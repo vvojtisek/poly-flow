@@ -15,6 +15,15 @@ class Settings(BaseSettings):
     piper_url: str = "http://localhost:5000"
     whisper_url: str = "http://localhost:9000"
 
+    # Auth. Set POLYFLOW_COOKIE_SECURE=true whenever the app is served over HTTPS.
+    cookie_secure: bool = False
+    session_cookie_name: str = "pf_session"
+    session_ttl_days: int = 30
+    login_max_attempts: int = 5  # per username within the window
+    login_max_attempts_per_ip: int = 30
+    login_window_s: int = 900
+    default_timezone: str = "Europe/Prague"
+
 
 @lru_cache
 def get_settings() -> Settings:

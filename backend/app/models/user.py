@@ -1,6 +1,6 @@
-from datetime import date
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, String, text
+from sqlalchemy import Boolean, Date, DateTime, String, text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -14,8 +14,17 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
     username: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     display_name: Mapped[str] = mapped_column(String(128), nullable=False)
-    # Nullable: child profiles may be PIN-less / parent-managed. Auth scheme is not decided yet.
+    # Adults sign in with a password. Children use an optional PIN, or are opened from a
+    # parent's session on a shared device; a child without a PIN cannot sign in alone.
     password_hash: Mapped[str | None] = mapped_column(String(255))
+    pin_hash: Mapped[str | None] = mapped_column(String(255))
+    is_active: Mapped[bool] = mapped_column(
+        Boolean, default=True, server_default=text("true"), nullable=False
+    )
+    last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    timezone: Mapped[str] = mapped_column(
+        String(64), default="Europe/Prague", server_default="Europe/Prague", nullable=False
+    )
     role: Mapped[UserRole] = mapped_column(
         UserRoleType,
         default=UserRole.LEARNER,
