@@ -1,0 +1,41 @@
+# syntax=docker/dockerfile:1.7
+# Build context: ./backend. Targets: `api` (FastAPI) and `worker` (ARQ) share one image base.
+
+# Override PYTHON_IMAGE to use a registry mirror (e.g. mirror.gcr.io/library/python:3.12-slim).
+ARG PYTHON_IMAGE=python:3.12-slim
+
+# ---- builder: resolve locked deps into a self-contained venv ----
+FROM ${PYTHON_IMAGE} AS builder
+RUN pip install --no-cache-dir uv==0.8.17
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PROJECT_ENVIRONMENT=/opt/venv \
+    UV_PYTHON_DOWNLOADS=never
+WORKDIR /src
+COPY pyproject.toml uv.lock ./
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev --no-install-project
+
+# ---- base runtime: no build tooling, non-root ----
+FROM ${PYTHON_IMAGE} AS base
+ENV PATH=/opt/venv/bin:$PATH \
+    PYTHONPATH=/app \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+RUN groupadd --system --gid 10001 app && useradd --system --uid 10001 --gid app app
+COPY --from=builder /opt/venv /opt/venv
+WORKDIR /app
+COPY --chown=app:app alembic.ini ./
+COPY --chown=app:app alembic ./alembic
+COPY --chown=app:app data ./data
+COPY --chown=app:app app ./app
+USER app
+
+FROM base AS api
+EXPOSE 8000
+HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
+    CMD ["python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--proxy-headers"]
+
+FROM base AS worker
+CMD ["python", "-m", "app.workers"]

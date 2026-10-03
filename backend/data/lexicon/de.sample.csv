@@ -1,0 +1,24 @@
+# SAMPLE ONLY: 20 high-frequency German lemmas, hand-curated for pipeline testing.
+# Ranks are approximate (ordering of the top function words varies by corpus).
+# Replace with an authoritative lemmatised list before production; see data/README.md.
+language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example
+de,1,der,DET,ten (určitý člen),deːɐ̯,A1,,Der Hund schläft.
+de,2,und,CCONJ,a,ʊnt,A1,,Brot und Butter.
+de,3,sein,AUX,být,zaɪ̯n,A1,,Ich bin müde.
+de,4,in,ADP,v,ɪn,A1,,Ich wohne in Prag.
+de,5,ein,DET,nějaký (neurčitý člen),aɪ̯n,A1,,Das ist ein Buch.
+de,6,zu,ADP,"k, do",tsuː,A1,,Ich gehe zu Oma.
+de,7,haben,AUX,mít,ˈhaːbn̩,A1,,Wir haben Zeit.
+de,8,ich,PRON,já,ɪç,A1,,Ich heiße Anna.
+de,9,werden,AUX,stát se,ˈveːɐ̯dn̩,A1,,Es wird kalt.
+de,10,sie,PRON,"ona, oni",ziː,A1,,Sie liest gern.
+de,11,von,ADP,"od, z",fɔn,A1,,Ein Brief von Peter.
+de,12,nicht,PART,ne,nɪçt,A1,,Das weiß ich nicht.
+de,13,mit,ADP,s,mɪt,A1,,Ich fahre mit dem Bus.
+de,14,es,PRON,to,ɛs,A1,,Es regnet.
+de,15,sich,PRON,"se, si",zɪç,A1,,Er wäscht sich.
+de,16,auch,ADV,také,aʊ̯x,A1,,Ich komme auch.
+de,17,auf,ADP,na,aʊ̯f,A1,,Das Buch liegt auf dem Tisch.
+de,18,für,ADP,pro,fyːɐ̯,A1,,Das ist für dich.
+de,19,an,ADP,"u, na",an,A1,,Das Bild hängt an der Wand.
+de,20,er,PRON,on,eːɐ̯,A1,,Er ist zu Hause.
