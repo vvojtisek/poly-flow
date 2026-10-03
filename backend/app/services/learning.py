@@ -2,6 +2,7 @@
 
 import math
 import random
+import re
 import uuid
 from dataclasses import dataclass
 from datetime import datetime
@@ -268,6 +269,16 @@ def hint_text(task: LearningTask) -> str | None:
     lemma = task.item.lemma
     shown = 1 if task.hint_level == 1 else max(1, math.ceil(len(lemma) / 2))
     return lemma[:shown] + "…"
+
+
+def cloze(task: LearningTask) -> str | None:
+    """Example sentence with the lemma blanked (whole word, case-insensitive), if present."""
+    item = task.item
+    if task.task_type != TaskType.RECALL or not item.example_sentence:
+        return None
+    pattern = re.compile(rf"(?<!\w){re.escape(item.lemma)}(?!\w)", re.IGNORECASE)
+    blanked, n = pattern.subn("___", item.example_sentence, count=1)
+    return blanked if n else None
 
 
 def visible_options(task: LearningTask) -> list[tuple[int, str]] | None:

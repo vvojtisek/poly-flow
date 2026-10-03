@@ -51,6 +51,9 @@ class TaskOut(BaseModel):
     pos: str
     gender: str | None
     example: str | None  # only for recognition (it would give recall away)
+    # recall: the example sentence with the target word blanked, to disambiguate
+    # function words ("ten (určitý člen)" alone could be der/die/das).
+    cloze: str | None
     options: list[Option] | None
     hint: str | None
 

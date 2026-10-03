@@ -69,6 +69,7 @@ def _task_out(task: LearningTask, total: int) -> TaskOut:
         example=item.example_sentence if recognition else None,
         options=[Option(id=i, text=t) for i, t in options] if options is not None else None,
         hint=svc.hint_text(task),
+        cloze=svc.cloze(task),
     )
 
 

@@ -10,3 +10,5 @@ node_modules/
 *.tsbuildinfo
 next-env.d.ts
 *.egg-info/
+test-results/
+playwright-report/

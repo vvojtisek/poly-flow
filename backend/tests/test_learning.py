@@ -448,3 +448,26 @@ async def test_progress_overview(db, client):
     assert p["next_milestone"] == 100 and p["grammar_gate"] == 1000
     assert p["phonetic_measured"] == 0 and p["active_session_id"] is None
     assert p["by_band"] == [{"band": 100, "items": 6, "known": 0}]
+
+
+async def test_recall_shows_cloze_for_ambiguous_words(db, client):
+    from app.cli import LexiconRow, upsert_lexicon
+
+    await upsert_lexicon(
+        [
+            LexiconRow(
+                language="de",
+                rank=1,
+                lemma="der",
+                pos="DET",
+                translation_cs="ten (určitý člen)",
+                example="Der Hund schläft.",
+            )
+        ]
+    )
+    me = await child_session(client)
+    s = await start(client, me)
+    t = await next_task(client, s["id"])
+    assert t["type"] == "recall" and t["cloze"] == "___ Hund schläft." and t["example"] is None
+    r = (await answer(client, me, t, {"text": "der"})).json()
+    assert r["correct"]
