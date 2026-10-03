@@ -1,6 +1,7 @@
 // Typed API client. Response types mirror backend Pydantic models (app/api/*).
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// Same-origin: next.config.ts proxies /api/* and /readyz to the backend.
+export const API_URL = "";
 
 export interface DependencyCheck {
   ok: boolean;

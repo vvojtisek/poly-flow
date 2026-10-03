@@ -44,6 +44,11 @@ docker compose run --rm backend python -m app.cli seed-lexicon data/lexicon/de.s
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
 ```
 
+Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
+
+The browser talks only to the frontend origin; Next.js proxies `/api/*` and `/readyz` to the backend
+(`BACKEND_URL`, resolved at build time for the production `runner` image).
+
 - API: http://localhost:8000 (`/healthz` liveness, `/readyz` checks Postgres + Redis, 503 when unready; OpenAPI at `/docs`)
 - Frontend: http://localhost:3000
 
@@ -54,7 +59,7 @@ Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`
 ```sh
 cd backend
 uv sync --extra dev
-uv run pytest
+uv run pytest                      # DB tests need POLYFLOW_TEST_DATABASE_URL (disposable DB)
 uv run ruff check . && uv run ruff format --check .
 POLYFLOW_DATABASE_URL=postgresql+asyncpg://... uv run alembic upgrade head
 uv run alembic revision --autogenerate -m "..."   # then review; `alembic check` must be clean
