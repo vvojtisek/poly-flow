@@ -35,6 +35,24 @@ export async function apiGet<T>(
   return (await res.json()) as T;
 }
 
+export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
+
+export interface Milestone {
+  rank: number;
+  key: string;
+  cefr: CefrLevel | null;
+  voluntary: boolean;
+  passive_focus: boolean;
+}
+
+export interface Progression {
+  curriculum_end: number;
+  milestones: Milestone[];
+}
+
+export const getProgression = (signal?: AbortSignal) =>
+  apiGet<Progression>("/api/v1/progression/milestones", { signal });
+
 // /readyz answers 503 with a valid body when a dependency is down.
 export const getReadiness = (signal?: AbortSignal) =>
   apiGet<Readiness>("/readyz", { signal, cache: "no-store", acceptStatuses: [503] });

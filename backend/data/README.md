@@ -7,7 +7,7 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 | column | required | notes |
 |---|---|---|
 | language | yes | `de` / `fr` / `it` |
-| rank | yes | 1..2500, unique per language |
+| rank | yes | >= 1, unique per language (curriculum ends at 5000; higher ranks form the voluntary extension) |
 | lemma | yes | dictionary form |
 | pos | no | Universal Dependencies UPOS (`NOUN`, `VERB`, ...). `(language, lemma, pos)` is the upsert key |
 | translation_cs | yes | primary Czech gloss(es) |
@@ -19,15 +19,18 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 The committed `*.sample.csv` files hold **20 hand-curated lemmas per language** for pipeline testing only.
 Ranks there are approximate.
 
-### Producing the full 2,500-lemma lists (not done yet)
+### Producing the full lists (not done yet)
+
+Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
+used only for voluntary, recognition-focused practice.
 
 No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" for DE/FR/IT. A realistic pipeline:
 
 1. **Frequency**: lemmatise a large corpus with spaCy/Stanza and count, or use an existing lemma list.
    Surface-form lists (e.g. OpenSubtitles-derived `FrequencyWords`, CC-BY-SA-4.0) are *not* lemma lists:
    `bin/bist/ist/sind` would occupy four ranks. Licences differ per source; check before redistributing.
-2. **Czech glosses + IPA**: Wiktionary extracts (kaikki.org, CC-BY-SA) cover most of the top 2,500;
-   gaps filled by LLM/MT and **reviewed by a human**. Unreviewed glosses will teach wrong meanings.
+2. **Czech glosses + IPA**: Wiktionary extracts (kaikki.org, CC-BY-SA) cover most of the top few thousand;
+   coverage of glosses/IPA thins out toward rank 5,000+. Gaps filled by LLM/MT and **reviewed by a human**. Unreviewed glosses will teach wrong meanings.
 3. **CEFR**: no authoritative open per-lemma CEFR mapping exists for these languages; derive a
    heuristic from rank bands or leave blank.
 

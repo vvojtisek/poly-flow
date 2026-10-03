@@ -1,6 +1,7 @@
-import { Activity, BookOpen, Flame, Play, TrendingDown } from "lucide-react";
+import { Activity, BookOpen, Flame, Map as MapIcon, Play, TrendingDown } from "lucide-react";
 
 import { Panel } from "@/components/Panel";
+import { ProgressionPath } from "@/components/ProgressionPath";
 import { ServerStatus } from "@/components/ServerStatus";
 import { cs } from "@/lib/i18n/cs";
 
@@ -35,6 +36,10 @@ export default function HomePage() {
 
         <Panel title={cs.dashboard.retention} icon={TrendingDown} className="hidden lg:col-span-2 lg:block">
           <p className="text-sm text-slate-500">{cs.comingSoon}</p>
+        </Panel>
+
+        <Panel title={cs.progression.title} icon={MapIcon} className="lg:col-span-1">
+          <ProgressionPath />
         </Panel>
 
         <Panel title={cs.dashboard.streak} icon={Flame}>

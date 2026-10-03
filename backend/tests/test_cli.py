@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from app.cli import BlacklistRow, LexiconRow, RowError, check_lexicon_uniqueness, read_rows
-from app.domain.enums import CefrLevel, Language, frequency_band
+from app.domain.enums import CefrLevel, Language
 
 DATA = Path(__file__).resolve().parents[1] / "data"
 
@@ -42,7 +42,7 @@ def test_lexicon_row_normalisation():
 def test_invalid_rows_collected(tmp_path):
     f = tmp_path / "bad.csv"
     f.write_text(
-        "# comment\nlanguage,rank,lemma,pos,translation_cs\nde,2501,x,,y\nes,1,x,,y\nde,1,,,y\n",
+        "# comment\nlanguage,rank,lemma,pos,translation_cs\nde,0,x,,y\nes,1,x,,y\nde,1,,,y\n",
         encoding="utf-8",
     )
     with pytest.raises(RowError) as exc:
@@ -74,14 +74,6 @@ def test_blank_language_means_all():
     )
 
 
-@pytest.mark.parametrize(
-    ("rank", "band"), [(1, 100), (100, 100), (101, 500), (1000, 1000), (2001, 2500), (2500, 2500)]
-)
-def test_frequency_band(rank, band):
-    assert frequency_band(rank) == band
-
-
-@pytest.mark.parametrize("rank", [0, 2501])
-def test_frequency_band_out_of_range(rank):
-    with pytest.raises(ValueError):
-        frequency_band(rank)
+def test_extension_rank_accepted():
+    row = LexiconRow(language="de", rank=7200, lemma="x", translation_cs="y")
+    assert row.to_db()["frequency_band"] == 8000
