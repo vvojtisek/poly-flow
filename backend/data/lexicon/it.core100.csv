@@ -1,0 +1,105 @@
+# Core 100 (it): hand-curated starter set (frequent function words + frequent concrete
+# vocabulary suited to children). Ranks are an approximate frequency order, not taken from
+# a published corpus list. Czech glosses need native-speaker review before wider use.
+# Ranks 1-20 keep the IPA/examples of the earlier sample; IPA left blank where unverified.
+language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example,source,license,revision
+it,1,il,DET,ten (určitý člen),il,A1,,Il gatto dorme.,polyflow-curated,CC0-1.0,core100-v1
+it,2,di,ADP,"z, od",di,A1,,Un bicchiere di latte.,polyflow-curated,CC0-1.0,core100-v1
+it,3,e,CCONJ,a,e,A1,,Pane e burro.,polyflow-curated,CC0-1.0,core100-v1
+it,4,essere,AUX,být,ˈɛssere,A1,,Sono stanco.,polyflow-curated,CC0-1.0,core100-v1
+it,5,un,DET,nějaký (neurčitý člen),un,A1,,È un libro.,polyflow-curated,CC0-1.0,core100-v1
+it,6,a,ADP,"k, v, do",a,A1,,Vado a Roma.,polyflow-curated,CC0-1.0,core100-v1
+it,7,in,ADP,v,in,A1,,Abito in Italia.,polyflow-curated,CC0-1.0,core100-v1
+it,8,che,SCONJ,že,ke,A1,,Penso che sia vero.,polyflow-curated,CC0-1.0,core100-v1
+it,9,non,ADV,ne (zápor),non,A1,,Non lo so.,polyflow-curated,CC0-1.0,core100-v1
+it,10,avere,AUX,mít,aˈvere,A1,,Abbiamo tempo.,polyflow-curated,CC0-1.0,core100-v1
+it,11,per,ADP,pro,per,A1,,È per te.,polyflow-curated,CC0-1.0,core100-v1
+it,12,io,PRON,já,ˈio,A1,,Io mi chiamo Anna.,polyflow-curated,CC0-1.0,core100-v1
+it,13,con,ADP,s,kon,A1,,Vado con lui.,polyflow-curated,CC0-1.0,core100-v1
+it,14,da,ADP,"od, z",da,A1,,Una lettera da Marco.,polyflow-curated,CC0-1.0,core100-v1
+it,15,questo,DET,tento,ˈkwesto,A1,,Questo libro è bello.,polyflow-curated,CC0-1.0,core100-v1
+it,16,fare,VERB,dělat,ˈfare,A1,,Cosa fai?,polyflow-curated,CC0-1.0,core100-v1
+it,17,lui,PRON,on,ˈlui,A1,,Lui è a casa.,polyflow-curated,CC0-1.0,core100-v1
+it,18,potere,AUX,moci,poˈtere,A1,,Posso entrare?,polyflow-curated,CC0-1.0,core100-v1
+it,19,lei,PRON,ona,ˈlɛi,A1,,Lei legge molto.,polyflow-curated,CC0-1.0,core100-v1
+it,20,tutto,PRON,všechno,ˈtutto,A1,,Tutto bene.,polyflow-curated,CC0-1.0,core100-v1
+it,21,ma,CCONJ,ale,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,22,come,ADV,"jak, jako",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,23,su,ADP,na,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,24,anche,ADV,také,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,25,se,SCONJ,"jestli, když",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,26,dire,VERB,říct,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,27,noi,PRON,my,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,28,voi,PRON,vy,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,29,tu,PRON,ty,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,30,andare,VERB,jít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,31,volere,VERB,chtít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,32,dovere,VERB,muset,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,33,sapere,VERB,vědět,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,34,vedere,VERB,vidět,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,35,venire,VERB,přijít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,36,dare,VERB,dát,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,37,stare,VERB,"být (o stavu), zůstávat",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,38,più,ADV,více,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,39,molto,ADV,"velmi, hodně",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,40,bene,ADV,dobře,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,41,già,ADV,už,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,42,ancora,ADV,ještě,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,43,sempre,ADV,vždy,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,44,qui,ADV,tady,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,45,dove,ADV,kde,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,46,quando,SCONJ,"když, kdy",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,47,perché,SCONJ,"protože, proč",,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,48,oggi,ADV,dnes,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,49,ora,ADV,teď,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,50,grande,ADJ,velký,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,51,piccolo,ADJ,malý,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,52,buono,ADJ,dobrý,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,53,nuovo,ADJ,nový,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,54,mio,DET,můj,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,55,anno,NOUN,rok,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,56,giorno,NOUN,den,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,57,tempo,NOUN,čas,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,58,uomo,NOUN,"muž, člověk",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,59,donna,NOUN,žena,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,60,bambino,NOUN,dítě,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,61,casa,NOUN,"dům, domov",,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,62,mondo,NOUN,svět,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,63,vita,NOUN,život,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,64,paese,NOUN,země,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,65,città,NOUN,město,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,66,mano,NOUN,ruka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,67,domanda,NOUN,otázka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,68,lavoro,NOUN,práce,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,69,acqua,NOUN,voda,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,70,cosa,NOUN,věc,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,71,parlare,VERB,mluvit,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,72,trovare,VERB,najít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,73,pensare,VERB,myslet,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,74,prendere,VERB,vzít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,75,restare,VERB,zůstat,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,76,mangiare,VERB,jíst,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,77,bere,VERB,pít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,78,scrivere,VERB,psát,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,79,leggere,VERB,číst,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,80,amico,NOUN,"přítel, kamarád",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,81,scuola,NOUN,škola,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,82,libro,NOUN,kniha,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,83,cane,NOUN,pes,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,84,sì,ADV,ano,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,85,no,ADV,ne (odpověď),,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,86,niente,PRON,nic,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,87,chi,PRON,kdo,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,88,quello,DET,tamten,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,89,notte,NOUN,noc,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,90,padre,NOUN,otec,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,91,madre,NOUN,matka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,92,gatto,NOUN,"kočka, kocour",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
+it,93,strada,NOUN,"ulice, cesta",,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,94,porta,NOUN,dveře,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,95,testa,NOUN,hlava,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
+it,96,grazie,INTJ,děkuji,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,97,giocare,VERB,hrát (si),,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,98,amare,VERB,milovat,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,99,chiamare,VERB,volat,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+it,100,mettere,VERB,"položit, dát (něco někam)",,A1,,,polyflow-curated,CC0-1.0,core100-v1

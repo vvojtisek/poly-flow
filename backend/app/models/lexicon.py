@@ -36,5 +36,9 @@ class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     gender: Mapped[str | None] = mapped_column(String(8))  # der/die/das, m/f
     example_sentence: Mapped[str | None] = mapped_column(String(512))
     audio_path: Mapped[str | None] = mapped_column(String(255))
+    # Provenance (plan P2): where the row came from, under which licence, which data revision.
+    source: Mapped[str | None] = mapped_column(String(64))
+    license: Mapped[str | None] = mapped_column(String(32))
+    revision: Mapped[str | None] = mapped_column(String(32))
 
     progress = relationship("UserWordProgress", back_populates="item", cascade="all, delete-orphan")

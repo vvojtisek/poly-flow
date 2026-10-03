@@ -1,6 +1,6 @@
 """Operational CLI.
 
-python -m app.cli seed-lexicon data/lexicon/de.sample.csv [--dry-run]
+python -m app.cli seed-lexicon data/lexicon/de.core100.csv [--dry-run]
 python -m app.cli seed-blacklist data/blacklist/default.csv [--dry-run]
 """
 
@@ -50,7 +50,11 @@ def _blank_to_none(v: object) -> object:
 
 
 class LexiconRow(BaseModel):
-    """One CSV row. Columns: language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example."""
+    """One CSV row.
+
+    Columns: language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example
+    and optionally source,license,revision (provenance).
+    """
 
     model_config = ConfigDict(str_strip_whitespace=True)
 
@@ -63,8 +67,13 @@ class LexiconRow(BaseModel):
     cefr: CefrLevel | None = None
     gender: str | None = None
     example: str | None = None
+    source: str | None = None
+    license: str | None = None
+    revision: str | None = None
 
-    _blanks = field_validator("ipa", "cefr", "gender", "example", mode="before")(_blank_to_none)
+    _blanks = field_validator(
+        "ipa", "cefr", "gender", "example", "source", "license", "revision", mode="before"
+    )(_blank_to_none)
 
     @field_validator("pos")
     @classmethod
@@ -83,6 +92,9 @@ class LexiconRow(BaseModel):
             "cefr_level": self.cefr,
             "gender": self.gender,
             "example_sentence": self.example,
+            "source": self.source,
+            "license": self.license,
+            "revision": self.revision,
         }
 
 
@@ -167,6 +179,9 @@ async def upsert_lexicon(rows: Sequence[LexiconRow]) -> int:
         "cefr_level",
         "gender",
         "example_sentence",
+        "source",
+        "license",
+        "revision",
     ]
     async for session in get_session():
         async with session.begin():

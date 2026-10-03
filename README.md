@@ -40,7 +40,7 @@ docker compose up --build       # postgres, redis, migrate, backend, worker, fro
 docker compose --profile audio up --build   # + piper, whisper (first start downloads models)
 
 # seed
-docker compose run --rm backend python -m app.cli seed-lexicon data/lexicon/de.sample.csv data/lexicon/fr.sample.csv data/lexicon/it.sample.csv
+docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv'
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
 ```
 
