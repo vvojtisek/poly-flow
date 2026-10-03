@@ -62,6 +62,10 @@ uv run alembic revision --autogenerate -m "..."   # then review; `alembic check`
 
 All settings are env vars prefixed `POLYFLOW_` (see `app/core/config.py`).
 
+## Agent workflow
+
+Read [AGENTS.md](AGENTS.md) and the scoped `AGENTS.md` for the area you change. The configured Codex roles and adaptive model router live under `.codex/`; the [implementation plan](docs/IMPLEMENTATION_PLAN.md) describes planned features, while the source code remains authoritative for shipped behavior.
+
 ## Schema (Phase 1)
 
 | table | purpose |
