@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import auth, health, profiles, progression
+from app.api import auth, health, learning, profiles, progression
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.core.middleware import RequestLoggingMiddleware
@@ -33,6 +33,7 @@ def create_app() -> FastAPI:
     app.include_router(progression.router)
     app.include_router(auth.router)
     app.include_router(profiles.router)
+    app.include_router(learning.router)
     return app
 
 

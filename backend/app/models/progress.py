@@ -8,6 +8,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Index,
+    String,
     UniqueConstraint,
     text,
 )
@@ -32,6 +33,7 @@ class UserWordProgress(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         # Decay sweep: rows per state ordered by staleness.
         Index("ix_user_word_progress_state_error_free", "state", "last_error_free_at"),
         Index("ix_user_word_progress_user_state", "user_id", "state"),
+        Index("ix_user_word_progress_user_next_review", "user_id", "next_review_at"),
     )
 
     user_id: Mapped[uuid.UUID] = mapped_column(
@@ -65,6 +67,13 @@ class UserWordProgress(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     # Last review with no errors; decay triggers when this is > DECAY_AFTER_DAYS old.
     last_error_free_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_decay_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Shown in any task, whether or not it was answered (exposure is not knowledge).
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    next_review_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    review_streak: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)
+    # When passive_known and active_known first both held (starts the mastery delay).
+    known_since_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    policy_version: Mapped[str | None] = mapped_column(String(16))
 
     user = relationship("User", back_populates="progress")
     item = relationship("LexiconItem", back_populates="progress")
