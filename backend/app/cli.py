@@ -30,13 +30,12 @@ from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.db.session import dispose_engine, get_session
 from app.domain.enums import (
-    MAX_FREQUENCY_RANK,
     BlacklistCategory,
     BlacklistPatternType,
     CefrLevel,
     Language,
-    frequency_band,
 )
+from app.domain.progression import frequency_band
 from app.models import ContentBlacklistEntry, LexiconItem
 
 log = logging.getLogger("polyflow.cli")
@@ -56,7 +55,7 @@ class LexiconRow(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
     language: Language
-    rank: int = Field(ge=1, le=MAX_FREQUENCY_RANK)
+    rank: int = Field(ge=1)
     lemma: NonEmpty
     pos: str = ""
     translation_cs: NonEmpty

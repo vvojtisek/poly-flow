@@ -52,14 +52,5 @@ class StoryStatus(enum.StrEnum):
     FAILED = "failed"
 
 
-MAX_FREQUENCY_RANK = 2500
-# Fixed milestones; an item's band is the smallest bound >= its rank.
-FREQUENCY_BANDS: tuple[int, ...] = (100, 500, 1000, 1500, 2000, 2500)
 GRAMMAR_GATE_WORDS = 1000
 DECAY_AFTER_DAYS = 30
-
-
-def frequency_band(rank: int) -> int:
-    if not 1 <= rank <= MAX_FREQUENCY_RANK:
-        raise ValueError(f"rank {rank} outside 1..{MAX_FREQUENCY_RANK}")
-    return next(b for b in FREQUENCY_BANDS if rank <= b)

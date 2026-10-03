@@ -1,4 +1,4 @@
-from sqlalchemy import CheckConstraint, Index, SmallInteger, String, UniqueConstraint
+from sqlalchemy import CheckConstraint, Index, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
@@ -18,7 +18,7 @@ class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
             deferrable=True,
             initially="DEFERRED",
         ),
-        CheckConstraint("frequency_rank BETWEEN 1 AND 2500", name="rank_range"),
+        CheckConstraint("frequency_rank >= 1", name="rank_positive"),
         Index("ix_lexicon_items_language_band", "language", "frequency_band"),
     )
 
@@ -26,9 +26,10 @@ class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     lemma: Mapped[str] = mapped_column(String(128), nullable=False)
     # Universal POS tag (NOUN, VERB, ...); empty string when unknown so the unique key holds.
     pos: Mapped[str] = mapped_column(String(16), default="", server_default="", nullable=False)
-    frequency_rank: Mapped[int] = mapped_column(SmallInteger, nullable=False)
-    # Denormalised milestone bound (100/500/1000/1500/2000/2500); set by the importer.
-    frequency_band: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    # Open-ended: the curriculum ends at 5000, the voluntary extension continues past it.
+    frequency_rank: Mapped[int] = mapped_column(Integer, nullable=False)
+    # Denormalised milestone (app.domain.progression.frequency_band); set by the importer.
+    frequency_band: Mapped[int] = mapped_column(Integer, nullable=False)
     translation_cs: Mapped[str] = mapped_column(String(255), nullable=False)
     ipa: Mapped[str | None] = mapped_column(String(128))
     cefr_level: Mapped[CefrLevel | None] = mapped_column(CefrLevelType)
