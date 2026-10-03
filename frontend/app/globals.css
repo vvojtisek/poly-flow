@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Tailwind v4: design tokens live here (CSS-first config), not in tailwind.config.js. */
+@theme {
+  --color-brand-50: oklch(0.97 0.02 250);
+  --color-brand-500: oklch(0.58 0.17 250);
+  --color-brand-600: oklch(0.5 0.17 250);
+  --color-brand-900: oklch(0.28 0.08 250);
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  /* Respect notches when installed full-screen. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}

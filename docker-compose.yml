@@ -1,0 +1,128 @@
+# Dev/homelab stack.
+#   docker compose up --build                      # core: postgres, redis, migrate, backend, worker, frontend
+#   docker compose --profile audio up --build      # + piper (TTS) and whisper (STT)
+name: polyflow
+
+x-backend-env: &backend-env
+  POLYFLOW_ENV: ${POLYFLOW_ENV:-dev}
+  POLYFLOW_LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  POLYFLOW_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-polyflow}:${POSTGRES_PASSWORD:-polyflow}@postgres:5432/${POSTGRES_DB:-polyflow}
+  POLYFLOW_REDIS_URL: redis://redis:6379/0
+  POLYFLOW_CORS_ORIGINS: '["http://localhost:3000"]'
+  POLYFLOW_PIPER_URL: http://piper:5000
+  POLYFLOW_WHISPER_URL: http://whisper:9000
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-polyflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-polyflow}
+      POSTGRES_DB: ${POSTGRES_DB:-polyflow}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  migrate:
+    build: &backend-build
+      context: ./backend
+      dockerfile: ../docker/backend/Dockerfile
+      target: api
+    image: polyflow-backend:dev
+    command: ["alembic", "upgrade", "head"]
+    environment: *backend-env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  backend:
+    image: polyflow-backend:dev
+    build: *backend-build
+    environment: *backend-env
+    ports:
+      - "8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: ../docker/backend/Dockerfile
+      target: worker
+    image: polyflow-worker:dev
+    environment: *backend-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend/Dockerfile
+      target: dev
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      WATCHPACK_POLLING: "true"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  piper:
+    profiles: ["audio"]
+    build:
+      context: ./docker/piper
+    volumes:
+      - piperdata:/data
+    ports:
+      - "127.0.0.1:5000:5000"
+    restart: unless-stopped
+
+  whisper:
+    profiles: ["audio"]
+    build:
+      context: ./docker/whisper
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:-small}
+    volumes:
+      - whispermodels:/models
+    ports:
+      - "127.0.0.1:9000:9000"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:
+  piperdata:
+  whispermodels:
