@@ -5,6 +5,8 @@ Modular monolith: FastAPI + ARQ worker + PostgreSQL 16 + Redis + Next.js PWA, wi
 
 Status: **Phase 1 scaffold** (schema, migrations, Compose stack, lexicon/blacklist seeding, health endpoints).
 
+The [LinguaCore implementation plan](docs/IMPLEMENTATION_PLAN.md) maps the updated family-platform specification to this scaffold, including the proposed 100–2500-word blocks, delivery phases, and acceptance criteria. The code and schema below still describe the current implementation.
+
 ## Layout
 
 ```
