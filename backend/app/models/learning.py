@@ -34,6 +34,8 @@ class SessionStatus(StrEnum):
 class SessionMode(StrEnum):
     LEARN = "learn"  # Lekce: context first, then practice; nothing is graded toward knowledge
     CHECK = "check"  # Ověření: one first-try attempt, no hints; the only source of evidence
+    # Rozřazovací test: adaptive, graded like a check; its tasks are chosen one at a time.
+    PLACEMENT = "placement"
 
 
 class TaskType(StrEnum):
@@ -187,6 +189,37 @@ class LearningEvent(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     local_date: Mapped[date] = mapped_column(Date, nullable=False)  # in the profile's timezone
     # Response returned for this attempt, replayed verbatim on duplicate submission.
     result: Mapped[dict] = mapped_column(JSONB, nullable=False)
+
+
+class LanguagePlacement(TimestampMixin, Base):
+    """The latest placement decision per profile and language: placed by a test, or skipped.
+
+    Absent = never offered or decided. A retake replaces the row; each test's own result stays
+    in its session summary.
+    """
+
+    __tablename__ = "language_placements"
+    __table_args__ = (
+        CheckConstraint("status IN ('placed', 'skipped')", name="status"),
+        CheckConstraint("(status = 'placed') = (level IS NOT NULL)", name="level_when_placed"),
+    )
+
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    language: Mapped[Language] = mapped_column(LanguageType, primary_key=True)
+    status: Mapped[str] = mapped_column(String(16), nullable=False)
+    # Recognised up to about this frequency rank, with the credible interval; `ceiling` is the
+    # highest rank the lexicon held then (a level at the ceiling means "at least").
+    level: Mapped[int | None] = mapped_column(Integer)
+    level_low: Mapped[int | None] = mapped_column(Integer)
+    level_high: Mapped[int | None] = mapped_column(Integer)
+    ceiling: Mapped[int | None] = mapped_column(Integer)
+    session_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("learning_sessions.id", ondelete="SET NULL")
+    )
+    decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    policy_version: Mapped[str | None] = mapped_column(String(16))
 
 
 class GrammarUnlock(TimestampMixin, Base):

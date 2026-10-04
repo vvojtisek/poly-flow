@@ -140,8 +140,9 @@ export const updateProfile = (id: string, body: { is_child?: boolean; is_active?
 // ---------------------------------------------------------------- learning
 
 export type TaskType = "recognition" | "recall";
-// learn = Lekce (context first, practice never graded); check = Ověření (the only graded mode)
-export type SessionMode = "learn" | "check";
+// learn = Lekce (context first, practice never graded); check = Ověření (the only graded mode);
+// placement = rozřazovací test (graded like a check, adaptive)
+export type SessionMode = "learn" | "check" | "placement";
 
 export interface SceneSegment {
   text: string;
@@ -192,6 +193,15 @@ export interface LessonSession {
     first_try_correct: number;
     new_items: number;
     reviewed_items: number;
+    // placement only
+    placed: boolean; // false: stopped before enough answers, nothing changed
+    asked: number;
+    level: number; // recognised up to about this frequency rank
+    level_low: number;
+    level_high: number;
+    ceiling: number; // highest rank the app holds: the test cannot place higher
+    at_ceiling: boolean;
+    queued: number; // words up to the level, not asked: waiting in Ověření to be confirmed
   }>;
   scene: Scene | null;
   words: WordCard[];
@@ -249,6 +259,25 @@ export interface ProgressOverview {
   by_band: { band: number; items: number; known: number }[];
   active_session_id: string | null;
   active_check_session_id: string | null;
+  active_placement_session_id: string | null;
+  placement: Placement | null; // null: the test was never taken or skipped for this language
+}
+
+export interface Placement {
+  status: "placed" | "skipped";
+  level: number | null;
+  level_low: number | null;
+  level_high: number | null;
+  ceiling: number | null;
+  decided_at: string;
+}
+
+export interface PlacementInfo {
+  language: Language;
+  ceiling: number; // highest rank the test can ask now
+  max_questions: number;
+  placement: Placement | null;
+  active_session_id: string | null;
 }
 
 export const startLesson = (language: Language, mode: SessionMode = "learn") =>
@@ -265,6 +294,11 @@ export const revealAnswer = (taskId: string, idempotency_key: string) =>
   api<AnswerResult>(`/api/v1/learning/tasks/${taskId}/reveal`, { json: { idempotency_key } });
 export const completeLesson = (sessionId: string) =>
   api<LessonSession>(`/api/v1/learning/sessions/${sessionId}/complete`, { method: "POST" });
+
+export const getPlacementInfo = (language: Language) =>
+  api<PlacementInfo>(`/api/v1/learning/placement?language=${language}`, { cache: "no-store" });
+export const skipPlacement = (language: Language) =>
+  api<void>("/api/v1/learning/placement/skip", { json: { language } });
 
 // Speech (WAV) for content the lesson already shows; played through lib/audio.ts.
 export const sceneLineAudioUrl = (sessionId: string, line: number) =>

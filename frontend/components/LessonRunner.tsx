@@ -81,11 +81,50 @@ function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: Sess
       )}
       {mode === "learn" && !result.task_done && <p>{cs.lesson.wrongTryAgain}</p>}
       {mode === "check" && !good && <p className="text-xs opacity-80">{cs.check.missedNote}</p>}
+      {mode === "placement" && !good && <p className="text-xs opacity-80">{cs.placement.missedNote}</p>}
     </div>
   );
 }
 
-/** learn: scene -> word cards -> practice (never graded). check: graded once, no hints. */
+function PlacementDone({ session }: { session: LessonSession }) {
+  const s = session.summary;
+  if (!s.placed) return <Notice>{cs.placement.notPlaced}</Notice>;
+  const level = s.level ?? 0;
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <p className="text-xs text-slate-500">{cs.placement.levelTitle}</p>
+        <p className="text-2xl font-bold">{cs.placement.level(level)}</p>
+        {s.at_ceiling ? (
+          <p className="mt-1 text-sm text-slate-500">{cs.placement.atCeiling(s.ceiling ?? level)}</p>
+        ) : (
+          level > 0 && (
+            <p className="mt-1 text-sm text-slate-500">{cs.placement.range(s.level_low ?? 0, s.level_high ?? level)}</p>
+          )
+        )}
+      </div>
+      <dl className="grid grid-cols-2 gap-2 text-sm">
+        {(
+          [
+            [cs.placement.summaryCorrect, `${s.first_try_correct ?? 0} / ${s.asked ?? 0}`],
+            [cs.placement.summaryQueued, s.queued ?? 0],
+          ] as const
+        ).map(([label, value]) => (
+          <div key={label} className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
+            <dt className="text-xs text-slate-500">{label}</dt>
+            <dd className="text-xl font-bold tabular-nums">{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <Notice>{cs.placement.nextSteps}</Notice>
+    </div>
+  );
+}
+
+/**
+ * learn: scene -> word cards -> practice (never graded). check: graded once, no hints.
+ * placement: graded once like a check; the server picks each next question from the answers.
+ */
 export function LessonRunner({ language, mode = "learn" }: { language: Language; mode?: SessionMode }) {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>({ kind: "starting" });
@@ -132,7 +171,7 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
     }
   }, [phase]);
 
-  const t = mode === "check" ? cs.check : cs.lesson;
+  const t = mode === "check" ? cs.check : mode === "placement" ? cs.placement : cs.lesson;
   if (phase.kind === "starting") return <p className="text-center text-slate-500">{t.preparing}</p>;
   if (phase.kind === "empty")
     return (
@@ -230,6 +269,23 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
       </div>
     );
   }
+  if (phase.kind === "done" && mode === "placement")
+    return (
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl font-bold">{t.doneTitle}</h2>
+        <PlacementDone session={phase.session} />
+        <div className="flex flex-col gap-2 sm:flex-row">
+          {(phase.session.summary.queued ?? 0) > 0 && (
+            <Button className="flex-1" onClick={() => router.push("/check")}>
+              {cs.placement.toCheck}
+            </Button>
+          )}
+          <Button variant="secondary" className="flex-1" onClick={() => router.push("/")}>
+            {cs.lesson.toDashboard}
+          </Button>
+        </div>
+      </div>
+    );
   if (phase.kind === "done") {
     const s = phase.session.summary;
     const tiles: (readonly [string, string | number])[] =
@@ -288,6 +344,18 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
     }
   }
 
+  async function stop() {
+    if (busy) return;
+    setBusy(true);
+    try {
+      setPhase({ kind: "done", session: await completeLesson(session.id) });
+    } catch {
+      setNetError(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function hint() {
     try {
       setPhase({ kind: "task", session, task: await requestHint(task.id), result });
@@ -305,10 +373,20 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
-        <span>{cs.lesson.progress(task.position + 1, task.total)}</span>
+        <span>
+          {mode === "placement"
+            ? cs.placement.question(task.position + 1, task.total)
+            : cs.lesson.progress(task.position + 1, task.total)}
+        </span>
         <SlowToggle />
         <span className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
-          {mode === "check" ? cs.check.title : task.is_new_item ? cs.lesson.newWord : cs.lesson.review}
+          {mode === "check"
+            ? cs.check.title
+            : mode === "placement"
+              ? cs.placement.title
+              : task.is_new_item
+                ? cs.lesson.newWord
+                : cs.lesson.review}
         </span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
@@ -425,7 +503,7 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         <Button onClick={() => void advance(session)} autoFocus>
           {cs.lesson.next}
         </Button>
-      ) : mode === "check" ? (
+      ) : mode !== "learn" ? (
         <Button variant="ghost" disabled={busy} onClick={() => void send("reveal")}>
           <HelpCircle className="size-4" aria-hidden /> {cs.check.dontKnow}
         </Button>
@@ -443,6 +521,11 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
             <Eye className="size-4" aria-hidden /> {cs.lesson.reveal}
           </Button>
         </div>
+      )}
+      {mode === "placement" && (
+        <Button variant="ghost" className="text-sm" disabled={busy} onClick={() => void stop()}>
+          {cs.placement.stop}
+        </Button>
       )}
       {mode === "learn" && session.scene && (
         <details className="rounded-xl text-sm">

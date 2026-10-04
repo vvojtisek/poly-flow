@@ -5,6 +5,8 @@ Two separate modes:
   and retries. Nothing here counts toward knowing a word; completing it introduces the words.
 - check (Ověření): introduced words that are due, from the day after their lesson. One attempt,
   no hints. The only source of knowledge evidence.
+- placement (rozřazovací test, `app.services.placement`): graded like a check, adaptive; places
+  a learner who already knows words further along.
 """
 
 import math
@@ -38,6 +40,7 @@ from app.models import (
     UserWordProgress,
 )
 from app.models.learning import SessionMode, SessionStatus, TaskStatus, TaskType
+from app.services import placement
 
 MAX_RECOGNITION_OPTIONS = 4
 MAX_HINT_LEVEL = 2
@@ -189,7 +192,12 @@ async def _plan_check(
                 UserWordProgress.next_review_at <= now,
                 _suitable(user),
             )
-            .order_by(UserWordProgress.next_review_at, LexiconItem.frequency_rank)
+            # Words a lesson taught come before the ones a placement test queued unconfirmed.
+            .order_by(
+                placement.is_unconfirmed_placement(),
+                UserWordProgress.next_review_at,
+                LexiconItem.frequency_rank,
+            )
             .limit(POLICY.session_max_tasks)
         )
     ).all()
@@ -241,9 +249,11 @@ async def start_session(
     scene: Scene | None = None
     if mode == SessionMode.LEARN:
         scene, plan = await _plan_learn(db, user, language)
-    else:
+    elif mode == SessionMode.CHECK:
         plan = await _plan_check(db, user, language, now)
-    if not plan:
+    else:
+        plan = []  # placement: questions are chosen one at a time, below
+    if not plan and mode != SessionMode.PLACEMENT:
         return None
 
     session = LearningSession(
@@ -283,7 +293,15 @@ async def start_session(
         position += 1
     await db.flush()
     db.expire(session, ["tasks"])
-    return await get_session(db, user, session.id)
+    session = await get_session(db, user, session.id)
+    if mode == SessionMode.PLACEMENT:
+        if await placement.add_next_task(db, user, session, rng) is None:
+            await db.delete(session)  # no words to ask about
+            await db.flush()
+            return None
+        db.expire(session, ["tasks"])
+        session = await get_session(db, user, session.id)
+    return session
 
 
 def next_pending(session: LearningSession) -> LearningTask | None:
@@ -446,7 +464,7 @@ async def use_hint(db: AsyncSession, user: User, task_id: uuid.UUID) -> Learning
     task = await _lock_task(db, user, task_id)
     if task.status != TaskStatus.PENDING:
         raise LearningError("task_closed")
-    if task.session.mode == SessionMode.CHECK:
+    if task.session.mode != SessionMode.LEARN:
         raise LearningError("hints_disabled")
     limit = 1 if task.task_type == TaskType.RECOGNITION else MAX_HINT_LEVEL
     task.hint_level = min(task.hint_level + 1, limit)
@@ -469,11 +487,13 @@ async def submit_answer(
     text: str | None = None,
     spoken: list[SpokenWord] | None = None,
     reveal: bool = False,
+    rng: random.Random | None = None,
 ) -> dict:
     """Grade one attempt (or a reveal) and aggregate progress. Duplicate keys replay.
 
     learn: retry until correct; a wrong answer shows the right one; never evidence.
     check: the first attempt closes the task; correct and hint-free is evidence.
+    placement: as check; then the next question is chosen from the answers so far.
     spoken (recall only): a confident transcript of exactly the word is a correct answer;
     anything else is "not understood", recorded for calibration, and changes nothing else.
     """
@@ -524,7 +544,7 @@ async def submit_answer(
             text,
         )
 
-    checking = task.session.mode == SessionMode.CHECK
+    checking = task.session.mode != SessionMode.LEARN  # check or placement: graded once
     hint_used = task.hint_level > 0
     if understood:
         task.attempts += 1
@@ -591,7 +611,11 @@ async def submit_answer(
 
     if not understood:
         return result  # unrecognised speech measured nothing: no attempt, no progress
-    if checking:
+    if task.session.mode == SessionMode.PLACEMENT:
+        await placement.record_answer(db, user, item, evidence=evidence, now=now)
+        session = await get_session(db, user, task.session_id)
+        await placement.add_next_task(db, user, session, rng or random.Random())
+    elif checking:
         await _apply_progress(
             db,
             user,
@@ -640,6 +664,11 @@ async def _apply_progress(
             p.last_error_free_at = now
             p.review_streak += 1
             p.next_review_at = now + next_review_interval(p.review_streak)
+        elif p.introduced_by == "placement":
+            # A placement test let this word skip its lesson; it is not known, so teach it.
+            p.error_count += 1
+            p.review_streak = 0
+            p.introduced_at = p.introduced_by = p.next_review_at = None
         else:
             p.error_count += 1
             p.review_streak = 0
@@ -724,6 +753,8 @@ async def complete_session(
         }
         if s.mode == SessionMode.LEARN:
             await _introduce(db, user, [t.item for t in tasks if t.is_new_item], now)
+        elif s.mode == SessionMode.PLACEMENT:
+            s.summary = {**s.summary, **await placement.finish(db, user, s, now)}
         s.status = SessionStatus.COMPLETED
         s.completed_at = now
     return s
@@ -743,6 +774,7 @@ async def _introduce(db: AsyncSession, user: User, items: list[LexiconItem], now
             )
             .values(
                 introduced_at=now,
+                introduced_by="lesson",
                 state=case(
                     (UserWordProgress.state == ProgressState.NEW, ProgressState.LEARNING),
                     else_=UserWordProgress.state,
@@ -792,7 +824,7 @@ async def prune_expired_sessions(db: AsyncSession, now: datetime) -> int:
 
 async def progress_overview(db: AsyncSession, user: User, language: Language, now: datetime):
     from app.domain.progression import MILESTONES
-    from app.schemas.learning import BandProgress, ProgressOut
+    from app.schemas.learning import BandProgress, PlacementOut, ProgressOut
 
     p, li = UserWordProgress, LexiconItem
     known_expr = and_(p.passive_known.is_(True), p.active_known.is_(True))
@@ -851,6 +883,8 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
     nxt = next((m for m in MILESTONES if m.rank > known), None)
     open_lesson = await get_active_session(db, user, language, SessionMode.LEARN)
     open_check = await get_active_session(db, user, language, SessionMode.CHECK)
+    open_placement = await get_active_session(db, user, language, SessionMode.PLACEMENT)
+    placed = await placement.get_placement(db, user, language)
     return ProgressOut(
         language=language,
         lexicon_items=lexicon_items,
@@ -870,4 +904,6 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         by_band=[BandProgress(band=b, items=n, known=k) for b, n, k in bands],
         active_session_id=open_lesson.id if open_lesson else None,
         active_check_session_id=open_check.id if open_check else None,
+        active_placement_session_id=open_placement.id if open_placement else None,
+        placement=PlacementOut.model_validate(placed, from_attributes=True) if placed else None,
     )

@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import DB, Auth
 from app.core.config import get_settings
 from app.domain.enums import Language
+from app.domain.placement import PLACEMENT
 from app.models import LearningSession, LearningTask, LexiconItem
 from app.models.learning import SessionMode, TaskStatus, TaskType
 from app.schemas.learning import (
@@ -18,6 +19,9 @@ from app.schemas.learning import (
     IdempotencyKey,
     NextOut,
     Option,
+    PlacementInfo,
+    PlacementOut,
+    PlacementSkipIn,
     ProgressOut,
     RevealIn,
     SceneLineOut,
@@ -30,6 +34,7 @@ from app.schemas.learning import (
     WordCard,
 )
 from app.services import learning as svc
+from app.services import placement as placement_svc
 from app.services.stt import Stt, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
 
@@ -179,7 +184,9 @@ async def next_task(session_id: uuid.UUID, auth: Auth, db: DB, now: Now) -> Next
         return NextOut(task=None)
     await svc.mark_seen(db, auth.acting, task.item, now)
     await db.commit()
-    return NextOut(task=_task_out(task, len(s.tasks)))
+    # A placement test's length depends on the answers: show its upper bound.
+    total = PLACEMENT.max_items if s.mode == SessionMode.PLACEMENT else len(s.tasks)
+    return NextOut(task=_task_out(task, total))
 
 
 @router.post("/tasks/{task_id}/hint", response_model=TaskOut)
@@ -307,6 +314,30 @@ async def progress(
     return await svc.progress_overview(
         db, auth.acting, language or auth.acting.active_language, now
     )
+
+
+@router.get("/placement", response_model=PlacementInfo)
+async def placement_info(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> PlacementInfo:
+    """What a placement test can cover for this profile now, and the latest decision."""
+    language = language or auth.acting.active_language
+    placed = await placement_svc.get_placement(db, auth.acting, language)
+    active = await svc.get_active_session(db, auth.acting, language, SessionMode.PLACEMENT)
+    return PlacementInfo(
+        language=language,
+        ceiling=await placement_svc.ceiling(db, auth.acting, language),
+        max_questions=PLACEMENT.max_items,
+        placement=PlacementOut.model_validate(placed, from_attributes=True) if placed else None,
+        active_session_id=active.id if active else None,
+    )
+
+
+@router.post("/placement/skip", status_code=204)
+async def placement_skip(body: PlacementSkipIn, auth: Auth, db: DB, now: Now) -> None:
+    """Start from the beginning: the test is no longer offered (it can still be taken)."""
+    await placement_svc.skip(db, auth.acting, body.language or auth.acting.active_language, now)
+    await db.commit()
 
 
 # ---------------------------------------------------------------- audio

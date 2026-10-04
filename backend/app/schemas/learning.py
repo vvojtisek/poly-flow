@@ -135,6 +135,33 @@ class AnswerOut(BaseModel):
     heard: str | None = None
 
 
+class PlacementOut(BaseModel):
+    """The latest placement decision for a language (None in ProgressOut: never decided)."""
+
+    status: Literal["placed", "skipped"]
+    level: int | None  # recognised up to about this frequency rank
+    level_low: int | None
+    level_high: int | None
+    ceiling: int | None  # highest rank the lexicon held when tested: the test's upper limit
+    decided_at: datetime
+
+
+class PlacementInfo(BaseModel):
+    """What a placement test can cover now, before starting one."""
+
+    language: Language
+    ceiling: int  # highest frequency rank available to this profile: the test cannot go higher
+    max_questions: int
+    placement: PlacementOut | None
+    active_session_id: uuid.UUID | None
+
+
+class PlacementSkipIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    language: Language | None = None  # defaults to the profile's active language
+
+
 class BandProgress(BaseModel):
     band: int
     items: int  # lexicon items available in this band
@@ -160,3 +187,5 @@ class ProgressOut(BaseModel):
     by_band: list[BandProgress]
     active_session_id: uuid.UUID | None  # open lesson
     active_check_session_id: uuid.UUID | None
+    active_placement_session_id: uuid.UUID | None = None
+    placement: PlacementOut | None = None
