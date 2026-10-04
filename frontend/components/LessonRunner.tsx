@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from "lucide-react";
+import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
@@ -19,6 +19,7 @@ import {
   taskAudioUrl,
   wordAudioUrl,
   type AnswerResult,
+  type ExamLevel,
   type Language,
   type LessonSession,
   type SessionMode,
@@ -82,6 +83,7 @@ function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: Sess
       {mode === "learn" && !result.task_done && <p>{cs.lesson.wrongTryAgain}</p>}
       {mode === "check" && !good && <p className="text-xs opacity-80">{cs.check.missedNote}</p>}
       {mode === "placement" && !good && <p className="text-xs opacity-80">{cs.placement.missedNote}</p>}
+      {mode === "exam" && !good && <p className="text-xs opacity-80">{cs.exam.missedNote}</p>}
     </div>
   );
 }
@@ -121,11 +123,67 @@ function PlacementDone({ session }: { session: LessonSession }) {
   );
 }
 
+function ExamDone({ session }: { session: LessonSession }) {
+  const s = session.summary;
+  const level = s.exam_level ?? "";
+  const missed = s.missed ?? [];
+  return (
+    <div className="flex flex-col gap-3">
+      <div
+        className={`rounded-2xl border p-5 text-center shadow-sm ${
+          s.passed
+            ? "border-emerald-300 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950"
+            : "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
+        }`}
+      >
+        {s.passed && <Award className="mx-auto mb-1 size-8 text-emerald-600" aria-hidden />}
+        <p className="text-xl font-bold">{s.passed ? cs.exam.passedTitle(level) : cs.exam.failedTitle}</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          {cs.exam.score(s.correct ?? 0, s.asked ?? 0, s.pass_correct ?? 0)}
+        </p>
+      </div>
+      {!s.passed && s.retry_from && (
+        <Notice>{cs.exam.retryFrom(new Date(s.retry_from).toLocaleDateString("cs-CZ"))}</Notice>
+      )}
+      {missed.length > 0 && (
+        <section className="flex flex-col gap-2">
+          <h3 className="font-semibold">{cs.exam.toPractise}</h3>
+          <ul className="divide-y divide-slate-200 rounded-xl border border-slate-200 text-sm dark:divide-slate-800 dark:border-slate-800">
+            {missed.map((w) => (
+              <li key={`${w.lemma}:${w.translation}`} className="flex justify-between gap-2 px-3 py-2">
+                <span className="font-medium" lang={session.language}>
+                  {session.language === "de" && w.gender ? `${w.gender} ` : ""}
+                  {w.lemma}
+                </span>
+                <span className="text-slate-500" lang="cs">
+                  {w.translation}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs text-slate-500">{cs.exam.practiseNote}</p>
+        </section>
+      )}
+    </div>
+  );
+}
+
 /**
  * learn: scene -> word cards -> practice (never graded). check: graded once, no hints.
  * placement: graded once like a check; the server picks each next question from the answers.
+ * exam: graded once like a check, on a fixed sample of one level's band.
  */
-export function LessonRunner({ language, mode = "learn" }: { language: Language; mode?: SessionMode }) {
+export function LessonRunner({
+  language,
+  mode = "learn",
+  level,
+  onExit,
+}: {
+  language: Language;
+  mode?: SessionMode;
+  level?: ExamLevel; // exam only
+  onExit?: () => void; // where "back" leads; the dashboard by default
+}) {
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>({ kind: "starting" });
   const [text, setText] = useState("");
@@ -150,7 +208,7 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
   const begin = useCallback(async () => {
     setPhase({ kind: "starting" });
     try {
-      const { session } = await startLesson(language, mode);
+      const { session } = await startLesson(language, mode, level);
       if (!session) setPhase({ kind: "empty" });
       // A fresh lesson starts with its context; a resumed one continues the practice.
       else if (session.mode === "learn" && session.remaining === session.total && session.words.length) {
@@ -159,7 +217,7 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
     } catch {
       setPhase({ kind: "error", retry: () => void begin() });
     }
-  }, [language, mode, advance]);
+  }, [language, mode, level, advance]);
 
   useEffect(() => {
     void begin();
@@ -171,14 +229,16 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
     }
   }, [phase]);
 
-  const t = mode === "check" ? cs.check : mode === "placement" ? cs.placement : cs.lesson;
+  const t =
+    mode === "check" ? cs.check : mode === "placement" ? cs.placement : mode === "exam" ? cs.exam : cs.lesson;
+  const exit = onExit ?? (() => router.push("/"));
   if (phase.kind === "starting") return <p className="text-center text-slate-500">{t.preparing}</p>;
   if (phase.kind === "empty")
     return (
       <div className="flex flex-col gap-4">
         <Notice>{t.empty}</Notice>
-        <Button variant="secondary" onClick={() => router.push("/")}>
-          {cs.lesson.toDashboard}
+        <Button variant="secondary" onClick={exit}>
+          {onExit && mode === "exam" ? cs.exam.back : cs.lesson.toDashboard}
         </Button>
       </div>
     );
@@ -286,6 +346,16 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         </div>
       </div>
     );
+  if (phase.kind === "done" && mode === "exam")
+    return (
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl font-bold">{t.doneTitle}</h2>
+        <ExamDone session={phase.session} />
+        <Button variant="secondary" onClick={exit}>
+          {onExit ? cs.exam.back : cs.lesson.toDashboard}
+        </Button>
+      </div>
+    );
   if (phase.kind === "done") {
     const s = phase.session.summary;
     const tiles: (readonly [string, string | number])[] =
@@ -382,7 +452,9 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         <span className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
           {mode === "check"
             ? cs.check.title
-            : mode === "placement"
+            : mode === "exam"
+              ? cs.exam.badgeName(level ?? "")
+              : mode === "placement"
               ? cs.placement.title
               : task.is_new_item
                 ? cs.lesson.newWord

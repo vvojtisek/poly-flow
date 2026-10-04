@@ -17,7 +17,7 @@ Explicit user instructions take precedence over these defaults. If current code,
 ## Product invariants
 
 - Teach DE/FR/IT/EN from Czech (English added 2026-10-04; British spelling and voice). Keep learner-facing UI copy in the Czech localization table and provide separate progress per learner and language.
-- Frequency milestones are 100 → 500 → 1000 (A2) → 2500 (B1) → 4000 (B2 threshold) → 5000 (full B2) lemmas per language; `backend/app/domain/progression.py` is the source of truth. Above 5000 is a voluntary, passive-focused 6000+ extension with no CEFR claim. CEFR labels on milestones are indicative; vocabulary rank alone does not establish a CEFR communication level.
+- Frequency milestones are 100 → 500 (A1) → 1000 (A2) → 2500 (B1) → 4000 (B2 threshold) → 5000 (full B2) lemmas per language; `backend/app/domain/progression.py` is the source of truth. Above 5000 is a voluntary, passive-focused 6000+ extension with no CEFR claim. CEFR labels on milestones are indicative; vocabulary rank alone does not establish a CEFR communication level.
 - Passive recognition and active production are separate knowledge states. An unmeasured score stays unknown; do not silently turn absent evidence into zero or full mastery.
 - More than 30 days without error-free use schedules a word for review. Repeated decay jobs must be idempotent and must not compound a score decrease on each run.
 - The grammar module unlocks when the learner masters the first 1000-word block in that language. Decay does not revoke an earned unlock. Practice itself has no lives, energy limits, or paid gates.

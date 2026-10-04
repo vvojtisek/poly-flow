@@ -1,3 +1,4 @@
+import math
 import uuid
 from datetime import UTC, datetime
 from typing import Annotated, Literal
@@ -10,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import DB, Auth
 from app.core.config import get_settings
 from app.domain.enums import Language
+from app.domain.level_exam import EXAM
 from app.domain.placement import PLACEMENT
 from app.models import LearningSession, LearningTask, LexiconItem
 from app.models.learning import SessionMode, TaskStatus, TaskType
@@ -17,6 +19,8 @@ from app.schemas.learning import (
     AnswerIn,
     AnswerOut,
     IdempotencyKey,
+    LevelsInfo,
+    LevelStatusOut,
     NextOut,
     Option,
     PlacementInfo,
@@ -34,6 +38,7 @@ from app.schemas.learning import (
     WordCard,
 )
 from app.services import learning as svc
+from app.services import level_exam as exam_svc
 from app.services import placement as placement_svc
 from app.services.stt import Stt, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
@@ -149,7 +154,13 @@ def _task_out(task: LearningTask, total: int) -> TaskOut:
 @router.post("/sessions", response_model=StartOut)
 async def start(body: StartIn, auth: Auth, db: DB, now: Now) -> StartOut:
     language = body.language or auth.acting.active_language
-    s = await svc.start_session(db, auth.acting, language, now, mode=body.mode)
+    try:
+        s = await svc.start_session(
+            db, auth.acting, language, now, mode=body.mode, level=body.level
+        )
+    except svc.LearningError as exc:
+        await db.rollback()
+        raise _http(exc) from exc
     await db.commit()
     return StartOut(session=await _session_out(db, s) if s else None)
 
@@ -338,6 +349,38 @@ async def placement_skip(body: PlacementSkipIn, auth: Auth, db: DB, now: Now) ->
     """Start from the beginning: the test is no longer offered (it can still be taken)."""
     await placement_svc.skip(db, auth.acting, body.language or auth.acting.active_language, now)
     await db.commit()
+
+
+@router.get("/levels", response_model=LevelsInfo)
+async def levels(
+    auth: Auth, db: DB, now: Now, language: Annotated[Language | None, Query()] = None
+) -> LevelsInfo:
+    """The vocabulary level exams (A1-B2) for this language: which are earned, open or locked."""
+    language = language or auth.acting.active_language
+    rows = await exam_svc.statuses(db, auth.acting, language, now)
+    return LevelsInfo(
+        language=language,
+        questions=EXAM.questions,
+        pass_correct=EXAM.pass_correct,
+        levels=[
+            LevelStatusOut(
+                level=st.level,
+                low=st.low,
+                high=st.high,
+                state=st.state,
+                lexicon_items=st.lexicon_items,
+                pool=st.pool,
+                known=st.known,
+                ready_known=math.ceil(st.pool * EXAM.ready_share),
+                earned_at=st.earned_at,
+                retry_from=st.retry_from,
+                active_session_id=st.active_session_id,
+                last_correct=st.last_correct,
+                last_asked=st.last_asked,
+            )
+            for st in rows
+        ],
+    )
 
 
 # ---------------------------------------------------------------- audio

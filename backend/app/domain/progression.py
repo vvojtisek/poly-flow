@@ -1,12 +1,13 @@
 """Vocabulary progression: frequency-rank milestones and the voluntary extension beyond B2.
 
-Curriculum: 100 -> 500 -> 1000 (A2) -> 2500 (B1) -> 4000 (B2 threshold) -> 5000 (full B2).
+Curriculum: 100 -> 500 (A1) -> 1000 (A2) -> 2500 (B1) -> 4000 (B2 threshold) -> 5000 (full B2).
 Beyond 5000 the app offers an open-ended, voluntary extension (6000+, passive-recognition
 focus). It makes no CEFR claim there: progress past B2 depends on real use of the language
 (conversation with people, media, culture), which the app can support but not replace.
 
 The CEFR tags are heuristics. CEFR describes communicative ability, not vocabulary size; the
-word counts only indicate a vocabulary consistent with that level.
+word counts only indicate a vocabulary consistent with that level. The level exams
+(`app.domain.level_exam`) take their bands from these tags.
 """
 
 from dataclasses import dataclass
@@ -27,7 +28,7 @@ class Milestone:
 
 MILESTONES: tuple[Milestone, ...] = (
     Milestone(100, "core_100"),
-    Milestone(500, "basic_500"),
+    Milestone(500, "basic_500", CefrLevel.A1),
     Milestone(1000, "a2", CefrLevel.A2),
     Milestone(2500, "b1", CefrLevel.B1),
     Milestone(4000, "b2_threshold", CefrLevel.B2),

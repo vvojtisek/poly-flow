@@ -9,6 +9,8 @@ from app.main import app
 def test_milestone_sequence():
     assert [m.rank for m in MILESTONES] == [100, 500, 1000, 2500, 4000, 5000, 6000]
     by_rank = {m.rank: m for m in MILESTONES}
+    assert by_rank[100].cefr is None
+    assert by_rank[500].cefr is CefrLevel.A1
     assert by_rank[1000].cefr is CefrLevel.A2
     assert by_rank[2500].cefr is CefrLevel.B1
     assert by_rank[4000].cefr is by_rank[5000].cefr is CefrLevel.B2

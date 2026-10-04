@@ -21,8 +21,8 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
-from app.db.types import LanguageType
-from app.domain.enums import Language
+from app.db.types import CefrLevelType, LanguageType
+from app.domain.enums import CefrLevel, Language
 
 
 class SessionStatus(StrEnum):
@@ -36,6 +36,9 @@ class SessionMode(StrEnum):
     CHECK = "check"  # Ověření: one first-try attempt, no hints; the only source of evidence
     # Rozřazovací test: adaptive, graded like a check; its tasks are chosen one at a time.
     PLACEMENT = "placement"
+    # Zkouška úrovně slovní zásoby (A1-B2): graded like a check, on a fixed random sample of
+    # one level's band; passing earns a LevelBadge.
+    EXAM = "exam"
 
 
 class TaskType(StrEnum):
@@ -74,6 +77,7 @@ class LearningSession(UUIDPrimaryKeyMixin, TimestampMixin, Base):
             unique=True,
             postgresql_where=text("status = 'active'"),
         ),
+        CheckConstraint("(mode::text = 'exam') = (exam_level IS NOT NULL)", name="exam_level"),
     )
 
     user_id: Mapped[uuid.UUID] = mapped_column(
@@ -88,6 +92,8 @@ class LearningSession(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     )
     # Learn mode: the scene that introduces the lesson's words (None = example sentences only).
     scene_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("scenes.id", ondelete="SET NULL"))
+    # Exam mode: the level whose band the exam samples.
+    exam_level: Mapped[CefrLevel | None] = mapped_column(CefrLevelType)
     status: Mapped[SessionStatus] = mapped_column(
         SessionStatusType,
         default=SessionStatus.ACTIVE,
@@ -220,6 +226,32 @@ class LanguagePlacement(TimestampMixin, Base):
     )
     decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     policy_version: Mapped[str | None] = mapped_column(String(16))
+
+
+class LevelBadge(TimestampMixin, Base):
+    """A passed vocabulary level exam. Earned once; decay does not take it back.
+
+    A vocabulary level, not a CEFR certificate: the exam measures word recognition only.
+    """
+
+    __tablename__ = "level_badges"
+    __table_args__ = (
+        CheckConstraint("level::text IN ('A1', 'A2', 'B1', 'B2')", name="level"),
+        CheckConstraint("correct BETWEEN 0 AND asked", name="score"),
+    )
+
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), primary_key=True
+    )
+    language: Mapped[Language] = mapped_column(LanguageType, primary_key=True)
+    level: Mapped[CefrLevel] = mapped_column(CefrLevelType, primary_key=True)
+    earned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    session_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("learning_sessions.id", ondelete="SET NULL")
+    )
+    correct: Mapped[int] = mapped_column(Integer, nullable=False)
+    asked: Mapped[int] = mapped_column(Integer, nullable=False)
+    policy_version: Mapped[str] = mapped_column(String(16), nullable=False)
 
 
 class GrammarUnlock(TimestampMixin, Base):

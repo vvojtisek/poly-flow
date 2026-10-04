@@ -141,8 +141,10 @@ export const updateProfile = (id: string, body: { is_child?: boolean; is_active?
 
 export type TaskType = "recognition" | "recall";
 // learn = Lekce (context first, practice never graded); check = Ověření (the only graded mode);
-// placement = rozřazovací test (graded like a check, adaptive)
-export type SessionMode = "learn" | "check" | "placement";
+// placement = rozřazovací test (graded like a check, adaptive);
+// exam = zkouška úrovně slovní zásoby A1-B2 (graded like a check, fixed sample of one band)
+export type SessionMode = "learn" | "check" | "placement" | "exam";
+export type ExamLevel = "A1" | "A2" | "B1" | "B2";
 
 export interface SceneSegment {
   text: string;
@@ -202,6 +204,14 @@ export interface LessonSession {
     ceiling: number; // highest rank the app holds: the test cannot place higher
     at_ceiling: boolean;
     queued: number; // words up to the level, not asked: waiting in Ověření to be confirmed
+    // exam only
+    exam_level: ExamLevel;
+    passed: boolean;
+    correct: number;
+    answered: number;
+    pass_correct: number;
+    missed: { lemma: string; gender: string | null; translation: string }[];
+    retry_from: string; // failed: the next try opens then
   }>;
   scene: Scene | null;
   words: WordCard[];
@@ -261,6 +271,48 @@ export interface ProgressOverview {
   active_check_session_id: string | null;
   active_placement_session_id: string | null;
   placement: Placement | null; // null: the test was never taken or skipped for this language
+  active_exam_session_id: string | null;
+  level_badges: LevelBadge[];
+}
+
+// A passed level exam: a vocabulary level, not a CEFR certificate.
+export interface LevelBadge {
+  level: ExamLevel;
+  earned_at: string;
+  correct: number;
+  asked: number;
+}
+
+export type LevelState =
+  | "earned"
+  | "in_progress"
+  | "missing_words" // the band is not imported yet
+  | "needs_previous"
+  | "not_ready" // too little of the band known
+  | "retry_later" // failed: retake from `retry_from`
+  | "available";
+
+export interface LevelStatus {
+  level: ExamLevel;
+  low: number;
+  high: number;
+  state: LevelState;
+  lexicon_items: number;
+  pool: number;
+  known: number;
+  ready_known: number;
+  earned_at: string | null;
+  retry_from: string | null;
+  active_session_id: string | null;
+  last_correct: number | null;
+  last_asked: number | null;
+}
+
+export interface LevelsInfo {
+  language: Language;
+  questions: number;
+  pass_correct: number;
+  levels: LevelStatus[];
 }
 
 export interface Placement {
@@ -280,8 +332,10 @@ export interface PlacementInfo {
   active_session_id: string | null;
 }
 
-export const startLesson = (language: Language, mode: SessionMode = "learn") =>
-  api<{ session: LessonSession | null }>("/api/v1/learning/sessions", { json: { language, mode } });
+export const startLesson = (language: Language, mode: SessionMode = "learn", level?: ExamLevel) =>
+  api<{ session: LessonSession | null }>("/api/v1/learning/sessions", {
+    json: level ? { language, mode, level } : { language, mode },
+  });
 export const nextTask = (sessionId: string) =>
   api<{ task: Task | null }>(`/api/v1/learning/sessions/${sessionId}/next`, { cache: "no-store" });
 export const requestHint = (taskId: string) =>
@@ -297,6 +351,8 @@ export const completeLesson = (sessionId: string) =>
 
 export const getPlacementInfo = (language: Language) =>
   api<PlacementInfo>(`/api/v1/learning/placement?language=${language}`, { cache: "no-store" });
+export const getLevels = (language: Language) =>
+  api<LevelsInfo>(`/api/v1/learning/levels?language=${language}`, { cache: "no-store" });
 export const skipPlacement = (language: Language) =>
   api<void>("/api/v1/learning/placement/skip", { json: { language } });
 
