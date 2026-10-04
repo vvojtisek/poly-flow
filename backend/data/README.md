@@ -6,7 +6,7 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 
 | column | required | notes |
 |---|---|---|
-| language | yes | `de` / `fr` / `it` |
+| language | yes | `de` / `fr` / `it` / `en` |
 | rank | yes | >= 1, unique per language (curriculum ends at 5000; higher ranks form the voluntary extension) |
 | lemma | yes | dictionary form |
 | pos | no | Universal Dependencies UPOS (`NOUN`, `VERB`, ...). `(language, lemma, pos)` is the upsert key |
@@ -30,7 +30,7 @@ lemma occurs verbatim in the example.
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
 used only for voluntary, recognition-focused practice.
 
-No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" for DE/FR/IT. A realistic pipeline:
+No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" for DE/FR/IT/EN. A realistic pipeline:
 
 1. **Frequency**: lemmatise a large corpus with spaCy/Stanza and count, or use an existing lemma list.
    Surface-form lists (e.g. OpenSubtitles-derived `FrequencyWords`, CC-BY-SA-4.0) are *not* lemma lists:
@@ -43,6 +43,24 @@ No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" fo
 Import is an idempotent upsert: re-running updates rank/gloss/etc. in place without touching user progress.
 The per-language rank constraint is deferred to commit, so rank shifts inside one file are fine; an import
 fails cleanly if an item *not* in the file still holds a rank the file assigns to another lemma.
+
+## Scenes (`scenes/*.json`)
+
+Short dialogues that open each lesson (Lekce): the learner reads the scene first (Czech translation on
+demand, new words highlighted and tappable), then meets each new word, then practises it. Practice is
+never graded; only the separate check (Ověření) counts toward knowing a word.
+
+Format and rules are in `app/domain/scenes.py`. In a line, `[Hund]` marks a lexicon word whose surface
+form is the lemma, `[bin|sein]` an inflected form, `[sie|sie/PRON]` a lemma that needs its UPOS. `words`
+lists the lemmas a scene introduces: every word at most once per language, and marked at least once in
+that scene. Lessons walk scenes in file order, up to 4 new words per lesson; words with no scene follow
+by frequency with their example sentence as context.
+
+Import after the lexicon: `python -m app.cli seed-scenes data/scenes/*.json` (`--dry-run` validates
+against the lexicon in the database). `tests/test_scene_data.py` checks the committed files against the
+committed lexicon and requires every core-100 word to have a scene. The `*.core100.json` files
+(revision `scenes-v1`) were drafted without native-speaker review; target-language grammar and the
+Czech translations still need it.
 
 ## Content blacklist (`blacklist/*.csv`)
 

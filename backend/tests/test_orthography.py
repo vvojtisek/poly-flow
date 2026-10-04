@@ -3,7 +3,7 @@ import pytest
 from app.domain.enums import Language
 from app.domain.orthography import Verdict, check_spelling
 
-DE, FR, IT = Language.DE, Language.FR, Language.IT
+DE, FR, IT, EN = Language.DE, Language.FR, Language.IT, Language.EN
 
 
 @pytest.mark.parametrize(
@@ -28,6 +28,13 @@ DE, FR, IT = Language.DE, Language.FR, Language.IT
         (IT, "città", "citta", "NOUN", Verdict.DIACRITICS),
         (IT, "città", "la città", "NOUN", Verdict.EXACT),
         (IT, "perché", "perche", "ADV", Verdict.DIACRITICS),
+        (EN, "dog", "the dog", "NOUN", Verdict.EXACT),
+        (EN, "apple", "an apple", "NOUN", Verdict.EXACT),
+        (EN, "go", "to go", "VERB", Verdict.EXACT),  # infinitive marker allowed
+        (EN, "to", "to", "ADP", Verdict.EXACT),  # the lemma itself is not stripped
+        (EN, "house", "House", "NOUN", Verdict.EXACT),  # no capitalisation rule
+        (EN, "I", "i", "PRON", Verdict.EXACT),
+        (EN, "house", "horse", "NOUN", Verdict.WRONG),
     ],
 )
 def test_verdicts(lang, expected, answer, pos, verdict):

@@ -60,8 +60,8 @@ export const apiGet = <T>(path: string, init?: Init) => api<T>(path, init);
 
 // ---------------------------------------------------------------- progression & health
 
-export type Language = "de" | "fr" | "it";
-export const LANGUAGES: Language[] = ["de", "fr", "it"];
+export type Language = "de" | "fr" | "it" | "en";
+export const LANGUAGES: Language[] = ["de", "fr", "it", "en"];
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 
 export interface Milestone {
@@ -140,11 +140,37 @@ export const updateProfile = (id: string, body: { is_child?: boolean; is_active?
 // ---------------------------------------------------------------- learning
 
 export type TaskType = "recognition" | "recall";
+// learn = Lekce (context first, practice never graded); check = Ověření (the only graded mode)
+export type SessionMode = "learn" | "check";
+
+export interface SceneSegment {
+  text: string;
+  item_id: string | null; // a lexicon word: tap for its gloss
+  gloss: string | null;
+  new: boolean; // introduced by this lesson
+}
+
+export interface Scene {
+  title: string;
+  lines: { speaker: string | null; cs: string; segments: SceneSegment[] }[];
+}
+
+export interface WordCard {
+  id: string;
+  lemma: string;
+  pos: string;
+  gender: string | null;
+  ipa: string | null;
+  translation: string;
+  context: string | null;
+  context_cs: string | null;
+}
 export type Verdict = "exact" | "accepted_variant" | "case" | "diacritics" | "wrong" | "revealed";
 
 export interface LessonSession {
   id: string;
   language: Language;
+  mode: SessionMode;
   status: "active" | "completed" | "abandoned";
   total: number;
   remaining: number;
@@ -159,6 +185,8 @@ export interface LessonSession {
     new_items: number;
     reviewed_items: number;
   }>;
+  scene: Scene | null;
+  words: WordCard[];
 }
 
 export interface Task {
@@ -201,6 +229,7 @@ export interface ProgressOverview {
   passive_known: number;
   active_known: number;
   known: number;
+  introduced: number;
   due_now: number;
   orthography_avg: number | null;
   phonetic_measured: number;
@@ -210,10 +239,11 @@ export interface ProgressOverview {
   next_milestone_cefr: CefrLevel | null;
   by_band: { band: number; items: number; known: number }[];
   active_session_id: string | null;
+  active_check_session_id: string | null;
 }
 
-export const startLesson = (language: Language) =>
-  api<{ session: LessonSession | null }>("/api/v1/learning/sessions", { json: { language } });
+export const startLesson = (language: Language, mode: SessionMode = "learn") =>
+  api<{ session: LessonSession | null }>("/api/v1/learning/sessions", { json: { language, mode } });
 export const nextTask = (sessionId: string) =>
   api<{ task: Task | null }>(`/api/v1/learning/sessions/${sessionId}/next`, { cache: "no-store" });
 export const requestHint = (taskId: string) =>

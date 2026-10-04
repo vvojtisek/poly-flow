@@ -70,6 +70,8 @@ class UserWordProgress(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     # Shown in any task, whether or not it was answered (exposure is not knowledge).
     last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     next_review_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # Presented in a completed lesson (learning). Only introduced words are checked.
+    introduced_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     review_streak: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)
     # When passive_known and active_known first both held (starts the mastery delay).
     known_since_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
