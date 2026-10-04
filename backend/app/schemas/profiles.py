@@ -39,6 +39,7 @@ class ProfileOut(BaseModel):
     is_child: bool
     is_active: bool
     has_pin: bool
+    has_password: bool
     active_language: Language
     timezone: str
     settings: ProfileSettings
@@ -53,6 +54,7 @@ class ProfileOut(BaseModel):
             is_child=user.is_child,
             is_active=user.is_active,
             has_pin=user.pin_hash is not None,
+            has_password=user.password_hash is not None,
             active_language=user.active_language,
             timezone=user.timezone,
             settings=ProfileSettings.model_validate(user.settings or {}),
@@ -85,7 +87,7 @@ class Me(BaseModel):
     principal: ProfileOut
     acting: ProfileOut
     csrf_token: str
-    can_manage: bool  # parent/admin, not currently handed over to a child profile
+    can_manage: bool  # admin acting as themselves (not handed over to a child profile)
 
 
 class SwitchIn(BaseModel):
@@ -101,34 +103,35 @@ class ReturnIn(BaseModel):
 
 
 class ProfileCreate(BaseModel):
+    """Every profile gets its own sign-in: a password or a PIN. The learner picks their
+    languages themselves, so there is no language field here."""
+
     model_config = ConfigDict(extra="forbid")
 
     username: Username
     display_name: DisplayName
-    kind: Literal["adult", "child"]
-    password: Password | None = None  # required for adults
-    pin: Pin | None = None  # optional, children only
-    active_language: Language = Language.DE
+    kind: Literal["adult", "child"]  # child = age-appropriate content filter
+    password: Password | None = None
+    pin: Pin | None = None
     timezone: str | None = None
 
     _tz = field_validator("timezone")(_check_tz)
 
 
 class ProfileAdminUpdate(BaseModel):
-    """Parent-managed fields. Role and is_child are deliberately not updatable."""
+    """Admin-managed fields: access (credentials, active) and the content filter.
+
+    Learning choices (language, goals, audio, timezone) belong to the profile itself and are
+    deliberately absent; role is not updatable.
+    """
 
     model_config = ConfigDict(extra="forbid")
 
     display_name: DisplayName | None = None
-    password: Password | None = None
-    pin: Pin | None = None
-    clear_pin: bool = False
+    password: Password | None = None  # replaces a PIN
+    pin: Pin | None = None  # replaces a password; not for admins
     is_active: bool | None = None
-    active_language: Language | None = None
-    timezone: str | None = None
-    settings: ProfileSettings | None = None
-
-    _tz = field_validator("timezone")(_check_tz)
+    is_child: bool | None = None
 
 
 class ProfileSelfUpdate(BaseModel):

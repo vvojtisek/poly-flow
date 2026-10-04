@@ -27,7 +27,7 @@ async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean } = {}) 
   await expect(page.getByRole("button", { name: "Další" })).toBeVisible();
 }
 
-test("parent sets up, hands device to a child, lesson resumes after reload", async ({ page }) => {
+test("admin sets up, hands device to a child, lesson resumes after reload", async ({ page }) => {
   await page.goto("/");
   await page.waitForURL("**/setup");
   await page.getByLabel("Jméno", { exact: true }).fill("Máma");
@@ -38,6 +38,7 @@ test("parent sets up, hands device to a child, lesson resumes after reload", asy
 
   await page.getByLabel("Jméno", { exact: true }).fill("Eva");
   await page.getByLabel("Uživatelské jméno").fill("eva");
+  await page.getByLabel("PIN (4–8 číslic)").fill("2468");
   await page.getByRole("button", { name: "Přidat profil" }).last().click();
   await expect(page.getByText("Profil vytvořen.")).toBeVisible();
   await page.getByRole("button", { name: "Předat zařízení" }).click();
@@ -76,7 +77,7 @@ test("parent sets up, hands device to a child, lesson resumes after reload", asy
   await page.reload();
   await expect(seen).toHaveText("4"); // progress is persisted server-side
 
-  await page.getByRole("button", { name: "Zpět do rodičovského účtu" }).click();
+  await page.getByRole("button", { name: "Zpět do účtu správce" }).click();
   await page.getByLabel("Heslo", { exact: true }).fill("spatne-heslo");
   await page.getByRole("button", { name: "Pokračovat" }).click();
   await expect(page.getByText("Neplatné jméno nebo heslo.")).toBeVisible();
@@ -89,5 +90,9 @@ test("parent sets up, hands device to a child, lesson resumes after reload", asy
   await page.getByLabel("Uživatelské jméno").fill("eva");
   await page.getByLabel("Heslo nebo PIN").fill("1234");
   await page.getByRole("button", { name: "Přihlásit se" }).click();
-  await expect(page.getByText("Neplatné jméno nebo heslo.")).toBeVisible(); // no PIN -> no solo login
+  await expect(page.getByText("Neplatné jméno nebo heslo.")).toBeVisible();
+  await page.getByLabel("Heslo nebo PIN").fill("2468");
+  await page.getByRole("button", { name: "Přihlásit se" }).click();
+  await page.waitForURL((u) => u.pathname === "/");
+  await expect(page.getByText("Viděná slova").locator("xpath=preceding-sibling::p")).toHaveText("4"); // the child signs in alone
 });

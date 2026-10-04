@@ -9,17 +9,16 @@ import { Panel } from "@/components/Panel";
 import { Button, Field, Notice } from "@/components/ui";
 import {
   ApiError,
-  LANGUAGES,
   createProfile,
   listProfiles,
   switchProfile,
-  type Language,
+  updateProfile,
   type Profile,
 } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
-const EMPTY = { username: "", display_name: "", password: "", pin: "", kind: "child" as "child" | "adult", active_language: "de" as Language };
+const EMPTY = { username: "", display_name: "", password: "", pin: "", kind: "child" as "child" | "adult" };
 
 export default function ProfilesPage() {
   const me = useRequireMe();
@@ -52,8 +51,7 @@ export default function ProfilesPage() {
         username: form.username,
         display_name: form.display_name,
         kind: form.kind,
-        active_language: form.active_language,
-        ...(form.kind === "adult" ? { password: form.password } : form.pin ? { pin: form.pin } : {}),
+        ...(form.kind === "adult" ? { password: form.password } : { pin: form.pin }),
       });
       setForm(EMPTY);
       setMessage({ tone: "ok", text: cs.profiles.created });
@@ -61,6 +59,16 @@ export default function ProfilesPage() {
     } catch (err) {
       const taken = err instanceof ApiError && err.status === 409;
       setMessage({ tone: "error", text: taken ? cs.profiles.taken : cs.profiles.invalid });
+    }
+  }
+
+  async function toggleChild(p: Profile) {
+    setMessage(null);
+    try {
+      await updateProfile(p.id, { is_child: !p.is_child });
+      await load();
+    } catch {
+      setMessage({ tone: "error", text: cs.common.error });
     }
   }
 
@@ -85,15 +93,28 @@ export default function ProfilesPage() {
                   <div>
                     <p className="font-medium">{p.display_name}</p>
                     <p className="text-xs text-slate-500">
-                      @{p.username} · {p.role === "admin" ? cs.profiles.parent : p.is_child ? cs.profiles.child : cs.profiles.adult}
-                      {p.is_child && !p.has_pin ? ` · ${cs.profiles.noPin}` : ""} · {cs.languages[p.active_language]}
+                      @{p.username} · {p.role === "admin" ? cs.profiles.admin : p.is_child ? cs.profiles.child : cs.profiles.adult}
+                      {!p.has_pin && !p.has_password ? ` · ${cs.profiles.noCredential}` : ""} · {cs.languages[p.active_language]}
                     </p>
                   </div>
-                  {p.is_child && p.is_active && (
-                    <Button variant="secondary" className="!py-2 text-sm" onClick={() => void handOver(p)}>
-                      {cs.profiles.learnAs}
-                    </Button>
-                  )}
+                  <div className="flex flex-wrap justify-end gap-2">
+                    {p.role !== "admin" && (
+                      <Button
+                        variant="ghost"
+                        role="switch"
+                        aria-checked={p.is_child}
+                        className="!py-2 text-sm"
+                        onClick={() => void toggleChild(p)}
+                      >
+                        {p.is_child ? cs.profiles.childFilterOn : cs.profiles.childFilterOff}
+                      </Button>
+                    )}
+                    {p.is_child && p.is_active && (
+                      <Button variant="secondary" className="!py-2 text-sm" onClick={() => void handOver(p)}>
+                        {cs.profiles.learnAs}
+                      </Button>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -116,6 +137,7 @@ export default function ProfilesPage() {
                 </Button>
               ))}
             </div>
+            {form.kind === "child" && <p className="text-xs text-slate-500">{cs.profiles.childHelp}</p>}
             <Field label={cs.setup.displayName} value={form.display_name} onChange={set("display_name")} required />
             <Field
               label={cs.auth.username}
@@ -139,28 +161,15 @@ export default function ProfilesPage() {
               />
             ) : (
               <Field
-                label={cs.profiles.pinOptional}
+                label={cs.profiles.pin}
                 help={cs.profiles.pinHelp}
                 inputMode="numeric"
                 pattern="[0-9]{4,8}"
                 value={form.pin}
                 onChange={set("pin")}
+                required
               />
             )}
-            <label className="flex flex-col gap-1 text-sm">
-              <span className="font-medium text-slate-700 dark:text-slate-300">{cs.profiles.language}</span>
-              <select
-                className="rounded-xl border border-slate-300 bg-white px-3 py-3 dark:border-slate-700 dark:bg-slate-900"
-                value={form.active_language}
-                onChange={set("active_language")}
-              >
-                {LANGUAGES.map((l) => (
-                  <option key={l} value={l}>
-                    {cs.languages[l]}
-                  </option>
-                ))}
-              </select>
-            </label>
             {message && <Notice tone={message.tone}>{message.text}</Notice>}
             <Button type="submit">{cs.profiles.create}</Button>
           </form>

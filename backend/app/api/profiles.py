@@ -41,21 +41,16 @@ async def list_profiles(_: Manager, db: DB) -> list[ProfileOut]:
 
 @router.post("/profiles", response_model=ProfileOut, status_code=status.HTTP_201_CREATED)
 async def create_profile(body: ProfileCreate, _: Manager, db: DB) -> ProfileOut:
-    child = body.kind == "child"
-    if not child and body.password is None:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "password_required_for_adult")
-    if not child and body.pin is not None:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "pin_is_for_children")
-    if child and body.password is not None:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "children_use_pin")
+    """Admin grants access. Language and other learning choices stay with the new profile."""
+    if (body.password is None) == (body.pin is None):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "password_or_pin_required")
     user = User(
         username=body.username,
         display_name=body.display_name,
         role=UserRole.LEARNER,
-        is_child=child,
+        is_child=body.kind == "child",
         password_hash=hash_secret(body.password) if body.password else None,
         pin_hash=hash_secret(body.pin) if body.pin else None,
-        active_language=body.active_language,
         timezone=body.timezone or get_settings().default_timezone,
         settings={},
     )
@@ -81,26 +76,27 @@ async def update_profile(
 ) -> ProfileOut:
     user = await _managed(db, profile_id)
     is_self = user.id == auth.principal.id
-    if body.pin is not None or body.clear_pin:
-        if not user.is_child:
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "pin_is_for_children")
-        user.pin_hash = None if body.clear_pin else hash_secret(body.pin)
+    is_admin = user.role == UserRole.ADMIN
+    if body.password is not None and body.pin is not None:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "password_or_pin_required")
+    if body.pin is not None:
+        if is_admin:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "admin_needs_password")
+        user.pin_hash, user.password_hash = hash_secret(body.pin), None
     if body.password is not None:
-        if user.is_child:
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "children_use_pin")
-        user.password_hash = hash_secret(body.password)
+        user.password_hash, user.pin_hash = hash_secret(body.password), None
     if body.is_active is not None:
         if is_self and not body.is_active:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "cannot_deactivate_self")
         user.is_active = body.is_active
-    for field in ("display_name", "active_language", "timezone"):
-        value = getattr(body, field)
-        if value is not None:
-            setattr(user, field, value)
-    if body.settings is not None:
-        user.settings = body.settings.model_dump()
+    if body.is_child is not None:
+        if is_admin and body.is_child:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "admin_cannot_be_child")
+        user.is_child = body.is_child
+    if body.display_name is not None:
+        user.display_name = body.display_name
     # Changed credentials or deactivation end that profile's other sessions.
-    if (body.password or body.pin or body.clear_pin or body.is_active is False) and not is_self:
+    if (body.password or body.pin or body.is_active is False) and not is_self:
         await revoke_user_sessions(db, user.id)
     await db.commit()
     return ProfileOut.from_user(user)

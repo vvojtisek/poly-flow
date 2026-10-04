@@ -58,7 +58,7 @@ flowchart LR
 
 | Model / záznam | Účel a zásadní pravidla |
 |---|---|
-| Profily a přístup | Přihlašovací session, rodičovská oprávnění, nastavení profilu a časové pásmo; oprávnění kontroluje backend |
+| Profily a přístup | Přihlašovací session, správce (přístup a obsah), dětský filtr obsahu, nastavení profilu a časové pásmo; oprávnění kontroluje backend |
 | Pokrok uživatel–slovo | Zachovat existující unikátní dvojici; doplnit expozici, plán opakování a verzi retenční politiky |
 | Událost učení | Profil, jazyk, slovo, typ úlohy, odpověď/výsledek, čas, session, verze hodnoticí politiky a idempotency key |
 | Výuková session | Serverem vydané úlohy, cílová slova, skutečné pokusy a dokončení; klient nemůže sám přidělit zvládnutí ani XP |
@@ -121,8 +121,9 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 ### P1 — rodinné profily a oprávnění
 
-- První spuštění vytvoří rodičovský/admin účet bez otevřené registrace. Přihlášení pomocí serverové session, bezpečné cookies, ochrana zápisů proti CSRF a omezení pokusů o heslo/PIN.
-- Rodič spravuje dětské profily, zdroje, zájmy a volitelný PIN. Výběr dětského profilu na sdíleném zařízení funguje v rodičem autorizované session; návrat do správy vyžaduje rodičovské ověření.
+- První spuštění vytvoří účet správce (admin) bez otevřené registrace. Přihlášení pomocí serverové session, bezpečné cookies, ochrana zápisů proti CSRF a omezení pokusů o heslo/PIN.
+- Správce uděluje přístup (zakládá profily, obnovuje heslo/PIN, deaktivuje) a spravuje společný obsah. Neomezuje, co uživatelé dělají: jazyk, denní cíl a audio si volí každý sám. Každý profil se přihlašuje sám heslem nebo PINem.
+- Dětský profil je filtr obsahu podle věku, ne rodičovská kontrola: položky slovníku s `content_flags` (`sexual`, `profanity`, `violence`) se dítěti nezobrazí. Filtr zapíná/vypíná správce. Na sdíleném zařízení může správce otevřít dětský profil ze své session; návrat do správy vyžaduje heslo správce.
 - API/UI pro profil, výběr jazyka, denní cíl a nastavení audia. Znalost a gramatické odemčení se vedou per jazyk; změna aktivního jazyka nic neresetuje.
 - Kontroly: přímé volání cizích ID, změna `is_child`/role, odhlášení, expirace session a přepnutí profilu.
 

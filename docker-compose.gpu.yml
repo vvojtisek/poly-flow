@@ -1,0 +1,17 @@
+# Run Whisper on an NVIDIA GPU (CUDA 12, float16). Needs the NVIDIA driver and the NVIDIA Container
+# Toolkit on Linux, or Docker Desktop with the WSL2 backend on Windows.
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml --profile audio up --build
+services:
+  whisper:
+    build:
+      args:
+        WHISPER_GPU: "1"
+    environment:
+      WHISPER_DEVICE: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

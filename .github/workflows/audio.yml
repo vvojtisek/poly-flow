@@ -1,0 +1,108 @@
+name: audio
+
+# Builds the audio profile, fetches pinned models, and checks Piper + Whisper end to end with the
+# smallest STT model. Heavier than the core CI, so it runs only when audio files change, weekly
+# (catches upstream breakage), or on demand.
+on:
+  pull_request:
+    paths:
+      - docker/piper/**
+      - docker/whisper/**
+      - docker/models/**
+      - scripts/models.py
+      - scripts/bench_audio.py
+      - docker-compose.yml
+      - .github/workflows/audio.yml
+  schedule:
+    - cron: "17 4 * * 1"
+  workflow_dispatch:
+
+jobs:
+  audio-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      WHISPER_MODEL: tiny
+      # the models script in a bare python container on the audio volumes; OFFLINE has no network
+      MODELS_RUN: >-
+        docker run --rm
+        -v polyflow_piperdata:/data/piper -v polyflow_whispermodels:/data/whisper
+        -v ${{ github.workspace }}/scripts/models.py:/srv/scripts/models.py:ro
+        -v ${{ github.workspace }}/docker/models:/srv/docker/models:ro
+        python:3.12-slim python /srv/scripts/models.py
+      MODELS_OFFLINE: >-
+        docker run --rm --network none
+        -v polyflow_piperdata:/data/piper -v polyflow_whispermodels:/data/whisper
+        -v ${{ github.workspace }}/scripts/models.py:/srv/scripts/models.py:ro
+        -v ${{ github.workspace }}/docker/models:/srv/docker/models:ro
+        python:3.12-slim python /srv/scripts/models.py
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate the model lock if it is not committed yet
+        id: lock
+        run: |
+          if [ -f docker/models/models.lock.json ]; then
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+          else
+            python3 scripts/models.py lock
+            echo "generated=true" >> "$GITHUB_OUTPUT"
+            echo "::group::generated docker/models/models.lock.json"
+            cat docker/models/models.lock.json
+            echo "::endgroup::"
+          fi
+
+      - if: steps.lock.outputs.generated == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: models-lock
+          path: docker/models/models.lock.json
+
+      - name: Build audio images
+        run: docker compose --profile audio build piper whisper
+
+      - name: Start Piper and Whisper (models fetched first)
+        run: |
+          docker compose --profile audio up -d piper whisper
+          for url in http://127.0.0.1:5000/voices http://127.0.0.1:9000/healthz; do
+            for i in $(seq 1 60); do
+              curl -fsS "$url" >/dev/null && echo "ok: $url" && break
+              [ "$i" = 60 ] && { echo "timeout: $url"; exit 1; }
+              sleep 5
+            done
+          done
+
+      - name: TTS -> STT round trip in every language
+        run: |
+          python3 scripts/bench_audio.py --smoke --min-accuracy 0.3 --out bench.md
+          cat bench.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Complete volumes need no network
+        run: $MODELS_OFFLINE fetch --dest /data piper/ whisper/tiny
+
+      - name: A tampered model file is detected
+        run: |
+          docker run --rm -v polyflow_piperdata:/data python:3.12-slim \
+            sh -c 'printf x >> /data/de_DE-thorsten-medium.onnx.json'
+          if $MODELS_RUN verify --dest /data piper/; then
+            echo "verify accepted a tampered file"; exit 1
+          fi
+          # offline, fetch cannot repair it and must fail instead of leaving it in place
+          if $MODELS_OFFLINE fetch --dest /data piper/; then
+            echo "offline fetch accepted a tampered file"; exit 1
+          fi
+          # online, fetch replaces it with the locked file
+          $MODELS_RUN fetch --dest /data piper/
+          $MODELS_RUN verify --dest /data piper/
+
+      - if: failure()
+        run: docker compose --profile audio logs --no-color --tail=200
+
+      - if: always()
+        run: docker compose --profile audio down -v --remove-orphans
+
+      - name: Fail until the generated lock is committed
+        if: steps.lock.outputs.generated == 'true'
+        run: |
+          echo "::error::docker/models/models.lock.json is not committed. Download the models-lock artifact (or copy it from the log above) and commit it."
+          exit 1
