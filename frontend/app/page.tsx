@@ -101,11 +101,14 @@ export default function HomePage() {
                 </p>
               )}
             </div>
-            {progress && !offerPlacement && progress.lexicon_items > 0 && (
-              <Button variant="ghost" className="text-sm" onClick={() => router.push("/placement")}>
-                <Compass className="size-4" aria-hidden />
-                {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
-              </Button>
+            {progress && !offerPlacement && (
+              <div className="flex flex-col gap-1">
+                <Button variant="secondary" className="w-full" onClick={() => router.push("/placement")}>
+                  <Compass className="size-5" aria-hidden />
+                  {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
+                </Button>
+                <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
+              </div>
             )}
           </div>
         </Panel>

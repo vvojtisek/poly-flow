@@ -1,10 +1,12 @@
-"""Placement test (rozřazovací test): where a learner who already knows some words starts.
+"""Placement test (rozřazovací test): where a learner stands in a language, at any time.
 
 Graded like a check (one attempt, no hints, "Nevím" instead of guessing) but adaptive: each
-answer picks the next word (`app.domain.placement`). Callers own the transaction.
+answer picks the next word (`app.domain.placement`), from all words of the language, learned
+ones included. Callers own the transaction.
 
 - A first-try correct answer is one piece of check evidence for that word, which then skips
-  its lesson. A miss is exposure only: the word stays for the lessons.
+  its lesson. A miss on a word already introduced counts like a missed check; on a word never
+  taught it is exposure only: the word stays for the lessons.
 - Finishing sets the level. Words up to it that the test did not ask skip the lessons and wait
   in Ověření to be confirmed; nothing is marked known by assumption. A check that misses one
   sends it back to the lessons (`learning._apply_progress`).
@@ -79,16 +81,13 @@ async def add_next_task(
     if rank is None:
         return None
     asked = [t.lexicon_item_id for t in session.tasks]
-    on, still_new = lsvc._not_introduced(user)
+    # Any word may be asked, learned ones too: the test can be taken at any time.
     nearest = list(
         (
             await db.execute(
                 select(LexiconItem)
-                .outerjoin(UserWordProgress, on)
                 .where(
                     LexiconItem.language == session.language,
-                    # Words not taught yet, including those an earlier test queued (a retake).
-                    or_(still_new, _queued_unchecked()),
                     lsvc._suitable(user),
                     LexiconItem.id.not_in(asked) if asked else true(),
                 )
@@ -119,8 +118,17 @@ async def add_next_task(
 async def record_answer(
     db: AsyncSession, user: User, item: LexiconItem, *, evidence: bool, now: datetime
 ) -> None:
-    """A correct first try is check evidence and skips the word's lesson; a miss is exposure."""
-    if not evidence:
+    """Graded like a check. A correct first try is evidence and skips the word's lesson.
+
+    A miss on a word already introduced counts like a missed check; on a word never taught it
+    is exposure only (the lessons teach it).
+    """
+    introduced = await db.scalar(
+        select(UserWordProgress.introduced_at).where(
+            UserWordProgress.user_id == user.id, UserWordProgress.lexicon_item_id == item.id
+        )
+    )
+    if not evidence and introduced is None:
         await lsvc.mark_seen(db, user, item, now)
         return
     await lsvc._apply_progress(
@@ -130,9 +138,11 @@ async def record_answer(
         TaskType.RECOGNITION,
         now=now,
         first_attempt=True,
-        evidence=True,
+        evidence=evidence,
         orthography=None,
     )
+    if not evidence:
+        return
     await db.execute(
         update(UserWordProgress)
         .where(
