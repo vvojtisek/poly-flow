@@ -1,0 +1,7 @@
+# Local Fedora/SELinux deployment: build the self-contained frontend image and
+# avoid a development bind mount from the user's home directory.
+services:
+  frontend:
+    build:
+      target: runner
+    volumes: !override []
