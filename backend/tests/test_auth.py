@@ -88,7 +88,7 @@ async def test_login_rate_limited(db, client):
 
 async def test_csrf_required_for_writes(db, client):
     me = await setup_parent(client)
-    body = {"username": "eva", "display_name": "Eva", "kind": "child"}
+    body = {"username": "eva", "display_name": "Eva", "kind": "child", "pin": "4321"}
     assert (await client.post("/api/v1/profiles", json=body)).status_code == 403
     r = await client.post("/api/v1/profiles", json=body, headers={"X-CSRF-Token": "forged"})
     assert r.status_code == 403
@@ -98,32 +98,54 @@ async def test_csrf_required_for_writes(db, client):
 async def test_profile_rules(db, client):
     me = await setup_parent(client)
     h = csrf(me)
+    for body in (
+        {"username": "tata", "display_name": "Táta", "kind": "adult"},
+        {"username": "eva", "display_name": "Eva", "kind": "child"},
+        {
+            "username": "eva",
+            "display_name": "Eva",
+            "kind": "child",
+            "pin": "4321",
+            "password": "x" * 8,
+        },
+    ):
+        r = await client.post("/api/v1/profiles", json=body, headers=h)
+        assert r.status_code == 422, body  # exactly one of password / PIN
+    # The learner picks their own language; the admin cannot assign one.
     r = await client.post(
         "/api/v1/profiles",
-        json={"username": "tata", "display_name": "Táta", "kind": "adult"},
+        json={
+            "username": "eva",
+            "display_name": "Eva",
+            "kind": "child",
+            "pin": "4321",
+            "active_language": "fr",
+        },
         headers=h,
     )
-    assert r.status_code == 422  # adults need a password
+    assert r.status_code == 422
+    await create(client, me, username="eva", display_name="Eva", kind="child", pin="4321")
     r = await client.post(
         "/api/v1/profiles",
-        json={"username": "eva", "display_name": "Eva", "kind": "child", "password": "x" * 8},
-        headers=h,
-    )
-    assert r.status_code == 422  # children use a PIN
-    await create(client, me, username="eva", display_name="Eva", kind="child")
-    r = await client.post(
-        "/api/v1/profiles",
-        json={"username": "eva", "display_name": "Eva 2", "kind": "child"},
+        json={"username": "eva", "display_name": "Eva 2", "kind": "child", "pin": "4321"},
         headers=h,
     )
     assert r.status_code == 409
 
 
-async def test_child_without_pin_cannot_sign_in_alone(db, client):
+async def test_child_with_password_and_adult_with_pin_sign_in(db, client):
+    """The content filter and the kind of sign-in are independent."""
     me = await setup_parent(client)
-    await create(client, me, username="eva", display_name="Eva", kind="child")
-    r = await client.post("/api/v1/auth/login", json={"username": "eva", "secret": "1234"})
-    assert r.status_code == 401
+    await create(
+        client, me, username="eva", display_name="Eva", kind="child", password="eva-heslo-1"
+    )
+    await create(client, me, username="deda", display_name="Děda", kind="adult", pin="2468")
+    client.cookies.clear()
+    r = await client.post("/api/v1/auth/login", json={"username": "eva", "secret": "eva-heslo-1"})
+    assert r.status_code == 200 and r.json()["acting"]["is_child"] is True
+    client.cookies.clear()
+    r = await client.post("/api/v1/auth/login", json={"username": "deda", "secret": "2468"})
+    assert r.status_code == 200 and r.json()["acting"]["is_child"] is False
 
 
 async def test_child_with_pin_signs_in_but_cannot_manage(db, client):
@@ -164,7 +186,7 @@ async def test_child_cannot_change_safety_fields(db, client):
 
 async def test_parent_hands_device_to_child_and_back(db, client):
     me = await setup_parent(client)
-    eva = await create(client, me, username="eva", display_name="Eva", kind="child")
+    eva = await create(client, me, username="eva", display_name="Eva", kind="child", pin="4321")
     r = await client.post("/api/v1/auth/switch", json={"profile_id": eva["id"]}, headers=csrf(me))
     assert r.status_code == 200
     switched = r.json()
@@ -195,7 +217,7 @@ async def test_adult_learner_sees_only_own_profile(db, client):
     tata = await create(
         client, me, username="tata", display_name="Táta", kind="adult", password="tata-heslo-1"
     )
-    eva = await create(client, me, username="eva", display_name="Eva", kind="child")
+    eva = await create(client, me, username="eva", display_name="Eva", kind="child", pin="4321")
     client.cookies.clear()
     t = (
         await client.post("/api/v1/auth/login", json={"username": "tata", "secret": "tata-heslo-1"})
@@ -230,6 +252,38 @@ async def test_deactivation_and_pin_change_revoke_sessions(db, client):
     client.cookies.clear()
     r = await client.post("/api/v1/auth/login", json={"username": "eva", "secret": "9999"})
     assert r.status_code == 401
+
+
+async def test_admin_manages_access_not_learning_choices(db, client):
+    me = await setup_parent(client)
+    eva = await create(client, me, username="eva", display_name="Eva", kind="child", pin="4321")
+    url = f"/api/v1/profiles/{eva['id']}"
+    for forbidden in (
+        {"active_language": "fr"},
+        {"settings": {"daily_goal_minutes": 30}},
+        {"timezone": "Europe/Berlin"},
+        {"role": "admin"},
+    ):
+        r = await client.patch(url, json=forbidden, headers=csrf(me))
+        assert r.status_code == 422, forbidden
+    # Switching to a password replaces the PIN; the filter can be turned off as the kid grows up.
+    r = await client.patch(
+        url, json={"password": "eva-heslo-1", "is_child": False}, headers=csrf(me)
+    )
+    assert r.status_code == 200
+    assert r.json()["is_child"] is False and r.json()["has_pin"] is False
+    client.cookies.clear()
+    r = await client.post("/api/v1/auth/login", json={"username": "eva", "secret": "4321"})
+    assert r.status_code == 401
+    r = await client.post("/api/v1/auth/login", json={"username": "eva", "secret": "eva-heslo-1"})
+    assert r.status_code == 200
+
+
+async def test_admin_keeps_password_and_no_filter(db, client):
+    me = await setup_parent(client)
+    url = f"/api/v1/profiles/{me['principal']['id']}"
+    assert (await client.patch(url, json={"pin": "1234"}, headers=csrf(me))).status_code == 422
+    assert (await client.patch(url, json={"is_child": True}, headers=csrf(me))).status_code == 422
 
 
 async def test_expired_session_rejected(db, client):

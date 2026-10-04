@@ -15,11 +15,11 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, time, timedelta
 from zoneinfo import ZoneInfo
 
-from sqlalchemy import and_, case, func, select, update
+from sqlalchemy import and_, case, func, select, true, update
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
+from sqlalchemy.orm import aliased, selectinload
 
 from app.domain.enums import GRAMMAR_GATE_WORDS, Language, ProgressState
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
@@ -96,6 +96,11 @@ async def get_session(db: AsyncSession, user: User, session_id: uuid.UUID) -> Le
     return s
 
 
+def _suitable(user: User):
+    """Age-appropriate filter: child profiles never get a flagged item, in any role."""
+    return func.cardinality(LexiconItem.content_flags) == 0 if user.is_child else true()
+
+
 @dataclass(slots=True)
 class _Planned:
     item: LexiconItem
@@ -125,13 +130,23 @@ async def _plan_learn(
     """
     on, still_new = _not_introduced(user)
     limit = POLICY.new_items_per_session
+    scene_ok = true()
+    if user.is_child:
+        # A scene that introduces a flagged word is skipped as a whole, not shown without it.
+        flagged = aliased(LexiconItem)
+        scene_ok = ~(
+            select(SceneWord.scene_id)
+            .join(flagged, flagged.id == SceneWord.lexicon_item_id)
+            .where(SceneWord.scene_id == Scene.id, func.cardinality(flagged.content_flags) > 0)
+            .exists()
+        )
     rows = (
         await db.execute(
             select(Scene, LexiconItem)
             .join(SceneWord, SceneWord.scene_id == Scene.id)
             .join(LexiconItem, LexiconItem.id == SceneWord.lexicon_item_id)
             .outerjoin(UserWordProgress, on)
-            .where(Scene.language == language, still_new)
+            .where(Scene.language == language, still_new, scene_ok)
             .order_by(Scene.position, SceneWord.position)
             .limit(limit)
         )
@@ -147,7 +162,7 @@ async def _plan_learn(
                 await db.execute(
                     select(LexiconItem)
                     .outerjoin(UserWordProgress, on)
-                    .where(LexiconItem.language == language, still_new)
+                    .where(LexiconItem.language == language, still_new, _suitable(user))
                     .order_by(LexiconItem.frequency_rank)
                     .limit(limit)
                 )
@@ -171,6 +186,7 @@ async def _plan_check(
                 LexiconItem.language == language,
                 UserWordProgress.introduced_at.is_not(None),
                 UserWordProgress.next_review_at <= now,
+                _suitable(user),
             )
             .order_by(UserWordProgress.next_review_at, LexiconItem.frequency_rank)
             .limit(POLICY.session_max_tasks)
@@ -184,7 +200,7 @@ async def _plan_check(
 
 
 async def _recognition_payload(
-    db: AsyncSession, item: LexiconItem, rng: random.Random
+    db: AsyncSession, user: User, item: LexiconItem, rng: random.Random
 ) -> dict | None:
     candidates = (
         await db.execute(
@@ -193,6 +209,7 @@ async def _recognition_payload(
                 LexiconItem.language == item.language,
                 LexiconItem.id != item.id,
                 LexiconItem.translation_cs != item.translation_cs,
+                _suitable(user),
             )
             .order_by(func.abs(LexiconItem.frequency_rank - item.frequency_rank))
             .limit(12)
@@ -249,7 +266,7 @@ async def start_session(
         payload: dict = {}
         task_type = p.task_type
         if task_type == TaskType.RECOGNITION:
-            payload = await _recognition_payload(db, p.item, rng) or {}
+            payload = await _recognition_payload(db, user, p.item, rng) or {}
             if not payload:
                 task_type = TaskType.RECALL  # no distractors available
         db.add(

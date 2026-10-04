@@ -16,6 +16,7 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 | gender | no | `der/die/das`, `m/f` |
 | example | no | short example sentence in the target language |
 | source, license, revision | no | provenance of the row (e.g. `polyflow-curated`, `CC0-1.0`, `core100-v1`) |
+| content_flags | no | pipe-separated (`violence\|profanity`): `sexual`, `profanity`, `violence`. Flagged items never reach child profiles. Re-imports only add flags (an admin's flag is never dropped); remove a flag via `PATCH /api/v1/lexicon/{id}` |
 
 The committed `*.core100.csv` files hold the **first 100 hand-curated lemmas per language** (plan P2): frequent
 function words plus frequent concrete vocabulary suited to children. Ranks are an approximate frequency

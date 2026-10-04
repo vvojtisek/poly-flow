@@ -1,0 +1,40 @@
+{
+  "_comment": "What scripts/models.py lock resolves. Edit this, run `python scripts/models.py lock`, commit both files.",
+  "models": [
+    {
+      "name": "piper/de_DE-thorsten-medium",
+      "repo": "rhasspy/piper-voices",
+      "ref": "main",
+      "files": [
+        {"path": "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx", "as": "de_DE-thorsten-medium.onnx"},
+        {"path": "de/de_DE/thorsten/medium/de_DE-thorsten-medium.onnx.json", "as": "de_DE-thorsten-medium.onnx.json"},
+        {"path": "de/de_DE/thorsten/medium/MODEL_CARD", "as": "de_DE-thorsten-medium.MODEL_CARD"}
+      ]
+    },
+    {
+      "name": "piper/fr_FR-siwis-medium",
+      "repo": "rhasspy/piper-voices",
+      "ref": "main",
+      "files": [
+        {"path": "fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx", "as": "fr_FR-siwis-medium.onnx"},
+        {"path": "fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx.json", "as": "fr_FR-siwis-medium.onnx.json"},
+        {"path": "fr/fr_FR/siwis/medium/MODEL_CARD", "as": "fr_FR-siwis-medium.MODEL_CARD"}
+      ]
+    },
+    {
+      "name": "piper/it_IT-paola-medium",
+      "repo": "rhasspy/piper-voices",
+      "ref": "main",
+      "files": [
+        {"path": "it/it_IT/paola/medium/it_IT-paola-medium.onnx", "as": "it_IT-paola-medium.onnx"},
+        {"path": "it/it_IT/paola/medium/it_IT-paola-medium.onnx.json", "as": "it_IT-paola-medium.onnx.json"},
+        {"path": "it/it_IT/paola/medium/MODEL_CARD", "as": "it_IT-paola-medium.MODEL_CARD"}
+      ]
+    },
+    {"name": "whisper/tiny", "repo": "Systran/faster-whisper-tiny", "ref": "main", "patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.*", "preprocessor_config.json"]},
+    {"name": "whisper/base", "repo": "Systran/faster-whisper-base", "ref": "main", "patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.*", "preprocessor_config.json"]},
+    {"name": "whisper/small", "repo": "Systran/faster-whisper-small", "ref": "main", "patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.*", "preprocessor_config.json"]},
+    {"name": "whisper/medium", "repo": "Systran/faster-whisper-medium", "ref": "main", "patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.*", "preprocessor_config.json"]},
+    {"name": "whisper/large-v3-turbo", "repo": "mobiuslabsgmbh/faster-whisper-large-v3-turbo", "ref": "main", "patterns": ["config.json", "model.bin", "tokenizer.json", "vocabulary.*", "preprocessor_config.json"]}
+  ]
+}

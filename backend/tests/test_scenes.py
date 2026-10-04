@@ -1,12 +1,15 @@
 """Lessons open with a scene that introduces their words in context (policy v2)."""
 
 import pytest
+from sqlalchemy import update
 
 from app.api.deps import get_limiter
 from app.api.learning import get_now
 from app.cli import RowError, upsert_scenes
+from app.db.session import get_session
 from app.domain.scenes import SceneFile
 from app.main import app
+from app.models import LexiconItem
 from app.services.rate_limit import MemoryAttemptLimiter
 from tests.helpers import Clock, seed_words
 from tests.test_learning import child_session, finish, next_task, progress_rows, start
@@ -140,3 +143,19 @@ async def test_invalid_scene_is_rejected(db, change, error):
     bad = {**SCENES, "scenes": [{**SCENES["scenes"][0], **change}]}
     with pytest.raises(RowError, match=error.replace("[", r"\[").replace("]", r"\]")):
         await upsert_scenes(SceneFile.model_validate(bad))
+
+
+async def test_child_skips_a_scene_with_a_flagged_word(db, client):
+    await seed()
+    async for session in get_session():
+        await session.execute(
+            update(LexiconItem)
+            .where(LexiconItem.lemma == "klein")
+            .values(content_flags=["violence"])
+        )
+        await session.commit()
+    me = await child_session(client)  # a child profile
+    s = await start(client, me)
+    # "hallo" introduces the flagged word, so the child starts with "hund"; no lesson shows it.
+    assert s["scene"]["title"] == "Pes"
+    assert "klein" not in [c["lemma"] for c in s["words"]]

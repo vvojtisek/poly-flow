@@ -1,9 +1,12 @@
-from sqlalchemy import CheckConstraint, Index, Integer, String, UniqueConstraint
+from sqlalchemy import CheckConstraint, Index, Integer, String, UniqueConstraint, text
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base, TimestampMixin, UUIDPrimaryKeyMixin
 from app.db.types import CefrLevelType, LanguageType
-from app.domain.enums import CefrLevel, Language
+from app.domain.enums import CefrLevel, ContentFlag, Language
+
+_FLAG_VALUES = ", ".join(f"'{f.value}'" for f in ContentFlag)
 
 
 class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
@@ -19,6 +22,9 @@ class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
             initially="DEFERRED",
         ),
         CheckConstraint("frequency_rank >= 1", name="rank_positive"),
+        CheckConstraint(
+            f"content_flags <@ ARRAY[{_FLAG_VALUES}]::varchar[]", name="content_flags_known"
+        ),
         Index("ix_lexicon_items_language_band", "language", "frequency_band"),
     )
 
@@ -36,6 +42,10 @@ class LexiconItem(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     gender: Mapped[str | None] = mapped_column(String(8))  # der/die/das, m/f
     example_sentence: Mapped[str | None] = mapped_column(String(512))
     audio_path: Mapped[str | None] = mapped_column(String(255))
+    # Age-appropriate filter: child profiles never get an item with any flag (ContentFlag values).
+    content_flags: Mapped[list[str]] = mapped_column(
+        ARRAY(String(16)), default=list, server_default=text("'{}'::varchar[]"), nullable=False
+    )
     # Provenance (plan P2): where the row came from, under which licence, which data revision.
     source: Mapped[str | None] = mapped_column(String(64))
     license: Mapped[str | None] = mapped_column(String(32))

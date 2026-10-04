@@ -3,8 +3,8 @@
 A self-hosted language-learning platform (DE / FR / IT from Czech) for a family homelab.
 Modular monolith: FastAPI + ARQ worker + PostgreSQL 16 + Redis + Next.js PWA, with local Piper TTS and faster-whisper STT.
 
-Status: **first usable version** (implementation plan P0–P2): family profiles with parent-managed child
-profiles, the first 100 curated words per language, server-graded lessons with spaced review and decay,
+Status: **first usable version** (implementation plan P0–P2): family profiles (an admin grants access,
+child profiles get an age-appropriate content filter), the first 100 curated words per language, server-graded lessons with spaced review and decay,
 persistent progress per profile and language.
 
 The [LinguaCore implementation plan](docs/IMPLEMENTATION_PLAN.md) maps the updated family-platform specification to this scaffold, including the vocabulary milestones (100 → 5000, plus the voluntary 6000+ extension), delivery phases, and acceptance criteria. The code and schema below still describe the current implementation.
@@ -39,19 +39,39 @@ docker-compose.yml
 ```sh
 cp .env.example .env            # set POSTGRES_PASSWORD
 docker compose up --build       # postgres, redis, migrate, backend, worker, frontend
-docker compose --profile audio up --build   # + piper, whisper (first start downloads models)
+docker compose --profile audio up --build   # + piper, whisper (first start fetches pinned models)
 
 # seed
 docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json'
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
 ```
 
-Open http://localhost:3000. The first visit runs **first-run setup**, which creates the parent account
-(there is no open registration afterwards). The parent then adds profiles under *Rodina*:
+Open http://localhost:3000. The first visit runs **first-run setup**, which creates the admin account
+(there is no open registration afterwards). The admin then adds profiles under *Rodina*. Roles:
 
-- **adult** profiles sign in with their own password;
-- **child** profiles get an optional PIN. Without a PIN, the parent opens the child profile from their own
-  session (*Předat zařízení*); returning to the parent account requires the parent's password.
+- **admin** grants access (creates profiles, resets a password or PIN, deactivates) and edits shared
+  content (`GET/PATCH /api/v1/lexicon`). The admin does not decide what others learn: language, daily goal
+  and audio settings belong to each profile.
+- **every profile** signs in on its own with a password or a PIN (admins: password).
+- **child** is a content filter, not a restriction: lexicon items with `content_flags`
+  (`sexual`, `profanity`, `violence`) never reach a child profile, as new words, reviews or answer options.
+  The admin can switch the filter on or off per profile. On a shared tablet the admin can also open a child
+  profile from their own session (*Předat zařízení*); returning to the admin account requires the admin's
+  password.
+
+### Audio (Piper TTS, Whisper STT)
+
+Voices and STT models are pinned by Hugging Face commit and sha256 in `docker/models/models.lock.json`
+(generated from `models.spec.json` by `python3 scripts/models.py lock`). The one-shot `models` service
+fetches what is missing into the volumes and verifies it; with complete volumes it needs no network, and
+Piper and Whisper themselves never download anything. `python3 scripts/models.py verify --dest DIR`
+re-hashes everything.
+
+- `WHISPER_MODEL` (`tiny`, `base`, `small`, `medium`, `large-v3-turbo`; default `small`) selects the STT model.
+- On an NVIDIA GPU add `-f docker-compose.gpu.yml` (CUDA 12, float16); without it Whisper runs on CPU (int8).
+- Uploads are limited (`WHISPER_MAX_SECONDS`, `WHISPER_MAX_UPLOAD_BYTES`), decoded in memory, never stored.
+- `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
+  The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
 
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
@@ -81,13 +101,17 @@ uv run alembic revision --autogenerate -m "..."   # then review; `alembic check`
 
 All settings are env vars prefixed `POLYFLOW_` (see `app/core/config.py`).
 
+## Agent workflow
+
+Read [AGENTS.md](AGENTS.md) and the scoped `AGENTS.md` for the area you change. It is the single source of rules for both Codex and Claude Code: `CLAUDE.md` files import the matching `AGENTS.md`. Codex roles and the model router live under `.codex/`; Claude subagents and the model-router skill live under `.claude/`. The [implementation plan](docs/IMPLEMENTATION_PLAN.md) describes planned features, while the source code remains authoritative for shipped behavior.
+
 ## Schema
 
 | table | purpose |
 |---|---|
-| `users` | profiles: role (parent = admin), `is_child`, password / optional child PIN (argon2), timezone, JSONB `settings`, XP / coins / streak stats |
+| `users` | profiles: role (admin / learner), `is_child` (content filter), one credential: password or PIN (argon2), timezone, JSONB `settings`, XP / coins / streak stats |
 | `auth_sessions` | server-side sessions (token digests only): who signed in and which profile is currently in use |
-| `lexicon_items` | lemma, language, frequency rank (+ derived milestone band), Czech gloss, IPA, CEFR, provenance (`source`, `license`, `revision`) |
+| `lexicon_items` | lemma, language, frequency rank (+ derived milestone band), Czech gloss, IPA, CEFR, `content_flags` (child filter), provenance (`source`, `license`, `revision`) |
 | `user_word_progress` | `NEW/LEARNING/MASTERED` state, `passive_known` / `active_known`, phonetic & orthography scores (NULL = never measured), last seen / reviewed / error-free / decay timestamps, `next_review_at`, review streak |
 | `learning_sessions`, `learning_tasks` | server-issued lessons and their tasks; at most one open lesson per profile and language |
 | `learning_events` | every graded attempt (idempotency key, verdict, hint, evidence flag, policy version); progress is aggregated from these |

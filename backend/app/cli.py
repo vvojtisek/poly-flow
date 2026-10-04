@@ -24,7 +24,7 @@ from pydantic import (
     ValidationError,
     field_validator,
 )
-from sqlalchemy import delete, func, select
+from sqlalchemy import delete, func, literal_column, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 
@@ -35,6 +35,7 @@ from app.domain.enums import (
     BlacklistCategory,
     BlacklistPatternType,
     CefrLevel,
+    ContentFlag,
     Language,
 )
 from app.domain.progression import frequency_band
@@ -56,7 +57,8 @@ class LexiconRow(BaseModel):
     """One CSV row.
 
     Columns: language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example
-    and optionally source,license,revision (provenance).
+    and optionally source,license,revision (provenance) and content_flags
+    (`|`-separated ContentFlag values; flagged items are withheld from child profiles).
     """
 
     model_config = ConfigDict(str_strip_whitespace=True)
@@ -73,10 +75,20 @@ class LexiconRow(BaseModel):
     source: str | None = None
     license: str | None = None
     revision: str | None = None
+    content_flags: list[ContentFlag] = []
 
     _blanks = field_validator(
         "ipa", "cefr", "gender", "example", "source", "license", "revision", mode="before"
     )(_blank_to_none)
+
+    @field_validator("content_flags", mode="before")
+    @classmethod
+    def _split_flags(cls, v: object) -> object:
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [f.strip() for f in v.split("|") if f.strip()]
+        return v
 
     @field_validator("pos")
     @classmethod
@@ -98,6 +110,7 @@ class LexiconRow(BaseModel):
             "source": self.source,
             "license": self.license,
             "revision": self.revision,
+            "content_flags": sorted({f.value for f in self.content_flags}),
         }
 
 
@@ -172,6 +185,14 @@ def _batches(items: Sequence[dict], size: int = BATCH_SIZE) -> Iterable[Sequence
         yield items[i : i + size]
 
 
+# Re-imports only add flags: a flag set by an admin (or an earlier file) is never silently
+# dropped, so a child profile cannot start seeing an item because a CSV lacks the column.
+_MERGED_FLAGS = literal_column(
+    "ARRAY(SELECT DISTINCT f FROM unnest(lexicon_items.content_flags || excluded.content_flags)"
+    " AS f ORDER BY f)"
+)
+
+
 async def upsert_lexicon(rows: Sequence[LexiconRow]) -> int:
     table = LexiconItem.__table__
     updatable = [
@@ -192,7 +213,8 @@ async def upsert_lexicon(rows: Sequence[LexiconRow]) -> int:
                 stmt = insert(table).values(list(batch))
                 stmt = stmt.on_conflict_do_update(
                     constraint="uq_lexicon_items_language_lemma_pos",
-                    set_={c: stmt.excluded[c] for c in updatable} | {"updated_at": func.now()},
+                    set_={c: stmt.excluded[c] for c in updatable}
+                    | {"content_flags": _MERGED_FLAGS, "updated_at": func.now()},
                 )
                 await session.execute(stmt)
     return len(rows)

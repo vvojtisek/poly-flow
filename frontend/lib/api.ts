@@ -100,6 +100,7 @@ export interface Profile {
   is_child: boolean;
   is_active: boolean;
   has_pin: boolean;
+  has_password: boolean;
   active_language: Language;
   timezone: string;
   settings: ProfileSettings;
@@ -132,8 +133,9 @@ export const createProfile = (body: {
   kind: "adult" | "child";
   password?: string;
   pin?: string;
-  active_language: Language;
 }) => api<Profile>("/api/v1/profiles", { json: body });
+export const updateProfile = (id: string, body: { is_child?: boolean; is_active?: boolean }) =>
+  api<Profile>(`/api/v1/profiles/${id}`, { method: "PATCH", json: body });
 
 // ---------------------------------------------------------------- learning
 
