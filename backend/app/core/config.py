@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # Synthesized speech is cached here (a persistent volume in Compose).
     audio_cache_dir: str = "/data/audio"
     tts_timeout_s: float = 20.0
+    stt_timeout_s: float = 30.0
+    # A spoken answer is one word or a short phrase: refuse larger uploads before Whisper.
+    speech_max_upload_bytes: int = 1024 * 1024
 
     # Build provenance, baked into the image at build time (see scripts/build-info.sh).
     git_sha: str = "unknown"

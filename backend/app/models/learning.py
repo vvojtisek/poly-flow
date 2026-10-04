@@ -4,6 +4,7 @@ from enum import StrEnum
 
 from sqlalchemy import (
     Boolean,
+    CheckConstraint,
     Date,
     DateTime,
     Enum,
@@ -146,6 +147,7 @@ class LearningEvent(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __table_args__ = (
         UniqueConstraint("user_id", "idempotency_key", name="uq_learning_events_idempotency"),
         Index("ix_learning_events_user_item", "user_id", "lexicon_item_id"),
+        CheckConstraint("answer_mode IN ('typed', 'spoken')", name="answer_mode"),
     )
 
     user_id: Mapped[uuid.UUID] = mapped_column(
@@ -172,6 +174,13 @@ class LearningEvent(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     # True only for a first-try, hint-free correct answer: what knowledge thresholds count.
     counts_as_evidence: Mapped[bool] = mapped_column(Boolean, nullable=False)
     orthography_score: Mapped[float | None] = mapped_column(Float)
+    # "typed" (written or chosen) or "spoken". For spoken attempts `answer` holds the transcript,
+    # `is_correct` whether it says the word, and `transcript_confidence` how sure Whisper was of
+    # its transcript. None of these is a pronunciation measurement (phonetic_score stays NULL).
+    answer_mode: Mapped[str] = mapped_column(
+        String(8), default="typed", server_default="typed", nullable=False
+    )
+    transcript_confidence: Mapped[float | None] = mapped_column(Float)
     policy_version: Mapped[str] = mapped_column(String(16), nullable=False)
     idempotency_key: Mapped[str] = mapped_column(String(64), nullable=False)
     occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)

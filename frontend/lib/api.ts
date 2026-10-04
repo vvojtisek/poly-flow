@@ -165,7 +165,15 @@ export interface WordCard {
   context: string | null;
   context_cs: string | null;
 }
-export type Verdict = "exact" | "accepted_variant" | "case" | "diacritics" | "wrong" | "revealed";
+export type Verdict =
+  | "exact"
+  | "accepted_variant"
+  | "case"
+  | "diacritics"
+  | "wrong"
+  | "revealed"
+  | "spoken" // a spoken answer whose transcript is the word
+  | "not_understood"; // a spoken answer the transcript cannot confirm; nothing changed
 
 export interface LessonSession {
   id: string;
@@ -219,6 +227,7 @@ export interface AnswerResult {
   can_retry: boolean;
   expected: string | null;
   meaning: string | null;
+  heard?: string | null; // spoken answers: the transcript (not a pronunciation score)
 }
 
 export interface ProgressOverview {
@@ -267,4 +276,11 @@ export const taskAudioUrl = (taskId: string, part: "word" | "example") =>
 export const getProgress = (language: Language) =>
   api<ProgressOverview>(`/api/v1/learning/progress?language=${language}`, { cache: "no-store" });
 
+// Answer a recall task by voice; the recording is transcribed on the server and discarded.
+export const submitSpeech = (taskId: string, idempotency_key: string, recording: Blob) =>
+  api<AnswerResult>(`/api/v1/learning/tasks/${taskId}/speech?idempotency_key=${idempotency_key}`, {
+    method: "POST",
+    body: recording,
+    headers: { "Content-Type": recording.type || "audio/webm" },
+  });
 export const newIdempotencyKey = () => crypto.randomUUID().replaceAll("-", "");

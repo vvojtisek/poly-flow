@@ -2,18 +2,20 @@ import uuid
 from datetime import UTC, datetime
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import DB, Auth
+from app.core.config import get_settings
 from app.domain.enums import Language
 from app.models import LearningSession, LearningTask, LexiconItem
 from app.models.learning import SessionMode, TaskStatus, TaskType
 from app.schemas.learning import (
     AnswerIn,
     AnswerOut,
+    IdempotencyKey,
     NextOut,
     Option,
     ProgressOut,
@@ -28,6 +30,7 @@ from app.schemas.learning import (
     WordCard,
 )
 from app.services import learning as svc
+from app.services.stt import Stt, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
 
 router = APIRouter(prefix="/api/v1/learning", tags=["learning"])
@@ -39,6 +42,7 @@ def get_now() -> datetime:
 
 Now = Annotated[datetime, Depends(get_now)]
 TtsDep = Annotated[Tts, Depends(get_tts)]
+SttDep = Annotated[Stt, Depends(get_stt)]
 
 
 def _http(exc: svc.LearningError) -> HTTPException:
@@ -200,6 +204,71 @@ async def answer(task_id: uuid.UUID, body: AnswerIn, auth: Auth, db: DB, now: No
             now=now,
             choice=body.choice,
             text=body.text,
+        )
+    except svc.LearningError as exc:
+        await db.rollback()
+        raise _http(exc) from exc
+    await db.commit()
+    return AnswerOut.model_validate(result)
+
+
+async def _read_recording(request: Request) -> tuple[bytes, str]:
+    content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
+    if not (content_type.startswith("audio/") or content_type == "video/webm"):
+        raise HTTPException(415, "audio_required")
+    limit = get_settings().speech_max_upload_bytes
+    length = request.headers.get("content-length")
+    if length and length.isdigit() and int(length) > limit:
+        raise HTTPException(413, "audio_too_large")
+    body = bytearray()
+    async for chunk in request.stream():
+        body += chunk
+        if len(body) > limit:
+            raise HTTPException(413, "audio_too_large")
+    if not body:
+        raise HTTPException(422, "audio_invalid")
+    return bytes(body), request.headers["content-type"]
+
+
+@router.post(
+    "/tasks/{task_id}/speech",
+    response_model=AnswerOut,
+    openapi_extra={
+        "requestBody": {"content": {"audio/*": {"schema": {"type": "string", "format": "binary"}}}}
+    },
+    responses={
+        413: {"description": "audio_too_large / audio_too_long"},
+        415: {"description": "audio_required: send the recording with an audio/* type"},
+        422: {"description": "audio_invalid: empty or not decodable"},
+        503: {"description": "speech_unavailable: the STT service is not running"},
+    },
+)
+async def answer_by_speech(
+    task_id: uuid.UUID,
+    request: Request,
+    idempotency_key: Annotated[IdempotencyKey, Query()],
+    auth: Auth,
+    db: DB,
+    stt: SttDep,
+    now: Now,
+) -> AnswerOut:
+    """Answer a recall task by voice. The recording is transcribed and discarded, never stored."""
+    if (cached := await svc.replay(db, auth.acting, idempotency_key)) is not None:
+        return AnswerOut.model_validate(cached)
+    try:
+        task = await svc.get_task(db, auth.acting, task_id)
+    except svc.LearningError as exc:
+        raise _http(exc) from exc
+    audio, content_type = await _read_recording(request)
+    try:
+        words = await stt.transcribe(task.item.language, audio, content_type)
+    except SttRejected as exc:
+        raise HTTPException(413 if exc.code == "audio_too_long" else 422, exc.code) from exc
+    except SttUnavailable as exc:
+        raise HTTPException(503, "speech_unavailable") from exc
+    try:
+        result = await svc.submit_answer(
+            db, auth.acting, task_id, idempotency_key=idempotency_key, now=now, spoken=words
         )
     except svc.LearningError as exc:
         await db.rollback()

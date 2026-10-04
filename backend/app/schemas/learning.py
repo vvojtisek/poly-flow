@@ -114,7 +114,16 @@ class RevealIn(BaseModel):
 class AnswerOut(BaseModel):
     task_id: uuid.UUID
     correct: bool
-    verdict: Literal["exact", "accepted_variant", "case", "diacritics", "wrong", "revealed"]
+    verdict: Literal[
+        "exact",
+        "accepted_variant",
+        "case",
+        "diacritics",
+        "wrong",
+        "revealed",
+        "spoken",  # a spoken answer whose transcript is the word
+        "not_understood",  # a spoken answer the transcript cannot confirm; nothing changed
+    ]
     note: str | None
     counted: bool  # contributed evidence toward knowing the word
     attempts: int
@@ -122,6 +131,8 @@ class AnswerOut(BaseModel):
     can_retry: bool
     expected: str | None
     meaning: str | None
+    # Spoken answers: what speech recognition heard (a transcript, not a pronunciation score).
+    heard: str | None = None
 
 
 class BandProgress(BaseModel):

@@ -44,7 +44,10 @@ FROM base AS api
 EXPOSE 8000
 HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
     CMD ["python", "-c", "import urllib.request,sys; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--proxy-headers"]
+# Keep idle connections open longer than the frontend proxy reuses them; at uvicorn's default
+# 5 s a reused socket can be closed mid-request ("socket hang up").
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--proxy-headers", \
+     "--timeout-keep-alive", "75"]
 
 FROM base AS worker
 CMD ["python", "-m", "app.workers"]

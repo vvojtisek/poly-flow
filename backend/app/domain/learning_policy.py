@@ -13,7 +13,11 @@ from datetime import datetime, timedelta
 class LearningPolicy:
     # v2: only checks (Ověření) count as evidence; lessons introduce words in context and their
     # practice is never graded toward knowledge. Words become checkable the next local day.
-    version: str = "v2"
+    # v3: a recall task can be answered by voice. A transcript that is exactly the word, with
+    # every matched word at least `spoken_min_confidence`, counts like a correct written answer
+    # (active evidence, no orthography measurement). Anything else is "not understood" and
+    # changes nothing: speech recognition errors are not evidence of not knowing a word.
+    version: str = "v3"
     # passive_known: correct recognition (or production) in a check, without a hint
     passive_required_correct: int = 3
     passive_required_days: int = 2
@@ -32,6 +36,9 @@ class LearningPolicy:
     session_max_tasks: int = 12
     # ...and a lesson introduces at most this many (each practised twice).
     new_items_per_session: int = 4
+    # Lowest Whisper word probability for a spoken match. Provisional: transcript confidence
+    # of real learner recordings is stored per event so this can be set from data.
+    spoken_min_confidence: float = 0.5
     # Exponential smoothing weight of the latest orthography measurement
     orthography_weight: float = 0.3
 

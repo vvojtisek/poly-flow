@@ -24,6 +24,7 @@ from sqlalchemy.orm import aliased, selectinload
 from app.domain.enums import GRAMMAR_GATE_WORDS, Language, ProgressState
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
+from app.domain.speech import SpokenWord, judge
 from app.models import (
     AuthSession,
     GrammarUnlock,
@@ -331,6 +332,11 @@ async def _lock_task(db: AsyncSession, user: User, task_id: uuid.UUID) -> Learni
     return task
 
 
+async def replay(db: AsyncSession, user: User, key: str) -> dict | None:
+    """The stored result of an attempt already submitted with this key, if any."""
+    return await _replay(db, user, key)
+
+
 async def _replay(db: AsyncSession, user: User, key: str) -> dict | None:
     return (
         await db.execute(
@@ -461,12 +467,15 @@ async def submit_answer(
     now: datetime,
     choice: int | None = None,
     text: str | None = None,
+    spoken: list[SpokenWord] | None = None,
     reveal: bool = False,
 ) -> dict:
     """Grade one attempt (or a reveal) and aggregate progress. Duplicate keys replay.
 
     learn: retry until correct; a wrong answer shows the right one; never evidence.
     check: the first attempt closes the task; correct and hint-free is evidence.
+    spoken (recall only): a confident transcript of exactly the word is a correct answer;
+    anything else is "not understood", recorded for calibration, and changes nothing else.
     """
     if (cached := await _replay(db, user, idempotency_key)) is not None:
         return cached
@@ -479,8 +488,23 @@ async def submit_answer(
     item = task.item
     note = None
     ortho = None
+    mode, confidence, heard = "typed", None, None
+    understood = True  # False: a spoken answer the transcript cannot confirm
     if reveal:
         correct, verdict, answer = False, "revealed", ""
+    elif spoken is not None:
+        if task.task_type != TaskType.RECALL:
+            raise LearningError("speech_not_supported", 422)
+        mode = "spoken"
+        heard = " ".join(w.word.strip() for w in spoken).strip() or None
+        confidence = min((w.probability for w in spoken), default=None)
+        judged = judge(item.language, item.lemma, spoken)
+        understood = judged.matched and (judged.confidence or 0) >= POLICY.spoken_min_confidence
+        correct, verdict, answer = (
+            understood,
+            "spoken" if understood else "not_understood",
+            heard or "",
+        )
     elif task.task_type == TaskType.RECOGNITION:
         options = task.payload["options"]
         if choice is None or not 0 <= choice < len(options):
@@ -501,19 +525,21 @@ async def submit_answer(
         )
 
     checking = task.session.mode == SessionMode.CHECK
-    task.attempts += 1
-    first_attempt = task.attempts == 1
     hint_used = task.hint_level > 0
+    if understood:
+        task.attempts += 1
+    first_attempt = understood and task.attempts == 1
     evidence = checking and correct and first_attempt and not hint_used and not reveal
     if first_attempt:
         task.first_try_correct = correct and not hint_used and not reveal
     if correct and not reveal:
         task.status = TaskStatus.DONE
-    elif reveal or checking:
+    elif understood and (reveal or checking):
         task.status = TaskStatus.REVEALED  # closed without a correct answer
     done = task.status != TaskStatus.PENDING
-    # learn: show the right answer straight away, then the learner tries again.
-    show = done or not checking
+    # learn: show the right answer straight away, then the learner tries again. Not after
+    # unrecognised speech: the learner tries again (or types) without being told.
+    show = done or (not checking and understood)
 
     result = {
         "task_id": str(task.id),
@@ -527,6 +553,7 @@ async def submit_answer(
         # check: show the answer only once it can no longer be guessed from it.
         "expected": _expected(task) if show else None,
         "meaning": item.translation_cs if show else None,
+        "heard": heard,
     }
     tz = ZoneInfo(user.timezone)
     db.add(
@@ -544,6 +571,8 @@ async def submit_answer(
             revealed=reveal,
             counts_as_evidence=evidence,
             orthography_score=ortho,
+            answer_mode=mode,
+            transcript_confidence=confidence,
             policy_version=POLICY.version,
             idempotency_key=idempotency_key,
             occurred_at=now,
@@ -560,6 +589,8 @@ async def submit_answer(
             return cached
         raise
 
+    if not understood:
+        return result  # unrecognised speech measured nothing: no attempt, no progress
     if checking:
         await _apply_progress(
             db,
