@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
 
+import { BuildInfo } from "@/components/BuildInfo";
 import { Button, Field, Notice } from "@/components/ui";
 import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
@@ -123,21 +124,24 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
           </Link>
           <p className="text-sm text-slate-500">{me.acting.display_name}</p>
         </div>
-        <nav className="flex items-center gap-1">
-          {me.can_manage && (
-            <Link
-              href="/profiles"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-            >
-              <Users className="size-4" aria-hidden /> {cs.profiles.title}
-            </Link>
-          )}
-          {me.acting.id === me.principal.id && (
-            <Button variant="ghost" className="!px-3 !py-2 text-sm" onClick={() => void signOut()}>
-              <LogOut className="size-4" aria-hidden /> {cs.auth.logout}
-            </Button>
-          )}
-        </nav>
+        <div className="flex flex-col items-end gap-1">
+          <nav className="flex flex-wrap items-center justify-end gap-1">
+            {me.can_manage && (
+              <Link
+                href="/profiles"
+                className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              >
+                <Users className="size-4" aria-hidden /> {cs.profiles.title}
+              </Link>
+            )}
+            {me.acting.id === me.principal.id && (
+              <Button variant="ghost" className="!px-3 !py-2 text-sm" onClick={() => void signOut()}>
+                <LogOut className="size-4" aria-hidden /> {cs.auth.logout}
+              </Button>
+            )}
+          </nav>
+          <BuildInfo className="justify-end px-3 text-right" />
+        </div>
       </header>
       {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
       {children}

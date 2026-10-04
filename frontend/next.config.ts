@@ -8,7 +8,7 @@ import type { NextConfig } from "next";
 // Note: for `output: "standalone"` rewrites are resolved at build time (BACKEND_URL build arg).
 const backend = process.env.BACKEND_URL ?? "http://localhost:8000";
 
-// Build provenance shown in the footer. Docker builds get it from scripts/build-info.sh;
+// Build provenance shown in the page header (components/BuildInfo.tsx). Docker builds get it from scripts/build-info.sh;
 // a local `npm run dev` / `npm run build` falls back to asking git directly.
 function git(args: string): string | undefined {
   try {

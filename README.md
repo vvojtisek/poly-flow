@@ -104,16 +104,18 @@ The current state is **pre-release 1.0**: version `1.0.0-alpha.1` ([SemVer](http
 `/VERSION` is canonical; `scripts/set-version.sh <version>` updates every copy (backend package,
 `pyproject.toml`/`uv.lock` in PEP 440 spelling, `frontend/package.json`), and a backend test fails if they drift.
 
-Every page shows the running build in its footer, and `GET /version` returns the same for the backend:
+Every page shows the running build in its header, right under the logout button (on the login page,
+under the form), and `GET /version` returns the same for the backend:
 
-| Build | Footer |
+| Build | Shown |
 |---|---|
-| release (`1.0.0`) | `PolyFlow 1.0.0 · abc1234` |
-| pre-release (`1.0.0-alpha.1`) | `PolyFlow 1.0.0-alpha.1 · main · abc1234` + badge *předběžná verze* |
+| release (`1.0.0`) | `1.0.0 · abc1234` |
+| pre-release (`1.0.0-alpha.1`) | `1.0.0-alpha.1 · main · abc1234` + badge *předběžná verze* |
 | dev server (`next dev`, the Compose default) | adds the branch and a *vývoj* badge |
 
 Commit, branch and build time are baked in when images are built. Run
 `eval "$(scripts/build-info.sh)"` before `docker compose up --build`; without it they read `unknown`.
+The local CD timer (`scripts/deploy-main.sh`) does this itself.
 A local `npm run dev` asks git directly. A `-dirty` suffix means the build had uncommitted changes.
 
 Branching (see `AGENTS.md`): until 1.0 ships, work lands on `main` through short-lived branches.
