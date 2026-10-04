@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from sqlalchemy import Boolean, Date, DateTime, String, text
+from sqlalchemy import Boolean, CheckConstraint, Date, DateTime, String, text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -11,11 +11,15 @@ from app.domain.enums import Language, UserRole
 
 class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "users"
+    __table_args__ = (
+        # One sign-in secret per profile: a password or a PIN, never both.
+        CheckConstraint("password_hash IS NULL OR pin_hash IS NULL", name="single_credential"),
+    )
 
     username: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     display_name: Mapped[str] = mapped_column(String(128), nullable=False)
-    # Adults sign in with a password. Children use an optional PIN, or are opened from a
-    # parent's session on a shared device; a child without a PIN cannot sign in alone.
+    # Every profile signs in on its own with a password or a PIN (admins: password only).
+    # Profiles created before 0006 may have neither; an admin can then set one.
     password_hash: Mapped[str | None] = mapped_column(String(255))
     pin_hash: Mapped[str | None] = mapped_column(String(255))
     is_active: Mapped[bool] = mapped_column(
@@ -31,7 +35,8 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         server_default=UserRole.LEARNER.value,
         nullable=False,
     )
-    # Drives the content blacklist in the story pipeline.
+    # Age-appropriate content filter (lexicon content_flags, story blacklist). Not an access
+    # restriction: a child profile can do everything any other learner can.
     is_child: Mapped[bool] = mapped_column(
         Boolean, default=False, server_default=text("false"), nullable=False
     )

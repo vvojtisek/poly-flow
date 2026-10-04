@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from sqlalchemy import and_, case, func, select, update
+from sqlalchemy import and_, case, func, select, true, update
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -76,6 +76,11 @@ async def get_session(db: AsyncSession, user: User, session_id: uuid.UUID) -> Le
     return s
 
 
+def _suitable(user: User):
+    """Age-appropriate filter: child profiles never get a flagged item, in any role."""
+    return func.cardinality(LexiconItem.content_flags) == 0 if user.is_child else true()
+
+
 @dataclass(slots=True)
 class _Planned:
     item: LexiconItem
@@ -93,6 +98,7 @@ async def _plan(db: AsyncSession, user: User, language: Language, now: datetime)
                 LexiconItem.language == language,
                 UserWordProgress.state != ProgressState.NEW,
                 UserWordProgress.next_review_at <= now,
+                _suitable(user),
             )
             .order_by(UserWordProgress.next_review_at, LexiconItem.frequency_rank)
             .limit(POLICY.session_max_tasks)
@@ -121,6 +127,7 @@ async def _plan(db: AsyncSession, user: User, language: Language, now: datetime)
             .where(
                 LexiconItem.language == language,
                 (UserWordProgress.id.is_(None)) | (UserWordProgress.state == ProgressState.NEW),
+                _suitable(user),
             )
             .order_by(LexiconItem.frequency_rank)
             .limit(new_slots)
@@ -133,7 +140,7 @@ async def _plan(db: AsyncSession, user: User, language: Language, now: datetime)
 
 
 async def _recognition_payload(
-    db: AsyncSession, item: LexiconItem, rng: random.Random
+    db: AsyncSession, user: User, item: LexiconItem, rng: random.Random
 ) -> dict | None:
     candidates = (
         await db.execute(
@@ -142,6 +149,7 @@ async def _recognition_payload(
                 LexiconItem.language == item.language,
                 LexiconItem.id != item.id,
                 LexiconItem.translation_cs != item.translation_cs,
+                _suitable(user),
             )
             .order_by(func.abs(LexiconItem.frequency_rank - item.frequency_rank))
             .limit(12)
@@ -188,7 +196,7 @@ async def start_session(
         payload: dict = {}
         task_type = p.task_type
         if task_type == TaskType.RECOGNITION:
-            payload = await _recognition_payload(db, p.item, rng) or {}
+            payload = await _recognition_payload(db, user, p.item, rng) or {}
             if not payload:
                 task_type = TaskType.RECALL  # no distractors available
         db.add(

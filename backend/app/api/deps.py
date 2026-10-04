@@ -58,7 +58,7 @@ Auth = Annotated[AuthContext, Depends(get_auth)]
 
 
 async def require_manager(auth: Auth) -> AuthContext:
-    """Parent/admin acting as themselves (not handed over to a child profile)."""
+    """Admin acting as themselves (not handed over to a child profile)."""
     if not auth.can_manage:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "forbidden")
     return auth

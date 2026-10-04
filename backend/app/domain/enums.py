@@ -12,6 +12,14 @@ class UserRole(enum.StrEnum):
     LEARNER = "learner"
 
 
+class ContentFlag(enum.StrEnum):
+    """Why a lexicon item is withheld from child profiles (age-appropriate filter)."""
+
+    SEXUAL = "sexual"
+    PROFANITY = "profanity"
+    VIOLENCE = "violence"
+
+
 class CefrLevel(enum.StrEnum):
     A1 = "A1"
     A2 = "A2"
