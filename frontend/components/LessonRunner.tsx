@@ -34,6 +34,25 @@ const SPECIAL_CHARS: Record<Language, string[]> = {
   en: [],
 };
 
+// A correct choice stays on screen this long (ms) before the next question replaces it.
+const AUTO_ADVANCE_MS = 300;
+
+type OptionState = "idle" | "pending" | "correct" | "wrong" | "muted";
+
+// Each state keeps WCAG AA text contrast in both themes; correct and wrong also carry an icon,
+// so the result never rests on colour alone.
+const OPTION_BASE =
+  "flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-4 text-left text-base font-semibold outline-none motion-safe:transition-colors focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-default dark:focus-visible:ring-offset-slate-950";
+const OPTION_STATES: Record<OptionState, string> = {
+  idle: "border-slate-300 bg-white text-slate-900 hover:border-brand-500 hover:bg-brand-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800",
+  pending:
+    "border-brand-500 bg-brand-50 text-slate-900 ring-2 ring-brand-500/40 dark:bg-slate-800 dark:text-slate-100",
+  correct:
+    "border-emerald-600 bg-emerald-50 text-emerald-950 dark:border-emerald-400 dark:bg-emerald-950 dark:text-emerald-50",
+  wrong: "border-red-600 bg-red-50 text-red-950 dark:border-red-400 dark:bg-red-950 dark:text-red-50",
+  muted: "border-slate-200 bg-white text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300",
+};
+
 type Phase =
   | { kind: "starting" }
   | { kind: "empty" }
@@ -43,7 +62,17 @@ type Phase =
   | { kind: "task"; session: LessonSession; task: Task; result: AnswerResult | null }
   | { kind: "done"; session: LessonSession };
 
-function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: SessionMode; audioUrl?: string }) {
+function Feedback({
+  result,
+  mode,
+  audioUrl,
+  announce = true,
+}: {
+  result: AnswerResult;
+  mode: SessionMode;
+  audioUrl?: string;
+  announce?: boolean; // false: a persistent live region announces it instead (auto-advance)
+}) {
   const good = result.correct;
   const note = result.note ? cs.feedback.notes[result.note] : null;
   if (result.verdict === "not_understood")
@@ -56,7 +85,7 @@ function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: Sess
     );
   return (
     <div
-      role="status"
+      role={announce ? "status" : undefined}
       className={`flex flex-col gap-1 rounded-xl p-3 text-sm ${
         good
           ? "bg-emerald-50 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-100"
@@ -86,6 +115,23 @@ function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: Sess
       {mode === "exam" && !good && <p className="text-xs opacity-80">{cs.exam.missedNote}</p>}
     </div>
   );
+}
+
+/** How one answer option looks: the server's answer decides correct and wrong, not the client. */
+function optionState(
+  option: { id: number; text: string },
+  chosen: number | null,
+  result: AnswerResult | null,
+  busy: boolean,
+  finished: boolean,
+): OptionState {
+  // `expected` is the correct translation once it may be shown; options never repeat it.
+  if (result?.expected != null && option.text === result.expected) return "correct";
+  if (option.id === chosen) {
+    if (busy) return "pending";
+    if (result && result.verdict === "wrong") return "wrong";
+  }
+  return finished ? "muted" : "idle";
 }
 
 function PlacementDone({ session }: { session: LessonSession }) {
@@ -189,14 +235,20 @@ export function LessonRunner({
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [netError, setNetError] = useState(false);
+  const [chosen, setChosen] = useState<number | null>(null); // the option clicked on this task
+  const [announcement, setAnnouncement] = useState("");
   // Reused until the server answers, so a retried request cannot double-count.
   const pendingKey = useRef<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const optionsRef = useRef<HTMLDivElement>(null);
+  // The last choice came from the keyboard: disabled options drop focus, so it is put back.
+  const refocusOptions = useRef(false);
 
   const advance = useCallback(async (session: LessonSession) => {
     try {
       const { task } = await nextTask(session.id);
       setText("");
+      setChosen(null);
       pendingKey.current = null;
       if (task) setPhase({ kind: "task", session, task, result: null });
       else setPhase({ kind: "done", session: await completeLesson(session.id) });
@@ -227,7 +279,31 @@ export function LessonRunner({
     if (phase.kind === "task" && phase.task.type === "recall" && !phase.result?.task_done) {
       inputRef.current?.focus();
     }
+    if (
+      phase.kind === "task" &&
+      phase.task.type === "recognition" &&
+      !phase.result?.task_done &&
+      refocusOptions.current
+    ) {
+      refocusOptions.current = false;
+      optionsRef.current?.querySelector("button")?.focus();
+    }
   }, [phase]);
+
+  // One click answers a choice: a correct one shows green briefly, then the next question comes.
+  // A wrong one (or a reveal) stays until the learner presses Další.
+  const autoAdvance =
+    phase.kind === "task" &&
+    phase.task.type === "recognition" &&
+    !!phase.result?.correct &&
+    phase.result.task_done;
+  useEffect(() => {
+    if (phase.kind !== "task" || !autoAdvance) return;
+    const { session, result } = phase;
+    setAnnouncement(`${cs.feedback[result!.verdict]} ${cs.lesson.expected} ${result!.expected ?? ""}`);
+    const timer = setTimeout(() => void advance(session), AUTO_ADVANCE_MS);
+    return () => clearTimeout(timer);
+  }, [phase, autoAdvance, advance]);
 
   const t =
     mode === "check" ? cs.check : mode === "placement" ? cs.placement : mode === "exam" ? cs.exam : cs.lesson;
@@ -397,6 +473,11 @@ export function LessonRunner({
 
   async function send(body: { choice?: number; text?: string } | "reveal") {
     if (busy) return;
+    if (body !== "reveal" && body.choice !== undefined) {
+      if (body.choice !== chosen) pendingKey.current = null; // a different option is a new attempt
+      setChosen(body.choice);
+    }
+    setAnnouncement("");
     setBusy(true);
     setNetError(false);
     pendingKey.current ??= newIdempotencyKey();
@@ -442,14 +523,14 @@ export function LessonRunner({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
+      <div className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
         <span>
           {mode === "placement"
             ? cs.placement.question(task.position + 1, task.total)
             : cs.lesson.progress(task.position + 1, task.total)}
         </span>
         <SlowToggle />
-        <span className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
+        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           {mode === "check"
             ? cs.check.title
             : mode === "exam"
@@ -466,7 +547,7 @@ export function LessonRunner({
       </div>
 
       <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           {task.type === "recognition" ? cs.lesson.recognitionPrompt : cs.lesson.recallPrompt}
         </p>
         <div className="flex items-center justify-center gap-1">
@@ -490,7 +571,7 @@ export function LessonRunner({
         )}
         {task.example && (
           <div className="flex items-center justify-center gap-1">
-            <p className="text-sm italic text-slate-500" lang={language}>
+            <p className="text-sm italic text-slate-500 dark:text-slate-400" lang={language}>
               {task.example}
             </p>
             <PlayButton url={taskAudioUrl(task.id, "example")} label={cs.audio.playSentence} size="sm" />
@@ -499,18 +580,27 @@ export function LessonRunner({
       </section>
 
       {task.type === "recognition" && task.options ? (
-        <div className="grid gap-2">
-          {task.options.map((o) => (
-            <Button
-              key={o.id}
-              variant="secondary"
-              className="w-full !justify-start !py-4 text-left"
-              disabled={busy || finished}
-              onClick={() => void send({ choice: o.id })}
-            >
-              {o.text}
-            </Button>
-          ))}
+        <div className="grid gap-2" ref={optionsRef}>
+          {task.options.map((o) => {
+            const state = optionState(o, chosen, result, busy, finished);
+            return (
+              <button
+                key={`${task.id}:${o.id}`}
+                type="button"
+                data-state={state}
+                className={`${OPTION_BASE} ${OPTION_STATES[state]}`}
+                disabled={busy || finished}
+                onClick={(e) => {
+                  refocusOptions.current = e.detail === 0; // Enter or Space, not a pointer
+                  void send({ choice: o.id });
+                }}
+              >
+                <span>{o.text}</span>
+                {state === "correct" && <CheckCircle2 className="size-5 shrink-0" aria-hidden />}
+                {state === "wrong" && <XCircle className="size-5 shrink-0" aria-hidden />}
+              </button>
+            );
+          })}
         </div>
       ) : (
         <form onSubmit={onSubmit} className="flex flex-col gap-2">
@@ -567,11 +657,16 @@ export function LessonRunner({
           result={result}
           mode={mode}
           audioUrl={task.type === "recall" ? taskAudioUrl(task.id, "word") : undefined}
+          announce={!autoAdvance}
         />
       )}
+      {/* Outlives the question, so an auto-advanced result is still read out. */}
+      <p className="sr-only" aria-live="polite">
+        {announcement}
+      </p>
       {netError && <Notice tone="error">{cs.common.offline}</Notice>}
 
-      {finished ? (
+      {autoAdvance ? null : finished ? (
         <Button onClick={() => void advance(session)} autoFocus>
           {cs.lesson.next}
         </Button>
