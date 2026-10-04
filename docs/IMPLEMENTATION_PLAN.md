@@ -8,7 +8,7 @@ Plán převádí dodanou specifikaci LinguaCore na implementační kroky v repoz
 
 Rodina si nasadí aplikaci přes Docker Compose, vytvoří dospělé a dětské profily a učí se němčinu, francouzštinu a italštinu z češtiny. Každý profil má samostatný pokrok v každém jazyce. Denní rutina propojí opakování, nová slova, přizpůsobený text s audiem, otázky k porozumění a volitelný rozhovor. Gramatické minilekce se odemknou po zvládnutí prvních 1000 slov.
 
-Základní frekvenční bloky jsou **100, 500, 1000, 1500, 2000 a 2500** lemmat na jazyk. Cílem vzdělávacího obsahu je podpora dovedností do B2. Dokončení 2500 slov se nebude vydávat za dosažení B2; čtení, poslech, psaní a komunikace dostanou vlastní úlohy a přehled dovedností. CEFR používá deskriptory jednotlivých kompetencí, z čehož plyne toto oddělení slovní zásoby a úrovně. [Rada Evropy: popis úrovní CEFR](https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions).
+Frekvenční milníky jsou **100 → 500 → 1000 (A2) → 2500 (B1) → 4000 (práh B2) → 5000 (plné B2)** lemmat na jazyk; 5000 je konec povinné části. Nad 5000 následuje **dobrovolné rozšíření 6000+** zaměřené na pasivní slovní zásobu, bez tvrzení o úrovni CEFR: kdo chce, může se dál učit a trénovat, ale aplikace jasně říká, že postup k C1 přichází z reálného používání jazyka (lidé, kultura, média), nikoli z aplikace. Cílem vzdělávacího obsahu je podpora dovedností do B2. Štítky A2/B1/B2 u milníků jsou orientační; dosažení 5000 slov se nebude vydávat za dosažení B2. Čtení, poslech, psaní a komunikace dostanou vlastní úlohy a přehled dovedností. CEFR používá deskriptory jednotlivých kompetencí, z čehož plyne toto oddělení slovní zásoby a úrovně. [Rada Evropy: popis úrovní CEFR](https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions).
 
 Provozní cíl: verzované závislosti a modely, opakovatelné nasazení z čistého stroje, JSON logy a přehled zdraví systému bez ruční konfigurace každé služby. Reprodukovatelnost nasazení nezaručuje identické odpovědi LLM; skutečně použitý výstup a jeho původ se uloží.
 
@@ -21,7 +21,7 @@ Stav vychází z kontroly zdrojových souborů, nikoli z ověřeného běhu cel�
 | Backend | FastAPI, konfigurace, JSON logy, request ID, health/readiness API | Autentizace, doménové služby a výuková API |
 | Data | PostgreSQL modely profilů, lexikonu, pokroku, blacklistu a denních příběhů; dvě migrace | Události učení, plán opakování, obsahové úlohy, audio a odměnová historie |
 | Slovník | Idempotentní CSV import, validace; 20 ukázkových lemmat pro každý jazyk | Úplné ověřené seznamy a dohledatelný původ dat |
-| Milníky | API, UI a testy používají 100/500/1000/2500/4000/5000/6000+ | Sjednotit se zadanými bloky; zachovat existující data nad 2500 |
+| Milníky | Doména, API, UI a testy používají 100/500/1000/2500/4000/5000 a dobrovolné 6000+; migrace `0002` zrušila strop 2500 | Zachovat kontrakt; navázat na něj výběr lekcí a pasivní zaměření rozšíření |
 | Worker | ARQ + Redis, pouze úloha `ping` | Plánování, ingest, transformace, validace, TTS, decay a retry |
 | Audio | Docker služby Piper a faster-whisper; endpoint přepisu s pravděpodobnostmi slov | Integrace do lekcí, cache, řízení souběhu a validované hodnocení |
 | Frontend | Next.js, české texty, dashboard shell, health a seznam milníků | Profily, lekce, příběhy, dialog, odměny a rodičovská správa |
@@ -32,7 +32,7 @@ Hlavní místa změn: `backend/app/domain/`, `backend/app/services/`, `backend/a
 ## 3. Rozhodnutí pro implementaci
 
 1. **Zachovat modulární monolit:** FastAPI + SQLAlchemy/Alembic + PostgreSQL, Next.js a ARQ/Redis. Specifikace uvádí více možností scheduleru; stávající ARQ bude obsluhovat noční úlohy i retry. Další scheduler ani migrace na Celery nejsou potřeba.
-2. **Sjednotit milníky podle aktuálního zadání:** upravit doménové konstanty, API, české texty, dokumentaci a testy. Přepočítat denormalizované `frequency_band` novou migrací/importem. Existující slova nad 2500 ani jejich pokrok nemazat; zůstanou dostupná pro dobrovolné rozšíření bez tvrzení o CEFR. Historické migrace nepřepisovat.
+2. **Zachovat platné milníky:** kontrakt `app/domain/progression.py` (100/500/1000 A2/2500 B1/4000 práh B2/5000 plné B2, nad 5000 dobrovolné 6000+) je v souladu se zadáním a zůstává zdrojem pravdy pro API, české texty, dokumentaci a testy. Rank lexikonu nemá horní strop (migrace `0002`); `frequency_band` počítá importér. Slova nad 5000 jsou dobrovolná, výběr lekcí u nich upřednostní rozpoznání před produkcí a nikdy je nevyžaduje ani nepřipomíná. Historické migrace nepřepisovat.
 3. **Oddělit měření a prezentaci skóre:** databáze už používá rozsah 0–1, UI zobrazí 0–100. `NULL` znamená „dosud nezměřeno“. Přidat `last_seen_at`, `next_review_at` a údaje pro retenční model; stávající `last_reviewed_at` a `last_error_free_at` mají jiný význam.
 4. **Zachovat otevřený přístup k procvičování:** milníky řídí doporučené pořadí, nikoli počet povolených chyb. Jediným zadaným pedagogickým odemčením je gramatický modul po 1000 slovech; při decay se už získaný přístup znovu nezamkne.
 5. **LLM přes společné rozhraní:** lokální endpoint jako výchozí možnost, cloud jako volitelná explicitní konfigurace. Adaptéry pro generování, dialog a závěrečnou zpětnou vazbu sdílejí validaci, timeouty a evidenci modelu. Automatický přechod z lokálního provozu do cloudu nebude výchozí chování.
@@ -102,7 +102,7 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 | Fáze | Dodávka | Závislost | Kritérium dokončení |
 |---|---|---|---|
-| P0 | Sjednocený kontrakt a ověřený základ | — | Nové milníky v API/UI; zachovaný pokrok; čisté CI a spuštěný Compose smoke test |
+| P0 | Ověřený základ | — | Milníky do 5000 + dobrovolné 6000+ ověřené v API/UI; zachovaný pokrok; čisté CI a spuštěný Compose smoke test |
 | P1 | Rodinné profily a přístup | P0 | Oddělený pokrok profilů/jazyků; dítě nemůže změnit bezpečnostní režim ani číst cizí data |
 | P2 | Lexikální motor a první funkční lekce | P1 | Rozpoznání, psaní, stav znalosti, plán opakování a decay fungují od UI po DB |
 | P3 | Poslech, řeč a ověření fonetického hodnocení | P2 | Piper a přepis fungují pro DE/FR/IT; jistota přepisu a výslovnost mají odlišné kontrakty |
@@ -113,7 +113,7 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 ### P0 — sjednotit základ a ověřit nasazení
 
-- Přepsat kontrakt milníků a související texty/testy; připravit migraci přepočtu frekvenčních bloků bez ztráty dat.
+- Ověřit kontrakt milníků (do 5000, dobrovolné 6000+) v API, UI a testech a upgrade `0001 → 0002` na databázi s existujícím pokrokem bez ztráty dat.
 - Ověřit existující `backend/uv.lock` a `frontend/package-lock.json` pomocí frozen instalací, současné backend testy/lint, frontend typecheck/build a migrations round-trip. Ověřit i databázi s již existujícím pokrokem.
 - Spustit čistý Compose a profil audio; ověřit hlasy, přepis i jejich health endpointy. Produkční parametrizaci nezaměňovat s dnešním vývojovým Compose.
 - Zdokumentovat cílový počet profilů, CPU/RAM, případnou GPU, prostor pro audio a dostupné lokální LLM. Změřit start modelů, latenci TTS/STT/LLM a souběh; teprve poté stanovit provozní limity.
@@ -128,7 +128,7 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 ### P2 — lexikon, evidence učení a drill MVP
 
-- Připravit datovou pipeline pro 2500 frekvenčních lemmat v každém jazyce: slovní druh, český význam, příklady, rod a IPA tam, kde jsou ověřené; evidovat zdroj, licenci a revizi. Začít kurátorovanými prvními 100 slovy všech tří jazyků, další bloky publikovat postupně po kontrole kvality.
+- Připravit datovou pipeline pro 5000 frekvenčních lemmat v každém jazyce (plus volitelné rozšíření 6000+ pro pasivní procvičování): slovní druh, český význam, příklady, rod a IPA tam, kde jsou ověřené; evidovat zdroj, licenci a revizi. Začít kurátorovanými prvními 100 slovy všech tří jazyků, další bloky publikovat postupně po kontrole kvality.
 - Implementovat události učení, transakční agregaci pokroku a verzovaná pravidla z části 4. Pravopis hodnotit jazykově specificky: Unicode normalizace, diakritika, velikost písmen a povolené varianty; nepoužívat jeden plošný fuzzy práh.
 - API pro začátek session, další úlohu, odevzdání odpovědi, dokončení a přehled pokroku. Nápověda a opakovaný pokus jsou dostupné bez limitu; duplicitní odevzdání nemění výsledky podruhé.
 - Mobilní UI: zadání, odpověď, vysvětlení v češtině, další pokus, souhrn a návrat na dashboard. Rozlišit načítání, prázdný plán, chybu a dokončenou lekci; po obnově stránky lze pokračovat.
@@ -184,7 +184,7 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 **Denní obsah:** dokončit TTS část P3 a P4: každé ráno připravený text/pohádka, poslech a otázky. Fonetický experiment může běžet souběžně; jeho neúspěch nesmí blokovat čtení a poslech.
 
-**Kompletní specifikace:** rozšířit ověřený lexikon na 2500 lemmat per jazyk, dokončit fonetické hodnocení, P5, P6 a produkční P7. Bez validovaného fonetického skóre nebo bez všech požadovaných jazyků není specifikace kompletní.
+**Kompletní specifikace:** rozšířit ověřený lexikon na 5000 lemmat per jazyk (rozšíření 6000+ je volitelné), dokončit fonetické hodnocení, P5, P6 a produkční P7. Bez validovaného fonetického skóre nebo bez všech požadovaných jazyků není specifikace kompletní.
 
 Minimum před sloučením implementační fáze: relevantní backend testy a lint/format, frontend typecheck/build, integrační testy dotčených DB transakcí a migrací. Výukové toky dostanou E2E test od vytvoření profilu po obnovu pokroku. LLM testy použijí pevné fixture výstupy pro chyby a separátní verzovanou eval sadu pro skutečné modely; náhodně úspěšné generování není jediným CI testem.
 
@@ -198,6 +198,7 @@ Pro plnou dodávku musí projít:
 - Audio/LLM výpadek má srozumitelný stav a recovery; dostupný textový drill lze dál používat.
 - Gramatika se odemkne podle zvládnutí bloku 1000 v daném jazyce; samotné nasbírané XP ji neodemknou.
 - UI rozlišuje slovní milníky a komunikační schopnosti; netvrdí dosažení B2 pouze z počtu slov.
+- Nad 5000 slov je procvičování dobrovolné, zaměřené na pasivní znalost, bez CEFR štítku a s jasným sdělením, že C1 vyžaduje reálné používání jazyka.
 
 ## 7. Otevřené volby pro jednotlivé fáze
 
@@ -208,7 +209,7 @@ Tyto volby neblokují vytvoření plánu ani práci na P0–P2. Musí se uzavř�
 | Název produktu | LinguaCore v produktové dokumentaci; technický checkout zůstává PolyFlow | Před úpravou brandingu |
 | Hardware a souběh rodiny | CPU kompatibilní základ, další akcelerace podle měření | P0 |
 | Lokální LLM a model | Adapter k lokálnímu endpointu, konkrétní runtime/model po kvalitativním a výkonovém testu | P0/P4 |
-| Frekvenční a slovníková data | Kurátorovaných 100 → verzované bloky do 2500, ověřené české významy | P2 |
+| Frekvenční a slovníková data | Kurátorovaných 100 → verzované bloky do 5000, volitelně rozšíření 6000+; ověřené české významy (pokrytí volných zdrojů nad ~5000 slábne) | P2 |
 | Prahy znalosti a decay | Pilotní pravidla z části 4; změny verzovat a vyhodnotit na pilotu | P2/pilot |
 | RSS a dětská knihovna | Schválený seznam, pro děti kurátorované vhodné pohádky s dohledatelným původem | P4 |
 | Hodnocení výslovnosti | Samostatný kalibrační experiment; do úspěchu skóre nezměřeno | P3 |
