@@ -116,3 +116,71 @@ async def test_downgrade_below_0008_refuses_to_drop_english(migrated_db):
             await conn.execute(text("DELETE FROM lexicon_items"))
         await engine.dispose()
         alembic("upgrade", "head")
+
+
+async def test_downgrade_below_0010_keeps_lesson_progress(migrated_db):
+    user, taught, queued = (
+        "00000000-0000-0000-0000-000000000001",
+        "00000000-0000-0000-0000-0000000000b1",
+        "00000000-0000-0000-0000-0000000000b2",
+    )
+    engine = create_async_engine(migrated_db, poolclass=NullPool)
+    try:
+        async with engine.begin() as conn:
+            await conn.execute(
+                text(f"INSERT INTO users (id, username, display_name) VALUES ('{user}', 'a', 'A')")
+            )
+            for n, lemma in ((1, "Haus"), (2, "Baum")):
+                await conn.execute(
+                    text(
+                        f"""INSERT INTO lexicon_items (id, language, lemma, pos, frequency_rank,
+                                                       frequency_band, translation_cs)
+                            VALUES ('00000000-0000-0000-0000-0000000000a{n}', 'de', '{lemma}',
+                                    'NOUN', {n}, 100, 'x{n}')"""
+                    )
+                )
+            for pid, n, by in ((taught, 1, "lesson"), (queued, 2, "placement")):
+                await conn.execute(
+                    text(
+                        f"""INSERT INTO user_word_progress (id, user_id, lexicon_item_id,
+                                                            introduced_at, introduced_by,
+                                                            next_review_at)
+                            VALUES ('{pid}', '{user}', '00000000-0000-0000-0000-0000000000a{n}',
+                                    now(), '{by}', now())"""
+                    )
+                )
+            await conn.execute(
+                text(
+                    f"""INSERT INTO learning_sessions (id, user_id, language, mode, status,
+                                                       policy_version, summary)
+                        VALUES ('00000000-0000-0000-0000-0000000000c1', '{user}', 'de',
+                                'placement', 'completed', 'v3', '{{}}')"""
+                )
+            )
+
+        alembic("downgrade", "0009")
+        async with engine.begin() as conn:
+            introduced = dict(
+                (
+                    await conn.execute(
+                        text("SELECT id::text, introduced_at FROM user_word_progress")
+                    )
+                ).all()
+            )
+            sessions = await conn.scalar(text("SELECT count(*) FROM learning_sessions"))
+        assert introduced[taught] is not None  # a lesson-taught word stays checkable
+        assert introduced[queued] is None  # never taught or checked: back to the lessons
+        assert sessions == 0
+
+        alembic("upgrade", "head")
+        async with engine.begin() as conn:
+            by = await conn.scalar(
+                text(f"SELECT introduced_by FROM user_word_progress WHERE id = '{taught}'")
+            )
+        assert by == "lesson"
+    finally:
+        async with engine.begin() as conn:
+            for table in ("learning_sessions", "user_word_progress", "lexicon_items", "users"):
+                await conn.execute(text(f"DELETE FROM {table}"))
+        await engine.dispose()
+        alembic("upgrade", "head")

@@ -30,6 +30,10 @@ class UserWordProgress(UUIDPrimaryKeyMixin, TimestampMixin, Base):
             "orthography_score IS NULL OR orthography_score BETWEEN 0 AND 1",
             name="orthography_range",
         ),
+        CheckConstraint(
+            "introduced_by IS NULL OR introduced_by IN ('lesson', 'placement')",
+            name="introduced_by",
+        ),
         # Decay sweep: rows per state ordered by staleness.
         Index("ix_user_word_progress_state_error_free", "state", "last_error_free_at"),
         Index("ix_user_word_progress_user_state", "user_id", "state"),
@@ -72,6 +76,9 @@ class UserWordProgress(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     next_review_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     # Presented in a completed lesson (learning). Only introduced words are checked.
     introduced_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # "lesson", or "placement": skipped the lesson after a placement test. Such a word goes back
+    # to the lessons when a check misses it, since no lesson ever taught it.
+    introduced_by: Mapped[str | None] = mapped_column(String(16))
     review_streak: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)
     # When passive_known and active_known first both held (starts the mastery delay).
     known_since_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

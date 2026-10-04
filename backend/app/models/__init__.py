@@ -1,6 +1,12 @@
 from app.models.auth import AuthSession
 from app.models.blacklist import ContentBlacklistEntry
-from app.models.learning import GrammarUnlock, LearningEvent, LearningSession, LearningTask
+from app.models.learning import (
+    GrammarUnlock,
+    LanguagePlacement,
+    LearningEvent,
+    LearningSession,
+    LearningTask,
+)
 from app.models.lexicon import LexiconItem
 from app.models.progress import UserWordProgress
 from app.models.scene import Scene, SceneWord
@@ -12,6 +18,7 @@ __all__ = [
     "ContentBlacklistEntry",
     "DailyStory",
     "GrammarUnlock",
+    "LanguagePlacement",
     "LearningEvent",
     "LearningSession",
     "LearningTask",

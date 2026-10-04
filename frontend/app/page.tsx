@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BarChart3, BookOpen, ClipboardCheck, Map as MapIcon, Play } from "lucide-react";
+import { Activity, BarChart3, BookOpen, ClipboardCheck, Compass, Map as MapIcon, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
 import { ServerStatus } from "@/components/ServerStatus";
 import { Button, Notice } from "@/components/ui";
-import { getProgress, type ProgressOverview } from "@/lib/api";
+import { getProgress, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -36,6 +36,20 @@ export default function HomePage() {
     };
   }, [language, me?.acting.id]);
 
+  // Offered once per language, before anything is learned; skipping or taking it decides.
+  const offerPlacement =
+    !!progress && progress.placement === null && progress.introduced === 0 && progress.lexicon_items > 0;
+
+  async function skip() {
+    if (!language) return;
+    try {
+      await skipPlacement(language);
+      setProgress(await getProgress(language));
+    } catch {
+      setFailed(true);
+    }
+  }
+
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
 
@@ -45,6 +59,23 @@ export default function HomePage() {
         <Panel title={cs.todayPractice} icon={BookOpen}>
           <div className="flex flex-col gap-3">
             <LanguagePicker me={me} />
+            {offerPlacement && (
+              <section className="flex flex-col gap-2 rounded-xl border border-brand-500/40 bg-brand-500/5 p-3">
+                <p className="flex items-center gap-2 font-semibold">
+                  <Compass className="size-5 text-brand-500" aria-hidden />
+                  {cs.placement.offerTitle}
+                </p>
+                <p className="text-sm text-slate-600 dark:text-slate-300">{cs.placement.offer}</p>
+                <div className="flex gap-2">
+                  <Button className="flex-1" onClick={() => router.push("/placement")}>
+                    {cs.placement.take}
+                  </Button>
+                  <Button variant="secondary" className="flex-1" onClick={() => void skip()}>
+                    {cs.placement.skip}
+                  </Button>
+                </div>
+              </section>
+            )}
             <div className="flex flex-col gap-1">
               <Button className="w-full !py-4 text-lg" onClick={() => router.push("/lesson")}>
                 <Play className="size-5" aria-hidden />
@@ -70,6 +101,12 @@ export default function HomePage() {
                 </p>
               )}
             </div>
+            {progress && !offerPlacement && progress.lexicon_items > 0 && (
+              <Button variant="ghost" className="text-sm" onClick={() => router.push("/placement")}>
+                <Compass className="size-4" aria-hidden />
+                {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
+              </Button>
+            )}
           </div>
         </Panel>
 
