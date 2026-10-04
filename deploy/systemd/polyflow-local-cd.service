@@ -1,0 +1,12 @@
+[Unit]
+Description=Pull and deploy PolyFlow main when it changes
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Desktop/Projects/PolyFlow
+Environment=POLYFLOW_REPO_ROOT=%h/Desktop/Projects/PolyFlow
+Environment=POLYFLOW_COMPOSE_OVERRIDE=%h/.config/polyflow/compose.override.yaml
+Environment=POLYFLOW_DEPLOY_STATE=%h/.local/state/polyflow/deployed-main
+ExecStart=/usr/bin/flock --nonblock %t/polyflow-local-cd.lock %h/.local/bin/polyflow-deploy-main
