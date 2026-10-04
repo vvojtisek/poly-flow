@@ -1,0 +1,107 @@
+# Core 100 (en): hand-curated starter set (frequent function words + frequent concrete
+# vocabulary suited to children), British spelling to match the en_GB voice. Ranks are an
+# approximate frequency order, not taken from a published corpus list. Czech glosses need
+# native-speaker review before wider use. IPA left blank: none of it is verified yet.
+# Words spelled differently in British and American English are avoided in this block,
+# because spelling is checked against one form only.
+language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example,source,license,revision
+en,1,the,DET,ten (určitý člen),,A1,,The dog is sleeping.,polyflow-curated,CC0-1.0,core100-v1
+en,2,be,AUX,být,,A1,,I want to be a pilot.,polyflow-curated,CC0-1.0,core100-v1
+en,3,and,CCONJ,a,,A1,,Bread and butter.,polyflow-curated,CC0-1.0,core100-v1
+en,4,a,DET,nějaký (neurčitý člen),,A1,,This is a book.,polyflow-curated,CC0-1.0,core100-v1
+en,5,of,ADP,(vyjadřuje 2. pád); z,,A1,,A cup of tea.,polyflow-curated,CC0-1.0,core100-v1
+en,6,to,ADP,"k, do",,A1,,I go to school.,polyflow-curated,CC0-1.0,core100-v1
+en,7,in,ADP,v,,A1,,I live in Prague.,polyflow-curated,CC0-1.0,core100-v1
+en,8,have,VERB,mít,,A1,,We have time.,polyflow-curated,CC0-1.0,core100-v1
+en,9,I,PRON,já,,A1,,I am Anna.,polyflow-curated,CC0-1.0,core100-v1
+en,10,it,PRON,to (ono),,A1,,It is cold today.,polyflow-curated,CC0-1.0,core100-v1
+en,11,you,PRON,"ty, vy",,A1,,Are you hungry?,polyflow-curated,CC0-1.0,core100-v1
+en,12,he,PRON,on,,A1,,He is my brother.,polyflow-curated,CC0-1.0,core100-v1
+en,13,she,PRON,ona,,A1,,She is my sister.,polyflow-curated,CC0-1.0,core100-v1
+en,14,we,PRON,my,,A1,,We are at home.,polyflow-curated,CC0-1.0,core100-v1
+en,15,they,PRON,"oni, ony",,A1,,They play football.,polyflow-curated,CC0-1.0,core100-v1
+en,16,not,PART,ne (zápor),,A1,,I am not tired.,polyflow-curated,CC0-1.0,core100-v1
+en,17,do,VERB,dělat; (pomocné sloveso v otázce a záporu),,A1,,I do my homework.,polyflow-curated,CC0-1.0,core100-v1
+en,18,with,ADP,s,,A1,,I play with my dog.,polyflow-curated,CC0-1.0,core100-v1
+en,19,for,ADP,pro,,A1,,This present is for you.,polyflow-curated,CC0-1.0,core100-v1
+en,20,on,ADP,na,,A1,,The book is on the table.,polyflow-curated,CC0-1.0,core100-v1
+en,21,that,PRON,"to, tamto",,A1,,What is that?,polyflow-curated,CC0-1.0,core100-v1
+en,22,this,PRON,"toto, tohle",,A1,,This is my house.,polyflow-curated,CC0-1.0,core100-v1
+en,23,can,AUX,"moci, umět",,A1,,I can swim.,polyflow-curated,CC0-1.0,core100-v1
+en,24,will,AUX,"(budoucí čas) budu, bude…",,A1,,It will rain tomorrow.,polyflow-curated,CC0-1.0,core100-v1
+en,25,say,VERB,"říct, říkat",,A1,,What did you say?,polyflow-curated,CC0-1.0,core100-v1
+en,26,go,VERB,"jít, jet",,A1,,Let's go home.,polyflow-curated,CC0-1.0,core100-v1
+en,27,get,VERB,"dostat, získat",,A1,,I get a present every year.,polyflow-curated,CC0-1.0,core100-v1
+en,28,make,VERB,"dělat, vyrobit",,A1,,We make a cake.,polyflow-curated,CC0-1.0,core100-v1
+en,29,know,VERB,"vědět, znát",,A1,,I know the answer.,polyflow-curated,CC0-1.0,core100-v1
+en,30,see,VERB,vidět,,A1,,I can see the sea.,polyflow-curated,CC0-1.0,core100-v1
+en,31,come,VERB,"přijít, přijet",,A1,,"Come here, please.",polyflow-curated,CC0-1.0,core100-v1
+en,32,take,VERB,vzít,,A1,,Take your coat.,polyflow-curated,CC0-1.0,core100-v1
+en,33,want,VERB,chtít,,A1,,I want an apple.,polyflow-curated,CC0-1.0,core100-v1
+en,34,think,VERB,myslet (si),,A1,,I think it is true.,polyflow-curated,CC0-1.0,core100-v1
+en,35,give,VERB,dát,,A1,,"Give me the ball, please.",polyflow-curated,CC0-1.0,core100-v1
+en,36,look,VERB,dívat se,,A1,,Look at the bird!,polyflow-curated,CC0-1.0,core100-v1
+en,37,but,CCONJ,ale,,A1,,It is small but fast.,polyflow-curated,CC0-1.0,core100-v1
+en,38,or,CCONJ,nebo,,A1,,Tea or milk?,polyflow-curated,CC0-1.0,core100-v1
+en,39,if,SCONJ,"jestli, když (podmínka)",,A1,,Call me if you are late.,polyflow-curated,CC0-1.0,core100-v1
+en,40,what,PRON,co,,A1,,What is your name?,polyflow-curated,CC0-1.0,core100-v1
+en,41,who,PRON,kdo,,A1,,Who is at the door?,polyflow-curated,CC0-1.0,core100-v1
+en,42,where,ADV,"kde, kam",,A1,,Where is the station?,polyflow-curated,CC0-1.0,core100-v1
+en,43,when,ADV,kdy,,A1,,When does the film start?,polyflow-curated,CC0-1.0,core100-v1
+en,44,how,ADV,jak,,A1,,How are you?,polyflow-curated,CC0-1.0,core100-v1
+en,45,why,ADV,proč,,A1,,Why are you sad?,polyflow-curated,CC0-1.0,core100-v1
+en,46,yes,INTJ,ano,,A1,,"Yes, please.",polyflow-curated,CC0-1.0,core100-v1
+en,47,no,INTJ,ne,,A1,,"No, thank you.",polyflow-curated,CC0-1.0,core100-v1
+en,48,here,ADV,"tady, sem",,A1,,Come here!,polyflow-curated,CC0-1.0,core100-v1
+en,49,there,ADV,tam,,A1,,The cat is over there.,polyflow-curated,CC0-1.0,core100-v1
+en,50,now,ADV,teď,,A1,,I am busy now.,polyflow-curated,CC0-1.0,core100-v1
+en,51,very,ADV,velmi,,A1,,It is very hot.,polyflow-curated,CC0-1.0,core100-v1
+en,52,all,DET,"všechen, všichni",,A1,,All the children are here.,polyflow-curated,CC0-1.0,core100-v1
+en,53,my,DET,"můj, moje",,A1,,This is my bike.,polyflow-curated,CC0-1.0,core100-v1
+en,54,your,DET,"tvůj, váš",,A1,,Is this your bag?,polyflow-curated,CC0-1.0,core100-v1
+en,55,good,ADJ,dobrý,,A1,,This soup is good.,polyflow-curated,CC0-1.0,core100-v1
+en,56,new,ADJ,nový,,A1,,I have a new phone.,polyflow-curated,CC0-1.0,core100-v1
+en,57,big,ADJ,velký,,A1,,They live in a big house.,polyflow-curated,CC0-1.0,core100-v1
+en,58,small,ADJ,malý,,A1,,A small dog is barking.,polyflow-curated,CC0-1.0,core100-v1
+en,59,old,ADJ,starý,,A1,,My grandpa is old.,polyflow-curated,CC0-1.0,core100-v1
+en,60,time,NOUN,čas,,A1,,We have no time.,polyflow-curated,CC0-1.0,core100-v1
+en,61,year,NOUN,rok,,A1,,This year we go to Italy.,polyflow-curated,CC0-1.0,core100-v1
+en,62,day,NOUN,den,,A1,,Have a nice day!,polyflow-curated,CC0-1.0,core100-v1
+en,63,man,NOUN,muž,,A1,,The man is tall.,polyflow-curated,CC0-1.0,core100-v1
+en,64,woman,NOUN,žena,,A1,,The woman is a doctor.,polyflow-curated,CC0-1.0,core100-v1
+en,65,child,NOUN,dítě,,A1,,The child is sleeping.,polyflow-curated,CC0-1.0,core100-v1
+en,66,people,NOUN,lidé,,A1,,Many people live here.,polyflow-curated,CC0-1.0,core100-v1
+en,67,friend,NOUN,"kamarád, přítel",,A1,,She is my best friend.,polyflow-curated,CC0-1.0,core100-v1
+en,68,family,NOUN,rodina,,A1,,My family is big.,polyflow-curated,CC0-1.0,core100-v1
+en,69,house,NOUN,dům,,A1,,Our house has a garden.,polyflow-curated,CC0-1.0,core100-v1
+en,70,home,NOUN,domov; doma,,A1,,I am at home.,polyflow-curated,CC0-1.0,core100-v1
+en,71,school,NOUN,škola,,A1,,School starts at eight.,polyflow-curated,CC0-1.0,core100-v1
+en,72,water,NOUN,voda,,A1,,Can I have some water?,polyflow-curated,CC0-1.0,core100-v1
+en,73,food,NOUN,jídlo,,A1,,The food is ready.,polyflow-curated,CC0-1.0,core100-v1
+en,74,book,NOUN,kniha,,A1,,I read a book.,polyflow-curated,CC0-1.0,core100-v1
+en,75,dog,NOUN,pes,,A1,,The dog is hungry.,polyflow-curated,CC0-1.0,core100-v1
+en,76,cat,NOUN,"kočka, kocour",,A1,,The cat drinks milk.,polyflow-curated,CC0-1.0,core100-v1
+en,77,hand,NOUN,ruka (dlaň),,A1,,Give me your hand.,polyflow-curated,CC0-1.0,core100-v1
+en,78,world,NOUN,svět,,A1,,The world is big.,polyflow-curated,CC0-1.0,core100-v1
+en,79,city,NOUN,město,,A1,,Prague is a beautiful city.,polyflow-curated,CC0-1.0,core100-v1
+en,80,country,NOUN,"země, stát",,A1,,Italy is a sunny country.,polyflow-curated,CC0-1.0,core100-v1
+en,81,work,NOUN,práce,,A1,,My dad is at work.,polyflow-curated,CC0-1.0,core100-v1
+en,82,question,NOUN,otázka,,A1,,Can I ask a question?,polyflow-curated,CC0-1.0,core100-v1
+en,83,name,NOUN,jméno,,A1,,My name is Tom.,polyflow-curated,CC0-1.0,core100-v1
+en,84,eat,VERB,jíst,,A1,,We eat lunch at noon.,polyflow-curated,CC0-1.0,core100-v1
+en,85,drink,VERB,pít,,A1,,I drink milk.,polyflow-curated,CC0-1.0,core100-v1
+en,86,write,VERB,psát,,A1,,Write your name here.,polyflow-curated,CC0-1.0,core100-v1
+en,87,read,VERB,číst,,A1,,I like to read.,polyflow-curated,CC0-1.0,core100-v1
+en,88,speak,VERB,mluvit,,A1,,Do you speak English?,polyflow-curated,CC0-1.0,core100-v1
+en,89,play,VERB,hrát (si),,A1,,Let's play outside.,polyflow-curated,CC0-1.0,core100-v1
+en,90,like,VERB,"mít rád, líbit se",,A1,,I like ice cream.,polyflow-curated,CC0-1.0,core100-v1
+en,91,live,VERB,"žít, bydlet",,A1,,We live in Brno.,polyflow-curated,CC0-1.0,core100-v1
+en,92,today,ADV,dnes,,A1,,Today is Monday.,polyflow-curated,CC0-1.0,core100-v1
+en,93,tomorrow,ADV,zítra,,A1,,See you tomorrow!,polyflow-curated,CC0-1.0,core100-v1
+en,94,morning,NOUN,"ráno, dopoledne",,A1,,Good morning!,polyflow-curated,CC0-1.0,core100-v1
+en,95,night,NOUN,noc,,A1,,Good night!,polyflow-curated,CC0-1.0,core100-v1
+en,96,car,NOUN,auto,,A1,,Our car is red.,polyflow-curated,CC0-1.0,core100-v1
+en,97,door,NOUN,dveře,,A1,,"Close the door, please.",polyflow-curated,CC0-1.0,core100-v1
+en,98,head,NOUN,hlava,,A1,,My head hurts.,polyflow-curated,CC0-1.0,core100-v1
+en,99,please,INTJ,prosím,,A1,,"Sit down, please.",polyflow-curated,CC0-1.0,core100-v1
+en,100,thank,VERB,děkovat,,A1,,Thank you!,polyflow-curated,CC0-1.0,core100-v1

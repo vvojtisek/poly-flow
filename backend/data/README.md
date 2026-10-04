@@ -6,7 +6,7 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 
 | column | required | notes |
 |---|---|---|
-| language | yes | `de` / `fr` / `it` |
+| language | yes | `de` / `fr` / `it` / `en` |
 | rank | yes | >= 1, unique per language (curriculum ends at 5000; higher ranks form the voluntary extension) |
 | lemma | yes | dictionary form |
 | pos | no | Universal Dependencies UPOS (`NOUN`, `VERB`, ...). `(language, lemma, pos)` is the upsert key |
@@ -30,7 +30,7 @@ lemma occurs verbatim in the example.
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
 used only for voluntary, recognition-focused practice.
 
-No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" for DE/FR/IT. A realistic pipeline:
+No single open dataset provides "top-N *lemmas* + Czech glosses + IPA + CEFR" for DE/FR/IT/EN. A realistic pipeline:
 
 1. **Frequency**: lemmatise a large corpus with spaCy/Stanza and count, or use an existing lemma list.
    Surface-form lists (e.g. OpenSubtitles-derived `FrequencyWords`, CC-BY-SA-4.0) are *not* lemma lists:

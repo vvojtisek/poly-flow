@@ -1,5 +1,8 @@
 """Upgrading a database that already holds learner data must not lose or alter it."""
 
+import subprocess
+
+import pytest
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.pool import NullPool
@@ -50,5 +53,30 @@ async def test_upgrade_from_0001_preserves_progress(migrated_db):
         async with engine.begin() as conn:
             for table in ("user_word_progress", "lexicon_items", "users"):
                 await conn.execute(text(f"DELETE FROM {table}"))
+        await engine.dispose()
+        alembic("upgrade", "head")
+
+
+async def test_downgrade_below_0007_refuses_to_drop_english(migrated_db):
+    engine = create_async_engine(migrated_db, poolclass=NullPool)
+    try:
+        async with engine.begin() as conn:
+            await conn.execute(
+                text(
+                    """INSERT INTO lexicon_items (id, language, lemma, pos, frequency_rank,
+                                                  frequency_band, translation_cs)
+                       VALUES ('00000000-0000-0000-0000-0000000000e1', 'en', 'dog', 'NOUN',
+                               75, 100, 'pes')"""
+                )
+            )
+        with pytest.raises(subprocess.CalledProcessError) as exc:
+            alembic("downgrade", "0006")
+        assert b"holds English rows" in exc.value.stderr
+        async with engine.begin() as conn:  # still at head, English row intact
+            lemma = await conn.scalar(text("SELECT lemma FROM lexicon_items WHERE language = 'en'"))
+        assert lemma == "dog"
+    finally:
+        async with engine.begin() as conn:
+            await conn.execute(text("DELETE FROM lexicon_items"))
         await engine.dispose()
         alembic("upgrade", "head")

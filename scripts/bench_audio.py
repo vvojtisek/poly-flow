@@ -52,6 +52,12 @@ CASES = {
         "sentence": "Questo fine settimana prendiamo il treno per andare in montagna, perché "
         "dovrebbe fare bel tempo e ai bambini piace camminare.",
     },
+    "en": {
+        "voice": "en_GB-jenny_dioco-medium",
+        "word": "the dog",
+        "sentence": "This weekend we are taking the train to the mountains, because the weather "
+        "should be nice and the children like walking.",
+    },
 }
 
 

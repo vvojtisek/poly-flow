@@ -60,8 +60,8 @@ export const apiGet = <T>(path: string, init?: Init) => api<T>(path, init);
 
 // ---------------------------------------------------------------- progression & health
 
-export type Language = "de" | "fr" | "it";
-export const LANGUAGES: Language[] = ["de", "fr", "it"];
+export type Language = "de" | "fr" | "it" | "en";
+export const LANGUAGES: Language[] = ["de", "fr", "it", "en"];
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
 
 export interface Milestone {

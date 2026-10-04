@@ -24,6 +24,7 @@ const SPECIAL_CHARS: Record<Language, string[]> = {
   de: ["ä", "ö", "ü", "ß", "Ä", "Ö", "Ü"],
   fr: ["é", "è", "ê", "à", "â", "ç", "ô", "î", "û", "ù", "ë", "œ"],
   it: ["à", "è", "é", "ì", "ò", "ù"],
+  en: [],
 };
 
 type Phase =
@@ -263,7 +264,7 @@ export function LessonRunner({ language }: { language: Language }) {
             className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-center text-xl outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900"
           />
           {task.hint && <p className="text-center text-sm text-slate-500">{task.hint}</p>}
-          {!finished && (
+          {!finished && SPECIAL_CHARS[language].length > 0 && (
             <div className="flex flex-wrap justify-center gap-1">
               {SPECIAL_CHARS[language].map((c) => (
                 <button

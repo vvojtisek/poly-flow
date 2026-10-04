@@ -37,6 +37,8 @@ _ARTICLES: dict[Language, tuple[str, ...]] = {
     Language.DE: ("der", "die", "das", "ein", "eine"),
     Language.FR: ("le", "la", "les", "l'", "un", "une"),
     Language.IT: ("il", "lo", "la", "i", "gli", "le", "l'", "un", "uno", "una", "un'"),
+    # "to" is the infinitive marker, accepted before a bare verb ("to go" for "go")
+    Language.EN: ("the", "a", "an", "to"),
 }
 # Keyboard fallbacks that are accepted spellings, with the note shown to the learner.
 _VARIANTS: dict[Language, tuple[tuple[str, str, str], ...]] = {
@@ -51,6 +53,7 @@ _VARIANTS: dict[Language, tuple[tuple[str, str, str], ...]] = {
     ),
     Language.FR: (("œ", "oe", "ligature_split"), ("æ", "ae", "ligature_split")),
     Language.IT: (),
+    Language.EN: (),
 }
 
 

@@ -5,6 +5,7 @@ class Language(enum.StrEnum):
     DE = "de"
     FR = "fr"
     IT = "it"
+    EN = "en"
 
 
 class UserRole(enum.StrEnum):
