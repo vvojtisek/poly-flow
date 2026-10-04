@@ -21,6 +21,8 @@ The committed `*.core100.csv` files hold the **first 100 hand-curated lemmas per
 function words plus frequent concrete vocabulary suited to children. Ranks are an approximate frequency
 order, not copied from a published corpus list; Czech glosses still need native-speaker review. Every row
 carries `source`, `license` and `revision` columns (provenance); IPA is left blank where unverified.
+Examples should contain the lemma's citation form where natural: recall tasks only show a cloze when the
+lemma occurs verbatim in the example.
 
 ### Producing the full lists (not done yet)
 

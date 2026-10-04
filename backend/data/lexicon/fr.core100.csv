@@ -1,105 +1,106 @@
 # Core 100 (fr): hand-curated starter set (frequent function words + frequent concrete
 # vocabulary suited to children). Ranks are an approximate frequency order, not taken from
 # a published corpus list. Czech glosses need native-speaker review before wider use.
-# Ranks 1-20 keep the IPA/examples of the earlier sample; IPA left blank where unverified.
+# Ranks 1-20 keep the IPA of the earlier sample; IPA left blank where unverified. Examples
+# contain the lemma's citation form where natural, so recall tasks can show a cloze.
 language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example,source,license,revision
 fr,1,le,DET,ten (určitý člen),lə,A1,,Le chat dort.,polyflow-curated,CC0-1.0,core100-v1
 fr,2,de,ADP,"z, od",də,A1,,Un verre de lait.,polyflow-curated,CC0-1.0,core100-v1
 fr,3,un,DET,nějaký (neurčitý člen),œ̃,A1,,C'est un livre.,polyflow-curated,CC0-1.0,core100-v1
-fr,4,être,AUX,být,ɛtʁ,A1,,Je suis fatigué.,polyflow-curated,CC0-1.0,core100-v1
+fr,4,être,AUX,být,ɛtʁ,A1,,Je veux être pilote.,polyflow-curated,CC0-1.0,core100-v2
 fr,5,et,CCONJ,a,e,A1,,Du pain et du beurre.,polyflow-curated,CC0-1.0,core100-v1
 fr,6,à,ADP,"k, v, do",a,A1,,Je vais à Paris.,polyflow-curated,CC0-1.0,core100-v1
 fr,7,il,PRON,on,il,A1,,Il est à la maison.,polyflow-curated,CC0-1.0,core100-v1
-fr,8,avoir,AUX,mít,avwaʁ,A1,,Nous avons le temps.,polyflow-curated,CC0-1.0,core100-v1
-fr,9,ne,ADV,ne (zápor),nə,A1,,Je ne sais pas.,polyflow-curated,CC0-1.0,core100-v1
+fr,8,avoir,AUX,mít,avwaʁ,A1,,Je voudrais avoir un chien.,polyflow-curated,CC0-1.0,core100-v2
+fr,9,ne,ADV,ne (1. část záporu ne… pas),nə,A1,,Je ne sais pas.,polyflow-curated,CC0-1.0,core100-v2
 fr,10,je,PRON,já,ʒə,A1,,Je m'appelle Anna.,polyflow-curated,CC0-1.0,core100-v1
-fr,11,son,DET,"jeho, její",sɔ̃,A1,,C'est son vélo.,polyflow-curated,CC0-1.0,core100-v1
+fr,11,son,DET,"jeho, její, svůj",sɔ̃,A1,,C'est son vélo.,polyflow-curated,CC0-1.0,core100-v2
 fr,12,que,SCONJ,že,kə,A1,,Je pense que oui.,polyflow-curated,CC0-1.0,core100-v1
 fr,13,se,PRON,"se, si",sə,A1,,Il se lave.,polyflow-curated,CC0-1.0,core100-v1
 fr,14,qui,PRON,"kdo, který",ki,A1,,Qui est là ?,polyflow-curated,CC0-1.0,core100-v1
-fr,15,ce,PRON,to,sə,A1,,C'est vrai.,polyflow-curated,CC0-1.0,core100-v1
+fr,15,ce,PRON,to,sə,A1,,Ce sont mes amis.,polyflow-curated,CC0-1.0,core100-v2
 fr,16,dans,ADP,v,dɑ̃,A1,,Le livre est dans le sac.,polyflow-curated,CC0-1.0,core100-v1
 fr,17,en,ADP,"v, do",ɑ̃,A1,,Il habite en France.,polyflow-curated,CC0-1.0,core100-v1
 fr,18,elle,PRON,ona,ɛl,A1,,Elle lit beaucoup.,polyflow-curated,CC0-1.0,core100-v1
 fr,19,pour,ADP,pro,puʁ,A1,,C'est pour toi.,polyflow-curated,CC0-1.0,core100-v1
-fr,20,faire,VERB,dělat,fɛʁ,A1,,Qu'est-ce que tu fais ?,polyflow-curated,CC0-1.0,core100-v1
-fr,21,pas,ADV,ne (ve spojení ne… pas),,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,22,pouvoir,AUX,moci,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,23,sur,ADP,na,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,24,vous,PRON,vy,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,25,nous,PRON,my,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,26,tout,DET,"všechen, celý",,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,27,plus,ADV,více,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,28,dire,VERB,říct,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,29,on,PRON,"člověk, se (obecný podmět)",,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,30,mais,CCONJ,ale,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,31,avec,ADP,s,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,32,aller,VERB,jít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,33,voir,VERB,vidět,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,34,bien,ADV,dobře,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,35,où,ADV,kde,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,36,si,SCONJ,"jestli, když",,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,37,comme,ADV,jako,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,38,savoir,VERB,vědět,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,39,vouloir,VERB,chtít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,40,tu,PRON,ty,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,41,grand,ADJ,velký,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,42,mon,DET,můj,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,43,venir,VERB,přijít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,44,devoir,VERB,muset,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,45,prendre,VERB,vzít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,46,temps,NOUN,čas,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,47,jour,NOUN,den,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,48,homme,NOUN,"muž, člověk",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,49,femme,NOUN,žena,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,50,enfant,NOUN,dítě,,A1,m/f,,polyflow-curated,CC0-1.0,core100-v1
-fr,51,an,NOUN,rok,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,52,aussi,ADV,také,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,53,encore,ADV,ještě,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,54,très,ADV,velmi,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,55,petit,ADJ,malý,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,56,bon,ADJ,dobrý,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,57,nouveau,ADJ,nový,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,58,maison,NOUN,dům,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,59,parler,VERB,mluvit,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,60,trouver,VERB,najít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,61,donner,VERB,dát,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,62,penser,VERB,myslet,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,63,rester,VERB,zůstat,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,64,monde,NOUN,svět,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,65,vie,NOUN,život,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,66,pays,NOUN,země,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,67,ville,NOUN,město,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,68,main,NOUN,ruka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,69,question,NOUN,otázka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,70,travail,NOUN,práce,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,71,eau,NOUN,voda,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,72,manger,VERB,jíst,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,73,boire,VERB,pít,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,74,écrire,VERB,psát,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,75,lire,VERB,číst,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,76,ami,NOUN,"přítel, kamarád",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,77,école,NOUN,škola,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,78,livre,NOUN,kniha,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,79,chien,NOUN,pes,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,80,oui,ADV,ano,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,81,non,ADV,ne (odpověď),,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,82,ici,ADV,tady,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,83,maintenant,ADV,teď,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,84,toujours,ADV,vždy,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,85,aujourd'hui,ADV,dnes,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,86,beaucoup,ADV,hodně,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,87,rien,PRON,nic,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,88,chose,NOUN,věc,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,89,aimer,VERB,"mít rád, milovat",,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,90,appeler,VERB,volat,,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,91,jouer,VERB,hrát (si),,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,92,mettre,VERB,"položit, dát (něco někam)",,A1,,,polyflow-curated,CC0-1.0,core100-v1
-fr,93,nuit,NOUN,noc,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,94,père,NOUN,otec,,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,95,mère,NOUN,matka,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,96,chat,NOUN,"kočka, kocour",,A1,m,,polyflow-curated,CC0-1.0,core100-v1
-fr,97,rue,NOUN,ulice,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,98,porte,NOUN,dveře,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,99,tête,NOUN,hlava,,A1,f,,polyflow-curated,CC0-1.0,core100-v1
-fr,100,merci,INTJ,děkuji,,A1,,,polyflow-curated,CC0-1.0,core100-v1
+fr,20,faire,VERB,dělat,fɛʁ,A1,,Qu'est-ce que tu veux faire ?,polyflow-curated,CC0-1.0,core100-v2
+fr,21,pas,ADV,ne (2. část záporu ne… pas),,A1,,Il ne pleut pas.,polyflow-curated,CC0-1.0,core100-v2
+fr,22,pouvoir,AUX,moci,,A1,,"Demain, tu vas pouvoir jouer dehors.",polyflow-curated,CC0-1.0,core100-v2
+fr,23,sur,ADP,na,,A1,,Le livre est sur la table.,polyflow-curated,CC0-1.0,core100-v2
+fr,24,vous,PRON,vy,,A1,,Vous parlez français ?,polyflow-curated,CC0-1.0,core100-v2
+fr,25,nous,PRON,my,,A1,,Nous habitons à Prague.,polyflow-curated,CC0-1.0,core100-v2
+fr,26,tout,DET,"všechen, celý",,A1,,Tout le monde est là.,polyflow-curated,CC0-1.0,core100-v2
+fr,27,plus,ADV,více,,A1,,Je voudrais plus de pain.,polyflow-curated,CC0-1.0,core100-v2
+fr,28,dire,VERB,říct,,A1,,Je veux te dire un secret.,polyflow-curated,CC0-1.0,core100-v2
+fr,29,on,PRON,"člověk, se (obecný podmět)",,A1,,On va à la plage ?,polyflow-curated,CC0-1.0,core100-v2
+fr,30,mais,CCONJ,ale,,A1,,"C'est petit, mais joli.",polyflow-curated,CC0-1.0,core100-v2
+fr,31,avec,ADP,s,,A1,,Je joue avec mon chien.,polyflow-curated,CC0-1.0,core100-v2
+fr,32,aller,VERB,jít,,A1,,Je veux aller au parc.,polyflow-curated,CC0-1.0,core100-v2
+fr,33,voir,VERB,vidět,,A1,,Je veux voir la mer.,polyflow-curated,CC0-1.0,core100-v2
+fr,34,bien,ADV,dobře,,A1,,"Je vais bien, merci.",polyflow-curated,CC0-1.0,core100-v2
+fr,35,où,ADV,"kde, kam",,A1,,Où est le chat ?,polyflow-curated,CC0-1.0,core100-v2
+fr,36,si,SCONJ,"jestli, když",,A1,,"Si tu veux, on joue ensemble.",polyflow-curated,CC0-1.0,core100-v2
+fr,37,comme,ADV,jako,,A1,,Il est grand comme son père.,polyflow-curated,CC0-1.0,core100-v2
+fr,38,savoir,VERB,vědět,,A1,,Je veux savoir pourquoi.,polyflow-curated,CC0-1.0,core100-v2
+fr,39,vouloir,VERB,chtít,,A1,,Tu veux jouer avec moi ?,polyflow-curated,CC0-1.0,core100-v2
+fr,40,tu,PRON,ty,,A1,,Tu as faim ?,polyflow-curated,CC0-1.0,core100-v2
+fr,41,grand,ADJ,velký,,A1,,Mon frère est grand.,polyflow-curated,CC0-1.0,core100-v2
+fr,42,mon,DET,můj,,A1,,C'est mon livre.,polyflow-curated,CC0-1.0,core100-v2
+fr,43,venir,VERB,přijít,,A1,,Tu peux venir chez moi ?,polyflow-curated,CC0-1.0,core100-v2
+fr,44,devoir,VERB,muset,,A1,,Tu vas devoir attendre.,polyflow-curated,CC0-1.0,core100-v2
+fr,45,prendre,VERB,vzít,,A1,,Je vais prendre le bus.,polyflow-curated,CC0-1.0,core100-v2
+fr,46,temps,NOUN,"čas, počasí",,A1,m,Quel temps fait-il ?,polyflow-curated,CC0-1.0,core100-v2
+fr,47,jour,NOUN,den,,A1,m,C'est un beau jour.,polyflow-curated,CC0-1.0,core100-v2
+fr,48,homme,NOUN,"muž, člověk",,A1,m,L'homme lit le journal.,polyflow-curated,CC0-1.0,core100-v2
+fr,49,femme,NOUN,"žena, manželka",,A1,f,La femme boit un café.,polyflow-curated,CC0-1.0,core100-v2
+fr,50,enfant,NOUN,dítě,,A1,m/f,L'enfant joue dans le jardin.,polyflow-curated,CC0-1.0,core100-v2
+fr,51,an,NOUN,rok,,A1,m,Mon petit frère a un an.,polyflow-curated,CC0-1.0,core100-v2
+fr,52,aussi,ADV,také,,A1,,Moi aussi !,polyflow-curated,CC0-1.0,core100-v2
+fr,53,encore,ADV,ještě,,A1,,Je veux encore du gâteau.,polyflow-curated,CC0-1.0,core100-v2
+fr,54,très,ADV,velmi,,A1,,Il fait très froid.,polyflow-curated,CC0-1.0,core100-v2
+fr,55,petit,ADJ,malý,,A1,,Le chat est petit.,polyflow-curated,CC0-1.0,core100-v2
+fr,56,bon,ADJ,dobrý,,A1,,Ce gâteau est bon.,polyflow-curated,CC0-1.0,core100-v2
+fr,57,nouveau,ADJ,nový,,A1,,J'ai un nouveau vélo.,polyflow-curated,CC0-1.0,core100-v2
+fr,58,maison,NOUN,"dům, domov",,A1,f,Je suis à la maison.,polyflow-curated,CC0-1.0,core100-v2
+fr,59,parler,VERB,mluvit,,A1,,Tu peux parler plus lentement ?,polyflow-curated,CC0-1.0,core100-v2
+fr,60,trouver,VERB,najít,,A1,,Je ne peux pas trouver mes clés.,polyflow-curated,CC0-1.0,core100-v2
+fr,61,donner,VERB,dát,,A1,,Tu peux me donner le sel ?,polyflow-curated,CC0-1.0,core100-v2
+fr,62,penser,VERB,myslet,,A1,,Je vais y penser.,polyflow-curated,CC0-1.0,core100-v2
+fr,63,rester,VERB,zůstat,,A1,,Nous voulons rester à la maison.,polyflow-curated,CC0-1.0,core100-v2
+fr,64,monde,NOUN,svět,,A1,m,Le monde est grand.,polyflow-curated,CC0-1.0,core100-v2
+fr,65,vie,NOUN,život,,A1,f,La vie est belle.,polyflow-curated,CC0-1.0,core100-v2
+fr,66,pays,NOUN,země,,A1,m,La France est un grand pays.,polyflow-curated,CC0-1.0,core100-v2
+fr,67,ville,NOUN,město,,A1,f,Prague est une belle ville.,polyflow-curated,CC0-1.0,core100-v2
+fr,68,main,NOUN,ruka,,A1,f,Donne-moi la main.,polyflow-curated,CC0-1.0,core100-v2
+fr,69,question,NOUN,otázka,,A1,f,J'ai une question.,polyflow-curated,CC0-1.0,core100-v2
+fr,70,travail,NOUN,práce,,A1,m,Papa est au travail.,polyflow-curated,CC0-1.0,core100-v2
+fr,71,eau,NOUN,voda,,A1,f,L'eau est froide.,polyflow-curated,CC0-1.0,core100-v2
+fr,72,manger,VERB,jíst,,A1,,On va manger ?,polyflow-curated,CC0-1.0,core100-v2
+fr,73,boire,VERB,pít,,A1,,Je veux boire de l'eau.,polyflow-curated,CC0-1.0,core100-v2
+fr,74,écrire,VERB,psát,,A1,,Je vais écrire une lettre.,polyflow-curated,CC0-1.0,core100-v2
+fr,75,lire,VERB,číst,,A1,,J'aime lire.,polyflow-curated,CC0-1.0,core100-v2
+fr,76,ami,NOUN,"přítel, kamarád",,A1,m,Paul est mon ami.,polyflow-curated,CC0-1.0,core100-v2
+fr,77,école,NOUN,škola,,A1,f,Je vais à l'école.,polyflow-curated,CC0-1.0,core100-v2
+fr,78,livre,NOUN,kniha,,A1,m,Ce livre est intéressant.,polyflow-curated,CC0-1.0,core100-v2
+fr,79,chien,NOUN,pes,,A1,m,Le chien aboie.,polyflow-curated,CC0-1.0,core100-v2
+fr,80,oui,ADV,ano,,A1,,"Oui, merci !",polyflow-curated,CC0-1.0,core100-v2
+fr,81,non,ADV,ne (odpověď),,A1,,"Non, merci.",polyflow-curated,CC0-1.0,core100-v2
+fr,82,ici,ADV,tady,,A1,,J'habite ici.,polyflow-curated,CC0-1.0,core100-v2
+fr,83,maintenant,ADV,teď,,A1,,Je n'ai pas le temps maintenant.,polyflow-curated,CC0-1.0,core100-v2
+fr,84,toujours,ADV,"vždy, stále",,A1,,Il est toujours content.,polyflow-curated,CC0-1.0,core100-v2
+fr,85,aujourd'hui,ADV,dnes,,A1,,"Aujourd'hui, c'est lundi.",polyflow-curated,CC0-1.0,core100-v2
+fr,86,beaucoup,ADV,hodně,,A1,,Merci beaucoup !,polyflow-curated,CC0-1.0,core100-v2
+fr,87,rien,PRON,nic,,A1,,Je ne vois rien.,polyflow-curated,CC0-1.0,core100-v2
+fr,88,chose,NOUN,věc,,A1,f,J'ai une chose à te dire.,polyflow-curated,CC0-1.0,core100-v2
+fr,89,aimer,VERB,"mít rád, milovat",,A1,,Tu vas aimer ce film.,polyflow-curated,CC0-1.0,core100-v2
+fr,90,appeler,VERB,volat; jmenovat se (s'appeler),,A1,,Je vais appeler maman.,polyflow-curated,CC0-1.0,core100-v2
+fr,91,jouer,VERB,hrát (si),,A1,,Les enfants veulent jouer.,polyflow-curated,CC0-1.0,core100-v2
+fr,92,mettre,VERB,"položit, dát (něco někam)",,A1,,Tu peux mettre la table ?,polyflow-curated,CC0-1.0,core100-v2
+fr,93,nuit,NOUN,noc,,A1,f,Bonne nuit !,polyflow-curated,CC0-1.0,core100-v2
+fr,94,père,NOUN,otec,,A1,m,Mon père travaille à Prague.,polyflow-curated,CC0-1.0,core100-v2
+fr,95,mère,NOUN,matka,,A1,f,Ma mère fait un gâteau.,polyflow-curated,CC0-1.0,core100-v2
+fr,96,chat,NOUN,"kočka, kocour",,A1,m,Le chat boit du lait.,polyflow-curated,CC0-1.0,core100-v2
+fr,97,rue,NOUN,ulice,,A1,f,J'habite dans cette rue.,polyflow-curated,CC0-1.0,core100-v2
+fr,98,porte,NOUN,dveře,,A1,f,"Ferme la porte, s'il te plaît.",polyflow-curated,CC0-1.0,core100-v2
+fr,99,tête,NOUN,hlava,,A1,f,J'ai mal à la tête.,polyflow-curated,CC0-1.0,core100-v2
+fr,100,merci,INTJ,děkuji,,A1,,Merci pour le cadeau !,polyflow-curated,CC0-1.0,core100-v2
