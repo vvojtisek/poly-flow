@@ -1,0 +1,192 @@
+{
+  "language": "en",
+  "source": "polyflow-curated",
+  "revision": "scenes-v1",
+  "scenes": [
+    {
+      "slug": "hello",
+      "title_cs": "Ahoj, jak se jmenuješ?",
+      "words": ["I", "be", "you", "what", "name", "my", "your", "and"],
+      "lines": [
+        {"speaker": "Emma", "text": "Hello! [I] [am|be] Emma. [What|what] [is|be] [your] [name]?", "cs": "Ahoj! Já jsem Emma. Jak se jmenuješ?"},
+        {"speaker": "Jack", "text": "Hi, Emma! [My|my] [name] [is|be] Jack.", "cs": "Ahoj, Emmo! Jmenuju se Jack."},
+        {"speaker": "Emma", "text": "[Are|be] [you] eight, Jack?", "cs": "Je ti osm, Jacku?"},
+        {"speaker": "Jack", "text": "[No|no], [I] [am|be] nine. [And|and] [you]?", "cs": "Ne, je mi devět. A tobě?"},
+        {"speaker": "Emma", "text": "[I] [am|be] eight.", "cs": "Mně je osm."}
+      ]
+    },
+    {
+      "slug": "my-family",
+      "title_cs": "Moje rodina",
+      "words": ["this", "the", "family", "who", "man", "he", "woman", "she"],
+      "lines": [
+        {"speaker": "Emma", "text": "[Look|look], [this] [is|be] [my] [family].", "cs": "Podívej, tohle je moje rodina."},
+        {"speaker": "Jack", "text": "[Who|who] [is|be] [the] [man]?", "cs": "Kdo je ten pán?"},
+        {"speaker": "Emma", "text": "[He|he] [is|be] [my] dad. His [name] [is|be] Peter.", "cs": "To je můj táta. Jmenuje se Peter."},
+        {"speaker": "Jack", "text": "[And|and] [the] [woman]?", "cs": "A ta paní?"},
+        {"speaker": "Emma", "text": "[She|she] [is|be] [my] mum. [She|she] [is|be] [a] doctor.", "cs": "To je moje máma. Je doktorka."},
+        {"speaker": "Jack", "text": "[And|and] [who] [is|be] [this]?", "cs": "A kdo je tohle?"},
+        {"speaker": "Emma", "text": "[This|this] [is|be] Max, [my] little brother. [He|he] [is|be] five.", "cs": "To je Max, můj malý bráška. Je mu pět."}
+      ]
+    },
+    {
+      "slug": "dog-and-cat",
+      "title_cs": "Pes a kočka",
+      "words": ["have", "a", "dog", "big", "very", "but", "cat", "small"],
+      "lines": [
+        {"speaker": "Jack", "text": "[I] [have] [a] [dog]. His [name] [is|be] Rex.", "cs": "Mám psa. Jmenuje se Rex."},
+        {"speaker": "Emma", "text": "[Is|be] [your] [dog] [big]?", "cs": "Je tvůj pes velký?"},
+        {"speaker": "Jack", "text": "[Yes|yes], [he] [is|be] [very] [big], [but] [he] [is|be] [very] kind.", "cs": "Jo, je hodně velký, ale je moc hodný."},
+        {"speaker": "Emma", "text": "[I] [have] [a] [cat]. [She|she] [is|be] [small] [and] black.", "cs": "Já mám kočku. Je malá a černá."},
+        {"speaker": "Jack", "text": "[What|what] [is|be] her [name]?", "cs": "Jak se jmenuje?"},
+        {"speaker": "Emma", "text": "Her [name] [is|be] Mia.", "cs": "Jmenuje se Mia."},
+        {"speaker": "Jack", "text": "[A|a] [small] black [cat]! Lovely!", "cs": "Malá černá kočička! Ta je krásná!"}
+      ]
+    },
+    {
+      "slug": "where-do-you-live",
+      "title_cs": "Kde bydlíš?",
+      "words": ["live", "in", "city", "yes", "where", "do", "country", "speak", "no"],
+      "lines": [
+        {"speaker": "Ben", "text": "Hello! [I] [am|be] Ben. [I] [live] [in] London.", "cs": "Ahoj! Já jsem Ben. Bydlím v Londýně."},
+        {"speaker": "Jack", "text": "London [is|be] [a] [very] [big] [city]!", "cs": "Londýn je hodně velké město!"},
+        {"speaker": "Ben", "text": "[Yes|yes]! [And|and] [where] [do] [you] [live]?", "cs": "Jo! A kde bydlíš ty?"},
+        {"speaker": "Jack", "text": "[I] [live] [in] Brno. [It|it] [is|be] [a] [city] [in] [the] Czech Republic.", "cs": "Bydlím v Brně. To je město v Česku."},
+        {"speaker": "Ben", "text": "[The|the] Czech Republic [is|be] [a] beautiful [country]!", "cs": "Česko je krásná země!"},
+        {"speaker": "Jack", "text": "[Do|do] [you] [speak] Czech?", "cs": "Mluvíš česky?"},
+        {"speaker": "Ben", "text": "[No|no], [I] [speak] English [and] French.", "cs": "Ne, mluvím anglicky a francouzsky."},
+        {"speaker": "Emma", "text": "[I] [speak] English [and] Czech!", "cs": "Já mluvím anglicky i česky!"}
+      ]
+    },
+    {
+      "slug": "at-emmas-house",
+      "title_cs": "Návštěva u Emmy",
+      "words": ["come", "we", "here", "house", "look", "there", "door", "home"],
+      "lines": [
+        {"speaker": "Emma", "text": "[Come|come] in, Jack! [We|we] [live] [here].", "cs": "Pojď dál, Jacku! Tady bydlíme."},
+        {"speaker": "Jack", "text": "[Your|your] [house] [is|be] [very] [big]!", "cs": "Máte moc velký dům!"},
+        {"speaker": "Emma", "text": "[Look|look]! [My|my] [dog] [is|be] over [there].", "cs": "Podívej! Tamhle je můj pes."},
+        {"speaker": "Jack", "text": "[And|and] [where] [is|be] [your] [cat]?", "cs": "A kde je tvoje kočka?"},
+        {"speaker": "Emma", "text": "[She|she] [is|be] asleep by [the] [door].", "cs": "Spí u dveří."},
+        {"speaker": "Jack", "text": "[Your|your] [home] [is|be] lovely, Emma.", "cs": "Máte to tu moc hezké, Emmo."}
+      ]
+    },
+    {
+      "slug": "at-school",
+      "title_cs": "Ve škole",
+      "words": ["school", "book", "not", "can", "read", "write", "question", "how", "say"],
+      "lines": [
+        {"speaker": "Mr Brown", "text": "[Good|good] [morning], [children|child]! Welcome back [to] [school].", "cs": "Dobré ráno, děti! Vítejte zpátky ve škole."},
+        {"speaker": "Mr Brown", "text": "Open [your] [books|book], [please].", "cs": "Otevřete si prosím knížky."},
+        {"speaker": "Jack", "text": "Oh [no]! [My|my] [book] [is|be] [not] [here]. [It|it] [is|be] at [home]!", "cs": "Ale ne! Nemám tu knížku. Mám ji doma!"},
+        {"speaker": "Emma", "text": "[You|you] [can] [read] [with] me.", "cs": "Můžeš číst se mnou."},
+        {"speaker": "Mr Brown", "text": "[Now|now] [write] [your] [name] [on] [the] page.", "cs": "Teď si napište jméno na stránku."},
+        {"speaker": "Jack", "text": "[Can|can] [I] ask [a] [question]?", "cs": "Můžu se na něco zeptat?"},
+        {"speaker": "Mr Brown", "text": "[Yes|yes], Jack. [What|what] [is|be] [it]?", "cs": "Ano, Jacku. Copak?"},
+        {"speaker": "Jack", "text": "[How|how] [do] [you] [say] 'pes' [in] English?", "cs": "Jak se anglicky řekne „pes“?"},
+        {"speaker": "Mr Brown", "text": "[Dog|dog]! [Good|good] [question], Jack.", "cs": "Dog! Dobrá otázka, Jacku."}
+      ]
+    },
+    {
+      "slug": "lunch",
+      "title_cs": "Oběd",
+      "words": ["food", "want", "eat", "please", "thank", "good", "water", "or", "drink"],
+      "lines": [
+        {"speaker": "Mum", "text": "[The|the] [food] [is|be] ready! Jack, [do] [you] [want] to [eat] [with] us?", "cs": "Jídlo je hotové! Jacku, chceš se s námi najíst?"},
+        {"speaker": "Jack", "text": "[Yes|yes], [please]! [Thank|thank] [you].", "cs": "Ano, prosím! Děkuju."},
+        {"speaker": "Emma", "text": "Mmm, [the] soup [is|be] [very] [good]!", "cs": "Mňam, ta polévka je moc dobrá!"},
+        {"speaker": "Mum", "text": "Jack, [do] [you] [want] [water] [or] milk?", "cs": "Jacku, chceš vodu, nebo mléko?"},
+        {"speaker": "Jack", "text": "[Water|water], [please].", "cs": "Vodu, prosím."},
+        {"speaker": "Mum", "text": "[And|and] [you], Emma? [Do|do] [you] [want] something to [drink]?", "cs": "A ty, Emmo? Chceš se něčeho napít?"},
+        {"speaker": "Emma", "text": "[No|no], [thank] [you]. [I] [want] to [eat]!", "cs": "Ne, děkuju. Já chci jíst!"}
+      ]
+    },
+    {
+      "slug": "monday-morning",
+      "title_cs": "Pondělní ráno",
+      "words": ["morning", "it", "day", "today", "time", "for", "now", "go", "to"],
+      "lines": [
+        {"speaker": "Mum", "text": "[Good|good] [morning], Emma! [It|it] [is|be] seven o'clock.", "cs": "Dobré ráno, Emmo! Je sedm hodin."},
+        {"speaker": "Emma", "text": "[Good|good] [morning], Mum. [What|what] [day] [is|be] [it] [today]?", "cs": "Dobré ráno, mami. Co je dneska za den?"},
+        {"speaker": "Mum", "text": "[It|it] [is|be] Monday, [a] [school] [day].", "cs": "Je pondělí, jde se do školy."},
+        {"speaker": "Emma", "text": "Oh [no]! [I] [want] to sleep!", "cs": "Ale ne! Já chci spát!"},
+        {"speaker": "Mum", "text": "Sorry, [it] [is|be] [time] [for] [school]!", "cs": "Promiň, je čas jít do školy!"},
+        {"speaker": "Emma", "text": "OK, [I] [am|be] [coming|come] [now]!", "cs": "Dobře, už jdu!"},
+        {"speaker": "Mum", "text": "[Take|take] [your] bag. Let's [go] [to] [school]!", "cs": "Vezmi si tašku. Jdeme do školy!"}
+      ]
+    },
+    {
+      "slug": "in-the-park",
+      "title_cs": "V parku",
+      "words": ["all", "friend", "see", "they", "play", "with", "people", "child"],
+      "lines": [
+        {"speaker": "Jack", "text": "[Look|look]! [All|all] [my] [friends|friend] [are|be] [in] [the] park.", "cs": "Podívej! Všichni moji kamarádi jsou v parku."},
+        {"speaker": "Emma", "text": "[I] [can] [see] [them|they]! [What|what] [are|be] [they] [doing|do]?", "cs": "Já je vidím! Co dělají?"},
+        {"speaker": "Jack", "text": "[They|they] [are|be] [playing|play] football.", "cs": "Hrají fotbal."},
+        {"speaker": "Emma", "text": "[Can|can] [we] [play] [with] [them|they]?", "cs": "Můžeme si s nimi zahrát?"},
+        {"speaker": "Jack", "text": "[Yes|yes]! Come on!", "cs": "Jo! Pojď!"},
+        {"speaker": "Emma", "text": "So many [people] [are|be] [here] [today]!", "cs": "Je tu dneska tolik lidí!"},
+        {"speaker": "Jack", "text": "[Yes|yes], [all] [the] [children|child] [are|be] [here]!", "cs": "Jo, jsou tu všechny děti!"}
+      ]
+    },
+    {
+      "slug": "birthday",
+      "title_cs": "Narozeniny",
+      "words": ["old", "year", "make", "give", "new", "get"],
+      "lines": [
+        {"speaker": "Emma", "text": "[Today|today] [is|be] [my] birthday!", "cs": "Dneska mám narozeniny!"},
+        {"speaker": "Jack", "text": "Happy birthday! [How|how] [old] [are|be] [you] [now]?", "cs": "Všechno nejlepší! Kolik ti je?"},
+        {"speaker": "Emma", "text": "[I] [am|be] nine [years|year] [old].", "cs": "Je mi devět let."},
+        {"speaker": "Jack", "text": "[This|this] [is|be] [for] [you]. [I] [made|make] [it]!", "cs": "Tohle je pro tebe. Sám jsem to vyrobil!"},
+        {"speaker": "Emma", "text": "[A|a] card! [It|it] [is|be] [very] beautiful. [Thank|thank] [you]!", "cs": "Přáníčko! Je moc krásné. Děkuju!"},
+        {"speaker": "Mum", "text": "Dad [and] [I] [want] to [give] [you] [a] present too.", "cs": "Táta a já ti taky chceme dát dárek."},
+        {"speaker": "Emma", "text": "[A|a] [new] bike! [Thank|thank] [you]!", "cs": "Nové kolo! Děkuju!"},
+        {"speaker": "Jack", "text": "Lucky [you]! [I] [get] [new] socks [for] [my] birthday.", "cs": "Ty se máš! Já k narozeninám dostávám nové ponožky."}
+      ]
+    },
+    {
+      "slug": "trip-to-grandma",
+      "title_cs": "Výlet k babičce",
+      "words": ["tomorrow", "will", "car", "when", "think", "if", "know", "night"],
+      "lines": [
+        {"speaker": "Dad", "text": "[Tomorrow|tomorrow] [we] [will] [go] [to] Grandma's by [car].", "cs": "Zítra pojedeme autem k babičce."},
+        {"speaker": "Emma", "text": "Yay! [When|when] [will] [we] [go]?", "cs": "Hurá! A kdy pojedeme?"},
+        {"speaker": "Dad", "text": "[In|in] [the] [morning].", "cs": "Ráno."},
+        {"speaker": "Jack", "text": "[Can|can] [I] [come] too?", "cs": "Můžu jet taky?"},
+        {"speaker": "Dad", "text": "[I] [think] so, [if] [your] mum [says|say] yes.", "cs": "Myslím, že jo, když to tvoje máma dovolí."},
+        {"speaker": "Jack", "text": "[I] [know] [she] [will] [say] yes!", "cs": "Vím, že řekne ano!"},
+        {"speaker": "Dad", "text": "Great! [Now|now] sleep well. [Good|good] [night], [children|child]!", "cs": "Výborně! A teď se dobře vyspěte. Dobrou noc, děti!"}
+      ]
+    },
+    {
+      "slug": "grandmas-globe",
+      "title_cs": "Babiččin glóbus",
+      "words": ["that", "world", "like", "hand", "on"],
+      "lines": [
+        {"speaker": "Jack", "text": "[What|what] [is|be] [that]?", "cs": "Co je tamto?"},
+        {"speaker": "Grandma", "text": "[It|it] [is|be] [a] globe, [a] [small] [world].", "cs": "To je glóbus, takový malý svět."},
+        {"speaker": "Emma", "text": "[I] [like] [it]! [Where|where] [is|be] England?", "cs": "Líbí se mi! Kde je Anglie?"},
+        {"speaker": "Grandma", "text": "[Here|here]. Put [your] [hand] [on] [it].", "cs": "Tady. Polož na něj ruku."},
+        {"speaker": "Emma", "text": "[My|my] [hand] [is|be] [on] England [and] France!", "cs": "Mám ruku na Anglii a na Francii!"},
+        {"speaker": "Jack", "text": "[And|and] [that] [is|be] [the] Czech Republic. [It|it] [is|be] [very] [small]!", "cs": "A tamto je Česko. Je hodně malé!"},
+        {"speaker": "Grandma", "text": "[Yes|yes], [but] [it] [is|be] our [home].", "cs": "Ano, ale je to náš domov."}
+      ]
+    },
+    {
+      "slug": "a-headache",
+      "title_cs": "Bolí mě hlava",
+      "words": ["why", "head", "of", "take", "work"],
+      "lines": [
+        {"speaker": "Emma", "text": "Mum, [why] [are|be] [you] sad?", "cs": "Mami, proč jsi smutná?"},
+        {"speaker": "Mum", "text": "[I] [am|be] [not] sad. [My|my] [head] hurts.", "cs": "Nejsem smutná. Jen mě bolí hlava."},
+        {"speaker": "Emma", "text": "[Do|do] [you] [want] [a] glass [of] [water]?", "cs": "Chceš sklenici vody?"},
+        {"speaker": "Mum", "text": "[Yes|yes], [please]. [Thank|thank] [you], darling.", "cs": "Ano, prosím. Děkuju, zlatíčko."},
+        {"speaker": "Emma", "text": "[Take|take] [my] pillow [and] lie down.", "cs": "Vezmi si můj polštář a lehni si."},
+        {"speaker": "Dad", "text": "Hello! [I] [am|be] back from [work].", "cs": "Ahoj! Jsem zpátky z práce."},
+        {"speaker": "Emma", "text": "Shh, Dad! Mum [has|have] [a] headache.", "cs": "Pst, tati! Mamku bolí hlava."},
+        {"speaker": "Dad", "text": "Oh [no]. [What|what] [can] [I] [do]?", "cs": "Ale ne. Co můžu udělat?"},
+        {"speaker": "Emma", "text": "[You|you] [can] [make] tea!", "cs": "Můžeš uvařit čaj!"}
+      ]
+    }
+  ]
+}
