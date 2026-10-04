@@ -72,9 +72,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose config -q
-      - run: docker build -f docker/backend/Dockerfile --target api backend
-      - run: docker build -f docker/backend/Dockerfile --target worker backend
-      - run: docker build -f docker/frontend/Dockerfile --target runner frontend
+      - name: Build images stamped with commit and branch
+        run: |
+          eval "$(scripts/build-info.sh)"
+          args=(--build-arg POLYFLOW_GIT_SHA --build-arg POLYFLOW_GIT_BRANCH --build-arg POLYFLOW_BUILD_TIME)
+          docker build "${args[@]}" -f docker/backend/Dockerfile --target api -t polyflow-api:ci backend
+          docker build "${args[@]}" -f docker/backend/Dockerfile --target worker backend
+          docker build "${args[@]}" -f docker/frontend/Dockerfile --target runner frontend
+          docker run --rm polyflow-api:ci env | grep '^POLYFLOW_GIT_'
 
   compose-smoke:
     runs-on: ubuntu-latest

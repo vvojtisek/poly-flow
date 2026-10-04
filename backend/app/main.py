@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app import __version__
 from app.api import auth, health, learning, profiles, progression
 from app.core.config import get_settings
 from app.core.logging import configure_logging
@@ -21,7 +22,7 @@ def create_app() -> FastAPI:
     settings = get_settings()
     configure_logging(settings.log_level)
 
-    app = FastAPI(title="PolyFlow API", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="PolyFlow API", version=__version__, lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,

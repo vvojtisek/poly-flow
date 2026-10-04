@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
+import { BuildFooter } from "@/components/BuildFooter";
 import { AuthProvider } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="cs">
       <body>
         <AuthProvider>{children}</AuthProvider>
+        <BuildFooter />
       </body>
     </html>
   );

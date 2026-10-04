@@ -29,6 +29,14 @@ COPY --chown=app:app alembic.ini ./
 COPY --chown=app:app alembic ./alembic
 COPY --chown=app:app data ./data
 COPY --chown=app:app app ./app
+# Build provenance (scripts/build-info.sh). Last, so a new commit only rebuilds this layer.
+ARG POLYFLOW_GIT_SHA=unknown
+ARG POLYFLOW_GIT_BRANCH=unknown
+ARG POLYFLOW_BUILD_TIME=
+ENV POLYFLOW_GIT_SHA=${POLYFLOW_GIT_SHA} \
+    POLYFLOW_GIT_BRANCH=${POLYFLOW_GIT_BRANCH} \
+    POLYFLOW_BUILD_TIME=${POLYFLOW_BUILD_TIME}
+LABEL org.opencontainers.image.revision=${POLYFLOW_GIT_SHA}
 USER app
 
 FROM base AS api

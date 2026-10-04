@@ -8,6 +8,7 @@ from redis.asyncio import Redis
 from sqlalchemy import text
 
 from app.core.config import get_settings
+from app.core.version import BuildInfo, get_build_info
 from app.db.session import get_engine
 
 log = logging.getLogger("polyflow.health")
@@ -32,6 +33,12 @@ class Readiness(BaseModel):
 async def healthz() -> Liveness:
     """Liveness: process is up. No dependency calls."""
     return Liveness()
+
+
+@router.get("/version", response_model=BuildInfo)
+async def version() -> BuildInfo:
+    """Which build is running: SemVer version, release channel, commit, branch."""
+    return get_build_info()
 
 
 async def _check_db() -> None:

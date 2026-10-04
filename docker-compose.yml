@@ -1,7 +1,13 @@
 # Dev/homelab stack.
+#   eval "$(scripts/build-info.sh)"                # optional: stamp commit/branch into the images
 #   docker compose up --build                      # core: postgres, redis, migrate, backend, worker, frontend
 #   docker compose --profile audio up --build      # + piper (TTS) and whisper (STT)
 name: polyflow
+
+x-build-info: &build-info
+  POLYFLOW_GIT_SHA: ${POLYFLOW_GIT_SHA:-unknown}
+  POLYFLOW_GIT_BRANCH: ${POLYFLOW_GIT_BRANCH:-unknown}
+  POLYFLOW_BUILD_TIME: ${POLYFLOW_BUILD_TIME:-}
 
 x-backend-env: &backend-env
   POLYFLOW_ENV: ${POLYFLOW_ENV:-dev}
@@ -47,6 +53,7 @@ services:
       context: ./backend
       dockerfile: ../docker/backend/Dockerfile
       target: api
+      args: *build-info
     image: polyflow-backend:dev
     command: ["alembic", "upgrade", "head"]
     environment: *backend-env
@@ -73,6 +80,7 @@ services:
       context: ./backend
       dockerfile: ../docker/backend/Dockerfile
       target: worker
+      args: *build-info
     image: polyflow-worker:dev
     environment: *backend-env
     depends_on:
@@ -88,6 +96,7 @@ services:
       dockerfile: ../docker/frontend/Dockerfile
       target: dev
     environment:
+      <<: *build-info  # the dev server reads these at startup (next.config.ts)
       BACKEND_URL: http://backend:8000
       WATCHPACK_POLLING: "true"
     volumes:
