@@ -18,7 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "pytest-asyncio>=0.23", "ruff>=0.5"]
-# Build-time only: regenerates data/frequency/*.lemmas.csv (scripts/seed_lemmas_en_us.py).
+# Build-time only: regenerates data/frequency/*.lemmas.csv (scripts/seed_lemmas_en.py).
 lemmas = [
   "wordfreq==3.1.1",
   "spacy==3.8.16",

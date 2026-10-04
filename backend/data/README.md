@@ -48,7 +48,7 @@ fails cleanly if an item *not* in the file still holds a rank the file assigns t
 
 Ranked reference lists of the most frequent lemmas per locale, imported into the `frequency_lemmas`
 table. Columns: `rank,lemma,pos,content_flags,source,license,revision`; the locale comes from the
-file name (`en_US.lemmas.csv`). Ranks run exactly 1..N, lemmas are unique per locale, lowercase ASCII
+file name (`en_GB.lemmas.csv`). Ranks run exactly 1..N, lemmas are unique per locale, lowercase ASCII
 (`app/domain/lemmas.py`). `content_flags` has the same meaning as in the lexicon.
 
 **This is not curriculum.** Rows have no Czech gloss, so lessons, Ověření, level exams and the
@@ -62,48 +62,64 @@ Import (idempotent; one transaction, batches of 1,000; lemmas missing from the f
 flags are only ever added):
 
 ```sh
-python -m app.cli seed-lemmas data/frequency/en_US.lemmas.csv [--dry-run]
+python -m app.cli seed-lemmas data/frequency/*.lemmas.csv [--dry-run]
 ```
 
-### `en_US.lemmas.csv` (10,000 lemmas, revision `wordfreq-en-v1`)
+### `en_GB.lemmas.csv` and `en_US.lemmas.csv` (10,000 lemmas each, revision `wordfreq-en-v1`)
 
-Generated, not hand-edited: `uv run --extra lemmas python scripts/seed_lemmas_en_us.py build`
-(pinned versions in `pyproject.toml`; the output is byte-identical on re-runs). Pipeline:
+The English course teaches British English (decided 2026-10-04), so `en_GB` is the list it will draw
+ranks from; `en_US` stays as an American reference. Both come from the same pipeline and the same
+reviewed lists (`en.*.csv`), and differ only in spelling and in the dictionary that filters them.
+Generated, not hand-edited: `uv run --extra lemmas python scripts/seed_lemmas_en.py build --locale
+en_GB` (or `en_US`); pinned versions in `pyproject.toml`; the output is byte-identical on re-runs.
 
 1. Word forms and frequencies: [wordfreq](https://github.com/rspeer/wordfreq) 3.1.1, `en`, top 60,000.
 2. Normalise: NFKD, drop diacritics, lowercase; British spellings mapped to American with breame
-   0.1.2 (only when Hunspell knows the American form).
+   0.1.2 (only when Hunspell knows the American form), so both spellings of a word count together.
 3. Lemmatise each form with spaCy 3.8 `en_core_web_sm` 3.8.0 and add its frequency to the lemma;
    contractions split (`don't` -> do + not). Forms tagged PROPN out of context are re-lemmatised as
-   nouns; forms left unlemmatised are retried as each open class. `en_US.lemma_overrides.csv`
-   corrects known errors (`data` stays `data`, `better` -> `good`).
-4. Keep a lemma only if the SCOWL en_US Hunspell dictionary (LibreOffice/dictionaries, pinned commit
-   and checksum) accepts it in lowercase: this drops names, places, acronyms, British-only spellings,
-   most foreign words and slang. `en_US.include.csv` re-admits capitalised everyday words (days,
-   months, languages and nationalities, holidays); `en_US.exclude.csv` removes what the dictionary
-   lets through (abbreviations, roman numerals, first names, prefix fragments).
-5. Rank by summed frequency (ties alphabetical), keep 10,000. `en_US.flags.csv` adds content flags.
+   nouns; forms left unlemmatised are retried as each open class. `en.lemma_overrides.csv` corrects
+   known errors (`data` stays `data`, `better` -> `good`).
+4. en_GB only: map each lemma to British spelling with breame (`color` -> `colour`, `realize` ->
+   `realise`). `en_GB.spelling.csv` corrects the map: it keeps American forms that are also British
+   words with their own meaning (`tire`, `program`, `practice`, `draft`) and adds `math` -> `maths`,
+   `mom` -> `mum`.
+5. Keep a lemma only if the locale's pinned Hunspell dictionary (LibreOffice/dictionaries, pinned commit
+   and checksums; SCOWL `en_US`, LibreOffice `en_GB` with -ise spellings) accepts it in lowercase. This
+   drops names, places, acronyms, the other variety's spellings, most foreign words and slang. The
+   `en_GB` dictionary accepts many names in lowercase, so a British lemma must also pass `en_US` in its
+   American spelling (or be listed in `en_GB.spelling.csv`). `en.include.csv` re-admits capitalised
+   everyday words (days, months, languages and nationalities, holidays) and `seize`, which the `en_GB`
+   dictionary lacks; `en.exclude.csv` removes what the dictionaries let through (abbreviations, roman
+   numerals, first names, prefix fragments).
+6. Rank by summed frequency (ties alphabetical), keep 10,000. `en.flags.csv` adds content flags.
+
+The two lists share 9,784 lemmas. The 216 that differ are spelling variants (`colour`/`color`) and
+words only one variety uses (`mum`, `maths`, `jewellery` against `mom`, `downtown`, `sidewalk`).
 
 Limits, stated plainly:
 
 - **Not COCA.** COCA's lemma lists are licensed and not freely downloadable, so wordfreq is the source.
   wordfreq's English blends US and UK sources (Wikipedia, subtitles, news, books, web, Reddit,
-  Twitter); `en_US` here means American spelling, not a US-only corpus. wordfreq's data stops around
-  2021 and the project is no longer updated, so recent words rank low or are missing.
+  Twitter). The locale means spelling and vocabulary filter, not a national corpus; ranks are the
+  same blended frequencies in both lists. wordfreq's data stops around 2021 and the project is no
+  longer updated, so recent words rank low or are missing.
 - Lemmas and POS come from tagging isolated words, without sentence context. POS is the dominant tag
   of the lemma's forms and is a heuristic; homographs are merged (`left` counts toward `leave`).
-- The 100 English core lemmas are all in the list (99 within the first 1,000, `cat` at ~1,100). The
+  Where an American spelling covers two British words (`tire`/`tyre`, `meter`/`metre`), the whole
+  frequency goes to one of them.
+- The 100 English core lemmas are in both lists (99 within the first 1,000, `cat` at ~1,100). The
   lexicon's core-100 ranks are hand-set and unchanged; nothing here changes learner progress.
 - Content flags are a first, hand-made pass (profanity, slurs, sexual terms, war and killing as
   violence, as in the German blacklist). Identity terms are not flagged. Drugs have no `ContentFlag`
   value and are unflagged.
-- Licence: wordfreq's data is CC-BY-SA-4.0, so this derived list is too: attribution to wordfreq
+- Licence: wordfreq's data is CC-BY-SA-4.0, so these derived lists are too: attribution to wordfreq
   (Robyn Speer, <https://doi.org/10.5281/zenodo.7199437>) sits in the file header, every row carries
   `source` and `license`, and the table keeps both. wordfreq's README asks people not to convert it to
-  CSV because attribution gets stripped; the file holds ranks of processed lemmas, not wordfreq's
-  frequencies, and keeps the attribution in every row. spaCy,
-  breame (Apache-2.0), spylls (MPL-2.0) and the SCOWL dictionary are build tools only; none of their
-  data is copied into the list beyond the lemmas themselves.
+  CSV because attribution gets stripped; the files hold ranks of processed lemmas, not wordfreq's
+  frequencies, and keep the attribution in every row. spaCy, breame (Apache-2.0), spylls (MPL-2.0) and
+  the Hunspell dictionaries (SCOWL; en_GB under LGPL) are build tools only; none of their data is
+  copied into the lists beyond the lemmas themselves.
 
 ## Scenes (`scenes/*.json`)
 
