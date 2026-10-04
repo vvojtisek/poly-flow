@@ -86,10 +86,24 @@ export const getReadiness = (signal?: AbortSignal) =>
 
 // ---------------------------------------------------------------- profiles & auth
 
+export type Theme = "light" | "dark" | "system";
+
 export interface ProfileSettings {
   daily_goal_minutes: number;
   audio_rate: number;
   autoplay_audio: boolean;
+  theme: Theme;
+  interests: string[];
+  voices: Partial<Record<Language, string>>;
+}
+
+export interface Voice {
+  id: string;
+  language: Language;
+  name: string;
+  gender: "female" | "male";
+  default: boolean;
+  installed: boolean;
 }
 
 export interface Profile {
@@ -124,8 +138,11 @@ export const switchProfile = (profile_id: string) =>
   api<Me>("/api/v1/auth/switch", { json: { profile_id } });
 export const returnToParent = (password: string) =>
   api<Me>("/api/v1/auth/return", { json: { password } });
-export const updateOwnProfile = (body: Partial<Pick<Profile, "active_language" | "display_name">>) =>
-  api<Profile>("/api/v1/me/profile", { method: "PATCH", json: body });
+export const updateOwnProfile = (
+  body: Partial<Pick<Profile, "active_language" | "display_name">> & { settings?: Partial<ProfileSettings> },
+) => api<Profile>("/api/v1/me/profile", { method: "PATCH", json: body });
+export const listVoices = (signal?: AbortSignal) => api<Voice[]>("/api/v1/voices", { signal });
+export const voiceSampleUrl = (voiceId: string) => `/api/v1/voices/${encodeURIComponent(voiceId)}/sample`;
 export const listProfiles = () => api<Profile[]>("/api/v1/profiles");
 export const createProfile = (body: {
   username: string;

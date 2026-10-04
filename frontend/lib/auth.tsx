@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 import { ApiError, getMe, getSetupStatus, setCsrfToken, type Me } from "@/lib/api";
+import { setBaseRate } from "@/lib/audio";
+import { applyTheme } from "@/lib/theme";
 
 type AuthState =
   | { kind: "loading" }
@@ -24,6 +26,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const setMe = useCallback((me: Me | null) => {
     setCsrfToken(me?.csrf_token ?? null);
+    if (me) {
+      // The acting profile's look and speech speed (a handed-over device takes the child's).
+      applyTheme(me.acting.settings.theme);
+      setBaseRate(me.acting.settings.audio_rate);
+    }
     setState(me ? { kind: "signed_in", me } : { kind: "anonymous", needsSetup: false });
   }, []);
 
