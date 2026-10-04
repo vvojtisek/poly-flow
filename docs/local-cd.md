@@ -31,6 +31,8 @@ Without lingering, the timer runs while the user's systemd session is active.
 - Inspect the timer with `systemctl --user status polyflow-local-cd.timer` and deployment output with `journalctl --user -u polyflow-local-cd.service`.
 - Deploy the current `main` immediately with `systemctl --user start polyflow-local-cd.service`.
 - Pause with `systemctl --user disable --now polyflow-local-cd.timer`; resume with `systemctl --user enable --now polyflow-local-cd.timer`.
+- The deploy stamps commit, branch and build time into the images (`scripts/build-info.sh`), so the GUI shows which commit is running.
+- The timer runs an installed copy of `scripts/deploy-main.sh` in `~/.local/bin`. After a change to that script reaches `main`, re-run `scripts/install-local-cd.sh` to pick it up.
 - The `deployed-main` marker lives under `~/.local/state/polyflow/`. If a build, migration, seed, or health check fails, the marker stays unchanged and the next poll retries.
 
 The timer does not run application tests for each deployment. CI is responsible for validating merged changes before they reach `main`.

@@ -1,5 +1,7 @@
 import { useId, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from "react";
 
+import { BuildInfo } from "@/components/BuildInfo";
+
 const base =
   "inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold transition disabled:cursor-not-allowed disabled:opacity-50";
 const variants = {
@@ -64,6 +66,7 @@ export function CenteredCard({ title, children }: { title: string; children: Rea
       <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
         {children}
       </div>
+      <BuildInfo className="justify-center text-center" />
     </main>
   );
 }

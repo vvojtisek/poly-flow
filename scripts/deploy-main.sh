@@ -54,6 +54,8 @@ fi
 compose=(/usr/bin/docker compose --project-directory "$repo_root" \
   -f "$repo_root/docker-compose.yml" -f "$override_file")
 "${compose[@]}" config -q
+# Stamp commit, branch and build time into the images so the GUI shows which build is running.
+eval "$("$repo_root/scripts/build-info.sh")"
 say "building and starting PolyFlow at ${local_sha:0:12}"
 "${compose[@]}" up -d --build
 

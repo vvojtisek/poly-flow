@@ -101,6 +101,9 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await page.getByRole("button", { name: "Pokračovat" }).click();
   await expect(page.getByRole("link", { name: "Rodina" })).toBeVisible();
 
+  // The running version sits next to logout, visible without scrolling.
+  await expect(page.getByTestId("build-info")).toBeInViewport();
+  await expect(page.getByTestId("build-info")).toContainText(/\d+\.\d+\.\d+/);
   await page.getByRole("button", { name: "Odhlásit" }).click();
   await page.waitForURL("**/login");
   await page.getByLabel("Uživatelské jméno").fill("eva");
