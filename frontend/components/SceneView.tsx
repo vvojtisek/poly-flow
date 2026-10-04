@@ -3,7 +3,8 @@
 import { Languages } from "lucide-react";
 import { useState } from "react";
 
-import type { Language, Scene, SceneSegment } from "@/lib/api";
+import { PlayButton } from "@/components/PlayButton";
+import { sceneLineAudioUrl, type Language, type Scene, type SceneSegment } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 
 function Word({ seg, language }: { seg: SceneSegment; language: Language }) {
@@ -32,8 +33,8 @@ function Word({ seg, language }: { seg: SceneSegment; language: Language }) {
   );
 }
 
-/** The lesson's context: a short dialogue, new words highlighted, Czech on demand. */
-export function SceneView({ scene, language }: { scene: Scene; language: Language }) {
+/** The lesson's context: a short dialogue, new words highlighted, Czech on demand, each line playable. */
+export function SceneView({ scene, language, sessionId }: { scene: Scene; language: Language; sessionId: string }) {
   const [translate, setTranslate] = useState(false);
   return (
     <section className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -42,11 +43,14 @@ export function SceneView({ scene, language }: { scene: Scene; language: Languag
         {scene.lines.map((line, i) => (
           <li key={i} className="flex flex-col gap-0.5">
             {line.speaker && <span className="text-xs font-semibold text-slate-500">{line.speaker}</span>}
-            <p className="text-lg leading-relaxed" lang={language}>
-              {line.segments.map((seg, j) =>
-                seg.item_id ? <Word key={j} seg={seg} language={language} /> : <span key={j}>{seg.text}</span>,
-              )}
-            </p>
+            <div className="flex items-start gap-1">
+              <p className="flex-1 text-lg leading-relaxed" lang={language}>
+                {line.segments.map((seg, j) =>
+                  seg.item_id ? <Word key={j} seg={seg} language={language} /> : <span key={j}>{seg.text}</span>,
+                )}
+              </p>
+              <PlayButton url={sceneLineAudioUrl(sessionId, i)} label={cs.audio.playSentence} size="sm" />
+            </div>
             {translate && (
               <p className="text-sm text-slate-500" lang="cs">
                 {line.cs}

@@ -57,6 +57,9 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(page.getByRole("heading", { name: "Ahoj, jak se jmenuješ?" })).toBeVisible();
   await page.getByRole("button", { name: "Ukázat překlad" }).click();
   await expect(page.getByText("Ahoj, Anno! Já jsem Tom.")).toBeVisible();
+  // This stack runs without the audio profile: a play button says so and the lesson goes on.
+  await page.getByRole("button", { name: "Přehrát větu" }).first().click();
+  await expect(page.getByRole("button", { name: "Zvuk teď není k dispozici." })).toBeVisible();
   await page.getByRole("button", { name: "Seznámit se se slovy" }).click();
   for (let n = 1; n <= 4; n++) {
     await expect(page.getByText(`Slovo ${n} z 4`)).toBeVisible();

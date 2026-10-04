@@ -97,6 +97,13 @@ export const cs = {
     admin: "správce",
     noCredential: "bez hesla i PINu",
   },
+  audio: {
+    play: "Přehrát",
+    playWord: "Přehrát slovo",
+    playSentence: "Přehrát větu",
+    slower: "Pomaleji",
+    unavailable: "Zvuk teď není k dispozici.",
+  },
   lesson: {
     title: "Lekce",
     start: "Začít lekci",

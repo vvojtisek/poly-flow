@@ -371,6 +371,71 @@ def visible_options(task: LearningTask) -> list[tuple[int, str]] | None:
     return options
 
 
+# ---------------------------------------------------------------- audio
+
+
+def spoken_word(item: LexiconItem) -> str:
+    """The word as the learner sees it: German nouns with their article (der Hund)."""
+    if item.language == Language.DE and item.gender in {"der", "die", "das"}:
+        return f"{item.gender} {item.lemma}"
+    return item.lemma
+
+
+async def get_task(db: AsyncSession, user: User, task_id: uuid.UUID) -> LearningTask:
+    task = (
+        await db.execute(
+            select(LearningTask)
+            .join(LearningSession, LearningSession.id == LearningTask.session_id)
+            .where(LearningTask.id == task_id, LearningSession.user_id == user.id)
+            .options(selectinload(LearningTask.item))
+        )
+    ).scalar_one_or_none()
+    if task is None:
+        raise LearningError("task_not_found", 404)
+    return task
+
+
+def task_audio_text(task: LearningTask, part: str) -> str:
+    """Text the learner may hear for a task: only what the task already shows.
+
+    A pending recall task asks the learner to produce the word, so its audio waits until the
+    task is finished (then it plays the expected answer).
+    """
+    if task.task_type == TaskType.RECALL and task.status == TaskStatus.PENDING:
+        raise LearningError("audio_would_reveal")
+    if part == "word":
+        return spoken_word(task.item)
+    if task.item.example_sentence:
+        return task.item.example_sentence
+    raise LearningError("audio_not_found", 404)
+
+
+def session_audio_text(
+    session: LearningSession, line: int | None, item_id: uuid.UUID | None, part: str
+) -> str:
+    """Text of a scene line or a word card of a lesson, as `SessionOut` presents them."""
+    if session.mode != SessionMode.LEARN:
+        raise LearningError("audio_not_found", 404)
+    lines = session.scene.lines if session.scene else []
+    if line is not None:
+        if line >= len(lines):
+            raise LearningError("audio_not_found", 404)
+        return "".join(seg["t"] for seg in lines[line]["segments"])
+    item = next(
+        (t.item for t in session.tasks if t.lexicon_item_id == item_id and t.is_new_item), None
+    )
+    if item is None:
+        raise LearningError("audio_not_found", 404)
+    if part == "word":
+        return spoken_word(item)
+    for scene_line in lines:  # the card's context: the scene line with the word, else example
+        if any(seg.get("item") == str(item.id) for seg in scene_line["segments"]):
+            return "".join(seg["t"] for seg in scene_line["segments"])
+    if item.example_sentence:
+        return item.example_sentence
+    raise LearningError("audio_not_found", 404)
+
+
 async def use_hint(db: AsyncSession, user: User, task_id: uuid.UUID) -> LearningTask:
     task = await _lock_task(db, user, task_id)
     if task.status != TaskStatus.PENDING:

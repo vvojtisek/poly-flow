@@ -1,8 +1,9 @@
 import uuid
 from datetime import UTC, datetime
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -27,6 +28,7 @@ from app.schemas.learning import (
     WordCard,
 )
 from app.services import learning as svc
+from app.services.tts import Tts, TtsUnavailable, get_tts
 
 router = APIRouter(prefix="/api/v1/learning", tags=["learning"])
 
@@ -36,6 +38,7 @@ def get_now() -> datetime:
 
 
 Now = Annotated[datetime, Depends(get_now)]
+TtsDep = Annotated[Tts, Depends(get_tts)]
 
 
 def _http(exc: svc.LearningError) -> HTTPException:
@@ -235,3 +238,61 @@ async def progress(
     return await svc.progress_overview(
         db, auth.acting, language or auth.acting.active_language, now
     )
+
+
+# ---------------------------------------------------------------- audio
+
+AUDIO_RESPONSES: dict[int | str, dict] = {
+    200: {"content": {"audio/wav": {}}, "description": "Speech as WAV"},
+    404: {"description": "audio_not_found"},
+    409: {"description": "audio_would_reveal: the task asks for this word"},
+    503: {"description": "audio_unavailable: the TTS service is not running"},
+}
+
+
+async def _speech(tts: Tts, language: Language, text: str) -> FileResponse:
+    try:
+        path = await tts.speech(language, text)
+    except TtsUnavailable as exc:
+        raise HTTPException(503, "audio_unavailable") from exc
+    return FileResponse(
+        path, media_type="audio/wav", headers={"Cache-Control": "private, max-age=86400"}
+    )
+
+
+@router.get("/sessions/{session_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def session_audio(
+    session_id: uuid.UUID,
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    line: Annotated[int | None, Query(ge=0)] = None,
+    item: Annotated[uuid.UUID | None, Query()] = None,
+    part: Annotated[Literal["word", "context"], Query()] = "word",
+) -> FileResponse:
+    """A lesson's scene line (`line`) or new word (`item`, its `word` or `context`) spoken."""
+    if (line is None) == (item is None):
+        raise HTTPException(422, "line_or_item_required")
+    try:
+        s = await svc.get_session(db, auth.acting, session_id)
+        text = svc.session_audio_text(s, line, item, part)
+    except svc.LearningError as exc:
+        raise _http(exc) from exc
+    return await _speech(tts, s.language, text)
+
+
+@router.get("/tasks/{task_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def task_audio(
+    task_id: uuid.UUID,
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    part: Annotated[Literal["word", "example"], Query()] = "word",
+) -> FileResponse:
+    """A task's word or example sentence spoken; a pending recall task stays silent."""
+    try:
+        task = await svc.get_task(db, auth.acting, task_id)
+        text = svc.task_audio_text(task, part)
+    except svc.LearningError as exc:
+        raise _http(exc) from exc
+    return await _speech(tts, task.item.language, text)

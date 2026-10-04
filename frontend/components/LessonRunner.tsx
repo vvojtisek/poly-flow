@@ -4,6 +4,7 @@ import { BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from "luc
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
+import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
 import { Button, Notice } from "@/components/ui";
 import {
@@ -14,6 +15,8 @@ import {
   revealAnswer,
   startLesson,
   submitAnswer,
+  taskAudioUrl,
+  wordAudioUrl,
   type AnswerResult,
   type Language,
   type LessonSession,
@@ -38,7 +41,7 @@ type Phase =
   | { kind: "task"; session: LessonSession; task: Task; result: AnswerResult | null }
   | { kind: "done"; session: LessonSession };
 
-function Feedback({ result, mode }: { result: AnswerResult; mode: SessionMode }) {
+function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: SessionMode; audioUrl?: string }) {
   const good = result.correct;
   const note = result.note ? cs.feedback.notes[result.note] : null;
   return (
@@ -56,8 +59,9 @@ function Feedback({ result, mode }: { result: AnswerResult; mode: SessionMode })
       </p>
       {note && <p>{note}</p>}
       {result.expected && (
-        <p>
+        <p className="flex flex-wrap items-center gap-x-1">
           {cs.lesson.expected} <strong>{result.expected}</strong>
+          {audioUrl && result.task_done && <PlayButton url={audioUrl} label={cs.audio.playWord} size="sm" />}
           {result.meaning && result.meaning !== result.expected && (
             <>
               {" "}
@@ -144,7 +148,10 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         <p className="text-sm text-slate-500">
           {cs.lesson.sceneHelp} {cs.lesson.learnHelp}
         </p>
-        <SceneView scene={session.scene!} language={language} />
+        <div className="flex justify-end">
+          <SlowToggle />
+        </div>
+        <SceneView scene={session.scene!} language={language} sessionId={session.id} />
         <Button onClick={() => setPhase({ kind: "words", session, index: 0 })} autoFocus>
           {cs.lesson.toWords}
         </Button>
@@ -157,15 +164,21 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
     const last = index === session.words.length - 1;
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex items-center justify-between text-xs text-slate-500">
+        <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
           <span>{cs.lesson.wordsTitle}</span>
-          <span>{cs.lesson.wordOf(index + 1, session.words.length)}</span>
+          <span className="flex items-center gap-2">
+            <SlowToggle />
+            {cs.lesson.wordOf(index + 1, session.words.length)}
+          </span>
         </div>
         <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
-          <p className="text-3xl font-bold break-words" lang={language}>
-            {language === "de" && w.gender ? `${w.gender} ` : ""}
-            {w.lemma}
-          </p>
+          <div className="flex items-center justify-center gap-1">
+            <p className="text-3xl font-bold break-words" lang={language}>
+              {language === "de" && w.gender ? `${w.gender} ` : ""}
+              {w.lemma}
+            </p>
+            <PlayButton url={wordAudioUrl(session.id, w.id, "word")} label={cs.audio.playWord} />
+          </div>
           {w.gender && language !== "de" && (
             <p className="text-sm text-slate-500" lang={language}>
               ({w.gender})
@@ -177,9 +190,12 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
           </p>
           {w.context && (
             <div className="mt-2 rounded-xl bg-slate-50 p-3 text-left dark:bg-slate-800/60">
-              <p className="italic" lang={language}>
-                {w.context}
-              </p>
+              <div className="flex items-start gap-1">
+                <p className="flex-1 italic" lang={language}>
+                  {w.context}
+                </p>
+                <PlayButton url={wordAudioUrl(session.id, w.id, "context")} label={cs.audio.playSentence} size="sm" />
+              </div>
               {w.context_cs && (
                 <p className="text-sm text-slate-500" lang="cs">
                   {w.context_cs}
@@ -279,8 +295,9 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between text-xs text-slate-500">
+      <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
         <span>{cs.lesson.progress(task.position + 1, task.total)}</span>
+        <SlowToggle />
         <span className="rounded-full bg-slate-100 px-2 py-0.5 dark:bg-slate-800">
           {mode === "check" ? cs.check.title : task.is_new_item ? cs.lesson.newWord : cs.lesson.review}
         </span>
@@ -293,11 +310,15 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         <p className="text-sm text-slate-500">
           {task.type === "recognition" ? cs.lesson.recognitionPrompt : cs.lesson.recallPrompt}
         </p>
-        <p className="text-3xl font-bold break-words" lang={task.type === "recognition" ? language : "cs"}>
-          {/* German stores the article (der/die/das); French/Italian store m/f. */}
-          {task.type === "recognition" && language === "de" && task.gender ? `${task.gender} ` : ""}
-          {task.prompt}
-        </p>
+        <div className="flex items-center justify-center gap-1">
+          <p className="text-3xl font-bold break-words" lang={task.type === "recognition" ? language : "cs"}>
+            {/* German stores the article (der/die/das); French/Italian store m/f. */}
+            {task.type === "recognition" && language === "de" && task.gender ? `${task.gender} ` : ""}
+            {task.prompt}
+          </p>
+          {/* A recall task asks for the word itself: its audio plays with the answer instead. */}
+          {task.type === "recognition" && <PlayButton url={taskAudioUrl(task.id, "word")} label={cs.audio.playWord} />}
+        </div>
         {task.gender && (task.type === "recall" || language !== "de") && (
           <p className="text-sm text-slate-500" lang={language}>
             ({task.gender})
@@ -309,9 +330,12 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
           </p>
         )}
         {task.example && (
-          <p className="text-sm italic text-slate-500" lang={language}>
-            {task.example}
-          </p>
+          <div className="flex items-center justify-center gap-1">
+            <p className="text-sm italic text-slate-500" lang={language}>
+              {task.example}
+            </p>
+            <PlayButton url={taskAudioUrl(task.id, "example")} label={cs.audio.playSentence} size="sm" />
+          </div>
         )}
       </section>
 
@@ -371,7 +395,13 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
         </form>
       )}
 
-      {result && <Feedback result={result} mode={mode} />}
+      {result && (
+        <Feedback
+          result={result}
+          mode={mode}
+          audioUrl={task.type === "recall" ? taskAudioUrl(task.id, "word") : undefined}
+        />
+      )}
       {netError && <Notice tone="error">{cs.common.offline}</Notice>}
 
       {finished ? (
@@ -403,7 +433,7 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
             <BookOpen className="size-4" aria-hidden /> {cs.lesson.rereadScene}
           </summary>
           <div className="mt-2">
-            <SceneView scene={session.scene} language={language} />
+            <SceneView scene={session.scene} language={language} sessionId={session.id} />
           </div>
         </details>
       )}

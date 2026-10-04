@@ -22,7 +22,8 @@ ENV PATH=/opt/venv/bin:$PATH \
     PYTHONPATH=/app \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
-RUN groupadd --system --gid 10001 app && useradd --system --uid 10001 --gid app app
+RUN groupadd --system --gid 10001 app && useradd --system --uid 10001 --gid app app \
+    && mkdir -p /data/audio && chown app:app /data/audio  # a fresh named volume copies this owner
 COPY --from=builder /opt/venv /opt/venv
 WORKDIR /app
 COPY --chown=app:app alembic.ini ./
