@@ -39,17 +39,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate the model lock if it is not committed yet
+      - name: Lock models added to the spec but not yet to the lock
         id: lock
         run: |
-          if [ -f docker/models/models.lock.json ]; then
-            echo "generated=false" >> "$GITHUB_OUTPUT"
-          else
-            python3 scripts/models.py lock
+          python3 scripts/models.py lock --missing
+          if [ -n "$(git status --porcelain docker/models/models.lock.json)" ]; then
             echo "generated=true" >> "$GITHUB_OUTPUT"
-            echo "::group::generated docker/models/models.lock.json"
+            echo "::group::updated docker/models/models.lock.json"
             cat docker/models/models.lock.json
             echo "::endgroup::"
+          else
+            echo "generated=false" >> "$GITHUB_OUTPUT"
           fi
 
       - if: steps.lock.outputs.generated == 'true'
@@ -101,8 +101,8 @@ jobs:
       - if: always()
         run: docker compose --profile audio down -v --remove-orphans
 
-      - name: Fail until the generated lock is committed
+      - name: Fail until the updated lock is committed
         if: steps.lock.outputs.generated == 'true'
         run: |
-          echo "::error::docker/models/models.lock.json is not committed. Download the models-lock artifact (or copy it from the log above) and commit it."
+          echo "::error::docker/models/models.lock.json is out of date with models.spec.json. Download the models-lock artifact (or copy it from the log above) and commit it."
           exit 1

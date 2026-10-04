@@ -2,7 +2,7 @@
 
 ## Purpose
 
-PolyFlow (product plan: LinguaCore) is a self-hosted Czech-language learning platform for German, French, and Italian. Work should preserve:
+PolyFlow (product plan: LinguaCore) is a self-hosted Czech-language learning platform for German, French, Italian, and English. Work should preserve:
 
 - accurate, reviewed language-learning content;
 - family privacy and age-appropriate content for child profiles;
@@ -16,7 +16,7 @@ Explicit user instructions take precedence over these defaults. If current code,
 
 ## Product invariants
 
-- Teach DE/FR/IT from Czech. Keep learner-facing UI copy in the Czech localization table and provide separate progress per learner and language.
+- Teach DE/FR/IT/EN from Czech (English added 2026-10-04; British spelling and voice). Keep learner-facing UI copy in the Czech localization table and provide separate progress per learner and language.
 - Frequency milestones are 100 → 500 → 1000 (A2) → 2500 (B1) → 4000 (B2 threshold) → 5000 (full B2) lemmas per language; `backend/app/domain/progression.py` is the source of truth. Above 5000 is a voluntary, passive-focused 6000+ extension with no CEFR claim. CEFR labels on milestones are indicative; vocabulary rank alone does not establish a CEFR communication level.
 - Passive recognition and active production are separate knowledge states. An unmeasured score stays unknown; do not silently turn absent evidence into zero or full mastery.
 - More than 30 days without error-free use schedules a word for review. Repeated decay jobs must be idempotent and must not compound a score decrease on each run.

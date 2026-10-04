@@ -1,7 +1,7 @@
 // cs-CZ UI strings. All user-facing copy goes through this table.
 export const cs = {
   appName: "PolyFlow",
-  tagline: "Rodinná jazyková škola – němčina, francouzština, italština",
+  tagline: "Rodinná jazyková škola – němčina, francouzština, italština, angličtina",
   todayPractice: "Dnešní procvičování",
   startDrill: "Začít procvičovat",
   comingSoon: "Připravujeme",
@@ -38,7 +38,7 @@ export const cs = {
       "Úrovně CEFR jsou orientační. Počet slov je jen jedna složka jazykové úrovně.",
     unavailable: "Nepodařilo se načíst postup.",
   },
-  languages: { de: "Němčina", fr: "Francouzština", it: "Italština" } as Record<string, string>,
+  languages: { de: "Němčina", fr: "Francouzština", it: "Italština", en: "Angličtina" } as Record<string, string>,
   common: {
     loading: "Načítám…",
     retry: "Zkusit znovu",

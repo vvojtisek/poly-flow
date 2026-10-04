@@ -80,6 +80,32 @@
       ]
     },
     {
+      "name": "piper/en_GB-jenny_dioco-medium",
+      "repo": "rhasspy/piper-voices",
+      "revision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+      "dir": "piper",
+      "files": [
+        {
+          "path": "en/en_GB/jenny_dioco/medium/en_GB-jenny_dioco-medium.onnx",
+          "as": "en_GB-jenny_dioco-medium.onnx",
+          "size": 63201294,
+          "sha256": "469c630d209e139dd392a66bf4abde4ab86390a0269c1e47b4e5d7ce81526b01"
+        },
+        {
+          "path": "en/en_GB/jenny_dioco/medium/en_GB-jenny_dioco-medium.onnx.json",
+          "as": "en_GB-jenny_dioco-medium.onnx.json",
+          "size": 4895,
+          "sha256": "a9a7a93a317c9a3cb6563e37eb057df9ef09c06188a8a4341b0fcb58cba54dd4"
+        },
+        {
+          "path": "en/en_GB/jenny_dioco/medium/MODEL_CARD",
+          "as": "en_GB-jenny_dioco-medium.MODEL_CARD",
+          "size": 298,
+          "sha256": "bc8aec32196ab14f46260ab6e002cf004b0793ddd7886011145fe00106e20d45"
+        }
+      ]
+    },
+    {
       "name": "whisper/tiny",
       "repo": "Systran/faster-whisper-tiny",
       "revision": "d90ca5fe260221311c53c58e660288d3deb8d356",

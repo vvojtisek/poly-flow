@@ -79,7 +79,7 @@ export function LanguagePicker({ me, onChange }: { me: Me; onChange?: (l: Langua
   }
 
   return (
-    <div role="radiogroup" aria-label={cs.profiles.language} className="flex gap-1">
+    <div role="radiogroup" aria-label={cs.profiles.language} className="flex flex-wrap gap-1">
       {LANGUAGES.map((l) => (
         <button
           key={l}

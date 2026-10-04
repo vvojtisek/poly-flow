@@ -1,6 +1,6 @@
 # PolyFlow
 
-A self-hosted language-learning platform (DE / FR / IT from Czech) for a family homelab.
+A self-hosted language-learning platform (DE / FR / IT / EN from Czech) for a family homelab.
 Modular monolith: FastAPI + ARQ worker + PostgreSQL 16 + Redis + Next.js PWA, with local Piper TTS and faster-whisper STT.
 
 Status: **first usable version** (implementation plan P0–P2): family profiles (an admin grants access,
@@ -62,7 +62,7 @@ Open http://localhost:3000. The first visit runs **first-run setup**, which crea
 ### Audio (Piper TTS, Whisper STT)
 
 Voices and STT models are pinned by Hugging Face commit and sha256 in `docker/models/models.lock.json`
-(generated from `models.spec.json` by `python3 scripts/models.py lock`). The one-shot `models` service
+(generated from `models.spec.json` by `python3 scripts/models.py lock --missing`, which resolves only new entries). The one-shot `models` service
 fetches what is missing into the volumes and verifies it; with complete volumes it needs no network, and
 Piper and Whisper themselves never download anything. `python3 scripts/models.py verify --dest DIR`
 re-hashes everything.

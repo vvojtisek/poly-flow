@@ -96,10 +96,17 @@ def _resolve_url(repo: str, revision: str, path: str) -> str:
 # --- lock -------------------------------------------------------------------------------------
 
 
-def lock(spec_path: Path, lock_path: Path) -> None:
+def lock(spec_path: Path, lock_path: Path, missing_only: bool = False) -> None:
+    """Resolve the spec. With missing_only, keep entries already locked and add only new ones."""
     spec = json.loads(spec_path.read_text())
+    kept: dict[str, dict[str, Any]] = {}
+    if missing_only and lock_path.is_file():
+        kept = {m["name"]: m for m in json.loads(lock_path.read_text())["models"]}
     out: list[dict[str, Any]] = []
     for model in spec["models"]:
+        if model["name"] in kept:
+            out.append(kept[model["name"]])
+            continue
         info = _get_json(f"{HF}/api/models/{model['repo']}/revision/{model['ref']}?blobs=true")
         revision = info["sha"]
         siblings = {s["rfilename"]: s for s in info.get("siblings", [])}
@@ -217,6 +224,9 @@ def main() -> None:
     p_lock = sub.add_parser("lock")
     p_lock.add_argument("--spec", type=Path, default=SPEC)
     p_lock.add_argument("--lock", type=Path, default=LOCK)
+    p_lock.add_argument(
+        "--missing", action="store_true", help="only resolve spec entries absent from the lock"
+    )
     for name in ("fetch", "verify"):
         p = sub.add_parser(name)
         p.add_argument("--dest", type=Path, required=True)
@@ -225,7 +235,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.cmd == "lock":
-        lock(args.spec, args.lock)
+        lock(args.spec, args.lock, missing_only=args.missing)
         return
     if not args.lock.is_file():
         raise SystemExit(f"{args.lock} missing: run `scripts/models.py lock` with network access")
