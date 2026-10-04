@@ -52,7 +52,7 @@ async def setup_status(db: DB) -> SetupStatus:
 
 @router.post("/setup", response_model=Me, status_code=status.HTTP_201_CREATED)
 async def setup(body: SetupIn, db: DB, response: Response) -> Me:
-    """First run only: create the parent/admin account. There is no open registration."""
+    """First run only: create the admin account. There is no open registration."""
     await db.execute(text("SELECT pg_advisory_xact_lock(:k)"), {"k": _SETUP_LOCK_KEY})
     if (await db.execute(select(func.count()).select_from(User))).scalar_one() > 0:
         raise HTTPException(status.HTTP_409_CONFLICT, "already_set_up")
@@ -88,8 +88,8 @@ async def login(
     user = (
         await db.execute(select(User).where(User.username == body.username))
     ).scalar_one_or_none()
-    # Children sign in with their PIN; everyone else with a password.
-    stored = None if user is None else (user.pin_hash if user.is_child else user.password_hash)
+    # Each profile holds exactly one secret (password or PIN), whatever its content filter.
+    stored = None if user is None else (user.password_hash or user.pin_hash)
     ok = verify_secret(stored, body.secret) and user is not None and user.is_active
     if not ok:
         await limiter.record_failure(user_key, s.login_window_s)
@@ -119,7 +119,7 @@ async def me(auth: Auth) -> Me:
 
 @router.post("/auth/switch", response_model=Me)
 async def switch_to_child(body: SwitchIn, auth: Auth, db: DB) -> Me:
-    """Hand this device to a child profile. Only a parent acting as themselves may do this."""
+    """Open a child profile on this device (shared tablet). Only an admin acting as themselves."""
     if not auth.can_manage:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "forbidden")
     target = await db.get(User, body.profile_id)
@@ -137,7 +137,7 @@ async def switch_to_child(body: SwitchIn, auth: Auth, db: DB) -> Me:
 async def return_to_parent(
     body: ReturnIn, request: Request, auth: Auth, db: DB, limiter: Limiter
 ) -> Me:
-    """Leave the child profile; requires the parent's password (the child holds the device)."""
+    """Leave the child profile; requires the admin's password (the child holds the device)."""
     if auth.acting.id == auth.principal.id:
         return _me(auth)
     s = get_settings()

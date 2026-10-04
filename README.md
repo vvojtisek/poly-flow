@@ -3,8 +3,8 @@
 A self-hosted language-learning platform (DE / FR / IT from Czech) for a family homelab.
 Modular monolith: FastAPI + ARQ worker + PostgreSQL 16 + Redis + Next.js PWA, with local Piper TTS and faster-whisper STT.
 
-Status: **first usable version** (implementation plan P0–P2): family profiles with parent-managed child
-profiles, the first 100 curated words per language, server-graded lessons with spaced review and decay,
+Status: **first usable version** (implementation plan P0–P2): family profiles (an admin grants access,
+child profiles get an age-appropriate content filter), the first 100 curated words per language, server-graded lessons with spaced review and decay,
 persistent progress per profile and language.
 
 The [LinguaCore implementation plan](docs/IMPLEMENTATION_PLAN.md) maps the updated family-platform specification to this scaffold, including the vocabulary milestones (100 → 5000, plus the voluntary 6000+ extension), delivery phases, and acceptance criteria. The code and schema below still describe the current implementation.
@@ -46,12 +46,18 @@ docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexic
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
 ```
 
-Open http://localhost:3000. The first visit runs **first-run setup**, which creates the parent account
-(there is no open registration afterwards). The parent then adds profiles under *Rodina*:
+Open http://localhost:3000. The first visit runs **first-run setup**, which creates the admin account
+(there is no open registration afterwards). The admin then adds profiles under *Rodina*. Roles:
 
-- **adult** profiles sign in with their own password;
-- **child** profiles get an optional PIN. Without a PIN, the parent opens the child profile from their own
-  session (*Předat zařízení*); returning to the parent account requires the parent's password.
+- **admin** grants access (creates profiles, resets a password or PIN, deactivates) and edits shared
+  content (`GET/PATCH /api/v1/lexicon`). The admin does not decide what others learn: language, daily goal
+  and audio settings belong to each profile.
+- **every profile** signs in on its own with a password or a PIN (admins: password).
+- **child** is a content filter, not a restriction: lexicon items with `content_flags`
+  (`sexual`, `profanity`, `violence`) never reach a child profile, as new words, reviews or answer options.
+  The admin can switch the filter on or off per profile. On a shared tablet the admin can also open a child
+  profile from their own session (*Předat zařízení*); returning to the admin account requires the admin's
+  password.
 
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
@@ -85,9 +91,9 @@ All settings are env vars prefixed `POLYFLOW_` (see `app/core/config.py`).
 
 | table | purpose |
 |---|---|
-| `users` | profiles: role (parent = admin), `is_child`, password / optional child PIN (argon2), timezone, JSONB `settings`, XP / coins / streak stats |
+| `users` | profiles: role (admin / learner), `is_child` (content filter), one credential: password or PIN (argon2), timezone, JSONB `settings`, XP / coins / streak stats |
 | `auth_sessions` | server-side sessions (token digests only): who signed in and which profile is currently in use |
-| `lexicon_items` | lemma, language, frequency rank (+ derived milestone band), Czech gloss, IPA, CEFR, provenance (`source`, `license`, `revision`) |
+| `lexicon_items` | lemma, language, frequency rank (+ derived milestone band), Czech gloss, IPA, CEFR, `content_flags` (child filter), provenance (`source`, `license`, `revision`) |
 | `user_word_progress` | `NEW/LEARNING/MASTERED` state, `passive_known` / `active_known`, phonetic & orthography scores (NULL = never measured), last seen / reviewed / error-free / decay timestamps, `next_review_at`, review streak |
 | `learning_sessions`, `learning_tasks` | server-issued lessons and their tasks; at most one open lesson per profile and language |
 | `learning_events` | every graded attempt (idempotency key, verdict, hint, evidence flag, policy version); progress is aggregated from these |
