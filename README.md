@@ -106,8 +106,9 @@ Commit, branch and build time are baked in when images are built. Run
 `eval "$(scripts/build-info.sh)"` before `docker compose up --build`; without it they read `unknown`.
 A local `npm run dev` asks git directly. A `-dirty` suffix means the build had uncommitted changes.
 
-Branching: `main` is the development line. A release is a `vX.Y.Z` tag; fixes for it go on a
-`release/X.Y` branch and ship as patch tags (`vX.Y.1`, ...) while `main` moves on to the next pre-release.
+Branching (see `AGENTS.md`): until 1.0 ships, work lands on `main` through short-lived branches.
+At release, `main` is tagged `v1.0.0` and from then on tracks released code only; ongoing development
+moves to a development branch and reaches `main` when the next version is released and tagged.
 
 ## Local backend development
 
