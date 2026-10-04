@@ -39,7 +39,7 @@ docker-compose.yml
 ```sh
 cp .env.example .env            # set POSTGRES_PASSWORD
 docker compose up --build       # postgres, redis, migrate, backend, worker, frontend
-docker compose --profile audio up --build   # + piper, whisper (first start downloads models)
+docker compose --profile audio up --build   # + piper, whisper (first start fetches pinned models)
 
 # seed
 docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv'
@@ -52,6 +52,20 @@ Open http://localhost:3000. The first visit runs **first-run setup**, which crea
 - **adult** profiles sign in with their own password;
 - **child** profiles get an optional PIN. Without a PIN, the parent opens the child profile from their own
   session (*Předat zařízení*); returning to the parent account requires the parent's password.
+
+### Audio (Piper TTS, Whisper STT)
+
+Voices and STT models are pinned by Hugging Face commit and sha256 in `docker/models/models.lock.json`
+(generated from `models.spec.json` by `python3 scripts/models.py lock`). The one-shot `models` service
+fetches what is missing into the volumes and verifies it; with complete volumes it needs no network, and
+Piper and Whisper themselves never download anything. `python3 scripts/models.py verify --dest DIR`
+re-hashes everything.
+
+- `WHISPER_MODEL` (`tiny`, `base`, `small`, `medium`, `large-v3-turbo`; default `small`) selects the STT model.
+- On an NVIDIA GPU add `-f docker-compose.gpu.yml` (CUDA 12, float16); without it Whisper runs on CPU (int8).
+- Uploads are limited (`WHISPER_MAX_SECONDS`, `WHISPER_MAX_UPLOAD_BYTES`), decoded in memory, never stored.
+- `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
+  The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
 
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`

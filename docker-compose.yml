@@ -1,6 +1,7 @@
 # Dev/homelab stack.
 #   docker compose up --build                      # core: postgres, redis, migrate, backend, worker, frontend
-#   docker compose --profile audio up --build      # + piper (TTS) and whisper (STT)
+#   docker compose --profile audio up --build      # + piper (TTS) and whisper (STT), models fetched first
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml --profile audio up --build   # STT on NVIDIA GPU
 name: polyflow
 
 x-backend-env: &backend-env
@@ -99,14 +100,36 @@ services:
     depends_on:
       - backend
 
+  # One-shot: puts pinned, checksum-verified voices and the STT model into the volumes
+  # (docker/models/models.lock.json). Downloads only what is missing or changed; offline when complete.
+  models:
+    profiles: ["audio"]
+    image: ${PYTHON_IMAGE:-python:3.12-slim}
+    command:
+      - sh
+      - -c
+      - python /srv/scripts/models.py fetch --dest /data piper/ "whisper/$${WHISPER_MODEL}"
+    environment:
+      WHISPER_MODEL: ${WHISPER_MODEL:-small}
+      HF_TOKEN: ${HF_TOKEN:-}
+    volumes:
+      - ./scripts/models.py:/srv/scripts/models.py:ro
+      - ./docker/models:/srv/docker/models:ro
+      - piperdata:/data/piper
+      - whispermodels:/data/whisper
+    restart: "no"
+
   piper:
     profiles: ["audio"]
     build:
       context: ./docker/piper
     volumes:
-      - piperdata:/data
+      - piperdata:/data:ro
     ports:
       - "127.0.0.1:5000:5000"
+    depends_on:
+      models:
+        condition: service_completed_successfully
     restart: unless-stopped
 
   whisper:
@@ -115,10 +138,16 @@ services:
       context: ./docker/whisper
     environment:
       WHISPER_MODEL: ${WHISPER_MODEL:-small}
+      WHISPER_DEVICE: ${WHISPER_DEVICE:-auto}
+      WHISPER_MAX_SECONDS: ${WHISPER_MAX_SECONDS:-30}
+      WHISPER_CONCURRENCY: ${WHISPER_CONCURRENCY:-1}
     volumes:
-      - whispermodels:/models
+      - whispermodels:/models:ro
     ports:
       - "127.0.0.1:9000:9000"
+    depends_on:
+      models:
+        condition: service_completed_successfully
     restart: unless-stopped
 
 volumes:
