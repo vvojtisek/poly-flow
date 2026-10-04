@@ -1,13 +1,13 @@
 """English as a fourth learning language
 
-Revision ID: 0007
-Revises: 0006
+Revision ID: 0008
+Revises: 0007
 """
 
 from alembic import op
 
-revision = "0007"
-down_revision = "0006"
+revision = "0008"
+down_revision = "0007"
 branch_labels = None
 depends_on = None
 
@@ -19,6 +19,7 @@ COLUMNS = (
     ("daily_stories", "language"),
     ("learning_sessions", "language"),
     ("grammar_unlocks", "language"),
+    ("scenes", "language"),
 )
 
 
@@ -36,7 +37,7 @@ def downgrade() -> None:
         found = bind.exec_driver_sql(f"SELECT 1 FROM {table} WHERE {column} = 'en' LIMIT 1").first()
         if found:
             raise RuntimeError(
-                f"cannot downgrade below 0007: {table}.{column} holds English rows; "
+                f"cannot downgrade below 0008: {table}.{column} holds English rows; "
                 "remove English data deliberately first"
             )
     op.execute("ALTER TABLE users ALTER COLUMN active_language DROP DEFAULT")

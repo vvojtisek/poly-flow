@@ -1,6 +1,8 @@
 """Upgrading a database that already holds learner data must not lose or alter it."""
 
+import ast
 import subprocess
+from pathlib import Path
 
 import pytest
 from sqlalchemy import text
@@ -8,6 +10,8 @@ from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.pool import NullPool
 
 from tests.conftest import alembic
+
+VERSIONS = Path(__file__).resolve().parent.parent / "alembic" / "versions"
 
 SEED_0001 = [
     """INSERT INTO users (id, username, display_name)
@@ -30,6 +34,33 @@ FROM user_word_progress p
 JOIN users u ON u.id = p.user_id
 JOIN lexicon_items l ON l.id = p.lexicon_item_id
 """
+
+
+def _revision_ids() -> dict[str, tuple[str, str | None]]:
+    """file name -> (revision, down_revision), read without importing the migrations."""
+    ids = {}
+    for path in sorted(VERSIONS.glob("*.py")):
+        values = {
+            node.targets[0].id: ast.literal_eval(node.value)
+            for node in ast.parse(path.read_text()).body
+            if isinstance(node, ast.Assign)
+            and isinstance(node.targets[0], ast.Name)
+            and node.targets[0].id in ("revision", "down_revision")
+        }
+        ids[path.name] = (values["revision"], values["down_revision"])
+    return ids
+
+
+def test_migrations_form_one_linear_history():
+    # Two branches that each add the next number merge cleanly in git but leave Alembic
+    # with duplicate ids or two heads, and `alembic upgrade head` then refuses to run.
+    ids = _revision_ids()
+    revisions = [rev for rev, _ in ids.values()]
+    duplicates = sorted({r for r in revisions if revisions.count(r) > 1})
+    assert not duplicates, f"duplicate revision ids: {duplicates} in {sorted(ids)}"
+    parents = {down for _, down in ids.values()}
+    heads = sorted(set(revisions) - parents)
+    assert len(heads) == 1, f"expected one head, found {heads}"
 
 
 async def test_upgrade_from_0001_preserves_progress(migrated_db):
@@ -62,7 +93,7 @@ async def test_upgrade_from_0001_preserves_progress(migrated_db):
         alembic("upgrade", "head")
 
 
-async def test_downgrade_below_0007_refuses_to_drop_english(migrated_db):
+async def test_downgrade_below_0008_refuses_to_drop_english(migrated_db):
     engine = create_async_engine(migrated_db, poolclass=NullPool)
     try:
         async with engine.begin() as conn:
@@ -75,7 +106,7 @@ async def test_downgrade_below_0007_refuses_to_drop_english(migrated_db):
                 )
             )
         with pytest.raises(subprocess.CalledProcessError) as exc:
-            alembic("downgrade", "0006")
+            alembic("downgrade", "0007")
         assert b"holds English rows" in exc.value.stderr
         async with engine.begin() as conn:  # still at head, English row intact
             lemma = await conn.scalar(text("SELECT lemma FROM lexicon_items WHERE language = 'en'"))
