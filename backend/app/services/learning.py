@@ -7,6 +7,8 @@ Two separate modes:
   no hints. The only source of knowledge evidence.
 - placement (rozřazovací test, `app.services.placement`): graded like a check, adaptive; places
   a learner who already knows words further along.
+- exam (zkouška úrovně, `app.services.level_exam`): graded like a check, on a fixed random
+  sample of one level's band; passing earns a vocabulary level badge.
 """
 
 import math
@@ -23,7 +25,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased, selectinload
 
-from app.domain.enums import GRAMMAR_GATE_WORDS, Language, ProgressState
+from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, Language, ProgressState
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
 from app.domain.speech import SpokenWord, judge
@@ -40,7 +42,7 @@ from app.models import (
     UserWordProgress,
 )
 from app.models.learning import SessionMode, SessionStatus, TaskStatus, TaskType
-from app.services import placement
+from app.services import level_exam, placement
 
 MAX_RECOGNITION_OPTIONS = 4
 MAX_HINT_LEVEL = 2
@@ -240,10 +242,19 @@ async def start_session(
     now: datetime,
     rng: random.Random | None = None,
     mode: SessionMode = SessionMode.LEARN,
+    level: CefrLevel | None = None,
 ) -> LearningSession | None:
-    """Resume the open lesson/check for this language, or build a new one. None = nothing to do."""
+    """Resume the open lesson/check for this language, or build a new one. None = nothing to do.
+
+    exam: `level` is required; LearningError when that exam cannot be taken now, or another
+    level's exam is still open.
+    """
+    if mode == SessionMode.EXAM and level is None:
+        raise LearningError("exam_level_required", 422)
     existing = await get_active_session(db, user, language, mode)
     if existing is not None:
+        if mode == SessionMode.EXAM and existing.exam_level != level:
+            raise LearningError("exam_in_progress")
         return existing
     rng = rng or random.Random()
     scene: Scene | None = None
@@ -251,6 +262,10 @@ async def start_session(
         scene, plan = await _plan_learn(db, user, language)
     elif mode == SessionMode.CHECK:
         plan = await _plan_check(db, user, language, now)
+    elif mode == SessionMode.EXAM:
+        assert level is not None
+        items = await level_exam.plan(db, user, language, level, now, rng)
+        plan = [_Planned(i, TaskType.RECOGNITION, False) for i in items]
     else:
         plan = []  # placement: questions are chosen one at a time, below
     if not plan and mode != SessionMode.PLACEMENT:
@@ -261,6 +276,7 @@ async def start_session(
         language=language,
         mode=mode,
         scene_id=scene.id if scene else None,
+        exam_level=level if mode == SessionMode.EXAM else None,
         policy_version=POLICY.version,
         summary={},
     )
@@ -494,6 +510,7 @@ async def submit_answer(
     learn: retry until correct; a wrong answer shows the right one; never evidence.
     check: the first attempt closes the task; correct and hint-free is evidence.
     placement: as check; then the next question is chosen from the answers so far.
+    exam: as check, on the exam's fixed sample.
     spoken (recall only): a confident transcript of exactly the word is a correct answer;
     anything else is "not understood", recorded for calibration, and changes nothing else.
     """
@@ -544,7 +561,7 @@ async def submit_answer(
             text,
         )
 
-    checking = task.session.mode != SessionMode.LEARN  # check or placement: graded once
+    checking = task.session.mode != SessionMode.LEARN  # check, placement, exam: graded once
     hint_used = task.hint_level > 0
     if understood:
         task.attempts += 1
@@ -615,6 +632,8 @@ async def submit_answer(
         await placement.record_answer(db, user, item, evidence=evidence, now=now)
         session = await get_session(db, user, task.session_id)
         await placement.add_next_task(db, user, session, rng or random.Random())
+    elif task.session.mode == SessionMode.EXAM:
+        await level_exam.record_answer(db, user, item, evidence=evidence, now=now)
     elif checking:
         await _apply_progress(
             db,
@@ -755,6 +774,8 @@ async def complete_session(
             await _introduce(db, user, [t.item for t in tasks if t.is_new_item], now)
         elif s.mode == SessionMode.PLACEMENT:
             s.summary = {**s.summary, **await placement.finish(db, user, s, now)}
+        elif s.mode == SessionMode.EXAM:
+            s.summary = {**s.summary, **await level_exam.finish(db, user, s, now)}
         s.status = SessionStatus.COMPLETED
         s.completed_at = now
     return s
@@ -824,7 +845,7 @@ async def prune_expired_sessions(db: AsyncSession, now: datetime) -> int:
 
 async def progress_overview(db: AsyncSession, user: User, language: Language, now: datetime):
     from app.domain.progression import MILESTONES
-    from app.schemas.learning import BandProgress, PlacementOut, ProgressOut
+    from app.schemas.learning import BandProgress, LevelBadgeOut, PlacementOut, ProgressOut
 
     p, li = UserWordProgress, LexiconItem
     known_expr = and_(p.passive_known.is_(True), p.active_known.is_(True))
@@ -884,7 +905,9 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
     open_lesson = await get_active_session(db, user, language, SessionMode.LEARN)
     open_check = await get_active_session(db, user, language, SessionMode.CHECK)
     open_placement = await get_active_session(db, user, language, SessionMode.PLACEMENT)
+    open_exam = await get_active_session(db, user, language, SessionMode.EXAM)
     placed = await placement.get_placement(db, user, language)
+    earned = await level_exam.badges(db, user, language)
     return ProgressOut(
         language=language,
         lexicon_items=lexicon_items,
@@ -906,4 +929,6 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         active_check_session_id=open_check.id if open_check else None,
         active_placement_session_id=open_placement.id if open_placement else None,
         placement=PlacementOut.model_validate(placed, from_attributes=True) if placed else None,
+        active_exam_session_id=open_exam.id if open_exam else None,
+        level_badges=[LevelBadgeOut.model_validate(b, from_attributes=True) for b in earned],
     )

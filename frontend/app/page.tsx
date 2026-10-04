@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BarChart3, BookOpen, ClipboardCheck, Compass, Map as MapIcon, Play } from "lucide-react";
+import { Activity, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Map as MapIcon, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -101,14 +101,31 @@ export default function HomePage() {
                 </p>
               )}
             </div>
-            {progress && !offerPlacement && (
-              <div className="flex flex-col gap-1">
-                <Button variant="secondary" className="w-full" onClick={() => router.push("/placement")}>
-                  <Compass className="size-5" aria-hidden />
-                  {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
-                </Button>
-                <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
-              </div>
+            {progress && (
+              <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
+                <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.tests.title}</h3>
+                {/* Available at any time; before the first lesson it is also offered above. */}
+                {!offerPlacement && (
+                  <div className="flex flex-col gap-1">
+                    <Button variant="secondary" className="w-full" onClick={() => router.push("/placement")}>
+                      <Compass className="size-5" aria-hidden />
+                      {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
+                    </Button>
+                    <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
+                  </div>
+                )}
+                <div className="flex flex-col gap-1">
+                  <Button variant="secondary" className="w-full" onClick={() => router.push("/levels")}>
+                    <Award className="size-5" aria-hidden />
+                    {progress.active_exam_session_id ? cs.exam.resume : cs.tests.levels}
+                  </Button>
+                  <p className="text-center text-xs text-slate-500">
+                    {progress.level_badges.length
+                      ? cs.tests.badges(progress.level_badges.map((b) => b.level))
+                      : cs.tests.levelsHelp}
+                  </p>
+                </div>
+              </section>
             )}
           </div>
         </Panel>

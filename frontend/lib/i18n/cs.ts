@@ -29,7 +29,7 @@ export const cs = {
     words: "slov",
     milestones: {
       core_100: "Prvních 100 slov",
-      basic_500: "Základ",
+      basic_500: "A1",
       a2: "A2",
       b1: "B1",
       b2_threshold: "Práh B2",
@@ -203,6 +203,51 @@ export const cs = {
     notPlaced: "Na odhad úrovně bylo málo odpovědí, takže se úroveň nezměnila. Správné odpovědi se počítají.",
     toCheck: "Jít na ověření",
     another: "Zopakovat test",
+  },
+  tests: {
+    title: "Testy",
+    levels: "Zkoušky úrovně slovní zásoby",
+    levelsHelp: "Potvrdí, že znáš slovní zásobu úrovně A1, A2, B1 nebo B2.",
+    badges: (levels: string[]) => `Získáno: ${levels.join(", ")}`,
+  },
+  exam: {
+    title: "Zkouška úrovně",
+    pageTitle: "Úrovně slovní zásoby",
+    badgeName: (level: string) => `Slovní zásoba ${level}`,
+    intro: (questions: number, pass: number) =>
+      `Každá zkouška vybere náhodně ${questions} slov z rozsahu dané úrovně. Úroveň získáš, když napoprvé poznáš aspoň ${pass} z nich.`,
+    rules:
+      "Jeden pokus na slovo, bez nápovědy a bez časového limitu. Když slovo neznáš, klepni na „Nevím“. Správná odpověď se počítá jako ověření.",
+    disclaimer:
+      "Zkouška ověřuje jen porozumění slovní zásobě. Není to certifikát CEFR: jazyková úroveň zahrnuje i čtení, poslech, psaní a mluvení.",
+    range: (low: number, high: number) =>
+      `Slova ${(low + 1).toLocaleString("cs-CZ")}–${high.toLocaleString("cs-CZ")}`,
+    states: {
+      earned: (date: string) => `Získáno ${date}`,
+      in_progress: "Rozpracováno",
+      missing_words: (have: number, high: number) =>
+        `Aplikace zatím nemá slova do ${high.toLocaleString("cs-CZ")} (v tomto rozsahu má ${have.toLocaleString("cs-CZ")}). Zkouška se otevře, až se doplní.`,
+      needs_previous: (level: string) => `Nejdřív získej úroveň ${level}.`,
+      not_ready: (known: number, need: number) =>
+        `Zatím umíš ${known.toLocaleString("cs-CZ")} slov z tohoto rozsahu, ke zkoušce jich potřebuješ ${need.toLocaleString("cs-CZ")}. Zkouška se otevře i po rozřazovacím testu nad tímto rozsahem.`,
+      retry_later: (date: string) => `Další pokus od ${date}.`,
+      available: "Můžeš začít.",
+    },
+    last: (correct: number, asked: number) => `Poslední pokus: ${correct} z ${asked}`,
+    start: "Začít zkoušku",
+    resume: "Pokračovat ve zkoušce",
+    back: "Zpět na úrovně",
+    preparing: "Připravuji zkoušku…",
+    empty: "Tuto zkoušku teď nelze začít.",
+    missedNote: "Toto slovo si zopakuješ v ověření nebo v lekci.",
+    doneTitle: "Zkouška dokončena",
+    passedTitle: (level: string) => `Gratuluji, máš slovní zásobu ${level}!`,
+    failedTitle: "Tentokrát to nevyšlo",
+    score: (correct: number, asked: number, pass: number) => `Napoprvé správně ${correct} z ${asked} (potřeba ${pass}).`,
+    toPractise: "Slova k procvičení",
+    practiseNote: "Slova, která už znáš z lekcí, se vrátí v Ověření. Ostatní tě naučí lekce.",
+    retryFrom: (date: string) => `Zkoušku můžeš zopakovat od ${date}, s novým výběrem slov.`,
+    another: "Na úrovně",
   },
   feedback: {
     exact: "Správně!",

@@ -6,6 +6,7 @@ from app.models.learning import (
     LearningEvent,
     LearningSession,
     LearningTask,
+    LevelBadge,
 )
 from app.models.lexicon import LexiconItem
 from app.models.progress import UserWordProgress
@@ -22,6 +23,7 @@ __all__ = [
     "LearningEvent",
     "LearningSession",
     "LearningTask",
+    "LevelBadge",
     "LexiconItem",
     "Scene",
     "SceneWord",

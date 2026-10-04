@@ -15,6 +15,7 @@ class StartIn(BaseModel):
 
     language: Language | None = None  # defaults to the profile's active language
     mode: SessionMode = SessionMode.LEARN
+    level: CefrLevel | None = None  # exam only: which level's exam (A1, A2, B1, B2)
 
 
 class SegmentOut(BaseModel):
@@ -162,6 +163,49 @@ class PlacementSkipIn(BaseModel):
     language: Language | None = None  # defaults to the profile's active language
 
 
+class LevelBadgeOut(BaseModel):
+    """A passed vocabulary level exam: a vocabulary level, not a CEFR certificate."""
+
+    level: CefrLevel
+    earned_at: datetime
+    correct: int
+    asked: int
+
+
+class LevelStatusOut(BaseModel):
+    level: CefrLevel
+    low: int  # the exam samples ranks above `low`...
+    high: int  # ...up to and including `high`
+    # earned; in_progress; missing_words (band not imported); needs_previous (earn the level
+    # below first); not_ready (too little of the band known); retry_later (failed today);
+    # available
+    state: Literal[
+        "earned",
+        "in_progress",
+        "missing_words",
+        "needs_previous",
+        "not_ready",
+        "retry_later",
+        "available",
+    ]
+    lexicon_items: int  # band words the app holds
+    pool: int  # band words this profile can be asked
+    known: int  # band words passively known
+    ready_known: int  # `known` needed to open the exam (a placement past the band also opens it)
+    earned_at: datetime | None
+    retry_from: datetime | None
+    active_session_id: uuid.UUID | None
+    last_correct: int | None  # latest finished attempt
+    last_asked: int | None
+
+
+class LevelsInfo(BaseModel):
+    language: Language
+    questions: int
+    pass_correct: int
+    levels: list[LevelStatusOut]
+
+
 class BandProgress(BaseModel):
     band: int
     items: int  # lexicon items available in this band
@@ -189,3 +233,5 @@ class ProgressOut(BaseModel):
     active_check_session_id: uuid.UUID | None
     active_placement_session_id: uuid.UUID | None = None
     placement: PlacementOut | None = None
+    active_exam_session_id: uuid.UUID | None = None
+    level_badges: list[LevelBadgeOut] = []

@@ -184,3 +184,61 @@ async def test_downgrade_below_0010_keeps_lesson_progress(migrated_db):
                 await conn.execute(text(f"DELETE FROM {table}"))
         await engine.dispose()
         alembic("upgrade", "head")
+
+
+async def test_downgrade_below_0011_drops_exams_but_keeps_progress(migrated_db):
+    user, item = "00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-0000000000a1"
+    exam, placed = "00000000-0000-0000-0000-0000000000c1", "00000000-0000-0000-0000-0000000000c2"
+    engine = create_async_engine(migrated_db, poolclass=NullPool)
+    try:
+        async with engine.begin() as conn:
+            await conn.execute(
+                text(f"INSERT INTO users (id, username, display_name) VALUES ('{user}', 'a', 'A')")
+            )
+            await conn.execute(
+                text(
+                    f"""INSERT INTO lexicon_items (id, language, lemma, pos, frequency_rank,
+                                                   frequency_band, translation_cs)
+                        VALUES ('{item}', 'de', 'Haus', 'NOUN', 1, 100, 'dům')"""
+                )
+            )
+            await conn.execute(
+                text(
+                    f"""INSERT INTO user_word_progress (id, user_id, lexicon_item_id,
+                                                        correct_count, introduced_at,
+                                                        introduced_by)
+                        VALUES ('00000000-0000-0000-0000-0000000000b1', '{user}', '{item}',
+                                2, now(), 'lesson')"""
+                )
+            )
+            for sid, mode, level in ((exam, "exam", "'A1'"), (placed, "placement", "NULL")):
+                await conn.execute(
+                    text(
+                        f"""INSERT INTO learning_sessions (id, user_id, language, mode, status,
+                                                           exam_level, policy_version, summary)
+                            VALUES ('{sid}', '{user}', 'de', '{mode}', 'completed', {level},
+                                    'v3', '{{}}')"""
+                    )
+                )
+            await conn.execute(
+                text(
+                    f"""INSERT INTO level_badges (user_id, language, level, earned_at,
+                                                  session_id, correct, asked, policy_version)
+                        VALUES ('{user}', 'de', 'A1', now(), '{exam}', 28, 30, 'e1')"""
+                )
+            )
+
+        alembic("downgrade", "0010")
+        async with engine.begin() as conn:
+            sessions = (
+                await conn.execute(text("SELECT id::text, mode::text FROM learning_sessions"))
+            ).all()
+            correct = await conn.scalar(text("SELECT correct_count FROM user_word_progress"))
+        assert sessions == [(placed, "placement")]
+        assert correct == 2  # check evidence an exam produced stays
+    finally:
+        async with engine.begin() as conn:
+            for table in ("learning_sessions", "user_word_progress", "lexicon_items", "users"):
+                await conn.execute(text(f"DELETE FROM {table}"))
+        await engine.dispose()
+        alembic("upgrade", "head")
