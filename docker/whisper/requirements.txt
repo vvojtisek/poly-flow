@@ -1,4 +1,10 @@
 faster-whisper==1.2.1
+ctranslate2==4.8.2
+# av 19 removed the `metadata_errors` argument faster-whisper 1.2.1 passes to av.open
+av==16.1.0
+onnxruntime==1.30.0
+tokenizers==0.23.2
+huggingface-hub==1.33.0
 fastapi==0.118.0
 uvicorn==0.37.0
 python-multipart==0.0.20
