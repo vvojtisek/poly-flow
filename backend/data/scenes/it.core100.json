@@ -1,0 +1,193 @@
+{
+  "language": "it",
+  "source": "polyflow-curated",
+  "revision": "scenes-v1",
+  "scenes": [
+    {
+      "slug": "ciao",
+      "title_cs": "Ahoj, jak se máš?",
+      "words": ["io", "tu", "essere", "e", "come", "stare", "bene", "grazie"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Ciao! [Io|io] [sono|essere] Giulia. [E|e] [tu]?", "cs": "Ahoj! Já jsem Giulia. A ty?"},
+        {"speaker": "Marco", "text": "Ciao! [Io|io] [sono|essere] Marco. [Come|come] [stai|stare]?", "cs": "Ahoj! Já jsem Marco. Jak se máš?"},
+        {"speaker": "Giulia", "text": "[Sto|stare] [bene], [grazie]! [E|e] [tu]?", "cs": "Dobře, díky! A ty?"},
+        {"speaker": "Marco", "text": "[Bene|bene], [grazie]. [Tu|tu] [sei|essere] nuova qui?", "cs": "Taky dobře, díky. Ty jsi tu nová?"},
+        {"speaker": "Giulia", "text": "Sì, [io] [sono|essere] nuova.", "cs": "Jo, jsem tu nová."}
+      ]
+    },
+    {
+      "slug": "famiglia",
+      "title_cs": "Moje rodina",
+      "words": ["il", "mio", "madre", "padre", "lui", "lei", "questo", "chi"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Guarda [questa|questo] foto! [È|essere] [la|il] [mia|mio] famiglia.", "cs": "Podívej se na tuhle fotku! To je moje rodina."},
+        {"speaker": "Marco", "text": "[Chi|chi] [è|essere] [lui]?", "cs": "A kdo je tohle?"},
+        {"speaker": "Giulia", "text": "[Lui|lui] [è|essere] [mio] [padre]. [E|e] [lei] [è|essere] [mia|mio] [madre].", "cs": "To je můj táta. A tohle je moje máma."},
+        {"speaker": "Marco", "text": "[E|e] [chi] [è|essere] [questa|questo] signora?", "cs": "A kdo je tahle paní?"},
+        {"speaker": "Giulia", "text": "[È|essere] [la|il] nonna Rosa, [la|il] [madre] di [mio] [padre].", "cs": "To je babička Rosa, tátova maminka."},
+        {"speaker": "Marco", "text": "[Lei|lei] [è|essere] simpatica!", "cs": "Ta je milá!"}
+      ]
+    },
+    {
+      "slug": "cane-e-gatto",
+      "title_cs": "Pes a kočka",
+      "words": ["un", "avere", "cane", "gatto", "piccolo", "grande", "ma", "anche"],
+      "lines": [
+        {"speaker": "Marco", "text": "[Io|io] [ho|avere] [un] [cane]. Si chiama Rex.", "cs": "Mám psa. Jmenuje se Rex."},
+        {"speaker": "Giulia", "text": "[Il|il] tuo [cane] [è|essere] [grande]?", "cs": "Je tvůj pes velký?"},
+        {"speaker": "Marco", "text": "Sì, [è|essere] [grande], [ma] [è|essere] bravo. [E|e] [tu]? [Hai|avere] [un] [cane]?", "cs": "Jo, je velký, ale hodný. A ty? Máš psa?"},
+        {"speaker": "Giulia", "text": "No, [io] [ho|avere] [un] [gatto]. [È|essere] [piccolo] [e] nero.", "cs": "Ne, já mám kocoura. Je malý a černý."},
+        {"speaker": "Marco", "text": "[Anche|anche] [mia|mio] nonna [ha|avere] [un] [gatto]!", "cs": "Moje babička má taky kočku!"}
+      ]
+    },
+    {
+      "slug": "a-tavola",
+      "title_cs": "U oběda",
+      "words": ["mangiare", "bere", "acqua", "buono", "volere", "sì", "no", "non"],
+      "lines": [
+        {"speaker": "Mamma", "text": "Bambini, a tavola! Marco, [vuoi|volere] [mangiare] [anche] [tu]?", "cs": "Děti, ke stolu! Marco, dáš si s námi?"},
+        {"speaker": "Marco", "text": "[Sì|sì], [grazie]!", "cs": "Ano, děkuju!"},
+        {"speaker": "Giulia", "text": "Mmm, [la|il] pasta [è|essere] [buona|buono]!", "cs": "Mňam, ty těstoviny jsou dobré!"},
+        {"speaker": "Mamma", "text": "[Vuoi|volere] [bere], Marco? Ecco [l'|il][acqua].", "cs": "Chceš se napít, Marco? Tady máš vodu."},
+        {"speaker": "Mamma", "text": "[E|e] [tu]? [Vuoi|volere] [bere]?", "cs": "A ty? Chceš se napít?"},
+        {"speaker": "Giulia", "text": "[No|no], [grazie]. [Non|non] [voglio|volere] [bere], [voglio|volere] [mangiare]!", "cs": "Ne, díky. Pít nechci, chci jíst!"}
+      ]
+    },
+    {
+      "slug": "nuova-scuola",
+      "title_cs": "Nová škola",
+      "words": ["scuola", "libro", "leggere", "scrivere", "domanda", "potere", "nuovo", "in"],
+      "lines": [
+        {"speaker": "Giulia", "text": "[Questa|questo] [è|essere] [la|il] nostra [scuola] [nuova|nuovo]!", "cs": "Tohle je naše nová škola!"},
+        {"speaker": "Maestra Rossi", "text": "Buongiorno, bambini! Ecco [un] [libro] [nuovo].", "cs": "Dobrý den, děti! Tady máme novou knížku."},
+        {"speaker": "Marco", "text": "[Posso|potere] [leggere] [io]?", "cs": "Můžu číst já?"},
+        {"speaker": "Maestra Rossi", "text": "[Sì|sì]! Marco [legge|leggere] [e] Giulia [scrive|scrivere].", "cs": "Ano! Marco bude číst a Giulia psát."},
+        {"speaker": "Giulia", "text": "Maestra, [ho|avere] [una|un] [domanda]. [Posso|potere] [scrivere] [nel|in] [libro]?", "cs": "Paní učitelko, mám otázku. Můžu psát do knížky?"},
+        {"speaker": "Maestra Rossi", "text": "[No|no], [non] [nel|in] [libro]! [Scrivi|scrivere] [nel|in] quaderno.", "cs": "Ne, do knížky ne! Piš do sešitu."}
+      ]
+    },
+    {
+      "slug": "lunedi-mattina",
+      "title_cs": "Ráno před školou",
+      "words": ["andare", "a", "dovere", "oggi", "ora", "già", "sapere", "che"],
+      "lines": [
+        {"speaker": "Mamma", "text": "Giulia, [ora|ora] [devi|dovere] [andare] [a] [scuola]!", "cs": "Vstávej, teď musíš jít do školy!"},
+        {"speaker": "Giulia", "text": "[Oggi|oggi]? [Ma|ma] [oggi] [è|essere] sabato!", "cs": "Dneska? Vždyť je sobota!"},
+        {"speaker": "Mamma", "text": "[No|no], [oggi] [è|essere] lunedì!", "cs": "Ne, dneska je pondělí!"},
+        {"speaker": "Giulia", "text": "Uffa! [Non|non] [voglio|volere] [andare] [a] [scuola].", "cs": "Ach jo! Nechci jít do školy."},
+        {"speaker": "Mamma", "text": "Lo [so|sapere], [ma] [devi|dovere] [andare]. Marco ti aspetta [già].", "cs": "Já vím, ale musíš. Marco už na tebe čeká."},
+        {"speaker": "Giulia", "text": "Va bene! [So|sapere] [che] [oggi] [leggiamo|leggere] [un] [libro] [nuovo].", "cs": "Tak jo! Vím, že dneska budeme číst novou knížku."}
+      ]
+    },
+    {
+      "slug": "al-parco",
+      "title_cs": "V parku",
+      "words": ["giocare", "amico", "con", "noi", "voi", "venire", "dove", "qui"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Marco, [vuoi|volere] [venire] [al|a] parco [con] [noi]?", "cs": "Marco, chceš jít s námi do parku?"},
+        {"speaker": "Marco", "text": "[Con|con] [voi]? [Chi|chi] [viene|venire]?", "cs": "S vámi? A kdo ještě jde?"},
+        {"speaker": "Giulia", "text": "Sofia. [Lei|lei] [è|essere] [una|un] [mia|mio] [amica|amico].", "cs": "Sofia. To je moje kamarádka."},
+        {"speaker": "Marco", "text": "[Sì|sì]! [Dove|dove] [giochiamo|giocare]?", "cs": "Jasně! A kde budeme hrát?"},
+        {"speaker": "Sofia", "text": "Ciao! [Venite|venire] [qui]! [Qui|qui] c'è [un] prato [grande].", "cs": "Ahoj! Pojďte sem! Je tu velká louka."},
+        {"speaker": "Marco", "text": "[Giochiamo|giocare] a calcio?", "cs": "Zahrajeme si fotbal?"},
+        {"speaker": "Sofia", "text": "[Sì|sì]! [Gli|il] [amici|amico] di Giulia [sono|essere] [anche] [amici|amico] [miei|mio]!", "cs": "Jasně! Kamarádi Giulie jsou i moji kamarádi!"}
+      ]
+    },
+    {
+      "slug": "in-citta",
+      "title_cs": "Ve městě",
+      "words": ["città", "molto", "paese", "di", "lavoro", "casa", "da", "strada"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Papà, [questa|questo] [città] [è|essere] [molto] [grande]!", "cs": "Tati, tohle město je strašně velké!"},
+        {"speaker": "Papà", "text": "[Sì|sì]! [Io|io] [sono|essere] [di] [un] [paese] [piccolo].", "cs": "To jo! Já jsem z malé vesnice."},
+        {"speaker": "Giulia", "text": "[E|e] [il|il] tuo [lavoro]? [È|essere] [qui]?", "cs": "A kde máš práci? Tady?"},
+        {"speaker": "Papà", "text": "[Sì|sì], [il|il] [mio] [lavoro] [è|essere] vicino a [casa].", "cs": "Ano, pracuju kousek od domu."},
+        {"speaker": "Giulia", "text": "[Io|io] torno [da] [scuola] [con] Marco. [Lui|lui] abita [in] [questa|questo] [strada].", "cs": "Já chodím ze školy s Marcem. Bydlí v téhle ulici."},
+        {"speaker": "Papà", "text": "[Sì|sì], [è|essere] [anche] [la|il] nostra [strada]! Ed ecco [la|il] nostra [casa].", "cs": "Ano, to je i naše ulice! A tady je náš dům."}
+      ]
+    },
+    {
+      "slug": "compleanno",
+      "title_cs": "Narozeniny",
+      "words": ["anno", "più", "cosa", "per", "amare", "dare"],
+      "lines": [
+        {"speaker": "Marco", "text": "Buon compleanno, Giulia! Quanti [anni|anno] [hai|avere]?", "cs": "Všechno nejlepší k narozeninám! Kolik ti je let?"},
+        {"speaker": "Giulia", "text": "[Oggi|oggi] [ho|avere] otto [anni|anno]!", "cs": "Dneska mi je osm!"},
+        {"speaker": "Marco", "text": "[Ora|ora] [sei|essere] [più] [grande]! [Ho|avere] [una|un] [cosa] [per] te.", "cs": "Tak teď jsi zase o kus větší! Mám pro tebe jednu věc."},
+        {"speaker": "Giulia", "text": "[Per|per] me? [Grazie|grazie]!", "cs": "Pro mě? Děkuju!"},
+        {"speaker": "Marco", "text": "[È|essere] [un] [libro]. [Tu|tu] [ami|amare] [leggere], [no]?", "cs": "Je to knížka. Ty přece moc ráda čteš, ne?"},
+        {"speaker": "Giulia", "text": "[Sì|sì], [amo|amare] [i|il] [libri|libro]!", "cs": "Jo, knížky miluju!"},
+        {"speaker": "Mamma", "text": "[E|e] [ora|ora] ti [do|dare] [la|il] torta! Giulia, [dai|dare] [una|un] fetta [anche] [a] Marco.", "cs": "A teď ti dám dort! Giulia, dej kousek taky Marcovi."}
+      ]
+    },
+    {
+      "slug": "che-tempo-fa",
+      "title_cs": "Jaké je počasí?",
+      "words": ["tempo", "fare", "ancora", "se", "restare", "prendere"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Mamma, che [tempo] [fa|fare] [oggi]?", "cs": "Mami, jaké je dneska počasí?"},
+        {"speaker": "Mamma", "text": "[Fa|fare] freddo [e] piove [ancora].", "cs": "Je zima a pořád ještě prší."},
+        {"speaker": "Giulia", "text": "[Se|se] piove, [restiamo|restare] [a] [casa]?", "cs": "Když prší, zůstaneme doma?"},
+        {"speaker": "Mamma", "text": "[No|no], [andiamo|andare] dalla nonna. [Prendi|prendere] [l'|il]ombrello!", "cs": "Ne, jdeme k babičce. Vezmi si deštník!"},
+        {"speaker": "Giulia", "text": "[E|e] [se|se] [fa|fare] [ancora] freddo?", "cs": "A co když bude pořád zima?"},
+        {"speaker": "Mamma", "text": "[Prendi|prendere] [anche] [il] cappello!", "cs": "Tak si vezmi i čepici!"}
+      ]
+    },
+    {
+      "slug": "lo-zaino",
+      "title_cs": "Kde je můj batoh?",
+      "words": ["trovare", "su", "niente", "quello", "porta", "mettere"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Papà, [non] [trovo|trovare] [il] [mio] zaino!", "cs": "Tati, nemůžu najít batoh!"},
+        {"speaker": "Papà", "text": "[Hai|avere] guardato [sul|su] letto?", "cs": "Dívala ses na postel?"},
+        {"speaker": "Giulia", "text": "[Sì|sì], [ma] [non] c'è [niente].", "cs": "Jo, ale nic tam není."},
+        {"speaker": "Papà", "text": "[E|e] [quello|quello] zaino lì, vicino alla [porta]?", "cs": "A co tamten batoh u dveří?"},
+        {"speaker": "Giulia", "text": "[Sì|sì], [è|essere] [il|il] [mio]! [Grazie|grazie], papà!", "cs": "Jo, to je on! Díky, tati!"},
+        {"speaker": "Papà", "text": "[Ora|ora] [metti|mettere] [il] [libro] [nello|in] zaino.", "cs": "A teď si dej do batohu knížku."}
+      ]
+    },
+    {
+      "slug": "mal-di-testa",
+      "title_cs": "Bolí mě hlava",
+      "words": ["perché", "parlare", "testa", "mano", "dire", "pensare"],
+      "lines": [
+        {"speaker": "Mamma", "text": "Giulia, [perché] [non] [parli|parlare]?", "cs": "Giulia, proč nic neříkáš?"},
+        {"speaker": "Giulia", "text": "[Perché|perché] mi fa male [la|il] [testa].", "cs": "Protože mě bolí hlava."},
+        {"speaker": "Mamma", "text": "Oh! [Dammi|dare] [la|il] [mano] [e] [vieni|venire] [sul|su] divano.", "cs": "Ale ne! Dej mi ruku a pojď na gauč."},
+        {"speaker": "Mamma", "text": "[Dimmi|dire]: [hai|avere] [bevuto|bere] [acqua] [oggi]?", "cs": "Řekni mi, pila jsi dneska vodu?"},
+        {"speaker": "Giulia", "text": "[No|no], [non] [molto]... [Penso|pensare] di [avere] sete.", "cs": "Moc ne… Asi mám žízeň."},
+        {"speaker": "Mamma", "text": "Ecco [un] bicchiere d'[acqua]. [Ora|ora] riposa un po'.", "cs": "Tady máš sklenici vody. A teď si chvilku odpočiň."},
+        {"speaker": "Giulia", "text": "[Grazie|grazie], mamma. [Ora|ora] [sto|stare] meglio.", "cs": "Díky, mami. Už je mi líp."}
+      ]
+    },
+    {
+      "slug": "le-foto-della-nonna",
+      "title_cs": "Babiččiny fotky",
+      "words": ["uomo", "bambino", "donna", "vita", "mondo", "vedere"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Nonna, [chi] [è|essere] [quell'|quello][uomo] [nella|in] foto?", "cs": "Babi, kdo je ten pán na fotce?"},
+        {"speaker": "Nonna", "text": "[È|essere] [il] nonno! [Noi|noi] [eravamo|essere] [amici|amico] [già] da [bambini|bambino].", "cs": "To je děda! Kamarádili jsme se už jako děti."},
+        {"speaker": "Giulia", "text": "[E|e] [quella|quello] [donna]?", "cs": "A ta paní?"},
+        {"speaker": "Nonna", "text": "[È|essere] [mia|mio] [madre]. [Era|essere] [una|un] [donna] [molto] [buona|buono].", "cs": "To je moje maminka. Byla to moc hodná paní."},
+        {"speaker": "Giulia", "text": "Nonna, [tu] [sei|essere] così allegra!", "cs": "Babi, ty jsi tak veselá!"},
+        {"speaker": "Nonna", "text": "[Perché|perché] [la|il] [vita] [è|essere] bella, tesoro!", "cs": "Protože život je krásný, zlatíčko!"},
+        {"speaker": "Giulia", "text": "Da grande [voglio|volere] [vedere] [il] [mondo]!", "cs": "Až budu velká, chci vidět celý svět!"},
+        {"speaker": "Nonna", "text": "[Sì|sì]! [Il|il] [mondo] [è|essere] [grande] [e] [molto] bello.", "cs": "Ano! Svět je velký a moc krásný."}
+      ]
+    },
+    {
+      "slug": "buonanotte-nonna",
+      "title_cs": "Dobrou noc, babi",
+      "words": ["chiamare", "giorno", "tutto", "quando", "sempre", "notte"],
+      "lines": [
+        {"speaker": "Giulia", "text": "Mamma, [posso|potere] [chiamare] [la|il] nonna?", "cs": "Mami, můžu zavolat babičce?"},
+        {"speaker": "Mamma", "text": "[Sì|sì], [ma] [è|essere] tardi. Poi [vai|andare] [a] letto.", "cs": "Jo, ale už je pozdě. Pak hned do postele."},
+        {"speaker": "Giulia", "text": "Ciao, nonna! [Oggi|oggi] [è|essere] [stato|essere] [un] [giorno] bellissimo!", "cs": "Ahoj babi! Dneska byl úžasný den!"},
+        {"speaker": "Nonna", "text": "Che bello! [Dimmi|dire] [tutto]!", "cs": "To je krásné! Všechno mi povídej!"},
+        {"speaker": "Giulia", "text": "[Ho|avere] [giocato|giocare] [con] Marco [e] Sofia. Nonna, [quando] [vieni|venire] da [noi]?", "cs": "Hrála jsem si s Marcem a Sofií. Babi, kdy k nám přijedeš?"},
+        {"speaker": "Nonna", "text": "Domenica! [Penso|pensare] [sempre] a te. [Buona|buono] [notte], tesoro!", "cs": "V neděli! Pořád na tebe myslím. Dobrou noc, zlatíčko!"},
+        {"speaker": "Giulia", "text": "[Buona|buono] [notte], nonna! Ti voglio bene.", "cs": "Dobrou noc, babi! Mám tě ráda."}
+      ]
+    }
+  ]
+}

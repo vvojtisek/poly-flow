@@ -44,6 +44,24 @@ Import is an idempotent upsert: re-running updates rank/gloss/etc. in place with
 The per-language rank constraint is deferred to commit, so rank shifts inside one file are fine; an import
 fails cleanly if an item *not* in the file still holds a rank the file assigns to another lemma.
 
+## Scenes (`scenes/*.json`)
+
+Short dialogues that open each lesson (Lekce): the learner reads the scene first (Czech translation on
+demand, new words highlighted and tappable), then meets each new word, then practises it. Practice is
+never graded; only the separate check (Ověření) counts toward knowing a word.
+
+Format and rules are in `app/domain/scenes.py`. In a line, `[Hund]` marks a lexicon word whose surface
+form is the lemma, `[bin|sein]` an inflected form, `[sie|sie/PRON]` a lemma that needs its UPOS. `words`
+lists the lemmas a scene introduces: every word at most once per language, and marked at least once in
+that scene. Lessons walk scenes in file order, up to 4 new words per lesson; words with no scene follow
+by frequency with their example sentence as context.
+
+Import after the lexicon: `python -m app.cli seed-scenes data/scenes/*.json` (`--dry-run` validates
+against the lexicon in the database). `tests/test_scene_data.py` checks the committed files against the
+committed lexicon and requires every core-100 word to have a scene. The `*.core100.json` files
+(revision `scenes-v1`) were drafted without native-speaker review; target-language grammar and the
+Czech translations still need it.
+
 ## Content blacklist (`blacklist/*.csv`)
 
 Columns: `language,pattern_type,pattern,category,note`. Blank `language` = all languages.

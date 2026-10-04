@@ -41,7 +41,7 @@ wait_for "$FRONTEND/" 200 300
 wait_for "$FRONTEND/api/v1/progression/milestones" 200 60  # same-origin proxy to the API
 
 # Seeding must work against the migrated schema.
-"${compose[@]}" exec -T backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv'
+"${compose[@]}" exec -T backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json'
 
 if [ "$("${compose[@]}" ps --status running --services | grep -c '^worker$')" -ne 1 ]; then
   echo "worker is not running" >&2

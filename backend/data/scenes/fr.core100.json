@@ -1,0 +1,206 @@
+{
+  "language": "fr",
+  "source": "polyflow-curated",
+  "revision": "scenes-v1",
+  "scenes": [
+    {
+      "slug": "bonjour",
+      "title_cs": "Ahoj, jak se jmenuješ?",
+      "words": ["je", "tu", "être", "appeler", "et", "oui", "non", "merci"],
+      "lines": [
+        {"speaker": "Léa", "text": "Bonjour ! [Je|je] m'[appelle|appeler] Léa. Comment [tu] t'[appelles|appeler] ?", "cs": "Ahoj! Jmenuju se Léa. A jak se jmenuješ ty?"},
+        {"speaker": "Tom", "text": "Bonjour, Léa ! [Je|je] m'[appelle|appeler] Tom.", "cs": "Ahoj, Léo! Já se jmenuju Tom."},
+        {"speaker": "Léa", "text": "[Tu|tu] [es|être] français, Tom ?", "cs": "Jsi Francouz, Tome?"},
+        {"speaker": "Tom", "text": "[Non|non], [je] [suis|être] tchèque. [Tu|tu] [es|être] française ?", "cs": "Ne, jsem Čech. A ty jsi Francouzka?"},
+        {"speaker": "Léa", "text": "[Oui|oui] ! [Je|je] [suis|être] française [et] tchèque. Bienvenue, Tom !", "cs": "Ano! Jsem Francouzka a zároveň Češka. Vítej, Tome!"},
+        {"speaker": "Tom", "text": "[Merci|merci], Léa !", "cs": "Díky, Léo!"}
+      ]
+    },
+    {
+      "slug": "ma-famille",
+      "title_cs": "Moje rodina",
+      "words": ["mon", "père", "mère", "il", "elle", "avoir", "grand", "petit"],
+      "lines": [
+        {"speaker": "Tom", "text": "[Qui|qui] [est|être] [le] monsieur [sur] [la|le] photo ?", "cs": "Kdo je ten pán na fotce?"},
+        {"speaker": "Léa", "text": "[C'|ce][est|être] [mon] [père]. [Il|il] [est|être] [grand], hein ?", "cs": "To je můj táta. Je velký, viď?"},
+        {"speaker": "Tom", "text": "[Et|et] la dame ?", "cs": "A ta paní?"},
+        {"speaker": "Léa", "text": "[C'|ce][est|être] [ma|mon] [mère]. [Elle|elle] [est|être] [petite|petit], [comme] moi !", "cs": "To je moje máma. Je malá, jako já!"},
+        {"speaker": "Tom", "text": "[Tu|tu] [as|avoir] [un] frère ?", "cs": "Máš bratra?"},
+        {"speaker": "Léa", "text": "[Oui|oui], [un] [petit] frère. [Il|il] [a|avoir] deux [ans|an].", "cs": "Jo, malého bratra. Jsou mu dva roky."},
+        {"speaker": "Tom", "text": "Moi, [j'|je][ai|avoir] [une|un] [grande|grand] sœur !", "cs": "A já mám velkou sestru!"}
+      ]
+    },
+    {
+      "slug": "le-chien-et-le-chat",
+      "title_cs": "Pes a kocour",
+      "words": ["le", "un", "chien", "chat", "dans", "sur", "maison", "où"],
+      "lines": [
+        {"speaker": "Tom", "text": "Léa, [tu] [as|avoir] [un] [chien] ?", "cs": "Léo, máš psa?"},
+        {"speaker": "Léa", "text": "[Oui|oui], [il] [s'|se][appelle|appeler] Rex. [Et|et] [j'|je][ai|avoir] [aussi] [un] [chat].", "cs": "Jo, jmenuje se Rex. A mám taky kocoura."},
+        {"speaker": "Tom", "text": "[Où|où] [est|être] [le] [chat] ?", "cs": "A kde je ten kocour?"},
+        {"speaker": "Léa", "text": "[Il|il] [est|être] [dans] [la|le] [maison], [sur] [le] lit.", "cs": "Je v domě, na posteli."},
+        {"speaker": "Tom", "text": "[Et|et] [le] [chien] ?", "cs": "A pes?"},
+        {"speaker": "Léa", "text": "[Le|le] [chien] ? [Il|il] [est|être] [dans] [le] jardin [avec] [mon] [père].", "cs": "Pes? Ten je na zahradě s tátou."}
+      ]
+    },
+    {
+      "slug": "comment-ca-va",
+      "title_cs": "Jak se máte?",
+      "words": ["aller", "vous", "nous", "bien", "très", "ne", "pas", "tête"],
+      "lines": [
+        {"speaker": "Madame Martin", "text": "Bonjour, [les|le] [enfants|enfant] ! Comment [allez|aller]-[vous] ?", "cs": "Dobré ráno, děti! Jak se máte?"},
+        {"speaker": "Léa", "text": "[Nous|nous] [allons|aller] [bien], [merci] ! [Et|et] [vous] ?", "cs": "Máme se dobře, děkujeme! A vy?"},
+        {"speaker": "Madame Martin", "text": "[Très|très] [bien], [merci] ! Tom, [tu] [vas|aller] [bien] ?", "cs": "Moc dobře, děkuju! A ty, Tome, máš se dobře?"},
+        {"speaker": "Tom", "text": "[Non|non], [je] [ne] [vais|aller] [pas] [très] [bien]. [J'|je][ai|avoir] mal [à] [la|le] [tête].", "cs": "Ne, moc dobře mi není. Bolí mě hlava."},
+        {"speaker": "Madame Martin", "text": "Oh, pauvre Tom ! [Tu|tu] [veux|vouloir] [un] verre d'[eau] ?", "cs": "Chudáčku! Chceš sklenici vody?"},
+        {"speaker": "Tom", "text": "[Oui|oui], [merci], Madame.", "cs": "Ano, děkuju, paní učitelko."}
+      ]
+    },
+    {
+      "slug": "a-l-ecole",
+      "title_cs": "Nová kniha ve škole",
+      "words": ["à", "école", "livre", "lire", "écrire", "question", "qui", "nouveau"],
+      "lines": [
+        {"speaker": "Papa", "text": "Léa, [tu] [vas|aller] [à] [l'|le][école] ?", "cs": "Léo, jdeš do školy?"},
+        {"speaker": "Léa", "text": "[Oui|oui], Papa ! [Aujourd'hui|aujourd'hui], [nous] [allons|aller] [lire] [un] [nouveau] [livre].", "cs": "Jo, tati! Dneska budeme číst novou knihu."},
+        {"speaker": "Madame Martin", "text": "Voici [le] [nouveau] [livre]. [Qui|qui] [veut|vouloir] [lire] ?", "cs": "Tady je ta nová kniha. Kdo chce číst?"},
+        {"speaker": "Tom", "text": "Moi, Madame ! [J'|je][aime|aimer] [lire].", "cs": "Já, paní učitelko! Rád čtu."},
+        {"speaker": "Léa", "text": "Madame, [j'|je][ai|avoir] [une|un] [question]. [Qui|qui] [a|avoir] [écrit|écrire] [le] [livre] ?", "cs": "Paní učitelko, mám otázku. Kdo tu knihu napsal?"},
+        {"speaker": "Madame Martin", "text": "[Une|un] [femme] [de] Lyon. [Elle|elle] [écrit|écrire] [pour] [les|le] [enfants|enfant].", "cs": "Jedna paní z Lyonu. Píše pro děti."},
+        {"speaker": "Madame Martin", "text": "[Maintenant|maintenant], [vous] [allez|aller] [écrire] [une|un] [question] [pour] [elle] !", "cs": "A teď pro ni napíšete otázku!"}
+      ]
+    },
+    {
+      "slug": "le-gouter",
+      "title_cs": "Svačina",
+      "words": ["manger", "boire", "eau", "vouloir", "bon", "de"],
+      "lines": [
+        {"speaker": "Maman", "text": "Léa, Tom, [vous] [voulez|vouloir] [manger] quelque chose ?", "cs": "Léo, Tome, chcete něco k jídlu?"},
+        {"speaker": "Léa", "text": "[Oui|oui] ! [Je|je] [veux|vouloir] [un] croissant, s'il te plaît !", "cs": "Jo! Já chci croissant, prosím!"},
+        {"speaker": "Tom", "text": "Moi [aussi], s'il vous plaît !", "cs": "Já taky, prosím!"},
+        {"speaker": "Maman", "text": "Voilà ! [Et|et] [vous] [voulez|vouloir] [boire] [un] verre [de] lait ou de l'[eau] ?", "cs": "Tady máte! A co budete pít? Sklenici mléka, nebo vodu?"},
+        {"speaker": "Tom", "text": "[Pour|pour] moi, de l'[eau], [merci].", "cs": "Pro mě vodu, děkuju."},
+        {"speaker": "Léa", "text": "Mmm, [le|le] croissant [est|être] [très] [bon] !", "cs": "Mňam, ten croissant je moc dobrý!"},
+        {"speaker": "Maman", "text": "[Il|il] [vient|venir] [de] [la|le] boulangerie [de] [la|le] [rue] Victor-Hugo.", "cs": "Je z pekárny v ulici Victora Huga."}
+      ]
+    },
+    {
+      "slug": "au-parc",
+      "title_cs": "Jdeme do parku",
+      "words": ["jouer", "ami", "avec", "pouvoir", "si", "venir", "aussi"],
+      "lines": [
+        {"speaker": "Léa", "text": "Papa, [je] [peux|pouvoir] [aller] au parc ?", "cs": "Tati, můžu jít do parku?"},
+        {"speaker": "Papa", "text": "[Si|si] [tu] [veux|vouloir], [je] [viens|venir] [avec] toi.", "cs": "Jestli chceš, půjdu s tebou."},
+        {"speaker": "Léa", "text": "Super ! Tom [peut|pouvoir] [venir] [aussi] ? [C'|ce][est|être] [mon] [ami].", "cs": "Super! Může jít taky Tom? Je to můj kamarád."},
+        {"speaker": "Papa", "text": "[Bien|bien] sûr ! [Il|il] [peut|pouvoir] [venir] [avec] [nous].", "cs": "Jasně! Může jít s námi."},
+        {"speaker": "Tom", "text": "Léa, [tu] [veux|vouloir] [jouer] au ballon [avec] moi ?", "cs": "Léo, chceš si se mnou hrát s míčem?"},
+        {"speaker": "Léa", "text": "[Oui|oui] ! [Et|et] [mon] [chien] [veut|vouloir] [jouer] [aussi] !", "cs": "Jo! A můj pes si chce hrát taky!"},
+        {"speaker": "Tom", "text": "Super ! Rex [est|être] [mon] [ami] [aussi] !", "cs": "Super! Rex je taky můj kamarád!"}
+      ]
+    },
+    {
+      "slug": "papa-au-travail",
+      "title_cs": "Kde pracují rodiče?",
+      "words": ["travail", "homme", "femme", "ville", "faire", "prendre", "rue"],
+      "lines": [
+        {"speaker": "Tom", "text": "[Où|où] [est|être] ton [père], Léa ?", "cs": "Kde je tvůj táta, Léo?"},
+        {"speaker": "Léa", "text": "[Il|il] [est|être] au [travail], [en] [ville].", "cs": "Je v práci, ve městě."},
+        {"speaker": "Tom", "text": "[Il|il] [prend|prendre] [le] bus ?", "cs": "Jezdí autobusem?"},
+        {"speaker": "Léa", "text": "[Non|non], [il] [prend|prendre] [son] vélo.", "cs": "Ne, bere si kolo."},
+        {"speaker": "Tom", "text": "[Et|et] [il] [fait|faire] quoi, au [travail] ?", "cs": "A co dělá v práci?"},
+        {"speaker": "Léa", "text": "[Il|il] [est|être] architecte. [Il|il] dessine des [maisons|maison] [et] des [rues|rue].", "cs": "Je architekt. Kreslí domy a ulice."},
+        {"speaker": "Tom", "text": "[Et|et] ta [mère] ?", "cs": "A tvoje máma?"},
+        {"speaker": "Léa", "text": "[Elle|elle] [est|être] médecin. [Elle|elle] soigne [les|le] [hommes|homme], [les|le] [femmes|femme] [et] [les|le] [enfants|enfant].", "cs": "Je doktorka. Léčí muže, ženy i děti."}
+      ]
+    },
+    {
+      "slug": "les-devoirs",
+      "title_cs": "Domácí úkol",
+      "words": ["devoir", "savoir", "que", "penser", "dire", "rien", "chose"],
+      "lines": [
+        {"speaker": "Maman", "text": "Léa, [tu] [dois|devoir] [faire] ton exercice de maths.", "cs": "Léo, musíš si udělat úkol z matiky."},
+        {"speaker": "Léa", "text": "[Je|je] [sais|savoir], Maman. [Mais|mais] [je] [ne] [sais|savoir] [pas] la réponse [à] [la|le] [question] trois.", "cs": "Já vím, mami. Ale nevím, jaká je odpověď na třetí otázku."},
+        {"speaker": "Maman", "text": "Voyons… [Tu|tu] [penses|penser] [que] [c'|ce][est|être] quatre ou cinq ?", "cs": "Tak se podíváme… Myslíš, že je to čtyři, nebo pět?"},
+        {"speaker": "Léa", "text": "[Je|je] [pense|penser] [que] [c'|ce][est|être] cinq !", "cs": "Myslím, že pět!"},
+        {"speaker": "Maman", "text": "Bravo ! [Et|et] [je] [n'|ne][ai|avoir] [rien] [dit|dire] !", "cs": "Výborně! A to jsem ti vůbec nic neřekla!"},
+        {"speaker": "Léa", "text": "Maman, [je] [peux|pouvoir] te [dire] [une|un] [chose] ?", "cs": "Mami, můžu ti říct jednu věc?"},
+        {"speaker": "Maman", "text": "[Oui|oui], [bien] sûr.", "cs": "Jasně, povídej."},
+        {"speaker": "Léa", "text": "[Je|je] [dois|devoir] [encore] [lire] [un] [livre] [pour] demain !", "cs": "Do zítřka musím ještě přečíst knihu!"}
+      ]
+    },
+    {
+      "slug": "quel-temps",
+      "title_cs": "Jaké je dnes počasí?",
+      "words": ["temps", "aujourd'hui", "rester", "maintenant", "mais", "voir", "comme"],
+      "lines": [
+        {"speaker": "Tom", "text": "Quel [temps] [fait|faire]-[il] [aujourd'hui] ?", "cs": "Jaké je dneska počasí?"},
+        {"speaker": "Léa", "text": "Attends, [je] [vais|aller] [voir]… Oh [non], [il] pleut !", "cs": "Počkej, jdu se podívat… Ale ne, prší!"},
+        {"speaker": "Tom", "text": "Zut ! [Nous|nous] [ne] [pouvons|pouvoir] [pas] [aller] au parc.", "cs": "Škoda! Nemůžeme jít do parku."},
+        {"speaker": "Maman", "text": "[Non|non], [vous] [restez|rester] [à] [la|le] [maison] [maintenant]. [Mais|mais] [vous] [pouvez|pouvoir] [jouer] [ici].", "cs": "Ne, teď zůstanete doma. Ale můžete si hrát tady."},
+        {"speaker": "Léa", "text": "Regarde, Tom ! [Le|le] [chat] dort [sur] [le] canapé, [comme] [un] bébé.", "cs": "Podívej, Tome! Kocour spí na gauči jako miminko."},
+        {"speaker": "Tom", "text": "Oh, [je] [vois|voir] [le] soleil ! [Il|il] [ne] pleut plus !", "cs": "Jé, vidím sluníčko! Už neprší!"},
+        {"speaker": "Maman", "text": "Super ! [Maintenant|maintenant], [vous] [pouvez|pouvoir] [aller] au parc.", "cs": "Skvělé! Teď už můžete jít do parku."}
+      ]
+    },
+    {
+      "slug": "un-cadeau-pour-maman",
+      "title_cs": "Dárek pro mámu",
+      "words": ["pour", "donner", "son", "aimer", "mettre", "trouver", "beaucoup"],
+      "lines": [
+        {"speaker": "Papa", "text": "Léa, demain, [c'|ce][est|être] l'anniversaire de Maman.", "cs": "Léo, zítra má máma narozeniny."},
+        {"speaker": "Léa", "text": "Oh ! [Je|je] [veux|vouloir] [faire] [un] dessin [pour] [elle] !", "cs": "Jé! Chci pro ni nakreslit obrázek!"},
+        {"speaker": "Papa", "text": "[Bonne|bon] idée ! [Elle|elle] [aime|aimer] [beaucoup] [les|le] fleurs.", "cs": "Dobrý nápad! Má moc ráda květiny."},
+        {"speaker": "Léa", "text": "Papa, [je] [ne] [trouve|trouver] [pas] mes crayons !", "cs": "Tati, nemůžu najít pastelky!"},
+        {"speaker": "Papa", "text": "[Ils|il] [sont|être] [dans] ton sac, [sur] [la|le] table.", "cs": "Jsou v tvé tašce na stole."},
+        {"speaker": "Léa", "text": "Maman, [c'|ce][est|être] [pour] toi ! [Je|je] t'[aime|aimer] !", "cs": "Mami, to je pro tebe! Mám tě ráda!"},
+        {"speaker": "Maman", "text": "Oh, [merci], ma chérie ! [Je|je] [vais|aller] le [mettre] [sur] [le] frigo.", "cs": "Moc děkuju, zlatíčko! Dám si ho na lednici."},
+        {"speaker": "Papa", "text": "[Elle|elle] t'[a|avoir] [donné|donner] [son] plus joli dessin !", "cs": "Dala ti svůj nejhezčí obrázek!"}
+      ]
+    },
+    {
+      "slug": "bonne-nuit",
+      "title_cs": "Dobrou noc",
+      "words": ["nuit", "jour", "toujours", "porte", "se", "ce"],
+      "lines": [
+        {"speaker": "Papa", "text": "Léa, [c'|ce][est|être] [la|le] [nuit]. [Tu|tu] [dois|devoir] dormir.", "cs": "Léo, už je noc. Musíš spát."},
+        {"speaker": "Léa", "text": "[Mais|mais], Papa, [je] [ne] [suis|être] [pas] fatiguée !", "cs": "Ale tati, já nejsem unavená!"},
+        {"speaker": "Papa", "text": "[Tu|tu] [dis|dire] [toujours] ça !", "cs": "To říkáš vždycky!"},
+        {"speaker": "Léa", "text": "Regarde, [le] [chat] [se] lave [dans] [mon] lit !", "cs": "Podívej, kocour se myje v mojí posteli!"},
+        {"speaker": "Papa", "text": "[Tu|tu] [vois|voir] ? [Il|il] [se] prépare [pour] [la|le] [nuit]. Demain, [c'|ce][est|être] [un] [nouveau] [jour] !", "cs": "Vidíš? Taky se chystá spát. A zítra je nový den!"},
+        {"speaker": "Léa", "text": "Papa, [tu] [peux|pouvoir] laisser [la|le] [porte] ouverte ?", "cs": "Tati, můžeš nechat otevřené dveře?"},
+        {"speaker": "Papa", "text": "[Oui|oui], [je] laisse [la|le] [porte] ouverte. [Bonne|bon] [nuit], ma puce !", "cs": "Jasně, nechám je otevřené. Dobrou noc, broučku!"},
+        {"speaker": "Léa", "text": "[Bonne|bon] [nuit], Papa !", "cs": "Dobrou noc, tati!"}
+      ]
+    },
+    {
+      "slug": "joyeux-anniversaire",
+      "title_cs": "Tom má narozeniny",
+      "words": ["an", "enfant", "main", "tout", "plus", "encore"],
+      "lines": [
+        {"speaker": "Léa", "text": "Joyeux anniversaire, Tom ! [Tu|tu] [as|avoir] quel âge ?", "cs": "Všechno nejlepší, Tome! Kolik ti je?"},
+        {"speaker": "Tom", "text": "[Merci|merci] ! [J'|je][ai|avoir] huit [ans|an] [aujourd'hui].", "cs": "Díky! Dneska je mi osm."},
+        {"speaker": "Madame Martin", "text": "[Les|le] [enfants|enfant], voici [le] gâteau ! [Tout|tout] [le] [monde] [est|être] prêt ? [On|on] chante !", "cs": "Děti, tady je dort! Jsou všichni připravení? Zazpíváme!"},
+        {"speaker": "Léa", "text": "Tom, [donne|donner]-moi [la|le] [main] ! [On|on] danse !", "cs": "Tome, podej mi ruku! Jdeme tancovat!"},
+        {"speaker": "Tom", "text": "Mmm, [le] gâteau [est|être] [très] [bon] ! [Je|je] [peux|pouvoir] [avoir] [encore] [un] morceau ?", "cs": "Mňam, dort je moc dobrý! Můžu dostat ještě kousek?"},
+        {"speaker": "Madame Martin", "text": "[Oui|oui], [mais] [les|le] autres [enfants|enfant] [veulent|vouloir] [aussi] [un] morceau.", "cs": "Ano, ale ostatní děti taky chtějí kousek."},
+        {"speaker": "Léa", "text": "Regarde, Tom ! [J'|je][ai|avoir] [plus] de gâteau que toi !", "cs": "Podívej, Tome! Já mám víc dortu než ty!"},
+        {"speaker": "Tom", "text": "[Non|non], [c'|ce][est|être] [mon] anniversaire !", "cs": "To ne, vždyť mám narozeniny já!"}
+      ]
+    },
+    {
+      "slug": "en-vacances",
+      "title_cs": "Prázdniny ve Francii",
+      "words": ["pays", "monde", "vie", "en", "parler", "ici", "on"],
+      "lines": [
+        {"speaker": "Tom", "text": "Léa, [tu] [vas|aller] [où] [en] vacances ?", "cs": "Léo, kam pojedeš na prázdniny?"},
+        {"speaker": "Léa", "text": "[Nous|nous] [allons|aller] [en] France, chez [ma|mon] grand-mère.", "cs": "Jedeme do Francie k babičce."},
+        {"speaker": "Tom", "text": "[En|en] France, [on] [parle|parler] français, [non] ?", "cs": "Ve Francii se mluví francouzsky, ne?"},
+        {"speaker": "Léa", "text": "[Oui|oui] ! [Ma|mon] grand-mère [ne] [parle|parler] [pas] tchèque.", "cs": "Jo! Moje babička česky nemluví."},
+        {"speaker": "Tom", "text": "[La|le] France, [c'|ce][est|être] [un] [grand] [pays] ?", "cs": "Je Francie velká země?"},
+        {"speaker": "Léa", "text": "[Oui|oui], [très] [grand] ! [Mais|mais] [j'|je][aime|aimer] [aussi] [ma|mon] [vie] [ici], [à] Prague.", "cs": "Jo, moc velká! Ale svůj život tady v Praze mám taky ráda."},
+        {"speaker": "Tom", "text": "Moi, [un] [jour], [je] [veux|vouloir] [voir] [le] [monde] entier !", "cs": "A já chci jednou vidět celý svět!"},
+        {"speaker": "Léa", "text": "[Et|et] moi, [je] [viens|venir] [avec] toi !", "cs": "A já pojedu s tebou!"}
+      ]
+    }
+  ]
+}

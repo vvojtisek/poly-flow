@@ -46,6 +46,11 @@ async def test_upgrade_from_0001_preserves_progress(migrated_db):
             after = (await conn.execute(text(CHECK))).one()
         assert after == before
         assert after.phonetic_score is None  # "never measured" survives the upgrade
+        async with engine.begin() as conn:
+            introduced = (
+                await conn.execute(text("SELECT introduced_at FROM user_word_progress"))
+            ).scalar_one()
+        assert introduced is not None  # v1-practised words stay checkable under v2
     finally:
         async with engine.begin() as conn:
             for table in ("user_word_progress", "lexicon_items", "users"):

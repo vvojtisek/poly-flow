@@ -7,10 +7,9 @@ from app.api.deps import get_limiter
 from app.api.learning import get_now
 from app.cli import LexiconRow, RowError, read_rows, upsert_lexicon
 from app.db.session import get_session
-from app.domain.enums import ContentFlag, ProgressState
+from app.domain.enums import ContentFlag
 from app.main import app
-from app.models import LearningSession, LearningTask, LexiconItem, UserWordProgress
-from app.models.learning import SessionStatus
+from app.models import LearningTask, LexiconItem, UserWordProgress
 from app.services.rate_limit import MemoryAttemptLimiter
 from tests.helpers import Clock, csrf, login, make_child, setup_parent
 
@@ -51,9 +50,11 @@ async def seed(flags: bool = True) -> None:
     )
 
 
-async def lesson_content(client, me) -> tuple[set[str], set[str]]:
-    """(lemmas taught, every Czech gloss shown as a recognition option) for a new lesson."""
-    r = await client.post("/api/v1/learning/sessions", json={"language": "de"}, headers=csrf(me))
+async def lesson_content(client, me, mode: str = "learn") -> tuple[set[str], set[str]]:
+    """(lemmas taught, every Czech gloss shown as a recognition option) for a new session."""
+    r = await client.post(
+        "/api/v1/learning/sessions", json={"language": "de", "mode": mode}, headers=csrf(me)
+    )
     assert r.status_code == 200, r.text
     sid = r.json()["session"]["id"]
     async for db in get_session():
@@ -93,21 +94,21 @@ async def test_item_flagged_later_leaves_child_reviews(db, client):
     child = await login(client, "eva", "4321")
     lemmas, _ = await lesson_content(client, child)
     assert "Krieg" in lemmas
-    # Close the lesson, make everything due, then an admin flags one word.
+    # Finish the lesson (introduces its words), make them checkable now, then flag one word.
+    sid = (await client.get("/api/v1/learning/sessions/current?language=de")).json()["session"][
+        "id"
+    ]
+    r = await client.post(f"/api/v1/learning/sessions/{sid}/complete", headers=csrf(child))
+    assert r.status_code == 200
     async for s in get_session():
-        await s.execute(update(LearningSession).values(status=SessionStatus.COMPLETED))
-        await s.execute(
-            update(UserWordProgress).values(
-                state=ProgressState.LEARNING, next_review_at=Clock().now
-            )
-        )
+        await s.execute(update(UserWordProgress).values(next_review_at=Clock().now))
         await s.execute(
             update(LexiconItem)
             .where(LexiconItem.lemma == "Krieg")
             .values(content_flags=["violence"])
         )
         await s.commit()
-    lemmas, _ = await lesson_content(client, child)
+    lemmas, _ = await lesson_content(client, child, "check")
     assert lemmas and "Krieg" not in lemmas
 
 

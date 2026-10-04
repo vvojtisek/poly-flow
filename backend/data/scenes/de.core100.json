@@ -1,0 +1,194 @@
+{
+  "language": "de",
+  "source": "polyflow-curated",
+  "revision": "scenes-v1",
+  "scenes": [
+    {
+      "slug": "hallo",
+      "title_cs": "Ahoj, jak se jmenuješ?",
+      "words": ["ich", "heißen", "wie", "du", "sein", "nein", "und", "ja"],
+      "lines": [
+        {"speaker": "Anna", "text": "Hallo! [Ich|ich] [heiße|heißen] Anna. [Wie|wie] [heißt|heißen] [du]?", "cs": "Ahoj! Jmenuju se Anna. A jak se jmenuješ ty?"},
+        {"speaker": "Tom", "text": "Hallo, Anna! [Ich|ich] [bin|sein] Tom.", "cs": "Ahoj, Anno! Já jsem Tom."},
+        {"speaker": "Anna", "text": "[Bist|sein] [du] acht, Tom?", "cs": "Je ti osm, Tome?"},
+        {"speaker": "Tom", "text": "[Nein|nein], [ich] [bin|sein] neun. [Und|und] [du]?", "cs": "Ne, je mi devět. A tobě?"},
+        {"speaker": "Anna", "text": "[Ich|ich] [bin|sein] acht.", "cs": "Mně je osm."},
+        {"speaker": "Tom", "text": "Spielst [du] gern Fußball?", "cs": "Hraješ ráda fotbal?"},
+        {"speaker": "Anna", "text": "[Ja|ja], sehr gern!", "cs": "Jo, moc ráda!"}
+      ]
+    },
+    {
+      "slug": "familie",
+      "title_cs": "Moje rodina",
+      "words": ["der", "Mann", "Frau", "mein", "er", "sie", "haben", "Kind"],
+      "lines": [
+        {"speaker": "Anna", "text": "Schau, das [ist|sein] [meine|mein] Familie.", "cs": "Podívej, tohle je moje rodina."},
+        {"speaker": "Tom", "text": "Wer [ist|sein] [der] [Mann]?", "cs": "Kdo je ten pán?"},
+        {"speaker": "Anna", "text": "Das [ist|sein] [mein] Papa. [Er|er] [heißt|heißen] Petr.", "cs": "To je můj táta. Jmenuje se Petr."},
+        {"speaker": "Tom", "text": "[Und|und] [die|der] [Frau]?", "cs": "A ta paní?"},
+        {"speaker": "Anna", "text": "Das [ist|sein] [meine|mein] Mama. [Sie|sie] [heißt|heißen] Eva.", "cs": "To je moje máma. Jmenuje se Eva."},
+        {"speaker": "Tom", "text": "[Hast|haben] [du] Geschwister?", "cs": "Máš sourozence?"},
+        {"speaker": "Anna", "text": "[Ja|ja], [ich] [habe|haben] einen Bruder [und] eine Schwester: Max [und] Lisa.", "cs": "Jo, mám bratra a sestru, Maxe a Lízu."},
+        {"speaker": "Tom", "text": "Drei [Kinder|Kind]! Toll!", "cs": "Tři děti! To je super!"}
+      ]
+    },
+    {
+      "slug": "woher",
+      "title_cs": "Odkud jsi?",
+      "words": ["aus", "kommen", "Stadt", "in", "Land", "sprechen", "auch", "ein"],
+      "lines": [
+        {"speaker": "Ben", "text": "Hallo! [Ich|ich] [bin|sein] Ben. [Ich|ich] [komme|kommen] [aus] Berlin.", "cs": "Ahoj! Já jsem Ben. Jsem z Berlína."},
+        {"speaker": "Tom", "text": "Berlin [ist|sein] [eine|ein] [Stadt] [in] Deutschland, [ja]?", "cs": "Berlín je město v Německu, že?"},
+        {"speaker": "Ben", "text": "[Ja|ja]. [Und|und] woher [kommst|kommen] [du]?", "cs": "Jo. A odkud jsi ty?"},
+        {"speaker": "Tom", "text": "[Ich|ich] [komme|kommen] [aus] Tschechien, [aus] Brno.", "cs": "Já jsem z Česka, z Brna."},
+        {"speaker": "Ben", "text": "Tschechien [ist|sein] [ein] schönes [Land]!", "cs": "Česko je krásná země!"},
+        {"speaker": "Tom", "text": "[Sprichst|sprechen] [du] Tschechisch?", "cs": "Mluvíš česky?"},
+        {"speaker": "Ben", "text": "[Nein|nein], [ich] [spreche|sprechen] Deutsch [und] Englisch.", "cs": "Ne, mluvím německy a anglicky."},
+        {"speaker": "Anna", "text": "[Ich|ich] [spreche|sprechen] [auch] Englisch!", "cs": "Já taky mluvím anglicky!"}
+      ]
+    },
+    {
+      "slug": "zu-besuch",
+      "title_cs": "Návštěva u Anny",
+      "words": ["hier", "wir", "Haus", "sehr", "groß", "da", "Hund", "klein"],
+      "lines": [
+        {"speaker": "Anna", "text": "[Hier|hier] wohnen [wir]. Komm rein, Tom!", "cs": "Tady bydlíme. Pojď dál, Tome!"},
+        {"speaker": "Tom", "text": "Euer [Haus] [ist|sein] [sehr] [groß]!", "cs": "Máte moc velký dům!"},
+        {"speaker": "Anna", "text": "[Ja|ja], [und] [der] Garten [ist|sein] [auch] [groß].", "cs": "Jo, a zahrada je taky velká."},
+        {"speaker": "Tom", "text": "Oh, [da] [ist|sein] [ein] [Hund]!", "cs": "Jé, tamhle je pes!"},
+        {"speaker": "Anna", "text": "Das [ist|sein] Bello. [Er|er] [ist|sein] [sehr] lieb.", "cs": "To je Bello. Je moc hodný."},
+        {"speaker": "Tom", "text": "[Er|er] [ist|sein] [klein] [und] süß!", "cs": "Je malý a roztomilý!"},
+        {"speaker": "Anna", "text": "Komm, [wir] spielen [im|in] Garten!", "cs": "Pojď, půjdeme si hrát na zahradu!"}
+      ]
+    },
+    {
+      "slug": "ve-skole",
+      "title_cs": "Ve škole",
+      "words": ["Buch", "nicht", "können", "lesen", "gut", "Frage", "was", "schreiben", "Schule"],
+      "lines": [
+        {"speaker": "Frau Novak", "text": "Guten Morgen, [Kinder|Kind]! Bitte öffnet eure [Bücher|Buch].", "cs": "Dobré ráno, děti! Otevřete si prosím knížky."},
+        {"speaker": "Tom", "text": "Oh [nein]! [Ich|ich] [habe|haben] [mein] [Buch] [nicht] [hier].", "cs": "Ale ne! Nemám tu svoji knížku."},
+        {"speaker": "Anna", "text": "Kein Problem, [wir] [können] zusammen [lesen].", "cs": "To nevadí, můžeme číst spolu."},
+        {"speaker": "Frau Novak", "text": "[Gut|gut]! Anna [und] Tom, [lest|lesen] bitte laut.", "cs": "Dobře! Anno a Tome, čtěte prosím nahlas."},
+        {"speaker": "Anna", "text": "[Frau] Novak, [ich] [habe|haben] [eine|ein] [Frage]. [Was|was] [schreiben] [wir] ins Heft?", "cs": "Paní učitelko, mám otázku. Co máme psát do sešitu?"},
+        {"speaker": "Frau Novak", "text": "[Schreibt|schreiben] fünf Wörter [aus] [dem|der] [Buch].", "cs": "Napište si pět slov z knížky."},
+        {"speaker": "Tom", "text": "[Ich|ich] mag [die|der] [Schule]!", "cs": "Škola mě baví!"}
+      ]
+    },
+    {
+      "slug": "obed",
+      "title_cs": "Oběd",
+      "words": ["essen", "wollen", "oder", "trinken", "Wasser", "geben", "nehmen", "noch"],
+      "lines": [
+        {"speaker": "Mama", "text": "[Kinder|Kind], [kommt|kommen] [essen]!", "cs": "Děti, pojďte jíst!"},
+        {"speaker": "Mama", "text": "Anna, [willst|wollen] [du] Suppe [oder] Nudeln?", "cs": "Anno, chceš polévku, nebo těstoviny?"},
+        {"speaker": "Anna", "text": "Nudeln, bitte!", "cs": "Těstoviny, prosím!"},
+        {"speaker": "Mama", "text": "[Und|und] [was] [willst|wollen] [du] [trinken]?", "cs": "A co chceš pít?"},
+        {"speaker": "Anna", "text": "[Wasser], bitte.", "cs": "Vodu, prosím."},
+        {"speaker": "Papa", "text": "Anna, [gibst|geben] [du] mir bitte [das|der] Brot?", "cs": "Anno, podáš mi prosím chleba?"},
+        {"speaker": "Anna", "text": "[Hier|hier], Papa.", "cs": "Tady máš, tati."},
+        {"speaker": "Papa", "text": "Danke! [Ich|ich] [nehme|nehmen] [noch] Nudeln.", "cs": "Díky! Ještě si vezmu těstoviny."}
+      ]
+    },
+    {
+      "slug": "pondeli",
+      "title_cs": "Pondělní ráno",
+      "words": ["heute", "machen", "gehen", "zu", "Arbeit", "nach", "dann", "Tag"],
+      "lines": [
+        {"speaker": "Mama", "text": "Guten Morgen, Anna! [Heute|heute] [ist|sein] Montag.", "cs": "Dobré ráno, Anno! Dneska je pondělí."},
+        {"speaker": "Anna", "text": "[Was|was] [machen] [wir] [heute]?", "cs": "Co dneska budeme dělat?"},
+        {"speaker": "Mama", "text": "Papa [geht|gehen] [zur|zu] [Arbeit] [und] [du] [gehst|gehen] [in] [die|der] [Schule].", "cs": "Táta jde do práce a ty jdeš do školy."},
+        {"speaker": "Anna", "text": "[Und|und] [nach] [der] [Schule]?", "cs": "A po škole?"},
+        {"speaker": "Mama", "text": "[Dann|dann] [gehen] [wir] [zu] Oma.", "cs": "Pak půjdeme k babičce."},
+        {"speaker": "Papa", "text": "[Nach|nach] [der] [Arbeit] [komme|kommen] [ich] [auch].", "cs": "Já po práci přijdu taky."},
+        {"speaker": "Anna", "text": "Super! [Heute|heute] [ist|sein] [ein] [guter|gut] [Tag]!", "cs": "Super! Dneska je dobrý den!"}
+      ]
+    },
+    {
+      "slug": "v-parku",
+      "title_cs": "S pejskem v parku",
+      "words": ["mit", "Freund", "liegen", "auf", "sehen", "es", "finden"],
+      "lines": [
+        {"speaker": "Anna", "text": "[Wir|wir] [gehen] [mit] Bello [in] [den|der] Park. [Kommst|kommen] [du] [auch]?", "cs": "Jdeme s Bellem do parku. Půjdeš taky?"},
+        {"speaker": "Tom", "text": "[Ja|ja]! [Mein|mein] [Freund] Ben [kommt|kommen] [auch].", "cs": "Jasně! Můj kamarád Ben půjde taky."},
+        {"speaker": "Ben", "text": "Schaut mal! [Was|was] [liegt|liegen] [da] [auf] [dem|der] Weg?", "cs": "Koukejte! Co to tam leží na cestě?"},
+        {"speaker": "Tom", "text": "[Ich|ich] [sehe|sehen] [es]! [Es|es] [ist|sein] [ein] Ball.", "cs": "Já to vidím! Je to míč."},
+        {"speaker": "Anna", "text": "Bello [hat|haben] [den|der] Ball [gefunden|finden]!", "cs": "Bello ten míč našel!"},
+        {"speaker": "Ben", "text": "Bello [ist|sein] [ein] [guter|gut] [Hund]!", "cs": "Bello je hodný pejsek!"}
+      ]
+    },
+    {
+      "slug": "prsi",
+      "title_cs": "Prší",
+      "words": ["so", "jetzt", "wenn", "bleiben", "aber", "wissen", "dass", "schon"],
+      "lines": [
+        {"speaker": "Anna", "text": "Mama, [es] regnet!", "cs": "Mami, prší!"},
+        {"speaker": "Mama", "text": "[Ja|ja], [und] [es] [ist|sein] [so] kalt!", "cs": "Jo, a je tak zima!"},
+        {"speaker": "Anna", "text": "[Gehen|gehen] [wir] [jetzt] [mit] Bello [in] [den|der] Park?", "cs": "Půjdeme teď s Bellem do parku?"},
+        {"speaker": "Mama", "text": "[Nein|nein]. [Wenn|wenn] [es] regnet, [bleiben] [wir] zu Hause.", "cs": "Ne. Když prší, zůstaneme doma."},
+        {"speaker": "Anna", "text": "[Aber|aber] Bello [will|wollen] raus!", "cs": "Ale Bello chce ven!"},
+        {"speaker": "Mama", "text": "[Ich|ich] [weiß|wissen], [dass] [er] raus [will|wollen]. [Aber|aber] [jetzt] [bleiben] [wir] [hier].", "cs": "Já vím, že chce ven. Ale teď zůstaneme tady."},
+        {"speaker": "Anna", "text": "Mama, schau! [Die|der] Sonne scheint [schon]!", "cs": "Mami, koukej! Už svítí sluníčko!"},
+        {"speaker": "Mama", "text": "Super! [Jetzt|jetzt] [können] [wir] [gehen].", "cs": "Super! Teď už můžeme jít."}
+      ]
+    },
+    {
+      "slug": "na-trhu",
+      "title_cs": "Na trhu",
+      "words": ["müssen", "viel", "Mensch", "alle", "man", "für", "sagen", "nur"],
+      "lines": [
+        {"speaker": "Papa", "text": "Anna, [wir] [müssen] [heute] einkaufen.", "cs": "Anno, dneska musíme nakoupit."},
+        {"speaker": "Anna", "text": "[Hier|hier] [sind|sein] [so] [viele|viel] [Menschen|Mensch]!", "cs": "Tady je tolik lidí!"},
+        {"speaker": "Papa", "text": "[Ja|ja], samstags [kommen] [alle] [in] [die|der] [Stadt].", "cs": "Jo, v sobotu jsou ve městě všichni."},
+        {"speaker": "Anna", "text": "[Was|was] [kann|können] [man] [hier] kaufen?", "cs": "Co se tady dá koupit?"},
+        {"speaker": "Papa", "text": "Obst [und] Gemüse. [Wir|wir] kaufen Äpfel [für] Oma.", "cs": "Ovoce a zeleninu. Koupíme jablka pro babičku."},
+        {"speaker": "Anna", "text": "[Was|was] [sagt|sagen] [die|der] [Frau]?", "cs": "Co ta paní říká?"},
+        {"speaker": "Papa", "text": "[Sie|sie] [sagt|sagen], [die|der] Äpfel kosten [nur] zwei Euro.", "cs": "Říká, že jablka stojí jen dvě eura."},
+        {"speaker": "Anna", "text": "Das [ist|sein] [gut]!", "cs": "To je fajn!"}
+      ]
+    },
+    {
+      "slug": "narozeniny",
+      "title_cs": "Tom má narozeniny",
+      "words": ["Jahr", "als", "neu", "über", "sich", "dieser", "ihr"],
+      "lines": [
+        {"speaker": "Anna", "text": "Alles Gute zum Geburtstag, Tom!", "cs": "Všechno nejlepší k narozeninám, Tome!"},
+        {"speaker": "Tom", "text": "Danke! [Ich|ich] [bin|sein] [heute] zehn [Jahre|Jahr] alt.", "cs": "Díky! Dneska je mi deset let."},
+        {"speaker": "Ben", "text": "Zehn? [Dann|dann] [bist|sein] [du] [jetzt] älter [als] [ich]!", "cs": "Deset? Tak to jsi teď starší než já!"},
+        {"speaker": "Anna", "text": "Das [ist|sein] [für] [dich|du].", "cs": "Tohle je pro tebe."},
+        {"speaker": "Tom", "text": "Oh, [ein|ein] [neues|neu] [Buch] [über] [Hunde|Hund]! Danke!", "cs": "Jé, nová knížka o psech! Díky!"},
+        {"speaker": "Ben", "text": "Schau, Anna! Tom freut [sich] [sehr].", "cs": "Koukej, Anno! Tom má velkou radost."},
+        {"speaker": "Tom", "text": "[Ja|ja], [dieses|dieser] [Buch] [ist|sein] super! [Habt|haben] [ihr] Hunger? [Es|es] gibt Kuchen.", "cs": "Jo, tahle knížka je super! Máte hlad? Je tu dort."},
+        {"speaker": "Anna", "text": "[Ja|ja], [wir] [haben] Hunger!", "cs": "Jo, máme hlad!"}
+      ]
+    },
+    {
+      "slug": "cim-budu",
+      "title_cs": "Čím chceš být?",
+      "words": ["werden", "Welt", "denken", "Zeit", "Leben", "immer"],
+      "lines": [
+        {"speaker": "Frau Novak", "text": "[Heute|heute] [habe|haben] [ich] [eine|ein] [Frage] [für] [euch|ihr]: [Was|was] [wollt|wollen] [ihr] [werden]?", "cs": "Dneska pro vás mám otázku: Čím chcete být?"},
+        {"speaker": "Ben", "text": "[Ich|ich] [will|wollen] Pilot [werden]. [Ich|ich] [will|wollen] [die|der] ganze [Welt] [sehen].", "cs": "Já chci být pilot. Chci vidět celý svět."},
+        {"speaker": "Anna", "text": "[Ich|ich] [denke|denken], [ich] [werde|werden] Tierärztin. [Ich|ich] liebe Tiere.", "cs": "Myslím, že budu veterinářka. Mám ráda zvířata."},
+        {"speaker": "Tom", "text": "[Ich|ich] [weiß|wissen] [es] [noch] [nicht].", "cs": "Já ještě nevím."},
+        {"speaker": "Frau Novak", "text": "Kein Problem, Tom. [Du|du] [hast|haben] [noch] [viel] [Zeit]. [Man|man] lernt sein ganzes [Leben] lang.", "cs": "To nevadí, Tome. Máš ještě spoustu času. Člověk se učí celý život."},
+        {"speaker": "Tom", "text": "Vielleicht [werde|werden] [ich] Lehrer. [Sie|sie] [sind|sein] [immer] [so] nett, [Frau] Novak!", "cs": "Možná budu učitel. Vy jste vždycky tak milá, paní učitelko!"}
+      ]
+    },
+    {
+      "slug": "u-babicky",
+      "title_cs": "U babičky a dědy",
+      "words": ["bei", "Hand", "stehen", "an", "von", "sollen", "lassen"],
+      "lines": [
+        {"speaker": "Anna", "text": "[Heute|heute] [sind|sein] [wir] [bei] Oma [und] Opa.", "cs": "Dneska jsme u babičky a dědy."},
+        {"speaker": "Oma", "text": "Hallo, [ihr] Lieben! Wascht euch bitte [die|der] [Hände|Hand].", "cs": "Ahoj, zlatíčka! Umyjte si prosím ruce."},
+        {"speaker": "Max", "text": "Oma, wer [steht|stehen] [da] [an] [der] Tür?", "cs": "Babi, kdo to stojí u dveří?"},
+        {"speaker": "Oma", "text": "Das [ist|sein] Opa. [Er|er] [hat|haben] [einen|ein] Brief [von] Tante Jana.", "cs": "To je děda. Má dopis od tety Jany."},
+        {"speaker": "Anna", "text": "Opa, [was] [schreibt|schreiben] [sie]?", "cs": "Dědo, co píše?"},
+        {"speaker": "Opa", "text": "[Sie|sie] [kommt|kommen] [im|in] Sommer [mit] ihren [Kindern|Kind].", "cs": "V létě přijede i s dětmi."},
+        {"speaker": "Max", "text": "Oma, [soll|sollen] [ich] [den|der] Tisch decken?", "cs": "Babi, mám prostřít stůl?"},
+        {"speaker": "Oma", "text": "[Nein|nein], [lass|lassen] nur, Max. Das [mache|machen] [ich].", "cs": "Ne, nech to být, Maxi. To udělám já."}
+      ]
+    }
+  ]
+}

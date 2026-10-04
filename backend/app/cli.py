@@ -2,11 +2,13 @@
 
 python -m app.cli seed-lexicon data/lexicon/de.core100.csv [--dry-run]
 python -m app.cli seed-blacklist data/blacklist/default.csv [--dry-run]
+python -m app.cli seed-scenes data/scenes/de.core100.json [--dry-run]   (after seed-lexicon)
 """
 
 import argparse
 import asyncio
 import csv
+import json
 import logging
 import re
 import sys
@@ -22,7 +24,7 @@ from pydantic import (
     ValidationError,
     field_validator,
 )
-from sqlalchemy import func, literal_column
+from sqlalchemy import delete, func, literal_column, select
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 
@@ -37,7 +39,8 @@ from app.domain.enums import (
     Language,
 )
 from app.domain.progression import frequency_band
-from app.models import ContentBlacklistEntry, LexiconItem
+from app.domain.scenes import SceneFile, lexicon_resolver, validate_scene_file
+from app.models import ContentBlacklistEntry, LexiconItem, Scene, SceneWord
 
 log = logging.getLogger("polyflow.cli")
 
@@ -236,6 +239,94 @@ async def upsert_blacklist(rows: Sequence[BlacklistRow]) -> int:
     return len(rows)
 
 
+def read_scene_file(path: Path) -> SceneFile:
+    try:
+        return SceneFile.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    except (ValueError, ValidationError) as exc:
+        raise RowError(f"{path}: {exc}") from exc
+
+
+async def upsert_scenes(f: SceneFile, *, dry_run: bool = False) -> int:
+    """Validate against the lexicon in the database, then upsert by (language, slug).
+
+    A scene's word list is replaced on every import. Scenes missing from the file are kept
+    (finished lessons reference them).
+    """
+    async for session in get_session():
+        async with session.begin():
+            entries = (
+                await session.execute(
+                    select(LexiconItem.lemma, LexiconItem.pos, LexiconItem.id).where(
+                        LexiconItem.language == f.language
+                    )
+                )
+            ).all()
+            resolve = lexicon_resolver(entries)
+            if errors := validate_scene_file(f, resolve):
+                raise RowError("\n".join(errors))
+            if dry_run:
+                return 0
+            for position, s in enumerate(f.scenes, start=1):
+                lines = [
+                    {
+                        "speaker": line.speaker,
+                        "cs": line.cs,
+                        "segments": [
+                            {"t": seg.t, "item": str(resolve(seg.ref.lemma, seg.ref.pos))}
+                            if seg.ref
+                            else {"t": seg.t}
+                            for seg in line.segments()
+                        ],
+                    }
+                    for line in s.lines
+                ]
+                values = {
+                    "language": f.language,
+                    "slug": s.slug,
+                    "position": position,
+                    "title_cs": s.title_cs,
+                    "lines": lines,
+                    "source": f.source,
+                    "revision": f.revision,
+                }
+                stmt = insert(Scene).values(values)
+                stmt = stmt.on_conflict_do_update(
+                    constraint="uq_scenes_language_slug",
+                    set_={k: stmt.excluded[k] for k in ("position", "title_cs", "lines")}
+                    | {"source": f.source, "revision": f.revision, "updated_at": func.now()},
+                ).returning(Scene.id)
+                scene_id = (await session.execute(stmt)).scalar_one()
+                await session.execute(delete(SceneWord).where(SceneWord.scene_id == scene_id))
+                # A word moved between scenes: the old scene must release it first.
+                word_ids = [resolve(w.lemma, w.pos) for w in s.word_refs()]
+                await session.execute(
+                    delete(SceneWord).where(
+                        SceneWord.lexicon_item_id.in_(word_ids),
+                        SceneWord.scene_id.in_(
+                            select(Scene.id).where(Scene.language == f.language)
+                        ),
+                    )
+                )
+                await session.execute(
+                    insert(SceneWord).values(
+                        [
+                            {"scene_id": scene_id, "lexicon_item_id": wid, "position": n}
+                            for n, wid in enumerate(word_ids)
+                        ]
+                    )
+                )
+    return len(f.scenes)
+
+
+async def _seed_scenes(paths: list[Path], dry_run: bool) -> int:
+    files = [read_scene_file(p) for p in paths]
+    for f in files:
+        n = await upsert_scenes(f, dry_run=dry_run)
+        event = "scenes_validated" if dry_run else "scenes_seeded"
+        log.info(event, extra={"language": f.language.value, "scenes": n or len(f.scenes)})
+    return 0
+
+
 async def _seed_lexicon(paths: list[Path], dry_run: bool) -> int:
     rows = [r for p in paths for r in read_rows(p, LexiconRow)]
     check_lexicon_uniqueness(rows)
@@ -269,6 +360,7 @@ def main(argv: list[str] | None = None) -> int:
     for name, help_ in (
         ("seed-lexicon", "Upsert lexicon items from CSV files"),
         ("seed-blacklist", "Upsert content blacklist entries from CSV files"),
+        ("seed-scenes", "Upsert lesson scenes from JSON files (needs the lexicon)"),
     ):
         p = sub.add_parser(name, help=help_)
         p.add_argument("paths", nargs="+", type=Path)
@@ -276,7 +368,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     configure_logging(get_settings().log_level)
-    handler = _seed_lexicon if args.cmd == "seed-lexicon" else _seed_blacklist
+    handler = {
+        "seed-lexicon": _seed_lexicon,
+        "seed-blacklist": _seed_blacklist,
+        "seed-scenes": _seed_scenes,
+    }[args.cmd]
 
     async def run() -> int:
         try:

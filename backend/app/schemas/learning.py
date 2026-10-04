@@ -5,7 +5,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 from app.domain.enums import CefrLevel, Language, ProgressState
-from app.models.learning import SessionStatus, TaskStatus, TaskType
+from app.models.learning import SessionMode, SessionStatus, TaskStatus, TaskType
 
 IdempotencyKey = Annotated[str, StringConstraints(pattern=r"^[A-Za-z0-9_-]{8,64}$")]
 
@@ -14,21 +14,56 @@ class StartIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     language: Language | None = None  # defaults to the profile's active language
+    mode: SessionMode = SessionMode.LEARN
+
+
+class SegmentOut(BaseModel):
+    text: str
+    item_id: uuid.UUID | None = None  # a lexicon word: tappable for its gloss
+    gloss: str | None = None
+    new: bool = False  # introduced by this lesson
+
+
+class SceneLineOut(BaseModel):
+    speaker: str | None
+    cs: str
+    segments: list[SegmentOut]
+
+
+class SceneOut(BaseModel):
+    title: str
+    lines: list[SceneLineOut]
+
+
+class WordCard(BaseModel):
+    """A new word, presented before any practice."""
+
+    id: uuid.UUID
+    lemma: str
+    pos: str
+    gender: str | None
+    ipa: str | None
+    translation: str
+    context: str | None  # the scene line with the word, else its example sentence
+    context_cs: str | None
 
 
 class SessionOut(BaseModel):
     id: uuid.UUID
     language: Language
+    mode: SessionMode
     status: SessionStatus
     total: int
     remaining: int
     created_at: datetime
     completed_at: datetime | None
     summary: dict
+    scene: SceneOut | None = None  # learn only
+    words: list[WordCard] = []  # learn only
 
 
 class StartOut(BaseModel):
-    session: SessionOut | None  # None: nothing due and no new words in this language
+    session: SessionOut | None  # None: learn = no new words left; check = nothing due
 
 
 class Option(BaseModel):
@@ -103,7 +138,8 @@ class ProgressOut(BaseModel):
     passive_known: int
     active_known: int
     known: int  # both passive and active
-    due_now: int
+    introduced: int  # presented in a finished lesson
+    due_now: int  # introduced words a check can ask about now
     orthography_avg: float | None
     phonetic_measured: int  # profiles start at 0: pronunciation scoring is not validated yet
     grammar_unlocked: bool
@@ -111,4 +147,5 @@ class ProgressOut(BaseModel):
     next_milestone: int | None
     next_milestone_cefr: CefrLevel | None
     by_band: list[BandProgress]
-    active_session_id: uuid.UUID | None
+    active_session_id: uuid.UUID | None  # open lesson
+    active_check_session_id: uuid.UUID | None

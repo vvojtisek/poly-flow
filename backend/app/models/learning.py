@@ -30,6 +30,11 @@ class SessionStatus(StrEnum):
     ABANDONED = "abandoned"
 
 
+class SessionMode(StrEnum):
+    LEARN = "learn"  # Lekce: context first, then practice; nothing is graded toward knowledge
+    CHECK = "check"  # Ověření: one first-try attempt, no hints; the only source of evidence
+
+
 class TaskType(StrEnum):
     RECOGNITION = "recognition"  # target word -> pick the Czech meaning
     RECALL = "recall"  # Czech meaning -> write the target word
@@ -46,20 +51,23 @@ def _enum(cls: type[StrEnum], name: str) -> Enum:
 
 
 SessionStatusType = _enum(SessionStatus, "learning_session_status")
+SessionModeType = _enum(SessionMode, "learning_session_mode")
 TaskTypeType = _enum(TaskType, "learning_task_type")
 TaskStatusType = _enum(TaskStatus, "learning_task_status")
 
 
 class LearningSession(UUIDPrimaryKeyMixin, TimestampMixin, Base):
-    """A lesson: the server issues the tasks; the client cannot add or grade them."""
+    """A lesson or a check: the server issues the tasks; the client cannot add or grade them."""
 
     __tablename__ = "learning_sessions"
     __table_args__ = (
-        # At most one open lesson per profile and language (resume instead of duplicating).
+        # At most one open lesson and one open check per profile and language (resume
+        # instead of duplicating).
         Index(
             "uq_learning_sessions_one_active",
             "user_id",
             "language",
+            "mode",
             unique=True,
             postgresql_where=text("status = 'active'"),
         ),
@@ -69,6 +77,14 @@ class LearningSession(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     language: Mapped[Language] = mapped_column(LanguageType, nullable=False)
+    mode: Mapped[SessionMode] = mapped_column(
+        SessionModeType,
+        default=SessionMode.LEARN,
+        server_default=SessionMode.LEARN.value,
+        nullable=False,
+    )
+    # Learn mode: the scene that introduces the lesson's words (None = example sentences only).
+    scene_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("scenes.id", ondelete="SET NULL"))
     status: Mapped[SessionStatus] = mapped_column(
         SessionStatusType,
         default=SessionStatus.ACTIVE,
@@ -81,6 +97,7 @@ class LearningSession(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         JSONB, default=dict, server_default=text("'{}'::jsonb"), nullable=False
     )
 
+    scene = relationship("Scene")
     tasks = relationship(
         "LearningTask",
         back_populates="session",
