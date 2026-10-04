@@ -1,0 +1,26 @@
+# Lemmatiser corrections (spaCy on isolated forms). form -> lemma, with the reason.
+form,lemma,reason
+data,data,modern English treats data as a mass noun
+media,media,the plural of medium is rarely meant
+better,good,adjective use dominates; spaCy picks the adverb out of context
+best,good,adjective use dominates; spaCy picks the adverb out of context
+according,according,learners meet it as 'according to'; spaCy reduces it to the verb accord
+texted,text,spaCy leaves the verb unlemmatised
+texting,text,spaCy leaves the verb unlemmatised
+blogging,blog,spaCy leaves the verb unlemmatised
+us,we,object pronoun; spaCy leaves it as its own lemma out of context
+am,be,first-person form of be
+taxis,taxi,plural left unlemmatised
+clothes,clothes,spaCy reduces it to the rare verb clothe
+politics,politics,spaCy reduces it to politic
+headquarters,headquarters,spaCy reduces it to headquarter
+pants,pants,spaCy reduces it to pant
+jeans,jeans,spaCy reduces it to jean
+congratulations,congratulations,spaCy reduces it to congratulation
+ethics,ethics,spaCy reduces it to ethic
+stole,steal,past tense of steal
+me,i,object pronoun; spaCy keeps it out of context
+fed,feed,past tense of feed
+sung,sing,past participle of sing
+graves,grave,plural left unlemmatised
+brooks,brook,plural left unlemmatised

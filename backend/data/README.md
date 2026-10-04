@@ -44,6 +44,67 @@ Import is an idempotent upsert: re-running updates rank/gloss/etc. in place with
 The per-language rank constraint is deferred to commit, so rank shifts inside one file are fine; an import
 fails cleanly if an item *not* in the file still holds a rank the file assigns to another lemma.
 
+## Frequency lemmas (`frequency/*.lemmas.csv`)
+
+Ranked reference lists of the most frequent lemmas per locale, imported into the `frequency_lemmas`
+table. Columns: `rank,lemma,pos,content_flags,source,license,revision`; the locale comes from the
+file name (`en_US.lemmas.csv`). Ranks run exactly 1..N, lemmas are unique per locale, lowercase ASCII
+(`app/domain/lemmas.py`). `content_flags` has the same meaning as in the lexicon.
+
+**This is not curriculum.** Rows have no Czech gloss, so lessons, Ověření, level exams and the
+placement test never draw from this table; they keep using `lexicon_items`. The list is the rank
+source for growing the lexicon: a word joins the lexicon (and the courses) once it has a reviewed
+Czech gloss, with its rank taken from here. Ranks map onto the ladder with
+`app.domain.progression.frequency_band` (stored as `frequency_band`): 1-100 core, -500 A1, -1000 A2,
+-2500 B1, -4000 B2 threshold, -5000 full B2, 5001-10000 the voluntary passive extension.
+
+Import (idempotent; one transaction, batches of 1,000; lemmas missing from the file are deleted,
+flags are only ever added):
+
+```sh
+python -m app.cli seed-lemmas data/frequency/en_US.lemmas.csv [--dry-run]
+```
+
+### `en_US.lemmas.csv` (10,000 lemmas, revision `wordfreq-en-v1`)
+
+Generated, not hand-edited: `uv run --extra lemmas python scripts/seed_lemmas_en_us.py build`
+(pinned versions in `pyproject.toml`; the output is byte-identical on re-runs). Pipeline:
+
+1. Word forms and frequencies: [wordfreq](https://github.com/rspeer/wordfreq) 3.1.1, `en`, top 60,000.
+2. Normalise: NFKD, drop diacritics, lowercase; British spellings mapped to American with breame
+   0.1.2 (only when Hunspell knows the American form).
+3. Lemmatise each form with spaCy 3.8 `en_core_web_sm` 3.8.0 and add its frequency to the lemma;
+   contractions split (`don't` -> do + not). Forms tagged PROPN out of context are re-lemmatised as
+   nouns; forms left unlemmatised are retried as each open class. `en_US.lemma_overrides.csv`
+   corrects known errors (`data` stays `data`, `better` -> `good`).
+4. Keep a lemma only if the SCOWL en_US Hunspell dictionary (LibreOffice/dictionaries, pinned commit
+   and checksum) accepts it in lowercase: this drops names, places, acronyms, British-only spellings,
+   most foreign words and slang. `en_US.include.csv` re-admits capitalised everyday words (days,
+   months, languages and nationalities, holidays); `en_US.exclude.csv` removes what the dictionary
+   lets through (abbreviations, roman numerals, first names, prefix fragments).
+5. Rank by summed frequency (ties alphabetical), keep 10,000. `en_US.flags.csv` adds content flags.
+
+Limits, stated plainly:
+
+- **Not COCA.** COCA's lemma lists are licensed and not freely downloadable, so wordfreq is the source.
+  wordfreq's English blends US and UK sources (Wikipedia, subtitles, news, books, web, Reddit,
+  Twitter); `en_US` here means American spelling, not a US-only corpus. wordfreq's data stops around
+  2021 and the project is no longer updated, so recent words rank low or are missing.
+- Lemmas and POS come from tagging isolated words, without sentence context. POS is the dominant tag
+  of the lemma's forms and is a heuristic; homographs are merged (`left` counts toward `leave`).
+- The 100 English core lemmas are all in the list (99 within the first 1,000, `cat` at ~1,100). The
+  lexicon's core-100 ranks are hand-set and unchanged; nothing here changes learner progress.
+- Content flags are a first, hand-made pass (profanity, slurs, sexual terms, war and killing as
+  violence, as in the German blacklist). Identity terms are not flagged. Drugs have no `ContentFlag`
+  value and are unflagged.
+- Licence: wordfreq's data is CC-BY-SA-4.0, so this derived list is too: attribution to wordfreq
+  (Robyn Speer, <https://doi.org/10.5281/zenodo.7199437>) sits in the file header, every row carries
+  `source` and `license`, and the table keeps both. wordfreq's README asks people not to convert it to
+  CSV because attribution gets stripped; the file holds ranks of processed lemmas, not wordfreq's
+  frequencies, and keeps the attribution in every row. spaCy,
+  breame (Apache-2.0), spylls (MPL-2.0) and the SCOWL dictionary are build tools only; none of their
+  data is copied into the list beyond the lemmas themselves.
+
 ## Scenes (`scenes/*.json`)
 
 Short dialogues that open each lesson (Lekce): the learner reads the scene first (Czech translation on

@@ -51,6 +51,7 @@ jobs:
           uv run python -m app.cli seed-lexicon data/lexicon/*.csv
           uv run python -m app.cli seed-scenes data/scenes/*.json
           uv run python -m app.cli seed-blacklist data/blacklist/*.csv
+          uv run python -m app.cli seed-lemmas data/frequency/*.lemmas.csv
 
   frontend:
     runs-on: ubuntu-latest
