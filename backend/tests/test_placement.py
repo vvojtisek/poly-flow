@@ -309,3 +309,33 @@ async def test_lesson_words_are_marked_as_lesson_introduced(db, client):
     async for s in get_session():
         by = set((await s.execute(select(UserWordProgress.introduced_by))).scalars())
     assert by == {"lesson"}
+
+
+async def test_available_after_learning_and_graded_like_a_check(db, client):
+    # Everything placed at the ceiling: a later test still has words to ask.
+    await seed_ranked()
+    me = await setup_parent(client)
+    first = (await take_test(client, me, N_WORDS))["summary"]
+    assert first["at_ceiling"]
+    asked_before = {rank for rank, p in (await progress_rows()).items() if p.correct_count == 1}
+
+    done = await take_test(client, me, 0)  # now answers "Nevím" to everything
+    assert done["summary"]["asked"] >= PLACEMENT.min_items
+    rows = await progress_rows()
+    async for s in get_session():
+        missed = set(
+            (
+                await s.execute(
+                    select(LexiconItem.frequency_rank)
+                    .join(LearningEvent, LearningEvent.lexicon_item_id == LexiconItem.id)
+                    .where(LearningEvent.is_correct.is_(False))
+                )
+            ).scalars()
+        )
+    assert missed
+    for rank in missed:
+        p = rows[rank]
+        # Each miss counted like a missed check: back to the lessons, nothing known.
+        assert p.error_count == 1 and p.introduced_at is None
+        if rank in asked_before:
+            assert p.correct_count == 1  # the earlier evidence stays
