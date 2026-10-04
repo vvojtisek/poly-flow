@@ -11,11 +11,13 @@ from datetime import datetime, timedelta
 
 @dataclass(frozen=True, slots=True)
 class LearningPolicy:
-    version: str = "v1"
-    # passive_known: correct recognition (or production) without a hint, on the first try
+    # v2: only checks (Ověření) count as evidence; lessons introduce words in context and their
+    # practice is never graded toward knowledge. Words become checkable the next local day.
+    version: str = "v2"
+    # passive_known: correct recognition (or production) in a check, without a hint
     passive_required_correct: int = 3
     passive_required_days: int = 2
-    # active_known: correct written production without a hint, on the first try
+    # active_known: correct written production in a check, without a hint
     active_required_correct: int = 3
     active_required_days: int = 2
     # MASTERED: both known, then a successful check at least this long afterwards
@@ -26,8 +28,9 @@ class LearningPolicy:
     decay_after: timedelta = timedelta(days=30)
     # Effective retention past the decay window halves every this many days.
     retention_half_life: timedelta = timedelta(days=30)
-    # Session composition
+    # Session composition: a check holds at most this many words...
     session_max_tasks: int = 12
+    # ...and a lesson introduces at most this many (each practised twice).
     new_items_per_session: int = 4
     # Exponential smoothing weight of the latest orthography measurement
     orthography_weight: float = 0.3

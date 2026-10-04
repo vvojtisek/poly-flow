@@ -1,11 +1,18 @@
-"""Lesson engine (plan P2). Callers own the transaction; `now` is injected for testability."""
+"""Lesson engine (plan P2, policy v2). Callers own the transaction; `now` is injected.
+
+Two separate modes:
+- learn (Lekce): a scene introduces the words in context, then guided practice with free hints
+  and retries. Nothing here counts toward knowing a word; completing it introduces the words.
+- check (Ověření): introduced words that are due, from the day after their lesson. One attempt,
+  no hints. The only source of knowledge evidence.
+"""
 
 import math
 import random
 import re
 import uuid
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime, time, timedelta
 from zoneinfo import ZoneInfo
 
 from sqlalchemy import and_, case, func, select, update
@@ -24,10 +31,12 @@ from app.models import (
     LearningSession,
     LearningTask,
     LexiconItem,
+    Scene,
+    SceneWord,
     User,
     UserWordProgress,
 )
-from app.models.learning import SessionStatus, TaskStatus, TaskType
+from app.models.learning import SessionMode, SessionStatus, TaskStatus, TaskType
 
 MAX_RECOGNITION_OPTIONS = 4
 MAX_HINT_LEVEL = 2
@@ -44,11 +53,21 @@ class LearningError(Exception):
 
 
 def _with_tasks():
-    return selectinload(LearningSession.tasks).selectinload(LearningTask.item)
+    return (
+        selectinload(LearningSession.tasks).selectinload(LearningTask.item),
+        selectinload(LearningSession.scene),
+    )
+
+
+def next_local_midnight(user: User, now: datetime) -> datetime:
+    """Start of the profile's next local day: when freshly learned words become checkable."""
+    tz = ZoneInfo(user.timezone)
+    tomorrow = now.astimezone(tz).date() + timedelta(days=1)
+    return datetime.combine(tomorrow, time(0), tzinfo=tz).astimezone(UTC)
 
 
 async def get_active_session(
-    db: AsyncSession, user: User, language: Language
+    db: AsyncSession, user: User, language: Language, mode: SessionMode = SessionMode.LEARN
 ) -> LearningSession | None:
     return (
         await db.execute(
@@ -56,9 +75,10 @@ async def get_active_session(
             .where(
                 LearningSession.user_id == user.id,
                 LearningSession.language == language,
+                LearningSession.mode == mode,
                 LearningSession.status == SessionStatus.ACTIVE,
             )
-            .options(_with_tasks())
+            .options(*_with_tasks())
         )
     ).scalar_one_or_none()
 
@@ -68,7 +88,7 @@ async def get_session(db: AsyncSession, user: User, session_id: uuid.UUID) -> Le
         await db.execute(
             select(LearningSession)
             .where(LearningSession.id == session_id, LearningSession.user_id == user.id)
-            .options(_with_tasks())
+            .options(*_with_tasks())
         )
     ).scalar_one_or_none()
     if s is None:
@@ -83,7 +103,65 @@ class _Planned:
     is_new: bool
 
 
-async def _plan(db: AsyncSession, user: User, language: Language, now: datetime) -> list[_Planned]:
+def _not_introduced(user: User):
+    """Outer-join condition + filter for words this profile has not been introduced to."""
+    return (
+        and_(
+            UserWordProgress.lexicon_item_id == LexiconItem.id,
+            UserWordProgress.user_id == user.id,
+        ),
+        UserWordProgress.introduced_at.is_(None),
+    )
+
+
+async def _plan_learn(
+    db: AsyncSession, user: User, language: Language
+) -> tuple[Scene | None, list[_Planned]]:
+    """The next scene with words not yet introduced, and up to N of those words.
+
+    Scenes are walked in curriculum order; a scene with more new words than fit in one lesson
+    opens the next lesson too. Words without a scene follow by frequency, with their example
+    sentence as the context.
+    """
+    on, still_new = _not_introduced(user)
+    limit = POLICY.new_items_per_session
+    rows = (
+        await db.execute(
+            select(Scene, LexiconItem)
+            .join(SceneWord, SceneWord.scene_id == Scene.id)
+            .join(LexiconItem, LexiconItem.id == SceneWord.lexicon_item_id)
+            .outerjoin(UserWordProgress, on)
+            .where(Scene.language == language, still_new)
+            .order_by(Scene.position, SceneWord.position)
+            .limit(limit)
+        )
+    ).all()
+    scene: Scene | None = None
+    items: list[LexiconItem]
+    if rows:
+        scene = rows[0][0]
+        items = [item for sc, item in rows if sc.id == scene.id]
+    else:
+        items = list(
+            (
+                await db.execute(
+                    select(LexiconItem)
+                    .outerjoin(UserWordProgress, on)
+                    .where(LexiconItem.language == language, still_new)
+                    .order_by(LexiconItem.frequency_rank)
+                    .limit(limit)
+                )
+            ).scalars()
+        )
+    # Meet the word first (recognition), produce it later in the same lesson (recall).
+    plan = [_Planned(i, TaskType.RECOGNITION, True) for i in items]
+    plan += [_Planned(i, TaskType.RECALL, True) for i in items]
+    return scene, plan
+
+
+async def _plan_check(
+    db: AsyncSession, user: User, language: Language, now: datetime
+) -> list[_Planned]:
     due_rows = (
         await db.execute(
             select(UserWordProgress, LexiconItem)
@@ -91,45 +169,18 @@ async def _plan(db: AsyncSession, user: User, language: Language, now: datetime)
             .where(
                 UserWordProgress.user_id == user.id,
                 LexiconItem.language == language,
-                UserWordProgress.state != ProgressState.NEW,
+                UserWordProgress.introduced_at.is_not(None),
                 UserWordProgress.next_review_at <= now,
             )
             .order_by(UserWordProgress.next_review_at, LexiconItem.frequency_rank)
             .limit(POLICY.session_max_tasks)
         )
     ).all()
-    plan: list[_Planned] = []
-    for progress, item in due_rows:
-        if not progress.passive_known:
-            plan.append(_Planned(item, TaskType.RECOGNITION, False))
-        else:
-            plan.append(_Planned(item, TaskType.RECALL, False))
-
-    new_slots = min(
-        POLICY.new_items_per_session, max(0, (POLICY.session_max_tasks - len(plan)) // 2)
-    )
-    if new_slots:
-        unseen = (
-            select(LexiconItem)
-            .outerjoin(
-                UserWordProgress,
-                and_(
-                    UserWordProgress.lexicon_item_id == LexiconItem.id,
-                    UserWordProgress.user_id == user.id,
-                ),
-            )
-            .where(
-                LexiconItem.language == language,
-                (UserWordProgress.id.is_(None)) | (UserWordProgress.state == ProgressState.NEW),
-            )
-            .order_by(LexiconItem.frequency_rank)
-            .limit(new_slots)
-        )
-        new_items = (await db.execute(unseen)).scalars().all()
-        # Meet the word first (recognition), produce it later in the same lesson (recall).
-        plan += [_Planned(i, TaskType.RECOGNITION, True) for i in new_items]
-        plan += [_Planned(i, TaskType.RECALL, True) for i in new_items]
-    return plan[: POLICY.session_max_tasks]
+    # Recognition until the word is passively known, then production.
+    return [
+        _Planned(item, TaskType.RECALL if p.passive_known else TaskType.RECOGNITION, False)
+        for p, item in due_rows
+    ]
 
 
 async def _recognition_payload(
@@ -162,26 +213,36 @@ async def start_session(
     language: Language,
     now: datetime,
     rng: random.Random | None = None,
+    mode: SessionMode = SessionMode.LEARN,
 ) -> LearningSession | None:
-    """Resume the open lesson for this language, or build a new one. None = nothing to do."""
-    existing = await get_active_session(db, user, language)
+    """Resume the open lesson/check for this language, or build a new one. None = nothing to do."""
+    existing = await get_active_session(db, user, language, mode)
     if existing is not None:
         return existing
     rng = rng or random.Random()
-    plan = await _plan(db, user, language, now)
+    scene: Scene | None = None
+    if mode == SessionMode.LEARN:
+        scene, plan = await _plan_learn(db, user, language)
+    else:
+        plan = await _plan_check(db, user, language, now)
     if not plan:
         return None
 
     session = LearningSession(
-        user_id=user.id, language=language, policy_version=POLICY.version, summary={}
+        user_id=user.id,
+        language=language,
+        mode=mode,
+        scene_id=scene.id if scene else None,
+        policy_version=POLICY.version,
+        summary={},
     )
     try:
         async with db.begin_nested():
             db.add(session)
             await db.flush()
     except IntegrityError:
-        # A concurrent request opened the lesson first; resume that one.
-        return await get_active_session(db, user, language)
+        # A concurrent request opened the session first; resume that one.
+        return await get_active_session(db, user, language, mode)
 
     position = 0
     for p in plan:
@@ -297,6 +358,8 @@ async def use_hint(db: AsyncSession, user: User, task_id: uuid.UUID) -> Learning
     task = await _lock_task(db, user, task_id)
     if task.status != TaskStatus.PENDING:
         raise LearningError("task_closed")
+    if task.session.mode == SessionMode.CHECK:
+        raise LearningError("hints_disabled")
     limit = 1 if task.task_type == TaskType.RECOGNITION else MAX_HINT_LEVEL
     task.hint_level = min(task.hint_level + 1, limit)
     return task
@@ -318,7 +381,11 @@ async def submit_answer(
     text: str | None = None,
     reveal: bool = False,
 ) -> dict:
-    """Grade one attempt (or a reveal) and aggregate progress. Duplicate keys replay."""
+    """Grade one attempt (or a reveal) and aggregate progress. Duplicate keys replay.
+
+    learn: retry until correct; a wrong answer shows the right one; never evidence.
+    check: the first attempt closes the task; correct and hint-free is evidence.
+    """
     if (cached := await _replay(db, user, idempotency_key)) is not None:
         return cached
     task = await _lock_task(db, user, task_id)
@@ -351,17 +418,20 @@ async def submit_answer(
             text,
         )
 
+    checking = task.session.mode == SessionMode.CHECK
     task.attempts += 1
     first_attempt = task.attempts == 1
     hint_used = task.hint_level > 0
-    evidence = correct and first_attempt and not hint_used and not reveal
+    evidence = checking and correct and first_attempt and not hint_used and not reveal
     if first_attempt:
-        task.first_try_correct = evidence
-    if reveal:
-        task.status = TaskStatus.REVEALED
-    elif correct:
+        task.first_try_correct = correct and not hint_used and not reveal
+    if correct and not reveal:
         task.status = TaskStatus.DONE
+    elif reveal or checking:
+        task.status = TaskStatus.REVEALED  # closed without a correct answer
     done = task.status != TaskStatus.PENDING
+    # learn: show the right answer straight away, then the learner tries again.
+    show = done or not checking
 
     result = {
         "task_id": str(task.id),
@@ -372,9 +442,9 @@ async def submit_answer(
         "attempts": task.attempts,
         "task_done": done,
         "can_retry": not done,
-        # Show the answer only once it can no longer be guessed from it.
-        "expected": _expected(task) if done else None,
-        "meaning": item.translation_cs if done else None,
+        # check: show the answer only once it can no longer be guessed from it.
+        "expected": _expected(task) if show else None,
+        "meaning": item.translation_cs if show else None,
     }
     tz = ZoneInfo(user.timezone)
     db.add(
@@ -408,16 +478,19 @@ async def submit_answer(
             return cached
         raise
 
-    await _apply_progress(
-        db,
-        user,
-        item,
-        task.task_type,
-        now=now,
-        first_attempt=first_attempt,
-        evidence=evidence,
-        orthography=ortho if first_attempt else None,
-    )
+    if checking:
+        await _apply_progress(
+            db,
+            user,
+            item,
+            task.task_type,
+            now=now,
+            first_attempt=first_attempt,
+            evidence=evidence,
+            orthography=ortho if first_attempt else None,
+        )
+    else:
+        await mark_seen(db, user, item, now)  # practice is exposure, not knowledge
     return result
 
 
@@ -457,7 +530,8 @@ async def _apply_progress(
         else:
             p.error_count += 1
             p.review_streak = 0
-            p.next_review_at = now  # back into the next lesson
+            # Due again tomorrow: a same-day retry would measure short-term memory.
+            p.next_review_at = next_local_midnight(user, now)
         if orthography is not None:
             p.orthography_score = smooth(p.orthography_score, orthography)
 
@@ -535,9 +609,35 @@ async def complete_session(
             "new_items": len({t.lexicon_item_id for t in tasks if t.is_new_item}),
             "reviewed_items": len({t.lexicon_item_id for t in tasks if not t.is_new_item}),
         }
+        if s.mode == SessionMode.LEARN:
+            await _introduce(db, user, [t.item for t in tasks if t.is_new_item], now)
         s.status = SessionStatus.COMPLETED
         s.completed_at = now
     return s
+
+
+async def _introduce(db: AsyncSession, user: User, items: list[LexiconItem], now: datetime):
+    """A finished lesson introduces its words: checkable from the next local day."""
+    checkable = next_local_midnight(user, now)
+    for item in {i.id: i for i in items}.values():
+        await mark_seen(db, user, item, now)
+        await db.execute(
+            update(UserWordProgress)
+            .where(
+                UserWordProgress.user_id == user.id,
+                UserWordProgress.lexicon_item_id == item.id,
+                UserWordProgress.introduced_at.is_(None),
+            )
+            .values(
+                introduced_at=now,
+                state=case(
+                    (UserWordProgress.state == ProgressState.NEW, ProgressState.LEARNING),
+                    else_=UserWordProgress.state,
+                ),
+                next_review_at=checkable,
+                policy_version=POLICY.version,
+            )
+        )
 
 
 # ---------------------------------------------------------------- maintenance
@@ -590,7 +690,8 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
                 func.count().filter(p.passive_known.is_(True)),
                 func.count().filter(p.active_known.is_(True)),
                 func.count().filter(known_expr),
-                func.count().filter(and_(p.state != ProgressState.NEW, p.next_review_at <= now)),
+                func.count().filter(p.introduced_at.is_not(None)),
+                func.count().filter(and_(p.introduced_at.is_not(None), p.next_review_at <= now)),
                 func.avg(p.orthography_score),
                 func.count(p.phonetic_score),
             )
@@ -599,7 +700,7 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
             .where(p.user_id == user.id, li.language == language)
         )
     ).one()
-    seen, passive, active, known, due, ortho_avg, phonetic = row
+    seen, passive, active, known, introduced, due, ortho_avg, phonetic = row
 
     by_state = dict.fromkeys(ProgressState, 0)
     for state, n in (
@@ -635,7 +736,8 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         )
     ).first() is not None
     nxt = next((m for m in MILESTONES if m.rank > known), None)
-    open_session = await get_active_session(db, user, language)
+    open_lesson = await get_active_session(db, user, language, SessionMode.LEARN)
+    open_check = await get_active_session(db, user, language, SessionMode.CHECK)
     return ProgressOut(
         language=language,
         lexicon_items=lexicon_items,
@@ -644,6 +746,7 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         passive_known=passive,
         active_known=active,
         known=known,
+        introduced=introduced,
         due_now=due,
         orthography_avg=round(float(ortho_avg), 3) if ortho_avg is not None else None,
         phonetic_measured=phonetic,
@@ -652,5 +755,6 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         next_milestone=nxt.rank if nxt else None,
         next_milestone_cefr=nxt.cefr if nxt else None,
         by_band=[BandProgress(band=b, items=n, known=k) for b, n, k in bands],
-        active_session_id=open_session.id if open_session else None,
+        active_session_id=open_lesson.id if open_lesson else None,
+        active_check_session_id=open_check.id if open_check else None,
     )

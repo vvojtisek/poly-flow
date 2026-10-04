@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, BarChart3, BookOpen, Map as MapIcon, Play } from "lucide-react";
+import { Activity, BarChart3, BookOpen, ClipboardCheck, Map as MapIcon, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -45,15 +45,31 @@ export default function HomePage() {
         <Panel title={cs.todayPractice} icon={BookOpen}>
           <div className="flex flex-col gap-3">
             <LanguagePicker me={me} />
-            <Button className="w-full !py-4 text-lg" onClick={() => router.push("/lesson")}>
-              <Play className="size-5" aria-hidden />
-              {progress?.active_session_id ? cs.lesson.resume : cs.lesson.start}
-            </Button>
-            {progress && (
-              <p className="text-center text-xs text-slate-500">
-                {cs.progress.due}: {progress.due_now}
-              </p>
-            )}
+            <div className="flex flex-col gap-1">
+              <Button className="w-full !py-4 text-lg" onClick={() => router.push("/lesson")}>
+                <Play className="size-5" aria-hidden />
+                {progress?.active_session_id ? cs.lesson.resume : cs.lesson.start}
+              </Button>
+              <p className="text-center text-xs text-slate-500">{cs.lesson.learnHelp}</p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <Button
+                variant="secondary"
+                className="w-full !py-4 text-lg"
+                disabled={!progress || (!progress.due_now && !progress.active_check_session_id)}
+                onClick={() => router.push("/check")}
+              >
+                <ClipboardCheck className="size-5" aria-hidden />
+                {progress?.active_check_session_id ? cs.check.resume : cs.check.start}
+              </Button>
+              {progress && (
+                <p className="text-center text-xs text-slate-500">
+                  {progress.due_now || progress.active_check_session_id
+                    ? `${cs.check.dueCount(progress.due_now)}. ${cs.check.help}`
+                    : cs.check.nothingDue}
+                </p>
+              )}
+            </div>
           </div>
         </Panel>
 

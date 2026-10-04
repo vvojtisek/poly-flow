@@ -2,7 +2,7 @@
 
 import asyncio
 import uuid
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from sqlalchemy import func, select, update
@@ -43,9 +43,9 @@ async def child_session(client) -> dict:
     return await login(client, "eva", "4321")
 
 
-async def start(client, me, language="de") -> dict | None:
+async def start(client, me, language="de", mode="learn") -> dict | None:
     r = await client.post(
-        "/api/v1/learning/sessions", json={"language": language}, headers=csrf(me)
+        "/api/v1/learning/sessions", json={"language": language, "mode": mode}, headers=csrf(me)
     )
     assert r.status_code == 200, r.text
     return r.json()["session"]
@@ -94,9 +94,16 @@ async def answer(client, me, task, body, k=None):
     return r
 
 
-async def run_lesson(client, me, language="de", correct=True) -> dict:
-    s = await start(client, me, language)
-    assert s is not None
+async def finish(client, me, s) -> dict:
+    r = await client.post(f"/api/v1/learning/sessions/{s['id']}/complete", headers=csrf(me))
+    assert r.status_code == 200
+    return r.json()
+
+
+async def run_session(client, me, language="de", correct=True, mode="learn") -> dict | None:
+    s = await start(client, me, language, mode)
+    if s is None:
+        return None
     while (t := await next_task(client, s["id"])) is not None:
         body = await correct_answer(t) if correct else await wrong_answer(t)
         r = await answer(client, me, t, body)
@@ -108,9 +115,26 @@ async def run_lesson(client, me, language="de", correct=True) -> dict:
                 headers=csrf(me),
             )
             assert r.status_code == 200
-    r = await client.post(f"/api/v1/learning/sessions/{s['id']}/complete", headers=csrf(me))
-    assert r.status_code == 200
-    return r.json()
+    return await finish(client, me, s)
+
+
+async def run_lesson(client, me, language="de") -> dict:
+    s = await run_session(client, me, language)
+    assert s is not None
+    return s
+
+
+async def run_check(client, me, language="de", correct=True) -> dict | None:
+    return await run_session(client, me, language, correct, mode="check")
+
+
+async def checkable(client, me, clock, language="de") -> dict:
+    """Learn the first words, wait for the next day, open a check."""
+    await run_lesson(client, me, language)
+    clock.advance(days=1)
+    s = await start(client, me, language, "check")
+    assert s is not None
+    return s
 
 
 async def progress_rows() -> dict[str, UserWordProgress]:
@@ -174,37 +198,56 @@ async def test_concurrent_start_creates_one_lesson(db, client):
     assert len({r["id"] for r in results}) == 1
 
 
-# ------------------------------------------------------------------ answering
+# ------------------------------------------------------------------ learning (Lekce)
 
 
-async def test_wrong_then_right_is_not_evidence(db, client):
+async def test_lesson_wrong_answer_shows_the_right_one_and_retries(db, client):
     await seed_words()
     me = await child_session(client)
     s = await start(client, me)
     t = await next_task(client, s["id"])
     r = (await answer(client, me, t, await wrong_answer(t))).json()
-    assert r["correct"] is False and r["can_retry"] and r["expected"] is None
+    assert r["correct"] is False and r["can_retry"] and r["expected"] == "ten"
     r = (await answer(client, me, t, await correct_answer(t))).json()
     assert r["correct"] and r["task_done"] and r["counted"] is False and r["attempts"] == 2
     p = (await progress_rows())["der"]
-    assert p.error_count == 1 and p.correct_count == 0 and p.state == ProgressState.LEARNING
-    assert p.next_review_at is not None  # due again
+    # Practice is exposure only: no errors, no schedule, not introduced until the lesson ends.
+    assert p.error_count == 0 and p.correct_count == 0 and p.state == ProgressState.NEW
+    assert p.next_review_at is None and p.introduced_at is None
 
 
-async def test_first_try_correct_is_evidence_and_schedules(db, client, clock):
+async def test_lesson_never_counts_as_evidence(db, client):
     await seed_words()
     me = await child_session(client)
-    s = await start(client, me)
-    t = await next_task(client, s["id"])
-    r = (await answer(client, me, t, await correct_answer(t))).json()
-    assert r["counted"] and r["expected"] == "ten"
+    summary = await run_lesson(client, me)
+    assert summary["mode"] == "learn" and summary["summary"]["first_try_correct"] == 8
+    rows = await progress_rows()
+    assert all(p.correct_count == 0 and not p.passive_known for p in rows.values())
+    async with get_engine().connect() as conn:
+        counted = (
+            await conn.execute(
+                select(func.count())
+                .select_from(LearningEvent)
+                .where(LearningEvent.counts_as_evidence.is_(True))
+            )
+        ).scalar_one()
+    assert counted == 0
+
+
+async def test_finished_lesson_introduces_words_for_tomorrow(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    await run_lesson(client, me)
     p = (await progress_rows())["der"]
-    assert p.correct_count == 1 and p.review_streak == 1
-    assert p.next_review_at == clock.now + timedelta(days=1)
-    assert p.last_error_free_at == clock.now and p.phonetic_score is None
+    assert p.introduced_at == clock.now and p.state == ProgressState.LEARNING
+    # 08:00 UTC on 5 Oct is 10:00 in Prague; the next local day starts at 22:00 UTC.
+    assert p.next_review_at == datetime(2026, 10, 5, 22, 0, tzinfo=UTC)
+    assert await start(client, me, mode="check") is None  # not the same day
+    nxt = await start(client, me)  # the next lesson brings the next words
+    assert nxt is not None and nxt["total"] == 4
 
 
-async def test_hint_removes_evidence(db, client):
+async def test_lesson_hints_are_free(db, client):
     await seed_words()
     me = await child_session(client)
     s = await start(client, me)
@@ -226,7 +269,7 @@ async def test_recall_hint_shows_prefix(db, client):
     assert h1["hint"] == "H…" and h2["hint"] == "Ha…"
 
 
-async def test_reveal_closes_task_and_counts_as_error(db, client):
+async def test_lesson_reveal_has_no_consequence(db, client):
     await seed_words()
     me = await child_session(client)
     s = await start(client, me)
@@ -240,7 +283,7 @@ async def test_reveal_closes_task_and_counts_as_error(db, client):
     assert body["verdict"] == "revealed" and body["expected"] == "ten" and body["task_done"]
     again = await answer(client, me, t, await correct_answer(t))
     assert again.status_code == 409
-    assert (await progress_rows())["der"].error_count == 1
+    assert (await progress_rows())["der"].error_count == 0
 
 
 async def test_spelling_feedback(db, client):
@@ -252,13 +295,89 @@ async def test_spelling_feedback(db, client):
     assert r["verdict"] == "case" and r["note"] == "de_noun_capital" and not r["correct"]
     r = (await answer(client, me, t, {"text": "das Haus"})).json()
     assert r["correct"]
-    assert (await progress_rows())["Haus"].orthography_score == 0.6  # first attempt measured
+    assert (await progress_rows())["Haus"].orthography_score is None  # measured in checks only
 
 
-async def test_duplicate_submission_is_replayed(db, client):
+# ------------------------------------------------------------------ checking (Ověření)
+
+
+async def test_check_first_try_correct_is_evidence_and_schedules(db, client, clock):
     await seed_words()
     me = await child_session(client)
-    s = await start(client, me)
+    s = await checkable(client, me, clock)
+    assert s["mode"] == "check" and s["total"] == 4 and s["words"] == [] and s["scene"] is None
+    t = await next_task(client, s["id"])
+    assert t["type"] == "recognition" and not t["is_new_item"]
+    r = (await answer(client, me, t, await correct_answer(t))).json()
+    assert r["counted"] and r["expected"] == "ten"
+    p = (await progress_rows())["der"]
+    assert p.correct_count == 1 and p.review_streak == 1
+    assert p.next_review_at == clock.now + timedelta(days=1)
+    assert p.last_error_free_at == clock.now and p.phonetic_score is None
+
+
+async def test_check_wrong_answer_closes_the_task(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    s = await checkable(client, me, clock)
+    t = await next_task(client, s["id"])
+    r = (await answer(client, me, t, await wrong_answer(t))).json()
+    assert not r["correct"] and r["task_done"] and not r["can_retry"] and r["expected"] == "ten"
+    assert (await answer(client, me, t, await correct_answer(t))).status_code == 409
+    p = (await progress_rows())["der"]
+    assert p.error_count == 1 and p.review_streak == 0
+    assert p.next_review_at > clock.now  # due again tomorrow, not in the same sitting
+
+
+async def test_check_has_no_hints(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    s = await checkable(client, me, clock)
+    t = await next_task(client, s["id"])
+    h = await client.post(f"/api/v1/learning/tasks/{t['id']}/hint", headers=csrf(me))
+    assert h.status_code == 409 and h.json()["detail"] == "hints_disabled"
+
+
+async def test_check_dont_know_counts_as_error(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    s = await checkable(client, me, clock)
+    t = await next_task(client, s["id"])
+    r = await client.post(
+        f"/api/v1/learning/tasks/{t['id']}/reveal",
+        json={"idempotency_key": key()},
+        headers=csrf(me),
+    )
+    assert r.json()["verdict"] == "revealed"
+    assert (await progress_rows())["der"].error_count == 1
+
+
+async def test_check_measures_spelling(db, client, clock):
+    await seed_words(words=[("Haus", "NOUN", "dům")])
+    me = await child_session(client)
+    s = await checkable(client, me, clock)
+    t = await next_task(client, s["id"])
+    assert t["type"] == "recall"
+    r = (await answer(client, me, t, {"text": "haus"})).json()
+    assert r["verdict"] == "case" and r["task_done"]
+    assert (await progress_rows())["Haus"].orthography_score == 0.6
+
+
+async def test_lesson_and_check_can_be_open_together(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    c = await checkable(client, me, clock)
+    lesson = await start(client, me)
+    assert lesson["id"] != c["id"]
+    prog = (await client.get("/api/v1/learning/progress")).json()
+    assert prog["active_session_id"] == lesson["id"]
+    assert prog["active_check_session_id"] == c["id"]
+
+
+async def test_duplicate_submission_is_replayed(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    s = await checkable(client, me, clock)
     t = await next_task(client, s["id"])
     body = await wrong_answer(t)
     k = key()
@@ -269,26 +388,28 @@ async def test_duplicate_submission_is_replayed(db, client):
     assert p.error_count == 1
 
 
-async def test_concurrent_duplicate_submissions(db, client):
+async def test_concurrent_duplicate_submissions(db, client, clock):
     await seed_words()
     me = await child_session(client)
-    s = await start(client, me)
+    s = await checkable(client, me, clock)
     t = await next_task(client, s["id"])
     body = await correct_answer(t)
     k = key()
+    async with get_engine().connect() as conn:
+        before = (await conn.execute(select(func.count()).select_from(LearningEvent))).scalar_one()
     results = await asyncio.gather(*(answer(client, me, t, body, k) for _ in range(5)))
     assert all(r.status_code == 200 for r in results)
     assert len({r.text for r in results}) == 1
     async with get_engine().connect() as conn:
         n = (await conn.execute(select(func.count()).select_from(LearningEvent))).scalar_one()
-    assert n == 1
+    assert n == before + 1
     assert (await progress_rows())["der"].correct_count == 1
 
 
-async def test_concurrent_different_attempts_serialise(db, client):
+async def test_concurrent_different_attempts_serialise(db, client, clock):
     await seed_words()
     me = await child_session(client)
-    s = await start(client, me)
+    s = await checkable(client, me, clock)
     t = await next_task(client, s["id"])
     body = await correct_answer(t)
     results = await asyncio.gather(*(answer(client, me, t, body) for _ in range(3)))
@@ -303,12 +424,14 @@ async def test_concurrent_different_attempts_serialise(db, client):
 async def test_passive_and_active_known_need_two_days(db, client, clock):
     await seed_words(words=[("Haus", "NOUN", "dům"), ("Hund", "NOUN", "pes")])
     me = await child_session(client)
-    await run_lesson(client, me)  # day 1: recognition + recall evidence for both words
+    await run_lesson(client, me)
+    clock.advance(days=1)
+    await run_check(client, me)  # day 1: one recognition check per word
     p = (await progress_rows())["Haus"]
-    assert p.correct_count == 2 and not p.passive_known  # 2 events, 1 day
-    for _ in range(3):
-        clock.advance(days=8)  # past every interval, so the words are due
-        await run_lesson(client, me)
+    assert p.correct_count == 1 and not p.passive_known
+    while not (await progress_rows())["Haus"].active_known:
+        clock.advance(days=31)  # past every interval, so the words are due
+        assert await run_check(client, me) is not None
     p = (await progress_rows())["Haus"]
     assert p.passive_known and p.active_known and p.known_since_at is not None
 
@@ -318,17 +441,17 @@ async def test_mastered_after_delayed_check(db, client, clock):
     me = await child_session(client)
     await run_lesson(client, me)
     while not (await progress_rows())["Haus"].active_known:
-        clock.advance(days=8)
-        await run_lesson(client, me)
+        clock.advance(days=31)
+        await run_check(client, me)
     p = (await progress_rows())["Haus"]
     assert p.state == ProgressState.LEARNING
     clock.advance(days=6)
     await svc_force_due()
-    await run_lesson(client, me)
+    await run_check(client, me)
     assert (await progress_rows())["Haus"].state == ProgressState.LEARNING  # < 7 days
     clock.advance(days=2)
     await svc_force_due()
-    await run_lesson(client, me)
+    await run_check(client, me)
     assert (await progress_rows())["Haus"].state == ProgressState.MASTERED
 
 
@@ -346,16 +469,17 @@ async def test_languages_are_independent(db, client):
     await run_lesson(client, me, "de")
     fr = (await client.get("/api/v1/learning/progress?language=fr")).json()
     de = (await client.get("/api/v1/learning/progress?language=de")).json()
-    assert fr["seen"] == 0 and de["seen"] == 4
+    assert fr["seen"] == 0 and de["seen"] == 4 and de["introduced"] == 4
 
 
 async def test_grammar_unlock_persists(db, client, clock, monkeypatch):
     monkeypatch.setattr(svc, "GRAMMAR_GATE_WORDS", 2)
     await seed_words(words=[("Haus", "NOUN", "dům"), ("Hund", "NOUN", "pes")])
     me = await child_session(client)
-    for _ in range(4):
-        await run_lesson(client, me)
-        clock.advance(days=8)
+    await run_lesson(client, me)
+    for _ in range(8):
+        clock.advance(days=31)
+        await run_check(client, me)
     prog = (await client.get("/api/v1/learning/progress?language=de")).json()
     assert prog["known"] == 2 and prog["grammar_unlocked"]
     # Decay must not re-lock grammar.
@@ -373,6 +497,8 @@ async def test_decay_boundary_and_idempotence(db, client, clock):
     await seed_words(words=[("Haus", "NOUN", "dům"), ("Hund", "NOUN", "pes")])
     me = await child_session(client)
     await run_lesson(client, me)
+    clock.advance(days=1)
+    await run_check(client, me)
     async with get_engine().begin() as conn:
         await conn.execute(
             update(UserWordProgress).values(
@@ -431,10 +557,10 @@ async def test_reimport_keeps_progress(db, client):
     await seed_words()
     me = await child_session(client)
     await run_lesson(client, me)
-    before = {k: (v.correct_count, v.lexicon_item_id) for k, v in (await progress_rows()).items()}
+    before = {k: (v.introduced_at, v.lexicon_item_id) for k, v in (await progress_rows()).items()}
     changed = [(w, pos, cs + " (upr.)") for w, pos, cs in WORDS["de"]]
     await seed_words(words=changed)
-    after = {k: (v.correct_count, v.lexicon_item_id) for k, v in (await progress_rows()).items()}
+    after = {k: (v.introduced_at, v.lexicon_item_id) for k, v in (await progress_rows()).items()}
     assert before == after
 
 
@@ -445,8 +571,10 @@ async def test_progress_overview(db, client):
     p = (await client.get("/api/v1/learning/progress")).json()
     assert p["language"] == "de" and p["lexicon_items"] == 6 and p["seen"] == 4
     assert p["by_state"]["LEARNING"] == 4 and p["known"] == 0
+    assert p["introduced"] == 4 and p["due_now"] == 0  # checkable from tomorrow
     assert p["next_milestone"] == 100 and p["grammar_gate"] == 1000
     assert p["phonetic_measured"] == 0 and p["active_session_id"] is None
+    assert p["active_check_session_id"] is None
     assert p["by_band"] == [{"band": 100, "items": 6, "known": 0}]
 
 

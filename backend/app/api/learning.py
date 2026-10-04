@@ -3,11 +3,13 @@ from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import DB, Auth
 from app.domain.enums import Language
-from app.models import LearningSession, LearningTask
-from app.models.learning import TaskStatus, TaskType
+from app.models import LearningSession, LearningTask, LexiconItem
+from app.models.learning import SessionMode, TaskStatus, TaskType
 from app.schemas.learning import (
     AnswerIn,
     AnswerOut,
@@ -15,10 +17,14 @@ from app.schemas.learning import (
     Option,
     ProgressOut,
     RevealIn,
+    SceneLineOut,
+    SceneOut,
+    SegmentOut,
     SessionOut,
     StartIn,
     StartOut,
     TaskOut,
+    WordCard,
 )
 from app.services import learning as svc
 
@@ -36,10 +42,11 @@ def _http(exc: svc.LearningError) -> HTTPException:
     return HTTPException(exc.status, exc.code)
 
 
-def _session_out(s: LearningSession) -> SessionOut:
-    return SessionOut(
+async def _session_out(db: AsyncSession, s: LearningSession) -> SessionOut:
+    out = SessionOut(
         id=s.id,
         language=s.language,
+        mode=s.mode,
         status=s.status,
         total=len(s.tasks),
         remaining=sum(t.status == TaskStatus.PENDING for t in s.tasks),
@@ -47,6 +54,60 @@ def _session_out(s: LearningSession) -> SessionOut:
         completed_at=s.completed_at,
         summary=s.summary,
     )
+    if s.mode != SessionMode.LEARN:
+        return out
+    new_items = list({t.item.id: t.item for t in s.tasks if t.is_new_item}.values())
+    new_ids = {i.id for i in new_items}
+    lines = s.scene.lines if s.scene else []
+    ids = {uuid.UUID(seg["item"]) for line in lines for seg in line["segments"] if seg.get("item")}
+    gloss = (
+        dict(
+            (
+                await db.execute(
+                    select(LexiconItem.id, LexiconItem.translation_cs).where(
+                        LexiconItem.id.in_(ids)
+                    )
+                )
+            ).all()
+        )
+        if ids
+        else {}
+    )
+    scene_lines: list[SceneLineOut] = []
+    context: dict[uuid.UUID, tuple[str, str]] = {}
+    for line in lines:
+        segs = []
+        for seg in line["segments"]:
+            item_id = uuid.UUID(seg["item"]) if seg.get("item") else None
+            if item_id not in gloss:
+                item_id = None  # the word left the lexicon: plain text
+            segs.append(
+                SegmentOut(
+                    text=seg["t"],
+                    item_id=item_id,
+                    gloss=gloss.get(item_id) if item_id else None,
+                    new=item_id in new_ids,
+                )
+            )
+            if item_id in new_ids:
+                context.setdefault(item_id, ("".join(x["t"] for x in line["segments"]), line["cs"]))
+        scene_lines.append(SceneLineOut(speaker=line.get("speaker"), cs=line["cs"], segments=segs))
+    if s.scene:
+        out.scene = SceneOut(title=s.scene.title_cs, lines=scene_lines)
+    out.words = [
+        WordCard(
+            id=i.id,
+            lemma=i.lemma,
+            pos=i.pos,
+            gender=i.gender,
+            ipa=i.ipa,
+            translation=i.translation_cs,
+            context=context[i.id][0] if i.id in context else i.example_sentence,
+            context_cs=context[i.id][1] if i.id in context else None,
+        )
+        for i in new_items
+    ]
+    return out
 
 
 def _task_out(task: LearningTask, total: int) -> TaskOut:
@@ -76,23 +137,26 @@ def _task_out(task: LearningTask, total: int) -> TaskOut:
 @router.post("/sessions", response_model=StartOut)
 async def start(body: StartIn, auth: Auth, db: DB, now: Now) -> StartOut:
     language = body.language or auth.acting.active_language
-    s = await svc.start_session(db, auth.acting, language, now)
+    s = await svc.start_session(db, auth.acting, language, now, mode=body.mode)
     await db.commit()
-    return StartOut(session=_session_out(s) if s else None)
+    return StartOut(session=await _session_out(db, s) if s else None)
 
 
 @router.get("/sessions/current", response_model=StartOut)
 async def current(
-    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+    mode: Annotated[SessionMode, Query()] = SessionMode.LEARN,
 ) -> StartOut:
-    s = await svc.get_active_session(db, auth.acting, language or auth.acting.active_language)
-    return StartOut(session=_session_out(s) if s else None)
+    s = await svc.get_active_session(db, auth.acting, language or auth.acting.active_language, mode)
+    return StartOut(session=await _session_out(db, s) if s else None)
 
 
 @router.get("/sessions/{session_id}", response_model=SessionOut)
 async def get_session(session_id: uuid.UUID, auth: Auth, db: DB) -> SessionOut:
     try:
-        return _session_out(await svc.get_session(db, auth.acting, session_id))
+        return await _session_out(db, await svc.get_session(db, auth.acting, session_id))
     except svc.LearningError as exc:
         raise _http(exc) from exc
 
@@ -161,7 +225,7 @@ async def complete(session_id: uuid.UUID, auth: Auth, db: DB, now: Now) -> Sessi
     except svc.LearningError as exc:
         raise _http(exc) from exc
     await db.commit()
-    return _session_out(s)
+    return await _session_out(db, s)
 
 
 @router.get("/progress", response_model=ProgressOut)
