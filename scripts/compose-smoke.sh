@@ -32,6 +32,9 @@ wait_for() {  # url expected_status timeout_s
   echo "ok: $url -> $got"
 }
 
+# Stamp commit/branch into the images unless the caller already did.
+[ -n "${POLYFLOW_GIT_SHA:-}" ] || eval "$(scripts/build-info.sh)"
+
 "${compose[@]}" up -d --build postgres redis migrate backend worker frontend
 
 wait_for "$BACKEND/healthz" 200 180
@@ -39,6 +42,16 @@ wait_for "$BACKEND/readyz" 200 60
 wait_for "$BACKEND/api/v1/progression/milestones" 200 30
 wait_for "$FRONTEND/" 200 300
 wait_for "$FRONTEND/api/v1/progression/milestones" 200 60  # same-origin proxy to the API
+
+# The running backend reports the version in the code and the commit it was built from.
+build=$(curl -sf "$FRONTEND/version")
+echo "build: $build"
+python3 - "$build" "$(tr -d '[:space:]' < VERSION)" "${POLYFLOW_GIT_SHA:0:7}" <<'PY'
+import json, sys
+info, version, sha = json.loads(sys.argv[1]), sys.argv[2], sys.argv[3]
+assert info["version"] == version, (info["version"], version)
+assert info["commit"].startswith(sha), (info["commit"], sha)
+PY
 
 # Seeding must work against the migrated schema.
 "${compose[@]}" exec -T backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json'

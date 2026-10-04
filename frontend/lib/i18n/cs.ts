@@ -12,6 +12,11 @@ export const cs = {
     streak: "Série dní",
     serverHealth: "Stav serveru",
   },
+  build: {
+    prerelease: "předběžná verze",
+    development: "vývoj",
+    builtAt: (iso: string) => `Sestaveno ${iso}`,
+  },
   health: {
     ready: "Vše funguje",
     unready: "Některé služby nejsou dostupné",

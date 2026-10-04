@@ -88,6 +88,28 @@ The browser talks only to the frontend origin; Next.js proxies `/api/*` and `/re
 
 Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`.
 
+## Versions and releases
+
+The current state is **pre-release 1.0**: version `1.0.0-alpha.1` ([SemVer](https://semver.org) pre-release).
+`/VERSION` is canonical; `scripts/set-version.sh <version>` updates every copy (backend package,
+`pyproject.toml`/`uv.lock` in PEP 440 spelling, `frontend/package.json`), and a backend test fails if they drift.
+
+Every page shows the running build in its footer, and `GET /version` returns the same for the backend:
+
+| Build | Footer |
+|---|---|
+| release (`1.0.0`) | `PolyFlow 1.0.0 · abc1234` |
+| pre-release (`1.0.0-alpha.1`) | `PolyFlow 1.0.0-alpha.1 · main · abc1234` + badge *předběžná verze* |
+| dev server (`next dev`, the Compose default) | adds the branch and a *vývoj* badge |
+
+Commit, branch and build time are baked in when images are built. Run
+`eval "$(scripts/build-info.sh)"` before `docker compose up --build`; without it they read `unknown`.
+A local `npm run dev` asks git directly. A `-dirty` suffix means the build had uncommitted changes.
+
+Branching (see `AGENTS.md`): until 1.0 ships, work lands on `main` through short-lived branches.
+At release, `main` is tagged `v1.0.0` and from then on tracks released code only; ongoing development
+moves to a development branch and reaches `main` when the next version is released and tagged.
+
 ## Local backend development
 
 ```sh

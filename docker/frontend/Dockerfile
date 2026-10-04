@@ -19,7 +19,14 @@ FROM ${NODE_IMAGE} AS builder
 WORKDIR /app
 # Rewrites (API proxy target) are resolved at build time for standalone output.
 ARG BACKEND_URL=http://backend:8000
+# Build provenance (scripts/build-info.sh), inlined into the bundle by next.config.ts.
+ARG POLYFLOW_GIT_SHA=unknown
+ARG POLYFLOW_GIT_BRANCH=unknown
+ARG POLYFLOW_BUILD_TIME=
 ENV BACKEND_URL=${BACKEND_URL} \
+    POLYFLOW_GIT_SHA=${POLYFLOW_GIT_SHA} \
+    POLYFLOW_GIT_BRANCH=${POLYFLOW_GIT_BRANCH} \
+    POLYFLOW_BUILD_TIME=${POLYFLOW_BUILD_TIME} \
     NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

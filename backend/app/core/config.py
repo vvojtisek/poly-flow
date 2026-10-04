@@ -15,6 +15,11 @@ class Settings(BaseSettings):
     piper_url: str = "http://localhost:5000"
     whisper_url: str = "http://localhost:9000"
 
+    # Build provenance, baked into the image at build time (see scripts/build-info.sh).
+    git_sha: str = "unknown"
+    git_branch: str = "unknown"
+    build_time: str | None = None
+
     # Auth. Set POLYFLOW_COOKIE_SECURE=true whenever the app is served over HTTPS.
     cookie_secure: bool = False
     session_cookie_name: str = "pf_session"
