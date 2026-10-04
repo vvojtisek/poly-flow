@@ -40,6 +40,7 @@ _ARTICLES: dict[Language, tuple[str, ...]] = {
     # "to" is the infinitive marker, accepted before a bare verb ("to go" for "go")
     Language.EN: ("the", "a", "an", "to"),
 }
+ARTICLES = _ARTICLES  # also used to read spoken answers (app.domain.speech)
 # Keyboard fallbacks that are accepted spellings, with the note shown to the learner.
 _VARIANTS: dict[Language, tuple[tuple[str, str, str], ...]] = {
     Language.DE: (

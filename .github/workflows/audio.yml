@@ -12,6 +12,7 @@ on:
       - scripts/models.py
       - scripts/bench_audio.py
       - backend/app/services/tts.py
+      - backend/app/services/stt.py
       - docker-compose.yml
       - .github/workflows/audio.yml
   schedule:
@@ -78,12 +79,15 @@ jobs:
           python3 scripts/bench_audio.py --smoke --min-accuracy 0.3 --out bench.md
           cat bench.md >> "$GITHUB_STEP_SUMMARY"
 
-      - name: The backend's TTS client speaks every language through Piper
+      - name: The backend's TTS and STT clients work against Piper and Whisper
         run: |
           docker build -q -f docker/backend/Dockerfile --target api -t polyflow-api-audio backend
           docker run --rm --network host -e POLYFLOW_PIPER_URL=http://127.0.0.1:5000 \
+            -e POLYFLOW_WHISPER_URL=http://127.0.0.1:9000 \
             -e POLYFLOW_AUDIO_CACHE_DIR=/tmp/audio polyflow-api-audio python -c '
           import asyncio
+          from app.domain.enums import Language
+          from app.services.stt import get_stt
           from app.services.tts import VOICES, get_tts
 
           async def main():
@@ -93,6 +97,11 @@ jobs:
                   again = await tts.speech(language, "Hallo, hello, ciao.")
                   assert first == again and first.stat().st_size > 10_000, language
                   print(language.value, first.stat().st_size, "bytes, cached")
+              # The STT contract the speaking endpoint relies on (tiny is too weak to judge words).
+              clip = await tts.speech(Language.EN, "This weekend we are taking the train.")
+              words = await get_stt().transcribe(Language.EN, clip.read_bytes(), "audio/wav")
+              assert words and all(0 <= w.probability <= 1 for w in words), words
+              print("stt:", " ".join(w.word.strip() for w in words))
 
           asyncio.run(main())
           '

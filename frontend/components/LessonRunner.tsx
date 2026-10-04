@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
+import { SpeakAnswer } from "@/components/SpeakAnswer";
 import { Button, Notice } from "@/components/ui";
 import {
   completeLesson,
@@ -44,6 +45,14 @@ type Phase =
 function Feedback({ result, mode, audioUrl }: { result: AnswerResult; mode: SessionMode; audioUrl?: string }) {
   const good = result.correct;
   const note = result.note ? cs.feedback.notes[result.note] : null;
+  if (result.verdict === "not_understood")
+    return (
+      <div role="status" className="flex flex-col gap-1 rounded-xl bg-slate-100 p-3 text-sm dark:bg-slate-800">
+        <p className="font-semibold">{cs.feedback.not_understood}</p>
+        <p>{result.heard ? cs.feedback.heard(result.heard) : cs.feedback.nothingHeard}</p>
+        <p>{cs.feedback.speakAgain}</p>
+      </div>
+    );
   return (
     <div
       role="status"
@@ -391,6 +400,14 @@ export function LessonRunner({ language, mode = "learn" }: { language: Language;
             <Button type="submit" disabled={busy || !text.trim()}>
               {cs.lesson.check}
             </Button>
+          )}
+          {!finished && (
+            <SpeakAnswer
+              key={task.id}
+              taskId={task.id}
+              disabled={busy}
+              onResult={(r) => setPhase({ kind: "task", session, task, result: r })}
+            />
           )}
         </form>
       )}

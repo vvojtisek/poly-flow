@@ -75,6 +75,11 @@ re-hashes everything.
   `audiocache` volume, keyed by text, voice and the voice's configuration. Deleting the volume only
   costs re-synthesis. Without the `audio` profile the play buttons report that sound is unavailable
   and the lesson works as text.
+- A "write the word" task can also be answered by voice. Whisper transcribes the recording,
+  which is then discarded. A transcript that is exactly the word, with every word at least
+  `spoken_min_confidence` sure (policy v3, provisional 0.5), counts like a typed answer.
+  Anything else is "not understood" and counts neither way. Browsers allow the microphone only
+  over HTTPS or on `localhost`, so phones on the home network need HTTPS (plan P7).
 - `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
   The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
 
