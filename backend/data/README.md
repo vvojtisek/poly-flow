@@ -25,6 +25,29 @@ carries `source`, `license` and `revision` columns (provenance); IPA is left bla
 Examples should contain the lemma's citation form where natural: recall tasks only show a cloze when the
 lemma occurs verbatim in the example.
 
+### `en.0101-1000.csv` (English ranks 101-1000, revision `en1000-draft-v1`)
+
+900 words that take the English course from the core-100 to the A2 milestone (1,000), so the
+placement test can place up to 1,000 and the A1 and A2 level exams can open. Lemmas, in order,
+come from `frequency/en_GB.lemmas.csv`: walk the list from rank 1, skip the core-100 lemmas and
+the entries one Czech gloss would misrepresent (profanity, inflected forms such as `higher`,
+names such as `china`, merged homographs such as `bear`/`born`), and number the rest 101-1000.
+Lessons therefore follow frequency after the core block. These words have no scene: a lesson
+shows each word's example sentence as its context.
+
+Czech glosses, part of speech and the British English examples were drafted by Claude and have
+**not been reviewed by a native Czech speaker** (`source` = `claude-drafted`); the review list,
+with every gloss, the skipped words and their reasons, is kept with the project files
+(`reviews/en-101-1000-review.md`). Glosses are unique across the English lexicon, because recall
+shows the gloss and expects one word; near-synonyms carry a bracket (`large` = `velký
+(rozměrný)`). Where the list's POS tag is an artefact of tagging isolated words, the lexicon uses
+the common learner sense (`step` NOUN, `key` NOUN, `count` VERB). Two lemmas differ from the list:
+`according to` (listed as `according`) and the British `per cent` (listed as `percent`). Content
+flags carry over from the frequency list, plus `battle` (violence); IPA and CEFR are blank.
+Licence CC-BY-SA-4.0, because the selection and order derive from wordfreq.
+`tests/test_lexicon_data.py` checks ranks 1-1000 without gaps, unique glosses, the en_GB order,
+carried-over flags, and that no unflagged example uses a flagged word.
+
 ### Producing the full lists (not done yet)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
