@@ -1,0 +1,31 @@
+model = "gpt-6-luna"
+model_reasoning_effort = "high"
+
+[agents]
+enabled = true
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "high"
+
+[agents.quick_worker]
+description = "Small, clear edits, documentation, formatting, and localized fixes."
+config_file = "agents/quick-worker.toml"
+
+[agents.implementer]
+description = "Ordinary backend or frontend features and scoped bug fixes."
+config_file = "agents/implementer.toml"
+
+[agents.feature_engineer]
+description = "Cross-layer product features spanning API, persistence, worker, and UI."
+config_file = "agents/feature-engineer.toml"
+
+[agents.deep_debugger]
+description = "Evidence-led analysis of hard, intermittent, concurrency, or runtime bugs."
+config_file = "agents/deep-debugger.toml"
+
+[agents.hard_problem_solver]
+description = "Unresolved high-complexity problems after a serious lower-cost investigation."
+config_file = "agents/hard-problem-solver.toml"
+
+[agents.migration_architect]
+description = "High-risk database, framework, service, or deployment migrations."
+config_file = "agents/migration-architect.toml"

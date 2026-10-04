@@ -81,6 +81,10 @@ uv run alembic revision --autogenerate -m "..."   # then review; `alembic check`
 
 All settings are env vars prefixed `POLYFLOW_` (see `app/core/config.py`).
 
+## Agent workflow
+
+Read [AGENTS.md](AGENTS.md) and the scoped `AGENTS.md` for the area you change. It is the single source of rules for both Codex and Claude Code: `CLAUDE.md` files import the matching `AGENTS.md`. Codex roles and the model router live under `.codex/`; Claude subagents and the model-router skill live under `.claude/`. The [implementation plan](docs/IMPLEMENTATION_PLAN.md) describes planned features, while the source code remains authoritative for shipped behavior.
+
 ## Schema
 
 | table | purpose |
