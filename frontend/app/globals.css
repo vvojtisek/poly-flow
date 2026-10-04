@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode follows the .dark class on <html> (lib/theme.ts), set before first paint. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Tailwind v4: design tokens live here (CSS-first config), not in tailwind.config.js. */
 @theme {
   --color-brand-50: oklch(0.97 0.02 250);

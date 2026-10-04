@@ -1,6 +1,6 @@
 "use client";
 
-import { Compass, LogOut, Users } from "lucide-react";
+import { Compass, LogOut, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
@@ -131,6 +131,12 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
               className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <Compass className="size-4" aria-hidden /> {cs.placement.link}
+            </Link>
+            <Link
+              href="/settings"
+              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+            >
+              <Settings className="size-4" aria-hidden /> {cs.settings.title}
             </Link>
             {me.can_manage && (
               <Link

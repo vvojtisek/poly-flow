@@ -393,9 +393,15 @@ AUDIO_RESPONSES: dict[int | str, dict] = {
 }
 
 
-async def _speech(tts: Tts, language: Language, text: str) -> FileResponse:
+def _chosen_voice(user, language: Language) -> str | None:
+    """The profile's voice for `language` (validated when saved; unknown ids fall back)."""
+    chosen = (user.settings or {}).get("voices") or {}
+    return chosen.get(language.value) if isinstance(chosen, dict) else None
+
+
+async def _speech(tts: Tts, language: Language, text: str, voice: str | None) -> FileResponse:
     try:
-        path = await tts.speech(language, text)
+        path = await tts.speech(language, text, voice)
     except TtsUnavailable as exc:
         raise HTTPException(503, "audio_unavailable") from exc
     return FileResponse(
@@ -421,7 +427,7 @@ async def session_audio(
         text = svc.session_audio_text(s, line, item, part)
     except svc.LearningError as exc:
         raise _http(exc) from exc
-    return await _speech(tts, s.language, text)
+    return await _speech(tts, s.language, text, _chosen_voice(auth.acting, s.language))
 
 
 @router.get("/tasks/{task_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
@@ -438,4 +444,5 @@ async def task_audio(
         text = svc.task_audio_text(task, part)
     except svc.LearningError as exc:
         raise _http(exc) from exc
-    return await _speech(tts, task.item.language, text)
+    lang = task.item.language
+    return await _speech(tts, lang, text, _chosen_voice(auth.acting, lang))

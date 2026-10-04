@@ -13,6 +13,7 @@ let player: HTMLAudioElement | null = null;
 let current: string | null = null;
 let state: AudioState = "idle";
 let slow = readSlow();
+let baseRate = 1; // the profile's speech speed (settings.audio_rate)
 const clips = new Map<string, string>(); // url -> object URL, for this page's lifetime
 const listeners = new Set<() => void>();
 
@@ -62,7 +63,7 @@ export async function play(url: string): Promise<void> {
     }
     if (current !== url) return; // another clip was started meanwhile
     audio.src = src;
-    audio.playbackRate = slow ? SLOW_RATE : 1;
+    audio.playbackRate = rate();
     await audio.play();
     set(url, "playing");
   } catch {
@@ -82,8 +83,18 @@ export function setSlow(value: boolean) {
   } catch {
     /* storage unavailable: the choice lasts for this page */
   }
-  if (player) player.playbackRate = value ? SLOW_RATE : 1;
+  if (player) player.playbackRate = rate();
   emit();
+}
+
+function rate(): number {
+  return baseRate * (slow ? SLOW_RATE : 1);
+}
+
+/** The profile's speech speed; the lesson's "slower" toggle slows it further. */
+export function setBaseRate(value: number) {
+  baseRate = value > 0 ? value : 1;
+  if (player) player.playbackRate = rate();
 }
 
 /** State of the clip at `url` (idle unless it is the current one). */

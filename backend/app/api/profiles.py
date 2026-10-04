@@ -9,7 +9,13 @@ from app.core.config import get_settings
 from app.core.security import hash_secret
 from app.domain.enums import UserRole
 from app.models import User
-from app.schemas.profiles import ProfileAdminUpdate, ProfileCreate, ProfileOut, ProfileSelfUpdate
+from app.schemas.profiles import (
+    ProfileAdminUpdate,
+    ProfileCreate,
+    ProfileOut,
+    ProfileSelfUpdate,
+    ProfileSettings,
+)
 from app.services.auth import revoke_user_sessions
 
 router = APIRouter(prefix="/api/v1", tags=["profiles"])
@@ -28,7 +34,10 @@ async def update_own_profile(body: ProfileSelfUpdate, auth: Auth, db: DB) -> Pro
         if value is not None:
             setattr(user, field, value)
     if body.settings is not None:
-        user.settings = body.settings.model_dump()
+        # Partial: fields the request leaves out keep their stored value.
+        changed = body.settings.model_dump(mode="json", exclude_unset=True)
+        stored = ProfileSettings.from_stored(user.settings).model_dump(mode="json")
+        user.settings = {**stored, **changed}
     await db.commit()
     return ProfileOut.from_user(user)
 

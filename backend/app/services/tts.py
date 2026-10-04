@@ -24,17 +24,12 @@ import httpx
 
 from app.core.config import get_settings
 from app.domain.enums import Language
+from app.domain.voices import DEFAULT_VOICES, voice_for
 
 log = logging.getLogger("polyflow.tts")
 
-# One voice per language. Keep in sync with PIPER_VOICES in docker/piper/Dockerfile and
-# docker/models/models.spec.json (tests/test_tts.py checks the Dockerfile).
-VOICES: dict[Language, str] = {
-    Language.DE: "de_DE-thorsten-medium",
-    Language.FR: "fr_FR-siwis-medium",
-    Language.IT: "it_IT-paola-medium",
-    Language.EN: "en_GB-jenny_dioco-medium",
-}
+# Default voice per language; the choosable voices are in app.domain.voices.CATALOG.
+VOICES: dict[Language, str] = DEFAULT_VOICES
 
 CACHE_FORMAT = 1  # bump to invalidate every cached file
 MAX_TEXT_CHARS = 400
@@ -75,22 +70,34 @@ class Tts:
         self._digests: dict[str, str] = {}
         self._digests_at = float("-inf")
 
+    async def _refresh_digests(self) -> None:
+        """Digests of the voice configurations, refreshed from Piper every few minutes."""
+        if time.monotonic() - self._digests_at <= VOICES_TTL_S:
+            return
+        try:
+            resp = await self._client.get(f"{self._base_url}/voices")
+            resp.raise_for_status()
+            self._digests = {
+                name: hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
+                for name, config in resp.json().items()
+            }
+            self._digests_at = time.monotonic()
+        except (httpx.HTTPError, ValueError, AttributeError) as exc:
+            # Keep serving the cache with the last known digests while Piper is down.
+            log.warning("tts_voices_unavailable", extra={"error": type(exc).__name__})
+            if not self._digests:
+                raise TtsUnavailable("piper_unreachable") from exc
+
+    async def installed(self) -> set[str]:
+        """Names of the voices Piper serves (empty when Piper has never been reachable)."""
+        try:
+            await self._refresh_digests()
+        except TtsUnavailable:
+            return set()
+        return set(self._digests)
+
     async def _voice_digest(self, voice: str) -> str:
-        """Digest of the voice's configuration, refreshed from Piper every few minutes."""
-        if time.monotonic() - self._digests_at > VOICES_TTL_S:
-            try:
-                resp = await self._client.get(f"{self._base_url}/voices")
-                resp.raise_for_status()
-                self._digests = {
-                    name: hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
-                    for name, config in resp.json().items()
-                }
-                self._digests_at = time.monotonic()
-            except (httpx.HTTPError, ValueError, AttributeError) as exc:
-                # Keep serving the cache with the last known digests while Piper is down.
-                log.warning("tts_voices_unavailable", extra={"error": type(exc).__name__})
-                if not self._digests:
-                    raise TtsUnavailable("piper_unreachable") from exc
+        await self._refresh_digests()
         digest = self._digests.get(voice)
         if digest is None:
             # Piper silently falls back to its default voice for an unknown name: refuse
@@ -98,13 +105,24 @@ class Tts:
             raise TtsUnavailable("voice_missing")
         return digest
 
-    async def speech(self, language: Language, text: str) -> Path:
-        """Path to a WAV file of `text` spoken in `language`, synthesizing it if needed."""
+    async def speech(self, language: Language, text: str, voice: str | None = None) -> Path:
+        """Path to a WAV file of `text` spoken in `language`, synthesizing it if needed.
+
+        `voice` is the learner's choice; a voice of another language falls back to the
+        language's default, and so does a chosen voice that this Piper does not serve.
+        """
         text = normalize(text)
         if not text or len(text) > MAX_TEXT_CHARS:
             raise ValueError("text empty or too long for speech")
-        voice = VOICES[language]
-        key = cache_key(voice, await self._voice_digest(voice), text)
+        voice = voice_for(language, voice)
+        try:
+            digest = await self._voice_digest(voice)
+        except TtsUnavailable:
+            if voice == VOICES[language]:
+                raise
+            voice = VOICES[language]
+            digest = await self._voice_digest(voice)
+        key = cache_key(voice, digest, text)
         path = self._cache_dir / key[:2] / f"{key}.wav"
         if path.is_file():
             return path

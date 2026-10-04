@@ -9,11 +9,13 @@ import pytest
 
 from app.api.deps import get_limiter
 from app.api.learning import get_now
+from app.domain import voices
 from app.domain.enums import Language
+from app.domain.voices import Voice
 from app.main import app
 from app.services.rate_limit import MemoryAttemptLimiter
 from app.services.tts import VOICES, Tts, TtsUnavailable, get_tts
-from tests.helpers import PARENT, Clock, csrf, login, make_child
+from tests.helpers import PARENT, Clock, csrf, login, make_child, setup_parent
 from tests.test_learning import answer, child_session, correct_answer, next_task, start
 from tests.test_scenes import seed
 
@@ -132,7 +134,7 @@ def test_voices_match_the_piper_image_and_model_spec():
         m["name"].removeprefix("piper/") for m in spec["models"] if m["name"].startswith("piper/")
     }
     assert set(VOICES) == set(Language)
-    assert set(VOICES.values()) <= image <= locked
+    assert set(VOICES.values()) <= {v.id for v in voices.CATALOG} <= image <= locked
 
 
 # ---------------------------------------------------------------- endpoints
@@ -142,12 +144,18 @@ class RecordingTts:
     def __init__(self, cache: Path) -> None:
         self.cache = cache
         self.spoken: list[tuple[Language, str]] = []
+        self.voices: list[str | None] = []
+        self.installed_voices = set(VOICES.values())
         self.down = False
 
-    async def speech(self, language: Language, text: str) -> Path:
+    async def installed(self) -> set[str]:
+        return set() if self.down else set(self.installed_voices)
+
+    async def speech(self, language: Language, text: str, voice: str | None = None) -> Path:
         if self.down:
             raise TtsUnavailable("piper_unreachable")
         self.spoken.append((language, text))
+        self.voices.append(voice)
         path = self.cache / f"{len(self.spoken)}.wav"
         path.write_bytes(WAV)
         return path
@@ -233,3 +241,85 @@ async def test_audio_unavailable(db, client, tts):
     assert r.status_code == 503 and r.json()["detail"] == "audio_unavailable"
     assert csrf(me)  # the session itself is untouched
     assert (await next_task(client, s["id"]))["type"] == "recognition"
+
+
+# ---------------------------------------------------------------- chosen voices
+
+EXTRA_DE = Voice("de_DE-kerstin-low", Language.DE, "Kerstin", "female")
+
+
+@pytest.fixture
+def extra_voice(monkeypatch):
+    """A second German voice, as if it were in the catalogue and installed."""
+    monkeypatch.setattr(voices, "CATALOG", (*voices.CATALOG, EXTRA_DE))
+    monkeypatch.setitem(voices.BY_ID, EXTRA_DE.id, EXTRA_DE)
+    return EXTRA_DE
+
+
+async def test_chosen_voice_speaks_and_has_its_own_cache(piper, tmp_path, extra_voice):
+    piper.voices[extra_voice.id] = {"audio": {"sample_rate": 16000}}
+    tts = make_tts(piper, tmp_path)
+    default = await tts.speech(Language.DE, "Hallo")
+    chosen = await tts.speech(Language.DE, "Hallo", extra_voice.id)
+    assert default != chosen
+    assert [s["voice"] for s in piper.synthesized] == [VOICES[Language.DE], extra_voice.id]
+
+
+async def test_chosen_voice_falls_back_to_the_language_default(piper, tmp_path, extra_voice):
+    tts = make_tts(piper, tmp_path)
+    # Not served by this Piper: the default voice of the language, never Piper's own default.
+    await tts.speech(Language.DE, "Hallo", extra_voice.id)
+    # A voice of another language is never used for German text.
+    await tts.speech(Language.DE, "Tschüss", VOICES[Language.EN])
+    await tts.speech(Language.DE, "Danke", "no-such-voice")
+    assert {s["voice"] for s in piper.synthesized} == {VOICES[Language.DE]}
+
+
+async def test_installed_voices(piper, tmp_path):
+    tts = make_tts(piper, tmp_path)
+    assert await tts.installed() == set(VOICES.values())
+    piper.down = True
+    assert await make_tts(piper, tmp_path).installed() == set()
+
+
+async def test_lesson_audio_uses_the_profile_voice(db, client, tts, extra_voice):
+    await seed()
+    me = await child_session(client)
+    body = {"settings": {"voices": {"de": extra_voice.id}}}
+    r = await client.patch("/api/v1/me/profile", json=body, headers=csrf(me))
+    assert r.status_code == 200, r.text
+    s = await start(client, me)
+    r = await client.get(f"/api/v1/learning/sessions/{s['id']}/audio?line=0")
+    assert r.status_code == 200
+    t = await next_task(client, s["id"])
+    assert (await client.get(f"/api/v1/learning/tasks/{t['id']}/audio")).status_code == 200
+    assert tts.voices == [extra_voice.id, extra_voice.id]
+
+
+async def test_voice_list_and_sample(db, client, tts, extra_voice):
+    parent = await setup_parent(client)
+    r = await client.get("/api/v1/voices")
+    assert r.status_code == 200
+    listed = {v["id"]: v for v in r.json()}
+    assert listed[VOICES[Language.DE]] == {
+        "id": VOICES[Language.DE],
+        "language": "de",
+        "name": "Thorsten",
+        "gender": "male",
+        "default": True,
+        "installed": True,
+    }
+    assert listed[extra_voice.id]["installed"] is False
+    assert listed[extra_voice.id]["default"] is False
+
+    r = await client.get(f"/api/v1/voices/{VOICES[Language.FR]}/sample")
+    assert r.status_code == 200 and r.content == WAV
+    assert tts.spoken == [(Language.FR, voices.SAMPLES[Language.FR])]
+    assert tts.voices == [VOICES[Language.FR]]
+    # Not installed: no preview in another voice pretending to be this one.
+    r = await client.get(f"/api/v1/voices/{extra_voice.id}/sample")
+    assert r.status_code == 503
+    assert (await client.get("/api/v1/voices/nope/sample")).status_code == 404
+    assert csrf(parent)
+    client.cookies.clear()
+    assert (await client.get("/api/v1/voices")).status_code == 401
