@@ -101,7 +101,7 @@ export default function HomePage() {
                 </p>
               )}
             </div>
-            {progress && progress.lexicon_items > 0 && (
+            {progress && (
               <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
                 <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.tests.title}</h3>
                 {/* Available at any time; before the first lesson it is also offered above. */}
@@ -111,7 +111,7 @@ export default function HomePage() {
                       <Compass className="size-5" aria-hidden />
                       {progress.active_placement_session_id ? cs.placement.resume : cs.placement.link}
                     </Button>
-                    <p className="text-center text-xs text-slate-500">{cs.tests.placementHelp}</p>
+                    <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
                   </div>
                 )}
                 <div className="flex flex-col gap-1">

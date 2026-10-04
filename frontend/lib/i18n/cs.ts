@@ -177,7 +177,9 @@ export const cs = {
     noGuessing: "Když slovo neznáš, klepni na „Nevím“. Hádání výsledek zkreslí.",
     calm: "Bez časového limitu a bez nápovědy. Test můžeš kdykoli ukončit nebo později zopakovat.",
     counts:
-      "Slovo, které poznáš napoprvé, se počítá jako jedno ověření. Nic dalšího se za známé nepovažuje: slova pod tvou úrovní ti nabídnu v Ověření k potvrzení.",
+      "Odpovědi se počítají jako v Ověření: slovo, které poznáš napoprvé, je jedno ověření, a chyba u slova, které už znáš z lekcí, se počítá jako chyba. Nic dalšího se za známé nepovažuje: slova pod tvou úrovní ti nabídnu v Ověření k potvrzení.",
+    anytime: "Test můžeš udělat kdykoli a v kterémkoli jazyce, třeba pro kontrolu, kde právě jsi.",
+    pickLanguage: "Jazyk testu",
     coverage: (n: number) =>
       `Aplikace zatím obsahuje jen prvních ${n.toLocaleString("cs-CZ")} slov tohoto jazyka, takže test umí určit úroveň jen v jejich rozsahu. S dalšími slovy porostou i jeho možnosti.`,
     previous: (level: number) => `Minulý výsledek: asi prvních ${level.toLocaleString("cs-CZ")} slov.`,
@@ -204,7 +206,6 @@ export const cs = {
   },
   tests: {
     title: "Testy",
-    placementHelp: "Zjistí, kde v lekcích začít. Můžeš ho udělat kdykoli znovu.",
     levels: "Zkoušky úrovně slovní zásoby",
     levelsHelp: "Potvrdí, že znáš slovní zásobu úrovně A1, A2, B1 nebo B2.",
     badges: (levels: string[]) => `Získáno: ${levels.join(", ")}`,

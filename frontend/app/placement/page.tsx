@@ -4,14 +4,14 @@ import { Compass } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { AppShell, FullPageStatus } from "@/components/AppShell";
+import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { LessonRunner } from "@/components/LessonRunner";
 import { Button, Notice } from "@/components/ui";
-import { getPlacementInfo, skipPlacement, type Language, type PlacementInfo } from "@/lib/api";
+import { getPlacementInfo, skipPlacement, type Language, type Me, type PlacementInfo } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
-function Intro({ language, onStart }: { language: Language; onStart: () => void }) {
+function Intro({ me, language, onStart }: { me: Me; language: Language; onStart: () => void }) {
   const router = useRouter();
   const [info, setInfo] = useState<PlacementInfo | null>(null);
   const [failed, setFailed] = useState(false);
@@ -49,12 +49,17 @@ function Intro({ language, onStart }: { language: Language; onStart: () => void 
     <div className="flex flex-col gap-4">
       <h1 className="flex items-center gap-2 text-xl font-bold">
         <Compass className="size-6 text-brand-500" aria-hidden />
-        {cs.placement.title} · {cs.languages[language]}
+        {cs.placement.title}
       </h1>
+      <div className="flex flex-col gap-1">
+        <p className="text-xs text-slate-500">{cs.placement.pickLanguage}</p>
+        <LanguagePicker me={me} />
+      </div>
       <div className="flex flex-col gap-2 text-sm text-slate-700 dark:text-slate-200">
         <p>{cs.placement.intro(info.max_questions)}</p>
         <p>{cs.placement.noGuessing}</p>
         <p>{cs.placement.calm}</p>
+        <p>{cs.placement.anytime}</p>
         <p>{cs.placement.counts}</p>
       </div>
       <Notice>{cs.placement.coverage(info.ceiling)}</Notice>
@@ -89,7 +94,7 @@ export default function PlacementPage() {
         {started ? (
           <LessonRunner key={`${me.acting.id}:${language}:placement`} language={language} mode="placement" />
         ) : (
-          <Intro key={`${me.acting.id}:${language}`} language={language} onStart={start} />
+          <Intro key={`${me.acting.id}:${language}`} me={me} language={language} onStart={start} />
         )}
       </div>
     </AppShell>

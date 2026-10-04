@@ -38,7 +38,7 @@ from app.models import (
     User,
     UserWordProgress,
 )
-from app.models.learning import SessionMode, SessionStatus, TaskStatus, TaskType
+from app.models.learning import SessionMode, SessionStatus, TaskStatus
 from app.services import learning as lsvc
 from app.services import placement
 
@@ -189,26 +189,8 @@ async def plan(
 async def record_answer(
     db: AsyncSession, user: User, item: LexiconItem, *, evidence: bool, now: datetime
 ) -> None:
-    """Graded like a check. A word no lesson or test introduced yet is handled like a placement
-    answer: right skips its lesson, wrong leaves it for the lessons."""
-    introduced = await db.scalar(
-        select(UserWordProgress.introduced_at).where(
-            UserWordProgress.user_id == user.id, UserWordProgress.lexicon_item_id == item.id
-        )
-    )
-    if introduced is None:
-        await placement.record_answer(db, user, item, evidence=evidence, now=now)
-        return
-    await lsvc._apply_progress(
-        db,
-        user,
-        item,
-        TaskType.RECOGNITION,
-        now=now,
-        first_attempt=True,
-        evidence=evidence,
-        orthography=None,
-    )
+    """Graded exactly like a placement answer, which is graded like a check."""
+    await placement.record_answer(db, user, item, evidence=evidence, now=now)
 
 
 async def finish(db: AsyncSession, user: User, session: LearningSession, now: datetime) -> dict:
