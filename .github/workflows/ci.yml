@@ -21,8 +21,16 @@ jobs:
         ports: ["5432:5432"]
         options: >-
           --health-cmd "pg_isready -U polyflow" --health-interval 5s --health-timeout 3s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s --health-timeout 3s --health-retries 20
     env:
       POLYFLOW_DATABASE_URL: postgresql+asyncpg://polyflow:polyflow@localhost:5432/polyflow
+      # DB-backed tests rebuild this schema; the migration steps below run afterwards.
+      POLYFLOW_TEST_DATABASE_URL: postgresql+asyncpg://polyflow:polyflow@localhost:5432/polyflow
+      POLYFLOW_TEST_REDIS_URL: redis://localhost:6379/1
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -67,3 +75,31 @@ jobs:
       - run: docker build -f docker/backend/Dockerfile --target api backend
       - run: docker build -f docker/backend/Dockerfile --target worker backend
       - run: docker build -f docker/frontend/Dockerfile --target runner frontend
+
+  compose-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Core stack from scratch serves traffic
+        run: scripts/compose-smoke.sh
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Browser E2E against a fresh Compose stack
+        run: scripts/e2e.sh
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: frontend/test-results

@@ -17,9 +17,9 @@ CMD ["npm", "run", "dev"]
 
 FROM ${NODE_IMAGE} AS builder
 WORKDIR /app
-# NEXT_PUBLIC_* is inlined at build time.
-ARG NEXT_PUBLIC_API_URL=http://localhost:8000
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+# Rewrites (API proxy target) are resolved at build time for standalone output.
+ARG BACKEND_URL=http://backend:8000
+ENV BACKEND_URL=${BACKEND_URL} \
     NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

@@ -15,9 +15,12 @@ Columns: `language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example`. Lines
 | cefr | no | `A1`..`C2` |
 | gender | no | `der/die/das`, `m/f` |
 | example | no | short example sentence in the target language |
+| source, license, revision | no | provenance of the row (e.g. `polyflow-curated`, `CC0-1.0`, `core100-v1`) |
 
-The committed `*.sample.csv` files hold **20 hand-curated lemmas per language** for pipeline testing only.
-Ranks there are approximate.
+The committed `*.core100.csv` files hold the **first 100 hand-curated lemmas per language** (plan P2): frequent
+function words plus frequent concrete vocabulary suited to children. Ranks are an approximate frequency
+order, not copied from a published corpus list; Czech glosses still need native-speaker review. Every row
+carries `source`, `license` and `revision` columns (provenance); IPA is left blank where unverified.
 
 ### Producing the full lists (not done yet)
 
