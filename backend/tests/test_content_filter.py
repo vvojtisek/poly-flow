@@ -80,11 +80,37 @@ async def test_child_never_gets_flagged_items(db, client):
     assert options and not options & {"válka", "sakra"}
 
 
-async def test_adult_gets_flagged_items(db, client):
+async def test_adult_gets_flagged_items_but_profanity_only_by_choice(db, client):
     await seed()
     parent = await setup_parent(client)
+    lemmas, options = await lesson_content(client, parent)
+    assert "Krieg" in lemmas and "Mist" not in lemmas and "sakra" not in options
+
+
+async def test_adult_opts_into_profanity(db, client):
+    await seed()
+    parent = await setup_parent(client)
+    r = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"learn_profanity": True}}, headers=csrf(parent)
+    )
+    assert r.status_code == 200 and r.json()["settings"]["learn_profanity"] is True
     lemmas, _ = await lesson_content(client, parent)
     assert FLAGGED <= lemmas
+
+
+async def test_child_cannot_opt_into_profanity(db, client):
+    await seed()
+    parent = await setup_parent(client)
+    await make_child(client, parent)
+    child = await login(client, "eva", "4321")
+    r = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"learn_profanity": True}}, headers=csrf(child)
+    )
+    assert r.status_code == 422 and r.json()["detail"] == "profanity_adults_only"
+    r = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"learn_profanity": False}}, headers=csrf(child)
+    )
+    assert r.status_code == 200
 
 
 async def test_item_flagged_later_leaves_child_reviews(db, client):

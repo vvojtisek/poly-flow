@@ -1,6 +1,6 @@
 "use client";
 
-import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, Sun, X } from "lucide-react";
+import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, X } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
@@ -271,6 +271,22 @@ function SettingsView({ me }: { me: Me }) {
           )}
         </div>
       </Panel>
+      {!me.acting.is_child && (
+        <Panel title={cs.settings.profanity} icon={ShieldAlert}>
+          <div className="flex flex-col gap-2">
+            <label className="flex items-center gap-3 text-sm font-medium">
+              <input
+                type="checkbox"
+                className="size-5 accent-brand-500"
+                checked={settings.learn_profanity}
+                onChange={(e) => void change({ learn_profanity: e.target.checked })}
+              />
+              {cs.settings.profanityToggle}
+            </label>
+            <p className="text-xs text-slate-500">{cs.settings.profanityHelp}</p>
+          </div>
+        </Panel>
+      )}
     </div>
   );
 }

@@ -25,6 +25,34 @@ carries `source`, `license` and `revision` columns (provenance); IPA is left bla
 Examples should contain the lemma's citation form where natural: recall tasks only show a cloze when the
 lemma occurs verbatim in the example.
 
+### `en.0101-1000.csv` (English ranks 101-1000, revision `en1000-draft-v2`)
+
+900 words that take the English course from the core-100 to the A2 milestone (1,000), so the
+placement test can place up to 1,000 and the A1 and A2 level exams can open. Lemmas, in order,
+come from `frequency/en_GB.lemmas.csv`: walk the list from rank 1, skip the core-100 lemmas and
+the inflected forms `higher` and `lower`, and number the rest 101-1000. Lessons therefore follow
+frequency after the core block. A list entry that merges several words takes its most frequent
+use (`bear` -> `born`, `unite` -> `united`, `china` -> `China`); the other senses (`bear` =
+carry and the animal, the verb `unite`, `china` = porcelain) join a later block as words of their
+own. These words have no scene: a lesson shows each word's example sentence as its context.
+
+Profanity (`shit`, `fuck`, `fucking`, `damn`, `hell`, `ass`) sits at its frequency rank with the
+`profanity` flag. Adults get it only after opting in (Nastavení, `settings.learn_profanity`);
+child profiles never get any flagged item.
+
+Czech glosses, part of speech and the British English examples were drafted by Claude and have
+**not been reviewed by a native Czech speaker** (`source` = `claude-drafted`); the review list,
+with every gloss, is kept with the project files (`reviews/en-101-1000-review.md`). Glosses are
+unique across the English lexicon, because recall shows the gloss and expects one word;
+near-synonyms carry a bracket (`large` = `velký (rozměrný)`). Where the list's POS tag is an
+artefact of tagging isolated words, the lexicon uses the common learner sense (`step` NOUN, `key`
+NOUN, `count` VERB). Lemmas that differ from the list: `according to` (`according`), `per cent`
+(`percent`), `born` (`bear`), `united` (`unite`), `China` (`china`). Content flags carry over from
+the frequency list, plus `battle` (violence) and `fucking` (profanity, missing from
+`en.flags.csv`); IPA and CEFR are blank. Licence CC-BY-SA-4.0, because the selection and order
+derive from wordfreq. `tests/test_lexicon_data.py` checks ranks 1-1000 without gaps, unique
+glosses, the en_GB order, carried-over flags, and that no unflagged example uses a flagged word.
+
 ### Producing the full lists (not done yet)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)

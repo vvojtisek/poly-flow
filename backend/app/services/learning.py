@@ -25,7 +25,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased, selectinload
 
-from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, Language, ProgressState
+from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, ContentFlag, Language, ProgressState
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
 from app.domain.speech import SpokenWord, judge
@@ -102,9 +102,22 @@ async def get_session(db: AsyncSession, user: User, session_id: uuid.UUID) -> Le
     return s
 
 
-def _suitable(user: User):
-    """Age-appropriate filter: child profiles never get a flagged item, in any role."""
-    return func.cardinality(LexiconItem.content_flags) == 0 if user.is_child else true()
+def wants_profanity(user: User) -> bool:
+    """Profanity is an opt-in for adult profiles (settings.learn_profanity); never for a child."""
+    return not user.is_child and (user.settings or {}).get("learn_profanity") is True
+
+
+def _suitable(user: User, item=LexiconItem):
+    """Content filter for `item` (LexiconItem or an alias of it).
+
+    Child profiles never get a flagged item, in any role. Adults get everything except
+    profanity, which they learn only after opting in.
+    """
+    if user.is_child:
+        return func.cardinality(item.content_flags) == 0
+    if wants_profanity(user):
+        return true()
+    return ~item.content_flags.contains([ContentFlag.PROFANITY.value])
 
 
 @dataclass(slots=True)
@@ -136,16 +149,15 @@ async def _plan_learn(
     """
     on, still_new = _not_introduced(user)
     limit = POLICY.new_items_per_session
-    scene_ok = true()
-    if user.is_child:
-        # A scene that introduces a flagged word is skipped as a whole, not shown without it.
-        flagged = aliased(LexiconItem)
-        scene_ok = ~(
-            select(SceneWord.scene_id)
-            .join(flagged, flagged.id == SceneWord.lexicon_item_id)
-            .where(SceneWord.scene_id == Scene.id, func.cardinality(flagged.content_flags) > 0)
-            .exists()
-        )
+    # A scene that introduces a word this profile does not get is skipped as a whole, not
+    # shown without it.
+    hidden = aliased(LexiconItem)
+    scene_ok = ~(
+        select(SceneWord.scene_id)
+        .join(hidden, hidden.id == SceneWord.lexicon_item_id)
+        .where(SceneWord.scene_id == Scene.id, ~_suitable(user, hidden))
+        .exists()
+    )
     rows = (
         await db.execute(
             select(Scene, LexiconItem)
