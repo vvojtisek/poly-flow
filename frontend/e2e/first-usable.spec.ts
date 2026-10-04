@@ -6,27 +6,47 @@ const DE: Record<string, string> = { ich: "já", heißen: "jmenovat se", wie: "j
 const CS_TO_DE = Object.fromEntries(Object.entries(DE).map(([de, cs]) => [cs, de]));
 const PARENT_PASSWORD = "rodic-heslo-1";
 
-async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean } = {}) {
+// Answers the current task. A correct choice advances by itself; a typed answer waits for "Další".
+async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean; keyboard?: boolean } = {}) {
   const prompt = (await page.locator("section p.text-3xl").innerText()).trim();
   if (await page.getByText("Co znamená?").count()) {
-    const word = prompt.split(" ").at(-1)!;
-    await page.getByRole("button", { name: DE[word]!, exact: true }).click();
-  } else {
-    const box = page.getByLabel("Tvoje odpověď");
+    const right = DE[prompt.split(" ").at(-1)!]!;
     if (opts.wrongFirst) {
-      await box.fill("falsch");
-      await page.getByRole("button", { name: "Zkontrolovat" }).click();
-      await expect(page.getByText("To není ono")).toBeVisible();
-      await expect(page.getByText("Zkus to ještě jednou.")).toBeVisible(); // learning: the answer is shown
-      await page.getByRole("button", { name: "Nápověda" }).click();
-      await expect(page.getByText(/^\p{L}…$/u)).toBeVisible();
+      // Lekce: one click answers; the pick turns red, the right option green, and the learner retries.
+      const texts = await page.locator("[data-state]").allInnerTexts();
+      const wrong = page.getByRole("button", { name: texts.find((t) => t.trim() !== right)!.trim(), exact: true });
+      await wrong.click();
+      await expect(wrong).toHaveAttribute("data-state", "wrong");
+      await expect(page.getByRole("button", { name: right, exact: true })).toHaveAttribute("data-state", "correct");
+      await expect(page.getByText("Zkus to ještě jednou.")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Další" })).toHaveCount(0);
     }
-    const expected = CS_TO_DE[prompt];
-    expect(expected, `unexpected prompt ${prompt}`).toBeDefined();
-    await box.fill(expected!);
-    await page.getByRole("button", { name: "Zkontrolovat" }).click();
+    const option = page.getByRole("button", { name: right, exact: true });
+    if (opts.keyboard) {
+      await option.focus();
+      await page.keyboard.press("Enter");
+    } else await option.click();
+    await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${right}`);
+    if (opts.keyboard) {
+      // Focus stays in the exercise: the next question's first option, or the answer box.
+      await expect(page.locator("[data-state]").first().or(page.getByLabel("Tvoje odpověď"))).toBeFocused();
+    }
+    return;
   }
-  await expect(page.getByRole("button", { name: "Další" })).toBeVisible();
+  const box = page.getByLabel("Tvoje odpověď");
+  if (opts.wrongFirst) {
+    await box.fill("falsch");
+    await page.getByRole("button", { name: "Zkontrolovat" }).click();
+    await expect(page.getByText("To není ono")).toBeVisible();
+    await expect(page.getByText("Zkus to ještě jednou.")).toBeVisible(); // learning: the answer is shown
+    await page.getByRole("button", { name: "Nápověda" }).click();
+    await expect(page.getByText(/^\p{L}…$/u)).toBeVisible();
+  }
+  const expected = CS_TO_DE[prompt];
+  expect(expected, `unexpected prompt ${prompt}`).toBeDefined();
+  await box.fill(expected!);
+  await page.getByRole("button", { name: "Zkontrolovat" }).click();
+  await page.getByRole("button", { name: "Další" }).click();
 }
 
 test("admin sets up, hands device to a child, lesson resumes after reload", async ({ page }) => {
@@ -66,20 +86,21 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
     await page.getByRole("button", { name: n === 4 ? "Procvičit" : "Další" }).click();
   }
   await expect(page.getByText("Úkol 1 z 8")).toBeVisible();
-  await answerCorrectly(page);
-  await page.getByRole("button", { name: "Další" }).click();
+  await expect(page.getByText("Co znamená?")).toBeVisible(); // a new word is recognised first
+  await answerCorrectly(page, { wrongFirst: true });
   await expect(page.getByText("Úkol 2 z 8")).toBeVisible();
 
   await page.reload();
   await expect(page.getByText("Úkol 2 z 8")).toBeVisible();
 
   let firstRecall = true;
+  let firstChoice = true;
   for (let n = 2; n <= 8; n++) {
     await expect(page.getByText(`Úkol ${n} z 8`)).toBeVisible();
     const recall = (await page.getByText("Napiš slovo").count()) > 0;
-    await answerCorrectly(page, { wrongFirst: recall && firstRecall });
-    if (recall && firstRecall) firstRecall = false;
-    await page.getByRole("button", { name: "Další" }).click();
+    await answerCorrectly(page, { wrongFirst: recall && firstRecall, keyboard: !recall && firstChoice && n < 8 });
+    if (recall) firstRecall = false;
+    else firstChoice = false;
   }
   await expect(page.getByText("Lekce dokončena")).toBeVisible();
   await expect(page.getByText("Tato slova si můžeš ověřit zítra v Ověření.")).toBeVisible();
