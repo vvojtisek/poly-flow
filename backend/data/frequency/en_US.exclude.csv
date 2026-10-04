@@ -1,0 +1,279 @@
+# Lemmas removed from the en_US frequency list after review: abbreviations, roman numerals,
+# first names, word fragments left by the tokenizer, foreign words, non-standard spellings.
+lemma,reason
+st,abbreviation
+etc,abbreviation
+ltd,abbreviation
+vol,abbreviation
+op,abbreviation
+pp,abbreviation
+com,abbreviation
+aka,abbreviation
+rd,abbreviation
+rt,abbreviation
+ave,abbreviation
+cal,abbreviation
+gov,abbreviation
+oz,abbreviation
+ch,abbreviation
+ff,abbreviation
+jun,abbreviation
+sci,abbreviation
+hon,abbreviation
+def,abbreviation
+tel,abbreviation
+pg,abbreviation
+pl,abbreviation
+sf,abbreviation
+sh,abbreviation
+lib,abbreviation
+rm,abbreviation
+bf,abbreviation
+sq,abbreviation
+int,abbreviation
+gt,abbreviation
+govt,abbreviation
+reg,abbreviation
+tr,abbreviation
+capt,abbreviation
+dept,abbreviation
+val,abbreviation
+lg,abbreviation
+exp,abbreviation
+rec,abbreviation
+org,abbreviation
+pres,abbreviation
+om,abbreviation
+ind,abbreviation
+cw,abbreviation
+bu,abbreviation
+gr,abbreviation
+approx,abbreviation
+prob,abbreviation
+div,abbreviation
+chem,abbreviation
+ht,abbreviation
+aux,abbreviation
+pf,abbreviation
+psych,abbreviation
+inc,abbreviation
+jr,abbreviation
+vs,abbreviation
+pm,abbreviation
+mm,abbreviation
+ms,abbreviation
+ll,abbreviation
+em,abbreviation
+dc,abbreviation
+ft,abbreviation
+mar,abbreviation
+ma,abbreviation
+pa,abbreviation
+mo,abbreviation
+km,abbreviation
+cm,abbreviation
+kg,abbreviation
+lb,abbreviation
+lbs,abbreviation
+mph,abbreviation
+hrs,abbreviation
+hr,abbreviation
+min,abbreviation
+sec,abbreviation
+mg,abbreviation
+ml,abbreviation
+ac,abbreviation
+er,abbreviation
+ab,abbreviation
+ct,abbreviation
+hp,abbreviation
+mt,abbreviation
+est,abbreviation
+fl,abbreviation
+fr,abbreviation
+vi,abbreviation
+cs,abbreviation
+ea,abbreviation
+cf,abbreviation
+cl,abbreviation
+ti,abbreviation
+tb,abbreviation
+db,abbreviation
+dd,abbreviation
+ls,abbreviation
+tn,abbreviation
+pd,abbreviation
+ts,abbreviation
+ks,abbreviation
+kc,abbreviation
+gs,abbreviation
+cu,abbreviation
+esp,abbreviation
+rpm,abbreviation
+bk,abbreviation
+mp,abbreviation
+mi,abbreviation
+gm,abbreviation
+rs,abbreviation
+pr,abbreviation
+cc,abbreviation
+pt,abbreviation
+ref,abbreviation
+ob,abbreviation
+av,abbreviation
+var,abbreviation
+med,abbreviation
+mas,abbreviation
+cis,abbreviation
+eff,abbreviation
+sim,abbreviation
+mic,abbreviation
+yr,abbreviation
+col,abbreviation
+ax,abbreviation
+ed,abbreviation
+nu,abbreviation
+phi,abbreviation
+psi,abbreviation
+xi,abbreviation
+chi,abbreviation
+pi,abbreviation
+mu,abbreviation
+stat,abbreviation
+promo,abbreviation
+rehab,abbreviation
+ii,roman numeral
+iii,roman numeral
+iv,roman numeral
+vii,roman numeral
+ix,roman numeral
+xii,roman numeral
+xv,roman numeral
+xx,roman numeral
+tony,name
+roger,name
+charlie,name
+joey,name
+barney,name
+sheila,name
+willy,name
+barbie,name
+tom,name
+bob,name
+lee,name
+ted,name
+ken,name
+don,name
+jay,name
+mac,name
+sam,name
+non,prefix or fragment of a split compound
+re,prefix or fragment of a split compound
+co,prefix or fragment of a split compound
+mid,prefix or fragment of a split compound
+bi,prefix or fragment of a split compound
+uni,prefix or fragment of a split compound
+multi,prefix or fragment of a split compound
+poly,prefix or fragment of a split compound
+hydro,prefix or fragment of a split compound
+trans,prefix or fragment of a split compound
+versa,prefix or fragment of a split compound
+quo,prefix or fragment of a split compound
+la,foreign word
+et,foreign word
+wanna,non-standard spelling or contraction
+gimme,non-standard spelling or contraction
+dunno,non-standard spelling or contraction
+outta,non-standard spelling or contraction
+thru,non-standard spelling or contraction
+til,non-standard spelling or contraction
+cuz,non-standard spelling or contraction
+tho,non-standard spelling or contraction
+ya,non-standard spelling or contraction
+xxx,adult content site term
+peter,name
+smith,name
+harry,name
+mike,name
+johnny,name
+josh,name
+jimmy,name
+rick,name
+billy,name
+bobby,name
+terry,name
+graham,name
+khan,name
+cooper,name
+turner,name
+wright,name
+nelson,name
+maria,name
+miller,name
+warren,name
+carter,name
+martin,name
+batman,brand
+ford,brand
+oxford,place
+amazon,brand
+google,brand
+twitter,brand
+trump,name
+wale,place (Wales)
+inter,prefix or fragment of a split compound
+semi,prefix or fragment of a split compound
+corp,abbreviation
+rep,abbreviation
+fa,abbreviation
+en,foreign word
+john,name
+intel,name
+randy,name
+brad,name
+sally,name
+dale,name
+drake,name
+troy,name
+chad,name
+beck,name
+cox,name
+nova,name
+jenny,name
+molly,name
+mickey,name
+hank,name
+timothy,name
+tucker,name
+napoleon,name
+manila,name
+panama,name
+yahoo,name
+wellington,name
+chandler,name
+gore,name
+sonny,name
+hector,name
+veronica,name
+fritz,name
+dirk,name
+trey,name
+mercer,name
+marlin,name
+dickens,name
+thatcher,name
+hogan,name
+shanghai,name
+hamburg,name
+java,name
+superman,name
+johns,name
+ta,abbreviation
+ca,abbreviation
+pol,abbreviation
+dis,abbreviation
+lea,abbreviation
+meg,abbreviation
+rev,abbreviation
+prof,abbreviation
+gen,abbreviation

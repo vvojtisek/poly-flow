@@ -3,6 +3,7 @@
 python -m app.cli seed-lexicon data/lexicon/de.core100.csv [--dry-run]
 python -m app.cli seed-blacklist data/blacklist/default.csv [--dry-run]
 python -m app.cli seed-scenes data/scenes/de.core100.json [--dry-run]   (after seed-lexicon)
+python -m app.cli seed-lemmas data/frequency/en_US.lemmas.csv [--dry-run]
 """
 
 import argparse
@@ -12,6 +13,7 @@ import json
 import logging
 import re
 import sys
+from collections import Counter
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Annotated, TypeVar
@@ -38,19 +40,30 @@ from app.domain.enums import (
     ContentFlag,
     Language,
 )
+from app.domain.lemmas import LOCALE_PATTERN, is_valid_lemma
 from app.domain.progression import frequency_band
 from app.domain.scenes import SceneFile, lexicon_resolver, validate_scene_file
-from app.models import ContentBlacklistEntry, LexiconItem, Scene, SceneWord
+from app.models import ContentBlacklistEntry, FrequencyLemma, LexiconItem, Scene, SceneWord
 
 log = logging.getLogger("polyflow.cli")
 
 NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 BATCH_SIZE = 500
+LEMMA_BATCH_SIZE = 1000
 T = TypeVar("T", bound=BaseModel)
 
 
 def _blank_to_none(v: object) -> object:
     return None if isinstance(v, str) and not v.strip() else v
+
+
+def _split_flags(v: object) -> object:
+    """`violence|profanity` -> ["violence", "profanity"]; blank -> []."""
+    if v is None:
+        return []
+    if isinstance(v, str):
+        return [f.strip() for f in v.split("|") if f.strip()]
+    return v
 
 
 class LexiconRow(BaseModel):
@@ -81,14 +94,7 @@ class LexiconRow(BaseModel):
         "ipa", "cefr", "gender", "example", "source", "license", "revision", mode="before"
     )(_blank_to_none)
 
-    @field_validator("content_flags", mode="before")
-    @classmethod
-    def _split_flags(cls, v: object) -> object:
-        if v is None:
-            return []
-        if isinstance(v, str):
-            return [f.strip() for f in v.split("|") if f.strip()]
-        return v
+    _flags = field_validator("content_flags", mode="before")(_split_flags)
 
     @field_validator("pos")
     @classmethod
@@ -141,6 +147,52 @@ class BlacklistRow(BaseModel):
         return self.model_dump()
 
 
+class FrequencyLemmaRow(BaseModel):
+    """Columns: rank,lemma,pos,content_flags,source,license,revision.
+
+    The locale comes from the file name (`en_US.lemmas.csv`). Lemmas must already be
+    normalised (lowercase ASCII, see app.domain.lemmas); the importer does not rewrite them.
+    """
+
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    rank: int = Field(ge=1)
+    lemma: NonEmpty
+    pos: str | None = None
+    content_flags: list[ContentFlag] = []
+    source: NonEmpty
+    license: NonEmpty
+    revision: NonEmpty
+
+    _blanks = field_validator("pos", mode="before")(_blank_to_none)
+    _flags = field_validator("content_flags", mode="before")(_split_flags)
+
+    @field_validator("lemma")
+    @classmethod
+    def _normalised(cls, v: str) -> str:
+        if not is_valid_lemma(v):
+            raise ValueError(f"not a normalised lemma: {v!r}")
+        return v
+
+    @field_validator("pos")
+    @classmethod
+    def _upper_pos(cls, v: str | None) -> str | None:
+        return v.upper() if v else v
+
+    def to_db(self, locale: str) -> dict:
+        return {
+            "locale": locale,
+            "lemma": self.lemma,
+            "rank": self.rank,
+            "frequency_band": frequency_band(self.rank),
+            "pos": self.pos,
+            "content_flags": sorted({f.value for f in self.content_flags}),
+            "source": self.source,
+            "license": self.license,
+            "revision": self.revision,
+        }
+
+
 class RowError(Exception):
     pass
 
@@ -180,6 +232,26 @@ def check_lexicon_uniqueness(rows: Iterable[LexiconRow]) -> None:
         raise RowError("\n".join(errors))
 
 
+def lemma_file_locale(path: Path) -> str:
+    """`en_US.lemmas.csv` -> `en_US`."""
+    locale = path.name.split(".", 1)[0]
+    if not path.name.endswith(".lemmas.csv") or not re.fullmatch(LOCALE_PATTERN, locale):
+        raise RowError(f"{path}: expected a file named <ll_CC>.lemmas.csv")
+    return locale
+
+
+def check_lemma_list(rows: Sequence[FrequencyLemmaRow]) -> None:
+    """Unique lemmas and ranks; ranks exactly 1..N so a list never has holes."""
+    errors = []
+    counts = Counter(r.lemma for r in rows)
+    if dupes := sorted(lemma for lemma, n in counts.items() if n > 1):
+        errors.append(f"duplicate lemmas: {', '.join(dupes[:20])}")
+    if sorted(r.rank for r in rows) != list(range(1, len(rows) + 1)):
+        errors.append(f"ranks must be exactly 1..{len(rows)}, each once")
+    if errors:
+        raise RowError("\n".join(errors))
+
+
 def _batches(items: Sequence[dict], size: int = BATCH_SIZE) -> Iterable[Sequence[dict]]:
     for i in range(0, len(items), size):
         yield items[i : i + size]
@@ -215,6 +287,39 @@ async def upsert_lexicon(rows: Sequence[LexiconRow]) -> int:
                     constraint="uq_lexicon_items_language_lemma_pos",
                     set_={c: stmt.excluded[c] for c in updatable}
                     | {"content_flags": _MERGED_FLAGS, "updated_at": func.now()},
+                )
+                await session.execute(stmt)
+    return len(rows)
+
+
+async def upsert_lemmas(locale: str, rows: Sequence[FrequencyLemmaRow]) -> int:
+    """Replace the locale's list in one transaction, in batches of LEMMA_BATCH_SIZE.
+
+    Upsert on (locale, lemma), so re-running keeps row ids; lemmas no longer in the file are
+    deleted (nothing references this table). Flags are only ever added, as in the lexicon.
+    """
+    table = FrequencyLemma.__table__
+    updatable = ["rank", "frequency_band", "pos", "source", "license", "revision"]
+    async for session in get_session():
+        async with session.begin():
+            await session.execute(
+                delete(FrequencyLemma).where(
+                    FrequencyLemma.locale == locale,
+                    FrequencyLemma.lemma.not_in([r.lemma for r in rows]),
+                )
+            )
+            for batch in _batches([r.to_db(locale) for r in rows], LEMMA_BATCH_SIZE):
+                stmt = insert(table).values(list(batch))
+                stmt = stmt.on_conflict_do_update(
+                    constraint="uq_frequency_lemmas_locale_lemma",
+                    set_={c: stmt.excluded[c] for c in updatable}
+                    | {
+                        "content_flags": literal_column(
+                            "ARRAY(SELECT DISTINCT f FROM unnest(frequency_lemmas.content_flags"
+                            " || excluded.content_flags) AS f ORDER BY f)"
+                        ),
+                        "updated_at": func.now(),
+                    },
                 )
                 await session.execute(stmt)
     return len(rows)
@@ -344,6 +449,19 @@ async def _seed_lexicon(paths: list[Path], dry_run: bool) -> int:
     return 0
 
 
+async def _seed_lemmas(paths: list[Path], dry_run: bool) -> int:
+    for path in paths:
+        locale = lemma_file_locale(path)
+        rows = read_rows(path, FrequencyLemmaRow)
+        check_lemma_list(rows)
+        if dry_run:
+            log.info("lemmas_validated", extra={"locale": locale, "rows": len(rows)})
+            continue
+        n = await upsert_lemmas(locale, rows)
+        log.info("lemmas_seeded", extra={"locale": locale, "rows": n})
+    return 0
+
+
 async def _seed_blacklist(paths: list[Path], dry_run: bool) -> int:
     rows = [r for p in paths for r in read_rows(p, BlacklistRow)]
     if dry_run:
@@ -361,6 +479,7 @@ def main(argv: list[str] | None = None) -> int:
         ("seed-lexicon", "Upsert lexicon items from CSV files"),
         ("seed-blacklist", "Upsert content blacklist entries from CSV files"),
         ("seed-scenes", "Upsert lesson scenes from JSON files (needs the lexicon)"),
+        ("seed-lemmas", "Replace frequency lemma lists from <locale>.lemmas.csv files"),
     ):
         p = sub.add_parser(name, help=help_)
         p.add_argument("paths", nargs="+", type=Path)
@@ -372,6 +491,7 @@ def main(argv: list[str] | None = None) -> int:
         "seed-lexicon": _seed_lexicon,
         "seed-blacklist": _seed_blacklist,
         "seed-scenes": _seed_scenes,
+        "seed-lemmas": _seed_lemmas,
     }[args.cmd]
 
     async def run() -> int:

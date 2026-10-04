@@ -44,6 +44,7 @@ docker compose --profile audio up --build   # + piper, whisper (first start fetc
 # seed
 docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json'
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
+docker compose run --rm backend python -m app.cli seed-lemmas data/frequency/en_US.lemmas.csv  # frequency reference, no glosses
 ```
 
 Open http://localhost:3000. The first visit runs **first-run setup**, which creates the admin account

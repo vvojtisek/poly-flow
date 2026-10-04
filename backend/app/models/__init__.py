@@ -1,5 +1,6 @@
 from app.models.auth import AuthSession
 from app.models.blacklist import ContentBlacklistEntry
+from app.models.frequency import FrequencyLemma
 from app.models.learning import (
     GrammarUnlock,
     LanguagePlacement,
@@ -18,6 +19,7 @@ __all__ = [
     "AuthSession",
     "ContentBlacklistEntry",
     "DailyStory",
+    "FrequencyLemma",
     "GrammarUnlock",
     "LanguagePlacement",
     "LearningEvent",
