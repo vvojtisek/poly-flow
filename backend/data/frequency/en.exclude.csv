@@ -1,4 +1,4 @@
-# Lemmas removed from the en_US frequency list after review: abbreviations, roman numerals,
+# Lemmas removed from the English frequency lists after review: abbreviations, roman numerals,
 # first names, word fragments left by the tokenizer, foreign words, non-standard spellings.
 lemma,reason
 st,abbreviation

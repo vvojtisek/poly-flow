@@ -1,0 +1,22 @@
+# en_GB corrections to breame's American -> British spelling map. american,british,reason.
+# Where both columns match, the American form is also standard British (usually with its
+# own meaning, or as the dominant modern spelling) and stays. Reviewed by hand.
+american,british,reason
+connection,connection,connexion is archaic
+disk,disk,computing sense; disc covers other senses
+draft,draft,draught is a different word
+encyclopedia,encyclopedia,dominant modern British spelling
+fetal,fetal,standard in British medicine
+fetus,fetus,standard in British medicine
+filter,filter,philtre is a different word
+gram,gram,gramme is archaic
+griffin,griffin,gryphon is a rare variant
+install,install,instal is rare
+kilogram,kilogram,kilogramme is archaic
+medieval,medieval,mediaeval is archaic
+practice,practice,British noun; practise is the verb
+program,program,computing sense; programme covers other senses
+tire,tire,verb (to tire); tyre covers the noun
+ton,ton,imperial ton; tonne is the metric unit
+math,maths,British form of the word
+mom,mum,British form of the word
