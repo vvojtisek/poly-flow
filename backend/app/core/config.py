@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     readiness_timeout_s: float = 2.0
     piper_url: str = "http://localhost:5000"
     whisper_url: str = "http://localhost:9000"
+    # Synthesized speech is cached here (a persistent volume in Compose).
+    audio_cache_dir: str = "/data/audio"
+    tts_timeout_s: float = 20.0
 
     # Build provenance, baked into the image at build time (see scripts/build-info.sh).
     git_sha: str = "unknown"

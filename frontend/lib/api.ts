@@ -256,6 +256,14 @@ export const revealAnswer = (taskId: string, idempotency_key: string) =>
   api<AnswerResult>(`/api/v1/learning/tasks/${taskId}/reveal`, { json: { idempotency_key } });
 export const completeLesson = (sessionId: string) =>
   api<LessonSession>(`/api/v1/learning/sessions/${sessionId}/complete`, { method: "POST" });
+
+// Speech (WAV) for content the lesson already shows; played through lib/audio.ts.
+export const sceneLineAudioUrl = (sessionId: string, line: number) =>
+  `/api/v1/learning/sessions/${sessionId}/audio?line=${line}`;
+export const wordAudioUrl = (sessionId: string, itemId: string, part: "word" | "context") =>
+  `/api/v1/learning/sessions/${sessionId}/audio?item=${itemId}&part=${part}`;
+export const taskAudioUrl = (taskId: string, part: "word" | "example") =>
+  `/api/v1/learning/tasks/${taskId}/audio?part=${part}`;
 export const getProgress = (language: Language) =>
   api<ProgressOverview>(`/api/v1/learning/progress?language=${language}`, { cache: "no-store" });
 

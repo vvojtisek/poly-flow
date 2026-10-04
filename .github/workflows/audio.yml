@@ -11,6 +11,7 @@ on:
       - docker/models/**
       - scripts/models.py
       - scripts/bench_audio.py
+      - backend/app/services/tts.py
       - docker-compose.yml
       - .github/workflows/audio.yml
   schedule:
@@ -76,6 +77,25 @@ jobs:
         run: |
           python3 scripts/bench_audio.py --smoke --min-accuracy 0.3 --out bench.md
           cat bench.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: The backend's TTS client speaks every language through Piper
+        run: |
+          docker build -q -f docker/backend/Dockerfile --target api -t polyflow-api-audio backend
+          docker run --rm --network host -e POLYFLOW_PIPER_URL=http://127.0.0.1:5000 \
+            -e POLYFLOW_AUDIO_CACHE_DIR=/tmp/audio polyflow-api-audio python -c '
+          import asyncio
+          from app.services.tts import VOICES, get_tts
+
+          async def main():
+              tts = get_tts()
+              for language in VOICES:
+                  first = await tts.speech(language, "Hallo, hello, ciao.")
+                  again = await tts.speech(language, "Hallo, hello, ciao.")
+                  assert first == again and first.stat().st_size > 10_000, language
+                  print(language.value, first.stat().st_size, "bytes, cached")
+
+          asyncio.run(main())
+          '
 
       - name: Complete volumes need no network
         run: $MODELS_OFFLINE fetch --dest /data piper/ whisper/tiny

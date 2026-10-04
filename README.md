@@ -70,6 +70,11 @@ re-hashes everything.
 - `WHISPER_MODEL` (`tiny`, `base`, `small`, `medium`, `large-v3-turbo`; default `small`) selects the STT model.
 - On an NVIDIA GPU add `-f docker-compose.gpu.yml` (CUDA 12, float16); without it Whisper runs on CPU (int8).
 - Uploads are limited (`WHISPER_MAX_SECONDS`, `WHISPER_MAX_UPLOAD_BYTES`), decoded in memory, never stored.
+- Lessons play scene lines, new words and task words through Piper. The backend serves only text a
+  lesson already shows (a pending "write the word" task stays silent), and caches each clip in the
+  `audiocache` volume, keyed by text, voice and the voice's configuration. Deleting the volume only
+  costs re-synthesis. Without the `audio` profile the play buttons report that sound is unavailable
+  and the lesson works as text.
 - `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
   The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
 

@@ -18,6 +18,7 @@ x-backend-env: &backend-env
   POLYFLOW_CORS_ORIGINS: '["http://localhost:3000"]'
   POLYFLOW_PIPER_URL: http://piper:5000
   POLYFLOW_WHISPER_URL: http://whisper:9000
+  POLYFLOW_AUDIO_CACHE_DIR: /data/audio
 
 services:
   postgres:
@@ -67,6 +68,8 @@ services:
     image: polyflow-backend:dev
     build: *backend-build
     environment: *backend-env
+    volumes:
+      - audiocache:/data/audio  # synthesized speech; safe to delete, it is rebuilt on demand
     ports:
       - "8000:8000"
     depends_on:
@@ -162,5 +165,6 @@ services:
 volumes:
   pgdata:
   redisdata:
+  audiocache:
   piperdata:
   whispermodels:
