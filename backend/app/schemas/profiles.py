@@ -36,6 +36,9 @@ class ProfileSettings(BaseModel):
     interests: list[str] = Field(default_factory=list, max_length=voices.MAX_INTERESTS)
     # Chosen speech voice per language; a language without an entry uses its default voice.
     voices: dict[Language, str] = Field(default_factory=dict)
+    # Adults only, off by default: lessons, checks and tests include profanity (vulgar words).
+    # A child profile never gets it, whatever is stored here.
+    learn_profanity: bool = False
 
     @field_validator("interests")
     @classmethod

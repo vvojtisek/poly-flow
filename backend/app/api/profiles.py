@@ -36,6 +36,8 @@ async def update_own_profile(body: ProfileSelfUpdate, auth: Auth, db: DB) -> Pro
     if body.settings is not None:
         # Partial: fields the request leaves out keep their stored value.
         changed = body.settings.model_dump(mode="json", exclude_unset=True)
+        if user.is_child and changed.get("learn_profanity"):
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "profanity_adults_only")
         stored = ProfileSettings.from_stored(user.settings).model_dump(mode="json")
         user.settings = {**stored, **changed}
     await db.commit()

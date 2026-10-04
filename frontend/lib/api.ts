@@ -95,6 +95,7 @@ export interface ProfileSettings {
   theme: Theme;
   interests: string[];
   voices: Partial<Record<Language, string>>;
+  learn_profanity: boolean;
 }
 
 export interface Voice {

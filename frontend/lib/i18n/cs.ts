@@ -309,6 +309,10 @@ export const cs = {
     notInstalled: "není nainstalovaný",
     sample: (name: string) => `Ukázka hlasu ${name}`,
     oneVoice: "Pro tento jazyk je zatím nainstalovaný jen jeden hlas.",
+    profanity: "Vulgární slova",
+    profanityToggle: "Učit se i vulgární slova",
+    profanityHelp:
+      "Jen pro dospělé, ve výchozím stavu vypnuto. Když to zapneš, lekce, ověření a testy zařadí i sprostá slova (třeba anglické „damn“ nebo „shit“) na místo podle jejich četnosti. Dětský profil je nikdy nedostane.",
     speechDown: "Služba řeči teď neběží, ukázky hlasů nejdou přehrát. Hlas si vybrat můžeš.",
     voicesUnavailable: "Seznam hlasů se nepodařilo načíst.",
   },
