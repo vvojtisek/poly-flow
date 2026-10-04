@@ -9,7 +9,7 @@ import pytest
 from app.cli import LexiconRow, read_rows, upsert_lexicon
 from app.domain.enums import CefrLevel
 from app.domain.level_exam import BY_LEVEL, band_complete
-from tests.helpers import login, make_child, setup_parent
+from tests.helpers import csrf, login, make_child, setup_parent
 from tests.test_learning import overrides  # noqa: F401  (fixture)
 
 DATA = Path(__file__).resolve().parents[1] / "data"
@@ -59,12 +59,17 @@ def test_glosses_are_unique():
 def test_block_above_core_follows_the_en_gb_frequency_list():
     gb = _gb()
     block = sorted((r for r in _en() if r.rank > 100), key=lambda r: r.rank)
-    aliases = {"according to": "according", "per cent": "percent"}
+    aliases = {
+        "according to": "according",
+        "per cent": "percent",
+        "born": "bear",
+        "united": "unite",
+    }
     gb_ranks = [gb[aliases.get(r.lemma, r.lemma.lower())][0] for r in block]
     assert gb_ranks == sorted(gb_ranks)
     # Drafts are marked as such until a native speaker has reviewed them.
     assert {(r.source, r.license, r.revision) for r in block} == {
-        ("claude-drafted", "CC-BY-SA-4.0", "en1000-draft-v1")
+        ("claude-drafted", "CC-BY-SA-4.0", "en1000-draft-v2")
     }
     assert all(r.example for r in block)  # lessons without a scene show the example
     with_cloze = sum(bool(_word(r.lemma).search(r.example)) for r in block)
@@ -104,6 +109,28 @@ async def test_placement_and_exams_see_the_whole_lexicon(english, client):
     assert levels["A1"]["state"] == "not_ready" and levels["A1"]["lexicon_items"] == 500
     assert levels["A2"]["state"] == "needs_previous" and levels["A2"]["lexicon_items"] == 500
     assert levels["B1"]["state"] == "missing_words"
+
+
+def _profanity() -> int:
+    return sum(1 for row in _en() if "profanity" in {f.value for f in row.content_flags})
+
+
+async def test_adult_pool_has_profanity_only_after_opting_in(english, client, overrides):  # noqa: F811
+    me = await setup_parent(client)
+
+    async def pool() -> int:
+        r = await client.get("/api/v1/learning/levels?language=en")
+        assert r.status_code == 200, r.text
+        lv = {x["level"]: x for x in r.json()["levels"]}
+        return lv["A1"]["pool"] + lv["A2"]["pool"]
+
+    assert _profanity() >= 5
+    assert await pool() == 1000 - _profanity()
+    r = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"learn_profanity": True}}, headers=csrf(me)
+    )
+    assert r.status_code == 200, r.text
+    assert await pool() == 1000
 
 
 async def test_child_pool_leaves_out_flagged_words(english, client, overrides):  # noqa: F811
