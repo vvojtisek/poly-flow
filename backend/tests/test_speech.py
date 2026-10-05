@@ -71,6 +71,14 @@ def whisper(status=200, body=None, seen=None):
     )
 
 
+async def test_stt_default_timeout_allows_cpu_decode_headroom():
+    stt = Stt("http://whisper:9000")
+    try:
+        assert stt._client.timeout.read == 120.0
+    finally:
+        await stt._client.aclose()
+
+
 async def test_stt_sends_language_and_audio_but_no_prompt():
     seen: list[httpx.Request] = []
     stt = whisper(body={"words": [{"word": " Hund", "probability": 0.8, "start": 0}]}, seen=seen)
