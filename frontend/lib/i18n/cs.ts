@@ -258,7 +258,6 @@ export const cs = {
     revealed: "Nevadí.",
     spoken: "Správně!",
     not_understood: "Nerozuměl jsem.",
-    nothingHeard: "Nic jsem neslyšel.",
     speakAgain: "Zkus to znovu, nebo slovo napiš. Nic se nepočítá.",
     notes: {
       eszett_as_ss: "Ve spisovné němčině se tu píše ß.",

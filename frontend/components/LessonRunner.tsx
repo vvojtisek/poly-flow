@@ -79,7 +79,6 @@ function Feedback({
     return (
       <div role="status" className="flex flex-col gap-1 rounded-xl bg-slate-100 p-3 text-sm dark:bg-slate-800">
         <p className="font-semibold">{cs.feedback.not_understood}</p>
-        <p>{cs.feedback.nothingHeard}</p>
         <p>{cs.feedback.speakAgain}</p>
       </div>
     );
