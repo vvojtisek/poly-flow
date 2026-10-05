@@ -6,6 +6,7 @@ from sqlalchemy import select
 
 from app.api.deps import get_limiter
 from app.api.learning import get_now
+from app.core.logging import request_id_ctx
 from app.db.session import get_session
 from app.domain.enums import Language
 from app.domain.learning_policy import POLICY
@@ -82,11 +83,16 @@ async def test_stt_default_timeout_allows_cpu_decode_headroom():
 async def test_stt_sends_language_and_audio_but_no_prompt():
     seen: list[httpx.Request] = []
     stt = whisper(body={"words": [{"word": " Hund", "probability": 0.8, "start": 0}]}, seen=seen)
-    words = await stt.transcribe(Language.DE, b"OggS-audio", "audio/ogg")
+    token = request_id_ctx.set("request-123")
+    try:
+        words = await stt.transcribe(Language.DE, b"OggS-audio", "audio/ogg")
+    finally:
+        request_id_ctx.reset(token)
     assert words == [W(" Hund", 0.8)]
     sent = seen[0].content
     assert b'name="language"\r\n\r\nde' in sent and b"OggS-audio" in sent
     assert b"initial_prompt" not in sent  # never suggest the expected word
+    assert seen[0].headers["x-request-id"] == "request-123"
 
 
 @pytest.mark.parametrize(

@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import time
+import uuid
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -153,7 +154,9 @@ async def _read_limited(audio: UploadFile) -> bytes:
     return data
 
 
-def _transcribe(data: bytes, language: str | None, queued_ms: int) -> dict:
+def _transcribe(
+    data: bytes, language: str | None, queued_ms: int, request_id: str
+) -> dict:
     try:
         samples = decode_audio(io.BytesIO(data), sampling_rate=SAMPLE_RATE)
     except Exception as exc:
@@ -190,6 +193,7 @@ def _transcribe(data: bytes, language: str | None, queued_ms: int) -> dict:
                 "duration_ms": elapsed_ms,
                 "words": len(words),
                 "language": info.language,
+                "request_id": request_id,
             }
         },
     )
@@ -211,6 +215,7 @@ async def transcribe(
 ) -> dict:
     if language is not None and language not in LANGUAGES:
         raise HTTPException(422, "unsupported language")
+    request_id = request.headers.get("x-request-id") or uuid.uuid4().hex
     data = await _read_limited(audio)
     queued_started = time.monotonic()
     try:
@@ -218,12 +223,19 @@ async def transcribe(
     except TimeoutError as exc:
         log.warning(
             "transcription busy",
-            extra={"fields": {"queue_timeout_s": QUEUE_TIMEOUT_S}},
+            extra={
+                "fields": {
+                    "queue_timeout_s": QUEUE_TIMEOUT_S,
+                    "request_id": request_id,
+                }
+            },
         )
         raise HTTPException(429, "transcription busy") from exc
     try:
         # transcription is blocking CPU/GPU work: keep it off the event loop
         queued_ms = round((time.monotonic() - queued_started) * 1000)
-        return await run_in_threadpool(_transcribe, data, language, queued_ms)
+        return await run_in_threadpool(
+            _transcribe, data, language, queued_ms, request_id
+        )
     finally:
         _slots.release()

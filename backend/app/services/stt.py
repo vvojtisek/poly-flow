@@ -12,6 +12,7 @@ from functools import lru_cache
 import httpx
 
 from app.core.config import get_settings
+from app.core.logging import request_id_ctx
 from app.domain.enums import Language
 from app.domain.speech import SpokenWord
 
@@ -46,10 +47,14 @@ class Stt:
     ) -> list[SpokenWord]:
         started = time.monotonic()
         try:
+            headers = {}
+            if request_id := request_id_ctx.get():
+                headers["X-Request-ID"] = request_id
             resp = await self._client.post(
                 f"{self._base_url}/v1/transcribe",
                 data={"language": language.value},
                 files={"audio": ("answer", audio, content_type)},
+                headers=headers,
             )
         except httpx.HTTPError as exc:
             log.warning("stt_failed", extra={"error": type(exc).__name__})
