@@ -69,6 +69,7 @@ Piper and Whisper themselves never download anything. `python3 scripts/models.py
 re-hashes everything.
 
 - `WHISPER_MODEL` (`tiny`, `base`, `small`, `medium`, `large-v3-turbo`; default `small`) selects the STT model.
+- `STT_TIMEOUT_S` (default `120`) gives the API enough wall-clock budget for CPU decoding; `WHISPER_QUEUE_TIMEOUT_S` (default `30`) bounds waiting for a busy Whisper slot and returns a retryable response.
 - On an NVIDIA GPU add `-f docker-compose.gpu.yml` (CUDA 12, float16); without it Whisper runs on CPU (int8).
 - Uploads are limited (`WHISPER_MAX_SECONDS`, `WHISPER_MAX_UPLOAD_BYTES`), decoded in memory, never stored.
 - Lessons play scene lines, new words and task words through Piper. The backend serves only text a

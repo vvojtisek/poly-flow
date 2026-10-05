@@ -19,6 +19,7 @@ x-backend-env: &backend-env
   POLYFLOW_PIPER_URL: http://piper:5000
   POLYFLOW_WHISPER_URL: http://whisper:9000
   POLYFLOW_AUDIO_CACHE_DIR: /data/audio
+  POLYFLOW_STT_TIMEOUT_S: ${STT_TIMEOUT_S:-120}
 
 services:
   postgres:
@@ -153,6 +154,7 @@ services:
       WHISPER_DEVICE: ${WHISPER_DEVICE:-auto}
       WHISPER_MAX_SECONDS: ${WHISPER_MAX_SECONDS:-30}
       WHISPER_CONCURRENCY: ${WHISPER_CONCURRENCY:-1}
+      WHISPER_QUEUE_TIMEOUT_S: ${WHISPER_QUEUE_TIMEOUT_S:-30}
     volumes:
       - whispermodels:/models:ro
     ports:

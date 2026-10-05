@@ -12,6 +12,7 @@ from functools import lru_cache
 import httpx
 
 from app.core.config import get_settings
+from app.core.logging import request_id_ctx
 from app.domain.enums import Language
 from app.domain.speech import SpokenWord
 
@@ -20,6 +21,10 @@ log = logging.getLogger("polyflow.stt")
 
 class SttUnavailable(Exception):
     """Whisper is unreachable or failed."""
+
+
+class SttBusy(SttUnavailable):
+    """Whisper is healthy but its bounded transcription queue is full."""
 
 
 class SttRejected(Exception):
@@ -32,7 +37,7 @@ class SttRejected(Exception):
 
 class Stt:
     def __init__(
-        self, base_url: str, timeout_s: float = 30.0, client: httpx.AsyncClient | None = None
+        self, base_url: str, timeout_s: float = 120.0, client: httpx.AsyncClient | None = None
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._client = client or httpx.AsyncClient(timeout=timeout_s)
@@ -42,10 +47,14 @@ class Stt:
     ) -> list[SpokenWord]:
         started = time.monotonic()
         try:
+            headers = {}
+            if request_id := request_id_ctx.get():
+                headers["X-Request-ID"] = request_id
             resp = await self._client.post(
                 f"{self._base_url}/v1/transcribe",
                 data={"language": language.value},
                 files={"audio": ("answer", audio, content_type)},
+                headers=headers,
             )
         except httpx.HTTPError as exc:
             log.warning("stt_failed", extra={"error": type(exc).__name__})
@@ -54,6 +63,8 @@ class Stt:
             raise SttRejected("audio_too_long")
         if resp.status_code == 422:
             raise SttRejected("audio_invalid")
+        if resp.status_code == 429:
+            raise SttBusy("whisper_busy")
         if resp.status_code != 200:
             log.warning("stt_failed", extra={"status": resp.status_code})
             raise SttUnavailable("whisper_failed")

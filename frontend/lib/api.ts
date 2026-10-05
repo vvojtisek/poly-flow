@@ -265,7 +265,6 @@ export interface AnswerResult {
   can_retry: boolean;
   expected: string | null;
   meaning: string | null;
-  heard?: string | null; // spoken answers: the transcript (not a pronunciation score)
 }
 
 export interface ProgressOverview {

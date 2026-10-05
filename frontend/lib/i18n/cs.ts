@@ -258,7 +258,6 @@ export const cs = {
     revealed: "Nevadí.",
     spoken: "Správně!",
     not_understood: "Nerozuměl jsem.",
-    heard: (text: string) => `Slyšel jsem: „${text}“.`,
     nothingHeard: "Nic jsem neslyšel.",
     speakAgain: "Zkus to znovu, nebo slovo napiš. Nic se nepočítá.",
     notes: {

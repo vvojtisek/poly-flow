@@ -17,7 +17,9 @@ class Settings(BaseSettings):
     # Synthesized speech is cached here (a persistent volume in Compose).
     audio_cache_dir: str = "/data/audio"
     tts_timeout_s: float = 20.0
-    stt_timeout_s: float = 30.0
+    # Whisper accepts up to 30 seconds of audio. CPU decoding plus a bounded queue can
+    # legitimately take longer than that, so keep enough wall-clock budget for the work.
+    stt_timeout_s: float = 120.0
     # A spoken answer is one word or a short phrase: refuse larger uploads before Whisper.
     speech_max_upload_bytes: int = 1024 * 1024
 

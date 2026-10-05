@@ -524,7 +524,7 @@ async def submit_answer(
     placement: as check; then the next question is chosen from the answers so far.
     exam: as check, on the exam's fixed sample.
     spoken (recall only): a confident transcript of exactly the word is a correct answer;
-    anything else is "not understood", recorded for calibration, and changes nothing else.
+    anything else is "not understood" and changes nothing else; only derived confidence is kept.
     """
     if (cached := await _replay(db, user, idempotency_key)) is not None:
         return cached
@@ -602,7 +602,6 @@ async def submit_answer(
         # check: show the answer only once it can no longer be guessed from it.
         "expected": _expected(task) if show else None,
         "meaning": item.translation_cs if show else None,
-        "heard": heard,
     }
     tz = ZoneInfo(user.timezone)
     db.add(
@@ -613,7 +612,9 @@ async def submit_answer(
             task_id=task.id,
             task_type=task.task_type,
             attempt_no=task.attempts,
-            answer=answer[:500],
+            # Spoken transcripts are grading input only. Keep a non-sensitive marker in the
+            # event instead of retaining learner-produced speech as free text.
+            answer="[spoken]" if mode == "spoken" else answer[:500],
             is_correct=correct,
             verdict=verdict,
             hint_used=hint_used,

@@ -40,7 +40,7 @@ from app.schemas.learning import (
 from app.services import learning as svc
 from app.services import level_exam as exam_svc
 from app.services import placement as placement_svc
-from app.services.stt import Stt, SttRejected, SttUnavailable, get_stt
+from app.services.stt import Stt, SttBusy, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
 
 router = APIRouter(prefix="/api/v1/learning", tags=["learning"])
@@ -258,6 +258,7 @@ async def _read_recording(request: Request) -> tuple[bytes, str]:
         413: {"description": "audio_too_large / audio_too_long"},
         415: {"description": "audio_required: send the recording with an audio/* type"},
         422: {"description": "audio_invalid: empty or not decodable"},
+        429: {"description": "speech_busy: the STT queue is full; retry later"},
         503: {"description": "speech_unavailable: the STT service is not running"},
     },
 )
@@ -282,6 +283,8 @@ async def answer_by_speech(
         words = await stt.transcribe(task.item.language, audio, content_type)
     except SttRejected as exc:
         raise HTTPException(413 if exc.code == "audio_too_long" else 422, exc.code) from exc
+    except SttBusy as exc:
+        raise HTTPException(429, "speech_busy") from exc
     except SttUnavailable as exc:
         raise HTTPException(503, "speech_unavailable") from exc
     try:
