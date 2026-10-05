@@ -154,6 +154,7 @@ services:
       WHISPER_DEVICE: ${WHISPER_DEVICE:-auto}
       WHISPER_MAX_SECONDS: ${WHISPER_MAX_SECONDS:-30}
       WHISPER_CONCURRENCY: ${WHISPER_CONCURRENCY:-1}
+      WHISPER_QUEUE_TIMEOUT_S: ${WHISPER_QUEUE_TIMEOUT_S:-30}
     volumes:
       - whispermodels:/models:ro
     ports:

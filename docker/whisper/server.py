@@ -9,11 +9,11 @@ The model is loaded from a local directory filled by `scripts/models.py fetch`
 Uploads are decoded in memory and never written to disk.
 """
 
+import asyncio
 import io
 import json
 import logging
 import os
-import threading
 import time
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -33,7 +33,11 @@ LANGUAGES = {"de", "fr", "it", "en", "cs"}
 
 class _JsonFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
-        entry = {"ts": self.formatTime(record), "level": record.levelname, "service": "whisper"}
+        entry = {
+            "ts": self.formatTime(record),
+            "level": record.levelname,
+            "service": "whisper",
+        }
         entry["msg"] = record.getMessage()
         entry.update(getattr(record, "fields", {}))
         return json.dumps(entry)
@@ -49,11 +53,16 @@ def _env_int(name: str, default: int) -> int:
     return int(os.getenv(name, str(default)))
 
 
+def _env_float(name: str, default: float) -> float:
+    return float(os.getenv(name, str(default)))
+
+
 MODEL_NAME = os.getenv("WHISPER_MODEL", "small")
 MODEL_DIR = Path(os.getenv("WHISPER_MODEL_DIR", "/models"))
 MAX_UPLOAD_BYTES = _env_int("WHISPER_MAX_UPLOAD_BYTES", 5 * 1024 * 1024)
 MAX_SECONDS = _env_int("WHISPER_MAX_SECONDS", 30)
 CONCURRENCY = _env_int("WHISPER_CONCURRENCY", 1)
+QUEUE_TIMEOUT_S = _env_float("WHISPER_QUEUE_TIMEOUT_S", 30.0)
 
 # keep uploads within the limit in memory: Starlette spools larger parts to a temp file
 MultiPartParser.spool_max_size = MAX_UPLOAD_BYTES + 1
@@ -61,7 +70,7 @@ MultiPartParser.spool_max_size = MAX_UPLOAD_BYTES + 1
 _model: WhisperModel | None = None
 _device = "cpu"
 _compute_type = "int8"
-_slots = threading.BoundedSemaphore(CONCURRENCY)
+_slots = asyncio.Semaphore(CONCURRENCY)
 
 
 def _resolve_device() -> tuple[str, str]:
@@ -114,7 +123,9 @@ async def reject_oversized(request: Request, call_next):
     """Refuse a declared oversized body before reading it (multipart overhead allowed)."""
     length = request.headers.get("content-length")
     if length and length.isdigit() and int(length) > MAX_UPLOAD_BYTES + 64 * 1024:
-        return JSONResponse({"detail": f"audio larger than {MAX_UPLOAD_BYTES} bytes"}, 413)
+        return JSONResponse(
+            {"detail": f"audio larger than {MAX_UPLOAD_BYTES} bytes"}, 413
+        )
     return await call_next(request)
 
 
@@ -129,6 +140,7 @@ def healthz() -> dict:
         "max_upload_bytes": MAX_UPLOAD_BYTES,
         "max_seconds": MAX_SECONDS,
         "concurrency": CONCURRENCY,
+        "queue_timeout_s": QUEUE_TIMEOUT_S,
     }
 
 
@@ -141,30 +153,33 @@ async def _read_limited(audio: UploadFile) -> bytes:
     return data
 
 
-def _transcribe(data: bytes, language: str | None, initial_prompt: str | None) -> dict:
+def _transcribe(data: bytes, language: str | None, queued_ms: int) -> dict:
     try:
         samples = decode_audio(io.BytesIO(data), sampling_rate=SAMPLE_RATE)
-    except Exception as exc:  # PyAV raises several unrelated types for undecodable input
+    except Exception as exc:
+        # PyAV raises several unrelated types for undecodable input.
         raise HTTPException(422, "audio could not be decoded") from exc
     duration = len(samples) / SAMPLE_RATE
     if duration > MAX_SECONDS:
         raise HTTPException(413, f"audio longer than {MAX_SECONDS} s")
     started = time.monotonic()
-    with _slots:
-        queued_ms = round((time.monotonic() - started) * 1000)
-        segments, info = load_model().transcribe(
-            samples,
-            language=language,
-            initial_prompt=initial_prompt,
-            word_timestamps=True,
-            vad_filter=True,
-            beam_size=5,
-        )
-        words = [
-            {"word": w.word.strip(), "start": w.start, "end": w.end, "probability": w.probability}
-            for s in segments
-            for w in (s.words or [])
-        ]
+    segments, info = load_model().transcribe(
+        samples,
+        language=language,
+        word_timestamps=True,
+        vad_filter=True,
+        beam_size=5,
+    )
+    words = [
+        {
+            "word": w.word.strip(),
+            "start": w.start,
+            "end": w.end,
+            "probability": w.probability,
+        }
+        for s in segments
+        for w in (s.words or [])
+    ]
     elapsed_ms = round((time.monotonic() - started) * 1000)
     log.info(
         "transcribed",
@@ -190,12 +205,25 @@ def _transcribe(data: bytes, language: str | None, initial_prompt: str | None) -
 
 @app.post("/v1/transcribe")
 async def transcribe(
+    request: Request,
     audio: Annotated[UploadFile, File()],
     language: Annotated[str | None, Form()] = None,
-    initial_prompt: Annotated[str | None, Form()] = None,
 ) -> dict:
     if language is not None and language not in LANGUAGES:
         raise HTTPException(422, "unsupported language")
     data = await _read_limited(audio)
-    # transcription is blocking CPU/GPU work: keep it off the event loop
-    return await run_in_threadpool(_transcribe, data, language, initial_prompt)
+    queued_started = time.monotonic()
+    try:
+        await asyncio.wait_for(_slots.acquire(), timeout=QUEUE_TIMEOUT_S)
+    except TimeoutError as exc:
+        log.warning(
+            "transcription busy",
+            extra={"fields": {"queue_timeout_s": QUEUE_TIMEOUT_S}},
+        )
+        raise HTTPException(429, "transcription busy") from exc
+    try:
+        # transcription is blocking CPU/GPU work: keep it off the event loop
+        queued_ms = round((time.monotonic() - queued_started) * 1000)
+        return await run_in_threadpool(_transcribe, data, language, queued_ms)
+    finally:
+        _slots.release()

@@ -13,7 +13,7 @@ from app.domain.speech import SpokenWord, judge
 from app.main import app
 from app.models import LearningEvent
 from app.services.rate_limit import MemoryAttemptLimiter
-from app.services.stt import Stt, SttRejected, SttUnavailable, get_stt
+from app.services.stt import Stt, SttBusy, SttRejected, SttUnavailable, get_stt
 from tests.helpers import Clock, csrf, seed_words
 from tests.test_learning import (
     answer,
@@ -94,6 +94,7 @@ async def test_stt_sends_language_and_audio_but_no_prompt():
     [
         (413, SttRejected, "audio_too_long"),
         (422, SttRejected, "audio_invalid"),
+        (429, SttBusy, None),
         (500, SttUnavailable, None),
         (httpx.ConnectError("refused"), SttUnavailable, None),
     ],
@@ -113,11 +114,14 @@ class FakeStt:
         self.words: list[SpokenWord] = []
         self.calls = 0
         self.down = False
+        self.busy = False
 
     async def transcribe(self, language, audio, content_type):
         self.calls += 1
         if self.down:
             raise SttUnavailable("whisper_unreachable")
+        if self.busy:
+            raise SttBusy("whisper_busy")
         return self.words
 
 
@@ -235,6 +239,10 @@ async def test_speech_request_errors(db, client, stt):
     stt[0].down = True
     r = await speak(client, me, t)
     assert r.status_code == 503 and r.json()["detail"] == "speech_unavailable"
+    stt[0].down = False
+    stt[0].busy = True
+    r = await speak(client, me, t)
+    assert r.status_code == 429 and r.json()["detail"] == "speech_busy"
     no_csrf = await client.post(
         f"/api/v1/learning/tasks/{t['id']}/speech",
         params={"idempotency_key": key()},

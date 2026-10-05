@@ -22,6 +22,10 @@ class SttUnavailable(Exception):
     """Whisper is unreachable or failed."""
 
 
+class SttBusy(SttUnavailable):
+    """Whisper is healthy but its bounded transcription queue is full."""
+
+
 class SttRejected(Exception):
     """Whisper refused the recording (too long, too large, or not decodable audio)."""
 
@@ -54,6 +58,8 @@ class Stt:
             raise SttRejected("audio_too_long")
         if resp.status_code == 422:
             raise SttRejected("audio_invalid")
+        if resp.status_code == 429:
+            raise SttBusy("whisper_busy")
         if resp.status_code != 200:
             log.warning("stt_failed", extra={"status": resp.status_code})
             raise SttUnavailable("whisper_failed")
