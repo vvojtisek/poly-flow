@@ -173,13 +173,14 @@ async def test_confident_spoken_word_is_active_evidence(db, client, stt):
     assert r.status_code == 200, r.text
     body = r.json()
     assert body["verdict"] == "spoken" and body["correct"] and body["counted"]
-    assert body["task_done"] and body["heard"] == "Das Haus." and body["expected"] == "Haus"
+    assert body["task_done"] and "heard" not in body and body["expected"] == "Haus"
     p = (await progress_rows())["Haus"]
     assert p.correct_count == 1 and p.phonetic_score is None
     assert p.orthography_score is None  # speech says nothing about spelling
     [ev] = await spoken_events()
     assert ev.is_correct and ev.counts_as_evidence and ev.transcript_confidence == 0.8
-    assert ev.answer == "Das Haus." and ev.task_type == "recall" and ev.policy_version == "v3"
+    assert ev.answer == "[spoken]" and "heard" not in ev.result
+    assert ev.task_type == "recall" and ev.policy_version == "v3"
 
 
 @pytest.mark.parametrize(

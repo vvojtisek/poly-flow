@@ -182,9 +182,10 @@ class LearningEvent(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     # True only for a first-try, hint-free correct answer: what knowledge thresholds count.
     counts_as_evidence: Mapped[bool] = mapped_column(Boolean, nullable=False)
     orthography_score: Mapped[float | None] = mapped_column(Float)
-    # "typed" (written or chosen) or "spoken". For spoken attempts `answer` holds the transcript,
-    # `is_correct` whether it says the word, and `transcript_confidence` how sure Whisper was of
-    # its transcript. None of these is a pronunciation measurement (phonetic_score stays NULL).
+    # "typed" (written or chosen) or "spoken". For spoken attempts `answer` is a non-sensitive
+    # marker, `is_correct` says whether the transcript matched, and `transcript_confidence` is
+    # how sure Whisper was of its transcript. None is a pronunciation measurement
+    # (phonetic_score stays NULL).
     answer_mode: Mapped[str] = mapped_column(
         String(8), default="typed", server_default="typed", nullable=False
     )

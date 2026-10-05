@@ -132,8 +132,6 @@ class AnswerOut(BaseModel):
     can_retry: bool
     expected: str | None
     meaning: str | None
-    # Spoken answers: what speech recognition heard (a transcript, not a pronunciation score).
-    heard: str | None = None
 
 
 class PlacementOut(BaseModel):
