@@ -390,4 +390,9 @@ export const submitSpeech = (taskId: string, idempotency_key: string, recording:
     body: recording,
     headers: { "Content-Type": recording.type || "audio/webm" },
   });
-export const newIdempotencyKey = () => crypto.randomUUID().replaceAll("-", "");
+// crypto.randomUUID() is only defined in a secure context; a self-hosted LAN served over plain
+// HTTP is not one, so fall back to getRandomValues (available everywhere, including insecure
+// contexts). Both branches yield 32 hex chars, matching the backend idempotency-key pattern.
+export const newIdempotencyKey = () =>
+  crypto.randomUUID?.().replaceAll("-", "") ??
+  Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, "0")).join("");

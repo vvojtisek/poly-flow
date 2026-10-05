@@ -489,8 +489,10 @@ export function LessonRunner({
     setAnnouncement("");
     setBusy(true);
     setNetError(false);
-    pendingKey.current ??= newIdempotencyKey();
     try {
+      // Inside the try: a throw here (e.g. a missing Web Crypto API) must not strand busy=true,
+      // which would disable every answer control with no way to recover.
+      pendingKey.current ??= newIdempotencyKey();
       const r =
         body === "reveal"
           ? await revealAnswer(task.id, pendingKey.current)
