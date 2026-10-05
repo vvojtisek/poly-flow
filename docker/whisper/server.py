@@ -213,6 +213,7 @@ async def transcribe(
     audio: Annotated[UploadFile, File()],
     language: Annotated[str | None, Form()] = None,
 ) -> dict:
+    # The grading endpoint intentionally exposes no model-biasing prompt input.
     if language is not None and language not in LANGUAGES:
         raise HTTPException(422, "unsupported language")
     request_id = request.headers.get("x-request-id") or uuid.uuid4().hex
