@@ -79,7 +79,6 @@ function Feedback({
     return (
       <div role="status" className="flex flex-col gap-1 rounded-xl bg-slate-100 p-3 text-sm dark:bg-slate-800">
         <p className="font-semibold">{cs.feedback.not_understood}</p>
-        <p>{cs.feedback.nothingHeard}</p>
         <p>{cs.feedback.speakAgain}</p>
       </div>
     );
@@ -243,31 +242,41 @@ export function LessonRunner({
   const optionsRef = useRef<HTMLDivElement>(null);
   // The last choice came from the keyboard: disabled options drop focus, so it is put back.
   const refocusOptions = useRef(false);
+  // Bumped on every (re)start: a superseded start (React's dev double mount, a retry) must not
+  // overwrite the task the learner is already answering when its late response arrives.
+  const run = useRef(0);
 
   const advance = useCallback(async (session: LessonSession) => {
+    const id = run.current;
     try {
       const { task } = await nextTask(session.id);
+      if (id !== run.current) return;
       setText("");
       setChosen(null);
       pendingKey.current = null;
       if (task) setPhase({ kind: "task", session, task, result: null });
-      else setPhase({ kind: "done", session: await completeLesson(session.id) });
+      else {
+        const done = await completeLesson(session.id);
+        if (id === run.current) setPhase({ kind: "done", session: done });
+      }
     } catch {
-      setPhase({ kind: "error", retry: () => void advance(session) });
+      if (id === run.current) setPhase({ kind: "error", retry: () => void advance(session) });
     }
   }, []);
 
   const begin = useCallback(async () => {
+    const id = ++run.current;
     setPhase({ kind: "starting" });
     try {
       const { session } = await startLesson(language, mode, level);
+      if (id !== run.current) return;
       if (!session) setPhase({ kind: "empty" });
       // A fresh lesson starts with its context; a resumed one continues the practice.
       else if (session.mode === "learn" && session.remaining === session.total && session.words.length) {
         setPhase(session.scene ? { kind: "scene", session } : { kind: "words", session, index: 0 });
       } else await advance(session);
     } catch {
-      setPhase({ kind: "error", retry: () => void begin() });
+      if (id === run.current) setPhase({ kind: "error", retry: () => void begin() });
     }
   }, [language, mode, level, advance]);
 
