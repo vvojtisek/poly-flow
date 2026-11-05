@@ -10,6 +10,7 @@ PIPER_VOICES and to CATALOG below.
 from dataclasses import dataclass
 
 from app.domain.enums import Language
+from app.domain.language_packs import PACKS
 
 
 @dataclass(frozen=True)
@@ -33,12 +34,7 @@ for _v in CATALOG:
     DEFAULT_VOICES.setdefault(_v.language, _v.id)
 
 # Spoken by the preview button; fixed text, so the sample endpoint is no general TTS proxy.
-SAMPLES: dict[Language, str] = {
-    Language.DE: "Hallo! So klingt meine Stimme. Wollen wir zusammen üben?",
-    Language.FR: "Bonjour ! Voici ma voix. On s'entraîne ensemble ?",
-    Language.IT: "Ciao! Questa è la mia voce. Ci esercitiamo insieme?",
-    Language.EN: "Hello! This is my voice. Shall we practise together?",
-}
+SAMPLES: dict[Language, str] = {lang: p.voice_sample for lang, p in PACKS.items()}
 
 
 def voice_for(language: Language, chosen: str | None) -> str:

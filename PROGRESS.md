@@ -78,12 +78,14 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       `services/stories.py`, `/api/v1/stories`, migration 0017, page `/stories` (*Čtení*).
 - [x] **M7 German vocabulary 101-1000**: drafted lexicon rows (gloss, gender, plural-free lemma,
       example) marked `claude-draft` / unreviewed, plus scenes for the new words.
-- [ ] **M8 Language-pack registry**: one module per target language (articles, spelling
+- [x] **M8 Language-pack registry**: one module per target language (articles, spelling
       variants, special characters, voice, data files) so `cs → es` is configuration + data.
 - [ ] **M9 Verification and release bump**: backend tests, ruff, alembic check, frontend
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M8 done. `app/domain/language_packs.py` (one `LanguagePack` per target language); orthography, grammar grading, word lessons, tutor (name, genders, hints), voices and story vocabulary read it. README "Adding a target language". Tests: tests/test_language_packs.py (also checks frontend/lib/keyboard.ts). Backend 357 passed, 1 skipped.
 
 - 2026-11-05: M7 done (without new scenes: words 101-1000 use their example sentence as context, like English 101-1000). `data/lexicon/de.0101-1000.csv`, 900 drafted rows, order approximate (no German frequency list in repo). Tests: tests/test_lexicon_de.py. Backend 353 passed, 1 skipped; Playwright 3/3.
 

@@ -27,6 +27,7 @@ from sqlalchemy.orm import aliased, selectinload
 
 from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, ContentFlag, Language, ProgressState
 from app.domain.grammar import ErrorTag, classify
+from app.domain.language_packs import pack
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
 from app.domain.speech import SpokenWord, judge
@@ -488,7 +489,7 @@ def visible_options(task: LearningTask) -> list[tuple[int, str]] | None:
 
 def spoken_word(item: LexiconItem) -> str:
     """The word as the learner sees it: German nouns with their article (der Hund)."""
-    if item.language == Language.DE and item.gender in {"der", "die", "das"}:
+    if item.gender in pack(item.language).noun_genders:
         return f"{item.gender} {item.lemma}"
     return item.lemma
 
@@ -559,15 +560,13 @@ async def use_hint(db: AsyncSession, user: User, task_id: uuid.UUID) -> Learning
     return task
 
 
-_DE_DEFINITE = ("der", "die", "das")
-
-
 def wrong_article(item: LexiconItem, text: str) -> bool:
-    """A German noun written with a definite article that is not its own (die Hund)."""
-    if item.language != Language.DE or item.gender not in _DE_DEFINITE:
+    """A noun written with a definite article that is not its own (German: die Hund)."""
+    articles = pack(item.language).definite_articles
+    if item.gender not in articles:
         return False
     first = text.strip().split(" ", 1)[0].casefold()
-    return first in _DE_DEFINITE and first != item.gender
+    return first in articles and first != item.gender
 
 
 def word_error_tag(task: LearningTask, item: LexiconItem, answer: str, verdict: str) -> str | None:

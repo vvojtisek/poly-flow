@@ -21,6 +21,7 @@ from sqlalchemy.orm import selectinload
 from app.core.config import get_settings
 from app.domain.enums import Language
 from app.domain.grammar import ErrorTag
+from app.domain.language_packs import PACKS, pack
 from app.models import (
     GrammarAttempt,
     GrammarExercise,
@@ -39,29 +40,27 @@ from app.services.llm import Llm, LlmUnavailable
 from app.services.safety import blacklist_hits, looks_like_czech_explanation
 
 MAX_EXPLANATION_CHARS = 1500
-LANGUAGE_CS = {
-    Language.DE: "němčina",
-    Language.FR: "francouzština",
-    Language.IT: "italština",
-    Language.EN: "angličtina",
-}
-GENDER_CS = {"der": "mužského rodu", "die": "ženského rodu", "das": "středního rodu"}
+LANGUAGE_CS = {lang: p.name_cs for lang, p in PACKS.items()}
 
+# Language-neutral hints per mistake kind; a language pack can override them (`tag_hints`).
 TAG_HINTS: dict[str, str] = {
     ErrorTag.ARTICLE: "Chyba je ve členu: zkontroluj rod podstatného jména a pád, který věta "
-    "vyžaduje (např. 4. pád po haben, sehen; 3. pád po mit, bei).",
+    "vyžaduje.",
     ErrorTag.ENDING: "Kmen slova máš správně, liší se koncovka: podívej se, ke které osobě nebo "
     "pádu tvar patří.",
-    ErrorTag.WORD_ORDER: "Slova máš správně, jen jejich pořadí ne. V německé oznamovací větě "
-    "stojí časované sloveso na druhém místě, ve vedlejší větě na konci.",
-    ErrorTag.CAPITALISATION: "Podstatná jména se v němčině píšou vždy s velkým písmenem.",
-    ErrorTag.DIACRITICS: "Pozor na přehlásky a diakritiku: ä, ö, ü mění význam i výslovnost "
-    "(schon = už, schön = hezký).",
+    ErrorTag.WORD_ORDER: "Slova máš správně, jen jejich pořadí ne.",
+    ErrorTag.CAPITALISATION: "Pozor na velká a malá písmena.",
+    ErrorTag.DIACRITICS: "Pozor na diakritiku: znaménka nad písmeny mění význam i výslovnost.",
     ErrorTag.SPELLING: "Odpověď je blízko, jen je v ní překlep.",
     ErrorTag.WORD_CHOICE: "Použil(a) jsi jiné slovo, než věta potřebuje.",
     ErrorTag.GENDER: "Slovo je správně, ale člen ne. Rod se u podstatných jmen učí spolu se "
     "slovem; v češtině bývá jiný.",
 }
+
+
+def hints_for(language: Language) -> dict[str, str]:
+    return {**TAG_HINTS, **pack(language).tag_hints}
+
 
 SYSTEM_PROMPT = (
     "You are a patient language tutor for a Czech-speaking learner. Reply ONLY in Czech, in "
@@ -131,17 +130,19 @@ async def _word_context(db: AsyncSession, user: User, task_id: uuid.UUID) -> _Co
     ).scalar_one_or_none()
     answer = None if ev is None or ev.revealed or ev.answer_mode == "spoken" else ev.answer
     tag = ev.error_tag if ev else None
-    word = f"{item.gender} {item.lemma}" if item.gender in GENDER_CS else item.lemma
+    genders = pack(item.language).noun_genders
+    word = f"{item.gender} {item.lemma}" if item.gender in genders else item.lemma
     lines = [f"{word} znamená „{item.translation_cs}“."]
-    if item.language == Language.DE and item.gender in GENDER_CS:
-        lines.append(f"{item.lemma} je {GENDER_CS[item.gender]}, proto {item.gender} {item.lemma}.")
+    if item.gender in genders:
+        lines.append(f"{item.lemma} je {genders[item.gender]}, proto {item.gender} {item.lemma}.")
     if answer and tag:
         if task.task_type == TaskType.RECOGNITION:
             lines.append(f"Vybral(a) jsi „{answer}“, ale {word} znamená „{item.translation_cs}“.")
         else:
             lines.append(f"Napsal(a) jsi „{answer}“, správně je „{word}“.")
-    if tag and tag in TAG_HINTS:
-        lines.append(TAG_HINTS[tag])
+    hints = hints_for(item.language)
+    if tag and tag in hints:
+        lines.append(hints[tag])
     if item.example_sentence:
         lines.append(f"Příklad: {item.example_sentence}")
     rule = " ".join(lines)
@@ -204,8 +205,9 @@ async def _grammar_context(db: AsyncSession, user: User, item_id: uuid.UUID) -> 
     lines = [f"Správně: {solution}", ex.explain]
     if answer and tag:
         lines.insert(1, f"Tvoje odpověď: {answer}")
-        if tag in TAG_HINTS:
-            lines.append(TAG_HINTS[tag])
+        hints = hints_for(item.session.language)
+        if tag in hints:
+            lines.append(hints[tag])
     note = ex.unit.notes[0] if ex.unit.notes else None
     rule = ex.explain
     if note:

@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from enum import StrEnum
 
 from app.domain.enums import Language
+from app.domain.language_packs import PACKS, pack
 
 
 class Verdict(StrEnum):
@@ -34,27 +35,12 @@ class SpellingResult:
 # Typographic apostrophe look-alikes -> ASCII apostrophe
 _APOSTROPHES = str.maketrans({"\u2019": "'", "\u02bc": "'", "`": "'", "\u00b4": "'"})
 _ARTICLES: dict[Language, tuple[str, ...]] = {
-    Language.DE: ("der", "die", "das", "ein", "eine"),
-    Language.FR: ("le", "la", "les", "l'", "un", "une"),
-    Language.IT: ("il", "lo", "la", "i", "gli", "le", "l'", "un", "uno", "una", "un'"),
-    # "to" is the infinitive marker, accepted before a bare verb ("to go" for "go")
-    Language.EN: ("the", "a", "an", "to"),
+    lang: p.citation_articles for lang, p in PACKS.items()
 }
 ARTICLES = _ARTICLES  # also used to read spoken answers (app.domain.speech)
 # Keyboard fallbacks that are accepted spellings, with the note shown to the learner.
 _VARIANTS: dict[Language, tuple[tuple[str, str, str], ...]] = {
-    Language.DE: (
-        ("ß", "ss", "eszett_as_ss"),
-        ("ä", "ae", "umlaut_as_e"),
-        ("ö", "oe", "umlaut_as_e"),
-        ("ü", "ue", "umlaut_as_e"),
-        ("Ä", "Ae", "umlaut_as_e"),
-        ("Ö", "Oe", "umlaut_as_e"),
-        ("Ü", "Ue", "umlaut_as_e"),
-    ),
-    Language.FR: (("œ", "oe", "ligature_split"), ("æ", "ae", "ligature_split")),
-    Language.IT: (),
-    Language.EN: (),
+    lang: p.spelling_variants for lang, p in PACKS.items()
 }
 
 
@@ -105,7 +91,11 @@ def check_spelling(language: Language, expected: str, answer: str, pos: str = ""
         return SpellingResult(Verdict.VARIANT, 0.9, notes[0])
 
     if ans.casefold() == exp.casefold():
-        if language == Language.DE and pos.upper() in ("NOUN", "PROPN") and exp[:1].isupper():
+        if (
+            pack(language).capitalises_nouns
+            and pos.upper() in ("NOUN", "PROPN")
+            and exp[:1].isupper()
+        ):
             return SpellingResult(Verdict.CASE, 0.6, "de_noun_capital")
         return SpellingResult(Verdict.EXACT, 1.0)  # capitalisation is not significant here
 

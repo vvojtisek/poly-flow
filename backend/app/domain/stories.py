@@ -15,6 +15,7 @@ from typing import Annotated
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from app.domain.enums import Language
+from app.domain.language_packs import pack
 from app.domain.orthography import normalize
 
 PROMPT_VERSION = "s1"
@@ -102,44 +103,6 @@ def parse_draft(reply: str) -> StoryDraft:
         raise DraftInvalid("bad_shape") from exc
 
 
-# Irregular and function-word forms that a stem match cannot reach (lemma -> forms).
-IRREGULAR: dict[Language, dict[str, tuple[str, ...]]] = {
-    Language.DE: {
-        "sein": ("bin", "bist", "ist", "sind", "seid", "war", "warst", "waren", "wart", "gewesen"),
-        "haben": ("habe", "hast", "hat", "habt", "hatte", "hatten", "hattest", "gehabt"),
-        "werden": ("werde", "wirst", "wird", "werdet", "wurde", "wurden", "geworden"),
-        "der": ("die", "das", "den", "dem", "des"),
-        "ein": ("eine", "einen", "einem", "einer", "eines"),
-        "kein": ("keine", "keinen", "keinem", "keiner", "keines"),
-        "ich": ("mich", "mir"),
-        "du": ("dich", "dir"),
-        "er": ("ihn", "ihm"),
-        "sie": ("ihr", "ihnen"),
-        "wir": ("uns",),
-        "mein": ("meine", "meinen", "meinem", "meiner", "meines"),
-        "dein": ("deine", "deinen", "deinem", "deiner", "deines"),
-        "sein_poss": ("seine", "seinen", "seinem", "seiner", "seines"),
-        "können": ("kann", "kannst", "könnt", "konnte", "konnten"),
-        "müssen": ("muss", "musst", "müsst", "musste", "mussten"),
-        "wollen": ("will", "willst", "wollt", "wollte", "wollten"),
-        "gehen": ("geht", "ging", "gingen", "gegangen"),
-        "geben": ("gibt", "gibst", "gab", "gegeben"),
-        "sehen": ("sieht", "siehst", "sah", "gesehen"),
-        "essen": ("isst", "aß", "gegessen"),
-        "fahren": ("fährt", "fährst", "fuhr", "gefahren"),
-        "kommen": ("kam", "kamen", "gekommen"),
-        "nehmen": ("nimmt", "nimmst", "nahm", "genommen"),
-        "sprechen": ("spricht", "sprichst", "sprach", "gesprochen"),
-        "lesen": ("liest", "las", "gelesen"),
-        "wissen": ("weiß", "weißt", "wusste", "gewusst"),
-        "mögen": ("mag", "magst", "mochte", "möchte", "möchtest", "möchten"),
-    },
-}
-# Words a story may always use: punctuation-like interjections and numbers are not vocabulary.
-FREE: dict[Language, frozenset[str]] = {
-    Language.DE: frozenset({"ja", "nein", "oh", "hallo", "tschüss", "danke", "bitte", "ok"}),
-}
-
 _TOKEN = re.compile(r"[^\W\d_]+(?:['-][^\W\d_]+)*")
 
 
@@ -161,15 +124,12 @@ class Vocabulary:
         self.language = language
         self.exact: dict[str, str] = {}
         self.stems: list[tuple[str, str]] = []
-        irregular = IRREGULAR.get(language, {})
+        irregular = pack(language).irregular_forms
         for lemma in lemmas:
             key = lemma.casefold()
             self.exact[key] = lemma
             for form in irregular.get(key, ()):
                 self.exact.setdefault(form, lemma)
-            if key == "sein":
-                for form in irregular.get("sein_poss", ()):
-                    self.exact.setdefault(form, lemma)
             stem = _stem(key)
             if len(stem) >= 3:
                 self.stems.append((stem, lemma))
@@ -208,7 +168,7 @@ def coverage(
     target_vocab = Vocabulary(language, targets)
     allowed = {t.casefold() for g in draft.glossary for t in tokens(g.word)}
     allowed |= {t.casefold() for n in draft.names for t in tokens(n)}
-    allowed |= FREE.get(language, frozenset())
+    allowed |= pack(language).free_words
     found: set[str] = set()
     unknown: list[str] = []
     total = 0

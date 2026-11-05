@@ -23,6 +23,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 from app.domain.enums import CefrLevel, ContentFlag, Language
+from app.domain.language_packs import PACKS, pack
 from app.domain.orthography import normalize
 
 NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
@@ -57,16 +58,7 @@ class ErrorTag(StrEnum):
 
 
 # Articles and determiners whose swap is an article/case error, per language.
-DETERMINERS: dict[Language, frozenset[str]] = {
-    Language.DE: frozenset(
-        "der die das den dem des ein eine einen einem einer eines "
-        "kein keine keinen keinem keiner keines".split()
-    ),
-    Language.FR: frozenset("le la les l' un une des du de au aux".split()),
-    Language.IT: frozenset("il lo la i gli le l' un uno una un' del della dei degli".split()),
-    Language.EN: frozenset("the a an".split()),
-}
-_UMLAUT_FALLBACKS = (("ß", "ss"), ("ä", "ae"), ("ö", "oe"), ("ü", "ue"))
+DETERMINERS: dict[Language, frozenset[str]] = {lang: p.determiners for lang, p in PACKS.items()}
 
 
 # ---------------------------------------------------------------- content pack schema
@@ -205,11 +197,7 @@ def _key(text: str) -> str:
 
 def _unfallback(language: Language, text: str) -> str:
     """Learner text with keyboard fallbacks (ae, oe, ue, ss) read as the real characters."""
-    if language != Language.DE:
-        return text
-    for real, fallback in _UMLAUT_FALLBACKS:
-        text = text.replace(fallback, real).replace(fallback.capitalize(), real.upper())
-    return text
+    return pack(language).unfallback(text)
 
 
 @dataclass(frozen=True, slots=True)
@@ -336,7 +324,11 @@ def grade(
     folded = {k.casefold(): a for k, a in keys.items()}
     if got.casefold() in folded:
         exp = folded[got.casefold()]
-        if case_sensitive_target and language == Language.DE and _german_nouns_lowered(exp, text):
+        if (
+            case_sensitive_target
+            and pack(language).capitalises_nouns
+            and _german_nouns_lowered(exp, text)
+        ):
             return Graded(
                 False, "case", note="de_noun_capital", error=ErrorTag.CAPITALISATION, matched=exp
             )
