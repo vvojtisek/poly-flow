@@ -49,7 +49,7 @@ Plan phase P6 (XP, coins, streaks, mini-games) is dropped; progress shows master
 Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
 
 - [x] **M0 Audit and roadmap**: this file.
-- [ ] **M1 Desktop ergonomics** (frontend): `Enter` submits / continues, digit keys pick answer
+- [x] **M1 Desktop ergonomics** (frontend): `Enter` submits / continues, digit keys pick answer
       options using physical key codes (works on the Czech layout, where the top row types
       `+ěščřžýáíé`), quick German character bar (`ä ö ü ß` + capitals) with `Alt+a/o/u/s`
       shortcuts, `?`/`H` for hint, `Esc` leaves to the overview, a shortcut legend, wider layout and a
@@ -82,5 +82,7 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M1 done. `lib/keyboard.ts` (data-hotkey listener, physical digit keys, Alt+letter characters), `AnswerInput`, key badges and legend on lg screens, scene side pane in Lekce. Playwright: mobile spec + new keyboard-only desktop spec pass on localhost.
 
 - 2026-11-05: audit done; baseline `uv run pytest` = 283 passed, 1 skipped (local Postgres 16).

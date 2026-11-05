@@ -16,5 +16,13 @@ export default defineConfig({
     // Sandboxes with a preinstalled Chromium can point at it instead of downloading one.
     launchOptions: process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {},
   },
-  projects: [{ name: "mobile-chromium", use: { ...devices["Pixel 7"] } }],
+  projects: [
+    { name: "mobile-chromium", testIgnore: /desktop/, use: { ...devices["Pixel 7"] } },
+    {
+      name: "desktop-chromium",
+      testMatch: /desktop/,
+      dependencies: ["mobile-chromium"], // signs in with the admin account the mobile spec sets up
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+    },
+  ],
 });

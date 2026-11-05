@@ -4,6 +4,8 @@ import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } fr
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
+import { AnswerInput } from "@/components/AnswerInput";
+import { KeyHint, ShortcutLegend } from "@/components/Kbd";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
 import { SpeakAnswer } from "@/components/SpeakAnswer";
@@ -26,13 +28,7 @@ import {
   type Task,
 } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
-
-const SPECIAL_CHARS: Record<Language, string[]> = {
-  de: ["ä", "ö", "ü", "ß", "Ä", "Ö", "Ü"],
-  fr: ["é", "è", "ê", "à", "â", "ç", "ô", "î", "û", "ù", "ë", "œ"],
-  it: ["à", "è", "é", "ì", "ò", "ù"],
-  en: [],
-};
+import { useHotkeys } from "@/lib/keyboard";
 
 // A correct choice stays on screen this long (ms) before the next question replaces it.
 const AUTO_ADVANCE_MS = 300;
@@ -245,6 +241,7 @@ export function LessonRunner({
   // Bumped on every (re)start: a superseded start (React's dev double mount, a retry) must not
   // overwrite the task the learner is already answering when its late response arrives.
   const run = useRef(0);
+  useHotkeys();
 
   const advance = useCallback(async (session: LessonSession) => {
     const id = run.current;
@@ -320,7 +317,7 @@ export function LessonRunner({
   if (phase.kind === "starting") return <p className="text-center text-slate-500">{t.preparing}</p>;
   if (phase.kind === "empty")
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <Notice>{t.empty}</Notice>
         <Button variant="secondary" onClick={exit}>
           {onExit && mode === "exam" ? cs.exam.back : cs.lesson.toDashboard}
@@ -329,7 +326,7 @@ export function LessonRunner({
     );
   if (phase.kind === "error")
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <Notice tone="error">{cs.common.offline}</Notice>
         <Button onClick={phase.retry}>{cs.common.retry}</Button>
       </div>
@@ -337,7 +334,7 @@ export function LessonRunner({
   if (phase.kind === "scene") {
     const { session } = phase;
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <p className="text-sm text-slate-500">
           {cs.lesson.sceneHelp} {cs.lesson.learnHelp}
         </p>
@@ -345,8 +342,8 @@ export function LessonRunner({
           <SlowToggle />
         </div>
         <SceneView scene={session.scene!} language={language} sessionId={session.id} />
-        <Button onClick={() => setPhase({ kind: "words", session, index: 0 })} autoFocus>
-          {cs.lesson.toWords}
+        <Button data-hotkey="enter" onClick={() => setPhase({ kind: "words", session, index: 0 })} autoFocus>
+          {cs.lesson.toWords} <KeyHint k="Enter" />
         </Button>
       </div>
     );
@@ -356,7 +353,7 @@ export function LessonRunner({
     const w = session.words[index]!;
     const last = index === session.words.length - 1;
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
           <span>{cs.lesson.wordsTitle}</span>
           <span className="flex items-center gap-2">
@@ -370,7 +367,7 @@ export function LessonRunner({
               {language === "de" && w.gender ? `${w.gender} ` : ""}
               {w.lemma}
             </p>
-            <PlayButton url={wordAudioUrl(session.id, w.id, "word")} label={cs.audio.playWord} />
+            <PlayButton url={wordAudioUrl(session.id, w.id, "word")} label={cs.audio.playWord} hotkey />
           </div>
           {w.gender && language !== "de" && (
             <p className="text-sm text-slate-500" lang={language}>
@@ -406,9 +403,10 @@ export function LessonRunner({
           <Button
             className="flex-1"
             autoFocus
+            data-hotkey="enter"
             onClick={() => (last ? void advance(session) : setPhase({ ...phase, index: index + 1 }))}
           >
-            {last ? cs.lesson.toPractice : cs.lesson.next}
+            {last ? cs.lesson.toPractice : cs.lesson.next} <KeyHint k="Enter" />
           </Button>
         </div>
       </div>
@@ -416,7 +414,7 @@ export function LessonRunner({
   }
   if (phase.kind === "done" && mode === "placement")
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <h2 className="text-xl font-bold">{t.doneTitle}</h2>
         <PlacementDone session={phase.session} />
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -433,7 +431,7 @@ export function LessonRunner({
     );
   if (phase.kind === "done" && mode === "exam")
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <h2 className="text-xl font-bold">{t.doneTitle}</h2>
         <ExamDone session={phase.session} />
         <Button variant="secondary" onClick={exit}>
@@ -454,7 +452,7 @@ export function LessonRunner({
             [cs.lesson.summaryPracticed, s.total ?? 0],
           ];
     return (
-      <div className="flex flex-col gap-4">
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <h2 className="text-xl font-bold">{t.doneTitle}</h2>
         <dl className="grid grid-cols-2 gap-2 text-sm">
           {tiles.map(([label, value]) => (
@@ -532,8 +530,24 @@ export function LessonRunner({
     else if (text.trim()) void send({ text });
   }
 
-  return (
-    <div className="flex flex-col gap-4">
+  const splitScene = mode === "learn" && session.scene ? session.scene : null;
+  const legend: [string, string][] = finished
+    ? [["Enter", cs.lesson.next]]
+    : task.type === "recognition"
+      ? [
+          [`1–${task.options?.length ?? 4}`, cs.keys.choose],
+          ...(mode === "learn" ? ([["H", cs.keys.hint]] as [string, string][]) : []),
+          ["N", cs.keys.reveal],
+          ["P", cs.keys.play],
+        ]
+      : [
+          ["Enter", cs.keys.submit],
+          ...(mode === "learn" ? ([["Alt+H", cs.keys.hint]] as [string, string][]) : []),
+          ["Alt+N", cs.keys.reveal],
+        ];
+
+  const practice = (
+    <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
       <div className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
         <span>
           {mode === "placement"
@@ -568,7 +582,7 @@ export function LessonRunner({
             {task.prompt}
           </p>
           {/* A recall task asks for the word itself: its audio plays with the answer instead. */}
-          {task.type === "recognition" && <PlayButton url={taskAudioUrl(task.id, "word")} label={cs.audio.playWord} />}
+          {task.type === "recognition" && <PlayButton url={taskAudioUrl(task.id, "word")} label={cs.audio.playWord} hotkey />}
         </div>
         {task.gender && (task.type === "recall" || language !== "de") && (
           <p className="text-sm text-slate-500" lang={language}>
@@ -592,13 +606,14 @@ export function LessonRunner({
 
       {task.type === "recognition" && task.options ? (
         <div className="grid gap-2" ref={optionsRef}>
-          {task.options.map((o) => {
+          {task.options.map((o, i) => {
             const state = optionState(o, chosen, result, busy, finished);
             return (
               <button
                 key={`${task.id}:${o.id}`}
                 type="button"
                 data-state={state}
+                data-hotkey={i < 9 ? `${i + 1}` : undefined}
                 className={`${OPTION_BASE} ${OPTION_STATES[state]}`}
                 disabled={busy || finished}
                 onClick={(e) => {
@@ -606,7 +621,10 @@ export function LessonRunner({
                   void send({ choice: o.id });
                 }}
               >
-                <span>{o.text}</span>
+                <span className="flex items-center gap-3">
+                  {i < 9 && <KeyHint k={`${i + 1}`} />}
+                  {o.text}
+                </span>
                 {state === "correct" && <CheckCircle2 className="size-5 shrink-0" aria-hidden />}
                 {state === "wrong" && <XCircle className="size-5 shrink-0" aria-hidden />}
               </button>
@@ -615,38 +633,14 @@ export function LessonRunner({
         </div>
       ) : (
         <form onSubmit={onSubmit} className="flex flex-col gap-2">
-          <input
+          <AnswerInput
             ref={inputRef}
+            language={language}
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={setText}
             disabled={busy || finished}
-            placeholder={cs.lesson.answerPlaceholder}
-            aria-label={cs.lesson.answerPlaceholder}
-            autoCapitalize="none"
-            autoCorrect="off"
-            autoComplete="off"
-            spellCheck={false}
-            lang={language}
-            className="rounded-xl border border-slate-300 bg-white px-4 py-4 text-center text-xl outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900"
           />
           {task.hint && <p className="text-center text-sm text-slate-500">{task.hint}</p>}
-          {!finished && SPECIAL_CHARS[language].length > 0 && (
-            <div className="flex flex-wrap justify-center gap-1">
-              {SPECIAL_CHARS[language].map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  className="min-w-9 rounded-lg bg-slate-100 px-2 py-1.5 font-medium dark:bg-slate-800"
-                  onClick={() => {
-                    setText((t) => t + c);
-                    inputRef.current?.focus();
-                  }}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          )}
           {!finished && (
             <Button type="submit" disabled={busy || !text.trim()}>
               {cs.lesson.check}
@@ -678,11 +672,11 @@ export function LessonRunner({
       {netError && <Notice tone="error">{cs.common.offline}</Notice>}
 
       {autoAdvance ? null : finished ? (
-        <Button onClick={() => void advance(session)} autoFocus>
-          {cs.lesson.next}
+        <Button onClick={() => void advance(session)} autoFocus data-hotkey="enter">
+          {cs.lesson.next} <KeyHint k="Enter" />
         </Button>
       ) : mode !== "learn" ? (
-        <Button variant="ghost" disabled={busy} onClick={() => void send("reveal")}>
+        <Button variant="ghost" disabled={busy} onClick={() => void send("reveal")} data-hotkey="reveal">
           <HelpCircle className="size-4" aria-hidden /> {cs.check.dontKnow}
         </Button>
       ) : (
@@ -692,10 +686,17 @@ export function LessonRunner({
             className="flex-1"
             disabled={busy || (task.type === "recognition" ? task.hint_level >= 1 : task.hint_level >= 2)}
             onClick={() => void hint()}
+            data-hotkey="hint"
           >
             <Lightbulb className="size-4" aria-hidden /> {cs.lesson.hint}
           </Button>
-          <Button variant="ghost" className="flex-1" disabled={busy} onClick={() => void send("reveal")}>
+          <Button
+            variant="ghost"
+            className="flex-1"
+            disabled={busy}
+            onClick={() => void send("reveal")}
+            data-hotkey="reveal"
+          >
             <Eye className="size-4" aria-hidden /> {cs.lesson.reveal}
           </Button>
         </div>
@@ -705,16 +706,31 @@ export function LessonRunner({
           {cs.placement.stop}
         </Button>
       )}
-      {mode === "learn" && session.scene && (
-        <details className="rounded-xl text-sm">
+      <ShortcutLegend items={legend} />
+      {splitScene && (
+        // On wide screens the scene stays visible in the side pane instead.
+        <details className="rounded-xl text-sm lg:hidden">
           <summary className="flex cursor-pointer items-center gap-2 text-slate-500">
             <BookOpen className="size-4" aria-hidden /> {cs.lesson.rereadScene}
           </summary>
           <div className="mt-2">
-            <SceneView scene={session.scene} language={language} sessionId={session.id} />
+            <SceneView scene={splitScene} language={language} sessionId={session.id} />
           </div>
         </details>
       )}
+    </div>
+  );
+
+  if (!splitScene) return <div className="mx-auto w-full max-w-xl">{practice}</div>;
+  return (
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-start">
+      <aside className="hidden lg:sticky lg:top-4 lg:flex lg:max-h-[calc(100vh-2rem)] lg:flex-col lg:gap-2 lg:overflow-y-auto lg:rounded-2xl lg:border lg:border-slate-200 lg:p-4 dark:lg:border-slate-800">
+        <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-500">
+          <BookOpen className="size-4" aria-hidden /> {cs.lesson.sceneNotes}
+        </h2>
+        <SceneView scene={splitScene} language={language} sessionId={session.id} />
+      </aside>
+      {practice}
     </div>
   );
 }
