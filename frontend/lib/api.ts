@@ -541,3 +541,36 @@ export interface TutorExplanation {
 /** "Proč?" for an answered word task or grammar item; refused (409) while it is still open. */
 export const explainAnswer = (kind: "word" | "grammar", id: string, question?: string) =>
   api<TutorExplanation>("/api/v1/tutor/explain", { json: { kind, id, ...(question ? { question } : {}) } });
+
+// ---------------------------------------------------------------- generated stories
+
+export interface StoryLine {
+  speaker: string | null;
+  text: string;
+  cs: string;
+}
+
+export interface Story {
+  id: string;
+  language: Language;
+  kind: "story" | "dialogue";
+  title: string;
+  lines: StoryLine[];
+  glossary: { word: string; cs: string }[];
+  targets: string[];
+  questions: { question: string; options: string[]; answered: boolean | null }[];
+  model: string | null;
+  review_status: "unreviewed";
+}
+
+export const getStoryToday = (language: Language) =>
+  api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
+    cache: "no-store",
+  });
+export const generateStory = (language: Language, kind: Story["kind"]) =>
+  api<Story>("/api/v1/stories/generate", { json: { language, kind } });
+export const answerStoryQuestion = (storyId: string, index: number, choice: number) =>
+  api<{ correct: boolean; answer_index: number }>(`/api/v1/stories/${storyId}/questions/${index}/answer`, {
+    json: { choice },
+  });
+export const storyAudioUrl = (storyId: string, line: number) => `/api/v1/stories/${storyId}/audio?line=${line}`;

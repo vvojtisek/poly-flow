@@ -13,6 +13,7 @@ from app.api import (
     lexicon,
     profiles,
     progression,
+    stories,
     tutor,
     voices,
 )
@@ -48,6 +49,7 @@ def create_app() -> FastAPI:
     app.include_router(learning.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)
+    app.include_router(stories.router)
     app.include_router(lexicon.router)
     return app
 

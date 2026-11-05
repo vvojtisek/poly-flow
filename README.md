@@ -100,6 +100,19 @@ text is sent as data, never as instructions, and is not logged. Hosts outside lo
 networks are refused unless `LLM_ALLOW_REMOTE=true`; child profiles get model text only with
 `LLM_FOR_CHILDREN=true`. Explanations are cached per profile and exercise (`tutor_explanations`).
 
+### Generated reading (local model, optional)
+
+*Čtení* (`/stories`) asks the local model for one short story or dialogue per profile, language
+and day, written from the words the learner has met, with 3-5 of the words still being learned as
+targets (most missed first). The reply must be a JSON object with lines, Czech translations, a
+glossary for any extra word and 2-4 Czech comprehension questions. It is stored only when every
+target word appears, at most 15 % of the words are outside the learner's words, glossary and
+names (German inflection is folded approximately), and the whole text passes the content
+blacklist; otherwise the model gets one more try and then the learner sees an error. Each line
+can be played through Piper. Answers are graded on the server and never count as evidence.
+Stories record the provider and model and are labelled as unreviewed. Without `LLM_URL` the page
+says that a model is needed; child profiles get stories only with `LLM_FOR_CHILDREN=true`.
+
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
 (run `npm ci && npx playwright install chromium` in `frontend/` first).

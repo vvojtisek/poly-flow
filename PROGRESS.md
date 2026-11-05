@@ -72,9 +72,10 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       (length, language, blacklist) and never shown to child profiles unvalidated; never reveals a
       pending check answer. Shipped: `services/llm.py`, `services/tutor.py`, `/api/v1/tutor`, migration
       0016 (`tutor_explanations` cache), `TutorButton` (W) in word and grammar runners.
-- [ ] **M6 Generated stories and dialogues**: short story/dialogue from the learner's known words
+- [x] **M6 Generated stories and dialogues**: short story/dialogue from the learner's known words
       plus 3-5 targets, structured output, vocabulary-coverage and safety validation, stored with
-      provenance, reader UI with TTS and comprehension questions.
+      provenance, reader UI with TTS and comprehension questions. Shipped: `domain/stories.py`,
+      `services/stories.py`, `/api/v1/stories`, migration 0017, page `/stories` (*Čtení*).
 - [ ] **M7 German vocabulary 101-1000**: drafted lexicon rows (gloss, gender, plural-free lemma,
       example) marked `claude-draft` / unreviewed, plus scenes for the new words.
 - [ ] **M8 Language-pack registry**: one module per target language (articles, spelling
@@ -83,6 +84,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M6 done. One generated story or dialogue per profile/language/day; targets = met but not yet known words (content words, most missed first); validation: JSON shape, all targets present, unknown ratio <= 0.15, blacklist; 2 model attempts; questions graded server-side, no evidence. Tests: tests/test_stories.py (12). Verified in the browser against a local OpenAI-compatible stand-in (no real model in this sandbox).
 
 - 2026-11-05: M3 content done: A2 (dative, fixed-case prepositions, Wo/Wohin, Perfekt, weil/dass/wenn, comparison, reflexive), B1 (Präteritum, adjective endings, relative clauses, Konjunktiv II, Futur I, Genitiv), B2 (Passiv, zu-infinitive, paired conjunctions, Plusquamperfekt, n-declension). Pack test now requires all of A1-B2.
 
