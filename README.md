@@ -85,6 +85,21 @@ re-hashes everything.
 - `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
   The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
 
+### AI tutor (local model, optional)
+
+After any answered exercise, *Proč?* (key `W`) explains in Czech why the answer is right or wrong.
+The explanation always starts from the curriculum: the word's gloss, gender and example, or the
+grammar exercise's explanation and the unit's rule, plus the kind of mistake the learner made.
+An exercise that is still open is never explained, so the tutor cannot give a check's answer away.
+
+With `LLM_URL` set to an OpenAI-compatible endpoint (for example Ollama with `qwen2.5:7b-instruct`
+on the host GPU), the model may rephrase that explanation and answer one follow-up question. Its
+reply is used only when it is Czech, bounded, quotes the correct answer and passes the content
+blacklist; otherwise the curriculum text is shown. Model text is labelled as unreviewed. Learner
+text is sent as data, never as instructions, and is not logged. Hosts outside localhost or private
+networks are refused unless `LLM_ALLOW_REMOTE=true`; child profiles get model text only with
+`LLM_FOR_CHILDREN=true`. Explanations are cached per profile and exercise (`tutor_explanations`).
+
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
 (run `npm ci && npx playwright install chromium` in `frontend/` first).

@@ -5,7 +5,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import __version__
-from app.api import auth, grammar, health, learning, lexicon, profiles, progression, voices
+from app.api import (
+    auth,
+    grammar,
+    health,
+    learning,
+    lexicon,
+    profiles,
+    progression,
+    tutor,
+    voices,
+)
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.core.middleware import RequestLoggingMiddleware
@@ -37,6 +47,7 @@ def create_app() -> FastAPI:
     app.include_router(voices.router)
     app.include_router(learning.router)
     app.include_router(grammar.router)
+    app.include_router(tutor.router)
     app.include_router(lexicon.router)
     return app
 

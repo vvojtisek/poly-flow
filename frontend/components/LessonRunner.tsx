@@ -9,6 +9,7 @@ import { KeyHint, ShortcutLegend } from "@/components/Kbd";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
 import { SpeakAnswer } from "@/components/SpeakAnswer";
+import { TutorButton } from "@/components/TutorButton";
 import { Button, Notice } from "@/components/ui";
 import {
   completeLesson,
@@ -536,8 +537,9 @@ export function LessonRunner({
   }
 
   const splitScene = mode === "learn" && session.scene ? session.scene : null;
+  const tutor = mode === "learn" || mode === "check";
   const legend: [string, string][] = finished
-    ? [["Enter", cs.lesson.next]]
+    ? [["Enter", cs.lesson.next], ...(tutor ? ([["W", cs.keys.why]] as [string, string][]) : [])]
     : task.type === "recognition"
       ? [
           [`1–${task.options?.length ?? 4}`, cs.keys.choose],
@@ -669,6 +671,9 @@ export function LessonRunner({
           audioUrl={task.type === "recall" ? taskAudioUrl(task.id, "word") : undefined}
           announce={!autoAdvance}
         />
+      )}
+      {finished && !autoAdvance && tutor && (
+        <TutorButton key={task.id} kind="word" id={task.id} />
       )}
       {/* Outlives the question, so an auto-advanced result is still read out. */}
       <p className="sr-only" aria-live="polite">

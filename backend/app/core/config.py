@@ -23,6 +23,20 @@ class Settings(BaseSettings):
     # A spoken answer is one word or a short phrase: refuse larger uploads before Whisper.
     speech_max_upload_bytes: int = 1024 * 1024
 
+    # Local language model (AI tutor, generated stories): an OpenAI-compatible chat endpoint
+    # such as Ollama (http://ollama:11434/v1) or llama.cpp server. Unset = no model; the tutor
+    # then answers from the curriculum's own explanations. A host outside localhost/private
+    # networks is refused unless llm_allow_remote is set: learner text must not leave the
+    # house without an explicit decision.
+    llm_url: str | None = None
+    llm_model: str = "qwen2.5:7b-instruct"
+    llm_api_key: str | None = None
+    llm_timeout_s: float = 60.0
+    llm_allow_remote: bool = False
+    # Model text for child profiles only when explicitly enabled (it still has to pass the
+    # content checks); otherwise children get the reviewed curriculum explanations.
+    llm_for_children: bool = False
+
     # Build provenance, baked into the image at build time (see scripts/build-info.sh).
     git_sha: str = "unknown"
     git_branch: str = "unknown"

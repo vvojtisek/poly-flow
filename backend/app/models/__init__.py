@@ -21,6 +21,7 @@ from app.models.lexicon import LexiconItem
 from app.models.progress import UserWordProgress
 from app.models.scene import Scene, SceneWord
 from app.models.story import DailyStory
+from app.models.tutor import TutorExplanation
 from app.models.user import User
 
 __all__ = [
@@ -42,6 +43,7 @@ __all__ = [
     "LexiconItem",
     "Scene",
     "SceneWord",
+    "TutorExplanation",
     "User",
     "UserGrammarProgress",
     "UserWordProgress",

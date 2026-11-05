@@ -69,6 +69,11 @@ test("grammar lesson: notes beside the exercise, explanation after a mistake", a
   await expect(page.getByText("Zkus to ještě jednou.")).toBeVisible();
   await page.keyboard.press("Digit1");
   await expect(page.getByText("Správně!")).toBeVisible();
+  // "Proč?" (W): the curriculum explanation names the right sentence and the learner's mistake.
+  await page.keyboard.press("KeyW");
+  await expect(page.getByText("Správně: Ich bin müde.")).toBeVisible();
+  await expect(page.getByText("Tvoje odpověď: bist")).toBeVisible();
+  await expect(page.getByText("Vysvětlení z výkladu lekce")).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(page.getByText("Cvičení 2 z 8")).toBeVisible();
 });

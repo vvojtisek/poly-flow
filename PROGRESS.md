@@ -66,11 +66,12 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
 - [x] **M4 Exercise types**: grammar exercises `choice` (der/die/das, cases, prepositions),
       `gap` (typed conjugation/ending), `order` (sentence building from tiles) and `translate`
       (cs → de and de → cs with accepted variants), all graded on the server.
-- [ ] **M5 AI tutor**: LLM adapter (OpenAI-compatible chat completions, local by default, timeout,
+- [x] **M5 AI tutor**: LLM adapter (OpenAI-compatible chat completions, local by default, timeout,
       provider/model recorded), "Proč?" explanation in Czech after any answered task: always the
       curriculum's deterministic explanation, optionally expanded by the model; output validated
       (length, language, blacklist) and never shown to child profiles unvalidated; never reveals a
-      pending check answer.
+      pending check answer. Shipped: `services/llm.py`, `services/tutor.py`, `/api/v1/tutor`, migration
+      0016 (`tutor_explanations` cache), `TutorButton` (W) in word and grammar runners.
 - [ ] **M6 Generated stories and dialogues**: short story/dialogue from the learner's known words
       plus 3-5 targets, structured output, vocabulary-coverage and safety validation, stored with
       provenance, reader UI with TTS and comprehension questions.
@@ -82,6 +83,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M5 done. Tutor explains closed word tasks and grammar items from the curriculum; optional local model (`POLYFLOW_LLM_URL`), replies validated (Czech shape, quotes the correct answer, blacklist), remote hosts refused without `LLM_ALLOW_REMOTE`, children curriculum-only without `LLM_FOR_CHILDREN`. Tests: tests/test_tutor.py (13). Backend 334 passed, 1 skipped; Playwright 3/3.
 
 - 2026-11-05: M2 done: policy v4, migration 0015 (`learning_events.error_tag`), wrong-article detection, lesson remediation (2 recently missed words first, ungraded), `GET /api/v1/learning/weak-spots`, dashboard panel "Slabá místa" and a grammar button. Tests: tests/test_mistakes.py.
 

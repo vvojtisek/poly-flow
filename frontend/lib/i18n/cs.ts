@@ -387,6 +387,16 @@ export const cs = {
     none: "Žádná neopravená chyba. Dobrá práce!",
     errors: (n: number) => (n === 1 ? "1 chyba" : n < 5 ? `${n} chyby` : `${n} chyb`),
   },
+  tutor: {
+    why: "Proč?",
+    loading: "Hledám vysvětlení…",
+    fromCurriculum: "Vysvětlení z výkladu lekce",
+    fromModel: (model: string) => `Rozepsal místní jazykový model (${model}); obsah není ručně zkontrolovaný.`,
+    ask: "Doplňující otázka",
+    askPlaceholder: "Na co se chceš zeptat k tomuto cvičení?",
+    send: "Zeptat se",
+    failed: "Vysvětlení se nepodařilo načíst.",
+  },
   keys: {
     legend: "Klávesové zkratky",
     specialChars: "Zvláštní znaky",

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { AnswerInput } from "@/components/AnswerInput";
 import { GrammarNotes } from "@/components/GrammarNotes";
 import { KeyHint, ShortcutLegend } from "@/components/Kbd";
+import { TutorButton } from "@/components/TutorButton";
 import { Button, Notice } from "@/components/ui";
 import {
   answerGrammar,
@@ -366,7 +367,7 @@ export function GrammarRunner({
   }
 
   const legend: [string, string][] = finished
-    ? [["Enter", cs.lesson.next]]
+    ? [["Enter", cs.lesson.next], ["W", cs.keys.why]]
     : item.kind === "choice"
       ? [[`1–${item.options!.length}`, cs.keys.choose], ["N", cs.keys.reveal]]
       : item.kind === "order"
@@ -456,6 +457,7 @@ export function GrammarRunner({
       )}
 
       {result && <Feedback result={result} mode={mode} language={language} />}
+      {finished && <TutorButton key={item.item_id} kind="grammar" id={item.item_id} />}
       {netError && <Notice tone="error">{cs.common.offline}</Notice>}
 
       {finished ? (

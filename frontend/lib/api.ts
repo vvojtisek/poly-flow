@@ -528,3 +528,16 @@ export interface WeakSpots {
 
 export const getWeakSpots = (language: Language) =>
   api<WeakSpots>(`/api/v1/learning/weak-spots?language=${language}`, { cache: "no-store" });
+
+// ---------------------------------------------------------------- tutor
+
+export interface TutorExplanation {
+  source: "curriculum" | "model";
+  text: string;
+  model: string | null;
+  can_ask: boolean;
+}
+
+/** "Proč?" for an answered word task or grammar item; refused (409) while it is still open. */
+export const explainAnswer = (kind: "word" | "grammar", id: string, question?: string) =>
+  api<TutorExplanation>("/api/v1/tutor/explain", { json: { kind, id, ...(question ? { question } : {}) } });
