@@ -30,7 +30,7 @@ def test_shipped_packs_validate_and_cover_a1_to_b2():
         assert pack.review_status in ("unreviewed", "reviewed")
         assert pack.source and pack.license and pack.revision
         if pack.language == DE:
-            assert {u.level for u in pack.units} <= set(LEVELS)  # A1-B2 TIGHTEN
+            assert {u.level for u in pack.units} == set(LEVELS)
         for u in pack.units:
             kinds = {e.kind for e in u.exercises}
             assert len(kinds) >= 2, f"{u.id}: needs varied exercise kinds"

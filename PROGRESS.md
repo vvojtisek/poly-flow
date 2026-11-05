@@ -58,7 +58,7 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       umlaut/diacritics, capitalisation, misspelling, wrong meaning), keep it on the event,
       weak-spot query per profile and language, inject recently missed words as ungraded
       remediation practice at the start of the next Lekce, weak-spot overview in the UI.
-- [~] **M3 Grammar module** (engine, API, UI and A1 content done; A2-B2 content pending): content-pack format (`backend/data/grammar/*.json`) with provenance and
+- [x] **M3 Grammar module** (30 units, 245 exercises: A1 12, A2 7, B1 6, B2 5; drafted, unreviewed): content-pack format (`backend/data/grammar/*.json`) with provenance and
       review status, tables for rules, exercises, per-rule progress and attempts (migration
       0014), German A1-B2 skill tree with Czech explanations; Lekce for a rule (notes in a split
       pane + ungraded practice with retries and explanations) and Ověření gramatiky (one try,
@@ -83,6 +83,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M3 content done: A2 (dative, fixed-case prepositions, Wo/Wohin, Perfekt, weil/dass/wenn, comparison, reflexive), B1 (Präteritum, adjective endings, relative clauses, Konjunktiv II, Futur I, Genitiv), B2 (Passiv, zu-infinitive, paired conjunctions, Plusquamperfekt, n-declension). Pack test now requires all of A1-B2.
 
 - 2026-11-05: M5 done. Tutor explains closed word tasks and grammar items from the curriculum; optional local model (`POLYFLOW_LLM_URL`), replies validated (Czech shape, quotes the correct answer, blacklist), remote hosts refused without `LLM_ALLOW_REMOTE`, children curriculum-only without `LLM_FOR_CHILDREN`. Tests: tests/test_tutor.py (13). Backend 334 passed, 1 skipped; Playwright 3/3.
 
