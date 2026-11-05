@@ -1,0 +1,2056 @@
+{
+ "language": "de",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "grammar-v1",
+ "review_status": "unreviewed",
+ "note": "German grammar A1-B2 explained in Czech. Drafted by Claude (2026-11-05); not yet reviewed by a German teacher or a native Czech speaker. Treat explanations and accepted answers as drafts.",
+ "units": [
+  {
+   "id": "de-a1-sein",
+   "level": "A1",
+   "title": "Já jsem, ty jsi: sloveso sein",
+   "summary": "Řekneš, kdo jsi a odkud jsi, a zeptáš se na to druhých.",
+   "notes": [
+    {
+     "heading": "Osobní zájmena a sein",
+     "text": "Sloveso **sein** (být) je nepravidelné, tvary je potřeba se naučit nazpaměť. Na rozdíl od češtiny se zájmeno v němčině nevynechává: „jsem unavený“ je **ich bin müde**.",
+     "table": [
+      [
+       "zájmeno",
+       "sein",
+       "česky"
+      ],
+      [
+       "ich",
+       "bin",
+       "já jsem"
+      ],
+      [
+       "du",
+       "bist",
+       "ty jsi"
+      ],
+      [
+       "er / sie / es",
+       "ist",
+       "on / ona / ono je"
+      ],
+      [
+       "wir",
+       "sind",
+       "my jsme"
+      ],
+      [
+       "ihr",
+       "seid",
+       "vy jste (tykání více lidem)"
+      ],
+      [
+       "sie / Sie",
+       "sind",
+       "oni jsou / Vy jste (vykání)"
+      ]
+     ]
+    },
+    {
+     "heading": "Vykání: Sie",
+     "text": "Vykání jedné i více osobám je vždy **Sie** s velkým S a sloveso má tvar jako ve 3. osobě množného čísla: **Sind Sie Herr Novák?** (Jste pan Novák?)."
+    },
+    {
+     "heading": "Povolání bez členu",
+     "text": "U povolání a národnosti po slovese sein se člen nepíše: **Sie ist Lehrerin.** (Je učitelka.)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich bin Anna und ich bin acht.",
+     "cs": "Jsem Anna a je mi osm."
+    },
+    {
+     "text": "Wir sind aus Tschechien.",
+     "cs": "Jsme z Česka."
+    },
+    {
+     "text": "Sind Sie Herr Novák?",
+     "cs": "Jste pan Novák?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-sein-01",
+     "kind": "choice",
+     "prompt": "Ich ___ müde.",
+     "prompt_cs": "Jsem unavený.",
+     "options": [
+      "bin",
+      "bist",
+      "ist",
+      "sind"
+     ],
+     "answers": [
+      "bin"
+     ],
+     "explain": "K zájmenu ich patří tvar bin: ich bin = já jsem."
+    },
+    {
+     "id": "de-a1-sein-02",
+     "kind": "choice",
+     "prompt": "Wir ___ aus Tschechien.",
+     "prompt_cs": "Jsme z Česka.",
+     "options": [
+      "sind",
+      "seid",
+      "ist",
+      "bin"
+     ],
+     "answers": [
+      "sind"
+     ],
+     "explain": "wir (my) má tvar sind, stejně jako sie (oni) a vykání Sie."
+    },
+    {
+     "id": "de-a1-sein-03",
+     "kind": "gap",
+     "prompt": "Du ___ sehr nett. (sein)",
+     "prompt_cs": "Jsi moc milý.",
+     "answers": [
+      "bist"
+     ],
+     "explain": "du (ty) má u slovesa sein tvar bist: du bist = ty jsi."
+    },
+    {
+     "id": "de-a1-sein-04",
+     "kind": "gap",
+     "prompt": "Ihr ___ heute zu Hause. (sein)",
+     "prompt_cs": "Jste dnes doma. (tykání více lidem)",
+     "answers": [
+      "seid"
+     ],
+     "explain": "ihr je „vy“, když tykáme více lidem; sein má tvar seid. Pozor, nezaměnit se sind."
+    },
+    {
+     "id": "de-a1-sein-05",
+     "kind": "choice",
+     "prompt": "___ Sie Herr Novák?",
+     "prompt_cs": "Jste pan Novák?",
+     "options": [
+      "Sind",
+      "Ist",
+      "Seid",
+      "Bist"
+     ],
+     "answers": [
+      "Sind"
+     ],
+     "explain": "Vykání Sie má tvar sind. V otázce bez tázacího slova stojí sloveso na prvním místě."
+    },
+    {
+     "id": "de-a1-sein-06",
+     "kind": "order",
+     "prompt": "Ona je učitelka.",
+     "tokens": [
+      "Lehrerin",
+      "ist",
+      "sie"
+     ],
+     "answers": [
+      "Sie ist Lehrerin"
+     ],
+     "explain": "Oznamovací věta: podmět sie, sloveso ist na druhém místě. U povolání se člen nepíše."
+    },
+    {
+     "id": "de-a1-sein-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jsme doma.",
+     "answers": [
+      "Wir sind zu Hause",
+      "Wir sind daheim",
+      "Wir sind zuhause"
+     ],
+     "explain": "wir sind = my jsme; „doma“ je zu Hause. Zájmeno wir se v němčině nevynechává."
+    },
+    {
+     "id": "de-a1-sein-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Bist du müde?",
+     "answers": [
+      "Jsi unavený",
+      "Jsi unavená",
+      "Jsi ospalý",
+      "Jsi ospalá",
+      "Jsi unavenej"
+     ],
+     "explain": "du bist = ty jsi; v otázce stojí sloveso na začátku. müde = unavený (i ospalý)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-present",
+   "level": "A1",
+   "title": "Přítomný čas pravidelných sloves",
+   "summary": "Vyčasuješ pravidelné sloveso jako wohnen, spielen nebo lernen ve všech osobách.",
+   "notes": [
+    {
+     "heading": "Kmen + koncovka",
+     "text": "Od infinitivu odtrhni **-en** (wohn-en) a přidej koncovku podle osoby. Koncovky se opakují u všech pravidelných sloves.",
+     "table": [
+      [
+       "osoba",
+       "koncovka",
+       "wohnen"
+      ],
+      [
+       "ich",
+       "-e",
+       "wohne"
+      ],
+      [
+       "du",
+       "-st",
+       "wohnst"
+      ],
+      [
+       "er / sie / es",
+       "-t",
+       "wohnt"
+      ],
+      [
+       "wir",
+       "-en",
+       "wohnen"
+      ],
+      [
+       "ihr",
+       "-t",
+       "wohnt"
+      ],
+      [
+       "sie / Sie",
+       "-en",
+       "wohnen"
+      ]
+     ]
+    },
+    {
+     "heading": "Kmen na -t, -d",
+     "text": "Když kmen končí na **-t** nebo **-d**, vkládá se před -st a -t samohláska **e**, aby se dal tvar vyslovit: arbeiten → du **arbeitest**, er **arbeitet**; finden → er **findet**."
+    },
+    {
+     "heading": "Kmen na -s, -ß, -z",
+     "text": "U du se po s/ß/z přidává jen **-t**: heißen → du **heißt**, tanzen → du **tanzt**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich wohne in Brno.",
+     "cs": "Bydlím v Brně."
+    },
+    {
+     "text": "Spielst du gern Fußball?",
+     "cs": "Hraješ rád fotbal?"
+    },
+    {
+     "text": "Sie arbeitet in Prag.",
+     "cs": "Pracuje v Praze."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-present-01",
+     "kind": "gap",
+     "prompt": "Ich ___ in Brno. (wohnen)",
+     "prompt_cs": "Bydlím v Brně.",
+     "answers": [
+      "wohne"
+     ],
+     "explain": "ich má koncovku -e: wohn- + e = wohne."
+    },
+    {
+     "id": "de-a1-present-02",
+     "kind": "gap",
+     "prompt": "___ du gern Fußball? (spielen)",
+     "prompt_cs": "Hraješ rád fotbal?",
+     "answers": [
+      "Spielst"
+     ],
+     "explain": "du má koncovku -st: spiel- + st = spielst. V otázce stojí sloveso na začátku."
+    },
+    {
+     "id": "de-a1-present-03",
+     "kind": "choice",
+     "prompt": "Er ___ Deutsch.",
+     "prompt_cs": "Učí se německy.",
+     "options": [
+      "lernt",
+      "lernst",
+      "lerne",
+      "lernen"
+     ],
+     "answers": [
+      "lernt"
+     ],
+     "explain": "er / sie / es má koncovku -t: lern- + t = lernt."
+    },
+    {
+     "id": "de-a1-present-04",
+     "kind": "choice",
+     "prompt": "Wir ___ heute Musik.",
+     "prompt_cs": "Dnes posloucháme hudbu.",
+     "options": [
+      "hören",
+      "hört",
+      "hörst",
+      "höre"
+     ],
+     "answers": [
+      "hören"
+     ],
+     "explain": "wir má stejný tvar jako infinitiv: hör- + en = hören."
+    },
+    {
+     "id": "de-a1-present-05",
+     "kind": "gap",
+     "prompt": "Sie ___ in einem Büro. (arbeiten)",
+     "prompt_cs": "Pracuje v kanceláři.",
+     "answers": [
+      "arbeitet"
+     ],
+     "explain": "Kmen arbeit- končí na -t, proto se před koncovku -t vkládá e: sie arbeitet."
+    },
+    {
+     "id": "de-a1-present-06",
+     "kind": "choice",
+     "prompt": "Wie ___ du?",
+     "prompt_cs": "Jak se jmenuješ?",
+     "options": [
+      "heißt",
+      "heißst",
+      "heiße",
+      "heißen"
+     ],
+     "answers": [
+      "heißt"
+     ],
+     "explain": "Kmen heiß- končí na ß, takže du dostane jen -t: du heißt."
+    },
+    {
+     "id": "de-a1-present-07",
+     "kind": "order",
+     "prompt": "Bydlíme v Praze.",
+     "tokens": [
+      "in",
+      "wohnen",
+      "Prag",
+      "wir"
+     ],
+     "answers": [
+      "Wir wohnen in Prag"
+     ],
+     "explain": "Podmět wir, sloveso wohnen na druhém místě, potom místo in Prag."
+    },
+    {
+     "id": "de-a1-present-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Učíš se německy?",
+     "answers": [
+      "Lernst du Deutsch"
+     ],
+     "explain": "du lernst = ty se učíš; otázka bez tázacího slova začíná slovesem. „Německy“ je Deutsch s velkým D."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-haben",
+   "level": "A1",
+   "title": "Mít: sloveso haben",
+   "summary": "Řekneš, co máš, a použiješ haben ve všech osobách.",
+   "notes": [
+    {
+     "heading": "Tvary haben",
+     "text": "Sloveso **haben** (mít) je skoro pravidelné, jen du a er/sie/es ztrácí b: du **hast**, er **hat**.",
+     "table": [
+      [
+       "zájmeno",
+       "haben"
+      ],
+      [
+       "ich",
+       "habe"
+      ],
+      [
+       "du",
+       "hast"
+      ],
+      [
+       "er / sie / es",
+       "hat"
+      ],
+      [
+       "wir",
+       "haben"
+      ],
+      [
+       "ihr",
+       "habt"
+      ],
+      [
+       "sie / Sie",
+       "haben"
+      ]
+     ]
+    },
+    {
+     "heading": "Hunger, Durst, Zeit",
+     "text": "Kde čeština říká „mám hlad“, „mám žízeň“, „mám čas“, němčina také používá haben a podstatné jméno bez členu: **Ich habe Hunger.** **Hast du Zeit?**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich habe einen Bruder.",
+     "cs": "Mám bratra."
+    },
+    {
+     "text": "Hast du heute Zeit?",
+     "cs": "Máš dnes čas?"
+    },
+    {
+     "text": "Sie hat Hunger.",
+     "cs": "Má hlad."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-haben-01",
+     "kind": "choice",
+     "prompt": "Ich ___ Hunger.",
+     "prompt_cs": "Mám hlad.",
+     "options": [
+      "habe",
+      "hast",
+      "hat",
+      "haben"
+     ],
+     "answers": [
+      "habe"
+     ],
+     "explain": "ich habe = já mám. Hunger se po haben píše bez členu."
+    },
+    {
+     "id": "de-a1-haben-02",
+     "kind": "choice",
+     "prompt": "___ du heute Zeit?",
+     "prompt_cs": "Máš dnes čas?",
+     "options": [
+      "Hast",
+      "Habst",
+      "Hat",
+      "Habe"
+     ],
+     "answers": [
+      "Hast"
+     ],
+     "explain": "du hast: u du a er/sie/es haben ztrácí b (hast, hat)."
+    },
+    {
+     "id": "de-a1-haben-03",
+     "kind": "gap",
+     "prompt": "Mein Vater ___ ein Auto. (haben)",
+     "prompt_cs": "Můj táta má auto.",
+     "answers": [
+      "hat"
+     ],
+     "explain": "mein Vater = er, takže hat."
+    },
+    {
+     "id": "de-a1-haben-04",
+     "kind": "gap",
+     "prompt": "Ihr ___ einen Hund. (haben)",
+     "prompt_cs": "Máte psa. (tykání více lidem)",
+     "answers": [
+      "habt"
+     ],
+     "explain": "ihr má pravidelnou koncovku -t: hab- + t = habt."
+    },
+    {
+     "id": "de-a1-haben-05",
+     "kind": "choice",
+     "prompt": "Wir ___ Durst.",
+     "prompt_cs": "Máme žízeň.",
+     "options": [
+      "haben",
+      "habt",
+      "hat",
+      "hast"
+     ],
+     "answers": [
+      "haben"
+     ],
+     "explain": "wir haben = my máme (stejné jako infinitiv)."
+    },
+    {
+     "id": "de-a1-haben-06",
+     "kind": "order",
+     "prompt": "Máš sestru?",
+     "tokens": [
+      "eine",
+      "du",
+      "Schwester",
+      "hast"
+     ],
+     "answers": [
+      "Hast du eine Schwester"
+     ],
+     "explain": "Otázka bez tázacího slova: sloveso hast na začátku, pak podmět du a předmět eine Schwester."
+    },
+    {
+     "id": "de-a1-haben-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Mám čas.",
+     "answers": [
+      "Ich habe Zeit"
+     ],
+     "explain": "ich habe = mám; Zeit (čas) je podstatné jméno, proto velké Z, a po haben bez členu."
+    },
+    {
+     "id": "de-a1-haben-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Er hat keine Zeit.",
+     "answers": [
+      "Nemá čas",
+      "On nemá čas",
+      "Nemá žádný čas",
+      "On nemá žádný čas"
+     ],
+     "explain": "er hat = má; keine Zeit = žádný čas, česky prostě „nemá čas“."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-articles",
+   "level": "A1",
+   "title": "Rod podstatných jmen: der, die, das",
+   "summary": "Víš, že každé podstatné jméno má svůj člen, a poznáš nejčastější vodítka k rodu.",
+   "notes": [
+    {
+     "heading": "Tři rody",
+     "text": "Každé německé podstatné jméno má rod a ten ukazuje člen: **der** (mužský), **die** (ženský), **das** (střední). Rod se často neshoduje s češtinou (das Mädchen = dívka). Učte se slovo vždy se členem. Podstatná jména se píšou s **velkým písmenem**.",
+     "table": [
+      [
+       "rod",
+       "člen",
+       "příklad"
+      ],
+      [
+       "mužský",
+       "der",
+       "der Hund (pes)"
+      ],
+      [
+       "ženský",
+       "die",
+       "die Katze (kočka)"
+      ],
+      [
+       "střední",
+       "das",
+       "das Haus (dům)"
+      ],
+      [
+       "množné číslo",
+       "die",
+       "die Hunde (psi)"
+      ]
+     ]
+    },
+    {
+     "heading": "Vodítka",
+     "text": "Koncovky **-ung, -heit, -keit, -schaft, -ion** jsou vždy die (die Zeitung). **-chen** a **-lein** jsou vždy das (das Mädchen). Dny, měsíce a roční období jsou der (der Montag). U složeného slova rozhoduje poslední část: das Haus + die Tür → **die Haustür**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Der Hund spielt im Garten.",
+     "cs": "Pes si hraje na zahradě."
+    },
+    {
+     "text": "Das Mädchen liest ein Buch.",
+     "cs": "Dívka čte knihu."
+    },
+    {
+     "text": "Die Zeitung liegt auf dem Tisch.",
+     "cs": "Noviny leží na stole."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-articles-01",
+     "kind": "choice",
+     "prompt": "___ Hund ist groß.",
+     "prompt_cs": "Ten pes je velký.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Der"
+     ],
+     "explain": "Hund je rodu mužského: der Hund."
+    },
+    {
+     "id": "de-a1-articles-02",
+     "kind": "choice",
+     "prompt": "___ Mädchen heißt Lisa.",
+     "prompt_cs": "Ta dívka se jmenuje Lisa.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Das"
+     ],
+     "explain": "Slova na -chen jsou vždy středního rodu: das Mädchen, i když jde o dívku."
+    },
+    {
+     "id": "de-a1-articles-03",
+     "kind": "choice",
+     "prompt": "___ Zeitung ist neu.",
+     "prompt_cs": "Ty noviny jsou nové.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Die"
+     ],
+     "explain": "Koncovka -ung je vždy ženského rodu: die Zeitung."
+    },
+    {
+     "id": "de-a1-articles-04",
+     "kind": "choice",
+     "prompt": "___ Haus ist alt.",
+     "prompt_cs": "Ten dům je starý.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Das"
+     ],
+     "explain": "Haus je středního rodu: das Haus."
+    },
+    {
+     "id": "de-a1-articles-05",
+     "kind": "choice",
+     "prompt": "___ Montag ist mein Lieblingstag.",
+     "prompt_cs": "Pondělí je můj oblíbený den.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Der"
+     ],
+     "explain": "Dny v týdnu jsou mužského rodu: der Montag (česky střední „pondělí“)."
+    },
+    {
+     "id": "de-a1-articles-06",
+     "kind": "choice",
+     "prompt": "___ Haustür ist offen.",
+     "prompt_cs": "Domovní dveře jsou otevřené.",
+     "options": [
+      "Der",
+      "Die",
+      "Das"
+     ],
+     "answers": [
+      "Die"
+     ],
+     "explain": "U složeného slova rozhoduje poslední část: die Tür, proto die Haustür."
+    },
+    {
+     "id": "de-a1-articles-07",
+     "kind": "gap",
+     "prompt": "___ Katze schläft. (der/die/das)",
+     "prompt_cs": "Kočka spí.",
+     "answers": [
+      "Die"
+     ],
+     "explain": "Katze je rodu ženského: die Katze."
+    },
+    {
+     "id": "de-a1-articles-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pes spí.",
+     "answers": [
+      "Der Hund schläft"
+     ],
+     "explain": "der Hund (mužský rod, velké H), sloveso schlafen má u er/sie/es tvar schläft (a → ä)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-indefinite",
+   "level": "A1",
+   "title": "Neurčitý člen ein, eine a zápor kein",
+   "summary": "Použiješ ein/eine pro „nějaký“ a kein/keine pro „žádný“.",
+   "notes": [
+    {
+     "heading": "ein, eine",
+     "text": "Neurčitý člen použijeme, když o věci mluvíme poprvé nebo obecně: **ein Hund** (nějaký pes). Mužský a střední rod mají **ein**, ženský **eine**. Množné číslo neurčitý člen nemá: Hunde.",
+     "table": [
+      [
+       "rod",
+       "určitý",
+       "neurčitý",
+       "zápor"
+      ],
+      [
+       "mužský",
+       "der Hund",
+       "ein Hund",
+       "kein Hund"
+      ],
+      [
+       "ženský",
+       "die Katze",
+       "eine Katze",
+       "keine Katze"
+      ],
+      [
+       "střední",
+       "das Haus",
+       "ein Haus",
+       "kein Haus"
+      ],
+      [
+       "množné",
+       "die Hunde",
+       "Hunde",
+       "keine Hunde"
+      ]
+     ]
+    },
+    {
+     "heading": "kein = ne + ein",
+     "text": "Zápor podstatného jména s neurčitým členem nebo bez členu dělá **kein** se stejnými koncovkami jako ein: Das ist **kein** Hund. Ich habe **keine** Zeit."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Das ist ein Apfel.",
+     "cs": "To je jablko."
+    },
+    {
+     "text": "Ich habe eine Idee.",
+     "cs": "Mám nápad."
+    },
+    {
+     "text": "Wir haben keine Kinder.",
+     "cs": "Nemáme děti."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-indefinite-01",
+     "kind": "choice",
+     "prompt": "Das ist ___ Apfel.",
+     "prompt_cs": "To je jablko.",
+     "options": [
+      "ein",
+      "eine",
+      "einen"
+     ],
+     "answers": [
+      "ein"
+     ],
+     "explain": "der Apfel je mužského rodu; po „das ist“ stojí 1. pád: ein Apfel."
+    },
+    {
+     "id": "de-a1-indefinite-02",
+     "kind": "choice",
+     "prompt": "Das ist ___ Katze.",
+     "prompt_cs": "To je kočka.",
+     "options": [
+      "ein",
+      "eine",
+      "einer"
+     ],
+     "answers": [
+      "eine"
+     ],
+     "explain": "die Katze je ženského rodu, proto eine."
+    },
+    {
+     "id": "de-a1-indefinite-03",
+     "kind": "choice",
+     "prompt": "Das ist ___ Hund, das ist eine Katze!",
+     "prompt_cs": "To není pes, to je kočka!",
+     "options": [
+      "kein",
+      "keine",
+      "nicht"
+     ],
+     "answers": [
+      "kein"
+     ],
+     "explain": "Zápor podstatného jména s neurčitým členem dělá kein; der Hund je mužský, proto kein."
+    },
+    {
+     "id": "de-a1-indefinite-04",
+     "kind": "gap",
+     "prompt": "Ich habe ___ Zeit. (kein)",
+     "prompt_cs": "Nemám čas.",
+     "answers": [
+      "keine"
+     ],
+     "explain": "die Zeit je ženského rodu, proto keine."
+    },
+    {
+     "id": "de-a1-indefinite-05",
+     "kind": "gap",
+     "prompt": "Wir haben ___ Kinder. (kein)",
+     "prompt_cs": "Nemáme děti.",
+     "answers": [
+      "keine"
+     ],
+     "explain": "V množném čísle má kein vždy tvar keine."
+    },
+    {
+     "id": "de-a1-indefinite-06",
+     "kind": "choice",
+     "prompt": "Das ist ___ Buch.",
+     "prompt_cs": "To je kniha.",
+     "options": [
+      "ein",
+      "eine",
+      "einen"
+     ],
+     "answers": [
+      "ein"
+     ],
+     "explain": "das Buch je středního rodu, proto ein (i když česky je kniha ženského rodu)."
+    },
+    {
+     "id": "de-a1-indefinite-07",
+     "kind": "order",
+     "prompt": "To není auto.",
+     "tokens": [
+      "kein",
+      "ist",
+      "Auto",
+      "das"
+     ],
+     "answers": [
+      "Das ist kein Auto"
+     ],
+     "explain": "das Auto je středního rodu: kein Auto. Sloveso ist na druhém místě."
+    },
+    {
+     "id": "de-a1-indefinite-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Mám nápad.",
+     "answers": [
+      "Ich habe eine Idee"
+     ],
+     "explain": "die Idee je ženského rodu, proto eine Idee."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-negation",
+   "level": "A1",
+   "title": "Zápor: nicht, nebo kein?",
+   "summary": "Rozlišíš, kdy zapírat slovem kein a kdy slovem nicht.",
+   "notes": [
+    {
+     "heading": "Pravidlo",
+     "text": "**kein** zapírá podstatné jméno, které by jinak mělo neurčitý člen nebo žádný člen: Ich habe **keinen** Hund. **nicht** zapírá všechno ostatní: sloveso, přídavné jméno, příslovce, jméno s určitým členem nebo vlastní jméno: Ich komme **nicht**. Das ist **nicht** gut. Das ist **nicht** der Bus."
+    },
+    {
+     "heading": "Kam patří nicht",
+     "text": "nicht stojí většinou na konci věty nebo před částí, kterou zapírá: Ich schlafe **nicht**. Er ist **nicht** müde. Wir fahren **nicht** nach Berlin."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich komme heute nicht.",
+     "cs": "Dnes nepřijdu."
+    },
+    {
+     "text": "Das Essen ist nicht warm.",
+     "cs": "To jídlo není teplé."
+    },
+    {
+     "text": "Er hat keinen Bruder.",
+     "cs": "Nemá bratra."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-negation-01",
+     "kind": "choice",
+     "prompt": "Ich komme heute ___.",
+     "prompt_cs": "Dnes nepřijdu.",
+     "options": [
+      "nicht",
+      "kein",
+      "keine"
+     ],
+     "answers": [
+      "nicht"
+     ],
+     "explain": "Zapíráme sloveso (kommen), proto nicht."
+    },
+    {
+     "id": "de-a1-negation-02",
+     "kind": "choice",
+     "prompt": "Das Essen ist ___ warm.",
+     "prompt_cs": "Jídlo není teplé.",
+     "options": [
+      "nicht",
+      "kein",
+      "keine"
+     ],
+     "answers": [
+      "nicht"
+     ],
+     "explain": "Zapíráme přídavné jméno warm, proto nicht."
+    },
+    {
+     "id": "de-a1-negation-03",
+     "kind": "choice",
+     "prompt": "Ich habe ___ Auto.",
+     "prompt_cs": "Nemám auto.",
+     "options": [
+      "kein",
+      "nicht",
+      "keine"
+     ],
+     "answers": [
+      "kein"
+     ],
+     "explain": "Zapíráme podstatné jméno s neurčitým členem (ein Auto), proto kein. das Auto: kein Auto."
+    },
+    {
+     "id": "de-a1-negation-04",
+     "kind": "choice",
+     "prompt": "Das ist ___ mein Handy.",
+     "prompt_cs": "To není můj mobil.",
+     "options": [
+      "nicht",
+      "kein",
+      "keine"
+     ],
+     "answers": [
+      "nicht"
+     ],
+     "explain": "Před přivlastňovacím zájmenem (mein) stojí nicht, ne kein."
+    },
+    {
+     "id": "de-a1-negation-05",
+     "kind": "choice",
+     "prompt": "Sie trinkt ___ Kaffee.",
+     "prompt_cs": "Nepije kávu.",
+     "options": [
+      "keinen",
+      "nicht",
+      "kein"
+     ],
+     "answers": [
+      "keinen"
+     ],
+     "explain": "Kaffee je zde bez členu, zapírá se tedy kein. der Kaffee je předmět ve 4. pádě: keinen Kaffee."
+    },
+    {
+     "id": "de-a1-negation-06",
+     "kind": "order",
+     "prompt": "Nespím.",
+     "tokens": [
+      "nicht",
+      "schlafe",
+      "ich"
+     ],
+     "answers": [
+      "Ich schlafe nicht"
+     ],
+     "explain": "nicht zapírá sloveso a stojí na konci věty."
+    },
+    {
+     "id": "de-a1-negation-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Není unavený.",
+     "answers": [
+      "Er ist nicht müde"
+     ],
+     "explain": "Zapíráme přídavné jméno müde, proto nicht. Zájmeno er se nevynechává."
+    },
+    {
+     "id": "de-a1-negation-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Nemám čas.",
+     "answers": [
+      "Ich habe keine Zeit"
+     ],
+     "explain": "Zeit stojí bez členu, zapírá se tedy kein; die Zeit je ženského rodu, proto keine."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-word-order",
+   "level": "A1",
+   "title": "Slovosled: sloveso na druhém místě",
+   "summary": "Postavíš oznamovací větu a otázku se slovesem na správném místě.",
+   "notes": [
+    {
+     "heading": "Sloveso je druhé",
+     "text": "V oznamovací větě stojí časované sloveso vždy na **druhém místě**. Na prvním místě může být podmět, ale i čas nebo místo; podmět se pak přesune za sloveso: Ich gehe heute ins Kino. → **Heute gehe ich** ins Kino.",
+     "table": [
+      [
+       "1. místo",
+       "sloveso",
+       "zbytek"
+      ],
+      [
+       "Ich",
+       "gehe",
+       "heute ins Kino."
+      ],
+      [
+       "Heute",
+       "gehe",
+       "ich ins Kino."
+      ],
+      [
+       "Am Samstag",
+       "spielen",
+       "wir Fußball."
+      ]
+     ]
+    },
+    {
+     "heading": "Otázky",
+     "text": "Otázka s tázacím slovem (**wer, was, wo, wann, wie, warum, woher**) má sloveso na druhém místě: **Wo wohnst du?** Otázka bez tázacího slova (ano/ne) začíná slovesem: **Wohnst du in Prag?**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Heute lerne ich Deutsch.",
+     "cs": "Dnes se učím německy."
+    },
+    {
+     "text": "Woher kommst du?",
+     "cs": "Odkud jsi?"
+    },
+    {
+     "text": "Kommst du mit?",
+     "cs": "Půjdeš s námi?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-word-order-01",
+     "kind": "order",
+     "prompt": "Dnes se učím německy.",
+     "tokens": [
+      "ich",
+      "Deutsch",
+      "lerne",
+      "heute"
+     ],
+     "answers": [
+      "Heute lerne ich Deutsch",
+      "Ich lerne heute Deutsch"
+     ],
+     "explain": "Sloveso lerne musí být druhé. Když začneš slovem heute, podmět ich jde za sloveso."
+    },
+    {
+     "id": "de-a1-word-order-02",
+     "kind": "order",
+     "prompt": "Kde bydlíš?",
+     "tokens": [
+      "du",
+      "wohnst",
+      "wo"
+     ],
+     "answers": [
+      "Wo wohnst du"
+     ],
+     "explain": "Tázací slovo wo na začátku, sloveso wohnst druhé, potom podmět du."
+    },
+    {
+     "id": "de-a1-word-order-03",
+     "kind": "order",
+     "prompt": "Bydlíš v Praze?",
+     "tokens": [
+      "Prag",
+      "du",
+      "in",
+      "wohnst"
+     ],
+     "answers": [
+      "Wohnst du in Prag"
+     ],
+     "explain": "Otázka bez tázacího slova začíná slovesem."
+    },
+    {
+     "id": "de-a1-word-order-04",
+     "kind": "order",
+     "prompt": "V sobotu hrajeme fotbal.",
+     "tokens": [
+      "Fußball",
+      "wir",
+      "am Samstag",
+      "spielen"
+     ],
+     "answers": [
+      "Am Samstag spielen wir Fußball",
+      "Wir spielen am Samstag Fußball"
+     ],
+     "explain": "am Samstag zabírá první místo celé; sloveso spielen je druhé a podmět wir jde za něj."
+    },
+    {
+     "id": "de-a1-word-order-05",
+     "kind": "choice",
+     "prompt": "Morgen ___ nach Wien.",
+     "prompt_cs": "Zítra jedu do Vídně.",
+     "options": [
+      "fahre ich",
+      "ich fahre",
+      "fahren ich"
+     ],
+     "answers": [
+      "fahre ich"
+     ],
+     "explain": "morgen je na prvním místě, takže sloveso fahre jde druhé a podmět ich až za něj."
+    },
+    {
+     "id": "de-a1-word-order-06",
+     "kind": "choice",
+     "prompt": "___ kommst du?",
+     "prompt_cs": "Odkud jsi?",
+     "options": [
+      "Woher",
+      "Wohin",
+      "Wo"
+     ],
+     "answers": [
+      "Woher"
+     ],
+     "explain": "woher = odkud, wohin = kam, wo = kde."
+    },
+    {
+     "id": "de-a1-word-order-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Dnes jdu do kina.",
+     "answers": [
+      "Heute gehe ich ins Kino",
+      "Ich gehe heute ins Kino"
+     ],
+     "explain": "Sloveso gehe je vždy druhé; za heute se podmět ich přesune za sloveso. „Do kina“ = ins Kino."
+    },
+    {
+     "id": "de-a1-word-order-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Wann kommst du?",
+     "answers": [
+      "Kdy přijdeš",
+      "Kdy přijedeš",
+      "Kdy přicházíš",
+      "Kdy přijdeš ty"
+     ],
+     "explain": "wann = kdy; sloveso kommst je v otázce s tázacím slovem na druhém místě."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-accusative",
+   "level": "A1",
+   "title": "Čtvrtý pád (akuzativ): den, einen",
+   "summary": "Použiješ 4. pád po slovesech jako haben, sehen, kaufen.",
+   "notes": [
+    {
+     "heading": "Mění se jen mužský rod",
+     "text": "Předmět ve 4. pádě (koho, co) poznáš po slovesech jako **haben, sehen, kaufen, brauchen, essen, trinken**. Změní se jen člen mužského rodu: **der → den, ein → einen, kein → keinen**. Ženský, střední rod a množné číslo zůstávají stejné jako v 1. pádě.",
+     "table": [
+      [
+       "rod",
+       "1. pád",
+       "4. pád"
+      ],
+      [
+       "mužský",
+       "der / ein Hund",
+       "den / einen Hund"
+      ],
+      [
+       "ženský",
+       "die / eine Katze",
+       "die / eine Katze"
+      ],
+      [
+       "střední",
+       "das / ein Buch",
+       "das / ein Buch"
+      ],
+      [
+       "množné",
+       "die Hunde",
+       "die Hunde"
+      ]
+     ]
+    },
+    {
+     "heading": "Zájmena ve 4. pádě",
+     "text": "ich → **mich**, du → **dich**, er → **ihn**, sie → sie, es → es, wir → **uns**, ihr → **euch**, Sie → Sie: Ich sehe **ihn**. Siehst du **mich**?"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich sehe den Bus.",
+     "cs": "Vidím autobus."
+    },
+    {
+     "text": "Wir kaufen einen Tisch.",
+     "cs": "Kupujeme stůl."
+    },
+    {
+     "text": "Kennst du ihn?",
+     "cs": "Znáš ho?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-accusative-01",
+     "kind": "choice",
+     "prompt": "Ich sehe ___ Bus.",
+     "prompt_cs": "Vidím autobus.",
+     "options": [
+      "den",
+      "der",
+      "dem"
+     ],
+     "answers": [
+      "den"
+     ],
+     "explain": "der Bus je mužského rodu a po sehen je ve 4. pádě: der → den."
+    },
+    {
+     "id": "de-a1-accusative-02",
+     "kind": "choice",
+     "prompt": "Wir kaufen ___ Tisch.",
+     "prompt_cs": "Kupujeme stůl.",
+     "options": [
+      "einen",
+      "ein",
+      "eine"
+     ],
+     "answers": [
+      "einen"
+     ],
+     "explain": "der Tisch je mužského rodu, ve 4. pádě ein → einen."
+    },
+    {
+     "id": "de-a1-accusative-03",
+     "kind": "choice",
+     "prompt": "Sie trinkt ___ Milch.",
+     "prompt_cs": "Pije mléko.",
+     "options": [
+      "die",
+      "den",
+      "der"
+     ],
+     "answers": [
+      "die"
+     ],
+     "explain": "die Milch je ženského rodu; ženský rod má ve 4. pádě stejný člen: die."
+    },
+    {
+     "id": "de-a1-accusative-04",
+     "kind": "gap",
+     "prompt": "Hast du ___ Bruder? (ein)",
+     "prompt_cs": "Máš bratra?",
+     "answers": [
+      "einen"
+     ],
+     "explain": "der Bruder, po haben 4. pád: einen Bruder."
+    },
+    {
+     "id": "de-a1-accusative-05",
+     "kind": "choice",
+     "prompt": "Ich brauche ___ Buch.",
+     "prompt_cs": "Potřebuji tu knihu.",
+     "options": [
+      "das",
+      "den",
+      "dem"
+     ],
+     "answers": [
+      "das"
+     ],
+     "explain": "das Buch je středního rodu, ve 4. pádě se nemění: das Buch."
+    },
+    {
+     "id": "de-a1-accusative-06",
+     "kind": "choice",
+     "prompt": "Kennst du ___?",
+     "prompt_cs": "Znáš ho?",
+     "options": [
+      "ihn",
+      "er",
+      "ihm"
+     ],
+     "answers": [
+      "ihn"
+     ],
+     "explain": "Zájmeno er má ve 4. pádě tvar ihn."
+    },
+    {
+     "id": "de-a1-accusative-07",
+     "kind": "order",
+     "prompt": "Potřebujeme nový stůl.",
+     "tokens": [
+      "einen",
+      "brauchen",
+      "neuen Tisch",
+      "wir"
+     ],
+     "answers": [
+      "Wir brauchen einen neuen Tisch"
+     ],
+     "explain": "der Tisch je ve 4. pádě: einen (neuen) Tisch. Sloveso brauchen na druhém místě."
+    },
+    {
+     "id": "de-a1-accusative-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Vidím psa.",
+     "answers": [
+      "Ich sehe den Hund",
+      "Ich sehe einen Hund"
+     ],
+     "explain": "der Hund po sehen ve 4. pádě: den Hund (toho psa) nebo einen Hund (nějakého psa)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-plural",
+   "level": "A1",
+   "title": "Množné číslo podstatných jmen",
+   "summary": "Poznáš nejčastější koncovky množného čísla a víš, že člen je vždy die.",
+   "notes": [
+    {
+     "heading": "Člen je vždy die",
+     "text": "V množném čísle mají všechna podstatná jména člen **die**. Koncovky jsou různé, a proto je dobré učit se slovo i s množným číslem.",
+     "table": [
+      [
+       "koncovka",
+       "jednotné",
+       "množné"
+      ],
+      [
+       "-e (často s přehláskou)",
+       "der Hund / die Hand",
+       "die Hunde / die Hände"
+      ],
+      [
+       "-(e)n",
+       "die Frau / die Blume",
+       "die Frauen / die Blumen"
+      ],
+      [
+       "-er (s přehláskou)",
+       "das Kind / das Buch",
+       "die Kinder / die Bücher"
+      ],
+      [
+       "-s",
+       "das Auto / das Handy",
+       "die Autos / die Handys"
+      ],
+      [
+       "beze změny / jen přehláska",
+       "der Lehrer / die Mutter",
+       "die Lehrer / die Mütter"
+      ]
+     ]
+    },
+    {
+     "heading": "Vodítka",
+     "text": "Ženská slova na **-e, -ung, -heit, -keit** mají -n nebo -en (die Lampe → die Lampen, die Zeitung → die Zeitungen). Slova na **-er, -el, -chen** (mužská a střední) se většinou nemění (das Mädchen → die Mädchen). Přejatá slova na samohlásku mají **-s**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Die Kinder spielen draußen.",
+     "cs": "Děti si hrají venku."
+    },
+    {
+     "text": "Ich habe zwei Brüder.",
+     "cs": "Mám dva bratry."
+    },
+    {
+     "text": "Die Autos sind neu.",
+     "cs": "Ta auta jsou nová."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-plural-01",
+     "kind": "choice",
+     "prompt": "Die ___ spielen im Park.",
+     "prompt_cs": "Děti si hrají v parku.",
+     "options": [
+      "Kinder",
+      "Kinde",
+      "Kinds"
+     ],
+     "answers": [
+      "Kinder"
+     ],
+     "explain": "das Kind → die Kinder (koncovka -er)."
+    },
+    {
+     "id": "de-a1-plural-02",
+     "kind": "choice",
+     "prompt": "Ich lese zwei ___.",
+     "prompt_cs": "Čtu dvě knihy.",
+     "options": [
+      "Bücher",
+      "Buchs",
+      "Buchen"
+     ],
+     "answers": [
+      "Bücher"
+     ],
+     "explain": "das Buch → die Bücher: koncovka -er a přehláska u → ü."
+    },
+    {
+     "id": "de-a1-plural-03",
+     "kind": "choice",
+     "prompt": "Die ___ sind schön.",
+     "prompt_cs": "Ty květiny jsou krásné.",
+     "options": [
+      "Blumen",
+      "Blume",
+      "Blumer"
+     ],
+     "answers": [
+      "Blumen"
+     ],
+     "explain": "Ženská slova na -e mají v množném čísle -n: die Blume → die Blumen."
+    },
+    {
+     "id": "de-a1-plural-04",
+     "kind": "gap",
+     "prompt": "Wir haben drei ___. (das Auto)",
+     "prompt_cs": "Máme tři auta.",
+     "answers": [
+      "Autos"
+     ],
+     "explain": "Přejatá slova končící samohláskou mají -s: das Auto → die Autos."
+    },
+    {
+     "id": "de-a1-plural-05",
+     "kind": "gap",
+     "prompt": "Die ___ sind müde. (die Frau)",
+     "prompt_cs": "Ty ženy jsou unavené.",
+     "answers": [
+      "Frauen"
+     ],
+     "explain": "die Frau → die Frauen (koncovka -en)."
+    },
+    {
+     "id": "de-a1-plural-06",
+     "kind": "choice",
+     "prompt": "___ Hunde bellen.",
+     "prompt_cs": "Ti psi štěkají.",
+     "options": [
+      "Die",
+      "Der",
+      "Das"
+     ],
+     "answers": [
+      "Die"
+     ],
+     "explain": "V množném čísle je člen vždy die, i když der Hund je mužský."
+    },
+    {
+     "id": "de-a1-plural-07",
+     "kind": "gap",
+     "prompt": "Zwei ___ wohnen hier. (das Mädchen)",
+     "prompt_cs": "Bydlí tu dvě dívky.",
+     "answers": [
+      "Mädchen"
+     ],
+     "explain": "Slova na -chen se v množném čísle nemění: das Mädchen → die Mädchen."
+    },
+    {
+     "id": "de-a1-plural-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Mám dva bratry.",
+     "answers": [
+      "Ich habe zwei Brüder"
+     ],
+     "explain": "der Bruder → die Brüder (jen přehláska u → ü)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-possessive",
+   "level": "A1",
+   "title": "Můj, tvůj, jeho: mein, dein, sein, ihr",
+   "summary": "Řekneš, komu co patří, se správnou koncovkou.",
+   "notes": [
+    {
+     "heading": "Zájmena",
+     "text": "Přivlastňovací zájmena mají stejné koncovky jako **ein / eine / kein**.",
+     "table": [
+      [
+       "osoba",
+       "zájmeno",
+       "česky"
+      ],
+      [
+       "ich",
+       "mein",
+       "můj"
+      ],
+      [
+       "du",
+       "dein",
+       "tvůj"
+      ],
+      [
+       "er / es",
+       "sein",
+       "jeho"
+      ],
+      [
+       "sie",
+       "ihr",
+       "její"
+      ],
+      [
+       "wir",
+       "unser",
+       "náš"
+      ],
+      [
+       "ihr",
+       "euer",
+       "váš (tykání)"
+      ],
+      [
+       "sie / Sie",
+       "ihr / Ihr",
+       "jejich / Váš"
+      ]
+     ]
+    },
+    {
+     "heading": "Koncovky",
+     "text": "Před mužským a středním rodem bez koncovky (**mein** Vater, **mein** Haus), před ženským rodem a množným číslem **-e** (**meine** Mutter, **meine** Eltern). Ve 4. pádě mužského rodu **-en**: Ich sehe **meinen** Vater. Pozor: euer + e = **eure**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Das ist meine Schwester.",
+     "cs": "To je moje sestra."
+    },
+    {
+     "text": "Sein Hund heißt Bello.",
+     "cs": "Jeho pes se jmenuje Bello."
+    },
+    {
+     "text": "Ich besuche meinen Opa.",
+     "cs": "Navštěvuji dědu."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-possessive-01",
+     "kind": "choice",
+     "prompt": "Das ist ___ Schwester.",
+     "prompt_cs": "To je moje sestra.",
+     "options": [
+      "meine",
+      "mein",
+      "meinen"
+     ],
+     "answers": [
+      "meine"
+     ],
+     "explain": "die Schwester je ženského rodu, proto meine."
+    },
+    {
+     "id": "de-a1-possessive-02",
+     "kind": "choice",
+     "prompt": "Wie heißt ___ Bruder?",
+     "prompt_cs": "Jak se jmenuje tvůj bratr?",
+     "options": [
+      "dein",
+      "deine",
+      "deinen"
+     ],
+     "answers": [
+      "dein"
+     ],
+     "explain": "der Bruder je v 1. pádě (podmět), mužský rod: dein bez koncovky."
+    },
+    {
+     "id": "de-a1-possessive-03",
+     "kind": "choice",
+     "prompt": "Anna sucht ___ Katze.",
+     "prompt_cs": "Anna hledá svou kočku.",
+     "options": [
+      "ihre",
+      "seine",
+      "ihren"
+     ],
+     "answers": [
+      "ihre"
+     ],
+     "explain": "Patří Anně (ona), proto ihr-; die Katze je ženského rodu: ihre Katze."
+    },
+    {
+     "id": "de-a1-possessive-04",
+     "kind": "choice",
+     "prompt": "Tom spielt mit ___ Hund.",
+     "prompt_cs": "Tom si hraje se svým psem.",
+     "options": [
+      "seinem",
+      "ihrem",
+      "sein"
+     ],
+     "answers": [
+      "seinem"
+     ],
+     "explain": "Patří Tomovi (on), proto sein-; po mit je 3. pád mužského rodu: seinem."
+    },
+    {
+     "id": "de-a1-possessive-05",
+     "kind": "gap",
+     "prompt": "Ich besuche ___ Opa. (mein)",
+     "prompt_cs": "Navštěvuji svého dědu.",
+     "answers": [
+      "meinen"
+     ],
+     "explain": "der Opa je předmět ve 4. pádě: mein → meinen."
+    },
+    {
+     "id": "de-a1-possessive-06",
+     "kind": "gap",
+     "prompt": "Das sind ___ Eltern. (unser)",
+     "prompt_cs": "To jsou naši rodiče.",
+     "answers": [
+      "unsere"
+     ],
+     "explain": "Množné číslo má koncovku -e: unsere Eltern."
+    },
+    {
+     "id": "de-a1-possessive-07",
+     "kind": "order",
+     "prompt": "Jeho pes je malý.",
+     "tokens": [
+      "ist",
+      "Hund",
+      "klein",
+      "sein"
+     ],
+     "answers": [
+      "Sein Hund ist klein"
+     ],
+     "explain": "sein Hund (jeho pes) tvoří podmět na prvním místě, sloveso ist druhé."
+    },
+    {
+     "id": "de-a1-possessive-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "To je moje máma.",
+     "answers": [
+      "Das ist meine Mama",
+      "Das ist meine Mutter",
+      "Das ist meine Mutti"
+     ],
+     "explain": "die Mama / die Mutter je ženského rodu, proto meine."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-modal",
+   "level": "A1",
+   "title": "Způsobová slovesa: können, müssen, wollen",
+   "summary": "Řekneš, co umíš, musíš a chceš, s druhým slovesem na konci věty.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Způsobová slovesa mají v jednotném čísle změněnou samohlásku a ich a er mají stejný tvar **bez koncovky**.",
+     "table": [
+      [
+       "",
+       "können",
+       "müssen",
+       "wollen",
+       "dürfen",
+       "möchten"
+      ],
+      [
+       "ich",
+       "kann",
+       "muss",
+       "will",
+       "darf",
+       "möchte"
+      ],
+      [
+       "du",
+       "kannst",
+       "musst",
+       "willst",
+       "darfst",
+       "möchtest"
+      ],
+      [
+       "er / sie / es",
+       "kann",
+       "muss",
+       "will",
+       "darf",
+       "möchte"
+      ],
+      [
+       "wir",
+       "können",
+       "müssen",
+       "wollen",
+       "dürfen",
+       "möchten"
+      ],
+      [
+       "ihr",
+       "könnt",
+       "müsst",
+       "wollt",
+       "dürft",
+       "möchtet"
+      ],
+      [
+       "sie / Sie",
+       "können",
+       "müssen",
+       "wollen",
+       "dürfen",
+       "möchten"
+      ]
+     ]
+    },
+    {
+     "heading": "Větná závorka",
+     "text": "Způsobové sloveso je na druhém místě a druhé sloveso jde v infinitivu **na konec věty**: Ich **kann** gut **schwimmen**. Wir **müssen** heute **arbeiten**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich kann gut schwimmen.",
+     "cs": "Umím dobře plavat."
+    },
+    {
+     "text": "Du musst jetzt schlafen.",
+     "cs": "Teď musíš spát."
+    },
+    {
+     "text": "Möchtest du etwas trinken?",
+     "cs": "Chceš se něčeho napít?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-modal-01",
+     "kind": "choice",
+     "prompt": "Ich ___ gut schwimmen.",
+     "prompt_cs": "Umím dobře plavat.",
+     "options": [
+      "kann",
+      "kannst",
+      "könne",
+      "können"
+     ],
+     "answers": [
+      "kann"
+     ],
+     "explain": "ich kann: způsobová slovesa nemají v 1. osobě jednotného čísla koncovku."
+    },
+    {
+     "id": "de-a1-modal-02",
+     "kind": "choice",
+     "prompt": "Er ___ heute arbeiten.",
+     "prompt_cs": "Dnes musí pracovat.",
+     "options": [
+      "muss",
+      "musst",
+      "müsst",
+      "müssen"
+     ],
+     "answers": [
+      "muss"
+     ],
+     "explain": "er muss: stejný tvar jako ich, bez koncovky a bez přehlásky."
+    },
+    {
+     "id": "de-a1-modal-03",
+     "kind": "gap",
+     "prompt": "___ du etwas trinken? (möchten)",
+     "prompt_cs": "Chceš se něčeho napít?",
+     "answers": [
+      "Möchtest"
+     ],
+     "explain": "du möchtest; v otázce bez tázacího slova stojí sloveso na začátku."
+    },
+    {
+     "id": "de-a1-modal-04",
+     "kind": "gap",
+     "prompt": "Wir ___ ins Kino gehen. (wollen)",
+     "prompt_cs": "Chceme jít do kina.",
+     "answers": [
+      "wollen"
+     ],
+     "explain": "wir wollen = my chceme; druhé sloveso gehen je na konci."
+    },
+    {
+     "id": "de-a1-modal-05",
+     "kind": "choice",
+     "prompt": "Hier ___ man nicht rauchen.",
+     "prompt_cs": "Tady se nesmí kouřit.",
+     "options": [
+      "darf",
+      "dürft",
+      "darfst"
+     ],
+     "answers": [
+      "darf"
+     ],
+     "explain": "man (se, člověk) se časuje jako er: man darf. nicht dürfen = nesmět."
+    },
+    {
+     "id": "de-a1-modal-06",
+     "kind": "order",
+     "prompt": "Umím dobře vařit.",
+     "tokens": [
+      "gut",
+      "kochen",
+      "ich",
+      "kann"
+     ],
+     "answers": [
+      "Ich kann gut kochen"
+     ],
+     "explain": "Způsobové sloveso kann na druhém místě, infinitiv kochen na konci věty."
+    },
+    {
+     "id": "de-a1-modal-07",
+     "kind": "order",
+     "prompt": "Musíme dnes uklízet.",
+     "tokens": [
+      "aufräumen",
+      "müssen",
+      "heute",
+      "wir"
+     ],
+     "answers": [
+      "Wir müssen heute aufräumen",
+      "Heute müssen wir aufräumen"
+     ],
+     "explain": "müssen je druhé, infinitiv aufräumen jde na konec."
+    },
+    {
+     "id": "de-a1-modal-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Chci spát.",
+     "answers": [
+      "Ich will schlafen",
+      "Ich möchte schlafen"
+     ],
+     "explain": "ich will (chci) nebo zdvořileji ich möchte (chtěl bych); infinitiv schlafen na konci."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-separable",
+   "level": "A1",
+   "title": "Odlučitelné předpony: aufstehen, einkaufen",
+   "summary": "Postavíš větu se slovesem, jehož předpona odchází na konec.",
+   "notes": [
+    {
+     "heading": "Předpona jde na konec",
+     "text": "U sloves s odlučitelnou předponou (**auf-, an-, ab-, ein-, mit-, aus-, zu-, fern-**) se v přítomném čase předpona oddělí a jde **na konec věty**: aufstehen → Ich **stehe** um sieben **auf**. einkaufen → Wir **kaufen** heute **ein**.",
+     "table": [
+      [
+       "infinitiv",
+       "věta"
+      ],
+      [
+       "aufstehen (vstávat)",
+       "Ich stehe um 7 Uhr auf."
+      ],
+      [
+       "einkaufen (nakupovat)",
+       "Wir kaufen am Samstag ein."
+      ],
+      [
+       "anrufen (zavolat)",
+       "Er ruft seine Mutter an."
+      ],
+      [
+       "fernsehen (dívat se na televizi)",
+       "Siehst du gern fern?"
+      ]
+     ]
+    },
+    {
+     "heading": "Se způsobovým slovesem",
+     "text": "Po způsobovém slovese zůstává sloveso celé v infinitivu na konci: Ich **muss** früh **aufstehen**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich stehe um sieben Uhr auf.",
+     "cs": "Vstávám v sedm."
+    },
+    {
+     "text": "Rufst du mich morgen an?",
+     "cs": "Zavoláš mi zítra?"
+    },
+    {
+     "text": "Ich muss noch einkaufen.",
+     "cs": "Ještě musím nakoupit."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-separable-01",
+     "kind": "order",
+     "prompt": "Vstávám v sedm.",
+     "tokens": [
+      "auf",
+      "um sieben",
+      "stehe",
+      "ich"
+     ],
+     "answers": [
+      "Ich stehe um sieben auf",
+      "Um sieben stehe ich auf"
+     ],
+     "explain": "aufstehen: časovaná část stehe je druhá, předpona auf jde na konec."
+    },
+    {
+     "id": "de-a1-separable-02",
+     "kind": "choice",
+     "prompt": "Wir kaufen heute ___.",
+     "prompt_cs": "Dnes nakupujeme.",
+     "options": [
+      "ein",
+      "an",
+      "auf"
+     ],
+     "answers": [
+      "ein"
+     ],
+     "explain": "einkaufen = nakupovat; předpona ein jde na konec věty."
+    },
+    {
+     "id": "de-a1-separable-03",
+     "kind": "choice",
+     "prompt": "Er ___ seine Mutter an.",
+     "prompt_cs": "Volá své mámě.",
+     "options": [
+      "ruft",
+      "anruft",
+      "rufen"
+     ],
+     "answers": [
+      "ruft"
+     ],
+     "explain": "anrufen: na druhém místě je jen ruft, předpona an je na konci."
+    },
+    {
+     "id": "de-a1-separable-04",
+     "kind": "gap",
+     "prompt": "Ich muss morgen früh ___. (aufstehen)",
+     "prompt_cs": "Zítra musím vstávat brzy.",
+     "answers": [
+      "aufstehen"
+     ],
+     "explain": "Po způsobovém slovese muss zůstává celý infinitiv aufstehen na konci."
+    },
+    {
+     "id": "de-a1-separable-05",
+     "kind": "gap",
+     "prompt": "Wann ___ der Zug an? (ankommen)",
+     "prompt_cs": "Kdy přijede vlak?",
+     "answers": [
+      "kommt"
+     ],
+     "explain": "ankommen se rozdělí: časovaná část kommt je na druhém místě (za wann), předpona an na konci."
+    },
+    {
+     "id": "de-a1-separable-06",
+     "kind": "choice",
+     "prompt": "Siehst du gern ___?",
+     "prompt_cs": "Díváš se rád na televizi?",
+     "options": [
+      "fern",
+      "an",
+      "mit"
+     ],
+     "answers": [
+      "fern"
+     ],
+     "explain": "fernsehen: sehen se časuje (du siehst), fern jde na konec."
+    },
+    {
+     "id": "de-a1-separable-07",
+     "kind": "order",
+     "prompt": "Půjdeš s námi?",
+     "tokens": [
+      "mit",
+      "du",
+      "kommst"
+     ],
+     "answers": [
+      "Kommst du mit"
+     ],
+     "explain": "mitkommen: otázka začíná časovanou částí kommst, předpona mit na konci."
+    },
+    {
+     "id": "de-a1-separable-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Zavolám ti.",
+     "answers": [
+      "Ich rufe dich an"
+     ],
+     "explain": "anrufen + 4. pád: ich rufe dich an (předpona na konci; v němčině „volat koho“)."
+    }
+   ]
+  }
+ ]
+}

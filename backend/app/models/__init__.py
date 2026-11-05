@@ -1,6 +1,14 @@
 from app.models.auth import AuthSession
 from app.models.blacklist import ContentBlacklistEntry
 from app.models.frequency import FrequencyLemma
+from app.models.grammar import (
+    GrammarAttempt,
+    GrammarExercise,
+    GrammarSession,
+    GrammarSessionItem,
+    GrammarUnit,
+    UserGrammarProgress,
+)
 from app.models.learning import (
     GrammarUnlock,
     LanguagePlacement,
@@ -20,6 +28,11 @@ __all__ = [
     "ContentBlacklistEntry",
     "DailyStory",
     "FrequencyLemma",
+    "GrammarAttempt",
+    "GrammarExercise",
+    "GrammarSession",
+    "GrammarSessionItem",
+    "GrammarUnit",
     "GrammarUnlock",
     "LanguagePlacement",
     "LearningEvent",
@@ -30,5 +43,6 @@ __all__ = [
     "Scene",
     "SceneWord",
     "User",
+    "UserGrammarProgress",
     "UserWordProgress",
 ]

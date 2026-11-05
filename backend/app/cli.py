@@ -472,6 +472,33 @@ async def _seed_blacklist(paths: list[Path], dry_run: bool) -> int:
     return 0
 
 
+def read_grammar_pack(path: Path):
+    from app.domain.grammar import GrammarPack
+
+    try:
+        return GrammarPack.model_validate(json.loads(path.read_text(encoding="utf-8")))
+    except (ValueError, ValidationError) as exc:
+        raise RowError(f"{path}: {exc}") from exc
+
+
+async def _seed_grammar(paths: list[Path], dry_run: bool) -> int:
+    from app.services.grammar import upsert_pack
+
+    packs = [read_grammar_pack(p) for p in paths]
+    for pack in packs:
+        if dry_run:
+            log.info("grammar_validated", extra={"language": pack.language.value})
+            continue
+        async for session in get_session():
+            async with session.begin():
+                units, exercises = await upsert_pack(session, pack)
+        log.info(
+            "grammar_seeded",
+            extra={"language": pack.language.value, "units": units, "exercises": exercises},
+        )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="polyflow")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -480,6 +507,7 @@ def main(argv: list[str] | None = None) -> int:
         ("seed-blacklist", "Upsert content blacklist entries from CSV files"),
         ("seed-scenes", "Upsert lesson scenes from JSON files (needs the lexicon)"),
         ("seed-lemmas", "Replace frequency lemma lists from <locale>.lemmas.csv files"),
+        ("seed-grammar", "Upsert grammar units and exercises from JSON content packs"),
     ):
         p = sub.add_parser(name, help=help_)
         p.add_argument("paths", nargs="+", type=Path)
@@ -492,6 +520,7 @@ def main(argv: list[str] | None = None) -> int:
         "seed-blacklist": _seed_blacklist,
         "seed-scenes": _seed_scenes,
         "seed-lemmas": _seed_lemmas,
+        "seed-grammar": _seed_grammar,
     }[args.cmd]
 
     async def run() -> int:

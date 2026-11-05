@@ -71,3 +71,30 @@ def smooth(old: float | None, new: float, policy: LearningPolicy = POLICY) -> fl
     if old is None:
         return new
     return round(old * (1 - policy.orthography_weight) + new * policy.orthography_weight, 4)
+
+
+@dataclass(frozen=True, slots=True)
+class GrammarPolicy:
+    """Grammar units (plan P5): same learn/check split and spacing as words.
+
+    g1: a unit is "known" after `known_required_correct` first-try correct check answers on at
+    least `known_required_days` days; MASTERED after a successful check `mastery_delay` later.
+    A missed check answer makes the unit due the next local day and brings that exercise back.
+    """
+
+    version: str = "g1"
+    known_required_correct: int = 3
+    known_required_days: int = 2
+    mastery_delay: timedelta = timedelta(days=7)
+    review_intervals: tuple[timedelta, ...] = tuple(timedelta(days=d) for d in (1, 2, 4, 7, 14, 30))
+    decay_after: timedelta = timedelta(days=30)
+    # A grammar check covers at most this many due units, this many exercises each.
+    check_max_units: int = 4
+    check_exercises_per_unit: int = 2
+    # A grammar lesson adds up to this many exercises missed recently in other units.
+    lesson_remediation: int = 2
+    # "Recently" for remediation and weak spots.
+    remediation_window: timedelta = timedelta(days=21)
+
+
+GRAMMAR_POLICY = GrammarPolicy()
