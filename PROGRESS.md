@@ -80,10 +80,12 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       example) marked `claude-draft` / unreviewed, plus scenes for the new words.
 - [x] **M8 Language-pack registry**: one module per target language (articles, spelling
       variants, special characters, voice, data files) so `cs → es` is configuration + data.
-- [ ] **M9 Verification and release bump**: backend tests, ruff, alembic check, frontend
+- [x] **M9 Verification and release bump**: backend tests, ruff, alembic check, frontend
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M9 done. Version 1.0.0-alpha.5 (scripts/set-version.sh). Backend 357 passed, 1 skipped; ruff check/format clean; alembic 0017 -> 0015 -> head round trip and `alembic check` clean; frontend typecheck and `npm run build` pass; Playwright 3/3 on localhost; `docker compose config -q` passes. Not run here: Docker image builds (no Docker daemon in this sandbox) and a real local LLM (verified against a stand-in endpoint).
 
 - 2026-11-05: M8 done. `app/domain/language_packs.py` (one `LanguagePack` per target language); orthography, grammar grading, word lessons, tutor (name, genders, hints), voices and story vocabulary read it. README "Adding a target language". Tests: tests/test_language_packs.py (also checks frontend/lib/keyboard.ts). Backend 357 passed, 1 skipped.
 
