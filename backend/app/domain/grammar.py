@@ -356,5 +356,6 @@ def grade(
 
 
 def blank(prompt: str, answer: str) -> str:
-    """The sentence with the gap filled in."""
-    return prompt.replace("___", answer, 1)
+    """The sentence with the gap filled in, without a trailing hint such as "(sein)"."""
+    filled = prompt.replace("___", answer, 1)
+    return re.sub(r"\s*\([^()]*\)\s*$", "", filled)

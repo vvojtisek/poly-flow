@@ -58,12 +58,12 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       umlaut/diacritics, capitalisation, misspelling, wrong meaning), keep it on the event,
       weak-spot query per profile and language, inject recently missed words as ungraded
       remediation practice at the start of the next Lekce, weak-spot overview in the UI.
-- [ ] **M3 Grammar module**: content-pack format (`backend/data/grammar/*.json`) with provenance and
+- [~] **M3 Grammar module** (engine, API, UI and A1 content done; A2-B2 content pending): content-pack format (`backend/data/grammar/*.json`) with provenance and
       review status, tables for rules, exercises, per-rule progress and attempts (migration
       0014), German A1-B2 skill tree with Czech explanations; Lekce for a rule (notes in a split
       pane + ungraded practice with retries and explanations) and Ověření gramatiky (one try,
       per-rule SRS with the same intervals and idempotent decay); mistakes feed the rule's review.
-- [ ] **M4 Exercise types**: grammar exercises `choice` (der/die/das, cases, prepositions),
+- [x] **M4 Exercise types**: grammar exercises `choice` (der/die/das, cases, prepositions),
       `gap` (typed conjugation/ending), `order` (sentence building from tiles) and `translate`
       (cs → de and de → cs with accepted variants), all graded on the server.
 - [ ] **M5 AI tutor**: LLM adapter (OpenAI-compatible chat completions, local by default, timeout,
@@ -82,6 +82,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M3/M4 engine: migration 0014, `app/domain/grammar.py` (pack schema, grading, error tags), `app/services/grammar.py`, `/api/v1/grammar`, pages `/grammar`, `/grammar/[unit]`, `/grammar/check`; German A1 (12 units, 96 exercises, drafted, unreviewed). Backend 318 tests pass; Playwright 3/3 on localhost.
 
 - 2026-11-05: M1 done. `lib/keyboard.ts` (data-hotkey listener, physical digit keys, Alt+letter characters), `AnswerInput`, key badges and legend on lg screens, scene side pane in Lekce. Playwright: mobile spec + new keyboard-only desktop spec pass on localhost.
 

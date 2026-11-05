@@ -14,7 +14,7 @@ import { SPECIAL_CHARS, altCharFor, altCharLegend, insertAtCaret } from "@/lib/k
 export const AnswerInput = forwardRef<
   HTMLInputElement,
   {
-    language: Language;
+    language: Language | "cs"; // "cs": a Czech answer, no extra characters
     value: string;
     onChange: (value: string) => void;
     disabled?: boolean;
@@ -24,8 +24,8 @@ export const AnswerInput = forwardRef<
 >(function AnswerInput({ language, value, onChange, disabled, placeholder, showChars = true }, ref) {
   const inputRef = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inputRef.current!, []);
-  const chars = SPECIAL_CHARS[language];
-  const legend = altCharLegend(language);
+  const chars = language === "cs" ? [] : SPECIAL_CHARS[language];
+  const legend = language === "cs" ? [] : altCharLegend(language);
 
   function insert(char: string) {
     const { value: next, caret } = insertAtCaret(inputRef.current, value, char);
@@ -40,7 +40,7 @@ export const AnswerInput = forwardRef<
   }
 
   function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    const char = altCharFor(language, e.nativeEvent);
+    const char = language === "cs" ? null : altCharFor(language, e.nativeEvent);
     if (char) {
       e.preventDefault();
       insert(char);

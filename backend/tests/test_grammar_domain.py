@@ -145,3 +145,4 @@ def test_wrong_text_returns_the_closest_accepted_answer():
 
 def test_blank_fills_the_gap():
     assert blank("Ich ___ müde.", "bin") == "Ich bin müde."
+    assert blank("Hast du ___ Bruder? (ein)", "einen") == "Hast du einen Bruder?"

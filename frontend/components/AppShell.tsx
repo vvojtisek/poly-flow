@@ -1,6 +1,6 @@
 "use client";
 
-import { Compass, LogOut, Settings, Users } from "lucide-react";
+import { Compass, GraduationCap, LogOut, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
@@ -126,6 +126,12 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
         </div>
         <div className="flex flex-col items-end gap-1">
           <nav className="flex flex-wrap items-center justify-end gap-1">
+            <Link
+              href="/grammar"
+              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+            >
+              <GraduationCap className="size-4" aria-hidden /> {cs.grammar.link}
+            </Link>
             <Link
               href="/placement"
               className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"

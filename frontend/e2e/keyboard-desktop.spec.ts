@@ -53,3 +53,22 @@ test("a lesson runs on the keyboard: Enter, digit keys, Alt+S for ß", async ({ 
   }
   await expect(page.getByText("Lekce dokončena")).toBeVisible();
 });
+
+test("grammar lesson: notes beside the exercise, explanation after a mistake", async ({ page }) => {
+  await signIn(page);
+  await page.goto("/grammar");
+  await expect(page.getByRole("heading", { name: "A1" })).toBeVisible();
+  await page.getByRole("link", { name: /Já jsem, ty jsi: sloveso sein/ }).click();
+  await expect(page.getByRole("heading", { name: "Já jsem, ty jsi: sloveso sein" })).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("Cvičení 1 z 8")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Osobní zájmena a sein" })).toBeVisible(); // side pane
+  // "Ich ___ müde.": options bin, bist, ist, sind. A wrong pick explains and lets the learner retry.
+  await page.keyboard.press("Digit2");
+  await expect(page.getByText("Proč:")).toBeVisible();
+  await expect(page.getByText("Zkus to ještě jednou.")).toBeVisible();
+  await page.keyboard.press("Digit1");
+  await expect(page.getByText("Správně!")).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page.getByText("Cvičení 2 z 8")).toBeVisible();
+});

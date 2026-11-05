@@ -396,3 +396,121 @@ export const submitSpeech = (taskId: string, idempotency_key: string, recording:
 export const newIdempotencyKey = () =>
   crypto.randomUUID?.().replaceAll("-", "") ??
   Array.from(crypto.getRandomValues(new Uint8Array(16)), (b) => b.toString(16).padStart(2, "0")).join("");
+
+// ---------------------------------------------------------------- grammar
+
+export type UnitState = "new" | "studied" | "known" | "mastered";
+export type ExerciseKind = "choice" | "gap" | "order" | "translate";
+
+export interface GrammarNote {
+  heading: string;
+  text: string;
+  table?: string[][] | null;
+}
+
+export interface GrammarUnitSummary {
+  id: string;
+  level: CefrLevel;
+  title: string;
+  summary: string;
+  status: UnitState;
+  exercises: number;
+  due: boolean;
+  recent_errors: number;
+  next_review_at: string | null;
+}
+
+export interface GrammarTree {
+  language: Language;
+  open: boolean;
+  due: number;
+  recommended: string | null;
+  review_status: "unreviewed" | "reviewed" | "mixed" | null;
+  levels: { level: CefrLevel; units: GrammarUnitSummary[] }[];
+  active_lesson_unit: string | null;
+  active_check_session_id: string | null;
+}
+
+export interface GrammarUnit {
+  id: string;
+  level: CefrLevel;
+  title: string;
+  summary: string;
+  notes: GrammarNote[];
+  examples: { text: string; cs: string }[];
+  status: UnitState;
+  review_status: string;
+  source: string;
+}
+
+export interface GrammarSession {
+  id: string;
+  language: Language;
+  mode: "learn" | "check";
+  status: "active" | "completed";
+  unit: GrammarUnit | null;
+  total: number;
+  remaining: number;
+  summary: {
+    total?: number;
+    done?: number;
+    revealed?: number;
+    first_try_correct?: number;
+    remediation?: number;
+    abandoned?: boolean;
+  };
+}
+
+export interface GrammarExercise {
+  item_id: string;
+  session_id: string;
+  position: number;
+  total: number;
+  kind: ExerciseKind;
+  prompt: string;
+  prompt_cs: string | null;
+  direction: "cs-target" | "target-cs" | null;
+  options: string[] | null;
+  tokens: string[] | null;
+  unit_id: string;
+  unit_title: string;
+  is_remediation: boolean;
+  status: "pending" | "done" | "revealed";
+  attempts: number;
+}
+
+export interface GrammarResult {
+  item_id: string;
+  correct: boolean;
+  verdict: string;
+  note: string | null;
+  error: string | null;
+  counted: boolean;
+  attempts: number;
+  task_done: boolean;
+  can_retry: boolean;
+  expected: string | null;
+  solution: string | null;
+  explanation: string | null;
+  unit_id: string;
+  unit_title: string;
+}
+
+export const getGrammarTree = (language: Language) =>
+  api<GrammarTree>(`/api/v1/grammar?language=${language}`, { cache: "no-store" });
+export const getGrammarUnit = (unitId: string) =>
+  api<GrammarUnit>(`/api/v1/grammar/units/${encodeURIComponent(unitId)}`, { cache: "no-store" });
+export const startGrammarLesson = (unitId: string) =>
+  api<{ session: GrammarSession | null }>(`/api/v1/grammar/units/${encodeURIComponent(unitId)}/lesson`, {
+    method: "POST",
+  });
+export const startGrammarCheck = (language: Language) =>
+  api<{ session: GrammarSession | null }>("/api/v1/grammar/check", { json: { language } });
+export const nextGrammarItem = (sessionId: string) =>
+  api<{ item: GrammarExercise | null }>(`/api/v1/grammar/sessions/${sessionId}/next`, { cache: "no-store" });
+export const answerGrammar = (itemId: string, body: { idempotency_key: string; choice?: number; text?: string }) =>
+  api<GrammarResult>(`/api/v1/grammar/items/${itemId}/answer`, { json: body });
+export const revealGrammar = (itemId: string, idempotency_key: string) =>
+  api<GrammarResult>(`/api/v1/grammar/items/${itemId}/reveal`, { json: { idempotency_key } });
+export const completeGrammar = (sessionId: string) =>
+  api<GrammarSession>(`/api/v1/grammar/sessions/${sessionId}/complete`, { method: "POST" });
