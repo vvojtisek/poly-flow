@@ -53,6 +53,25 @@ the frequency list, plus `battle` (violence) and `fucking` (profanity, missing f
 derive from wordfreq. `tests/test_lexicon_data.py` checks ranks 1-1000 without gaps, unique
 glosses, the en_GB order, carried-over flags, and that no unflagged example uses a flagged word.
 
+### `de.0101-1000.csv` (German ranks 101-1000, revision `de1000-draft-v1`)
+
+900 words that take the German course from the core-100 to the A2 milestone (1,000), so the
+placement test and the A1 and A2 level exams can open for German. Unlike English there is no
+German lemma frequency list in the repository yet: lemmas and their order were **drafted by
+Claude from general knowledge** of frequent, learner-relevant German (function words, everyday
+nouns with gender, common verbs and adjectives, numbers, days and months), not copied from a
+published corpus list. Words that are not suitable for child profiles (alcohol, smoking) were
+left out of this block rather than flagged. Each row has a Czech gloss, gender for nouns
+(`der/die/das`; `die` for plural-only nouns such as `Eltern`, none for country and language names
+used without an article) and one example sentence; for verbs the example uses the infinitive,
+so recall can show a cloze. Reflexive verbs are listed without `sich` and say so in the gloss
+(`freuen` = `radovat se (sich freuen)`). Glosses are unique across the German lexicon.
+**Not reviewed by a native speaker** (`source` = `claude-drafted`, licence CC0-1.0). These words
+have no scene: a lesson shows each word's example sentence as its context.
+`tests/test_lexicon_de.py` checks ranks 1-1000 without gaps, unique keys and glosses,
+provenance, noun capitalisation and gender. Adding `sein/DET` (possessive) made `sein` and `zu`
+ambiguous in scene markup, so `de.core100.json` now writes `sein/AUX` and `zu/ADP`.
+
 ### Producing the full lists (not done yet)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
