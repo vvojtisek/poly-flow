@@ -378,6 +378,15 @@ export const cs = {
     another: "Další ověření",
     missedNote: "Tohle cvičení se vrátí v příští lekci a v dalším ověření.",
   },
+  weak: {
+    title: "Slabá místa",
+    help: (days: number) => `Co se ti v ověřeních za posledních ${days} dní nepovedlo a ještě to není opravené. Tato slova a cvičení se vracejí v lekcích a ověřeních.`,
+    words: "Slova",
+    grammar: "Gramatika",
+    kinds: "Druhy chyb",
+    none: "Žádná neopravená chyba. Dobrá práce!",
+    errors: (n: number) => (n === 1 ? "1 chyba" : n < 5 ? `${n} chyby` : `${n} chyb`),
+  },
   keys: {
     legend: "Klávesové zkratky",
     specialChars: "Zvláštní znaky",

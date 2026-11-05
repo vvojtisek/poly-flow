@@ -35,10 +35,14 @@ from app.schemas.learning import (
     StartIn,
     StartOut,
     TaskOut,
+    WeakSpotsOut,
+    WeakUnitOut,
+    WeakWordOut,
     WordCard,
 )
 from app.services import learning as svc
 from app.services import level_exam as exam_svc
+from app.services import mistakes
 from app.services import placement as placement_svc
 from app.services.stt import Stt, SttBusy, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
@@ -327,6 +331,42 @@ async def progress(
 ) -> ProgressOut:
     return await svc.progress_overview(
         db, auth.acting, language or auth.acting.active_language, now
+    )
+
+
+@router.get("/weak-spots", response_model=WeakSpotsOut)
+async def weak_spots(
+    auth: Auth, db: DB, now: Now, language: Annotated[Language | None, Query()] = None
+) -> WeakSpotsOut:
+    """What this profile got wrong in recent checks, still unresolved, plus mistake kinds."""
+    lang = language or auth.acting.active_language
+    w = await mistakes.weak_spots(db, auth.acting, lang, now)
+    return WeakSpotsOut(
+        language=lang,
+        window_days=w.window_days,
+        words=[
+            WeakWordOut(
+                lemma=x.item.lemma,
+                gender=x.item.gender,
+                translation=x.item.translation_cs,
+                errors=x.errors,
+                last_error_at=x.last_error_at,
+                tags=x.tags,
+            )
+            for x in w.words
+        ],
+        units=[
+            WeakUnitOut(
+                id=u.unit.id,
+                title=u.unit.title,
+                level=u.unit.level.value,
+                errors=u.errors,
+                last_error_at=u.last_error_at,
+                tags=u.tags,
+            )
+            for u in w.units
+        ],
+        tags=w.tags,
     )
 
 

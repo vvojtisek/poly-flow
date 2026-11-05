@@ -92,6 +92,11 @@ function Feedback({
         {cs.feedback[result.verdict]}
       </p>
       {note && <p>{note}</p>}
+      {result.error && !good && (
+        <p className="text-xs opacity-90">
+          {cs.grammar.errorKind} {cs.feedback.errors[result.error] ?? result.error}
+        </p>
+      )}
       {result.expected && (
         <p className="flex flex-wrap items-center gap-x-1">
           {cs.lesson.expected} <strong>{result.expected}</strong>

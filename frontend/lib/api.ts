@@ -259,6 +259,7 @@ export interface AnswerResult {
   correct: boolean;
   verdict: Verdict;
   note: string | null;
+  error?: string | null; // what a wrong answer got wrong (mistake engine)
   counted: boolean;
   attempts: number;
   task_done: boolean;
@@ -514,3 +515,16 @@ export const revealGrammar = (itemId: string, idempotency_key: string) =>
   api<GrammarResult>(`/api/v1/grammar/items/${itemId}/reveal`, { json: { idempotency_key } });
 export const completeGrammar = (sessionId: string) =>
   api<GrammarSession>(`/api/v1/grammar/sessions/${sessionId}/complete`, { method: "POST" });
+
+// ---------------------------------------------------------------- mistakes
+
+export interface WeakSpots {
+  language: Language;
+  window_days: number;
+  words: { lemma: string; gender: string | null; translation: string; errors: number; last_error_at: string; tags: string[] }[];
+  units: { id: string; title: string; level: string; errors: number; last_error_at: string; tags: string[] }[];
+  tags: [string, number][];
+}
+
+export const getWeakSpots = (language: Language) =>
+  api<WeakSpots>(`/api/v1/learning/weak-spots?language=${language}`, { cache: "no-store" });

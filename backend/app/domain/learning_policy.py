@@ -17,7 +17,11 @@ class LearningPolicy:
     # every matched word at least `spoken_min_confidence`, counts like a correct written answer
     # (active evidence, no orthography measurement). Anything else is "not understood" and
     # changes nothing: speech recognition errors are not evidence of not knowing a word.
-    version: str = "v3"
+    # v4: wrong answers carry an error tag (meaning, gender, spelling, ...), a recall answer
+    # with the wrong German article is still correct but tagged `gender`, and a lesson opens
+    # with up to `remediation_per_lesson` words the profile missed in a recent check
+    # (ungraded practice, like the rest of the lesson).
+    version: str = "v4"
     # passive_known: correct recognition (or production) in a check, without a hint
     passive_required_correct: int = 3
     passive_required_days: int = 2
@@ -36,6 +40,10 @@ class LearningPolicy:
     session_max_tasks: int = 12
     # ...and a lesson introduces at most this many (each practised twice).
     new_items_per_session: int = 4
+    # Recently missed words practised at the start of the next lesson, and the window that
+    # counts as "recently" (also used by the weak-spot overview).
+    remediation_per_lesson: int = 2
+    remediation_window: timedelta = timedelta(days=21)
     # Lowest Whisper word probability for a spoken match. Provisional: transcript confidence
     # of real learner recordings is stored per event so this can be set from data.
     spoken_min_confidence: float = 0.5

@@ -186,7 +186,7 @@ async def test_confident_spoken_word_is_active_evidence(db, client, stt):
     [ev] = await spoken_events()
     assert ev.is_correct and ev.counts_as_evidence and ev.transcript_confidence == 0.8
     assert ev.answer == "[spoken]" and "heard" not in ev.result
-    assert ev.task_type == "recall" and ev.policy_version == "v3"
+    assert ev.task_type == "recall" and ev.policy_version == POLICY.version
 
 
 @pytest.mark.parametrize(

@@ -54,7 +54,7 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       `+ěščřžýáíé`), quick German character bar (`ä ö ü ß` + capitals) with `Alt+a/o/u/s`
       shortcuts, `?`/`H` for hint, `Esc` leaves to the overview, a shortcut legend, wider layout and a
       split pane (scene and word notes beside the practice) on wide screens; mobile layout unchanged.
-- [ ] **M2 Mistake engine for words**: classify each wrong answer (wrong article/gender, missing
+- [x] **M2 Mistake engine for words**: classify each wrong answer (wrong article/gender, missing
       umlaut/diacritics, capitalisation, misspelling, wrong meaning), keep it on the event,
       weak-spot query per profile and language, inject recently missed words as ungraded
       remediation practice at the start of the next Lekce, weak-spot overview in the UI.
@@ -82,6 +82,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-05: M2 done: policy v4, migration 0015 (`learning_events.error_tag`), wrong-article detection, lesson remediation (2 recently missed words first, ungraded), `GET /api/v1/learning/weak-spots`, dashboard panel "Slabá místa" and a grammar button. Tests: tests/test_mistakes.py.
 
 - 2026-11-05: M3/M4 engine: migration 0014, `app/domain/grammar.py` (pack schema, grading, error tags), `app/services/grammar.py`, `/api/v1/grammar`, pages `/grammar`, `/grammar/[unit]`, `/grammar/check`; German A1 (12 units, 96 exercises, drafted, unreviewed). Backend 318 tests pass; Playwright 3/3 on localhost.
 
