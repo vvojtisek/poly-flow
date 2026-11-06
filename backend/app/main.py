@@ -8,6 +8,7 @@ from app import __version__
 from app.api import (
     auth,
     diagnostic,
+    dictation,
     grammar,
     health,
     insights,
@@ -57,6 +58,7 @@ def create_app() -> FastAPI:
     app.include_router(insights.router)
     app.include_router(words.router)
     app.include_router(today.router)
+    app.include_router(dictation.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)
     app.include_router(stories.router)

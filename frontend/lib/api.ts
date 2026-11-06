@@ -775,3 +775,29 @@ export interface TodayPlan {
 }
 
 export const getToday = (language: Language) => api<TodayPlan>(`/api/v1/today?language=${language}`);
+
+// ---------------------------------------------------------------- dictation (ungraded)
+
+export interface DictationNext {
+  item_id: string | null;
+  words: number;
+  pool: number;
+}
+
+export type DictationVerdict = "ok" | "case" | "accents" | "wrong" | "missing" | "extra";
+
+export interface DictationResult {
+  sentence: string;
+  lemma: string;
+  translation: string;
+  marks: { expected: string | null; typed: string | null; verdict: DictationVerdict }[];
+  score: number;
+}
+
+export function getDictationNext(language: Language, exclude: string[]) {
+  const p = new URLSearchParams({ language });
+  for (const id of exclude.slice(-50)) p.append("exclude", id);
+  return api<DictationNext>(`/api/v1/dictation/next?${p}`);
+}
+export const checkDictation = (item_id: string, text: string) =>
+  api<DictationResult>("/api/v1/dictation/check", { json: { item_id, text } });

@@ -17,6 +17,7 @@ unreviewed.
 | 4 | Learning insights dashboard | activity calendar, accuracy trend, mistake types, review forecast |
 | 5 | My dictionary + word inspector | look up any learned word, its state, audio and history |
 | 6 | Today's plan + goal ring | one button to the most useful next step, calm daily goal |
+| 7 | Dictation drill (Diktát) | hear a sentence, type it, word-level diff; ungraded practice |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -131,3 +132,21 @@ and the existing `daily_goal_minutes` setting was not shown anywhere.
   from the answers given (no stopwatch runs during learning), the copy says so, and missing the
   goal has no consequence: no streak, nothing lost.
 - Also reports how many words come due tomorrow.
+
+## Cycle 7/30: dictation drill (Diktát)
+
+**Before:** listening was only ever paired with a single word or a multiple-choice answer; there
+was no way to practise turning a whole spoken sentence into correctly spelled text.
+
+**Built:** `/dictation`, reachable from the dashboard and the command palette.
+
+- Plays the example sentence of a word the learner has already had a lesson on (filtered by the
+  child content filter); the text is never sent before an attempt (`GET /api/v1/dictation/next`
+  returns only the item id and word count).
+- The learner types with the special-character bar and Alt shortcuts; `POST /check` aligns the
+  answer with the sentence (`app.domain.dictation`, difflib over folded tokens) and marks each
+  word as exact, wrong case, missing accents, a different word, missing, or extra. The UI shows
+  the diff with the expected word under every miss, the full sentence, and the lesson word.
+- Strictly practice: nothing is recorded, nothing counts toward checks or ranks (learning vs
+  testing split kept). Slow playback, Alt+P to replay, Enter to check and then continue; the
+  session average stays on the page only.
