@@ -10,6 +10,7 @@ from app.api import (
     declension,
     diagnostic,
     dictation,
+    genders,
     grammar,
     health,
     insights,
@@ -60,6 +61,7 @@ def create_app() -> FastAPI:
     app.include_router(words.router)
     app.include_router(today.router)
     app.include_router(declension.router)
+    app.include_router(genders.router)
     app.include_router(dictation.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)

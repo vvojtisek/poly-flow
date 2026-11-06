@@ -850,3 +850,27 @@ export interface PracticeSentence {
 }
 export const getPracticeSentences = (language: Language) =>
   api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}`);
+
+// ---------------------------------------------------------------- gender sorter (ungraded)
+
+export interface GenderHint {
+  suffix: string;
+  gender: string;
+  certainty: "always" | "usually";
+  exception: boolean;
+}
+export interface GenderNoun {
+  id: string;
+  lemma: string;
+  translation: string;
+  gender: string;
+  met: boolean;
+  hint: GenderHint | null;
+}
+export interface GenderSet {
+  language: Language;
+  genders: string[];
+  rules: { suffix: string; gender: string; certainty: "always" | "usually" }[];
+  nouns: GenderNoun[];
+}
+export const getGenders = (language: Language) => api<GenderSet>(`/api/v1/genders?language=${language}`);

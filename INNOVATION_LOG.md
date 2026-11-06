@@ -20,6 +20,7 @@ unreviewed.
 | 7 | Dictation drill (Diktát) | hear a sentence, type it, word-level diff; ungraded practice |
 | 8 | German case lab | build a noun phrase, see which word carries the case signal |
 | 9 | Shadowing studio (Stínování) | listen, repeat aloud, compare rhythm outlines; recordings never leave the browser |
+| 10 | Gender sorter (Rody) | 1-2-3 keyboard sorting with ending rules on a miss, optional 60 s test |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -193,3 +194,25 @@ to practise the melody and rhythm of whole sentences.
   page closes. Without TTS the page says the model is missing and still allows recording.
 - Keyboard: P, R, M, C, H, N. `useRecorder` gained a max-length option; `lib/audio` gained
   `clipSrc`, `playToEnd` and natural-speed playback for own recordings.
+
+## Cycle 10/30: gender sorter (Rody)
+
+**Before:** grammatical gender was only shown next to a word; nothing trained it on its own, and
+the ending patterns that make most genders predictable were never taught.
+
+**Built:** `/genders` for German (der/die/das), French and Italian (m/f), on the dashboard and in
+the palette.
+
+- `app.domain.gender_hints`: the reliable ending rules (-ung/-heit/-keit/-schaft → die always,
+  -chen/-lein → das always, -ling/-ismus → der always, -e → die usually; French -tion/-sion → f,
+  -ment/-age/-eau → m usually; Italian -zione/-tà → f, -o → m and -a → f usually) with a minimum
+  word length, a certainty level, and an exception flag when the lexicon's gender differs.
+  Rules too mixed to teach (French -eur, Italian -e and -ma) are left out on purpose. The
+  lexicon gender stays authoritative; "m/f" nouns are skipped.
+- `GET /api/v1/genders`: the learner's own nouns first, child filter applied.
+- Practice mode (untimed, nothing recorded): keys 1-3 or arrows, gender colours, a correct pick
+  moves on by itself; a miss shows the right gender, the ending rule (or that none exists, or
+  that this word is an exception) and brings the word back three cards later. Optional "only my
+  words" filter. A cheat sheet lists every rule with its certainty.
+- "Test rychlosti 60 s": an explicitly separate timed test (learning stays untimed); the score
+  is not recorded anywhere, only a personal best kept in this browser.

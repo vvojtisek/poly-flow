@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Trophy, Waves } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Shapes, Trophy, Waves } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -124,6 +124,12 @@ export default function HomePage() {
                 <Waves className="size-5" aria-hidden />
                 {cs.shadow.title}
               </Button>
+              {language !== "en" && (
+                <Button variant="secondary" className="col-span-2 w-full" onClick={() => router.push("/genders")}>
+                  <Shapes className="size-5" aria-hidden />
+                  {cs.genders.title}
+                </Button>
+              )}
             </div>
             {progress && (
               <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
