@@ -452,6 +452,7 @@ export const cs = {
       verbs: { title: "Časování", blurb: "Slovesa v přítomném čase: kmen, koncovka, předpona." },
       wordOrder: { title: "Slovosled", blurb: "Poskládej rozházená slova zpátky do věty." },
       clock: { title: "Hodiny", blurb: "Kolik je hodin: čtvrt, půl a tři čtvrtě, jak to říkají jinde." },
+      sounds: { title: "Výslovnost", blurb: "Jak se čtou písmena: ei, sch, ou, gli, th. Se slovy, která znáš." },
       numbers: { title: "Čísla", blurb: "Čísla od nuly do 9999: napsat slovy, poslechnout, přečíst." },
       stories: { title: "Čtení", blurb: "Krátký text jen ze slov, která znáš." },
     } as Record<string, { title: string; blurb: string }>,
@@ -526,6 +527,15 @@ export const cs = {
       it: "Italština: sono le tre e un quarto = 3:15, e mezza = 3:30, le quattro meno un quarto = 3:45; jedna hodina je è l'una.",
       en: "Angličtina (britská): quarter past three = 3:15, half past three = 3:30 (ne „půl třetí“!), quarter to four = 3:45.",
     } as Record<string, string>,
+  },
+  sounds: {
+    title: "Jak se to čte",
+    intro: "Česky čteme skoro písmeno po písmenu. Jinde ne: tady jsou skupiny písmen, které se čtou jinak, s nejbližší českou hláskou a se slovy ze slovníku. Slova, která už znáš, jsou první a dají se přehrát.",
+    unreviewed: "Pravidla jsou zjednodušená a zatím je nezkontroloval rodilý mluvčí. Výjimky existují; „obvykle“ je u pravidel, kde jsou časté.",
+    sounds: "zní jako",
+    noExamples: "Ve slovníku zatím není příklad.",
+    known: "znáš",
+    search: "Hledat písmena…",
   },
   numbers: {
     title: "Čísla",

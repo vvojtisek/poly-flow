@@ -990,3 +990,7 @@ export const clockQuiz = (language: Language, level: "quarters" | "five") =>
   api<{ time: ClockTime; options: ClockTime[]; answer: number }>(`/api/v1/clock/quiz?language=${language}&level=${level}`);
 export const clockAudioUrl = (t: { hour: number; minute: number }, language: Language) =>
   `/api/v1/clock/audio?hour=${t.hour}&minute=${t.minute}&language=${language}`;
+
+export type SoundExample = { id: string; lemma: string; translation: string; start: number; end: number; met: boolean };
+export type SoundRule = { id: string; spelling: string; czech: string; note: string; examples: SoundExample[] };
+export const getSounds = (language: Language) => api<SoundRule[]>(`/api/v1/sounds?language=${language}`);

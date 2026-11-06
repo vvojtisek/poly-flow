@@ -35,6 +35,7 @@ unreviewed.
 | 22 | Telling the time (Kolik je hodin?) | analog clock, everyday spoken forms in four languages, the Czech "čtvrt na" trap as a distractor |
 | 23 | Accent colours (Barva) | five accent hues per profile; same contrast, never green or red, gender colours unchanged |
 | 24 | Focus mode (Soustředění) | lessons and checks without header, tabs or links; key F, remembered per device |
+| 25 | How letters sound (Jak se to čte) | spelling-to-sound rules for Czech readers in four languages, examples from the learner's own words |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -495,3 +496,21 @@ is easily distracted, and every link an exit from the task.
 - "Return to the parent" stays visible on a handed-over device; the command palette (Ctrl+K)
   still works.
 - Remembered per device (local storage, like the slow-audio toggle); other pages are unaffected.
+
+## Cycle 25/30: how letters sound (Jak se to čte)
+
+**Before:** Czech is read almost letter by letter, and nothing in the app told a Czech reader that
+German "ei" is [aj], French "ou" is [u] or Italian "ci" is [č]. Learners met these only one word
+at a time, by ear.
+
+**Built:** `app/domain/sounds.py`, `GET /api/v1/sounds` and the `/sounds` page.
+
+- 60 rules (German 19, French 17, Italian 10, English 14): the spelling, the nearest Czech sound
+  (or "we do not have it": German soft ch, English th, ö, ü, French nasals) and a one-line note.
+- Examples are taken from the lexicon at request time (child filter applied): words the learner
+  has met first, each with the letters highlighted, its meaning and, for met words, its audio.
+- Patterns are conservative on purpose and tested both ways: what must match (euch has a soft
+  ch) and what must not (Schule is not ch, sechs reads ks, ville is an exception, school is k,
+  book is a short u, tomorrow keeps its r).
+- Marked on the page as simplified and not yet reviewed by a native speaker; "obvykle" marks
+  rules with frequent exceptions. Reference only; nothing is recorded.
