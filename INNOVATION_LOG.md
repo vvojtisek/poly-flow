@@ -912,3 +912,15 @@ whole-story action still starts from the first line.
 - Sentence playback remains available separately for replaying just one line. Starting playback
   from a line near the end finishes at the end of the story.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 19/30: combine practice skill filters
+
+**Before:** the practice hub could filter exercises by only one skill at a time, so a learner
+looking for an activity that combines listening and writing had to choose between those goals.
+
+**Built:** the skill picker now supports multiple simultaneous selections. It shows every practice
+mode that covers at least one selected skill, explains that matching rule, and retains a clear
+one-tap reset to all modes.
+
+- The filter remains a discovery aid only; it does not alter learner settings or progress.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

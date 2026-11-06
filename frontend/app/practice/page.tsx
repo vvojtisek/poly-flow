@@ -66,7 +66,7 @@ function Card({ m, tint }: { m: PracticeMode; tint: string }) {
 export default function PracticePage() {
   const me = useRequireMe();
   const { state } = useAuth();
-  const [skill, setSkill] = useState<Skill | null>(null);
+  const [skills, setSkills] = useState<Skill[]>([]);
   const [recent, setRecent] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
@@ -85,7 +85,7 @@ export default function PracticePage() {
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const modes = modesFor(me.acting.active_language);
-  const shown = skill ? modes.filter((m) => m.skills.includes(skill)) : modes;
+  const shown = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
   const recommendations = (weakSpots?.tags ?? [])
@@ -150,17 +150,18 @@ export default function PracticePage() {
           </div>
         )}
 
-        <div className="flex flex-wrap items-center gap-2" role="radiogroup" aria-label={t.filter}>
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t.filter}>
           <span className="text-sm font-medium text-slate-500">{t.filter}</span>
-          <button type="button" role="radio" aria-checked={skill === null} className={chip(skill === null)} onClick={() => setSkill(null)}>
+          <button type="button" aria-pressed={skills.length === 0} className={chip(skills.length === 0)} onClick={() => setSkills([])}>
             {t.all}
           </button>
           {available.map((s) => (
-            <button key={s} type="button" role="radio" aria-checked={skill === s} className={chip(skill === s)} onClick={() => setSkill(s)}>
+            <button key={s} type="button" aria-pressed={skills.includes(s)} className={chip(skills.includes(s))} onClick={() => setSkills((current) => current.includes(s) ? current.filter((item) => item !== s) : [...current, s])}>
               {t.skill[s]}
             </button>
           ))}
         </div>
+        {skills.length > 0 && <p className="-mt-2 text-xs text-slate-500">{t.filterHelp}</p>}
         <p className="text-xs text-slate-500" aria-live="polite">
           {t.count(shown.length)}
         </p>
