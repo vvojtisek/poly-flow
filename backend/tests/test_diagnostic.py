@@ -123,11 +123,12 @@ async def test_strong_learner_reaches_b2_plus_and_unlocks_grammar_and_exams(db, 
     assert res["level"] == "B2+" and res["next"] is None
     assert res["exams_opened"] == ["A1", "A2", "B1", "B2"]
     rows = await grammar_rows()
-    assert len(rows) == 30 and res["grammar_queued"] == 30
+    units = len(read_grammar_pack(GRAMMAR).units)
+    assert len(rows) == units and res["grammar_queued"] == units
     assert all(p.studied_by == "placement" and p.next_review_at is not None for p in rows.values())
     # The units wait in the grammar check right away.
     r = await client.get("/api/v1/grammar?language=de")
-    assert r.json()["due"] == 30
+    assert r.json()["due"] == units
     async for db_ in get_session():
         placed = await db_.get(CefrPlacement, (uuid.UUID(me["acting"]["id"]), "de"))
         assert placed.level.value == "C1"

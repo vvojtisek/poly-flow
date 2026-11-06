@@ -2,9 +2,9 @@
   "language": "en",
   "source": "polyflow-curated",
   "license": "CC0-1.0",
-  "revision": "english-grammar-v1",
+  "revision": "english-grammar-v2",
   "review_status": "unreviewed",
-  "note": "Six introductory English grammar units, one per CEFR band. Draft content; examples distinguish UK and US usage where it differs. Not a complete CEFR grammar syllabus.",
+  "note": "British English grammar explained in Czech. A1 and A2 form a complete draft syllabus (units added 2026-11-06, drafted by Claude); B1-C2 have one introductory unit each and do not claim full CEFR coverage. Examples distinguish UK and US usage where it differs. Not yet reviewed by an English teacher or a native Czech speaker.",
   "units": [
     {
       "id": "en-a1-basic-word-order",
@@ -88,11 +88,2392 @@
       "objective": "Vytvoříš oznamovací větu a otázku se slovesem be podle správného slovosledu."
     },
     {
+      "id": "en-a1-to-be",
+      "level": "A1",
+      "title": "Já jsem, ty jsi: sloveso to be",
+      "summary": "Řekneš, kdo jsi, odkud jsi a jaký jsi.",
+      "notes": [
+        {
+          "heading": "Tvary slovesa be",
+          "text": "Sloveso **be** (být) má v přítomném čase tři tvary. Zájmeno se nevynechává: „jsem unavený“ je **I am tired**. V mluvené řeči se tvary zkracují: **I'm, you're, he's, we're, they're**.",
+          "table": [
+            [
+              "zájmeno",
+              "plný tvar",
+              "zkrácený"
+            ],
+            [
+              "I",
+              "am",
+              "I'm"
+            ],
+            [
+              "you",
+              "are",
+              "you're"
+            ],
+            [
+              "he / she / it",
+              "is",
+              "he's / she's / it's"
+            ],
+            [
+              "we",
+              "are",
+              "we're"
+            ],
+            [
+              "they",
+              "are",
+              "they're"
+            ]
+          ]
+        },
+        {
+          "heading": "Zápor a otázka",
+          "text": "Zápor: **not** za slovesem (**I'm not, he isn't, they aren't**). Otázka: sloveso před podmět: **Are you Czech?** Krátká odpověď: **Yes, I am. / No, I'm not.**"
+        },
+        {
+          "heading": "you",
+          "text": "**you** znamená ty, vy i Vy. Vykání angličtina nemá."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I'm Czech.",
+          "cs": "Jsem Čech."
+        },
+        {
+          "text": "We are in London.",
+          "cs": "Jsme v Londýně."
+        },
+        {
+          "text": "Is she a doctor?",
+          "cs": "Je lékařka?"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-to-be-01",
+          "kind": "choice",
+          "prompt": "I ___ tired.",
+          "prompt_cs": "Jsem unavený.",
+          "options": [
+            "am",
+            "is",
+            "are",
+            "be"
+          ],
+          "answers": [
+            "am"
+          ],
+          "explain": "I → am."
+        },
+        {
+          "id": "en-a1-to-be-02",
+          "kind": "choice",
+          "prompt": "They ___ from Prague.",
+          "prompt_cs": "Jsou z Prahy.",
+          "options": [
+            "are",
+            "is",
+            "am",
+            "be"
+          ],
+          "answers": [
+            "are"
+          ],
+          "explain": "they → are."
+        },
+        {
+          "id": "en-a1-to-be-03",
+          "kind": "gap",
+          "prompt": "She ___ my sister. (be)",
+          "prompt_cs": "Je to moje sestra.",
+          "answers": [
+            "is",
+            "'s"
+          ],
+          "explain": "he / she / it → is."
+        },
+        {
+          "id": "en-a1-to-be-04",
+          "kind": "gap",
+          "prompt": "We ___ not at home. (be)",
+          "prompt_cs": "Nejsme doma.",
+          "answers": [
+            "are"
+          ],
+          "explain": "we → are; zápor not stojí za slovesem."
+        },
+        {
+          "id": "en-a1-to-be-05",
+          "kind": "choice",
+          "prompt": "___ you a teacher?",
+          "prompt_cs": "Jste učitel?",
+          "options": [
+            "Are",
+            "Is",
+            "Am",
+            "Be"
+          ],
+          "answers": [
+            "Are"
+          ],
+          "explain": "V otázce stojí sloveso před podmětem: Are you…?"
+        },
+        {
+          "id": "en-a1-to-be-06",
+          "kind": "order",
+          "prompt": "Je to můj bratr.",
+          "tokens": [
+            "brother",
+            "is",
+            "my",
+            "he"
+          ],
+          "answers": [
+            "He is my brother"
+          ],
+          "explain": "Podmět, sloveso, zbytek věty."
+        },
+        {
+          "id": "en-a1-to-be-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Nejsem unavený.",
+          "answers": [
+            "I'm not tired",
+            "I am not tired"
+          ],
+          "explain": "I am not = I'm not."
+        },
+        {
+          "id": "en-a1-to-be-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "They aren't at school.",
+          "answers": [
+            "Nejsou ve škole",
+            "Oni nejsou ve škole"
+          ],
+          "explain": "aren't = are not."
+        }
+      ],
+      "objective": "Doplníš správný tvar am, is, are v kladné větě, záporu i otázce."
+    },
+    {
+      "id": "en-a1-have-got",
+      "level": "A1",
+      "title": "Mít: have got a have",
+      "summary": "Řekneš, co máš a co nemáš.",
+      "notes": [
+        {
+          "heading": "have got",
+          "text": "V britské angličtině se vlastnictví často vyjadřuje **have got**: **I've got a dog. She's got two brothers.** Ve 3. osobě **has got**.",
+          "table": [
+            [
+              "",
+              "kladně",
+              "záporně",
+              "otázka"
+            ],
+            [
+              "I / you / we / they",
+              "have got ('ve got)",
+              "haven't got",
+              "Have you got…?"
+            ],
+            [
+              "he / she / it",
+              "has got ('s got)",
+              "hasn't got",
+              "Has she got…?"
+            ]
+          ]
+        },
+        {
+          "heading": "have",
+          "text": "Stejný význam má **have** se pomocným **do**: **I have a car. Do you have a car? I don't have a car.**"
+        },
+        {
+          "heading": "Věk",
+          "text": "Věk se neříká slovesem mít, ale **be**: **I'm ten.** (Je mi deset.)"
+        }
+      ],
+      "examples": [
+        {
+          "text": "I've got a cat.",
+          "cs": "Mám kočku."
+        },
+        {
+          "text": "Have you got a pen?",
+          "cs": "Máš propisku?"
+        },
+        {
+          "text": "He hasn't got a car.",
+          "cs": "Nemá auto."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-have-got-01",
+          "kind": "choice",
+          "prompt": "She ___ got two children.",
+          "prompt_cs": "Má dvě děti.",
+          "options": [
+            "has",
+            "have",
+            "is",
+            "does"
+          ],
+          "answers": [
+            "has"
+          ],
+          "explain": "he / she / it → has got."
+        },
+        {
+          "id": "en-a1-have-got-02",
+          "kind": "choice",
+          "prompt": "___ you got a minute?",
+          "prompt_cs": "Máš chvilku?",
+          "options": [
+            "Have",
+            "Has",
+            "Do",
+            "Are"
+          ],
+          "answers": [
+            "Have"
+          ],
+          "explain": "Otázka: Have + podmět + got."
+        },
+        {
+          "id": "en-a1-have-got-03",
+          "kind": "gap",
+          "prompt": "We ___ got a garden. (zápor)",
+          "prompt_cs": "Nemáme zahradu.",
+          "answers": [
+            "haven't"
+          ],
+          "explain": "Zápor: haven't got."
+        },
+        {
+          "id": "en-a1-have-got-04",
+          "kind": "choice",
+          "prompt": "Do you ___ a bike?",
+          "prompt_cs": "Máš kolo?",
+          "options": [
+            "have",
+            "has",
+            "got",
+            "having"
+          ],
+          "answers": [
+            "have"
+          ],
+          "explain": "Po do stojí základní tvar have."
+        },
+        {
+          "id": "en-a1-have-got-05",
+          "kind": "choice",
+          "prompt": "I ___ twelve.",
+          "prompt_cs": "Je mi dvanáct.",
+          "options": [
+            "am",
+            "have",
+            "have got",
+            "is"
+          ],
+          "answers": [
+            "am"
+          ],
+          "explain": "Věk se vyjadřuje slovesem be."
+        },
+        {
+          "id": "en-a1-have-got-06",
+          "kind": "order",
+          "prompt": "Mám dvě sestry.",
+          "tokens": [
+            "sisters",
+            "got",
+            "I've",
+            "two"
+          ],
+          "answers": [
+            "I've got two sisters"
+          ],
+          "explain": "I've got + předmět."
+        },
+        {
+          "id": "en-a1-have-got-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Nemá auto.",
+          "answers": [
+            "He hasn't got a car",
+            "She hasn't got a car",
+            "He doesn't have a car",
+            "She doesn't have a car",
+            "He has not got a car",
+            "She has not got a car"
+          ],
+          "explain": "has got → hasn't got; nebo doesn't have."
+        },
+        {
+          "id": "en-a1-have-got-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Have you got any brothers?",
+          "answers": [
+            "Máš nějaké bratry",
+            "Máš bratry",
+            "Máte bratry",
+            "Máte nějaké bratry"
+          ],
+          "explain": "have got = mít."
+        }
+      ],
+      "objective": "Vytvoříš kladnou větu, zápor a otázku s have got i s do you have."
+    },
+    {
+      "id": "en-a1-present-simple",
+      "level": "A1",
+      "title": "Přítomný čas prostý",
+      "summary": "Popíšeš, co obvykle děláš a co platí stále.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "Základní tvar slovesa, jen ve 3. osobě jednotného čísla (he, she, it) se přidává **-s**: **I work → she works**. Po -s, -sh, -ch, -x, -o **-es** (watches, goes), po souhlásce + y **-ies** (study → studies). **have → has**."
+        },
+        {
+          "heading": "Kdy",
+          "text": "Pro zvyky, opakované děje a stálé pravdy: **I get up at seven. Water boils at 100 degrees.** Často se slovy **always, usually, often, sometimes, never, every day**."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I live in Brno.",
+          "cs": "Bydlím v Brně."
+        },
+        {
+          "text": "She speaks English.",
+          "cs": "Mluví anglicky."
+        },
+        {
+          "text": "My dad watches football.",
+          "cs": "Táta se dívá na fotbal."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-present-simple-01",
+          "kind": "choice",
+          "prompt": "He ___ in a bank.",
+          "prompt_cs": "Pracuje v bance.",
+          "options": [
+            "works",
+            "work",
+            "working",
+            "is work"
+          ],
+          "answers": [
+            "works"
+          ],
+          "explain": "he → -s."
+        },
+        {
+          "id": "en-a1-present-simple-02",
+          "kind": "choice",
+          "prompt": "We ___ to school by bus.",
+          "prompt_cs": "Jezdíme do školy autobusem.",
+          "options": [
+            "go",
+            "goes",
+            "going",
+            "gos"
+          ],
+          "answers": [
+            "go"
+          ],
+          "explain": "we → základní tvar."
+        },
+        {
+          "id": "en-a1-present-simple-03",
+          "kind": "gap",
+          "prompt": "She ___ TV every evening. (watch)",
+          "prompt_cs": "Každý večer se dívá na televizi.",
+          "answers": [
+            "watches"
+          ],
+          "explain": "Po -ch se přidává -es."
+        },
+        {
+          "id": "en-a1-present-simple-04",
+          "kind": "gap",
+          "prompt": "My brother ___ history. (study)",
+          "prompt_cs": "Můj bratr studuje dějepis.",
+          "answers": [
+            "studies"
+          ],
+          "explain": "souhláska + y → -ies."
+        },
+        {
+          "id": "en-a1-present-simple-05",
+          "kind": "gap",
+          "prompt": "It ___ a lot in Wales. (rain)",
+          "prompt_cs": "Ve Walesu hodně prší.",
+          "answers": [
+            "rains"
+          ],
+          "explain": "it → -s."
+        },
+        {
+          "id": "en-a1-present-simple-06",
+          "kind": "order",
+          "prompt": "Obvykle vstávám v sedm.",
+          "tokens": [
+            "get",
+            "seven",
+            "usually",
+            "I",
+            "up",
+            "at"
+          ],
+          "answers": [
+            "I usually get up at seven"
+          ],
+          "explain": "Příslovce četnosti stojí před plnovýznamovým slovesem."
+        },
+        {
+          "id": "en-a1-present-simple-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Mluví česky a anglicky.",
+          "answers": [
+            "She speaks Czech and English",
+            "He speaks Czech and English",
+            "They speak Czech and English"
+          ],
+          "explain": "he / she → speaks."
+        },
+        {
+          "id": "en-a1-present-simple-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "My mum drinks tea every morning.",
+          "answers": [
+            "Moje máma pije každé ráno čaj",
+            "Máma pije každé ráno čaj",
+            "Moje maminka pije každé ráno čaj"
+          ],
+          "explain": "drinks = pije (zvyk)."
+        }
+      ],
+      "objective": "Přidáš ve 3. osobě koncovku -s / -es / -ies a správně umístíš příslovce četnosti."
+    },
+    {
+      "id": "en-a1-do-does",
+      "level": "A1",
+      "title": "Zápor a otázka s do, does",
+      "summary": "Zeptáš se, co kdo dělá, a řekneš, co neděláš.",
+      "notes": [
+        {
+          "heading": "Pomocné sloveso do",
+          "text": "V přítomném čase prostém se zápor a otázka tvoří pomocí **do / does**. Hlavní sloveso je pak v základním tvaru (bez -s).",
+          "table": [
+            [
+              "",
+              "zápor",
+              "otázka"
+            ],
+            [
+              "I / you / we / they",
+              "I don't like",
+              "Do you like…?"
+            ],
+            [
+              "he / she / it",
+              "she doesn't like",
+              "Does she like…?"
+            ]
+          ]
+        },
+        {
+          "heading": "Pozor na -s",
+          "text": "-s se objeví jen jednou: **She likes → She doesn't like → Does she like?** (nikdy doesn't likes)."
+        },
+        {
+          "heading": "Tázací slova",
+          "text": "**What, Where, When, Why, How, Who**: **Where do you live? What does he do?** (Čím se živí?)"
+        }
+      ],
+      "examples": [
+        {
+          "text": "I don't eat meat.",
+          "cs": "Nejím maso."
+        },
+        {
+          "text": "Do you speak English?",
+          "cs": "Mluvíš anglicky?"
+        },
+        {
+          "text": "Where does she work?",
+          "cs": "Kde pracuje?"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-do-does-01",
+          "kind": "choice",
+          "prompt": "___ you like coffee?",
+          "prompt_cs": "Máš rád kávu?",
+          "options": [
+            "Do",
+            "Does",
+            "Are",
+            "Is"
+          ],
+          "answers": [
+            "Do"
+          ],
+          "explain": "you → Do."
+        },
+        {
+          "id": "en-a1-do-does-02",
+          "kind": "choice",
+          "prompt": "She ___ live here.",
+          "prompt_cs": "Nebydlí tady.",
+          "options": [
+            "doesn't",
+            "don't",
+            "isn't",
+            "not"
+          ],
+          "answers": [
+            "doesn't"
+          ],
+          "explain": "she → doesn't."
+        },
+        {
+          "id": "en-a1-do-does-03",
+          "kind": "choice",
+          "prompt": "Does he ___ football?",
+          "prompt_cs": "Hraje fotbal?",
+          "options": [
+            "play",
+            "plays",
+            "playing",
+            "played"
+          ],
+          "answers": [
+            "play"
+          ],
+          "explain": "Po does stojí základní tvar."
+        },
+        {
+          "id": "en-a1-do-does-04",
+          "kind": "gap",
+          "prompt": "Where ___ they live?",
+          "prompt_cs": "Kde bydlí?",
+          "answers": [
+            "do"
+          ],
+          "explain": "they → do."
+        },
+        {
+          "id": "en-a1-do-does-05",
+          "kind": "gap",
+          "prompt": "My cat ___ like milk. (zápor)",
+          "prompt_cs": "Moje kočka nemá ráda mléko.",
+          "answers": [
+            "doesn't",
+            "does not"
+          ],
+          "explain": "it → doesn't."
+        },
+        {
+          "id": "en-a1-do-does-06",
+          "kind": "order",
+          "prompt": "Co děláš o víkendu?",
+          "tokens": [
+            "do",
+            "what",
+            "at",
+            "weekend",
+            "the",
+            "you",
+            "do"
+          ],
+          "answers": [
+            "What do you do at the weekend"
+          ],
+          "explain": "Tázací slovo + do + podmět + sloveso; britsky at the weekend."
+        },
+        {
+          "id": "en-a1-do-does-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Nerozumím.",
+          "answers": [
+            "I don't understand",
+            "I do not understand"
+          ],
+          "explain": "Zápor: don't + základní tvar."
+        },
+        {
+          "id": "en-a1-do-does-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Does your brother play the guitar?",
+          "answers": [
+            "Hraje tvůj bratr na kytaru",
+            "Hraje tvůj brácha na kytaru",
+            "Hraje váš bratr na kytaru"
+          ],
+          "explain": "Does + podmět + základní tvar."
+        }
+      ],
+      "objective": "Vytvoříš otázku a zápor s do / does a hlavní sloveso necháš bez -s."
+    },
+    {
+      "id": "en-a1-present-continuous",
+      "level": "A1",
+      "title": "Přítomný čas průběhový",
+      "summary": "Řekneš, co se děje právě teď.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**am / is / are + sloveso s -ing**: **I'm reading. She's working.** Pravopis: koncové -e odpadá (make → making), krátká slabika zdvojí souhlásku (sit → sitting, run → running)."
+        },
+        {
+          "heading": "Prostý × průběhový",
+          "text": "**I work in Brno.** (obecně) × **I'm working now.** (právě teď). Některá slovesa se v průběhovém tvaru nepoužívají: **like, love, want, know, understand, need**: **I want a drink** (ne I'm wanting)."
+        }
+      ],
+      "examples": [
+        {
+          "text": "What are you doing?",
+          "cs": "Co děláš?"
+        },
+        {
+          "text": "It's raining.",
+          "cs": "Prší."
+        },
+        {
+          "text": "They're watching a film.",
+          "cs": "Dívají se na film."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-present-continuous-01",
+          "kind": "choice",
+          "prompt": "Look! It ___.",
+          "prompt_cs": "Podívej, sněží!",
+          "options": [
+            "'s snowing",
+            "snows",
+            "snowing",
+            "is snow"
+          ],
+          "answers": [
+            "'s snowing"
+          ],
+          "explain": "Děj probíhá právě teď → průběhový čas."
+        },
+        {
+          "id": "en-a1-present-continuous-02",
+          "kind": "choice",
+          "prompt": "I ___ to music now.",
+          "prompt_cs": "Teď poslouchám hudbu.",
+          "options": [
+            "am listening",
+            "listen",
+            "listening",
+            "listens"
+          ],
+          "answers": [
+            "am listening"
+          ],
+          "explain": "now → am + -ing."
+        },
+        {
+          "id": "en-a1-present-continuous-03",
+          "kind": "gap",
+          "prompt": "She is ___ a letter. (write)",
+          "prompt_cs": "Píše dopis.",
+          "answers": [
+            "writing"
+          ],
+          "explain": "write → writing (e odpadá)."
+        },
+        {
+          "id": "en-a1-present-continuous-04",
+          "kind": "gap",
+          "prompt": "They are ___ in the park. (run)",
+          "prompt_cs": "Běhají v parku.",
+          "answers": [
+            "running"
+          ],
+          "explain": "run → running (zdvojí se n)."
+        },
+        {
+          "id": "en-a1-present-continuous-05",
+          "kind": "choice",
+          "prompt": "I ___ the answer.",
+          "prompt_cs": "Znám odpověď.",
+          "options": [
+            "know",
+            "am knowing",
+            "knowing",
+            "knows"
+          ],
+          "answers": [
+            "know"
+          ],
+          "explain": "know se v průběhovém tvaru nepoužívá."
+        },
+        {
+          "id": "en-a1-present-continuous-06",
+          "kind": "order",
+          "prompt": "Co děláš?",
+          "tokens": [
+            "doing",
+            "are",
+            "what",
+            "you"
+          ],
+          "answers": [
+            "What are you doing"
+          ],
+          "explain": "Tázací slovo + are + podmět + -ing."
+        },
+        {
+          "id": "en-a1-present-continuous-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Právě vaříme večeři.",
+          "answers": [
+            "We're cooking dinner",
+            "We are cooking dinner",
+            "We're making dinner",
+            "We are making dinner",
+            "We're cooking dinner now",
+            "We are cooking dinner now"
+          ],
+          "explain": "we → are + -ing."
+        },
+        {
+          "id": "en-a1-present-continuous-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "The baby is sleeping.",
+          "answers": [
+            "Miminko spí",
+            "Dítě spí"
+          ],
+          "explain": "Průběhový čas: děj probíhá teď."
+        }
+      ],
+      "objective": "Rozlišíš děj právě teď (am / is / are + -ing) od obecného přítomného času."
+    },
+    {
+      "id": "en-a1-articles",
+      "level": "A1",
+      "title": "Členy: a, an, the",
+      "summary": "Použiješ člen a, an, the, nebo žádný.",
+      "notes": [
+        {
+          "heading": "a / an",
+          "text": "Neurčitý člen před počitatelným podstatným jménem v jednotném čísle, když je nové nebo jedno z mnoha. **an** stojí před samohláskovou **výslovností**: **an apple, an hour**, ale **a university** (čte se [ju:])."
+        },
+        {
+          "heading": "the",
+          "text": "Určitý člen označuje něco známého nebo jedinečného: **I've got a dog. The dog is black. The sun, the sea.**"
+        },
+        {
+          "heading": "Bez členu",
+          "text": "Bez členu se mluví obecně o množném čísle a nepočitatelných věcech: **I like cats. Milk is good for you.** Také **at home, at school, by bus, on Monday**. U povolání se člen píše: **She's a nurse.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "I've got an idea.",
+          "cs": "Mám nápad."
+        },
+        {
+          "text": "The cat is under the table.",
+          "cs": "Kočka je pod stolem."
+        },
+        {
+          "text": "Children love animals.",
+          "cs": "Děti mají rády zvířata."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-articles-01",
+          "kind": "choice",
+          "prompt": "She's ___ engineer.",
+          "prompt_cs": "Je inženýrka.",
+          "options": [
+            "an",
+            "a",
+            "the",
+            "–"
+          ],
+          "answers": [
+            "an"
+          ],
+          "explain": "engineer začíná samohláskou → an; u povolání se člen píše."
+        },
+        {
+          "id": "en-a1-articles-02",
+          "kind": "choice",
+          "prompt": "I wait for ___ hour.",
+          "prompt_cs": "Čekám hodinu.",
+          "options": [
+            "an",
+            "a",
+            "the",
+            "–"
+          ],
+          "answers": [
+            "an"
+          ],
+          "explain": "h v hour se nečte, slovo začíná samohláskou."
+        },
+        {
+          "id": "en-a1-articles-03",
+          "kind": "choice",
+          "prompt": "___ moon is bright tonight.",
+          "prompt_cs": "Měsíc dnes v noci jasně svítí.",
+          "options": [
+            "The",
+            "A",
+            "An",
+            "–"
+          ],
+          "answers": [
+            "The"
+          ],
+          "explain": "Jedinečná věc → the."
+        },
+        {
+          "id": "en-a1-articles-04",
+          "kind": "choice",
+          "prompt": "I like ___ dogs.",
+          "prompt_cs": "Mám rád psy.",
+          "options": [
+            "–",
+            "the",
+            "a",
+            "an"
+          ],
+          "answers": [
+            "–"
+          ],
+          "explain": "Obecně v množném čísle → bez členu."
+        },
+        {
+          "id": "en-a1-articles-05",
+          "kind": "choice",
+          "prompt": "He goes to work by ___ bus.",
+          "prompt_cs": "Jezdí do práce autobusem.",
+          "options": [
+            "–",
+            "a",
+            "the",
+            "an"
+          ],
+          "answers": [
+            "–"
+          ],
+          "explain": "by + dopravní prostředek je bez členu (– = žádný člen)."
+        },
+        {
+          "id": "en-a1-articles-06",
+          "kind": "gap",
+          "prompt": "I bought a book. ___ book is great.",
+          "prompt_cs": "Koupil jsem knihu. Ta kniha je skvělá.",
+          "answers": [
+            "The"
+          ],
+          "explain": "Podruhé už je kniha známá → the."
+        },
+        {
+          "id": "en-a1-articles-07",
+          "kind": "order",
+          "prompt": "Máme psa a kočku.",
+          "tokens": [
+            "a",
+            "dog",
+            "a",
+            "we've",
+            "cat",
+            "and",
+            "got"
+          ],
+          "answers": [
+            "We've got a dog and a cat"
+          ],
+          "explain": "Každé podstatné jméno v jednotném čísle má svůj člen."
+        },
+        {
+          "id": "en-a1-articles-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Je to univerzita.",
+          "answers": [
+            "It's a university",
+            "It is a university"
+          ],
+          "explain": "university se čte [ju:] → a."
+        }
+      ],
+      "objective": "Vybereš a, an, the, nebo žádný člen podle výslovnosti a toho, zda je věc známá."
+    },
+    {
+      "id": "en-a1-plurals-possessive",
+      "level": "A1",
+      "title": "Množné číslo a přivlastnění",
+      "summary": "Utvoříš množné číslo a řekneš, čí co je: my, your, Tom's.",
+      "notes": [
+        {
+          "heading": "Množné číslo",
+          "text": "Většinou **-s**; po -s, -sh, -ch, -x **-es** (bus → buses); souhláska + y → **-ies** (city → cities). Nepravidelné:",
+          "table": [
+            [
+              "jednotné",
+              "množné"
+            ],
+            [
+              "man",
+              "men"
+            ],
+            [
+              "woman",
+              "women"
+            ],
+            [
+              "child",
+              "children"
+            ],
+            [
+              "person",
+              "people"
+            ],
+            [
+              "foot",
+              "feet"
+            ],
+            [
+              "tooth",
+              "teeth"
+            ],
+            [
+              "mouse",
+              "mice"
+            ]
+          ]
+        },
+        {
+          "heading": "Přivlastňovací zájmena",
+          "text": "**my, your, his, her, its, our, their**. Nemění se podle věci: **my brother, my sisters**. Pozor: **its** (jeho, o věci) × **it's** (= it is)."
+        },
+        {
+          "heading": "Přivlastňovací 's",
+          "text": "U osob: **Tom's car** (Tomovo auto), **my parents' house** (dům mých rodičů, za -s jen apostrof), **the children's toys**."
+        }
+      ],
+      "examples": [
+        {
+          "text": "Their children are lovely.",
+          "cs": "Jejich děti jsou milé."
+        },
+        {
+          "text": "This is Anna's bag.",
+          "cs": "To je Annina taška."
+        },
+        {
+          "text": "My feet hurt.",
+          "cs": "Bolí mě nohy."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-plurals-possessive-01",
+          "kind": "choice",
+          "prompt": "Two ___ are waiting.",
+          "prompt_cs": "Čekají dvě ženy.",
+          "options": [
+            "women",
+            "womans",
+            "woman",
+            "womens"
+          ],
+          "answers": [
+            "women"
+          ],
+          "explain": "woman → women."
+        },
+        {
+          "id": "en-a1-plurals-possessive-02",
+          "kind": "choice",
+          "prompt": "Where are ___ keys? (tvoje)",
+          "prompt_cs": "Kde máš klíče?",
+          "options": [
+            "your",
+            "you",
+            "yours",
+            "you're"
+          ],
+          "answers": [
+            "your"
+          ],
+          "explain": "tvůj = your."
+        },
+        {
+          "id": "en-a1-plurals-possessive-03",
+          "kind": "choice",
+          "prompt": "This is ___ house. (jejich)",
+          "prompt_cs": "To je jejich dům.",
+          "options": [
+            "their",
+            "there",
+            "they're",
+            "them"
+          ],
+          "answers": [
+            "their"
+          ],
+          "explain": "jejich = their."
+        },
+        {
+          "id": "en-a1-plurals-possessive-04",
+          "kind": "gap",
+          "prompt": "Two ___ please. (coffee)",
+          "prompt_cs": "Dvě kávy, prosím.",
+          "answers": [
+            "coffees"
+          ],
+          "explain": "coffee → coffees."
+        },
+        {
+          "id": "en-a1-plurals-possessive-05",
+          "kind": "gap",
+          "prompt": "It's ___ bike. (Peter)",
+          "prompt_cs": "Je to Petrovo kolo.",
+          "answers": [
+            "Peter's"
+          ],
+          "explain": "Přivlastnění u osob: 's."
+        },
+        {
+          "id": "en-a1-plurals-possessive-06",
+          "kind": "gap",
+          "prompt": "I've got three ___. (baby)",
+          "prompt_cs": "Mám tři miminka.",
+          "answers": [
+            "babies"
+          ],
+          "explain": "souhláska + y → -ies."
+        },
+        {
+          "id": "en-a1-plurals-possessive-07",
+          "kind": "order",
+          "prompt": "To je auto mého otce.",
+          "tokens": [
+            "is",
+            "car",
+            "my",
+            "this",
+            "father's"
+          ],
+          "answers": [
+            "This is my father's car"
+          ],
+          "explain": "father's car = otcovo auto."
+        },
+        {
+          "id": "en-a1-plurals-possessive-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Lidé jsou milí.",
+          "answers": [
+            "People are nice",
+            "The people are nice",
+            "People are kind",
+            "The people are kind"
+          ],
+          "explain": "person → people."
+        }
+      ],
+      "objective": "Utvoříš pravidelné i nepravidelné množné číslo a použiješ my, your, their a 's."
+    },
+    {
+      "id": "en-a1-there-is",
+      "level": "A1",
+      "title": "There is, there are",
+      "summary": "Řekneš, co kde je.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**There is** (there's) + jednotné číslo, **There are** + množné číslo: **There's a bank near here. There are two cafés.** Česky: Je tu…, Jsou tam…"
+        },
+        {
+          "heading": "Zápor a otázka",
+          "text": "**There isn't a … / There aren't any …** **Is there a …? Are there any …?**"
+        },
+        {
+          "heading": "some a any",
+          "text": "V kladné větě **some** (nějaké), v záporu a otázce **any**: **There are some apples. Are there any eggs?**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "There's a park near my house.",
+          "cs": "Blízko mého domu je park."
+        },
+        {
+          "text": "Are there any shops here?",
+          "cs": "Jsou tady nějaké obchody?"
+        },
+        {
+          "text": "There aren't any eggs.",
+          "cs": "Nejsou tu žádná vejce."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-there-is-01",
+          "kind": "choice",
+          "prompt": "There ___ a cat in the garden.",
+          "prompt_cs": "Na zahradě je kočka.",
+          "options": [
+            "is",
+            "are",
+            "be",
+            "has"
+          ],
+          "answers": [
+            "is"
+          ],
+          "explain": "Jednotné číslo → there is."
+        },
+        {
+          "id": "en-a1-there-is-02",
+          "kind": "choice",
+          "prompt": "There ___ three bedrooms.",
+          "prompt_cs": "Jsou tam tři ložnice.",
+          "options": [
+            "are",
+            "is",
+            "have",
+            "be"
+          ],
+          "answers": [
+            "are"
+          ],
+          "explain": "Množné číslo → there are."
+        },
+        {
+          "id": "en-a1-there-is-03",
+          "kind": "choice",
+          "prompt": "Are there ___ biscuits?",
+          "prompt_cs": "Jsou tu nějaké sušenky?",
+          "options": [
+            "any",
+            "some",
+            "a",
+            "an"
+          ],
+          "answers": [
+            "any"
+          ],
+          "explain": "V otázce → any."
+        },
+        {
+          "id": "en-a1-there-is-04",
+          "kind": "gap",
+          "prompt": "___ there a bank near here?",
+          "prompt_cs": "Je tu blízko banka?",
+          "answers": [
+            "Is"
+          ],
+          "explain": "Otázka: Is there…?"
+        },
+        {
+          "id": "en-a1-there-is-05",
+          "kind": "gap",
+          "prompt": "There aren't ___ chairs.",
+          "prompt_cs": "Nejsou tu žádné židle.",
+          "answers": [
+            "any"
+          ],
+          "explain": "V záporu → any."
+        },
+        {
+          "id": "en-a1-there-is-06",
+          "kind": "order",
+          "prompt": "V kuchyni je stůl.",
+          "tokens": [
+            "kitchen",
+            "a",
+            "there's",
+            "table",
+            "the",
+            "in"
+          ],
+          "answers": [
+            "There's a table in the kitchen"
+          ],
+          "explain": "There's + předmět + místo."
+        },
+        {
+          "id": "en-a1-there-is-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Je tu problém.",
+          "answers": [
+            "There's a problem",
+            "There is a problem"
+          ],
+          "explain": "there is = je (tu)."
+        },
+        {
+          "id": "en-a1-there-is-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "There are some apples on the table.",
+          "answers": [
+            "Na stole jsou nějaká jablka",
+            "Na stole jsou jablka"
+          ],
+          "explain": "some = nějaké."
+        }
+      ],
+      "objective": "Použiješ there is / there are a some / any v kladné větě, záporu a otázce."
+    },
+    {
+      "id": "en-a1-can",
+      "level": "A1",
+      "title": "Can: umět a moci",
+      "summary": "Řekneš, co umíš a co můžeš, a zdvořile o něco požádáš.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**can** má pro všechny osoby stejný tvar a po něm stojí základní tvar slovesa bez to: **She can swim.** Zápor **can't** (cannot). Otázka: **Can you…?**"
+        },
+        {
+          "heading": "Významy",
+          "text": "Schopnost (umím), možnost (můžu) i dovolení: **Can I open the window?** Zdvořileji **Could you help me?**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "I can speak three languages.",
+          "cs": "Mluvím třemi jazyky."
+        },
+        {
+          "text": "Can you help me?",
+          "cs": "Můžeš mi pomoct?"
+        },
+        {
+          "text": "She can't swim.",
+          "cs": "Neumí plavat."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-can-01",
+          "kind": "choice",
+          "prompt": "He can ___ the piano.",
+          "prompt_cs": "Umí hrát na klavír.",
+          "options": [
+            "play",
+            "plays",
+            "to play",
+            "playing"
+          ],
+          "answers": [
+            "play"
+          ],
+          "explain": "Po can stojí základní tvar bez to."
+        },
+        {
+          "id": "en-a1-can-02",
+          "kind": "choice",
+          "prompt": "___ I sit here?",
+          "prompt_cs": "Můžu si sem sednout?",
+          "options": [
+            "Can",
+            "Do",
+            "Am",
+            "Does"
+          ],
+          "answers": [
+            "Can"
+          ],
+          "explain": "Prosba o dovolení: Can I…?"
+        },
+        {
+          "id": "en-a1-can-03",
+          "kind": "gap",
+          "prompt": "I ___ find my keys. (zápor)",
+          "prompt_cs": "Nemůžu najít klíče.",
+          "answers": [
+            "can't",
+            "cannot"
+          ],
+          "explain": "Zápor: can't."
+        },
+        {
+          "id": "en-a1-can-04",
+          "kind": "choice",
+          "prompt": "___ you open the door, please?",
+          "prompt_cs": "Mohl byste prosím otevřít dveře?",
+          "options": [
+            "Could",
+            "Do",
+            "Are",
+            "Does"
+          ],
+          "answers": [
+            "Could"
+          ],
+          "explain": "Zdvořilá prosba: Could you…?"
+        },
+        {
+          "id": "en-a1-can-05",
+          "kind": "gap",
+          "prompt": "She ___ ride a bike. (can)",
+          "prompt_cs": "Umí jezdit na kole.",
+          "answers": [
+            "can"
+          ],
+          "explain": "can má ve všech osobách stejný tvar."
+        },
+        {
+          "id": "en-a1-can-06",
+          "kind": "order",
+          "prompt": "Umíš plavat?",
+          "tokens": [
+            "swim",
+            "can",
+            "you"
+          ],
+          "answers": [
+            "Can you swim"
+          ],
+          "explain": "Otázka: Can + podmět + sloveso."
+        },
+        {
+          "id": "en-a1-can-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Neumím vařit.",
+          "answers": [
+            "I can't cook",
+            "I cannot cook"
+          ],
+          "explain": "can't + základní tvar."
+        },
+        {
+          "id": "en-a1-can-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Can I have a glass of water?",
+          "answers": [
+            "Můžu dostat sklenici vody",
+            "Můžu si dát sklenici vody",
+            "Mohl bych dostat sklenici vody"
+          ],
+          "explain": "Can I have…? = Můžu dostat…?"
+        }
+      ],
+      "objective": "Použiješ can / can't se základním tvarem slovesa a zdvořile požádáš s could."
+    },
+    {
+      "id": "en-a1-demonstratives-pronouns",
+      "level": "A1",
+      "title": "This, that a osobní zájmena v předmětu",
+      "summary": "Ukážeš na věci a správně použiješ me, him, her, us, them.",
+      "notes": [
+        {
+          "heading": "this, that, these, those",
+          "text": "Blízko: **this** (jednotné), **these** (množné). Daleko: **that**, **those**: **This book is good. Those shoes are expensive.**"
+        },
+        {
+          "heading": "Zájmena v předmětu",
+          "text": "Po slovese a předložce stojí tvar předmětu:",
+          "table": [
+            [
+              "podmět",
+              "předmět"
+            ],
+            [
+              "I",
+              "me"
+            ],
+            [
+              "you",
+              "you"
+            ],
+            [
+              "he",
+              "him"
+            ],
+            [
+              "she",
+              "her"
+            ],
+            [
+              "it",
+              "it"
+            ],
+            [
+              "we",
+              "us"
+            ],
+            [
+              "they",
+              "them"
+            ]
+          ]
+        },
+        {
+          "heading": "Příklad",
+          "text": "**She loves him. Give it to me. Come with us.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "These apples are sweet.",
+          "cs": "Tato jablka jsou sladká."
+        },
+        {
+          "text": "Can you help me?",
+          "cs": "Můžeš mi pomoct?"
+        },
+        {
+          "text": "I like them.",
+          "cs": "Mám je rád."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-demonstratives-pronouns-01",
+          "kind": "choice",
+          "prompt": "___ shoes are too small. (tyhle)",
+          "prompt_cs": "Tyhle boty jsou moc malé.",
+          "options": [
+            "These",
+            "This",
+            "That",
+            "Those"
+          ],
+          "answers": [
+            "These"
+          ],
+          "explain": "Blízko + množné číslo → these."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-02",
+          "kind": "choice",
+          "prompt": "Look at ___ bird over there!",
+          "prompt_cs": "Podívej se na toho ptáka tamhle!",
+          "options": [
+            "that",
+            "this",
+            "these",
+            "those"
+          ],
+          "answers": [
+            "that"
+          ],
+          "explain": "Daleko + jednotné číslo → that."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-03",
+          "kind": "choice",
+          "prompt": "I know ___. (ji)",
+          "prompt_cs": "Znám ji.",
+          "options": [
+            "her",
+            "she",
+            "hers",
+            "his"
+          ],
+          "answers": [
+            "her"
+          ],
+          "explain": "Předmět → her."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-04",
+          "kind": "gap",
+          "prompt": "Please tell ___ the truth. (nám)",
+          "prompt_cs": "Řekni nám prosím pravdu.",
+          "answers": [
+            "us"
+          ],
+          "explain": "nám = us."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-05",
+          "kind": "gap",
+          "prompt": "Where are my glasses? I can't find ___.",
+          "prompt_cs": "Kde jsou moje brýle? Nemůžu je najít.",
+          "answers": [
+            "them"
+          ],
+          "explain": "je (množné číslo) = them."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-06",
+          "kind": "order",
+          "prompt": "Má ho rád.",
+          "tokens": [
+            "him",
+            "she",
+            "likes"
+          ],
+          "answers": [
+            "She likes him"
+          ],
+          "explain": "Podmět she, předmět him."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Pojď s námi.",
+          "answers": [
+            "Come with us"
+          ],
+          "explain": "Po předložce → us."
+        },
+        {
+          "id": "en-a1-demonstratives-pronouns-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Is this your phone?",
+          "answers": [
+            "Je to tvůj telefon",
+            "Je tohle tvůj telefon",
+            "Je to váš telefon",
+            "Je tohle váš telefon"
+          ],
+          "explain": "this = tohle, to."
+        }
+      ],
+      "objective": "Vybereš this, that, these, those podle vzdálenosti a čísla a zájmeno v předmětu (me, him, us…)."
+    },
+    {
+      "id": "en-a1-prepositions",
+      "level": "A1",
+      "title": "Předložky času a místa: in, on, at",
+      "summary": "Řekneš, kdy a kde se něco děje.",
+      "notes": [
+        {
+          "heading": "Čas",
+          "text": "**at** + hodina, noc, víkend (britsky): **at five o'clock, at night, at the weekend**. **on** + den a datum: **on Monday, on 5 May**. **in** + měsíc, rok, roční období, část dne: **in July, in 2020, in summer, in the morning**."
+        },
+        {
+          "heading": "Místo",
+          "text": "**in** = uvnitř (in the box, in London), **on** = na povrchu (on the table, on the wall), **at** = u, na místě kvůli činnosti (at the door, at school, at home, at work)."
+        },
+        {
+          "heading": "Další",
+          "text": "**under** (pod), **next to** (vedle), **between** (mezi), **behind** (za), **in front of** (před), **opposite** (naproti)."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I get up at seven.",
+          "cs": "Vstávám v sedm."
+        },
+        {
+          "text": "My birthday is in May.",
+          "cs": "Narozeniny mám v květnu."
+        },
+        {
+          "text": "The keys are on the table.",
+          "cs": "Klíče jsou na stole."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-prepositions-01",
+          "kind": "choice",
+          "prompt": "The film starts ___ eight o'clock.",
+          "prompt_cs": "Film začíná v osm.",
+          "options": [
+            "at",
+            "on",
+            "in",
+            "by"
+          ],
+          "answers": [
+            "at"
+          ],
+          "explain": "Hodina → at."
+        },
+        {
+          "id": "en-a1-prepositions-02",
+          "kind": "choice",
+          "prompt": "We go swimming ___ Saturdays.",
+          "prompt_cs": "V sobotu chodíme plavat.",
+          "options": [
+            "on",
+            "in",
+            "at",
+            "by"
+          ],
+          "answers": [
+            "on"
+          ],
+          "explain": "Den → on."
+        },
+        {
+          "id": "en-a1-prepositions-03",
+          "kind": "choice",
+          "prompt": "It's cold ___ winter.",
+          "prompt_cs": "V zimě je zima.",
+          "options": [
+            "in",
+            "on",
+            "at",
+            "by"
+          ],
+          "answers": [
+            "in"
+          ],
+          "explain": "Roční období → in."
+        },
+        {
+          "id": "en-a1-prepositions-04",
+          "kind": "gap",
+          "prompt": "She's ___ work now.",
+          "prompt_cs": "Teď je v práci.",
+          "answers": [
+            "at"
+          ],
+          "explain": "at work = v práci."
+        },
+        {
+          "id": "en-a1-prepositions-05",
+          "kind": "gap",
+          "prompt": "There's a picture ___ the wall.",
+          "prompt_cs": "Na zdi je obraz.",
+          "answers": [
+            "on"
+          ],
+          "explain": "Na povrchu → on."
+        },
+        {
+          "id": "en-a1-prepositions-06",
+          "kind": "gap",
+          "prompt": "The bank is next ___ the post office.",
+          "prompt_cs": "Banka je vedle pošty.",
+          "answers": [
+            "to"
+          ],
+          "explain": "vedle = next to."
+        },
+        {
+          "id": "en-a1-prepositions-07",
+          "kind": "order",
+          "prompt": "O víkendu jsem doma.",
+          "tokens": [
+            "the",
+            "at",
+            "at",
+            "I'm",
+            "home",
+            "weekend"
+          ],
+          "answers": [
+            "I'm at home at the weekend",
+            "At the weekend I'm at home"
+          ],
+          "explain": "at home; britsky at the weekend."
+        },
+        {
+          "id": "en-a1-prepositions-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Narodil jsem se v roce 2010.",
+          "answers": [
+            "I was born in 2010"
+          ],
+          "explain": "Rok → in."
+        }
+      ],
+      "objective": "Vybereš in, on, at u času i místa."
+    },
+    {
+      "id": "en-a1-imperative-lets",
+      "level": "A1",
+      "title": "Rozkazovací způsob a let's",
+      "summary": "Požádáš někoho, ať něco udělá, a navrhneš společnou činnost.",
+      "notes": [
+        {
+          "heading": "Rozkaz",
+          "text": "Základní tvar slovesa bez podmětu: **Sit down! Open your books.** Zápor: **Don't …**: **Don't touch it!** Zdvořile: **please**."
+        },
+        {
+          "heading": "let's",
+          "text": "Návrh pro nás: **Let's + základní tvar**: **Let's go!** (Pojďme!) Zápor: **Let's not …**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "Close the door, please.",
+          "cs": "Zavři prosím dveře."
+        },
+        {
+          "text": "Don't worry.",
+          "cs": "Neboj se."
+        },
+        {
+          "text": "Let's have a break.",
+          "cs": "Dáme si přestávku."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-imperative-lets-01",
+          "kind": "choice",
+          "prompt": "___ quiet, please!",
+          "prompt_cs": "Buďte prosím zticha!",
+          "options": [
+            "Be",
+            "Are",
+            "Is",
+            "Being"
+          ],
+          "answers": [
+            "Be"
+          ],
+          "explain": "Rozkaz = základní tvar be."
+        },
+        {
+          "id": "en-a1-imperative-lets-02",
+          "kind": "choice",
+          "prompt": "___ run in the corridor!",
+          "prompt_cs": "Neběhejte na chodbě!",
+          "options": [
+            "Don't",
+            "Not",
+            "No",
+            "Doesn't"
+          ],
+          "answers": [
+            "Don't"
+          ],
+          "explain": "Zápor rozkazu: Don't + sloveso."
+        },
+        {
+          "id": "en-a1-imperative-lets-03",
+          "kind": "gap",
+          "prompt": "___ go to the cinema tonight!",
+          "prompt_cs": "Pojďme dnes večer do kina!",
+          "answers": [
+            "Let's"
+          ],
+          "explain": "Návrh: Let's + sloveso."
+        },
+        {
+          "id": "en-a1-imperative-lets-04",
+          "kind": "gap",
+          "prompt": "Please ___ the window. (open)",
+          "prompt_cs": "Otevři prosím okno.",
+          "answers": [
+            "open"
+          ],
+          "explain": "Rozkaz = základní tvar."
+        },
+        {
+          "id": "en-a1-imperative-lets-05",
+          "kind": "choice",
+          "prompt": "Let's ___ a taxi.",
+          "prompt_cs": "Vezměme si taxi.",
+          "options": [
+            "take",
+            "to take",
+            "taking",
+            "takes"
+          ],
+          "answers": [
+            "take"
+          ],
+          "explain": "Po let's stojí základní tvar."
+        },
+        {
+          "id": "en-a1-imperative-lets-06",
+          "kind": "order",
+          "prompt": "Nezapomeň na klíče!",
+          "tokens": [
+            "keys",
+            "forget",
+            "don't",
+            "your"
+          ],
+          "answers": [
+            "Don't forget your keys"
+          ],
+          "explain": "Don't + sloveso + předmět."
+        },
+        {
+          "id": "en-a1-imperative-lets-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Posaďte se, prosím.",
+          "answers": [
+            "Sit down, please",
+            "Please sit down",
+            "Have a seat, please",
+            "Please have a seat"
+          ],
+          "explain": "sit down = posadit se."
+        },
+        {
+          "id": "en-a1-imperative-lets-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Let's not argue.",
+          "answers": [
+            "Nehádejme se",
+            "Nebudeme se hádat"
+          ],
+          "explain": "Let's not = nedělejme."
+        }
+      ],
+      "objective": "Vytvoříš kladný i záporný rozkaz a návrh s let's."
+    },
+    {
+      "id": "en-a2-past-simple",
+      "level": "A2",
+      "title": "Minulý čas prostý: pravidelná slovesa",
+      "summary": "Řekneš, co jsi dělal včera nebo minulý týden.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "Pravidelná slovesa přidávají **-ed** pro všechny osoby: **I worked, she played**. Pravopis: **live → lived, stop → stopped, study → studied**."
+        },
+        {
+          "heading": "Zápor a otázka",
+          "text": "Pomocné **did** + základní tvar: **I didn't watch TV. Did you call her? Where did you go?** -ed je v záporu a otázce jen jednou (v did)."
+        },
+        {
+          "heading": "Kdy",
+          "text": "Ukončený děj v minulosti, často s časovým údajem: **yesterday, last week, two days ago, in 2019**."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I visited my grandma yesterday.",
+          "cs": "Včera jsem navštívil babičku."
+        },
+        {
+          "text": "Did you enjoy the film?",
+          "cs": "Líbil se ti film?"
+        },
+        {
+          "text": "We didn't stay long.",
+          "cs": "Nezůstali jsme dlouho."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-past-simple-01",
+          "kind": "choice",
+          "prompt": "We ___ football yesterday.",
+          "prompt_cs": "Včera jsme hráli fotbal.",
+          "options": [
+            "played",
+            "play",
+            "plays",
+            "playing"
+          ],
+          "answers": [
+            "played"
+          ],
+          "explain": "Minulý čas → -ed."
+        },
+        {
+          "id": "en-a2-past-simple-02",
+          "kind": "choice",
+          "prompt": "___ you watch the match?",
+          "prompt_cs": "Díval ses na zápas?",
+          "options": [
+            "Did",
+            "Do",
+            "Were",
+            "Was"
+          ],
+          "answers": [
+            "Did"
+          ],
+          "explain": "Otázka v minulém čase: Did + základní tvar."
+        },
+        {
+          "id": "en-a2-past-simple-03",
+          "kind": "choice",
+          "prompt": "She didn't ___ me.",
+          "prompt_cs": "Nezavolala mi.",
+          "options": [
+            "call",
+            "called",
+            "calls",
+            "calling"
+          ],
+          "answers": [
+            "call"
+          ],
+          "explain": "Po didn't stojí základní tvar."
+        },
+        {
+          "id": "en-a2-past-simple-04",
+          "kind": "gap",
+          "prompt": "They ___ in Leeds for two years. (live)",
+          "prompt_cs": "Bydleli dva roky v Leedsu.",
+          "answers": [
+            "lived"
+          ],
+          "explain": "live → lived."
+        },
+        {
+          "id": "en-a2-past-simple-05",
+          "kind": "gap",
+          "prompt": "I ___ for the exam. (study)",
+          "prompt_cs": "Učil jsem se na zkoušku.",
+          "answers": [
+            "studied"
+          ],
+          "explain": "souhláska + y → -ied."
+        },
+        {
+          "id": "en-a2-past-simple-06",
+          "kind": "gap",
+          "prompt": "The bus ___ at the corner. (stop)",
+          "prompt_cs": "Autobus zastavil na rohu.",
+          "answers": [
+            "stopped"
+          ],
+          "explain": "Krátká slabika → zdvojení p."
+        },
+        {
+          "id": "en-a2-past-simple-07",
+          "kind": "order",
+          "prompt": "Kdy jsi přijel?",
+          "tokens": [
+            "you",
+            "arrive",
+            "did",
+            "when"
+          ],
+          "answers": [
+            "When did you arrive"
+          ],
+          "explain": "Tázací slovo + did + podmět + základní tvar."
+        },
+        {
+          "id": "en-a2-past-simple-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Včera jsem nepracoval.",
+          "answers": [
+            "I didn't work yesterday",
+            "I did not work yesterday",
+            "Yesterday I didn't work"
+          ],
+          "explain": "didn't + základní tvar."
+        }
+      ],
+      "objective": "Utvoříš minulý tvar pravidelných sloves i otázku a zápor s did."
+    },
+    {
+      "id": "en-a2-irregular-past",
+      "level": "A2",
+      "title": "Minulý čas: nepravidelná slovesa a was, were",
+      "summary": "Vyprávíš, co se stalo, i s nepravidelnými slovesy.",
+      "notes": [
+        {
+          "heading": "Nepravidelná slovesa",
+          "text": "Minulý tvar je potřeba se naučit. V záporu a otázce se ale používá did + základní tvar: **I went → I didn't go → Did you go?**",
+          "table": [
+            [
+              "základ",
+              "minulý čas"
+            ],
+            [
+              "go",
+              "went"
+            ],
+            [
+              "have",
+              "had"
+            ],
+            [
+              "do",
+              "did"
+            ],
+            [
+              "see",
+              "saw"
+            ],
+            [
+              "buy",
+              "bought"
+            ],
+            [
+              "eat",
+              "ate"
+            ],
+            [
+              "take",
+              "took"
+            ],
+            [
+              "come",
+              "came"
+            ],
+            [
+              "make",
+              "made"
+            ],
+            [
+              "get",
+              "got"
+            ]
+          ]
+        },
+        {
+          "heading": "was a were",
+          "text": "**be** má v minulém čase dva tvary: **I / he / she / it was**, **you / we / they were**. Zápor **wasn't, weren't**, otázka **Was she…? Were you…?** (bez did)."
+        }
+      ],
+      "examples": [
+        {
+          "text": "We went to the seaside.",
+          "cs": "Jeli jsme k moři."
+        },
+        {
+          "text": "I was tired.",
+          "cs": "Byl jsem unavený."
+        },
+        {
+          "text": "Where were you?",
+          "cs": "Kde jsi byl?"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-irregular-past-01",
+          "kind": "choice",
+          "prompt": "Last summer we ___ to Scotland.",
+          "prompt_cs": "Loni v létě jsme jeli do Skotska.",
+          "options": [
+            "went",
+            "goed",
+            "go",
+            "gone"
+          ],
+          "answers": [
+            "went"
+          ],
+          "explain": "go → went."
+        },
+        {
+          "id": "en-a2-irregular-past-02",
+          "kind": "choice",
+          "prompt": "I ___ at home yesterday.",
+          "prompt_cs": "Včera jsem byl doma.",
+          "options": [
+            "was",
+            "were",
+            "did",
+            "am"
+          ],
+          "answers": [
+            "was"
+          ],
+          "explain": "I → was."
+        },
+        {
+          "id": "en-a2-irregular-past-03",
+          "kind": "choice",
+          "prompt": "___ you at the party?",
+          "prompt_cs": "Byl jsi na večírku?",
+          "options": [
+            "Were",
+            "Was",
+            "Did",
+            "Are"
+          ],
+          "answers": [
+            "Were"
+          ],
+          "explain": "you → were; otázka s be bez did."
+        },
+        {
+          "id": "en-a2-irregular-past-04",
+          "kind": "gap",
+          "prompt": "She ___ a new phone. (buy)",
+          "prompt_cs": "Koupila si nový telefon.",
+          "answers": [
+            "bought"
+          ],
+          "explain": "buy → bought."
+        },
+        {
+          "id": "en-a2-irregular-past-05",
+          "kind": "gap",
+          "prompt": "Did you ___ the film? (see)",
+          "prompt_cs": "Viděl jsi ten film?",
+          "answers": [
+            "see"
+          ],
+          "explain": "Po did stojí základní tvar."
+        },
+        {
+          "id": "en-a2-irregular-past-06",
+          "kind": "gap",
+          "prompt": "We ___ pizza for dinner. (have)",
+          "prompt_cs": "K večeři jsme měli pizzu.",
+          "answers": [
+            "had"
+          ],
+          "explain": "have → had."
+        },
+        {
+          "id": "en-a2-irregular-past-07",
+          "kind": "order",
+          "prompt": "Neviděl jsem ho.",
+          "tokens": [
+            "see",
+            "him",
+            "didn't",
+            "I"
+          ],
+          "answers": [
+            "I didn't see him"
+          ],
+          "explain": "didn't + základní tvar."
+        },
+        {
+          "id": "en-a2-irregular-past-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Byli jsme unavení.",
+          "answers": [
+            "We were tired"
+          ],
+          "explain": "we → were."
+        }
+      ],
+      "objective": "Použiješ minulé tvary častých nepravidelných sloves a was / were."
+    },
+    {
+      "id": "en-a2-past-continuous",
+      "level": "A2",
+      "title": "Minulý čas průběhový",
+      "summary": "Popíšeš, co právě probíhalo, když se něco stalo.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**was / were + -ing**: **I was reading. They were playing.**"
+        },
+        {
+          "heading": "Použití",
+          "text": "Probíhající děj (kulisa) + krátká událost v minulém čase prostém: **I was having a shower when the phone rang.** (Sprchoval jsem se, když zazvonil telefon.) **while** = zatímco: **While I was cooking, he was watching TV.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "What were you doing at eight?",
+          "cs": "Co jsi dělal v osm?"
+        },
+        {
+          "text": "It was raining.",
+          "cs": "Pršelo."
+        },
+        {
+          "text": "I was walking home when I saw her.",
+          "cs": "Šel jsem domů, když jsem ji uviděl."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-past-continuous-01",
+          "kind": "choice",
+          "prompt": "I ___ TV when you called.",
+          "prompt_cs": "Díval jsem se na televizi, když jsi zavolal.",
+          "options": [
+            "was watching",
+            "watched",
+            "were watching",
+            "am watching"
+          ],
+          "answers": [
+            "was watching"
+          ],
+          "explain": "Probíhající děj → was + -ing."
+        },
+        {
+          "id": "en-a2-past-continuous-02",
+          "kind": "choice",
+          "prompt": "They ___ football at five.",
+          "prompt_cs": "V pět hráli fotbal.",
+          "options": [
+            "were playing",
+            "was playing",
+            "played",
+            "are playing"
+          ],
+          "answers": [
+            "were playing"
+          ],
+          "explain": "they → were."
+        },
+        {
+          "id": "en-a2-past-continuous-03",
+          "kind": "choice",
+          "prompt": "While she was cooking, the lights ___ out.",
+          "prompt_cs": "Zatímco vařila, zhasla světla.",
+          "options": [
+            "went",
+            "were going",
+            "go",
+            "was going"
+          ],
+          "answers": [
+            "went"
+          ],
+          "explain": "Krátká událost → minulý čas prostý."
+        },
+        {
+          "id": "en-a2-past-continuous-04",
+          "kind": "gap",
+          "prompt": "It ___ raining all day. (be)",
+          "prompt_cs": "Celý den pršelo.",
+          "answers": [
+            "was"
+          ],
+          "explain": "it → was."
+        },
+        {
+          "id": "en-a2-past-continuous-05",
+          "kind": "gap",
+          "prompt": "What were you ___ at midnight? (do)",
+          "prompt_cs": "Co jsi dělal o půlnoci?",
+          "answers": [
+            "doing"
+          ],
+          "explain": "were + -ing."
+        },
+        {
+          "id": "en-a2-past-continuous-06",
+          "kind": "order",
+          "prompt": "Spal, když přišla.",
+          "tokens": [
+            "she",
+            "was",
+            "sleeping",
+            "came",
+            "he",
+            "when"
+          ],
+          "answers": [
+            "He was sleeping when she came"
+          ],
+          "explain": "Průběhový děj + when + krátká událost."
+        },
+        {
+          "id": "en-a2-past-continuous-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Pršelo, když jsme odcházeli.",
+          "answers": [
+            "It was raining when we left",
+            "It was raining when we were leaving"
+          ],
+          "explain": "Kulisa → was raining."
+        },
+        {
+          "id": "en-a2-past-continuous-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "We were having dinner.",
+          "answers": [
+            "Večeřeli jsme",
+            "Jedli jsme večeři",
+            "Měli jsme večeři"
+          ],
+          "explain": "were having = (zrovna) jsme měli."
+        }
+      ],
+      "objective": "Spojíš probíhající děj (was / were + -ing) s krátkou událostí v minulém čase."
+    },
+    {
       "id": "en-a2-present-perfect",
       "level": "A2",
       "title": "Předpřítomný čas a minulost",
       "summary": "Mluvíš o zkušenosti nebo nedávné události a všimneš si rozdílů mezi UK a US.",
       "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**have / has + příčestí minulé** (pravidelná -ed, nepravidelná třetí tvar): **I've finished. She's lost her keys. Have you ever been to London?**",
+          "table": [
+            [
+              "základ",
+              "minulý čas",
+              "příčestí"
+            ],
+            [
+              "be",
+              "was / were",
+              "been"
+            ],
+            [
+              "go",
+              "went",
+              "gone"
+            ],
+            [
+              "see",
+              "saw",
+              "seen"
+            ],
+            [
+              "eat",
+              "ate",
+              "eaten"
+            ],
+            [
+              "do",
+              "did",
+              "done"
+            ],
+            [
+              "write",
+              "wrote",
+              "written"
+            ]
+          ]
+        },
+        {
+          "heading": "Kdy",
+          "text": "Zkušenost bez určení času (**ever, never**), novinka s následkem teď (**just, already, yet**). Jakmile řeknete **kdy** (yesterday, in 2019), použijte minulý čas prostý: **I've been to Paris. I went there in 2019.**"
+        },
+        {
+          "heading": "yet a already",
+          "text": "**already** (už) v kladné větě, **yet** (už / ještě) na konci záporu a otázky: **Have you finished yet? I haven't finished yet.**"
+        },
         {
           "heading": "Tvar a použití",
           "text": "Předpřítomný čas tvoří **have/has + příčestí**: I have finished. Často spojuje minulou událost s přítomností nebo popisuje zkušenost bez určení přesného času."
@@ -103,6 +2484,18 @@
         }
       ],
       "examples": [
+        {
+          "text": "I've never seen snow.",
+          "cs": "Nikdy jsem neviděl sníh."
+        },
+        {
+          "text": "She's just left.",
+          "cs": "Právě odešla."
+        },
+        {
+          "text": "Have you ever been to Wales?",
+          "cs": "Byl jsi někdy ve Walesu?"
+        },
         {
           "text": "I have just eaten.",
           "cs": "Právě jsem se najedl/a.",
@@ -172,9 +2565,990 @@
             "We already saw that movie"
           ],
           "explain": "Britská varianta často volí předpřítomný čas. Americké We already saw that movie je v tomto kontextu také přirozené."
+        },
+        {
+          "id": "en-a2-present-perfect-01",
+          "kind": "choice",
+          "prompt": "I ___ my homework.",
+          "prompt_cs": "Udělal jsem si úkol.",
+          "options": [
+            "have done",
+            "have did",
+            "has done",
+            "done"
+          ],
+          "answers": [
+            "have done"
+          ],
+          "explain": "have + příčestí done."
+        },
+        {
+          "id": "en-a2-present-perfect-02",
+          "kind": "choice",
+          "prompt": "___ you ever eaten sushi?",
+          "prompt_cs": "Jedl jsi někdy sushi?",
+          "options": [
+            "Have",
+            "Did",
+            "Has",
+            "Were"
+          ],
+          "answers": [
+            "Have"
+          ],
+          "explain": "Zkušenost bez času → Have you ever…?"
+        },
+        {
+          "id": "en-a2-present-perfect-03",
+          "kind": "choice",
+          "prompt": "I ___ to Paris in 2019.",
+          "prompt_cs": "V roce 2019 jsem jel do Paříže.",
+          "options": [
+            "went",
+            "have gone",
+            "have been",
+            "go"
+          ],
+          "answers": [
+            "went"
+          ],
+          "explain": "Přesný čas → minulý čas prostý."
+        },
+        {
+          "id": "en-a2-present-perfect-04",
+          "kind": "gap",
+          "prompt": "She has ___ her keys. (lose)",
+          "prompt_cs": "Ztratila klíče.",
+          "answers": [
+            "lost"
+          ],
+          "explain": "lose → lost."
+        },
+        {
+          "id": "en-a2-present-perfect-05",
+          "kind": "gap",
+          "prompt": "Have you finished ___?",
+          "prompt_cs": "Už jsi skončil?",
+          "answers": [
+            "yet"
+          ],
+          "explain": "yet na konci otázky."
+        },
+        {
+          "id": "en-a2-present-perfect-06",
+          "kind": "gap",
+          "prompt": "We have ___ been to Ireland.",
+          "prompt_cs": "Nikdy jsme nebyli v Irsku.",
+          "answers": [
+            "never"
+          ],
+          "explain": "never = nikdy."
+        },
+        {
+          "id": "en-a2-present-perfect-07",
+          "kind": "order",
+          "prompt": "Právě jsem přijel.",
+          "tokens": [
+            "arrived",
+            "just",
+            "I've"
+          ],
+          "answers": [
+            "I've just arrived"
+          ],
+          "explain": "just stojí mezi have a příčestím."
+        },
+        {
+          "id": "en-a2-present-perfect-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Už jsi jedl?",
+          "answers": [
+            "Have you eaten yet",
+            "Have you already eaten",
+            "Have you had lunch yet",
+            "Have you had dinner yet"
+          ],
+          "explain": "Otázka s yet na konci."
         }
       ],
       "objective": "Zvolíš předpřítomný nebo prostý minulý čas podle významu a uvedeného časového určení."
+    },
+    {
+      "id": "en-a2-future",
+      "level": "A2",
+      "title": "Budoucnost: going to a will",
+      "summary": "Řekneš, co plánuješ a co se nejspíš stane.",
+      "notes": [
+        {
+          "heading": "going to",
+          "text": "**am / is / are going to + sloveso**: plán, úmysl, nebo to, co je vidět, že se stane: **I'm going to study medicine. Look at the clouds! It's going to rain.**"
+        },
+        {
+          "heading": "will",
+          "text": "**will + sloveso** (zkráceně 'll, zápor won't): rozhodnutí v tu chvíli, slib, předpověď: **I'll help you. I think it will be sunny. I won't tell anyone.**"
+        },
+        {
+          "heading": "Přítomný průběhový",
+          "text": "Domluvené schůzky v blízké budoucnosti: **I'm meeting Tom on Friday.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "We're going to visit Edinburgh.",
+          "cs": "Chystáme se navštívit Edinburgh."
+        },
+        {
+          "text": "I'll call you later.",
+          "cs": "Zavolám ti později."
+        },
+        {
+          "text": "It won't take long.",
+          "cs": "Nebude to trvat dlouho."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-future-01",
+          "kind": "choice",
+          "prompt": "Look at that sky! It ___ rain.",
+          "prompt_cs": "Podívej na tu oblohu! Bude pršet.",
+          "options": [
+            "'s going to",
+            "will",
+            "rains",
+            "is raining"
+          ],
+          "answers": [
+            "'s going to"
+          ],
+          "explain": "Je to vidět → going to."
+        },
+        {
+          "id": "en-a2-future-02",
+          "kind": "choice",
+          "prompt": "The phone's ringing. I ___ get it.",
+          "prompt_cs": "Zvoní telefon. Vezmu to.",
+          "options": [
+            "'ll",
+            "'m going to",
+            "am",
+            "do"
+          ],
+          "answers": [
+            "'ll"
+          ],
+          "explain": "Rozhodnutí v tu chvíli → will."
+        },
+        {
+          "id": "en-a2-future-03",
+          "kind": "choice",
+          "prompt": "Next year I ___ learn to drive.",
+          "prompt_cs": "Příští rok se naučím řídit (mám to v plánu).",
+          "options": [
+            "am going to",
+            "will to",
+            "going",
+            "am"
+          ],
+          "answers": [
+            "am going to"
+          ],
+          "explain": "Plán → going to."
+        },
+        {
+          "id": "en-a2-future-04",
+          "kind": "gap",
+          "prompt": "Don't worry, I ___ tell anyone. (zápor will)",
+          "prompt_cs": "Neboj, nikomu to neřeknu.",
+          "answers": [
+            "won't",
+            "will not"
+          ],
+          "explain": "will not = won't."
+        },
+        {
+          "id": "en-a2-future-05",
+          "kind": "gap",
+          "prompt": "They are ___ to buy a house.",
+          "prompt_cs": "Chystají se koupit dům.",
+          "answers": [
+            "going"
+          ],
+          "explain": "be going to."
+        },
+        {
+          "id": "en-a2-future-06",
+          "kind": "order",
+          "prompt": "Myslím, že vyhraje.",
+          "tokens": [
+            "think",
+            "she'll",
+            "I",
+            "win"
+          ],
+          "answers": [
+            "I think she'll win"
+          ],
+          "explain": "Předpověď → will."
+        },
+        {
+          "id": "en-a2-future-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Pomůžu ti.",
+          "answers": [
+            "I'll help you",
+            "I will help you"
+          ],
+          "explain": "Nabídka → will."
+        },
+        {
+          "id": "en-a2-future-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "What are you going to do tomorrow?",
+          "answers": [
+            "Co budeš zítra dělat",
+            "Co zítra budeš dělat",
+            "Co budete zítra dělat",
+            "Co máš zítra v plánu"
+          ],
+          "explain": "going to = plán."
+        }
+      ],
+      "objective": "Rozlišíš going to (plán, je to vidět) a will (rozhodnutí, slib, předpověď)."
+    },
+    {
+      "id": "en-a2-comparison",
+      "level": "A2",
+      "title": "Stupňování přídavných jmen",
+      "summary": "Porovnáš dvě věci a řekneš, co je nejlepší.",
+      "notes": [
+        {
+          "heading": "Krátká přídavná jména",
+          "text": "Jednoslabičná (a dvouslabičná na -y): **-er / the -est**: **cold → colder → the coldest; big → bigger → the biggest; happy → happier → the happiest**. Porovnání: **than** (než)."
+        },
+        {
+          "heading": "Dlouhá přídavná jména",
+          "text": "**more / the most**: **expensive → more expensive → the most expensive**."
+        },
+        {
+          "heading": "Nepravidelná",
+          "text": "**good → better → the best; bad → worse → the worst; far → further → the furthest**. Stejně jako: **as … as**: **She's as tall as me.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "London is bigger than Brno.",
+          "cs": "Londýn je větší než Brno."
+        },
+        {
+          "text": "This is the best pizza in town.",
+          "cs": "Tohle je nejlepší pizza ve městě."
+        },
+        {
+          "text": "Trains are more comfortable than buses.",
+          "cs": "Vlaky jsou pohodlnější než autobusy."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-comparison-01",
+          "kind": "choice",
+          "prompt": "My brother is ___ than me.",
+          "prompt_cs": "Můj bratr je vyšší než já.",
+          "options": [
+            "taller",
+            "more tall",
+            "tallest",
+            "the taller"
+          ],
+          "answers": [
+            "taller"
+          ],
+          "explain": "Krátké přídavné jméno → -er."
+        },
+        {
+          "id": "en-a2-comparison-02",
+          "kind": "choice",
+          "prompt": "This book is ___ than that one.",
+          "prompt_cs": "Tahle kniha je zajímavější než tamta.",
+          "options": [
+            "more interesting",
+            "interestinger",
+            "most interesting",
+            "the more interesting"
+          ],
+          "answers": [
+            "more interesting"
+          ],
+          "explain": "Dlouhé → more."
+        },
+        {
+          "id": "en-a2-comparison-03",
+          "kind": "choice",
+          "prompt": "It's the ___ day of my life!",
+          "prompt_cs": "Je to nejlepší den mého života!",
+          "options": [
+            "best",
+            "goodest",
+            "better",
+            "most good"
+          ],
+          "answers": [
+            "best"
+          ],
+          "explain": "good → the best."
+        },
+        {
+          "id": "en-a2-comparison-04",
+          "kind": "gap",
+          "prompt": "Today is ___ than yesterday. (hot)",
+          "prompt_cs": "Dnes je tepleji než včera.",
+          "answers": [
+            "hotter"
+          ],
+          "explain": "Krátká slabika → zdvojení t."
+        },
+        {
+          "id": "en-a2-comparison-05",
+          "kind": "gap",
+          "prompt": "She is as old ___ my sister.",
+          "prompt_cs": "Je stejně stará jako moje sestra.",
+          "answers": [
+            "as"
+          ],
+          "explain": "as … as = stejně jako."
+        },
+        {
+          "id": "en-a2-comparison-06",
+          "kind": "gap",
+          "prompt": "The weather is ___ than last week. (bad)",
+          "prompt_cs": "Počasí je horší než minulý týden.",
+          "answers": [
+            "worse"
+          ],
+          "explain": "bad → worse."
+        },
+        {
+          "id": "en-a2-comparison-07",
+          "kind": "order",
+          "prompt": "Je to nejdražší hotel.",
+          "tokens": [
+            "the",
+            "hotel",
+            "most",
+            "expensive",
+            "it's"
+          ],
+          "answers": [
+            "It's the most expensive hotel"
+          ],
+          "explain": "Dlouhé přídavné jméno → the most."
+        },
+        {
+          "id": "en-a2-comparison-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Moje kolo je lepší než tvoje.",
+          "answers": [
+            "My bike is better than yours",
+            "My bicycle is better than yours"
+          ],
+          "explain": "good → better; tvoje = yours."
+        }
+      ],
+      "objective": "Utvoříš druhý a třetí stupeň krátkých, dlouhých i nepravidelných přídavných jmen."
+    },
+    {
+      "id": "en-a2-quantifiers",
+      "level": "A2",
+      "title": "Počitatelná a nepočitatelná: much, many, a lot of",
+      "summary": "Řekneš, kolik čeho je, a zeptáš se How much? How many?",
+      "notes": [
+        {
+          "heading": "Dva druhy podstatných jmen",
+          "text": "Počitatelná mají množné číslo (**an apple, two apples**). Nepočitatelná nemají ani a / an, ani množné číslo: **water, money, bread, information, advice, news**."
+        },
+        {
+          "heading": "Kolik",
+          "text": "**many** + počitatelná, **much** + nepočitatelná (hlavně v otázce a záporu). **a lot of** s oběma v kladné větě. **How many apples? How much money?**",
+          "table": [
+            [
+              "",
+              "počitatelná",
+              "nepočitatelná"
+            ],
+            [
+              "hodně",
+              "many / a lot of",
+              "much / a lot of"
+            ],
+            [
+              "málo",
+              "a few",
+              "a little"
+            ],
+            [
+              "kolik?",
+              "How many…?",
+              "How much…?"
+            ]
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "text": "How much is it?",
+          "cs": "Kolik to stojí?"
+        },
+        {
+          "text": "I haven't got much time.",
+          "cs": "Nemám moc času."
+        },
+        {
+          "text": "There are a lot of people here.",
+          "cs": "Je tu hodně lidí."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-quantifiers-01",
+          "kind": "choice",
+          "prompt": "How ___ brothers have you got?",
+          "prompt_cs": "Kolik máš bratrů?",
+          "options": [
+            "many",
+            "much",
+            "lot",
+            "few"
+          ],
+          "answers": [
+            "many"
+          ],
+          "explain": "Počitatelné → many."
+        },
+        {
+          "id": "en-a2-quantifiers-02",
+          "kind": "choice",
+          "prompt": "We haven't got ___ milk.",
+          "prompt_cs": "Nemáme moc mléka.",
+          "options": [
+            "much",
+            "many",
+            "few",
+            "a few"
+          ],
+          "answers": [
+            "much"
+          ],
+          "explain": "Nepočitatelné v záporu → much."
+        },
+        {
+          "id": "en-a2-quantifiers-03",
+          "kind": "choice",
+          "prompt": "Can you give me some ___?",
+          "prompt_cs": "Můžeš mi poradit?",
+          "options": [
+            "advice",
+            "advices",
+            "an advice",
+            "advise"
+          ],
+          "answers": [
+            "advice"
+          ],
+          "explain": "advice je nepočitatelné: bez -s a bez an."
+        },
+        {
+          "id": "en-a2-quantifiers-04",
+          "kind": "gap",
+          "prompt": "There are ___ lot of cars.",
+          "prompt_cs": "Je tu hodně aut.",
+          "answers": [
+            "a"
+          ],
+          "explain": "a lot of."
+        },
+        {
+          "id": "en-a2-quantifiers-05",
+          "kind": "gap",
+          "prompt": "I've got a ___ friends in Bristol.",
+          "prompt_cs": "Mám pár kamarádů v Bristolu.",
+          "answers": [
+            "few"
+          ],
+          "explain": "Počitatelné → a few."
+        },
+        {
+          "id": "en-a2-quantifiers-06",
+          "kind": "gap",
+          "prompt": "How ___ sugar do you want?",
+          "prompt_cs": "Kolik chceš cukru?",
+          "answers": [
+            "much"
+          ],
+          "explain": "Nepočitatelné → How much."
+        },
+        {
+          "id": "en-a2-quantifiers-07",
+          "kind": "order",
+          "prompt": "Kolik to stojí?",
+          "tokens": [
+            "is",
+            "much",
+            "it",
+            "how"
+          ],
+          "answers": [
+            "How much is it"
+          ],
+          "explain": "Cena: How much is it?"
+        },
+        {
+          "id": "en-a2-quantifiers-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Mám jen trochu času.",
+          "answers": [
+            "I've only got a little time",
+            "I only have a little time",
+            "I have only got a little time",
+            "I have only a little time"
+          ],
+          "explain": "time je nepočitatelné → a little."
+        }
+      ],
+      "objective": "Vybereš much, many, a lot of, a few, a little podle počitatelnosti."
+    },
+    {
+      "id": "en-a2-obligation",
+      "level": "A2",
+      "title": "Must, have to, should",
+      "summary": "Řekneš, co musíš, co nemusíš a co bys měl.",
+      "notes": [
+        {
+          "heading": "must a have to",
+          "text": "**must** = musím (sám to tak cítím, pravidlo), **have to** = musím (okolnosti mě nutí). V minulém čase jen **had to**."
+        },
+        {
+          "heading": "Zápor je jiný",
+          "text": "**mustn't** = nesmíš: **You mustn't smoke here.** **don't have to** = nemusíš: **You don't have to come.** (Nemusíš chodit.)"
+        },
+        {
+          "heading": "should",
+          "text": "**should** = měl bys (rada): **You should see a doctor.** Zápor **shouldn't**."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I have to get up early.",
+          "cs": "Musím brzy vstávat."
+        },
+        {
+          "text": "You mustn't be late.",
+          "cs": "Nesmíš přijít pozdě."
+        },
+        {
+          "text": "You should drink more water.",
+          "cs": "Měl bys pít víc vody."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-obligation-01",
+          "kind": "choice",
+          "prompt": "You ___ touch that, it's hot!",
+          "prompt_cs": "Nesmíš na to sahat, je to horké!",
+          "options": [
+            "mustn't",
+            "don't have to",
+            "shouldn't to",
+            "haven't"
+          ],
+          "answers": [
+            "mustn't"
+          ],
+          "explain": "Zákaz → mustn't."
+        },
+        {
+          "id": "en-a2-obligation-02",
+          "kind": "choice",
+          "prompt": "It's Saturday. I ___ go to school.",
+          "prompt_cs": "Je sobota. Nemusím do školy.",
+          "options": [
+            "don't have to",
+            "mustn't",
+            "haven't",
+            "can't to"
+          ],
+          "answers": [
+            "don't have to"
+          ],
+          "explain": "Nemusím → don't have to."
+        },
+        {
+          "id": "en-a2-obligation-03",
+          "kind": "choice",
+          "prompt": "You look tired. You ___ go to bed.",
+          "prompt_cs": "Vypadáš unaveně. Měl bys jít spát.",
+          "options": [
+            "should",
+            "must to",
+            "have",
+            "should to"
+          ],
+          "answers": [
+            "should"
+          ],
+          "explain": "Rada → should."
+        },
+        {
+          "id": "en-a2-obligation-04",
+          "kind": "gap",
+          "prompt": "She ___ to work on Sundays.",
+          "prompt_cs": "V neděli musí pracovat.",
+          "answers": [
+            "has"
+          ],
+          "explain": "she → has to."
+        },
+        {
+          "id": "en-a2-obligation-05",
+          "kind": "gap",
+          "prompt": "Yesterday I ___ to wait an hour.",
+          "prompt_cs": "Včera jsem musel hodinu čekat.",
+          "answers": [
+            "had"
+          ],
+          "explain": "Minulý čas → had to."
+        },
+        {
+          "id": "en-a2-obligation-06",
+          "kind": "order",
+          "prompt": "Měl bys zavolat mámě.",
+          "tokens": [
+            "mum",
+            "should",
+            "call",
+            "you",
+            "your"
+          ],
+          "answers": [
+            "You should call your mum"
+          ],
+          "explain": "should + základní tvar."
+        },
+        {
+          "id": "en-a2-obligation-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Musím jít.",
+          "answers": [
+            "I must go",
+            "I have to go",
+            "I've got to go"
+          ],
+          "explain": "must / have to + základní tvar."
+        },
+        {
+          "id": "en-a2-obligation-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "You don't have to pay.",
+          "answers": [
+            "Nemusíš platit",
+            "Nemusíte platit"
+          ],
+          "explain": "don't have to = nemusíš."
+        }
+      ],
+      "objective": "Rozlišíš must, mustn't, have to, don't have to a should."
+    },
+    {
+      "id": "en-a2-gerund-infinitive",
+      "level": "A2",
+      "title": "Like doing, want to do",
+      "summary": "Řekneš, co rád děláš a co chceš dělat.",
+      "notes": [
+        {
+          "heading": "-ing po slovesech oblíbenosti",
+          "text": "Po **like, love, enjoy, hate, don't mind, finish** stojí tvar **-ing**: **I enjoy reading. She hates waiting.** (Po like a love je možné i to + sloveso.)"
+        },
+        {
+          "heading": "to + sloveso",
+          "text": "Po **want, would like, need, decide, hope, learn, plan** stojí **to + sloveso**: **I want to go home. I'd like to order.**"
+        },
+        {
+          "heading": "Po předložce",
+          "text": "Po předložce vždy **-ing**: **I'm good at swimming. Thanks for helping.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "I love dancing.",
+          "cs": "Miluju tanec."
+        },
+        {
+          "text": "We want to travel.",
+          "cs": "Chceme cestovat."
+        },
+        {
+          "text": "I'd like to book a table.",
+          "cs": "Chtěl bych rezervovat stůl."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-gerund-infinitive-01",
+          "kind": "choice",
+          "prompt": "I enjoy ___ to music.",
+          "prompt_cs": "Rád poslouchám hudbu.",
+          "options": [
+            "listening",
+            "to listen",
+            "listen",
+            "listened"
+          ],
+          "answers": [
+            "listening"
+          ],
+          "explain": "enjoy + -ing."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-02",
+          "kind": "choice",
+          "prompt": "She wants ___ a doctor.",
+          "prompt_cs": "Chce být lékařkou.",
+          "options": [
+            "to be",
+            "being",
+            "be",
+            "is"
+          ],
+          "answers": [
+            "to be"
+          ],
+          "explain": "want + to."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-03",
+          "kind": "choice",
+          "prompt": "I'd like ___ a coffee, please.",
+          "prompt_cs": "Chtěl bych si objednat kávu.",
+          "options": [
+            "to order",
+            "ordering",
+            "order",
+            "ordered"
+          ],
+          "answers": [
+            "to order"
+          ],
+          "explain": "would like + to."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-04",
+          "kind": "gap",
+          "prompt": "Thanks for ___ me. (help)",
+          "prompt_cs": "Díky, žes mi pomohl.",
+          "answers": [
+            "helping"
+          ],
+          "explain": "Po předložce → -ing."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-05",
+          "kind": "gap",
+          "prompt": "He hates ___ up early. (get)",
+          "prompt_cs": "Nesnáší brzké vstávání.",
+          "answers": [
+            "getting"
+          ],
+          "explain": "hate + -ing; t se zdvojí."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-06",
+          "kind": "gap",
+          "prompt": "We need ___ leave now.",
+          "prompt_cs": "Musíme už odejít.",
+          "answers": [
+            "to"
+          ],
+          "explain": "need + to."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-07",
+          "kind": "order",
+          "prompt": "Rád plavu.",
+          "tokens": [
+            "swimming",
+            "like",
+            "I"
+          ],
+          "answers": [
+            "I like swimming"
+          ],
+          "explain": "like + -ing."
+        },
+        {
+          "id": "en-a2-gerund-infinitive-08",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Chci se naučit anglicky.",
+          "answers": [
+            "I want to learn English"
+          ],
+          "explain": "want to + learn."
+        }
+      ],
+      "objective": "Po slovesech jako enjoy a want vybereš tvar -ing, nebo to + sloveso."
+    },
+    {
+      "id": "en-a2-first-conditional",
+      "level": "A2",
+      "title": "Podmínka: if + přítomný čas",
+      "summary": "Řekneš, co se stane, když se splní podmínka.",
+      "notes": [
+        {
+          "heading": "Tvar",
+          "text": "**If + přítomný čas, will + sloveso**: **If it rains, we'll stay at home.** Pozor: po **if** a **when** o budoucnosti stojí přítomný čas, ne will (česky „když bude pršet“)."
+        },
+        {
+          "heading": "Pořadí vět",
+          "text": "Věty lze prohodit; čárka se píše, když je if na začátku: **We'll stay at home if it rains.**"
+        }
+      ],
+      "examples": [
+        {
+          "text": "If you hurry, you'll catch the bus.",
+          "cs": "Když si pospíšíš, stihneš autobus."
+        },
+        {
+          "text": "I'll call you when I arrive.",
+          "cs": "Zavolám ti, až přijedu."
+        },
+        {
+          "text": "If it's sunny, we'll go to the beach.",
+          "cs": "Když bude slunečno, půjdeme na pláž."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-first-conditional-01",
+          "kind": "choice",
+          "prompt": "If it ___ tomorrow, we'll stay in.",
+          "prompt_cs": "Když zítra bude pršet, zůstaneme doma.",
+          "options": [
+            "rains",
+            "will rain",
+            "rain",
+            "rained"
+          ],
+          "answers": [
+            "rains"
+          ],
+          "explain": "Po if přítomný čas."
+        },
+        {
+          "id": "en-a2-first-conditional-02",
+          "kind": "choice",
+          "prompt": "If you study, you ___ the exam.",
+          "prompt_cs": "Když se budeš učit, uděláš zkoušku.",
+          "options": [
+            "'ll pass",
+            "pass",
+            "passed",
+            "passing"
+          ],
+          "answers": [
+            "'ll pass"
+          ],
+          "explain": "Hlavní věta → will."
+        },
+        {
+          "id": "en-a2-first-conditional-03",
+          "kind": "gap",
+          "prompt": "I'll tell her when I ___ her. (see)",
+          "prompt_cs": "Řeknu jí to, až ji uvidím.",
+          "answers": [
+            "see"
+          ],
+          "explain": "Po when o budoucnosti přítomný čas."
+        },
+        {
+          "id": "en-a2-first-conditional-04",
+          "kind": "gap",
+          "prompt": "If you don't hurry, you ___ miss the train.",
+          "prompt_cs": "Když si nepospíšíš, ujede ti vlak.",
+          "answers": [
+            "will"
+          ],
+          "explain": "Hlavní věta → will."
+        },
+        {
+          "id": "en-a2-first-conditional-05",
+          "kind": "choice",
+          "prompt": "We'll go out if the weather ___ good.",
+          "prompt_cs": "Půjdeme ven, když bude hezky.",
+          "options": [
+            "is",
+            "will be",
+            "be",
+            "was"
+          ],
+          "answers": [
+            "is"
+          ],
+          "explain": "Po if přítomný čas."
+        },
+        {
+          "id": "en-a2-first-conditional-06",
+          "kind": "order",
+          "prompt": "Když přijdeš, budu rád.",
+          "tokens": [
+            "come",
+            "I'll",
+            "if",
+            "happy",
+            "be",
+            "you"
+          ],
+          "answers": [
+            "I'll be happy if you come",
+            "If you come I'll be happy"
+          ],
+          "explain": "Po if přítomný čas (you come), v hlavní větě will."
+        },
+        {
+          "id": "en-a2-first-conditional-07",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Když budu mít čas, pomůžu ti.",
+          "answers": [
+            "If I have time, I'll help you",
+            "If I have time, I will help you",
+            "I'll help you if I have time",
+            "I will help you if I have time"
+          ],
+          "explain": "if + přítomný čas, will + sloveso."
+        },
+        {
+          "id": "en-a2-first-conditional-08",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "If you're hungry, I'll make a sandwich.",
+          "answers": [
+            "Jestli máš hlad, udělám sendvič",
+            "Když máš hlad, udělám sendvič",
+            "Jestli máš hlad, udělám ti sendvič",
+            "Když máš hlad, udělám ti sendvič"
+          ],
+          "explain": "if + přítomný čas, will + sloveso."
+        }
+      ],
+      "objective": "Vytvoříš podmínkovou větu if + přítomný čas, will + sloveso."
     },
     {
       "id": "en-b1-conditionals",

@@ -1,0 +1,3563 @@
+{
+ "language": "it",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "grammar-it-v1",
+ "review_status": "unreviewed",
+ "note": "Italian grammar A1-A2 explained in Czech. Drafted by Claude (2026-11-06); not yet reviewed by an Italian teacher or a native Czech speaker. Treat explanations and accepted answers as drafts.",
+ "units": [
+  {
+   "id": "it-a1-essere",
+   "level": "A1",
+   "title": "Já jsem, ty jsi: sloveso essere",
+   "summary": "Řekneš, kdo jsi, odkud jsi a jaký jsi.",
+   "notes": [
+    {
+     "heading": "Tvary slovesa essere",
+     "text": "**essere** (být) je nepravidelné. Zájmeno se v italštině obvykle vynechává, stejně jako v češtině: **Sono stanco.** = Jsem unavený.",
+     "table": [
+      [
+       "zájmeno",
+       "essere",
+       "česky"
+      ],
+      [
+       "io",
+       "sono",
+       "já jsem"
+      ],
+      [
+       "tu",
+       "sei",
+       "ty jsi"
+      ],
+      [
+       "lui / lei / Lei",
+       "è",
+       "on / ona je, Vy jste"
+      ],
+      [
+       "noi",
+       "siamo",
+       "my jsme"
+      ],
+      [
+       "voi",
+       "siete",
+       "vy jste"
+      ],
+      [
+       "loro",
+       "sono",
+       "oni jsou"
+      ]
+     ]
+    },
+    {
+     "heading": "Vykání",
+     "text": "Vyká se zájmenem **Lei** (s velkým L) a slovesem ve 3. osobě jednotného čísla: **Lei è italiano?** (Jste Ital?)"
+    },
+    {
+     "heading": "Pozor na è × e",
+     "text": "**è** s přízvukem = je, **e** bez přízvuku = a."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Sono ceco.",
+     "cs": "Jsem Čech."
+    },
+    {
+     "text": "Siamo a Roma.",
+     "cs": "Jsme v Římě."
+    },
+    {
+     "text": "Lei è medico?",
+     "cs": "Jste lékař?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-essere-01",
+     "kind": "choice",
+     "prompt": "Io ___ stanco.",
+     "prompt_cs": "Jsem unavený.",
+     "options": [
+      "sono",
+      "sei",
+      "è",
+      "siamo"
+     ],
+     "answers": [
+      "sono"
+     ],
+     "explain": "io → sono."
+    },
+    {
+     "id": "it-a1-essere-02",
+     "kind": "choice",
+     "prompt": "Noi ___ di Praga.",
+     "prompt_cs": "Jsme z Prahy.",
+     "options": [
+      "siamo",
+      "siete",
+      "sono",
+      "è"
+     ],
+     "answers": [
+      "siamo"
+     ],
+     "explain": "noi → siamo."
+    },
+    {
+     "id": "it-a1-essere-03",
+     "kind": "gap",
+     "prompt": "Tu ___ molto gentile. (essere)",
+     "prompt_cs": "Jsi moc milý.",
+     "answers": [
+      "sei"
+     ],
+     "explain": "tu → sei."
+    },
+    {
+     "id": "it-a1-essere-04",
+     "kind": "gap",
+     "prompt": "Marco ___ italiano. (essere)",
+     "prompt_cs": "Marco je Ital.",
+     "answers": [
+      "è"
+     ],
+     "explain": "3. osoba jednotného čísla → è (s přízvukem)."
+    },
+    {
+     "id": "it-a1-essere-05",
+     "kind": "choice",
+     "prompt": "Voi ___ in vacanza?",
+     "prompt_cs": "Jste na dovolené?",
+     "options": [
+      "siete",
+      "siamo",
+      "sono",
+      "sei"
+     ],
+     "answers": [
+      "siete"
+     ],
+     "explain": "voi → siete."
+    },
+    {
+     "id": "it-a1-essere-06",
+     "kind": "order",
+     "prompt": "Ona je učitelka.",
+     "tokens": [
+      "insegnante",
+      "è",
+      "lei"
+     ],
+     "answers": [
+      "Lei è insegnante",
+      "È insegnante lei"
+     ],
+     "explain": "Podmět, sloveso, povolání bez členu."
+    },
+    {
+     "id": "it-a1-essere-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jsme Češi.",
+     "answers": [
+      "Siamo cechi",
+      "Noi siamo cechi"
+     ],
+     "explain": "noi → siamo; národnost malým písmenem."
+    },
+    {
+     "id": "it-a1-essere-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Sono a casa.",
+     "answers": [
+      "Jsem doma",
+      "Jsou doma"
+     ],
+     "explain": "sono je tvar pro io i loro."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-avere",
+   "level": "A1",
+   "title": "Mít: sloveso avere",
+   "summary": "Řekneš, co máš, kolik je ti let a že máš hlad nebo žízeň.",
+   "notes": [
+    {
+     "heading": "Tvary slovesa avere",
+     "text": "**avere** (mít). Písmeno **h** se nevyslovuje.",
+     "table": [
+      [
+       "zájmeno",
+       "avere"
+      ],
+      [
+       "io",
+       "ho"
+      ],
+      [
+       "tu",
+       "hai"
+      ],
+      [
+       "lui / lei",
+       "ha"
+      ],
+      [
+       "noi",
+       "abbiamo"
+      ],
+      [
+       "voi",
+       "avete"
+      ],
+      [
+       "loro",
+       "hanno"
+      ]
+     ]
+    },
+    {
+     "heading": "Věk a pocity",
+     "text": "Italsky se věk, hlad, žízeň, zima i strach „mají“: **Ho dieci anni.** (Je mi deset.) **Ho fame. Ho sete. Ho freddo. Ho paura.**"
+    },
+    {
+     "heading": "ha × a",
+     "text": "**ha** = má, **a** = předložka do, v. Liší se jen písmenem h."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ho un cane.",
+     "cs": "Mám psa."
+    },
+    {
+     "text": "Lei ha otto anni.",
+     "cs": "Je jí osm let."
+    },
+    {
+     "text": "Avete fame?",
+     "cs": "Máte hlad?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-avere-01",
+     "kind": "choice",
+     "prompt": "Io ___ un fratello.",
+     "prompt_cs": "Mám bratra.",
+     "options": [
+      "ho",
+      "hai",
+      "ha",
+      "hanno"
+     ],
+     "answers": [
+      "ho"
+     ],
+     "explain": "io → ho."
+    },
+    {
+     "id": "it-a1-avere-02",
+     "kind": "choice",
+     "prompt": "Loro ___ due figli.",
+     "prompt_cs": "Mají dvě děti.",
+     "options": [
+      "hanno",
+      "sono",
+      "abbiamo",
+      "ha"
+     ],
+     "answers": [
+      "hanno"
+     ],
+     "explain": "loro → hanno."
+    },
+    {
+     "id": "it-a1-avere-03",
+     "kind": "gap",
+     "prompt": "Quanti anni ___? (avere, tu)",
+     "prompt_cs": "Kolik ti je let?",
+     "answers": [
+      "hai"
+     ],
+     "explain": "Věk se vyjadřuje slovesem avere; tu → hai."
+    },
+    {
+     "id": "it-a1-avere-04",
+     "kind": "gap",
+     "prompt": "Noi ___ un gatto. (avere)",
+     "prompt_cs": "Máme kočku.",
+     "answers": [
+      "abbiamo"
+     ],
+     "explain": "noi → abbiamo."
+    },
+    {
+     "id": "it-a1-avere-05",
+     "kind": "choice",
+     "prompt": "Ho ___.",
+     "prompt_cs": "Mám žízeň.",
+     "options": [
+      "sete",
+      "sono sete",
+      "fame di",
+      "assetato"
+     ],
+     "answers": [
+      "sete"
+     ],
+     "explain": "Žízeň se má: avere sete."
+    },
+    {
+     "id": "it-a1-avere-06",
+     "kind": "order",
+     "prompt": "Mám dvě sestry.",
+     "tokens": [
+      "sorelle",
+      "due",
+      "ho"
+     ],
+     "answers": [
+      "Ho due sorelle"
+     ],
+     "explain": "Sloveso + číslovka + podstatné jméno."
+    },
+    {
+     "id": "it-a1-avere-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Je mi dvanáct let.",
+     "answers": [
+      "Ho dodici anni"
+     ],
+     "explain": "Věk = avere + číslo + anni."
+    },
+    {
+     "id": "it-a1-avere-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Avete una domanda?",
+     "answers": [
+      "Máte otázku",
+      "Máte dotaz"
+     ],
+     "explain": "voi avete = vy máte."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-present",
+   "level": "A1",
+   "title": "Přítomný čas: -are, -ere, -ire",
+   "summary": "Popíšeš, co obvykle děláš: parlare, leggere, dormire, finire.",
+   "notes": [
+    {
+     "heading": "Tři skupiny",
+     "text": "Kmen + koncovka podle zakončení infinitivu:",
+     "table": [
+      [
+       "",
+       "parlare",
+       "leggere",
+       "dormire"
+      ],
+      [
+       "io",
+       "parlo",
+       "leggo",
+       "dormo"
+      ],
+      [
+       "tu",
+       "parli",
+       "leggi",
+       "dormi"
+      ],
+      [
+       "lui / lei",
+       "parla",
+       "legge",
+       "dorme"
+      ],
+      [
+       "noi",
+       "parliamo",
+       "leggiamo",
+       "dormiamo"
+      ],
+      [
+       "voi",
+       "parlate",
+       "leggete",
+       "dormite"
+      ],
+      [
+       "loro",
+       "parlano",
+       "leggono",
+       "dormono"
+      ]
+     ]
+    },
+    {
+     "heading": "Slovesa s -isc-",
+     "text": "Část sloves na -ire vkládá **-isc-** (kromě noi a voi): **finire → finisco, finisci, finisce, finiamo, finite, finiscono**. Stejně **capire, preferire, pulire**."
+    },
+    {
+     "heading": "Přízvuk ve 3. osobě množného čísla",
+     "text": "**parlano** se čte s přízvukem na první slabice: PAR-la-no."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Abito a Brno.",
+     "cs": "Bydlím v Brně."
+    },
+    {
+     "text": "Parliamo italiano.",
+     "cs": "Mluvíme italsky."
+    },
+    {
+     "text": "Non capisco.",
+     "cs": "Nerozumím."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-present-01",
+     "kind": "choice",
+     "prompt": "Noi ___ ceco.",
+     "prompt_cs": "Mluvíme česky.",
+     "options": [
+      "parliamo",
+      "parlate",
+      "parlano",
+      "parlo"
+     ],
+     "answers": [
+      "parliamo"
+     ],
+     "explain": "noi → -iamo."
+    },
+    {
+     "id": "it-a1-present-02",
+     "kind": "gap",
+     "prompt": "Voi ___ a Milano? (abitare)",
+     "prompt_cs": "Bydlíte v Miláně?",
+     "answers": [
+      "abitate"
+     ],
+     "explain": "voi u sloves na -are → -ate."
+    },
+    {
+     "id": "it-a1-present-03",
+     "kind": "gap",
+     "prompt": "Loro ___ il giornale. (leggere)",
+     "prompt_cs": "Čtou noviny.",
+     "answers": [
+      "leggono"
+     ],
+     "explain": "loro u sloves na -ere → -ono."
+    },
+    {
+     "id": "it-a1-present-04",
+     "kind": "choice",
+     "prompt": "Tu ___ troppo.",
+     "prompt_cs": "Pracuješ moc.",
+     "options": [
+      "lavori",
+      "lavora",
+      "lavorate",
+      "lavoro"
+     ],
+     "answers": [
+      "lavori"
+     ],
+     "explain": "tu → -i."
+    },
+    {
+     "id": "it-a1-present-05",
+     "kind": "choice",
+     "prompt": "Io non ___.",
+     "prompt_cs": "Nerozumím.",
+     "options": [
+      "capisco",
+      "capo",
+      "capisci",
+      "capiamo"
+     ],
+     "answers": [
+      "capisco"
+     ],
+     "explain": "capire vkládá -isc-: capisco."
+    },
+    {
+     "id": "it-a1-present-06",
+     "kind": "gap",
+     "prompt": "Lei ___ fino a tardi. (dormire)",
+     "prompt_cs": "Spí dlouho.",
+     "answers": [
+      "dorme"
+     ],
+     "explain": "lui/lei u sloves na -ire → -e."
+    },
+    {
+     "id": "it-a1-present-07",
+     "kind": "order",
+     "prompt": "Bydlím v Praze.",
+     "tokens": [
+      "Praga",
+      "abito",
+      "a"
+     ],
+     "answers": [
+      "Abito a Praga"
+     ],
+     "explain": "Ve městě = a; zájmeno io se vynechá."
+    },
+    {
+     "id": "it-a1-present-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Posloucháme hudbu.",
+     "answers": [
+      "Ascoltiamo la musica",
+      "Noi ascoltiamo la musica",
+      "Ascoltiamo musica"
+     ],
+     "explain": "ascoltare, noi → ascoltiamo."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-articles",
+   "level": "A1",
+   "title": "Členy: il, lo, la, l', un, uno, una",
+   "summary": "Vybereš správný člen podle rodu a začátku slova.",
+   "notes": [
+    {
+     "heading": "Určitý člen",
+     "text": "Rod: mužský nebo ženský. Mužský člen závisí na začátku slova: **lo** před s + souhláskou, z, gn, ps, y; **l'** před samohláskou; jinak **il**.",
+     "table": [
+      [
+       "",
+       "jednotné",
+       "množné"
+      ],
+      [
+       "mužský (většina)",
+       "il libro",
+       "i libri"
+      ],
+      [
+       "mužský (s+souhl., z…)",
+       "lo zaino, lo studente",
+       "gli zaini, gli studenti"
+      ],
+      [
+       "mužský (samohláska)",
+       "l'amico",
+       "gli amici"
+      ],
+      [
+       "ženský",
+       "la casa",
+       "le case"
+      ],
+      [
+       "ženský (samohláska)",
+       "l'amica",
+       "le amiche"
+      ]
+     ]
+    },
+    {
+     "heading": "Neurčitý člen",
+     "text": "**un** (mužský), **uno** (mužský před s + souhláskou, z…), **una** (ženský), **un'** (ženský před samohláskou): **un libro, uno zaino, una casa, un'amica**."
+    },
+    {
+     "heading": "Rod podle koncovky",
+     "text": "Slova na **-o** jsou většinou mužského rodu, na **-a** ženského. Na **-e** mohou být obojí: **il pane, la notte**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Il ragazzo e la ragazza.",
+     "cs": "Chlapec a dívka."
+    },
+    {
+     "text": "Ho un'idea.",
+     "cs": "Mám nápad."
+    },
+    {
+     "text": "Gli studenti sono qui.",
+     "cs": "Studenti jsou tady."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-articles-01",
+     "kind": "choice",
+     "prompt": "___ sole è caldo.",
+     "prompt_cs": "Slunce je teplé.",
+     "options": [
+      "Il",
+      "Lo",
+      "La",
+      "L'"
+     ],
+     "answers": [
+      "Il"
+     ],
+     "explain": "sole je mužského rodu a začíná souhláskou → il."
+    },
+    {
+     "id": "it-a1-articles-02",
+     "kind": "choice",
+     "prompt": "___ zio di Marco.",
+     "prompt_cs": "Markův strýc.",
+     "options": [
+      "Lo",
+      "Il",
+      "La",
+      "Gli"
+     ],
+     "answers": [
+      "Lo"
+     ],
+     "explain": "Před z stojí lo."
+    },
+    {
+     "id": "it-a1-articles-03",
+     "kind": "choice",
+     "prompt": "___ amici sono arrivati.",
+     "prompt_cs": "Kamarádi přišli.",
+     "options": [
+      "Gli",
+      "I",
+      "Le",
+      "Lo"
+     ],
+     "answers": [
+      "Gli"
+     ],
+     "explain": "Mužský rod, množné číslo před samohláskou → gli."
+    },
+    {
+     "id": "it-a1-articles-04",
+     "kind": "choice",
+     "prompt": "Ho ___ macchina rossa.",
+     "prompt_cs": "Mám červené auto.",
+     "options": [
+      "una",
+      "un",
+      "uno",
+      "un'"
+     ],
+     "answers": [
+      "una"
+     ],
+     "explain": "macchina je ženského rodu."
+    },
+    {
+     "id": "it-a1-articles-05",
+     "kind": "choice",
+     "prompt": "È ___ amica di Anna.",
+     "prompt_cs": "Je to Annina kamarádka.",
+     "options": [
+      "un'",
+      "una",
+      "un",
+      "uno"
+     ],
+     "answers": [
+      "un'"
+     ],
+     "explain": "Ženský rod před samohláskou → un'."
+    },
+    {
+     "id": "it-a1-articles-06",
+     "kind": "gap",
+     "prompt": "___ case sono grandi.",
+     "prompt_cs": "Domy jsou velké.",
+     "answers": [
+      "Le"
+     ],
+     "explain": "Ženský rod, množné číslo → le."
+    },
+    {
+     "id": "it-a1-articles-07",
+     "kind": "gap",
+     "prompt": "Compro ___ specchio.",
+     "prompt_cs": "Kupuji zrcadlo.",
+     "answers": [
+      "uno"
+     ],
+     "explain": "Před s + souhláskou stojí uno."
+    },
+    {
+     "id": "it-a1-articles-08",
+     "kind": "order",
+     "prompt": "Mám rád ty knihy.",
+     "tokens": [
+      "libri",
+      "piacciono",
+      "i",
+      "mi"
+     ],
+     "answers": [
+      "Mi piacciono i libri"
+     ],
+     "explain": "Po piacere stojí věc s určitým členem."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-plural-adjectives",
+   "level": "A1",
+   "title": "Množné číslo a shoda přídavných jmen",
+   "summary": "Utvoříš množné číslo a přizpůsobíš přídavné jméno rodu a číslu.",
+   "notes": [
+    {
+     "heading": "Množné číslo",
+     "text": "**-o → -i** (libro → libri), **-a → -e** (casa → case), **-e → -i** (pane → pani). Slova s přízvukem na konci a cizí slova se nemění: **la città → le città, il bar → i bar**."
+    },
+    {
+     "heading": "Přídavná jména",
+     "text": "Shodují se s podstatným jménem. Na -o mají čtyři tvary, na -e jen dva.",
+     "table": [
+      [
+       "",
+       "jednotné",
+       "množné"
+      ],
+      [
+       "mužský",
+       "rosso / grande",
+       "rossi / grandi"
+      ],
+      [
+       "ženský",
+       "rossa / grande",
+       "rosse / grandi"
+      ]
+     ]
+    },
+    {
+     "heading": "Postavení",
+     "text": "Většinou **za** podstatným jménem: **una macchina rossa**. Krátká častá (bello, buono, piccolo, grande) často stojí před ním: **un bel ragazzo**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "due gatti neri",
+     "cs": "dvě černé kočky"
+    },
+    {
+     "text": "una casa grande",
+     "cs": "velký dům"
+    },
+    {
+     "text": "Le ragazze sono contente.",
+     "cs": "Dívky jsou spokojené."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-plural-adjectives-01",
+     "kind": "choice",
+     "prompt": "Lei è molto ___.",
+     "prompt_cs": "Je velmi malá.",
+     "options": [
+      "piccola",
+      "piccolo",
+      "piccole",
+      "piccoli"
+     ],
+     "answers": [
+      "piccola"
+     ],
+     "explain": "Ženský rod jednotného čísla → -a."
+    },
+    {
+     "id": "it-a1-plural-adjectives-02",
+     "kind": "choice",
+     "prompt": "Ho due ___.",
+     "prompt_cs": "Mám dva bratry.",
+     "options": [
+      "fratelli",
+      "fratello",
+      "fratelle",
+      "fratellos"
+     ],
+     "answers": [
+      "fratelli"
+     ],
+     "explain": "-o → -i."
+    },
+    {
+     "id": "it-a1-plural-adjectives-03",
+     "kind": "gap",
+     "prompt": "I muri sono ___. (bianco)",
+     "prompt_cs": "Zdi jsou bílé.",
+     "answers": [
+      "bianchi"
+     ],
+     "explain": "Mužský rod množného čísla; -co → -chi, aby zůstala výslovnost [k]."
+    },
+    {
+     "id": "it-a1-plural-adjectives-04",
+     "kind": "gap",
+     "prompt": "Una gonna ___. (verde)",
+     "prompt_cs": "Zelená sukně.",
+     "answers": [
+      "verde"
+     ],
+     "explain": "Přídavná jména na -e mají v jednotném čísle jeden tvar pro oba rody."
+    },
+    {
+     "id": "it-a1-plural-adjectives-05",
+     "kind": "choice",
+     "prompt": "Le città sono ___.",
+     "prompt_cs": "Města jsou krásná.",
+     "options": [
+      "belle",
+      "bella",
+      "belli",
+      "bello"
+     ],
+     "answers": [
+      "belle"
+     ],
+     "explain": "città je ženského rodu, množné číslo → belle."
+    },
+    {
+     "id": "it-a1-plural-adjectives-06",
+     "kind": "order",
+     "prompt": "Mám černou kočku.",
+     "tokens": [
+      "nera",
+      "gatta",
+      "una",
+      "ho"
+     ],
+     "answers": [
+      "Ho una gatta nera"
+     ],
+     "explain": "Barva stojí za podstatným jménem."
+    },
+    {
+     "id": "it-a1-plural-adjectives-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Knihy jsou zajímavé.",
+     "answers": [
+      "I libri sono interessanti"
+     ],
+     "explain": "libro → libri; interessante → interessanti."
+    },
+    {
+     "id": "it-a1-plural-adjectives-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Le case sono vecchie.",
+     "answers": [
+      "Domy jsou staré",
+      "Ty domy jsou staré"
+     ],
+     "explain": "vecchia → vecchie."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-negation-questions",
+   "level": "A1",
+   "title": "Zápor a otázky",
+   "summary": "Řekneš, co neděláš, a zeptáš se na základní věci.",
+   "notes": [
+    {
+     "heading": "Zápor non",
+     "text": "Stačí **non** před slovesem: **Non parlo tedesco.** Dvojí zápor jako v češtině: **Non ho niente.** (Nemám nic.) **Non vedo nessuno.** (Nikoho nevidím.)"
+    },
+    {
+     "heading": "Otázka",
+     "text": "Otázka bez tázacího slova se liší jen intonací: **Parli italiano?** Tázací slova: **dove** (kde), **quando** (kdy), **come** (jak), **perché** (proč), **quanto** (kolik), **chi** (kdo), **che cosa / cosa** (co), **quale** (který)."
+    },
+    {
+     "heading": "Dove è → dov'è",
+     "text": "**Dov'è il bagno?** (Kde je koupelna?) **Com'è?** (Jaké to je?)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Non mangio carne.",
+     "cs": "Nejím maso."
+    },
+    {
+     "text": "Come ti chiami?",
+     "cs": "Jak se jmenuješ?"
+    },
+    {
+     "text": "Dov'è la stazione?",
+     "cs": "Kde je nádraží?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-negation-questions-01",
+     "kind": "choice",
+     "prompt": "Io ___ parlo inglese.",
+     "prompt_cs": "Nemluvím anglicky.",
+     "options": [
+      "non",
+      "no",
+      "nessuno",
+      "niente"
+     ],
+     "answers": [
+      "non"
+     ],
+     "explain": "Zápor u slovesa je non."
+    },
+    {
+     "id": "it-a1-negation-questions-02",
+     "kind": "choice",
+     "prompt": "___ abiti?",
+     "prompt_cs": "Kde bydlíš?",
+     "options": [
+      "Dove",
+      "Quando",
+      "Chi",
+      "Quanto"
+     ],
+     "answers": [
+      "Dove"
+     ],
+     "explain": "dove = kde."
+    },
+    {
+     "id": "it-a1-negation-questions-03",
+     "kind": "choice",
+     "prompt": "___ costa?",
+     "prompt_cs": "Kolik to stojí?",
+     "options": [
+      "Quanto",
+      "Come",
+      "Dove",
+      "Chi"
+     ],
+     "answers": [
+      "Quanto"
+     ],
+     "explain": "quanto = kolik."
+    },
+    {
+     "id": "it-a1-negation-questions-04",
+     "kind": "gap",
+     "prompt": "Non vedo ___. (nikoho)",
+     "prompt_cs": "Nikoho nevidím.",
+     "answers": [
+      "nessuno"
+     ],
+     "explain": "non + nessuno: dvojí zápor jako v češtině."
+    },
+    {
+     "id": "it-a1-negation-questions-05",
+     "kind": "gap",
+     "prompt": "___ ti chiami?",
+     "prompt_cs": "Jak se jmenuješ?",
+     "answers": [
+      "Come"
+     ],
+     "explain": "come = jak."
+    },
+    {
+     "id": "it-a1-negation-questions-06",
+     "kind": "order",
+     "prompt": "Nemám nic.",
+     "tokens": [
+      "niente",
+      "ho",
+      "non"
+     ],
+     "answers": [
+      "Non ho niente"
+     ],
+     "explain": "non + sloveso + niente."
+    },
+    {
+     "id": "it-a1-negation-questions-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Proč pláčeš?",
+     "answers": [
+      "Perché piangi"
+     ],
+     "explain": "perché = proč i protože."
+    },
+    {
+     "id": "it-a1-negation-questions-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Che cosa fai?",
+     "answers": [
+      "Co děláš",
+      "Co děláte"
+     ],
+     "explain": "che cosa = co."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-irregular",
+   "level": "A1",
+   "title": "Nepravidelná slovesa: andare, fare, venire, stare",
+   "summary": "Řekneš, kam jdeš, odkud přicházíš a jak se máš.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Velmi častá nepravidelná slovesa:",
+     "table": [
+      [
+       "",
+       "andare",
+       "fare",
+       "venire",
+       "stare"
+      ],
+      [
+       "io",
+       "vado",
+       "faccio",
+       "vengo",
+       "sto"
+      ],
+      [
+       "tu",
+       "vai",
+       "fai",
+       "vieni",
+       "stai"
+      ],
+      [
+       "lui / lei",
+       "va",
+       "fa",
+       "viene",
+       "sta"
+      ],
+      [
+       "noi",
+       "andiamo",
+       "facciamo",
+       "veniamo",
+       "stiamo"
+      ],
+      [
+       "voi",
+       "andate",
+       "fate",
+       "venite",
+       "state"
+      ],
+      [
+       "loro",
+       "vanno",
+       "fanno",
+       "vengono",
+       "stanno"
+      ]
+     ]
+    },
+    {
+     "heading": "stare",
+     "text": "**stare** znamená mít se, zůstávat, být (o stavu): **Come stai? Sto bene.** (Jak se máš? Mám se dobře.)"
+    },
+    {
+     "heading": "fare",
+     "text": "**fare** se pojí s mnoha výrazy: **fare colazione** (snídat), **fare la spesa** (nakupovat), **fa caldo** (je teplo)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Vado a scuola.",
+     "cs": "Jdu do školy."
+    },
+    {
+     "text": "Che tempo fa?",
+     "cs": "Jaké je počasí?"
+    },
+    {
+     "text": "Vengo da Praga.",
+     "cs": "Jsem z Prahy."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-irregular-01",
+     "kind": "choice",
+     "prompt": "Noi ___ al cinema.",
+     "prompt_cs": "Jdeme do kina.",
+     "options": [
+      "andiamo",
+      "andate",
+      "vanno",
+      "vado"
+     ],
+     "answers": [
+      "andiamo"
+     ],
+     "explain": "andare, noi → andiamo."
+    },
+    {
+     "id": "it-a1-irregular-02",
+     "kind": "choice",
+     "prompt": "Come ___?",
+     "prompt_cs": "Jak se máš?",
+     "options": [
+      "stai",
+      "sei",
+      "fai",
+      "vai"
+     ],
+     "answers": [
+      "stai"
+     ],
+     "explain": "Na zdraví se ptáme slovesem stare."
+    },
+    {
+     "id": "it-a1-irregular-03",
+     "kind": "gap",
+     "prompt": "Loro ___ la spesa. (fare)",
+     "prompt_cs": "Nakupují.",
+     "answers": [
+      "fanno"
+     ],
+     "explain": "fare, loro → fanno."
+    },
+    {
+     "id": "it-a1-irregular-04",
+     "kind": "gap",
+     "prompt": "Io ___ dalla Repubblica Ceca. (venire)",
+     "prompt_cs": "Jsem z České republiky.",
+     "answers": [
+      "vengo"
+     ],
+     "explain": "venire, io → vengo."
+    },
+    {
+     "id": "it-a1-irregular-05",
+     "kind": "choice",
+     "prompt": "Oggi ___ freddo.",
+     "prompt_cs": "Dnes je zima.",
+     "options": [
+      "fa",
+      "è",
+      "ha",
+      "sta"
+     ],
+     "answers": [
+      "fa"
+     ],
+     "explain": "Počasí se vyjadřuje slovesem fare: fa freddo."
+    },
+    {
+     "id": "it-a1-irregular-06",
+     "kind": "gap",
+     "prompt": "Voi ___ in Italia? (andare)",
+     "prompt_cs": "Jedete do Itálie?",
+     "answers": [
+      "andate"
+     ],
+     "explain": "andare, voi → andate."
+    },
+    {
+     "id": "it-a1-irregular-07",
+     "kind": "order",
+     "prompt": "Snídáme v sedm.",
+     "tokens": [
+      "sette",
+      "facciamo",
+      "alle",
+      "colazione"
+     ],
+     "answers": [
+      "Facciamo colazione alle sette"
+     ],
+     "explain": "fare colazione = snídat."
+    },
+    {
+     "id": "it-a1-irregular-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Sto bene, grazie.",
+     "answers": [
+      "Mám se dobře, děkuji",
+      "Mám se dobře, díky",
+      "Dobře, děkuji"
+     ],
+     "explain": "stare bene = mít se dobře."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-prepositions",
+   "level": "A1",
+   "title": "Předložky a stažené tvary: nel, al, del",
+   "summary": "Řekneš, kde jsi a kam jdeš: v Itálii, do Říma, na nádraží.",
+   "notes": [
+    {
+     "heading": "Města a země",
+     "text": "Města: **a** (a Roma, a Praga). Země a regiony: **in** (in Italia, in Toscana). Místnosti a obchody: často **in** (in cucina, in banca)."
+    },
+    {
+     "heading": "Stažené tvary",
+     "text": "Předložky a, da, di, in, su se spojují s určitým členem:",
+     "table": [
+      [
+       "",
+       "il",
+       "lo",
+       "la",
+       "l'",
+       "i",
+       "gli",
+       "le"
+      ],
+      [
+       "a",
+       "al",
+       "allo",
+       "alla",
+       "all'",
+       "ai",
+       "agli",
+       "alle"
+      ],
+      [
+       "di",
+       "del",
+       "dello",
+       "della",
+       "dell'",
+       "dei",
+       "degli",
+       "delle"
+      ],
+      [
+       "in",
+       "nel",
+       "nello",
+       "nella",
+       "nell'",
+       "nei",
+       "negli",
+       "nelle"
+      ],
+      [
+       "da",
+       "dal",
+       "dallo",
+       "dalla",
+       "dall'",
+       "dai",
+       "dagli",
+       "dalle"
+      ],
+      [
+       "su",
+       "sul",
+       "sullo",
+       "sulla",
+       "sull'",
+       "sui",
+       "sugli",
+       "sulle"
+      ]
+     ]
+    },
+    {
+     "heading": "da",
+     "text": "**da** znamená od, z, ale i k někomu: **vado dal medico** (jdu k lékaři)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Abito in Italia.",
+     "cs": "Bydlím v Itálii."
+    },
+    {
+     "text": "Vado al mercato.",
+     "cs": "Jdu na trh."
+    },
+    {
+     "text": "Il libro è sul tavolo.",
+     "cs": "Kniha je na stole."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-prepositions-01",
+     "kind": "choice",
+     "prompt": "Abitiamo ___ Repubblica Ceca.",
+     "prompt_cs": "Bydlíme v České republice.",
+     "options": [
+      "in",
+      "a",
+      "nella",
+      "alla"
+     ],
+     "answers": [
+      "in"
+     ],
+     "explain": "Země → in (bez členu)."
+    },
+    {
+     "id": "it-a1-prepositions-02",
+     "kind": "choice",
+     "prompt": "Vado ___ Roma.",
+     "prompt_cs": "Jedu do Říma.",
+     "options": [
+      "a",
+      "in",
+      "al",
+      "da"
+     ],
+     "answers": [
+      "a"
+     ],
+     "explain": "Města → a."
+    },
+    {
+     "id": "it-a1-prepositions-03",
+     "kind": "choice",
+     "prompt": "Andiamo ___ cinema.",
+     "prompt_cs": "Jdeme do kina.",
+     "options": [
+      "al",
+      "a il",
+      "nel",
+      "allo"
+     ],
+     "answers": [
+      "al"
+     ],
+     "explain": "a + il → al."
+    },
+    {
+     "id": "it-a1-prepositions-04",
+     "kind": "gap",
+     "prompt": "Il gatto è ___ cucina. (in + la)",
+     "prompt_cs": "Kočka je v kuchyni.",
+     "answers": [
+      "nella"
+     ],
+     "explain": "in + la → nella."
+    },
+    {
+     "id": "it-a1-prepositions-05",
+     "kind": "gap",
+     "prompt": "Le chiavi sono ___ tavolo. (su + il)",
+     "prompt_cs": "Klíče jsou na stole.",
+     "answers": [
+      "sul"
+     ],
+     "explain": "su + il → sul."
+    },
+    {
+     "id": "it-a1-prepositions-06",
+     "kind": "gap",
+     "prompt": "Domani vado ___ dentista. (da + il)",
+     "prompt_cs": "Zítra jdu k zubaři.",
+     "answers": [
+      "dal"
+     ],
+     "explain": "Jít k někomu = da; da + il → dal."
+    },
+    {
+     "id": "it-a1-prepositions-07",
+     "kind": "order",
+     "prompt": "Je to Markova kniha.",
+     "tokens": [
+      "libro",
+      "di",
+      "il",
+      "è",
+      "Marco"
+     ],
+     "answers": [
+      "È il libro di Marco"
+     ],
+     "explain": "Vlastnictví = di."
+    },
+    {
+     "id": "it-a1-prepositions-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jsem v bance.",
+     "answers": [
+      "Sono in banca"
+     ],
+     "explain": "Obchody a instituce často in bez členu."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-possessives",
+   "level": "A1",
+   "title": "Přivlastňovací zájmena: il mio, la mia",
+   "summary": "Řekneš, čí co je, a správně použiješ člen u příbuzných.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Přivlastňovací zájmeno se shoduje s **věcí**, ne s vlastníkem, a obvykle má **člen**.",
+     "table": [
+      [
+       "",
+       "m. j.",
+       "ž. j.",
+       "m. mn.",
+       "ž. mn."
+      ],
+      [
+       "můj",
+       "il mio",
+       "la mia",
+       "i miei",
+       "le mie"
+      ],
+      [
+       "tvůj",
+       "il tuo",
+       "la tua",
+       "i tuoi",
+       "le tue"
+      ],
+      [
+       "jeho / její",
+       "il suo",
+       "la sua",
+       "i suoi",
+       "le sue"
+      ],
+      [
+       "náš",
+       "il nostro",
+       "la nostra",
+       "i nostri",
+       "le nostre"
+      ],
+      [
+       "váš",
+       "il vostro",
+       "la vostra",
+       "i vostri",
+       "le vostre"
+      ],
+      [
+       "jejich",
+       "il loro",
+       "la loro",
+       "i loro",
+       "le loro"
+      ]
+     ]
+    },
+    {
+     "heading": "Příbuzní bez členu",
+     "text": "U příbuzného v jednotném čísle se člen vynechává: **mia madre, tuo fratello**. Člen zůstává v množném čísle (**i miei genitori**) a u **loro** (**la loro madre**)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "La mia casa è piccola.",
+     "cs": "Můj dům je malý."
+    },
+    {
+     "text": "Mio padre lavora a Brno.",
+     "cs": "Můj otec pracuje v Brně."
+    },
+    {
+     "text": "I tuoi amici sono simpatici.",
+     "cs": "Tví kamarádi jsou sympatičtí."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-possessives-01",
+     "kind": "choice",
+     "prompt": "___ sorella si chiama Eva.",
+     "prompt_cs": "Moje sestra se jmenuje Eva.",
+     "options": [
+      "Mia",
+      "La mia",
+      "Il mio",
+      "Mio"
+     ],
+     "answers": [
+      "Mia"
+     ],
+     "explain": "Příbuzný v jednotném čísle → bez členu: mia sorella."
+    },
+    {
+     "id": "it-a1-possessives-02",
+     "kind": "choice",
+     "prompt": "Ecco ___ genitori.",
+     "prompt_cs": "To jsou moji rodiče.",
+     "options": [
+      "i miei",
+      "miei",
+      "mie",
+      "le mie"
+     ],
+     "answers": [
+      "i miei"
+     ],
+     "explain": "Množné číslo příbuzných → se členem."
+    },
+    {
+     "id": "it-a1-possessives-03",
+     "kind": "choice",
+     "prompt": "Dov'è ___ macchina?",
+     "prompt_cs": "Kde je tvoje auto?",
+     "options": [
+      "la tua",
+      "tua",
+      "il tuo",
+      "la tuo"
+     ],
+     "answers": [
+      "la tua"
+     ],
+     "explain": "macchina je ženského rodu; nejde o příbuzného → se členem."
+    },
+    {
+     "id": "it-a1-possessives-04",
+     "kind": "gap",
+     "prompt": "Marco ama ___ madre. (jeho)",
+     "prompt_cs": "Marco má rád svou matku.",
+     "answers": [
+      "sua"
+     ],
+     "explain": "madre je ženského rodu; příbuzný → bez členu."
+    },
+    {
+     "id": "it-a1-possessives-05",
+     "kind": "gap",
+     "prompt": "I bambini giocano con ___ cane. (jejich)",
+     "prompt_cs": "Děti si hrají se svým psem.",
+     "answers": [
+      "il loro"
+     ],
+     "explain": "loro má vždy člen."
+    },
+    {
+     "id": "it-a1-possessives-06",
+     "kind": "order",
+     "prompt": "Náš dům je velký.",
+     "tokens": [
+      "casa",
+      "grande",
+      "nostra",
+      "è",
+      "la"
+     ],
+     "answers": [
+      "La nostra casa è grande"
+     ],
+     "explain": "Člen + zájmeno + podstatné jméno."
+    },
+    {
+     "id": "it-a1-possessives-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jeho auto je červené.",
+     "answers": [
+      "La sua macchina è rossa",
+      "La sua auto è rossa"
+     ],
+     "explain": "Rozhoduje rod slova macchina (ženský) → la sua."
+    },
+    {
+     "id": "it-a1-possessives-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Mio fratello ha dieci anni.",
+     "answers": [
+      "Mému bratrovi je deset let",
+      "Mému bratrovi je deset"
+     ],
+     "explain": "Věk se v italštině vyjadřuje slovesem avere."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-ce-piacere",
+   "level": "A1",
+   "title": "C'è, ci sono a sloveso piacere",
+   "summary": "Řekneš, co kde je a co máš rád.",
+   "notes": [
+    {
+     "heading": "C'è a ci sono",
+     "text": "**c'è** = je (tam), existuje (jednotné číslo), **ci sono** = jsou (množné): **C'è un bar qui vicino? Ci sono molti turisti.**"
+    },
+    {
+     "heading": "piacere",
+     "text": "Jako české „líbí se mi“: věc, která se líbí, je podmět. **Mi piace la pizza.** (jednotné číslo) **Mi piacciono i gatti.** (množné) **Mi piace leggere.** (infinitiv = jednotné číslo)",
+     "table": [
+      [
+       "komu",
+       "zájmeno"
+      ],
+      [
+       "mně",
+       "mi"
+      ],
+      [
+       "tobě",
+       "ti"
+      ],
+      [
+       "jemu / jí",
+       "gli / le"
+      ],
+      [
+       "nám",
+       "ci"
+      ],
+      [
+       "vám",
+       "vi"
+      ],
+      [
+       "jim",
+       "gli"
+      ]
+     ]
+    },
+    {
+     "heading": "Zápor",
+     "text": "**Non mi piace il caffè.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "C'è un problema.",
+     "cs": "Je tu problém."
+    },
+    {
+     "text": "Mi piace il mare.",
+     "cs": "Mám rád moře."
+    },
+    {
+     "text": "Ti piacciono i film italiani?",
+     "cs": "Máš rád italské filmy?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-ce-piacere-01",
+     "kind": "choice",
+     "prompt": "Qui ___ molti negozi.",
+     "prompt_cs": "Je tu hodně obchodů.",
+     "options": [
+      "ci sono",
+      "c'è",
+      "sono",
+      "ha"
+     ],
+     "answers": [
+      "ci sono"
+     ],
+     "explain": "Množné číslo → ci sono."
+    },
+    {
+     "id": "it-a1-ce-piacere-02",
+     "kind": "choice",
+     "prompt": "___ un supermercato qui vicino?",
+     "prompt_cs": "Je tu blízko supermarket?",
+     "options": [
+      "C'è",
+      "Ci sono",
+      "È",
+      "Ha"
+     ],
+     "answers": [
+      "C'è"
+     ],
+     "explain": "Jednotné číslo → c'è."
+    },
+    {
+     "id": "it-a1-ce-piacere-03",
+     "kind": "choice",
+     "prompt": "Mi ___ i gatti.",
+     "prompt_cs": "Mám rád kočky.",
+     "options": [
+      "piacciono",
+      "piace",
+      "piaccio",
+      "piacciamo"
+     ],
+     "answers": [
+      "piacciono"
+     ],
+     "explain": "Podmět i gatti je v množném čísle → piacciono."
+    },
+    {
+     "id": "it-a1-ce-piacere-04",
+     "kind": "choice",
+     "prompt": "Ti ___ ballare?",
+     "prompt_cs": "Rád tancuješ?",
+     "options": [
+      "piace",
+      "piacciono",
+      "piaci",
+      "piaccio"
+     ],
+     "answers": [
+      "piace"
+     ],
+     "explain": "Infinitiv se chová jako jednotné číslo → piace."
+    },
+    {
+     "id": "it-a1-ce-piacere-05",
+     "kind": "gap",
+     "prompt": "A Marco ___ piace il calcio.",
+     "prompt_cs": "Marco má rád fotbal.",
+     "answers": [
+      "gli"
+     ],
+     "explain": "jemu = gli."
+    },
+    {
+     "id": "it-a1-ce-piacere-06",
+     "kind": "gap",
+     "prompt": "A Giulia ___ piace leggere.",
+     "prompt_cs": "Giulia ráda čte.",
+     "answers": [
+      "le"
+     ],
+     "explain": "jí = le."
+    },
+    {
+     "id": "it-a1-ce-piacere-07",
+     "kind": "order",
+     "prompt": "Nemám rád kávu.",
+     "tokens": [
+      "caffè",
+      "piace",
+      "il",
+      "mi",
+      "non"
+     ],
+     "answers": [
+      "Non mi piace il caffè"
+     ],
+     "explain": "non + mi + piace."
+    },
+    {
+     "id": "it-a1-ce-piacere-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Máme rádi moře.",
+     "answers": [
+      "Ci piace il mare",
+      "A noi piace il mare"
+     ],
+     "explain": "nám = ci."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-modals",
+   "level": "A1",
+   "title": "Potere, volere, dovere",
+   "summary": "Řekneš, co můžeš, chceš a musíš udělat.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Po těchto slovesech stojí **infinitiv**: **Posso entrare?**",
+     "table": [
+      [
+       "",
+       "potere",
+       "volere",
+       "dovere"
+      ],
+      [
+       "io",
+       "posso",
+       "voglio",
+       "devo"
+      ],
+      [
+       "tu",
+       "puoi",
+       "vuoi",
+       "devi"
+      ],
+      [
+       "lui / lei",
+       "può",
+       "vuole",
+       "deve"
+      ],
+      [
+       "noi",
+       "possiamo",
+       "vogliamo",
+       "dobbiamo"
+      ],
+      [
+       "voi",
+       "potete",
+       "volete",
+       "dovete"
+      ],
+      [
+       "loro",
+       "possono",
+       "vogliono",
+       "devono"
+      ]
+     ]
+    },
+    {
+     "heading": "Zdvořile",
+     "text": "**Vorrei** (chtěl bych) je zdvořilejší než voglio: **Vorrei un caffè, per favore.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Posso entrare?",
+     "cs": "Můžu dál?"
+    },
+    {
+     "text": "Dobbiamo lavorare.",
+     "cs": "Musíme pracovat."
+    },
+    {
+     "text": "Vorrei un gelato.",
+     "cs": "Chtěl bych zmrzlinu."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-modals-01",
+     "kind": "choice",
+     "prompt": "Tu ___ venire domani?",
+     "prompt_cs": "Můžeš přijít zítra?",
+     "options": [
+      "puoi",
+      "può",
+      "potete",
+      "posso"
+     ],
+     "answers": [
+      "puoi"
+     ],
+     "explain": "potere, tu → puoi."
+    },
+    {
+     "id": "it-a1-modals-02",
+     "kind": "choice",
+     "prompt": "Loro ___ partire presto.",
+     "prompt_cs": "Musí odejít brzy.",
+     "options": [
+      "devono",
+      "dovono",
+      "deve",
+      "dobbiamo"
+     ],
+     "answers": [
+      "devono"
+     ],
+     "explain": "dovere, loro → devono."
+    },
+    {
+     "id": "it-a1-modals-03",
+     "kind": "gap",
+     "prompt": "Voi ___ un tè? (volere)",
+     "prompt_cs": "Chcete čaj?",
+     "answers": [
+      "volete"
+     ],
+     "explain": "volere, voi → volete."
+    },
+    {
+     "id": "it-a1-modals-04",
+     "kind": "gap",
+     "prompt": "Io ___ dormire. (volere)",
+     "prompt_cs": "Chci spát.",
+     "answers": [
+      "voglio"
+     ],
+     "explain": "volere, io → voglio."
+    },
+    {
+     "id": "it-a1-modals-05",
+     "kind": "choice",
+     "prompt": "Vorrei ___ una camera.",
+     "prompt_cs": "Chtěl bych si rezervovat pokoj.",
+     "options": [
+      "prenotare",
+      "prenoto",
+      "prenotato",
+      "prenoti"
+     ],
+     "answers": [
+      "prenotare"
+     ],
+     "explain": "Po modálním slovese stojí infinitiv."
+    },
+    {
+     "id": "it-a1-modals-06",
+     "kind": "order",
+     "prompt": "Nemůžu přijít.",
+     "tokens": [
+      "venire",
+      "posso",
+      "non"
+     ],
+     "answers": [
+      "Non posso venire"
+     ],
+     "explain": "non + modální sloveso + infinitiv."
+    },
+    {
+     "id": "it-a1-modals-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Musíme se učit.",
+     "answers": [
+      "Dobbiamo studiare",
+      "Noi dobbiamo studiare"
+     ],
+     "explain": "dovere + infinitiv."
+    },
+    {
+     "id": "it-a1-modals-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Lei vuole dormire.",
+     "answers": [
+      "Chce spát",
+      "Ona chce spát",
+      "Chcete spát"
+     ],
+     "explain": "vuole = chce; Lei může být i vykání."
+    }
+   ]
+  },
+  {
+   "id": "it-a1-reflexive",
+   "level": "A1",
+   "title": "Zvratná slovesa: chiamarsi, alzarsi",
+   "summary": "Představíš se a popíšeš svůj den.",
+   "notes": [
+    {
+     "heading": "Zvratné zájmeno",
+     "text": "Zájmeno stojí před slovesem: **mi, ti, si, ci, vi, si**.",
+     "table": [
+      [
+       "",
+       "alzarsi (vstávat)"
+      ],
+      [
+       "io",
+       "mi alzo"
+      ],
+      [
+       "tu",
+       "ti alzi"
+      ],
+      [
+       "lui / lei",
+       "si alza"
+      ],
+      [
+       "noi",
+       "ci alziamo"
+      ],
+      [
+       "voi",
+       "vi alzate"
+      ],
+      [
+       "loro",
+       "si alzano"
+      ]
+     ]
+    },
+    {
+     "heading": "Rozdíly od češtiny",
+     "text": "Zvratná jsou i slovesa, která česky zvratná nejsou: **svegliarsi** (probudit se), **sentirsi** (cítit se), **riposarsi** (odpočívat), **divertirsi** (bavit se)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Mi chiamo Petr.",
+     "cs": "Jmenuji se Petr."
+    },
+    {
+     "text": "Ci alziamo alle sette.",
+     "cs": "Vstáváme v sedm."
+    },
+    {
+     "text": "Come ti senti?",
+     "cs": "Jak se cítíš?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a1-reflexive-01",
+     "kind": "choice",
+     "prompt": "Come ___ chiami?",
+     "prompt_cs": "Jak se jmenuješ?",
+     "options": [
+      "ti",
+      "si",
+      "mi",
+      "vi"
+     ],
+     "answers": [
+      "ti"
+     ],
+     "explain": "tu → ti."
+    },
+    {
+     "id": "it-a1-reflexive-02",
+     "kind": "choice",
+     "prompt": "Loro ___ divertono molto.",
+     "prompt_cs": "Moc se baví.",
+     "options": [
+      "si",
+      "ci",
+      "vi",
+      "li"
+     ],
+     "answers": [
+      "si"
+     ],
+     "explain": "loro → si."
+    },
+    {
+     "id": "it-a1-reflexive-03",
+     "kind": "gap",
+     "prompt": "Io ___ sveglio alle sei.",
+     "prompt_cs": "Budím se v šest.",
+     "answers": [
+      "mi"
+     ],
+     "explain": "io → mi."
+    },
+    {
+     "id": "it-a1-reflexive-04",
+     "kind": "gap",
+     "prompt": "Noi ___ riposiamo la domenica.",
+     "prompt_cs": "V neděli odpočíváme.",
+     "answers": [
+      "ci"
+     ],
+     "explain": "noi → ci."
+    },
+    {
+     "id": "it-a1-reflexive-05",
+     "kind": "choice",
+     "prompt": "Mia madre ___ alza presto.",
+     "prompt_cs": "Moje matka vstává brzy.",
+     "options": [
+      "si",
+      "se",
+      "ci",
+      "mi"
+     ],
+     "answers": [
+      "si"
+     ],
+     "explain": "lui/lei → si."
+    },
+    {
+     "id": "it-a1-reflexive-06",
+     "kind": "order",
+     "prompt": "Nevstávám brzy.",
+     "tokens": [
+      "presto",
+      "alzo",
+      "mi",
+      "non"
+     ],
+     "answers": [
+      "Non mi alzo presto"
+     ],
+     "explain": "non + zájmeno + sloveso."
+    },
+    {
+     "id": "it-a1-reflexive-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jak se jmenujete? (vykání)",
+     "answers": [
+      "Come si chiama",
+      "Lei come si chiama",
+      "Come si chiama Lei"
+     ],
+     "explain": "Lei → si chiama."
+    },
+    {
+     "id": "it-a1-reflexive-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Vi lavate le mani?",
+     "answers": [
+      "Myjete si ruce",
+      "Umýváte si ruce"
+     ],
+     "explain": "lavarsi le mani = mýt si ruce."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-passato-avere",
+   "level": "A2",
+   "title": "Minulý čas: passato prossimo s avere",
+   "summary": "Řekneš, co jsi dělal včera nebo o víkendu.",
+   "notes": [
+    {
+     "heading": "Stavba",
+     "text": "Passato prossimo = přítomný čas **avere** + **příčestí**: **Ho mangiato.** = Jedl jsem."
+    },
+    {
+     "heading": "Příčestí",
+     "text": "-are → **-ato**, -ere → **-uto**, -ire → **-ito**: parlato, avuto, dormito. Časté nepravidelné:",
+     "table": [
+      [
+       "infinitiv",
+       "příčestí"
+      ],
+      [
+       "fare",
+       "fatto"
+      ],
+      [
+       "prendere",
+       "preso"
+      ],
+      [
+       "vedere",
+       "visto"
+      ],
+      [
+       "leggere",
+       "letto"
+      ],
+      [
+       "scrivere",
+       "scritto"
+      ],
+      [
+       "bere",
+       "bevuto"
+      ],
+      [
+       "aprire",
+       "aperto"
+      ],
+      [
+       "dire",
+       "detto"
+      ]
+     ]
+    },
+    {
+     "heading": "Zápor",
+     "text": "**Non ho mangiato.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ieri ho lavorato.",
+     "cs": "Včera jsem pracoval."
+    },
+    {
+     "text": "Abbiamo visto un film.",
+     "cs": "Viděli jsme film."
+    },
+    {
+     "text": "Non ha finito.",
+     "cs": "Nedokončil to."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-passato-avere-01",
+     "kind": "choice",
+     "prompt": "Ieri ___ giocato a calcio.",
+     "prompt_cs": "Včera jsme hráli fotbal.",
+     "options": [
+      "abbiamo",
+      "siamo",
+      "avete",
+      "hanno"
+     ],
+     "answers": [
+      "abbiamo"
+     ],
+     "explain": "giocare se pojí s avere."
+    },
+    {
+     "id": "it-a2-passato-avere-02",
+     "kind": "choice",
+     "prompt": "Hai ___ quel libro?",
+     "prompt_cs": "Četl jsi tu knihu?",
+     "options": [
+      "letto",
+      "leggiuto",
+      "leggito",
+      "legge"
+     ],
+     "answers": [
+      "letto"
+     ],
+     "explain": "leggere → letto."
+    },
+    {
+     "id": "it-a2-passato-avere-03",
+     "kind": "gap",
+     "prompt": "Ho ___ un caffè. (prendere)",
+     "prompt_cs": "Dal jsem si kávu.",
+     "answers": [
+      "preso"
+     ],
+     "explain": "prendere → preso."
+    },
+    {
+     "id": "it-a2-passato-avere-04",
+     "kind": "gap",
+     "prompt": "Hanno ___ i compiti. (finire)",
+     "prompt_cs": "Dokončili úkoly.",
+     "answers": [
+      "finito"
+     ],
+     "explain": "-ire → -ito."
+    },
+    {
+     "id": "it-a2-passato-avere-05",
+     "kind": "choice",
+     "prompt": "Che cosa hai ___ ieri?",
+     "prompt_cs": "Co jsi dělal včera?",
+     "options": [
+      "fatto",
+      "fato",
+      "faciuto",
+      "fare"
+     ],
+     "answers": [
+      "fatto"
+     ],
+     "explain": "fare → fatto."
+    },
+    {
+     "id": "it-a2-passato-avere-06",
+     "kind": "order",
+     "prompt": "Neviděl jsem ho.",
+     "tokens": [
+      "visto",
+      "l'ho",
+      "non"
+     ],
+     "answers": [
+      "Non l'ho visto"
+     ],
+     "explain": "Zájmeno lo se před ho zkracuje: l'ho."
+    },
+    {
+     "id": "it-a2-passato-avere-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Napsal jsem dopis.",
+     "answers": [
+      "Ho scritto una lettera"
+     ],
+     "explain": "scrivere → scritto."
+    },
+    {
+     "id": "it-a2-passato-avere-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Abbiamo dormito bene.",
+     "answers": [
+      "Spali jsme dobře",
+      "Dobře jsme se vyspali",
+      "Spaly jsme dobře"
+     ],
+     "explain": "dormire → dormito."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-passato-essere",
+   "level": "A2",
+   "title": "Minulý čas: passato prossimo s essere",
+   "summary": "Popíšeš cestu a pohyb v minulosti: šel jsem, přijela, narodil se.",
+   "notes": [
+    {
+     "heading": "Slovesa s essere",
+     "text": "S **essere** se pojí slovesa pohybu a změny stavu (**andare, venire, arrivare, partire, uscire, entrare, tornare, restare, stare, nascere, morire, diventare, cadere**), sloveso essere samo a všechna **zvratná** slovesa."
+    },
+    {
+     "heading": "Shoda",
+     "text": "Příčestí se shoduje s podmětem: **è andato, è andata, sono andati, sono andate**."
+    },
+    {
+     "heading": "Zvratná slovesa",
+     "text": "**Mi sono alzato/a alle sette.** (Vstal(a) jsem v sedm.)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Lei è arrivata ieri.",
+     "cs": "Přijela včera."
+    },
+    {
+     "text": "Siamo andati al mare.",
+     "cs": "Jeli jsme k moři."
+    },
+    {
+     "text": "Sono nato a Brno.",
+     "cs": "Narodil jsem se v Brně."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-passato-essere-01",
+     "kind": "choice",
+     "prompt": "Loro ___ partiti alle otto.",
+     "prompt_cs": "Odjeli v osm.",
+     "options": [
+      "sono",
+      "hanno",
+      "siete",
+      "è"
+     ],
+     "answers": [
+      "sono"
+     ],
+     "explain": "partire se pojí s essere."
+    },
+    {
+     "id": "it-a2-passato-essere-02",
+     "kind": "choice",
+     "prompt": "Maria è ___ tardi.",
+     "prompt_cs": "Marie přišla pozdě.",
+     "options": [
+      "arrivata",
+      "arrivato",
+      "arrivati",
+      "arrivare"
+     ],
+     "answers": [
+      "arrivata"
+     ],
+     "explain": "Shoda s podmětem: Maria → -a."
+    },
+    {
+     "id": "it-a2-passato-essere-03",
+     "kind": "choice",
+     "prompt": "Abbiamo ___ al ristorante.",
+     "prompt_cs": "Jedli jsme v restauraci.",
+     "options": [
+      "mangiato",
+      "mangiati",
+      "mangiata",
+      "mangiare"
+     ],
+     "answers": [
+      "mangiato"
+     ],
+     "explain": "U avere se příčestí neshoduje s podmětem."
+    },
+    {
+     "id": "it-a2-passato-essere-04",
+     "kind": "gap",
+     "prompt": "Le ragazze sono ___ a casa. (restare)",
+     "prompt_cs": "Dívky zůstaly doma.",
+     "answers": [
+      "restate"
+     ],
+     "explain": "Ženský rod, množné číslo → -e."
+    },
+    {
+     "id": "it-a2-passato-essere-05",
+     "kind": "gap",
+     "prompt": "Mi ___ svegliato tardi. (essere)",
+     "prompt_cs": "Probudil jsem se pozdě.",
+     "answers": [
+      "sono"
+     ],
+     "explain": "Zvratná slovesa → essere."
+    },
+    {
+     "id": "it-a2-passato-essere-06",
+     "kind": "order",
+     "prompt": "Šli jsme do kina.",
+     "tokens": [
+      "andati",
+      "cinema",
+      "siamo",
+      "al"
+     ],
+     "answers": [
+      "Siamo andati al cinema"
+     ],
+     "explain": "andare + essere; shoda andati."
+    },
+    {
+     "id": "it-a2-passato-essere-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Spadla.",
+     "answers": [
+      "È caduta",
+      "Lei è caduta"
+     ],
+     "explain": "cadere + essere; ženský rod → caduta."
+    },
+    {
+     "id": "it-a2-passato-essere-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Sono tornati tardi.",
+     "answers": [
+      "Vrátili se pozdě",
+      "Vrátili se domů pozdě"
+     ],
+     "explain": "tornare = vrátit se."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-imperfetto",
+   "level": "A2",
+   "title": "Imperfetto: jaké to bylo",
+   "summary": "Popíšeš, jaké to bylo a co se dělávalo, a odlišíš to od jednorázové události.",
+   "notes": [
+    {
+     "heading": "Tvoření",
+     "text": "Kmen infinitivu + **-vo, -vi, -va, -vamo, -vate, -vano** (s tematickou samohláskou): parla-vo, legge-vo, dormi-vo. Nepravidelné: **essere → ero, eri, era, eravamo, eravate, erano**; **fare → facevo**; **bere → bevevo**.",
+     "table": [
+      [
+       "",
+       "parlare",
+       "essere"
+      ],
+      [
+       "io",
+       "parlavo",
+       "ero"
+      ],
+      [
+       "tu",
+       "parlavi",
+       "eri"
+      ],
+      [
+       "lui",
+       "parlava",
+       "era"
+      ],
+      [
+       "noi",
+       "parlavamo",
+       "eravamo"
+      ],
+      [
+       "voi",
+       "parlavate",
+       "eravate"
+      ],
+      [
+       "loro",
+       "parlavano",
+       "erano"
+      ]
+     ]
+    },
+    {
+     "heading": "Imperfetto × passato prossimo",
+     "text": "**Imperfetto** popisuje kulisu, stav a zvyk. **Passato prossimo** vypráví jednotlivé události. Česky to často odpovídá nedokonavému × dokonavému vidu: **Leggevo quando è arrivato.** (Četl jsem, když přišel.)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Quando ero piccolo, abitavo a Ostrava.",
+     "cs": "Když jsem byl malý, bydlel jsem v Ostravě."
+    },
+    {
+     "text": "Faceva bel tempo.",
+     "cs": "Bylo hezky."
+    },
+    {
+     "text": "Da bambino giocavo a calcio.",
+     "cs": "Jako dítě jsem hrával fotbal."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-imperfetto-01",
+     "kind": "choice",
+     "prompt": "Quando ___ bambino, avevo un cane.",
+     "prompt_cs": "Když jsem byl dítě, měl jsem psa.",
+     "options": [
+      "ero",
+      "sono stato",
+      "sono",
+      "era"
+     ],
+     "answers": [
+      "ero"
+     ],
+     "explain": "Stav v minulosti → imperfetto."
+    },
+    {
+     "id": "it-a2-imperfetto-02",
+     "kind": "choice",
+     "prompt": "___ quando sono uscito.",
+     "prompt_cs": "Pršelo, když jsem vyšel ven.",
+     "options": [
+      "Pioveva",
+      "È piovuto",
+      "Piove",
+      "Pioverà"
+     ],
+     "answers": [
+      "Pioveva"
+     ],
+     "explain": "Kulisa děje → imperfetto."
+    },
+    {
+     "id": "it-a2-imperfetto-03",
+     "kind": "gap",
+     "prompt": "Ogni estate ___ in Italia. (andare, noi)",
+     "prompt_cs": "Každé léto jsme jezdili do Itálie.",
+     "answers": [
+      "andavamo"
+     ],
+     "explain": "Opakovaný děj → imperfetto."
+    },
+    {
+     "id": "it-a2-imperfetto-04",
+     "kind": "gap",
+     "prompt": "Tu ___ la TV? (guardare)",
+     "prompt_cs": "Díval ses na televizi?",
+     "answers": [
+      "guardavi"
+     ],
+     "explain": "tu → -vi."
+    },
+    {
+     "id": "it-a2-imperfetto-05",
+     "kind": "choice",
+     "prompt": "All'improvviso il telefono ___.",
+     "prompt_cs": "Najednou zazvonil telefon.",
+     "options": [
+      "ha squillato",
+      "squillava",
+      "squilla",
+      "squillavi"
+     ],
+     "answers": [
+      "ha squillato"
+     ],
+     "explain": "Jednorázová událost → passato prossimo."
+    },
+    {
+     "id": "it-a2-imperfetto-06",
+     "kind": "gap",
+     "prompt": "Loro ___ stanchi. (essere)",
+     "prompt_cs": "Byli unavení.",
+     "answers": [
+      "erano"
+     ],
+     "explain": "essere → erano."
+    },
+    {
+     "id": "it-a2-imperfetto-07",
+     "kind": "order",
+     "prompt": "Bylo hezky.",
+     "tokens": [
+      "tempo",
+      "bel",
+      "faceva"
+     ],
+     "answers": [
+      "Faceva bel tempo"
+     ],
+     "explain": "Počasí v minulosti → imperfetto od fare."
+    },
+    {
+     "id": "it-a2-imperfetto-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Když jsem byl malý, hrál jsem si venku.",
+     "answers": [
+      "Quando ero piccolo, giocavo fuori",
+      "Quando ero piccola, giocavo fuori"
+     ],
+     "explain": "Popis a zvyk → imperfetto."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-object-pronouns",
+   "level": "A2",
+   "title": "Zájmena v předmětu: lo, la, li, gli, le",
+   "summary": "Nahradíš podstatné jméno zájmenem: vidím ho, dám jí to.",
+   "notes": [
+    {
+     "heading": "Přímý a nepřímý předmět",
+     "text": "Přímý (koho, co): **lo, la, li, le**. Nepřímý (komu): **gli** (jemu, jim), **le** (jí, Vám). 1. a 2. osoba: **mi, ti, ci, vi**.",
+     "table": [
+      [
+       "",
+       "přímý",
+       "nepřímý"
+      ],
+      [
+       "on",
+       "lo",
+       "gli"
+      ],
+      [
+       "ona",
+       "la",
+       "le"
+      ],
+      [
+       "oni",
+       "li",
+       "gli"
+      ],
+      [
+       "ony",
+       "le",
+       "gli"
+      ]
+     ]
+    },
+    {
+     "heading": "Postavení",
+     "text": "Před časovaným slovesem: **Lo vedo.** Po infinitivu se připojí: **Voglio vederlo** (nebo **Lo voglio vedere**)."
+    },
+    {
+     "heading": "Shoda v minulém čase",
+     "text": "U lo, la, li, le se příčestí shoduje: **L'ho vista.** (Viděl jsem ji.) **Li ho comprati.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Conosci Marco? Sì, lo conosco.",
+     "cs": "Znáš Marka? Ano, znám ho."
+    },
+    {
+     "text": "Gli telefono stasera.",
+     "cs": "Zavolám mu večer."
+    },
+    {
+     "text": "La pizza? L'ho mangiata.",
+     "cs": "Pizzu? Snědl jsem ji."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-object-pronouns-01",
+     "kind": "choice",
+     "prompt": "Questa gonna? ___ prendo.",
+     "prompt_cs": "Tu sukni? Vezmu si ji.",
+     "options": [
+      "La",
+      "Lo",
+      "Le",
+      "Gli"
+     ],
+     "answers": [
+      "La"
+     ],
+     "explain": "gonna je ženského rodu, přímý předmět → la."
+    },
+    {
+     "id": "it-a2-object-pronouns-02",
+     "kind": "choice",
+     "prompt": "Parli a tua madre? Sì, ___ parlo.",
+     "prompt_cs": "Mluvíš s matkou? Ano, mluvím s ní.",
+     "options": [
+      "le",
+      "la",
+      "gli",
+      "lo"
+     ],
+     "answers": [
+      "le"
+     ],
+     "explain": "parlare a + ona → le."
+    },
+    {
+     "id": "it-a2-object-pronouns-03",
+     "kind": "choice",
+     "prompt": "Scrivo a Paolo. ___ scrivo.",
+     "prompt_cs": "Píšu Pavlovi. Píšu mu.",
+     "options": [
+      "Gli",
+      "Lo",
+      "Le",
+      "Li"
+     ],
+     "answers": [
+      "Gli"
+     ],
+     "explain": "jemu = gli."
+    },
+    {
+     "id": "it-a2-object-pronouns-04",
+     "kind": "gap",
+     "prompt": "I biglietti? ___ ho comprati. (je)",
+     "prompt_cs": "Lístky? Koupil jsem je.",
+     "answers": [
+      "Li"
+     ],
+     "explain": "Mužský rod množného čísla, přímý předmět → li."
+    },
+    {
+     "id": "it-a2-object-pronouns-05",
+     "kind": "choice",
+     "prompt": "Voglio ___.",
+     "prompt_cs": "Chci ho vidět.",
+     "options": [
+      "vederlo",
+      "lo vedere",
+      "vedergli",
+      "vederla"
+     ],
+     "answers": [
+      "vederlo"
+     ],
+     "explain": "Zájmeno se připojuje k infinitivu."
+    },
+    {
+     "id": "it-a2-object-pronouns-06",
+     "kind": "order",
+     "prompt": "Vidím ji.",
+     "tokens": [
+      "vedo",
+      "la"
+     ],
+     "answers": [
+      "La vedo"
+     ],
+     "explain": "Zájmeno stojí před slovesem."
+    },
+    {
+     "id": "it-a2-object-pronouns-07",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Ti capisco.",
+     "answers": [
+      "Rozumím ti",
+      "Chápu tě"
+     ],
+     "explain": "ti = tobě / tě."
+    },
+    {
+     "id": "it-a2-object-pronouns-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pomůžu ti.",
+     "answers": [
+      "Ti aiuto"
+     ],
+     "explain": "aiutare qualcuno → přímý předmět ti."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-ci-ne",
+   "level": "A2",
+   "title": "Částice ci a ne",
+   "summary": "Řekneš „tam“ a „toho“ bez opakování slov: Ci vado. Ne voglio due.",
+   "notes": [
+    {
+     "heading": "ci",
+     "text": "**ci** nahrazuje místo (tam): **Vai a Roma? Sì, ci vado domani.** Pevná spojení: **c'è, ci sono, ci vuole** (je potřeba)."
+    },
+    {
+     "heading": "ne",
+     "text": "**ne** nahrazuje množství nebo výraz s di (toho, z toho): **Quanti fratelli hai? Ne ho due. Quanto pane vuoi? Ne voglio un po'.**"
+    },
+    {
+     "heading": "Postavení",
+     "text": "Před slovesem: **Non ci vado. Ne ho tre.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ci andiamo insieme?",
+     "cs": "Půjdeme tam spolu?"
+    },
+    {
+     "text": "Mele? Ne ho comprate cinque.",
+     "cs": "Jablka? Koupil jsem pět."
+    },
+    {
+     "text": "Ci vuole tempo.",
+     "cs": "Chce to čas."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-ci-ne-01",
+     "kind": "choice",
+     "prompt": "Vai al mercato? Sì, ___ vado.",
+     "prompt_cs": "Jdeš na trh? Ano, jdu tam.",
+     "options": [
+      "ci",
+      "ne",
+      "lo",
+      "gli"
+     ],
+     "answers": [
+      "ci"
+     ],
+     "explain": "Místo → ci."
+    },
+    {
+     "id": "it-a2-ci-ne-02",
+     "kind": "choice",
+     "prompt": "Hai figli? Sì, ___ ho tre.",
+     "prompt_cs": "Máš děti? Ano, mám tři.",
+     "options": [
+      "ne",
+      "ci",
+      "li",
+      "gli"
+     ],
+     "answers": [
+      "ne"
+     ],
+     "explain": "Množství → ne."
+    },
+    {
+     "id": "it-a2-ci-ne-03",
+     "kind": "choice",
+     "prompt": "Vuoi del tè? No, grazie, non ___ voglio.",
+     "prompt_cs": "Chceš čaj? Ne, děkuji, nechci.",
+     "options": [
+      "ne",
+      "ci",
+      "lo",
+      "gli"
+     ],
+     "answers": [
+      "ne"
+     ],
+     "explain": "Část něčeho → ne."
+    },
+    {
+     "id": "it-a2-ci-ne-04",
+     "kind": "gap",
+     "prompt": "Quanto tempo ___ vuole?",
+     "prompt_cs": "Jak dlouho to trvá?",
+     "answers": [
+      "ci"
+     ],
+     "explain": "ci vuole = je potřeba, trvá to."
+    },
+    {
+     "id": "it-a2-ci-ne-05",
+     "kind": "gap",
+     "prompt": "Abiti a Milano da molto? Sì, ___ abito da dieci anni.",
+     "prompt_cs": "Bydlíš v Miláně dlouho? Ano, bydlím tam deset let.",
+     "answers": [
+      "ci"
+     ],
+     "explain": "Místo → ci."
+    },
+    {
+     "id": "it-a2-ci-ne-06",
+     "kind": "order",
+     "prompt": "Nejdu tam.",
+     "tokens": [
+      "vado",
+      "ci",
+      "non"
+     ],
+     "answers": [
+      "Non ci vado"
+     ],
+     "explain": "non + ci + sloveso."
+    },
+    {
+     "id": "it-a2-ci-ne-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Kolik jich máš?",
+     "answers": [
+      "Quanti ne hai",
+      "Quante ne hai"
+     ],
+     "explain": "Množství → ne."
+    },
+    {
+     "id": "it-a2-ci-ne-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Ne parliamo domani.",
+     "answers": [
+      "Promluvíme si o tom zítra",
+      "Pobavíme se o tom zítra",
+      "Zítra si o tom promluvíme"
+     ],
+     "explain": "ne = o tom (parlare di)."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-futuro",
+   "level": "A2",
+   "title": "Budoucí čas: futuro semplice",
+   "summary": "Řekneš, co uděláš příští rok a jaké máš plány.",
+   "notes": [
+    {
+     "heading": "Tvoření",
+     "text": "Infinitiv bez -e + **-ò, -ai, -à, -emo, -ete, -anno**; u sloves na -are se a mění na **e**: **parlare → parlerò**.",
+     "table": [
+      [
+       "",
+       "parlare",
+       "partire"
+      ],
+      [
+       "io",
+       "parlerò",
+       "partirò"
+      ],
+      [
+       "tu",
+       "parlerai",
+       "partirai"
+      ],
+      [
+       "lui",
+       "parlerà",
+       "partirà"
+      ],
+      [
+       "noi",
+       "parleremo",
+       "partiremo"
+      ],
+      [
+       "voi",
+       "parlerete",
+       "partirete"
+      ],
+      [
+       "loro",
+       "parleranno",
+       "partiranno"
+      ]
+     ]
+    },
+    {
+     "heading": "Nepravidelné kmeny",
+     "text": "Koncovky stejné, mění se kmen:",
+     "table": [
+      [
+       "infinitiv",
+       "kmen"
+      ],
+      [
+       "essere",
+       "sar-"
+      ],
+      [
+       "avere",
+       "avr-"
+      ],
+      [
+       "andare",
+       "andr-"
+      ],
+      [
+       "fare",
+       "far-"
+      ],
+      [
+       "venire",
+       "verr-"
+      ],
+      [
+       "potere",
+       "potr-"
+      ],
+      [
+       "vedere",
+       "vedr-"
+      ],
+      [
+       "volere",
+       "vorr-"
+      ]
+     ]
+    },
+    {
+     "heading": "Přítomný čas místo budoucího",
+     "text": "O blízké jisté budoucnosti se často mluví v přítomném čase: **Domani vado a Roma.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Domani farà bel tempo.",
+     "cs": "Zítra bude hezky."
+    },
+    {
+     "text": "Andremo in Spagna.",
+     "cs": "Pojedeme do Španělska."
+    },
+    {
+     "text": "Ti chiamerò stasera.",
+     "cs": "Zavolám ti večer."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-futuro-01",
+     "kind": "choice",
+     "prompt": "L'anno prossimo ___ in Italia.",
+     "prompt_cs": "Příští rok budu v Itálii.",
+     "options": [
+      "sarò",
+      "sono",
+      "ero",
+      "sarei"
+     ],
+     "answers": [
+      "sarò"
+     ],
+     "explain": "essere → sar- + -ò."
+    },
+    {
+     "id": "it-a2-futuro-02",
+     "kind": "choice",
+     "prompt": "Noi ___ la macchina.",
+     "prompt_cs": "Vezmeme auto.",
+     "options": [
+      "prenderemo",
+      "prendiamo",
+      "prenderemmo",
+      "prendremo"
+     ],
+     "answers": [
+      "prenderemo"
+     ],
+     "explain": "prendere → prender- + -emo."
+    },
+    {
+     "id": "it-a2-futuro-03",
+     "kind": "gap",
+     "prompt": "Tu ___ stasera? (venire)",
+     "prompt_cs": "Přijdeš dnes večer?",
+     "answers": [
+      "verrai"
+     ],
+     "explain": "venire má kmen verr-."
+    },
+    {
+     "id": "it-a2-futuro-04",
+     "kind": "gap",
+     "prompt": "Loro ___ sci in inverno. (fare)",
+     "prompt_cs": "V zimě budou lyžovat.",
+     "answers": [
+      "faranno"
+     ],
+     "explain": "fare má kmen far-."
+    },
+    {
+     "id": "it-a2-futuro-05",
+     "kind": "gap",
+     "prompt": "Io ___ con lui. (parlare)",
+     "prompt_cs": "Promluvím s ním.",
+     "answers": [
+      "parlerò"
+     ],
+     "explain": "-are → -erò."
+    },
+    {
+     "id": "it-a2-futuro-06",
+     "kind": "order",
+     "prompt": "Budeme mít čas.",
+     "tokens": [
+      "tempo",
+      "avremo",
+      "il"
+     ],
+     "answers": [
+      "Avremo il tempo"
+     ],
+     "explain": "avere → avr- + -emo."
+    },
+    {
+     "id": "it-a2-futuro-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pojedu do Říma.",
+     "answers": [
+      "Andrò a Roma",
+      "Io andrò a Roma"
+     ],
+     "explain": "andare má kmen andr-."
+    },
+    {
+     "id": "it-a2-futuro-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Domani pioverà.",
+     "answers": [
+      "Zítra bude pršet"
+     ],
+     "explain": "piovere → pioverà."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-comparison",
+   "level": "A2",
+   "title": "Stupňování: più, meno, come",
+   "summary": "Porovnáš dvě věci a řekneš, co je nejlepší.",
+   "notes": [
+    {
+     "heading": "Druhý stupeň",
+     "text": "**più … di** (víc než), **meno … di** (méně než), **così / tanto … come** (stejně jako): **Paolo è più alto di Marco.** Před přídavným jménem nebo slovesem se místo di používá **che**: **più bello che utile**."
+    },
+    {
+     "heading": "Třetí stupeň",
+     "text": "Určitý člen + più: **il più alto, la più bella**. „v“ = **di**: **la città più bella d'Italia**. Absolutně: **-issimo**: **bellissimo** (velmi krásný)."
+    },
+    {
+     "heading": "Nepravidelné",
+     "text": "**buono → migliore** (lepší), **cattivo → peggiore** (horší), **bene → meglio** (lépe), **male → peggio** (hůře)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Il treno è più veloce dell'autobus.",
+     "cs": "Vlak je rychlejší než autobus."
+    },
+    {
+     "text": "È il ristorante migliore di Brno.",
+     "cs": "Je to nejlepší restaurace v Brně."
+    },
+    {
+     "text": "Canta meglio di me.",
+     "cs": "Zpívá lépe než já."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-comparison-01",
+     "kind": "choice",
+     "prompt": "Mio fratello è più alto ___ me.",
+     "prompt_cs": "Můj bratr je vyšší než já.",
+     "options": [
+      "di",
+      "che",
+      "come",
+      "da"
+     ],
+     "answers": [
+      "di"
+     ],
+     "explain": "Porovnání dvou osob → più … di."
+    },
+    {
+     "id": "it-a2-comparison-02",
+     "kind": "choice",
+     "prompt": "Questa torta è ___ dell'altra.",
+     "prompt_cs": "Tento dort je lepší než ten druhý.",
+     "options": [
+      "migliore",
+      "più buona di",
+      "meglio",
+      "bene"
+     ],
+     "answers": [
+      "migliore"
+     ],
+     "explain": "buono → migliore."
+    },
+    {
+     "id": "it-a2-comparison-03",
+     "kind": "choice",
+     "prompt": "Lei parla ___ di lui.",
+     "prompt_cs": "Mluví lépe než on.",
+     "options": [
+      "meglio",
+      "migliore",
+      "più bene",
+      "bene"
+     ],
+     "answers": [
+      "meglio"
+     ],
+     "explain": "bene → meglio."
+    },
+    {
+     "id": "it-a2-comparison-04",
+     "kind": "gap",
+     "prompt": "Praga è bella ___ Parigi.",
+     "prompt_cs": "Praha je krásná jako Paříž.",
+     "answers": [
+      "come"
+     ],
+     "explain": "Stejně jako → come."
+    },
+    {
+     "id": "it-a2-comparison-05",
+     "kind": "gap",
+     "prompt": "Il film è ___. (velmi zajímavý, interessante)",
+     "prompt_cs": "Ten film je velmi zajímavý.",
+     "answers": [
+      "interessantissimo"
+     ],
+     "explain": "Absolutní superlativ: -issimo."
+    },
+    {
+     "id": "it-a2-comparison-06",
+     "kind": "order",
+     "prompt": "Je méně unavená než ty.",
+     "tokens": [
+      "stanca",
+      "te",
+      "è",
+      "meno",
+      "di"
+     ],
+     "answers": [
+      "È meno stanca di te"
+     ],
+     "explain": "meno + přídavné jméno + di."
+    },
+    {
+     "id": "it-a2-comparison-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "To je nejlepší film.",
+     "answers": [
+      "È il film migliore",
+      "È il miglior film",
+      "Questo è il film migliore",
+      "Questo è il miglior film"
+     ],
+     "explain": "nejlepší = il migliore / il miglior."
+    },
+    {
+     "id": "it-a2-comparison-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "La bici costa meno della macchina.",
+     "answers": [
+      "Kolo stojí méně než auto",
+      "Kolo je levnější než auto"
+     ],
+     "explain": "meno di = méně než."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-stare-gerundio",
+   "level": "A2",
+   "title": "Právě teď: stare + gerundio",
+   "summary": "Řekneš, co se děje právě teď.",
+   "notes": [
+    {
+     "heading": "Tvoření",
+     "text": "**stare** + gerundium: -are → **-ando**, -ere / -ire → **-endo**: **Sto mangiando.** (Právě jím.) Nepravidelné: **fare → facendo, bere → bevendo, dire → dicendo**."
+    },
+    {
+     "heading": "Kdy",
+     "text": "Jen pro děj, který právě probíhá. Obecně a opakovaně se mluví v přítomném čase: **Lavoro a Brno.** × **Sto lavorando.** (Právě pracuji.)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Che cosa stai facendo?",
+     "cs": "Co právě děláš?"
+    },
+    {
+     "text": "Sto leggendo un libro.",
+     "cs": "Právě čtu knihu."
+    },
+    {
+     "text": "Stanno dormendo.",
+     "cs": "Spí."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-stare-gerundio-01",
+     "kind": "choice",
+     "prompt": "Sto ___ la cena.",
+     "prompt_cs": "Právě vařím večeři.",
+     "options": [
+      "preparando",
+      "preparendo",
+      "preparato",
+      "preparare"
+     ],
+     "answers": [
+      "preparando"
+     ],
+     "explain": "-are → -ando."
+    },
+    {
+     "id": "it-a2-stare-gerundio-02",
+     "kind": "choice",
+     "prompt": "Che cosa ___ facendo?",
+     "prompt_cs": "Co právě děláte?",
+     "options": [
+      "state",
+      "siete",
+      "fate",
+      "avete"
+     ],
+     "answers": [
+      "state"
+     ],
+     "explain": "voi → state."
+    },
+    {
+     "id": "it-a2-stare-gerundio-03",
+     "kind": "gap",
+     "prompt": "I bambini stanno ___. (dormire)",
+     "prompt_cs": "Děti spí.",
+     "answers": [
+      "dormendo"
+     ],
+     "explain": "-ire → -endo."
+    },
+    {
+     "id": "it-a2-stare-gerundio-04",
+     "kind": "gap",
+     "prompt": "Non posso parlare, sto ___. (guidare)",
+     "prompt_cs": "Nemůžu mluvit, řídím.",
+     "answers": [
+      "guidando"
+     ],
+     "explain": "-are → -ando."
+    },
+    {
+     "id": "it-a2-stare-gerundio-05",
+     "kind": "choice",
+     "prompt": "Stiamo ___ un caffè.",
+     "prompt_cs": "Právě pijeme kávu.",
+     "options": [
+      "bevendo",
+      "beviando",
+      "bevando",
+      "bevuto"
+     ],
+     "answers": [
+      "bevendo"
+     ],
+     "explain": "bere → bevendo."
+    },
+    {
+     "id": "it-a2-stare-gerundio-06",
+     "kind": "order",
+     "prompt": "Právě čte noviny.",
+     "tokens": [
+      "leggendo",
+      "sta",
+      "il",
+      "giornale"
+     ],
+     "answers": [
+      "Sta leggendo il giornale"
+     ],
+     "explain": "stare + gerundium + předmět."
+    },
+    {
+     "id": "it-a2-stare-gerundio-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Co právě děláš?",
+     "answers": [
+      "Che cosa stai facendo",
+      "Cosa stai facendo",
+      "Che stai facendo"
+     ],
+     "explain": "fare → facendo."
+    },
+    {
+     "id": "it-a2-stare-gerundio-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Sta piovendo.",
+     "answers": [
+      "Prší",
+      "Právě prší"
+     ],
+     "explain": "stare + gerundium = právě probíhající děj."
+    }
+   ]
+  },
+  {
+   "id": "it-a2-imperativo",
+   "level": "A2",
+   "title": "Rozkazovací způsob",
+   "summary": "Požádáš někoho, ať něco udělá, a dáš radu.",
+   "notes": [
+    {
+     "heading": "Tvary tu, noi, voi",
+     "text": "Slovesa na -are: **tu parla!** Na -ere / -ire: **tu prendi! senti!** Noi a voi jako přítomný čas: **andiamo! parlate!**"
+    },
+    {
+     "heading": "Zápor tu",
+     "text": "Zápor pro tu = **non + infinitiv**: **Non parlare! Non piangere!**"
+    },
+    {
+     "heading": "Zájmena",
+     "text": "Připojují se ke konci: **Aiutami!** (Pomoz mi!) **Dimmi!** (Řekni mi!) Časté nepravidelné: **va'** (jdi), **fa'** (dělej), **da'** (dej), **sta'** (buď, zůstaň), **di'** (řekni)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ascolta!",
+     "cs": "Poslouchej!"
+    },
+    {
+     "text": "Chiudete la porta, per favore.",
+     "cs": "Zavřete prosím dveře."
+    },
+    {
+     "text": "Andiamo al parco!",
+     "cs": "Pojďme do parku!"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a2-imperativo-01",
+     "kind": "choice",
+     "prompt": "___ la finestra, per favore.",
+     "prompt_cs": "Otevři prosím okno.",
+     "options": [
+      "Apri",
+      "Apra",
+      "Aprite",
+      "Aprire"
+     ],
+     "answers": [
+      "Apri"
+     ],
+     "explain": "aprire, tu → apri."
+    },
+    {
+     "id": "it-a2-imperativo-02",
+     "kind": "choice",
+     "prompt": "Non ___!",
+     "prompt_cs": "Neplač!",
+     "options": [
+      "piangere",
+      "piangi",
+      "piange",
+      "piangete"
+     ],
+     "answers": [
+      "piangere"
+     ],
+     "explain": "Zápor pro tu = non + infinitiv."
+    },
+    {
+     "id": "it-a2-imperativo-03",
+     "kind": "gap",
+     "prompt": "___ qui! (venire, voi)",
+     "prompt_cs": "Pojďte sem!",
+     "answers": [
+      "Venite"
+     ],
+     "explain": "voi venite → Venite!"
+    },
+    {
+     "id": "it-a2-imperativo-04",
+     "kind": "gap",
+     "prompt": "___ al cinema stasera! (andare, noi)",
+     "prompt_cs": "Pojďme dnes večer do kina!",
+     "answers": [
+      "Andiamo"
+     ],
+     "explain": "noi andiamo → Andiamo!"
+    },
+    {
+     "id": "it-a2-imperativo-05",
+     "kind": "choice",
+     "prompt": "___ la verità!",
+     "prompt_cs": "Řekni mi pravdu!",
+     "options": [
+      "Dimmi",
+      "Di' mi",
+      "Dici mi",
+      "Mi dici"
+     ],
+     "answers": [
+      "Dimmi"
+     ],
+     "explain": "di' + mi → dimmi (zdvojí se m)."
+    },
+    {
+     "id": "it-a2-imperativo-06",
+     "kind": "order",
+     "prompt": "Nemluvte tak rychle!",
+     "tokens": [
+      "veloce",
+      "parlate",
+      "così",
+      "non"
+     ],
+     "answers": [
+      "Non parlate così veloce"
+     ],
+     "explain": "voi: non + tvar přítomného času."
+    },
+    {
+     "id": "it-a2-imperativo-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Poslouchej mě!",
+     "answers": [
+      "Ascoltami"
+     ],
+     "explain": "Zájmeno se připojí ke konci rozkazu."
+    },
+    {
+     "id": "it-a2-imperativo-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Prendete i vostri libri.",
+     "answers": [
+      "Vezměte si knihy",
+      "Vezměte si své knihy",
+      "Vezměte své knihy"
+     ],
+     "explain": "prendere, voi → prendete."
+    }
+   ]
+  }
+ ]
+}

@@ -225,9 +225,23 @@ not that C1/C2 was assessed or certified.
 
 ## Grammar packs (`grammar/<lang>.grammar.json`)
 
-Grammar packs contain editable Czech explanations, examples, and exercises. Current packs may
-cover only selected topics: `en.grammar.json` provides one draft unit at each of A1-C2 and does
-not claim full CEFR coverage; the German pack currently covers A1-B2. Packs are marked unreviewed
+Grammar packs contain editable Czech explanations, examples, and exercises. Every course
+language has a draft A1-A2 syllabus (added 2026-11-06, revision in brackets):
+
+| pack | A1 | A2 | above A2 |
+|---|---|---|---|
+| `de.grammar.json` (`grammar-v2`) | 15 units | 11 units | B1 6, B2 5 |
+| `fr.grammar.json` (`grammar-fr-v1`) | 13 units | 10 units | none yet |
+| `it.grammar.json` (`grammar-it-v1`) | 12 units | 9 units | none yet |
+| `en.grammar.json` (`english-grammar-v2`) | 13 units | 10 units | one introductory unit each B1-C2 |
+
+The A1-A2 topics follow the usual CEFR grammar inventories for each language (verb *be*/*have*,
+present tense and irregular verbs, articles and gender, plurals and agreement, negation and
+questions, possessives, prepositions, imperative at A1; past tenses, object pronouns, future,
+comparison, modal verbs, reflexive verbs and the language's typical A2 points at A2). They were
+drafted by Claude (`source`, `review_status: unreviewed`) and still need a teacher or native
+speaker's review; `tests/test_grammar_domain.py` requires at least 8 units at A1 and at A2 for
+every language and checks that every shown answer grades as correct. Packs are marked unreviewed
 until a teacher or qualified reviewer approves them. Adding a unit is additive and keyed by
 stable unit ID, so importing a new pack preserves learner progress. Each unit has a short
 `summary` for discovery and an `objective` describing an observable outcome; older packs may omit
