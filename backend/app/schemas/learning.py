@@ -234,6 +234,7 @@ class ProgressOut(BaseModel):
     placement: PlacementOut | None = None
     active_exam_session_id: uuid.UUID | None = None
     level_badges: list[LevelBadgeOut] = []
+    cefr_level: str | None = None  # latest CEFR diagnostic: "pre-A1", "A1".."B2", "B2+"
 
 
 class WeakWordOut(BaseModel):

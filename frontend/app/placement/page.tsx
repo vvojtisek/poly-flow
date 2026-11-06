@@ -51,6 +51,22 @@ function Intro({ me, language, onStart }: { me: Me; language: Language; onStart:
         <Compass className="size-6 text-brand-500" aria-hidden />
         {cs.placement.title}
       </h1>
+      <ol className="grid gap-2 sm:grid-cols-2">
+        <li className="rounded-xl border border-brand-500/50 bg-brand-500/5 p-3">
+          <p className="font-semibold">{cs.placement.part1}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-300">{cs.placement.part1Help}</p>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={() => router.push("/placement/cefr")}
+            className="h-full w-full rounded-xl border border-slate-200 p-3 text-left hover:border-brand-500 dark:border-slate-800"
+          >
+            <p className="font-semibold">{cs.placement.part2}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-300">{cs.placement.part2Help}</p>
+          </button>
+        </li>
+      </ol>
       <div className="flex flex-col gap-1">
         <p className="text-xs text-slate-500">{cs.placement.pickLanguage}</p>
         <LanguagePicker me={me} />

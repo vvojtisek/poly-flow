@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import __version__
 from app.api import (
     auth,
+    diagnostic,
     grammar,
     health,
     learning,
@@ -47,6 +48,7 @@ def create_app() -> FastAPI:
     app.include_router(profiles.router)
     app.include_router(voices.router)
     app.include_router(learning.router)
+    app.include_router(diagnostic.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)
     app.include_router(stories.router)

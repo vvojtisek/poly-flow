@@ -1,0 +1,581 @@
+{
+ "language": "it",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "diag-v1",
+ "review_status": "unreviewed",
+ "note": "Diagnostic items for the CEFR placement test (Rozřazovací test, part 2), A1 to B2+ (level C1 marks the above-B2 probe; the app reports it as B2+, not as a C1 certificate). Drafted by Claude on 2026-11-06; not reviewed by a teacher or a native speaker. Item difficulties are the band's nominal value, not calibrated on learner data.",
+ "items": [
+  {
+   "id": "it-a1-01",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Io ___ ceco.",
+   "options": [
+    "sono",
+    "sei",
+    "è",
+    "siamo"
+   ],
+   "explain": "K io patří sono: io sono.",
+   "answer": "sono"
+  },
+  {
+   "id": "it-a1-02",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Noi ___ due figli.",
+   "options": [
+    "abbiamo",
+    "avete",
+    "hanno",
+    "hai"
+   ],
+   "explain": "avere: noi abbiamo.",
+   "answer": "abbiamo"
+  },
+  {
+   "id": "it-a1-03",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Questa è ___ casa di mia nonna.",
+   "options": [
+    "la",
+    "il",
+    "lo",
+    "i"
+   ],
+   "explain": "casa je ženského rodu: la casa.",
+   "answer": "la"
+  },
+  {
+   "id": "it-a1-04",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "Co znamená „la finestra“?",
+   "options": [
+    "okno",
+    "dveře",
+    "stůl",
+    "zeď"
+   ],
+   "explain": "la finestra = okno.",
+   "answer": "okno"
+  },
+  {
+   "id": "it-a1-05",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "D'inverno fa ___.",
+   "options": [
+    "freddo",
+    "caldo",
+    "verde",
+    "grande"
+   ],
+   "explain": "V zimě je zima: kalt / cold / froid / freddo.",
+   "answer": "freddo"
+  },
+  {
+   "id": "it-a1-06",
+   "level": "A1",
+   "skill": "reading",
+   "prompt": "Kde bydlí Marco?",
+   "options": [
+    "v Boloni",
+    "v Římě",
+    "v Praze",
+    "v Miláně"
+   ],
+   "explain": "„Abito a Bologna“ = bydlím v Boloni.",
+   "context": "Ciao! Mi chiamo Marco. Ho dieci anni e abito a Bologna con i miei genitori e il mio cane.",
+   "answer": "v Boloni"
+  },
+  {
+   "id": "it-a1-07",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Co si člověk objednává?",
+   "options": [
+    "dva croissanty",
+    "dvě kávy",
+    "tři croissanty",
+    "chleba"
+   ],
+   "explain": "due cornetti = dva croissanty.",
+   "audio": "Vorrei due cornetti, per favore.",
+   "answer": "dva croissanty"
+  },
+  {
+   "id": "it-a1-08",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Kdy přijede autobus?",
+   "options": [
+    "v osm",
+    "v sedm",
+    "v šest",
+    "v deset"
+   ],
+   "explain": "alle otto = v osm.",
+   "audio": "L'autobus arriva alle otto.",
+   "answer": "v osm"
+  },
+  {
+   "id": "it-a2-01",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Ieri ___ andati al cinema.",
+   "options": [
+    "siamo",
+    "abbiamo",
+    "eravamo",
+    "sono"
+   ],
+   "explain": "andare tvoří passato prossimo s essere: siamo andati.",
+   "answer": "siamo"
+  },
+  {
+   "id": "it-a2-02",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Maria? ___ telefono stasera.",
+   "options": [
+    "Le",
+    "La",
+    "Lo",
+    "Gli"
+   ],
+   "explain": "telefonare a qualcuno: nepřímý předmět ženského rodu = le.",
+   "answer": "Le"
+  },
+  {
+   "id": "it-a2-03",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Da bambino ___ a calcio ogni sabato.",
+   "options": [
+    "giocavo",
+    "ho giocato",
+    "gioco",
+    "giocherò"
+   ],
+   "explain": "Opakovaný děj v minulosti: imperfetto (giocavo).",
+   "answer": "giocavo"
+  },
+  {
+   "id": "it-a2-04",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Mio fratello è ___ alto di me.",
+   "options": [
+    "più",
+    "molto",
+    "il più",
+    "tanto"
+   ],
+   "explain": "Srovnání: più ... di.",
+   "answer": "più"
+  },
+  {
+   "id": "it-a2-05",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Ho mal di testa, vado dal ___.",
+   "options": [
+    "medico",
+    "panettiere",
+    "parrucchiere",
+    "professore"
+   ],
+   "explain": "S bolestí hlavy k lékaři: dal medico.",
+   "answer": "medico"
+  },
+  {
+   "id": "it-a2-06",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Jaký je opak slova „caro“?",
+   "options": [
+    "economico",
+    "piccolo",
+    "vuoto",
+    "facile"
+   ],
+   "explain": "caro = drahý, economico = levný.",
+   "answer": "economico"
+  },
+  {
+   "id": "it-a2-07",
+   "level": "A2",
+   "skill": "reading",
+   "prompt": "Co má Anna přinést?",
+   "options": [
+    "salát",
+    "pití",
+    "dort",
+    "nic"
+   ],
+   "explain": "V pozvánce stojí, že pití už je, a prosba je o salát.",
+   "context": "Cara Anna, sabato faccio una piccola festa alle 19. Puoi portare un'insalata? Le bevande ce le ho già. Un abbraccio, Giulia",
+   "answer": "salát"
+  },
+  {
+   "id": "it-a2-08",
+   "level": "A2",
+   "skill": "listening",
+   "prompt": "Co se stalo s vlakem?",
+   "options": [
+    "má zpoždění 20 minut",
+    "je zrušený",
+    "jede z jiného nástupiště",
+    "odjel o 20 minut dřív"
+   ],
+   "explain": "Hlášení říká, že vlak má dvacet minut zpoždění.",
+   "audio": "Il treno per Milano ha venti minuti di ritardo.",
+   "answer": "má zpoždění 20 minut"
+  },
+  {
+   "id": "it-b1-01",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Non so ___ verrà.",
+   "options": [
+    "se",
+    "che",
+    "cui",
+    "il quale"
+   ],
+   "explain": "Nepřímá zjišťovací otázka: se = zda.",
+   "answer": "se"
+  },
+  {
+   "id": "it-b1-02",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Il libro di ___ ti ho parlato è uscito.",
+   "options": [
+    "cui",
+    "che",
+    "quale",
+    "dove"
+   ],
+   "explain": "Po předložce stojí vztažné zájmeno cui: di cui.",
+   "answer": "cui"
+  },
+  {
+   "id": "it-b1-03",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Se avessi più tempo, ___ più spesso.",
+   "options": [
+    "leggerei",
+    "leggo",
+    "leggerò",
+    "leggevo"
+   ],
+   "explain": "Se + congiuntivo imperfetto, v hlavní větě condizionale: leggerei.",
+   "answer": "leggerei"
+  },
+  {
+   "id": "it-b1-04",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Bisogna che tu ___ i compiti.",
+   "options": [
+    "faccia",
+    "fai",
+    "farai",
+    "facevi"
+   ],
+   "explain": "Po bisogna che stojí congiuntivo: che tu faccia.",
+   "answer": "faccia"
+  },
+  {
+   "id": "it-b1-05",
+   "level": "B1",
+   "skill": "vocabulary",
+   "prompt": "Ho presentato la mia ___ per questo lavoro.",
+   "options": [
+    "candidatura",
+    "carriera",
+    "conoscenza",
+    "conferenza"
+   ],
+   "explain": "presentare la candidatura = ucházet se.",
+   "answer": "candidatura"
+  },
+  {
+   "id": "it-b1-06",
+   "level": "B1",
+   "skill": "idiom",
+   "prompt": "Co znamená „In bocca al lupo!“?",
+   "options": [
+    "Hodně štěstí!",
+    "Pozor na vlka!",
+    "Dobrou chuť!",
+    "Buď zticha!"
+   ],
+   "explain": "Přání štěstí; odpovídá se „Crepi!“.",
+   "answer": "Hodně štěstí!"
+  },
+  {
+   "id": "it-b1-07",
+   "level": "B1",
+   "skill": "reading",
+   "prompt": "Co se některým zaměstnancům nelíbí?",
+   "options": [
+    "chybí jim kontakt s kolegy",
+    "dlouhé dojíždění",
+    "nižší plat",
+    "práce o víkendu"
+   ],
+   "explain": "Text říká, že některým chybí kontakt s kolegy.",
+   "context": "Dal mese scorso i dipendenti della nostra azienda possono lavorare da casa due giorni alla settimana. Molti lo trovano pratico, perché passano meno tempo nel traffico. Alcuni però sentono la mancanza dei colleghi.",
+   "answer": "chybí jim kontakt s kolegy"
+  },
+  {
+   "id": "it-b1-08",
+   "level": "B1",
+   "skill": "listening",
+   "prompt": "Co mají cestující udělat?",
+   "options": [
+    "jet náhradním autobusem od hlavního nádraží",
+    "počkat do konce května na linku 5",
+    "koupit si novou jízdenku",
+    "jet linkou 5 jako obvykle"
+   ],
+   "explain": "autobus sostitutivo dalla stazione centrale = náhradní autobus od hlavního nádraží.",
+   "audio": "A causa di lavori, la linea cinque non sarà in servizio fino alla fine di maggio. Si prega di utilizzare l'autobus sostitutivo dalla stazione centrale.",
+   "answer": "jet náhradním autobusem od hlavního nádraží"
+  },
+  {
+   "id": "it-b2-01",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Benché ___ malato, è venuto al lavoro.",
+   "options": [
+    "fosse",
+    "era",
+    "è",
+    "sarà"
+   ],
+   "explain": "Po benché stojí congiuntivo: fosse.",
+   "answer": "fosse"
+  },
+  {
+   "id": "it-b2-02",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Quando siamo arrivati, il film ___ già cominciato.",
+   "options": [
+    "era",
+    "è",
+    "sarà",
+    "fu"
+   ],
+   "explain": "Děj ukončený před jiným minulým dějem: trapassato prossimo (era cominciato).",
+   "answer": "era"
+  },
+  {
+   "id": "it-b2-03",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Le decisioni ___ dal consiglio sono state criticate.",
+   "options": [
+    "prese",
+    "preso",
+    "prendendo",
+    "prendere"
+   ],
+   "explain": "Příčestí jako přívlastek se shoduje: le decisioni (ž. r. mn. č.) prese.",
+   "answer": "prese"
+  },
+  {
+   "id": "it-b2-04",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "A meno che non ___, partiremo domani.",
+   "options": [
+    "piova",
+    "piove",
+    "pioverà",
+    "pioveva"
+   ],
+   "explain": "Po a meno che stojí congiuntivo: piova.",
+   "answer": "piova"
+  },
+  {
+   "id": "it-b2-05",
+   "level": "B2",
+   "skill": "vocabulary",
+   "prompt": "I risultati non sono ___: sono state testate solo venti persone.",
+   "options": [
+    "attendibili",
+    "attenti",
+    "attesi",
+    "attivi"
+   ],
+   "explain": "attendibile = spolehlivý, věrohodný.",
+   "answer": "attendibili"
+  },
+  {
+   "id": "it-b2-06",
+   "level": "B2",
+   "skill": "idiom",
+   "prompt": "Co znamená „prendere due piccioni con una fava“?",
+   "options": [
+    "zabít dvě mouchy jednou ranou",
+    "chytit dva holuby",
+    "jíst fazole",
+    "ztrácet čas"
+   ],
+   "explain": "Dva holuby jedním bobem: dva cíle jedním krokem.",
+   "answer": "zabít dvě mouchy jednou ranou"
+  },
+  {
+   "id": "it-b2-07",
+   "level": "B2",
+   "skill": "reading",
+   "prompt": "Jak zastánci radnice vysvětlují pomalý postup?",
+   "options": [
+    "složitými povolovacími řízeními",
+    "nedostatkem peněz",
+    "odporem cyklistů",
+    "blížícími se volbami"
+   ],
+   "explain": "Zastánci (sostenitori) uvádějí složitá povolovací řízení.",
+   "context": "Sebbene il comune prometta da anni nuove piste ciclabili, è cambiato poco. I critici lo accusano di affrontare il tema solo prima delle elezioni, mentre i sostenitori citano la complessità delle procedure di autorizzazione.",
+   "answer": "složitými povolovacími řízeními"
+  },
+  {
+   "id": "it-b2-08",
+   "level": "B2",
+   "skill": "listening",
+   "prompt": "Co mluvčí říká o projektu?",
+   "options": [
+    "skončil dřív, než se plánovalo",
+    "trval déle než tři roky",
+    "ještě není hotový",
+    "stál víc peněz, než se čekalo"
+   ],
+   "explain": "Plánovaly se tři roky, hotovo bylo za osmnáct měsíců.",
+   "audio": "Sinceramente non pensavo che il progetto sarebbe finito così presto. Avevamo previsto tre anni e abbiamo finito in diciotto mesi.",
+   "answer": "skončil dřív, než se plánovalo"
+  },
+  {
+   "id": "it-c1-01",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Per quanto ___, non ci riesce.",
+   "options": [
+    "si sforzi",
+    "si sforza",
+    "si sforzerà",
+    "si sforzava"
+   ],
+   "explain": "Per quanto vyžaduje congiuntivo: per quanto si sforzi.",
+   "answer": "si sforzi"
+  },
+  {
+   "id": "it-c1-02",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Se l'avessi saputo, ___ diversamente.",
+   "options": [
+    "avrei agito",
+    "avevo agito",
+    "agirei",
+    "avrò agito"
+   ],
+   "explain": "Se + congiuntivo trapassato, v hlavní větě condizionale passato: avrei agito.",
+   "answer": "avrei agito"
+  },
+  {
+   "id": "it-c1-03",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "È ora che tu ___ una decisione.",
+   "options": [
+    "prenda",
+    "prendi",
+    "prenderai",
+    "prendevi"
+   ],
+   "explain": "Po è ora che stojí congiuntivo: che tu prenda.",
+   "answer": "prenda"
+  },
+  {
+   "id": "it-c1-04",
+   "level": "C1",
+   "skill": "vocabulary",
+   "prompt": "L'azienda ha deciso di ___ il lancio fino a nuovo ordine.",
+   "options": [
+    "rinviare",
+    "rinvenire",
+    "rinnovare",
+    "rinunciare"
+   ],
+   "explain": "rinviare = odložit; rinunciare = vzdát se.",
+   "answer": "rinviare"
+  },
+  {
+   "id": "it-c1-05",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „avere le mani bucate“?",
+   "options": [
+    "rozhazovat peníze",
+    "být nešikovný",
+    "mít zraněné ruce",
+    "mít hodně práce"
+   ],
+   "explain": "Mít děravé ruce: peníze se nedrží.",
+   "answer": "rozhazovat peníze"
+  },
+  {
+   "id": "it-c1-06",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „non avere peli sulla lingua“?",
+   "options": [
+    "mluvit otevřeně, bez obalu",
+    "mluvit potichu",
+    "nemít chuť k jídlu",
+    "neumět mluvit"
+   ],
+   "explain": "Nemít chlupy na jazyku: říkat věci na rovinu.",
+   "answer": "mluvit otevřeně, bez obalu"
+  },
+  {
+   "id": "it-c1-07",
+   "level": "C1",
+   "skill": "reading",
+   "prompt": "Co tvrdí druhá skupina pozorovatelů?",
+   "options": [
+    "že se nesmí podcenit provedení",
+    "že debata je zbytečná",
+    "že jde hlavně o to, zda vůbec jednat",
+    "že úspěch je jistý"
+   ],
+   "explain": "Druhá skupina varuje před podceněním provedení, kde podobné plány často selhávají.",
+   "context": "Che il dibattito ormai verta meno sul «se» che sul «come», alcuni osservatori lo considerano già un progresso; altri mettono in guardia dal sottovalutare l'attuazione, dove, come insegna l'esperienza, progetti simili finiscono spesso per arenarsi.",
+   "answer": "že se nesmí podcenit provedení"
+  },
+  {
+   "id": "it-c1-08",
+   "level": "C1",
+   "skill": "listening",
+   "prompt": "Jaký postoj mluvčí vyjadřuje?",
+   "options": [
+    "reforma řeší hlavní problém, ať už má jakékoli vady",
+    "reforma je úplně špatná",
+    "reforma hlavní problém neřeší",
+    "mluvčí reformu nezná"
+   ],
+   "explain": "Mluvčí připouští různé názory, ale říká, že reforma řeší hlavní problém.",
+   "audio": "Qualunque cosa si pensi della riforma, è difficile negare che affronti il problema di fondo.",
+   "answer": "reforma řeší hlavní problém, ať už má jakékoli vady"
+  }
+ ]
+}

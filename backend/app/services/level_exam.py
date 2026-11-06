@@ -19,6 +19,7 @@ from sqlalchemy import and_, func, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.domain.diagnostic import band_at_most
 from app.domain.enums import CefrLevel, Language
 from app.domain.level_exam import (
     BY_LEVEL,
@@ -31,6 +32,7 @@ from app.domain.level_exam import (
     ready,
 )
 from app.models import (
+    CefrPlacement,
     LearningSession,
     LearningTask,
     LevelBadge,
@@ -108,6 +110,8 @@ async def statuses(
     active = await lsvc.get_active_session(db, user, language, SessionMode.EXAM)
     placed = await placement.get_placement(db, user, language)
     placement_level = placed.level if placed and placed.status == placement.PLACED else None
+    cefr = await db.get(CefrPlacement, (user.id, language))
+    cefr_level = cefr.level if cefr is not None else None
 
     out: list[LevelStatus] = []
     for exam in LEVELS:
@@ -136,7 +140,9 @@ async def statuses(
             st.state = "missing_words"
         elif prev is not None and prev not in earned:
             st.state = "needs_previous"
-        elif not ready(exam, pool, known, placement_level):
+        elif not ready(
+            exam, pool, known, placement_level, cefr_reached=band_at_most(exam.level, cefr_level)
+        ):
             st.state = "not_ready"
         elif last is not None and now < (retry := _retry_from(user, last.completed_at)):
             st.state, st.retry_from = "retry_later", retry

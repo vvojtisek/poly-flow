@@ -291,6 +291,7 @@ export interface ProgressOverview {
   placement: Placement | null; // null: the test was never taken or skipped for this language
   active_exam_session_id: string | null;
   level_badges: LevelBadge[];
+  cefr_level?: string | null;
 }
 
 // A passed level exam: a vocabulary level, not a CEFR certificate.
@@ -574,3 +575,81 @@ export const answerStoryQuestion = (storyId: string, index: number, choice: numb
     json: { choice },
   });
 export const storyAudioUrl = (storyId: string, line: number) => `/api/v1/stories/${storyId}/audio?line=${line}`;
+
+// ---------------------------------------------------------------- CEFR diagnostic (placement part 2)
+
+export type DiagnosticSkill = "grammar" | "vocabulary" | "reading" | "listening" | "idiom";
+export type DiagnosticBand = "pre-A1" | "A1" | "A2" | "B1" | "B2" | "B2+";
+
+export interface DiagnosticInfo {
+  available: boolean;
+  review_status: string | null;
+  items: number;
+  bands: DiagnosticBand[];
+  min_items: number;
+  max_items: number;
+  active_session_id: string | null;
+  latest: { level: DiagnosticBand; decided_at: string; session_id: string | null } | null;
+}
+
+export interface DiagnosticQuestion {
+  position: number;
+  skill: DiagnosticSkill;
+  band: DiagnosticBand;
+  prompt: string;
+  context: string | null;
+  has_audio: boolean;
+  options: string[];
+  asked: number;
+  max_items: number;
+  theta: number;
+}
+
+export interface DiagnosticResult {
+  placed: boolean;
+  asked: number;
+  level?: DiagnosticBand;
+  next?: DiagnosticBand | null;
+  low?: DiagnosticBand;
+  high?: DiagnosticBand;
+  theta?: number;
+  correct?: number;
+  skills?: { skill: DiagnosticSkill; asked: number; correct: number; expected: number; verdict: "strong" | "weak" | "even" | "few" }[];
+  bands?: { band: DiagnosticBand; correct: number; asked: number }[];
+  grammar_queued?: number;
+  grammar_returned?: number;
+  exams_opened?: CefrLevel[];
+}
+
+export interface DiagnosticState {
+  session_id: string;
+  language: Language;
+  status: "active" | "completed" | "abandoned";
+  with_listening: boolean;
+  question: DiagnosticQuestion | null;
+  result: DiagnosticResult | null;
+}
+
+export interface DiagnosticAnswer {
+  position: number;
+  correct: boolean;
+  dont_know: boolean;
+  answer: string;
+  explain: string;
+  transcript: string | null;
+  asked: number;
+  max_items: number;
+  theta: number;
+}
+
+export const getDiagnosticInfo = (language: Language) =>
+  api<DiagnosticInfo>(`/api/v1/diagnostic?language=${language}`);
+export const startDiagnostic = (language: Language) =>
+  api<DiagnosticState>("/api/v1/diagnostic/sessions", { json: { language } });
+export const getDiagnostic = (sessionId: string) => api<DiagnosticState>(`/api/v1/diagnostic/sessions/${sessionId}`);
+export const answerDiagnostic = (sessionId: string, position: number, choice: string | null) =>
+  api<DiagnosticAnswer>(`/api/v1/diagnostic/sessions/${sessionId}/answer`, { json: { position, choice } });
+export const stopDiagnostic = (sessionId: string) =>
+  api<DiagnosticState>(`/api/v1/diagnostic/sessions/${sessionId}/stop`, { method: "POST" });
+export const diagnosticAudioUrl = (sessionId: string, position: number) =>
+  `/api/v1/diagnostic/sessions/${sessionId}/audio?position=${position}`;

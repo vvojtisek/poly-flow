@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, GraduationCap, Map as MapIcon, Play } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Map as MapIcon, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -121,6 +121,18 @@ export default function HomePage() {
                     <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
                   </div>
                 )}
+                <div className="flex flex-col gap-1">
+                  <Button variant="secondary" className="w-full" onClick={() => router.push("/placement/cefr")}>
+                    <Gauge className="size-5" aria-hidden />
+                    {cs.cefr.short}
+                    {progress.cefr_level && (
+                      <span className="rounded-md bg-brand-500/15 px-1.5 text-sm text-brand-600 dark:text-brand-50">
+                        {progress.cefr_level}
+                      </span>
+                    )}
+                  </Button>
+                  <p className="text-center text-xs text-slate-500">{cs.placement.part2}</p>
+                </div>
                 <div className="flex flex-col gap-1">
                   <Button variant="secondary" className="w-full" onClick={() => router.push("/levels")}>
                     <Award className="size-5" aria-hidden />

@@ -1,5 +1,6 @@
 from app.models.auth import AuthSession
 from app.models.blacklist import ContentBlacklistEntry
+from app.models.diagnostic import CefrPlacement, DiagnosticSession
 from app.models.frequency import FrequencyLemma
 from app.models.grammar import (
     GrammarAttempt,
@@ -26,8 +27,10 @@ from app.models.user import User
 
 __all__ = [
     "AuthSession",
+    "CefrPlacement",
     "ContentBlacklistEntry",
     "DailyStory",
+    "DiagnosticSession",
     "FrequencyLemma",
     "GrammarAttempt",
     "GrammarExercise",

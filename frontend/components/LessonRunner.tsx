@@ -38,9 +38,9 @@ type OptionState = "idle" | "pending" | "correct" | "wrong" | "muted";
 
 // Each state keeps WCAG AA text contrast in both themes; correct and wrong also carry an icon,
 // so the result never rests on colour alone.
-const OPTION_BASE =
+export const OPTION_BASE =
   "flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-4 text-left text-base font-semibold outline-none motion-safe:transition-colors focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-default dark:focus-visible:ring-offset-slate-950";
-const OPTION_STATES: Record<OptionState, string> = {
+export const OPTION_STATES: Record<OptionState, string> = {
   idle: "border-slate-300 bg-white text-slate-900 hover:border-brand-500 hover:bg-brand-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800",
   pending:
     "border-brand-500 bg-brand-50 text-slate-900 ring-2 ring-brand-500/40 dark:bg-slate-800 dark:text-slate-100",
@@ -423,9 +423,12 @@ export function LessonRunner({
       <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
         <h2 className="text-xl font-bold">{t.doneTitle}</h2>
         <PlacementDone session={phase.session} />
+        <Button className="!py-4 text-lg" autoFocus onClick={() => router.push("/placement/cefr")}>
+          {cs.placement.toPart2}
+        </Button>
         <div className="flex flex-col gap-2 sm:flex-row">
           {(phase.session.summary.queued ?? 0) > 0 && (
-            <Button className="flex-1" onClick={() => router.push("/check")}>
+            <Button variant="secondary" className="flex-1" onClick={() => router.push("/check")}>
               {cs.placement.toCheck}
             </Button>
           )}

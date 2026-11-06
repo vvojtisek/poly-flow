@@ -191,3 +191,22 @@ Czech translations still need it.
 Columns: `language,pattern_type,pattern,category,note`. Blank `language` = all languages.
 `keyword` = whole-word, case-insensitive; `regex` = Python `re`, compiled case-insensitively and
 validated at import time.
+
+## CEFR diagnostic item banks (`diagnostic/<lang>.diagnostic.json`, revision `diag-v1`)
+
+Item banks for part 2 of the placement test (*Rozřazovací test: gramatika a porozumění*,
+`app.domain.diagnostic`, policy `d1`). Each language holds 40 items, 8 per band A1, A2, B1, B2
+and C1. The C1 band is the **above-B2 probe**: the app reports it as "B2+", never as a C1
+result. Skills: `grammar` (verb forms, cases, subordinate-clause word order, conditionals,
+subjunctive, passive, inversion), `vocabulary` (words in context), `reading` (a short passage,
+question in Czech), `listening` (`audio` is spoken by TTS and shown only after answering; the
+test leaves listening out when the language's voice is not installed) and `idiom`.
+
+Fields: `id`, `level`, `skill`, `prompt`, `context` (reading only), `audio` (listening only),
+`options` (3-5, unique), `answer` (one of the options), `explain` (Czech), `content_flags`.
+Files are loaded at runtime (no seed step); a session stores the asked item ids, so editing a
+bank never changes a finished test. `tests/test_diagnostic_domain.py` validates every bank.
+
+Drafted by Claude on 2026-11-06, **not reviewed** by a teacher or a native speaker
+(`review_status: unreviewed`). Difficulties are the nominal band of each item, not calibrated
+on learner data; recalibrate with a new policy version once real answers exist.
