@@ -1,11 +1,13 @@
 "use client";
 
-import { BookOpenText, Compass, GraduationCap, LogOut, Settings, Users } from "lucide-react";
+import { BookOpenText, Compass, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 import { BuildInfo } from "@/components/BuildInfo";
+import { CommandPalette, openPalette } from "@/components/CommandPalette";
+import { Kbd } from "@/components/Kbd";
 import { RankEmblem } from "@/components/RankEmblem";
 import { Button, Field, Notice } from "@/components/ui";
 import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
@@ -145,6 +147,18 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
         </div>
         <div className="flex flex-col items-end gap-1">
           <nav className="flex flex-wrap items-center justify-end gap-1">
+            <button
+              type="button"
+              onClick={openPalette}
+              aria-label={cs.palette.title}
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-1.5 text-sm text-slate-500 hover:border-brand-500 dark:border-slate-700"
+            >
+              <Search className="size-4" aria-hidden />
+              <span className="hidden sm:inline">{cs.palette.button}</span>
+              <span className="hidden lg:inline">
+                <Kbd>Ctrl K</Kbd>
+              </span>
+            </button>
             <Link
               href="/grammar"
               className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
@@ -188,6 +202,7 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
       </header>
       {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
       {children}
+      <CommandPalette me={me} />
     </main>
   );
 }

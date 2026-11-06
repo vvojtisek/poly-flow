@@ -13,6 +13,7 @@ unreviewed.
 |---|---|---|
 | 1 | Adaptive CEFR placement test A1-B2+ | finds the real ceiling up to B2+, unlocks the curriculum |
 | 2 | Personal mastery rank path | a visible journey tied to proven learning, no traps |
+| 3 | Command palette (Ctrl+K) | keyboard-first navigation and settings from anywhere |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -67,3 +68,15 @@ mastery ranks (noted in `AGENTS.md` and the plan).
 - A one-time celebration dialog (pop-in emblem, colour burst, respects reduced motion) when a new
   rank or achievement is reached; the dashboard card and the full journey page show exactly what
   the next rank needs, with progress bars.
+
+## Cycle 3/30: command palette (Ctrl+K)
+
+**Before:** every destination was a header link or a dashboard button; on a desktop the learner had
+to reach for the mouse to switch language, theme or page.
+
+**Built:** a global command palette on every page. `Ctrl+K` / `Cmd+K`, or `/` outside text fields,
+opens it; typing filters actions with diacritics-insensitive matching (`tmavy` finds *Tmavý*,
+`cefr` finds the CEFR test), arrows move, Enter runs, Esc closes. Actions: every page (lesson,
+check, grammar, reading, both placement parts, level exams, rank path, settings, family), switch
+language, light/dark/system theme, rank theme, sign out. A visible "Hledat Ctrl K" button in the
+header makes it discoverable; it is a proper combobox/listbox for screen readers.
