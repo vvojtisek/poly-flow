@@ -25,6 +25,13 @@ class NextOut(BaseModel):
     pool: int  # sentences available for this profile
 
 
+class SentenceOut(BaseModel):
+    item_id: uuid.UUID
+    sentence: str
+    lemma: str
+    translation: str
+
+
 class CheckIn(BaseModel):
     item_id: uuid.UUID
     text: str = Field(max_length=600)
@@ -93,3 +100,28 @@ async def check(body: CheckIn, auth: Auth, db: DB) -> CheckOut:
         marks=[MarkOut(expected=m.expected, typed=m.typed, verdict=m.verdict) for m in marks],
         score=round(score(marks), 3),
     )
+
+
+@router.get("/sentences", response_model=list[SentenceOut])
+async def sentences(
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+    limit: Annotated[int, Query(ge=1, le=40)] = 20,
+) -> list[SentenceOut]:
+    """Sentences shown with their text, for shadowing (listen, repeat, compare). Ungraded."""
+    lang = language or auth.acting.active_language
+    items = (
+        (await db.execute(_pool(auth.acting, lang).order_by(func.random()).limit(limit)))
+        .scalars()
+        .all()
+    )
+    return [
+        SentenceOut(
+            item_id=i.id,
+            sentence=i.example_sentence or "",
+            lemma=i.lemma,
+            translation=i.translation_cs,
+        )
+        for i in items
+    ]

@@ -19,6 +19,7 @@ unreviewed.
 | 6 | Today's plan + goal ring | one button to the most useful next step, calm daily goal |
 | 7 | Dictation drill (Diktát) | hear a sentence, type it, word-level diff; ungraded practice |
 | 8 | German case lab | build a noun phrase, see which word carries the case signal |
+| 9 | Shadowing studio (Stínování) | listen, repeat aloud, compare rhythm outlines; recordings never leave the browser |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -173,3 +174,22 @@ units; there was no way to see the whole system or play with it.
   and a Czech explanation of why each ending appears (including n-declension). Beside it, the
   full table for the chosen determiner; clicking a cell rebuilds the phrase.
 - Reference only: nothing is graded or recorded.
+
+## Cycle 9/30: shadowing studio (Stínování)
+
+**Before:** speaking was limited to saying single words for speech recognition; there was no way
+to practise the melody and rhythm of whole sentences.
+
+**Built:** `/shadowing`, on the dashboard next to dictation and in the palette.
+
+- Example sentences of words the learner has had a lesson on (`GET /api/v1/dictation/sentences`,
+  child filter applied), with the word and its meaning.
+- Listen (normal or slow), record yourself (up to 15 s), play yourself back, or "Vzor a pak já"
+  plays the model and then the recording. Text can be blurred for listen-first practice.
+- A two-sided loudness outline puts the model (above) and the learner (below) on one time axis,
+  with silence trimmed and both durations shown: a visual of rhythm and length, explicitly not
+  a pronunciation score (speech-confidence invariant kept).
+- Privacy: recordings stay as object URLs in the tab, are never uploaded, and are freed when the
+  page closes. Without TTS the page says the model is missing and still allows recording.
+- Keyboard: P, R, M, C, H, N. `useRecorder` gained a max-length option; `lib/audio` gained
+  `clipSrc`, `playToEnd` and natural-speed playback for own recordings.

@@ -841,3 +841,12 @@ export interface Declension {
   adjectives: DeclAdjective[];
 }
 export const getDeclension = () => api<Declension>("/api/v1/grammar/declension");
+
+export interface PracticeSentence {
+  item_id: string;
+  sentence: string;
+  lemma: string;
+  translation: string;
+}
+export const getPracticeSentences = (language: Language) =>
+  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}`);

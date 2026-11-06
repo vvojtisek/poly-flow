@@ -94,6 +94,8 @@ async def test_dictation_uses_only_taught_words_and_records_nothing(db, client, 
     assert out["sentence"] == "Das Haus ist groß." and out["marks"][-1]["verdict"] == "accents"
     async for s in get_session():
         assert await s.scalar(select(func.count()).select_from(LearningEvent)) == 0
+    shadow = (await client.get("/api/v1/dictation/sentences?language=de")).json()
+    assert [x["sentence"] for x in shadow] == ["Das Haus ist groß."]
     # A word without a lesson cannot be dictated.
     async for s in get_session():
         gehen = (

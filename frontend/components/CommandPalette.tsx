@@ -23,6 +23,7 @@ import {
   Sun,
   Trophy,
   Users,
+  Waves,
   type LucideIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -102,6 +103,7 @@ export function CommandPalette({ me }: { me: Me }) {
       { id: "cefr", label: cs.cefr.title, group: nav, icon: Gauge, keywords: ["cefr", "uroven", "b2"], run: go("/placement/cefr") },
       { id: "levels", label: cs.tests.levels, group: nav, icon: Award, keywords: ["zkouska", "a1", "a2", "b1", "b2"], run: go("/levels") },
       { id: "cases", label: cs.cases.title, group: nav, icon: FlaskConical, keywords: ["pady", "clen", "koncovky", "der die das", "deklinace"], run: go("/grammar/cases") },
+      { id: "shadowing", label: cs.shadow.title, group: nav, icon: Waves, keywords: ["stinovani", "vyslovnost", "mluvit", "nahrat", "shadowing"], run: go("/shadowing") },
       { id: "dictation", label: cs.dictation.title, group: nav, icon: Headphones, keywords: ["diktat", "poslech", "psat"], run: go("/dictation") },
       { id: "words", label: cs.words.title, group: nav, icon: BookMarked, keywords: ["slovnik", "slova", "hledat"], run: go("/words") },
       { id: "insights", label: cs.insights.title, group: nav, icon: BarChart3, keywords: ["statistiky", "grafy", "aktivita", "predpoved"], run: go("/insights") },

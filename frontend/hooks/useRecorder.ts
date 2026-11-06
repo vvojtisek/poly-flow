@@ -10,7 +10,7 @@ export type RecorderState =
   | { kind: "recording" }
   | { kind: "error"; reason: "unsupported" | "denied" | "failed" };
 
-const MAX_MS = 6000; // one word or a short phrase
+const MAX_MS = 6000; // default: one word or a short phrase
 
 function supported(): boolean {
   return (
@@ -21,7 +21,7 @@ function supported(): boolean {
   );
 }
 
-export function useRecorder(onRecording: (recording: Blob) => void) {
+export function useRecorder(onRecording: (recording: Blob) => void, maxMs = MAX_MS) {
   const [state, setState] = useState<RecorderState>({ kind: "idle" });
   const recorder = useRef<MediaRecorder | null>(null);
   const cancelled = useRef(false);
@@ -67,8 +67,8 @@ export function useRecorder(onRecording: (recording: Blob) => void) {
     };
     rec.start();
     setState({ kind: "recording" });
-    timer.current = setTimeout(() => rec.state === "recording" && rec.stop(), MAX_MS);
-  }, [release]);
+    timer.current = setTimeout(() => rec.state === "recording" && rec.stop(), maxMs);
+  }, [release, maxMs]);
 
   const stop = useCallback(() => {
     if (recorder.current?.state === "recording") recorder.current.stop();

@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Trophy } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Trophy, Waves } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -115,10 +115,14 @@ export default function HomePage() {
                 {cs.grammar.title}
               </Button>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="grid grid-cols-2 gap-2">
               <Button variant="secondary" className="w-full" onClick={() => router.push("/dictation")}>
                 <Headphones className="size-5" aria-hidden />
                 {cs.dictation.title}
+              </Button>
+              <Button variant="secondary" className="w-full" onClick={() => router.push("/shadowing")}>
+                <Waves className="size-5" aria-hidden />
+                {cs.shadow.title}
               </Button>
             </div>
             {progress && (
