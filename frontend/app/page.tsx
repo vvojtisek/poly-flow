@@ -221,7 +221,7 @@ export default function HomePage() {
         )}
 
         <Panel title={cs.progression.title} icon={MapIcon} className="lg:col-span-2">
-          <ProgressionPath />
+          <ProgressionPath progress={progress} />
         </Panel>
 
         {me.can_manage && (

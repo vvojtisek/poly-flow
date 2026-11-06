@@ -27,6 +27,10 @@ export const cs = {
   progression: {
     title: "Tvoje cesta",
     words: "slov",
+    completed: "hotovo",
+    nextTarget: "Další cíl",
+    remaining: (n: number) => `Zbývá ${n} ${n === 1 ? "slovo" : n >= 2 && n <= 4 ? "slova" : "slov"}`,
+    curriculumDone: "Povinná slovní zásoba do B2 je hotová. Další rozšiřování je dobrovolné.",
     milestones: {
       core_100: "Prvních 100 slov",
       basic_500: "A1",

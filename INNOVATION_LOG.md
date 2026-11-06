@@ -937,3 +937,16 @@ server-side learning records, and modes unavailable in the selected language are
 - If browser storage is unavailable, pinning still updates the current view but cannot persist
   across visits.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 21/30: show personal progress along vocabulary milestones
+
+**Before:** the dashboard listed the vocabulary milestones but did not show which milestones the
+active learner had reached or how far away the next one was.
+
+**Built:** the path now marks completed milestones, highlights the next target, and shows an
+accessible progress bar with the current known-word count and remaining words. It explains when
+the required B2 vocabulary path is complete.
+
+- The path uses the existing profile-scoped progress count and keeps its CEFR disclaimer; the
+  visual never describes vocabulary rank as a certified communication level.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
