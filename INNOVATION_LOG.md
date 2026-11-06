@@ -886,3 +886,16 @@ word to appear again in the current session.
   learning history. The existing sentence-listening activity remains available when examples
   exist, and the recall mode still works when none do.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 17/30: search and organize large word collections
+
+**Before:** a collection always appeared in frequency order. As a set grew, finding a word or
+returning to useful example sentences meant scanning the full list.
+
+**Built:** collection details now include local search across words, Czech meanings and example
+sentences, alphabetical or frequency sorting, and a filter for words with examples. A live result
+count and clear empty state keep each combination understandable.
+
+- Filtering changes only the current view; collection membership and saved learning records stay
+  untouched.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

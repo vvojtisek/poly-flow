@@ -2,7 +2,7 @@
 
 import { ArrowDownToLine, ArrowLeft, FolderOpen, Headphones, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
@@ -33,6 +33,20 @@ export default function CollectionsPage() {
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const [practicing, setPracticing] = useState(false);
+  const [wordQuery, setWordQuery] = useState("");
+  const [wordSort, setWordSort] = useState<"frequency" | "alphabetical">("frequency");
+  const [examplesOnly, setExamplesOnly] = useState(false);
+
+  const visibleWords = useMemo(() => {
+    if (!detail) return [];
+    const query = wordQuery.trim().toLocaleLowerCase("cs");
+    return detail.items
+      .filter((word) => !examplesOnly || !!word.example?.trim())
+      .filter((word) => !query || [word.lemma, word.translation, word.example ?? ""].some((value) => value.toLocaleLowerCase("cs").includes(query)))
+      .sort((a, b) => wordSort === "frequency"
+        ? a.rank - b.rank || a.lemma.localeCompare(b.lemma, "cs")
+        : a.lemma.localeCompare(b.lemma, "cs"));
+  }, [detail, wordQuery, wordSort, examplesOnly]);
 
   const refresh = useCallback(async (preferred?: string) => {
     if (!language) return;
@@ -200,8 +214,23 @@ export default function CollectionsPage() {
                   ) : detail.items.length === 0 ? (
                     <Notice>{t.emptyItems}</Notice>
                   ) : (
-                    <ul className="divide-y divide-slate-100 dark:divide-slate-800">
-                      {detail.items.map((word) => (
+                    <>
+                    <div className="mb-3 flex flex-wrap items-center gap-2 rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+                      <label className="sr-only" htmlFor="collection-word-search">{t.searchWords}</label>
+                      <input id="collection-word-search" value={wordQuery} onChange={(event) => setWordQuery(event.target.value)} placeholder={t.searchWords} className="min-w-48 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900" />
+                      <label className="sr-only" htmlFor="collection-word-sort">{t.sortWords}</label>
+                      <select id="collection-word-sort" value={wordSort} onChange={(event) => setWordSort(event.target.value as "frequency" | "alphabetical")} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+                        <option value="frequency">{t.sortFrequency}</option>
+                        <option value="alphabetical">{t.sortAlphabetical}</option>
+                      </select>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input type="checkbox" checked={examplesOnly} onChange={(event) => setExamplesOnly(event.target.checked)} className="size-4 accent-brand-600" />
+                        {t.onlyWithExamples}
+                      </label>
+                      <p className="w-full text-xs text-slate-500" role="status">{t.showingWords(visibleWords.length, detail.items.length)}</p>
+                    </div>
+                    {visibleWords.length ? <ul className="divide-y divide-slate-100 dark:divide-slate-800">
+                      {visibleWords.map((word) => (
                         <li key={word.id} className="flex items-center gap-3 py-3">
                           <span className="w-9 shrink-0 text-right text-xs text-slate-400">{word.rank}</span>
                           <span className="min-w-0 flex-1">
@@ -215,7 +244,8 @@ export default function CollectionsPage() {
                           </Button>
                         </li>
                       ))}
-                    </ul>
+                    </ul> : <Notice>{t.noMatchingWords}</Notice>}
+                    </>
                   )}
                 </>
               )}
