@@ -1,6 +1,6 @@
 "use client";
 
-import { BookMarked, Clock, Search, X } from "lucide-react";
+import { BookMarked, Clock, Download, Search, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -8,7 +8,7 @@ import { Kbd } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { getWord, listWords, myWordAudioUrl, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
+import { getWord, listWords, myWordAudioUrl, wordExportUrl, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { genderClass } from "@/lib/gender";
 import { cs } from "@/lib/i18n/cs";
@@ -218,6 +218,25 @@ export default function WordsPage() {
           </div>
           <LanguagePicker me={me} />
         </div>
+        {total > 0 && me.acting.active_language && (
+          <details className="group self-start text-sm">
+            <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
+              <Download className="size-4" aria-hidden />
+              {t.export}
+            </summary>
+            <div className="mt-2 flex max-w-md flex-col gap-2 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
+              <p className="text-xs text-slate-500">{t.exportHelp}</p>
+              <div className="flex gap-2">
+                <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "csv")} download>
+                  {t.exportCsv}
+                </a>
+                <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "anki")} download>
+                  {t.exportAnki}
+                </a>
+              </div>
+            </div>
+          </details>
+        )}
         <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
           <div className="flex min-w-0 flex-col gap-3" onKeyDown={onListKey}>
             <label className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900">

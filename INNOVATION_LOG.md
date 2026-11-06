@@ -29,6 +29,7 @@ unreviewed.
 | 16 | Check review (Rozbor) | word-by-word result after a check: your answer, the right one, next review, add a hook |
 | 17 | Welcome wizard (Vítej) | first run of a fresh profile: language, daily goal, rank path, text size, then placement or first lesson |
 | 18 | Tap to look up (Klepni na slovo) | every word in stories, role-play and dictation opens its dictionary entry: form → lemma by rules |
+| 19 | Take your words with you (export) | own dictionary as a spreadsheet CSV or an Anki import file, with hooks, status and source |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -375,3 +376,21 @@ the dictionary form.
 - Used in stories, every role-play line and the dictation answer.
 - Known limit, stated in the module: a guess can hit a real but different lemma; the card shows
   the dictionary form so the learner can see which one was matched.
+
+## Cycle 19/30: take your words with you (export)
+
+**Before:** a learner's dictionary, hooks and review dates lived only inside PolyFlow. A family
+that also uses Anki or a spreadsheet had to copy words by hand.
+
+**Built:** `GET /api/v1/words/export?language=&format=csv|anki` and a "Stáhnout" menu in Můj
+slovník.
+
+- Only the acting profile's own met words in that language, child filter applied, frequency order.
+- CSV for spreadsheets: lemma, article, Czech meaning, status, part of speech, rank, example,
+  memory hook, next review date, right/wrong counts and the lexicon source. UTF-8 with a BOM so
+  accents open correctly; cells that a spreadsheet would run as a formula (=, +, -, @) are
+  prefixed with an apostrophe (CSV-injection guard, tested).
+- Anki file: Anki's own file headers (tab separator, no HTML, tags in column 3), so it imports
+  without settings. Front "der Hund", back "pes (hook)", tags `polyflow::de`, the status and
+  `polyflow::source::claude-drafted` for drafted translations, so unreviewed glosses stay marked.
+- Pure formatting in `app/domain/export.py`; the download is `no-store`.

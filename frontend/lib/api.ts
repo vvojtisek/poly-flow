@@ -769,6 +769,8 @@ export function listWords(
   return api<WordList>(`/api/v1/words?${p}`, { signal });
 }
 export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);
+export const wordExportUrl = (language: Language, format: "csv" | "anki") =>
+  `/api/v1/words/export?language=${language}&format=${format}`;
 export const myWordAudioUrl = (id: string, part: "word" | "example" = "word") => `/api/v1/words/${id}/audio?part=${part}`;
 
 // ---------------------------------------------------------------- today's plan

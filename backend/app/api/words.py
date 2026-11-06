@@ -5,11 +5,12 @@ from datetime import datetime
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, HTTPException, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, Field
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, Now, TtsDep, _chosen_voice, _speech
+from app.domain import export
 from app.domain.enums import Language
 from app.services import notes
 from app.services import words as svc
@@ -109,6 +110,31 @@ async def list_words(
         limit=limit,
     )
     return WordListOut(**out)
+
+
+@router.get("/export", response_class=Response)
+async def export_words(
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+    format: Annotated[export.Format, Query()] = "csv",
+) -> Response:
+    """The acting profile's own words as a download: a spreadsheet CSV or an Anki import file."""
+    lang = language or auth.acting.active_language
+    rows = await svc.export_rows(db, auth.acting, lang)
+    if format == "anki":
+        body, media, ext = export.to_anki(rows, lang), "text/tab-separated-values", "txt"
+    else:
+        body, media, ext = export.to_csv(rows), "text/csv", "csv"
+    name = f"polyflow-{lang}-{'anki' if format == 'anki' else 'words'}.{ext}"
+    return Response(
+        body,
+        media_type=f"{media}; charset=utf-8",
+        headers={
+            "Content-Disposition": f'attachment; filename="{name}"',
+            "Cache-Control": "no-store",
+        },
+    )
 
 
 @router.get("/{item_id}", response_model=WordDetailOut)

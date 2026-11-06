@@ -11,8 +11,10 @@ from sqlalchemy import and_, case, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.enums import Language, ProgressState
+from app.domain.export import Row
 from app.models import LearningEvent, LexiconItem, User, UserWordProgress
 from app.services.learning import LearningError, _suitable
+from app.services.notes import notes_for
 
 STATUSES = ("mastered", "known", "passive", "learning", "seen")
 
@@ -175,3 +177,34 @@ async def audio_text(
     if part == "word" and item.gender and item.language == Language.DE:
         text = f"{item.gender} {item.lemma}"
     return item.language, text
+
+
+async def export_rows(db: AsyncSession, user: User, language: Language) -> list[Row]:
+    """Every word this profile has met in the language, for its own export (frequency order)."""
+    p, li = UserWordProgress, LexiconItem
+    rows = (
+        await db.execute(
+            select(li, p, _status())
+            .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
+            .where(li.language == language, _suitable(user))
+            .order_by(li.frequency_rank)
+        )
+    ).all()
+    notes = await notes_for(db, user.id, [item.id for item, _, _ in rows])
+    return [
+        Row(
+            lemma=item.lemma,
+            article=item.gender if language == "de" and item.pos == "NOUN" else None,
+            translation=item.translation_cs,
+            status=status,
+            pos=item.pos,
+            rank=item.frequency_rank,
+            example=item.example_sentence,
+            note=notes.get(item.id),
+            next_review=prog.next_review_at.date().isoformat() if prog.next_review_at else None,
+            correct=prog.correct_count,
+            errors=prog.error_count,
+            source=item.source,
+        )
+        for item, prog, status in rows
+    ]
