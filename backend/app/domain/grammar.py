@@ -28,7 +28,14 @@ from app.domain.orthography import normalize
 
 NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 SLUG = r"^[a-z0-9][a-z0-9-]{0,63}$"
-LEVELS = (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2)
+LEVELS = (
+    CefrLevel.A1,
+    CefrLevel.A2,
+    CefrLevel.B1,
+    CefrLevel.B2,
+    CefrLevel.C1,
+    CefrLevel.C2,
+)
 
 # Grammar lessons are open from the first day (Vlad, 2026-11-05: an A1-B2 path in German needs
 # articles, cases and verb endings from the first sentences). The tree only recommends an order.
@@ -68,6 +75,7 @@ class Example(BaseModel):
     model_config = ConfigDict(extra="forbid")
     text: NonEmpty  # target language
     cs: NonEmpty
+    variant: Literal["uk", "us"] | None = None  # English example for one explicit locale
 
 
 class NoteSection(BaseModel):
@@ -140,7 +148,8 @@ class Unit(BaseModel):
     id: Annotated[str, StringConstraints(pattern=SLUG)]
     level: CefrLevel
     title: NonEmpty  # Czech
-    summary: NonEmpty  # one Czech sentence: what the learner can do after the unit
+    summary: NonEmpty  # short Czech description for lesson discovery
+    objective: NonEmpty | None = None  # observable learner outcome; older packs use summary
     notes: list[NoteSection] = Field(min_length=1)
     examples: list[Example] = Field(min_length=1)
     exercises: list[Exercise] = Field(min_length=4)
@@ -148,7 +157,7 @@ class Unit(BaseModel):
     @model_validator(mode="after")
     def _kinds(self) -> "Unit":
         if self.level not in LEVELS:
-            raise ValueError(f"{self.id}: level must be A1-B2")
+            raise ValueError(f"{self.id}: level must be A1-C2")
         return self
 
 
@@ -173,7 +182,7 @@ class GrammarPack(BaseModel):
         # Curriculum order never goes back a level.
         order = [LEVELS.index(u.level) for u in self.units]
         if order != sorted(order):
-            raise ValueError("units must be ordered A1 -> B2")
+            raise ValueError("units must be ordered A1 -> C2")
         return self
 
 

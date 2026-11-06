@@ -56,7 +56,7 @@ function Table({ rows }: { rows: string[][] }) {
 }
 
 /** A unit's Czech explanation: sections with optional tables, then examples. */
-export function GrammarNotes({ unit, language, header }: { unit: GrammarUnit; language: Language; header?: ReactNode }) {
+export function GrammarNotes({ unit, language, header, englishVariant = "uk" }: { unit: GrammarUnit; language: Language; header?: ReactNode; englishVariant?: "uk" | "us" }) {
   return (
     <article className="flex flex-col gap-4">
       {header}
@@ -73,7 +73,7 @@ export function GrammarNotes({ unit, language, header }: { unit: GrammarUnit; la
       <section className="flex flex-col gap-2">
         <h3 className="font-semibold">{cs.grammar.examples}</h3>
         <ul className="flex flex-col gap-2">
-          {unit.examples.map((e) => (
+          {unit.examples.filter((e) => !e.variant || e.variant === englishVariant).map((e) => (
             <li key={e.text} className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
               <p className="font-medium" lang={language}>
                 {e.text}

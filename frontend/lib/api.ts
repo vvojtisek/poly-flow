@@ -92,6 +92,7 @@ export interface ProfileSettings {
   daily_goal_minutes: number;
   audio_rate: number;
   autoplay_audio: boolean;
+  english_variant: "uk" | "us";
   theme: Theme;
   interests: string[];
   voices: Partial<Record<Language, string>>;
@@ -428,6 +429,7 @@ export interface GrammarUnitSummary {
   level: CefrLevel;
   title: string;
   summary: string;
+  objective: string;
   status: UnitState;
   exercises: number;
   due: boolean;
@@ -451,8 +453,9 @@ export interface GrammarUnit {
   level: CefrLevel;
   title: string;
   summary: string;
+  objective: string;
   notes: GrammarNote[];
-  examples: { text: string; cs: string }[];
+  examples: { text: string; cs: string; variant?: "uk" | "us" | null }[];
   status: UnitState;
   review_status: string;
   source: string;

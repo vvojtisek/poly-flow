@@ -19,6 +19,7 @@ class NoteOut(BaseModel):
 class ExampleOut(BaseModel):
     text: str
     cs: str
+    variant: Literal["uk", "us"] | None = None
 
 
 class UnitSummaryOut(BaseModel):
@@ -26,6 +27,7 @@ class UnitSummaryOut(BaseModel):
     level: CefrLevel
     title: str
     summary: str
+    objective: str
     status: UnitState
     exercises: int
     due: bool  # studied and due for a grammar check now
@@ -54,6 +56,7 @@ class UnitOut(BaseModel):
     level: CefrLevel
     title: str
     summary: str
+    objective: str
     notes: list[NoteOut]
     examples: list[ExampleOut]
     status: UnitState

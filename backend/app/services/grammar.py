@@ -64,6 +64,7 @@ async def upsert_pack(db: AsyncSession, pack: GrammarPack) -> tuple[int, int]:
             position=pos,
             title=u.title,
             summary=u.summary,
+            objective=u.objective or u.summary,
             notes=[n.model_dump(exclude_none=True) for n in u.notes],
             examples=[e.model_dump() for e in u.examples],
             source=pack.source,

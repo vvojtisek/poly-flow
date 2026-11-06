@@ -129,7 +129,10 @@ async def _state(db, user, s, rng: random.Random | None = None) -> StateOut:
 async def start(body: StartIn, auth: Auth, db: DB, now: Now, tts: TtsDep) -> StateOut:
     """Start (or resume) the diagnostic; listening items need the language's voice installed."""
     lang = body.language or auth.acting.active_language
-    with_listening = DEFAULT_VOICES[lang] in await tts.installed()
+    english_us = (
+        lang == Language.EN and (auth.acting.settings or {}).get("english_variant", "uk") == "us"
+    )
+    with_listening = not english_us and DEFAULT_VOICES[lang] in await tts.installed()
     try:
         s = await svc.start(db, auth.acting, lang, with_listening=with_listening, now=now)
         out = await _state(db, auth.acting, s)

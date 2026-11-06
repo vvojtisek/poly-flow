@@ -22,6 +22,7 @@ import {
   type Language,
 } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
+import { englishVariantText } from "@/lib/english-variant";
 import { useHotkeys } from "@/lib/keyboard";
 
 const BANDS: DiagnosticBand[] = ["A1", "A2", "B1", "B2", "B2+"];
@@ -72,7 +73,7 @@ type Phase =
   | { kind: "question"; state: DiagnosticState; chosen: string | null; feedback: DiagnosticAnswer | null; busy: boolean }
   | { kind: "done"; state: DiagnosticState };
 
-export function DiagnosticRunner({ language, onAgain }: { language: Language; onAgain: () => void }) {
+export function DiagnosticRunner({ language, englishVariant = "uk", onAgain }: { language: Language; englishVariant?: "uk" | "us"; onAgain: () => void }) {
   const [phase, setPhase] = useState<Phase>({ kind: "loading" });
   useHotkeys(phase.kind === "question" || phase.kind === "done");
 
@@ -152,7 +153,7 @@ export function DiagnosticRunner({ language, onAgain }: { language: Language; on
         </p>
         {q.context && (
           <blockquote lang={language} className="rounded-xl bg-slate-50 p-3 text-base leading-relaxed text-slate-800 dark:bg-slate-800 dark:text-slate-100">
-            {q.context}
+            {language === "en" ? englishVariantText(q.context, englishVariant) : q.context}
           </blockquote>
         )}
         {q.has_audio && (
@@ -162,7 +163,7 @@ export function DiagnosticRunner({ language, onAgain }: { language: Language; on
           </div>
         )}
         <p className="text-lg font-semibold" lang={q.skill === "grammar" || q.skill === "vocabulary" ? language : "cs"}>
-          {q.prompt}
+          {language === "en" ? englishVariantText(q.prompt, englishVariant) : q.prompt}
         </p>
       </section>
 
@@ -189,7 +190,7 @@ export function DiagnosticRunner({ language, onAgain }: { language: Language; on
             >
               <span className="flex items-center gap-3">
                 {i < 9 && <KeyHint k={`${i + 1}`} />}
-                {o}
+                {language === "en" ? englishVariantText(o, englishVariant) : o}
               </span>
               {state === "correct" && <CheckCircle2 className="size-5 shrink-0" aria-hidden />}
               {state === "wrong" && <XCircle className="size-5 shrink-0" aria-hidden />}
@@ -214,12 +215,12 @@ export function DiagnosticRunner({ language, onAgain }: { language: Language; on
         >
           <p className="font-semibold">
             {feedback.correct ? cs.cefr.correct : feedback.dont_know ? cs.cefr.dontKnowNote : cs.cefr.wrong}
-            {!feedback.correct && <span lang={language}> {feedback.answer}</span>}
+            {!feedback.correct && <span lang={language}> {language === "en" ? englishVariantText(feedback.answer, englishVariant) : feedback.answer}</span>}
           </p>
           <p>{feedback.explain}</p>
           {feedback.transcript && (
             <p className="text-xs opacity-80">
-              {cs.cefr.transcript}: <span lang={language}>{feedback.transcript}</span>
+              {cs.cefr.transcript}: <span lang={language}>{language === "en" ? englishVariantText(feedback.transcript, englishVariant) : feedback.transcript}</span>
             </p>
           )}
           <Button className="mt-1" autoFocus data-hotkey="enter" disabled={busy} onClick={() => void next()}>

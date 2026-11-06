@@ -1,6 +1,7 @@
 "use client";
 
 import { Compass } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
@@ -60,6 +61,9 @@ function Intro({ me, language, onStart }: { me: Me; language: Language; onStart:
               {cs.placement.back}
             </Button>
           </div>
+          <Link href="/placement/vocabulary" className="text-center text-sm font-medium text-brand-700 underline-offset-2 hover:underline dark:text-brand-200">
+            {cs.cefr.vocabularyTest}
+          </Link>
         </>
       ) : (
         <Notice>{cs.cefr.unavailable}</Notice>
@@ -79,7 +83,7 @@ export default function CefrPlacementPage() {
     <AppShell me={me}>
       <div className="mx-auto w-full max-w-xl">
         {run > 0 ? (
-          <DiagnosticRunner key={`${me.acting.id}:${language}:${run}`} language={language} onAgain={again} />
+          <DiagnosticRunner key={`${me.acting.id}:${language}:${run}`} language={language} englishVariant={me.acting.settings.english_variant} onAgain={again} />
         ) : (
           <Intro key={`${me.acting.id}:${language}`} me={me} language={language} onStart={start} />
         )}

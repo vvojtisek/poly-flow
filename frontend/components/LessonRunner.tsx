@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, Pause, XCircle } from "lucide-react";
+import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, Pause, RotateCcw, Volume2, VolumeX, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
@@ -31,6 +31,7 @@ import {
   type Task,
 } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
+import { englishVariantText } from "@/lib/english-variant";
 import { useHotkeys } from "@/lib/keyboard";
 
 // A correct choice stays on screen this long (ms) before the next question replaces it.
@@ -231,11 +232,17 @@ function ExamDone({ session }: { session: LessonSession }) {
 export function LessonRunner({
   language,
   mode = "learn",
+  autoplayAudio = true,
+  englishVariant = "uk",
+  onAutoplayAudioChange,
   level,
   onExit,
 }: {
   language: Language;
   mode?: SessionMode;
+  autoplayAudio?: boolean;
+  englishVariant?: "uk" | "us";
+  onAutoplayAudioChange?: (enabled: boolean) => void;
   level?: ExamLevel; // exam only
   onExit?: () => void; // where "back" leads; the dashboard by default
 }) {
@@ -246,16 +253,71 @@ export function LessonRunner({
   const [netError, setNetError] = useState(false);
   const [chosen, setChosen] = useState<number | null>(null); // the option clicked on this task
   const [announcement, setAnnouncement] = useState("");
+  const [speechUnavailable, setSpeechUnavailable] = useState(false);
+  const [speechBlocked, setSpeechBlocked] = useState(false);
   // Reused until the server answers, so a retried request cannot double-count.
   const pendingKey = useRef<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   // The last choice came from the keyboard: disabled options drop focus, so it is put back.
   const refocusOptions = useRef(false);
+  const spokenTask = useRef<string | null>(null);
   // Bumped on every (re)start: a superseded start (React's dev double mount, a retry) must not
   // overwrite the task the learner is already answering when its late response arrives.
   const run = useRef(0);
   useHotkeys();
+
+  const speechTask = mode === "check" && phase.kind === "task" ? phase.task : null;
+  const replaySpeech = useCallback(() => {
+    if (!speechTask || typeof window === "undefined" || !window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") {
+      setSpeechUnavailable(true);
+      return;
+    }
+    const itemLanguage = speechTask.type === "recall" ? "cs-CZ" : language === "en" ? (englishVariant === "uk" ? "en-GB" : "en-US") : ({ de: "de-DE", fr: "fr-FR", it: "it-IT", en: "en-GB" } as const)[language];
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(language === "en" ? englishVariantText(speechTask.prompt, englishVariant) : speechTask.prompt);
+    utterance.lang = itemLanguage;
+    const candidates = window.speechSynthesis.getVoices();
+    const localeKey = itemLanguage.toLowerCase().replaceAll("_", "-");
+    const matching = candidates.find((voice) => voice.lang.toLowerCase().replaceAll("_", "-") === localeKey)
+      ?? (language === "en" ? undefined : candidates.find((voice) => voice.lang.toLowerCase().startsWith(itemLanguage.slice(0, 2).toLowerCase())));
+    if (matching) utterance.voice = matching;
+    utterance.rate = 1;
+    utterance.onerror = (event) => {
+      if (event.error === "not-allowed") setSpeechBlocked(true);
+      else setSpeechUnavailable(true);
+    };
+    try {
+      window.speechSynthesis.speak(utterance);
+      setSpeechUnavailable(false);
+      setSpeechBlocked(false);
+    } catch {
+      setSpeechUnavailable(true);
+    }
+  }, [speechTask, language, englishVariant]);
+
+  useEffect(() => {
+    if (!speechTask || !autoplayAudio) {
+      if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+      if (!autoplayAudio) spokenTask.current = null;
+      return;
+    }
+    const key = `${speechTask.id}:${englishVariant}`;
+    if (spokenTask.current === key) return;
+    const timer = window.setTimeout(() => {
+      if (spokenTask.current === key) return;
+      spokenTask.current = key;
+      replaySpeech();
+    }, 0);
+    return () => {
+      window.clearTimeout(timer);
+      if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+    };
+  }, [speechTask, autoplayAudio, englishVariant, replaySpeech]);
+
+  useEffect(() => () => {
+    if (typeof window !== "undefined" && window.speechSynthesis) window.speechSynthesis.cancel();
+  }, []);
 
   const advance = useCallback(async (session: LessonSession) => {
     const id = run.current;
@@ -604,6 +666,19 @@ export function LessonRunner({
         </span>
         {pauseLesson}
       </div>
+      {mode === "check" && (
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-slate-50 px-3 py-2 dark:bg-slate-800/60">
+          <button type="button" aria-pressed={autoplayAudio} onClick={() => onAutoplayAudioChange?.(!autoplayAudio)} className="inline-flex items-center gap-2 rounded-lg px-2 py-1 text-sm font-medium hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:hover:bg-slate-900">
+            {autoplayAudio ? <Volume2 className="size-4" aria-hidden /> : <VolumeX className="size-4" aria-hidden />}
+            {autoplayAudio ? cs.check.muteSpeech : cs.check.enableSpeech}
+          </button>
+          <Button variant="ghost" className="!px-2 !py-1 text-sm" onClick={replaySpeech}>
+            <RotateCcw className="size-4" aria-hidden /> {cs.check.replaySpeech}
+          </Button>
+          {speechUnavailable && <p role="status" className="w-full text-xs text-amber-700 dark:text-amber-300">{cs.check.speechUnavailable}</p>}
+          {speechBlocked && <p role="status" className="w-full text-xs text-amber-700 dark:text-amber-300">{cs.check.speechBlocked}</p>}
+        </div>
+      )}
       <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
         <div className="h-full bg-brand-500" style={{ width: `${(task.position / task.total) * 100}%` }} />
       </div>
@@ -616,7 +691,7 @@ export function LessonRunner({
           <p className="text-3xl font-bold break-words" lang={task.type === "recognition" ? language : "cs"}>
             {/* German stores the article (der/die/das); French/Italian store m/f. */}
             {task.type === "recognition" && language === "de" && task.gender ? `${task.gender} ` : ""}
-            {task.prompt}
+            {language === "en" ? englishVariantText(task.prompt, englishVariant) : task.prompt}
           </p>
           {/* A recall task asks for the word itself: its audio plays with the answer instead. */}
           {task.type === "recognition" && <PlayButton url={taskAudioUrl(task.id, "word")} label={cs.audio.playWord} hotkey />}
@@ -628,13 +703,13 @@ export function LessonRunner({
         )}
         {task.cloze && (
           <p className="text-lg text-slate-700 dark:text-slate-200" lang={language}>
-            {task.cloze}
+            {language === "en" ? englishVariantText(task.cloze, englishVariant) : task.cloze}
           </p>
         )}
         {task.example && (
           <div className="flex items-center justify-center gap-1">
             <p className="text-sm italic text-slate-500 dark:text-slate-400" lang={language}>
-              {task.example}
+              {language === "en" ? englishVariantText(task.example, englishVariant) : task.example}
             </p>
             <PlayButton url={taskAudioUrl(task.id, "example")} label={cs.audio.playSentence} size="sm" />
           </div>

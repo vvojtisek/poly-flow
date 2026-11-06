@@ -31,6 +31,7 @@ class ProfileSettings(BaseModel):
     daily_goal_minutes: int = Field(default=10, ge=5, le=120)
     audio_rate: float = Field(default=1.0, ge=0.5, le=1.5)  # playback speed of spoken audio
     autoplay_audio: bool = True
+    english_variant: Literal["uk", "us"] = "uk"
     theme: Literal["light", "dark", "system"] = "system"
     # Predefined topic slugs (voices.TOPICS) and the profile's own keywords, lower case.
     interests: list[str] = Field(default_factory=list, max_length=voices.MAX_INTERESTS)

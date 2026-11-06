@@ -153,6 +153,25 @@ ENGLISH = LanguagePack(
     citation_articles=("the", "a", "an", "to"),
     determiners=frozenset("the a an".split()),
     free_words=frozenset({"yes", "no", "oh", "hello", "hi", "thanks", "ok"}),
+    # Accept explicit standard UK/US spellings on either locale; never guess by
+    # rewriting arbitrary learner text.
+    spelling_variants=(
+        ("colour", "color", "english_spelling_variant"),
+        ("favourite", "favorite", "english_spelling_variant"),
+        ("centre", "center", "english_spelling_variant"),
+        ("theatre", "theater", "english_spelling_variant"),
+        ("neighbour", "neighbor", "english_spelling_variant"),
+        ("organise", "organize", "english_spelling_variant"),
+        ("realise", "realize", "english_spelling_variant"),
+        ("travelling", "traveling", "english_spelling_variant"),
+        ("travelled", "traveled", "english_spelling_variant"),
+        ("defence", "defense", "english_spelling_variant"),
+        ("licence", "license", "english_spelling_variant"),
+        ("lorry", "truck", "english_vocabulary_variant"),
+        ("petrol", "gasoline", "english_vocabulary_variant"),
+        ("mobile phone", "cell phone", "english_expression_variant"),
+        ("postcode", "zip code", "english_expression_variant"),
+    ),
     voice_sample="Hello! This is my voice. Shall we practise together?",
 )
 

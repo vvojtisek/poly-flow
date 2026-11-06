@@ -48,6 +48,7 @@ class GrammarUnit(TimestampMixin, Base):
     position: Mapped[int] = mapped_column(Integer, nullable=False)
     title: Mapped[str] = mapped_column(String(160), nullable=False)
     summary: Mapped[str] = mapped_column(String(400), nullable=False)
+    objective: Mapped[str] = mapped_column(String(400), nullable=False)
     # [{"heading", "text", "table"?}], [{"text", "cs"}]: Czech explanation shown in the lesson.
     notes: Mapped[list] = mapped_column(JSONB, nullable=False)
     examples: Mapped[list] = mapped_column(JSONB, nullable=False)

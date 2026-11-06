@@ -441,17 +441,23 @@ AUDIO_RESPONSES: dict[int | str, dict] = {
     200: {"content": {"audio/wav": {}}, "description": "Speech as WAV"},
     404: {"description": "audio_not_found"},
     409: {"description": "audio_would_reveal: the task asks for this word"},
-    503: {"description": "audio_unavailable: the TTS service is not running"},
+    503: {"description": "audio_unavailable: speech service or selected variant is unavailable"},
 }
+
+_ENGLISH_US_VOICE_UNAVAILABLE = "__english_us_voice_unavailable__"
 
 
 def _chosen_voice(user, language: Language) -> str | None:
-    """The profile's voice for `language` (validated when saved; unknown ids fall back)."""
+    """The profile's voice for `language`; do not silently serve UK audio for a US preference."""
+    if language == Language.EN and (user.settings or {}).get("english_variant", "uk") == "us":
+        return _ENGLISH_US_VOICE_UNAVAILABLE
     chosen = (user.settings or {}).get("voices") or {}
     return chosen.get(language.value) if isinstance(chosen, dict) else None
 
 
 async def _speech(tts: Tts, language: Language, text: str, voice: str | None) -> FileResponse:
+    if voice == _ENGLISH_US_VOICE_UNAVAILABLE:
+        raise HTTPException(503, "english_variant_voice_unavailable")
     try:
         path = await tts.speech(language, text, voice)
     except TtsUnavailable as exc:

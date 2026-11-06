@@ -19,6 +19,7 @@ const STATUS_STYLE: Record<string, string> = {
 };
 
 const STATUS_FILTERS: UnitState[] = ["new", "studied", "known", "mastered"];
+const CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 const fold = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("cs-CZ");
 
 function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean }) {
@@ -99,15 +100,16 @@ export default function GrammarPage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const units = tree?.levels.flatMap((l) => l.units) ?? [];
   const foldedQuery = fold(query.trim());
-  const filteredLevels = tree?.levels
-    .map((level) => ({
-      ...level,
-      units: level.units.filter((u) => {
+  const filteredLevels = tree
+    ? CEFR_LEVELS.map((level) => ({
+      level,
+      units: (tree.levels.find((section) => section.level === level)?.units ?? []).filter((u) => {
         const matchesQuery = !foldedQuery || fold(`${u.title} ${u.summary}`).includes(foldedQuery);
         return matchesQuery && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due);
       }),
     }))
-    .filter((level) => level.units.length > 0) ?? [];
+    .filter((level) => level.units.length > 0 || (!query.trim() && !statusFilter && !dueOnly))
+    : [];
   const visibleCount = filteredLevels.reduce((sum, level) => sum + level.units.length, 0);
   return (
     <AppShell me={me}>
@@ -125,7 +127,7 @@ export default function GrammarPage() {
         {!tree && !failed && <p className="text-slate-500">{cs.common.loading}</p>}
         {tree && !tree.open && <Notice>{cs.grammar.locked}</Notice>}
         {tree && tree.open && units.length === 0 && <Notice>{cs.grammar.empty}</Notice>}
-        {tree && tree.open && units.length > 0 && (
+        {tree && tree.open && (
           <>
             <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-900">
               <p className="text-sm text-slate-600 dark:text-slate-300">
@@ -219,7 +221,7 @@ export default function GrammarPage() {
                 </button>
               </div>
             </section>
-            {visibleCount === 0 ? (
+            {visibleCount === 0 && units.length > 0 && (query.trim() || statusFilter || dueOnly) ? (
               <Notice>{cs.grammar.noTopicMatches}</Notice>
             ) : filteredLevels.map((lv) => (
               <section key={lv.level} className="flex flex-col gap-2" aria-labelledby={`level-${lv.level}`}>
@@ -239,7 +241,7 @@ export default function GrammarPage() {
                     </div>
                   );
                 })()}
-                <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                {lv.units.length === 0 ? <p className="rounded-xl border border-dashed border-slate-300 p-3 text-sm text-slate-500 dark:border-slate-700">{cs.grammar.levelNotImplemented}</p> : <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {lv.units.map((u) => (
                     <UnitCard
                       key={u.id}
@@ -248,7 +250,7 @@ export default function GrammarPage() {
                       resumable={u.id === tree.active_lesson_unit}
                     />
                   ))}
-                </ol>
+                </ol>}
               </section>
             ))}
           </>
