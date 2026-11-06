@@ -25,6 +25,7 @@ from app.models.scene import Scene, SceneWord
 from app.models.story import DailyStory
 from app.models.tutor import TutorExplanation
 from app.models.user import User
+from app.models.word_note import WordNote
 
 __all__ = [
     "AuthSession",
@@ -52,4 +53,5 @@ __all__ = [
     "User",
     "UserGrammarProgress",
     "UserWordProgress",
+    "WordNote",
 ]

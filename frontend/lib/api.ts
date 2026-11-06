@@ -191,6 +191,7 @@ export interface WordCard {
   translation: string;
   context: string | null;
   context_cs: string | null;
+  note: string | null; // the learner's own memory hook
 }
 export type Verdict =
   | "exact"
@@ -272,6 +273,7 @@ export interface AnswerResult {
   can_retry: boolean;
   expected: string | null;
   meaning: string | null;
+  hook?: string | null; // the learner's memory hook, after a miss
 }
 
 export interface ProgressOverview {
@@ -749,6 +751,7 @@ export interface WordDetail extends Omit<WordRow, "due"> {
   last_reviewed_at: string | null;
   review_streak: number;
   history: { at: string; correct: boolean; graded: boolean; task: string; mode: string; error_tag: string | null }[];
+  note: string | null;
 }
 
 export function listWords(
@@ -909,3 +912,6 @@ export const getRoleplay = (id: string, role: string) =>
 export const checkRoleplay = (id: string, line: number, text: string) =>
   api<{ marks: DictationResult["marks"]; score: number }>(`/api/v1/roleplay/${id}/check`, { json: { line, text } });
 export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/${id}/audio?line=${line}`;
+
+export const setWordNote = (id: string, text: string) =>
+  api<{ note: string | null }>(`/api/v1/words/${id}/note`, { method: "PUT", json: { text } });

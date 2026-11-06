@@ -47,6 +47,7 @@ class WordCard(BaseModel):
     translation: str
     context: str | None  # the scene line with the word, else its example sentence
     context_cs: str | None
+    note: str | None = None  # the learner's own memory hook
 
 
 class SessionOut(BaseModel):
@@ -133,6 +134,7 @@ class AnswerOut(BaseModel):
     can_retry: bool
     expected: str | None
     meaning: str | None
+    hook: str | None = None  # the learner's memory hook, shown after a miss
 
 
 class PlacementOut(BaseModel):

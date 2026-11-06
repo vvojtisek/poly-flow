@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 
 import { AnswerInput } from "@/components/AnswerInput";
 import { KeyHint, ShortcutLegend } from "@/components/Kbd";
+import { NoteEditor } from "@/components/NoteEditor";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
 import { SpeakAnswer } from "@/components/SpeakAnswer";
@@ -108,6 +109,12 @@ function Feedback({
               · {cs.lesson.meaning} {result.meaning}
             </>
           )}
+        </p>
+      )}
+      {result.hook && !good && (
+        <p className="flex items-start gap-1 rounded-lg bg-white/60 p-2 dark:bg-black/20">
+          <Lightbulb className="mt-0.5 size-4 shrink-0" aria-label={cs.hook.title} />
+          {result.hook}
         </p>
       )}
       {mode === "learn" && !result.task_done && <p>{cs.lesson.wrongTryAgain}</p>}
@@ -399,6 +406,16 @@ export function LessonRunner({
               )}
             </div>
           )}
+          <div className="mt-1 flex flex-col">
+            <NoteEditor
+              itemId={w.id}
+              initial={w.note}
+              compact
+              onSaved={(note) =>
+                setPhase({ ...phase, session: { ...session, words: session.words.map((x) => (x.id === w.id ? { ...x, note } : x)) } })
+              }
+            />
+          </div>
         </section>
         <div className="flex gap-2">
           {index > 0 && (

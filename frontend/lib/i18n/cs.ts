@@ -457,6 +457,18 @@ export const cs = {
     search: "Hledat",
     label: "Hlavní navigace",
   },
+  hook: {
+    title: "Oslí můstek",
+    add: "Přidat oslí můstek",
+    edit: "Upravit",
+    placeholder: "Co ti pomůže si slovo zapamatovat? Podobné české slovo, obrázek, vtip…",
+    help: "Jen pro tebe. Ukáže se u slova a po chybě, aby ti příště pomohl.",
+    save: "Uložit",
+    cancel: "Zrušit",
+    remove: "Smazat",
+    count: (n: number, max: number) => `${n}/${max}`,
+    failed: "Uložení se nepovedlo.",
+  },
   dictation: {
     title: "Diktát",
     intro: "Poslechni si větu se slovem, které už znáš z lekce, a napiš ji. Je to jen procvičování: nic se nepočítá do ověření ani do hodnosti.",

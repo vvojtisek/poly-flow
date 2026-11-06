@@ -42,7 +42,7 @@ from app.schemas.learning import (
 )
 from app.services import learning as svc
 from app.services import level_exam as exam_svc
-from app.services import mistakes
+from app.services import mistakes, notes
 from app.services import placement as placement_svc
 from app.services.stt import Stt, SttBusy, SttRejected, SttUnavailable, get_stt
 from app.services.tts import Tts, TtsUnavailable, get_tts
@@ -115,6 +115,7 @@ async def _session_out(db: AsyncSession, s: LearningSession) -> SessionOut:
         scene_lines.append(SceneLineOut(speaker=line.get("speaker"), cs=line["cs"], segments=segs))
     if s.scene:
         out.scene = SceneOut(title=s.scene.title_cs, lines=scene_lines)
+    hooks = await notes.notes_for(db, s.user_id, [i.id for i in new_items])
     out.words = [
         WordCard(
             id=i.id,
@@ -125,6 +126,7 @@ async def _session_out(db: AsyncSession, s: LearningSession) -> SessionOut:
             translation=i.translation_cs,
             context=context[i.id][0] if i.id in context else i.example_sentence,
             context_cs=context[i.id][1] if i.id in context else None,
+            note=hooks.get(i.id),
         )
         for i in new_items
     ]
@@ -231,7 +233,14 @@ async def answer(task_id: uuid.UUID, body: AnswerIn, auth: Auth, db: DB, now: No
         await db.rollback()
         raise _http(exc) from exc
     await db.commit()
-    return AnswerOut.model_validate(result)
+    return await _with_hook(db, auth.acting, AnswerOut.model_validate(result))
+
+
+async def _with_hook(db: AsyncSession, user, out: AnswerOut) -> AnswerOut:
+    """After a miss, the learner's own memory hook for the word (the answer is shown anyway)."""
+    if not out.correct and out.verdict != "not_understood":
+        out.hook = await notes.note_for_task(db, user, out.task_id)
+    return out
 
 
 async def _read_recording(request: Request) -> tuple[bytes, str]:
@@ -277,7 +286,7 @@ async def answer_by_speech(
 ) -> AnswerOut:
     """Answer a recall task by voice. The recording is transcribed and discarded, never stored."""
     if (cached := await svc.replay(db, auth.acting, idempotency_key)) is not None:
-        return AnswerOut.model_validate(cached)
+        return await _with_hook(db, auth.acting, AnswerOut.model_validate(cached))
     try:
         task = await svc.get_task(db, auth.acting, task_id)
     except svc.LearningError as exc:
@@ -299,7 +308,7 @@ async def answer_by_speech(
         await db.rollback()
         raise _http(exc) from exc
     await db.commit()
-    return AnswerOut.model_validate(result)
+    return await _with_hook(db, auth.acting, AnswerOut.model_validate(result))
 
 
 @router.post("/tasks/{task_id}/reveal", response_model=AnswerOut)
@@ -312,7 +321,7 @@ async def reveal(task_id: uuid.UUID, body: RevealIn, auth: Auth, db: DB, now: No
         await db.rollback()
         raise _http(exc) from exc
     await db.commit()
-    return AnswerOut.model_validate(result)
+    return await _with_hook(db, auth.acting, AnswerOut.model_validate(result))
 
 
 @router.post("/sessions/{session_id}/complete", response_model=SessionOut)

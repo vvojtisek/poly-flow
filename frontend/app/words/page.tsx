@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
+import { NoteEditor } from "@/components/NoteEditor";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
 import { getWord, listWords, myWordAudioUrl, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
@@ -89,6 +90,7 @@ function Inspector({ id, onClose }: { id: string; onClose: () => void }) {
               <PlayButton url={myWordAudioUrl(w.id, "example")} size="sm" label={cs.audio.playSentence} />
             </div>
           )}
+          <NoteEditor itemId={w.id} initial={w.note} />
           <div className="flex flex-col gap-1">
             <p className="text-xs font-semibold text-slate-500">{t.journey}</p>
             <ol className="grid grid-cols-5 gap-1">

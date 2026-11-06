@@ -6,11 +6,12 @@ from typing import Annotated, Literal
 
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, Now, TtsDep, _chosen_voice, _speech
 from app.domain.enums import Language
+from app.services import notes
 from app.services import words as svc
 from app.services.learning import LearningError
 
@@ -69,6 +70,15 @@ class WordDetailOut(BaseModel):
     next_review_at: datetime | None
     review_streak: int
     history: list[HistoryOut]
+    note: str | None = None  # the learner's own memory hook
+
+
+class NoteIn(BaseModel):
+    text: str = Field(max_length=1000)  # trimmed to 280 after collapsing whitespace
+
+
+class NoteOut(BaseModel):
+    note: str | None
 
 
 def _http(exc: LearningError) -> HTTPException:
@@ -104,9 +114,22 @@ async def list_words(
 @router.get("/{item_id}", response_model=WordDetailOut)
 async def word(item_id: uuid.UUID, auth: Auth, db: DB, now: Now) -> WordDetailOut:
     try:
-        return WordDetailOut(**await svc.word_detail(db, auth.acting, item_id, now))
+        out = WordDetailOut(**await svc.word_detail(db, auth.acting, item_id, now))
     except LearningError as exc:
         raise _http(exc) from exc
+    out.note = (await notes.notes_for(db, auth.acting.id, [item_id])).get(item_id)
+    return out
+
+
+@router.put("/{item_id}/note", response_model=NoteOut)
+async def put_note(item_id: uuid.UUID, body: NoteIn, auth: Auth, db: DB) -> NoteOut:
+    """Set or (with empty text) remove the learner's memory hook for a word."""
+    try:
+        note = await notes.set_note(db, auth.acting, item_id, body.text)
+    except LearningError as exc:
+        raise _http(exc) from exc
+    await db.commit()
+    return NoteOut(note=note)
 
 
 @router.get("/{item_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)

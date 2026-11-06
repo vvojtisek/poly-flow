@@ -24,6 +24,7 @@ unreviewed.
 | 11 | Role-play (Hraj roli) | play a lesson scene as one speaker: choose or type your lines |
 | 12 | Practice hub + mobile tab bar | one home for all practice modes; thumb-reach navigation on phones |
 | 13 | Reading comfort | per-profile text size, wider spacing, no animations; applied before first paint |
+| 14 | Memory hooks (oslí můstky) | your own note per word: on lesson cards, in the dictionary, after a miss |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -275,3 +276,21 @@ device switches to the child's own display at once.
   operating system's reduced-motion setting).
 - Applied before first paint by the existing head script (cached in localStorage), then
   confirmed from the server profile; a live preview sentence shows the effect.
+
+## Cycle 14/30: memory hooks (Oslí můstky)
+
+**Before:** the app had no place for the learner's own way of remembering a word, which is one
+of the most effective things a learner can do (self-generated mnemonics and elaboration).
+
+**Built:** a private note per word and profile (migration 0020, table `word_notes`, up to 280
+characters, whitespace collapsed, cascades with the profile and the word).
+
+- Add or edit it on the lesson's word cards (while meeting the word), and in My dictionary's
+  word card (`PUT /api/v1/words/{id}/note`; empty text removes it; any word the profile may see).
+- After a miss in a lesson or a check, and after "show answer", the answer response carries the
+  hook (`AnswerOut.hook`) and the feedback shows it. It is never shown before an answer, so a
+  check stays a first-try check without hints.
+- The note is the learner's own text: treated as untrusted, rendered as plain text, never logged
+  and never shown to another profile.
+- `NoteEditor` keeps the lesson's Enter hotkey away while typing (Enter saves, Shift+Enter adds a
+  space, Escape cancels). Upgrade and downgrade of 0020 verified; `alembic check` clean.
