@@ -981,3 +981,9 @@ export const checkWordOrder = (language: Language, ref: string, order: string[])
     method: "POST",
     json: { ref, order },
   });
+
+export type ClockTime = { hour: number; minute: number; phrase: string; czech: string; digits: string };
+export const clockQuiz = (language: Language, level: "quarters" | "five") =>
+  api<{ time: ClockTime; options: ClockTime[]; answer: number }>(`/api/v1/clock/quiz?language=${language}&level=${level}`);
+export const clockAudioUrl = (t: { hour: number; minute: number }, language: Language) =>
+  `/api/v1/clock/audio?hour=${t.hour}&minute=${t.minute}&language=${language}`;

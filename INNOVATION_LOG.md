@@ -32,6 +32,7 @@ unreviewed.
 | 19 | Take your words with you (export) | own dictionary as a spreadsheet CSV or an Anki import file, with hooks, status and source |
 | 20 | Number trainer (Čísla) | 0–9999 written, heard and read in DE/FR/IT/EN, spelled by rules with both French spellings accepted |
 | 21 | Word order (Slovosled) | rebuild shuffled sentences from met scenes and example sentences; Czech meaning as the goal |
+| 22 | Telling the time (Kolik je hodin?) | analog clock, everyday spoken forms in four languages, the Czech "čtvrt na" trap as a distractor |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -441,3 +442,23 @@ exercise checked words, not their position.
   compared, so a different order is never called wrong grammar.
 - Ungraded; nothing recorded. Tests cover splitting, usability, the shuffle, marks, the empty
   pool, capital handling, mismatched tiles (422) and unknown refs (404).
+
+## Cycle 22/30: telling the time (Kolik je hodin?)
+
+**Before:** time expressions were absent, although they are A1 material and a real trap for
+Czech speakers: Czech "čtvrt na čtyři" is 3:15, German says "Viertel nach drei"; English
+"half past three" is 3:30, not Czech "půl třetí".
+
+**Built:** `app/domain/clock.py`, `/api/v1/clock/{quiz,audio}`, a `ClockFace` SVG and `/clock`.
+
+- Everyday forms in five-minute steps: German (nach / vor / halb, "fünf vor halb vier"), French
+  (et quart, et demie, moins le quart, une heure, midi / midi et demi), Italian (sono le / è l'una,
+  e un quarto, e mezza, meno un quarto, mezzogiorno), British English (past / to, o'clock).
+  One standard form per language; regional variants are named in the module and not used.
+- Distractors are the mistakes learners make: the hour one off for quarters and halves (what the
+  Czech anchor suggests), the mirrored minute (Viertel nach / vor), and five minutes off.
+- Two modes: read the clock and pick the phrase, or hear and read the phrase and pick the clock.
+  Quarter hours or every five minutes. After each answer: digits, the phrase with audio, and the
+  Czech everyday form ("česky: čtvrt na osm") as the anchor.
+- Tests pin the phrases per language, check that all 144 times read differently in every
+  language, the Czech forms, distractors for every time, and the quiz API. Practice only.
