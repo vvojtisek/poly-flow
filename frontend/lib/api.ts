@@ -692,3 +692,18 @@ export interface RanksOverview {
 
 export const getRanks = (language: Language) => api<RanksOverview>(`/api/v1/ranks?language=${language}`);
 export const markRanksSeen = (language: Language) => api<void>("/api/v1/ranks/seen", { json: { language } });
+
+// ---------------------------------------------------------------- insights (statistics)
+
+export interface Insights {
+  language: Language;
+  today: string;
+  heatmap: { date: string; graded: number; practice: number }[];
+  active_days: number;
+  accuracy: { week: string; answered: number; correct: number }[];
+  mistakes: { tag: string; count: number }[];
+  forecast: { date: string; words: number; grammar: number }[];
+  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
+}
+
+export const getInsights = (language: Language) => api<Insights>(`/api/v1/insights?language=${language}`);

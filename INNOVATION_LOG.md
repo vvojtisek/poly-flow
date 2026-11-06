@@ -14,6 +14,7 @@ unreviewed.
 | 1 | Adaptive CEFR placement test A1-B2+ | finds the real ceiling up to B2+, unlocks the curriculum |
 | 2 | Personal mastery rank path | a visible journey tied to proven learning, no traps |
 | 3 | Command palette (Ctrl+K) | keyboard-first navigation and settings from anywhere |
+| 4 | Learning insights dashboard | activity calendar, accuracy trend, mistake types, review forecast |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -80,3 +81,18 @@ opens it; typing filters actions with diacritics-insensitive matching (`tmavy` f
 check, grammar, reading, both placement parts, level exams, rank path, settings, family), switch
 language, light/dark/system theme, rank theme, sign out. A visible "Hledat Ctrl K" button in the
 header makes it discoverable; it is a proper combobox/listbox for screen readers.
+
+## Cycle 4/30: learning insights dashboard (Statistiky)
+
+**Before:** the dashboard showed totals only. A learner could not see when they study, whether
+their accuracy improves, what kind of mistakes they make, or how much review is coming.
+
+**Built:** `/insights` (header link, palette) backed by `GET /api/v1/insights`.
+
+- Activity calendar for 26 weeks (graded and practice answers per local day). It is a calendar,
+  not a streak: the copy says explicitly that a pause costs nothing.
+- Review forecast for 14 days: words and grammar topics due per day (overdue counts as today),
+  so the learner can plan instead of being surprised by a pile of reviews.
+- First-try accuracy per week over 12 weeks (words and grammar checks).
+- "Od lekce k jistotě" funnel: introduced, recognised, written, both, long-term mastered.
+- Mistake types over 60 days, from the mistake engine's tags.

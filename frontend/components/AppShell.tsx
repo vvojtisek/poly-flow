@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpenText, Compass, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
+import { BarChart3, BookOpenText, Compass, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
@@ -170,6 +170,12 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
               className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <BookOpenText className="size-4" aria-hidden /> {cs.stories.link}
+            </Link>
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+            >
+              <BarChart3 className="size-4" aria-hidden /> {cs.insights.link}
             </Link>
             <Link
               href="/placement"
