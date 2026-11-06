@@ -136,7 +136,7 @@ export default function GrammarPage() {
                 </span>
               </Link>
             )}
-            {me.acting.active_language === "de" && (
+            {me.acting.active_language !== "en" && (
               <Link
                 href="/grammar/verbs"
                 className="flex items-center gap-3 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-4 hover:border-brand-500"

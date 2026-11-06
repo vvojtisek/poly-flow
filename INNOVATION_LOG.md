@@ -39,6 +39,7 @@ unreviewed.
 | 26 | Minimal pairs (Slyšíš rozdíl?) | hear one word of a pair (ship/sheep, Tür/Tier, pala/palla, rue/roue) and pick it |
 | 27 | Practice hub filters | filter 12 practice modes by skill, recently used modes first on the hub and dashboard |
 | 28 | Weekly recap (Týden v kostce) | last 7 days against the 7 before, the words that gave trouble, and one suggested next step |
+| 29 | Verb lab in French and Italian | the present tense lab from cycle 15 now conjugates French and Italian verbs, with spelling changes, elision and the irregular verbs |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -567,3 +568,24 @@ looking back over months, but it gave no short answer to "how did this week go, 
 - A quiet week is described ("Nevadí: nic se tím neztrácí"), never scored. No streaks.
 - Tests: accuracy unknown vs 0, trend margins, suggestion order, and the API over seeded events
   in two weeks and another language.
+
+## Cycle 29/30: verb lab in French and Italian
+
+**Before:** Časování (cycle 15) was German only; French and Italian learners saw "Časování je
+zatím jen pro němčinu", although both languages have a present tense at least as demanding.
+
+**Built:** `app/domain/conjugation_romance.py`; `GET /api/v1/grammar/verbs?language=de|fr|it`.
+
+- French: -er verbs with the spelling changes that keep the sound (nous mangeons, nous
+  commençons, j'achète, je préfère, j'appelle, je paie), -ir with -iss- (finir), the partir,
+  ouvrir and conduire patterns, -re (vendre), 22 irregular verbs listed whole and found through a
+  prefix (comprendre, revenir, permettre), and je to j' before a vowel or mute h.
+- Italian: -are, -ere, -ire and -isc- (finire), the h kept in cerchi / paghiamo, one i in mangi /
+  mangiamo (two in the stressed invii), and 22 irregular verbs, with prefixes (ottenere).
+- Forms are now a list of six with their pronoun, so the same table and drill serve all three
+  languages; each pattern has a Czech explanation. English is left out on purpose (one change,
+  he/she/it -s) and the page says why. The rules are drafted and marked as not yet reviewed by a
+  native speaker.
+- Tests: 38 domain cases (every pattern, é kept in réparer, the stressed i, `changed` marks
+  only the forms that differ, features), API in French and Italian, reflexive entries skipped,
+  English rejected with 422.

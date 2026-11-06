@@ -924,16 +924,24 @@ export const setWordNote = (id: string, text: string) =>
 
 // ---------------------------------------------------------------- German verb lab
 
-export type VerbPerson = "ich" | "du" | "er" | "wir" | "ihr" | "sie";
+export type VerbLanguage = "de" | "fr" | "it";
+export const VERB_LANGUAGES: VerbLanguage[] = ["de", "fr", "it"];
+export interface VerbForm {
+  pronoun: string;
+  stem: string;
+  ending: string;
+  changed: boolean;
+}
 export interface VerbEntry {
   lemma: string;
   translation: string;
   met: boolean;
   prefix: string | null;
-  features: ("irregular" | "vowel_change" | "separable" | "e_insertion" | "s_stem" | "el_er")[];
-  forms: Record<VerbPerson, { stem: string; ending: string; changed: boolean }>;
+  features: string[];
+  forms: VerbForm[]; // six persons: singular 1-3, plural 1-3
 }
-export const getVerbs = () => api<VerbEntry[]>("/api/v1/grammar/verbs");
+export const getVerbs = (language: VerbLanguage) =>
+  api<VerbEntry[]>(`/api/v1/grammar/verbs?language=${language}`);
 
 // ---------------------------------------------------------------- session review
 

@@ -7,36 +7,38 @@ import { AnswerInput } from "@/components/AnswerInput";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Panel } from "@/components/Panel";
 import { Button, Notice } from "@/components/ui";
-import { getVerbs, type VerbEntry, type VerbPerson } from "@/lib/api";
+import { getVerbs, VERB_LANGUAGES, type VerbEntry, type VerbLanguage } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { fold } from "@/lib/palette";
 
 const t = cs.verbs;
-const PERSONS: VerbPerson[] = ["ich", "du", "er", "wir", "ihr", "sie"];
+const PERSONS = [0, 1, 2, 3, 4, 5];
+const AMBER = new Set(["vowel_change", "irregular", "spelling"]);
+const VIOLET = new Set(["separable", "elision"]);
 
-function full(v: VerbEntry, p: VerbPerson) {
-  const f = v.forms[p];
+function full(v: VerbEntry, i: number) {
+  const f = v.forms[i]!;
   return `${f.stem}${f.ending}${v.prefix ? ` ${v.prefix}` : ""}`;
 }
 
-function Table({ verb }: { verb: VerbEntry }) {
+function Table({ verb, language }: { verb: VerbEntry; language: VerbLanguage }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-baseline gap-2">
-        <h2 lang="de" className="text-3xl font-bold">
+        <h2 lang={language} className="text-3xl font-bold">
           {verb.lemma}
         </h2>
         <span className="text-slate-500">{verb.translation}</span>
       </div>
-      <table className="w-full border-separate border-spacing-y-1 text-lg" lang="de">
+      <table className="w-full border-separate border-spacing-y-1 text-lg" lang={language}>
         <tbody>
           {PERSONS.map((p) => {
-            const f = verb.forms[p];
+            const f = verb.forms[p]!;
             return (
               <tr key={p} className="motion-safe:animate-pop-in">
                 <th scope="row" className="w-28 pr-3 text-left text-sm font-medium text-slate-500">
-                  {t.pronoun[p]}
+                  {f.pronoun}
                 </th>
                 <td className="rounded-lg bg-slate-50 px-3 py-1.5 dark:bg-slate-800/60">
                   <span className={f.changed ? "rounded bg-amber-200/70 px-0.5 font-semibold dark:bg-amber-500/40" : ""}>{f.stem}</span>
@@ -54,16 +56,16 @@ function Table({ verb }: { verb: VerbEntry }) {
         </tbody>
       </table>
       <ul className="flex flex-col gap-1 text-sm text-slate-700 dark:text-slate-200">
-        {verb.features.length === 0 && <li>{t.regular}</li>}
+        {verb.features.length === 0 && <li>{t.regular[language]}</li>}
         {verb.features.map((f) => (
           <li key={f} className="flex gap-2">
             <span
               className={`mt-1.5 inline-block size-2 shrink-0 rounded-full ${
-                f === "vowel_change" || f === "irregular" ? "bg-amber-500" : f === "separable" ? "bg-violet-500" : "bg-brand-500"
+                AMBER.has(f) ? "bg-amber-500" : VIOLET.has(f) ? "bg-violet-500" : "bg-brand-500"
               }`}
               aria-hidden
             />
-            {t.feature[f]}
+            {t.feature[f] ?? f}
           </li>
         ))}
       </ul>
@@ -71,7 +73,7 @@ function Table({ verb }: { verb: VerbEntry }) {
   );
 }
 
-function Drill({ verbs }: { verbs: VerbEntry[] }) {
+function Drill({ verbs, language }: { verbs: VerbEntry[]; language: VerbLanguage }) {
   const pool = useMemo(() => {
     const met = verbs.filter((v) => v.met);
     return met.length >= 5 ? met : verbs;
@@ -102,11 +104,11 @@ function Drill({ verbs }: { verbs: VerbEntry[] }) {
   return (
     <form onSubmit={submit} className="flex flex-col gap-3">
       <p className="text-sm text-slate-500">{t.practiceHelp}</p>
-      <p className="text-center text-2xl" lang="de">
-        <span className="text-slate-500">{t.pronoun[q.person]}</span> · <strong>{q.verb.lemma}</strong>{" "}
+      <p className="text-center text-2xl" lang={language}>
+        <span className="text-slate-500">{q.verb.forms[q.person]!.pronoun}</span> · <strong>{q.verb.lemma}</strong>{" "}
         <span className="text-base text-slate-500">({q.verb.translation})</span>
       </p>
-      <AnswerInput ref={input} language="de" value={text} onChange={setText} disabled={result !== null} />
+      <AnswerInput ref={input} language={language} value={text} onChange={setText} disabled={result !== null} />
       {result !== null && (
         <p className={`text-center font-semibold ${result ? "text-emerald-600" : "text-rose-600"}`} aria-live="polite">
           {result ? t.right : t.wrong(answer)}
@@ -119,7 +121,7 @@ function Drill({ verbs }: { verbs: VerbEntry[] }) {
   );
 }
 
-function Lab({ verbs }: { verbs: VerbEntry[] }) {
+function Lab({ verbs, language }: { verbs: VerbEntry[]; language: VerbLanguage }) {
   const [query, setQuery] = useState("");
   const [chosen, setChosen] = useState(verbs[0]?.lemma ?? "");
   const shown = useMemo(() => {
@@ -153,7 +155,7 @@ function Lab({ verbs }: { verbs: VerbEntry[] }) {
                   v.lemma === verb.lemma ? "bg-brand-500/10" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
                 }`}
               >
-                <span lang="de" className="font-medium">
+                <span lang={language} className="font-medium">
                   {v.lemma}
                   {v.met && <span className="ml-1 text-xs text-emerald-600" title={t.met}>✓</span>}
                 </span>
@@ -164,10 +166,10 @@ function Lab({ verbs }: { verbs: VerbEntry[] }) {
         </ul>
       </section>
       <Panel title={t.table} icon={Repeat} className="lg:col-span-2">
-        <Table key={verb.lemma} verb={verb} />
+        <Table key={verb.lemma} verb={verb} language={language} />
       </Panel>
       <Panel title={t.practice} icon={Repeat} className="lg:col-span-3">
-        <Drill verbs={verbs} />
+        <Drill verbs={verbs} language={language} />
       </Panel>
     </div>
   );
@@ -178,18 +180,21 @@ export default function VerbsPage() {
   const { state } = useAuth();
   const [verbs, setVerbs] = useState<VerbEntry[] | null>(null);
   const [failed, setFailed] = useState(false);
-  const german = me?.acting.active_language === "de";
+  const active = me?.acting.active_language;
+  const language = VERB_LANGUAGES.find((l) => l === active) ?? null;
 
   useEffect(() => {
-    if (!german) return;
+    if (!language) return;
     let cancelled = false;
-    getVerbs()
+    setVerbs(null);
+    setFailed(false);
+    getVerbs(language)
       .then((v) => !cancelled && setVerbs(v))
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
-  }, [german, me?.acting.id]);
+  }, [language, me?.acting.id]);
 
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
@@ -199,15 +204,15 @@ export default function VerbsPage() {
         <h1 className="text-2xl font-bold">{t.title}</h1>
         <p className="max-w-3xl text-slate-600 dark:text-slate-300">{t.intro}</p>
       </div>
-      {!german ? (
+      {!language ? (
         <div className="flex flex-col gap-3">
-          <Notice>{t.onlyGerman}</Notice>
+          <Notice>{t.notForEnglish}</Notice>
           <LanguagePicker me={me} />
         </div>
       ) : failed ? (
         <Notice tone="error">{cs.common.error}</Notice>
       ) : verbs ? (
-        <Lab verbs={verbs} />
+        <Lab key={language} verbs={verbs} language={language} />
       ) : (
         <p className="text-sm text-slate-500">{cs.common.loading}</p>
       )}

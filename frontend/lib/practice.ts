@@ -21,7 +21,7 @@ export const PRACTICE_MODES: PracticeMode[] = [
   { id: "shadowing", href: "/shadowing", icon: Waves, skills: ["listening", "speaking"] },
   { id: "genders", href: "/genders", icon: Shapes, skills: ["grammar"], languages: ["de", "fr", "it"] },
   { id: "cases", href: "/grammar/cases", icon: FlaskConical, skills: ["grammar"], languages: ["de"] },
-  { id: "verbs", href: "/grammar/verbs", icon: Repeat, skills: ["grammar", "writing"], languages: ["de"] },
+  { id: "verbs", href: "/grammar/verbs", icon: Repeat, skills: ["grammar", "writing"], languages: ["de", "fr", "it"] },
   { id: "wordOrder", href: "/word-order", icon: ArrowDownUp, skills: ["grammar", "reading"] },
   { id: "numbers", href: "/numbers", icon: Hash, skills: ["listening", "writing", "reading"] },
   { id: "clock", href: "/clock", icon: AlarmClock, skills: ["reading", "listening"] },
