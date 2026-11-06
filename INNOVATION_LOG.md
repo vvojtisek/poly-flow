@@ -11,7 +11,8 @@ unreviewed.
 
 | Cycle | Change | Why it helps the learner |
 |---|---|---|
-| 1 | Adaptive CEFR placement test A1-B2+ | see below |
+| 1 | Adaptive CEFR placement test A1-B2+ | finds the real ceiling up to B2+, unlocks the curriculum |
+| 2 | Personal mastery rank path | a visible journey tied to proven learning, no traps |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
