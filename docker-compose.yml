@@ -15,7 +15,7 @@ x-backend-env: &backend-env
   POLYFLOW_LOG_LEVEL: ${LOG_LEVEL:-INFO}
   POLYFLOW_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-polyflow}:${POSTGRES_PASSWORD:-polyflow}@postgres:5432/${POSTGRES_DB:-polyflow}
   POLYFLOW_REDIS_URL: redis://redis:6379/0
-  POLYFLOW_CORS_ORIGINS: '["http://localhost:3000"]'
+  POLYFLOW_CORS_ORIGINS: '["http://localhost:3001"]'
   POLYFLOW_PIPER_URL: http://piper:5000
   POLYFLOW_WHISPER_URL: http://whisper:9000
   POLYFLOW_AUDIO_CACHE_DIR: /data/audio
@@ -78,7 +78,7 @@ services:
     volumes:
       - audiocache:/data/audio  # synthesized speech; safe to delete, it is rebuilt on demand
     ports:
-      - "8000:8000"
+      - "8001:8000"
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -115,7 +115,7 @@ services:
       - /app/node_modules
       - /app/.next
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - backend
 

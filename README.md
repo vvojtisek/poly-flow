@@ -47,7 +47,7 @@ docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/
 docker compose run --rm backend python -m app.cli seed-lemmas data/frequency/en_GB.lemmas.csv data/frequency/en_US.lemmas.csv  # frequency reference, no glosses
 ```
 
-Open http://localhost:3000. The first visit runs **first-run setup**, which creates the admin account
+Open http://localhost:3001. The first visit runs **first-run setup**, which creates the admin account
 (there is no open registration afterwards). The admin then adds profiles under *Rodina*. Roles:
 
 - **admin** grants access (creates profiles, resets a password or PIN, deactivates) and edits shared
@@ -123,8 +123,8 @@ HttpOnly and SameSite=Lax, and every write needs the per-session CSRF token.
 The browser talks only to the frontend origin; Next.js proxies `/api/*` and `/readyz` to the backend
 (`BACKEND_URL`, resolved at build time for the production `runner` image).
 
-- API: http://localhost:8000 (`/healthz` liveness, `/readyz` checks Postgres + Redis, 503 when unready; OpenAPI at `/docs`)
-- Frontend: http://localhost:3000
+- API: http://localhost:8001 (`/healthz` liveness, `/readyz` checks Postgres + Redis, 503 when unready; OpenAPI at `/docs`)
+- Frontend: http://localhost:3001
 
 Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`.
 
