@@ -1,4 +1,4 @@
-"""The committed English lexicon (core-100 + ranks 101-1000): shape, order, safety, and gates."""
+"""The committed English lexicon (core-100 + ranks 101-5000): shape, order, safety, and gates."""
 
 import csv
 import re
@@ -33,20 +33,18 @@ def _word(lemma: str):
     return re.compile(rf"(?<!\w){re.escape(lemma)}(?!\w)", re.IGNORECASE)
 
 
-def test_ranks_run_1_to_1000_without_gaps():
+def test_ranks_run_1_to_5000_without_gaps():
     rows = _en()
-    assert sorted(r.rank for r in rows) == list(range(1, 1001))
+    assert sorted(r.rank for r in rows) == list(range(1, 5001))
     lemmas = [r.lemma.lower() for r in rows]
     assert len(set(lemmas)) == len(lemmas)
 
 
-def test_a1_and_a2_bands_count_as_imported():
+def test_a1_to_b2_bands_count_as_imported():
     ranks = [r.rank for r in _en()]
-    for level in (CefrLevel.A1, CefrLevel.A2):
+    for level in (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2):
         band = BY_LEVEL[level]
         assert band_complete(band, sum(band.low < r <= band.high for r in ranks))
-    b1 = BY_LEVEL[CefrLevel.B1]
-    assert not band_complete(b1, sum(b1.low < r <= b1.high for r in ranks))
 
 
 def test_glosses_are_unique():
@@ -69,7 +67,8 @@ def test_block_above_core_follows_the_en_gb_frequency_list():
     assert gb_ranks == sorted(gb_ranks)
     # Drafts are marked as such until a native speaker has reviewed them.
     assert {(r.source, r.license, r.revision) for r in block} == {
-        ("claude-drafted", "CC-BY-SA-4.0", "en1000-draft-v2")
+        ("claude-drafted", "CC-BY-SA-4.0", "en1000-draft-v2"),
+        ("claude-drafted", "CC-BY-SA-4.0", "en5000-draft-v1"),
     }
     assert all(r.example for r in block)  # lessons without a scene show the example
     with_cloze = sum(bool(_word(r.lemma).search(r.example)) for r in block)
@@ -102,17 +101,23 @@ async def test_placement_and_exams_see_the_whole_lexicon(english, client):
     await setup_parent(client)
     r = await client.get("/api/v1/learning/placement?language=en")
     assert r.status_code == 200, r.text
-    assert r.json()["ceiling"] == 1000
+    assert r.json()["ceiling"] == 5000
     r = await client.get("/api/v1/learning/levels?language=en")
     assert r.status_code == 200, r.text
     levels = {lv["level"]: lv for lv in r.json()["levels"]}
     assert levels["A1"]["state"] == "not_ready" and levels["A1"]["lexicon_items"] == 500
     assert levels["A2"]["state"] == "needs_previous" and levels["A2"]["lexicon_items"] == 500
-    assert levels["B1"]["state"] == "missing_words"
+    assert levels["B1"]["state"] == "needs_previous" and levels["B1"]["lexicon_items"] == 1500
+    assert levels["B2"]["state"] == "needs_previous" and levels["B2"]["lexicon_items"] == 2500
 
 
 def _profanity() -> int:
-    return sum(1 for row in _en() if "profanity" in {f.value for f in row.content_flags})
+    """Profanity in the A1-A2 bands (ranks 1-1000), the pool the tests below read."""
+    return sum(
+        1
+        for row in _en()
+        if row.rank <= 1000 and "profanity" in {f.value for f in row.content_flags}
+    )
 
 
 async def test_adult_pool_has_profanity_only_after_opting_in(english, client, overrides):  # noqa: F811

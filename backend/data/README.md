@@ -53,6 +53,32 @@ the frequency list, plus `battle` (violence) and `fucking` (profanity, missing f
 derive from wordfreq. `tests/test_lexicon_data.py` checks ranks 1-1000 without gaps, unique
 glosses, the en_GB order, carried-over flags, and that no unflagged example uses a flagged word.
 
+### `en.1001-5000.csv` (English ranks 1001-5000, revision `en5000-draft-v1`)
+
+4,000 words that take the English course from the A2 milestone (1,000) through B1 (2,500) and the
+B2 threshold (4,000) to full B2 (5,000), so the placement test can place up to 5,000 and the B1
+and B2 level exams can open. Same method as ranks 101-1000: walk `frequency/en_GB.lemmas.csv`
+from where the previous block stopped (en_GB rank 1002), skip lemmas already in the lexicon, and
+number the rest 1001-5000. 68 list entries were skipped because they are not useful headwords for
+a Czech learner: proper names and name fragments (`victor`, `bailey`, `sander`), prefixes and
+clippings (`anti`, `sub`, `micro`, `mod`), fillers (`uh`, `um`, `hmm`), archaic forms (`thou`,
+`thee`), drug names (`marijuana`, `cannabis`, `cocaine`, `coke`, `dope`) and US-only or slang
+entries (`interstate`, `capitol`, `cum`); the file header lists the policy. Where the list's POS
+tag is an artefact (`ant` ADJ, `brutal` NOUN, `vein` ADV), the row uses the learner sense.
+Language and nationality nouns are capitalised (`Czech`, `Arabic`, `Portuguese`).
+
+Flags: profanity and sexual vocabulary carry `profanity` or `sexual` (adult opt-in only, never in
+child profiles); violent vocabulary carries `violence` (`weapon`, `bomb`, `hostage`, `massacre`,
+`pistol`, `warfare`...), added by hand where the frequency list has no flag. Examples of unflagged
+words use no flagged word. 97.5% of examples contain the lemma verbatim (cloze).
+
+**Not reviewed by a native Czech speaker** (`source` = `claude-drafted`, licence CC-BY-SA-4.0 as
+the order derives from wordfreq). The review list is kept with the project files
+(`reviews/en-1001-5000-review.md`). Still open: the second senses of `bear` (animal, carry),
+`unite` (verb) and `china` (porcelain), which need their own rows outside the frequency order.
+`tests/test_lexicon_data.py` checks ranks 1-5000 without gaps, unique glosses, en_GB order,
+provenance, carried-over flags and clean examples, and that the A1-B2 exam bands are complete.
+
 ### `de.0101-1000.csv` (German ranks 101-1000, revision `de1000-draft-v1`)
 
 900 words that take the German course from the core-100 to the A2 milestone (1,000), so the
