@@ -872,3 +872,17 @@ collection when none exists.
   shortcuts no longer hijack inputs or selection controls.
 - Verification: collection API tests passed (6 tests), including duplicate handling and atomic
   rejection of an unavailable word. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 16/30: recall every word in a collection
+
+**Before:** collection practice depended on example sentences, so saved words without an example
+could not be practiced there. The only activity also focused on listening to the sentence.
+
+**Built:** collection practice now offers a shuffled recall-card mode for every word. The learner
+sees the Czech meaning, reveals the target word and audio, then either continues or queues that
+word to appear again in the current session.
+
+- Recall choices are temporary and ungraded; they do not change review schedules, mastery, or
+  learning history. The existing sentence-listening activity remains available when examples
+  exist, and the recall mode still works when none do.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
