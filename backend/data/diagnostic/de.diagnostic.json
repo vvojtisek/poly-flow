@@ -1,0 +1,581 @@
+{
+ "language": "de",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "diag-v1",
+ "review_status": "unreviewed",
+ "note": "Diagnostic items for the CEFR placement test (Rozřazovací test, part 2), A1 to B2+ (level C1 marks the above-B2 probe; the app reports it as B2+, not as a C1 certificate). Drafted by Claude on 2026-11-06; not reviewed by a teacher or a native speaker. Item difficulties are the band's nominal value, not calibrated on learner data.",
+ "items": [
+  {
+   "id": "de-a1-01",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Ich ___ aus Tschechien.",
+   "options": [
+    "komme",
+    "kommst",
+    "kommt",
+    "kommen"
+   ],
+   "explain": "K zájmenu ich patří koncovka -e: ich komme.",
+   "answer": "komme"
+  },
+  {
+   "id": "de-a1-02",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Wo ist ___ Mutter?",
+   "options": [
+    "die",
+    "der",
+    "das",
+    "den"
+   ],
+   "explain": "Mutter je ženského rodu: die Mutter.",
+   "answer": "die"
+  },
+  {
+   "id": "de-a1-03",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "___ du Kaffee?",
+   "options": [
+    "Trinkst",
+    "Trinke",
+    "Trinkt",
+    "Trinken"
+   ],
+   "explain": "K du patří koncovka -st; v otázce stojí sloveso na začátku.",
+   "answer": "Trinkst"
+  },
+  {
+   "id": "de-a1-04",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "Co znamená „das Fenster“?",
+   "options": [
+    "okno",
+    "dveře",
+    "stůl",
+    "zeď"
+   ],
+   "explain": "das Fenster = okno.",
+   "answer": "okno"
+  },
+  {
+   "id": "de-a1-05",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "Im Winter ist es ___.",
+   "options": [
+    "kalt",
+    "heiß",
+    "grün",
+    "groß"
+   ],
+   "explain": "V zimě je zima: kalt / cold / froid / freddo.",
+   "answer": "kalt"
+  },
+  {
+   "id": "de-a1-06",
+   "level": "A1",
+   "skill": "reading",
+   "prompt": "Kde bydlí Tom?",
+   "options": [
+    "ve Vídni",
+    "v Praze",
+    "v Berlíně",
+    "v Brně"
+   ],
+   "explain": "„Ich wohne in Wien“ = bydlím ve Vídni.",
+   "context": "Hallo, ich heiße Tom. Ich bin zwölf Jahre alt und wohne in Wien. Ich habe eine Schwester.",
+   "answer": "ve Vídni"
+  },
+  {
+   "id": "de-a1-07",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Co si člověk objednává?",
+   "options": [
+    "dvě housky",
+    "dvě kávy",
+    "tři housky",
+    "chleba"
+   ],
+   "explain": "zwei Brötchen = dvě housky.",
+   "audio": "Ich möchte zwei Brötchen, bitte.",
+   "answer": "dvě housky"
+  },
+  {
+   "id": "de-a1-08",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Kdy přijede autobus?",
+   "options": [
+    "v osm",
+    "v sedm",
+    "v šest",
+    "v deset"
+   ],
+   "explain": "um acht Uhr = v osm hodin.",
+   "audio": "Der Bus kommt um acht Uhr.",
+   "answer": "v osm"
+  },
+  {
+   "id": "de-a2-01",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Gestern ___ wir ins Kino gegangen.",
+   "options": [
+    "sind",
+    "haben",
+    "waren",
+    "wurden"
+   ],
+   "explain": "Slovesa pohybu (gehen) tvoří perfektum se sein: wir sind gegangen.",
+   "answer": "sind"
+  },
+  {
+   "id": "de-a2-02",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Ich gebe ___ Mann das Buch.",
+   "options": [
+    "dem",
+    "den",
+    "der",
+    "des"
+   ],
+   "explain": "Komu? 3. pád (dativ) mužského rodu: dem Mann.",
+   "answer": "dem"
+  },
+  {
+   "id": "de-a2-03",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Morgen ___ ich nach Berlin fahren.",
+   "options": [
+    "muss",
+    "müssen",
+    "musst",
+    "gemusst"
+   ],
+   "explain": "Způsobové sloveso se časuje (ich muss), infinitiv fahren jde na konec.",
+   "answer": "muss"
+  },
+  {
+   "id": "de-a2-04",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Mein Bruder ist ___ als ich.",
+   "options": [
+    "älter",
+    "alt",
+    "am ältesten",
+    "älteste"
+   ],
+   "explain": "Při srovnání s als stojí 2. stupeň: älter als.",
+   "answer": "älter"
+  },
+  {
+   "id": "de-a2-05",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Ich habe Kopfschmerzen. Ich gehe zum ___.",
+   "options": [
+    "Arzt",
+    "Bäcker",
+    "Friseur",
+    "Lehrer"
+   ],
+   "explain": "S bolestí hlavy se jde k lékaři: zum Arzt.",
+   "answer": "Arzt"
+  },
+  {
+   "id": "de-a2-06",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Jaký je opak slova „billig“?",
+   "options": [
+    "teuer",
+    "günstig",
+    "klein",
+    "leer"
+   ],
+   "explain": "billig = levný, opak je teuer = drahý (günstig znamená také výhodný, levný).",
+   "answer": "teuer"
+  },
+  {
+   "id": "de-a2-07",
+   "level": "A2",
+   "skill": "reading",
+   "prompt": "Co má Anna přinést?",
+   "options": [
+    "salát",
+    "pití",
+    "dort",
+    "nic"
+   ],
+   "explain": "V pozvánce stojí, že pití už je, a prosba je o salát.",
+   "context": "Liebe Anna, am Samstag mache ich eine kleine Party. Sie beginnt um 19 Uhr. Kannst du bitte einen Salat mitbringen? Getränke habe ich schon. Viele Grüße, Lena",
+   "answer": "salát"
+  },
+  {
+   "id": "de-a2-08",
+   "level": "A2",
+   "skill": "listening",
+   "prompt": "Co se stalo s vlakem?",
+   "options": [
+    "má zpoždění 20 minut",
+    "je zrušený",
+    "jede z jiného nástupiště",
+    "odjel o 20 minut dřív"
+   ],
+   "explain": "Hlášení říká, že vlak má dvacet minut zpoždění.",
+   "audio": "Entschuldigung, der Zug nach München hat heute zwanzig Minuten Verspätung.",
+   "answer": "má zpoždění 20 minut"
+  },
+  {
+   "id": "de-b1-01",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Ich weiß nicht, ___.",
+   "options": [
+    "ob er heute kommt",
+    "ob kommt er heute",
+    "ob er kommt heute",
+    "kommt er heute ob"
+   ],
+   "explain": "Ve vedlejší větě (po ob, dass, weil) stojí časované sloveso na konci.",
+   "answer": "ob er heute kommt"
+  },
+  {
+   "id": "de-b1-02",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Das ist der Mann, ___ ich gestern geholfen habe.",
+   "options": [
+    "dem",
+    "den",
+    "der",
+    "dessen"
+   ],
+   "explain": "helfen se pojí se 3. pádem, proto vztažné zájmeno dem.",
+   "answer": "dem"
+  },
+  {
+   "id": "de-b1-03",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Wenn ich mehr Zeit ___, würde ich öfter lesen.",
+   "options": [
+    "hätte",
+    "habe",
+    "hatte",
+    "gehabt"
+   ],
+   "explain": "Neskutečná podmínka: Konjunktiv II, wenn ich hätte = kdybych měl.",
+   "answer": "hätte"
+  },
+  {
+   "id": "de-b1-04",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Als ich ein Kind ___, wohnten wir auf dem Land.",
+   "options": [
+    "war",
+    "bin",
+    "wäre",
+    "gewesen"
+   ],
+   "explain": "Vyprávění o minulosti: préteritum war; als = když (jednorázově v minulosti).",
+   "answer": "war"
+  },
+  {
+   "id": "de-b1-05",
+   "level": "B1",
+   "skill": "vocabulary",
+   "prompt": "Ich habe mich um die Stelle ___.",
+   "options": [
+    "beworben",
+    "beantwortet",
+    "bekommen",
+    "bewiesen"
+   ],
+   "explain": "sich um eine Stelle bewerben = ucházet se o místo.",
+   "answer": "beworben"
+  },
+  {
+   "id": "de-b1-06",
+   "level": "B1",
+   "skill": "idiom",
+   "prompt": "Co znamená „Ich drücke dir die Daumen!“?",
+   "options": [
+    "Držím ti palce!",
+    "Dávej si pozor!",
+    "Jsi na řadě!",
+    "Podej mi ruku!"
+   ],
+   "explain": "Stejný obraz jako v češtině: držet palce.",
+   "answer": "Držím ti palce!"
+  },
+  {
+   "id": "de-b1-07",
+   "level": "B1",
+   "skill": "reading",
+   "prompt": "Co se některým zaměstnancům nelíbí?",
+   "options": [
+    "chybí jim kontakt s kolegy",
+    "dlouhé dojíždění",
+    "nižší plat",
+    "práce o víkendu"
+   ],
+   "explain": "Text říká, že některým chybí kontakt s kolegy.",
+   "context": "Seit letztem Monat dürfen Mitarbeiter in unserer Firma zwei Tage pro Woche von zu Hause arbeiten. Viele finden das praktisch, weil sie weniger Zeit im Verkehr verbringen. Einige vermissen aber den Kontakt zu den Kollegen.",
+   "answer": "chybí jim kontakt s kolegy"
+  },
+  {
+   "id": "de-b1-08",
+   "level": "B1",
+   "skill": "listening",
+   "prompt": "Co mají cestující udělat?",
+   "options": [
+    "jet náhradním autobusem od hlavního nádraží",
+    "počkat do konce května na linku 5",
+    "koupit si novou jízdenku",
+    "jet linkou 5 jako obvykle"
+   ],
+   "explain": "Ersatzbus ab dem Hauptbahnhof = náhradní autobus od hlavního nádraží.",
+   "audio": "Wegen Bauarbeiten fährt die Linie fünf bis Ende Mai nicht. Bitte benutzen Sie den Ersatzbus ab dem Hauptbahnhof.",
+   "answer": "jet náhradním autobusem od hlavního nádraží"
+  },
+  {
+   "id": "de-b2-01",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Der Antrag muss bis Freitag ___ werden.",
+   "options": [
+    "eingereicht",
+    "einreichen",
+    "eingereichen",
+    "reichte ein"
+   ],
+   "explain": "Trpný rod se způsobovým slovesem: muss + příčestí II + werden.",
+   "answer": "eingereicht"
+  },
+  {
+   "id": "de-b2-02",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "___ des schlechten Wetters fand das Konzert statt.",
+   "options": [
+    "Trotz",
+    "Wegen",
+    "Während",
+    "Statt"
+   ],
+   "explain": "Koncert se konal navzdory počasí: trotz + 2. pád.",
+   "answer": "Trotz"
+  },
+  {
+   "id": "de-b2-03",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Der Minister sagte, er ___ von dem Problem nichts gewusst.",
+   "options": [
+    "habe",
+    "hat gehabt",
+    "habt",
+    "haben"
+   ],
+   "explain": "Nepřímá řeč v psaném projevu: Konjunktiv I, er habe gewusst.",
+   "answer": "habe"
+  },
+  {
+   "id": "de-b2-04",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Die ___ Maßnahmen haben kaum etwas gebracht.",
+   "options": [
+    "von der Regierung beschlossenen",
+    "von der Regierung beschlossen",
+    "beschlossenen von der Regierung",
+    "von der Regierung beschließen"
+   ],
+   "explain": "Rozvitý přívlastek stojí před podstatným jménem a příčestí má koncovku: die ... beschlossenen Maßnahmen.",
+   "answer": "von der Regierung beschlossenen"
+  },
+  {
+   "id": "de-b2-05",
+   "level": "B2",
+   "skill": "vocabulary",
+   "prompt": "Die Ergebnisse sind nicht ___: Es wurden nur zwanzig Personen getestet.",
+   "options": [
+    "aussagekräftig",
+    "ausgezeichnet",
+    "aufmerksam",
+    "anspruchsvoll"
+   ],
+   "explain": "aussagekräftig = průkazný, vypovídající.",
+   "answer": "aussagekräftig"
+  },
+  {
+   "id": "de-b2-06",
+   "level": "B2",
+   "skill": "idiom",
+   "prompt": "Co znamená „Das ist nicht mein Bier.“?",
+   "options": [
+    "To není moje starost.",
+    "To mi nechutná.",
+    "Nemám žízeň.",
+    "To není moje vina."
+   ],
+   "explain": "Hovorově: to není moje věc, do toho mi nic není.",
+   "answer": "To není moje starost."
+  },
+  {
+   "id": "de-b2-07",
+   "level": "B2",
+   "skill": "reading",
+   "prompt": "Jak zastánci radnice vysvětlují pomalý postup?",
+   "options": [
+    "složitými povolovacími řízeními",
+    "nedostatkem peněz",
+    "odporem cyklistů",
+    "blížícími se volbami"
+   ],
+   "explain": "Zastánci (Befürworter / supporters) poukazují na složitá povolovací řízení.",
+   "context": "Obwohl die Stadt den Ausbau der Radwege seit Jahren verspricht, ist bisher wenig passiert. Kritiker werfen der Verwaltung vor, das Thema nur vor den Wahlen anzusprechen, während Befürworter auf die komplizierten Genehmigungsverfahren verweisen.",
+   "answer": "složitými povolovacími řízeními"
+  },
+  {
+   "id": "de-b2-08",
+   "level": "B2",
+   "skill": "listening",
+   "prompt": "Co mluvčí říká o projektu?",
+   "options": [
+    "skončil dřív, než se plánovalo",
+    "trval déle než tři roky",
+    "ještě není hotový",
+    "stál víc peněz, než se čekalo"
+   ],
+   "explain": "Plánovaly se tři roky, hotovo bylo za osmnáct měsíců.",
+   "audio": "Ehrlich gesagt hätte ich nicht gedacht, dass das Projekt so schnell fertig wird. Ursprünglich waren drei Jahre eingeplant, und jetzt sind wir schon nach achtzehn Monaten durch.",
+   "answer": "skončil dřív, než se plánovalo"
+  },
+  {
+   "id": "de-c1-01",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "___ er sich auch bemüht, er schafft es nicht.",
+   "options": [
+    "So sehr",
+    "Obwohl",
+    "Trotzdem",
+    "Weil"
+   ],
+   "explain": "So sehr ... auch = ať se snaží sebevíc; hlavní věta pak nemá převrácený slovosled.",
+   "answer": "So sehr"
+  },
+  {
+   "id": "de-c1-02",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Hätte ich das gewusst, ___ ich anders entschieden.",
+   "options": [
+    "hätte",
+    "habe",
+    "würde",
+    "wäre"
+   ],
+   "explain": "Neskutečná podmínka v minulosti bez wenn: Hätte ich ..., hätte ich ... entschieden.",
+   "answer": "hätte"
+  },
+  {
+   "id": "de-c1-03",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Nach ___ der Unterlagen erhalten Sie eine Bestätigung.",
+   "options": [
+    "Eingang",
+    "Eingehen",
+    "eingegangen",
+    "Eingänge"
+   ],
+   "explain": "Úřední jmenný styl: nach Eingang der Unterlagen = po doručení podkladů.",
+   "answer": "Eingang"
+  },
+  {
+   "id": "de-c1-04",
+   "level": "C1",
+   "skill": "vocabulary",
+   "prompt": "Die Firma hat die Entscheidung ___, bis alle Daten vorliegen.",
+   "options": [
+    "aufgeschoben",
+    "aufgehoben",
+    "aufgegeben",
+    "aufgefallen"
+   ],
+   "explain": "aufschieben = odložit; aufheben = zrušit, aufgeben = vzdát.",
+   "answer": "aufgeschoben"
+  },
+  {
+   "id": "de-c1-05",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „Er hat den Braten gerochen.“?",
+   "options": [
+    "Vytušil, že se něco chystá.",
+    "Uvařil oběd.",
+    "Pochválil jídlo.",
+    "Dostal hlad."
+   ],
+   "explain": "den Braten riechen = vytušit (obvykle nepříjemnou) věc dopředu.",
+   "answer": "Vytušil, že se něco chystá."
+  },
+  {
+   "id": "de-c1-06",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „Sie nimmt kein Blatt vor den Mund.“?",
+   "options": [
+    "Mluví otevřeně, bez obalu.",
+    "Nic neřekne.",
+    "Mluví potichu.",
+    "Nečte noviny."
+   ],
+   "explain": "kein Blatt vor den Mund nehmen = mluvit bez obalu.",
+   "answer": "Mluví otevřeně, bez obalu."
+  },
+  {
+   "id": "de-c1-07",
+   "level": "C1",
+   "skill": "reading",
+   "prompt": "Co tvrdí druhá skupina pozorovatelů?",
+   "options": [
+    "že se nesmí podcenit provedení",
+    "že debata je zbytečná",
+    "že jde hlavně o to, zda vůbec jednat",
+    "že úspěch je jistý"
+   ],
+   "explain": "Druhá skupina varuje před podceněním provedení, kde podobné plány často selhávají.",
+   "context": "Dass sich die Debatte inzwischen weniger um das Ob als um das Wie dreht, werten manche Beobachter bereits als Erfolg; andere warnen davor, die Umsetzung zu unterschätzen, die erfahrungsgemäß an den Details scheitert.",
+   "answer": "že se nesmí podcenit provedení"
+  },
+  {
+   "id": "de-c1-08",
+   "level": "C1",
+   "skill": "listening",
+   "prompt": "Jaký postoj mluvčí vyjadřuje?",
+   "options": [
+    "reforma řeší hlavní problém, ať už má jakékoli vady",
+    "reforma je úplně špatná",
+    "reforma hlavní problém neřeší",
+    "mluvčí reformu nezná"
+   ],
+   "explain": "Mluvčí připouští různé názory, ale říká, že reforma řeší hlavní problém.",
+   "audio": "Man kann von der Reform halten, was man will, aber dass sie das Grundproblem angeht, lässt sich kaum bestreiten.",
+   "answer": "reforma řeší hlavní problém, ať už má jakékoli vady"
+  }
+ ]
+}

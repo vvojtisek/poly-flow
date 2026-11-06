@@ -3,6 +3,33 @@
 /* Dark mode follows the .dark class on <html> (lib/theme.ts), set before first paint. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Accent colours (profile setting): the same lightness and chroma as the default blue, so text
+   contrast on brand buttons stays the same; only the hue turns. Set on <html> by lib/theme.ts. */
+html[data-accent="teal"] {
+  --color-brand-50: oklch(0.97 0.02 200);
+  --color-brand-500: oklch(0.58 0.15 200);
+  --color-brand-600: oklch(0.5 0.14 200);
+  --color-brand-900: oklch(0.28 0.07 200);
+}
+html[data-accent="violet"] {
+  --color-brand-50: oklch(0.97 0.02 295);
+  --color-brand-500: oklch(0.58 0.17 295);
+  --color-brand-600: oklch(0.5 0.17 295);
+  --color-brand-900: oklch(0.28 0.08 295);
+}
+html[data-accent="orange"] {
+  --color-brand-50: oklch(0.97 0.02 50);
+  --color-brand-500: oklch(0.58 0.16 45);
+  --color-brand-600: oklch(0.5 0.15 45);
+  --color-brand-900: oklch(0.28 0.07 45);
+}
+html[data-accent="pink"] {
+  --color-brand-50: oklch(0.97 0.02 345);
+  --color-brand-500: oklch(0.58 0.17 345);
+  --color-brand-600: oklch(0.5 0.17 345);
+  --color-brand-900: oklch(0.28 0.08 345);
+}
+
 /* Tailwind v4: design tokens live here (CSS-first config), not in tailwind.config.js. */
 @theme {
   --color-brand-50: oklch(0.97 0.02 250);
@@ -10,6 +37,30 @@
   --color-brand-600: oklch(0.5 0.17 250);
   --color-brand-900: oklch(0.28 0.08 250);
   --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* Micro-interactions; every use is wrapped in motion-safe: (reduced motion = no animation). */
+  --animate-pop-in: pop-in 450ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  --animate-burst: burst 900ms ease-out forwards;
+  @keyframes burst {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--burst-x), var(--burst-y)) scale(0.4);
+    }
+  }
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.92) translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 html,
@@ -22,4 +73,17 @@ body {
   /* Respect notches when installed full-screen. */
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
     env(safe-area-inset-left);
+}
+
+/* Reading comfort (profile settings). Tailwind sizes are in rem, so the root size scales the UI. */
+html[data-text="s"] { font-size: 93.75%; }
+html[data-text="l"] { font-size: 112.5%; }
+html[data-text="xl"] { font-size: 125%; }
+html[data-spacing] body { letter-spacing: 0.04em; word-spacing: 0.14em; }
+html[data-spacing] :where(p, li, label, dd, blockquote) { line-height: 1.75; }
+html[data-motion="reduce"] *, html[data-motion="reduce"] *::before, html[data-motion="reduce"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, GraduationCap, Map as MapIcon, Play } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, Dumbbell, GraduationCap, Map as MapIcon, Play, Trophy } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,12 +9,19 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Panel } from "@/components/Panel";
 import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
+import { RankCard } from "@/components/RankCard";
+import { NewsBanner } from "@/components/NewsBanner";
+import { TodayPlan } from "@/components/TodayPlan";
+import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
+import { Welcome } from "@/components/Welcome";
 import { Button, Notice } from "@/components/ui";
-import { getProgress, skipPlacement, type ProgressOverview } from "@/lib/api";
+import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
+import { byRecent, modesFor, readRecent } from "@/lib/practice";
+import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
 // Mobile: practice first, single column. lg+: dense multi-panel dashboard.
 export default function HomePage() {
@@ -23,6 +31,10 @@ export default function HomePage() {
   const language = me?.acting.active_language;
   const [progress, setProgress] = useState<ProgressOverview | null>(null);
   const [failed, setFailed] = useState(false);
+  const ranks = useRanks(language, me?.acting.id);
+  const [celebrated, setCelebrated] = useState(false);
+  const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
+  useEffect(() => setRecent(readRecent()), []);
 
   useEffect(() => {
     if (!language) return;
@@ -41,6 +53,9 @@ export default function HomePage() {
   const offerPlacement =
     !!progress && progress.placement === null && progress.introduced === 0 && progress.lexicon_items > 0;
 
+  // First run of a fresh profile: the welcome wizard comes before the placement offer.
+  const welcome = offerPlacement && !me?.acting.settings.onboarded;
+
   async function skip() {
     if (!language) return;
     try {
@@ -57,6 +72,8 @@ export default function HomePage() {
   return (
     <AppShell me={me}>
       <div className="grid gap-4 lg:grid-cols-3">
+        {language && !offerPlacement && <NewsBanner profileId={me.acting.id} language={language} />}
+        {language && <TodayPlan language={language} profileId={me.acting.id} />}
         <Panel title={cs.todayPractice} icon={BookOpen}>
           <div className="flex flex-col gap-3">
             <LanguagePicker me={me} />
@@ -108,6 +125,27 @@ export default function HomePage() {
                 {cs.grammar.title}
               </Button>
             </div>
+            {language && (
+              <section className="flex flex-col gap-2 rounded-2xl bg-slate-50 p-3 dark:bg-slate-800/50">
+                <Button variant="secondary" className="w-full" onClick={() => router.push("/practice")}>
+                  <Dumbbell className="size-5" aria-hidden />
+                  {cs.practice.open}
+                </Button>
+                <div className="flex flex-wrap justify-center gap-1">
+                  {byRecent(modesFor(language), recent).map((m) => (
+                    <Link
+                      key={m.id}
+                      href={m.href}
+                      title={cs.practice.mode[m.id]?.blurb}
+                      className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-brand-500/10 dark:bg-slate-900 dark:text-slate-200"
+                    >
+                      <m.icon className="size-3.5" aria-hidden />
+                      {cs.practice.mode[m.id]?.title}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
             {progress && (
               <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
                 <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.tests.title}</h3>
@@ -121,6 +159,18 @@ export default function HomePage() {
                     <p className="text-center text-xs text-slate-500">{cs.placement.anytime}</p>
                   </div>
                 )}
+                <div className="flex flex-col gap-1">
+                  <Button variant="secondary" className="w-full" onClick={() => router.push("/placement/cefr")}>
+                    <Gauge className="size-5" aria-hidden />
+                    {cs.cefr.short}
+                    {progress.cefr_level && (
+                      <span className="rounded-md bg-brand-500/15 px-1.5 text-sm text-brand-600 dark:text-brand-50">
+                        {progress.cefr_level}
+                      </span>
+                    )}
+                  </Button>
+                  <p className="text-center text-xs text-slate-500">{cs.placement.part2}</p>
+                </div>
                 <div className="flex flex-col gap-1">
                   <Button variant="secondary" className="w-full" onClick={() => router.push("/levels")}>
                     <Award className="size-5" aria-hidden />
@@ -151,6 +201,12 @@ export default function HomePage() {
           {language && <WeakSpotsCard key={`${me.acting.id}:${language}`} language={language} />}
         </Panel>
 
+        {ranks.data && ranks.data.path !== "off" && (
+          <Panel title="Moje cesta" icon={Trophy}>
+            <RankCard data={ranks.data} />
+          </Panel>
+        )}
+
         <Panel title={cs.progression.title} icon={MapIcon} className="lg:col-span-2">
           <ProgressionPath />
         </Panel>
@@ -161,6 +217,24 @@ export default function HomePage() {
           </Panel>
         )}
       </div>
+      {welcome && <Welcome me={me} />}
+      {ranks.data &&
+        !welcome &&
+        !celebrated &&
+        ranks.data.path !== "off" &&
+        ((ranks.data.unseen_rank ?? 0) > 1 || ranks.data.unseen_achievements.length > 0) && (
+          <RankCelebration
+            data={ranks.data}
+            onClose={() => {
+              setCelebrated(true);
+              const lang = ranks.data!.language;
+              void markRanksSeen(lang).then(() => {
+                invalidateRanks();
+                void ranks.reload();
+              });
+            }}
+          />
+        )}
     </AppShell>
   );
 }

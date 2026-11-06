@@ -96,7 +96,18 @@ export interface ProfileSettings {
   interests: string[];
   voices: Partial<Record<Language, string>>;
   learn_profanity: boolean;
+  rank_path: RankPath;
+  text_size: TextSize;
+  reading_spacing: boolean;
+  reduce_motion: boolean;
+  onboarded: boolean;
+  news_seen: number;
+  accent: Accent;
 }
+
+export type Accent = "blue" | "teal" | "violet" | "orange" | "pink";
+
+export type TextSize = "s" | "m" | "l" | "xl";
 
 export interface Voice {
   id: string;
@@ -185,6 +196,7 @@ export interface WordCard {
   translation: string;
   context: string | null;
   context_cs: string | null;
+  note: string | null; // the learner's own memory hook
 }
 export type Verdict =
   | "exact"
@@ -266,6 +278,7 @@ export interface AnswerResult {
   can_retry: boolean;
   expected: string | null;
   meaning: string | null;
+  hook?: string | null; // the learner's memory hook, after a miss
 }
 
 export interface ProgressOverview {
@@ -291,6 +304,7 @@ export interface ProgressOverview {
   placement: Placement | null; // null: the test was never taken or skipped for this language
   active_exam_session_id: string | null;
   level_badges: LevelBadge[];
+  cefr_level?: string | null;
 }
 
 // A passed level exam: a vocabulary level, not a CEFR certificate.
@@ -574,3 +588,457 @@ export const answerStoryQuestion = (storyId: string, index: number, choice: numb
     json: { choice },
   });
 export const storyAudioUrl = (storyId: string, line: number) => `/api/v1/stories/${storyId}/audio?line=${line}`;
+
+// ---------------------------------------------------------------- CEFR diagnostic (placement part 2)
+
+export type DiagnosticSkill = "grammar" | "vocabulary" | "reading" | "listening" | "idiom";
+export type DiagnosticBand = "pre-A1" | "A1" | "A2" | "B1" | "B2" | "B2+";
+
+export interface DiagnosticInfo {
+  available: boolean;
+  review_status: string | null;
+  items: number;
+  bands: DiagnosticBand[];
+  min_items: number;
+  max_items: number;
+  active_session_id: string | null;
+  latest: { level: DiagnosticBand; decided_at: string; session_id: string | null } | null;
+}
+
+export interface DiagnosticQuestion {
+  position: number;
+  skill: DiagnosticSkill;
+  band: DiagnosticBand;
+  prompt: string;
+  context: string | null;
+  has_audio: boolean;
+  options: string[];
+  asked: number;
+  max_items: number;
+  theta: number;
+}
+
+export interface DiagnosticResult {
+  placed: boolean;
+  asked: number;
+  level?: DiagnosticBand;
+  next?: DiagnosticBand | null;
+  low?: DiagnosticBand;
+  high?: DiagnosticBand;
+  theta?: number;
+  correct?: number;
+  skills?: { skill: DiagnosticSkill; asked: number; correct: number; expected: number; verdict: "strong" | "weak" | "even" | "few" }[];
+  bands?: { band: DiagnosticBand; correct: number; asked: number }[];
+  grammar_queued?: number;
+  grammar_returned?: number;
+  exams_opened?: CefrLevel[];
+}
+
+export interface DiagnosticState {
+  session_id: string;
+  language: Language;
+  status: "active" | "completed" | "abandoned";
+  with_listening: boolean;
+  question: DiagnosticQuestion | null;
+  result: DiagnosticResult | null;
+}
+
+export interface DiagnosticAnswer {
+  position: number;
+  correct: boolean;
+  dont_know: boolean;
+  answer: string;
+  explain: string;
+  transcript: string | null;
+  asked: number;
+  max_items: number;
+  theta: number;
+}
+
+export const getDiagnosticInfo = (language: Language) =>
+  api<DiagnosticInfo>(`/api/v1/diagnostic?language=${language}`);
+export const startDiagnostic = (language: Language) =>
+  api<DiagnosticState>("/api/v1/diagnostic/sessions", { json: { language } });
+export const getDiagnostic = (sessionId: string) => api<DiagnosticState>(`/api/v1/diagnostic/sessions/${sessionId}`);
+export const answerDiagnostic = (sessionId: string, position: number, choice: string | null) =>
+  api<DiagnosticAnswer>(`/api/v1/diagnostic/sessions/${sessionId}/answer`, { json: { position, choice } });
+export const stopDiagnostic = (sessionId: string) =>
+  api<DiagnosticState>(`/api/v1/diagnostic/sessions/${sessionId}/stop`, { method: "POST" });
+export const diagnosticAudioUrl = (sessionId: string, position: number) =>
+  `/api/v1/diagnostic/sessions/${sessionId}/audio?position=${position}`;
+
+// ---------------------------------------------------------------- personal mastery ranks
+
+export type RankPath = "hockey" | "royal" | "off";
+export type RankTier = "bronze" | "silver" | "gold" | "platinum" | "diamond";
+
+export interface RankRequirement {
+  key: "known_words" | "grammar_known" | "badge" | "recoveries";
+  target: number;
+  current: number;
+  level: string | null;
+  met: boolean;
+}
+
+export interface RanksOverview {
+  language: Language;
+  path: RankPath;
+  rank: number;
+  max_rank: number;
+  tier: RankTier;
+  next: { rank: number; tier: RankTier; requirements: RankRequirement[] } | null;
+  ranks: { rank: number; tier: RankTier; reached_at: string | null; requirements: RankRequirement[] }[];
+  achievements: { key: string; group: string; reached_at: string | null }[];
+  unseen_rank: number | null;
+  unseen_achievements: string[];
+  stats: {
+    known_words: number;
+    passive_words: number;
+    grammar_known: number;
+    grammar_total: number;
+    recoveries: number;
+    checks_answered: number;
+    badges: string[];
+  };
+}
+
+export const getRanks = (language: Language) => api<RanksOverview>(`/api/v1/ranks?language=${language}`);
+export const markRanksSeen = (language: Language) => api<void>("/api/v1/ranks/seen", { json: { language } });
+
+// ---------------------------------------------------------------- insights (statistics)
+
+export interface Insights {
+  language: Language;
+  today: string;
+  heatmap: { date: string; graded: number; practice: number }[];
+  active_days: number;
+  accuracy: { week: string; answered: number; correct: number }[];
+  mistakes: { tag: string; count: number }[];
+  forecast: { date: string; words: number; grammar: number }[];
+  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
+}
+
+export const getInsights = (language: Language) => api<Insights>(`/api/v1/insights?language=${language}`);
+
+// ---------------------------------------------------------------- my dictionary
+
+export type WordStatus = "mastered" | "known" | "passive" | "learning" | "seen";
+
+export interface WordRow {
+  id: string;
+  lemma: string;
+  gender: string | null;
+  pos: string;
+  rank: number;
+  translation: string;
+  status: WordStatus;
+  due: boolean;
+  next_review_at: string | null;
+  correct: number;
+  errors: number;
+}
+
+export interface WordList {
+  total: number;
+  counts: Record<WordStatus, number>;
+  items: WordRow[];
+}
+
+export interface WordDetail extends Omit<WordRow, "due"> {
+  language: Language;
+  ipa: string | null;
+  example: string | null;
+  review_status: string | null;
+  passive_known: boolean;
+  active_known: boolean;
+  introduced_at: string | null;
+  introduced_by: string | null;
+  last_reviewed_at: string | null;
+  review_streak: number;
+  history: { at: string; correct: boolean; graded: boolean; task: string; mode: string; error_tag: string | null }[];
+  note: string | null;
+}
+
+export function listWords(
+  language: Language,
+  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number },
+  signal?: AbortSignal,
+) {
+  const p = new URLSearchParams({ language });
+  if (opts.q) p.set("q", opts.q);
+  if (opts.status) p.set("status", opts.status);
+  if (opts.due) p.set("due", "true");
+  if (opts.offset) p.set("offset", String(opts.offset));
+  if (opts.limit) p.set("limit", String(opts.limit));
+  return api<WordList>(`/api/v1/words?${p}`, { signal });
+}
+export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);
+export const wordExportUrl = (language: Language, format: "csv" | "anki") =>
+  `/api/v1/words/export?language=${language}&format=${format}`;
+export const myWordAudioUrl = (id: string, part: "word" | "example" = "word") => `/api/v1/words/${id}/audio?part=${part}`;
+
+// ---------------------------------------------------------------- today's plan
+
+export interface TodayPlan {
+  language: Language;
+  date: string;
+  minutes_today: number;
+  answers_today: number;
+  goal_minutes: number;
+  steps: { kind: "check" | "grammar_check" | "lesson" | "reading"; count: number; minutes: number }[];
+  tomorrow_due: number;
+}
+
+export const getToday = (language: Language) => api<TodayPlan>(`/api/v1/today?language=${language}`);
+
+// ---------------------------------------------------------------- dictation (ungraded)
+
+export interface DictationNext {
+  item_id: string | null;
+  words: number;
+  pool: number;
+}
+
+export type DictationVerdict = "ok" | "case" | "accents" | "wrong" | "missing" | "extra";
+
+export interface DictationResult {
+  sentence: string;
+  lemma: string;
+  translation: string;
+  marks: { expected: string | null; typed: string | null; verdict: DictationVerdict }[];
+  score: number;
+}
+
+export function getDictationNext(language: Language, exclude: string[]) {
+  const p = new URLSearchParams({ language });
+  for (const id of exclude.slice(-50)) p.append("exclude", id);
+  return api<DictationNext>(`/api/v1/dictation/next?${p}`);
+}
+export const checkDictation = (item_id: string, text: string) =>
+  api<DictationResult>("/api/v1/dictation/check", { json: { item_id, text } });
+
+// ---------------------------------------------------------------- German case lab
+
+export type DeclCase = "nom" | "akk" | "dat" | "gen";
+export type DeclGender = "m" | "f" | "n" | "pl";
+export type DeclDet = "def" | "indef" | "kein" | "poss" | "none";
+export interface DeclPiece {
+  stem: string;
+  ending: string;
+}
+export interface DeclCell {
+  det: DeclDet;
+  case: DeclCase;
+  gender: DeclGender;
+  determiner: DeclPiece | null;
+  adjective_ending: string;
+  kind: "weak" | "mixed" | "strong";
+  signal: "determiner" | "adjective" | "noun";
+}
+export interface DeclNoun {
+  lemma: string;
+  gender: DeclGender;
+  translation: string;
+  met: boolean;
+  n_declension: boolean;
+  singular: Record<DeclCase, DeclPiece> | null;
+  plural: Record<DeclCase, DeclPiece> | null;
+}
+export interface DeclAdjective {
+  lemma: string;
+  stem: string | null;
+  translation: string;
+  met: boolean;
+}
+export interface Declension {
+  cells: DeclCell[];
+  nouns: DeclNoun[];
+  adjectives: DeclAdjective[];
+}
+export const getDeclension = () => api<Declension>("/api/v1/grammar/declension");
+
+export interface PracticeSentence {
+  item_id: string;
+  sentence: string;
+  lemma: string;
+  translation: string;
+}
+export const getPracticeSentences = (language: Language) =>
+  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}`);
+
+// ---------------------------------------------------------------- gender sorter (ungraded)
+
+export interface GenderHint {
+  suffix: string;
+  gender: string;
+  certainty: "always" | "usually";
+  exception: boolean;
+}
+export interface GenderNoun {
+  id: string;
+  lemma: string;
+  translation: string;
+  gender: string;
+  met: boolean;
+  hint: GenderHint | null;
+}
+export interface GenderSet {
+  language: Language;
+  genders: string[];
+  rules: { suffix: string; gender: string; certainty: "always" | "usually" }[];
+  nouns: GenderNoun[];
+}
+export const getGenders = (language: Language) => api<GenderSet>(`/api/v1/genders?language=${language}`);
+
+// ---------------------------------------------------------------- role-play (ungraded)
+
+export interface RoleplayScene {
+  id: string;
+  title: string;
+  speakers: string[];
+  lines: number;
+}
+export interface RoleplayLine {
+  speaker: string;
+  text: string;
+  cs: string;
+  mine: boolean;
+  options: string[] | null;
+  answer: number | null;
+}
+export interface RoleplayScript {
+  id: string;
+  title: string;
+  role: string;
+  speakers: string[];
+  lines: RoleplayLine[];
+}
+export const listRoleplay = (language: Language) => api<RoleplayScene[]>(`/api/v1/roleplay?language=${language}`);
+export const getRoleplay = (id: string, role: string) =>
+  api<RoleplayScript>(`/api/v1/roleplay/${id}?role=${encodeURIComponent(role)}`);
+export const checkRoleplay = (id: string, line: number, text: string) =>
+  api<{ marks: DictationResult["marks"]; score: number }>(`/api/v1/roleplay/${id}/check`, { json: { line, text } });
+export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/${id}/audio?line=${line}`;
+
+export const setWordNote = (id: string, text: string) =>
+  api<{ note: string | null }>(`/api/v1/words/${id}/note`, { method: "PUT", json: { text } });
+
+// ---------------------------------------------------------------- German verb lab
+
+export type VerbLanguage = "de" | "fr" | "it";
+export const VERB_LANGUAGES: VerbLanguage[] = ["de", "fr", "it"];
+export interface VerbForm {
+  pronoun: string;
+  stem: string;
+  ending: string;
+  changed: boolean;
+}
+export interface VerbEntry {
+  lemma: string;
+  translation: string;
+  met: boolean;
+  prefix: string | null;
+  features: string[];
+  forms: VerbForm[]; // six persons: singular 1-3, plural 1-3
+}
+export const getVerbs = (language: VerbLanguage) =>
+  api<VerbEntry[]>(`/api/v1/grammar/verbs?language=${language}`);
+
+// ---------------------------------------------------------------- session review
+
+export interface ReviewItem {
+  item_id: string;
+  lemma: string;
+  gender: string | null;
+  translation: string;
+  task: "recognition" | "recall";
+  first_try: boolean | null;
+  answered: string | null;
+  expected: string;
+  error: string | null;
+  passive_known: boolean;
+  active_known: boolean;
+  next_review_at: string | null;
+  note: string | null;
+}
+export const getSessionReview = (id: string) =>
+  api<{ mode: SessionMode; items: ReviewItem[] }>(`/api/v1/learning/sessions/${id}/review`);
+
+export type LookupHit = {
+  id: string;
+  lemma: string;
+  translation: string;
+  gender: string | null;
+  pos: string;
+  status: string | null;
+  note: string | null;
+};
+export const lookupWord = (word: string, language: Language) =>
+  api<LookupHit[]>(`/api/v1/lookup?language=${language}&word=${encodeURIComponent(word)}`);
+
+export type NumberDirection = "write" | "read";
+export const spellNumber = (n: number, language: Language) =>
+  api<{ n: number; words: string }>(`/api/v1/numbers/spell?n=${n}&language=${language}`);
+export const checkNumber = (body: { language: Language; n: number; answer: string; direction: NumberDirection }) =>
+  api<{ correct: boolean; n: number; words: string }>("/api/v1/numbers/check", { method: "POST", json: body });
+export const numberAudioUrl = (n: number, language: Language) => `/api/v1/numbers/audio?n=${n}&language=${language}`;
+
+export type WordOrderPuzzle = { ref: string; tiles: string[]; end: string; cs: string | null; hint: string | null; pool: number };
+export const nextWordOrder = (language: Language, exclude: string[]) =>
+  api<WordOrderPuzzle | { ref: null; pool: 0 }>(
+    `/api/v1/word-order/next?language=${language}${exclude.map((r) => `&exclude=${encodeURIComponent(r)}`).join("")}`,
+  );
+export const checkWordOrder = (language: Language, ref: string, order: string[]) =>
+  api<{ correct: boolean; marks: boolean[]; sentence: string; cs: string | null }>(`/api/v1/word-order/check?language=${language}`, {
+    method: "POST",
+    json: { ref, order },
+  });
+
+export type ClockTime = { hour: number; minute: number; phrase: string; czech: string; digits: string };
+export const clockQuiz = (language: Language, level: "quarters" | "five") =>
+  api<{ time: ClockTime; options: ClockTime[]; answer: number }>(`/api/v1/clock/quiz?language=${language}&level=${level}`);
+export const clockAudioUrl = (t: { hour: number; minute: number }, language: Language) =>
+  `/api/v1/clock/audio?hour=${t.hour}&minute=${t.minute}&language=${language}`;
+
+export type SoundExample = { id: string; lemma: string; translation: string; start: number; end: number; met: boolean };
+export type SoundRule = { id: string; spelling: string; czech: string; note: string; examples: SoundExample[] };
+export const getSounds = (language: Language) => api<SoundRule[]>(`/api/v1/sounds?language=${language}`);
+
+export type PairWord = { text: string; cs: string };
+export type PairSet = { id: string; title: string; hint: string; pairs: [PairWord, PairWord][] };
+export const getPairSets = (language: Language) => api<PairSet[]>(`/api/v1/pairs?language=${language}`);
+export const pairAudioUrl = (language: Language, set: string, pair: number, side: number) =>
+  `/api/v1/pairs/audio?language=${language}&set=${set}&pair=${pair}&side=${side}`;
+
+export type RecapWeek = { active_days: number; graded: number; correct: number; practice: number; introduced: number; newly_known: number; accuracy: number | null };
+export type Recap = {
+  language: Language;
+  from: string;
+  to: string;
+  this_week: RecapWeek;
+  last_week: RecapWeek;
+  accuracy_trend: "up" | "down" | "same" | null;
+  hard_words: { id: string; lemma: string; gender: string | null; translation: string; misses: number }[];
+  due_now: number;
+  due_next_7_days: number;
+  suggestion: "check_due" | "fix_mistakes" | "new_lesson" | "start_small" | "keep_going";
+};
+export const getRecap = (language: Language) => api<Recap>(`/api/v1/insights/recap?language=${language}`, { cache: "no-store" });
+
+// ---------------------------------------------------------------- what's new
+
+export interface NewsEntry {
+  n: number;
+  date: string;
+  title: string;
+  blurb: string;
+  href: string | null;
+  new: boolean;
+}
+export interface News {
+  latest: number;
+  unseen: number;
+  entries: NewsEntry[]; // newest first
+}
+export const getNews = () => api<News>("/api/v1/news");
+export const markNewsSeen = () => api<News>("/api/v1/news/seen", { method: "POST" });

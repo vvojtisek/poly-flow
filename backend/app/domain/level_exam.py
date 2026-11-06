@@ -78,8 +78,15 @@ def ready(
     known: int,
     placement_level: int | None,
     policy: ExamPolicy = EXAM,
+    *,
+    cefr_reached: bool = False,
 ) -> bool:
-    """Enough of the band is known (or a placement test reached past it) to try the exam."""
+    """Enough of the band is known (or a placement test reached past it) to try the exam.
+
+    `cefr_reached`: the CEFR diagnostic placed the learner at or above this band.
+    """
+    if cefr_reached:
+        return True
     if placement_level is not None and placement_level >= exam.high:
         return True
     return pool > 0 and known >= math.ceil(pool * policy.ready_share)

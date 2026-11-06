@@ -1,6 +1,6 @@
 "use client";
 
-import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, X } from "lucide-react";
+import { Check, Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, Type, X } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
@@ -12,8 +12,10 @@ import {
   listVoices,
   updateOwnProfile,
   voiceSampleUrl,
+  type Accent,
   type Me,
   type ProfileSettings,
+  type TextSize,
   type Theme,
   type Voice,
 } from "@/lib/api";
@@ -58,6 +60,42 @@ function ThemePicker({ value, onChange }: { value: Theme; onChange: (t: Theme) =
           {cs.settings.themes[t]}
         </button>
       ))}
+    </div>
+  );
+}
+
+const ACCENTS: { value: Accent; color: string }[] = [
+  { value: "blue", color: "oklch(0.58 0.17 250)" },
+  { value: "teal", color: "oklch(0.58 0.15 200)" },
+  { value: "violet", color: "oklch(0.58 0.17 295)" },
+  { value: "orange", color: "oklch(0.58 0.16 45)" },
+  { value: "pink", color: "oklch(0.58 0.17 345)" },
+];
+
+function AccentPicker({ value, onChange }: { value: Accent; onChange: (a: Accent) => void }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="text-sm font-semibold">{cs.settings.accent}</h3>
+      <div role="radiogroup" aria-label={cs.settings.accent} className="flex flex-wrap gap-3">
+        {ACCENTS.map(({ value: a, color }) => (
+          <button
+            key={a}
+            type="button"
+            role="radio"
+            aria-checked={value === a}
+            aria-label={cs.settings.accents[a]}
+            title={cs.settings.accents[a]}
+            onClick={() => onChange(a)}
+            className={`grid size-11 place-items-center rounded-full ring-offset-2 ring-offset-white dark:ring-offset-slate-900 ${
+              value === a ? "ring-2 ring-slate-900 dark:ring-white" : ""
+            }`}
+            style={{ background: color }}
+          >
+            {value === a && <Check className="size-5 text-white" aria-hidden />}
+          </button>
+        ))}
+      </div>
+      <p className="text-xs text-slate-500">{cs.settings.accentHelp}</p>
     </div>
   );
 }
@@ -249,7 +287,83 @@ function SettingsView({ me }: { me: Me }) {
       </div>
       {save === "error" && <Notice tone="error">{cs.settings.failed}</Notice>}
       <Panel title={cs.settings.theme} icon={Palette}>
-        <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
+        <div className="flex flex-col gap-4">
+          <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
+          <AccentPicker value={settings.accent ?? "blue"} onChange={(accent) => void change({ accent })} />
+        </div>
+      </Panel>
+      <Panel title={cs.settings.comfort} icon={Type}>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-semibold">{cs.settings.textSize}</h3>
+            <div role="radiogroup" aria-label={cs.settings.textSize} className="grid grid-cols-4 gap-2">
+              {(["s", "m", "l", "xl"] as TextSize[]).map((size, i) => (
+                <button
+                  key={size}
+                  type="button"
+                  role="radio"
+                  aria-checked={settings.text_size === size}
+                  onClick={() => void change({ text_size: size })}
+                  className={`flex flex-col items-center gap-1 rounded-xl px-2 py-3 font-medium ${
+                    settings.text_size === size ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                  }`}
+                >
+                  <span style={{ fontSize: `${0.9 + i * 0.25}rem` }} aria-hidden>
+                    Aa
+                  </span>
+                  <span className="text-xs">{cs.settings.textSizes[size]}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-semibold">{cs.welcome.goal}</h3>
+            <div role="radiogroup" aria-label={cs.welcome.goal} className="grid grid-cols-5 gap-2">
+              {[5, 10, 15, 20, 30].map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  role="radio"
+                  aria-checked={settings.daily_goal_minutes === g}
+                  onClick={() => void change({ daily_goal_minutes: g })}
+                  className={`rounded-xl px-2 py-2 text-sm font-medium ${
+                    settings.daily_goal_minutes === g ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                  }`}
+                >
+                  {cs.welcome.minutes(g)}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-slate-500">{cs.welcome.goalHelp}</p>
+          </div>
+          <label className="flex items-start gap-3 text-sm font-medium">
+            <input
+              type="checkbox"
+              className="mt-0.5 size-5 accent-brand-500"
+              checked={settings.reading_spacing}
+              onChange={(e) => void change({ reading_spacing: e.target.checked })}
+            />
+            <span className="flex flex-col">
+              {cs.settings.spacing}
+              <span className="text-xs font-normal text-slate-500">{cs.settings.spacingHelp}</span>
+            </span>
+          </label>
+          <label className="flex items-start gap-3 text-sm font-medium">
+            <input
+              type="checkbox"
+              className="mt-0.5 size-5 accent-brand-500"
+              checked={settings.reduce_motion}
+              onChange={(e) => void change({ reduce_motion: e.target.checked })}
+            />
+            <span className="flex flex-col">
+              {cs.settings.motion}
+              <span className="text-xs font-normal text-slate-500">{cs.settings.motionHelp}</span>
+            </span>
+          </label>
+          <p lang="de" className="rounded-xl bg-slate-50 p-3 text-lg dark:bg-slate-800/60">
+            {cs.settings.preview}
+          </p>
+        </div>
       </Panel>
       <Panel title={cs.settings.interests} icon={Heart}>
         <Interests value={settings.interests} onChange={(interests) => void change({ interests })} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, CheckCircle2, ClipboardCheck, GraduationCap, RotateCcw, Sparkles } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ClipboardCheck, FlaskConical, GraduationCap, Repeat, RotateCcw, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -124,6 +124,30 @@ export default function GrammarPage() {
               </Button>
             </section>
             {tree.review_status !== "reviewed" && <Notice>{cs.grammar.unreviewed}</Notice>}
+            {me.acting.active_language === "de" && (
+              <Link
+                href="/grammar/cases"
+                className="flex items-center gap-3 rounded-2xl border border-amber-300/60 bg-amber-50 p-4 hover:border-amber-400 dark:border-amber-800 dark:bg-amber-950/40"
+              >
+                <FlaskConical className="size-6 shrink-0 text-amber-600" aria-hidden />
+                <span className="flex flex-col">
+                  <span className="font-semibold">{cs.cases.title}</span>
+                  <span className="text-sm text-slate-600 dark:text-slate-300">{cs.cases.teaser}</span>
+                </span>
+              </Link>
+            )}
+            {me.acting.active_language !== "en" && (
+              <Link
+                href="/grammar/verbs"
+                className="flex items-center gap-3 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-4 hover:border-brand-500"
+              >
+                <Repeat className="size-6 shrink-0 text-brand-500" aria-hidden />
+                <span className="flex flex-col">
+                  <span className="font-semibold">{cs.verbs.title}</span>
+                  <span className="text-sm text-slate-600 dark:text-slate-300">{cs.verbs.teaser}</span>
+                </span>
+              </Link>
+            )}
             {tree.levels.map((lv) => (
               <section key={lv.level} className="flex flex-col gap-2" aria-labelledby={`level-${lv.level}`}>
                 <h2 id={`level-${lv.level}`} className="text-lg font-bold">

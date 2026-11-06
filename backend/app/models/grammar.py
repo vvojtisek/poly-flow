@@ -117,6 +117,8 @@ class UserGrammarProgress(TimestampMixin, Base):
         nullable=False,
     )
     studied_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # 'lesson' or 'placement' (a CEFR placement queued the unit for a check, no lesson needed).
+    studied_by: Mapped[str | None] = mapped_column(String(16))
     correct_count: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)
     error_count: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)
     review_streak: Mapped[int] = mapped_column(default=0, server_default=text("0"), nullable=False)

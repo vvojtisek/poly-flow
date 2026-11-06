@@ -547,6 +547,7 @@ async def _mark_studied(db: AsyncSession, user: User, unit_id: str, now: datetim
         p.studied_at = now
         p.state = ProgressState.LEARNING
         p.next_review_at = next_local_midnight(user, now)
+    p.studied_by = "lesson"  # a lesson taken after a placement queued the unit counts as one
     p.policy_version = POLICY.version
 
 

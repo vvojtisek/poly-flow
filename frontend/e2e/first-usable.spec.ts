@@ -115,11 +115,14 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(page.getByRole("button", { name: "Ověřit, co umím" })).toBeDisabled();
 
   await page.getByRole("button", { name: "Zpět do účtu správce" }).click();
-  await page.getByLabel("Heslo", { exact: true }).fill("spatne-heslo");
-  await page.getByRole("button", { name: "Pokračovat" }).click();
+  // Scoped to the password form: the dashboard's plan has its own "Pokračovat" button.
+  const password = page.getByLabel("Heslo", { exact: true });
+  const returnForm = password.locator("xpath=ancestor::form");
+  await password.fill("spatne-heslo");
+  await returnForm.getByRole("button", { name: "Pokračovat" }).click();
   await expect(page.getByText("Neplatné jméno nebo heslo.")).toBeVisible();
-  await page.getByLabel("Heslo", { exact: true }).fill(PARENT_PASSWORD);
-  await page.getByRole("button", { name: "Pokračovat" }).click();
+  await password.fill(PARENT_PASSWORD);
+  await returnForm.getByRole("button", { name: "Pokračovat" }).click();
   await expect(page.getByRole("link", { name: "Rodina" })).toBeVisible();
 
   // The running version sits next to logout, visible without scrolling.

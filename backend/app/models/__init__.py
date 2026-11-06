@@ -1,5 +1,6 @@
 from app.models.auth import AuthSession
 from app.models.blacklist import ContentBlacklistEntry
+from app.models.diagnostic import CefrPlacement, DiagnosticSession
 from app.models.frequency import FrequencyLemma
 from app.models.grammar import (
     GrammarAttempt,
@@ -18,16 +19,20 @@ from app.models.learning import (
     LevelBadge,
 )
 from app.models.lexicon import LexiconItem
+from app.models.mastery import MasteryAward
 from app.models.progress import UserWordProgress
 from app.models.scene import Scene, SceneWord
 from app.models.story import DailyStory
 from app.models.tutor import TutorExplanation
 from app.models.user import User
+from app.models.word_note import WordNote
 
 __all__ = [
     "AuthSession",
+    "CefrPlacement",
     "ContentBlacklistEntry",
     "DailyStory",
+    "DiagnosticSession",
     "FrequencyLemma",
     "GrammarAttempt",
     "GrammarExercise",
@@ -41,10 +46,12 @@ __all__ = [
     "LearningTask",
     "LevelBadge",
     "LexiconItem",
+    "MasteryAward",
     "Scene",
     "SceneWord",
     "TutorExplanation",
     "User",
     "UserGrammarProgress",
     "UserWordProgress",
+    "WordNote",
 ]

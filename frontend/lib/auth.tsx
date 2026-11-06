@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 
 import { ApiError, getMe, getSetupStatus, setCsrfToken, type Me } from "@/lib/api";
 import { setBaseRate } from "@/lib/audio";
-import { applyTheme } from "@/lib/theme";
+import { applyDisplay, applyTheme } from "@/lib/theme";
 
 type AuthState =
   | { kind: "loading" }
@@ -29,6 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (me) {
       // The acting profile's look and speech speed (a handed-over device takes the child's).
       applyTheme(me.acting.settings.theme);
+      applyDisplay(me.acting.settings);
       setBaseRate(me.acting.settings.audio_rate);
     }
     setState(me ? { kind: "signed_in", me } : { kind: "anonymous", needsSetup: false });

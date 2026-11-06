@@ -1,0 +1,581 @@
+{
+ "language": "fr",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "diag-v1",
+ "review_status": "unreviewed",
+ "note": "Diagnostic items for the CEFR placement test (Rozřazovací test, part 2), A1 to B2+ (level C1 marks the above-B2 probe; the app reports it as B2+, not as a C1 certificate). Drafted by Claude on 2026-11-06; not reviewed by a teacher or a native speaker. Item difficulties are the band's nominal value, not calibrated on learner data.",
+ "items": [
+  {
+   "id": "fr-a1-01",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Je ___ tchèque.",
+   "options": [
+    "suis",
+    "es",
+    "est",
+    "sommes"
+   ],
+   "explain": "K je patří suis: je suis.",
+   "answer": "suis"
+  },
+  {
+   "id": "fr-a1-02",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "Nous ___ deux enfants.",
+   "options": [
+    "avons",
+    "avez",
+    "ont",
+    "as"
+   ],
+   "explain": "avoir: nous avons.",
+   "answer": "avons"
+  },
+  {
+   "id": "fr-a1-03",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "C'est ___ maison de ma grand-mère.",
+   "options": [
+    "la",
+    "le",
+    "les",
+    "un"
+   ],
+   "explain": "maison je ženského rodu: la maison.",
+   "answer": "la"
+  },
+  {
+   "id": "fr-a1-04",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "Co znamená „la fenêtre“?",
+   "options": [
+    "okno",
+    "dveře",
+    "stůl",
+    "zeď"
+   ],
+   "explain": "la fenêtre = okno.",
+   "answer": "okno"
+  },
+  {
+   "id": "fr-a1-05",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "En hiver, il fait ___.",
+   "options": [
+    "froid",
+    "chaud",
+    "vert",
+    "grand"
+   ],
+   "explain": "V zimě je zima: kalt / cold / froid / freddo.",
+   "answer": "froid"
+  },
+  {
+   "id": "fr-a1-06",
+   "level": "A1",
+   "skill": "reading",
+   "prompt": "Kde bydlí Léa?",
+   "options": [
+    "v Lyonu",
+    "v Paříži",
+    "v Praze",
+    "v Nice"
+   ],
+   "explain": "„J'habite à Lyon“ = bydlím v Lyonu.",
+   "context": "Bonjour ! Je m'appelle Léa. J'ai dix ans et j'habite à Lyon avec mes parents et mon chat.",
+   "answer": "v Lyonu"
+  },
+  {
+   "id": "fr-a1-07",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Co si člověk objednává?",
+   "options": [
+    "dva croissanty",
+    "dvě kávy",
+    "tři croissanty",
+    "chleba"
+   ],
+   "explain": "deux croissants = dva croissanty.",
+   "audio": "Je voudrais deux croissants, s'il vous plaît.",
+   "answer": "dva croissanty"
+  },
+  {
+   "id": "fr-a1-08",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Kdy přijede autobus?",
+   "options": [
+    "v osm",
+    "v sedm",
+    "v šest",
+    "v deset"
+   ],
+   "explain": "à huit heures = v osm hodin.",
+   "audio": "Le bus arrive à huit heures.",
+   "answer": "v osm"
+  },
+  {
+   "id": "fr-a2-01",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Hier, nous ___ allés au cinéma.",
+   "options": [
+    "sommes",
+    "avons",
+    "étions",
+    "sont"
+   ],
+   "explain": "aller tvoří passé composé s être: nous sommes allés.",
+   "answer": "sommes"
+  },
+  {
+   "id": "fr-a2-02",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Marie ? Je ___ téléphone ce soir.",
+   "options": [
+    "lui",
+    "la",
+    "le",
+    "leur"
+   ],
+   "explain": "téléphoner à quelqu'un: nepřímý předmět jednotného čísla = lui.",
+   "answer": "lui"
+  },
+  {
+   "id": "fr-a2-03",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Quand j'étais petit, je ___ au foot tous les samedis.",
+   "options": [
+    "jouais",
+    "ai joué",
+    "joue",
+    "jouerai"
+   ],
+   "explain": "Opakovaný děj v minulosti: imparfait (je jouais).",
+   "answer": "jouais"
+  },
+  {
+   "id": "fr-a2-04",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Mon frère est ___ grand que moi.",
+   "options": [
+    "plus",
+    "très",
+    "le plus",
+    "autant"
+   ],
+   "explain": "Srovnání: plus ... que.",
+   "answer": "plus"
+  },
+  {
+   "id": "fr-a2-05",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "J'ai mal à la tête, je vais chez le ___.",
+   "options": [
+    "médecin",
+    "boulanger",
+    "coiffeur",
+    "professeur"
+   ],
+   "explain": "S bolestí hlavy k lékaři: le médecin.",
+   "answer": "médecin"
+  },
+  {
+   "id": "fr-a2-06",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Jaký je opak slova „cher“?",
+   "options": [
+    "bon marché",
+    "petit",
+    "vide",
+    "facile"
+   ],
+   "explain": "cher = drahý, bon marché = levný.",
+   "answer": "bon marché"
+  },
+  {
+   "id": "fr-a2-07",
+   "level": "A2",
+   "skill": "reading",
+   "prompt": "Co má Anne přinést?",
+   "options": [
+    "salát",
+    "pití",
+    "dort",
+    "nic"
+   ],
+   "explain": "V pozvánce stojí, že pití už je, a prosba je o salát.",
+   "context": "Chère Anne, samedi je fais une petite fête à 19 heures. Tu peux apporter une salade ? J'ai déjà les boissons. Bises, Julie",
+   "answer": "salát"
+  },
+  {
+   "id": "fr-a2-08",
+   "level": "A2",
+   "skill": "listening",
+   "prompt": "Co se stalo s vlakem?",
+   "options": [
+    "má zpoždění 20 minut",
+    "je zrušený",
+    "jede z jiného nástupiště",
+    "odjel o 20 minut dřív"
+   ],
+   "explain": "Hlášení říká, že vlak má dvacet minut zpoždění.",
+   "audio": "Le train pour Marseille a vingt minutes de retard.",
+   "answer": "má zpoždění 20 minut"
+  },
+  {
+   "id": "fr-b1-01",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Je ne sais pas ___ viendra.",
+   "options": [
+    "s'il",
+    "qu'il",
+    "ce qu'il",
+    "dont il"
+   ],
+   "explain": "Nepřímá zjišťovací otázka: si (před il se mění na s'il).",
+   "answer": "s'il"
+  },
+  {
+   "id": "fr-b1-02",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Le livre ___ je t'ai parlé est sorti.",
+   "options": [
+    "dont",
+    "que",
+    "qui",
+    "où"
+   ],
+   "explain": "parler de quelque chose: vztažné zájmeno dont nahrazuje de + ...",
+   "answer": "dont"
+  },
+  {
+   "id": "fr-b1-03",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Si j'avais plus de temps, je ___ plus souvent.",
+   "options": [
+    "lirais",
+    "lis",
+    "lirai",
+    "lisais"
+   ],
+   "explain": "Si + imparfait, v hlavní větě conditionnel présent: je lirais.",
+   "answer": "lirais"
+  },
+  {
+   "id": "fr-b1-04",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "Il faut que tu ___ tes devoirs.",
+   "options": [
+    "fasses",
+    "fais",
+    "feras",
+    "faisais"
+   ],
+   "explain": "Po il faut que stojí subjonctif: que tu fasses.",
+   "answer": "fasses"
+  },
+  {
+   "id": "fr-b1-05",
+   "level": "B1",
+   "skill": "vocabulary",
+   "prompt": "J'ai posé ma ___ pour ce poste.",
+   "options": [
+    "candidature",
+    "carrière",
+    "connaissance",
+    "conférence"
+   ],
+   "explain": "poser sa candidature = ucházet se o místo.",
+   "answer": "candidature"
+  },
+  {
+   "id": "fr-b1-06",
+   "level": "B1",
+   "skill": "idiom",
+   "prompt": "Co znamená „Ce n'est pas la mer à boire.“?",
+   "options": [
+    "Není to tak těžké.",
+    "Nemám žízeň.",
+    "Moře je daleko.",
+    "To se nesmí."
+   ],
+   "explain": "Nemusíš vypít celé moře: není to nic tak náročného.",
+   "answer": "Není to tak těžké."
+  },
+  {
+   "id": "fr-b1-07",
+   "level": "B1",
+   "skill": "reading",
+   "prompt": "Co se některým zaměstnancům nelíbí?",
+   "options": [
+    "chybí jim kontakt s kolegy",
+    "dlouhé dojíždění",
+    "nižší plat",
+    "práce o víkendu"
+   ],
+   "explain": "Text říká, že některým chybí kontakt s kolegy.",
+   "context": "Depuis le mois dernier, les employés de notre entreprise peuvent travailler deux jours par semaine à la maison. Beaucoup trouvent cela pratique, car ils passent moins de temps dans les transports. Certains regrettent pourtant le contact avec leurs collègues.",
+   "answer": "chybí jim kontakt s kolegy"
+  },
+  {
+   "id": "fr-b1-08",
+   "level": "B1",
+   "skill": "listening",
+   "prompt": "Co mají cestující udělat?",
+   "options": [
+    "jet náhradním autobusem od hlavního nádraží",
+    "počkat do konce května na linku 5",
+    "koupit si novou jízdenku",
+    "jet linkou 5 jako obvykle"
+   ],
+   "explain": "bus de remplacement à la gare centrale = náhradní autobus od hlavního nádraží.",
+   "audio": "En raison de travaux, la ligne cinq ne circulera pas jusqu'à fin mai. Veuillez prendre le bus de remplacement à la gare centrale.",
+   "answer": "jet náhradním autobusem od hlavního nádraží"
+  },
+  {
+   "id": "fr-b2-01",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Bien qu'il ___ malade, il est venu travailler.",
+   "options": [
+    "soit",
+    "est",
+    "était",
+    "sera"
+   ],
+   "explain": "Po bien que stojí subjonctif: qu'il soit.",
+   "answer": "soit"
+  },
+  {
+   "id": "fr-b2-02",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Quand nous sommes arrivés, le film ___.",
+   "options": [
+    "avait déjà commencé",
+    "a déjà commencé",
+    "commencera",
+    "aura commencé"
+   ],
+   "explain": "Děj ukončený před jiným minulým dějem: plus-que-parfait.",
+   "answer": "avait déjà commencé"
+  },
+  {
+   "id": "fr-b2-03",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Les décisions ___ par le conseil ont été critiquées.",
+   "options": [
+    "prises",
+    "pris",
+    "prenant",
+    "prendre"
+   ],
+   "explain": "Příčestí jako přívlastek se shoduje: les décisions (ž. r. mn. č.) prises.",
+   "answer": "prises"
+  },
+  {
+   "id": "fr-b2-04",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "À moins qu'il ne ___, nous partirons demain.",
+   "options": [
+    "pleuve",
+    "pleut",
+    "pleuvra",
+    "pleuvait"
+   ],
+   "explain": "Po à moins que stojí subjonctif: qu'il ne pleuve.",
+   "answer": "pleuve"
+  },
+  {
+   "id": "fr-b2-05",
+   "level": "B2",
+   "skill": "vocabulary",
+   "prompt": "Les résultats ne sont pas ___ : seules vingt personnes ont été testées.",
+   "options": [
+    "concluants",
+    "conclus",
+    "inclus",
+    "exclus"
+   ],
+   "explain": "concluant = průkazný, přesvědčivý.",
+   "answer": "concluants"
+  },
+  {
+   "id": "fr-b2-06",
+   "level": "B2",
+   "skill": "idiom",
+   "prompt": "Co znamená „poser un lapin à quelqu'un“?",
+   "options": [
+    "nepřijít na domluvenou schůzku",
+    "darovat někomu zvíře",
+    "někoho vyděsit",
+    "někomu pomoct"
+   ],
+   "explain": "poser un lapin = nechat někoho čekat a nepřijít.",
+   "answer": "nepřijít na domluvenou schůzku"
+  },
+  {
+   "id": "fr-b2-07",
+   "level": "B2",
+   "skill": "reading",
+   "prompt": "Jak zastánci radnice vysvětlují pomalý postup?",
+   "options": [
+    "složitými povolovacími řízeními",
+    "nedostatkem peněz",
+    "odporem cyklistů",
+    "blížícími se volbami"
+   ],
+   "explain": "Zastánci (défenseurs) se odvolávají na složitá povolovací řízení.",
+   "context": "Bien que la mairie promette depuis des années de nouvelles pistes cyclables, peu de choses ont changé. Les critiques l'accusent de n'aborder le sujet qu'avant les élections, tandis que ses défenseurs invoquent la complexité des procédures d'autorisation.",
+   "answer": "složitými povolovacími řízeními"
+  },
+  {
+   "id": "fr-b2-08",
+   "level": "B2",
+   "skill": "listening",
+   "prompt": "Co mluvčí říká o projektu?",
+   "options": [
+    "skončil dřív, než se plánovalo",
+    "trval déle než tři roky",
+    "ještě není hotový",
+    "stál víc peněz, než se čekalo"
+   ],
+   "explain": "Plánovaly se tři roky, hotovo bylo za osmnáct měsíců.",
+   "audio": "Franchement, je ne pensais pas que le projet serait terminé si vite. On avait prévu trois ans, et on a fini en dix-huit mois.",
+   "answer": "skončil dřív, než se plánovalo"
+  },
+  {
+   "id": "fr-c1-01",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Quelque effort qu'il ___, il n'y arrive pas.",
+   "options": [
+    "fasse",
+    "fait",
+    "fera",
+    "ferait"
+   ],
+   "explain": "Quelque ... que vyžaduje subjonctif: quelque effort qu'il fasse.",
+   "answer": "fasse"
+  },
+  {
+   "id": "fr-c1-02",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Si j'avais su, j'___ autrement.",
+   "options": [
+    "aurais agi",
+    "avais agi",
+    "aurai agi",
+    "agissais"
+   ],
+   "explain": "Si + plus-que-parfait, v hlavní větě conditionnel passé: j'aurais agi.",
+   "answer": "aurais agi"
+  },
+  {
+   "id": "fr-c1-03",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Il est grand temps que nous ___ une décision.",
+   "options": [
+    "prenions",
+    "prenons",
+    "prendrons",
+    "prendrions"
+   ],
+   "explain": "Il est temps que + subjonctif: que nous prenions.",
+   "answer": "prenions"
+  },
+  {
+   "id": "fr-c1-04",
+   "level": "C1",
+   "skill": "vocabulary",
+   "prompt": "L'entreprise a décidé de ___ le lancement jusqu'à nouvel ordre.",
+   "options": [
+    "reporter",
+    "rapporter",
+    "supporter",
+    "emporter"
+   ],
+   "explain": "reporter = odložit; rapporter = přinést zpět, vynést.",
+   "answer": "reporter"
+  },
+  {
+   "id": "fr-c1-05",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „avoir d'autres chats à fouetter“?",
+   "options": [
+    "mít důležitější starosti",
+    "mít hodně zvířat",
+    "být krutý",
+    "mít hlad"
+   ],
+   "explain": "Mít jiné kočky na vyšlehání: mít na práci důležitější věci.",
+   "answer": "mít důležitější starosti"
+  },
+  {
+   "id": "fr-c1-06",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „Il ne mâche pas ses mots.“?",
+   "options": [
+    "Mluví otevřeně, bez obalu.",
+    "Mluví potichu.",
+    "Málo jí.",
+    "Mluví nesrozumitelně."
+   ],
+   "explain": "ne pas mâcher ses mots = mluvit bez obalu.",
+   "answer": "Mluví otevřeně, bez obalu."
+  },
+  {
+   "id": "fr-c1-07",
+   "level": "C1",
+   "skill": "reading",
+   "prompt": "Co tvrdí druhá skupina pozorovatelů?",
+   "options": [
+    "že se nesmí podcenit provedení",
+    "že debata je zbytečná",
+    "že jde hlavně o to, zda vůbec jednat",
+    "že úspěch je jistý"
+   ],
+   "explain": "Druhá skupina varuje před podceněním provedení, kde podobné plány často selhávají.",
+   "context": "Que le débat porte désormais moins sur le « si » que sur le « comment », certains observateurs y voient déjà un progrès ; d'autres mettent en garde contre une sous-estimation de la mise en œuvre, là où, l'expérience le montre, ce genre de projets échoue souvent.",
+   "answer": "že se nesmí podcenit provedení"
+  },
+  {
+   "id": "fr-c1-08",
+   "level": "C1",
+   "skill": "listening",
+   "prompt": "Jaký postoj mluvčí vyjadřuje?",
+   "options": [
+    "reforma řeší hlavní problém, ať už má jakékoli vady",
+    "reforma je úplně špatná",
+    "reforma hlavní problém neřeší",
+    "mluvčí reformu nezná"
+   ],
+   "explain": "Mluvčí připouští různé názory, ale říká, že reforma řeší hlavní problém.",
+   "audio": "Quoi qu'on pense de la réforme, on peut difficilement nier qu'elle s'attaque au problème de fond.",
+   "answer": "reforma řeší hlavní problém, ať už má jakékoli vady"
+  }
+ ]
+}

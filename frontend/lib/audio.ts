@@ -49,26 +49,52 @@ function getPlayer(): HTMLAudioElement {
   return player;
 }
 
-export async function play(url: string): Promise<void> {
+/** Object URL of the clip at `url`, fetched once per page. Throws when the clip is unavailable. */
+export async function clipSrc(url: string): Promise<string> {
+  if (url.startsWith("blob:")) return url;
+  let src = clips.get(url);
+  if (!src) {
+    const res = await fetch(url, { credentials: "same-origin" });
+    if (!res.ok) throw new Error(`audio ${res.status}`);
+    src = URL.createObjectURL(await res.blob());
+    clips.set(url, src);
+  }
+  return src;
+}
+
+/**
+ * Plays the clip at `url`. `natural` plays at normal speed, ignoring the slow toggle and the
+ * profile's speech speed (for the learner's own recordings).
+ */
+export async function play(url: string, opts: { natural?: boolean } = {}): Promise<void> {
   const audio = getPlayer();
   audio.pause();
   set(url, "loading");
   try {
-    let src = clips.get(url);
-    if (!src) {
-      const res = await fetch(url, { credentials: "same-origin" });
-      if (!res.ok) throw new Error(`audio ${res.status}`);
-      src = URL.createObjectURL(await res.blob());
-      clips.set(url, src);
-    }
+    const src = await clipSrc(url);
     if (current !== url) return; // another clip was started meanwhile
     audio.src = src;
-    audio.playbackRate = rate();
+    audio.playbackRate = opts.natural ? 1 : rate();
     await audio.play();
     set(url, "playing");
   } catch {
     if (current === url) set(url, "error");
   }
+}
+
+/** Plays the clip and resolves once it has finished, failed, or been replaced by another clip. */
+export async function playToEnd(url: string, opts: { natural?: boolean } = {}): Promise<void> {
+  await play(url, opts);
+  if (current !== url || state !== "playing") return;
+  await new Promise<void>((resolve) => {
+    const check = () => {
+      if (current !== url || state !== "playing") {
+        listeners.delete(check);
+        resolve();
+      }
+    };
+    listeners.add(check);
+  });
 }
 
 export function stop() {

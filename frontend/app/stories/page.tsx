@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { PlayButton } from "@/components/PlayButton";
+import { TapText } from "@/components/TapText";
 import { Button, Notice } from "@/components/ui";
 import {
   ApiError,
@@ -66,7 +67,7 @@ function Reader({ story }: { story: Story }) {
               <div className="flex flex-col">
                 <p className="text-lg" lang={story.language}>
                   {ln.speaker && <span className="font-semibold">{ln.speaker}: </span>}
-                  {ln.text}
+                  <TapText text={ln.text} language={story.language} />
                 </p>
                 {translate && (
                   <p className="text-sm text-slate-500" lang="cs">
@@ -77,7 +78,9 @@ function Reader({ story }: { story: Story }) {
             </li>
           ))}
         </ol>
-        <p className="text-xs text-slate-500">{cs.stories.unreviewed(story.model)}</p>
+        <p className="text-xs text-slate-500">
+          {cs.lookup.hint} {cs.stories.unreviewed(story.model)}
+        </p>
       </article>
 
       <aside className="flex flex-col gap-4">

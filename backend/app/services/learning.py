@@ -951,7 +951,9 @@ async def prune_expired_sessions(db: AsyncSession, now: datetime) -> int:
 
 
 async def progress_overview(db: AsyncSession, user: User, language: Language, now: datetime):
+    from app.domain.diagnostic import band_label
     from app.domain.progression import MILESTONES
+    from app.models import CefrPlacement
     from app.schemas.learning import BandProgress, LevelBadgeOut, PlacementOut, ProgressOut
 
     p, li = UserWordProgress, LexiconItem
@@ -1020,6 +1022,7 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
     open_exam = await get_active_session(db, user, language, SessionMode.EXAM)
     placed = await placement.get_placement(db, user, language)
     earned = await level_exam.badges(db, user, language)
+    cefr = await db.get(CefrPlacement, (user.id, language))
     return ProgressOut(
         language=language,
         lexicon_items=lexicon_items,
@@ -1043,4 +1046,5 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         placement=PlacementOut.model_validate(placed, from_attributes=True) if placed else None,
         active_exam_session_id=open_exam.id if open_exam else None,
         level_badges=[LevelBadgeOut.model_validate(b, from_attributes=True) for b in earned],
+        cefr_level=band_label(cefr.level) if cefr is not None else None,
     )

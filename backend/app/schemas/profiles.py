@@ -39,6 +39,21 @@ class ProfileSettings(BaseModel):
     # Adults only, off by default: lessons, checks and tests include profanity (vulgar words).
     # A child profile never gets it, whatever is stored here.
     learn_profanity: bool = False
+    # Personal rank path theme (single player, no comparison): hockey, royal, or hidden.
+    rank_path: Literal["hockey", "royal", "off"] = "hockey"
+    # Reading comfort (this profile's display, on every device): text size, wider letter and
+    # line spacing (helps some readers, including many with dyslexia), and no animations.
+    text_size: Literal["s", "m", "l", "xl"] = "m"
+    reading_spacing: bool = False
+    reduce_motion: bool = False
+    # Accent colour of buttons, links and highlights (this profile, every device). Gender colours
+    # (der/die/das) and right/wrong colours never change with it; no accent is green or red, so
+    # an accent button never reads as "right" or "wrong".
+    accent: Literal["blue", "teal", "violet", "orange", "pink"] = "blue"
+    # The first-run welcome (language, daily goal, rank path, text size) was finished or skipped.
+    onboarded: bool = False
+    # Newest "Co je nového" entry (app.domain.news) this profile has seen; 0 = none yet.
+    news_seen: int = Field(default=0, ge=0, le=100_000)
 
     @field_validator("interests")
     @classmethod

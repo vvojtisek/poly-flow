@@ -1,0 +1,581 @@
+{
+ "language": "en",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "diag-v1",
+ "review_status": "unreviewed",
+ "note": "Diagnostic items for the CEFR placement test (Rozřazovací test, part 2), A1 to B2+ (level C1 marks the above-B2 probe; the app reports it as B2+, not as a C1 certificate). Drafted by Claude on 2026-11-06; not reviewed by a teacher or a native speaker. Item difficulties are the band's nominal value, not calibrated on learner data.",
+ "items": [
+  {
+   "id": "en-a1-01",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "She ___ a teacher.",
+   "options": [
+    "is",
+    "are",
+    "am",
+    "be"
+   ],
+   "explain": "K she patří is: she is.",
+   "answer": "is"
+  },
+  {
+   "id": "en-a1-02",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "I ___ got a brother and a sister.",
+   "options": [
+    "have",
+    "has",
+    "am",
+    "do"
+   ],
+   "explain": "I have got = mám; has patří jen ke 3. osobě (he/she/it).",
+   "answer": "have"
+  },
+  {
+   "id": "en-a1-03",
+   "level": "A1",
+   "skill": "grammar",
+   "prompt": "___ you like tea?",
+   "options": [
+    "Do",
+    "Does",
+    "Are",
+    "Is"
+   ],
+   "explain": "Otázka v přítomném čase: Do you ...? (Does jen pro he/she/it).",
+   "answer": "Do"
+  },
+  {
+   "id": "en-a1-04",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "Co znamená „kitchen“?",
+   "options": [
+    "kuchyně",
+    "koupelna",
+    "ložnice",
+    "zahrada"
+   ],
+   "explain": "kitchen = kuchyně.",
+   "answer": "kuchyně"
+  },
+  {
+   "id": "en-a1-05",
+   "level": "A1",
+   "skill": "vocabulary",
+   "prompt": "It's very cold today. Put on your ___.",
+   "options": [
+    "coat",
+    "swimsuit",
+    "sunglasses",
+    "sandals"
+   ],
+   "explain": "Do zimy si bereme kabát: coat.",
+   "answer": "coat"
+  },
+  {
+   "id": "en-a1-06",
+   "level": "A1",
+   "skill": "reading",
+   "prompt": "S kým Lucy bydlí?",
+   "options": [
+    "s mámou a psem",
+    "s tátou",
+    "se sestrou",
+    "sama"
+   ],
+   "explain": "„I live ... with my mum and my dog“.",
+   "context": "Hi! My name is Lucy. I'm ten years old and I live in Manchester with my mum and my dog, Biscuit.",
+   "answer": "s mámou a psem"
+  },
+  {
+   "id": "en-a1-07",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Co si člověk objednává?",
+   "options": [
+    "sendvič se sýrem a pomerančový džus",
+    "sýr a čaj",
+    "dva sendviče",
+    "pomerančový koláč"
+   ],
+   "explain": "a cheese sandwich and an orange juice.",
+   "audio": "Can I have a cheese sandwich and an orange juice, please?",
+   "answer": "sendvič se sýrem a pomerančový džus"
+  },
+  {
+   "id": "en-a1-08",
+   "level": "A1",
+   "skill": "listening",
+   "prompt": "Kdy se otevírá obchod?",
+   "options": [
+    "v devět",
+    "v pět",
+    "v devatenáct",
+    "v deset"
+   ],
+   "explain": "at nine o'clock = v devět.",
+   "audio": "The shop opens at nine o'clock.",
+   "answer": "v devět"
+  },
+  {
+   "id": "en-a2-01",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "Yesterday we ___ to the cinema.",
+   "options": [
+    "went",
+    "go",
+    "gone",
+    "going"
+   ],
+   "explain": "Minulý čas prostý nepravidelného go: went.",
+   "answer": "went"
+  },
+  {
+   "id": "en-a2-02",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "This is ___ book I have ever read.",
+   "options": [
+    "the best",
+    "better",
+    "the better",
+    "best"
+   ],
+   "explain": "Nejvyšší stupeň se členem: the best.",
+   "answer": "the best"
+  },
+  {
+   "id": "en-a2-03",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "I ___ TV when the phone rang.",
+   "options": [
+    "was watching",
+    "watched",
+    "am watching",
+    "have watched"
+   ],
+   "explain": "Probíhající děj přerušený jiným: past continuous (was watching).",
+   "answer": "was watching"
+  },
+  {
+   "id": "en-a2-04",
+   "level": "A2",
+   "skill": "grammar",
+   "prompt": "You ___ wear a seatbelt in the car. It's the law.",
+   "options": [
+    "must",
+    "mustn't",
+    "needn't",
+    "could"
+   ],
+   "explain": "Povinnost ze zákona: must.",
+   "answer": "must"
+  },
+  {
+   "id": "en-a2-05",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "I've got a headache, so I'm going to see the ___.",
+   "options": [
+    "doctor",
+    "baker",
+    "hairdresser",
+    "plumber"
+   ],
+   "explain": "S bolestí hlavy k lékaři: doctor.",
+   "answer": "doctor"
+  },
+  {
+   "id": "en-a2-06",
+   "level": "A2",
+   "skill": "vocabulary",
+   "prompt": "Jaký je opak slova „cheap“?",
+   "options": [
+    "expensive",
+    "small",
+    "empty",
+    "easy"
+   ],
+   "explain": "cheap = levný, expensive = drahý.",
+   "answer": "expensive"
+  },
+  {
+   "id": "en-a2-07",
+   "level": "A2",
+   "skill": "reading",
+   "prompt": "Co má Tom přinést?",
+   "options": [
+    "brambůrky",
+    "pití",
+    "dort",
+    "nic"
+   ],
+   "explain": "„Could you bring some crisps? I've already got drinks.“",
+   "context": "Dear Tom, I'm having a small party on Saturday at 7 pm. Could you bring some crisps? I've already got drinks. See you, Amy",
+   "answer": "brambůrky"
+  },
+  {
+   "id": "en-a2-08",
+   "level": "A2",
+   "skill": "listening",
+   "prompt": "Co se stalo s vlakem?",
+   "options": [
+    "má zpoždění 20 minut",
+    "je zrušený",
+    "jede z jiného nástupiště",
+    "odjel o 20 minut dřív"
+   ],
+   "explain": "Hlášení říká, že vlak má dvacet minut zpoždění.",
+   "audio": "We're sorry to announce that the ten fifteen train to Leeds is delayed by twenty minutes.",
+   "answer": "má zpoždění 20 minut"
+  },
+  {
+   "id": "en-b1-01",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "If it rains tomorrow, we ___ at home.",
+   "options": [
+    "will stay",
+    "would stay",
+    "stayed",
+    "stay will"
+   ],
+   "explain": "Skutečná podmínka (first conditional): if + přítomný čas, will + sloveso.",
+   "answer": "will stay"
+  },
+  {
+   "id": "en-b1-02",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "The man ___ car was stolen called the police.",
+   "options": [
+    "whose",
+    "who",
+    "which",
+    "whom"
+   ],
+   "explain": "Přivlastnění ve vztažné větě: whose = jehož.",
+   "answer": "whose"
+  },
+  {
+   "id": "en-b1-03",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "I've lived here ___ 2015.",
+   "options": [
+    "since",
+    "for",
+    "from",
+    "during"
+   ],
+   "explain": "Od určitého okamžiku do teď: since (for je pro délku trvání).",
+   "answer": "since"
+  },
+  {
+   "id": "en-b1-04",
+   "level": "B1",
+   "skill": "grammar",
+   "prompt": "She asked me where ___.",
+   "options": [
+    "I lived",
+    "did I live",
+    "do I live",
+    "I do live"
+   ],
+   "explain": "Nepřímá otázka má slovosled oznamovací věty a posun času: where I lived.",
+   "answer": "I lived"
+  },
+  {
+   "id": "en-b1-05",
+   "level": "B1",
+   "skill": "vocabulary",
+   "prompt": "Could you ___ me up at the station at six?",
+   "options": [
+    "pick",
+    "take",
+    "bring",
+    "get"
+   ],
+   "explain": "pick somebody up = vyzvednout někoho.",
+   "answer": "pick"
+  },
+  {
+   "id": "en-b1-06",
+   "level": "B1",
+   "skill": "idiom",
+   "prompt": "Co znamená „It's a piece of cake.“?",
+   "options": [
+    "Je to hračka.",
+    "Je to kus dortu.",
+    "Je to drahé.",
+    "Mám hlad."
+   ],
+   "explain": "a piece of cake = něco velmi snadného.",
+   "answer": "Je to hračka."
+  },
+  {
+   "id": "en-b1-07",
+   "level": "B1",
+   "skill": "reading",
+   "prompt": "Co se některým zaměstnancům nelíbí?",
+   "options": [
+    "chybí jim kontakt s kolegy",
+    "dlouhé dojíždění",
+    "nižší plat",
+    "práce o víkendu"
+   ],
+   "explain": "Text říká, že některým chybí kontakt s kolegy.",
+   "context": "Since last month, staff at our company have been allowed to work from home two days a week. Many find it practical because they spend less time commuting. Some, however, miss chatting with their colleagues.",
+   "answer": "chybí jim kontakt s kolegy"
+  },
+  {
+   "id": "en-b1-08",
+   "level": "B1",
+   "skill": "listening",
+   "prompt": "Co mají cestující udělat?",
+   "options": [
+    "jet náhradním autobusem z King's Cross",
+    "počkat do pondělí",
+    "koupit si novou jízdenku",
+    "jet linkou Northern jako obvykle"
+   ],
+   "explain": "replacement bus service from King's Cross = náhradní autobus z King's Cross.",
+   "audio": "Due to engineering works, the Northern line will not run this weekend. Please use the replacement bus service from King's Cross.",
+   "answer": "jet náhradním autobusem z King's Cross"
+  },
+  {
+   "id": "en-b2-01",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "By the time we arrived, the film ___.",
+   "options": [
+    "had already started",
+    "already started",
+    "has already started",
+    "will already start"
+   ],
+   "explain": "Děj ukončený před jiným minulým dějem: past perfect.",
+   "answer": "had already started"
+  },
+  {
+   "id": "en-b2-02",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "I wish I ___ more time to travel when I was younger.",
+   "options": [
+    "had had",
+    "had",
+    "would have",
+    "have had"
+   ],
+   "explain": "Lítost nad minulostí: I wish + past perfect.",
+   "answer": "had had"
+  },
+  {
+   "id": "en-b2-03",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "Hardly ___ the house when it started to rain.",
+   "options": [
+    "had we left",
+    "we had left",
+    "did we leave",
+    "we left"
+   ],
+   "explain": "Po záporném příslovci na začátku věty (Hardly) následuje převrácený slovosled.",
+   "answer": "had we left"
+  },
+  {
+   "id": "en-b2-04",
+   "level": "B2",
+   "skill": "grammar",
+   "prompt": "The report needs ___ by Friday.",
+   "options": [
+    "to be submitted",
+    "submitting to",
+    "to submit",
+    "be submitted"
+   ],
+   "explain": "Trpný infinitiv: needs to be submitted.",
+   "answer": "to be submitted"
+  },
+  {
+   "id": "en-b2-05",
+   "level": "B2",
+   "skill": "vocabulary",
+   "prompt": "The results are not ___: the study only tested twenty people.",
+   "options": [
+    "conclusive",
+    "concluded",
+    "inclusive",
+    "exclusive"
+   ],
+   "explain": "conclusive = průkazný, přesvědčivý.",
+   "answer": "conclusive"
+  },
+  {
+   "id": "en-b2-06",
+   "level": "B2",
+   "skill": "idiom",
+   "prompt": "Co znamená „to bite off more than you can chew“?",
+   "options": [
+    "vzít si víc, než člověk zvládne",
+    "jíst příliš rychle",
+    "říct něco nevhodného",
+    "vzdát se příliš brzy"
+   ],
+   "explain": "Ukousnout si víc, než dokážeš rozžvýkat: přecenit své síly.",
+   "answer": "vzít si víc, než člověk zvládne"
+  },
+  {
+   "id": "en-b2-07",
+   "level": "B2",
+   "skill": "reading",
+   "prompt": "Jak zastánci radnice vysvětlují pomalý postup?",
+   "options": [
+    "složitým plánovacím procesem",
+    "nedostatkem peněz",
+    "odporem cyklistů",
+    "blížícími se volbami"
+   ],
+   "explain": "Zastánci (supporters) poukazují na složitý plánovací proces.",
+   "context": "Although the council has promised more cycle lanes for years, little has happened. Critics accuse it of raising the issue only before elections, while supporters point to the complicated planning process.",
+   "answer": "složitým plánovacím procesem"
+  },
+  {
+   "id": "en-b2-08",
+   "level": "B2",
+   "skill": "listening",
+   "prompt": "Co mluvčí říká o projektu?",
+   "options": [
+    "skončil dřív, než se plánovalo",
+    "trval déle než tři roky",
+    "ještě není hotový",
+    "stál víc peněz, než se čekalo"
+   ],
+   "explain": "Plánovaly se tři roky, hotovo bylo za osmnáct měsíců.",
+   "audio": "To be honest, I didn't expect the project to be finished so soon. We'd originally planned three years, and we've wrapped it up in eighteen months.",
+   "answer": "skončil dřív, než se plánovalo"
+  },
+  {
+   "id": "en-c1-01",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Not until the results were published ___ the scale of the problem.",
+   "options": [
+    "did we realise",
+    "we realised",
+    "we did realise",
+    "had realised we"
+   ],
+   "explain": "Not until ... na začátku věty vyžaduje převrácený slovosled v hlavní větě.",
+   "answer": "did we realise"
+  },
+  {
+   "id": "en-c1-02",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "Had I known about the delay, I ___ a later train.",
+   "options": [
+    "would have caught",
+    "would catch",
+    "had caught",
+    "will have caught"
+   ],
+   "explain": "Třetí kondicionál s inverzí (Had I known = If I had known): would have + příčestí.",
+   "answer": "would have caught"
+  },
+  {
+   "id": "en-c1-03",
+   "level": "C1",
+   "skill": "grammar",
+   "prompt": "It's high time we ___ a decision.",
+   "options": [
+    "made",
+    "make",
+    "will make",
+    "have made"
+   ],
+   "explain": "It's high time + minulý čas: už je nejvyšší čas, abychom ...",
+   "answer": "made"
+  },
+  {
+   "id": "en-c1-04",
+   "level": "C1",
+   "skill": "vocabulary",
+   "prompt": "The company has decided to ___ the launch until all the data is in.",
+   "options": [
+    "postpone",
+    "cancel out",
+    "prevent",
+    "abolish"
+   ],
+   "explain": "postpone = odložit.",
+   "answer": "postpone"
+  },
+  {
+   "id": "en-c1-05",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „to let the cat out of the bag“?",
+   "options": [
+    "prozradit tajemství",
+    "udělat zmatek",
+    "vzdát se",
+    "utratit všechno"
+   ],
+   "explain": "Vypustit kočku z pytle: nechtěně něco prozradit.",
+   "answer": "prozradit tajemství"
+  },
+  {
+   "id": "en-c1-06",
+   "level": "C1",
+   "skill": "idiom",
+   "prompt": "Co znamená „She doesn't mince her words.“?",
+   "options": [
+    "Mluví otevřeně, bez obalu.",
+    "Mluví potichu.",
+    "Neumí vařit.",
+    "Málo mluví."
+   ],
+   "explain": "not mince one's words = mluvit bez obalu.",
+   "answer": "Mluví otevřeně, bez obalu."
+  },
+  {
+   "id": "en-c1-07",
+   "level": "C1",
+   "skill": "reading",
+   "prompt": "Co tvrdí druhá skupina pozorovatelů?",
+   "options": [
+    "že se nesmí podcenit provedení",
+    "že debata je zbytečná",
+    "že jde hlavně o to, zda vůbec jednat",
+    "že úspěch je jistý"
+   ],
+   "explain": "Druhá skupina varuje před podceněním provedení, kde podobné plány často selhávají.",
+   "context": "That the debate now centres less on whether to act than on how, some observers already regard as progress; others caution against underestimating implementation, which, experience suggests, is where such plans tend to founder.",
+   "answer": "že se nesmí podcenit provedení"
+  },
+  {
+   "id": "en-c1-08",
+   "level": "C1",
+   "skill": "listening",
+   "prompt": "Jaký postoj mluvčí vyjadřuje?",
+   "options": [
+    "reforma řeší hlavní problém, ať už má jakékoli vady",
+    "reforma je úplně špatná",
+    "reforma hlavní problém neřeší",
+    "mluvčí reformu nezná"
+   ],
+   "explain": "Mluvčí připouští různé názory, ale říká, že reforma řeší hlavní problém.",
+   "audio": "Whatever you think of the reform, it's hard to deny that it tackles the underlying problem.",
+   "answer": "reforma řeší hlavní problém, ať už má jakékoli vady"
+  }
+ ]
+}
