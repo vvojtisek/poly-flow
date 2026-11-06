@@ -694,3 +694,21 @@ generically across all four languages instead of saying every learner is on the 
   and graded verification contracts are unchanged.
 - Verification: frontend typecheck and production build; current local grammar route request and
   git diff checks before the local Cycle 4 commit.
+
+## Cycle 5/30: export a selected vocabulary collection
+
+**Before:** learners could export their full dictionary as a spreadsheet or Anki deck, but a
+carefully assembled topic collection had to be copied out by hand.
+
+**Built:** CSV and Anki download actions in each non-empty collection, backed by a profile-owned
+collection export endpoint. The export preserves the existing dictionary formats, including
+German noun articles, memory hooks, review state and lexicon provenance.
+
+- The endpoint intersects collection membership with the acting profile's learned words and
+  current content visibility; another profile receives not found. Both file formats contain only
+  the chosen set and are sent with private, no-store download headers.
+- The collection page explains that downloads contain only currently visible words and their
+  personal notes. Existing CSV spreadsheet-safety handling and Anki tags are reused.
+- Verification: collection API tests passed (5 tests), covering CSV and Anki contents, selected
+  words, file naming, and profile isolation. Ruff check/format, frontend typecheck, production
+  build, and `git diff --check` passed.

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, FolderOpen, Headphones, Plus, Trash2 } from "lucide-react";
+import { ArrowDownToLine, ArrowLeft, FolderOpen, Headphones, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
@@ -13,6 +13,7 @@ import {
   getWordCollection,
   listWordCollections,
   removeWordFromCollection,
+  wordCollectionExportUrl,
   type WordCollection,
   type WordCollectionDetail,
 } from "@/lib/api";
@@ -168,6 +169,19 @@ export default function CollectionsPage() {
                       <p className="text-sm text-slate-500">{t.count(detail.items.length)}</p>
                     </div>
                     <div className="flex flex-wrap gap-2">
+                      {detail.items.length > 0 && (
+                        <div className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
+                          <ArrowDownToLine className="size-4" aria-hidden />
+                          <span className="sr-only">{t.exportTitle}</span>
+                          <a href={wordCollectionExportUrl(detail.id, "csv")} className="font-medium text-brand-700 hover:underline dark:text-brand-200" download>
+                            {cs.words.exportCsv}
+                          </a>
+                          <span aria-hidden className="text-slate-400">·</span>
+                          <a href={wordCollectionExportUrl(detail.id, "anki")} className="font-medium text-brand-700 hover:underline dark:text-brand-200" download>
+                            {cs.words.exportAnki}
+                          </a>
+                        </div>
+                      )}
                       <Button
                         variant="secondary"
                         onClick={() => setPracticing((value) => !value)}
@@ -180,6 +194,7 @@ export default function CollectionsPage() {
                       </Button>
                     </div>
                   </header>
+                  {detail.items.length > 0 && <p className="mb-3 text-xs text-slate-500">{t.exportHelp}</p>}
                   {practicing ? (
                     <WordCollectionPractice collection={detail} onClose={() => setPracticing(false)} />
                   ) : detail.items.length === 0 ? (

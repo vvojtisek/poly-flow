@@ -945,6 +945,8 @@ export const listWordCollections = (language: Language) =>
   api<WordCollection[]>(`/api/v1/words/collections?language=${language}`);
 export const getWordCollection = (id: string) =>
   api<WordCollectionDetail>(`/api/v1/words/collections/${id}`);
+export const wordCollectionExportUrl = (id: string, format: "csv" | "anki") =>
+  `/api/v1/words/collections/${id}/export?format=${format}`;
 export const createWordCollection = (language: Language, name: string) =>
   api<WordCollection>("/api/v1/words/collections", { json: { language, name } });
 export const addWordToCollection = (collectionId: string, itemId: string) =>

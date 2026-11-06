@@ -172,6 +172,32 @@ async def export_words(
     )
 
 
+@router.get("/collections/{collection_id}/export", response_class=Response)
+async def export_collection(
+    collection_id: uuid.UUID,
+    auth: Auth,
+    db: DB,
+    format: Annotated[export.Format, Query()] = "csv",
+) -> Response:
+    try:
+        language, rows = await svc.export_collection_rows(db, auth.acting, collection_id)
+    except LearningError as exc:
+        raise _http(exc) from exc
+    if format == "anki":
+        body, media, ext = export.to_anki(rows, language), "text/tab-separated-values", "txt"
+    else:
+        body, media, ext = export.to_csv(rows), "text/csv", "csv"
+    name = f"polyflow-{language}-collection-{collection_id}.{ext}"
+    return Response(
+        body,
+        media_type=f"{media}; charset=utf-8",
+        headers={
+            "Content-Disposition": f'attachment; filename="{name}"',
+            "Cache-Control": "no-store",
+        },
+    )
+
+
 @router.get("/collections", response_model=list[CollectionOut])
 async def list_collections(
     auth: Auth,

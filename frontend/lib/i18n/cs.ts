@@ -345,6 +345,8 @@ export const cs = {
     addFailed: "Sada vznikla, ale slovo se do ní nepodařilo přidat. Zkus to znovu.",
     ownWordsOnly: "Do sad můžeš přidat jen slova, která už se objevila v tvých lekcích.",
     sentencePractice: "Procvičit ve větách",
+    exportTitle: "Stáhnout tuto sadu",
+    exportHelp: "Soubor obsahuje jen viditelná slova z této sady včetně tvých poznámek.",
     sentenceTitle: "Slova v kontextu",
     sentencePrompt: "Poslechni si větu a zkus odhadnout význam cílového slova. Překlad se ukáže až po klepnutí.",
     target: "Cílové slovo",

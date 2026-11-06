@@ -1,5 +1,7 @@
 """Learner-owned word collections preserve dictionary visibility and profile isolation."""
 
+import csv
+import io
 import uuid
 
 import pytest
@@ -155,3 +157,45 @@ async def test_collection_count_and_contents_reapply_child_filter(db, client, cl
     assert listed.json()[0]["count"] == 0
     detail = await client.get(f"/api/v1/words/collections/{collection_id}")
     assert detail.json()["items"] == []
+
+
+async def test_collection_export_contains_only_visible_selected_words(db, client, clock):
+    me = await setup_parent(client)
+    ids = await seed(uuid.UUID(me["acting"]["id"]), clock)
+    collection = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Výlet"},
+        headers=csrf(me),
+    )
+    collection_id = collection.json()["id"]
+    for lemma in ("Haus", "gehen", "Mord"):
+        await client.post(
+            f"/api/v1/words/collections/{collection_id}/items",
+            json={"item_id": str(ids[lemma])},
+            headers=csrf(me),
+        )
+
+    csv_response = await client.get(f"/api/v1/words/collections/{collection_id}/export?format=csv")
+    assert csv_response.status_code == 200
+    assert (
+        f"polyflow-de-collection-{collection_id}.csv" in csv_response.headers["content-disposition"]
+    )
+    csv_rows = list(csv.DictReader(io.StringIO(csv_response.text.lstrip("\ufeff"))))
+    assert [row["lemma"] for row in csv_rows] == ["Haus", "gehen", "Mord"]
+
+    anki_response = await client.get(
+        f"/api/v1/words/collections/{collection_id}/export?format=anki"
+    )
+    assert anki_response.status_code == 200
+    assert "#separator:tab" in anki_response.text
+    assert [line.split("\t", 1)[0] for line in anki_response.text.splitlines()[3:]] == [
+        "das Haus",
+        "gehen",
+        "Mord",
+    ]
+
+    child = await make_child(client, me)
+    child_me = await login(client, "eva", "4321")
+    child_export = await client.get(f"/api/v1/words/collections/{collection_id}/export")
+    assert child_export.status_code == 404
+    assert child_me["acting"]["id"] == child["id"]
