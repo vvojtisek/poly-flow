@@ -118,6 +118,39 @@ async def test_collections_do_not_cross_profiles_or_child_content_filter(db, cli
     assert parent_session["acting"]["username"] == "mama"
 
 
+async def test_bulk_add_is_idempotent_and_rejects_unavailable_words_atomically(db, client, clock):
+    me = await setup_parent(client)
+    ids = await seed(uuid.UUID(me["acting"]["id"]), clock)
+    created = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Na cestu"},
+        headers=csrf(me),
+    )
+    collection_id = created.json()["id"]
+    bulk_url = f"/api/v1/words/collections/{collection_id}/items/bulk"
+    response = await client.post(
+        bulk_url,
+        json={"item_ids": [str(ids["Haus"]), str(ids["gehen"]), str(ids["Haus"])]},
+        headers=csrf(me),
+    )
+    assert response.status_code == 200
+    assert response.json() == {"added": 2}
+    repeated = await client.post(
+        bulk_url,
+        json={"item_ids": [str(ids["Haus"]), str(ids["gehen"])]},
+        headers=csrf(me),
+    )
+    assert repeated.json() == {"added": 0}
+    rejected = await client.post(
+        bulk_url,
+        json={"item_ids": [str(ids["Haus"]), str(ids["neu"])]},
+        headers=csrf(me),
+    )
+    assert rejected.status_code == 404
+    detail = await client.get(f"/api/v1/words/collections/{collection_id}")
+    assert {word["lemma"] for word in detail.json()["items"]} == {"Haus", "gehen"}
+
+
 async def test_duplicate_collection_name_is_conflict(db, client):
     me = await setup_parent(client)
     payload = {"language": "de", "name": "Cestování"}

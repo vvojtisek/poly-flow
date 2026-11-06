@@ -975,6 +975,8 @@ export const createWordCollection = (language: Language, name: string) =>
   api<WordCollection>("/api/v1/words/collections", { json: { language, name } });
 export const addWordToCollection = (collectionId: string, itemId: string) =>
   api<void>(`/api/v1/words/collections/${collectionId}/items`, { json: { item_id: itemId } });
+export const addWordsToCollection = (collectionId: string, itemIds: string[]) =>
+  api<{ added: number }>(`/api/v1/words/collections/${collectionId}/items/bulk`, { json: { item_ids: itemIds } });
 export const removeWordFromCollection = (collectionId: string, itemId: string) =>
   api<void>(`/api/v1/words/collections/${collectionId}/items/${itemId}`, { method: "DELETE" });
 export const deleteWordCollection = (collectionId: string) =>

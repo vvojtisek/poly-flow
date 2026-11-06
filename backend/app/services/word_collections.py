@@ -126,6 +126,40 @@ async def add_word(
     await db.execute(stmt.on_conflict_do_nothing())
 
 
+async def add_words(
+    db: AsyncSession, user: User, collection_id: uuid.UUID, item_ids: list[uuid.UUID]
+) -> int:
+    collection = await db.scalar(
+        select(WordCollection).where(
+            WordCollection.id == collection_id, WordCollection.user_id == user.id
+        )
+    )
+    if collection is None:
+        raise LearningError("collection_not_found", 404)
+    unique_ids = list(dict.fromkeys(item_ids))
+    learned = set(
+        (
+            await db.scalars(
+                select(LexiconItem.id)
+                .join(UserWordProgress, UserWordProgress.lexicon_item_id == LexiconItem.id)
+                .where(
+                    LexiconItem.id.in_(unique_ids),
+                    LexiconItem.language == collection.language,
+                    UserWordProgress.user_id == user.id,
+                    _suitable(user),
+                )
+            )
+        ).all()
+    )
+    if learned != set(unique_ids):
+        raise LearningError("word_not_found", 404)
+    stmt = insert(WordCollectionItem).values(
+        [{"collection_id": collection.id, "lexicon_item_id": item_id} for item_id in unique_ids]
+    )
+    result = await db.execute(stmt.on_conflict_do_nothing())
+    return result.rowcount or 0
+
+
 async def remove_word(
     db: AsyncSession, user: User, collection_id: uuid.UUID, item_id: uuid.UUID
 ) -> None:

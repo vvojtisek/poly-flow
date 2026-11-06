@@ -117,6 +117,14 @@ class CollectionWordIn(BaseModel):
     item_id: uuid.UUID
 
 
+class CollectionWordsIn(BaseModel):
+    item_ids: list[uuid.UUID] = Field(min_length=1, max_length=100)
+
+
+class CollectionWordsOut(BaseModel):
+    added: int
+
+
 def _http(exc: LearningError) -> HTTPException:
     return HTTPException(exc.status, exc.code)
 
@@ -243,6 +251,19 @@ async def add_collection_word(
     except LearningError as exc:
         raise _http(exc) from exc
     return Response(status_code=204)
+
+
+@router.post("/collections/{collection_id}/items/bulk", response_model=CollectionWordsOut)
+async def add_collection_words(
+    collection_id: uuid.UUID, body: CollectionWordsIn, auth: Auth, db: DB
+) -> CollectionWordsOut:
+    try:
+        added = await collections.add_words(db, auth.acting, collection_id, body.item_ids)
+        await db.commit()
+    except LearningError as exc:
+        await db.rollback()
+        raise _http(exc) from exc
+    return CollectionWordsOut(added=added)
 
 
 @router.delete("/collections/{collection_id}/items/{item_id}", status_code=204)

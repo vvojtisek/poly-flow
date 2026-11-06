@@ -856,3 +856,19 @@ today's story also lets the learner generate a replacement for that day.
 - Verification: story API tests passed (15 tests), including owned deletion, regeneration,
   cross-profile rejection and archive visibility. Ruff, frontend typecheck/build and
   `git diff --check` passed.
+
+## Cycle 15/30: save selected dictionary words to a collection
+
+**Before:** learners could add words to a personal collection one at a time, making it tedious
+to gather a group of related words from a dictionary search.
+
+**Built:** dictionary rows now have independent selection checkboxes and a contextual bulk action
+to add the selected words to any same-language collection. The toolbar shows selection and
+collection counts, reports how many items were newly added, and offers a direct path to create a
+collection when none exists.
+
+- The server checks ownership, language, encounter history and child visibility for the entire
+  selection before inserting anything; duplicate submissions are idempotent. Keyboard navigation
+  shortcuts no longer hijack inputs or selection controls.
+- Verification: collection API tests passed (6 tests), including duplicate handling and atomic
+  rejection of an unavailable word. Ruff, frontend typecheck/build and `git diff --check` passed.
