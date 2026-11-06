@@ -165,6 +165,13 @@ Každá fáze je samostatně přezkoumatelná změna s migracemi, API/UI tam, kd
 
 ### P6 — motivace a hry
 
+> **Stav (Vlad, 2026-11-05 a 2026-11-06):** XP, mince, série, minihry a souboje jsou zrušené. Vrací se jen
+> osobní cesta hodností (`app/domain/ranks.py`, stránka *Moje cesta*): 10 hodností ve dvou tématech
+> (hokejová dráha, královská cesta) a odznaky, vše odvozené z ověřených důkazů (slova ověřená pasivně i
+> aktivně, gramatická témata zvládnutá v ověření, složené zkoušky slovní zásoby, opravené chyby). Bez
+> žebříčků, srovnávání, měny a sérií; dosaženou hodnost úpadek neodebírá; téma lze skrýt. Body níže
+> zůstávají jen jako historický návrh.
+
 - Serverově vyhodnocované denní cíle, XP, odznaky a série podle časového pásma profilu. Definovat započitatelnou dokončenou lekci a aktivní den; opakovaný request nesmí změnit odměnu.
 - Mince pouze za zvládnuté lekce a udržené série. Odměnový ledger má unikátní vazbu na událost; odemčení miniher ověří saldo a provede výdaj atomicky. Opakované nové dokončení stejné lekce může trénovat bez limitu, ale neslouží k neomezenému získávání mincí.
 - Nejprve tematický slovní souboj proti AI, potom dobrovolný rodinný souboj: omezené tematické sady, vyrovnání obtížnosti podle profilu, serverové výsledky a ochrana před opakovaným připsáním odměny.

@@ -42,3 +42,27 @@ looked at grammar, reading or listening.
 
 **Limits (stated in the UI):** items are Claude-drafted and unreviewed; difficulties are nominal
 bands, not calibrated on learner data; the result is an estimate, not a certificate.
+
+## Cycle 2/30: personal mastery rank path (hockey or royal)
+
+**Before:** progress was numbers and bars only; nothing marked the journey from beginner to master,
+and P6 gamification had been dropped because XP, coins and streaks reward activity, not learning.
+
+**Built:** *Moje cesta*, a single-player rank path. This reverses the P6 drop only for personal
+mastery ranks (noted in `AGENTS.md` and the plan).
+
+- 10 ranks per language in two themes the learner picks: hockey (První krůčky na ledě, Jistý
+  bruslař, Žákovská liga ... Národní reprezentant, Mistr světa, Olympijský šampion) or royal
+  (Poddaný, Učeň, Páže, Panoš ... Vévoda, Král nebo královna jazyka), or hidden.
+- Every requirement is evidence from Ověření: verified words (passive and active), grammar topics
+  known from grammar checks, passed vocabulary level exams, and recovered mistakes (missed in a
+  check, right in a later one). Thresholds follow the 100/500/1000/2500/5000 curriculum ladder.
+  Grammar requirements cap at what the language offers, so FR/IT/EN are not held back.
+- A reached rank is recorded (`mastery_awards`, migration 0019) and never taken back by decay. No
+  points, no streaks, no comparison with other profiles.
+- 17 achievements (words, grammar, learning from mistakes, exams, practice), measured the same way.
+- Visual evolution: an emblem whose ring moves from bronze to silver, gold, platinum and diamond,
+  with a theme icon per rank; it sits next to the learner's name in the header on every page.
+- A one-time celebration dialog (pop-in emblem, colour burst, respects reduced motion) when a new
+  rank or achievement is reached; the dashboard card and the full journey page show exactly what
+  the next rank needs, with progress bars.

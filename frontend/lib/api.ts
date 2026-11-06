@@ -96,6 +96,7 @@ export interface ProfileSettings {
   interests: string[];
   voices: Partial<Record<Language, string>>;
   learn_profanity: boolean;
+  rank_path: RankPath;
 }
 
 export interface Voice {
@@ -653,3 +654,41 @@ export const stopDiagnostic = (sessionId: string) =>
   api<DiagnosticState>(`/api/v1/diagnostic/sessions/${sessionId}/stop`, { method: "POST" });
 export const diagnosticAudioUrl = (sessionId: string, position: number) =>
   `/api/v1/diagnostic/sessions/${sessionId}/audio?position=${position}`;
+
+// ---------------------------------------------------------------- personal mastery ranks
+
+export type RankPath = "hockey" | "royal" | "off";
+export type RankTier = "bronze" | "silver" | "gold" | "platinum" | "diamond";
+
+export interface RankRequirement {
+  key: "known_words" | "grammar_known" | "badge" | "recoveries";
+  target: number;
+  current: number;
+  level: string | null;
+  met: boolean;
+}
+
+export interface RanksOverview {
+  language: Language;
+  path: RankPath;
+  rank: number;
+  max_rank: number;
+  tier: RankTier;
+  next: { rank: number; tier: RankTier; requirements: RankRequirement[] } | null;
+  ranks: { rank: number; tier: RankTier; reached_at: string | null; requirements: RankRequirement[] }[];
+  achievements: { key: string; group: string; reached_at: string | null }[];
+  unseen_rank: number | null;
+  unseen_achievements: string[];
+  stats: {
+    known_words: number;
+    passive_words: number;
+    grammar_known: number;
+    grammar_total: number;
+    recoveries: number;
+    checks_answered: number;
+    badges: string[];
+  };
+}
+
+export const getRanks = (language: Language) => api<RanksOverview>(`/api/v1/ranks?language=${language}`);
+export const markRanksSeen = (language: Language) => api<void>("/api/v1/ranks/seen", { json: { language } });

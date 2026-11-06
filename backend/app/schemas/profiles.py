@@ -39,6 +39,8 @@ class ProfileSettings(BaseModel):
     # Adults only, off by default: lessons, checks and tests include profanity (vulgar words).
     # A child profile never gets it, whatever is stored here.
     learn_profanity: bool = False
+    # Personal rank path theme (single player, no comparison): hockey, royal, or hidden.
+    rank_path: Literal["hockey", "royal", "off"] = "hockey"
 
     @field_validator("interests")
     @classmethod

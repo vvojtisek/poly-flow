@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 import { BuildInfo } from "@/components/BuildInfo";
+import { RankEmblem } from "@/components/RankEmblem";
 import { Button, Field, Notice } from "@/components/ui";
 import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
+import { rankName } from "@/lib/ranks";
+import { useRanks } from "@/lib/useRanks";
 
 function ReturnToParent({ me }: { me: Me }) {
   const { setMe } = useAuth();
@@ -102,6 +105,22 @@ export function LanguagePicker({ me, onChange }: { me: Me; onChange?: (l: Langua
   );
 }
 
+/** Display name with the rank emblem: the avatar evolves with the learner's rank. */
+function HeaderRank({ me }: { me: Me }) {
+  const { data } = useRanks(me.acting.active_language, me.acting.id);
+  if (!data || data.path === "off")
+    return <p className="text-sm text-slate-500">{me.acting.display_name}</p>;
+  return (
+    <Link href="/ranks" className="mt-1 flex items-center gap-2 rounded-full pr-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+      <RankEmblem path={data.path} rank={data.rank} tier={data.tier} size="sm" />
+      <span className="flex flex-col leading-tight">
+        <span className="text-slate-700 dark:text-slate-200">{me.acting.display_name}</span>
+        <span className="text-xs text-slate-500">{rankName(data.path, data.rank)}</span>
+      </span>
+    </Link>
+  );
+}
+
 export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
   const { setMe } = useAuth();
   const router = useRouter();
@@ -122,7 +141,7 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
           <Link href="/" className="text-2xl font-bold text-brand-600">
             {cs.appName}
           </Link>
-          <p className="text-sm text-slate-500">{me.acting.display_name}</p>
+          <HeaderRank me={me} />
         </div>
         <div className="flex flex-col items-end gap-1">
           <nav className="flex flex-wrap items-center justify-end gap-1">

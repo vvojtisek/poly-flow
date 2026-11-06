@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Map as MapIcon, Play } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Map as MapIcon, Play, Trophy } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -8,12 +8,15 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Panel } from "@/components/Panel";
 import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
+import { RankCard } from "@/components/RankCard";
+import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Button, Notice } from "@/components/ui";
-import { getProgress, skipPlacement, type ProgressOverview } from "@/lib/api";
+import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
+import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
 // Mobile: practice first, single column. lg+: dense multi-panel dashboard.
 export default function HomePage() {
@@ -23,6 +26,8 @@ export default function HomePage() {
   const language = me?.acting.active_language;
   const [progress, setProgress] = useState<ProgressOverview | null>(null);
   const [failed, setFailed] = useState(false);
+  const ranks = useRanks(language, me?.acting.id);
+  const [celebrated, setCelebrated] = useState(false);
 
   useEffect(() => {
     if (!language) return;
@@ -163,6 +168,12 @@ export default function HomePage() {
           {language && <WeakSpotsCard key={`${me.acting.id}:${language}`} language={language} />}
         </Panel>
 
+        {ranks.data && ranks.data.path !== "off" && (
+          <Panel title="Moje cesta" icon={Trophy}>
+            <RankCard data={ranks.data} />
+          </Panel>
+        )}
+
         <Panel title={cs.progression.title} icon={MapIcon} className="lg:col-span-2">
           <ProgressionPath />
         </Panel>
@@ -173,6 +184,22 @@ export default function HomePage() {
           </Panel>
         )}
       </div>
+      {ranks.data &&
+        !celebrated &&
+        ranks.data.path !== "off" &&
+        ((ranks.data.unseen_rank ?? 0) > 1 || ranks.data.unseen_achievements.length > 0) && (
+          <RankCelebration
+            data={ranks.data}
+            onClose={() => {
+              setCelebrated(true);
+              const lang = ranks.data!.language;
+              void markRanksSeen(lang).then(() => {
+                invalidateRanks();
+                void ranks.reload();
+              });
+            }}
+          />
+        )}
     </AppShell>
   );
 }

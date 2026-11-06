@@ -19,6 +19,7 @@ from app.models.learning import (
     LevelBadge,
 )
 from app.models.lexicon import LexiconItem
+from app.models.mastery import MasteryAward
 from app.models.progress import UserWordProgress
 from app.models.scene import Scene, SceneWord
 from app.models.story import DailyStory
@@ -44,6 +45,7 @@ __all__ = [
     "LearningTask",
     "LevelBadge",
     "LexiconItem",
+    "MasteryAward",
     "Scene",
     "SceneWord",
     "TutorExplanation",
