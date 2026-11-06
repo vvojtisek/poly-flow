@@ -18,6 +18,7 @@ unreviewed.
 | 5 | My dictionary + word inspector | look up any learned word, its state, audio and history |
 | 6 | Today's plan + goal ring | one button to the most useful next step, calm daily goal |
 | 7 | Dictation drill (Diktát) | hear a sentence, type it, word-level diff; ungraded practice |
+| 8 | German case lab | build a noun phrase, see which word carries the case signal |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -150,3 +151,25 @@ was no way to practise turning a whole spoken sentence into correctly spelled te
 - Strictly practice: nothing is recorded, nothing counts toward checks or ranks (learning vs
   testing split kept). Slow playback, Alt+P to replay, Enter to check and then continue; the
   session average stays on the page only.
+
+## Cycle 8/30: German case lab (Laboratoř pádů)
+
+**Before:** German cases and adjective endings were taught only as prose notes inside grammar
+units; there was no way to see the whole system or play with it.
+
+**Built:** `/grammar/cases`, linked from the grammar page and the palette.
+
+- `app.domain.declension`: the full paradigm for der, ein, kein, mein and no determiner across four
+  cases, three genders and the plural; weak/mixed/strong adjective declension; which word carries
+  the case signal; adjective stems (hoch → hoh-, dunkel → dunkl-, teuer → teur-, indeclinable
+  lila/rosa); nouns with genitive -s/-es, a listed (not guessed) n-declension set (Junge, Herr,
+  Name → Namens), dative plural -n, plural-only nouns, and adjectival nouns excluded. 46 tests
+  check every cell against the reference paradigm.
+- `GET /api/v1/grammar/declension` sends the paradigm plus German nouns and adjectives from the
+  lexicon (the learner's own words first, child filter applied) with all their forms computed
+  on the server; the UI only puts pieces together.
+- The builder: pick case (keys 1-4), determiner, singular/plural, adjective and noun (R for a
+  random one). The phrase is shown large with gender colours, the case-signal ending highlighted,
+  and a Czech explanation of why each ending appears (including n-declension). Beside it, the
+  full table for the chosen determiner; clicking a cell rebuilds the phrase.
+- Reference only: nothing is graded or recorded.

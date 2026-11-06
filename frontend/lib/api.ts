@@ -801,3 +801,43 @@ export function getDictationNext(language: Language, exclude: string[]) {
 }
 export const checkDictation = (item_id: string, text: string) =>
   api<DictationResult>("/api/v1/dictation/check", { json: { item_id, text } });
+
+// ---------------------------------------------------------------- German case lab
+
+export type DeclCase = "nom" | "akk" | "dat" | "gen";
+export type DeclGender = "m" | "f" | "n" | "pl";
+export type DeclDet = "def" | "indef" | "kein" | "poss" | "none";
+export interface DeclPiece {
+  stem: string;
+  ending: string;
+}
+export interface DeclCell {
+  det: DeclDet;
+  case: DeclCase;
+  gender: DeclGender;
+  determiner: DeclPiece | null;
+  adjective_ending: string;
+  kind: "weak" | "mixed" | "strong";
+  signal: "determiner" | "adjective" | "noun";
+}
+export interface DeclNoun {
+  lemma: string;
+  gender: DeclGender;
+  translation: string;
+  met: boolean;
+  n_declension: boolean;
+  singular: Record<DeclCase, DeclPiece> | null;
+  plural: Record<DeclCase, DeclPiece> | null;
+}
+export interface DeclAdjective {
+  lemma: string;
+  stem: string | null;
+  translation: string;
+  met: boolean;
+}
+export interface Declension {
+  cells: DeclCell[];
+  nouns: DeclNoun[];
+  adjectives: DeclAdjective[];
+}
+export const getDeclension = () => api<Declension>("/api/v1/grammar/declension");
