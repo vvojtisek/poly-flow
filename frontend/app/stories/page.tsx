@@ -1,7 +1,7 @@
 "use client";
 
-import { BookOpenText, CheckCircle2, Languages, MessagesSquare, XCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { BookOpenText, CheckCircle2, Languages, MessagesSquare, Play, Square, XCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { PlayButton } from "@/components/PlayButton";
@@ -32,6 +32,34 @@ function Reader({ story }: { story: Story }) {
   const [translate, setTranslate] = useState(false);
   const [results, setResults] = useState<Record<number, Result>>({});
   const [busy, setBusy] = useState(false);
+  const [activeLine, setActiveLine] = useState<number | null>(null);
+  const [audioError, setAudioError] = useState(false);
+  const audio = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (activeLine === null || !audio.current) return;
+    audio.current.currentTime = 0;
+    void audio.current.play().catch(() => setAudioError(true));
+  }, [activeLine]);
+
+  useEffect(() => {
+    setActiveLine(null);
+    setAudioError(false);
+  }, [story.id]);
+
+  function listenAll() {
+    setAudioError(false);
+    if (activeLine === null) setActiveLine(0);
+    else if (activeLine !== 0) setActiveLine(0);
+    else if (audio.current) {
+      audio.current.currentTime = 0;
+      void audio.current.play().catch(() => setAudioError(true));
+    }
+  }
+
+  function lineEnded() {
+    setActiveLine((line) => line !== null && line + 1 < story.lines.length ? line + 1 : null);
+  }
 
   async function answer(index: number, choice: number) {
     setBusy(true);
@@ -60,9 +88,33 @@ function Reader({ story }: { story: Story }) {
             <Languages className="size-4" aria-hidden /> {translate ? cs.stories.hideTranslation : cs.stories.showTranslation}
           </Button>
         </div>
+        <div className="flex flex-wrap items-center gap-2 rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
+          <Button variant="secondary" onClick={listenAll} disabled={story.lines.length === 0}>
+            <Play className="size-4" aria-hidden /> {cs.stories.listenAll}
+          </Button>
+          {activeLine !== null && (
+            <>
+              <audio
+                ref={audio}
+                controls
+                preload="none"
+                src={storyAudioUrl(story.id, activeLine)}
+                onEnded={lineEnded}
+                onError={() => setAudioError(true)}
+                aria-label={cs.stories.listenAll}
+                className="h-10 min-w-48 flex-1"
+              />
+              <Button variant="ghost" onClick={() => setActiveLine(null)}>
+                <Square className="size-4" aria-hidden /> {cs.stories.stopReading}
+              </Button>
+            </>
+          )}
+          {audioError && <p className="w-full text-sm text-rose-700 dark:text-rose-300" role="alert">{cs.stories.audioFailed}</p>}
+          {activeLine !== null && <span className="sr-only">{cs.stories.linePosition(activeLine + 1, story.lines.length)}</span>}
+        </div>
         <ol className="flex flex-col gap-3">
           {story.lines.map((ln, i) => (
-            <li key={i} className="flex items-start gap-2">
+            <li key={i} aria-current={activeLine === i ? "true" : undefined} className={`flex items-start gap-2 rounded-xl p-2 transition-colors ${activeLine === i ? "bg-brand-500/10 ring-1 ring-brand-500/40" : ""}`}>
               <PlayButton url={storyAudioUrl(story.id, i)} label={cs.stories.playLine} size="sm" />
               <div className="flex flex-col">
                 <p className="text-lg" lang={story.language}>

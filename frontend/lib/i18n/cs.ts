@@ -1021,6 +1021,10 @@ export const cs = {
     right: "Správně.",
     wrong: (answer: string) => `Ne, správně je: ${answer}`,
     playLine: "Přehrát větu",
+    listenAll: "Poslechnout celý text",
+    stopReading: "Zastavit",
+    audioFailed: "Zvuk této věty se nepodařilo přehrát. Zkus samostatné tlačítko u řádku.",
+    linePosition: (current: number, total: number) => `Právě hraje věta ${current} z ${total}`,
     done: "Hotovo. Zítra bude nový text.",
   },
   tutor: {

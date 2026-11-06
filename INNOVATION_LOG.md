@@ -729,3 +729,19 @@ word-order errors point to the word-order trainer.
   review timing. A failed recommendation request is shown as an error instead of guessing.
 - Verification: mistake API tests passed (4 tests); frontend typecheck and production build passed;
   `git diff --check` passed.
+
+## Cycle 7/30: listen through a full story
+
+**Before:** generated reading had a play button on every line, so listening to a complete story
+required stopping and starting each sentence by hand.
+
+**Built:** a continuous reader control that plays approved story audio line by line, advances
+automatically, highlights the line currently playing, and exposes native audio controls for pause
+and seek. Learners can restart the text or stop playback at any time.
+
+- Audio still comes from the existing per-line story endpoint; the UI does not synthesize or
+  publish any new text. A failed line shows a retry hint while keeping individual line playback.
+- Playback state resets when the selected daily story changes and does not affect question
+  answers or learning evidence.
+- Verification: story API tests passed (12 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.
