@@ -924,3 +924,16 @@ one-tap reset to all modes.
 
 - The filter remains a discovery aid only; it does not alter learner settings or progress.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 20/30: pin favorite practice modes to the dashboard
+
+**Before:** the dashboard surfaced only the three most recently opened practice modes. Learners
+could not keep a preferred routine visible when their recent activity changed.
+
+**Built:** practice cards can now be pinned or unpinned, and favorites appear as quick links on
+both the practice hub and dashboard. Favorites are stored on the current browser, independent of
+server-side learning records, and modes unavailable in the selected language are hidden.
+
+- If browser storage is unavailable, pinning still updates the current view but cannot persist
+  across visits.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

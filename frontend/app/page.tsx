@@ -20,7 +20,7 @@ import { Button, Notice } from "@/components/ui";
 import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
-import { byRecent, modesFor, readRecent } from "@/lib/practice";
+import { byRecent, modesFor, readPinned, readRecent } from "@/lib/practice";
 import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
 // Mobile: practice first, single column. lg+: dense multi-panel dashboard.
@@ -34,7 +34,11 @@ export default function HomePage() {
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
-  useEffect(() => setRecent(readRecent()), []);
+  const [pinned, setPinned] = useState<ReturnType<typeof readPinned>>([]);
+  useEffect(() => {
+    setRecent(readRecent());
+    setPinned(readPinned());
+  }, []);
 
   useEffect(() => {
     if (!language) return;
@@ -131,6 +135,15 @@ export default function HomePage() {
                   <Dumbbell className="size-5" aria-hidden />
                   {cs.practice.open}
                 </Button>
+                {pinned.some((id) => modesFor(language).some((mode) => mode.id === id)) && (
+                  <div className="flex flex-wrap justify-center gap-1" aria-label={cs.practice.pinned}>
+                    {pinned.map((id) => modesFor(language).find((mode) => mode.id === id)).filter((mode): mode is NonNullable<typeof mode> => !!mode).map((m) => (
+                      <Link key={`pinned-${m.id}`} href={m.href} className="inline-flex items-center gap-1 rounded-full border border-brand-500/60 bg-white px-2.5 py-1 text-xs font-semibold text-brand-700 hover:bg-brand-500/10 dark:bg-slate-900 dark:text-brand-100">
+                        <m.icon className="size-3.5" aria-hidden />{cs.practice.mode[m.id]?.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
                 <div className="flex flex-wrap justify-center gap-1">
                   {byRecent(modesFor(language), recent).map((m) => (
                     <Link

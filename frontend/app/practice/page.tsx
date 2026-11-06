@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, Dumbbell, History, Sparkles } from "lucide-react";
+import { AlertTriangle, Dumbbell, History, Pin, PinOff, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,7 @@ import { Notice } from "@/components/ui";
 import { getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
-import { modesFor, readRecent, SKILLS, type PracticeMode, type Skill } from "@/lib/practice";
+import { modesFor, readPinned, readRecent, SKILLS, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
 const ERROR_ROUTE: Record<string, (language: Language) => string> = {
@@ -38,28 +38,30 @@ function chip(active: boolean) {
   }`;
 }
 
-function Card({ m, tint }: { m: PracticeMode; tint: string }) {
+function Card({ m, tint, pinned, onToggle }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void }) {
   const copy = t.mode[m.id]!;
   return (
-    <Link
-      href={m.href}
-      className={`group flex h-full flex-col gap-3 rounded-3xl border border-slate-200 bg-gradient-to-br ${tint} p-5 transition-transform hover:-translate-y-0.5 hover:border-brand-500 motion-reduce:transition-none dark:border-slate-800`}
-    >
-      <span className="flex items-center gap-3">
-        <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
-          <m.icon className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
-        </span>
-        <span className="text-lg font-bold">{copy.title}</span>
-      </span>
-      <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
-      <span className="mt-auto flex flex-wrap gap-1">
-        {m.skills.map((s) => (
-          <span key={s} className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-900/70 dark:text-slate-300">
-            {t.skill[s]}
+    <div className={`relative h-full rounded-3xl border border-slate-200 bg-gradient-to-br ${tint} transition-transform hover:-translate-y-0.5 hover:border-brand-500 motion-reduce:transition-none dark:border-slate-800`}>
+      <Link href={m.href} className="group flex h-full flex-col gap-3 p-5 pr-14">
+        <span className="flex items-center gap-3">
+          <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
+            <m.icon className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
           </span>
-        ))}
-      </span>
-    </Link>
+          <span className="text-lg font-bold">{copy.title}</span>
+        </span>
+        <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
+        <span className="mt-auto flex flex-wrap gap-1">
+          {m.skills.map((s) => (
+            <span key={s} className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-900/70 dark:text-slate-300">
+              {t.skill[s]}
+            </span>
+          ))}
+        </span>
+      </Link>
+      <button type="button" aria-pressed={pinned} aria-label={pinned ? t.unpinMode(copy.title) : t.pinMode(copy.title)} title={pinned ? t.unpinMode(copy.title) : t.pinMode(copy.title)} onClick={onToggle} className="absolute right-3 top-3 rounded-full bg-white/80 p-2 text-brand-700 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:bg-slate-900/80 dark:text-brand-100 dark:hover:bg-slate-900">
+        {pinned ? <PinOff className="size-4" aria-hidden /> : <Pin className="size-4" aria-hidden />}
+      </button>
+    </div>
   );
 }
 
@@ -68,9 +70,11 @@ export default function PracticePage() {
   const { state } = useAuth();
   const [skills, setSkills] = useState<Skill[]>([]);
   const [recent, setRecent] = useState<PracticeMode["id"][]>([]);
+  const [pinned, setPinned] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
   useEffect(() => setRecent(readRecent()), []);
+  useEffect(() => setPinned(readPinned()), []);
   useEffect(() => {
     if (!me?.acting.active_language) return;
     let cancelled = false;
@@ -87,6 +91,7 @@ export default function PracticePage() {
   const modes = modesFor(me.acting.active_language);
   const shown = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
+  const favorites = pinned.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
   const recommendations = (weakSpots?.tags ?? [])
     .filter(([tag]) => !!ERROR_ROUTE[tag])
@@ -132,6 +137,12 @@ export default function PracticePage() {
           </section>
         )}
 
+        {favorites.length > 0 && (
+          <section className="flex flex-wrap items-center gap-2" aria-label={t.pinned}>
+            <span className="flex items-center gap-1 text-sm font-medium text-slate-500"><Pin className="size-4" aria-hidden /> {t.pinned}:</span>
+            {favorites.map((m) => <Link key={m.id} href={m.href} className="inline-flex items-center gap-1.5 rounded-full border border-brand-500 bg-brand-500/10 px-3 py-1.5 text-sm font-semibold text-brand-700 dark:text-brand-50"><m.icon className="size-4" aria-hidden />{t.mode[m.id]?.title}</Link>)}
+          </section>
+        )}
         {last.length > 0 && (
           <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-1 text-sm font-medium text-slate-500">
@@ -169,7 +180,7 @@ export default function PracticePage() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((m) => (
             <li key={m.id}>
-              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} />
+              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} />
             </li>
           ))}
         </ul>
