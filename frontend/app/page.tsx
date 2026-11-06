@@ -1,6 +1,7 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, Drama, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Shapes, Trophy, Waves } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, Dumbbell, GraduationCap, Map as MapIcon, Play, Trophy } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ import { Button, Notice } from "@/components/ui";
 import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
+import { modesFor } from "@/lib/practice";
 import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
 // Mobile: practice first, single column. lg+: dense multi-panel dashboard.
@@ -115,26 +117,27 @@ export default function HomePage() {
                 {cs.grammar.title}
               </Button>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <Button variant="secondary" className="col-span-2 w-full" onClick={() => router.push("/roleplay")}>
-                <Drama className="size-5" aria-hidden />
-                {cs.roleplay.title}
-              </Button>
-              <Button variant="secondary" className="w-full" onClick={() => router.push("/dictation")}>
-                <Headphones className="size-5" aria-hidden />
-                {cs.dictation.title}
-              </Button>
-              <Button variant="secondary" className="w-full" onClick={() => router.push("/shadowing")}>
-                <Waves className="size-5" aria-hidden />
-                {cs.shadow.title}
-              </Button>
-              {language !== "en" && (
-                <Button variant="secondary" className="col-span-2 w-full" onClick={() => router.push("/genders")}>
-                  <Shapes className="size-5" aria-hidden />
-                  {cs.genders.title}
+            {language && (
+              <section className="flex flex-col gap-2 rounded-2xl bg-slate-50 p-3 dark:bg-slate-800/50">
+                <Button variant="secondary" className="w-full" onClick={() => router.push("/practice")}>
+                  <Dumbbell className="size-5" aria-hidden />
+                  {cs.practice.open}
                 </Button>
-              )}
-            </div>
+                <div className="flex flex-wrap justify-center gap-1">
+                  {modesFor(language).map((m) => (
+                    <Link
+                      key={m.id}
+                      href={m.href}
+                      title={cs.practice.mode[m.id]?.blurb}
+                      className="inline-flex items-center gap-1 rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-brand-500/10 dark:bg-slate-900 dark:text-slate-200"
+                    >
+                      <m.icon className="size-3.5" aria-hidden />
+                      {cs.practice.mode[m.id]?.title}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
             {progress && (
               <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
                 <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.tests.title}</h3>

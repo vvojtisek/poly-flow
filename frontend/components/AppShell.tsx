@@ -1,10 +1,11 @@
 "use client";
 
-import { BarChart3, BookMarked, BookOpenText, Compass, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
+import { BarChart3, BookMarked, Dumbbell, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent, type ReactNode } from "react";
 
+import { BottomTabs } from "@/components/BottomTabs";
 import { BuildInfo } from "@/components/BuildInfo";
 import { CommandPalette, openPalette } from "@/components/CommandPalette";
 import { Kbd } from "@/components/Kbd";
@@ -137,7 +138,7 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
   }
 
   return (
-    <main className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-4 lg:p-8">
+    <main className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-4 pb-24 lg:p-8">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link href="/" className="text-2xl font-bold text-brand-600">
@@ -161,51 +162,47 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
             </button>
             <Link
               href="/grammar"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="hidden items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <GraduationCap className="size-4" aria-hidden /> {cs.grammar.link}
             </Link>
             <Link
-              href="/stories"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              href="/practice"
+              className="hidden items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-800"
             >
-              <BookOpenText className="size-4" aria-hidden /> {cs.stories.link}
+              <Dumbbell className="size-4" aria-hidden /> {cs.practice.link}
             </Link>
             <Link
               href="/words"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="hidden items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <BookMarked className="size-4" aria-hidden /> {cs.words.link}
             </Link>
             <Link
               href="/insights"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="hidden items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <BarChart3 className="size-4" aria-hidden /> {cs.insights.link}
             </Link>
             <Link
-              href="/placement"
-              className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-            >
-              <Compass className="size-4" aria-hidden /> {cs.placement.link}
-            </Link>
-            <Link
               href="/settings"
+              aria-label={cs.settings.title}
               className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
             >
-              <Settings className="size-4" aria-hidden /> {cs.settings.title}
+              <Settings className="size-4" aria-hidden /> <span className="hidden sm:inline">{cs.settings.title}</span>
             </Link>
             {me.can_manage && (
               <Link
                 href="/profiles"
+                aria-label={cs.profiles.title}
                 className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
               >
-                <Users className="size-4" aria-hidden /> {cs.profiles.title}
+                <Users className="size-4" aria-hidden /> <span className="hidden sm:inline">{cs.profiles.title}</span>
               </Link>
             )}
             {me.acting.id === me.principal.id && (
-              <Button variant="ghost" className="!px-3 !py-2 text-sm" onClick={() => void signOut()}>
-                <LogOut className="size-4" aria-hidden /> {cs.auth.logout}
+              <Button variant="ghost" className="!px-3 !py-2 text-sm" aria-label={cs.auth.logout} onClick={() => void signOut()}>
+                <LogOut className="size-4" aria-hidden /> <span className="hidden sm:inline">{cs.auth.logout}</span>
               </Button>
             )}
           </nav>
@@ -215,6 +212,7 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
       {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
       {children}
       <CommandPalette me={me} />
+      <BottomTabs />
     </main>
   );
 }

@@ -22,6 +22,7 @@ unreviewed.
 | 9 | Shadowing studio (Stínování) | listen, repeat aloud, compare rhythm outlines; recordings never leave the browser |
 | 10 | Gender sorter (Rody) | 1-2-3 keyboard sorting with ending rules on a miss, optional 60 s test |
 | 11 | Role-play (Hraj roli) | play a lesson scene as one speaker: choose or type your lines |
+| 12 | Practice hub + mobile tab bar | one home for all practice modes; thumb-reach navigation on phones |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -237,3 +238,20 @@ never used again.
 - Translations on demand under every bubble, replay any line, play again or swap roles at the
   end. Nothing is recorded; the "first try" count is shown only on the page.
 - `WordDiff` was extracted from the dictation page and is shared.
+
+## Cycle 12/30: practice hub (Procvičovna) and a mobile tab bar
+
+**Before:** cycles 7-11 added five practice modes, each a separate button on the dashboard and a
+link in an already crowded header that wrapped into three rows on a phone.
+
+**Built:**
+
+- `/practice`: one hub for every ungraded mode (role-play, dictation, shadowing, genders, case
+  lab, reading), each card with what it is for and which skills it trains; modes appear only for
+  languages they support (`lib/practice.ts` is the single list).
+- Dashboard: the button grid became one "Otevřít procvičovnu" button plus compact chips.
+- Phones get a fixed bottom tab bar (Domů, Lekce, Procvičovat, Slovník, Hledat → command
+  palette), safe-area aware, hidden from lg up. The header shows text links only on desktop;
+  settings, family and logout become icon buttons on small screens with their accessible names
+  kept (the e2e suite looks up "Rodina" by name). Placement moved out of the header (it stays on
+  the dashboard and in the palette).
