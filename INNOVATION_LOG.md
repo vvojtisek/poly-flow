@@ -825,3 +825,19 @@ action continues the open session.
   an unsubmitted text answer is not saved.
 - Verification: the server resume regression passed (1 test); frontend typecheck and production
   build passed; `git diff --check` passed.
+
+## Cycle 13/30: search learned words from the command palette
+
+**Before:** Ctrl+K and `/` could jump to learning pages and change settings, but finding a word
+required opening the dictionary and searching there.
+
+**Built:** after two characters, the palette makes a debounced, cancellable search against the
+acting profile's dictionary and adds up to six word-and-translation results. Choosing a result
+opens its dictionary inspector directly; the dictionary also accepts a focused word ID from that
+route.
+
+- Search uses the existing profile-scoped, child-filtered word-list API. No unseen words or other
+profiles' entries are introduced into global navigation; API failures leave ordinary commands
+available.
+- Verification: dictionary API tests passed (2 tests); frontend typecheck and production build
+passed; `git diff --check` passed.

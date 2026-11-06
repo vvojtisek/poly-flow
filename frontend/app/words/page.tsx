@@ -160,6 +160,14 @@ export default function WordsPage() {
   const search = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get("q");
+    const initialWord = params.get("word");
+    if (initialQuery) setQ(initialQuery);
+    if (initialWord) setOpen(initialWord);
+  }, []);
+
+  useEffect(() => {
     if (!language) return;
     const ctrl = new AbortController();
     const timer = setTimeout(() => {

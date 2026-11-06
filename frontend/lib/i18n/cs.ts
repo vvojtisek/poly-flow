@@ -811,10 +811,12 @@ export const cs = {
     switchLanguage: (name: string) => `Přepnout jazyk: ${name}`,
     theme: (name: string) => `Vzhled: ${name}`,
     path: (name: string) => `Téma cesty: ${name}`,
-    groups: { go: "Přejít", language: "Jazyk", look: "Vzhled", account: "Účet" },
+    groups: { go: "Přejít", language: "Jazyk", look: "Vzhled", account: "Účet", words: "Moje slova" },
     move: "pohyb",
     run: "spustit",
     open: "otevřít",
+    searchingWords: "Hledám ve tvém slovníku…",
+    wordSearchFailed: "Slovník se nepodařilo prohledat. Ostatní příkazy jsou dál dostupné.",
   },
   tests: {
     title: "Testy",
