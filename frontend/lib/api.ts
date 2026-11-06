@@ -963,3 +963,10 @@ export type LookupHit = {
 };
 export const lookupWord = (word: string, language: Language) =>
   api<LookupHit[]>(`/api/v1/lookup?language=${language}&word=${encodeURIComponent(word)}`);
+
+export type NumberDirection = "write" | "read";
+export const spellNumber = (n: number, language: Language) =>
+  api<{ n: number; words: string }>(`/api/v1/numbers/spell?n=${n}&language=${language}`);
+export const checkNumber = (body: { language: Language; n: number; answer: string; direction: NumberDirection }) =>
+  api<{ correct: boolean; n: number; words: string }>("/api/v1/numbers/check", { method: "POST", json: body });
+export const numberAudioUrl = (n: number, language: Language) => `/api/v1/numbers/audio?n=${n}&language=${language}`;

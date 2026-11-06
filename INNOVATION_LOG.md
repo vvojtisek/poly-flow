@@ -30,6 +30,7 @@ unreviewed.
 | 17 | Welcome wizard (Vítej) | first run of a fresh profile: language, daily goal, rank path, text size, then placement or first lesson |
 | 18 | Tap to look up (Klepni na slovo) | every word in stories, role-play and dictation opens its dictionary entry: form → lemma by rules |
 | 19 | Take your words with you (export) | own dictionary as a spreadsheet CSV or an Anki import file, with hooks, status and source |
+| 20 | Number trainer (Čísla) | 0–9999 written, heard and read in DE/FR/IT/EN, spelled by rules with both French spellings accepted |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -394,3 +395,26 @@ slovník.
   without settings. Front "der Hund", back "pes (hook)", tags `polyflow::de`, the status and
   `polyflow::source::claude-drafted` for drafted translations, so unreviewed glosses stay marked.
 - Pure formatting in `app/domain/export.py`; the download is `no-store`.
+
+## Cycle 20/30: number trainer (Čísla)
+
+**Before:** numbers appeared only as a few lexicon words (eins, zwei ...). Prices, times, years
+and phone numbers, which every A1 learner meets on day one, had no practice at all, and French
+70–99 or German "einundzwanzig" are exactly where Czech speakers stumble.
+
+**Built:** `app/domain/numbers.py`, `/api/v1/numbers/{spell,check,audio}` and the `/numbers` page.
+
+- Rules for 0 to 9999 in all four languages: German unit-before-ten and one word; French
+  soixante-dix / quatre-vingts (the s only on a bare 80 and bare hundreds), "et un" and
+  "et onze"; Italian one word with the elided ventuno / ventotto / centotto and ventitré;
+  British English with "and" after hundred and thousand.
+- Accepted alternatives, so correct answers are never marked wrong: einhundert, eintausend,
+  elfhundert; the French 1990 reform (hyphens everywhere) and "onze cents"; centootto, centuno,
+  a missing accent on tre; English without "and", "a hundred", "eleven hundred". Hyphen and
+  space count as the same; letters do not ("quatre-vingt" for 80 is wrong).
+- Three modes: write the shown number in words, listen and type digits, read the words and type
+  digits; four ranges. A right written answer plays the spoken number. A run of right answers is
+  shown for the visit only; nothing is stored or graded.
+- 93 tests: a table of pinned spellings per language, accepted and rejected answers, and every
+  number 0–9999 in every language round-trips through `check`.
+- Listening needs the local TTS; without it the page says so and points to the read mode.

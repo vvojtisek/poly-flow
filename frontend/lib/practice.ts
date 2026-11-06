@@ -1,14 +1,14 @@
 // The practice modes outside lessons and checks: shown on the practice hub, the dashboard and
 // the mobile tab bar. None of them is graded; the copy lives in cs.practice.
 
-import { BookOpenText, Drama, FlaskConical, Headphones, Repeat, Shapes, Waves, type LucideIcon } from "lucide-react";
+import { BookOpenText, Drama, FlaskConical, Hash, Headphones, Repeat, Shapes, Waves, type LucideIcon } from "lucide-react";
 
 import type { Language } from "@/lib/api";
 
 export type Skill = "listening" | "speaking" | "writing" | "reading" | "grammar";
 
 export interface PracticeMode {
-  id: "roleplay" | "dictation" | "shadowing" | "genders" | "cases" | "verbs" | "stories";
+  id: "roleplay" | "dictation" | "shadowing" | "genders" | "cases" | "verbs" | "numbers" | "stories";
   href: string;
   icon: LucideIcon;
   skills: Skill[];
@@ -22,6 +22,7 @@ export const PRACTICE_MODES: PracticeMode[] = [
   { id: "genders", href: "/genders", icon: Shapes, skills: ["grammar"], languages: ["de", "fr", "it"] },
   { id: "cases", href: "/grammar/cases", icon: FlaskConical, skills: ["grammar"], languages: ["de"] },
   { id: "verbs", href: "/grammar/verbs", icon: Repeat, skills: ["grammar", "writing"], languages: ["de"] },
+  { id: "numbers", href: "/numbers", icon: Hash, skills: ["listening", "writing", "reading"] },
   { id: "stories", href: "/stories", icon: BookOpenText, skills: ["reading"] },
 ];
 
