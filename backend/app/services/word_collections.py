@@ -55,6 +55,24 @@ async def create_collection(
     return collection
 
 
+async def rename_collection(
+    db: AsyncSession, user: User, collection_id: uuid.UUID, name: str
+) -> WordCollection:
+    clean = clean_name(name)
+    if not clean or len(clean) > 60:
+        raise LearningError("invalid_collection_name", 422)
+    collection = await db.scalar(
+        select(WordCollection).where(
+            WordCollection.id == collection_id, WordCollection.user_id == user.id
+        )
+    )
+    if collection is None:
+        raise LearningError("collection_not_found", 404)
+    collection.name = clean
+    await db.flush()
+    return collection
+
+
 async def get_collection(
     db: AsyncSession, user: User, collection_id: uuid.UUID
 ) -> tuple[WordCollection, list[dict]]:

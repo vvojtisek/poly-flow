@@ -1043,3 +1043,15 @@ card or grammar lesson.
   vocabulary through the active child-content policy, and omits inactive grammar units.
 - Verification: insights API tests passed (2 tests), including grouped counts, out-of-range dates
   and child-hidden word filtering. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 29/30: rename personal word collections
+
+**Before:** learners could organize encountered words into collections, but a collection's name
+could not be updated when their study plan changed.
+
+**Built:** collection owners can now rename a collection inline. Names are whitespace-normalized,
+limited to 60 characters, scoped to the learner, and duplicate names return a clear conflict.
+
+- Added API coverage for normalized renames, cross-profile access, and duplicate-name conflicts.
+- Verification: all 8 word-collection API tests passed, Ruff passed, and frontend typecheck and
+  production build passed; `git diff --check` passed.

@@ -981,6 +981,8 @@ export const wordCollectionExportUrl = (id: string, format: "csv" | "anki") =>
   `/api/v1/words/collections/${id}/export?format=${format}`;
 export const createWordCollection = (language: Language, name: string) =>
   api<WordCollection>("/api/v1/words/collections", { json: { language, name } });
+export const renameWordCollection = (id: string, name: string) =>
+  api<WordCollection>(`/api/v1/words/collections/${id}`, { method: "PUT", json: { name } });
 export const addWordToCollection = (collectionId: string, itemId: string) =>
   api<void>(`/api/v1/words/collections/${collectionId}/items`, { json: { item_id: itemId } });
 export const addWordsToCollection = (collectionId: string, itemIds: string[]) =>

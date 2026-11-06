@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDownToLine, ArrowLeft, FolderOpen, Headphones, Plus, Trash2 } from "lucide-react";
+import { ArrowDownToLine, ArrowLeft, FolderOpen, Headphones, Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -12,6 +12,7 @@ import {
   deleteWordCollection,
   getWordCollection,
   listWordCollections,
+  renameWordCollection,
   removeWordFromCollection,
   wordCollectionExportUrl,
   type WordCollection,
@@ -30,6 +31,10 @@ export default function CollectionsPage() {
   const [selected, setSelected] = useState("");
   const [detail, setDetail] = useState<WordCollectionDetail | null>(null);
   const [name, setName] = useState("");
+  const [editingName, setEditingName] = useState(false);
+  const [renamedName, setRenamedName] = useState("");
+  const [renameFailed, setRenameFailed] = useState(false);
+  const [duplicateName, setDuplicateName] = useState(false);
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const [practicing, setPracticing] = useState(false);
@@ -108,6 +113,24 @@ export default function CollectionsPage() {
     }
   }
 
+  async function rename(event: React.FormEvent) {
+    event.preventDefault();
+    if (!selected || !renamedName.trim()) return;
+    setBusy(true);
+    setRenameFailed(false);
+    setDuplicateName(false);
+    try {
+      await renameWordCollection(selected, renamedName);
+      setEditingName(false);
+      await refresh(selected);
+    } catch (error) {
+      setDuplicateName(error instanceof Error && error.message.includes("409"));
+      setRenameFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function removeCollection() {
     if (!selected) return;
     setBusy(true);
@@ -178,11 +201,22 @@ export default function CollectionsPage() {
               {detail && (
                 <>
                   <header className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <h2 className="text-lg font-bold">{detail.name}</h2>
+                    <div className="min-w-0 flex-1">
+                      {editingName ? (
+                        <form onSubmit={(event) => void rename(event)} className="flex flex-wrap gap-2">
+                          <label className="sr-only" htmlFor="rename-collection">{t.name}</label>
+                          <input id="rename-collection" autoFocus maxLength={60} value={renamedName} onChange={(event) => setRenamedName(event.target.value)} className="min-w-40 rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-base font-semibold dark:border-slate-700" />
+                          <Button disabled={busy || !renamedName.trim()}>{t.renameAction}</Button>
+                          <Button type="button" variant="ghost" disabled={busy} onClick={() => { setEditingName(false); setRenameFailed(false); }}>{t.cancelRename}</Button>
+                          {renameFailed && <p role="alert" className="w-full text-sm text-rose-700 dark:text-rose-300">{duplicateName ? t.renameDuplicate : t.failed}</p>}
+                        </form>
+                      ) : <h2 className="text-lg font-bold">{detail.name}</h2>}
                       <p className="text-sm text-slate-500">{t.count(detail.items.length)}</p>
                     </div>
                     <div className="flex flex-wrap gap-2">
+                      {!editingName && <Button variant="secondary" disabled={busy} onClick={() => { setRenamedName(detail.name); setEditingName(true); setRenameFailed(false); setDuplicateName(false); }}>
+                        <Pencil className="size-4" aria-hidden /> {t.rename}
+                      </Button>}
                       {detail.items.length > 0 && (
                         <div className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
                           <ArrowDownToLine className="size-4" aria-hidden />

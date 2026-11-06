@@ -162,6 +162,52 @@ async def test_duplicate_collection_name_is_conflict(db, client):
     ).status_code == 409
 
 
+async def test_collection_can_be_renamed_and_keeps_profile_isolation(db, client):
+    me = await setup_parent(client)
+    other = await make_child(client, me)
+    created = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Původní název"},
+        headers=csrf(me),
+    )
+    collection_id = created.json()["id"]
+    renamed = await client.put(
+        f"/api/v1/words/collections/{collection_id}",
+        json={"name": "  Německo   na cestách  "},
+        headers=csrf(me),
+    )
+    assert renamed.status_code == 200
+    assert renamed.json()["name"] == "Německo na cestách"
+    assert (await client.get(f"/api/v1/words/collections/{collection_id}")).json()[
+        "name"
+    ] == "Německo na cestách"
+    other_session = await login(client, other["username"], "4321")
+    foreign_rename = await client.put(
+        f"/api/v1/words/collections/{collection_id}",
+        json={"name": "Jiný název"},
+        headers=csrf(other_session),
+    )
+    assert foreign_rename.status_code == 404
+
+
+async def test_renaming_collection_to_duplicate_name_is_conflict(db, client):
+    me = await setup_parent(client)
+    ids = []
+    for name in ("První", "Druhá"):
+        response = await client.post(
+            "/api/v1/words/collections",
+            json={"language": "de", "name": name},
+            headers=csrf(me),
+        )
+        ids.append(response.json()["id"])
+    response = await client.put(
+        f"/api/v1/words/collections/{ids[1]}",
+        json={"name": "První"},
+        headers=csrf(me),
+    )
+    assert response.status_code == 409
+
+
 async def test_collection_count_and_contents_reapply_child_filter(db, client, clock):
     me = await setup_parent(client)
     ids = await seed(uuid.UUID(me["acting"]["id"]), clock)

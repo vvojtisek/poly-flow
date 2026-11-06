@@ -89,6 +89,10 @@ class CollectionIn(BaseModel):
     name: str = Field(min_length=1, max_length=60)
 
 
+class CollectionRenameIn(BaseModel):
+    name: str = Field(min_length=1, max_length=60)
+
+
 class CollectionOut(BaseModel):
     id: uuid.UUID
     name: str
@@ -239,6 +243,21 @@ async def collection_detail(collection_id: uuid.UUID, auth: Auth, db: DB) -> Col
     except LearningError as exc:
         raise _http(exc) from exc
     return CollectionDetailOut(id=item.id, language=item.language, name=item.name, items=words)
+
+
+@router.put("/collections/{collection_id}", response_model=CollectionOut)
+async def rename_collection(
+    collection_id: uuid.UUID, body: CollectionRenameIn, auth: Auth, db: DB
+) -> CollectionOut:
+    try:
+        item = await collections.rename_collection(db, auth.acting, collection_id, body.name)
+        await db.commit()
+    except LearningError as exc:
+        raise _http(exc) from exc
+    except IntegrityError as exc:
+        await db.rollback()
+        raise HTTPException(409, "collection_name_exists") from exc
+    return CollectionOut(id=item.id, name=item.name, count=0, created_at=item.created_at)
 
 
 @router.post("/collections/{collection_id}/items", status_code=204)
