@@ -144,6 +144,28 @@ async def today(
     ).scalar_one_or_none()
 
 
+async def archive(
+    db: AsyncSession, user: User, language: Language, *, limit: int = 30
+) -> list[DailyStory]:
+    """Previously generated, safety-checked readings for this profile and language."""
+    return list(
+        (
+            await db.scalars(
+                select(DailyStory)
+                .where(
+                    DailyStory.user_id == user.id,
+                    DailyStory.language == language,
+                    DailyStory.status == StoryStatus.GENERATED,
+                    DailyStory.source_type == StorySource.GENERATED,
+                    DailyStory.safety_checked.is_(True),
+                )
+                .order_by(DailyStory.story_date.desc(), DailyStory.created_at.desc())
+                .limit(limit)
+            )
+        ).all()
+    )
+
+
 async def get_story(
     db: AsyncSession, user: User, story_id: uuid.UUID, *, for_update: bool = False
 ) -> DailyStory:

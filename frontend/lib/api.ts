@@ -567,6 +567,7 @@ export interface StoryLine {
 export interface Story {
   id: string;
   language: Language;
+  story_date: string;
   kind: "story" | "dialogue";
   title: string;
   lines: StoryLine[];
@@ -578,10 +579,22 @@ export interface Story {
   review_status: "unreviewed";
 }
 
+export interface StoryArchiveItem {
+  id: string;
+  story_date: string;
+  title: string;
+  kind: "story" | "dialogue";
+  source_collection: string | null;
+  targets: string[];
+}
+
 export const getStoryToday = (language: Language) =>
   api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
     cache: "no-store",
   });
+export const listStoryArchive = (language: Language) =>
+  api<StoryArchiveItem[]>(`/api/v1/stories/archive?language=${language}`, { cache: "no-store" });
+export const getStory = (id: string) => api<Story>(`/api/v1/stories/${id}`, { cache: "no-store" });
 export const generateStory = (language: Language, kind: Story["kind"], collectionId?: string) =>
   api<Story>("/api/v1/stories/generate", {
     json: { language, kind, ...(collectionId ? { collection_id: collectionId } : {}) },

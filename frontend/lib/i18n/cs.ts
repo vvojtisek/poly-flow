@@ -1033,6 +1033,9 @@ export const cs = {
     collectionTooSmall: "Vybraná sada potřebuje alespoň tři viditelná slova ve zvoleném jazyce.",
     collectionsUnavailable: "Slovní sady se nepodařilo načíst. Příběh můžeš vytvořit z běžného plánu.",
     fromCollection: (name: string) => `Téma vychází ze sady „${name}“.`,
+    archiveTitle: "Předchozí čtení",
+    archiveFailed: "Předchozí čtení se nepodařilo načíst.",
+    backToToday: "Zpět na dnešní text",
     unreviewed: (model: string | null) =>
       `Text napsal místní jazykový model${model ? ` (${model})` : ""}. Prošel automatickou kontrolou slovní zásoby a obsahu, ale nikdo ho ručně nezkontroloval.`,
     targets: "Slova, která se učíš:",

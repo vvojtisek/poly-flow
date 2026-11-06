@@ -1,7 +1,7 @@
 """Generated reading texts: today's story or dialogue, comprehension questions, audio."""
 
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -42,6 +42,7 @@ class QuestionOut(BaseModel):
 class StoryOut(BaseModel):
     id: uuid.UUID
     language: Language
+    story_date: date
     kind: Literal["story", "dialogue"]
     title: str
     lines: list[LineOut]
@@ -51,6 +52,15 @@ class StoryOut(BaseModel):
     model: str | None
     source_collection: str | None
     review_status: Literal["unreviewed"]
+
+
+class StoryArchiveOut(BaseModel):
+    id: uuid.UUID
+    story_date: date
+    title: str
+    kind: Literal["story", "dialogue"]
+    source_collection: str | None
+    targets: list[str]
 
 
 class TodayOut(BaseModel):
@@ -81,6 +91,7 @@ def _out(s: DailyStory) -> StoryOut:
     return StoryOut(
         id=s.id,
         language=s.language,
+        story_date=s.story_date,
         kind=meta.get("kind", "story"),
         title=s.title or "",
         lines=[LineOut(**ln) for ln in meta.get("lines", [])],
@@ -96,6 +107,18 @@ def _out(s: DailyStory) -> StoryOut:
     )
 
 
+def _archive_out(s: DailyStory) -> StoryArchiveOut:
+    meta = s.generation_meta or {}
+    return StoryArchiveOut(
+        id=s.id,
+        story_date=s.story_date,
+        title=s.title or "",
+        kind=meta.get("kind", "story"),
+        source_collection=meta.get("source_collection"),
+        targets=meta.get("targets", []),
+    )
+
+
 @router.get("/today", response_model=TodayOut)
 async def today(language: Language, auth: Auth, db: DB, llm: LlmDep, now: Now) -> TodayOut:
     story = await svc.today(db, auth.acting, language, now)
@@ -103,6 +126,17 @@ async def today(language: Language, auth: Auth, db: DB, llm: LlmDep, now: Now) -
     return TodayOut(
         model_available=model_allowed(auth.acting, llm), story=_out(shown) if shown else None
     )
+
+
+@router.get("/archive", response_model=list[StoryArchiveOut])
+async def story_archive(
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+    limit: Annotated[int, Query(ge=1, le=60)] = 30,
+) -> list[StoryArchiveOut]:
+    rows = await svc.archive(db, auth.acting, language or auth.acting.active_language, limit=limit)
+    return [_archive_out(story) for story in rows]
 
 
 @router.post(

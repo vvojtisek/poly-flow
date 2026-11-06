@@ -795,3 +795,19 @@ selected initially, and empty dates have a clear explanation.
 - The forecast remains a schedule estimate; selecting a date changes no progress or evidence.
 - Verification: insights API tests passed (2 tests), including exact due-item details and child
   filtering. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 11/30: revisit earlier daily readings
+
+**Before:** the reader showed today's generated story or dialogue. Once a new day arrived, older
+texts had no learner-facing path back into the reading experience.
+
+**Built:** a recent-reading archive on the story page, with dates, titles and story/dialogue type.
+Selecting an entry loads its original text, glossary, comprehension state and per-line audio; a
+one-tap action returns to today's reading.
+
+- The API returns only generated, safety-checked entries owned by the acting profile and selected
+  language, with a bounded 30-item default. Pending, rejected or failed generations stay hidden.
+- The archive is read-only for learning records; revisiting text and questions does not create new
+  mastery evidence.
+- Verification: story API tests passed (14 tests), including language and profile isolation.
+  Ruff, frontend typecheck/build and `git diff --check` passed.

@@ -11,11 +11,14 @@ import {
   ApiError,
   answerStoryQuestion,
   generateStory,
+  getStory,
   getStoryToday,
   listWordCollections,
+  listStoryArchive,
   storyAudioUrl,
   type Language,
   type Story,
+  type StoryArchiveItem,
   type WordCollection,
 } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
@@ -229,18 +232,34 @@ export default function StoriesPage() {
   const [collections, setCollections] = useState<WordCollection[]>([]);
   const [collectionId, setCollectionId] = useState("");
   const [collectionsFailed, setCollectionsFailed] = useState(false);
+  const [archive, setArchive] = useState<StoryArchiveItem[]>([]);
+  const [archiveFailed, setArchiveFailed] = useState(false);
+  const [archiveLoading, setArchiveLoading] = useState("");
+  const [archivedStory, setArchivedStory] = useState<Story | null>(null);
 
   useEffect(() => {
     if (!language) return;
     let cancelled = false;
     setState(null);
     setError(null);
+    setArchivedStory(null);
     getStoryToday(language)
       .then((t) => !cancelled && setState({ available: t.model_available, story: t.story }))
       .catch(() => !cancelled && setError(cs.common.error));
     return () => {
       cancelled = true;
     };
+  }, [language, me?.acting.id]);
+
+  useEffect(() => {
+    if (!language) return;
+    let cancelled = false;
+    setArchive([]);
+    setArchiveFailed(false);
+    listStoryArchive(language)
+      .then((items) => !cancelled && setArchive(items))
+      .catch(() => !cancelled && setArchiveFailed(true));
+    return () => { cancelled = true; };
   }, [language, me?.acting.id]);
 
   useEffect(() => {
@@ -261,11 +280,29 @@ export default function StoriesPage() {
     setError(null);
     try {
       const story = await generateStory(language, kind, collectionId || undefined);
+      setArchivedStory(null);
       setState({ available: true, story });
+      try {
+        setArchive(await listStoryArchive(language));
+        setArchiveFailed(false);
+      } catch {
+        setArchiveFailed(true);
+      }
     } catch (e) {
       setError(e instanceof ApiError ? (ERRORS[e.code] ?? cs.common.error) : cs.common.offline);
     } finally {
       setWriting(false);
+    }
+  }
+
+  async function openArchive(id: string) {
+    setArchiveLoading(id);
+    try {
+      setArchivedStory(await getStory(id));
+    } catch {
+      setArchiveFailed(true);
+    } finally {
+      setArchiveLoading("");
     }
   }
 
@@ -284,10 +321,30 @@ export default function StoriesPage() {
         </div>
         {!state && !error && <p className="text-slate-500">{cs.common.loading}</p>}
         {error && <Notice tone="error">{error}</Notice>}
-        {state && !state.available && !state.story && (
+        {state && !state.available && !state.story && !archivedStory && (
           <Notice>{me.acting.is_child ? cs.stories.childUnavailable : cs.stories.unavailable}</Notice>
         )}
-        {state && state.available && !state.story && (
+        {archiveFailed && archive.length === 0 && <Notice tone="error">{cs.stories.archiveFailed}</Notice>}
+        {archive.length > 0 && (
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <h2 className="font-bold">{cs.stories.archiveTitle}</h2>
+              {archivedStory && state?.story && <Button variant="ghost" onClick={() => setArchivedStory(null)}>{cs.stories.backToToday}</Button>}
+            </div>
+            {archiveFailed && <Notice tone="error">{cs.stories.archiveFailed}</Notice>}
+            <ul className="flex max-h-56 flex-col gap-2 overflow-y-auto">
+              {archive.map((item) => (
+                <li key={item.id}>
+                  <button type="button" aria-pressed={(archivedStory?.id ?? state?.story?.id) === item.id} disabled={archiveLoading !== ""} onClick={() => void openArchive(item.id)} className={`flex w-full items-center justify-between gap-3 rounded-xl border px-3 py-2 text-left ${((archivedStory?.id ?? state?.story?.id) === item.id) ? "border-brand-500 bg-brand-500/10" : "border-slate-200 hover:border-brand-500 dark:border-slate-800"}`}>
+                    <span className="min-w-0"><span className="block text-xs text-slate-500">{new Date(`${item.story_date}T12:00:00`).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })}</span><span className="block truncate font-semibold">{item.title}</span></span>
+                    <span className="shrink-0 text-xs text-slate-500">{item.kind === "dialogue" ? cs.stories.dialogue : cs.stories.story}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {state && state.available && !state.story && !archivedStory && (
           <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
             {collections.length > 0 && (
               <label className="flex max-w-xl flex-col gap-1 text-sm font-medium">
@@ -315,7 +372,7 @@ export default function StoriesPage() {
           </div>
         )}
         {writing && <p className="text-slate-500" role="status">{cs.stories.writing}</p>}
-        {state?.story && <Reader story={state.story} />}
+        {(archivedStory || state?.story) && <Reader story={archivedStory ?? state!.story!} />}
       </div>
     </AppShell>
   );

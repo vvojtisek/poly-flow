@@ -213,6 +213,14 @@ async def test_generated_story_is_validated_stored_and_returned(db, client, mode
     assert again.json()["id"] == s["id"] and len(model.requests) == 1
     today = (await client.get("/api/v1/stories/today?language=de")).json()
     assert today["model_available"] is True and today["story"]["id"] == s["id"]
+    archive = await client.get("/api/v1/stories/archive?language=de")
+    assert archive.status_code == 200
+    assert archive.json()[0]["id"] == s["id"]
+    assert archive.json()[0]["title"] == "Der Hund"
+    assert (await client.get("/api/v1/stories/archive?language=fr")).json() == []
+    await make_child(client, me)
+    await login(client, "eva", "4321")
+    assert (await client.get("/api/v1/stories/archive?language=de")).json() == []
     async for db_ in get_session():
         row = (await db_.execute(select(DailyStory))).scalar_one()
         assert row.status == StoryStatus.GENERATED and row.source_type == "generated"
