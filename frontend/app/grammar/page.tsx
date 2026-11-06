@@ -1,13 +1,13 @@
 "use client";
 
-import { AlertTriangle, CheckCircle2, ClipboardCheck, FlaskConical, GraduationCap, Repeat, RotateCcw, Sparkles } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ClipboardCheck, FlaskConical, GraduationCap, Repeat, RotateCcw, Search, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
-import { getGrammarTree, type GrammarTree, type GrammarUnitSummary } from "@/lib/api";
+import { getGrammarTree, type GrammarTree, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -17,6 +17,9 @@ const STATUS_STYLE: Record<string, string> = {
   known: "bg-emerald-100 text-emerald-900 dark:bg-emerald-950 dark:text-emerald-100",
   mastered: "bg-emerald-600 text-white",
 };
+
+const STATUS_FILTERS: UnitState[] = ["new", "studied", "known", "mastered"];
+const fold = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("cs-CZ");
 
 function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean }) {
   return (
@@ -76,6 +79,9 @@ export default function GrammarPage() {
   const language = me?.acting.active_language;
   const [tree, setTree] = useState<GrammarTree | null>(null);
   const [failed, setFailed] = useState(false);
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
+  const [dueOnly, setDueOnly] = useState(false);
 
   useEffect(() => {
     if (!language) return;
@@ -92,6 +98,17 @@ export default function GrammarPage() {
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const units = tree?.levels.flatMap((l) => l.units) ?? [];
+  const foldedQuery = fold(query.trim());
+  const filteredLevels = tree?.levels
+    .map((level) => ({
+      ...level,
+      units: level.units.filter((u) => {
+        const matchesQuery = !foldedQuery || fold(`${u.title} ${u.summary}`).includes(foldedQuery);
+        return matchesQuery && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due);
+      }),
+    }))
+    .filter((level) => level.units.length > 0) ?? [];
+  const visibleCount = filteredLevels.reduce((sum, level) => sum + level.units.length, 0);
   return (
     <AppShell me={me}>
       <div className="flex flex-col gap-4">
@@ -148,7 +165,63 @@ export default function GrammarPage() {
                 </span>
               </Link>
             )}
-            {tree.levels.map((lv) => (
+            <section className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900" aria-label={cs.grammar.findTopics}>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <label className="flex min-w-56 flex-1 items-center gap-2 rounded-xl border border-slate-300 px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700">
+                  <Search className="size-4 shrink-0 text-slate-400" aria-hidden />
+                  <input
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder={cs.grammar.searchTopics}
+                    aria-label={cs.grammar.searchTopics}
+                    className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none"
+                  />
+                  {query && (
+                    <button type="button" onClick={() => setQuery("")} aria-label={cs.grammar.clearSearch} className="rounded-full p-1 hover:bg-slate-100 dark:hover:bg-slate-800">
+                      <X className="size-4" aria-hidden />
+                    </button>
+                  )}
+                </label>
+                <span aria-live="polite" className="text-xs tabular-nums text-slate-500">
+                  {cs.grammar.visibleTopics(visibleCount, units.length)}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                <button
+                  type="button"
+                  aria-pressed={!statusFilter}
+                  onClick={() => setStatusFilter(null)}
+                  className={`rounded-full px-3 py-1.5 text-sm font-medium ${!statusFilter ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                >
+                  {cs.grammar.allTopics} {units.length}
+                </button>
+                {STATUS_FILTERS.map((status) => {
+                  const count = units.filter((u) => u.status === status).length;
+                  return (
+                    <button
+                      key={status}
+                      type="button"
+                      aria-pressed={statusFilter === status}
+                      onClick={() => setStatusFilter(statusFilter === status ? null : status)}
+                      className={`rounded-full px-3 py-1.5 text-sm font-medium ${statusFilter === status ? "ring-2 ring-brand-500" : ""} ${STATUS_STYLE[status]}`}
+                    >
+                      {cs.grammar.status[status]} {count}
+                    </button>
+                  );
+                })}
+                <button
+                  type="button"
+                  aria-pressed={dueOnly}
+                  onClick={() => setDueOnly((value) => !value)}
+                  className={`rounded-full px-3 py-1.5 text-sm font-medium ${dueOnly ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                >
+                  {cs.grammar.due} {tree.due}
+                </button>
+              </div>
+            </section>
+            {visibleCount === 0 ? (
+              <Notice>{cs.grammar.noTopicMatches}</Notice>
+            ) : filteredLevels.map((lv) => (
               <section key={lv.level} className="flex flex-col gap-2" aria-labelledby={`level-${lv.level}`}>
                 <h2 id={`level-${lv.level}`} className="text-lg font-bold">
                   {lv.level}

@@ -679,3 +679,18 @@ banner, and a self-contained Czech fallback page with a retry button.
 - Verification: frontend typecheck/build passed; the production Docker runner build succeeded.
   A Playwright browser confirmed the worker controlled the page, cached 10 static assets and no
   API URLs, then returned the Czech retry screen when taken offline.
+
+## Cycle 4/30: searchable grammar roadmap
+
+**Before:** the grammar page rendered every topic in long CEFR sections. Learners had to scroll
+through the full curriculum to return to an unfinished topic or find a specific explanation.
+
+**Built:** a diacritics-insensitive search across topic titles and summaries, status chips with
+per-status counts, and a one-tap filter for topics due for verification. The roadmap reports how
+many topics match and gives a clear no-results state. The introduction now describes grammar
+generically across all four languages instead of saying every learner is on the German path.
+
+- Filters affect presentation only. Every unit remains open from A1; the suggested order, mastery,
+  and graded verification contracts are unchanged.
+- Verification: frontend typecheck and production build; current local grammar route request and
+  git diff checks before the local Cycle 4 commit.
