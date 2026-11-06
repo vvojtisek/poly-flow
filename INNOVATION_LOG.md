@@ -642,3 +642,23 @@ the dictionary and command palette.
   the test process pointed at Compose Redis; Ruff and `alembic check` passed. Frontend typecheck
   and production build passed. Local Compose applied revision 0021; `/collections` and `/readyz`
   returned HTTP 200.
+
+## Cycle 2/30: context-first listening from a word collection
+
+**Before:** collections grouped the learner's words for reference, but did not provide a way to
+return to them as useful in-context listening practice.
+
+**Built:** *Slova v kontextu* in the collection manager. Each eligible word is presented with its
+own example sentence and local TTS playback; the learner tries to infer the target word's meaning
+before revealing the Czech gloss. Playback can be slowed and the learner can move back and forth
+through the set.
+
+- Only collection words with a stored example sentence appear. The existing word audio endpoint
+  serves the clip and validates profile visibility; examples are reviewed lexicon text, not model
+  output.
+- The activity is explicitly ungraded and does not save attempts or alter review scheduling,
+  mastery, or daily goal evidence. Empty collections or collections without examples have a clear
+  message and remain usable for reference.
+- Verification: a collection API regression asserts example sentences are returned only with
+  the profile's visible collection words; frontend typecheck/build and targeted API tests run
+  before the local Cycle 2 commit.

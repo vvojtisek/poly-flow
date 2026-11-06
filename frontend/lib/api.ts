@@ -931,7 +931,15 @@ export interface WordCollection {
 }
 export interface WordCollectionDetail extends Omit<WordCollection, "count" | "created_at"> {
   language: Language;
-  items: { id: string; lemma: string; gender: string | null; pos: string; translation: string; rank: number }[];
+  items: {
+    id: string;
+    lemma: string;
+    gender: string | null;
+    pos: string;
+    translation: string;
+    rank: number;
+    example: string | null;
+  }[];
 }
 export const listWordCollections = (language: Language) =>
   api<WordCollection[]>(`/api/v1/words/collections?language=${language}`);

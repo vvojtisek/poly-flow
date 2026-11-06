@@ -73,6 +73,7 @@ async def get_collection(
             LexiconItem.pos,
             LexiconItem.translation_cs,
             LexiconItem.frequency_rank,
+            LexiconItem.example_sentence,
         )
         .join(WordCollectionItem, WordCollectionItem.lexicon_item_id == LexiconItem.id)
         .join(UserWordProgress, UserWordProgress.lexicon_item_id == LexiconItem.id)
@@ -92,6 +93,7 @@ async def get_collection(
             "pos": r.pos,
             "translation": r.translation_cs,
             "rank": r.frequency_rank,
+            "example": r.example_sentence,
         }
         for r in rows
     ]

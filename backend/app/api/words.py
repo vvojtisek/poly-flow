@@ -103,6 +103,7 @@ class CollectionItemOut(BaseModel):
     pos: str
     translation: str
     rank: int
+    example: str | None
 
 
 class CollectionDetailOut(BaseModel):

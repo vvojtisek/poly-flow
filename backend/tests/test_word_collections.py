@@ -9,7 +9,7 @@ from app.api.deps import get_limiter
 from app.api.learning import get_now
 from app.db.session import get_session
 from app.main import app
-from app.models import User
+from app.models import LexiconItem, User
 from app.services.rate_limit import MemoryAttemptLimiter
 from tests.helpers import Clock, csrf, login, make_child, setup_parent
 from tests.test_words import seed
@@ -27,6 +27,11 @@ def clock():
 async def test_collection_crud_is_private_and_only_accepts_encountered_words(db, client, clock):
     me = await setup_parent(client)
     ids = await seed(uuid.UUID(me["acting"]["id"]), clock)
+    async for session in get_session():
+        word = await session.scalar(select(LexiconItem).where(LexiconItem.id == ids["Haus"]))
+        word.example_sentence = "Ich kaufe ein Haus."
+        await session.commit()
+        break
     created = await client.post(
         "/api/v1/words/collections",
         json={"language": "de", "name": "  Na   cestě  "},
@@ -76,6 +81,7 @@ async def test_collection_crud_is_private_and_only_accepts_encountered_words(db,
     detail = (await client.get(f"/api/v1/words/collections/{collection_id}")).json()
     assert detail["name"] == "Na cestě"
     assert [word["lemma"] for word in detail["items"]] == ["Haus"]
+    assert detail["items"][0]["example"] == "Ich kaufe ein Haus."
     assert (await client.get("/api/v1/words/collections?language=de")).json()[0]["count"] == 1
     assert (
         await client.delete(

@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowLeft, FolderOpen, Plus, Trash2 } from "lucide-react";
+import { ArrowLeft, FolderOpen, Headphones, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
+import { WordCollectionPractice } from "@/components/WordCollectionPractice";
 import {
   createWordCollection,
   deleteWordCollection,
@@ -30,6 +31,7 @@ export default function CollectionsPage() {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [practicing, setPracticing] = useState(false);
 
   const refresh = useCallback(async (preferred?: string) => {
     if (!language) return;
@@ -146,6 +148,7 @@ export default function CollectionsPage() {
                   aria-pressed={selected === collection.id}
                   onClick={() => {
                     setSelected(collection.id);
+                    setPracticing(false);
                     getWordCollection(collection.id).then(setDetail).catch(() => setFailed(true));
                   }}
                   className={`min-w-40 rounded-xl border p-3 text-left ${selected === collection.id ? "border-brand-500 bg-brand-500/10" : "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"}`}
@@ -164,11 +167,22 @@ export default function CollectionsPage() {
                       <h2 className="text-lg font-bold">{detail.name}</h2>
                       <p className="text-sm text-slate-500">{t.count(detail.items.length)}</p>
                     </div>
-                    <Button variant="ghost" disabled={busy} onClick={() => void removeCollection()} className="text-rose-700 dark:text-rose-300">
-                      <Trash2 className="size-4" aria-hidden /> {t.delete}
-                    </Button>
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        variant="secondary"
+                        onClick={() => setPracticing((value) => !value)}
+                        aria-pressed={practicing}
+                      >
+                        <Headphones className="size-4" aria-hidden /> {t.sentencePractice}
+                      </Button>
+                      <Button variant="ghost" disabled={busy} onClick={() => void removeCollection()} className="text-rose-700 dark:text-rose-300">
+                        <Trash2 className="size-4" aria-hidden /> {t.delete}
+                      </Button>
+                    </div>
                   </header>
-                  {detail.items.length === 0 ? (
+                  {practicing ? (
+                    <WordCollectionPractice collection={detail} onClose={() => setPracticing(false)} />
+                  ) : detail.items.length === 0 ? (
                     <Notice>{t.emptyItems}</Notice>
                   ) : (
                     <ul className="divide-y divide-slate-100 dark:divide-slate-800">
