@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Shapes, Trophy, Waves } from "lucide-react";
+import { Activity, AlertTriangle, Award, Drama, BarChart3, BookOpen, ClipboardCheck, Compass, Gauge, GraduationCap, Headphones, Map as MapIcon, Play, Shapes, Trophy, Waves } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -116,6 +116,10 @@ export default function HomePage() {
               </Button>
             </div>
             <div className="grid grid-cols-2 gap-2">
+              <Button variant="secondary" className="col-span-2 w-full" onClick={() => router.push("/roleplay")}>
+                <Drama className="size-5" aria-hidden />
+                {cs.roleplay.title}
+              </Button>
               <Button variant="secondary" className="w-full" onClick={() => router.push("/dictation")}>
                 <Headphones className="size-5" aria-hidden />
                 {cs.dictation.title}

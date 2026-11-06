@@ -21,6 +21,7 @@ unreviewed.
 | 8 | German case lab | build a noun phrase, see which word carries the case signal |
 | 9 | Shadowing studio (Stínování) | listen, repeat aloud, compare rhythm outlines; recordings never leave the browser |
 | 10 | Gender sorter (Rody) | 1-2-3 keyboard sorting with ending rules on a miss, optional 60 s test |
+| 11 | Role-play (Hraj roli) | play a lesson scene as one speaker: choose or type your lines |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -216,3 +217,23 @@ the palette.
   words" filter. A cheat sheet lists every rule with its certainty.
 - "Test rychlosti 60 s": an explicitly separate timed test (learning stays untimed); the score
   is not recorded anywhere, only a personal best kept in this browser.
+
+## Cycle 11/30: role-play a lesson scene (Hraj roli)
+
+**Before:** a lesson's scene (a short dialogue) was read once at the start of the lesson and then
+never used again.
+
+**Built:** `/roleplay`, a scripted dialogue simulator over the reviewed scenes (no LLM).
+
+- Offered scenes: ones the learner finished a lesson on, or whose words they have all met (for
+  example through placement); scenes with a word hidden from the profile are skipped, as in
+  lessons.
+- Pick a scene and a role. The partner's lines appear as chat bubbles and are spoken (TTS, with a
+  reading pause when TTS is off). On your turn you see what you want to say in Czech and either
+  pick the right sentence from three (keys 1-3; a wrong pick is crossed out and you try again) or
+  type it and get the word-level diff from the dictation engine.
+- Distractors (`app.domain.roleplay`): one line from the same scene that does not fit the moment,
+  one of similar length from another scene; deterministic per scene, role and line.
+- Translations on demand under every bubble, replay any line, play again or swap roles at the
+  end. Nothing is recorded; the "first try" count is shown only on the page.
+- `WordDiff` was extracted from the dictation page and is shared.

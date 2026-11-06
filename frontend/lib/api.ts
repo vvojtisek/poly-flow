@@ -874,3 +874,33 @@ export interface GenderSet {
   nouns: GenderNoun[];
 }
 export const getGenders = (language: Language) => api<GenderSet>(`/api/v1/genders?language=${language}`);
+
+// ---------------------------------------------------------------- role-play (ungraded)
+
+export interface RoleplayScene {
+  id: string;
+  title: string;
+  speakers: string[];
+  lines: number;
+}
+export interface RoleplayLine {
+  speaker: string;
+  text: string;
+  cs: string;
+  mine: boolean;
+  options: string[] | null;
+  answer: number | null;
+}
+export interface RoleplayScript {
+  id: string;
+  title: string;
+  role: string;
+  speakers: string[];
+  lines: RoleplayLine[];
+}
+export const listRoleplay = (language: Language) => api<RoleplayScene[]>(`/api/v1/roleplay?language=${language}`);
+export const getRoleplay = (id: string, role: string) =>
+  api<RoleplayScript>(`/api/v1/roleplay/${id}?role=${encodeURIComponent(role)}`);
+export const checkRoleplay = (id: string, line: number, text: string) =>
+  api<{ marks: DictationResult["marks"]; score: number }>(`/api/v1/roleplay/${id}/check`, { json: { line, text } });
+export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/${id}/audio?line=${line}`;
