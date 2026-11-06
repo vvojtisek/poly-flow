@@ -49,3 +49,16 @@ async def test_onboarded_flag(db, client):
     )
     s = r.json()["settings"]
     assert s["onboarded"] is True and s["daily_goal_minutes"] == 15
+
+
+async def test_accent_colour(db, client):
+    me = await setup_parent(client)
+    assert me["acting"]["settings"]["accent"] == "blue"
+    r = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"accent": "violet"}}, headers=csrf(me)
+    )
+    assert r.json()["settings"]["accent"] == "violet"
+    bad = await client.patch(
+        "/api/v1/me/profile", json={"settings": {"accent": "#ff0000"}}, headers=csrf(me)
+    )
+    assert bad.status_code == 422

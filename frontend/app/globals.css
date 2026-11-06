@@ -3,6 +3,33 @@
 /* Dark mode follows the .dark class on <html> (lib/theme.ts), set before first paint. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Accent colours (profile setting): the same lightness and chroma as the default blue, so text
+   contrast on brand buttons stays the same; only the hue turns. Set on <html> by lib/theme.ts. */
+html[data-accent="teal"] {
+  --color-brand-50: oklch(0.97 0.02 200);
+  --color-brand-500: oklch(0.58 0.15 200);
+  --color-brand-600: oklch(0.5 0.14 200);
+  --color-brand-900: oklch(0.28 0.07 200);
+}
+html[data-accent="violet"] {
+  --color-brand-50: oklch(0.97 0.02 295);
+  --color-brand-500: oklch(0.58 0.17 295);
+  --color-brand-600: oklch(0.5 0.17 295);
+  --color-brand-900: oklch(0.28 0.08 295);
+}
+html[data-accent="orange"] {
+  --color-brand-50: oklch(0.97 0.02 50);
+  --color-brand-500: oklch(0.58 0.16 45);
+  --color-brand-600: oklch(0.5 0.15 45);
+  --color-brand-900: oklch(0.28 0.07 45);
+}
+html[data-accent="pink"] {
+  --color-brand-50: oklch(0.97 0.02 345);
+  --color-brand-500: oklch(0.58 0.17 345);
+  --color-brand-600: oklch(0.5 0.17 345);
+  --color-brand-900: oklch(0.28 0.08 345);
+}
+
 /* Tailwind v4: design tokens live here (CSS-first config), not in tailwind.config.js. */
 @theme {
   --color-brand-50: oklch(0.97 0.02 250);

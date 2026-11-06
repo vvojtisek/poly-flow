@@ -101,7 +101,10 @@ export interface ProfileSettings {
   reading_spacing: boolean;
   reduce_motion: boolean;
   onboarded: boolean;
+  accent: Accent;
 }
+
+export type Accent = "blue" | "teal" | "violet" | "orange" | "pink";
 
 export type TextSize = "s" | "m" | "l" | "xl";
 

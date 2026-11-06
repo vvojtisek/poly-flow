@@ -1,6 +1,6 @@
 "use client";
 
-import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, Type, X } from "lucide-react";
+import { Check, Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, Type, X } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
@@ -12,6 +12,7 @@ import {
   listVoices,
   updateOwnProfile,
   voiceSampleUrl,
+  type Accent,
   type Me,
   type ProfileSettings,
   type TextSize,
@@ -59,6 +60,42 @@ function ThemePicker({ value, onChange }: { value: Theme; onChange: (t: Theme) =
           {cs.settings.themes[t]}
         </button>
       ))}
+    </div>
+  );
+}
+
+const ACCENTS: { value: Accent; color: string }[] = [
+  { value: "blue", color: "oklch(0.58 0.17 250)" },
+  { value: "teal", color: "oklch(0.58 0.15 200)" },
+  { value: "violet", color: "oklch(0.58 0.17 295)" },
+  { value: "orange", color: "oklch(0.58 0.16 45)" },
+  { value: "pink", color: "oklch(0.58 0.17 345)" },
+];
+
+function AccentPicker({ value, onChange }: { value: Accent; onChange: (a: Accent) => void }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="text-sm font-semibold">{cs.settings.accent}</h3>
+      <div role="radiogroup" aria-label={cs.settings.accent} className="flex flex-wrap gap-3">
+        {ACCENTS.map(({ value: a, color }) => (
+          <button
+            key={a}
+            type="button"
+            role="radio"
+            aria-checked={value === a}
+            aria-label={cs.settings.accents[a]}
+            title={cs.settings.accents[a]}
+            onClick={() => onChange(a)}
+            className={`grid size-11 place-items-center rounded-full ring-offset-2 ring-offset-white dark:ring-offset-slate-900 ${
+              value === a ? "ring-2 ring-slate-900 dark:ring-white" : ""
+            }`}
+            style={{ background: color }}
+          >
+            {value === a && <Check className="size-5 text-white" aria-hidden />}
+          </button>
+        ))}
+      </div>
+      <p className="text-xs text-slate-500">{cs.settings.accentHelp}</p>
     </div>
   );
 }
@@ -250,7 +287,10 @@ function SettingsView({ me }: { me: Me }) {
       </div>
       {save === "error" && <Notice tone="error">{cs.settings.failed}</Notice>}
       <Panel title={cs.settings.theme} icon={Palette}>
-        <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
+        <div className="flex flex-col gap-4">
+          <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
+          <AccentPicker value={settings.accent ?? "blue"} onChange={(accent) => void change({ accent })} />
+        </div>
       </Panel>
       <Panel title={cs.settings.comfort} icon={Type}>
         <div className="flex flex-col gap-4">

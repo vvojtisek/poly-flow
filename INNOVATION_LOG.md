@@ -33,6 +33,7 @@ unreviewed.
 | 20 | Number trainer (Čísla) | 0–9999 written, heard and read in DE/FR/IT/EN, spelled by rules with both French spellings accepted |
 | 21 | Word order (Slovosled) | rebuild shuffled sentences from met scenes and example sentences; Czech meaning as the goal |
 | 22 | Telling the time (Kolik je hodin?) | analog clock, everyday spoken forms in four languages, the Czech "čtvrt na" trap as a distractor |
+| 23 | Accent colours (Barva) | five accent hues per profile; same contrast, never green or red, gender colours unchanged |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -462,3 +463,19 @@ Czech speakers: Czech "čtvrt na čtyři" is 3:15, German says "Viertel nach dre
   Czech everyday form ("česky: čtvrt na osm") as the anchor.
 - Tests pin the phrases per language, check that all 144 times read differently in every
   language, the Czech forms, distractors for every time, and the quiz API. Practice only.
+
+## Cycle 23/30: accent colours (Barva)
+
+**Before:** every profile looked the same blue. On a shared family device a child and a parent
+could not tell at a glance whose profile was active, and a child could not make the app theirs.
+
+**Built:** a per-profile `accent` setting (blue, teal, violet, orange, pink) in Nastavení > Vzhled.
+
+- The accent redefines the four brand tokens on `<html data-accent>`; every brand button, link,
+  ring and progress bar follows, with no component changes. Lightness and chroma match the
+  default blue, so white text on brand buttons keeps the same contrast; only the hue turns.
+- No accent is green or red, so a brand button never reads as "right" or "wrong", and the
+  gender colours (der blue, die red, das green) are separate tokens that never change.
+- Applied before first paint from local storage (same script as theme and text size), then from
+  the profile on sign-in, so switching to a child's profile switches the colour.
+- Server validation: only the five names are accepted (tested; "#ff0000" is a 422).

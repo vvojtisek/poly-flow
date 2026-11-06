@@ -767,6 +767,9 @@ export const cs = {
     failed: "Nastavení se nepodařilo uložit. Zkus to znovu.",
     theme: "Vzhled",
     themes: { light: "Světlý", dark: "Tmavý", system: "Podle zařízení" } as Record<string, string>,
+    accent: "Barva",
+    accents: { blue: "Modrá", teal: "Tyrkysová", violet: "Fialová", orange: "Oranžová", pink: "Růžová" } as Record<string, string>,
+    accentHelp: "Barva tlačítek a zvýraznění. Barvy rodů (der, die, das) a správně/špatně zůstávají stejné.",
     interests: "Zájmy",
     interestsHelp:
       "Zájmy se zatím jen ukládají. Lekce se teď řídí pevným pořadím nejčastějších slov a scén; podle zájmů budou vybírána témata až u denních textů, které aplikace zatím neumí.",

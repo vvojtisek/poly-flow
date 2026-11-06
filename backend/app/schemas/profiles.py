@@ -46,6 +46,10 @@ class ProfileSettings(BaseModel):
     text_size: Literal["s", "m", "l", "xl"] = "m"
     reading_spacing: bool = False
     reduce_motion: bool = False
+    # Accent colour of buttons, links and highlights (this profile, every device). Gender colours
+    # (der/die/das) and right/wrong colours never change with it; no accent is green or red, so
+    # an accent button never reads as "right" or "wrong".
+    accent: Literal["blue", "teal", "violet", "orange", "pink"] = "blue"
     # The first-run welcome (language, daily goal, rank path, text size) was finished or skipped.
     onboarded: bool = False
 
