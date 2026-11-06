@@ -97,7 +97,12 @@ export interface ProfileSettings {
   voices: Partial<Record<Language, string>>;
   learn_profanity: boolean;
   rank_path: RankPath;
+  text_size: TextSize;
+  reading_spacing: boolean;
+  reduce_motion: boolean;
 }
+
+export type TextSize = "s" | "m" | "l" | "xl";
 
 export interface Voice {
   id: string;

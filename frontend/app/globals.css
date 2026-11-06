@@ -47,3 +47,16 @@ body {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 }
+
+/* Reading comfort (profile settings). Tailwind sizes are in rem, so the root size scales the UI. */
+html[data-text="s"] { font-size: 93.75%; }
+html[data-text="l"] { font-size: 112.5%; }
+html[data-text="xl"] { font-size: 125%; }
+html[data-spacing] body { letter-spacing: 0.04em; word-spacing: 0.14em; }
+html[data-spacing] :where(p, li, label, dd, blockquote) { line-height: 1.75; }
+html[data-motion="reduce"] *, html[data-motion="reduce"] *::before, html[data-motion="reduce"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

@@ -23,6 +23,7 @@ unreviewed.
 | 10 | Gender sorter (Rody) | 1-2-3 keyboard sorting with ending rules on a miss, optional 60 s test |
 | 11 | Role-play (Hraj roli) | play a lesson scene as one speaker: choose or type your lines |
 | 12 | Practice hub + mobile tab bar | one home for all practice modes; thumb-reach navigation on phones |
+| 13 | Reading comfort | per-profile text size, wider spacing, no animations; applied before first paint |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -255,3 +256,22 @@ link in an already crowded header that wrapped into three rows on a phone.
   settings, family and logout become icon buttons on small screens with their accessible names
   kept (the e2e suite looks up "Rodina" by name). Placement moved out of the header (it stays on
   the dashboard and in the palette).
+
+## Cycle 13/30: reading comfort settings
+
+**Before:** the only display choice was light/dark. Children, older family members and readers
+who struggle with dense text had no way to make the app easier to read.
+
+**Built:** a "Pohodlí při čtení" panel in settings, stored per profile on the server
+(`ProfileSettings.text_size` s/m/l/xl, `reading_spacing`, `reduce_motion`), so a handed-over
+device switches to the child's own display at once.
+
+- Text size scales the whole UI (Tailwind sizes are rem-based; the root size changes).
+- Wider letter, word and line spacing. The copy says it helps "some people, including many
+  with dyslexia", which matches the evidence on letter spacing (for example Zorzi et al., 2012)
+  without claiming a cure; no special "dyslexia font" is used because the evidence for those is
+  weak.
+- "Bez animací" switches off motion even when the device allows it (the app already honours the
+  operating system's reduced-motion setting).
+- Applied before first paint by the existing head script (cached in localStorage), then
+  confirmed from the server profile; a live preview sentence shows the effect.

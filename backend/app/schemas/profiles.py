@@ -41,6 +41,11 @@ class ProfileSettings(BaseModel):
     learn_profanity: bool = False
     # Personal rank path theme (single player, no comparison): hockey, royal, or hidden.
     rank_path: Literal["hockey", "royal", "off"] = "hockey"
+    # Reading comfort (this profile's display, on every device): text size, wider letter and
+    # line spacing (helps some readers, including many with dyslexia), and no animations.
+    text_size: Literal["s", "m", "l", "xl"] = "m"
+    reading_spacing: bool = False
+    reduce_motion: bool = False
 
     @field_validator("interests")
     @classmethod

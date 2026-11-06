@@ -1,6 +1,6 @@
 "use client";
 
-import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, X } from "lucide-react";
+import { Gauge, Heart, Mic, Monitor, Moon, Palette, Plus, ShieldAlert, Sun, Type, X } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { AppShell, FullPageStatus } from "@/components/AppShell";
@@ -14,6 +14,7 @@ import {
   voiceSampleUrl,
   type Me,
   type ProfileSettings,
+  type TextSize,
   type Theme,
   type Voice,
 } from "@/lib/api";
@@ -250,6 +251,59 @@ function SettingsView({ me }: { me: Me }) {
       {save === "error" && <Notice tone="error">{cs.settings.failed}</Notice>}
       <Panel title={cs.settings.theme} icon={Palette}>
         <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
+      </Panel>
+      <Panel title={cs.settings.comfort} icon={Type}>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-semibold">{cs.settings.textSize}</h3>
+            <div role="radiogroup" aria-label={cs.settings.textSize} className="grid grid-cols-4 gap-2">
+              {(["s", "m", "l", "xl"] as TextSize[]).map((size, i) => (
+                <button
+                  key={size}
+                  type="button"
+                  role="radio"
+                  aria-checked={settings.text_size === size}
+                  onClick={() => void change({ text_size: size })}
+                  className={`flex flex-col items-center gap-1 rounded-xl px-2 py-3 font-medium ${
+                    settings.text_size === size ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                  }`}
+                >
+                  <span style={{ fontSize: `${0.9 + i * 0.25}rem` }} aria-hidden>
+                    Aa
+                  </span>
+                  <span className="text-xs">{cs.settings.textSizes[size]}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <label className="flex items-start gap-3 text-sm font-medium">
+            <input
+              type="checkbox"
+              className="mt-0.5 size-5 accent-brand-500"
+              checked={settings.reading_spacing}
+              onChange={(e) => void change({ reading_spacing: e.target.checked })}
+            />
+            <span className="flex flex-col">
+              {cs.settings.spacing}
+              <span className="text-xs font-normal text-slate-500">{cs.settings.spacingHelp}</span>
+            </span>
+          </label>
+          <label className="flex items-start gap-3 text-sm font-medium">
+            <input
+              type="checkbox"
+              className="mt-0.5 size-5 accent-brand-500"
+              checked={settings.reduce_motion}
+              onChange={(e) => void change({ reduce_motion: e.target.checked })}
+            />
+            <span className="flex flex-col">
+              {cs.settings.motion}
+              <span className="text-xs font-normal text-slate-500">{cs.settings.motionHelp}</span>
+            </span>
+          </label>
+          <p lang="de" className="rounded-xl bg-slate-50 p-3 text-lg dark:bg-slate-800/60">
+            {cs.settings.preview}
+          </p>
+        </div>
       </Panel>
       <Panel title={cs.settings.interests} icon={Heart}>
         <Interests value={settings.interests} onChange={(interests) => void change({ interests })} />
