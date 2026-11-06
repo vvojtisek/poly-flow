@@ -1076,6 +1076,7 @@ export const cs = {
     wrong: (answer: string) => `Ne, správně je: ${answer}`,
     playLine: "Přehrát větu",
     listenAll: "Poslechnout celý text",
+    listenFromLine: (line: number) => `Přehrát od věty ${line} až do konce`,
     stopReading: "Zastavit",
     audioFailed: "Zvuk této věty se nepodařilo přehrát. Zkus samostatné tlačítko u řádku.",
     linePosition: (current: number, total: number) => `Právě hraje věta ${current} z ${total}`,

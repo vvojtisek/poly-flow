@@ -899,3 +899,16 @@ count and clear empty state keep each combination understandable.
 - Filtering changes only the current view; collection membership and saved learning records stay
   untouched.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 18/30: continue story audio from any sentence
+
+**Before:** the reader could play an individual sentence or listen to the whole story, but whole
+story playback always restarted from the beginning.
+
+**Built:** every sentence now has a clearly labeled action to start continuous playback there.
+Audio proceeds through the remaining lines and highlights the active sentence; the existing
+whole-story action still starts from the first line.
+
+- Sentence playback remains available separately for replaying just one line. Starting playback
+  from a line near the end finishes at the end of the story.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

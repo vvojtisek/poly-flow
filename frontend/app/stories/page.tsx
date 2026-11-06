@@ -54,10 +54,9 @@ function Reader({ story }: { story: Story }) {
     setAudioError(false);
   }, [story.id]);
 
-  function listenAll() {
+  function listenFrom(index: number) {
     setAudioError(false);
-    if (activeLine === null) setActiveLine(0);
-    else if (activeLine !== 0) setActiveLine(0);
+    if (activeLine !== index) setActiveLine(index);
     else if (audio.current) {
       audio.current.currentTime = 0;
       void audio.current.play().catch(() => setAudioError(true));
@@ -96,7 +95,7 @@ function Reader({ story }: { story: Story }) {
           </Button>
         </div>
         <div className="flex flex-wrap items-center gap-2 rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
-          <Button variant="secondary" onClick={listenAll} disabled={story.lines.length === 0}>
+          <Button variant="secondary" onClick={() => listenFrom(0)} disabled={story.lines.length === 0}>
             <Play className="size-4" aria-hidden /> {cs.stories.listenAll}
           </Button>
           {activeLine !== null && (
@@ -122,6 +121,9 @@ function Reader({ story }: { story: Story }) {
         <ol className="flex flex-col gap-3">
           {story.lines.map((ln, i) => (
             <li key={i} aria-current={activeLine === i ? "true" : undefined} className={`flex items-start gap-2 rounded-xl p-2 transition-colors ${activeLine === i ? "bg-brand-500/10 ring-1 ring-brand-500/40" : ""}`}>
+              <button type="button" onClick={() => listenFrom(i)} aria-label={cs.stories.listenFromLine(i + 1)} title={cs.stories.listenFromLine(i + 1)} className="mt-1 rounded-full p-2 text-brand-600 hover:bg-brand-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-brand-200">
+                <Play className="size-4" aria-hidden />
+              </button>
               <PlayButton url={storyAudioUrl(story.id, i)} label={cs.stories.playLine} size="sm" />
               <div className="flex flex-col">
                 <p className="text-lg" lang={story.language}>
