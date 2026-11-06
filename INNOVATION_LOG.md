@@ -1004,3 +1004,16 @@ from the previous story are ignored. Previously saved archive answers stay locke
 - The server records the first answer per question; retrying the identical choice is safe and
   does not change saved results.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 26/30: surface the install action for the web app
+
+**Before:** the production app had a manifest and service worker, but no navigation control for
+the install prompt offered by supported browsers.
+
+**Built:** the shared navigation now listens for the browser's installability event and shows a
+clearly labeled install button only when that prompt is available. The action opens the native
+browser prompt and disappears after installation or dismissal.
+
+- Browsers that do not expose the install prompt keep the regular navigation unchanged. The
+  button does not claim that personal learning data is available offline.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

@@ -1,6 +1,10 @@
 // cs-CZ UI strings. All user-facing copy goes through this table.
 export const cs = {
   appName: "PolyFlow",
+  appInstall: {
+    install: "Přidat aplikaci",
+    help: "Nainstalovat PolyFlow do tohoto zařízení",
+  },
   tagline: "Rodinná jazyková škola – němčina, francouzština, italština, angličtina",
   todayPractice: "Dnešní procvičování",
   startDrill: "Začít procvičovat",
