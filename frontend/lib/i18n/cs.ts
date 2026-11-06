@@ -301,6 +301,7 @@ export const cs = {
       reading: () => "Krátké čtení",
     } as Record<string, (n: number) => string>,
     go: "Pokračovat",
+    recentReadings: "Nedávná čtení",
     tomorrow: (n: number) => `Zítra přijde na řadu ${n} slov.`,
   },
   words: {

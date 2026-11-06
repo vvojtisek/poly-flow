@@ -1,7 +1,7 @@
 "use client";
 
 import { BookOpenText, CheckCircle2, Languages, MessagesSquare, Play, Square, Trash2, XCircle } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { PlayButton } from "@/components/PlayButton";
@@ -316,7 +316,7 @@ export default function StoriesPage() {
     }
   }
 
-  async function openArchive(id: string) {
+  const openArchive = useCallback(async (id: string) => {
     setArchiveLoading(id);
     try {
       setArchivedStory(await getStory(id));
@@ -325,7 +325,15 @@ export default function StoriesPage() {
     } finally {
       setArchiveLoading("");
     }
-  }
+  }, []);
+
+  const archiveDeepLinkAttempt = useRef<string | null>(null);
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("story");
+    if (!id || archiveDeepLinkAttempt.current === id || !archive.some((item) => item.id === id)) return;
+    archiveDeepLinkAttempt.current = id;
+    void openArchive(id);
+  }, [archive, openArchive]);
 
   async function removeArchiveStory(item: StoryArchiveItem) {
     if (!window.confirm(cs.stories.deleteConfirm(item.title))) return;

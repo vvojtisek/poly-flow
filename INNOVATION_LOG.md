@@ -1017,3 +1017,15 @@ browser prompt and disappears after installation or dismissal.
 - Browsers that do not expose the install prompt keep the regular navigation unchanged. The
   button does not claim that personal learning data is available offline.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 27/30: reopen recent readings from the dashboard
+
+**Before:** the dashboard linked to today's reading, but returning to a saved story required
+opening the stories page and finding it in the archive list.
+
+**Built:** the daily plan now shows the three most recent saved readings, each opening directly
+in the story archive reader through a profile-checked story link.
+
+- The archive API already limits results to generated, safety-checked readings for the acting
+  profile and selected language. A deep link is opened only when its ID is in that archive list.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
