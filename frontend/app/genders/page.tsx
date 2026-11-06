@@ -1,6 +1,6 @@
 "use client";
 
-import { Shapes, Timer } from "lucide-react";
+import { ListChecks, Shapes } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -13,7 +13,7 @@ import { genderClass } from "@/lib/gender";
 import { cs } from "@/lib/i18n/cs";
 
 const t = cs.genders;
-const SPRINT_SECONDS = 60;
+const ROUND_QUESTIONS = 10;
 const RETRY_GAP = 3; // a missed noun comes back after this many others
 const BIN_STYLE: Record<string, string> = {
   der: "border-sky-300 bg-sky-50 text-sky-800 dark:border-sky-800 dark:bg-sky-950 dark:text-sky-200",
@@ -33,24 +33,6 @@ function shuffle<T>(xs: T[]): T[] {
   return a;
 }
 
-function bestKey(language: Language) {
-  return `pf_gender_best_${language}`;
-}
-function readBest(language: Language): number {
-  try {
-    return Number(window.localStorage.getItem(bestKey(language)) ?? 0) || 0;
-  } catch {
-    return 0;
-  }
-}
-function writeBest(language: Language, n: number) {
-  try {
-    window.localStorage.setItem(bestKey(language), String(n));
-  } catch {
-    /* storage unavailable: the record lasts for this page */
-  }
-}
-
 type Feedback = { noun: GenderNoun; picked: string; right: boolean };
 
 function HintLine({ noun }: { noun: GenderNoun }) {
@@ -64,7 +46,7 @@ function HintLine({ noun }: { noun: GenderNoun }) {
   );
 }
 
-function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice" | "sprint"; onSprintEnd: (n: number) => void }) {
+function Sorter({ data, mode, onRoundEnd }: { data: GenderSet; mode: "practice" | "round"; onRoundEnd: () => void }) {
   const [onlyMine, setOnlyMine] = useState(false);
   const metCount = useMemo(() => data.nouns.filter((n) => n.met).length, [data]);
   const pool = useMemo(() => (onlyMine ? data.nouns.filter((n) => n.met) : data.nouns), [data, onlyMine]);
@@ -72,30 +54,17 @@ function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice"
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [right, setRight] = useState(0);
   const [total, setTotal] = useState(0);
-  const [left, setLeft] = useState(SPRINT_SECONDS);
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const done = mode === "sprint" && left <= 0;
+  const done = mode === "round" && total >= ROUND_QUESTIONS;
+  const totalRef = useRef(total);
+  totalRef.current = total;
+  const report = useRef(onRoundEnd);
+  report.current = onRoundEnd;
 
   useEffect(() => {
     setQueue(shuffle(pool));
     setFeedback(null);
   }, [pool]);
-
-  useEffect(() => {
-    if (mode !== "sprint") return;
-    const id = setInterval(() => setLeft((s) => s - 1), 1000);
-    return () => clearInterval(id);
-  }, [mode]);
-
-  const report = useRef(onSprintEnd);
-  report.current = onSprintEnd;
-  const rightRef = useRef(right);
-  rightRef.current = right;
-  useEffect(() => {
-    if (!done) return;
-    if (advanceTimer.current) clearTimeout(advanceTimer.current);
-    report.current(rightRef.current); // once, when time runs out
-  }, [done]);
 
   useEffect(() => () => void (advanceTimer.current && clearTimeout(advanceTimer.current)), []);
 
@@ -104,13 +73,17 @@ function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice"
   const next = useCallback(
     (missed: GenderNoun | null) => {
       setFeedback(null);
+      if (mode === "round" && totalRef.current >= ROUND_QUESTIONS) {
+        report.current();
+        return;
+      }
       setQueue((q) => {
         const rest = q.slice(1);
         if (missed) rest.splice(Math.min(RETRY_GAP, rest.length), 0, missed);
         return rest.length ? rest : shuffle(pool);
       });
     },
-    [pool],
+    [pool, mode],
   );
 
   const pick = useCallback(
@@ -125,8 +98,8 @@ function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice"
       setTotal((n) => n + 1);
       if (ok) setRight((n) => n + 1);
       setFeedback({ noun, picked: g, right: ok });
-      if (ok || mode === "sprint") {
-        advanceTimer.current = setTimeout(() => next(null), ok ? 450 : 900);
+      if (ok) {
+        advanceTimer.current = setTimeout(() => next(null), 450);
       }
     },
     [noun, feedback, next, mode, done],
@@ -158,14 +131,14 @@ function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice"
 
   return (
     <div className="flex flex-col gap-4">
-      {mode === "sprint" ? (
+      {mode === "round" ? (
         <div className="flex flex-col gap-1">
-          <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800" role="progressbar" aria-valuemin={0} aria-valuemax={SPRINT_SECONDS} aria-valuenow={Math.max(0, left)}>
-            <div className="h-full bg-brand-500 transition-[width] duration-1000 ease-linear" style={{ width: `${(Math.max(0, left) / SPRINT_SECONDS) * 100}%` }} />
+          <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800" role="progressbar" aria-valuemin={0} aria-valuemax={ROUND_QUESTIONS} aria-valuenow={Math.min(total, ROUND_QUESTIONS)}>
+            <div className="h-full bg-brand-500 transition-[width]" style={{ width: `${(Math.min(total, ROUND_QUESTIONS) / ROUND_QUESTIONS) * 100}%` }} />
           </div>
           <p className="flex justify-between text-sm text-slate-500">
-            <span>{Math.max(0, left)} s</span>
-            <span>{t.sprintScore(right)}</span>
+            <span>{t.roundProgress(Math.min(total, ROUND_QUESTIONS), ROUND_QUESTIONS)}</span>
+            <span>{t.untimedRound}</span>
           </p>
         </div>
       ) : (
@@ -220,7 +193,7 @@ function Sorter({ data, mode, onSprintEnd }: { data: GenderSet; mode: "practice"
           </button>
         ))}
       </div>
-      {feedback && !feedback.right && mode === "practice" && (
+      {feedback && !feedback.right && (
         <Button variant="secondary" onClick={() => next(feedback.noun)}>
           {cs.common.continue}
         </Button>
@@ -251,14 +224,11 @@ function Rules({ data }: { data: GenderSet }) {
 function GenderTrainer({ language }: { language: Language }) {
   const [data, setData] = useState<GenderSet | null>(null);
   const [state, setState] = useState<"loading" | "none" | "error" | "ok">("loading");
-  const [mode, setMode] = useState<"practice" | "sprint" | "sprint-done">("practice");
+  const [mode, setMode] = useState<"practice" | "round" | "round-done">("practice");
   const [run, setRun] = useState(0);
-  const [best, setBest] = useState(0);
-  const [last, setLast] = useState<{ n: number; record: boolean } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    setBest(readBest(language));
     getGenders(language)
       .then((d) => {
         if (cancelled) return;
@@ -276,60 +246,46 @@ function GenderTrainer({ language }: { language: Language }) {
   if (state === "error" || !data) return <Notice tone="error">{cs.common.error}</Notice>;
   if (!data.nouns.length) return <Notice>{t.empty}</Notice>;
 
-  function endSprint(n: number) {
-    const record = n > best;
-    if (record) {
-      writeBest(language, n);
-      setBest(n);
-    }
-    setLast({ n, record });
-    setMode("sprint-done");
+  function endRound() {
+    setMode("round-done");
   }
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       <div className="flex flex-col gap-3 lg:col-span-2">
         <div role="tablist" className="flex gap-1">
-          {(["practice", "sprint"] as const).map((m) => (
+          {(["practice", "round"] as const).map((m) => (
             <button
               key={m}
               type="button"
               role="tab"
-              aria-selected={mode === m || (m === "sprint" && mode === "sprint-done")}
-              onClick={() => {
-                setMode(m === "sprint" ? "sprint-done" : "practice");
-                setLast(null);
-              }}
+              aria-selected={mode === m || (m === "round" && mode === "round-done")}
+              onClick={() => setMode(m === "round" ? "round-done" : "practice")}
               className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-sm font-semibold ${
-                mode === m || (m === "sprint" && mode === "sprint-done") ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                mode === m || (m === "round" && mode === "round-done") ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
               }`}
             >
-              {m === "sprint" && <Timer className="size-4" aria-hidden />}
-              {m === "practice" ? t.practice : t.sprint}
+              {m === "round" && <ListChecks className="size-4" aria-hidden />}
+              {m === "practice" ? t.practice : t.round}
             </button>
           ))}
         </div>
-        {mode === "sprint-done" ? (
+        {mode === "round-done" ? (
           <section className="flex flex-col items-center gap-3 rounded-3xl border border-slate-200 bg-white p-6 text-center dark:border-slate-800 dark:bg-slate-900">
-            <p className="text-sm text-slate-600 dark:text-slate-300">{t.sprintHelp}</p>
-            {last && (
-              <p className="text-3xl font-bold motion-safe:animate-pop-in">
-                {t.sprintScore(last.n)} {last.record && <span className="block text-base text-amber-600">{t.newBest}</span>}
-              </p>
-            )}
-            {best > 0 && <p className="text-sm text-slate-500">{t.best(best)}</p>}
+            <p className="text-xl font-bold motion-safe:animate-pop-in">{t.roundDone}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">{t.untimedRound}</p>
             <Button
               onClick={() => {
                 setRun((r) => r + 1);
-                setMode("sprint");
+                setMode("round");
               }}
             >
-              <Timer className="size-5" aria-hidden />
-              {last ? t.again2 : t.start}
+              <ListChecks className="size-5" aria-hidden />
+              {t.startRound}
             </Button>
           </section>
         ) : (
-          <Sorter key={`${mode}:${run}`} data={data} mode={mode} onSprintEnd={endSprint} />
+          <Sorter key={`${mode}:${run}`} data={data} mode={mode} onRoundEnd={endRound} />
         )}
       </div>
       <Panel title={t.rules} icon={Shapes}>

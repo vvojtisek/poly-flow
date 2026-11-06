@@ -977,3 +977,17 @@ to the collection area.
   support future practice without turning recap errors into a new mastery result.
 - Verification: collection API safety/idempotency tests were already green in Cycle 15; frontend
   typecheck and production build passed for this integration; `git diff --check` passed.
+
+## Cycle 24/30: replace the gender speed test with an untimed round
+
+**Before:** the gender practice page included a 60-second challenge and saved a local best score,
+which put time pressure and a persistent record inside ordinary practice.
+
+**Built:** the challenge is now a fixed 10-word round with a simple progress bar and no clock.
+Learners can pause to read the suffix rule after a miss, and the round ends without saving a
+score or record.
+
+- Ordinary gender practice remains available, including filtering to words the learner has met.
+  This brings the challenge in line with the project's rule that timed assessment belongs in an
+  explicit test mode.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
