@@ -1,9 +1,9 @@
 "use client";
 
-import { BarChart3, BookMarked, Dumbbell, GraduationCap, LogOut, Search, Settings, Users } from "lucide-react";
+import { BarChart3, BookMarked, Dumbbell, GraduationCap, LogOut, Maximize2, Minimize2, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 
 import { BottomTabs } from "@/components/BottomTabs";
 import { BuildInfo } from "@/components/BuildInfo";
@@ -13,7 +13,9 @@ import { RankEmblem } from "@/components/RankEmblem";
 import { Button, Field, Notice } from "@/components/ui";
 import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { useFocusMode } from "@/lib/focus";
 import { cs } from "@/lib/i18n/cs";
+import { isTypingTarget } from "@/lib/keyboard";
 import { rankName } from "@/lib/ranks";
 import { useRanks } from "@/lib/useRanks";
 
@@ -124,9 +126,23 @@ function HeaderRank({ me }: { me: Me }) {
   );
 }
 
-export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
+/** focusable: the page (a lesson or a check) offers focus mode, which hides everything but the task. */
+export function AppShell({ me, children, focusable = false }: { me: Me; children: ReactNode; focusable?: boolean }) {
   const { setMe } = useAuth();
   const router = useRouter();
+  const [focusPref, toggleFocus] = useFocusMode();
+  const focus = focusable && focusPref;
+
+  useEffect(() => {
+    if (!focusable) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.code !== "KeyF" || e.ctrlKey || e.metaKey || e.altKey || e.repeat || isTypingTarget(e.target)) return;
+      e.preventDefault();
+      toggleFocus();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [focusable, toggleFocus]);
 
   async function signOut() {
     try {
@@ -135,6 +151,30 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
       setMe(null);
       router.replace("/login");
     }
+  }
+
+  if (focus) {
+    return (
+      <main className="mx-auto flex min-h-full max-w-6xl flex-col gap-4 p-4 lg:p-8" data-focus="on">
+        <header className="flex items-center justify-between gap-3">
+          <Link href="/" className="text-sm font-bold text-brand-600" aria-label={cs.appName}>
+            {cs.appName}
+          </Link>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" className="!px-3 !py-1.5 text-sm" onClick={toggleFocus} aria-pressed>
+              <Minimize2 className="size-4" aria-hidden /> {cs.focus.exit}
+              <span className="hidden lg:inline">
+                <Kbd>F</Kbd>
+              </span>
+            </Button>
+          </div>
+        </header>
+        {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
+        {children}
+        <BuildInfo className="mt-auto justify-center pt-6 text-center opacity-70" />
+        <CommandPalette me={me} />
+      </main>
+    );
   }
 
   return (
@@ -148,6 +188,17 @@ export function AppShell({ me, children }: { me: Me; children: ReactNode }) {
         </div>
         <div className="flex flex-col items-end gap-1">
           <nav className="flex flex-wrap items-center justify-end gap-1">
+            {focusable && (
+              <button
+                type="button"
+                onClick={toggleFocus}
+                aria-pressed={false}
+                title={cs.focus.help}
+                className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              >
+                <Maximize2 className="size-4" aria-hidden /> <span className="hidden sm:inline">{cs.focus.enter}</span>
+              </button>
+            )}
             <button
               type="button"
               onClick={openPalette}

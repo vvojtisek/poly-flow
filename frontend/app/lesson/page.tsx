@@ -9,7 +9,7 @@ export default function LessonPage() {
   const me = useRequireMe();
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   return (
-    <AppShell me={me}>
+    <AppShell me={me} focusable>
       <div className="mx-auto w-full max-w-xl lg:max-w-6xl">
         <LessonRunner key={`${me.acting.id}:${me.acting.active_language}`} language={me.acting.active_language} />
       </div>

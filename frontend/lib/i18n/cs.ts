@@ -465,6 +465,11 @@ export const cs = {
     search: "Hledat",
     label: "Hlavní navigace",
   },
+  focus: {
+    enter: "Soustředění",
+    exit: "Ukončit soustředění",
+    help: "Skryje nabídky a nechá na obrazovce jen úkol (klávesa F).",
+  },
   lookup: {
     hint: "Klepni na slovo a uvidíš, co znamená.",
     loading: "Hledám…",

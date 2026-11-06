@@ -34,6 +34,7 @@ unreviewed.
 | 21 | Word order (Slovosled) | rebuild shuffled sentences from met scenes and example sentences; Czech meaning as the goal |
 | 22 | Telling the time (Kolik je hodin?) | analog clock, everyday spoken forms in four languages, the Czech "čtvrt na" trap as a distractor |
 | 23 | Accent colours (Barva) | five accent hues per profile; same contrast, never green or red, gender colours unchanged |
+| 24 | Focus mode (Soustředění) | lessons and checks without header, tabs or links; key F, remembered per device |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -479,3 +480,18 @@ could not tell at a glance whose profile was active, and a child could not make 
 - Applied before first paint from local storage (same script as theme and text size), then from
   the profile on sign-in, so switching to a child's profile switches the colour.
 - Server validation: only the five names are accepted (tested; "#ff0000" is a 422).
+
+## Cycle 24/30: focus mode (Soustředění)
+
+**Before:** a lesson or check sat under the full header (search, five links, rank, settings,
+family, logout) and, on a phone, above the tab bar: a lot to look at for a child or anyone who
+is easily distracted, and every link an exit from the task.
+
+**Built:** focus mode on the lesson and check pages (`AppShell focusable`).
+
+- "Soustředění" in the header or the F key (outside text fields) hides the navigation, the rank
+  line and the mobile tab bar; a slim bar keeps the app name and "Ukončit soustředění". The
+  version line moves to the foot of the page, so a build stays identifiable.
+- "Return to the parent" stays visible on a handed-over device; the command palette (Ctrl+K)
+  still works.
+- Remembered per device (local storage, like the slow-audio toggle); other pages are unaffected.
