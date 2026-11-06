@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 
 import { BottomTabs } from "@/components/BottomTabs";
+import { NetworkBanner } from "@/components/NetworkBanner";
 import { BuildInfo } from "@/components/BuildInfo";
 import { CommandPalette, openPalette } from "@/components/CommandPalette";
 import { Kbd } from "@/components/Kbd";
@@ -162,6 +163,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   if (focus) {
     return (
       <main className="mx-auto flex min-h-full max-w-6xl flex-col gap-4 p-4 lg:p-8" data-focus="on">
+        <NetworkBanner />
         <header className="flex items-center justify-between gap-3">
           <Link href="/" className="text-sm font-bold text-brand-600" aria-label={cs.appName}>
             {cs.appName}
@@ -185,6 +187,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
 
   return (
     <main className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-4 pb-24 lg:p-8">
+      <NetworkBanner />
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link href="/" className="text-2xl font-bold text-brand-600">

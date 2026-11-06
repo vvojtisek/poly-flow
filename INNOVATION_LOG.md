@@ -662,3 +662,20 @@ through the set.
 - Verification: a collection API regression asserts example sentences are returned only with
   the profile's visible collection words; frontend typecheck/build and targeted API tests run
   before the local Cycle 2 commit.
+
+## Cycle 3/30: safe offline recovery for the installed app
+
+**Before:** PolyFlow had an installable manifest, but a full reload during a Wi-Fi or homelab
+outage produced a browser error. Learners had no clear way to tell whether their work had saved.
+
+**Built:** a production-only service worker in `public/sw.js`, a global online/offline status
+banner, and a self-contained Czech fallback page with a retry button.
+
+- The worker caches only same-origin `/_next/static/` assets. It never caches HTML pages, API
+  responses, learner content, or answers; learning still needs a live server connection.
+- Navigation stays network-first. On failure the worker returns a minimal standalone fallback
+  page which doesn't depend on app JavaScript or reveal cached profile data. The banner appears
+  in normal and focus mode when the browser reports offline.
+- Verification: frontend typecheck/build passed; the production Docker runner build succeeded.
+  A Playwright browser confirmed the worker controlled the page, cached 10 static assets and no
+  API URLs, then returned the Czech retry screen when taken offline.

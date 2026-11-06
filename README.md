@@ -60,6 +60,10 @@ Open http://localhost:3001. The first visit runs **first-run setup**, which crea
   profile from their own session (*Předat zařízení*); returning to the admin account requires the admin's
   password.
 
+When installed as a PWA, PolyFlow caches only versioned JavaScript and CSS assets. It does not cache
+pages, API responses, learner content, or answers; a full reload without the server shows a clear
+offline screen and offers a retry. Learning actions require a live connection.
+
 ### Audio (Piper TTS, Whisper STT)
 
 Voices and STT models are pinned by Hugging Face commit and sha256 in `docker/models/models.lock.json`

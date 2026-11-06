@@ -50,6 +50,7 @@ export const cs = {
     retry: "Zkusit znovu",
     error: "Něco se nepovedlo.",
     offline: "Server je teď nedostupný. Zkus to prosím za chvíli.",
+    connectionLost: "Jsi offline. Odpovědi se teď neodesílají; osobní obsah zůstává na serveru.",
     save: "Uložit",
     cancel: "Zrušit",
     back: "Zpět",
