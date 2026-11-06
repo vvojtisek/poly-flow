@@ -707,3 +707,57 @@ export interface Insights {
 }
 
 export const getInsights = (language: Language) => api<Insights>(`/api/v1/insights?language=${language}`);
+
+// ---------------------------------------------------------------- my dictionary
+
+export type WordStatus = "mastered" | "known" | "passive" | "learning" | "seen";
+
+export interface WordRow {
+  id: string;
+  lemma: string;
+  gender: string | null;
+  pos: string;
+  rank: number;
+  translation: string;
+  status: WordStatus;
+  due: boolean;
+  next_review_at: string | null;
+  correct: number;
+  errors: number;
+}
+
+export interface WordList {
+  total: number;
+  counts: Record<WordStatus, number>;
+  items: WordRow[];
+}
+
+export interface WordDetail extends Omit<WordRow, "due"> {
+  language: Language;
+  ipa: string | null;
+  example: string | null;
+  review_status: string | null;
+  passive_known: boolean;
+  active_known: boolean;
+  introduced_at: string | null;
+  introduced_by: string | null;
+  last_reviewed_at: string | null;
+  review_streak: number;
+  history: { at: string; correct: boolean; graded: boolean; task: string; mode: string; error_tag: string | null }[];
+}
+
+export function listWords(
+  language: Language,
+  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number },
+  signal?: AbortSignal,
+) {
+  const p = new URLSearchParams({ language });
+  if (opts.q) p.set("q", opts.q);
+  if (opts.status) p.set("status", opts.status);
+  if (opts.due) p.set("due", "true");
+  if (opts.offset) p.set("offset", String(opts.offset));
+  if (opts.limit) p.set("limit", String(opts.limit));
+  return api<WordList>(`/api/v1/words?${p}`, { signal });
+}
+export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);
+export const myWordAudioUrl = (id: string, part: "word" | "example" = "word") => `/api/v1/words/${id}/audio?part=${part}`;

@@ -3,6 +3,7 @@
 import {
   Award,
   BarChart3,
+  BookMarked,
   BookOpen,
   BookOpenText,
   ClipboardCheck,
@@ -98,6 +99,7 @@ export function CommandPalette({ me }: { me: Me }) {
       { id: "placement", label: cs.placement.title, group: nav, icon: Compass, keywords: ["slovni zasoba"], run: go("/placement") },
       { id: "cefr", label: cs.cefr.title, group: nav, icon: Gauge, keywords: ["cefr", "uroven", "b2"], run: go("/placement/cefr") },
       { id: "levels", label: cs.tests.levels, group: nav, icon: Award, keywords: ["zkouska", "a1", "a2", "b1", "b2"], run: go("/levels") },
+      { id: "words", label: cs.words.title, group: nav, icon: BookMarked, keywords: ["slovnik", "slova", "hledat"], run: go("/words") },
       { id: "insights", label: cs.insights.title, group: nav, icon: BarChart3, keywords: ["statistiky", "grafy", "aktivita", "predpoved"], run: go("/insights") },
       { id: "ranks", label: cs.palette.ranks, group: nav, icon: Trophy, keywords: ["hodnost", "odznaky", "cesta"], run: go("/ranks") },
       { id: "settings", label: cs.settings.title, group: nav, icon: Settings, keywords: ["nastaveni", "hlas", "rychlost"], run: go("/settings") },

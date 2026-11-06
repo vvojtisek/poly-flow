@@ -15,6 +15,7 @@ unreviewed.
 | 2 | Personal mastery rank path | a visible journey tied to proven learning, no traps |
 | 3 | Command palette (Ctrl+K) | keyboard-first navigation and settings from anywhere |
 | 4 | Learning insights dashboard | activity calendar, accuracy trend, mistake types, review forecast |
+| 5 | My dictionary + word inspector | look up any learned word, its state, audio and history |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -96,3 +97,21 @@ their accuracy improves, what kind of mistakes they make, or how much review is 
 - First-try accuracy per week over 12 weeks (words and grammar checks).
 - "Od lekce k jistotě" funnel: introduced, recognised, written, both, long-term mastered.
 - Mistake types over 60 days, from the mistake engine's tags.
+
+## Cycle 5/30: My dictionary (Můj slovník) with a word inspector
+
+**Before:** once a word left a lesson, the learner could not look it up again, see how well they
+knew it, or hear it outside a session.
+
+**Built:** `/words` (header link, palette) with `GET /api/v1/words`, `/words/{id}` and
+`/words/{id}/audio`.
+
+- Lists only words the learner has met (a progress row exists), never the rest of the lexicon,
+  so it does not bypass the lessons; child profiles never see flagged words (tested).
+- Instant search over the word and its Czech meaning (debounced, `%`/`_` escaped), status filters
+  with counts (učím se, poznám, umím, zvládnuté, viděné) and a "K opakování" filter.
+- Keyboard-first: the search box has focus, arrows move through the list, Enter opens the card.
+- Word card (side panel on desktop, bottom sheet on mobile): the word with its article coloured by
+  gender, audio for the word and its example, IPA and frequency rank, the word's journey from
+  seen to mastered, counts, next review in plain words, and a dot timeline of every answer
+  (graded vs practice, error type on hover).

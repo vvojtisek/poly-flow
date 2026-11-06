@@ -19,6 +19,7 @@ from app.api import (
     stories,
     tutor,
     voices,
+    words,
 )
 from app.core.config import get_settings
 from app.core.logging import configure_logging
@@ -53,6 +54,7 @@ def create_app() -> FastAPI:
     app.include_router(diagnostic.router)
     app.include_router(ranks.router)
     app.include_router(insights.router)
+    app.include_router(words.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)
     app.include_router(stories.router)

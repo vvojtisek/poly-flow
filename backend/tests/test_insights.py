@@ -81,7 +81,7 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
     r = await client.get("/api/v1/insights?language=de")
     assert r.status_code == 200, r.text
     out = r.json()
-    today = [d for d in out["heatmap"] if d["date"] == out["today"]][0]
+    today = next(d for d in out["heatmap"] if d["date"] == out["today"])
     assert today == {"date": out["today"], "graded": 2, "practice": 1}
     assert out["active_days"] == 2 and len(out["heatmap"]) == 182
     assert sum(w["answered"] for w in out["accuracy"]) == 3
