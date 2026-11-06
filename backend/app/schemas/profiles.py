@@ -52,6 +52,8 @@ class ProfileSettings(BaseModel):
     accent: Literal["blue", "teal", "violet", "orange", "pink"] = "blue"
     # The first-run welcome (language, daily goal, rank path, text size) was finished or skipped.
     onboarded: bool = False
+    # Newest "Co je nového" entry (app.domain.news) this profile has seen; 0 = none yet.
+    news_seen: int = Field(default=0, ge=0, le=100_000)
 
     @field_validator("interests")
     @classmethod

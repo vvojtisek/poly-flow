@@ -7,7 +7,7 @@ import { useState } from "react";
 import { LanguagePicker } from "@/components/AppShell";
 import { RankEmblem } from "@/components/RankEmblem";
 import { Button } from "@/components/ui";
-import { updateOwnProfile, type Me, type ProfileSettings, type RankPath, type TextSize } from "@/lib/api";
+import { markNewsSeen, updateOwnProfile, type Me, type ProfileSettings, type RankPath, type TextSize } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { PATH_NAMES, rankName } from "@/lib/ranks";
@@ -44,6 +44,8 @@ export function Welcome({ me }: { me: Me }) {
   }
 
   async function finish(to?: string) {
+    // A fresh profile starts with everything in "Co je nového" already counted as seen.
+    await markNewsSeen().catch(() => undefined);
     await save({ onboarded: true });
     if (to) router.push(to);
   }

@@ -10,6 +10,7 @@ import { Panel } from "@/components/Panel";
 import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
 import { RankCard } from "@/components/RankCard";
+import { NewsBanner } from "@/components/NewsBanner";
 import { TodayPlan } from "@/components/TodayPlan";
 import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
@@ -71,6 +72,7 @@ export default function HomePage() {
   return (
     <AppShell me={me}>
       <div className="grid gap-4 lg:grid-cols-3">
+        {language && !offerPlacement && <NewsBanner profileId={me.acting.id} language={language} />}
         {language && <TodayPlan language={language} profileId={me.acting.id} />}
         <Panel title={cs.todayPractice} icon={BookOpen}>
           <div className="flex flex-col gap-3">

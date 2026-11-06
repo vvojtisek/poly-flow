@@ -101,6 +101,7 @@ export interface ProfileSettings {
   reading_spacing: boolean;
   reduce_motion: boolean;
   onboarded: boolean;
+  news_seen: number;
   accent: Accent;
 }
 
@@ -1023,3 +1024,21 @@ export type Recap = {
   suggestion: "check_due" | "fix_mistakes" | "new_lesson" | "start_small" | "keep_going";
 };
 export const getRecap = (language: Language) => api<Recap>(`/api/v1/insights/recap?language=${language}`, { cache: "no-store" });
+
+// ---------------------------------------------------------------- what's new
+
+export interface NewsEntry {
+  n: number;
+  date: string;
+  title: string;
+  blurb: string;
+  href: string | null;
+  new: boolean;
+}
+export interface News {
+  latest: number;
+  unseen: number;
+  entries: NewsEntry[]; // newest first
+}
+export const getNews = () => api<News>("/api/v1/news");
+export const markNewsSeen = () => api<News>("/api/v1/news/seen", { method: "POST" });

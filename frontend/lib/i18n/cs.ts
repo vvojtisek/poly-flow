@@ -677,6 +677,17 @@ export const cs = {
     session: (n: number, avg: number) => `Dnes ${n} ${n === 1 ? "věta" : n < 5 ? "věty" : "vět"}, průměrně ${avg} %`,
     keys: "Enter zkontroluje a pak přejde na další větu, Alt+P přehraje znovu.",
   },
+  news: {
+    title: "Co je nového",
+    intro: "Co přibylo v PolyFlow. Všechno je jen procvičování navíc: nic z toho se nepočítá do toho, co umíš, to dokazuje jen Ověření.",
+    banner: (n: number) => `${n} ${n === 1 ? "novinka" : n < 5 ? "novinky" : "novinek"} v PolyFlow`,
+    show: "Ukázat",
+    dismiss: "Už vím",
+    fresh: "Nové",
+    open: "Otevřít",
+    empty: "Zatím tu nic není.",
+    more: (n: number) => `a ${n} dalších`,
+  },
   recap: {
     title: "Týden v kostce",
     range: (from: string, to: string) => `${from} – ${to}`,

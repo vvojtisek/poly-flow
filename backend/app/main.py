@@ -18,6 +18,7 @@ from app.api import (
     learning,
     lexicon,
     lookup,
+    news,
     numbers,
     pairs,
     profiles,
@@ -77,6 +78,7 @@ def create_app() -> FastAPI:
     app.include_router(roleplay.router)
     app.include_router(verbs.router)
     app.include_router(lookup.router)
+    app.include_router(news.router)
     app.include_router(numbers.router)
     app.include_router(word_order.router)
     app.include_router(clock.router)

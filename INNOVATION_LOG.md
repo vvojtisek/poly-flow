@@ -40,6 +40,7 @@ unreviewed.
 | 27 | Practice hub filters | filter 12 practice modes by skill, recently used modes first on the hub and dashboard |
 | 28 | Weekly recap (Týden v kostce) | last 7 days against the 7 before, the words that gave trouble, and one suggested next step |
 | 29 | Verb lab in French and Italian | the present tense lab from cycle 15 now conjugates French and Italian verbs, with spelling changes, elision and the irregular verbs |
+| 30 | What's new (Co je nového) | the family finds the 26 features of this loop: a dashboard line with what is new, a page with links, seen per profile |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -589,3 +590,25 @@ zatím jen pro němčinu", although both languages have a present tense at least
 - Tests: 38 domain cases (every pattern, é kept in réparer, the stressed i, `changed` marks
   only the forms that differ, features), API in French and Italian, reflexive entries skipped,
   English rejected with 422.
+
+## Cycle 30/30: what's new (Co je nového)
+
+**Before:** 29 cycles added a dozen practice modes and many smaller features, but nothing in the
+app told a returning learner about them. A feature nobody finds does not help anyone.
+
+**Built:** `app/domain/news.py` (26 learner-facing entries in Czech), `GET /api/v1/news`,
+`POST /api/v1/news/seen`, a `/news` page, a `NewsBanner` line on the dashboard and a palette
+entry.
+
+- Each entry has a number that only grows; the profile stores the newest number it has seen
+  (`settings.news_seen`, no new table or migration). The banner says how many are new and
+  names the three newest; "Ukázat" opens the page, "Už vím" marks them seen. Opening the page
+  marks them seen but keeps the "Nové" marks for that visit.
+- Entries limited to some languages (the case lab, gender sorter, verb lab) are shown and
+  counted only for those.
+- A fresh profile finishing the welcome wizard starts with everything seen; the banner is also
+  hidden while the placement offer is shown. Marking seen is idempotent and per profile; a
+  failed request only means the line shows again next time.
+- The page says plainly that none of this counts as knowing a word; only Ověření does.
+- Tests: numbering contiguous and never reused, language filter, unseen count, the API
+  (repeat-safe, CSRF required, per profile: the parent marking seen leaves the child's count).

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Megaphone,
   Award,
   BarChart3,
   BookMarked,
@@ -125,6 +126,7 @@ export function CommandPalette({ me }: { me: Me }) {
       { id: "dictation", label: cs.dictation.title, group: nav, icon: Headphones, keywords: ["diktat", "poslech", "psat"], run: go("/dictation") },
       { id: "words", label: cs.words.title, group: nav, icon: BookMarked, keywords: ["slovnik", "slova", "hledat"], run: go("/words") },
       { id: "insights", label: cs.insights.title, group: nav, icon: BarChart3, keywords: ["statistiky", "grafy", "aktivita", "predpoved"], run: go("/insights") },
+      { id: "news", label: cs.news.title, group: nav, icon: Megaphone, keywords: ["novinky", "co je noveho", "zmeny", "nove"], run: go("/news") },
       { id: "ranks", label: cs.palette.ranks, group: nav, icon: Trophy, keywords: ["hodnost", "odznaky", "cesta"], run: go("/ranks") },
       { id: "settings", label: cs.settings.title, group: nav, icon: Settings, keywords: ["nastaveni", "hlas", "rychlost"], run: go("/settings") },
     ];
