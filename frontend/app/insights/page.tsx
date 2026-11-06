@@ -7,7 +7,7 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Panel } from "@/components/Panel";
 import { WeeklyRecap } from "@/components/WeeklyRecap";
 import { Notice } from "@/components/ui";
-import { getInsights, type Insights } from "@/lib/api";
+import { getActivityDay, getInsights, type ActivityDay, type Insights } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -24,7 +24,7 @@ function level(n: number, max: number): string {
 }
 
 /** Activity calendar: 26 weeks, Monday on top. A calendar, not a streak counter. */
-function Heatmap({ data }: { data: Insights["heatmap"] }) {
+function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; selected: string | null; onSelect: (date: string) => void }) {
   const max = Math.max(...data.map((d) => d.graded + d.practice));
   const first = new Date(data[0]!.date + "T12:00:00");
   const pad = (first.getDay() + 6) % 7; // Monday = 0
@@ -33,15 +33,19 @@ function Heatmap({ data }: { data: Insights["heatmap"] }) {
   for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-[3px] overflow-x-auto pb-1" role="img" aria-label={t.heatmapLabel}>
+      <div className="flex gap-[3px] overflow-x-auto pb-1" role="group" aria-label={t.heatmapLabel}>
         {weeks.map((w, i) => (
           <div key={i} className="flex flex-col gap-[3px]">
             {w.map((d, j) =>
               d ? (
-                <span
+                <button
                   key={d.date}
+                  type="button"
+                  aria-pressed={selected === d.date}
+                  aria-label={t.activityDayLabel(dayFmt(d.date), d.graded, d.practice)}
+                  onClick={() => onSelect(d.date)}
                   title={`${dayFmt(d.date)}: ${t.dayTitle(d.graded, d.practice)}`}
-                  className={`size-3 rounded-[3px] lg:size-4 ${level(d.graded + d.practice, max)}`}
+                  className={`size-4 shrink-0 rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-brand-500 lg:size-5 ${level(d.graded + d.practice, max)} ${selected === d.date ? "ring-2 ring-brand-700 dark:ring-brand-200" : ""}`}
                 />
               ) : (
                 <span key={`pad-${j}`} className="size-3 lg:size-4" />
@@ -58,6 +62,31 @@ function Heatmap({ data }: { data: Insights["heatmap"] }) {
         {t.more}
       </div>
     </div>
+  );
+}
+
+function ActivityDetails({ data, date, loading, failed, language }: { data: ActivityDay | null; date: string | null; loading: boolean; failed: boolean; language: string }) {
+  if (!date) return null;
+  return (
+    <section className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-800" aria-live="polite">
+      <h3 className="mb-2 font-semibold">{t.activityDay(dayFmt(date))}</h3>
+      {loading ? <p className="text-sm text-slate-500">{cs.common.loading}</p> : failed ? <Notice tone="error">{cs.common.error}</Notice> : !data || (!data.words.length && !data.grammar.length) ? <p className="text-sm text-slate-500">{t.activityEmpty}</p> : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {data.words.length > 0 && <section>
+            <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityWords}</h4>
+            <ul className="flex flex-col gap-1" lang={language}>
+              {data.words.map((word) => <li key={word.id}><a href={`/words?word=${word.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span className="font-medium">{word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}{word.lemma}<span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span></span><span className="shrink-0 text-xs text-slate-500">{t.activityCount(word.graded, word.practice)}</span></a></li>)}
+            </ul>
+          </section>}
+          {data.grammar.length > 0 && <section>
+            <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityGrammar}</h4>
+            <ul className="flex flex-col gap-1">
+              {data.grammar.map((unit) => <li key={unit.id}><a href={`/grammar/${unit.id}`} className="flex items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span><span className="mr-1 text-xs text-slate-500">{unit.level}</span>{unit.title}</span><span className="shrink-0 text-xs text-slate-500">{t.activityCount(unit.graded, unit.practice)}</span></a></li>)}
+            </ul>
+          </section>}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -165,6 +194,10 @@ export default function InsightsPage() {
   const [data, setData] = useState<Insights | null>(null);
   const [failed, setFailed] = useState(false);
   const [forecastDate, setForecastDate] = useState<string | null>(null);
+  const [activityDate, setActivityDate] = useState<string | null>(null);
+  const [activity, setActivity] = useState<ActivityDay | null>(null);
+  const [activityLoading, setActivityLoading] = useState(false);
+  const [activityFailed, setActivityFailed] = useState(false);
 
   useEffect(() => {
     if (!language) return;
@@ -175,12 +208,26 @@ export default function InsightsPage() {
         if (cancelled) return;
         setData(d);
         setForecastDate(d.forecast[0]?.date ?? null);
+        setActivityDate([...d.heatmap].reverse().find((day) => day.graded + day.practice > 0)?.date ?? d.today);
       })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
   }, [language, me?.acting.id]);
+
+  useEffect(() => {
+    if (!language || !activityDate) return;
+    let cancelled = false;
+    setActivity(null);
+    setActivityLoading(true);
+    setActivityFailed(false);
+    getActivityDay(language, activityDate)
+      .then((day) => !cancelled && setActivity(day))
+      .catch(() => !cancelled && setActivityFailed(true))
+      .finally(() => !cancelled && setActivityLoading(false));
+    return () => { cancelled = true; };
+  }, [language, activityDate, me?.acting.id]);
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const funnel = data?.funnel;
@@ -214,7 +261,8 @@ export default function InsightsPage() {
         ) : (
           <div className="grid gap-4 lg:grid-cols-2">
             <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
-              <Heatmap data={data.heatmap} />
+              <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} />
+              <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} />
               <p className="mt-2 text-xs text-slate-500">{t.activeDays(data.active_days)}</p>
             </Panel>
             <Panel title={t.forecast} icon={Target}>

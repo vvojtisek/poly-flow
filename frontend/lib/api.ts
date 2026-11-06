@@ -742,7 +742,15 @@ export interface Insights {
   funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
 }
 
+export interface ActivityDay {
+  date: string;
+  words: { id: string; lemma: string; gender: string | null; translation: string; graded: number; practice: number }[];
+  grammar: { id: string; title: string; level: string; graded: number; practice: number }[];
+}
+
 export const getInsights = (language: Language) => api<Insights>(`/api/v1/insights?language=${language}`);
+export const getActivityDay = (language: Language, date: string) =>
+  api<ActivityDay>(`/api/v1/insights/day?language=${language}&date=${date}`, { cache: "no-store" });
 
 // ---------------------------------------------------------------- my dictionary
 

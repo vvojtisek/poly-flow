@@ -195,3 +195,76 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             "mastered": mastered,
         },
     }
+
+
+async def day_activity(
+    db: AsyncSession, user: User, language: Language, activity_date: date, now: datetime
+) -> dict | None:
+    """Read-only, answer-free details for one calendar day in the learner's heatmap."""
+    today = now.astimezone(ZoneInfo(user.timezone)).date()
+    if not today - timedelta(days=HEATMAP_DAYS - 1) <= activity_date <= today:
+        return None
+
+    ev, li = LearningEvent, LexiconItem
+    words = await db.execute(
+        select(
+            li.id,
+            li.lemma,
+            li.gender,
+            li.translation_cs,
+            func.count().filter(ev.counts_as_evidence.is_(True)),
+            func.count().filter(ev.counts_as_evidence.is_(False)),
+        )
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(
+            ev.user_id == user.id,
+            li.language == language,
+            ev.local_date == activity_date,
+            _suitable(user),
+        )
+        .group_by(li.id)
+        .order_by(li.frequency_rank, li.lemma)
+    )
+    ga, gu = GrammarAttempt, GrammarUnit
+    grammar = await db.execute(
+        select(
+            gu.id,
+            gu.title,
+            gu.level,
+            func.count().filter(ga.counts_as_evidence.is_(True)),
+            func.count().filter(ga.counts_as_evidence.is_(False)),
+        )
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            gu.active.is_(True),
+            ga.local_date == activity_date,
+        )
+        .group_by(gu.id)
+        .order_by(gu.level, gu.title)
+    )
+    return {
+        "date": activity_date,
+        "words": [
+            {
+                "id": item_id,
+                "lemma": lemma,
+                "gender": gender,
+                "translation": translation,
+                "graded": graded,
+                "practice": practice,
+            }
+            for item_id, lemma, gender, translation, graded, practice in words.all()
+        ],
+        "grammar": [
+            {
+                "id": unit_id,
+                "title": title,
+                "level": level,
+                "graded": graded,
+                "practice": practice,
+            }
+            for unit_id, title, level, graded, practice in grammar.all()
+        ],
+    }

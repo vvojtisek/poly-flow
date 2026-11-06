@@ -1029,3 +1029,17 @@ in the story archive reader through a profile-checked story link.
 - The archive API already limits results to generated, safety-checked readings for the acting
   profile and selected language. A deep link is opened only when its ID is in that archive list.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 28/30: explore a day in the activity calendar
+
+**Before:** the 26-week activity calendar showed daily totals in tooltips, but selecting a day
+could not reveal which words or grammar topics were practiced.
+
+**Built:** calendar cells are now keyboard-selectable. A selected day shows its word and grammar
+topics with separate graded and practice counts, and links directly to the relevant dictionary
+card or grammar lesson.
+
+- The new API is limited to the learner's own 182-day calendar, returns no answer text, filters
+  vocabulary through the active child-content policy, and omits inactive grammar units.
+- Verification: insights API tests passed (2 tests), including grouped counts, out-of-range dates
+  and child-hidden word filtering. Ruff, frontend typecheck/build and `git diff --check` passed.
