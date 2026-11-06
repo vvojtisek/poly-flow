@@ -1000,3 +1000,18 @@ export type PairSet = { id: string; title: string; hint: string; pairs: [PairWor
 export const getPairSets = (language: Language) => api<PairSet[]>(`/api/v1/pairs?language=${language}`);
 export const pairAudioUrl = (language: Language, set: string, pair: number, side: number) =>
   `/api/v1/pairs/audio?language=${language}&set=${set}&pair=${pair}&side=${side}`;
+
+export type RecapWeek = { active_days: number; graded: number; correct: number; practice: number; introduced: number; newly_known: number; accuracy: number | null };
+export type Recap = {
+  language: Language;
+  from: string;
+  to: string;
+  this_week: RecapWeek;
+  last_week: RecapWeek;
+  accuracy_trend: "up" | "down" | "same" | null;
+  hard_words: { id: string; lemma: string; gender: string | null; translation: string; misses: number }[];
+  due_now: number;
+  due_next_7_days: number;
+  suggestion: "check_due" | "fix_mistakes" | "new_lesson" | "start_small" | "keep_going";
+};
+export const getRecap = (language: Language) => api<Recap>(`/api/v1/insights/recap?language=${language}`, { cache: "no-store" });

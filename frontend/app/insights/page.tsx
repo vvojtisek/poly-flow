@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Panel } from "@/components/Panel";
+import { WeeklyRecap } from "@/components/WeeklyRecap";
 import { Notice } from "@/components/ui";
 import { getInsights, type Insights } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
@@ -158,6 +159,7 @@ export default function InsightsPage() {
           </div>
           <LanguagePicker me={me} />
         </div>
+        {language && <WeeklyRecap language={language} />}
         {failed && <Notice tone="error">{cs.common.error}</Notice>}
         {!data ? (
           !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>

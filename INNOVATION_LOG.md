@@ -38,6 +38,7 @@ unreviewed.
 | 25 | How letters sound (Jak se to čte) | spelling-to-sound rules for Czech readers in four languages, examples from the learner's own words |
 | 26 | Minimal pairs (Slyšíš rozdíl?) | hear one word of a pair (ship/sheep, Tür/Tier, pala/palla, rue/roue) and pick it |
 | 27 | Practice hub filters | filter 12 practice modes by skill, recently used modes first on the hub and dashboard |
+| 28 | Weekly recap (Týden v kostce) | last 7 days against the 7 before, the words that gave trouble, and one suggested next step |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -547,3 +548,22 @@ hard to scan on a phone, and the dashboard chips listed them in a fixed order.
   `AppShell` from the page path, so every way of getting there counts (hub, tab bar, palette,
   dashboard). Stored in local storage only: never sent, never progress.
 - `lib/practice.ts` gains `SKILLS`, `readRecent`, `recordVisit` and `byRecent`.
+
+## Cycle 28/30: weekly recap (Týden v kostce)
+
+**Before:** the statistics page had a 26-week calendar, weekly accuracy and a forecast: good for
+looking back over months, but it gave no short answer to "how did this week go, and what now?".
+
+**Built:** `app/domain/recap.py`, `app/services/recap.py`, `GET /api/v1/insights/recap` and a
+`WeeklyRecap` panel at the top of Statistiky.
+
+- The last seven local days (the profile's time zone) against the seven before: days with
+  learning, words introduced and newly known, graded and practice answers, and first-try
+  accuracy with a trend. Accuracy is `null` and shown as "zatím nic k měření" when nothing was
+  graded; unknown is never shown as 0 %.
+- Up to three words with the most wrong graded answers this week, with gender colour.
+- One suggestion, in a fixed order: due reviews first, then a five-minute start after a quiet
+  week, then this week's trouble words, then a new lesson; with a button to the right page.
+- A quiet week is described ("Nevadí: nic se tím neztrácí"), never scored. No streaks.
+- Tests: accuracy unknown vs 0, trend margins, suggestion order, and the API over seeded events
+  in two weeks and another language.

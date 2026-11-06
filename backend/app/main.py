@@ -23,6 +23,7 @@ from app.api import (
     profiles,
     progression,
     ranks,
+    recap,
     review,
     roleplay,
     sounds,
@@ -67,6 +68,7 @@ def create_app() -> FastAPI:
     app.include_router(diagnostic.router)
     app.include_router(ranks.router)
     app.include_router(insights.router)
+    app.include_router(recap.router)
     app.include_router(words.router)
     app.include_router(today.router)
     app.include_router(declension.router)
