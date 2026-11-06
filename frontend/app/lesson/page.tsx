@@ -10,7 +10,7 @@ export default function LessonPage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   return (
     <AppShell me={me}>
-      <div className="mx-auto w-full max-w-xl">
+      <div className="mx-auto w-full max-w-xl lg:max-w-6xl">
         <LessonRunner key={`${me.acting.id}:${me.acting.active_language}`} language={me.acting.active_language} />
       </div>
     </AppShell>

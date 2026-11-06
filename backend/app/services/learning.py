@@ -26,6 +26,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased, selectinload
 
 from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, ContentFlag, Language, ProgressState
+from app.domain.grammar import GRAMMAR_OPEN_FROM_START, ErrorTag, classify
+from app.domain.language_packs import pack
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
 from app.domain.speech import SpokenWord, judge
@@ -138,8 +140,62 @@ def _not_introduced(user: User):
     )
 
 
+async def recently_missed_words(
+    db: AsyncSession,
+    user: User,
+    language: Language,
+    now: datetime,
+    *,
+    limit: int,
+    exclude: set[uuid.UUID] | None = None,
+) -> list[LexiconItem]:
+    """Introduced words whose latest graded answer (check or exam) was wrong, newest first."""
+    ev = LearningEvent
+    graded = (
+        select(
+            ev.lexicon_item_id,
+            ev.is_correct,
+            ev.occurred_at,
+            func.row_number()
+            .over(partition_by=ev.lexicon_item_id, order_by=ev.occurred_at.desc())
+            .label("rn"),
+        )
+        .join(LearningSession, LearningSession.id == ev.session_id)
+        .where(
+            ev.user_id == user.id,
+            LearningSession.mode.in_([SessionMode.CHECK, SessionMode.EXAM]),
+            ev.occurred_at >= now - POLICY.remediation_window,
+            ev.verdict != "not_understood",
+        )
+        .subquery()
+    )
+    q = (
+        select(LexiconItem)
+        .join(graded, graded.c.lexicon_item_id == LexiconItem.id)
+        .join(
+            UserWordProgress,
+            and_(
+                UserWordProgress.lexicon_item_id == LexiconItem.id,
+                UserWordProgress.user_id == user.id,
+            ),
+        )
+        .where(
+            graded.c.rn == 1,
+            graded.c.is_correct.is_(False),
+            LexiconItem.language == language,
+            UserWordProgress.introduced_at.is_not(None),
+            _suitable(user),
+        )
+        .order_by(graded.c.occurred_at.desc())
+        .limit(limit)
+    )
+    if exclude:
+        q = q.where(LexiconItem.id.not_in(exclude))
+    return list((await db.execute(q)).scalars())
+
+
 async def _plan_learn(
-    db: AsyncSession, user: User, language: Language
+    db: AsyncSession, user: User, language: Language, now: datetime
 ) -> tuple[Scene | None, list[_Planned]]:
     """The next scene with words not yet introduced, and up to N of those words.
 
@@ -186,8 +242,13 @@ async def _plan_learn(
                 )
             ).scalars()
         )
+    # Remediation first: words missed in a recent check, practised (never graded) again.
+    missed = await recently_missed_words(
+        db, user, language, now, limit=POLICY.remediation_per_lesson, exclude={i.id for i in items}
+    )
+    plan = [_Planned(i, TaskType.RECALL, False) for i in missed]
     # Meet the word first (recognition), produce it later in the same lesson (recall).
-    plan = [_Planned(i, TaskType.RECOGNITION, True) for i in items]
+    plan += [_Planned(i, TaskType.RECOGNITION, True) for i in items]
     plan += [_Planned(i, TaskType.RECALL, True) for i in items]
     return scene, plan
 
@@ -271,7 +332,7 @@ async def start_session(
     rng = rng or random.Random()
     scene: Scene | None = None
     if mode == SessionMode.LEARN:
-        scene, plan = await _plan_learn(db, user, language)
+        scene, plan = await _plan_learn(db, user, language, now)
     elif mode == SessionMode.CHECK:
         plan = await _plan_check(db, user, language, now)
     elif mode == SessionMode.EXAM:
@@ -428,7 +489,7 @@ def visible_options(task: LearningTask) -> list[tuple[int, str]] | None:
 
 def spoken_word(item: LexiconItem) -> str:
     """The word as the learner sees it: German nouns with their article (der Hund)."""
-    if item.language == Language.DE and item.gender in {"der", "die", "das"}:
+    if item.gender in pack(item.language).noun_genders:
         return f"{item.gender} {item.lemma}"
     return item.lemma
 
@@ -497,6 +558,32 @@ async def use_hint(db: AsyncSession, user: User, task_id: uuid.UUID) -> Learning
     limit = 1 if task.task_type == TaskType.RECOGNITION else MAX_HINT_LEVEL
     task.hint_level = min(task.hint_level + 1, limit)
     return task
+
+
+def wrong_article(item: LexiconItem, text: str) -> bool:
+    """A noun written with a definite article that is not its own (German: die Hund)."""
+    articles = pack(item.language).definite_articles
+    if item.gender not in articles:
+        return False
+    first = text.strip().split(" ", 1)[0].casefold()
+    return first in articles and first != item.gender
+
+
+def word_error_tag(task: LearningTask, item: LexiconItem, answer: str, verdict: str) -> str | None:
+    """What a wrong word answer got wrong (None when it was right)."""
+    if verdict in ("exact", "accepted_variant", "spoken"):
+        return None
+    if task.task_type == TaskType.RECOGNITION:
+        return ErrorTag.MEANING.value
+    if verdict == "case":
+        return ErrorTag.CAPITALISATION.value
+    if verdict == "diacritics":
+        return ErrorTag.DIACRITICS.value
+    tag = classify(item.language, item.lemma, answer)
+    # One word against one word: a far-off answer means the word itself was not recalled.
+    if tag in (ErrorTag.OTHER, ErrorTag.WORD_CHOICE):
+        return ErrorTag.MEANING.value
+    return tag.value
 
 
 def _expected(task: LearningTask) -> str:
@@ -572,6 +659,11 @@ async def submit_answer(
             res.score,
             text,
         )
+        if correct and wrong_article(item, text):
+            note = "de_wrong_article"
+    error_tag = None if reveal or not understood else word_error_tag(task, item, answer, verdict)
+    if correct and note == "de_wrong_article":
+        error_tag = ErrorTag.GENDER.value
 
     checking = task.session.mode != SessionMode.LEARN  # check, placement, exam: graded once
     hint_used = task.hint_level > 0
@@ -595,6 +687,7 @@ async def submit_answer(
         "correct": correct,
         "verdict": verdict,
         "note": note,
+        "error": error_tag,
         "counted": evidence,
         "attempts": task.attempts,
         "task_done": done,
@@ -621,6 +714,7 @@ async def submit_answer(
             revealed=reveal,
             counts_as_evidence=evidence,
             orthography_score=ortho,
+            error_tag=error_tag,
             answer_mode=mode,
             transcript_confidence=confidence,
             policy_version=POLICY.version,
@@ -907,13 +1001,18 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
     ).all()
     lexicon_items = sum(n for _, n, _ in bands)
 
+    # Vlad, 2026-11-06: grammar is open from A1; the 1000-word unlock is still recorded.
     unlocked = (
-        await db.execute(
-            select(GrammarUnlock.user_id).where(
-                GrammarUnlock.user_id == user.id, GrammarUnlock.language == language
+        GRAMMAR_OPEN_FROM_START
+        or (
+            await db.execute(
+                select(GrammarUnlock.user_id).where(
+                    GrammarUnlock.user_id == user.id, GrammarUnlock.language == language
+                )
             )
-        )
-    ).first() is not None
+        ).first()
+        is not None
+    )
     nxt = next((m for m in MILESTONES if m.rank > known), None)
     open_lesson = await get_active_session(db, user, language, SessionMode.LEARN)
     open_check = await get_active_session(db, user, language, SessionMode.CHECK)

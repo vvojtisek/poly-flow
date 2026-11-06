@@ -52,6 +52,7 @@ class StorySource(enum.StrEnum):
     RSS_NEWS = "rss_news"
     FAIRY_TALE = "fairy_tale"
     MYTH = "myth"
+    GENERATED = "generated"  # written by the local model from the learner's words
 
 
 class StoryStatus(enum.StrEnum):

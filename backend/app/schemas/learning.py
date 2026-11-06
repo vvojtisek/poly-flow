@@ -126,6 +126,7 @@ class AnswerOut(BaseModel):
         "not_understood",  # a spoken answer the transcript cannot confirm; nothing changed
     ]
     note: str | None
+    error: str | None = None  # what a wrong answer got wrong (mistake engine, policy v4)
     counted: bool  # contributed evidence toward knowing the word
     attempts: int
     task_done: bool
@@ -233,3 +234,29 @@ class ProgressOut(BaseModel):
     placement: PlacementOut | None = None
     active_exam_session_id: uuid.UUID | None = None
     level_badges: list[LevelBadgeOut] = []
+
+
+class WeakWordOut(BaseModel):
+    lemma: str
+    gender: str | None
+    translation: str
+    errors: int
+    last_error_at: datetime
+    tags: list[str]
+
+
+class WeakUnitOut(BaseModel):
+    id: str
+    title: str
+    level: str
+    errors: int
+    last_error_at: datetime
+    tags: list[str]
+
+
+class WeakSpotsOut(BaseModel):
+    language: Language
+    window_days: int
+    words: list[WeakWordOut]
+    units: list[WeakUnitOut]
+    tags: list[tuple[str, int]]

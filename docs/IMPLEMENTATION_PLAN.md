@@ -6,7 +6,7 @@ Plán převádí dodanou specifikaci LinguaCore na implementační kroky v repoz
 
 ## 1. Výsledek a rozsah
 
-Rodina si nasadí aplikaci přes Docker Compose, vytvoří dospělé a dětské profily a učí se němčinu, francouzštinu, italštinu a angličtinu z češtiny (angličtina doplněna 4. 10. 2026; britský pravopis a hlas). Každý profil má samostatný pokrok v každém jazyce. Denní rutina propojí opakování, nová slova, přizpůsobený text s audiem, otázky k porozumění a volitelný rozhovor. Gramatické minilekce se odemknou po zvládnutí prvních 1000 slov.
+Rodina si nasadí aplikaci přes Docker Compose, vytvoří dospělé a dětské profily a učí se němčinu, francouzštinu, italštinu a angličtinu z češtiny (angličtina doplněna 4. 10. 2026; britský pravopis a hlas). Každý profil má samostatný pokrok v každém jazyce. Denní rutina propojí opakování, nová slova, přizpůsobený text s audiem, otázky k porozumění a volitelný rozhovor. Gramatické lekce jsou otevřené od úrovně A1 (rozhodnutí 6. 11. 2026); zvládnutí prvních 1000 slov zůstává milníkem slovní zásoby.
 
 Frekvenční milníky jsou **100 → 500 (A1) → 1000 (A2) → 2500 (B1) → 4000 (práh B2) → 5000 (plné B2)** lemmat na jazyk; 5000 je konec povinné části. Nad 5000 následuje **dobrovolné rozšíření 6000+** zaměřené na pasivní slovní zásobu, bez tvrzení o úrovni CEFR: kdo chce, může se dál učit a trénovat, ale aplikace jasně říká, že postup k C1 přichází z reálného používání jazyka (lidé, kultura, média), nikoli z aplikace. Cílem vzdělávacího obsahu je podpora dovedností do B2. Štítky A1/A2/B1/B2 u milníků jsou orientační; dosažení 5000 slov se nebude vydávat za dosažení B2. Čtení, poslech, psaní a komunikace dostanou vlastní úlohy a přehled dovedností. CEFR používá deskriptory jednotlivých kompetencí, z čehož plyne toto oddělení slovní zásoby a úrovně. [Rada Evropy: popis úrovní CEFR](https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions).
 
@@ -34,7 +34,7 @@ Hlavní místa změn: `backend/app/domain/`, `backend/app/services/`, `backend/a
 1. **Zachovat modulární monolit:** FastAPI + SQLAlchemy/Alembic + PostgreSQL, Next.js a ARQ/Redis. Specifikace uvádí více možností scheduleru; stávající ARQ bude obsluhovat noční úlohy i retry. Další scheduler ani migrace na Celery nejsou potřeba.
 2. **Zachovat platné milníky:** kontrakt `app/domain/progression.py` (100/500/1000 A2/2500 B1/4000 práh B2/5000 plné B2, nad 5000 dobrovolné 6000+) je v souladu se zadáním a zůstává zdrojem pravdy pro API, české texty, dokumentaci a testy. Rank lexikonu nemá horní strop (migrace `0002`); `frequency_band` počítá importér. Slova nad 5000 jsou dobrovolná, výběr lekcí u nich upřednostní rozpoznání před produkcí a nikdy je nevyžaduje ani nepřipomíná. Historické migrace nepřepisovat.
 3. **Oddělit měření a prezentaci skóre:** databáze už používá rozsah 0–1, UI zobrazí 0–100. `NULL` znamená „dosud nezměřeno“. Přidat `last_seen_at`, `next_review_at` a údaje pro retenční model; stávající `last_reviewed_at` a `last_error_free_at` mají jiný význam.
-4. **Zachovat otevřený přístup k procvičování:** milníky řídí doporučené pořadí, nikoli počet povolených chyb. Jediným zadaným pedagogickým odemčením je gramatický modul po 1000 slovech; při decay se už získaný přístup znovu nezamkne.
+4. **Zachovat otevřený přístup k procvičování:** milníky řídí doporučené pořadí, nikoli počet povolených chyb. Gramatika je od 6. 11. 2026 otevřená od A1; dosažený milník 1000 slov se při decay neodebírá.
 5. **LLM přes společné rozhraní:** lokální endpoint jako výchozí možnost, cloud jako volitelná explicitní konfigurace. Adaptéry pro generování, dialog a závěrečnou zpětnou vazbu sdílejí validaci, timeouty a evidenci modelu. Automatický přechod z lokálního provozu do cloudu nebude výchozí chování.
 6. **Výslovnost vyžaduje vlastní ověření:** Whisper poskytne přepis, časování a jistotu rozpoznání. Současný wrapper sám upozorňuje, že tato jistota není kalibrované hodnocení výslovnosti. Průměr jeho pravděpodobností se proto neuloží jako `phonetic_score`. Pro tento plán je potřebný samostatný experiment s fonetickým zarovnáním a akustickým hodnoticím modelem. [Implementace faster-whisper](https://github.com/SYSTRAN/faster-whisper/blob/master/faster_whisper/transcribe.py).
 
@@ -78,7 +78,7 @@ Přesné názvy nových tabulek a OpenAPI schémata se dopracují v příslušn�
 - `passive_known` se získává rozpoznáním významu nebo porozuměním bez nápovědy; `active_known` samostatnou produkcí. Výsledek nahrávky s nejistým přepisem není automaticky chybou ani důkazem znalosti.
 - Výchozí, verzovaná pilotní politika: pasivní znalost po třech správných rozpoznáních na alespoň dvou různých dnech; aktivní po třech správných produkcích na alespoň dvou dnech. Nápovědou odhalená odpověď se nezapočítá. Prahy se upraví podle pilotních výsledků.
 - `MASTERED` vyžaduje obě znalosti a úspěšné odložené ověření alespoň po sedmi dnech. Mikrofon nebude povinný: správná písemná produkce může doložit aktivní znalost, výslovnost zůstane nezměřená.
-- Gramatické minilekce se odemknou, jakmile profil v daném jazyce zvládne první frekvenční blok 1000 lemmat. Jednoduché gramatické vzorce se přirozeně objevují v textech už před odemčením.
+- Gramatické lekce jsou otevřené od A1 (rozhodnutí 6. 11. 2026). Zvládnutí prvního frekvenčního bloku 1000 lemmat se dál zaznamenává jako milník.
 - Po více než 30 dnech bez bezchybného ověřeného použití se slovo vrátí do prioritního opakování. `retention_decay` sníží efektivní retenční skóre podle času od posledního úspěchu. Původní naměřenou pravopisnou/fonetickou přesnost uchovat; efektivní skóre počítat ze stejného základu, aby opakovaný běh neprováděl další násobné snížení.
 - Výběr lekce preferuje splatná opakování, chybovaná slova a potom malou dávku nových lemmat. Množství, intervaly i decay parametry patří do verzované politiky, ne do promptu LLM.
 
@@ -199,7 +199,7 @@ Pro plnou dodávku musí projít:
 - Dva workery nebo opakované odevzdání nevytvoří duplicitní příběhy, pokrok či odměny.
 - Dětský profil nedostane obsah, otázky, konverzační tah ani audio, které neprošly aktuální bezpečnostní politikou.
 - Audio/LLM výpadek má srozumitelný stav a recovery; dostupný textový drill lze dál používat.
-- Gramatika se odemkne podle zvládnutí bloku 1000 v daném jazyce; samotné nasbírané XP ji neodemknou.
+- Gramatika je otevřená od A1; blok 1000 je milník slovní zásoby, ne zámek.
 - UI rozlišuje slovní milníky a komunikační schopnosti; netvrdí dosažení B2 pouze z počtu slov.
 - Nad 5000 slov je procvičování dobrovolné, zaměřené na pasivní znalost, bez CEFR štítku a s jasným sdělením, že C1 vyžaduje reálné používání jazyka.
 

@@ -42,7 +42,7 @@ docker compose up --build       # postgres, redis, migrate, backend, worker, fro
 docker compose --profile audio up --build   # + piper, whisper (first start fetches pinned models)
 
 # seed
-docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json'
+docker compose run --rm backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json && python -m app.cli seed-grammar data/grammar/*.json'
 docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/default.csv
 docker compose run --rm backend python -m app.cli seed-lemmas data/frequency/en_GB.lemmas.csv data/frequency/en_US.lemmas.csv  # frequency reference, no glosses
 ```
@@ -84,6 +84,34 @@ re-hashes everything.
   over HTTPS or on `localhost`, so phones on the home network need HTTPS (plan P7).
 - `scripts/bench_audio.py` measures latency on the target machine; see [docs/HARDWARE.md](docs/HARDWARE.md).
   The `audio` CI workflow runs it in smoke mode with `tiny` when audio files change and weekly.
+
+### AI tutor (local model, optional)
+
+After any answered exercise, *Proč?* (key `W`) explains in Czech why the answer is right or wrong.
+The explanation always starts from the curriculum: the word's gloss, gender and example, or the
+grammar exercise's explanation and the unit's rule, plus the kind of mistake the learner made.
+An exercise that is still open is never explained, so the tutor cannot give a check's answer away.
+
+With `LLM_URL` set to an OpenAI-compatible endpoint (for example Ollama with `qwen2.5:7b-instruct`
+on the host GPU), the model may rephrase that explanation and answer one follow-up question. Its
+reply is used only when it is Czech, bounded, quotes the correct answer and passes the content
+blacklist; otherwise the curriculum text is shown. Model text is labelled as unreviewed. Learner
+text is sent as data, never as instructions, and is not logged. Hosts outside localhost or private
+networks are refused unless `LLM_ALLOW_REMOTE=true`; child profiles get model text only with
+`LLM_FOR_CHILDREN=true`. Explanations are cached per profile and exercise (`tutor_explanations`).
+
+### Generated reading (local model, optional)
+
+*Čtení* (`/stories`) asks the local model for one short story or dialogue per profile, language
+and day, written from the words the learner has met, with 3-5 of the words still being learned as
+targets (most missed first). The reply must be a JSON object with lines, Czech translations, a
+glossary for any extra word and 2-4 Czech comprehension questions. It is stored only when every
+target word appears, at most 15 % of the words are outside the learner's words, glossary and
+names (German inflection is folded approximately), and the whole text passes the content
+blacklist; otherwise the model gets one more try and then the learner sees an error. Each line
+can be played through Piper. Answers are graded on the server and never count as evidence.
+Stories record the provider and model and are labelled as unreviewed. Without `LLM_URL` the page
+says that a model is needed; child profiles get stories only with `LLM_FOR_CHILDREN=true`.
 
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
@@ -137,6 +165,22 @@ uv run alembic revision --autogenerate -m "..."   # then review; `alembic check`
 ```
 
 All settings are env vars prefixed `POLYFLOW_` (see `app/core/config.py`).
+
+## Adding a target language
+
+Czech is the only source language. Everything specific to a target language lives in its
+language pack, `backend/app/domain/language_packs.py`: its Czech name, citation articles,
+determiners, accepted keyboard fallbacks, noun genders and capitalisation, special characters and
+Alt shortcuts, irregular forms for story vocabulary checks, the voice preview sentence and tutor
+hints. Grading, the tutor and generated stories read the pack instead of testing for a language.
+A new language (for example Spanish) needs:
+
+1. a `Language` enum value and a migration that adds it to the `language` type (see `0008`);
+2. a `LanguagePack` in `language_packs.py`;
+3. a Piper voice in `app/domain/voices.py` and `docker/models/models.spec.json`;
+4. data: `data/lexicon/<lang>.*.csv`, `data/scenes/<lang>.*.json`, optionally a grammar pack;
+5. the same characters in `frontend/lib/keyboard.ts` (`tests/test_language_packs.py` compares
+   them) and the language name in `frontend/lib/i18n/cs.ts`.
 
 ## Agent workflow
 

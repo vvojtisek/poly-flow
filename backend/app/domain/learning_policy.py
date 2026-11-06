@@ -17,7 +17,11 @@ class LearningPolicy:
     # every matched word at least `spoken_min_confidence`, counts like a correct written answer
     # (active evidence, no orthography measurement). Anything else is "not understood" and
     # changes nothing: speech recognition errors are not evidence of not knowing a word.
-    version: str = "v3"
+    # v4: wrong answers carry an error tag (meaning, gender, spelling, ...), a recall answer
+    # with the wrong German article is still correct but tagged `gender`, and a lesson opens
+    # with up to `remediation_per_lesson` words the profile missed in a recent check
+    # (ungraded practice, like the rest of the lesson).
+    version: str = "v4"
     # passive_known: correct recognition (or production) in a check, without a hint
     passive_required_correct: int = 3
     passive_required_days: int = 2
@@ -36,6 +40,10 @@ class LearningPolicy:
     session_max_tasks: int = 12
     # ...and a lesson introduces at most this many (each practised twice).
     new_items_per_session: int = 4
+    # Recently missed words practised at the start of the next lesson, and the window that
+    # counts as "recently" (also used by the weak-spot overview).
+    remediation_per_lesson: int = 2
+    remediation_window: timedelta = timedelta(days=21)
     # Lowest Whisper word probability for a spoken match. Provisional: transcript confidence
     # of real learner recordings is stored per event so this can be set from data.
     spoken_min_confidence: float = 0.5
@@ -71,3 +79,30 @@ def smooth(old: float | None, new: float, policy: LearningPolicy = POLICY) -> fl
     if old is None:
         return new
     return round(old * (1 - policy.orthography_weight) + new * policy.orthography_weight, 4)
+
+
+@dataclass(frozen=True, slots=True)
+class GrammarPolicy:
+    """Grammar units (plan P5): same learn/check split and spacing as words.
+
+    g1: a unit is "known" after `known_required_correct` first-try correct check answers on at
+    least `known_required_days` days; MASTERED after a successful check `mastery_delay` later.
+    A missed check answer makes the unit due the next local day and brings that exercise back.
+    """
+
+    version: str = "g1"
+    known_required_correct: int = 3
+    known_required_days: int = 2
+    mastery_delay: timedelta = timedelta(days=7)
+    review_intervals: tuple[timedelta, ...] = tuple(timedelta(days=d) for d in (1, 2, 4, 7, 14, 30))
+    decay_after: timedelta = timedelta(days=30)
+    # A grammar check covers at most this many due units, this many exercises each.
+    check_max_units: int = 4
+    check_exercises_per_unit: int = 2
+    # A grammar lesson adds up to this many exercises missed recently in other units.
+    lesson_remediation: int = 2
+    # "Recently" for remediation and weak spots.
+    remediation_window: timedelta = timedelta(days=21)
+
+
+GRAMMAR_POLICY = GrammarPolicy()

@@ -472,10 +472,20 @@ async def test_languages_are_independent(db, client):
     assert fr["seen"] == 0 and de["seen"] == 4 and de["introduced"] == 4
 
 
+async def test_grammar_is_open_from_the_start(db, client):
+    await seed_words()
+    await child_session(client)
+    assert (await client.get("/api/v1/learning/progress?language=de")).json()["grammar_unlocked"]
+
+
 async def test_grammar_unlock_persists(db, client, clock, monkeypatch):
+    monkeypatch.setattr(svc, "GRAMMAR_OPEN_FROM_START", False)  # the recorded 1000-word unlock
     monkeypatch.setattr(svc, "GRAMMAR_GATE_WORDS", 2)
     await seed_words(words=[("Haus", "NOUN", "dům"), ("Hund", "NOUN", "pes")])
     me = await child_session(client)
+    assert not (await client.get("/api/v1/learning/progress?language=de")).json()[
+        "grammar_unlocked"
+    ]
     await run_lesson(client, me)
     for _ in range(8):
         clock.advance(days=31)

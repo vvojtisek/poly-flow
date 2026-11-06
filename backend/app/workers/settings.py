@@ -8,6 +8,7 @@ from arq.connections import RedisSettings
 
 from app.core.config import get_settings
 from app.db.session import dispose_engine, get_session
+from app.services import grammar
 from app.services.learning import decay_sweep, prune_expired_sessions
 
 log = logging.getLogger("polyflow.worker")
@@ -31,10 +32,12 @@ async def nightly_maintenance(ctx: dict[str, Any]) -> dict[str, int]:
     now = datetime.now(UTC)
     async for db in get_session():
         decayed = await decay_sweep(db, now)
+        grammar_decayed = await grammar.decay_sweep(db, now)
         pruned = await prune_expired_sessions(db, now)
         await db.commit()
-    log.info("nightly_maintenance_done", extra={"decayed": decayed, "sessions_pruned": pruned})
-    return {"decayed": decayed, "sessions_pruned": pruned}
+    stats = {"decayed": decayed, "grammar_decayed": grammar_decayed, "sessions_pruned": pruned}
+    log.info("nightly_maintenance_done", extra=stats)
+    return stats
 
 
 class WorkerSettings:

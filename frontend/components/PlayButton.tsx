@@ -6,13 +6,24 @@ import { play, setSlow, stop, useClipState, useSlow } from "@/lib/audio";
 import { cs } from "@/lib/i18n/cs";
 
 /** Plays one clip of synthesized speech. Without the TTS service it shows that and stays text-only. */
-export function PlayButton({ url, label = cs.audio.play, size = "md" }: { url: string; label?: string; size?: "sm" | "md" }) {
+export function PlayButton({
+  url,
+  label = cs.audio.play,
+  size = "md",
+  hotkey = false,
+}: {
+  url: string;
+  label?: string;
+  size?: "sm" | "md";
+  hotkey?: boolean; // the P key plays this clip
+}) {
   const state = useClipState(url);
   const Icon = state === "loading" ? Loader2 : state === "error" ? VolumeX : Volume2;
   const title = state === "error" ? cs.audio.unavailable : label;
   return (
     <button
       type="button"
+      data-hotkey={hotkey ? "play" : undefined}
       aria-label={title}
       title={title}
       onClick={() => (state === "playing" ? stop() : void play(url))}

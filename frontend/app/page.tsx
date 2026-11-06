@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, Award, BarChart3, BookOpen, ClipboardCheck, Compass, Map as MapIcon, Play } from "lucide-react";
+import { Activity, AlertTriangle, Award, BarChart3, BookOpen, ClipboardCheck, Compass, GraduationCap, Map as MapIcon, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,7 @@ import { Panel } from "@/components/Panel";
 import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
 import { ServerStatus } from "@/components/ServerStatus";
+import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Button, Notice } from "@/components/ui";
 import { getProgress, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
@@ -101,6 +102,12 @@ export default function HomePage() {
                 </p>
               )}
             </div>
+            <div className="flex flex-col gap-1">
+              <Button variant="secondary" className="w-full !py-4 text-lg" onClick={() => router.push("/grammar")}>
+                <GraduationCap className="size-5" aria-hidden />
+                {cs.grammar.title}
+              </Button>
+            </div>
             {progress && (
               <section className="flex flex-col gap-2 border-t border-slate-200 pt-3 dark:border-slate-800">
                 <h3 className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.tests.title}</h3>
@@ -140,12 +147,16 @@ export default function HomePage() {
           )}
         </Panel>
 
-        <Panel title={cs.progression.title} icon={MapIcon} className={me.can_manage ? "" : "lg:col-span-3"}>
+        <Panel title={cs.weak.title} icon={AlertTriangle}>
+          {language && <WeakSpotsCard key={`${me.acting.id}:${language}`} language={language} />}
+        </Panel>
+
+        <Panel title={cs.progression.title} icon={MapIcon} className="lg:col-span-2">
           <ProgressionPath />
         </Panel>
 
         {me.can_manage && (
-          <Panel title={cs.dashboard.serverHealth} icon={Activity} className="lg:col-span-2">
+          <Panel title={cs.dashboard.serverHealth} icon={Activity} className="lg:col-span-3">
             <ServerStatus />
           </Panel>
         )}

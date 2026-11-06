@@ -1,0 +1,905 @@
+# German ranks 101-1000 (de): Claude-drafted lemmas, order, Czech glosses, gender and one
+# example sentence per word. The order is an approximate frequency/usefulness order drafted
+# from general knowledge, NOT taken from a published corpus list. NOT YET REVIEWED by a
+# native speaker: treat every gloss and example as a draft.
+language,rank,lemma,pos,translation_cs,ipa,cefr,gender,example,source,license,revision
+de,101,andere,DET,jiný,,,,Ich möchte eine andere Farbe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,102,Uhr,NOUN,hodiny (přístroj),,,die,Die Uhr hängt an der Wand.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,103,einmal,ADV,jednou,,,,Ich war einmal in Wien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,104,ganz,ADV,úplně,,,,Das ist ganz einfach.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,105,mehr,ADV,více,,,,Ich möchte mehr Zeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,106,zwei,NUM,dva,,,,Ich habe zwei Brüder.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,107,drei,NUM,tři,,,,Wir haben drei Katzen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,108,eins,NUM,jedna (číslo),,,,Eins plus eins ist zwei.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,109,vier,NUM,čtyři,,,,Das Auto hat vier Räder.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,110,fünf,NUM,pět,,,,Es ist fünf Uhr.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,111,zehn,NUM,deset,,,,Ich zähle bis zehn.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,112,hundert,NUM,sto,,,,Das kostet hundert Euro.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,113,weil,SCONJ,protože,,,,"Ich bleibe hier, weil es regnet.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,114,doch,ADV,přece; ale ano,,,,Komm doch mit!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,115,Mutter,NOUN,matka,,,die,Meine Mutter heißt Eva.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,116,Vater,NOUN,otec,,,der,Mein Vater arbeitet viel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,117,Kopf,NOUN,hlava,,,der,Mir tut der Kopf weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,118,Auto,NOUN,auto,,,das,Das Auto ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,119,Weg,NOUN,cesta,,,der,Der Weg ist lang.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,120,Name,NOUN,jméno,,,der,Wie ist dein Name?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,121,Problem,NOUN,problém,,,das,Das ist kein Problem.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,122,Geld,NOUN,peníze,,,das,Ich habe kein Geld.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,123,Ende,NOUN,konec,,,das,Das ist das Ende.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,124,Teil,NOUN,část,,,der,Das ist ein Teil der Stadt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,125,Seite,NOUN,strana,,,die,Lies die Seite zehn.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,126,Woche,NOUN,týden,,,die,Die Woche hat sieben Tage.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,127,Monat,NOUN,měsíc (kalendářní),,,der,Der Monat Mai ist schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,128,Stunde,NOUN,hodina (60 minut),,,die,Der Film dauert eine Stunde.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,129,Abend,NOUN,večer,,,der,Guten Abend!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,130,Morgen,NOUN,ráno,,,der,Guten Morgen!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,131,morgen,ADV,zítra,,,,Bis morgen!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,132,Nacht,NOUN,noc,,,die,Gute Nacht!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,133,Familie,NOUN,rodina,,,die,Meine Familie ist groß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,134,Bruder,NOUN,bratr,,,der,Mein Bruder ist älter.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,135,Schwester,NOUN,sestra,,,die,Meine Schwester liest gern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,136,Eltern,NOUN,rodiče,,,die,Meine Eltern wohnen in Brno.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,137,Sohn,NOUN,syn,,,der,Ihr Sohn ist sechs.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,138,Tochter,NOUN,dcera,,,die,Seine Tochter spielt Klavier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,139,Junge,NOUN,kluk,,,der,Der Junge spielt Fußball.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,140,Mädchen,NOUN,holka; dívka,,,das,Das Mädchen lacht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,141,Lehrer,NOUN,učitel,,,der,Der Lehrer erklärt alles.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,142,Zimmer,NOUN,pokoj,,,das,Mein Zimmer ist klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,143,Tür,NOUN,dveře,,,die,Mach bitte die Tür zu.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,144,Fenster,NOUN,okno,,,das,Das Fenster ist offen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,145,Tisch,NOUN,stůl,,,der,Das Buch liegt auf dem Tisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,146,Stuhl,NOUN,židle,,,der,Der Stuhl ist bequem.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,147,Bett,NOUN,postel,,,das,Ich gehe ins Bett.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,148,Straße,NOUN,ulice,,,die,Die Straße ist lang.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,149,Platz,NOUN,místo; náměstí,,,der,Ist hier noch Platz?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,150,Baum,NOUN,strom,,,der,Der Baum ist alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,151,Blume,NOUN,květina,,,die,Die Blume riecht gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,152,Katze,NOUN,kočka,,,die,Die Katze schläft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,153,Tier,NOUN,zvíře,,,das,Welches Tier magst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,154,Vogel,NOUN,pták,,,der,Der Vogel singt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,155,Pferd,NOUN,kůň,,,das,Das Pferd läuft schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,156,Brot,NOUN,chléb,,,das,Ich kaufe Brot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,157,Milch,NOUN,mléko,,,die,Die Milch ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,158,Apfel,NOUN,jablko,,,der,Der Apfel ist süß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,159,Kaffee,NOUN,káva,,,der,Ich trinke Kaffee.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,160,Tee,NOUN,čaj,,,der,Möchtest du Tee?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,161,Essen,NOUN,jídlo,,,das,Das Essen ist fertig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,162,Fleisch,NOUN,maso,,,das,Ich esse kein Fleisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,163,Ei,NOUN,vejce,,,das,Ich esse ein Ei.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,164,Käse,NOUN,sýr,,,der,Der Käse kommt aus Holland.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,165,Obst,NOUN,ovoce,,,das,Obst ist gesund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,166,Gemüse,NOUN,zelenina,,,das,Ich koche Gemüse.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,167,Kuchen,NOUN,koláč; dort,,,der,Der Kuchen schmeckt gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,168,Farbe,NOUN,barva,,,die,Rot ist meine Farbe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,169,rot,ADJ,červený,,,,Die Rose ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,170,blau,ADJ,modrý,,,,Der Himmel ist blau.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,171,grün,ADJ,zelený,,,,Das Gras ist grün.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,172,gelb,ADJ,žlutý,,,,Die Sonne ist gelb.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,173,schwarz,ADJ,černý,,,,Die Katze ist schwarz.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,174,weiß,ADJ,bílý,,,,Der Schnee ist weiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,175,alt,ADJ,starý,,,,Das Haus ist alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,176,jung,ADJ,mladý,,,,Sie ist noch jung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,177,lang,ADJ,dlouhý,,,,Der Weg ist lang.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,178,kurz,ADJ,krátký,,,,Der Film ist kurz.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,179,schön,ADJ,hezký,,,,Das Wetter ist schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,180,schnell,ADJ,rychlý,,,,Das Auto ist schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,181,langsam,ADJ,pomalý,,,,Sprich bitte langsam.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,182,richtig,ADJ,správný,,,,Die Antwort ist richtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,183,falsch,ADJ,špatný (nesprávný),,,,Das ist falsch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,184,schlecht,ADJ,špatný (nekvalitní),,,,Das Wetter ist schlecht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,185,wichtig,ADJ,důležitý,,,,Das ist sehr wichtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,186,einfach,ADJ,jednoduchý,,,,Die Aufgabe ist einfach.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,187,schwer,ADJ,těžký,,,,Der Koffer ist schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,188,leicht,ADJ,lehký,,,,Die Tasche ist leicht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,189,warm,ADJ,teplý,,,,Der Tee ist warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,190,kalt,ADJ,studený,,,,Das Wasser ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,191,heiß,ADJ,horký,,,,Die Suppe ist heiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,192,müde,ADJ,unavený,,,,Ich bin müde.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,193,krank,ADJ,nemocný,,,,Er ist heute krank.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,194,froh,ADJ,rád (spokojený),,,,Ich bin froh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,195,lieb,ADJ,milý,,,,Du bist lieb.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,196,zusammen,ADV,spolu,,,,Wir spielen zusammen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,197,wieder,ADV,znovu,,,,Komm bald wieder!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,198,gern,ADV,rád (s chutí),,,,Ich lese gern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,199,bitte,ADV,prosím,,,,Bitte setz dich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,200,danke,ADV,děkuji,,,,Danke für das Geschenk!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,201,vielleicht,ADV,možná,,,,Vielleicht kommt er morgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,202,natürlich,ADV,samozřejmě,,,,Natürlich helfe ich dir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,203,wirklich,ADV,opravdu,,,,Das ist wirklich schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,204,gestern,ADV,včera,,,,Gestern war ich krank.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,205,bald,ADV,brzy,,,,Bis bald!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,206,oft,ADV,často,,,,Ich lese oft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,207,manchmal,ADV,někdy,,,,Manchmal regnet es.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,208,nie,ADV,nikdy,,,,Ich rauche nie.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,209,dort,ADV,tam (na tom místě),,,,Dort steht mein Haus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,210,oben,ADV,nahoře,,,,Die Katze ist oben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,211,unten,ADV,dole,,,,Der Hund wartet unten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,212,links,ADV,vlevo,,,,Geh nach links.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,213,rechts,ADV,vpravo,,,,Das Haus ist rechts.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,214,warum,ADV,proč,,,,Warum lachst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,215,wo,ADV,kde,,,,Wo wohnst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,216,wann,ADV,kdy,,,,Wann kommst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,217,wer,PRON,kdo,,,,Wer ist das?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,218,welcher,DET,který,,,,Welcher Tag ist heute?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,219,nichts,PRON,nic,,,,Ich sehe nichts.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,220,etwas,PRON,něco,,,,Ich möchte etwas trinken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,221,jemand,PRON,někdo,,,,Ist jemand da?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,222,dein,DET,tvůj,,,,Ist das dein Buch?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,223,sein,DET,jeho (přivlastňovací),,,,Das ist sein Hund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,224,unser,DET,náš,,,,Unser Haus ist alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,225,kein,DET,žádný,,,,Ich habe kein Auto.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,226,jeder,DET,každý,,,,Jeder Tag ist anders.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,227,ohne,ADP,bez,,,,Ich trinke Kaffee ohne Zucker.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,228,durch,ADP,skrz,,,,Wir gehen durch den Park.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,229,gegen,ADP,proti,,,,Er spielt gegen mich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,230,um,ADP,kolem; v (čas),,,,Wir treffen uns um acht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,231,vor,ADP,před,,,,Das Auto steht vor dem Haus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,232,hinter,ADP,za (místo),,,,Der Garten ist hinter dem Haus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,233,neben,ADP,vedle,,,,Er sitzt neben mir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,234,unter,ADP,pod,,,,Die Katze liegt unter dem Tisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,235,zwischen,ADP,mezi,,,,Das Kind sitzt zwischen uns.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,236,seit,ADP,od (doby),,,,Ich wohne seit Mai hier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,237,bis,ADP,až do,,,,Ich warte bis morgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,238,denn,CCONJ,neboť; vždyť,,,,"Ich gehe, denn es ist spät.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,239,sondern,CCONJ,nýbrž; ale (po záporu),,,,"Nicht heute, sondern morgen.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,240,ob,SCONJ,zda,,,,"Ich weiß nicht, ob er kommt.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,241,spielen,VERB,hrát,,,,Die Kinder spielen gern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,242,lernen,VERB,učit se,,,,Ich will Deutsch lernen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,243,wohnen,VERB,bydlet,,,,Wo möchtest du wohnen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,244,arbeiten,VERB,pracovat,,,,Ich muss heute arbeiten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,245,kaufen,VERB,koupit,,,,Ich will Brot kaufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,246,fragen,VERB,ptát se,,,,Darf ich dich etwas fragen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,247,antworten,VERB,odpovědět,,,,Bitte antworten Sie schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,248,hören,VERB,slyšet; poslouchat,,,,Ich kann dich nicht hören.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,249,fahren,VERB,jet,,,,Wir fahren nach Prag.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,250,laufen,VERB,běžet; chodit,,,,Ich kann schnell laufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,251,fliegen,VERB,letět,,,,Vögel können fliegen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,252,schwimmen,VERB,plavat,,,,Ich kann gut schwimmen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,253,schlafen,VERB,spát,,,,Das Baby will schlafen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,254,kochen,VERB,vařit,,,,Wir kochen heute zusammen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,255,helfen,VERB,pomoct,,,,Kannst du mir helfen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,256,brauchen,VERB,potřebovat,,,,Ich brauche Hilfe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,257,glauben,VERB,věřit,,,,Ich kann das nicht glauben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,258,kennen,VERB,znát,,,,Ich möchte ihn kennen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,259,verstehen,VERB,rozumět,,,,Ich kann dich gut verstehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,260,zeigen,VERB,ukázat,,,,Kannst du mir den Weg zeigen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,261,bringen,VERB,přinést,,,,Kannst du mir Wasser bringen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,262,halten,VERB,držet,,,,Kannst du das kurz halten?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,263,tragen,VERB,nést; nosit,,,,Ich muss die Tasche tragen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,264,ziehen,VERB,táhnout,,,,Du musst an der Tür ziehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,265,setzen,VERB,posadit; položit,,,,Du kannst dich hier setzen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,266,sitzen,VERB,sedět,,,,Wir sitzen im Garten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,267,legen,VERB,položit (naležato),,,,Du kannst das Buch hier legen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,268,stellen,VERB,postavit (nastojato),,,,Kannst du die Flasche hier stellen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,269,hängen,VERB,viset; pověsit,,,,Das Bild soll hier hängen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,270,öffnen,VERB,otevřít,,,,Kannst du das Fenster öffnen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,271,schließen,VERB,zavřít,,,,Bitte die Tür schließen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,272,beginnen,VERB,začít,,,,Der Film soll um acht beginnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,273,anfangen,VERB,začínat,,,,Wann können wir anfangen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,274,aufhören,VERB,přestat,,,,Du musst jetzt aufhören.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,275,warten,VERB,čekat,,,,Ich kann nicht lange warten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,276,suchen,VERB,hledat,,,,Ich muss meinen Schlüssel suchen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,277,verlieren,VERB,ztratit,,,,Ich will das Spiel nicht verlieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,278,gewinnen,VERB,vyhrát,,,,Wir wollen heute gewinnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,279,bezahlen,VERB,zaplatit,,,,Ich möchte bezahlen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,280,kosten,VERB,stát (o ceně),,,,Was soll das kosten?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,281,verkaufen,VERB,prodat,,,,Er will sein Auto verkaufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,282,bekommen,VERB,dostat,,,,Ich möchte einen Brief bekommen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,283,schicken,VERB,poslat,,,,Ich will dir ein Foto schicken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,284,rufen,VERB,volat (hlasem),,,,Du musst laut rufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,285,anrufen,VERB,zavolat (telefonem),,,,Ich muss meine Mutter anrufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,286,besuchen,VERB,navštívit,,,,Wir wollen Oma besuchen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,287,treffen,VERB,potkat,,,,Wir wollen uns morgen treffen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,288,lachen,VERB,smát se,,,,Die Kinder lachen viel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,289,weinen,VERB,plakat,,,,Das Baby fängt an zu weinen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,290,singen,VERB,zpívat,,,,Wir singen ein Lied.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,291,tanzen,VERB,tancovat,,,,Sie kann gut tanzen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,292,malen,VERB,malovat,,,,Ich möchte ein Bild malen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,293,zeichnen,VERB,kreslit,,,,Kannst du ein Pferd zeichnen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,294,rechnen,VERB,počítat,,,,Er kann schnell rechnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,295,zählen,VERB,počítat (čísla); záležet,,,,Kannst du bis zehn zählen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,296,erklären,VERB,vysvětlit,,,,Kannst du mir das erklären?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,297,erzählen,VERB,vyprávět,,,,Kannst du eine Geschichte erzählen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,298,vergessen,VERB,zapomenout,,,,Ich darf das nicht vergessen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,299,erinnern,VERB,připomenout,,,,Ich will dich daran erinnern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,300,leben,VERB,žít,,,,Ich möchte am Meer leben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,301,sterben,VERB,zemřít,,,,Die Pflanze darf nicht sterben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,302,wachsen,VERB,růst,,,,Die Blumen wachsen schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,303,fallen,VERB,padat,,,,"Pass auf, du kannst fallen!",claude-drafted,CC0-1.0,de1000-draft-v1
+de,304,springen,VERB,skákat,,,,Der Hund kann hoch springen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,305,werfen,VERB,hodit,,,,Kannst du den Ball werfen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,306,fangen,VERB,chytit,,,,Kannst du den Ball fangen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,307,waschen,VERB,prát; mýt,,,,Ich muss die Hände waschen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,308,putzen,VERB,uklízet; čistit,,,,Wir müssen das Zimmer putzen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,309,baden,VERB,koupat se,,,,Die Kinder wollen baden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,310,reisen,VERB,cestovat,,,,Ich möchte viel reisen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,311,fühlen,VERB,cítit,,,,Ich kann die Sonne fühlen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,312,riechen,VERB,čichat; vonět,,,,Die Blumen riechen gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,313,schmecken,VERB,chutnat,,,,Das Essen soll gut schmecken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,314,mögen,VERB,mít rád,,,,Ich mag Katzen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,315,lieben,VERB,milovat,,,,Ich liebe meine Familie.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,316,hoffen,VERB,doufat,,,,"Ich hoffe, du kommst.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,317,wünschen,VERB,přát,,,,Ich wünsche dir alles Gute.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,318,dürfen,AUX,smět,,,,Darf ich hier sitzen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,319,möchten,AUX,chtít (zdvořile),,,,Ich möchte ein Eis.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,320,Freundin,NOUN,kamarádka,,,die,Meine Freundin heißt Lea.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,321,Leute,NOUN,lidé,,,die,Viele Leute sind hier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,322,Herr,NOUN,pán,,,der,"Guten Tag, Herr Novák!",claude-drafted,CC0-1.0,de1000-draft-v1
+de,323,Baby,NOUN,miminko,,,das,Das Baby schläft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,324,Oma,NOUN,babička,,,die,Oma backt einen Kuchen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,325,Opa,NOUN,děda,,,der,Opa liest die Zeitung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,326,Onkel,NOUN,strýc,,,der,Mein Onkel wohnt in Wien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,327,Tante,NOUN,teta,,,die,Meine Tante kommt morgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,328,Körper,NOUN,tělo,,,der,Sport ist gut für den Körper.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,329,Gesicht,NOUN,obličej,,,das,Wasch dir das Gesicht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,330,Auge,NOUN,oko,,,das,Mach das Auge zu.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,331,Ohr,NOUN,ucho,,,das,Mein Ohr tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,332,Nase,NOUN,nos,,,die,Die Nase ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,333,Mund,NOUN,ústa,,,der,Mach den Mund auf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,334,Zahn,NOUN,zub,,,der,Der Zahn tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,335,Haar,NOUN,vlas,,,das,Sie hat ein graues Haar.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,336,Arm,NOUN,paže,,,der,Mein Arm tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,337,Bein,NOUN,noha (celá),,,das,Er hat ein Bein gebrochen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,338,Fuß,NOUN,chodidlo; noha (od kotníku),,,der,Mein Fuß ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,339,Finger,NOUN,prst,,,der,Ich habe mir den Finger verletzt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,340,Herz,NOUN,srdce,,,das,Das Herz schlägt schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,341,Bauch,NOUN,břicho,,,der,Mein Bauch tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,342,Rücken,NOUN,záda,,,der,Der Rücken tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,343,Sonne,NOUN,slunce,,,die,Die Sonne scheint.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,344,Mond,NOUN,měsíc (na nebi),,,der,Der Mond ist hell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,345,Stern,NOUN,hvězda,,,der,Ein Stern leuchtet.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,346,Himmel,NOUN,nebe,,,der,Der Himmel ist blau.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,347,Wetter,NOUN,počasí,,,das,Wie ist das Wetter?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,348,Regen,NOUN,déšť,,,der,Der Regen hört auf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,349,Schnee,NOUN,sníh,,,der,Der Schnee ist weiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,350,Wind,NOUN,vítr,,,der,Der Wind ist stark.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,351,Luft,NOUN,vzduch,,,die,Die Luft ist frisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,352,Feuer,NOUN,oheň,,,das,Das Feuer ist warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,353,Erde,NOUN,země (půda; planeta),,,die,Die Erde ist rund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,354,Meer,NOUN,moře,,,das,Wir fahren ans Meer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,355,See,NOUN,jezero,,,der,Der See ist tief.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,356,Fluss,NOUN,řeka,,,der,Der Fluss ist breit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,357,Berg,NOUN,hora,,,der,Der Berg ist hoch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,358,Wald,NOUN,les,,,der,Wir gehen in den Wald.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,359,Garten,NOUN,zahrada,,,der,Der Garten ist groß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,360,Park,NOUN,park,,,der,Wir spielen im Park.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,361,Dorf,NOUN,vesnice,,,das,Das Dorf ist klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,362,Frühling,NOUN,jaro,,,der,Der Frühling kommt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,363,Sommer,NOUN,léto,,,der,Im Sommer ist es warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,364,Herbst,NOUN,podzim,,,der,Im Herbst fallen die Blätter.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,365,Winter,NOUN,zima (roční období),,,der,Der Winter ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,366,Montag,NOUN,pondělí,,,der,Am Montag gehe ich zur Schule.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,367,Dienstag,NOUN,úterý,,,der,Am Dienstag habe ich Sport.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,368,Mittwoch,NOUN,středa,,,der,Am Mittwoch kocht Papa.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,369,Donnerstag,NOUN,čtvrtek,,,der,Am Donnerstag kommt Oma.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,370,Freitag,NOUN,pátek,,,der,Am Freitag ist Party.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,371,Samstag,NOUN,sobota,,,der,Am Samstag schlafen wir lange.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,372,Sonntag,NOUN,neděle,,,der,Am Sonntag essen wir zusammen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,373,Wochenende,NOUN,víkend,,,das,Schönes Wochenende!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,374,Minute,NOUN,minuta,,,die,Warte eine Minute!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,375,Geburtstag,NOUN,narozeniny,,,der,Heute ist mein Geburtstag.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,376,Ferien,NOUN,prázdniny,,,die,Die Ferien beginnen morgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,377,Urlaub,NOUN,dovolená,,,der,Wir machen Urlaub in Italien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,378,Spiel,NOUN,hra,,,das,Das Spiel ist lustig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,379,Ball,NOUN,míč,,,der,Wirf mir den Ball!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,380,Lied,NOUN,píseň,,,das,Wir singen ein Lied.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,381,Musik,NOUN,hudba,,,die,Ich höre gern Musik.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,382,Bild,NOUN,obraz; obrázek,,,das,Das Bild ist schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,383,Film,NOUN,film,,,der,Der Film ist spannend.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,384,Geschichte,NOUN,příběh; dějiny,,,die,Erzähl mir eine Geschichte!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,385,Brief,NOUN,dopis,,,der,Ich schreibe einen Brief.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,386,Wort,NOUN,slovo,,,das,Was bedeutet das Wort?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,387,Satz,NOUN,věta,,,der,Lies den Satz laut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,388,Sprache,NOUN,jazyk (řeč),,,die,Deutsch ist eine schöne Sprache.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,389,Zahl,NOUN,číslo,,,die,Sieben ist meine Zahl.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,390,Antwort,NOUN,odpověď,,,die,Die Antwort ist richtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,391,Idee,NOUN,nápad,,,die,Das ist eine gute Idee.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,392,Hilfe,NOUN,pomoc,,,die,Danke für die Hilfe!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,393,Glück,NOUN,štěstí,,,das,Viel Glück!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,394,Angst,NOUN,strach,,,die,Ich habe keine Angst.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,395,Spaß,NOUN,legrace; zábava,,,der,Das macht Spaß!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,396,Hunger,NOUN,hlad,,,der,Ich habe Hunger.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,397,Durst,NOUN,žízeň,,,der,Ich habe Durst.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,398,Klasse,NOUN,třída,,,die,Unsere Klasse ist nett.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,399,Lehrerin,NOUN,učitelka,,,die,Die Lehrerin ist freundlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,400,Schüler,NOUN,žák,,,der,Der Schüler lernt viel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,401,Heft,NOUN,sešit,,,das,Schreib das ins Heft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,402,Stift,NOUN,tužka; pero,,,der,Hast du einen Stift?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,403,Papier,NOUN,papír,,,das,Ich brauche Papier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,404,Aufgabe,NOUN,úkol,,,die,Die Aufgabe ist schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,405,Hausaufgabe,NOUN,domácí úkol,,,die,Ich mache meine Hausaufgabe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,406,Prüfung,NOUN,zkouška,,,die,Morgen habe ich eine Prüfung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,407,Fehler,NOUN,chyba,,,der,Das ist kein Fehler.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,408,Pause,NOUN,přestávka,,,die,Wir machen eine Pause.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,409,Unterricht,NOUN,vyučování,,,der,Der Unterricht beginnt um acht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,410,Universität,NOUN,univerzita,,,die,Sie studiert an der Universität.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,411,Bus,NOUN,autobus,,,der,Der Bus kommt gleich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,412,Zug,NOUN,vlak,,,der,Der Zug ist pünktlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,413,Bahnhof,NOUN,nádraží,,,der,Wo ist der Bahnhof?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,414,Fahrrad,NOUN,kolo (jízdní),,,das,Ich fahre mit dem Fahrrad.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,415,Flugzeug,NOUN,letadlo,,,das,Das Flugzeug fliegt hoch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,416,Schiff,NOUN,loď,,,das,Das Schiff ist groß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,417,Flughafen,NOUN,letiště,,,der,Der Flughafen ist weit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,418,Haltestelle,NOUN,zastávka,,,die,Die Haltestelle ist dort.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,419,Ticket,NOUN,jízdenka; vstupenka,,,das,Ich habe ein Ticket.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,420,Reise,NOUN,cesta (výlet),,,die,Gute Reise!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,421,Karte,NOUN,karta; mapa,,,die,Hast du eine Karte?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,422,Geschäft,NOUN,obchod,,,das,Das Geschäft ist zu.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,423,Supermarkt,NOUN,supermarket,,,der,Ich gehe in den Supermarkt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,424,Markt,NOUN,trh,,,der,Am Markt gibt es Obst.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,425,Restaurant,NOUN,restaurace,,,das,Das Restaurant ist voll.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,426,Café,NOUN,kavárna,,,das,Wir sitzen im Café.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,427,Hotel,NOUN,hotel,,,das,Das Hotel ist am Meer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,428,Kino,NOUN,kino,,,das,Wir gehen ins Kino.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,429,Museum,NOUN,muzeum,,,das,Das Museum ist interessant.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,430,Kirche,NOUN,kostel,,,die,Die Kirche ist alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,431,Krankenhaus,NOUN,nemocnice,,,das,Er liegt im Krankenhaus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,432,Arzt,NOUN,lékař,,,der,Ich gehe zum Arzt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,433,Ärztin,NOUN,lékařka,,,die,Die Ärztin hilft mir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,434,Apotheke,NOUN,lékárna,,,die,Die Apotheke ist offen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,435,Bank,NOUN,banka; lavička,,,die,Die Bank ist um die Ecke.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,436,Post,NOUN,pošta,,,die,Ich bringe den Brief zur Post.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,437,Polizei,NOUN,policie,,,die,Ruf die Polizei!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,438,Büro,NOUN,kancelář,,,das,Mama arbeitet im Büro.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,439,Firma,NOUN,firma,,,die,Die Firma ist groß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,440,Wohnung,NOUN,byt,,,die,Die Wohnung hat drei Zimmer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,441,Küche,NOUN,kuchyně,,,die,Wir essen in der Küche.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,442,Bad,NOUN,koupelna,,,das,Das Bad ist oben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,443,Toilette,NOUN,toaleta,,,die,Wo ist die Toilette?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,444,Wand,NOUN,zeď; stěna,,,die,Das Bild hängt an der Wand.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,445,Boden,NOUN,podlaha; půda,,,der,Die Tasche liegt auf dem Boden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,446,Treppe,NOUN,schody,,,die,Die Treppe ist steil.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,447,Schlüssel,NOUN,klíč,,,der,Wo ist mein Schlüssel?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,448,Lampe,NOUN,lampa,,,die,Mach die Lampe an.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,449,Sofa,NOUN,pohovka,,,das,Die Katze schläft auf dem Sofa.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,450,Schrank,NOUN,skříň,,,der,Die Kleider sind im Schrank.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,451,Kühlschrank,NOUN,lednice,,,der,Die Milch ist im Kühlschrank.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,452,Teller,NOUN,talíř,,,der,Der Teller ist leer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,453,Tasse,NOUN,hrnek; šálek,,,die,"Eine Tasse Tee, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,454,Glas,NOUN,sklenice; sklo,,,das,"Ein Glas Wasser, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,455,Flasche,NOUN,láhev,,,die,Die Flasche ist leer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,456,Messer,NOUN,nůž,,,das,Das Messer ist scharf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,457,Gabel,NOUN,vidlička,,,die,Wo ist die Gabel?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,458,Löffel,NOUN,lžíce,,,der,Ich brauche einen Löffel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,459,Tasche,NOUN,taška,,,die,Die Tasche ist schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,460,Kleid,NOUN,šaty,,,das,Das Kleid ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,461,Hose,NOUN,kalhoty,,,die,Die Hose ist zu lang.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,462,Hemd,NOUN,košile,,,das,Das Hemd ist weiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,463,Jacke,NOUN,bunda,,,die,Zieh die Jacke an.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,464,Schuh,NOUN,bota,,,der,Der Schuh ist zu klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,465,Mütze,NOUN,čepice,,,die,Im Winter trage ich eine Mütze.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,466,Handy,NOUN,mobil,,,das,Mein Handy ist leer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,467,Computer,NOUN,počítač,,,der,Der Computer ist neu.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,468,Telefon,NOUN,telefon,,,das,Das Telefon klingelt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,469,Foto,NOUN,fotka,,,das,Das Foto ist schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,470,Zeitung,NOUN,noviny,,,die,Opa liest die Zeitung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,471,Geschenk,NOUN,dárek,,,das,Danke für das Geschenk!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,472,Party,NOUN,večírek,,,die,Kommst du zur Party?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,473,Fest,NOUN,slavnost,,,das,Das Fest ist toll.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,474,Weihnachten,NOUN,Vánoce,,,das,Weihnachten feiern wir zu Hause.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,475,Suppe,NOUN,polévka,,,die,Die Suppe ist heiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,476,Salat,NOUN,salát,,,der,Ich esse einen Salat.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,477,Kartoffel,NOUN,brambora,,,die,Die Kartoffel ist gekocht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,478,Reis,NOUN,rýže,,,der,Wir essen Reis mit Gemüse.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,479,Nudel,NOUN,nudle; těstovina,,,die,Die Kinder lieben Nudeln.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,480,Butter,NOUN,máslo,,,die,"Brot mit Butter, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,481,Zucker,NOUN,cukr,,,der,"Ohne Zucker, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,482,Salz,NOUN,sůl,,,das,Gib mir bitte das Salz.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,483,Saft,NOUN,džus,,,der,Ich trinke Saft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,484,Eis,NOUN,zmrzlina; led,,,das,Im Sommer essen wir Eis.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,485,Schokolade,NOUN,čokoláda,,,die,Ich mag Schokolade.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,486,Frühstück,NOUN,snídaně,,,das,Das Frühstück ist fertig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,487,Mittagessen,NOUN,oběd,,,das,Was gibt es zum Mittagessen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,488,Abendessen,NOUN,večeře,,,das,Zum Abendessen gibt es Suppe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,489,Banane,NOUN,banán,,,die,Die Banane ist gelb.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,490,Orange,NOUN,pomeranč,,,die,Die Orange ist süß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,491,Tomate,NOUN,rajče,,,die,Die Tomate ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,492,Fisch,NOUN,ryba,,,der,Der Fisch schwimmt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,493,Huhn,NOUN,slepice; kuře,,,das,Das Huhn legt ein Ei.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,494,Kuh,NOUN,kráva,,,die,Die Kuh gibt Milch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,495,Schwein,NOUN,prase,,,das,Das Schwein ist rosa.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,496,Maus,NOUN,myš,,,die,Die Maus ist klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,497,Bär,NOUN,medvěd,,,der,Der Bär schläft im Winter.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,498,Hase,NOUN,zajíc,,,der,Der Hase läuft schnell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,499,Beruf,NOUN,povolání,,,der,Was ist dein Beruf?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,500,Koch,NOUN,kuchař,,,der,Der Koch kocht gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,501,Verkäufer,NOUN,prodavač,,,der,Der Verkäufer ist nett.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,502,Polizist,NOUN,policista,,,der,Der Polizist hilft uns.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,503,Chef,NOUN,šéf,,,der,Mein Chef ist streng.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,504,Kollege,NOUN,kolega,,,der,Mein Kollege kommt aus Wien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,505,Nachbar,NOUN,soused,,,der,Unser Nachbar ist freundlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,506,Gast,NOUN,host,,,der,Wir haben einen Gast.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,507,Kunde,NOUN,zákazník,,,der,Der Kunde wartet.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,508,Student,NOUN,student,,,der,Der Student lernt viel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,509,Deutschland,PROPN,Německo,,,,Ich wohne in Deutschland.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,510,Österreich,PROPN,Rakousko,,,,Wien liegt in Österreich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,511,Schweiz,PROPN,Švýcarsko,,,die,Die Schweiz hat viele Berge.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,512,Tschechien,PROPN,Česko,,,,Ich komme aus Tschechien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,513,deutsch,ADJ,německý,,,,Das ist ein deutsches Wort.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,514,Deutsch,NOUN,němčina,,,,Ich lerne Deutsch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,515,Englisch,NOUN,angličtina,,,,Sprichst du Englisch?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,516,Tschechisch,NOUN,čeština,,,,Ich spreche Tschechisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,517,hoch,ADJ,vysoký,,,,Der Berg ist hoch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,518,tief,ADJ,hluboký,,,,Das Wasser ist tief.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,519,breit,ADJ,široký,,,,Die Straße ist breit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,520,dick,ADJ,tlustý,,,,Das Buch ist dick.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,521,dünn,ADJ,tenký,,,,Das Papier ist dünn.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,522,weit,ADJ,daleký,,,,Der Weg ist weit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,523,nah,ADJ,blízký,,,,Die Schule ist nah.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,524,voll,ADJ,plný,,,,Der Bus ist voll.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,525,leer,ADJ,prázdný,,,,Die Flasche ist leer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,526,offen,ADJ,otevřený,,,,Das Fenster ist offen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,527,frei,ADJ,volný,,,,Ist der Platz frei?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,528,billig,ADJ,levný,,,,Das Brot ist billig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,529,teuer,ADJ,drahý,,,,Das Auto ist teuer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,530,sauber,ADJ,čistý,,,,Das Zimmer ist sauber.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,531,schmutzig,ADJ,špinavý,,,,Die Schuhe sind schmutzig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,532,laut,ADJ,hlasitý,,,,Die Musik ist laut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,533,leise,ADJ,tichý,,,,Sprich bitte leise.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,534,hell,ADJ,světlý,,,,Das Zimmer ist hell.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,535,dunkel,ADJ,tmavý,,,,Es ist schon dunkel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,536,stark,ADJ,silný,,,,Der Mann ist stark.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,537,schwach,ADJ,slabý,,,,Ich fühle mich schwach.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,538,glücklich,ADJ,šťastný,,,,Ich bin sehr glücklich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,539,traurig,ADJ,smutný,,,,Warum bist du traurig?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,540,lustig,ADJ,legrační,,,,Der Film ist lustig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,541,nett,ADJ,milý (příjemný),,,,Die Lehrerin ist nett.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,542,freundlich,ADJ,přátelský,,,,Er ist sehr freundlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,543,ruhig,ADJ,klidný,,,,Der See ist ruhig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,544,böse,ADJ,zlý,,,,Der Wolf ist böse.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,545,klug,ADJ,chytrý,,,,Das Mädchen ist klug.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,546,dumm,ADJ,hloupý,,,,Das war eine dumme Idee.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,547,faul,ADJ,líný,,,,Der Kater ist faul.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,548,fleißig,ADJ,pilný,,,,Sie ist sehr fleißig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,549,hungrig,ADJ,hladový,,,,Der Hund ist hungrig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,550,satt,ADJ,sytý,,,,"Danke, ich bin satt.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,551,gesund,ADJ,zdravý,,,,Obst ist gesund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,552,fertig,ADJ,hotový,,,,Das Essen ist fertig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,553,bereit,ADJ,připravený,,,,Bist du bereit?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,554,möglich,ADJ,možný,,,,Ist das möglich?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,555,sicher,ADJ,jistý; bezpečný,,,,Bist du sicher?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,556,ähnlich,ADJ,podobný,,,,Die Brüder sind ähnlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,557,gleich,ADJ,stejný,,,,Wir haben das gleiche Auto.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,558,verschieden,ADJ,různý,,,,Die Farben sind verschieden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,559,besonders,ADV,zvlášť,,,,Das ist besonders schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,560,interessant,ADJ,zajímavý,,,,Das Buch ist interessant.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,561,langweilig,ADJ,nudný,,,,Der Film ist langweilig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,562,spannend,ADJ,napínavý,,,,Die Geschichte ist spannend.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,563,toll,ADJ,skvělý,,,,Das ist toll!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,564,super,ADJ,super,,,,Das Spiel ist super.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,565,schlimm,ADJ,zlý (vážný),,,,Das ist nicht schlimm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,566,bekannt,ADJ,známý,,,,Der Sänger ist bekannt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,567,fremd,ADJ,cizí,,,,Ich bin hier fremd.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,568,allein,ADV,sám,,,,Ich wohne allein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,569,früh,ADJ,časný,,,,Es ist noch früh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,570,spät,ADJ,pozdní,,,,Es ist schon spät.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,571,pünktlich,ADJ,dochvilný,,,,Der Zug ist pünktlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,572,nächste,ADJ,příští,,,,Nächste Woche fahren wir weg.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,573,letzte,ADJ,poslední; minulý,,,,Das ist die letzte Seite.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,574,erste,ADJ,první,,,,Das ist mein erster Tag.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,575,zweite,ADJ,druhý,,,,Das ist die zweite Tür.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,576,sechs,NUM,šest,,,,Das Kind ist sechs.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,577,sieben,NUM,sedm,,,,Die Woche hat sieben Tage.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,578,acht,NUM,osm,,,,Wir treffen uns um acht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,579,neun,NUM,devět,,,,Es ist neun Uhr.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,580,elf,NUM,jedenáct,,,,Das Team hat elf Spieler.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,581,zwölf,NUM,dvanáct,,,,Das Jahr hat zwölf Monate.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,582,zwanzig,NUM,dvacet,,,,Ich bin zwanzig Jahre alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,583,tausend,NUM,tisíc,,,,Das kostet tausend Euro.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,584,halb,ADJ,poloviční; půl,,,,Es ist halb acht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,585,Hälfte,NOUN,polovina,,,die,Die Hälfte ist für dich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,586,Viertel,NOUN,čtvrt; čtvrtina,,,das,Es ist Viertel nach drei.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,587,Euro,NOUN,euro,,,der,Das kostet zehn Euro.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,588,Preis,NOUN,cena,,,der,Der Preis ist gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,589,Meter,NOUN,metr,,,der,Das Haus ist zehn Meter hoch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,590,Kilo,NOUN,kilo,,,das,"Ein Kilo Äpfel, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,591,Stück,NOUN,kus,,,das,"Ein Stück Kuchen, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,592,Ding,NOUN,věc,,,das,Was ist das für ein Ding?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,593,Sache,NOUN,záležitost; věc,,,die,Das ist eine wichtige Sache.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,594,Art,NOUN,druh; způsob,,,die,Welche Art Musik magst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,595,Grund,NOUN,důvod,,,der,Es gibt keinen Grund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,596,Beispiel,NOUN,příklad,,,das,Hier ist ein Beispiel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,597,Ziel,NOUN,cíl,,,das,Mein Ziel ist klar.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,598,Plan,NOUN,plán,,,der,Wir haben einen Plan.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,599,Moment,NOUN,okamžik,,,der,"Einen Moment, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,600,Anfang,NOUN,začátek,,,der,Am Anfang ist es schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,601,Mitte,NOUN,střed,,,die,Der Tisch steht in der Mitte.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,602,Ecke,NOUN,roh,,,die,Das Café ist an der Ecke.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,603,Nummer,NOUN,číslo (pořadové),,,die,Was ist deine Nummer?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,604,Adresse,NOUN,adresa,,,die,Wie ist deine Adresse?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,605,Information,NOUN,informace,,,die,Danke für die Information.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,606,Nachricht,NOUN,zpráva,,,die,Ich habe eine Nachricht für dich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,607,Gespräch,NOUN,rozhovor,,,das,Das Gespräch war gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,608,Meinung,NOUN,názor,,,die,Was ist deine Meinung?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,609,Wunsch,NOUN,přání,,,der,Hast du einen Wunsch?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,610,Gefühl,NOUN,pocit,,,das,Ich habe ein gutes Gefühl.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,611,Liebe,NOUN,láska,,,die,Liebe ist wichtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,612,Freude,NOUN,radost,,,die,Das macht mir Freude.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,613,Ruhe,NOUN,klid,,,die,Ich brauche Ruhe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,614,Gesundheit,NOUN,zdraví,,,die,Gesundheit ist wichtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,615,Krankheit,NOUN,nemoc,,,die,Die Krankheit ist nicht schlimm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,616,Schmerz,NOUN,bolest,,,der,Ich habe Schmerzen im Bein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,617,Sport,NOUN,sport,,,der,Sport macht Spaß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,618,Fußball,NOUN,fotbal,,,der,Wir spielen Fußball.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,619,Hobby,NOUN,koníček,,,das,Lesen ist mein Hobby.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,620,Buchstabe,NOUN,písmeno,,,der,Das Wort hat fünf Buchstaben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,621,Text,NOUN,text,,,der,Lies den Text.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,622,Natur,NOUN,příroda,,,die,Ich liebe die Natur.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,623,Pflanze,NOUN,rostlina,,,die,Die Pflanze braucht Wasser.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,624,Blatt,NOUN,list,,,das,Das Blatt ist grün.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,625,Gras,NOUN,tráva,,,das,Das Gras ist nass.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,626,Stein,NOUN,kámen,,,der,Der Stein ist schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,627,Insel,NOUN,ostrov,,,die,Die Insel ist klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,628,Strand,NOUN,pláž,,,der,Wir spielen am Strand.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,629,Wolke,NOUN,mrak,,,die,Eine Wolke ist am Himmel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,630,Licht,NOUN,světlo,,,das,Mach das Licht an.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,631,bauen,VERB,stavět,,,,Wir wollen ein Haus bauen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,632,benutzen,VERB,používat,,,,Darf ich dein Handy benutzen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,633,bestellen,VERB,objednat,,,,Ich möchte eine Pizza bestellen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,634,bitten,VERB,prosit,,,,Ich muss dich um Hilfe bitten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,635,danken,VERB,děkovat,,,,Ich möchte dir danken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,636,dauern,VERB,trvat,,,,Das kann lange dauern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,637,einkaufen,VERB,nakupovat,,,,Ich muss noch einkaufen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,638,einladen,VERB,pozvat,,,,Ich will dich einladen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,639,empfehlen,VERB,doporučit,,,,Kannst du ein Buch empfehlen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,640,entscheiden,VERB,rozhodnout,,,,Du musst dich entscheiden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,641,erreichen,VERB,dosáhnout; zastihnout,,,,Ich kann ihn nicht erreichen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,642,feiern,VERB,slavit,,,,Wir wollen deinen Geburtstag feiern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,643,folgen,VERB,následovat,,,,Bitte folgen Sie mir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,644,frühstücken,VERB,snídat,,,,Wir frühstücken um sieben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,645,gefallen,VERB,líbit se,,,,Das Bild soll dir gefallen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,646,gehören,VERB,patřit,,,,Das Buch soll mir gehören.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,647,gratulieren,VERB,gratulovat,,,,Ich will dir gratulieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,648,grüßen,VERB,pozdravit,,,,Ich soll dich von Oma grüßen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,649,holen,VERB,dojít pro; přinést,,,,Ich will Brot holen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,650,klingen,VERB,znít,,,,Das kann gut klingen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,651,lächeln,VERB,usmívat se,,,,Du sollst mehr lächeln.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,652,meinen,VERB,mínit,,,,Was meinst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,653,merken,VERB,všimnout si; zapamatovat si,,,,Das kann ich mir merken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,654,mitbringen,VERB,přinést s sebou,,,,Kannst du Saft mitbringen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,655,mitkommen,VERB,jít s někým,,,,Willst du mitkommen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,656,passen,VERB,hodit se; padnout,,,,Die Hose muss gut passen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,657,passieren,VERB,stát se (přihodit se),,,,Was kann da passieren?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,658,planen,VERB,plánovat,,,,Wir müssen die Reise planen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,659,probieren,VERB,ochutnat; zkusit,,,,Willst du den Kuchen probieren?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,660,regnen,VERB,pršet,,,,Morgen soll es regnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,661,reden,VERB,povídat,,,,Wir müssen reden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,662,reparieren,VERB,opravit,,,,Kannst du das Fahrrad reparieren?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,663,schauen,VERB,dívat se,,,,Ich will mal schauen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,664,scheinen,VERB,svítit; zdát se,,,,Die Sonne soll scheinen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,665,schenken,VERB,darovat,,,,Ich will dir ein Buch schenken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,666,schneiden,VERB,stříhat; krájet,,,,Kannst du das Brot schneiden?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,667,schreien,VERB,křičet,,,,Du musst nicht schreien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,668,sparen,VERB,šetřit,,,,Ich will Geld sparen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,669,spazieren,VERB,procházet se,,,,Wir wollen im Park spazieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,670,studieren,VERB,studovat,,,,Ich möchte in Wien studieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,671,teilen,VERB,dělit; sdílet,,,,Wir können den Kuchen teilen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,672,telefonieren,VERB,telefonovat,,,,Ich muss kurz telefonieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,673,üben,VERB,cvičit,,,,Ich muss Klavier üben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,674,übersetzen,VERB,přeložit,,,,Kannst du den Satz übersetzen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,675,versuchen,VERB,pokusit se,,,,Ich will es versuchen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,676,vorstellen,VERB,představit,,,,Darf ich mich vorstellen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,677,wählen,VERB,vybrat; volit,,,,Du kannst eine Farbe wählen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,678,wecken,VERB,budit,,,,Kannst du mich um sieben wecken?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,679,wiederholen,VERB,zopakovat,,,,Kannst du das wiederholen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,680,zuhören,VERB,poslouchat (pozorně),,,,Du musst gut zuhören.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,681,ändern,VERB,změnit,,,,Wir können den Plan ändern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,682,ankommen,VERB,přijet; dorazit,,,,Wann soll der Zug ankommen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,683,aufstehen,VERB,vstát,,,,Ich muss früh aufstehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,684,ausgehen,VERB,jít ven (za zábavou),,,,Wir wollen heute ausgehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,685,aussehen,VERB,vypadat,,,,Du siehst gut aus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,686,aussteigen,VERB,vystoupit,,,,Wir müssen hier aussteigen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,687,einsteigen,VERB,nastoupit,,,,Bitte schnell einsteigen!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,688,umsteigen,VERB,přestoupit,,,,Wir müssen in Wien umsteigen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,689,anziehen,VERB,obléct,,,,Du musst die Jacke anziehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,690,ausziehen,VERB,svléct; vystěhovat se,,,,Du kannst die Schuhe ausziehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,691,zumachen,VERB,zavřít (běžně),,,,Kannst du das Fenster zumachen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,692,aufmachen,VERB,otevřít (běžně),,,,Kannst du die Tür aufmachen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,693,fernsehen,VERB,dívat se na televizi,,,,Wir wollen heute fernsehen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,694,kennenlernen,VERB,seznámit se,,,,Ich möchte dich kennenlernen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,695,zurückkommen,VERB,vrátit se,,,,Wann willst du zurückkommen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,696,abholen,VERB,vyzvednout,,,,Ich muss die Kinder abholen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,697,also,ADV,tedy,,,,"Also, wir gehen jetzt.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,698,deshalb,ADV,proto,,,,"Es regnet, deshalb bleibe ich hier.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,699,trotzdem,ADV,přesto,,,,"Es ist kalt, trotzdem gehen wir raus.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,700,obwohl,SCONJ,ačkoli,,,,"Ich gehe, obwohl es regnet.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,701,während,SCONJ,zatímco; během,,,,"Ich lese, während du kochst.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,702,damit,SCONJ,aby,,,,"Ich spare, damit ich reisen kann.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,703,bevor,SCONJ,než (předtím),,,,"Wasch die Hände, bevor du isst.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,704,sogar,ADV,dokonce,,,,Er spricht sogar Japanisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,705,fast,ADV,skoro,,,,Ich bin fast fertig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,706,genug,ADV,dost,,,,Ich habe genug gegessen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,707,zu,ADV,příliš,,,,Der Tee ist zu heiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,708,ziemlich,ADV,docela,,,,Das ist ziemlich schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,709,etwa,ADV,asi; přibližně,,,,Das dauert etwa eine Stunde.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,710,genau,ADV,přesně,,,,Das ist genau richtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,711,sofort,ADV,hned,,,,Komm sofort her!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,712,gleich,ADV,hned (za chvíli),,,,Ich komme gleich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,713,endlich,ADV,konečně,,,,Endlich ist Sommer!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,714,plötzlich,ADV,najednou,,,,Plötzlich regnet es.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,715,zuerst,ADV,nejdřív,,,,Zuerst essen wir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,716,danach,ADV,potom (poté),,,,Danach gehen wir spazieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,717,später,ADV,později,,,,Bis später!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,718,vorher,ADV,předtím,,,,Ruf mich vorher an.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,719,damals,ADV,tehdy,,,,Damals war ich klein.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,720,überall,ADV,všude,,,,Überall liegt Schnee.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,721,irgendwo,ADV,někde,,,,Mein Schlüssel ist irgendwo hier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,722,draußen,ADV,venku,,,,Die Kinder spielen draußen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,723,drinnen,ADV,uvnitř,,,,Wir bleiben drinnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,724,zurück,ADV,zpět,,,,Ich bin gleich zurück.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,725,weg,ADV,pryč,,,,Der Bus ist schon weg.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,726,geradeaus,ADV,rovně,,,,Gehen Sie geradeaus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,727,nebenan,ADV,vedle (v sousedství),,,,Er wohnt nebenan.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,728,leider,ADV,bohužel,,,,Leider habe ich keine Zeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,729,hoffentlich,ADV,snad (doufejme),,,,Hoffentlich scheint morgen die Sonne.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,730,eigentlich,ADV,vlastně,,,,Eigentlich hast du recht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,731,sicherlich,ADV,určitě,,,,Er kommt sicherlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,732,wahrscheinlich,ADV,pravděpodobně,,,,Wahrscheinlich regnet es.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,733,selbst,ADV,sám (osobně),,,,Ich mache das selbst.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,734,ab,ADP,od (místa; času),,,,Ab Montag habe ich Ferien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,735,außer,ADP,kromě,,,,Alle außer mir sind da.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,736,gegenüber,ADP,naproti,,,,Die Bank ist gegenüber der Post.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,737,wegen,ADP,kvůli,,,,Wegen des Regens bleiben wir hier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,738,pro,ADP,za (každý),,,,Das kostet zwei Euro pro Stück.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,739,Ausflug,NOUN,výlet,,,der,Wir machen einen Ausflug.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,740,Besuch,NOUN,návštěva,,,der,Wir haben Besuch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,741,Einladung,NOUN,pozvánka,,,die,Danke für die Einladung!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,742,Termin,NOUN,termín; schůzka,,,der,Ich habe einen Termin beim Arzt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,743,Kalender,NOUN,kalendář,,,der,Schau in den Kalender.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,744,Datum,NOUN,datum,,,das,Welches Datum ist heute?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,745,Zukunft,NOUN,budoucnost,,,die,Die Zukunft ist offen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,746,Alter,NOUN,věk,,,das,In deinem Alter ist das normal.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,747,Kindheit,NOUN,dětství,,,die,Meine Kindheit war schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,748,Erwachsene,NOUN,dospělý,,,der,Ein Erwachsener muss zahlen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,749,Person,NOUN,osoba,,,die,Der Tisch ist für vier Personen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,750,Gruppe,NOUN,skupina,,,die,Wir arbeiten in einer Gruppe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,751,Paar,NOUN,pár (dvojice),,,das,"Ein Paar Schuhe, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,752,Hochzeit,NOUN,svatba,,,die,Die Hochzeit ist im Mai.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,753,Bildung,NOUN,vzdělání,,,die,Bildung ist wichtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,754,Wissen,NOUN,znalosti; vědění,,,das,Wissen ist Macht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,755,Kultur,NOUN,kultura,,,die,Ich mag die deutsche Kultur.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,756,Kunst,NOUN,umění,,,die,Sie studiert Kunst.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,757,Wissenschaft,NOUN,věda,,,die,Die Wissenschaft hilft uns.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,758,Technik,NOUN,technika,,,die,Ich interessiere mich für Technik.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,759,Umwelt,NOUN,životní prostředí,,,die,Wir schützen die Umwelt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,760,Energie,NOUN,energie,,,die,Die Sonne gibt Energie.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,761,Mitarbeiter,NOUN,zaměstnanec,,,der,Der Mitarbeiter ist neu.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,762,Stelle,NOUN,pracovní místo; místo,,,die,Ich suche eine neue Stelle.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,763,Erfolg,NOUN,úspěch,,,der,Viel Erfolg!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,764,Erfahrung,NOUN,zkušenost,,,die,Ich habe viel Erfahrung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,765,Möglichkeit,NOUN,možnost,,,die,Es gibt eine Möglichkeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,766,Lösung,NOUN,řešení,,,die,Wir finden eine Lösung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,767,Entscheidung,NOUN,rozhodnutí,,,die,Das ist eine schwere Entscheidung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,768,Ergebnis,NOUN,výsledek,,,das,Das Ergebnis ist gut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,769,Unterschied,NOUN,rozdíl,,,der,Wo ist der Unterschied?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,770,Bedeutung,NOUN,význam,,,die,Was ist die Bedeutung des Wortes?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,771,Wahrheit,NOUN,pravda,,,die,Sag die Wahrheit!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,772,Ordnung,NOUN,pořádek,,,die,Alles ist in Ordnung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,773,Regel,NOUN,pravidlo,,,die,Das ist die Regel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,774,Gefahr,NOUN,nebezpečí,,,die,"Achtung, Gefahr!",claude-drafted,CC0-1.0,de1000-draft-v1
+de,775,Unfall,NOUN,nehoda,,,der,Es gab einen Unfall.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,776,Sicherheit,NOUN,bezpečnost,,,die,Sicherheit ist wichtig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,777,Kraft,NOUN,síla,,,die,Ich habe keine Kraft mehr.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,778,Mut,NOUN,odvaha,,,der,Du hast viel Mut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,779,Geduld,NOUN,trpělivost,,,die,Hab Geduld!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,780,Sorge,NOUN,starost,,,die,Mach dir keine Sorgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,781,Streit,NOUN,hádka,,,der,Die Kinder haben Streit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,782,Frieden,NOUN,mír,,,der,Wir wünschen uns Frieden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,783,Traum,NOUN,sen,,,der,Ich hatte einen schönen Traum.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,784,Überraschung,NOUN,překvapení,,,die,Das ist eine Überraschung!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,785,Witz,NOUN,vtip,,,der,Erzähl einen Witz!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,786,Spielzeug,NOUN,hračka,,,das,Das Spielzeug ist kaputt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,787,Puppe,NOUN,panenka,,,die,Die Puppe hat blaue Augen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,788,Bleistift,NOUN,tužka (obyčejná),,,der,Schreib mit dem Bleistift.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,789,Rucksack,NOUN,batoh,,,der,Mein Rucksack ist schwer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,790,Koffer,NOUN,kufr,,,der,Der Koffer ist voll.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,791,Pass,NOUN,pas,,,der,Hast du deinen Pass?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,792,Geldbörse,NOUN,peněženka,,,die,Meine Geldbörse ist leer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,793,Brille,NOUN,brýle,,,die,Ich brauche eine Brille.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,794,Uhrzeit,NOUN,čas (na hodinách),,,die,Wie ist die Uhrzeit?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,795,Wecker,NOUN,budík,,,der,Der Wecker klingelt um sechs.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,796,Seife,NOUN,mýdlo,,,die,Wasch die Hände mit Seife.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,797,Handtuch,NOUN,ručník,,,das,Das Handtuch ist nass.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,798,Decke,NOUN,deka; strop,,,die,Die Decke ist warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,799,Kissen,NOUN,polštář,,,das,Das Kissen ist weich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,800,Spiegel,NOUN,zrcadlo,,,der,Schau in den Spiegel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,801,Dach,NOUN,střecha,,,das,Die Katze sitzt auf dem Dach.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,802,Keller,NOUN,sklep,,,der,Die Kartoffeln sind im Keller.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,803,Balkon,NOUN,balkon,,,der,Wir frühstücken auf dem Balkon.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,804,Hof,NOUN,dvůr,,,der,Die Kinder spielen im Hof.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,805,Brücke,NOUN,most,,,die,Die Brücke ist alt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,806,Schloss,NOUN,zámek,,,das,Das Schloss ist schön.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,807,Zentrum,NOUN,centrum,,,das,Wir wohnen im Zentrum.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,808,Gebäude,NOUN,budova,,,das,Das Gebäude ist modern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,809,Spielplatz,NOUN,hřiště (dětské),,,der,Die Kinder sind auf dem Spielplatz.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,810,Schwimmbad,NOUN,koupaliště; bazén,,,das,Wir gehen ins Schwimmbad.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,811,Bibliothek,NOUN,knihovna (instituce),,,die,Ich leihe Bücher in der Bibliothek.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,812,Zoo,NOUN,zoo,,,der,Im Zoo gibt es Elefanten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,813,Theater,NOUN,divadlo,,,das,Wir gehen ins Theater.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,814,Konzert,NOUN,koncert,,,das,Das Konzert beginnt um acht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,815,Ampel,NOUN,semafor,,,die,Die Ampel ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,816,Verkehr,NOUN,doprava; provoz,,,der,Der Verkehr ist stark.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,817,Taxi,NOUN,taxi,,,das,Wir nehmen ein Taxi.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,818,U-Bahn,NOUN,metro,,,die,Ich fahre mit der U-Bahn.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,819,Straßenbahn,NOUN,tramvaj,,,die,Die Straßenbahn kommt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,820,Fahrkarte,NOUN,jízdenka (vlaková),,,die,Ich kaufe eine Fahrkarte.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,821,Ausgang,NOUN,východ (dveře),,,der,Wo ist der Ausgang?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,822,Eingang,NOUN,vchod,,,der,Der Eingang ist links.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,823,Richtung,NOUN,směr,,,die,In welche Richtung gehen wir?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,824,Norden,NOUN,sever,,,der,Hamburg liegt im Norden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,825,Süden,NOUN,jih,,,der,München liegt im Süden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,826,Osten,NOUN,východ (světová strana),,,der,Die Sonne geht im Osten auf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,827,Westen,NOUN,západ,,,der,Die Sonne geht im Westen unter.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,828,Ausland,NOUN,cizina,,,das,Sie arbeitet im Ausland.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,829,Grenze,NOUN,hranice,,,die,Wir fahren über die Grenze.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,830,Heimat,NOUN,domov (vlast),,,die,Tschechien ist meine Heimat.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,831,Zuhause,NOUN,domov,,,das,"Mein Zuhause ist klein, aber schön.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,832,freuen,VERB,radovat se (sich freuen),,,,Ich will mich auf die Ferien freuen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,833,interessieren,VERB,zajímat (sich interessieren),,,,Musik kann mich sehr interessieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,834,beeilen,VERB,pospíšit si (sich beeilen),,,,Wir müssen uns beeilen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,835,ausruhen,VERB,odpočinout si,,,,Du musst dich ausruhen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,836,unterhalten,VERB,bavit se (rozhovorem),,,,Wir wollen uns unterhalten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,837,ärgern,VERB,zlobit (sich ärgern),,,,Du sollst dich nicht ärgern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,838,kümmern,VERB,starat se (sich kümmern),,,,Ich will mich um den Hund kümmern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,839,verabreden,VERB,domluvit si schůzku,,,,Wir wollen uns für Freitag verabreden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,840,streiten,VERB,hádat se,,,,Ihr sollt nicht streiten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,841,gewöhnen,VERB,zvyknout si,,,,Ich muss mich an die Stadt gewöhnen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,842,entschuldigen,VERB,omluvit,,,,Ich möchte mich entschuldigen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,843,bedeuten,VERB,znamenat,,,,Was soll das bedeuten?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,844,beschreiben,VERB,popsat,,,,Kannst du das Bild beschreiben?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,845,bemerken,VERB,zpozorovat,,,,Ich kann nichts bemerken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,846,bewegen,VERB,hýbat,,,,Du musst dich mehr bewegen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,847,drücken,VERB,stisknout; tlačit,,,,Du musst den Knopf drücken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,848,einschlafen,VERB,usnout,,,,Ich kann nicht einschlafen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,849,aufwachen,VERB,probudit se,,,,Ich will früh aufwachen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,850,enden,VERB,skončit,,,,Der Film soll um zehn enden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,851,entdecken,VERB,objevit,,,,Wir wollen die Insel entdecken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,852,erfahren,VERB,dozvědět se,,,,Ich will mehr erfahren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,853,erkennen,VERB,poznat (rozeznat),,,,Ich kann dich nicht erkennen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,854,erlauben,VERB,dovolit,,,,Mama will das nicht erlauben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,855,erwarten,VERB,očekávat,,,,Ich kann es kaum erwarten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,856,fehlen,VERB,chybět,,,,Du sollst nicht in der Schule fehlen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,857,füttern,VERB,krmit,,,,Ich muss die Katze füttern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,858,genießen,VERB,užívat si,,,,Wir wollen den Sommer genießen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,859,heiraten,VERB,vzít se,,,,Sie wollen im Mai heiraten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,860,informieren,VERB,informovat,,,,Ich will dich informieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,861,klettern,VERB,lézt,,,,Die Kinder wollen klettern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,862,klingeln,VERB,zvonit,,,,Das Telefon kann klingeln.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,863,leihen,VERB,půjčit,,,,Kannst du mir dein Fahrrad leihen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,864,lösen,VERB,vyřešit,,,,Wir müssen das Problem lösen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,865,mieten,VERB,pronajmout si,,,,Wir wollen eine Wohnung mieten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,866,organisieren,VERB,zorganizovat,,,,Wir wollen eine Party organisieren.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,867,packen,VERB,balit,,,,Ich muss den Koffer packen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,868,prüfen,VERB,zkontrolovat,,,,Wir müssen das Ergebnis prüfen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,869,retten,VERB,zachránit,,,,Wir wollen die Katze retten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,870,schaffen,VERB,zvládnout,,,,Du kannst das schaffen!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,871,schneien,VERB,sněžit,,,,Morgen soll es schneien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,872,sorgen,VERB,starat se; postarat se,,,,Ich will für dich sorgen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,873,stimmen,VERB,souhlasit (být pravda),,,,Das kann nicht stimmen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,874,tauschen,VERB,vyměnit,,,,Wollen wir die Plätze tauschen?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,875,träumen,VERB,snít,,,,Ich will vom Meer träumen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,876,überlegen,VERB,rozmyslet si,,,,Ich muss mir das überlegen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,877,überraschen,VERB,překvapit,,,,Ich will dich überraschen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,878,unterschreiben,VERB,podepsat,,,,Bitte hier unterschreiben.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,879,verbessern,VERB,zlepšit,,,,Ich will mein Deutsch verbessern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,880,verbieten,VERB,zakázat,,,,Das kann man nicht verbieten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,881,verdienen,VERB,vydělat; zasloužit si,,,,Ich will Geld verdienen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,882,vermissen,VERB,postrádat; stýskat se,,,,Ich werde dich vermissen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,883,verpassen,VERB,zmeškat,,,,Ich will den Bus nicht verpassen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,884,verstecken,VERB,schovat,,,,Wir wollen das Geschenk verstecken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,885,vorbereiten,VERB,připravit,,,,Ich muss das Essen vorbereiten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,886,wechseln,VERB,vyměnit; změnit,,,,Ich muss Geld wechseln.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,887,wehtun,VERB,bolet,,,,Das kann wehtun.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,888,weitermachen,VERB,pokračovat,,,,Wir wollen weitermachen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,889,zahlen,VERB,platit,,,,Wir möchten zahlen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,890,Elefant,NOUN,slon,,,der,Der Elefant ist groß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,891,Löwe,NOUN,lev,,,der,Der Löwe schläft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,892,Schaf,NOUN,ovce,,,das,Das Schaf ist weiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,893,Schmetterling,NOUN,motýl,,,der,Der Schmetterling ist bunt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,894,Honig,NOUN,med,,,der,Ich esse Brot mit Honig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,895,Wurst,NOUN,klobása; salám,,,die,Die Wurst ist lecker.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,896,Erdbeere,NOUN,jahoda,,,die,Die Erdbeere ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,897,Birne,NOUN,hruška,,,die,Die Birne ist süß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,898,Zwiebel,NOUN,cibule,,,die,Die Zwiebel ist scharf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,899,Gurke,NOUN,okurka,,,die,Die Gurke ist grün.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,900,Karotte,NOUN,mrkev,,,die,Das Pferd frisst eine Karotte.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,901,Brötchen,NOUN,rohlík; houska,,,das,Ich esse ein Brötchen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,902,Pizza,NOUN,pizza,,,die,Die Pizza ist heiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,903,Joghurt,NOUN,jogurt,,,der,Der Joghurt ist kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,904,Getränk,NOUN,nápoj,,,das,Welches Getränk möchtest du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,905,Rechnung,NOUN,účet,,,die,"Die Rechnung, bitte.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,906,Kellner,NOUN,číšník,,,der,Der Kellner bringt das Essen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,907,Hals,NOUN,krk,,,der,Mein Hals tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,908,Schulter,NOUN,rameno,,,die,Meine Schulter tut weh.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,909,Knie,NOUN,koleno,,,das,Das Knie ist blau.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,910,Haut,NOUN,kůže,,,die,Die Sonne ist schlecht für die Haut.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,911,Blut,NOUN,krev,,,das,Blut ist rot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,912,Fieber,NOUN,horečka,,,das,Das Kind hat Fieber.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,913,Husten,NOUN,kašel,,,der,Ich habe Husten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,914,Schnupfen,NOUN,rýma,,,der,Ich habe Schnupfen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,915,Medikament,NOUN,lék,,,das,Nimm das Medikament.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,916,Kleidung,NOUN,oblečení,,,die,Die Kleidung ist warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,917,Rock,NOUN,sukně,,,der,Der Rock ist kurz.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,918,Pullover,NOUN,svetr,,,der,Der Pullover ist warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,919,Mantel,NOUN,kabát,,,der,Zieh den Mantel an.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,920,Handschuh,NOUN,rukavice,,,der,Wo ist mein Handschuh?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,921,T-Shirt,NOUN,tričko,,,das,Das T-Shirt ist weiß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,922,Größe,NOUN,velikost,,,die,Welche Größe brauchst du?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,923,bunt,ADJ,barevný,,,,Der Schmetterling ist bunt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,924,grau,ADJ,šedý,,,,Der Himmel ist grau.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,925,braun,ADJ,hnědý,,,,Der Bär ist braun.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,926,rosa,ADJ,růžový,,,,Das Schwein ist rosa.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,927,lila,ADJ,fialový,,,,Die Blume ist lila.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,928,weich,ADJ,měkký,,,,Das Kissen ist weich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,929,hart,ADJ,tvrdý,,,,Das Brot ist hart.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,930,nass,ADJ,mokrý,,,,Das Gras ist nass.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,931,trocken,ADJ,suchý,,,,Die Wäsche ist trocken.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,932,frisch,ADJ,čerstvý,,,,Das Brot ist frisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,933,süß,ADJ,sladký,,,,Der Kuchen ist süß.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,934,sauer,ADJ,kyselý; naštvaný,,,,Die Zitrone ist sauer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,935,scharf,ADJ,ostrý; pálivý,,,,Das Messer ist scharf.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,936,lecker,ADJ,chutný,,,,Das Essen ist lecker.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,937,rund,ADJ,kulatý,,,,Der Ball ist rund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,938,bequem,ADJ,pohodlný,,,,Das Sofa ist bequem.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,939,kaputt,ADJ,rozbitý,,,,Das Spielzeug ist kaputt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,940,modern,ADJ,moderní,,,,Das Haus ist modern.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,941,berühmt,ADJ,slavný,,,,Der Sänger ist berühmt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,942,gefährlich,ADJ,nebezpečný,,,,Der Weg ist gefährlich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,943,ehrlich,ADJ,upřímný,,,,Sei ehrlich!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,944,höflich,ADJ,zdvořilý,,,,Er ist sehr höflich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,945,neugierig,ADJ,zvědavý,,,,Die Katze ist neugierig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,946,stolz,ADJ,hrdý,,,,Ich bin stolz auf dich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,947,wütend,ADJ,rozzlobený,,,,Er ist wütend.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,948,nervös,ADJ,nervózní,,,,Vor der Prüfung bin ich nervös.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,949,zufrieden,ADJ,spokojený,,,,Ich bin zufrieden.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,950,überrascht,ADJ,překvapený,,,,Ich bin überrascht.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,951,beliebt,ADJ,oblíbený,,,,Das Spiel ist sehr beliebt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,952,normal,ADJ,normální,,,,Das ist ganz normal.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,953,praktisch,ADJ,praktický,,,,Die Tasche ist praktisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,954,tot,ADJ,mrtvý,,,,Die Pflanze ist tot.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,955,wach,ADJ,vzhůru (bdělý),,,,Bist du schon wach?,claude-drafted,CC0-1.0,de1000-draft-v1
+de,956,nötig,ADJ,nutný,,,,Das ist nicht nötig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,957,unmöglich,ADJ,nemožný,,,,Das ist unmöglich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,958,klar,ADJ,jasný,,,,Das ist klar.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,959,ernst,ADJ,vážný,,,,Das ist ein ernstes Problem.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,960,persönlich,ADJ,osobní,,,,Das ist meine persönliche Meinung.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,961,ganz,ADJ,celý,,,,Ich habe den ganzen Tag Zeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,962,einzig,ADJ,jediný,,,,Du bist mein einziger Freund.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,963,mehrere,DET,několik,,,,Ich habe mehrere Fragen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,964,wenig,DET,málo,,,,Ich habe wenig Zeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,965,beide,DET,oba,,,,Beide Kinder schlafen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,966,einige,DET,některé; pár,,,,Einige Kinder spielen draußen.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,967,selten,ADV,zřídka,,,,Ich esse selten Fleisch.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,968,meistens,ADV,většinou,,,,Meistens fahre ich mit dem Bus.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,969,ungefähr,ADV,zhruba,,,,Das kostet ungefähr zehn Euro.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,970,total,ADV,naprosto,,,,Das ist total lustig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,971,wenigstens,ADV,alespoň,,,,Ruf wenigstens an!,claude-drafted,CC0-1.0,de1000-draft-v1
+de,972,außerdem,ADV,kromě toho,,,,Außerdem habe ich keine Zeit.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,973,übrigens,ADV,mimochodem,,,,"Übrigens, ich habe ein neues Handy.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,974,nämlich,ADV,totiž,,,,"Ich bin müde, ich habe nämlich schlecht geschlafen.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,975,sonst,ADV,jinak,,,,"Beeil dich, sonst kommst du zu spät.",claude-drafted,CC0-1.0,de1000-draft-v1
+de,976,unterwegs,ADV,na cestě,,,,Ich bin gerade unterwegs.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,977,nachts,ADV,v noci,,,,Nachts schlafe ich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,978,morgens,ADV,ráno (pravidelně),,,,Morgens trinke ich Tee.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,979,abends,ADV,večer (pravidelně),,,,Abends lese ich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,980,mittags,ADV,v poledne,,,,Mittags essen wir warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,981,Mittag,NOUN,poledne,,,der,Zu Mittag essen wir Suppe.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,982,Nachmittag,NOUN,odpoledne,,,der,Am Nachmittag spielen wir.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,983,Vormittag,NOUN,dopoledne,,,der,Am Vormittag bin ich in der Schule.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,984,Januar,NOUN,leden,,,der,Im Januar ist es kalt.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,985,Februar,NOUN,únor,,,der,Im Februar schneit es oft.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,986,März,NOUN,březen,,,der,Im März kommt der Frühling.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,987,April,NOUN,duben,,,der,Im April regnet es viel.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,988,Mai,NOUN,květen,,,der,Im Mai blühen die Bäume.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,989,Juni,NOUN,červen,,,der,Im Juni ist es warm.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,990,Juli,NOUN,červenec,,,der,Im Juli haben wir Ferien.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,991,August,NOUN,srpen,,,der,Im August fahren wir ans Meer.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,992,September,NOUN,září,,,der,Im September beginnt die Schule.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,993,Oktober,NOUN,říjen,,,der,Im Oktober fallen die Blätter.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,994,November,NOUN,listopad,,,der,Im November ist es neblig.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,995,Dezember,NOUN,prosinec,,,der,Im Dezember ist Weihnachten.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,996,Ostern,NOUN,Velikonoce,,,das,Zu Ostern suchen die Kinder Eier.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,997,Feiertag,NOUN,svátek (den volna),,,der,Morgen ist ein Feiertag.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,998,Freizeit,NOUN,volný čas,,,die,In der Freizeit lese ich.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,999,Lust,NOUN,chuť (něco dělat),,,die,Ich habe Lust auf Eis.,claude-drafted,CC0-1.0,de1000-draft-v1
+de,1000,Laune,NOUN,nálada,,,die,Ich habe gute Laune.,claude-drafted,CC0-1.0,de1000-draft-v1
