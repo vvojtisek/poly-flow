@@ -915,3 +915,16 @@ export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/
 
 export const setWordNote = (id: string, text: string) =>
   api<{ note: string | null }>(`/api/v1/words/${id}/note`, { method: "PUT", json: { text } });
+
+// ---------------------------------------------------------------- German verb lab
+
+export type VerbPerson = "ich" | "du" | "er" | "wir" | "ihr" | "sie";
+export interface VerbEntry {
+  lemma: string;
+  translation: string;
+  met: boolean;
+  prefix: string | null;
+  features: ("irregular" | "vowel_change" | "separable" | "e_insertion" | "s_stem" | "el_er")[];
+  forms: Record<VerbPerson, { stem: string; ending: string; changed: boolean }>;
+}
+export const getVerbs = () => api<VerbEntry[]>("/api/v1/grammar/verbs");

@@ -25,6 +25,7 @@ unreviewed.
 | 12 | Practice hub + mobile tab bar | one home for all practice modes; thumb-reach navigation on phones |
 | 13 | Reading comfort | per-profile text size, wider spacing, no animations; applied before first paint |
 | 14 | Memory hooks (oslí můstky) | your own note per word: on lesson cards, in the dictionary, after a miss |
+| 15 | German verb lab (Časování) | every lexicon verb in the present tense: stem, ending, prefix, why |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -294,3 +295,22 @@ characters, whitespace collapsed, cascades with the profile and the word).
   and never shown to another profile.
 - `NoteEditor` keeps the lesson's Enter hotkey away while typing (Enter saves, Shift+Enter adds a
   space, Escape cancels). Upgrade and downgrade of 0020 verified; `alembic check` clean.
+
+## Cycle 15/30: German verb lab (Časování)
+
+**Before:** verb forms appeared only inside grammar units; a learner could not look up how a
+verb from their own dictionary conjugates, or see why.
+
+**Built:** `/grammar/verbs` (linked from grammar, the practice hub and the palette).
+
+- `app.domain.conjugation`: present tense by rules (-e-insertion after -t/-d and consonant + m/n
+  with the ch/h distinction, -t only after s/ß/x/z, -eln/-ern), whole tables for sein, haben,
+  werden, wissen, tun, the modals and möchten, a list of strong verbs with their du/er stem
+  (found through inseparable prefixes: vergessen, gefallen, unterhalten, erfahren), and
+  separable prefixes split off (ich lade … ein). `features()` names what is special about a
+  verb. All 221 German lexicon verbs were generated and read through by hand; one rule bug
+  (zeichnen, rechnen) was found that way and fixed; 47 tests pin the forms.
+- `GET /api/v1/grammar/verbs`: the lexicon's verbs (own verbs first, child filter) with forms.
+- The page: search, a table with the changed stem highlighted, the ending in colour and the
+  prefix at the clause end, a plain-Czech explanation per feature, and an ungraded "type the
+  form" drill over the learner's own verbs. The page says the forms are rule-built.

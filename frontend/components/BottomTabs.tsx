@@ -14,7 +14,7 @@ const TABS: { href: string; label: string; icon: LucideIcon; match: (p: string) 
     href: "/practice",
     label: cs.tabs.practice,
     icon: Dumbbell,
-    match: (p) => ["/practice", "/dictation", "/shadowing", "/roleplay", "/genders", "/stories", "/grammar/cases"].some((x) => p.startsWith(x)),
+    match: (p) => ["/practice", "/dictation", "/shadowing", "/roleplay", "/genders", "/stories", "/grammar/cases", "/grammar/verbs"].some((x) => p.startsWith(x)),
   },
   { href: "/words", label: cs.tabs.words, icon: BookMarked, match: (p) => p.startsWith("/words") },
 ];
