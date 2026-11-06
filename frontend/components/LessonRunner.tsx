@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, XCircle } from "lucide-react";
+import { Award, BookOpen, CheckCircle2, Eye, HelpCircle, Lightbulb, Pause, XCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
@@ -328,6 +328,11 @@ export function LessonRunner({
   const t =
     mode === "check" ? cs.check : mode === "placement" ? cs.placement : mode === "exam" ? cs.exam : cs.lesson;
   const exit = onExit ?? (() => router.push("/"));
+  const pauseLesson = mode === "learn" ? (
+    <Button variant="ghost" disabled={busy} onClick={() => router.push("/")} aria-label={cs.lesson.pause} title={cs.lesson.pauseHelp}>
+      <Pause className="size-4" aria-hidden /> {cs.lesson.pause}
+    </Button>
+  ) : null;
   if (phase.kind === "starting") return <p className="text-center text-slate-500">{t.preparing}</p>;
   if (phase.kind === "empty")
     return (
@@ -352,8 +357,9 @@ export function LessonRunner({
         <p className="text-sm text-slate-500">
           {cs.lesson.sceneHelp} {cs.lesson.learnHelp}
         </p>
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between gap-2">
           <SlowToggle />
+          {pauseLesson}
         </div>
         <SceneView scene={session.scene!} language={language} sessionId={session.id} />
         <Button data-hotkey="enter" onClick={() => setPhase({ kind: "words", session, index: 0 })} autoFocus>
@@ -373,6 +379,7 @@ export function LessonRunner({
           <span className="flex items-center gap-2">
             <SlowToggle />
             {cs.lesson.wordOf(index + 1, session.words.length)}
+            {pauseLesson}
           </span>
         </div>
         <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -418,7 +425,7 @@ export function LessonRunner({
             />
           </div>
         </section>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {index > 0 && (
             <Button variant="secondary" className="flex-1" onClick={() => setPhase({ ...phase, index: index - 1 })}>
               {cs.lesson.back}
@@ -595,6 +602,7 @@ export function LessonRunner({
                 ? cs.lesson.newWord
                 : cs.lesson.review}
         </span>
+        {pauseLesson}
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
         <div className="h-full bg-brand-500" style={{ width: `${(task.position / task.total) * 100}%` }} />

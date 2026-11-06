@@ -811,3 +811,17 @@ one-tap action returns to today's reading.
   mastery evidence.
 - Verification: story API tests passed (14 tests), including language and profile isolation.
   Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 12/30: pause a lesson and resume it later
+
+**Before:** the learning session already stayed open on the server, but the focused lesson view had
+no explicit pause action. Learners had to leave the page and rely on the dashboard's resume label.
+
+**Built:** a visible *Pozastavit* control during the scene, word-introduction and practice phases.
+It returns to the dashboard without completing or deleting the lesson, where the existing resume
+action continues the open session.
+
+- The control is disabled while an answer request is in flight. Its accessible hint explains that
+  an unsubmitted text answer is not saved.
+- Verification: the server resume regression passed (1 test); frontend typecheck and production
+  build passed; `git diff --check` passed.

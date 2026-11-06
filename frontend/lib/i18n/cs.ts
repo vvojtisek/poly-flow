@@ -118,6 +118,8 @@ export const cs = {
     title: "Lekce",
     start: "Začít lekci",
     resume: "Pokračovat v lekci",
+    pause: "Pozastavit",
+    pauseHelp: "Lekce zůstane rozepsaná. Neodeslaná odpověď se neuloží; můžeš pokračovat z přehledu.",
     preparing: "Připravuji lekci…",
     empty: "Všechna dostupná slova už znáš z lekcí. Nová slova přibudou později.",
     learnHelp: "Bez spěchu a bez známkování. Chyby se tu nepočítají.",
