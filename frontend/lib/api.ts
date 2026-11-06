@@ -928,3 +928,23 @@ export interface VerbEntry {
   forms: Record<VerbPerson, { stem: string; ending: string; changed: boolean }>;
 }
 export const getVerbs = () => api<VerbEntry[]>("/api/v1/grammar/verbs");
+
+// ---------------------------------------------------------------- session review
+
+export interface ReviewItem {
+  item_id: string;
+  lemma: string;
+  gender: string | null;
+  translation: string;
+  task: "recognition" | "recall";
+  first_try: boolean | null;
+  answered: string | null;
+  expected: string;
+  error: string | null;
+  passive_known: boolean;
+  active_known: boolean;
+  next_review_at: string | null;
+  note: string | null;
+}
+export const getSessionReview = (id: string) =>
+  api<{ mode: SessionMode; items: ReviewItem[] }>(`/api/v1/learning/sessions/${id}/review`);

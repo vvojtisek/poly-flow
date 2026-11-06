@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { AnswerInput } from "@/components/AnswerInput";
 import { KeyHint, ShortcutLegend } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
+import { SessionReview } from "@/components/SessionReview";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
 import { SpeakAnswer } from "@/components/SpeakAnswer";
@@ -489,6 +490,7 @@ export function LessonRunner({
           ))}
         </dl>
         {mode === "learn" && <Notice>{cs.lesson.learnedNote}</Notice>}
+        {mode === "check" && <SessionReview sessionId={phase.session.id} language={language} />}
         <div className="flex flex-col gap-2 sm:flex-row">
           <Button className="flex-1" onClick={() => void begin()}>
             {t.another}

@@ -19,6 +19,7 @@ from app.api import (
     profiles,
     progression,
     ranks,
+    review,
     roleplay,
     stories,
     today,
@@ -64,6 +65,7 @@ def create_app() -> FastAPI:
     app.include_router(today.router)
     app.include_router(declension.router)
     app.include_router(genders.router)
+    app.include_router(review.router)
     app.include_router(roleplay.router)
     app.include_router(verbs.router)
     app.include_router(dictation.router)

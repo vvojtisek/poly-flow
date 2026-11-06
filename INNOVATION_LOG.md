@@ -26,6 +26,7 @@ unreviewed.
 | 13 | Reading comfort | per-profile text size, wider spacing, no animations; applied before first paint |
 | 14 | Memory hooks (oslí můstky) | your own note per word: on lesson cards, in the dictionary, after a miss |
 | 15 | German verb lab (Časování) | every lexicon verb in the present tense: stem, ending, prefix, why |
+| 16 | Check review (Rozbor) | word-by-word result after a check: your answer, the right one, next review, add a hook |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -314,3 +315,19 @@ verb from their own dictionary conjugates, or see why.
 - The page: search, a table with the changed stem highlighted, the ending in colour and the
   prefix at the clause end, a plain-Czech explanation per feature, and an ungraded "type the
   form" drill over the learner's own verbs. The page says the forms are rule-built.
+
+## Cycle 16/30: check review (Rozbor)
+
+**Before:** the end of an Ověření showed two numbers ("1 / 6", "5 to repeat"); the learner could
+not see which words they missed or what they had answered.
+
+**Built:** `GET /api/v1/learning/sessions/{id}/review` (completed sessions only, owner only) and a
+"Rozbor" section on the check's done screen.
+
+- Missed words first: the word with gender colour and meaning, the learner's first answer
+  struck through (or "answer shown"), the right answer, the kind of mistake, and when it comes
+  back ("Znovu zítra"). Each missed word offers "Přidat oslí můstek" right there (cycle 14),
+  at the moment it is most useful.
+- Words right on the first try as chips with where they stand now (recognised / can write).
+- Unanswered words are listed separately rather than counted as mistakes.
+- Read-only over tasks, first-attempt events and progress; nothing new is recorded.
