@@ -28,6 +28,7 @@ unreviewed.
 | 15 | German verb lab (Časování) | every lexicon verb in the present tense: stem, ending, prefix, why |
 | 16 | Check review (Rozbor) | word-by-word result after a check: your answer, the right one, next review, add a hook |
 | 17 | Welcome wizard (Vítej) | first run of a fresh profile: language, daily goal, rank path, text size, then placement or first lesson |
+| 18 | Tap to look up (Klepni na slovo) | every word in stories, role-play and dictation opens its dictionary entry: form → lemma by rules |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -350,3 +351,27 @@ yet in its language and has not finished or skipped the welcome (`settings.onboa
 - While it is shown, the rank celebration waits. Existing profiles with progress never see it.
 - The daily goal is now also editable in Nastavení (comfort panel).
 - Backend: one new settings field, `onboarded` (default false); test pins default and update.
+
+## Cycle 18/30: tap any word to look it up
+
+**Before:** lesson scenes glossed their linked words, but stories, role-play lines and dictation
+sentences were plain text. A learner who met "Kinder" or "gibt" had to leave the page and guess
+the dictionary form.
+
+**Built:** `GET /api/v1/lookup?word=&language=` and a `TapText` component.
+
+- `app/domain/lookup.py` (pure rules): the tapped word is cleaned (punctuation, French and Italian
+  elision such as l'homme, dell'acqua) and turned into candidate lemmas: the word itself, a short
+  irregular list per language (ist → sein, went → go, ont → avoir, sono → essere), suffix rules
+  (Kinder → Kind, cities → city, chevaux → cheval, ragazzi → ragazzo) and German umlaut plurals
+  (Städte → Stadt). For German verbs the service adds a reverse index of the cycle-15 present
+  forms (gibt → geben, stehe → aufstehen), ranked above suffix guesses (heiße → heißen, then heiß).
+- The service matches candidates against the lexicon the profile may see (child filter applies),
+  at most three entries, with the learner's status and memory hook. A word not met yet is shown
+  as "Nové slovo"; looking up records nothing, so it never counts as knowing.
+- The card shows the matched dictionary form (with article and gender colour), the meaning, the
+  status, the hook, and the word's audio for met words. It stays inside the viewport and closes
+  on Escape or a tap elsewhere. Results are cached per page load.
+- Used in stories, every role-play line and the dictation answer.
+- Known limit, stated in the module: a guess can hit a real but different lemma; the card shows
+  the dictionary form so the learner can see which one was matched.

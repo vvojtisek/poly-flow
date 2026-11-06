@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { AnswerInput } from "@/components/AnswerInput";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
+import { TapText } from "@/components/TapText";
 import { WordDiff } from "@/components/WordDiff";
 import { Button, Notice } from "@/components/ui";
 import {
@@ -120,7 +121,7 @@ function Dictation({ language }: { language: Language }) {
           <div className="text-sm">
             <p className="text-slate-500">{t.sentence}</p>
             <p lang={language} className="text-lg">
-              {result.sentence}
+              <TapText text={result.sentence} language={language} />
             </p>
           </div>
           <p className="text-sm text-slate-600 dark:text-slate-300">

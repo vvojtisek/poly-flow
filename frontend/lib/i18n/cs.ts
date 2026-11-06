@@ -458,6 +458,15 @@ export const cs = {
     search: "Hledat",
     label: "Hlavní navigace",
   },
+  lookup: {
+    hint: "Klepni na slovo a uvidíš, co znamená.",
+    loading: "Hledám…",
+    none: "Tohle slovo ve slovníku zatím nemáme.",
+    failed: "Slovo se nepodařilo najít.",
+    fresh: "Nové slovo",
+    close: "Zavřít",
+    form: (word: string) => `Tvar slova „${word}“`,
+  },
   hook: {
     title: "Oslí můstek",
     add: "Přidat oslí můstek",

@@ -949,3 +949,15 @@ export interface ReviewItem {
 }
 export const getSessionReview = (id: string) =>
   api<{ mode: SessionMode; items: ReviewItem[] }>(`/api/v1/learning/sessions/${id}/review`);
+
+export type LookupHit = {
+  id: string;
+  lemma: string;
+  translation: string;
+  gender: string | null;
+  pos: string;
+  status: string | null;
+  note: string | null;
+};
+export const lookupWord = (word: string, language: Language) =>
+  api<LookupHit[]>(`/api/v1/lookup?language=${language}&word=${encodeURIComponent(word)}`);

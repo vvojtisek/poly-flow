@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { AnswerInput } from "@/components/AnswerInput";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
+import { TapText } from "@/components/TapText";
 import { WordDiff } from "@/components/WordDiff";
 import { Button, Notice } from "@/components/ui";
 import {
@@ -51,7 +52,7 @@ function Bubble({
         }`}
       >
         <p lang={language} className="text-lg">
-          {line.text}
+          <TapText text={line.text} language={language} />
         </p>
         <button
           type="button"
@@ -182,7 +183,7 @@ function MyTurn({
             <>
               <WordDiff marks={result} />
               <p lang={language} className="text-sm text-slate-600 dark:text-slate-300">
-                {line.text}
+                <TapText text={line.text} language={language} />
               </p>
             </>
           )}
