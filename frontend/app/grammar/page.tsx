@@ -223,9 +223,22 @@ export default function GrammarPage() {
               <Notice>{cs.grammar.noTopicMatches}</Notice>
             ) : filteredLevels.map((lv) => (
               <section key={lv.level} className="flex flex-col gap-2" aria-labelledby={`level-${lv.level}`}>
-                <h2 id={`level-${lv.level}`} className="text-lg font-bold">
-                  {lv.level}
-                </h2>
+                {(() => {
+                  const complete = lv.units.filter((unit) => unit.status === "known" || unit.status === "mastered").length;
+                  const dueCount = lv.units.filter((unit) => unit.due).length;
+                  const percent = lv.units.length ? Math.round((complete / lv.units.length) * 100) : 0;
+                  return (
+                    <div className="rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <h2 id={`level-${lv.level}`} className="text-lg font-bold">{lv.level}</h2>
+                        <p className="text-xs tabular-nums text-slate-500">{cs.grammar.levelProgress(complete, lv.units.length, dueCount)}</p>
+                      </div>
+                      <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" role="progressbar" aria-label={cs.grammar.levelProgressLabel(lv.level)} aria-valuenow={percent} aria-valuemin={0} aria-valuemax={100}>
+                        <div className="h-full rounded-full bg-emerald-500 transition-[width]" style={{ width: `${percent}%` }} />
+                      </div>
+                    </div>
+                  );
+                })()}
                 <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                   {lv.units.map((u) => (
                     <UnitCard

@@ -950,3 +950,16 @@ the required B2 vocabulary path is complete.
 - The path uses the existing profile-scoped progress count and keeps its CEFR disclaimer; the
   visual never describes vocabulary rank as a certified communication level.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 22/30: see grammar progress by level
+
+**Before:** the grammar roadmap grouped topics by level and showed each topic's state, but gave no
+at-a-glance sense of how much of a level was known or due for review.
+
+**Built:** each visible grammar level now has a progress bar based on topics marked known or
+mastered, plus counts for those topics and the topics due for review. The summary follows the
+current search and filters, so it describes the topics currently on screen.
+
+- Progress is based on the existing grammar states; it does not award a level or alter review
+  scheduling.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

@@ -999,6 +999,8 @@ export const cs = {
     clearSearch: "Smazat hledání",
     allTopics: "Všechna témata",
     visibleTopics: (visible: number, total: number) => `Zobrazeno ${visible} z ${total} témat`,
+    levelProgress: (complete: number, total: number, due: number) => `${complete} z ${total} známých nebo zvládnutých · ${due} k opakování`,
+    levelProgressLabel: (level: string) => `Postup gramatikou ${level}`,
     noTopicMatches: "Žádné téma neodpovídá hledání nebo zvoleným filtrům.",
     recentErrors: (n: number) => (n === 1 ? "1 nedávná chyba" : n < 5 ? `${n} nedávné chyby` : `${n} nedávných chyb`),
     exercises: (n: number) => (n === 1 ? "1 cvičení" : n < 5 ? `${n} cvičení` : `${n} cvičení`),
