@@ -991,3 +991,16 @@ score or record.
   This brings the challenge in line with the project's rule that timed assessment belongs in an
   explicit test mode.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 25/30: recover story answers after a network error
+
+**Before:** if a comprehension answer request failed, the reader left the learner with no retry
+path. Switching to another story could also carry the previous reading's local answer state.
+
+**Built:** a failed submission now locks the original choice and offers a one-action retry for
+that same answer. Changing stories clears local results, errors and busy state, and late responses
+from the previous story are ignored. Previously saved archive answers stay locked.
+
+- The server records the first answer per question; retrying the identical choice is safe and
+  does not change saved results.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.

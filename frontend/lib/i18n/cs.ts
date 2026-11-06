@@ -1087,6 +1087,8 @@ export const cs = {
     showTranslation: "Zobrazit překlad",
     hideTranslation: "Skrýt překlad",
     questions: "Otázky k textu",
+    answerFailed: "Odpověď se nepodařilo uložit.",
+    retryAnswer: "Zkusit uložit znovu",
     right: "Správně.",
     wrong: (answer: string) => `Ne, správně je: ${answer}`,
     playLine: "Přehrát větu",

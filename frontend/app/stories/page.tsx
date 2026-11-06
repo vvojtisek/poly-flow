@@ -39,9 +39,11 @@ function Reader({ story }: { story: Story }) {
   const [translate, setTranslate] = useState(false);
   const [results, setResults] = useState<Record<number, Result>>({});
   const [busy, setBusy] = useState(false);
+  const [answerError, setAnswerError] = useState<{ index: number; choice: number } | null>(null);
   const [activeLine, setActiveLine] = useState<number | null>(null);
   const [audioError, setAudioError] = useState(false);
   const audio = useRef<HTMLAudioElement>(null);
+  const answerVersion = useRef(0);
 
   useEffect(() => {
     if (activeLine === null || !audio.current) return;
@@ -50,6 +52,10 @@ function Reader({ story }: { story: Story }) {
   }, [activeLine]);
 
   useEffect(() => {
+    answerVersion.current += 1;
+    setResults({});
+    setAnswerError(null);
+    setBusy(false);
     setActiveLine(null);
     setAudioError(false);
   }, [story.id]);
@@ -68,12 +74,18 @@ function Reader({ story }: { story: Story }) {
   }
 
   async function answer(index: number, choice: number) {
+    const version = answerVersion.current;
     setBusy(true);
+    setAnswerError(null);
     try {
       const r = await answerStoryQuestion(story.id, index, choice);
-      setResults((prev) => ({ ...prev, [index]: { choice, correct: r.correct, answer: r.answer_index } }));
+      if (answerVersion.current === version) {
+        setResults((prev) => ({ ...prev, [index]: { choice, correct: r.correct, answer: r.answer_index } }));
+      }
+    } catch {
+      if (answerVersion.current === version) setAnswerError({ index, choice });
     } finally {
-      setBusy(false);
+      if (answerVersion.current === version) setBusy(false);
     }
   }
 
@@ -188,7 +200,7 @@ function Reader({ story }: { story: Story }) {
                       <button
                         key={j}
                         type="button"
-                        disabled={busy || !!r}
+                        disabled={busy || !!r || q.answered !== null || answerError?.index === i}
                         onClick={() => void answer(i, j)}
                         className={`rounded-xl border px-3 py-2 text-sm font-medium transition disabled:cursor-default ${
                           state === "correct"
@@ -219,6 +231,12 @@ function Reader({ story }: { story: Story }) {
               </fieldset>
             );
           })}
+          {answerError && (
+            <div className="flex flex-wrap items-center gap-2" role="alert">
+              <p className="text-sm text-rose-700 dark:text-rose-300">{cs.stories.answerFailed}</p>
+              <Button variant="secondary" disabled={busy} onClick={() => void answer(answerError.index, answerError.choice)}>{cs.stories.retryAnswer}</Button>
+            </div>
+          )}
           {allAnswered && <Notice tone="ok">{cs.stories.done}</Notice>}
         </section>
       </aside>
