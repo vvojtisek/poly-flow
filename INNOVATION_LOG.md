@@ -1055,3 +1055,18 @@ limited to 60 characters, scoped to the learner, and duplicate names return a cl
 - Added API coverage for normalized renames, cross-profile access, and duplicate-name conflicts.
 - Verification: all 8 word-collection API tests passed, Ruff passed, and frontend typecheck and
   production build passed; `git diff --check` passed.
+
+## Cycle 30/30: bring the weekly learning coach to the dashboard
+
+**Before:** the personalized weekly recap, difficult words, and suggested next activity were
+available on the insights page, away from the dashboard where learners choose what to do next.
+
+**Built:** the home dashboard now includes the weekly recap and its actionable next step, so
+learners can see recent progress and continue into review, mistake correction, or a lesson from
+their main entry point.
+
+- The recap keeps its existing profile and language scoped API, reports unknown accuracy as
+  unknown, and does not add streak pressure or graded activity.
+- Verification: all 4 recap API tests passed; frontend typecheck and production build passed;
+  Compose config passed; rebuilt Compose stack reports `/readyz` ready and serves the frontend
+  with HTTP 200 on port 3001.

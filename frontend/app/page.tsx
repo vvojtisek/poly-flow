@@ -12,6 +12,7 @@ import { ProgressionPath } from "@/components/ProgressionPath";
 import { RankCard } from "@/components/RankCard";
 import { NewsBanner } from "@/components/NewsBanner";
 import { TodayPlan } from "@/components/TodayPlan";
+import { WeeklyRecap } from "@/components/WeeklyRecap";
 import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
@@ -78,6 +79,7 @@ export default function HomePage() {
       <div className="grid gap-4 lg:grid-cols-3">
         {language && !offerPlacement && <NewsBanner profileId={me.acting.id} language={language} />}
         {language && <TodayPlan language={language} profileId={me.acting.id} />}
+        {language && !offerPlacement && <WeeklyRecap language={language} className="lg:col-span-3" />}
         <Panel title={cs.todayPractice} icon={BookOpen}>
           <div className="flex flex-col gap-3">
             <LanguagePicker me={me} />
