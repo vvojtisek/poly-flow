@@ -970,3 +970,14 @@ export const spellNumber = (n: number, language: Language) =>
 export const checkNumber = (body: { language: Language; n: number; answer: string; direction: NumberDirection }) =>
   api<{ correct: boolean; n: number; words: string }>("/api/v1/numbers/check", { method: "POST", json: body });
 export const numberAudioUrl = (n: number, language: Language) => `/api/v1/numbers/audio?n=${n}&language=${language}`;
+
+export type WordOrderPuzzle = { ref: string; tiles: string[]; end: string; cs: string | null; hint: string | null; pool: number };
+export const nextWordOrder = (language: Language, exclude: string[]) =>
+  api<WordOrderPuzzle | { ref: null; pool: 0 }>(
+    `/api/v1/word-order/next?language=${language}${exclude.map((r) => `&exclude=${encodeURIComponent(r)}`).join("")}`,
+  );
+export const checkWordOrder = (language: Language, ref: string, order: string[]) =>
+  api<{ correct: boolean; marks: boolean[]; sentence: string; cs: string | null }>(`/api/v1/word-order/check?language=${language}`, {
+    method: "POST",
+    json: { ref, order },
+  });

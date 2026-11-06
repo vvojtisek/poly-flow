@@ -31,6 +31,7 @@ unreviewed.
 | 18 | Tap to look up (Klepni na slovo) | every word in stories, role-play and dictation opens its dictionary entry: form → lemma by rules |
 | 19 | Take your words with you (export) | own dictionary as a spreadsheet CSV or an Anki import file, with hooks, status and source |
 | 20 | Number trainer (Čísla) | 0–9999 written, heard and read in DE/FR/IT/EN, spelled by rules with both French spellings accepted |
+| 21 | Word order (Slovosled) | rebuild shuffled sentences from met scenes and example sentences; Czech meaning as the goal |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -418,3 +419,25 @@ and phone numbers, which every A1 learner meets on day one, had no practice at a
 - 93 tests: a table of pinned spellings per language, accepted and rejected answers, and every
   number 0–9999 in every language round-trips through `check`.
 - Listening needs the local TTS; without it the page says so and points to the read mode.
+
+## Cycle 21/30: word order (Slovosled)
+
+**Before:** word order, the main structural difference between Czech (free order) and German
+(verb second, verb at the end) or English (fixed SVO), was never practised on its own. Every
+exercise checked words, not their position.
+
+**Built:** `app/domain/word_order.py`, `/api/v1/word-order/{next,check}` and `/word-order`.
+
+- The pool is reviewed text the learner has met: lines of scenes they finished (role-play rule:
+  completed lesson or all words met), shown with the Czech line as the goal, and example
+  sentences of introduced words, with "word = meaning" as the hint. 3 to 10 words; child filter
+  as everywhere. Nothing is generated.
+- The end punctuation is fixed, commas stay on their word, and the first word loses its capital
+  when the lexicon (or a short closed list of pronouns and possessives) says it is not a noun or
+  name, so the capital does not give the start away. The shuffle is deterministic per sentence.
+- Tap (or press the number on) words to place them, tap a placed word to take it back,
+  Backspace undoes. The check colours each position, shows the original sentence (tappable, the
+  cycle-18 lookup) and says plainly that another order may also be possible: only the original is
+  compared, so a different order is never called wrong grammar.
+- Ungraded; nothing recorded. Tests cover splitting, usability, the shuffle, marks, the empty
+  pool, capital handling, mismatched tiles (422) and unknown refs (404).
