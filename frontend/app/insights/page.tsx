@@ -93,14 +93,22 @@ function AccuracyChart({ data }: { data: Insights["accuracy"] }) {
   );
 }
 
-function Forecast({ data }: { data: Insights["forecast"] }) {
+function Forecast({
+  data,
+  selected,
+  onSelect,
+}: {
+  data: Insights["forecast"];
+  selected: string | null;
+  onSelect: (date: string) => void;
+}) {
   const max = Math.max(1, ...data.map((d) => d.words + d.grammar));
   return (
-    <div className="flex h-40 items-end gap-1" role="img" aria-label={t.forecastLabel}>
+    <div className="flex h-40 items-end gap-1" role="group" aria-label={t.forecastLabel}>
       {data.map((d, i) => {
         const total = d.words + d.grammar;
         return (
-          <div key={d.date} className="flex h-full flex-1 flex-col items-center justify-end gap-1" title={`${dayFmt(d.date)}: ${t.forecastTitle(d.words, d.grammar)}`}>
+          <button key={d.date} type="button" aria-pressed={selected === d.date} aria-label={t.forecastAction(dayFmt(d.date), d.words, d.grammar)} onClick={() => onSelect(d.date)} className={`flex h-full flex-1 flex-col items-center justify-end gap-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${selected === d.date ? "bg-brand-500/10" : "hover:bg-slate-100/70 dark:hover:bg-slate-800/70"}`} title={`${dayFmt(d.date)}: ${t.forecastTitle(d.words, d.grammar)}`}>
             <span className="text-[0.65rem] tabular-nums text-slate-500">{total || ""}</span>
             <div className="flex w-full flex-col justify-end overflow-hidden rounded-md" style={{ height: `${(total / max) * 75}%` }}>
               <div className="bg-amber-400" style={{ flexGrow: d.grammar }} />
@@ -109,10 +117,45 @@ function Forecast({ data }: { data: Insights["forecast"] }) {
             <span className={`text-[0.6rem] ${i === 0 ? "font-bold text-slate-700 dark:text-slate-200" : "text-slate-400"}`}>
               {i === 0 ? t.today : dayFmt(d.date)}
             </span>
-          </div>
+          </button>
         );
       })}
     </div>
+  );
+}
+
+function ForecastDetails({ data, language }: { data: Insights["forecast"][number]; language: string }) {
+  const empty = data.word_items.length === 0 && data.grammar_items.length === 0;
+  return (
+    <section className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-800" aria-live="polite">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <h3 className="font-semibold">{t.forecastDetails(dayFmt(data.date))}</h3>
+        <div className="flex gap-3 text-sm">
+          {data.word_items.length > 0 && <a href="/words" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openWords}</a>}
+          {data.grammar_items.length > 0 && <a href="/grammar" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openGrammar}</a>}
+        </div>
+      </div>
+      {empty ? <p className="text-sm text-slate-500">{t.forecastEmpty}</p> : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {data.word_items.length > 0 && (
+            <section>
+              <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.words}</h4>
+              <ul className="flex flex-wrap gap-1.5" lang={language}>
+                {data.word_items.map((word) => <li key={word.id} className="rounded-lg bg-brand-500/10 px-2 py-1 text-sm">{word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}{word.lemma}<span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span></li>)}
+              </ul>
+            </section>
+          )}
+          {data.grammar_items.length > 0 && (
+            <section>
+              <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.grammar}</h4>
+              <ul className="flex flex-col gap-1">
+                {data.grammar_items.map((unit) => <li key={unit.id}><a href={`/grammar/${unit.id}`} className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span className="text-xs text-slate-500">{unit.level}</span>{unit.title}</a></li>)}
+              </ul>
+            </section>
+          )}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -121,13 +164,18 @@ export default function InsightsPage() {
   const language = me?.acting.active_language;
   const [data, setData] = useState<Insights | null>(null);
   const [failed, setFailed] = useState(false);
+  const [forecastDate, setForecastDate] = useState<string | null>(null);
 
   useEffect(() => {
     if (!language) return;
     let cancelled = false;
     setData(null);
     getInsights(language)
-      .then((d) => !cancelled && setData(d))
+      .then((d) => {
+        if (cancelled) return;
+        setData(d);
+        setForecastDate(d.forecast[0]?.date ?? null);
+      })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
@@ -170,7 +218,10 @@ export default function InsightsPage() {
               <p className="mt-2 text-xs text-slate-500">{t.activeDays(data.active_days)}</p>
             </Panel>
             <Panel title={t.forecast} icon={Target}>
-              <Forecast data={data.forecast} />
+              <Forecast data={data.forecast} selected={forecastDate} onSelect={setForecastDate} />
+              {forecastDate && data.forecast.find((day) => day.date === forecastDate) && (
+                <ForecastDetails data={data.forecast.find((day) => day.date === forecastDate)!} language={data.language} />
+              )}
               <p className="mt-2 flex gap-3 text-xs text-slate-500">
                 <span className="flex items-center gap-1">
                   <span className="size-2.5 rounded-sm bg-brand-500" /> {t.words}

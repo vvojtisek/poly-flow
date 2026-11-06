@@ -779,3 +779,19 @@ collection name as the topic, and identifies the source collection in the finish
 - Verification: story API tests passed (14 tests), including collection target selection,
   minimum-size handling and cross-profile isolation. Ruff, frontend typecheck/build and
   `git diff --check` passed.
+
+## Cycle 10/30: inspect the review forecast by day
+
+**Before:** the 14-day chart showed how many word and grammar reviews were coming, but learners
+could not see which words or topics made up a selected day's total.
+
+**Built:** each forecast column is now a keyboard-accessible selector. Choosing a day reveals its
+due vocabulary and grammar topics, with links to the relevant study areas. The current day is
+selected initially, and empty dates have a clear explanation.
+
+- The API returns item details alongside the existing counts, and applies the learner's current
+  visibility filter before including vocabulary. A regression test confirms child-hidden content
+  is absent from both details and forecast counts.
+- The forecast remains a schedule estimate; selecting a date changes no progress or evidence.
+- Verification: insights API tests passed (2 tests), including exact due-item details and child
+  filtering. Ruff, frontend typecheck/build and `git diff --check` passed.

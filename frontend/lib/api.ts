@@ -717,7 +717,13 @@ export interface Insights {
   active_days: number;
   accuracy: { week: string; answered: number; correct: number }[];
   mistakes: { tag: string; count: number }[];
-  forecast: { date: string; words: number; grammar: number }[];
+  forecast: {
+    date: string;
+    words: number;
+    grammar: number;
+    word_items: { id: string; lemma: string; gender: string | null; translation: string }[];
+    grammar_items: { id: string; title: string; level: string }[];
+  }[];
   funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
 }
 

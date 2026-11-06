@@ -1,5 +1,6 @@
 """Learning insights (statistics) for the acting profile."""
 
+import uuid
 from datetime import date
 from typing import Annotated
 
@@ -31,10 +32,25 @@ class MistakeOut(BaseModel):
     count: int
 
 
+class ForecastWordOut(BaseModel):
+    id: uuid.UUID
+    lemma: str
+    gender: str | None
+    translation: str
+
+
+class ForecastGrammarOut(BaseModel):
+    id: str
+    title: str
+    level: str
+
+
 class ForecastOut(BaseModel):
     date: date
     words: int
     grammar: int
+    word_items: list[ForecastWordOut]
+    grammar_items: list[ForecastGrammarOut]
 
 
 class FunnelOut(BaseModel):
