@@ -37,3 +37,15 @@ async def test_display_settings(db, client):
         "/api/v1/me/profile", json={"settings": {"text_size": "huge"}}, headers=csrf(me)
     )
     assert bad.status_code == 422
+
+
+async def test_onboarded_flag(db, client):
+    me = await setup_parent(client)
+    assert me["acting"]["settings"]["onboarded"] is False
+    r = await client.patch(
+        "/api/v1/me/profile",
+        json={"settings": {"onboarded": True, "daily_goal_minutes": 15}},
+        headers=csrf(me),
+    )
+    s = r.json()["settings"]
+    assert s["onboarded"] is True and s["daily_goal_minutes"] == 15

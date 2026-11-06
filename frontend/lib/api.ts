@@ -100,6 +100,7 @@ export interface ProfileSettings {
   text_size: TextSize;
   reading_spacing: boolean;
   reduce_motion: boolean;
+  onboarded: boolean;
 }
 
 export type TextSize = "s" | "m" | "l" | "xl";

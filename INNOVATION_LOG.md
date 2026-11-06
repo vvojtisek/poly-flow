@@ -27,6 +27,7 @@ unreviewed.
 | 14 | Memory hooks (oslí můstky) | your own note per word: on lesson cards, in the dictionary, after a miss |
 | 15 | German verb lab (Časování) | every lexicon verb in the present tense: stem, ending, prefix, why |
 | 16 | Check review (Rozbor) | word-by-word result after a check: your answer, the right one, next review, add a hook |
+| 17 | Welcome wizard (Vítej) | first run of a fresh profile: language, daily goal, rank path, text size, then placement or first lesson |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -331,3 +332,21 @@ not see which words they missed or what they had answered.
 - Words right on the first try as chips with where they stand now (recognised / can write).
 - Unanswered words are listed separately rather than counted as mistakes.
 - Read-only over tasks, first-attempt events and progress; nothing new is recorded.
+
+## Cycle 17/30: welcome wizard (Vítej)
+
+**Before:** a new profile landed on the full dashboard with the placement offer, a language
+picker and a rank card at once. The daily goal had no control anywhere in the UI, and the rank
+path was only reachable from the ranks page.
+
+**Built:** a five-step welcome dialog on the dashboard for a profile that has learned nothing
+yet in its language and has not finished or skipped the welcome (`settings.onboarded`).
+
+- Steps: language, daily goal (5–30 min, "just your goal, nothing is lost"), rank path
+  (hockey / royal / none, with the first and last emblems), text size, and a finish step with
+  "Rozřazovací test" or "První lekce".
+- Every choice saves at once through the existing profile settings PATCH (merged, so nothing
+  else is overwritten); "Přeskočit" on any step marks the welcome done.
+- While it is shown, the rank celebration waits. Existing profiles with progress never see it.
+- The daily goal is now also editable in Nastavení (comfort panel).
+- Backend: one new settings field, `onboarded` (default false); test pins default and update.

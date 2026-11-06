@@ -14,6 +14,7 @@ import { TodayPlan } from "@/components/TodayPlan";
 import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
+import { Welcome } from "@/components/Welcome";
 import { Button, Notice } from "@/components/ui";
 import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
@@ -48,6 +49,9 @@ export default function HomePage() {
   // Offered once per language, before anything is learned; skipping or taking it decides.
   const offerPlacement =
     !!progress && progress.placement === null && progress.introduced === 0 && progress.lexicon_items > 0;
+
+  // First run of a fresh profile: the welcome wizard comes before the placement offer.
+  const welcome = offerPlacement && !me?.acting.settings.onboarded;
 
   async function skip() {
     if (!language) return;
@@ -209,7 +213,9 @@ export default function HomePage() {
           </Panel>
         )}
       </div>
+      {welcome && <Welcome me={me} />}
       {ranks.data &&
+        !welcome &&
         !celebrated &&
         ranks.data.path !== "off" &&
         ((ranks.data.unseen_rank ?? 0) > 1 || ranks.data.unseen_achievements.length > 0) && (

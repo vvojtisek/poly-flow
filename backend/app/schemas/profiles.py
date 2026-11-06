@@ -46,6 +46,8 @@ class ProfileSettings(BaseModel):
     text_size: Literal["s", "m", "l", "xl"] = "m"
     reading_spacing: bool = False
     reduce_motion: bool = False
+    # The first-run welcome (language, daily goal, rank path, text size) was finished or skipped.
+    onboarded: bool = False
 
     @field_validator("interests")
     @classmethod

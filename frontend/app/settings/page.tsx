@@ -276,6 +276,26 @@ function SettingsView({ me }: { me: Me }) {
               ))}
             </div>
           </div>
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-semibold">{cs.welcome.goal}</h3>
+            <div role="radiogroup" aria-label={cs.welcome.goal} className="grid grid-cols-5 gap-2">
+              {[5, 10, 15, 20, 30].map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  role="radio"
+                  aria-checked={settings.daily_goal_minutes === g}
+                  onClick={() => void change({ daily_goal_minutes: g })}
+                  className={`rounded-xl px-2 py-2 text-sm font-medium ${
+                    settings.daily_goal_minutes === g ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                  }`}
+                >
+                  {cs.welcome.minutes(g)}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-slate-500">{cs.welcome.goalHelp}</p>
+          </div>
           <label className="flex items-start gap-3 text-sm font-medium">
             <input
               type="checkbox"
