@@ -276,6 +276,22 @@ export const cs = {
     toLevels: "Zkoušky úrovně",
     again: "Zopakovat část 2",
   },
+  today: {
+    title: "Dnešní plán",
+    goal: (m: number) => `Tvůj denní cíl je ${m} minut. Když ho nesplníš, nic se neděje.`,
+    goalMet: "Dnešní cíl je splněný. Cokoli dalšího je bonus.",
+    estimate: (n: number) => `Odhad podle ${n} odpovědí; během učení neběží žádné stopky.`,
+    ringLabel: (m: number, g: number) => `Dnes asi ${m} z ${g} minut`,
+    nothing: "Na dnešek je hotovo. Můžeš si číst nebo zopakovat gramatiku.",
+    step: {
+      check: (n: number) => `Ověřit ${n} ${n === 1 ? "slovo" : n < 5 ? "slova" : "slov"}`,
+      grammar_check: (n: number) => `Ověřit gramatiku (${n})`,
+      lesson: (n: number) => `Nová lekce (${n} slova)`,
+      reading: () => "Krátké čtení",
+    } as Record<string, (n: number) => string>,
+    go: "Pokračovat",
+    tomorrow: (n: number) => `Zítra přijde na řadu ${n} slov.`,
+  },
   words: {
     title: "Můj slovník",
     link: "Slovník",

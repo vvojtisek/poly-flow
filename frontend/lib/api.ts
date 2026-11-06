@@ -761,3 +761,17 @@ export function listWords(
 }
 export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);
 export const myWordAudioUrl = (id: string, part: "word" | "example" = "word") => `/api/v1/words/${id}/audio?part=${part}`;
+
+// ---------------------------------------------------------------- today's plan
+
+export interface TodayPlan {
+  language: Language;
+  date: string;
+  minutes_today: number;
+  answers_today: number;
+  goal_minutes: number;
+  steps: { kind: "check" | "grammar_check" | "lesson" | "reading"; count: number; minutes: number }[];
+  tomorrow_due: number;
+}
+
+export const getToday = (language: Language) => api<TodayPlan>(`/api/v1/today?language=${language}`);

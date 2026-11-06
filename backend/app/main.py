@@ -17,6 +17,7 @@ from app.api import (
     progression,
     ranks,
     stories,
+    today,
     tutor,
     voices,
     words,
@@ -55,6 +56,7 @@ def create_app() -> FastAPI:
     app.include_router(ranks.router)
     app.include_router(insights.router)
     app.include_router(words.router)
+    app.include_router(today.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)
     app.include_router(stories.router)

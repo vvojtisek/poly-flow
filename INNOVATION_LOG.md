@@ -16,6 +16,7 @@ unreviewed.
 | 3 | Command palette (Ctrl+K) | keyboard-first navigation and settings from anywhere |
 | 4 | Learning insights dashboard | activity calendar, accuracy trend, mistake types, review forecast |
 | 5 | My dictionary + word inspector | look up any learned word, its state, audio and history |
+| 6 | Today's plan + goal ring | one button to the most useful next step, calm daily goal |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -115,3 +116,18 @@ knew it, or hear it outside a session.
   gender, audio for the word and its example, IPA and frequency rank, the word's journey from
   seen to mastered, counts, next review in plain words, and a dot timeline of every answer
   (graded vs practice, error type on hover).
+
+## Cycle 6/30: today's plan (Dnešní plán) with a goal ring
+
+**Before:** the dashboard offered four equal buttons; the learner had to decide what to do first,
+and the existing `daily_goal_minutes` setting was not shown anywhere.
+
+**Built:** a plan banner on top of the dashboard (`GET /api/v1/today`).
+
+- The next steps in a fixed, explainable order: due word checks first, then due grammar topics,
+  then a new lesson, then a short reading. Each step shows its size and a time estimate; one
+  "Pokračovat" button (Enter) starts the first step.
+- A ring shows today's estimated minutes against the learner's own daily goal. The estimate comes
+  from the answers given (no stopwatch runs during learning), the copy says so, and missing the
+  goal has no consequence: no streak, nothing lost.
+- Also reports how many words come due tomorrow.
