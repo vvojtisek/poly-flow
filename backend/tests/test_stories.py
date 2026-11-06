@@ -219,14 +219,27 @@ async def test_generated_story_is_validated_stored_and_returned(db, client, mode
     assert archive.json()[0]["title"] == "Der Hund"
     assert (await client.get("/api/v1/stories/archive?language=fr")).json() == []
     await make_child(client, me)
-    await login(client, "eva", "4321")
+    child = await login(client, "eva", "4321")
     assert (await client.get("/api/v1/stories/archive?language=de")).json() == []
+    foreign_delete = await client.delete(f"/api/v1/stories/{s['id']}", headers=csrf(child))
+    assert foreign_delete.status_code == 404
     async for db_ in get_session():
         row = (await db_.execute(select(DailyStory))).scalar_one()
         assert row.status == StoryStatus.GENERATED and row.source_type == "generated"
         assert row.llm_model == "test-model" and row.llm_provider == "ollama"
         assert row.safety_checked and row.unknown_ratio is not None
         assert len(row.new_item_ids) == 3
+
+
+async def test_learner_can_delete_and_regenerate_their_archived_story(db, client, model):
+    me = await learner_with_words(client)
+    story = (await generate(client, me)).json()
+    deleted = await client.delete(f"/api/v1/stories/{story['id']}", headers=csrf(me))
+    assert deleted.status_code == 204
+    assert (await client.get(f"/api/v1/stories/{story['id']}")).status_code == 404
+    assert (await client.get("/api/v1/stories/archive?language=de")).json() == []
+    regenerated = await generate(client, me)
+    assert regenerated.status_code == 200 and regenerated.json()["id"] != story["id"]
 
 
 async def test_generated_story_can_use_a_private_collection_as_its_topic(db, client, model):

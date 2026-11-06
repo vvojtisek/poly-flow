@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from zoneinfo import ZoneInfo
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -164,6 +164,20 @@ async def archive(
             )
         ).all()
     )
+
+
+async def delete_archived_story(db: AsyncSession, user: User, story_id: uuid.UUID) -> None:
+    result = await db.execute(
+        delete(DailyStory).where(
+            DailyStory.id == story_id,
+            DailyStory.user_id == user.id,
+            DailyStory.status == StoryStatus.GENERATED,
+            DailyStory.source_type == StorySource.GENERATED,
+            DailyStory.safety_checked.is_(True),
+        )
+    )
+    if result.rowcount == 0:
+        raise LearningError("story_not_found", 404)
 
 
 async def get_story(

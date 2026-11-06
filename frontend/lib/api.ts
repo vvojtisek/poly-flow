@@ -595,6 +595,8 @@ export const getStoryToday = (language: Language) =>
 export const listStoryArchive = (language: Language) =>
   api<StoryArchiveItem[]>(`/api/v1/stories/archive?language=${language}`, { cache: "no-store" });
 export const getStory = (id: string) => api<Story>(`/api/v1/stories/${id}`, { cache: "no-store" });
+export const deleteStory = (id: string) =>
+  api<void>(`/api/v1/stories/${id}`, { method: "DELETE" });
 export const generateStory = (language: Language, kind: Story["kind"], collectionId?: string) =>
   api<Story>("/api/v1/stories/generate", {
     json: { language, kind, ...(collectionId ? { collection_id: collectionId } : {}) },

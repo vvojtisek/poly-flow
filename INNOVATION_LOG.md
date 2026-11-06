@@ -841,3 +841,18 @@ profiles' entries are introduced into global navigation; API failures leave ordi
 available.
 - Verification: dictionary API tests passed (2 tests); frontend typecheck and production build
 passed; `git diff --check` passed.
+
+## Cycle 14/30: delete a saved generated reading
+
+**Before:** learners could revisit readings from the archive but had no way to remove one they no
+longer wanted to keep.
+
+**Built:** a per-reading delete control with an explicit confirmation. The server permanently
+removes only a completed, safety-checked generated story owned by the acting profile; deleting
+today's story also lets the learner generate a replacement for that day.
+
+- Other profiles receive not found, and pending or failed generations cannot be deleted through
+  the archive action. The UI removes the item and closes its reader if that item was open.
+- Verification: story API tests passed (15 tests), including owned deletion, regeneration,
+  cross-profile rejection and archive visibility. Ruff, frontend typecheck/build and
+  `git diff --check` passed.

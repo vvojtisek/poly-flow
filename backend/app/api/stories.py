@@ -4,7 +4,7 @@ import uuid
 from datetime import date, datetime
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -178,6 +178,17 @@ async def get_story(story_id: uuid.UUID, auth: Auth, db: DB) -> StoryOut:
         return _out(await svc.get_story(db, auth.acting, story_id))
     except LearningError as exc:
         raise HTTPException(exc.status, exc.code) from exc
+
+
+@router.delete("/{story_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_story(story_id: uuid.UUID, auth: Auth, db: DB) -> Response:
+    try:
+        await svc.delete_archived_story(db, auth.acting, story_id)
+    except LearningError as exc:
+        await db.rollback()
+        raise HTTPException(exc.status, exc.code) from exc
+    await db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.post("/{story_id}/questions/{index}/answer", response_model=AnswerOut)

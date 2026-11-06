@@ -1040,6 +1040,8 @@ export const cs = {
     archiveTitle: "Předchozí čtení",
     archiveFailed: "Předchozí čtení se nepodařilo načíst.",
     backToToday: "Zpět na dnešní text",
+    deleteEntry: (title: string) => `Smazat čtení: ${title}`,
+    deleteConfirm: (title: string) => `Opravdu smazat čtení „${title}“? Tuto akci nelze vrátit.`,
     unreviewed: (model: string | null) =>
       `Text napsal místní jazykový model${model ? ` (${model})` : ""}. Prošel automatickou kontrolou slovní zásoby a obsahu, ale nikdo ho ručně nezkontroloval.`,
     targets: "Slova, která se učíš:",

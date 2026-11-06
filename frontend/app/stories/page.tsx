@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpenText, CheckCircle2, Languages, MessagesSquare, Play, Square, XCircle } from "lucide-react";
+import { BookOpenText, CheckCircle2, Languages, MessagesSquare, Play, Square, Trash2, XCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -10,6 +10,7 @@ import { Button, Notice } from "@/components/ui";
 import {
   ApiError,
   answerStoryQuestion,
+  deleteStory,
   generateStory,
   getStory,
   getStoryToday,
@@ -306,6 +307,22 @@ export default function StoriesPage() {
     }
   }
 
+  async function removeArchiveStory(item: StoryArchiveItem) {
+    if (!window.confirm(cs.stories.deleteConfirm(item.title))) return;
+    setArchiveLoading(item.id);
+    try {
+      await deleteStory(item.id);
+      setArchive((items) => items.filter((entry) => entry.id !== item.id));
+      setArchivedStory((story) => story?.id === item.id ? null : story);
+      setState((current) => current?.story?.id === item.id ? { ...current, story: null } : current);
+      setArchiveFailed(false);
+    } catch {
+      setArchiveFailed(true);
+    } finally {
+      setArchiveLoading("");
+    }
+  }
+
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   return (
     <AppShell me={me}>
@@ -334,11 +351,14 @@ export default function StoriesPage() {
             {archiveFailed && <Notice tone="error">{cs.stories.archiveFailed}</Notice>}
             <ul className="flex max-h-56 flex-col gap-2 overflow-y-auto">
               {archive.map((item) => (
-                <li key={item.id}>
-                  <button type="button" aria-pressed={(archivedStory?.id ?? state?.story?.id) === item.id} disabled={archiveLoading !== ""} onClick={() => void openArchive(item.id)} className={`flex w-full items-center justify-between gap-3 rounded-xl border px-3 py-2 text-left ${((archivedStory?.id ?? state?.story?.id) === item.id) ? "border-brand-500 bg-brand-500/10" : "border-slate-200 hover:border-brand-500 dark:border-slate-800"}`}>
+                <li key={item.id} className="flex items-center gap-2">
+                  <button type="button" aria-pressed={(archivedStory?.id ?? state?.story?.id) === item.id} disabled={archiveLoading !== ""} onClick={() => void openArchive(item.id)} className={`flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border px-3 py-2 text-left ${((archivedStory?.id ?? state?.story?.id) === item.id) ? "border-brand-500 bg-brand-500/10" : "border-slate-200 hover:border-brand-500 dark:border-slate-800"}`}>
                     <span className="min-w-0"><span className="block text-xs text-slate-500">{new Date(`${item.story_date}T12:00:00`).toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" })}</span><span className="block truncate font-semibold">{item.title}</span></span>
                     <span className="shrink-0 text-xs text-slate-500">{item.kind === "dialogue" ? cs.stories.dialogue : cs.stories.story}</span>
                   </button>
+                  <Button variant="ghost" disabled={archiveLoading !== ""} onClick={() => void removeArchiveStory(item)} aria-label={cs.stories.deleteEntry(item.title)} className="shrink-0 text-rose-700 dark:text-rose-300">
+                    <Trash2 className="size-4" aria-hidden />
+                  </Button>
                 </li>
               ))}
             </ul>
