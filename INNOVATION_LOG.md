@@ -745,3 +745,19 @@ and seek. Learners can restart the text or stop playback at any time.
   answers or learning evidence.
 - Verification: story API tests passed (12 tests); frontend typecheck and production build passed;
   `git diff --check` passed.
+
+## Cycle 8/30: recognize sound patterns by ear
+
+**Before:** the pronunciation guide explained spelling patterns and let learners play individual
+known examples, but it did not offer a listening activity to help distinguish those patterns.
+
+**Built:** an ungraded sound challenge above the guide. It plays a word the learner has already
+encountered and asks which spelling-to-sound rule it demonstrates. After the choice, the guide
+shows the rule's Czech sound cue and explanation, then offers another word.
+
+- The challenge only uses currently visible, encountered examples and offers a clear message until
+  examples exist for at least two rules. It avoids exposing new lexicon through audio.
+- Scores are temporary round counts in the page; there is no grade, saved answer, mastery event or
+  change to lesson scheduling. The original reference guide and individual replay remain available.
+- Verification: sound API tests passed (39 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.
