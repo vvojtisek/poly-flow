@@ -221,6 +221,71 @@ async def test_generated_story_is_validated_stored_and_returned(db, client, mode
         assert len(row.new_item_ids) == 3
 
 
+async def test_generated_story_can_use_a_private_collection_as_its_topic(db, client, model):
+    me = await learner_with_words(client)
+    created = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Výlet"},
+        headers=csrf(me),
+    )
+    collection_id = created.json()["id"]
+    async for db_ in get_session():
+        items = (
+            (await db_.execute(select(LexiconItem).where(LexiconItem.lemma.in_(TARGETS))))
+            .scalars()
+            .all()
+        )
+        ids = {item.lemma: item.id for item in items}
+        break
+    for lemma in TARGETS[:2]:
+        await client.post(
+            f"/api/v1/words/collections/{collection_id}/items",
+            json={"item_id": str(ids[lemma])},
+            headers=csrf(me),
+        )
+
+    too_small = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection_id},
+        headers=csrf(me),
+    )
+    assert too_small.status_code == 409 and too_small.json()["detail"] == "collection_too_small"
+    await client.post(
+        f"/api/v1/words/collections/{collection_id}/items",
+        json={"item_id": str(ids[TARGETS[2]])},
+        headers=csrf(me),
+    )
+    response = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection_id},
+        headers=csrf(me),
+    )
+    assert response.status_code == 200, response.text
+    story = response.json()
+    assert story["source_collection"] == "Výlet"
+    assert set(story["targets"]) == set(TARGETS)
+    payload = json.loads(model.requests[0]["messages"][1]["content"])
+    assert payload["topic"] == "Výlet"
+    assert set(payload["target_words"]) == set(TARGETS)
+
+
+async def test_story_collection_must_belong_to_the_acting_profile(db, client, model):
+    me = await learner_with_words(client)
+    collection = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Cizí"},
+        headers=csrf(me),
+    )
+    await make_child(client, me)
+    child = await login(client, "eva", "4321")
+    response = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection.json()["id"]},
+        headers=csrf(child),
+    )
+    assert response.status_code == 404 and response.json()["detail"] == "collection_not_found"
+
+
 async def test_questions_are_graded_on_the_server_and_never_evidence(db, client, model):
     me = await learner_with_words(client)
     s = (await generate(client, me)).json()

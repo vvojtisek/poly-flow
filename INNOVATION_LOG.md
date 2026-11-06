@@ -761,3 +761,21 @@ shows the rule's Czech sound cue and explanation, then offers another word.
   change to lesson scheduling. The original reference guide and individual replay remain available.
 - Verification: sound API tests passed (39 tests); frontend typecheck and production build passed;
   `git diff --check` passed.
+
+## Cycle 9/30: generate a story around a learner's collection
+
+**Before:** a learner could organize a theme set and generate a daily reading, but the story
+generator chose its target words independently of those personal collections.
+
+**Built:** before creating the day's story, the learner can optionally select a same-language
+collection. The generator uses up to five words from that set as its story targets, supplies the
+collection name as the topic, and identifies the source collection in the finished reader.
+
+- The server requires at least three currently visible, already encountered words and checks
+  collection ownership and language before model availability. It keeps the existing vocabulary
+  coverage validation, blacklist checks and child-profile model policy.
+- A small set is disabled with an explanation, and generation reports a clear error if a selected
+  set no longer has enough visible words. Ordinary generation from the learning plan is unchanged.
+- Verification: story API tests passed (14 tests), including collection target selection,
+  minimum-size handling and cross-profile isolation. Ruff, frontend typecheck/build and
+  `git diff --check` passed.

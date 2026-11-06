@@ -1021,6 +1021,13 @@ export const cs = {
     notEnoughWords: "Na příběh je potřeba víc slov. Projdi nejdřív pár lekcí.",
     generating: "Dnešní text se právě píše. Zkus to za chvíli znovu.",
     failed: "Model tentokrát nenapsal text, který by prošel kontrolou. Zkus to znovu.",
+    sourceCollection: "Téma podle slovní sady (volitelné)",
+    fromLearningPlan: "Slova z běžného plánu",
+    collectionHelp: "Z vybrané sady model použije 3–5 slov jako cíle čtení. Neznámá slova a bezpečnostní pravidla se kontrolují stejně jako u běžného příběhu.",
+    collectionNeedsMore: "potřebuje alespoň 3 viditelná slova",
+    collectionTooSmall: "Vybraná sada potřebuje alespoň tři viditelná slova ve zvoleném jazyce.",
+    collectionsUnavailable: "Slovní sady se nepodařilo načíst. Příběh můžeš vytvořit z běžného plánu.",
+    fromCollection: (name: string) => `Téma vychází ze sady „${name}“.`,
     unreviewed: (model: string | null) =>
       `Text napsal místní jazykový model${model ? ` (${model})` : ""}. Prošel automatickou kontrolou slovní zásoby a obsahu, ale nikdo ho ručně nezkontroloval.`,
     targets: "Slova, která se učíš:",

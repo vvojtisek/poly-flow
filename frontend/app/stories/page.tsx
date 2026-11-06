@@ -12,9 +12,11 @@ import {
   answerStoryQuestion,
   generateStory,
   getStoryToday,
+  listWordCollections,
   storyAudioUrl,
   type Language,
   type Story,
+  type WordCollection,
 } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
@@ -24,6 +26,7 @@ type Result = { choice: number; correct: boolean; answer: number };
 const ERRORS: Record<string, string> = {
   model_unavailable: cs.stories.unavailable,
   not_enough_words: cs.stories.notEnoughWords,
+  collection_too_small: cs.stories.collectionTooSmall,
   story_generating: cs.stories.generating,
   story_failed: cs.stories.failed,
 };
@@ -138,6 +141,7 @@ function Reader({ story }: { story: Story }) {
       <aside className="flex flex-col gap-4">
         <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900">
           <p className="font-semibold">{cs.stories.targets}</p>
+          {story.source_collection && <p className="rounded-lg bg-brand-500/10 px-2 py-1 text-brand-700 dark:text-brand-100">{cs.stories.fromCollection(story.source_collection)}</p>}
           <ul className="flex flex-wrap gap-1" lang={story.language}>
             {story.targets.map((t) => (
               <li key={t} className="rounded-lg bg-brand-50 px-2 py-1 text-brand-900 dark:bg-slate-800 dark:text-slate-100">
@@ -222,6 +226,9 @@ export default function StoriesPage() {
   const [state, setState] = useState<{ available: boolean; story: Story | null } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [writing, setWriting] = useState(false);
+  const [collections, setCollections] = useState<WordCollection[]>([]);
+  const [collectionId, setCollectionId] = useState("");
+  const [collectionsFailed, setCollectionsFailed] = useState(false);
 
   useEffect(() => {
     if (!language) return;
@@ -236,12 +243,24 @@ export default function StoriesPage() {
     };
   }, [language, me?.acting.id]);
 
+  useEffect(() => {
+    if (!language) return;
+    let cancelled = false;
+    setCollections([]);
+    setCollectionId("");
+    setCollectionsFailed(false);
+    listWordCollections(language)
+      .then((items) => !cancelled && setCollections(items))
+      .catch(() => !cancelled && setCollectionsFailed(true));
+    return () => { cancelled = true; };
+  }, [language, me?.acting.id]);
+
   async function write(kind: Story["kind"]) {
     if (!language) return;
     setWriting(true);
     setError(null);
     try {
-      const story = await generateStory(language, kind);
+      const story = await generateStory(language, kind, collectionId || undefined);
       setState({ available: true, story });
     } catch (e) {
       setError(e instanceof ApiError ? (ERRORS[e.code] ?? cs.common.error) : cs.common.offline);
@@ -269,13 +288,30 @@ export default function StoriesPage() {
           <Notice>{me.acting.is_child ? cs.stories.childUnavailable : cs.stories.unavailable}</Notice>
         )}
         {state && state.available && !state.story && (
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <Button disabled={writing} onClick={() => void write("story")}>
-              <BookOpenText className="size-5" aria-hidden /> {cs.stories.story}
-            </Button>
-            <Button variant="secondary" disabled={writing} onClick={() => void write("dialogue")}>
-              <MessagesSquare className="size-5" aria-hidden /> {cs.stories.dialogue}
-            </Button>
+          <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            {collections.length > 0 && (
+              <label className="flex max-w-xl flex-col gap-1 text-sm font-medium">
+                {cs.stories.sourceCollection}
+                <select value={collectionId} onChange={(event) => setCollectionId(event.target.value)} disabled={writing} className="rounded-xl border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-900">
+                  <option value="">{cs.stories.fromLearningPlan}</option>
+                  {collections.map((collection) => (
+                    <option key={collection.id} value={collection.id} disabled={collection.count < 3}>
+                      {collection.name} · {cs.collections.count(collection.count)}{collection.count < 3 ? ` · ${cs.stories.collectionNeedsMore}` : ""}
+                    </option>
+                  ))}
+                </select>
+                <span className="text-xs font-normal text-slate-500">{cs.stories.collectionHelp}</span>
+              </label>
+            )}
+            {collectionsFailed && <Notice>{cs.stories.collectionsUnavailable}</Notice>}
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <Button disabled={writing} onClick={() => void write("story")}>
+                <BookOpenText className="size-5" aria-hidden /> {cs.stories.story}
+              </Button>
+              <Button variant="secondary" disabled={writing} onClick={() => void write("dialogue")}>
+                <MessagesSquare className="size-5" aria-hidden /> {cs.stories.dialogue}
+              </Button>
+            </div>
           </div>
         )}
         {writing && <p className="text-slate-500" role="status">{cs.stories.writing}</p>}

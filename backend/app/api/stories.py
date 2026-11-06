@@ -49,6 +49,7 @@ class StoryOut(BaseModel):
     targets: list[str]
     questions: list[QuestionOut]
     model: str | None
+    source_collection: str | None
     review_status: Literal["unreviewed"]
 
 
@@ -61,6 +62,7 @@ class GenerateIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     language: Language
     kind: Literal["story", "dialogue"] = "story"
+    collection_id: uuid.UUID | None = None
 
 
 class AnswerIn(BaseModel):
@@ -89,6 +91,7 @@ def _out(s: DailyStory) -> StoryOut:
             for i, q in enumerate(s.comprehension_questions)
         ],
         model=s.llm_model,
+        source_collection=meta.get("source_collection"),
         review_status="unreviewed",
     )
 
@@ -106,13 +109,25 @@ async def today(language: Language, auth: Auth, db: DB, llm: LlmDep, now: Now) -
     "/generate",
     response_model=StoryOut,
     responses={
-        409: {"description": "model_unavailable / not_enough_words / story_generating"},
+        409: {
+            "description": (
+                "model_unavailable / not_enough_words / story_generating / collection_too_small"
+            )
+        },
         502: {"description": "story_failed: the model's texts did not pass validation"},
     },
 )
 async def generate(body: GenerateIn, auth: Auth, db: DB, llm: LlmDep, now: Now) -> StoryOut:
     try:
-        story = await svc.generate(db, auth.acting, llm, body.language, body.kind, now)
+        story = await svc.generate(
+            db,
+            auth.acting,
+            llm,
+            body.language,
+            body.kind,
+            now,
+            collection_id=body.collection_id,
+        )
     except LearningError as exc:
         if exc.code == "story_failed":
             await db.commit()  # keep the failure record (not shown to the learner)

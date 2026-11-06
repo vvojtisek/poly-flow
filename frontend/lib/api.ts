@@ -574,6 +574,7 @@ export interface Story {
   targets: string[];
   questions: { question: string; options: string[]; answered: boolean | null }[];
   model: string | null;
+  source_collection: string | null;
   review_status: "unreviewed";
 }
 
@@ -581,8 +582,10 @@ export const getStoryToday = (language: Language) =>
   api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
     cache: "no-store",
   });
-export const generateStory = (language: Language, kind: Story["kind"]) =>
-  api<Story>("/api/v1/stories/generate", { json: { language, kind } });
+export const generateStory = (language: Language, kind: Story["kind"], collectionId?: string) =>
+  api<Story>("/api/v1/stories/generate", {
+    json: { language, kind, ...(collectionId ? { collection_id: collectionId } : {}) },
+  });
 export const answerStoryQuestion = (storyId: string, index: number, choice: number) =>
   api<{ correct: boolean; answer_index: number }>(`/api/v1/stories/${storyId}/questions/${index}/answer`, {
     json: { choice },
