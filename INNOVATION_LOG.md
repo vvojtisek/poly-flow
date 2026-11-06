@@ -963,3 +963,17 @@ current search and filters, so it describes the topics currently on screen.
 - Progress is based on the existing grammar states; it does not award a level or alter review
   scheduling.
 - Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 23/30: turn weekly difficult words into a study set
+
+**Before:** the weekly recap identified words that had caused repeated mistakes, but learners had
+to find those words again and add them to a collection one at a time.
+
+**Built:** the recap now offers a short naming form that creates a personal word collection and
+adds its listed difficult words in one bulk request. Success and partial-failure states link back
+to the collection area.
+
+- The bulk endpoint rechecks word ownership, language and child visibility. The collection can
+  support future practice without turning recap errors into a new mastery result.
+- Verification: collection API safety/idempotency tests were already green in Cycle 15; frontend
+  typecheck and production build passed for this integration; `git diff --check` passed.
