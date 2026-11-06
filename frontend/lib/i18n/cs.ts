@@ -497,6 +497,9 @@ export const cs = {
     filter: "Co chceš procvičit?",
     recent: "Naposledy",
     count: (n: number) => `${n} ${n === 1 ? "způsob" : n < 5 ? "způsoby" : "způsobů"} procvičování`,
+    recommendTitle: "Zaměř se na to, co teď dělá potíže",
+    recommendHelp: "Podle posledních chyb v ověřeních můžeš pokračovat jedním z těchto cvičení. Procvičování mimo lekce se nikam nehodnotí.",
+    recommendCount: (n: number) => `${n}× v poslední době`,
   },
   tabs: {
     home: "Domů",

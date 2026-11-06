@@ -712,3 +712,20 @@ German noun articles, memory hooks, review state and lexicon provenance.
 - Verification: collection API tests passed (5 tests), covering CSV and Anki contents, selected
   words, file naming, and profile isolation. Ruff check/format, frontend typecheck, production
   build, and `git diff --check` passed.
+
+## Cycle 6/30: practice recommendations from recent errors
+
+**Before:** the practice hub helped learners browse by skill and reopen recent modes, but it did
+not connect those choices to the kinds of mistakes they had recently made in graded checks.
+
+**Built:** a compact recommendation panel that reads the profile's recent error aggregates and
+links the most frequent supported error types to a relevant exercise. Article/ending/gender
+recommendations respect the active language; spelling and orthography point to dictation, and
+word-order errors point to the word-order trainer.
+
+- Recommendations name the error type and observed count so the learner can judge why a mode was
+  suggested. The panel is omitted when there are no supported signals; practice remains ungraded.
+- This is a navigation aid only: it does not change error history, lesson planning, evidence or
+  review timing. A failed recommendation request is shown as an error instead of guessing.
+- Verification: mistake API tests passed (4 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.

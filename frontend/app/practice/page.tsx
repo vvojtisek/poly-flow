@@ -1,15 +1,28 @@
 "use client";
 
-import { Dumbbell, History } from "lucide-react";
+import { AlertTriangle, Dumbbell, History, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { Notice } from "@/components/ui";
+import { getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { modesFor, readRecent, SKILLS, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
+const ERROR_ROUTE: Record<string, (language: Language) => string> = {
+  article: (language) => language === "de" ? "/grammar/cases" : "/grammar",
+  ending: (language) => ["de", "fr", "it"].includes(language) ? "/grammar/verbs" : "/grammar",
+  word_order: () => "/word-order",
+  gender: (language) => ["de", "fr", "it"].includes(language) ? "/genders" : "/grammar",
+  capitalisation: () => "/dictation",
+  diacritics: () => "/dictation",
+  spelling: () => "/dictation",
+  meaning: () => "/lesson",
+  word_choice: () => "/lesson",
+};
 const TINT = [
   "from-sky-500/15 to-sky-500/0",
   "from-violet-500/15 to-violet-500/0",
@@ -55,7 +68,19 @@ export default function PracticePage() {
   const { state } = useAuth();
   const [skill, setSkill] = useState<Skill | null>(null);
   const [recent, setRecent] = useState<PracticeMode["id"][]>([]);
+  const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
+  const [weakFailed, setWeakFailed] = useState(false);
   useEffect(() => setRecent(readRecent()), []);
+  useEffect(() => {
+    if (!me?.acting.active_language) return;
+    let cancelled = false;
+    setWeakSpots(null);
+    setWeakFailed(false);
+    getWeakSpots(me.acting.active_language)
+      .then((data) => !cancelled && setWeakSpots(data))
+      .catch(() => !cancelled && setWeakFailed(true));
+    return () => { cancelled = true; };
+  }, [me?.acting.active_language, me?.acting.id]);
 
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
@@ -63,6 +88,10 @@ export default function PracticePage() {
   const shown = skill ? modes.filter((m) => m.skills.includes(skill)) : modes;
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
+  const recommendations = (weakSpots?.tags ?? [])
+    .filter(([tag]) => !!ERROR_ROUTE[tag])
+    .slice(0, 3)
+    .map(([tag, count]) => ({ tag, count, href: ERROR_ROUTE[tag]!(me.acting.active_language) }));
 
   return (
     <AppShell me={me}>
@@ -73,6 +102,35 @@ export default function PracticePage() {
         </h1>
         <p className="max-w-2xl text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
+
+        {(weakFailed || recommendations.length > 0) && (
+          <section className="flex flex-col gap-3 rounded-3xl border border-amber-300/70 bg-amber-50/70 p-4 dark:border-amber-900 dark:bg-amber-950/25">
+            <div className="flex items-center gap-2">
+              <Sparkles className="size-5 text-amber-600 dark:text-amber-300" aria-hidden />
+              <h2 className="font-bold">{t.recommendTitle}</h2>
+            </div>
+            {weakFailed ? (
+              <Notice tone="error">{cs.common.error}</Notice>
+            ) : (
+              <>
+                <p className="text-sm text-slate-600 dark:text-slate-300">{t.recommendHelp}</p>
+                <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {recommendations.map(({ tag, count, href }) => (
+                    <li key={tag}>
+                      <Link href={href} className="flex h-full items-center justify-between gap-3 rounded-2xl border border-amber-300/60 bg-white p-3 hover:border-amber-500 dark:border-amber-900 dark:bg-slate-900">
+                        <span className="flex items-start gap-2">
+                          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600" aria-hidden />
+                          <span className="font-semibold">{cs.feedback.errors[tag] ?? tag}</span>
+                        </span>
+                        <span className="shrink-0 text-xs text-slate-500">{t.recommendCount(count)}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+        )}
 
         {last.length > 0 && (
           <div className="flex flex-wrap items-center gap-2">
