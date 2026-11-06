@@ -994,3 +994,9 @@ export const clockAudioUrl = (t: { hour: number; minute: number }, language: Lan
 export type SoundExample = { id: string; lemma: string; translation: string; start: number; end: number; met: boolean };
 export type SoundRule = { id: string; spelling: string; czech: string; note: string; examples: SoundExample[] };
 export const getSounds = (language: Language) => api<SoundRule[]>(`/api/v1/sounds?language=${language}`);
+
+export type PairWord = { text: string; cs: string };
+export type PairSet = { id: string; title: string; hint: string; pairs: [PairWord, PairWord][] };
+export const getPairSets = (language: Language) => api<PairSet[]>(`/api/v1/pairs?language=${language}`);
+export const pairAudioUrl = (language: Language, set: string, pair: number, side: number) =>
+  `/api/v1/pairs/audio?language=${language}&set=${set}&pair=${pair}&side=${side}`;

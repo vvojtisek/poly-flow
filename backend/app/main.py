@@ -19,6 +19,7 @@ from app.api import (
     lexicon,
     lookup,
     numbers,
+    pairs,
     profiles,
     progression,
     ranks,
@@ -78,6 +79,7 @@ def create_app() -> FastAPI:
     app.include_router(word_order.router)
     app.include_router(clock.router)
     app.include_router(sounds.router)
+    app.include_router(pairs.router)
     app.include_router(dictation.router)
     app.include_router(grammar.router)
     app.include_router(tutor.router)

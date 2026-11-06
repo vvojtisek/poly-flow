@@ -36,6 +36,7 @@ unreviewed.
 | 23 | Accent colours (Barva) | five accent hues per profile; same contrast, never green or red, gender colours unchanged |
 | 24 | Focus mode (Soustředění) | lessons and checks without header, tabs or links; key F, remembered per device |
 | 25 | How letters sound (Jak se to čte) | spelling-to-sound rules for Czech readers in four languages, examples from the learner's own words |
+| 26 | Minimal pairs (Slyšíš rozdíl?) | hear one word of a pair (ship/sheep, Tür/Tier, pala/palla, rue/roue) and pick it |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -514,3 +515,20 @@ at a time, by ear.
   book is a short u, tomorrow keeps its r).
 - Marked on the page as simplified and not yet reviewed by a native speaker; "obvykle" marks
   rules with frequent exceptions. Reference only; nothing is recorded.
+
+## Cycle 26/30: minimal pairs (Slyšíš rozdíl?)
+
+**Before:** listening practice used whole sentences. Nothing trained the single contrasts a
+Czech ear merges: German ü/i and long/short vowels, French u/ou and the nasals, Italian single
+and double consonants, English ship/sheep, th, w/v and voiced final consonants (Czech devoices
+them, so "bag" and "back" sound the same to a Czech speaker).
+
+**Built:** `app/domain/minimal_pairs.py` (18 sets, 63 pairs), `/api/v1/pairs` and `/pairs`.
+
+- Each set names the contrast and how to hear or make it; each pair has short Czech meanings so
+  both words are real words to the learner (Tür dveře / Tier zvíře, pala lopata / palla míč).
+- One word of a random pair is spoken (local TTS, slow toggle available); the learner picks it
+  with a click or 1/2, then can play both to compare. A visit score is shown; nothing is stored.
+- The audio endpoint speaks only words from the fixed sets (no free text). Without the speech
+  server the page says so and the pairs stay readable.
+- Marked as a drafted, unreviewed set. Tests check the data shape, lookups and the API bounds.
