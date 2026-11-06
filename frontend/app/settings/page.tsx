@@ -191,10 +191,12 @@ function SpeedPicker({ value, onChange }: { value: number; onChange: (v: number)
 function VoicePicker({
   voices,
   chosen,
+  englishVariant,
   onChange,
 }: {
   voices: Voice[];
   chosen: ProfileSettings["voices"];
+  englishVariant: "uk" | "us";
   onChange: (v: ProfileSettings["voices"]) => void;
 }) {
   // Piper not running: every voice reads as not installed, which says nothing about the voices.
@@ -203,8 +205,12 @@ function VoicePicker({
     <div className="flex flex-col gap-4">
       {serviceDown && <Notice>{cs.settings.speechDown}</Notice>}
       {LANGUAGES.map((lang) => {
-        const options = voices.filter((v) => v.language === lang);
-        if (!options.length) return null;
+        const allOptions = voices.filter((v) => v.language === lang);
+        const options = lang === "en" && englishVariant === "us" ? [] : allOptions;
+        if (!options.length) {
+          if (lang !== "en" || englishVariant !== "us") return null;
+          return <div key={lang} className="rounded-xl bg-slate-50 p-3 text-sm text-slate-600 dark:bg-slate-800 dark:text-slate-300"><h3 className="font-semibold">{cs.settings.voiceFor(cs.languages.en ?? "Angličtina")}</h3><p className="mt-1">{cs.settings.usVoiceUnavailable}</p></div>;
+        }
         const current = chosen[lang] ?? options.find((v) => v.default)?.id;
         const installed = options.filter((v) => v.installed).length;
         const title = cs.settings.voiceFor(cs.languages[lang] ?? lang);
@@ -286,6 +292,20 @@ function SettingsView({ me }: { me: Me }) {
         </span>
       </div>
       {save === "error" && <Notice tone="error">{cs.settings.failed}</Notice>}
+      <Panel title={cs.settings.englishVariant} icon={Mic}>
+        <div className="flex flex-col gap-3">
+          <div role="radiogroup" aria-label={cs.settings.englishVariant} className="grid gap-2 sm:grid-cols-2">
+            {(["uk", "us"] as const).map((variant) => (
+              <button key={variant} type="button" role="radio" aria-checked={settings.english_variant === variant}
+                onClick={() => void change({ english_variant: variant })}
+                className={`rounded-xl px-3 py-3 text-sm font-semibold ${settings.english_variant === variant ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"}`}>
+                {cs.settings.englishVariants[variant]}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-slate-500">{cs.settings.englishVariantHelp}</p>
+        </div>
+      </Panel>
       <Panel title={cs.settings.theme} icon={Palette}>
         <div className="flex flex-col gap-4">
           <ThemePicker value={settings.theme} onChange={(theme) => void change({ theme })} />
@@ -370,6 +390,11 @@ function SettingsView({ me }: { me: Me }) {
       </Panel>
       <Panel title={cs.settings.voice} icon={Mic}>
         <div className="flex flex-col gap-4">
+          <label className="flex items-start gap-3 text-sm font-medium">
+            <input type="checkbox" className="mt-0.5 size-5 accent-brand-500" checked={settings.autoplay_audio}
+              onChange={(event) => void change({ autoplay_audio: event.target.checked })} />
+            <span className="flex flex-col">{cs.settings.autoplayAudio}<span className="text-xs font-normal text-slate-500">{cs.settings.autoplayAudioHelp}</span></span>
+          </label>
           <div className="flex flex-col gap-2">
             <h3 className="flex items-center gap-1 text-sm font-semibold">
               <Gauge className="size-4" aria-hidden /> {cs.settings.speed}
@@ -381,7 +406,7 @@ function SettingsView({ me }: { me: Me }) {
           ) : voices === null ? (
             <p className="text-sm text-slate-500">{cs.common.loading}</p>
           ) : (
-            <VoicePicker voices={voices} chosen={settings.voices} onChange={(v) => void change({ voices: v })} />
+            <VoicePicker voices={voices} chosen={settings.voices} englishVariant={settings.english_variant} onChange={(v) => void change({ voices: v })} />
           )}
         </div>
       </Panel>

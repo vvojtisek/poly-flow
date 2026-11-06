@@ -1,10 +1,10 @@
 """Generated reading texts: today's story or dialogue, comprehension questions, audio."""
 
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -42,6 +42,7 @@ class QuestionOut(BaseModel):
 class StoryOut(BaseModel):
     id: uuid.UUID
     language: Language
+    story_date: date
     kind: Literal["story", "dialogue"]
     title: str
     lines: list[LineOut]
@@ -49,7 +50,17 @@ class StoryOut(BaseModel):
     targets: list[str]
     questions: list[QuestionOut]
     model: str | None
+    source_collection: str | None
     review_status: Literal["unreviewed"]
+
+
+class StoryArchiveOut(BaseModel):
+    id: uuid.UUID
+    story_date: date
+    title: str
+    kind: Literal["story", "dialogue"]
+    source_collection: str | None
+    targets: list[str]
 
 
 class TodayOut(BaseModel):
@@ -61,6 +72,7 @@ class GenerateIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     language: Language
     kind: Literal["story", "dialogue"] = "story"
+    collection_id: uuid.UUID | None = None
 
 
 class AnswerIn(BaseModel):
@@ -79,6 +91,7 @@ def _out(s: DailyStory) -> StoryOut:
     return StoryOut(
         id=s.id,
         language=s.language,
+        story_date=s.story_date,
         kind=meta.get("kind", "story"),
         title=s.title or "",
         lines=[LineOut(**ln) for ln in meta.get("lines", [])],
@@ -89,7 +102,20 @@ def _out(s: DailyStory) -> StoryOut:
             for i, q in enumerate(s.comprehension_questions)
         ],
         model=s.llm_model,
+        source_collection=meta.get("source_collection"),
         review_status="unreviewed",
+    )
+
+
+def _archive_out(s: DailyStory) -> StoryArchiveOut:
+    meta = s.generation_meta or {}
+    return StoryArchiveOut(
+        id=s.id,
+        story_date=s.story_date,
+        title=s.title or "",
+        kind=meta.get("kind", "story"),
+        source_collection=meta.get("source_collection"),
+        targets=meta.get("targets", []),
     )
 
 
@@ -102,17 +128,40 @@ async def today(language: Language, auth: Auth, db: DB, llm: LlmDep, now: Now) -
     )
 
 
+@router.get("/archive", response_model=list[StoryArchiveOut])
+async def story_archive(
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+    limit: Annotated[int, Query(ge=1, le=60)] = 30,
+) -> list[StoryArchiveOut]:
+    rows = await svc.archive(db, auth.acting, language or auth.acting.active_language, limit=limit)
+    return [_archive_out(story) for story in rows]
+
+
 @router.post(
     "/generate",
     response_model=StoryOut,
     responses={
-        409: {"description": "model_unavailable / not_enough_words / story_generating"},
+        409: {
+            "description": (
+                "model_unavailable / not_enough_words / story_generating / collection_too_small"
+            )
+        },
         502: {"description": "story_failed: the model's texts did not pass validation"},
     },
 )
 async def generate(body: GenerateIn, auth: Auth, db: DB, llm: LlmDep, now: Now) -> StoryOut:
     try:
-        story = await svc.generate(db, auth.acting, llm, body.language, body.kind, now)
+        story = await svc.generate(
+            db,
+            auth.acting,
+            llm,
+            body.language,
+            body.kind,
+            now,
+            collection_id=body.collection_id,
+        )
     except LearningError as exc:
         if exc.code == "story_failed":
             await db.commit()  # keep the failure record (not shown to the learner)
@@ -129,6 +178,17 @@ async def get_story(story_id: uuid.UUID, auth: Auth, db: DB) -> StoryOut:
         return _out(await svc.get_story(db, auth.acting, story_id))
     except LearningError as exc:
         raise HTTPException(exc.status, exc.code) from exc
+
+
+@router.delete("/{story_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_story(story_id: uuid.UUID, auth: Auth, db: DB) -> Response:
+    try:
+        await svc.delete_archived_story(db, auth.acting, story_id)
+    except LearningError as exc:
+        await db.rollback()
+        raise HTTPException(exc.status, exc.code) from exc
+    await db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @router.post("/{story_id}/questions/{index}/answer", response_model=AnswerOut)

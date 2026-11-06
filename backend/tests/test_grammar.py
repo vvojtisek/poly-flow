@@ -215,6 +215,7 @@ async def test_tree_lists_units_in_order_with_a_recommendation(db, client):
     assert t["review_status"] == "unreviewed"
     assert [u["id"] for u in t["levels"][0]["units"]] == ["t-a", "t-b"]
     assert {u["status"] for u in t["levels"][0]["units"]} == {"new"}
+    assert all(u["objective"] == u["summary"] for u in t["levels"][0]["units"])
     assert me
 
 

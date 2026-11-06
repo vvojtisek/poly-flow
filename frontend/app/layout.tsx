@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { AuthProvider } from "@/lib/auth";
+import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { cs } from "@/lib/i18n/cs";
 import { THEME_SCRIPT } from "@/lib/theme";
 
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ServiceWorkerRegistration />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

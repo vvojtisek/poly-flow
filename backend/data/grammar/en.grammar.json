@@ -1,0 +1,513 @@
+{
+  "language": "en",
+  "source": "polyflow-curated",
+  "license": "CC0-1.0",
+  "revision": "english-grammar-v1",
+  "review_status": "unreviewed",
+  "note": "Six introductory English grammar units, one per CEFR band. Draft content; examples distinguish UK and US usage where it differs. Not a complete CEFR grammar syllabus.",
+  "units": [
+    {
+      "id": "en-a1-basic-word-order",
+      "level": "A1",
+      "title": "Základní pořádek slov a otázky s be",
+      "summary": "Sestavíš jednoduchou oznamovací větu a otázku se slovesem be.",
+      "notes": [
+        {
+          "heading": "Oznamovací věta",
+          "text": "V běžné anglické větě stojí nejprve podmět a potom sloveso: **podmět + sloveso + zbytek věty**. Podmět se obvykle nevynechává."
+        },
+        {
+          "heading": "Otázka se slovesem be",
+          "text": "U slovesa **be** přesuneme tvar slovesa před podmět: You are ready. → **Are you ready?** U jiných sloves se otázky tvoří pomocí do/does."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I am ready.",
+          "cs": "Jsem připravený/připravená."
+        },
+        {
+          "text": "Are they at home?",
+          "cs": "Jsou doma?"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a1-order-01",
+          "kind": "choice",
+          "prompt": "She ___ my friend.",
+          "prompt_cs": "Ona je moje kamarádka.",
+          "options": [
+            "is",
+            "are",
+            "am",
+            "be"
+          ],
+          "answers": [
+            "is"
+          ],
+          "explain": "Se zájmenem she používáme is."
+        },
+        {
+          "id": "en-a1-order-02",
+          "kind": "gap",
+          "prompt": "___ you tired?",
+          "prompt_cs": "Jsi unavený/unavená?",
+          "answers": [
+            "Are"
+          ],
+          "explain": "Otázku tvoříme přesunutím are před you."
+        },
+        {
+          "id": "en-a1-order-03",
+          "kind": "order",
+          "prompt": "Jsme ve škole.",
+          "tokens": [
+            "school",
+            "We",
+            "at",
+            "are"
+          ],
+          "answers": [
+            "We are at school"
+          ],
+          "explain": "Oznamovací věta má pořadí podmět + sloveso + místo."
+        },
+        {
+          "id": "en-a1-order-04",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Is he here?",
+          "answers": [
+            "Je tady",
+            "Je on tady"
+          ],
+          "explain": "Is stojí před podmětem he, proto jde o otázku."
+        }
+      ],
+      "objective": "Vytvoříš oznamovací větu a otázku se slovesem be podle správného slovosledu."
+    },
+    {
+      "id": "en-a2-present-perfect",
+      "level": "A2",
+      "title": "Předpřítomný čas a minulost",
+      "summary": "Mluvíš o zkušenosti nebo nedávné události a všimneš si rozdílů mezi UK a US.",
+      "notes": [
+        {
+          "heading": "Tvar a použití",
+          "text": "Předpřítomný čas tvoří **have/has + příčestí**: I have finished. Často spojuje minulou událost s přítomností nebo popisuje zkušenost bez určení přesného času."
+        },
+        {
+          "heading": "UK a US užití",
+          "text": "V britské angličtině se předpřítomný čas běžněji používá pro čerstvé události a zkušenosti (I’ve just eaten; Have you ever been?). V americké angličtině je v některých těchto větách běžný i prostý minulý čas (I just ate; Did you ever go?). Obě varianty jsou gramatické; úloha musí výslovně určit variantu, pokud vyžaduje jednu."
+        }
+      ],
+      "examples": [
+        {
+          "text": "I have just eaten.",
+          "cs": "Právě jsem se najedl/a.",
+          "variant": "uk"
+        },
+        {
+          "text": "I just ate.",
+          "cs": "Právě jsem se najedl/a.",
+          "variant": "us"
+        },
+        {
+          "text": "Have you ever visited London?",
+          "cs": "Navštívil/a jsi někdy Londýn?",
+          "variant": "uk"
+        },
+        {
+          "text": "Did you ever visit Boston?",
+          "cs": "Navštívil/a jsi někdy Boston?",
+          "variant": "us"
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-a2-perfect-01",
+          "kind": "gap",
+          "prompt": "She has ___ the message. (send)",
+          "prompt_cs": "Poslala tu zprávu.",
+          "answers": [
+            "sent"
+          ],
+          "explain": "Po has použijeme příčestí sent."
+        },
+        {
+          "id": "en-a2-perfect-02",
+          "kind": "choice",
+          "prompt": "___ you ever seen snow?",
+          "prompt_cs": "Viděl/a jsi někdy sníh?",
+          "options": [
+            "Have",
+            "Did",
+            "Do",
+            "Are"
+          ],
+          "answers": [
+            "Have"
+          ],
+          "explain": "V této běžné britské formulaci se zkušenost ptá pomocí have + příčestí. Americké Did you ever see snow? je také běžné."
+        },
+        {
+          "id": "en-a2-perfect-03",
+          "kind": "gap",
+          "prompt": "I ___ just finished. (have)",
+          "prompt_cs": "Právě jsem skončil/a.",
+          "answers": [
+            "have"
+          ],
+          "explain": "S I používáme have; po něm následuje příčestí finished."
+        },
+        {
+          "id": "en-a2-perfect-04",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "Už jsme ten film viděli.",
+          "answers": [
+            "We have already seen that film",
+            "We've already seen that film",
+            "We already saw that movie"
+          ],
+          "explain": "Britská varianta často volí předpřítomný čas. Americké We already saw that movie je v tomto kontextu také přirozené."
+        }
+      ],
+      "objective": "Zvolíš předpřítomný nebo prostý minulý čas podle významu a uvedeného časového určení."
+    },
+    {
+      "id": "en-b1-conditionals",
+      "level": "B1",
+      "title": "Podmínkové věty: skutečné a představované situace",
+      "summary": "Rozlišíš pravděpodobnou podmínku od hypotetické představy.",
+      "notes": [
+        {
+          "heading": "První kondicionál",
+          "text": "Pro reálnou možnost použijeme **if + přítomný čas**, v hlavní větě obvykle will: If it rains, we’ll stay inside. Po if běžně nedáváme will."
+        },
+        {
+          "heading": "Druhý kondicionál",
+          "text": "Pro hypotetickou nebo málo pravděpodobnou situaci použijeme **if + minulý čas**, potom would + infinitiv: If I had more time, I would travel. Minulý tvar zde vyjadřuje odstup, ne minulost."
+        }
+      ],
+      "examples": [
+        {
+          "text": "If the bus is late, I’ll call you.",
+          "cs": "Jestli bude autobus mít zpoždění, zavolám ti."
+        },
+        {
+          "text": "If I lived by the sea, I would swim every day.",
+          "cs": "Kdybych bydlel/a u moře, plaval/a bych každý den."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-b1-cond-01",
+          "kind": "gap",
+          "prompt": "If she ___ early, we’ll have time for coffee. (arrive)",
+          "prompt_cs": "Když přijede brzy, budeme mít čas na kávu.",
+          "answers": [
+            "arrives"
+          ],
+          "explain": "V části s if použijeme přítomný čas; u she přidáme -s."
+        },
+        {
+          "id": "en-b1-cond-02",
+          "kind": "choice",
+          "prompt": "If I ___ the answer, I would tell you.",
+          "prompt_cs": "Kdybych znal/a odpověď, řekl/a bych ti ji.",
+          "options": [
+            "knew",
+            "know",
+            "will know",
+            "have known"
+          ],
+          "answers": [
+            "knew"
+          ],
+          "explain": "Druhý kondicionál používá po if minulý tvar jako značku hypotézy."
+        },
+        {
+          "id": "en-b1-cond-03",
+          "kind": "order",
+          "prompt": "Kdybych měl/a auto, jel/a bych tam.",
+          "tokens": [
+            "would",
+            "If",
+            "a car,",
+            "I",
+            "I",
+            "had",
+            "drive there."
+          ],
+          "answers": [
+            "If I had a car I would drive there"
+          ],
+          "explain": "Po if je minulý tvar had; hlavní věta má would + infinitiv."
+        },
+        {
+          "id": "en-b1-cond-04",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "If you need help, send me a message.",
+          "answers": [
+            "Jestli potřebuješ pomoc pošli mi zprávu",
+            "Pokud potřebuješ pomoc pošli mi zprávu",
+            "Když budeš potřebovat pomoc pošli mi zprávu"
+          ],
+          "explain": "Jde o otevřenou, reálnou podmínku, proto je po if přítomný čas."
+        }
+      ],
+      "objective": "Utvoříš podmínkové věty pro obecné pravdy, reálnou budoucnost i hypotetickou přítomnost."
+    },
+    {
+      "id": "en-b2-passive-reporting",
+      "level": "B2",
+      "title": "Trpný rod a odstup ve zprávách",
+      "summary": "Zaměříš větu na děj nebo výsledek a opatrně připíšeš informaci jejímu zdroji.",
+      "notes": [
+        {
+          "heading": "Trpný rod",
+          "text": "Trpný rod tvoří **be + příčestí**. Předmět činné věty se stane podmětem trpné věty: Someone repaired the bridge. → The bridge was repaired. Původce přidáme pomocí by, jen když je důležitý."
+        },
+        {
+          "heading": "Reporting structures",
+          "text": "O zprávě můžeme mluvit bez tvrzení, že ji sami ověřujeme: **It is said that…** nebo **She is believed to…**. Tvar slovesa se přizpůsobí časovému vztahu."
+        }
+      ],
+      "examples": [
+        {
+          "text": "The results will be published tomorrow.",
+          "cs": "Výsledky budou zveřejněny zítra."
+        },
+        {
+          "text": "The minister is believed to be abroad.",
+          "cs": "Předpokládá se, že ministr je v zahraničí."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-b2-pass-01",
+          "kind": "choice",
+          "prompt": "The new library ___ next year.",
+          "prompt_cs": "Nová knihovna bude otevřena příští rok.",
+          "options": [
+            "will be opened",
+            "will open by",
+            "is opening by",
+            "will have open"
+          ],
+          "answers": [
+            "will be opened"
+          ],
+          "explain": "Budoucí trpný rod je will be + příčestí."
+        },
+        {
+          "id": "en-b2-pass-02",
+          "kind": "gap",
+          "prompt": "The painting was ___ by a local artist. (create)",
+          "prompt_cs": "Obraz vytvořil místní umělec.",
+          "answers": [
+            "created"
+          ],
+          "explain": "Po was v trpném rodě následuje příčestí created."
+        },
+        {
+          "id": "en-b2-pass-03",
+          "kind": "order",
+          "prompt": "Říká se, že se jednání odložilo.",
+          "tokens": [
+            "postponed.",
+            "the meeting",
+            "It",
+            "that",
+            "was",
+            "said",
+            "is"
+          ],
+          "answers": [
+            "It is said that the meeting was postponed"
+          ],
+          "explain": "Neosobní vazba It is said (that) uvádí zprávu s odstupem."
+        },
+        {
+          "id": "en-b2-pass-04",
+          "kind": "translate",
+          "direction": "cs-target",
+          "prompt": "The road has been closed.",
+          "answers": [
+            "Silnice byla uzavřena",
+            "Silnice je uzavřená"
+          ],
+          "explain": "Has been closed je trpný rod v předpřítomném čase; důležitý je současný výsledek."
+        }
+      ],
+      "objective": "Převedeš sdělení do trpného rodu a připíšeš tvrzení jeho zdroji."
+    },
+    {
+      "id": "en-c1-inversion",
+      "level": "C1",
+      "title": "Inverze po záporných a omezujících výrazech",
+      "summary": "Použiješ formální inverzi pro důraz a poznáš, kdy zní nepřirozeně.",
+      "notes": [
+        {
+          "heading": "Důrazná inverze",
+          "text": "Po výrazech jako **Never**, **Rarely** nebo **Not until** na začátku věty se v pečlivém stylu mění pořadí pomocného slovesa a podmětu: Never have I seen… Podobá se otázce, ale není to otázka."
+        },
+        {
+          "heading": "Pomocné sloveso",
+          "text": "Pokud ve větě není pomocné sloveso, přidáme do/does/did. Inverze je formální prostředek; neutrální pořadí zůstává správné v běžné řeči."
+        }
+      ],
+      "examples": [
+        {
+          "text": "Rarely do we see such careful work.",
+          "cs": "Jen zřídka vídáme tak pečlivou práci."
+        },
+        {
+          "text": "Not until the end did I understand the point.",
+          "cs": "Teprve na konci jsem pochopil/a smysl."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-c1-inv-01",
+          "kind": "choice",
+          "prompt": "Never ___ such a quiet room.",
+          "prompt_cs": "Tak tichý pokoj jsem nikdy neviděl/a.",
+          "options": [
+            "have I seen",
+            "I have seen",
+            "did I saw",
+            "I saw"
+          ],
+          "answers": [
+            "have I seen"
+          ],
+          "explain": "Po Never na začátku následuje inverze pomocného slovesa a podmětu."
+        },
+        {
+          "id": "en-c1-inv-02",
+          "kind": "gap",
+          "prompt": "Rarely ___ the team make this mistake. (do)",
+          "prompt_cs": "Tým tuto chybu dělá jen zřídka.",
+          "answers": [
+            "does"
+          ],
+          "explain": "Ve formální inverzi použijeme does před podmětem the team."
+        },
+        {
+          "id": "en-c1-inv-03",
+          "kind": "order",
+          "prompt": "Teprve potom pochopila důvod.",
+          "tokens": [
+            "did",
+            "Only then",
+            "she",
+            "understand",
+            "the reason."
+          ],
+          "answers": [
+            "Only then did she understand the reason"
+          ],
+          "explain": "Only then na začátku vyvolá inverzi did + podmět + infinitiv."
+        },
+        {
+          "id": "en-c1-inv-04",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "Not only did he apologise, but he also offered to help.",
+          "answers": [
+            "Nejenže se omluvil ale také nabídl pomoc",
+            "Nejen že se omluvil ale také nabídl pomoc"
+          ],
+          "explain": "Po Not only je inverze did he; druhá část věty pokračuje běžným pořádkem."
+        }
+      ],
+      "objective": "Použiješ inverzi po záporném či omezujícím výrazu a zachováš pomocné sloveso."
+    },
+    {
+      "id": "en-c2-modality",
+      "level": "C2",
+      "title": "Modální slovesa a jemné odstíny minulosti",
+      "summary": "Rozlišíš silný závěr, možnost a neuskutečněnou povinnost v minulosti.",
+      "notes": [
+        {
+          "heading": "Závěry o minulosti",
+          "text": "**Must have + příčestí** vyjadřuje silný závěr (She must have missed the train). **Might/may have + příčestí** vyjadřuje možnost. **Can’t have + příčestí** odmítá minulou možnost jako velmi nepravděpodobnou."
+        },
+        {
+          "heading": "Povinnost a možnost",
+          "text": "**Needn’t have done** znamená, že někdo něco udělal, ale nebylo to potřeba. **Didn’t need to do** říká, že povinnost nebyla nutná; samo o sobě neříká, zda člověk úkon provedl."
+        }
+      ],
+      "examples": [
+        {
+          "text": "They must have taken the earlier train.",
+          "cs": "Určitě jeli dřívějším vlakem."
+        },
+        {
+          "text": "You needn’t have brought any food.",
+          "cs": "Nemusel/a jsi nosit jídlo (a přinesl/a jsi ho)."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "en-c2-modal-01",
+          "kind": "choice",
+          "prompt": "The lights are on; they ___ forgotten to switch them off.",
+          "prompt_cs": "Světla svítí; nejspíš je zapomněli vypnout.",
+          "options": [
+            "must have",
+            "should",
+            "can have",
+            "would"
+          ],
+          "answers": [
+            "must have"
+          ],
+          "explain": "Must have + příčestí vyjadřuje silný závěr o minulosti."
+        },
+        {
+          "id": "en-c2-modal-02",
+          "kind": "gap",
+          "prompt": "You needn’t ___ the tickets; I had already bought them. (buy)",
+          "prompt_cs": "Nemusel/a jsi kupovat lístky; už jsem je koupil/a.",
+          "answers": [
+            "have bought"
+          ],
+          "explain": "Needn’t have + příčestí říká, že akce proběhla, ale nebyla nutná."
+        },
+        {
+          "id": "en-c2-modal-03",
+          "kind": "choice",
+          "prompt": "He ___ seen us; he was in another city.",
+          "prompt_cs": "Nemohl nás vidět; byl v jiném městě.",
+          "options": [
+            "can’t have",
+            "must have",
+            "needn’t have",
+            "would have"
+          ],
+          "answers": [
+            "can’t have"
+          ],
+          "explain": "Can’t have + příčestí vyjadřuje přesvědčení, že minulá událost nenastala."
+        },
+        {
+          "id": "en-c2-modal-04",
+          "kind": "translate",
+          "direction": "target-cs",
+          "prompt": "She may have misunderstood the instructions.",
+          "answers": [
+            "Možná špatně pochopila pokyny",
+            "Mohla špatně pochopit pokyny"
+          ],
+          "explain": "May have + příčestí vyjadřuje možnost, ne jistotu."
+        }
+      ],
+      "objective": "Vyjádříš jistotu, možnost nebo nesplněnou povinnost pomocí minulých modálních konstrukcí."
+    }
+  ]
+}

@@ -1,12 +1,13 @@
 "use client";
 
 import { ArrowRight, BookOpen, BookOpenText, ClipboardCheck, GraduationCap, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { KeyHint } from "@/components/Kbd";
 import { Button } from "@/components/ui";
-import { getToday, type Language, type TodayPlan as Plan } from "@/lib/api";
+import { getToday, listStoryArchive, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
 
@@ -50,6 +51,7 @@ function GoalRing({ minutes, goal }: { minutes: number; goal: number }) {
 export function TodayPlan({ language, profileId }: { language: Language; profileId: string }) {
   const router = useRouter();
   const [plan, setPlan] = useState<Plan | null>(null);
+  const [recentStories, setRecentStories] = useState<StoryArchiveItem[]>([]);
   useHotkeys(); // Enter on the dashboard continues with the first step
   useEffect(() => {
     let cancelled = false;
@@ -59,6 +61,13 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
     return () => {
       cancelled = true;
     };
+  }, [language, profileId]);
+  useEffect(() => {
+    let cancelled = false;
+    listStoryArchive(language)
+      .then((items) => !cancelled && setRecentStories(items.slice(0, 3)))
+      .catch(() => undefined);
+    return () => { cancelled = true; };
   }, [language, profileId]);
   if (!plan) return null;
   const first = plan.steps[0];
@@ -99,6 +108,16 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
           );
         })}
       </ol>
+      {recentStories.length > 0 && (
+        <section className="flex min-w-0 flex-col gap-1 sm:max-w-56" aria-label={t.recentReadings}>
+          <h3 className="text-xs font-semibold text-slate-500">{t.recentReadings}</h3>
+          {recentStories.map((story) => (
+            <Link key={story.id} href={`/stories?story=${encodeURIComponent(story.id)}`} className="truncate rounded-lg px-2 py-1 text-sm font-medium text-brand-700 hover:bg-brand-500/10 dark:text-brand-100" title={story.title}>
+              {story.title}
+            </Link>
+          ))}
+        </section>
+      )}
       {first && (
         <Button className="shrink-0 !py-4" data-hotkey="enter" onClick={() => router.push(STEP[first.kind].href)}>
           {t.go} <ArrowRight className="size-5" aria-hidden /> <KeyHint k="Enter" />

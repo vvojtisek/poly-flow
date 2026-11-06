@@ -5,6 +5,7 @@ import {
   Award,
   BarChart3,
   BookMarked,
+  FolderOpen,
   BookOpen,
   BookOpenText,
   ClipboardCheck,
@@ -40,7 +41,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Kbd } from "@/components/Kbd";
-import { LANGUAGES, logout, updateOwnProfile, type Me, type RankPath, type Theme } from "@/lib/api";
+import { LANGUAGES, listWords, logout, updateOwnProfile, type Me, type RankPath, type Theme, type WordRow } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { isTypingTarget } from "@/lib/keyboard";
@@ -68,6 +69,9 @@ export function CommandPalette({ me }: { me: Me }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
+  const [wordHits, setWordHits] = useState<WordRow[]>([]);
+  const [wordLoading, setWordLoading] = useState(false);
+  const [wordSearchFailed, setWordSearchFailed] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const input = useRef<HTMLInputElement>(null);
 
@@ -100,6 +104,32 @@ export function CommandPalette({ me }: { me: Me }) {
     } else if (!open && d.open) d.close();
   }, [open]);
 
+  useEffect(() => {
+    const q = query.trim();
+    if (!open || q.length < 2) {
+      setWordHits([]);
+      setWordSearchFailed(false);
+      setWordLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    setWordHits([]);
+    setWordLoading(true);
+    setWordSearchFailed(false);
+    const timer = setTimeout(() => {
+      listWords(me.acting.active_language, { q, limit: 6 }, controller.signal)
+        .then((result) => setWordHits(result.items))
+        .catch((error) => {
+          if (error?.name !== "AbortError") setWordSearchFailed(true);
+        })
+        .finally(() => !controller.signal.aborted && setWordLoading(false));
+    }, 180);
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [open, query, me.acting.active_language, me.acting.id]);
+
   const commands = useMemo<Command[]>(() => {
     const go = (href: string) => () => router.push(href);
     const nav = cs.palette.groups.go;
@@ -125,11 +155,22 @@ export function CommandPalette({ me }: { me: Me }) {
       { id: "roleplay", label: cs.roleplay.title, group: nav, icon: Drama, keywords: ["scenka", "dialog", "role", "konverzace", "rozhovor"], run: go("/roleplay") },
       { id: "dictation", label: cs.dictation.title, group: nav, icon: Headphones, keywords: ["diktat", "poslech", "psat"], run: go("/dictation") },
       { id: "words", label: cs.words.title, group: nav, icon: BookMarked, keywords: ["slovnik", "slova", "hledat"], run: go("/words") },
+      { id: "collections", label: cs.collections.title, group: nav, icon: FolderOpen, keywords: ["sady", "temata", "moje slova"], run: go("/collections") },
       { id: "insights", label: cs.insights.title, group: nav, icon: BarChart3, keywords: ["statistiky", "grafy", "aktivita", "predpoved"], run: go("/insights") },
       { id: "news", label: cs.news.title, group: nav, icon: Megaphone, keywords: ["novinky", "co je noveho", "zmeny", "nove"], run: go("/news") },
       { id: "ranks", label: cs.palette.ranks, group: nav, icon: Trophy, keywords: ["hodnost", "odznaky", "cesta"], run: go("/ranks") },
       { id: "settings", label: cs.settings.title, group: nav, icon: Settings, keywords: ["nastaveni", "hlas", "rychlost"], run: go("/settings") },
     ];
+    for (const word of wordHits) {
+      list.push({
+        id: `word-${word.id}`,
+        label: `${word.lemma} · ${word.translation}`,
+        group: cs.palette.groups.words,
+        icon: BookMarked,
+        keywords: [word.lemma, word.translation],
+        run: go(`/words?word=${encodeURIComponent(word.id)}`),
+      });
+    }
     if (me.can_manage)
       list.push({ id: "profiles", label: cs.profiles.title, group: nav, icon: Users, keywords: ["profily", "deti"], run: go("/profiles") });
     for (const l of LANGUAGES) {
@@ -193,7 +234,7 @@ export function CommandPalette({ me }: { me: Me }) {
         },
       });
     return list;
-  }, [me, router, setMe]);
+  }, [me, router, setMe, wordHits]);
 
   const results = useMemo(() => rank(query, commands, 12), [query, commands]);
   const current = Math.min(active, Math.max(results.length - 1, 0));
@@ -246,7 +287,9 @@ export function CommandPalette({ me }: { me: Me }) {
         <Kbd>Esc</Kbd>
       </div>
       <ul id="palette-results" role="listbox" className="max-h-[50vh] overflow-y-auto p-2">
-        {results.length === 0 && <li className="p-3 text-sm text-slate-500">{cs.palette.empty}</li>}
+        {results.length === 0 && !wordLoading && <li className="p-3 text-sm text-slate-500">{cs.palette.empty}</li>}
+        {wordLoading && <li role="presentation" className="px-3 py-2 text-xs text-slate-500" aria-live="polite">{cs.palette.searchingWords}</li>}
+        {wordSearchFailed && <li role="presentation" className="px-3 py-2 text-xs text-rose-600"><span role="alert">{cs.palette.wordSearchFailed}</span></li>}
         {results.map((c, i) => {
           const Icon = c.icon;
           return (

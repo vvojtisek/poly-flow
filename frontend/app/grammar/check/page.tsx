@@ -20,6 +20,7 @@ export default function GrammarCheckPage() {
       <GrammarRunner
         key={`${me.acting.id}:${language}`}
         language={me.acting.active_language}
+        englishVariant={me.acting.settings.english_variant}
         mode="check"
         start={start}
         onExit={() => router.push("/grammar")}

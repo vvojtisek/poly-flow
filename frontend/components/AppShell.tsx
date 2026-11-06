@@ -1,11 +1,12 @@
 "use client";
 
-import { BarChart3, BookMarked, Dumbbell, GraduationCap, LogOut, Maximize2, Minimize2, Search, Settings, Users } from "lucide-react";
+import { BarChart3, BookMarked, Download, Dumbbell, GraduationCap, LogOut, Maximize2, Minimize2, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 
 import { BottomTabs } from "@/components/BottomTabs";
+import { NetworkBanner } from "@/components/NetworkBanner";
 import { BuildInfo } from "@/components/BuildInfo";
 import { CommandPalette, openPalette } from "@/components/CommandPalette";
 import { Kbd } from "@/components/Kbd";
@@ -127,6 +128,46 @@ function HeaderRank({ me }: { me: Me }) {
   );
 }
 
+type InstallPrompt = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+};
+
+function InstallApp() {
+  const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
+  useEffect(() => {
+    function available(event: Event) {
+      event.preventDefault();
+      setInstallPrompt(event as InstallPrompt);
+    }
+    function installed() {
+      setInstallPrompt(null);
+    }
+    window.addEventListener("beforeinstallprompt", available);
+    window.addEventListener("appinstalled", installed);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", available);
+      window.removeEventListener("appinstalled", installed);
+    };
+  }, []);
+  if (!installPrompt) return null;
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        await installPrompt.prompt();
+        await installPrompt.userChoice;
+        setInstallPrompt(null);
+      }}
+      aria-label={cs.appInstall.install}
+      title={cs.appInstall.help}
+      className="inline-flex items-center gap-1 rounded-lg border border-brand-500/40 px-3 py-2 text-sm font-medium text-brand-700 hover:bg-brand-500/5 dark:text-brand-100"
+    >
+      <Download className="size-4" aria-hidden /> <span className="hidden sm:inline">{cs.appInstall.install}</span>
+    </button>
+  );
+}
+
 /** focusable: the page (a lesson or a check) offers focus mode, which hides everything but the task. */
 export function AppShell({ me, children, focusable = false }: { me: Me; children: ReactNode; focusable?: boolean }) {
   const { setMe } = useAuth();
@@ -162,6 +203,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   if (focus) {
     return (
       <main className="mx-auto flex min-h-full max-w-6xl flex-col gap-4 p-4 lg:p-8" data-focus="on">
+        <NetworkBanner />
         <header className="flex items-center justify-between gap-3">
           <Link href="/" className="text-sm font-bold text-brand-600" aria-label={cs.appName}>
             {cs.appName}
@@ -185,6 +227,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
 
   return (
     <main className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-4 pb-24 lg:p-8">
+      <NetworkBanner />
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <Link href="/" className="text-2xl font-bold text-brand-600">
@@ -217,6 +260,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
                 <Kbd>Ctrl K</Kbd>
               </span>
             </button>
+            <InstallApp />
             <Link
               href="/grammar"
               className="hidden items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 lg:inline-flex dark:text-slate-300 dark:hover:bg-slate-800"

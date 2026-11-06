@@ -39,7 +39,29 @@ export const SKILLS: Skill[] = ["listening", "speaking", "writing", "reading", "
 // The last practice modes this device opened (most recent first). A convenience only: it stays
 // in this browser, is never sent to the server and never counts as progress.
 const RECENT_KEY = "pf_recent_modes";
+const PINNED_KEY = "pf_pinned_modes";
 const MAX_RECENT = 3;
+
+export function readPinned(): PracticeMode["id"][] {
+  try {
+    const raw = JSON.parse(window.localStorage.getItem(PINNED_KEY) ?? "[]");
+    const ids = new Set(PRACTICE_MODES.map((m) => m.id));
+    return Array.isArray(raw) ? [...new Set(raw.filter((x): x is PracticeMode["id"] => ids.has(x)))] : [];
+  } catch {
+    return [];
+  }
+}
+
+export function togglePinned(id: PracticeMode["id"]): PracticeMode["id"][] {
+  const current = readPinned();
+  const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id];
+  try {
+    window.localStorage.setItem(PINNED_KEY, JSON.stringify(next));
+  } catch {
+    /* storage unavailable */
+  }
+  return next;
+}
 
 export function readRecent(): PracticeMode["id"][] {
   try {

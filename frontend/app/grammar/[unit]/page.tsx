@@ -20,6 +20,7 @@ export default function GrammarLessonPage() {
       <GrammarRunner
         key={`${me.acting.id}:${unit}`}
         language={me.acting.active_language}
+        englishVariant={me.acting.settings.english_variant}
         mode="learn"
         start={start}
         onExit={() => router.push("/grammar")}

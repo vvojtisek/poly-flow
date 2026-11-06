@@ -22,7 +22,7 @@ DATA = Path(__file__).resolve().parents[1] / "data" / "grammar"
 DE = Language.DE
 
 
-def test_shipped_packs_validate_and_cover_a1_to_b2():
+def test_shipped_packs_validate_and_only_claim_available_levels():
     files = sorted(DATA.glob("*.grammar.json"))
     assert files, "no grammar packs shipped"
     for f in files:
@@ -30,7 +30,10 @@ def test_shipped_packs_validate_and_cover_a1_to_b2():
         assert pack.review_status in ("unreviewed", "reviewed")
         assert pack.source and pack.license and pack.revision
         if pack.language == DE:
+            assert {u.level for u in pack.units} == set(LEVELS[:4])
+        if pack.language.value == "en":
             assert {u.level for u in pack.units} == set(LEVELS)
+            assert all(u.objective and u.objective != u.summary for u in pack.units)
         for u in pack.units:
             kinds = {e.kind for e in u.exercises}
             assert len(kinds) >= 2, f"{u.id}: needs varied exercise kinds"

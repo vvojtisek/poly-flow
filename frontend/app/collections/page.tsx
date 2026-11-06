@@ -1,0 +1,292 @@
+"use client";
+
+import { ArrowDownToLine, ArrowLeft, FolderOpen, Headphones, Pencil, Plus, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+import { AppShell, FullPageStatus } from "@/components/AppShell";
+import { Button, Notice } from "@/components/ui";
+import { WordCollectionPractice } from "@/components/WordCollectionPractice";
+import {
+  createWordCollection,
+  deleteWordCollection,
+  getWordCollection,
+  listWordCollections,
+  renameWordCollection,
+  removeWordFromCollection,
+  wordCollectionExportUrl,
+  type WordCollection,
+  type WordCollectionDetail,
+} from "@/lib/api";
+import { useRequireMe } from "@/lib/auth";
+import { genderClass } from "@/lib/gender";
+import { cs } from "@/lib/i18n/cs";
+
+const t = cs.collections;
+
+export default function CollectionsPage() {
+  const me = useRequireMe();
+  const language = me?.acting.active_language;
+  const [rows, setRows] = useState<WordCollection[]>([]);
+  const [selected, setSelected] = useState("");
+  const [detail, setDetail] = useState<WordCollectionDetail | null>(null);
+  const [name, setName] = useState("");
+  const [editingName, setEditingName] = useState(false);
+  const [renamedName, setRenamedName] = useState("");
+  const [renameFailed, setRenameFailed] = useState(false);
+  const [duplicateName, setDuplicateName] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [practicing, setPracticing] = useState(false);
+  const [wordQuery, setWordQuery] = useState("");
+  const [wordSort, setWordSort] = useState<"frequency" | "alphabetical">("frequency");
+  const [examplesOnly, setExamplesOnly] = useState(false);
+
+  const visibleWords = useMemo(() => {
+    if (!detail) return [];
+    const query = wordQuery.trim().toLocaleLowerCase("cs");
+    return detail.items
+      .filter((word) => !examplesOnly || !!word.example?.trim())
+      .filter((word) => !query || [word.lemma, word.translation, word.example ?? ""].some((value) => value.toLocaleLowerCase("cs").includes(query)))
+      .sort((a, b) => wordSort === "frequency"
+        ? a.rank - b.rank || a.lemma.localeCompare(b.lemma, "cs")
+        : a.lemma.localeCompare(b.lemma, "cs"));
+  }, [detail, wordQuery, wordSort, examplesOnly]);
+
+  const refresh = useCallback(async (preferred?: string) => {
+    if (!language) return;
+    const next = await listWordCollections(language);
+    setRows(next);
+    const id = preferred && next.some((item) => item.id === preferred)
+      ? preferred
+      : next.some((item) => item.id === selected)
+        ? selected
+        : next[0]?.id ?? "";
+    setSelected(id);
+    if (id) setDetail(await getWordCollection(id));
+    else setDetail(null);
+    setFailed(false);
+  }, [language, selected]);
+
+  useEffect(() => {
+    let active = true;
+    if (!language) return;
+    listWordCollections(language)
+      .then(async (next) => {
+        if (!active) return;
+        setRows(next);
+        const id = next[0]?.id ?? "";
+        setSelected(id);
+        if (id) setDetail(await getWordCollection(id));
+      })
+      .catch(() => active && setFailed(true));
+    return () => {
+      active = false;
+    };
+  }, [language, me?.acting.id]);
+
+  async function create(event: React.FormEvent) {
+    event.preventDefault();
+    if (!language || !name.trim()) return;
+    setBusy(true);
+    try {
+      const created = await createWordCollection(language, name);
+      setName("");
+      await refresh(created.id);
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function removeWord(id: string) {
+    if (!selected) return;
+    setBusy(true);
+    try {
+      await removeWordFromCollection(selected, id);
+      await refresh(selected);
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function rename(event: React.FormEvent) {
+    event.preventDefault();
+    if (!selected || !renamedName.trim()) return;
+    setBusy(true);
+    setRenameFailed(false);
+    setDuplicateName(false);
+    try {
+      await renameWordCollection(selected, renamedName);
+      setEditingName(false);
+      await refresh(selected);
+    } catch (error) {
+      setDuplicateName(error instanceof Error && error.message.includes("409"));
+      setRenameFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function removeCollection() {
+    if (!selected) return;
+    setBusy(true);
+    try {
+      await deleteWordCollection(selected);
+      await refresh();
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!me) return <FullPageStatus text={cs.common.loading} />;
+  return (
+    <AppShell me={me}>
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
+        <header className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <Link href="/words" className="mb-2 inline-flex items-center gap-1 text-sm text-brand-600 hover:underline dark:text-brand-50">
+              <ArrowLeft className="size-4" aria-hidden /> {cs.words.title}
+            </Link>
+            <h1 className="flex items-center gap-2 text-2xl font-bold">
+              <FolderOpen className="size-6 text-brand-500" aria-hidden /> {t.title}
+            </h1>
+            <p className="mt-1 max-w-2xl text-sm text-slate-600 dark:text-slate-300">{t.intro}</p>
+          </div>
+        </header>
+
+        <form onSubmit={(event) => void create(event)} className="flex flex-wrap gap-2 rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+          <label className="sr-only" htmlFor="collection-name">{t.name}</label>
+          <input
+            id="collection-name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            maxLength={60}
+            placeholder={t.name}
+            className="min-w-48 flex-1 rounded-lg border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700"
+          />
+          <Button disabled={busy || !name.trim()}><Plus className="size-4" aria-hidden /> {t.createAction}</Button>
+        </form>
+
+        {failed && <Notice tone="error">{t.failed}</Notice>}
+        {rows.length === 0 ? (
+          <Notice>{t.empty}</Notice>
+        ) : (
+          <div className="grid gap-4 lg:grid-cols-[15rem_1fr]">
+            <nav aria-label={t.title} className="flex gap-2 overflow-x-auto lg:flex-col">
+              {rows.map((collection) => (
+                <button
+                  key={collection.id}
+                  type="button"
+                  aria-pressed={selected === collection.id}
+                  onClick={() => {
+                    setSelected(collection.id);
+                    setPracticing(false);
+                    getWordCollection(collection.id).then(setDetail).catch(() => setFailed(true));
+                  }}
+                  className={`min-w-40 rounded-xl border p-3 text-left ${selected === collection.id ? "border-brand-500 bg-brand-500/10" : "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"}`}
+                >
+                  <span className="block font-semibold">{collection.name}</span>
+                  <span className="text-xs text-slate-500">{t.count(collection.count)}</span>
+                </button>
+              ))}
+            </nav>
+
+            <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+              {detail && (
+                <>
+                  <header className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      {editingName ? (
+                        <form onSubmit={(event) => void rename(event)} className="flex flex-wrap gap-2">
+                          <label className="sr-only" htmlFor="rename-collection">{t.name}</label>
+                          <input id="rename-collection" autoFocus maxLength={60} value={renamedName} onChange={(event) => setRenamedName(event.target.value)} className="min-w-40 rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-base font-semibold dark:border-slate-700" />
+                          <Button disabled={busy || !renamedName.trim()}>{t.renameAction}</Button>
+                          <Button type="button" variant="ghost" disabled={busy} onClick={() => { setEditingName(false); setRenameFailed(false); }}>{t.cancelRename}</Button>
+                          {renameFailed && <p role="alert" className="w-full text-sm text-rose-700 dark:text-rose-300">{duplicateName ? t.renameDuplicate : t.failed}</p>}
+                        </form>
+                      ) : <h2 className="text-lg font-bold">{detail.name}</h2>}
+                      <p className="text-sm text-slate-500">{t.count(detail.items.length)}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {!editingName && <Button variant="secondary" disabled={busy} onClick={() => { setRenamedName(detail.name); setEditingName(true); setRenameFailed(false); setDuplicateName(false); }}>
+                        <Pencil className="size-4" aria-hidden /> {t.rename}
+                      </Button>}
+                      {detail.items.length > 0 && (
+                        <div className="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm dark:border-slate-700">
+                          <ArrowDownToLine className="size-4" aria-hidden />
+                          <span className="sr-only">{t.exportTitle}</span>
+                          <a href={wordCollectionExportUrl(detail.id, "csv")} className="font-medium text-brand-700 hover:underline dark:text-brand-200" download>
+                            {cs.words.exportCsv}
+                          </a>
+                          <span aria-hidden className="text-slate-400">·</span>
+                          <a href={wordCollectionExportUrl(detail.id, "anki")} className="font-medium text-brand-700 hover:underline dark:text-brand-200" download>
+                            {cs.words.exportAnki}
+                          </a>
+                        </div>
+                      )}
+                      <Button
+                        variant="secondary"
+                        onClick={() => setPracticing((value) => !value)}
+                        aria-pressed={practicing}
+                      >
+                        <Headphones className="size-4" aria-hidden /> {t.sentencePractice}
+                      </Button>
+                      <Button variant="ghost" disabled={busy} onClick={() => void removeCollection()} className="text-rose-700 dark:text-rose-300">
+                        <Trash2 className="size-4" aria-hidden /> {t.delete}
+                      </Button>
+                    </div>
+                  </header>
+                  {detail.items.length > 0 && <p className="mb-3 text-xs text-slate-500">{t.exportHelp}</p>}
+                  {practicing ? (
+                    <WordCollectionPractice collection={detail} onClose={() => setPracticing(false)} />
+                  ) : detail.items.length === 0 ? (
+                    <Notice>{t.emptyItems}</Notice>
+                  ) : (
+                    <>
+                    <div className="mb-3 flex flex-wrap items-center gap-2 rounded-xl bg-slate-50 p-3 dark:bg-slate-800/50">
+                      <label className="sr-only" htmlFor="collection-word-search">{t.searchWords}</label>
+                      <input id="collection-word-search" value={wordQuery} onChange={(event) => setWordQuery(event.target.value)} placeholder={t.searchWords} className="min-w-48 flex-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900" />
+                      <label className="sr-only" htmlFor="collection-word-sort">{t.sortWords}</label>
+                      <select id="collection-word-sort" value={wordSort} onChange={(event) => setWordSort(event.target.value as "frequency" | "alphabetical")} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+                        <option value="frequency">{t.sortFrequency}</option>
+                        <option value="alphabetical">{t.sortAlphabetical}</option>
+                      </select>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input type="checkbox" checked={examplesOnly} onChange={(event) => setExamplesOnly(event.target.checked)} className="size-4 accent-brand-600" />
+                        {t.onlyWithExamples}
+                      </label>
+                      <p className="w-full text-xs text-slate-500" role="status">{t.showingWords(visibleWords.length, detail.items.length)}</p>
+                    </div>
+                    {visibleWords.length ? <ul className="divide-y divide-slate-100 dark:divide-slate-800">
+                      {visibleWords.map((word) => (
+                        <li key={word.id} className="flex items-center gap-3 py-3">
+                          <span className="w-9 shrink-0 text-right text-xs text-slate-400">{word.rank}</span>
+                          <span className="min-w-0 flex-1">
+                            <span lang={detail.language} className={`block truncate font-semibold ${word.gender ? genderClass(word.gender) : ""}`}>
+                              {word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}{word.lemma}
+                            </span>
+                            <span className="block truncate text-sm text-slate-500">{word.translation}</span>
+                          </span>
+                          <Button variant="ghost" disabled={busy} onClick={() => void removeWord(word.id)} aria-label={`${t.remove}: ${word.lemma}`}>
+                            <Trash2 className="size-4" aria-hidden /> <span className="hidden sm:inline">{t.remove}</span>
+                          </Button>
+                        </li>
+                      ))}
+                    </ul> : <Notice>{t.noMatchingWords}</Notice>}
+                    </>
+                  )}
+                </>
+              )}
+            </section>
+          </div>
+        )}
+      </div>
+    </AppShell>
+  );
+}

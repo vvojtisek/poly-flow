@@ -210,3 +210,25 @@ bank never changes a finished test. `tests/test_diagnostic_domain.py` validates 
 Drafted by Claude on 2026-11-06, **not reviewed** by a teacher or a native speaker
 (`review_status: unreviewed`). Difficulties are the nominal band of each item, not calibrated
 on learner data; recalibrate with a new policy version once real answers exist.
+
+### Adaptive policy (d1)
+
+The diagnostic starts at A2 (theta -1) unless the separate vocabulary estimate provides a
+starting prior. Each answer updates a posterior over A1, A2, B1, B2, and the above-B2 probe
+(reported only as B2+). The next unused item is selected for information near the current
+posterior mean, with ties rotated across skills; item order within a band is randomized by the
+session RNG. The saved asked-item IDs prevent repeats. It requires at least 10 answers and stops
+once posterior standard deviation is at most 0.42, the bank is exhausted, or 22 questions have
+been asked. An incomplete attempt does not replace the last completed result. The estimate is
+uncertain and pilot-calibrated; at B2+ it only means performance exceeded this bank's B2 items,
+not that C1/C2 was assessed or certified.
+
+## Grammar packs (`grammar/<lang>.grammar.json`)
+
+Grammar packs contain editable Czech explanations, examples, and exercises. Current packs may
+cover only selected topics: `en.grammar.json` provides one draft unit at each of A1-C2 and does
+not claim full CEFR coverage; the German pack currently covers A1-B2. Packs are marked unreviewed
+until a teacher or qualified reviewer approves them. Adding a unit is additive and keyed by
+stable unit ID, so importing a new pack preserves learner progress. Each unit has a short
+`summary` for discovery and an `objective` describing an observable outcome; older packs may omit
+`objective`, in which case the importer reuses the summary.

@@ -47,7 +47,7 @@ docker compose run --rm backend python -m app.cli seed-blacklist data/blacklist/
 docker compose run --rm backend python -m app.cli seed-lemmas data/frequency/en_GB.lemmas.csv data/frequency/en_US.lemmas.csv  # frequency reference, no glosses
 ```
 
-Open http://localhost:3000. The first visit runs **first-run setup**, which creates the admin account
+Open http://localhost:3001. The first visit runs **first-run setup**, which creates the admin account
 (there is no open registration afterwards). The admin then adds profiles under *Rodina*. Roles:
 
 - **admin** grants access (creates profiles, resets a password or PIN, deactivates) and edits shared
@@ -59,6 +59,10 @@ Open http://localhost:3000. The first visit runs **first-run setup**, which crea
   The admin can switch the filter on or off per profile. On a shared tablet the admin can also open a child
   profile from their own session (*Předat zařízení*); returning to the admin account requires the admin's
   password.
+
+When installed as a PWA, PolyFlow caches only versioned JavaScript and CSS assets. It does not cache
+pages, API responses, learner content, or answers; a full reload without the server shows a clear
+offline screen and offers a retry. Learning actions require a live connection.
 
 ### Audio (Piper TTS, Whisper STT)
 
@@ -123,8 +127,8 @@ HttpOnly and SameSite=Lax, and every write needs the per-session CSRF token.
 The browser talks only to the frontend origin; Next.js proxies `/api/*` and `/readyz` to the backend
 (`BACKEND_URL`, resolved at build time for the production `runner` image).
 
-- API: http://localhost:8000 (`/healthz` liveness, `/readyz` checks Postgres + Redis, 503 when unready; OpenAPI at `/docs`)
-- Frontend: http://localhost:3000
+- API: http://localhost:8001 (`/healthz` liveness, `/readyz` checks Postgres + Redis, 503 when unready; OpenAPI at `/docs`)
+- Frontend: http://localhost:3001
 
 Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`.
 

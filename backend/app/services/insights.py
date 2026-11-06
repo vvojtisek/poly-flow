@@ -21,6 +21,7 @@ from app.models import (
     UserGrammarProgress,
     UserWordProgress,
 )
+from app.services.learning import _suitable
 
 HEATMAP_DAYS = 182
 ACCURACY_WEEKS = 12
@@ -106,24 +107,29 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
     # Review forecast: words and grammar topics due per local day (overdue counts as today).
     p, gp = UserWordProgress, UserGrammarProgress
     horizon = now + timedelta(days=FORECAST_DAYS)
-    forecast = {today + timedelta(days=i): {"words": 0, "grammar": 0} for i in range(FORECAST_DAYS)}
+    forecast = {
+        today + timedelta(days=i): {"words": [], "grammar": []} for i in range(FORECAST_DAYS)
+    }
     word_due = await db.execute(
-        select(p.next_review_at)
+        select(li.id, li.lemma, li.gender, li.translation_cs, p.next_review_at)
         .join(li, li.id == p.lexicon_item_id)
         .where(
             p.user_id == user.id,
             li.language == language,
+            _suitable(user),
             p.introduced_at.is_not(None),
             p.next_review_at.is_not(None),
             p.next_review_at < horizon,
         )
     )
-    for (at,) in word_due.all():
+    for item_id, lemma, gender, translation, at in word_due.all():
         d = max(at.astimezone(tz).date(), today)
         if d in forecast:
-            forecast[d]["words"] += 1
+            forecast[d]["words"].append(
+                {"id": item_id, "lemma": lemma, "gender": gender, "translation": translation}
+            )
     grammar_due = await db.execute(
-        select(gp.next_review_at)
+        select(gu.id, gu.title, gu.level, gp.next_review_at)
         .join(gu, gu.id == gp.unit_id)
         .where(
             gp.user_id == user.id,
@@ -134,10 +140,10 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             gp.next_review_at < horizon,
         )
     )
-    for (at,) in grammar_due.all():
+    for unit_id, title, level, at in grammar_due.all():
         d = max(at.astimezone(tz).date(), today)
         if d in forecast:
-            forecast[d]["grammar"] += 1
+            forecast[d]["grammar"].append({"id": unit_id, "title": title, "level": level})
 
     # Knowledge funnel.
     introduced, passive, active, known, mastered = (
@@ -171,7 +177,16 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
         "mistakes": sorted(
             ({"tag": t, "count": n} for t, n in tags.items()), key=lambda x: -x["count"]
         ),
-        "forecast": [{"date": d, **v} for d, v in forecast.items()],
+        "forecast": [
+            {
+                "date": d,
+                "words": len(v["words"]),
+                "grammar": len(v["grammar"]),
+                "word_items": v["words"],
+                "grammar_items": v["grammar"],
+            }
+            for d, v in forecast.items()
+        ],
         "funnel": {
             "introduced": introduced,
             "passive": passive,
@@ -179,4 +194,77 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             "known": known,
             "mastered": mastered,
         },
+    }
+
+
+async def day_activity(
+    db: AsyncSession, user: User, language: Language, activity_date: date, now: datetime
+) -> dict | None:
+    """Read-only, answer-free details for one calendar day in the learner's heatmap."""
+    today = now.astimezone(ZoneInfo(user.timezone)).date()
+    if not today - timedelta(days=HEATMAP_DAYS - 1) <= activity_date <= today:
+        return None
+
+    ev, li = LearningEvent, LexiconItem
+    words = await db.execute(
+        select(
+            li.id,
+            li.lemma,
+            li.gender,
+            li.translation_cs,
+            func.count().filter(ev.counts_as_evidence.is_(True)),
+            func.count().filter(ev.counts_as_evidence.is_(False)),
+        )
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(
+            ev.user_id == user.id,
+            li.language == language,
+            ev.local_date == activity_date,
+            _suitable(user),
+        )
+        .group_by(li.id)
+        .order_by(li.frequency_rank, li.lemma)
+    )
+    ga, gu = GrammarAttempt, GrammarUnit
+    grammar = await db.execute(
+        select(
+            gu.id,
+            gu.title,
+            gu.level,
+            func.count().filter(ga.counts_as_evidence.is_(True)),
+            func.count().filter(ga.counts_as_evidence.is_(False)),
+        )
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            gu.active.is_(True),
+            ga.local_date == activity_date,
+        )
+        .group_by(gu.id)
+        .order_by(gu.level, gu.title)
+    )
+    return {
+        "date": activity_date,
+        "words": [
+            {
+                "id": item_id,
+                "lemma": lemma,
+                "gender": gender,
+                "translation": translation,
+                "graded": graded,
+                "practice": practice,
+            }
+            for item_id, lemma, gender, translation, graded, practice in words.all()
+        ],
+        "grammar": [
+            {
+                "id": unit_id,
+                "title": title,
+                "level": level,
+                "graded": graded,
+                "practice": practice,
+            }
+            for unit_id, title, level, graded, practice in grammar.all()
+        ],
     }

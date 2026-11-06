@@ -213,12 +213,98 @@ async def test_generated_story_is_validated_stored_and_returned(db, client, mode
     assert again.json()["id"] == s["id"] and len(model.requests) == 1
     today = (await client.get("/api/v1/stories/today?language=de")).json()
     assert today["model_available"] is True and today["story"]["id"] == s["id"]
+    archive = await client.get("/api/v1/stories/archive?language=de")
+    assert archive.status_code == 200
+    assert archive.json()[0]["id"] == s["id"]
+    assert archive.json()[0]["title"] == "Der Hund"
+    assert (await client.get("/api/v1/stories/archive?language=fr")).json() == []
+    await make_child(client, me)
+    child = await login(client, "eva", "4321")
+    assert (await client.get("/api/v1/stories/archive?language=de")).json() == []
+    foreign_delete = await client.delete(f"/api/v1/stories/{s['id']}", headers=csrf(child))
+    assert foreign_delete.status_code == 404
     async for db_ in get_session():
         row = (await db_.execute(select(DailyStory))).scalar_one()
         assert row.status == StoryStatus.GENERATED and row.source_type == "generated"
         assert row.llm_model == "test-model" and row.llm_provider == "ollama"
         assert row.safety_checked and row.unknown_ratio is not None
         assert len(row.new_item_ids) == 3
+
+
+async def test_learner_can_delete_and_regenerate_their_archived_story(db, client, model):
+    me = await learner_with_words(client)
+    story = (await generate(client, me)).json()
+    deleted = await client.delete(f"/api/v1/stories/{story['id']}", headers=csrf(me))
+    assert deleted.status_code == 204
+    assert (await client.get(f"/api/v1/stories/{story['id']}")).status_code == 404
+    assert (await client.get("/api/v1/stories/archive?language=de")).json() == []
+    regenerated = await generate(client, me)
+    assert regenerated.status_code == 200 and regenerated.json()["id"] != story["id"]
+
+
+async def test_generated_story_can_use_a_private_collection_as_its_topic(db, client, model):
+    me = await learner_with_words(client)
+    created = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Výlet"},
+        headers=csrf(me),
+    )
+    collection_id = created.json()["id"]
+    async for db_ in get_session():
+        items = (
+            (await db_.execute(select(LexiconItem).where(LexiconItem.lemma.in_(TARGETS))))
+            .scalars()
+            .all()
+        )
+        ids = {item.lemma: item.id for item in items}
+        break
+    for lemma in TARGETS[:2]:
+        await client.post(
+            f"/api/v1/words/collections/{collection_id}/items",
+            json={"item_id": str(ids[lemma])},
+            headers=csrf(me),
+        )
+
+    too_small = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection_id},
+        headers=csrf(me),
+    )
+    assert too_small.status_code == 409 and too_small.json()["detail"] == "collection_too_small"
+    await client.post(
+        f"/api/v1/words/collections/{collection_id}/items",
+        json={"item_id": str(ids[TARGETS[2]])},
+        headers=csrf(me),
+    )
+    response = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection_id},
+        headers=csrf(me),
+    )
+    assert response.status_code == 200, response.text
+    story = response.json()
+    assert story["source_collection"] == "Výlet"
+    assert set(story["targets"]) == set(TARGETS)
+    payload = json.loads(model.requests[0]["messages"][1]["content"])
+    assert payload["topic"] == "Výlet"
+    assert set(payload["target_words"]) == set(TARGETS)
+
+
+async def test_story_collection_must_belong_to_the_acting_profile(db, client, model):
+    me = await learner_with_words(client)
+    collection = await client.post(
+        "/api/v1/words/collections",
+        json={"language": "de", "name": "Cizí"},
+        headers=csrf(me),
+    )
+    await make_child(client, me)
+    child = await login(client, "eva", "4321")
+    response = await client.post(
+        "/api/v1/stories/generate",
+        json={"language": "de", "collection_id": collection.json()["id"]},
+        headers=csrf(child),
+    )
+    assert response.status_code == 404 and response.json()["detail"] == "collection_not_found"
 
 
 async def test_questions_are_graded_on_the_server_and_never_evidence(db, client, model):

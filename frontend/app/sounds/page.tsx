@@ -1,12 +1,13 @@
 "use client";
 
-import { AudioLines, Search } from "lucide-react";
+import { AudioLines, CheckCircle2, Ear, Search, XCircle } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { PlayButton } from "@/components/PlayButton";
-import { Notice } from "@/components/ui";
+import { Button, Notice } from "@/components/ui";
 import { getSounds, myWordAudioUrl, type Language, type SoundExample, type SoundRule } from "@/lib/api";
+import { play, useClipState } from "@/lib/audio";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { fold } from "@/lib/palette";
@@ -60,6 +61,85 @@ function Rule({ rule, language }: { rule: SoundRule; language: Language }) {
   );
 }
 
+type SoundQuestion = { answer: SoundRule; example: SoundExample; options: SoundRule[] };
+
+function pickQuestion(rules: SoundRule[], previous?: string): SoundQuestion | null {
+  const eligible = rules.filter((rule) => rule.examples.some((example) => example.met));
+  if (eligible.length < 2) return null;
+  const pool = eligible.filter((rule) => rule.id !== previous);
+  const answer = pool[Math.floor(Math.random() * pool.length)] ?? eligible[0]!;
+  const examples = answer.examples.filter((example) => example.met);
+  const example = examples[Math.floor(Math.random() * examples.length)]!;
+  const distractors = eligible.filter((rule) => rule.id !== answer.id);
+  const options = [answer, ...distractors.sort(() => Math.random() - 0.5).slice(0, 3)];
+  return { answer, example, options: options.sort(() => Math.random() - 0.5) };
+}
+
+function SoundQuiz({ rules, language }: { rules: SoundRule[]; language: Language }) {
+  const [question, setQuestion] = useState(() => pickQuestion(rules));
+  const [chosen, setChosen] = useState<string | null>(null);
+  const [round, setRound] = useState(1);
+  const audioUrl = question ? myWordAudioUrl(question.example.id) : "";
+  const audio = useClipState(audioUrl);
+
+  useEffect(() => {
+    if (audioUrl) void play(audioUrl);
+  }, [audioUrl]);
+
+  if (!question) return <Notice>{t.quizNeedsExamples}</Notice>;
+
+  function next() {
+    const previous = question?.answer.id;
+    if (!previous) return;
+    setQuestion(pickQuestion(rules, previous));
+    setChosen(null);
+    setRound((value) => value + 1);
+  }
+
+  const correct = chosen === question.answer.id;
+  return (
+    <section className="flex flex-col gap-4 rounded-3xl border border-brand-500/30 bg-gradient-to-br from-brand-500/10 to-white p-4 dark:to-slate-900" aria-labelledby="sound-quiz-title">
+      <header>
+        <h2 id="sound-quiz-title" className="flex items-center gap-2 text-lg font-bold"><Ear className="size-5 text-brand-500" aria-hidden />{t.quizTitle}</h2>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{t.quizHelp}</p>
+      </header>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="secondary" onClick={() => void play(audioUrl)}>{cs.audio.playWord}</Button>
+        {audio === "error" && <span className="text-sm text-rose-700 dark:text-rose-300">{t.quizAudioFailed}</span>}
+        <span className="text-sm text-slate-500">{t.quizRound(round)}</span>
+      </div>
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="group" aria-label={t.quizOptions}>
+        {question.options.map((rule) => {
+          const selected = chosen === rule.id;
+          const isAnswer = chosen !== null && rule.id === question.answer.id;
+          return (
+            <button
+              key={rule.id}
+              type="button"
+              disabled={chosen !== null}
+              onClick={() => setChosen(rule.id)}
+              className={`rounded-xl border-2 p-3 text-left font-semibold disabled:cursor-default ${isAnswer ? "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-100" : selected ? "border-rose-500 bg-rose-50 text-rose-900 dark:bg-rose-950/40 dark:text-rose-100" : "border-slate-200 bg-white hover:border-brand-500 dark:border-slate-700 dark:bg-slate-900"}`}
+            >
+              <span lang={language}>{rule.spelling}</span><span className="ml-2 text-sm font-normal text-slate-500">{rule.czech}</span>
+            </button>
+          );
+        })}
+      </div>
+      {chosen !== null && (
+        <div className="flex flex-col gap-2 rounded-xl bg-white p-3 dark:bg-slate-900" aria-live="polite">
+          <p className={`flex items-center gap-2 font-semibold ${correct ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"}`}>
+            {correct ? <CheckCircle2 className="size-4" aria-hidden /> : <XCircle className="size-4" aria-hidden />}
+            {correct ? t.quizRight : t.quizReveal(question.answer.spelling, question.answer.czech)}
+          </p>
+          <p className="text-sm text-slate-600 dark:text-slate-300">{question.answer.note}</p>
+          <Button className="self-end" onClick={next}>{t.quizNext}</Button>
+        </div>
+      )}
+      <p className="text-xs text-slate-500">{t.quizNoEvidence}</p>
+    </section>
+  );
+}
+
 function Guide({ language }: { language: Language }) {
   const [rules, setRules] = useState<SoundRule[] | null>(null);
   const [failed, setFailed] = useState(false);
@@ -90,6 +170,7 @@ function Guide({ language }: { language: Language }) {
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.search} aria-label={t.search} className="min-w-0 flex-1 bg-transparent outline-none" />
       </label>
       <div className="grid gap-4 lg:grid-cols-2">
+        <div className="lg:col-span-2"><SoundQuiz rules={rules ?? []} language={language} /></div>
         {shown.map((r) => (
           <Rule key={r.id} rule={r} language={language} />
         ))}

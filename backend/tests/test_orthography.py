@@ -35,6 +35,10 @@ DE, FR, IT, EN = Language.DE, Language.FR, Language.IT, Language.EN
         (EN, "house", "House", "NOUN", Verdict.EXACT),  # no capitalisation rule
         (EN, "I", "i", "PRON", Verdict.EXACT),
         (EN, "house", "horse", "NOUN", Verdict.WRONG),
+        (EN, "colour", "color", "NOUN", Verdict.VARIANT),
+        (EN, "organize", "organise", "VERB", Verdict.VARIANT),
+        (EN, "lorry", "truck", "NOUN", Verdict.VARIANT),
+        (EN, "mobile phone", "cell phone", "NOUN", Verdict.VARIANT),
     ],
 )
 def test_verdicts(lang, expected, answer, pos, verdict):

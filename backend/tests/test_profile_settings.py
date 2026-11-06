@@ -29,7 +29,7 @@ async def test_defaults_for_a_new_profile(db, client):
     me = await setup_parent(client)
     s = me["acting"]["settings"]
     assert s["theme"] == "system" and s["interests"] == [] and s["voices"] == {}
-    assert s["audio_rate"] == 1.0
+    assert s["audio_rate"] == 1.0 and s["english_variant"] == "uk"
 
 
 async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client):
@@ -42,6 +42,7 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
             "interests": ["travel", " Formule  1 ", "formule 1", "Vaření"],
             "voices": {"fr": "fr_FR-siwis-medium"},
             "audio_rate": 0.8,
+            "english_variant": "us",
         },
     )
     assert r.status_code == 200, r.text
@@ -49,11 +50,13 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
     assert s["theme"] == "dark"
     assert s["interests"] == ["travel", "formule 1", "vaření"]
     assert s["voices"] == {"fr": "fr_FR-siwis-medium"} and s["audio_rate"] == 0.8
+    assert s["english_variant"] == "us"
 
     r = await patch(client, me, {"theme": "light"})
     s = r.json()["settings"]
     assert s["theme"] == "light" and s["interests"] == ["travel", "formule 1", "vaření"]
     assert s["voices"] == {"fr": "fr_FR-siwis-medium"} and s["audio_rate"] == 0.8
+    assert s["english_variant"] == "us"
     assert (await client.get(URL)).json()["settings"] == s
 
 
@@ -68,6 +71,7 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
         {"voices": {"de": "de_DE-unknown"}},
         {"voices": {"es": "de_DE-thorsten-medium"}},
         {"audio_rate": 3},
+        {"english_variant": "au"},
         {"unknown": True},
     ],
 )
@@ -109,3 +113,4 @@ async def test_a_removed_voice_does_not_break_the_profile(db, client):
 def test_stored_settings_from_before_this_change_still_read():
     s = ProfileSettings.from_stored({"daily_goal_minutes": 15, "audio_rate": 1.0})
     assert s.theme == "system" and s.interests == [] and s.voices == {}
+    assert s.english_variant == "uk" and s.autoplay_audio is True

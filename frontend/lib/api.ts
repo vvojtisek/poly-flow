@@ -92,6 +92,7 @@ export interface ProfileSettings {
   daily_goal_minutes: number;
   audio_rate: number;
   autoplay_audio: boolean;
+  english_variant: "uk" | "us";
   theme: Theme;
   interests: string[];
   voices: Partial<Record<Language, string>>;
@@ -428,6 +429,7 @@ export interface GrammarUnitSummary {
   level: CefrLevel;
   title: string;
   summary: string;
+  objective: string;
   status: UnitState;
   exercises: number;
   due: boolean;
@@ -451,8 +453,9 @@ export interface GrammarUnit {
   level: CefrLevel;
   title: string;
   summary: string;
+  objective: string;
   notes: GrammarNote[];
-  examples: { text: string; cs: string }[];
+  examples: { text: string; cs: string; variant?: "uk" | "us" | null }[];
   status: UnitState;
   review_status: string;
   source: string;
@@ -567,6 +570,7 @@ export interface StoryLine {
 export interface Story {
   id: string;
   language: Language;
+  story_date: string;
   kind: "story" | "dialogue";
   title: string;
   lines: StoryLine[];
@@ -574,15 +578,32 @@ export interface Story {
   targets: string[];
   questions: { question: string; options: string[]; answered: boolean | null }[];
   model: string | null;
+  source_collection: string | null;
   review_status: "unreviewed";
+}
+
+export interface StoryArchiveItem {
+  id: string;
+  story_date: string;
+  title: string;
+  kind: "story" | "dialogue";
+  source_collection: string | null;
+  targets: string[];
 }
 
 export const getStoryToday = (language: Language) =>
   api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
     cache: "no-store",
   });
-export const generateStory = (language: Language, kind: Story["kind"]) =>
-  api<Story>("/api/v1/stories/generate", { json: { language, kind } });
+export const listStoryArchive = (language: Language) =>
+  api<StoryArchiveItem[]>(`/api/v1/stories/archive?language=${language}`, { cache: "no-store" });
+export const getStory = (id: string) => api<Story>(`/api/v1/stories/${id}`, { cache: "no-store" });
+export const deleteStory = (id: string) =>
+  api<void>(`/api/v1/stories/${id}`, { method: "DELETE" });
+export const generateStory = (language: Language, kind: Story["kind"], collectionId?: string) =>
+  api<Story>("/api/v1/stories/generate", {
+    json: { language, kind, ...(collectionId ? { collection_id: collectionId } : {}) },
+  });
 export const answerStoryQuestion = (storyId: string, index: number, choice: number) =>
   api<{ correct: boolean; answer_index: number }>(`/api/v1/stories/${storyId}/questions/${index}/answer`, {
     json: { choice },
@@ -714,11 +735,25 @@ export interface Insights {
   active_days: number;
   accuracy: { week: string; answered: number; correct: number }[];
   mistakes: { tag: string; count: number }[];
-  forecast: { date: string; words: number; grammar: number }[];
+  forecast: {
+    date: string;
+    words: number;
+    grammar: number;
+    word_items: { id: string; lemma: string; gender: string | null; translation: string }[];
+    grammar_items: { id: string; title: string; level: string }[];
+  }[];
   funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
 }
 
+export interface ActivityDay {
+  date: string;
+  words: { id: string; lemma: string; gender: string | null; translation: string; graded: number; practice: number }[];
+  grammar: { id: string; title: string; level: string; graded: number; practice: number }[];
+}
+
 export const getInsights = (language: Language) => api<Insights>(`/api/v1/insights?language=${language}`);
+export const getActivityDay = (language: Language, date: string) =>
+  api<ActivityDay>(`/api/v1/insights/day?language=${language}&date=${date}`, { cache: "no-store" });
 
 // ---------------------------------------------------------------- my dictionary
 
@@ -922,6 +957,43 @@ export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/
 
 export const setWordNote = (id: string, text: string) =>
   api<{ note: string | null }>(`/api/v1/words/${id}/note`, { method: "PUT", json: { text } });
+
+export interface WordCollection {
+  id: string;
+  name: string;
+  count: number;
+  created_at: string;
+}
+export interface WordCollectionDetail extends Omit<WordCollection, "count" | "created_at"> {
+  language: Language;
+  items: {
+    id: string;
+    lemma: string;
+    gender: string | null;
+    pos: string;
+    translation: string;
+    rank: number;
+    example: string | null;
+  }[];
+}
+export const listWordCollections = (language: Language) =>
+  api<WordCollection[]>(`/api/v1/words/collections?language=${language}`);
+export const getWordCollection = (id: string) =>
+  api<WordCollectionDetail>(`/api/v1/words/collections/${id}`);
+export const wordCollectionExportUrl = (id: string, format: "csv" | "anki") =>
+  `/api/v1/words/collections/${id}/export?format=${format}`;
+export const createWordCollection = (language: Language, name: string) =>
+  api<WordCollection>("/api/v1/words/collections", { json: { language, name } });
+export const renameWordCollection = (id: string, name: string) =>
+  api<WordCollection>(`/api/v1/words/collections/${id}`, { method: "PUT", json: { name } });
+export const addWordToCollection = (collectionId: string, itemId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}/items`, { json: { item_id: itemId } });
+export const addWordsToCollection = (collectionId: string, itemIds: string[]) =>
+  api<{ added: number }>(`/api/v1/words/collections/${collectionId}/items/bulk`, { json: { item_ids: itemIds } });
+export const removeWordFromCollection = (collectionId: string, itemId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}/items/${itemId}`, { method: "DELETE" });
+export const deleteWordCollection = (collectionId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}`, { method: "DELETE" });
 
 // ---------------------------------------------------------------- German verb lab
 

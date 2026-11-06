@@ -80,12 +80,17 @@ def check_spelling(language: Language, expected: str, answer: str, pos: str = ""
     for original, fallback, note in _VARIANTS[language]:
         if original in exp and ans == exp.replace(original, fallback):
             return SpellingResult(Verdict.VARIANT, 0.9, note)
+        if fallback in exp and ans == exp.replace(fallback, original):
+            return SpellingResult(Verdict.VARIANT, 0.9, note)
     # Several substitutions at once (e.g. "Strasse" for "Straße" with umlauts too)
     variant = exp
     notes = []
     for original, fallback, note in _VARIANTS[language]:
         if original in variant:
             variant = variant.replace(original, fallback)
+            notes.append(note)
+        elif fallback in variant:
+            variant = variant.replace(fallback, original)
             notes.append(note)
     if notes and ans == variant:
         return SpellingResult(Verdict.VARIANT, 0.9, notes[0])

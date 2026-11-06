@@ -612,3 +612,461 @@ entry.
 - The page says plainly that none of this counts as knowing a word; only Ověření does.
 - Tests: numbering contiguous and never reused, language filter, unseen count, the API
   (repeat-safe, CSRF required, per profile: the parent marking seen leaves the child's count).
+
+# Fresh innovation run: 2026-11-06
+
+This is a new 30-cycle run on top of the already completed loop above. Each cycle adds a distinct
+learner-facing improvement, records focused verification, and lands in its own local commit.
+
+## Cycle 1/30: learner-made vocabulary collections (Slovní sady)
+
+**Before:** the dictionary held every encountered word in one long list. Learners could add a
+personal memory hook, but could not gather a topic set such as travel words for later reference.
+
+**Built:** private, language-specific word collections backed by `word_collections` and
+`word_collection_items` (migration 0021), with API operations for creating, listing, viewing,
+adding, removing and deleting collections. The dictionary inspector can create a collection and
+add the current word in one action; `/collections` provides a responsive manager, reached from
+the dictionary and command palette.
+
+- A collection accepts only words that profile has encountered in that same language; the
+  existing content filter is checked on every add and read. Unseen and child-filtered words stay
+  unavailable, and collection data cannot be read by another profile.
+- Duplicate names in one profile and language return a conflict. Retried item additions are
+  idempotent. Collection counts also exclude words that are no longer visible to the profile.
+- This organizes the learner's own curriculum for reference without changing evidence, mastery,
+  review scheduling, or the words available in lessons and checks.
+- Verification: collection and dictionary API tests passed (6 tests), including CRUD, whitespace
+  cleanup, duplicate requests and names, language boundaries, unseen words, child filtering,
+  filtered counts and profile isolation. The backend suite passed (802 passed, 1 skipped) with
+  the test process pointed at Compose Redis; Ruff and `alembic check` passed. Frontend typecheck
+  and production build passed. Local Compose applied revision 0021; `/collections` and `/readyz`
+  returned HTTP 200.
+
+## Cycle 2/30: context-first listening from a word collection
+
+**Before:** collections grouped the learner's words for reference, but did not provide a way to
+return to them as useful in-context listening practice.
+
+**Built:** *Slova v kontextu* in the collection manager. Each eligible word is presented with its
+own example sentence and local TTS playback; the learner tries to infer the target word's meaning
+before revealing the Czech gloss. Playback can be slowed and the learner can move back and forth
+through the set.
+
+- Only collection words with a stored example sentence appear. The existing word audio endpoint
+  serves the clip and validates profile visibility; examples are reviewed lexicon text, not model
+  output.
+- The activity is explicitly ungraded and does not save attempts or alter review scheduling,
+  mastery, or daily goal evidence. Empty collections or collections without examples have a clear
+  message and remain usable for reference.
+- Verification: a collection API regression asserts example sentences are returned only with
+  the profile's visible collection words; frontend typecheck/build and targeted API tests run
+  before the local Cycle 2 commit.
+
+## Cycle 3/30: safe offline recovery for the installed app
+
+**Before:** PolyFlow had an installable manifest, but a full reload during a Wi-Fi or homelab
+outage produced a browser error. Learners had no clear way to tell whether their work had saved.
+
+**Built:** a production-only service worker in `public/sw.js`, a global online/offline status
+banner, and a self-contained Czech fallback page with a retry button.
+
+- The worker caches only same-origin `/_next/static/` assets. It never caches HTML pages, API
+  responses, learner content, or answers; learning still needs a live server connection.
+- Navigation stays network-first. On failure the worker returns a minimal standalone fallback
+  page which doesn't depend on app JavaScript or reveal cached profile data. The banner appears
+  in normal and focus mode when the browser reports offline.
+- Verification: frontend typecheck/build passed; the production Docker runner build succeeded.
+  A Playwright browser confirmed the worker controlled the page, cached 10 static assets and no
+  API URLs, then returned the Czech retry screen when taken offline.
+
+## Cycle 4/30: searchable grammar roadmap
+
+**Before:** the grammar page rendered every topic in long CEFR sections. Learners had to scroll
+through the full curriculum to return to an unfinished topic or find a specific explanation.
+
+**Built:** a diacritics-insensitive search across topic titles and summaries, status chips with
+per-status counts, and a one-tap filter for topics due for verification. The roadmap reports how
+many topics match and gives a clear no-results state. The introduction now describes grammar
+generically across all four languages instead of saying every learner is on the German path.
+
+- Filters affect presentation only. Every unit remains open from A1; the suggested order, mastery,
+  and graded verification contracts are unchanged.
+- Verification: frontend typecheck and production build; current local grammar route request and
+  git diff checks before the local Cycle 4 commit.
+
+## Cycle 5/30: export a selected vocabulary collection
+
+**Before:** learners could export their full dictionary as a spreadsheet or Anki deck, but a
+carefully assembled topic collection had to be copied out by hand.
+
+**Built:** CSV and Anki download actions in each non-empty collection, backed by a profile-owned
+collection export endpoint. The export preserves the existing dictionary formats, including
+German noun articles, memory hooks, review state and lexicon provenance.
+
+- The endpoint intersects collection membership with the acting profile's learned words and
+  current content visibility; another profile receives not found. Both file formats contain only
+  the chosen set and are sent with private, no-store download headers.
+- The collection page explains that downloads contain only currently visible words and their
+  personal notes. Existing CSV spreadsheet-safety handling and Anki tags are reused.
+- Verification: collection API tests passed (5 tests), covering CSV and Anki contents, selected
+  words, file naming, and profile isolation. Ruff check/format, frontend typecheck, production
+  build, and `git diff --check` passed.
+
+## Cycle 6/30: practice recommendations from recent errors
+
+**Before:** the practice hub helped learners browse by skill and reopen recent modes, but it did
+not connect those choices to the kinds of mistakes they had recently made in graded checks.
+
+**Built:** a compact recommendation panel that reads the profile's recent error aggregates and
+links the most frequent supported error types to a relevant exercise. Article/ending/gender
+recommendations respect the active language; spelling and orthography point to dictation, and
+word-order errors point to the word-order trainer.
+
+- Recommendations name the error type and observed count so the learner can judge why a mode was
+  suggested. The panel is omitted when there are no supported signals; practice remains ungraded.
+- This is a navigation aid only: it does not change error history, lesson planning, evidence or
+  review timing. A failed recommendation request is shown as an error instead of guessing.
+- Verification: mistake API tests passed (4 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.
+
+## Cycle 7/30: listen through a full story
+
+**Before:** generated reading had a play button on every line, so listening to a complete story
+required stopping and starting each sentence by hand.
+
+**Built:** a continuous reader control that plays approved story audio line by line, advances
+automatically, highlights the line currently playing, and exposes native audio controls for pause
+and seek. Learners can restart the text or stop playback at any time.
+
+- Audio still comes from the existing per-line story endpoint; the UI does not synthesize or
+  publish any new text. A failed line shows a retry hint while keeping individual line playback.
+- Playback state resets when the selected daily story changes and does not affect question
+  answers or learning evidence.
+- Verification: story API tests passed (12 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.
+
+## Cycle 8/30: recognize sound patterns by ear
+
+**Before:** the pronunciation guide explained spelling patterns and let learners play individual
+known examples, but it did not offer a listening activity to help distinguish those patterns.
+
+**Built:** an ungraded sound challenge above the guide. It plays a word the learner has already
+encountered and asks which spelling-to-sound rule it demonstrates. After the choice, the guide
+shows the rule's Czech sound cue and explanation, then offers another word.
+
+- The challenge only uses currently visible, encountered examples and offers a clear message until
+  examples exist for at least two rules. It avoids exposing new lexicon through audio.
+- Scores are temporary round counts in the page; there is no grade, saved answer, mastery event or
+  change to lesson scheduling. The original reference guide and individual replay remain available.
+- Verification: sound API tests passed (39 tests); frontend typecheck and production build passed;
+  `git diff --check` passed.
+
+## Cycle 9/30: generate a story around a learner's collection
+
+**Before:** a learner could organize a theme set and generate a daily reading, but the story
+generator chose its target words independently of those personal collections.
+
+**Built:** before creating the day's story, the learner can optionally select a same-language
+collection. The generator uses up to five words from that set as its story targets, supplies the
+collection name as the topic, and identifies the source collection in the finished reader.
+
+- The server requires at least three currently visible, already encountered words and checks
+  collection ownership and language before model availability. It keeps the existing vocabulary
+  coverage validation, blacklist checks and child-profile model policy.
+- A small set is disabled with an explanation, and generation reports a clear error if a selected
+  set no longer has enough visible words. Ordinary generation from the learning plan is unchanged.
+- Verification: story API tests passed (14 tests), including collection target selection,
+  minimum-size handling and cross-profile isolation. Ruff, frontend typecheck/build and
+  `git diff --check` passed.
+
+## Cycle 10/30: inspect the review forecast by day
+
+**Before:** the 14-day chart showed how many word and grammar reviews were coming, but learners
+could not see which words or topics made up a selected day's total.
+
+**Built:** each forecast column is now a keyboard-accessible selector. Choosing a day reveals its
+due vocabulary and grammar topics, with links to the relevant study areas. The current day is
+selected initially, and empty dates have a clear explanation.
+
+- The API returns item details alongside the existing counts, and applies the learner's current
+  visibility filter before including vocabulary. A regression test confirms child-hidden content
+  is absent from both details and forecast counts.
+- The forecast remains a schedule estimate; selecting a date changes no progress or evidence.
+- Verification: insights API tests passed (2 tests), including exact due-item details and child
+  filtering. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 11/30: revisit earlier daily readings
+
+**Before:** the reader showed today's generated story or dialogue. Once a new day arrived, older
+texts had no learner-facing path back into the reading experience.
+
+**Built:** a recent-reading archive on the story page, with dates, titles and story/dialogue type.
+Selecting an entry loads its original text, glossary, comprehension state and per-line audio; a
+one-tap action returns to today's reading.
+
+- The API returns only generated, safety-checked entries owned by the acting profile and selected
+  language, with a bounded 30-item default. Pending, rejected or failed generations stay hidden.
+- The archive is read-only for learning records; revisiting text and questions does not create new
+  mastery evidence.
+- Verification: story API tests passed (14 tests), including language and profile isolation.
+  Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 12/30: pause a lesson and resume it later
+
+**Before:** the learning session already stayed open on the server, but the focused lesson view had
+no explicit pause action. Learners had to leave the page and rely on the dashboard's resume label.
+
+**Built:** a visible *Pozastavit* control during the scene, word-introduction and practice phases.
+It returns to the dashboard without completing or deleting the lesson, where the existing resume
+action continues the open session.
+
+- The control is disabled while an answer request is in flight. Its accessible hint explains that
+  an unsubmitted text answer is not saved.
+- Verification: the server resume regression passed (1 test); frontend typecheck and production
+  build passed; `git diff --check` passed.
+
+## Cycle 13/30: search learned words from the command palette
+
+**Before:** Ctrl+K and `/` could jump to learning pages and change settings, but finding a word
+required opening the dictionary and searching there.
+
+**Built:** after two characters, the palette makes a debounced, cancellable search against the
+acting profile's dictionary and adds up to six word-and-translation results. Choosing a result
+opens its dictionary inspector directly; the dictionary also accepts a focused word ID from that
+route.
+
+- Search uses the existing profile-scoped, child-filtered word-list API. No unseen words or other
+profiles' entries are introduced into global navigation; API failures leave ordinary commands
+available.
+- Verification: dictionary API tests passed (2 tests); frontend typecheck and production build
+passed; `git diff --check` passed.
+
+## Cycle 14/30: delete a saved generated reading
+
+**Before:** learners could revisit readings from the archive but had no way to remove one they no
+longer wanted to keep.
+
+**Built:** a per-reading delete control with an explicit confirmation. The server permanently
+removes only a completed, safety-checked generated story owned by the acting profile; deleting
+today's story also lets the learner generate a replacement for that day.
+
+- Other profiles receive not found, and pending or failed generations cannot be deleted through
+  the archive action. The UI removes the item and closes its reader if that item was open.
+- Verification: story API tests passed (15 tests), including owned deletion, regeneration,
+  cross-profile rejection and archive visibility. Ruff, frontend typecheck/build and
+  `git diff --check` passed.
+
+## Cycle 15/30: save selected dictionary words to a collection
+
+**Before:** learners could add words to a personal collection one at a time, making it tedious
+to gather a group of related words from a dictionary search.
+
+**Built:** dictionary rows now have independent selection checkboxes and a contextual bulk action
+to add the selected words to any same-language collection. The toolbar shows selection and
+collection counts, reports how many items were newly added, and offers a direct path to create a
+collection when none exists.
+
+- The server checks ownership, language, encounter history and child visibility for the entire
+  selection before inserting anything; duplicate submissions are idempotent. Keyboard navigation
+  shortcuts no longer hijack inputs or selection controls.
+- Verification: collection API tests passed (6 tests), including duplicate handling and atomic
+  rejection of an unavailable word. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 16/30: recall every word in a collection
+
+**Before:** collection practice depended on example sentences, so saved words without an example
+could not be practiced there. The only activity also focused on listening to the sentence.
+
+**Built:** collection practice now offers a shuffled recall-card mode for every word. The learner
+sees the Czech meaning, reveals the target word and audio, then either continues or queues that
+word to appear again in the current session.
+
+- Recall choices are temporary and ungraded; they do not change review schedules, mastery, or
+  learning history. The existing sentence-listening activity remains available when examples
+  exist, and the recall mode still works when none do.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 17/30: search and organize large word collections
+
+**Before:** a collection always appeared in frequency order. As a set grew, finding a word or
+returning to useful example sentences meant scanning the full list.
+
+**Built:** collection details now include local search across words, Czech meanings and example
+sentences, alphabetical or frequency sorting, and a filter for words with examples. A live result
+count and clear empty state keep each combination understandable.
+
+- Filtering changes only the current view; collection membership and saved learning records stay
+  untouched.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 18/30: continue story audio from any sentence
+
+**Before:** the reader could play an individual sentence or listen to the whole story, but whole
+story playback always restarted from the beginning.
+
+**Built:** every sentence now has a clearly labeled action to start continuous playback there.
+Audio proceeds through the remaining lines and highlights the active sentence; the existing
+whole-story action still starts from the first line.
+
+- Sentence playback remains available separately for replaying just one line. Starting playback
+  from a line near the end finishes at the end of the story.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 19/30: combine practice skill filters
+
+**Before:** the practice hub could filter exercises by only one skill at a time, so a learner
+looking for an activity that combines listening and writing had to choose between those goals.
+
+**Built:** the skill picker now supports multiple simultaneous selections. It shows every practice
+mode that covers at least one selected skill, explains that matching rule, and retains a clear
+one-tap reset to all modes.
+
+- The filter remains a discovery aid only; it does not alter learner settings or progress.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 20/30: pin favorite practice modes to the dashboard
+
+**Before:** the dashboard surfaced only the three most recently opened practice modes. Learners
+could not keep a preferred routine visible when their recent activity changed.
+
+**Built:** practice cards can now be pinned or unpinned, and favorites appear as quick links on
+both the practice hub and dashboard. Favorites are stored on the current browser, independent of
+server-side learning records, and modes unavailable in the selected language are hidden.
+
+- If browser storage is unavailable, pinning still updates the current view but cannot persist
+  across visits.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 21/30: show personal progress along vocabulary milestones
+
+**Before:** the dashboard listed the vocabulary milestones but did not show which milestones the
+active learner had reached or how far away the next one was.
+
+**Built:** the path now marks completed milestones, highlights the next target, and shows an
+accessible progress bar with the current known-word count and remaining words. It explains when
+the required B2 vocabulary path is complete.
+
+- The path uses the existing profile-scoped progress count and keeps its CEFR disclaimer; the
+  visual never describes vocabulary rank as a certified communication level.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 22/30: see grammar progress by level
+
+**Before:** the grammar roadmap grouped topics by level and showed each topic's state, but gave no
+at-a-glance sense of how much of a level was known or due for review.
+
+**Built:** each visible grammar level now has a progress bar based on topics marked known or
+mastered, plus counts for those topics and the topics due for review. The summary follows the
+current search and filters, so it describes the topics currently on screen.
+
+- Progress is based on the existing grammar states; it does not award a level or alter review
+  scheduling.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 23/30: turn weekly difficult words into a study set
+
+**Before:** the weekly recap identified words that had caused repeated mistakes, but learners had
+to find those words again and add them to a collection one at a time.
+
+**Built:** the recap now offers a short naming form that creates a personal word collection and
+adds its listed difficult words in one bulk request. Success and partial-failure states link back
+to the collection area.
+
+- The bulk endpoint rechecks word ownership, language and child visibility. The collection can
+  support future practice without turning recap errors into a new mastery result.
+- Verification: collection API safety/idempotency tests were already green in Cycle 15; frontend
+  typecheck and production build passed for this integration; `git diff --check` passed.
+
+## Cycle 24/30: replace the gender speed test with an untimed round
+
+**Before:** the gender practice page included a 60-second challenge and saved a local best score,
+which put time pressure and a persistent record inside ordinary practice.
+
+**Built:** the challenge is now a fixed 10-word round with a simple progress bar and no clock.
+Learners can pause to read the suffix rule after a miss, and the round ends without saving a
+score or record.
+
+- Ordinary gender practice remains available, including filtering to words the learner has met.
+  This brings the challenge in line with the project's rule that timed assessment belongs in an
+  explicit test mode.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 25/30: recover story answers after a network error
+
+**Before:** if a comprehension answer request failed, the reader left the learner with no retry
+path. Switching to another story could also carry the previous reading's local answer state.
+
+**Built:** a failed submission now locks the original choice and offers a one-action retry for
+that same answer. Changing stories clears local results, errors and busy state, and late responses
+from the previous story are ignored. Previously saved archive answers stay locked.
+
+- The server records the first answer per question; retrying the identical choice is safe and
+  does not change saved results.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 26/30: surface the install action for the web app
+
+**Before:** the production app had a manifest and service worker, but no navigation control for
+the install prompt offered by supported browsers.
+
+**Built:** the shared navigation now listens for the browser's installability event and shows a
+clearly labeled install button only when that prompt is available. The action opens the native
+browser prompt and disappears after installation or dismissal.
+
+- Browsers that do not expose the install prompt keep the regular navigation unchanged. The
+  button does not claim that personal learning data is available offline.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 27/30: reopen recent readings from the dashboard
+
+**Before:** the dashboard linked to today's reading, but returning to a saved story required
+opening the stories page and finding it in the archive list.
+
+**Built:** the daily plan now shows the three most recent saved readings, each opening directly
+in the story archive reader through a profile-checked story link.
+
+- The archive API already limits results to generated, safety-checked readings for the acting
+  profile and selected language. A deep link is opened only when its ID is in that archive list.
+- Verification: frontend typecheck and production build passed; `git diff --check` passed.
+
+## Cycle 28/30: explore a day in the activity calendar
+
+**Before:** the 26-week activity calendar showed daily totals in tooltips, but selecting a day
+could not reveal which words or grammar topics were practiced.
+
+**Built:** calendar cells are now keyboard-selectable. A selected day shows its word and grammar
+topics with separate graded and practice counts, and links directly to the relevant dictionary
+card or grammar lesson.
+
+- The new API is limited to the learner's own 182-day calendar, returns no answer text, filters
+  vocabulary through the active child-content policy, and omits inactive grammar units.
+- Verification: insights API tests passed (2 tests), including grouped counts, out-of-range dates
+  and child-hidden word filtering. Ruff, frontend typecheck/build and `git diff --check` passed.
+
+## Cycle 29/30: rename personal word collections
+
+**Before:** learners could organize encountered words into collections, but a collection's name
+could not be updated when their study plan changed.
+
+**Built:** collection owners can now rename a collection inline. Names are whitespace-normalized,
+limited to 60 characters, scoped to the learner, and duplicate names return a clear conflict.
+
+- Added API coverage for normalized renames, cross-profile access, and duplicate-name conflicts.
+- Verification: all 8 word-collection API tests passed, Ruff passed, and frontend typecheck and
+  production build passed; `git diff --check` passed.
+
+## Cycle 30/30: bring the weekly learning coach to the dashboard
+
+**Before:** the personalized weekly recap, difficult words, and suggested next activity were
+available on the insights page, away from the dashboard where learners choose what to do next.
+
+**Built:** the home dashboard now includes the weekly recap and its actionable next step, so
+learners can see recent progress and continue into review, mistake correction, or a lesson from
+their main entry point.
+
+- The recap keeps its existing profile and language scoped API, reports unknown accuracy as
+  unknown, and does not add streak pressure or graded activity.
+- Verification: all 4 recap API tests passed; frontend typecheck and production build passed;
+  Compose config passed; rebuilt Compose stack reports `/readyz` ready and serves the frontend
+  with HTTP 200 on port 3001.

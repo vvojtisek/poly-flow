@@ -8,7 +8,7 @@ import httpx
 import pytest
 
 from app.api.deps import get_limiter
-from app.api.learning import get_now
+from app.api.learning import _chosen_voice, _speech, get_now
 from app.domain import voices
 from app.domain.enums import Language
 from app.domain.voices import Voice
@@ -21,6 +21,20 @@ from tests.test_scenes import seed
 
 REPO = Path(__file__).resolve().parents[2]
 WAV = b"RIFF\x24\x00\x00\x00WAVEfmt " + bytes(28)
+
+
+def test_us_english_preference_does_not_select_a_uk_server_voice():
+    from types import SimpleNamespace
+
+    voice = _chosen_voice(SimpleNamespace(settings={"english_variant": "us"}), Language.EN)
+    assert voice == "__english_us_voice_unavailable__"
+
+
+async def test_us_english_server_audio_reports_unavailable_instead_of_fallback():
+    from fastapi import HTTPException
+
+    with pytest.raises(HTTPException, match="english_variant_voice_unavailable"):
+        await _speech(None, Language.EN, "colour", "__english_us_voice_unavailable__")
 
 
 class FakePiper:

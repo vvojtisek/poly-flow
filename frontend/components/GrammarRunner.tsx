@@ -170,12 +170,14 @@ function Tiles({
  */
 export function GrammarRunner({
   language,
+  englishVariant = "uk",
   mode,
   start,
   onExit,
   exitLabel,
 }: {
   language: Language;
+  englishVariant?: "uk" | "us";
   mode: "learn" | "check";
   start: () => Promise<{ session: GrammarSession | null }>;
   onExit: () => void;
@@ -240,6 +242,7 @@ export function GrammarRunner({
       <GrammarNotes
         unit={unit}
         language={language}
+        englishVariant={englishVariant}
         header={
           <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-500">
             <BookOpen className="size-4" aria-hidden /> {cs.grammar.notes} · {unit.level}
@@ -281,7 +284,7 @@ export function GrammarRunner({
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">{session.unit!.title}</h2>
         <div className="lg:hidden">
-          <GrammarNotes unit={session.unit!} language={language} />
+          <GrammarNotes unit={session.unit!} language={language} englishVariant={englishVariant} />
         </div>
         <p className="hidden text-slate-600 lg:block dark:text-slate-300">{session.unit!.summary}</p>
         <Notice>{cs.lesson.learnHelp}</Notice>
@@ -477,7 +480,7 @@ export function GrammarRunner({
             <BookOpen className="size-4" aria-hidden /> {cs.grammar.backToNotes}
           </summary>
           <div className="mt-2">
-            <GrammarNotes unit={unit} language={language} />
+            <GrammarNotes unit={unit} language={language} englishVariant={englishVariant} />
           </div>
         </details>
       )}

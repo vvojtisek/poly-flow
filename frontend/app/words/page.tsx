@@ -1,14 +1,16 @@
 "use client";
 
-import { BookMarked, Clock, Download, Search, X } from "lucide-react";
+import { BookMarked, Clock, Download, FolderOpen, Search, X } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
+import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { getWord, listWords, myWordAudioUrl, wordExportUrl, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
+import { addWordsToCollection, getWord, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { genderClass } from "@/lib/gender";
 import { cs } from "@/lib/i18n/cs";
@@ -91,6 +93,7 @@ function Inspector({ id, onClose }: { id: string; onClose: () => void }) {
             </div>
           )}
           <NoteEditor itemId={w.id} initial={w.note} />
+          <WordCollectionControl itemId={w.id} language={w.language} />
           <div className="flex flex-col gap-1">
             <p className="text-xs font-semibold text-slate-500">{t.journey}</p>
             <ol className="grid grid-cols-5 gap-1">
@@ -154,7 +157,20 @@ export default function WordsPage() {
   const [failed, setFailed] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [cursor, setCursor] = useState(0);
+  const [collections, setCollections] = useState<WordCollection[]>([]);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [targetCollection, setTargetCollection] = useState("");
+  const [savingSelected, setSavingSelected] = useState(false);
+  const [bulkNotice, setBulkNotice] = useState<{ text: string; error?: boolean } | null>(null);
   const search = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const initialQuery = params.get("q");
+    const initialWord = params.get("word");
+    if (initialQuery) setQ(initialQuery);
+    if (initialWord) setOpen(initialWord);
+  }, []);
 
   useEffect(() => {
     if (!language) return;
@@ -174,6 +190,14 @@ export default function WordsPage() {
     };
   }, [language, q, status, due, me?.acting.id]);
 
+  useEffect(() => {
+    if (!language) return;
+    setSelected([]);
+    setTargetCollection("");
+    setBulkNotice(null);
+    listWordCollections(language).then(setCollections).catch(() => setCollections([]));
+  }, [language, me?.acting.id]);
+
   const loadMore = useCallback(async () => {
     if (!language || !data) return;
     setMore(true);
@@ -186,6 +210,7 @@ export default function WordsPage() {
   }, [language, data, q, status, due]);
 
   function onListKey(e: React.KeyboardEvent) {
+    if ((e.target as HTMLElement).closest("input, select, textarea, button")) return;
     if (!data?.items.length) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -197,6 +222,22 @@ export default function WordsPage() {
       e.preventDefault();
       setOpen(data.items[cursor]!.id);
     } else if (e.key === "Escape") setOpen(null);
+  }
+
+  async function saveSelected() {
+    if (!targetCollection || selected.length === 0) return;
+    setSavingSelected(true);
+    setBulkNotice(null);
+    try {
+      const result = await addWordsToCollection(targetCollection, selected);
+      setBulkNotice({ text: result.added ? t.bulkAdded(result.added, selected.length) : t.bulkNoop });
+      setSelected([]);
+      if (language) setCollections(await listWordCollections(language));
+    } catch {
+      setBulkNotice({ text: t.bulkFailed, error: true });
+    } finally {
+      setSavingSelected(false);
+    }
   }
 
   useEffect(() => {
@@ -217,6 +258,9 @@ export default function WordsPage() {
             <p className="text-sm text-slate-600 dark:text-slate-300">{t.intro}</p>
           </div>
           <LanguagePicker me={me} />
+          <Link href="/collections" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium hover:border-brand-500 dark:border-slate-700">
+            <FolderOpen className="size-4" aria-hidden /> {cs.collections.link}
+          </Link>
         </div>
         {total > 0 && me.acting.active_language && (
           <details className="group self-start text-sm">
@@ -284,17 +328,40 @@ export default function WordsPage() {
               </button>
             </div>
             {failed && <Notice tone="error">{cs.common.error}</Notice>}
+            {selected.length > 0 && (
+              <section aria-label={t.addSelected} className="flex flex-wrap items-center gap-2 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-3">
+                <span className="mr-auto text-sm font-semibold">{t.selected(selected.length)}</span>
+                {collections.length ? (
+                  <>
+                    <label className="sr-only" htmlFor="bulk-collection">{t.selectCollection}</label>
+                    <select id="bulk-collection" value={targetCollection} onChange={(e) => setTargetCollection(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+                      <option value="">{t.selectCollection}</option>
+                      {collections.map((collection) => <option key={collection.id} value={collection.id}>{collection.name} · {cs.collections.count(collection.count)}</option>)}
+                    </select>
+                    <Button disabled={!targetCollection || savingSelected} onClick={() => void saveSelected()}>{savingSelected ? cs.common.loading : t.addSelected}</Button>
+                  </>
+                ) : (
+                  <Link href="/collections" className="rounded-lg bg-brand-500 px-3 py-2 text-sm font-semibold text-white">{t.createCollection}</Link>
+                )}
+                <button type="button" onClick={() => setSelected([])} aria-label={cs.common.close} className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-800"><X className="size-4" aria-hidden /></button>
+              </section>
+            )}
+            {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
             {data && data.items.length === 0 && <Notice>{total === 0 ? t.empty : t.noMatch}</Notice>}
             <ul className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
               {data?.items.map((w, i) => (
                 <li key={w.id} id={`word-row-${i}`}>
+                  <div className="flex items-center">
+                  <label className="flex shrink-0 items-center pl-3" title={t.selectWord(w.lemma)}>
+                    <input type="checkbox" checked={selected.includes(w.id)} aria-label={t.selectWord(w.lemma)} onChange={(e) => setSelected((current) => e.target.checked ? [...current, w.id] : current.filter((id) => id !== w.id))} className="size-4 accent-brand-600" />
+                  </label>
                   <button
                     type="button"
                     onClick={() => {
                       setCursor(i);
                       setOpen(w.id);
                     }}
-                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-left ${
+                    className={`flex min-w-0 flex-1 items-center gap-3 px-4 py-2.5 text-left ${
                       open === w.id ? "bg-brand-500/10" : i === cursor ? "bg-slate-50 dark:bg-slate-800/60" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
                     }`}
                   >
@@ -308,6 +375,7 @@ export default function WordsPage() {
                     {w.due && <Clock className="size-4 text-amber-500" aria-label={t.dueNow} />}
                     <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${PILL[w.status]}`}>{t.status[w.status]}</span>
                   </button>
+                  </div>
                 </li>
               ))}
             </ul>

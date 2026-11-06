@@ -12,7 +12,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.enums import Language, ProgressState
 from app.domain.export import Row
-from app.models import LearningEvent, LexiconItem, User, UserWordProgress
+from app.models import (
+    LearningEvent,
+    LexiconItem,
+    User,
+    UserWordProgress,
+    WordCollection,
+    WordCollectionItem,
+)
 from app.services.learning import LearningError, _suitable
 from app.services.notes import notes_for
 
@@ -192,19 +199,53 @@ async def export_rows(db: AsyncSession, user: User, language: Language) -> list[
     ).all()
     notes = await notes_for(db, user.id, [item.id for item, _, _ in rows])
     return [
-        Row(
-            lemma=item.lemma,
-            article=item.gender if language == "de" and item.pos == "NOUN" else None,
-            translation=item.translation_cs,
-            status=status,
-            pos=item.pos,
-            rank=item.frequency_rank,
-            example=item.example_sentence,
-            note=notes.get(item.id),
-            next_review=prog.next_review_at.date().isoformat() if prog.next_review_at else None,
-            correct=prog.correct_count,
-            errors=prog.error_count,
-            source=item.source,
+        _export_row(item, prog, status, language, notes.get(item.id)) for item, prog, status in rows
+    ]
+
+
+async def export_collection_rows(
+    db: AsyncSession, user: User, collection_id: uuid.UUID
+) -> tuple[Language, list[Row]]:
+    collection = await db.scalar(
+        select(WordCollection).where(
+            WordCollection.id == collection_id, WordCollection.user_id == user.id
         )
+    )
+    if collection is None:
+        raise LearningError("collection_not_found", 404)
+    p, li = UserWordProgress, LexiconItem
+    rows = (
+        await db.execute(
+            select(li, p, _status())
+            .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
+            .join(WordCollectionItem, WordCollectionItem.lexicon_item_id == li.id)
+            .where(
+                WordCollectionItem.collection_id == collection.id,
+                li.language == collection.language,
+                _suitable(user),
+            )
+            .order_by(li.frequency_rank)
+        )
+    ).all()
+    notes = await notes_for(db, user.id, [item.id for item, _, _ in rows])
+    return collection.language, [
+        _export_row(item, prog, status, collection.language, notes.get(item.id))
         for item, prog, status in rows
     ]
+
+
+def _export_row(item, prog, status: str, language: Language, note: str | None) -> Row:
+    return Row(
+        lemma=item.lemma,
+        article=item.gender if language == Language.DE and item.pos == "NOUN" else None,
+        translation=item.translation_cs,
+        status=status,
+        pos=item.pos,
+        rank=item.frequency_rank,
+        example=item.example_sentence,
+        note=note,
+        next_review=prog.next_review_at.date().isoformat() if prog.next_review_at else None,
+        correct=prog.correct_count,
+        errors=prog.error_count,
+        source=item.source,
+    )

@@ -1,0 +1,118 @@
+"use client";
+
+import { Compass } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+
+import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { LessonRunner } from "@/components/LessonRunner";
+import { Button, Notice } from "@/components/ui";
+import { getPlacementInfo, skipPlacement, type Language, type Me, type PlacementInfo } from "@/lib/api";
+import { useRequireMe } from "@/lib/auth";
+import { cs } from "@/lib/i18n/cs";
+
+function Intro({ me, language, onStart }: { me: Me; language: Language; onStart: () => void }) {
+  const router = useRouter();
+  const [info, setInfo] = useState<PlacementInfo | null>(null);
+  const [failed, setFailed] = useState(false);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    getPlacementInfo(language)
+      .then((i) => {
+        if (cancelled) return;
+        if (i.active_session_id) onStart(); // an unfinished test continues where it stopped
+        else setInfo(i);
+      })
+      .catch(() => !cancelled && setFailed(true));
+    return () => {
+      cancelled = true;
+    };
+  }, [language, onStart]);
+
+  async function skip() {
+    setBusy(true);
+    try {
+      await skipPlacement(language);
+      router.push("/");
+    } catch {
+      setFailed(true);
+      setBusy(false);
+    }
+  }
+
+  if (failed) return <Notice tone="error">{cs.common.offline}</Notice>;
+  if (!info) return <p className="text-center text-slate-500">{cs.common.loading}</p>;
+  const previous = info.placement?.status === "placed" ? info.placement.level : null;
+  return (
+    <div className="flex flex-col gap-4">
+      <h1 className="flex items-center gap-2 text-xl font-bold">
+        <Compass className="size-6 text-brand-500" aria-hidden />
+        {cs.placement.vocabularyTitle}
+      </h1>
+      <ol className="grid gap-2 sm:grid-cols-2">
+        <li className="rounded-xl border border-brand-500/50 bg-brand-500/5 p-3">
+          <p className="font-semibold">{cs.placement.part1}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-300">{cs.placement.part1Help}</p>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={() => router.push("/placement/cefr")}
+            className="h-full w-full rounded-xl border border-slate-200 p-3 text-left hover:border-brand-500 dark:border-slate-800"
+          >
+            <p className="font-semibold">{cs.placement.part2}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-300">{cs.placement.part2Help}</p>
+          </button>
+        </li>
+      </ol>
+      <div className="flex flex-col gap-1">
+        <p className="text-xs text-slate-500">{cs.placement.pickLanguage}</p>
+        <LanguagePicker me={me} />
+      </div>
+      <div className="flex flex-col gap-2 text-sm text-slate-700 dark:text-slate-200">
+        <p>{cs.placement.intro(info.max_questions)}</p>
+        <p>{cs.placement.noGuessing}</p>
+        <p>{cs.placement.calm}</p>
+        <p>{cs.placement.anytime}</p>
+        <p>{cs.placement.counts}</p>
+      </div>
+      <Notice>{cs.placement.coverage(info.ceiling)}</Notice>
+      {previous !== null && <p className="text-sm text-slate-500">{cs.placement.previous(previous)}</p>}
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <Button className="flex-1 !py-4 text-lg" onClick={onStart} disabled={busy || info.ceiling === 0} autoFocus>
+          {cs.placement.start}
+        </Button>
+        {info.placement === null ? (
+          <Button variant="secondary" className="flex-1" onClick={() => void skip()} disabled={busy}>
+            {cs.placement.skip}
+          </Button>
+        ) : (
+          <Button variant="secondary" className="flex-1" onClick={() => router.push("/")}>
+            {cs.placement.back}
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function PlacementPage() {
+  const me = useRequireMe();
+  const [started, setStarted] = useState(false);
+  const start = useCallback(() => setStarted(true), []);
+  if (!me) return <FullPageStatus text={cs.common.loading} />;
+  const language = me.acting.active_language;
+  return (
+    <AppShell me={me}>
+      <div className="mx-auto w-full max-w-xl">
+        {started ? (
+          <LessonRunner key={`${me.acting.id}:${language}:placement`} language={language} mode="placement" />
+        ) : (
+          <Intro key={`${me.acting.id}:${language}`} me={me} language={language} onStart={start} />
+        )}
+      </div>
+    </AppShell>
+  );
+}
