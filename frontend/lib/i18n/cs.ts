@@ -458,6 +458,10 @@ export const cs = {
       stories: { title: "Čtení", blurb: "Krátký text jen ze slov, která znáš." },
     } as Record<string, { title: string; blurb: string }>,
     skill: { listening: "poslech", speaking: "mluvení", writing: "psaní", reading: "čtení", grammar: "gramatika" } as Record<string, string>,
+    all: "Vše",
+    filter: "Co chceš procvičit?",
+    recent: "Naposledy",
+    count: (n: number) => `${n} ${n === 1 ? "způsob" : n < 5 ? "způsoby" : "způsobů"} procvičování`,
   },
   tabs: {
     home: "Domů",

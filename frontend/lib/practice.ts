@@ -33,3 +33,41 @@ export const PRACTICE_MODES: PracticeMode[] = [
 export function modesFor(language: Language): PracticeMode[] {
   return PRACTICE_MODES.filter((m) => !m.languages || m.languages.includes(language));
 }
+
+export const SKILLS: Skill[] = ["listening", "speaking", "writing", "reading", "grammar"];
+
+// The last practice modes this device opened (most recent first). A convenience only: it stays
+// in this browser, is never sent to the server and never counts as progress.
+const RECENT_KEY = "pf_recent_modes";
+const MAX_RECENT = 3;
+
+export function readRecent(): PracticeMode["id"][] {
+  try {
+    const raw = JSON.parse(window.localStorage.getItem(RECENT_KEY) ?? "[]");
+    const ids = new Set(PRACTICE_MODES.map((m) => m.id));
+    return Array.isArray(raw) ? raw.filter((x): x is PracticeMode["id"] => ids.has(x)).slice(0, MAX_RECENT) : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Remembers a visit when `path` is a practice mode's page. */
+export function recordVisit(path: string) {
+  const mode = PRACTICE_MODES.find((m) => path === m.href || path.startsWith(`${m.href}/`));
+  if (!mode) return;
+  try {
+    const next = [mode.id, ...readRecent().filter((id) => id !== mode.id)].slice(0, MAX_RECENT);
+    window.localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+/** Modes for a language with the recently used ones first (stable order otherwise). */
+export function byRecent(modes: PracticeMode[], recent: PracticeMode["id"][]): PracticeMode[] {
+  const rank = (m: PracticeMode) => {
+    const i = recent.indexOf(m.id);
+    return i === -1 ? recent.length : i;
+  };
+  return [...modes].sort((a, b) => rank(a) - rank(b));
+}

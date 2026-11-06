@@ -2,7 +2,7 @@
 
 import { BarChart3, BookMarked, Dumbbell, GraduationCap, LogOut, Maximize2, Minimize2, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 
 import { BottomTabs } from "@/components/BottomTabs";
@@ -16,6 +16,7 @@ import { useAuth } from "@/lib/auth";
 import { useFocusMode } from "@/lib/focus";
 import { cs } from "@/lib/i18n/cs";
 import { isTypingTarget } from "@/lib/keyboard";
+import { recordVisit } from "@/lib/practice";
 import { rankName } from "@/lib/ranks";
 import { useRanks } from "@/lib/useRanks";
 
@@ -132,6 +133,11 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   const router = useRouter();
   const [focusPref, toggleFocus] = useFocusMode();
   const focus = focusable && focusPref;
+  const path = usePathname();
+
+  useEffect(() => {
+    if (path) recordVisit(path);
+  }, [path]);
 
   useEffect(() => {
     if (!focusable) return;

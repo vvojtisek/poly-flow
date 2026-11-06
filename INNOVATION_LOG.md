@@ -37,6 +37,7 @@ unreviewed.
 | 24 | Focus mode (Soustředění) | lessons and checks without header, tabs or links; key F, remembered per device |
 | 25 | How letters sound (Jak se to čte) | spelling-to-sound rules for Czech readers in four languages, examples from the learner's own words |
 | 26 | Minimal pairs (Slyšíš rozdíl?) | hear one word of a pair (ship/sheep, Tür/Tier, pala/palla, rue/roue) and pick it |
+| 27 | Practice hub filters | filter 12 practice modes by skill, recently used modes first on the hub and dashboard |
 
 ## Cycle 1/30: adaptive CEFR placement test (A1 to B2+)
 
@@ -532,3 +533,17 @@ them, so "bag" and "back" sound the same to a Czech speaker).
 - The audio endpoint speaks only words from the fixed sets (no free text). Without the speech
   server the page says so and the pairs stay readable.
 - Marked as a drafted, unreviewed set. Tests check the data shape, lookups and the API bounds.
+
+## Cycle 27/30: a practice hub that scales (filters and recents)
+
+**Before:** cycles 7 to 26 grew the practice hub to 12 modes. A flat grid of 12 cards is
+hard to scan on a phone, and the dashboard chips listed them in a fixed order.
+
+**Built:** skill filters and "Naposledy" on `/practice`; recency order on the dashboard chips.
+
+- Filter chips (Vše, poslech, mluvení, psaní, čtení, gramatika), only for skills the language
+  has, with a live count ("6 způsobů procvičování").
+- The last three practice modes opened on this device are shown first, recorded centrally in
+  `AppShell` from the page path, so every way of getting there counts (hub, tab bar, palette,
+  dashboard). Stored in local storage only: never sent, never progress.
+- `lib/practice.ts` gains `SKILLS`, `readRecent`, `recordVisit` and `byRecent`.

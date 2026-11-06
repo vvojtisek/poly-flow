@@ -19,7 +19,7 @@ import { Button, Notice } from "@/components/ui";
 import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
-import { modesFor } from "@/lib/practice";
+import { byRecent, modesFor, readRecent } from "@/lib/practice";
 import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
 // Mobile: practice first, single column. lg+: dense multi-panel dashboard.
@@ -32,6 +32,8 @@ export default function HomePage() {
   const [failed, setFailed] = useState(false);
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
+  const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
+  useEffect(() => setRecent(readRecent()), []);
 
   useEffect(() => {
     if (!language) return;
@@ -128,7 +130,7 @@ export default function HomePage() {
                   {cs.practice.open}
                 </Button>
                 <div className="flex flex-wrap justify-center gap-1">
-                  {modesFor(language).map((m) => (
+                  {byRecent(modesFor(language), recent).map((m) => (
                     <Link
                       key={m.id}
                       href={m.href}
