@@ -26,7 +26,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import aliased, selectinload
 
 from app.domain.enums import GRAMMAR_GATE_WORDS, CefrLevel, ContentFlag, Language, ProgressState
-from app.domain.grammar import ErrorTag, classify
+from app.domain.grammar import GRAMMAR_OPEN_FROM_START, ErrorTag, classify
 from app.domain.language_packs import pack
 from app.domain.learning_policy import POLICY, next_review_interval, smooth
 from app.domain.orthography import check_spelling
@@ -1001,13 +1001,18 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
     ).all()
     lexicon_items = sum(n for _, n, _ in bands)
 
+    # Vlad, 2026-11-06: grammar is open from A1; the 1000-word unlock is still recorded.
     unlocked = (
-        await db.execute(
-            select(GrammarUnlock.user_id).where(
-                GrammarUnlock.user_id == user.id, GrammarUnlock.language == language
+        GRAMMAR_OPEN_FROM_START
+        or (
+            await db.execute(
+                select(GrammarUnlock.user_id).where(
+                    GrammarUnlock.user_id == user.id, GrammarUnlock.language == language
+                )
             )
-        )
-    ).first() is not None
+        ).first()
+        is not None
+    )
     nxt = next((m for m in MILESTONES if m.rank > known), None)
     open_lesson = await get_active_session(db, user, language, SessionMode.LEARN)
     open_check = await get_active_session(db, user, language, SessionMode.CHECK)

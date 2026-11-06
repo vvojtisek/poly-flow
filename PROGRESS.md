@@ -35,11 +35,10 @@ Plan phase P6 (XP, coins, streaks, mini-games) is dropped; progress shows master
 
 ## Open questions for Vlad (asked 2026-11-05)
 
-1. Push the branch and open a draft PR, or keep commits local only? (cloud sandbox: unpushed
-   commits are lost when the session ends). Until answered: local commits only.
-2. Grammar lessons open from A1, or locked until 1000 known words (current AGENTS.md rule)?
-   Until answered: implemented behind one function (`app.domain.grammar.grammar_open`), default
-   open from A1 as recommended.
+1. Push the branch and open a draft PR, or keep commits local only? **Answered 2026-11-06: push
+   and open a draft PR.**
+2. Grammar lessons open from A1, or locked until 1000 known words? **Answered 2026-11-06: open
+   from A1.** AGENTS.md and the plan updated; the progress overview reports grammar as open.
 3. Which local LLM runtime/model for the tutor and stories? Until answered: an
    OpenAI-compatible adapter (Ollama / llama.cpp), disabled unless `POLYFLOW_LLM_URL` is set,
    with deterministic Czech explanations from the curriculum when it is off.
@@ -84,6 +83,8 @@ Status: `[x]` done and committed, `[~]` in progress, `[ ]` not started.
       typecheck/build, Playwright run on localhost, version `1.0.0-alpha.5`.
 
 ## Log
+
+- 2026-11-06: Vlad chose grammar open from A1 and push + draft PR. AGENTS.md and plan updated; progress overview reports grammar open. Backend 358 passed, 1 skipped.
 
 - 2026-11-05: M9 done. Version 1.0.0-alpha.5 (scripts/set-version.sh). Backend 357 passed, 1 skipped; ruff check/format clean; alembic 0017 -> 0015 -> head round trip and `alembic check` clean; frontend typecheck and `npm run build` pass; Playwright 3/3 on localhost; `docker compose config -q` passes. Not run here: Docker image builds (no Docker daemon in this sandbox) and a real local LLM (verified against a stand-in endpoint).
 
