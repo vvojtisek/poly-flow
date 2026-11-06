@@ -923,6 +923,29 @@ export const roleplayAudioUrl = (id: string, line: number) => `/api/v1/roleplay/
 export const setWordNote = (id: string, text: string) =>
   api<{ note: string | null }>(`/api/v1/words/${id}/note`, { method: "PUT", json: { text } });
 
+export interface WordCollection {
+  id: string;
+  name: string;
+  count: number;
+  created_at: string;
+}
+export interface WordCollectionDetail extends Omit<WordCollection, "count" | "created_at"> {
+  language: Language;
+  items: { id: string; lemma: string; gender: string | null; pos: string; translation: string; rank: number }[];
+}
+export const listWordCollections = (language: Language) =>
+  api<WordCollection[]>(`/api/v1/words/collections?language=${language}`);
+export const getWordCollection = (id: string) =>
+  api<WordCollectionDetail>(`/api/v1/words/collections/${id}`);
+export const createWordCollection = (language: Language, name: string) =>
+  api<WordCollection>("/api/v1/words/collections", { json: { language, name } });
+export const addWordToCollection = (collectionId: string, itemId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}/items`, { json: { item_id: itemId } });
+export const removeWordFromCollection = (collectionId: string, itemId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}/items/${itemId}`, { method: "DELETE" });
+export const deleteWordCollection = (collectionId: string) =>
+  api<void>(`/api/v1/words/collections/${collectionId}`, { method: "DELETE" });
+
 // ---------------------------------------------------------------- German verb lab
 
 export type VerbLanguage = "de" | "fr" | "it";

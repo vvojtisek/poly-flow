@@ -1,11 +1,13 @@
 "use client";
 
-import { BookMarked, Clock, Download, Search, X } from "lucide-react";
+import { BookMarked, Clock, Download, FolderOpen, Search, X } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
+import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
 import { getWord, listWords, myWordAudioUrl, wordExportUrl, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
@@ -91,6 +93,7 @@ function Inspector({ id, onClose }: { id: string; onClose: () => void }) {
             </div>
           )}
           <NoteEditor itemId={w.id} initial={w.note} />
+          <WordCollectionControl itemId={w.id} language={w.language} />
           <div className="flex flex-col gap-1">
             <p className="text-xs font-semibold text-slate-500">{t.journey}</p>
             <ol className="grid grid-cols-5 gap-1">
@@ -217,6 +220,9 @@ export default function WordsPage() {
             <p className="text-sm text-slate-600 dark:text-slate-300">{t.intro}</p>
           </div>
           <LanguagePicker me={me} />
+          <Link href="/collections" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium hover:border-brand-500 dark:border-slate-700">
+            <FolderOpen className="size-4" aria-hidden /> {cs.collections.link}
+          </Link>
         </div>
         {total > 0 && me.acting.active_language && (
           <details className="group self-start text-sm">

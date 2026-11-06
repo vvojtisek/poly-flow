@@ -7,12 +7,14 @@ from typing import Annotated, Literal
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, Field
+from sqlalchemy.exc import IntegrityError
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, Now, TtsDep, _chosen_voice, _speech
 from app.domain import export
 from app.domain.enums import Language
 from app.services import notes
+from app.services import word_collections as collections
 from app.services import words as svc
 from app.services.learning import LearningError
 
@@ -82,6 +84,38 @@ class NoteOut(BaseModel):
     note: str | None
 
 
+class CollectionIn(BaseModel):
+    language: Language
+    name: str = Field(min_length=1, max_length=60)
+
+
+class CollectionOut(BaseModel):
+    id: uuid.UUID
+    name: str
+    count: int
+    created_at: datetime
+
+
+class CollectionItemOut(BaseModel):
+    id: uuid.UUID
+    lemma: str
+    gender: str | None
+    pos: str
+    translation: str
+    rank: int
+
+
+class CollectionDetailOut(BaseModel):
+    id: uuid.UUID
+    language: Language
+    name: str
+    items: list[CollectionItemOut]
+
+
+class CollectionWordIn(BaseModel):
+    item_id: uuid.UUID
+
+
 def _http(exc: LearningError) -> HTTPException:
     return HTTPException(exc.status, exc.code)
 
@@ -135,6 +169,75 @@ async def export_words(
             "Cache-Control": "no-store",
         },
     )
+
+
+@router.get("/collections", response_model=list[CollectionOut])
+async def list_collections(
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+) -> list[CollectionOut]:
+    rows = await collections.list_collections(
+        db, auth.acting, language or auth.acting.active_language
+    )
+    return [CollectionOut(**row) for row in rows]
+
+
+@router.post("/collections", response_model=CollectionOut, status_code=201)
+async def create_collection(body: CollectionIn, auth: Auth, db: DB) -> CollectionOut:
+    try:
+        item = await collections.create_collection(db, auth.acting, body.language, body.name)
+        await db.flush()
+        await db.commit()
+    except LearningError as exc:
+        raise _http(exc) from exc
+    except IntegrityError as exc:
+        await db.rollback()
+        raise HTTPException(409, "collection_name_exists") from exc
+    return CollectionOut(id=item.id, name=item.name, count=0, created_at=item.created_at)
+
+
+@router.get("/collections/{collection_id}", response_model=CollectionDetailOut)
+async def collection_detail(collection_id: uuid.UUID, auth: Auth, db: DB) -> CollectionDetailOut:
+    try:
+        item, words = await collections.get_collection(db, auth.acting, collection_id)
+    except LearningError as exc:
+        raise _http(exc) from exc
+    return CollectionDetailOut(id=item.id, language=item.language, name=item.name, items=words)
+
+
+@router.post("/collections/{collection_id}/items", status_code=204)
+async def add_collection_word(
+    collection_id: uuid.UUID, body: CollectionWordIn, auth: Auth, db: DB
+) -> Response:
+    try:
+        await collections.add_word(db, auth.acting, collection_id, body.item_id)
+        await db.commit()
+    except LearningError as exc:
+        raise _http(exc) from exc
+    return Response(status_code=204)
+
+
+@router.delete("/collections/{collection_id}/items/{item_id}", status_code=204)
+async def remove_collection_word(
+    collection_id: uuid.UUID, item_id: uuid.UUID, auth: Auth, db: DB
+) -> Response:
+    try:
+        await collections.remove_word(db, auth.acting, collection_id, item_id)
+        await db.commit()
+    except LearningError as exc:
+        raise _http(exc) from exc
+    return Response(status_code=204)
+
+
+@router.delete("/collections/{collection_id}", status_code=204)
+async def delete_collection(collection_id: uuid.UUID, auth: Auth, db: DB) -> Response:
+    try:
+        await collections.delete_collection(db, auth.acting, collection_id)
+        await db.commit()
+    except LearningError as exc:
+        raise _http(exc) from exc
+    return Response(status_code=204)
 
 
 @router.get("/{item_id}", response_model=WordDetailOut)

@@ -612,3 +612,33 @@ entry.
 - The page says plainly that none of this counts as knowing a word; only Ověření does.
 - Tests: numbering contiguous and never reused, language filter, unseen count, the API
   (repeat-safe, CSRF required, per profile: the parent marking seen leaves the child's count).
+
+# Fresh innovation run: 2026-11-06
+
+This is a new 30-cycle run on top of the already completed loop above. Each cycle adds a distinct
+learner-facing improvement, records focused verification, and lands in its own local commit.
+
+## Cycle 1/30: learner-made vocabulary collections (Slovní sady)
+
+**Before:** the dictionary held every encountered word in one long list. Learners could add a
+personal memory hook, but could not gather a topic set such as travel words for later reference.
+
+**Built:** private, language-specific word collections backed by `word_collections` and
+`word_collection_items` (migration 0021), with API operations for creating, listing, viewing,
+adding, removing and deleting collections. The dictionary inspector can create a collection and
+add the current word in one action; `/collections` provides a responsive manager, reached from
+the dictionary and command palette.
+
+- A collection accepts only words that profile has encountered in that same language; the
+  existing content filter is checked on every add and read. Unseen and child-filtered words stay
+  unavailable, and collection data cannot be read by another profile.
+- Duplicate names in one profile and language return a conflict. Retried item additions are
+  idempotent. Collection counts also exclude words that are no longer visible to the profile.
+- This organizes the learner's own curriculum for reference without changing evidence, mastery,
+  review scheduling, or the words available in lessons and checks.
+- Verification: collection and dictionary API tests passed (6 tests), including CRUD, whitespace
+  cleanup, duplicate requests and names, language boundaries, unseen words, child filtering,
+  filtered counts and profile isolation. The backend suite passed (802 passed, 1 skipped) with
+  the test process pointed at Compose Redis; Ruff and `alembic check` passed. Frontend typecheck
+  and production build passed. Local Compose applied revision 0021; `/collections` and `/readyz`
+  returned HTTP 200.
