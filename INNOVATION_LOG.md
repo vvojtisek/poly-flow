@@ -1975,3 +1975,13 @@ Vlad approves a push.
 **Implemented Solution:** The card header now wraps: the title takes a 160px-basis flexible column, and the badges wrap underneath when they do not fit. Summaries are clamped to two lines below the sm breakpoint and shown in full from sm up. Filter chips use px-2 on phones and px-3 from sm.
 
 **Verification:** l88.js at 390px, before vs after: title widths changed from 68/260/147/145px to 298/260/260/298px. Sein title height went from 96 to 24px. Radiogroup scrollWidth went from 398 to 366 (equal to clientWidth). Full-page height went from 4056 to 4008px. ov.js /lesson: no overflowing elements. Typecheck, build, ruff passed.
+
+## Global Cycle 89/120 | Page: [/lesson] (Page Cycle 14/15)
+
+**Summary:** show the last overview at once when returning from a topic
+
+**Observed Problem:** The page's own requests are already minimal (7 API calls in the prod build, all under 20 ms locally). The real cost was navigation: /lesson is the hub learners return to after every topic, and each Back discarded the overview and waited for all four requests before showing anything. With a slow tree, levels took 1353 ms to appear.
+
+**Implemented Solution:** A module-level snapshot per profile and language holds the last complete overview: tree, estimate, progress and preview. Returning to the page renders it immediately and refreshes it in the background. Partial loads are not cached. A failed refresh drops the snapshot and shows the retry state, so stale data is never presented as current. Keys include the acting profile id, so profiles never share an entry.
+
+**Verification:** l89.js with the grammar tree delayed 1200 ms. Opening a topic and pressing Back showed the levels in 141 ms with no skeleton, versus 1353 ms on the stashed baseline. After the refresh, 4 level sections were present. No console errors. Typecheck, build, ruff passed.

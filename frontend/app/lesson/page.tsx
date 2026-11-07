@@ -54,6 +54,22 @@ function ExampleTaste({ unitId, language }: { unitId: string; language: string }
   );
 }
 
+type Estimate = { level: string; at: string | null; source: "test" | "progress" };
+type Snapshot = {
+  tree: GrammarTree;
+  partial: boolean;
+  placement: string | null;
+  estimate: Estimate | null;
+  testOpen: boolean;
+  testAvailable: boolean;
+  badge: string | null;
+  introduced: number | null;
+  openSession: boolean;
+  preview: LessonPreview | null;
+};
+/** Last complete overview per profile and language, for this browser tab only (module memory). */
+const SNAPSHOTS = new Map<string, Snapshot>();
+
 function highestBadge(badges: LevelBadge[]): string | null {
   const rank = ["A1", "A2", "B1", "B2"];
   return badges.map((b) => b.level).sort((a, b) => rank.indexOf(b) - rank.indexOf(a))[0] ?? null;
@@ -76,6 +92,7 @@ export default function LessonPage() {
     return () => document.removeEventListener("keydown", onKey);
   }, [router]);
   const language = me?.acting.active_language;
+  const profileId = me?.acting.id;
   const [tree, setTree] = useState<GrammarTree | null>(null);
   const [placement, setPlacement] = useState<string | null>(null);
   const [badge, setBadge] = useState<string | null>(null);
@@ -86,7 +103,7 @@ export default function LessonPage() {
   const [partial, setPartial] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [openSession, setOpenSession] = useState(false);
-  const [estimate, setEstimate] = useState<{ level: string; at: string | null; source: "test" | "progress" } | null>(null);
+  const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [testOpen, setTestOpen] = useState(false);
   const [testAvailable, setTestAvailable] = useState(false);
   const [show, setShowState] = useState<Show>("all");
@@ -106,42 +123,70 @@ export default function LessonPage() {
   const [preview, setPreview] = useState<LessonPreview | null>(null);
 
   useEffect(() => {
-    if (!language) return;
+    if (!language || !profileId) return;
     let live = true;
-    setTree(null);
+    const key = `${profileId}:${language}`;
+    function apply(snap: Snapshot) {
+      setTree(snap.tree);
+      setPartial(snap.partial);
+      setPlacement(snap.placement);
+      setEstimate(snap.estimate);
+      setTestOpen(snap.testOpen);
+      setTestAvailable(snap.testAvailable);
+      setBadge(snap.badge);
+      setIntroduced(snap.introduced);
+      setOpenSession(snap.openSession);
+      setPreview(snap.preview);
+    }
+    // Coming back from a topic shows the last overview at once and refreshes it underneath, instead
+    // of a skeleton flash on every Back. A different profile or language never shares an entry.
+    const cached = SNAPSHOTS.get(key);
     setFailed(false);
-    setPreview(null);
-    setOpenSession(false);
-    setPartial(false);
+    if (cached) apply(cached);
+    else {
+      setTree(null);
+      setPreview(null);
+      setOpenSession(false);
+      setPartial(false);
+    }
     // The grammar tree is the page; the estimate, progress and lesson preview only refine it, so
     // one of them failing must not blank the whole overview.
     Promise.allSettled([getGrammarTree(language), getDiagnosticInfo(language), getProgress(language), getLessonPreview(language)]).then(
       ([grammar, assessment, progress, next]) => {
         if (!live) return;
         if (grammar.status === "rejected") {
+          // A cached overview may be stale; do not keep presenting it as current.
+          SNAPSHOTS.delete(key);
+          setTree(null);
           setFailed(true);
           return;
         }
-        setTree(grammar.value);
-        setPartial(assessment.status === "rejected" || progress.status === "rejected");
         const p = progress.status === "fulfilled" ? progress.value : null;
         const a = assessment.status === "fulfilled" ? assessment.value : null;
-        setPlacement(a?.latest?.level ?? p?.cefr_level ?? null);
-        setEstimate(
-          a?.latest ? { level: a.latest.level, at: a.latest.decided_at, source: "test" } : p?.cefr_level ? { level: p.cefr_level, at: null, source: "progress" } : null,
-        );
-        setTestOpen(Boolean(a?.active_session_id));
-        setTestAvailable(Boolean(a?.available));
-        setBadge(p ? highestBadge(p.level_badges) : null);
-        setIntroduced(p?.introduced ?? null);
-        setOpenSession(Boolean(p?.active_session_id));
-        if (next.status === "fulfilled") setPreview(next.value);
+        const snap: Snapshot = {
+          tree: grammar.value,
+          partial: assessment.status === "rejected" || progress.status === "rejected",
+          placement: a?.latest?.level ?? p?.cefr_level ?? null,
+          estimate: a?.latest
+            ? { level: a.latest.level, at: a.latest.decided_at, source: "test" }
+            : p?.cefr_level
+              ? { level: p.cefr_level, at: null, source: "progress" }
+              : null,
+          testOpen: Boolean(a?.active_session_id),
+          testAvailable: Boolean(a?.available),
+          badge: p ? highestBadge(p.level_badges) : null,
+          introduced: p?.introduced ?? null,
+          openSession: Boolean(p?.active_session_id),
+          preview: next.status === "fulfilled" ? next.value : null,
+        };
+        if (!snap.partial) SNAPSHOTS.set(key, snap);
+        apply(snap);
       },
     );
     return () => {
       live = false;
     };
-  }, [language, me?.acting.id, attempt]);
+  }, [language, profileId, attempt]);
 
   // What to do next, in order: finish a lesson that is open, clear due checks, then the first topic
   // not studied yet, starting at the level after the learner's estimate. A studied topic is never
