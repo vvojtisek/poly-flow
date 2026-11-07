@@ -1515,3 +1515,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx` waits for the per-language summary (success or failure) before suggesting, showing a tip-sized placeholder meanwhile; if the summary fails, nothing is locked. The mistake panel uses `RetryNotice` ("Nepodařilo se načíst poslední chyby.") that re-runs both requests.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with weak-spots returning 500 showed the retry notice, and after recovery the recommendations ("Například: …") appeared.
+
+## Global Cycle 43/120 | Page: [/practice] (Page Cycle 13/15)
+
+**Summary:** shorter mode cards on phones
+
+**Observed Problem:** On a 390 px phone each of the twelve cards was about 190 px tall (large padding, full blurb, a row of skill tags that duplicates the filter chips), so the hub needed 3 600 px of scrolling.
+
+**Implemented Solution:** `app/practice/page.tsx`: below `sm` cards use tighter padding, a smaller icon tile, a two-line clamped blurb and no skill-tag row (skills remain available as filter chips); the grid gap shrinks. From `sm` up the cards are unchanged.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height drops from 3 618 px to 2 842 px with no console errors.

@@ -50,22 +50,23 @@ function Card({ m, tint, pinned, onToggle, visited, locked, hotkey }: { m: Pract
         href={m.href}
         data-hotkey={hotkey ? String(hotkey) : undefined}
         aria-keyshortcuts={hotkey ? String(hotkey) : undefined}
-        className="group flex h-full flex-col gap-3 p-5 pr-14"
+        className="group flex h-full flex-col gap-2 p-4 pr-14 sm:gap-3 sm:p-5 sm:pr-14"
       >
         <span className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
-            <m.icon className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white shadow-sm sm:size-11 sm:rounded-2xl dark:bg-slate-900">
+            <m.icon className="size-5 text-brand-600 sm:size-6 dark:text-brand-50" aria-hidden />
           </span>
           <span className="text-lg font-bold">{copy.title}</span>
           {hotkey && <KeyHint k={String(hotkey)} />}
         </span>
-        <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
+        <span className="line-clamp-2 text-sm text-slate-600 sm:line-clamp-none dark:text-slate-300">{copy.blurb}</span>
         {locked ? (
           <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">{t.needsLesson}</span>
         ) : (
           <span className="text-xs text-slate-500">{visited ? t.lastVisit(relativePast(visited)) : t.neverVisited}</span>
         )}
-        <span className="mt-auto flex flex-wrap gap-1">
+        {/* Skills are also the filter chips; on phones the card stays short without them. */}
+        <span className="mt-auto hidden flex-wrap gap-1 sm:flex">
           {m.skills.map((s) => (
             <span key={s} className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-900/70 dark:text-slate-300">
               {t.skill[s]}
@@ -274,7 +275,7 @@ export default function PracticePage() {
           {announce}
         </p>
 
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
           {shown.map((m, i) => (
             <li key={m.id}>
               <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => {
