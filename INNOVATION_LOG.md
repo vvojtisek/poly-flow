@@ -1195,3 +1195,13 @@ Vlad approves a push.
 **Implemented Solution:** New read-only `GET /api/v1/learning/next-lesson` (`api/learning.py`, `services/learning.preview_lesson`, `LessonPreviewOut`) runs the same lesson planner used by session start, with the child-content filter, and returns the scene's Czech title, new-word count and remediation count without creating a session. The dashboard hero shows "Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení", or a clear message when every word has been met. New test checks that the preview matches the started lesson and starts nothing.
 
 **Verification:** `tests/test_learning.py` preview/summary tests passed; ruff, typecheck, production build, `git diff --check` passed; mobile screenshot shows the preview.
+
+## Global Cycle 11/120 | Page: [/] (Page Cycle 11/15)
+
+**Summary:** one primary action: the hero button follows today's plan
+
+**Observed Problem:** The dashboard had two competing primary buttons: the hero's "Začít lekci" (always a new lesson) and today's plan "Pokračovat" (first plan step, bound to Enter). When checks were due they pointed to different places, so the page gave contradictory advice.
+
+**Implemented Solution:** `TodayPlan` no longer renders its own button; it exports its step map and hands the loaded plan up via `onPlan`. The hero button in `app/page.tsx` is now the only primary action and the Enter target: resume an open lesson, otherwise the plan's first step (for example "Ověřit 12 slov"), otherwise a new lesson. The note under it switches between the ungraded-lesson note and a new graded-check note (`cs.dashboard.checkNote`), and the lesson preview from cycle 10 only appears when the action is a lesson.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; desktop screenshot shows one primary button with its Enter hint and the plan panel without a duplicate.

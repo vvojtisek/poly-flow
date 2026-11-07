@@ -1,19 +1,18 @@
 "use client";
 
-import { ArrowRight, BookOpen, BookOpenText, ClipboardCheck, GraduationCap, type LucideIcon } from "lucide-react";
+import { BookOpen, BookOpenText, ClipboardCheck, GraduationCap, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { KeyHint } from "@/components/Kbd";
-import { Button, Skeleton } from "@/components/ui";
+import { Skeleton } from "@/components/ui";
 import { getToday, listStoryArchive, updateOwnProfile, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
 
 const t = cs.today;
-const STEP: Record<Plan["steps"][number]["kind"], { icon: LucideIcon; href: string }> = {
+export const STEP: Record<Plan["steps"][number]["kind"], { icon: LucideIcon; href: string }> = {
   check: { icon: ClipboardCheck, href: "/check" },
   grammar_check: { icon: GraduationCap, href: "/grammar/check" },
   lesson: { icon: BookOpen, href: "/lesson/vocabulary" },
@@ -51,14 +50,21 @@ function GoalRing({ minutes, goal }: { minutes: number; goal: number }) {
   );
 }
 
-export function TodayPlan({ language, profileId }: { language: Language; profileId: string }) {
+/**
+ * Today's goal ring and ordered steps. The dashboard's single primary button (in the hero) follows
+ * the first step, so this panel has no button of its own; `onPlan` hands the plan up.
+ */
+export function TodayPlan({ language, profileId, onPlan }: { language: Language; profileId: string; onPlan?: (plan: Plan) => void }) {
   const router = useRouter();
   const { state, setMe } = useAuth();
   const [plan, setPlan] = useState<Plan | null>(null);
   const [editGoal, setEditGoal] = useState(false);
   const [goalFailed, setGoalFailed] = useState(false);
   const [recentStories, setRecentStories] = useState<StoryArchiveItem[]>([]);
-  useHotkeys(); // Enter on the dashboard continues with the first step
+  useHotkeys(); // Enter and digit keys on the dashboard
+  useEffect(() => {
+    if (plan) onPlan?.(plan);
+  }, [plan, onPlan]);
   useEffect(() => {
     let cancelled = false;
     getToday(language)
@@ -95,7 +101,6 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
         <Skeleton lines={3} className="flex-1" />
       </section>
     );
-  const first = plan.steps[0];
   const done = plan.minutes_today >= plan.goal_minutes;
   return (
     <section className="flex flex-col gap-4 rounded-3xl border border-brand-500/30 bg-gradient-to-br from-brand-500/10 via-white to-white p-4 shadow-sm dark:via-slate-900 dark:to-slate-900 sm:flex-row sm:items-center lg:col-span-3">
@@ -173,11 +178,6 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
             </Link>
           ))}
         </section>
-      )}
-      {first && (
-        <Button className="shrink-0 !py-4" data-hotkey="enter" onClick={() => router.push(STEP[first.kind].href)}>
-          {t.go} <ArrowRight className="size-5" aria-hidden /> <KeyHint k="Enter" />
-        </Button>
       )}
       {plan.tomorrow_due > 0 && <p className="text-xs text-slate-500 sm:hidden">{t.tomorrow(plan.tomorrow_due)}</p>}
     </section>

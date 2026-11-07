@@ -3,7 +3,7 @@
 import { Activity, AlertTriangle, ArrowRight, Award, BarChart3, ClipboardCheck, Compass, Dumbbell, Flag, Gauge, GraduationCap, Layers, Map as MapIcon, Play, Trophy, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
@@ -13,14 +13,14 @@ import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
 import { RankCard } from "@/components/RankCard";
 import { NewsBanner } from "@/components/NewsBanner";
-import { TodayPlan } from "@/components/TodayPlan";
+import { STEP, TodayPlan } from "@/components/TodayPlan";
 import { WeeklyRecap } from "@/components/WeeklyRecap";
 import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
 import { Button, Notice, Skeleton } from "@/components/ui";
-import { getGrammarTree, getLanguageSummaries, getLessonPreview, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type LessonPreview, type ProgressOverview } from "@/lib/api";
+import { getGrammarTree, getLanguageSummaries, getLessonPreview, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type LessonPreview, type ProgressOverview, type TodayPlan as Plan } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent } from "@/lib/practice";
@@ -88,6 +88,7 @@ function QuickAction({
 
 function grammarHelp(tree: GrammarTree | null, level: string | null): string {
   const t = cs.dashboard;
+
   if (!tree) return t.grammarHelp(level);
   const units = tree.levels.flatMap((l) => l.units);
   const title = (id: string | null) => units.find((u) => u.id === id)?.title;
@@ -110,6 +111,8 @@ export default function HomePage() {
   const [grammar, setGrammar] = useState<GrammarTree | null>(null);
   const [summaries, setSummaries] = useState<LanguageSummary[] | null>(null);
   const [preview, setPreview] = useState<LessonPreview | null>(null);
+  const [firstStep, setFirstStep] = useState<Plan["steps"][number] | null>(null);
+  const onPlan = useCallback((p: Plan) => setFirstStep(p.steps[0] ?? null), []);
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
@@ -166,6 +169,13 @@ export default function HomePage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
 
   const t = cs.dashboard;
+  // One primary action: an open lesson first, otherwise the first step of today's plan, otherwise a
+  // new lesson. Enter triggers it on desktop.
+  const primary =
+    !progress?.active_session_id && firstStep && firstStep.kind !== "lesson"
+      ? { href: STEP[firstStep.kind].href, label: cs.today.step[firstStep.kind]?.(firstStep.count) ?? cs.today.go, Icon: STEP[firstStep.kind].icon }
+      : { href: "/lesson/vocabulary", label: progress?.active_session_id ? cs.lesson.resume : cs.lesson.start, Icon: Play };
+  const showPreview = !progress?.active_session_id && preview && (!firstStep || firstStep.kind === "lesson");
   const checkDue = !!progress && (progress.due_now > 0 || !!progress.active_check_session_id);
   const assessmentInProgress = !!progress && (!!progress.active_placement_session_id || !!progress.active_exam_session_id);
   return (
@@ -181,7 +191,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-1">
             <h1 id="continue-title" className="text-2xl font-bold">{t.continueTitle}</h1>
             <p className="max-w-xl text-sm text-white/85">{progress?.active_session_id ? t.continueResume : t.continueNext}</p>
-            {!progress?.active_session_id && preview && (
+            {showPreview && preview && (
               <p className="mt-1 text-sm text-white" aria-live="polite">
                 {preview.new_words === 0 && preview.review_words === 0 ? (
                   t.nothingNew
@@ -214,14 +224,17 @@ export default function HomePage() {
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
             <button
               type="button"
-              onClick={() => router.push("/lesson/vocabulary")}
+              data-hotkey="enter"
+              aria-keyshortcuts="Enter"
+              onClick={() => router.push(primary.href)}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-lg font-bold text-brand-600 shadow-sm transition hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
             >
-              <Play className="size-5" aria-hidden />
-              {progress?.active_session_id ? cs.lesson.resume : cs.lesson.start}
+              <primary.Icon className="size-5" aria-hidden />
+              {primary.label}
               <ArrowRight className="size-5" aria-hidden />
+              <KeyHint k="Enter" />
             </button>
-            <p className="text-xs text-white/80">{cs.lesson.learnHelp}</p>
+            <p className="text-xs text-white/80">{primary.href === "/lesson/vocabulary" ? cs.lesson.learnHelp : t.checkNote}</p>
           </div>
         </section>
 
@@ -283,7 +296,7 @@ export default function HomePage() {
           )}
         </section>
 
-        {language && <TodayPlan language={language} profileId={me.acting.id} />}
+        {language && <TodayPlan language={language} profileId={me.acting.id} onPlan={onPlan} />}
         {language && !offerPlacement && <NewsBanner profileId={me.acting.id} language={language} />}
 
         <Panel title={cs.progress.title} icon={BarChart3} className="lg:col-span-2">

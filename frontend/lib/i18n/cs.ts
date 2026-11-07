@@ -50,6 +50,7 @@ export const cs = {
       ]
         .filter(Boolean)
         .join(" · "),
+    checkNote: "Ověření se počítá: jeden pokus, bez nápovědy a bez časového limitu.",
     nothingNew: "Všechna slova tohoto jazyka už jsi potkal(a). Pokračuj ověřením a opakováním.",
     quickActions: "Na každý den",
     daily: "Denní opakování",
