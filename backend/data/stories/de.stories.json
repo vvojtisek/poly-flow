@@ -7071,6 +7071,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-49-queue-appointment",
+   "level": "B2",
+   "title": "Warten nach Termin",
+   "title_cs": "Objednané čekání",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom kam mit einem elektronisch reservierten Termin zum Amt und freute sich, diesmal nicht anstehen zu müssen.",
+     "cs": "Tom dorazil na úřad s elektronicky rezervovaným termínem a měl radost, že tentokrát nebude stát ve frontě."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das System verspricht Zeitoptimierung und priorisierte Bearbeitung genau zur festgelegten Stunde.",
+     "cs": "Systém slibuje optimalizaci času a přednostní odbavení přesně v určenou hodinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ausgezeichnet. Sie müssen nur am Automaten eine Wartenummer ziehen, damit der Schalter weiß, dass Sie hier sind.",
+     "cs": "To je skvělé. Jen si musíte vyzvednout pořadové číslo u automatu, aby o vás přepážka věděla."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Natürlich. Warum ist die Schlange am Automaten länger als die vor dem Schalter?",
+     "cs": "Samozřejmě. A proč je před automatem delší fronta než před přepážkou?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Weil jeder zuerst seine Reservierung verifizieren muss. Das ist ein unerlässlicher Schritt zur Abschaffung des Wartens.",
+     "cs": "Protože si každý musí nejdřív ověřit rezervaci. Je to nezbytný krok k odstranění čekání."
+    },
+    {
+     "speaker": null,
+     "text": "Tom öffnete seinen Kalender: Verstanden. Nächstes Mal reserviere ich auch einen Platz in der Schlange für die Bestätigung, dass ich nicht warten muss.",
+     "cs": "Tom si otevřel kalendář: Rozumím. Příště si tedy rezervuji i místo ve frontě na potvrzení, že nemusím čekat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Zeitoptimierung",
+     "cs": "optimalizace času"
+    },
+    {
+     "word": "priorisierte",
+     "cs": "přednostní"
+    },
+    {
+     "word": "verifizieren",
+     "cs": "ověřit"
+    },
+    {
+     "word": "unerlässlicher",
+     "cs": "nezbytný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde musí Tom nově čekat?",
+     "options": [
+      "U automatu na pořadové číslo.",
+      "Na letišti.",
+      "V knihovně."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co systém podle slibu optimalizuje?",
+     "options": [
+      "Čas návštěvníků.",
+      "Cenu kávy.",
+      "Velikost úřadu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
