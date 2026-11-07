@@ -3943,6 +3943,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-06-bread-alarm",
+   "level": "A2",
+   "title": "La sveglia del pane",
+   "title_cs": "Budík na chleba",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "La sera Tom ha messo la sveglia per comprare il pane fresco al mattino.",
+     "cs": "Tom si večer nastavil budík, aby ráno koupil čerstvý chléb."
+    },
+    {
+     "speaker": "Eva",
+     "text": "L'ho messa nell'armadio. Altrimenti la spengo e mi riaddormento.",
+     "cs": "Dal jsem ho do skříně. Jinak ho vypnu a zase usnu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È furbo. Al mattino devi davvero alzarti.",
+     "cs": "To je chytré. Ráno musíš opravdu vstát."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Mi sono alzato, ho aperto l'armadio e ho trovato le scarpe.",
+     "cs": "Ráno jsem vstal, otevřel skříň a našel svoje boty."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E hai comprato anche il pane?",
+     "cs": "A koupil jsi také chléb?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha mostrato la borsa: Sì. Solo che ora mia moglie porta la sveglia nella borsetta.",
+     "cs": "Tom ukázal tašku: Koupil. Jen ten budík teď nosí moje žena v kabelce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "armadio",
+     "cs": "skříň"
+    },
+    {
+     "word": "altrimenti",
+     "cs": "jinak"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč dal Tom budík do skříně?",
+     "options": [
+      "Aby musel vstát.",
+      "Aby byl potichu.",
+      "Aby ho prodal."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo má nakonec budík?",
+     "options": [
+      "Jeho žena.",
+      "Pekař.",
+      "Soused."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
