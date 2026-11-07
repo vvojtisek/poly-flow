@@ -1169,6 +1169,9 @@ export const cs = {
     focusLevel: "Zaměřit se na úroveň",
     nextCheck: (when: string) => `Ověření ${when}`,
     enterOpens: "Enter otevře první, Esc vše zruší",
+    preview: "Náhled výkladu",
+    previewHide: "Skrýt náhled",
+    previewGoal: "Cíl:",
     checkedTally: (ok: number, wrong: number) =>
       `V ověřeních: ${ok} správně${wrong ? `, ${wrong} ${wrong === 1 ? "chyba" : wrong < 5 ? "chyby" : "chyb"}` : ""}`,
     focusAuto: (level: string) => `Podle odhadu (${level})`,

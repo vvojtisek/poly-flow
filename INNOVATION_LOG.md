@@ -1305,3 +1305,13 @@ Vlad approves a push.
 **Implemented Solution:** `components/CommandPalette.tsx`: "/" now focuses the current page's own search box when one is marked `data-page-search` and visible, and still opens the global palette elsewhere (Ctrl+K always opens the palette). `app/grammar/page.tsx` marks its topic search, shows a "/" key badge, opens the first matching topic on Enter and clears search and status/due filters on Escape; a desktop hint "Enter otevře první, Esc vše zruší" appears while filtering.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright: "/" then typing "akuzativ" filtered to 1 of 37, Escape restored 37, typing "sein" + Enter opened `/grammar/de-a1-sein`.
+
+## Global Cycle 22/120 | Page: [/grammar] (Page Cycle 7/15)
+
+**Summary:** preview a topic's goal, first rule and examples in place
+
+**Observed Problem:** The only way to see what a grammar topic teaches was to open it, and opening a topic immediately starts a lesson session; browsing several topics created several open sessions and lost the overview.
+
+**Implemented Solution:** `app/grammar/page.tsx`: every topic card has a "Náhled výkladu" toggle below it (a separate button, not nested in the card link) that expands the unit's objective, first explanation note (markdown markers removed) and up to three examples with Czech translations, read through the existing read-only `GET /grammar/units/{id}`. Unit details are cached per page session and a failed load can be retried by reopening. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened the preview on a 390 px screen without leaving `/grammar`.

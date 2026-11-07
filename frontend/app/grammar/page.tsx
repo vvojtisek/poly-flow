@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, CheckCircle2, ClipboardCheck, FlaskConical, GraduationCap, Info, Repeat, RotateCcw, Search, Sparkles, X } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ChevronDown, ClipboardCheck, FlaskConical, GraduationCap, Info, Repeat, RotateCcw, Search, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import { Kbd } from "@/components/Kbd";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
 import { Button, Notice } from "@/components/ui";
-import { getGrammarSearchIndex, getGrammarTree, getProgress, type GrammarTree, type GrammarUnitSummary, type UnitState } from "@/lib/api";
+import { getGrammarSearchIndex, getGrammarTree, getGrammarUnit, getProgress, type GrammarTree, type GrammarUnit, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 
@@ -25,9 +25,64 @@ const STATUS_FILTERS: UnitState[] = ["new", "studied", "known", "mastered"];
 const CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 const fold = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("cs-CZ");
 
-function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean }) {
+// Unit details for previews, shared by all cards for the page session.
+const previews = new Map<string, Promise<GrammarUnit>>();
+function loadPreview(id: string): Promise<GrammarUnit> {
+  let p = previews.get(id);
+  if (!p) {
+    p = getGrammarUnit(id).catch((err: unknown) => {
+      previews.delete(id);
+      throw err;
+    });
+    previews.set(id, p);
+  }
+  return p;
+}
+
+/** Objective, first rule and examples of a topic, read without starting its lesson. */
+function UnitPreview({ id, language }: { id: string; language: string }) {
+  const [unit, setUnit] = useState<GrammarUnit | null>(null);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    let live = true;
+    loadPreview(id)
+      .then((u) => live && setUnit(u))
+      .catch(() => live && setFailed(true));
+    return () => {
+      live = false;
+    };
+  }, [id]);
+  if (failed) return <p className="text-xs text-red-700 dark:text-red-300">{cs.common.error}</p>;
+  if (!unit) return <p className="text-xs text-slate-500">{cs.common.loading}</p>;
+  const note = unit.notes[0];
   return (
-    <li>
+    <div className="flex flex-col gap-2 text-sm">
+      <p className="text-slate-700 dark:text-slate-200">
+        <span className="font-semibold">{cs.grammar.previewGoal}</span> {unit.objective}
+      </p>
+      {note && (
+        <p className="text-slate-600 dark:text-slate-300">
+          <span className="font-semibold">{note.heading}:</span> {note.text.replaceAll("**", "")}
+        </p>
+      )}
+      {unit.examples.length > 0 && (
+        <ul className="flex flex-col gap-1">
+          {unit.examples.slice(0, 3).map((ex) => (
+            <li key={ex.text} className="rounded-lg bg-slate-50 px-2 py-1 dark:bg-slate-800/60">
+              <span className="font-medium" lang={language}>{ex.text}</span>
+              <span className="block text-xs text-slate-500">{ex.cs}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function UnitCard({ u, recommended, resumable, language }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean; language: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <li className="flex flex-col">
       <Link
         href={`/grammar/${u.id}`}
         className={`flex h-full flex-col gap-2 rounded-2xl border p-4 outline-none transition hover:border-brand-500 focus-visible:ring-2 focus-visible:ring-brand-500 ${
@@ -83,6 +138,21 @@ function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recomm
           </span>
         </p>
       </Link>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={`preview-${u.id}`}
+        onClick={() => setOpen((v) => !v)}
+        className="mt-1 inline-flex items-center gap-1 self-start rounded-lg px-2 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-slate-300 dark:hover:bg-slate-800"
+      >
+        <ChevronDown className={`size-3.5 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
+        {open ? cs.grammar.previewHide : cs.grammar.preview}
+      </button>
+      {open && (
+        <div id={`preview-${u.id}`} className="mt-1 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
+          <UnitPreview id={u.id} language={language} />
+        </div>
+      )}
     </li>
   );
 }
@@ -120,7 +190,7 @@ function UnitGrid({ units, tree }: { units: Unit[]; tree: GrammarTree }) {
   return (
     <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {units.map((u) => (
-        <UnitCard key={u.id} u={u} recommended={u.id === tree.recommended} resumable={u.id === tree.active_lesson_unit} />
+        <UnitCard key={u.id} u={u} recommended={u.id === tree.recommended} resumable={u.id === tree.active_lesson_unit} language={tree.language} />
       ))}
     </ol>
   );
