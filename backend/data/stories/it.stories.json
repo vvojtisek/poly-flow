@@ -1,0 +1,3608 @@
+{
+ "language": "it",
+ "source": "polyflow-curated",
+ "revision": "stories-v1",
+ "license": "CC0-1.0",
+ "review_status": "unreviewed",
+ "stories": [
+  {
+   "slug": "a1-01-umbrella",
+   "level": "A1",
+   "title": "L'ombrello",
+   "title_cs": "Deštník na slunci",
+   "lines": [
+    {
+     "speaker": "Tom",
+     "text": "Oggi piove. Prendo il mio ombrello.",
+     "cs": "Dnes bude pršet. Vezmu si deštník."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Ma Tom, c'è il sole!",
+     "cs": "Ale Tome, vždyť svítí slunce!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Io lo so meglio. Le previsioni del tempo dicono: pioggia.",
+     "cs": "Já to vím líp. Předpověď počasí říká: déšť."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Sono le previsioni di ieri, Tom.",
+     "cs": "To je včerejší předpověď, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Non importa. Vado al parco con l'ombrello.",
+     "cs": "To je jedno. Jdu s deštníkem do parku."
+    },
+    {
+     "text": "Al parco tutti ridono. Tom resta tranquillo.",
+     "cs": "V parku se všichni smějí. Tom zůstává klidný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Presto piove. Vedrete!",
+     "cs": "Brzy bude pršet. Uvidíte!"
+    },
+    {
+     "text": "La sera piove davvero. Tom è a casa, senza ombrello.",
+     "cs": "Večer opravdu prší. Tom je doma, bez deštníku."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Il tuo ombrello è ancora al parco, Tom.",
+     "cs": "Tvůj deštník je pořád v parku, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Pazienza. Almeno lui ha passato una bella giornata.",
+     "cs": "No co. Aspoň si užil hezký den."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "previsioni",
+     "cs": "předpověď"
+    },
+    {
+     "word": "tranquillo",
+     "cs": "klidný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa dice Tom del tempo?",
+     "options": [
+      "Presto piove.",
+      "Fa freddo.",
+      "Nevica."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è l'ombrello la sera?",
+     "options": [
+      "A casa",
+      "Al parco",
+      "Sull'autobus"
+     ],
+     "answer_index": 1
+    }
+   ]
+  },
+  {
+   "slug": "a1-02-guard-dog",
+   "level": "A1",
+   "title": "Il cane da guardia",
+   "title_cs": "Hlídací pes",
+   "lines": [
+    {
+     "text": "Mia mette un panino sul tavolo.",
+     "cs": "Mia položí sendvič na stůl."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max, tu sei il mio cane da guardia. Fai attenzione!",
+     "cs": "Maxi, ty jsi můj hlídací pes. Dávej dobrý pozor!"
+    },
+    {
+     "text": "Max è seduto vicino al tavolo. Sembra molto serio.",
+     "cs": "Max sedí vedle stolu. Vypadá velmi vážně."
+    },
+    {
+     "text": "Mia va in cucina. Dopo cinque minuti torna.",
+     "cs": "Mia jde do kuchyně. Za pět minut se vrátí."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Dov'è il mio panino?",
+     "cs": "Kde je můj sendvič?"
+    },
+    {
+     "text": "Max guarda da un'altra parte. Ha del formaggio sul naso.",
+     "cs": "Max se dívá stranou. Na čumáku má sýr."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max! Hai mangiato il panino!",
+     "cs": "Maxi! Snědl jsi sendvič!"
+    },
+    {
+     "text": "Max non dice niente. Si addormenta subito.",
+     "cs": "Max neříká nic. Rychle usne."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Va bene. Il panino adesso è al sicuro: nella tua pancia.",
+     "cs": "No dobře. Sendvič je teď v bezpečí: v tvém břiše."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "guardia",
+     "cs": "hlídání (cane da guardia = hlídací pes)"
+    },
+    {
+     "word": "serio",
+     "cs": "vážný"
+    },
+    {
+     "word": "sicuro",
+     "cs": "jistý; al sicuro = v bezpečí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dov'è il panino alla fine?",
+     "options": [
+      "Sul tavolo",
+      "In cucina",
+      "Nella pancia di Max"
+     ],
+     "answer_index": 2
+    },
+    {
+     "question": "Che cosa c'è sul naso di Max?",
+     "options": [
+      "Formaggio",
+      "Pane",
+      "Acqua"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-03-soup",
+   "level": "A1",
+   "title": "La zuppa",
+   "title_cs": "Polévka jako dezert",
+   "lines": [
+    {
+     "text": "Oggi papà prepara la zuppa.",
+     "cs": "Táta dnes vaří polévku."
+    },
+    {
+     "speaker": "Papà",
+     "text": "Sono un bravo cuoco. Ecco la mia ricetta!",
+     "cs": "Jsem dobrý kuchař. Tady je můj recept!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Che buon profumo!",
+     "cs": "Voní to dobře!"
+    },
+    {
+     "text": "Papà prende la polvere bianca dal barattolo e la mette nella pentola.",
+     "cs": "Táta vezme bílý prášek ze sklenice a dá ho do hrnce."
+    },
+    {
+     "text": "Tutti sono a tavola. Emma assaggia.",
+     "cs": "Všichni sedí u stolu. Emma ochutná."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Papà, la zuppa è molto dolce.",
+     "cs": "Tati, ta polévka je moc sladká."
+    },
+    {
+     "text": "Anche papà assaggia. Fa una faccia strana.",
+     "cs": "Táta taky ochutná. Udělá legrační obličej."
+    },
+    {
+     "speaker": "Papà",
+     "text": "Il sale e lo zucchero hanno lo stesso colore!",
+     "cs": "Sůl a cukr mají stejnou barvu!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Nessun problema, papà. Oggi la zuppa è il nostro dolce.",
+     "cs": "Žádný problém, tati. Dnes je polévka náš dezert."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ricetta",
+     "cs": "recept"
+    },
+    {
+     "word": "polvere",
+     "cs": "prášek"
+    },
+    {
+     "word": "assaggia",
+     "cs": "ochutná"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa mette papà nella pentola?",
+     "options": [
+      "Sale",
+      "Zucchero",
+      "Acqua"
+     ],
+     "answer_index": 1
+    },
+    {
+     "question": "Com'è la zuppa?",
+     "options": [
+      "Molto dolce",
+      "Molto fredda",
+      "Molto piccante"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-04-sunday-bus",
+   "level": "A1",
+   "title": "L'autobus della domenica",
+   "title_cs": "Autobus v neděli",
+   "lines": [
+    {
+     "text": "Lena è alla fermata dell'autobus. Aspetta da mezz'ora.",
+     "cs": "Lena stojí na autobusové zastávce. Čeká už půl hodiny."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Buongiorno. Aspetta il cinque?",
+     "cs": "Dobrý den. Čekáte na číslo pět?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Sì. L'autobus è molto in ritardo.",
+     "cs": "Ano. Autobus je velmi pozdě."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Oggi è domenica. La domenica qui non passa nessun autobus.",
+     "cs": "Dnes je neděle, paní. V neděli autobus nejezdí."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Cosa? Ma devo andare al lavoro!",
+     "cs": "Co? Ale já chci do práce!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Lavora la domenica?",
+     "cs": "Vy pracujete v neděli?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "No... oggi è giorno libero. L'ho dimenticato.",
+     "cs": "Ne... dnes je volno. Já jsem zapomněla."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Almeno oggi ho un posto molto bello sull'autobus.",
+     "cs": "Aspoň mám dnes velmi dobré místo v autobuse."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Sì. Può prendere tutti i posti.",
+     "cs": "Ano. Můžete si vybrat všechna místa."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fermata",
+     "cs": "zastávka"
+    },
+    {
+     "word": "ritardo",
+     "cs": "zpoždění"
+    },
+    {
+     "word": "dimenticato",
+     "cs": "zapomenutý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché l'autobus non arriva?",
+     "options": [
+      "È domenica.",
+      "Piove.",
+      "L'autobus è rotto."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa ha dimenticato Lena?",
+     "options": [
+      "Che oggi è libero",
+      "I soldi",
+      "La borsa"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-05-shopping-list",
+   "level": "A1",
+   "title": "La lista della spesa",
+   "title_cs": "Nákupní seznam",
+   "lines": [
+    {
+     "text": "Piero scrive la lista della spesa: latte, pane, uova, mele.",
+     "cs": "Petr píše nákupní seznam: mléko, chleba, vejce, jablka."
+    },
+    {
+     "speaker": "Piero",
+     "text": "Perfetto. Adesso vado al supermercato.",
+     "cs": "Perfektní. Teď jdu do obchodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Hai dimenticato la lista, Piero! È sul tavolo.",
+     "cs": "Zapomněl jsi seznam, Petře! Leží na stole."
+    },
+    {
+     "speaker": "Piero",
+     "text": "Non importa. Ho una buona memoria.",
+     "cs": "To nevadí. Mám dobrou paměť."
+    },
+    {
+     "text": "Al supermercato Piero pensa: che cosa compro? Qualcosa di dolce!",
+     "cs": "V obchodě Petr myslí: co mám koupit? Něco sladkého!"
+    },
+    {
+     "text": "A casa Eva apre la borsa. C'è solo una torta al cioccolato.",
+     "cs": "Doma Eva otevře tašku. Je tam jen čokoládový dort."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Dov'è il latte? E il pane? E le uova?",
+     "cs": "Kde je mléko? A chleba? A vejce?"
+    },
+    {
+     "speaker": "Piero",
+     "text": "Tutto è sulla lista. La lista è sul tavolo.",
+     "cs": "Všechno je na seznamu. Seznam leží na stole."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Almeno stasera abbiamo la torta per cena.",
+     "cs": "Aspoň máme k večeři dort."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "memoria",
+     "cs": "paměť"
+    },
+    {
+     "word": "supermercato",
+     "cs": "supermarket"
+    },
+    {
+     "word": "torta",
+     "cs": "dort"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa compra Piero?",
+     "options": [
+      "Una torta",
+      "Il latte",
+      "Il pane"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è la lista?",
+     "options": [
+      "Sul tavolo",
+      "Nella borsa",
+      "Al supermercato"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-06-ice-cream",
+   "level": "A1",
+   "title": "Il gelato per gli amici",
+   "title_cs": "Zmrzlina pro přátele",
+   "lines": [
+    {
+     "text": "Fa molto caldo. Tom e Anna vanno al chiosco dei gelati.",
+     "cs": "Je velké horko. Tom a Anna jdou ke stánku se zmrzlinou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Compro i gelati per Ben, Tina e te.",
+     "cs": "Koupím zmrzlinu pro Bena, Tinu a pro tebe."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Che gentile! Prendo la vaniglia.",
+     "cs": "To je milé! Dám si vanilkovou."
+    },
+    {
+     "text": "Tom torna. Ha quattro gelati in mano.",
+     "cs": "Tom se vrací. V ruce má čtyři zmrzliny."
+    },
+    {
+     "text": "Tom mangia in fretta il suo gelato. Poi mangia il gelato di Ben.",
+     "cs": "Tom rychle sní svou zmrzlinu. Pak sní Benovu."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Tom, che cosa fai?",
+     "cs": "Tome, co děláš?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Il gelato si scioglie. Ben e Tina non sono qui.",
+     "cs": "Zmrzlina taje. Ben a Tina tu nejsou."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Mangi anche il gelato di Tina!",
+     "cs": "Ty jíš i Tininu zmrzlinu!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Mangio per i miei amici. Questa si chiama amicizia.",
+     "cs": "Jím za své přátele. Tomu se říká přátelství."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "chiosco",
+     "cs": "stánek"
+    },
+    {
+     "word": "scioglie",
+     "cs": "taje"
+    },
+    {
+     "word": "amicizia",
+     "cs": "přátelství"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Per chi compra i gelati Tom?",
+     "options": [
+      "Per Ben, Tina e Anna",
+      "Solo per sé",
+      "Per Tom e Anna"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi mangia i gelati di Ben e Tina?",
+     "options": [
+      "Tom",
+      "Anna",
+      "Ben"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-07-lost-phone",
+   "level": "A1",
+   "title": "Il telefono perso",
+   "title_cs": "Ztracený mobil",
+   "lines": [
+    {
+     "text": "Gianni cerca il telefono. Cerca in bagno, in cucina e nel letto.",
+     "cs": "Jan hledá mobil. Hledá v koupelně, v kuchyni a v posteli."
+    },
+    {
+     "text": "Gianni chiama Mia.",
+     "cs": "Jan volá Mie."
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Ciao Mia! Non trovo il mio telefono. Puoi aiutarmi?",
+     "cs": "Ahoj, Mio! Nemůžu najít mobil. Můžeš mi pomoct?"
+    },
+    {
+     "speaker": "Mia",
+     "text": "Certo. Dove sei?",
+     "cs": "Jasně. Kde jsi?"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Sono a casa. Non lo vedo da nessuna parte.",
+     "cs": "Jsem doma. Nikde ho nevidím."
+    },
+    {
+     "speaker": "Mia",
+     "text": "E con che telefono mi parli?",
+     "cs": "A čím mi voláš?"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Con... il mio telefono.",
+     "cs": "Mým... mobilem."
+    },
+    {
+     "text": "Mia ride. Dice: Allora ce l'hai in mano, Gianni!",
+     "cs": "Mia se směje: Tak ho máš v ruce, Jane!"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Ah, già. Grazie, Mia! Sei la migliore.",
+     "cs": "Aha. Díky, Mio! Jsi nejlepší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Certo",
+     "cs": "samozřejmě"
+    },
+    {
+     "word": "nessuna",
+     "cs": "žádná; da nessuna parte = nikde"
+    },
+    {
+     "word": "ride",
+     "cs": "směje se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa cerca Gianni?",
+     "options": [
+      "Il telefono",
+      "La chiave",
+      "Il libro"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è il telefono?",
+     "options": [
+      "In mano",
+      "Nel letto",
+      "In cucina"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-08-glasses",
+   "level": "A1",
+   "title": "Gli occhiali del nonno",
+   "title_cs": "Dědečkovy brýle",
+   "lines": [
+    {
+     "text": "Il nonno vuole leggere il giornale. Ma non vede bene.",
+     "cs": "Dědeček chce číst noviny. Ale nevidí dobře."
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Dove sono i miei occhiali? Non riesco a trovarli!",
+     "cs": "Kde jsou moje brýle? Nemůžu je najít!"
+    },
+    {
+     "text": "Cerca sul tavolo, sotto la sedia e nella borsa.",
+     "cs": "Hledá na stole, pod židlí a v tašce."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Nonno, sono sulla tua testa!",
+     "cs": "Dědo, jsou na tvé hlavě!"
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Impossibile. Li sentirei.",
+     "cs": "Nemožné. Já bych je cítil."
+    },
+    {
+     "text": "Lucia prende gli occhiali e li mette sul suo naso.",
+     "cs": "Lucie vezme brýle a dá mu je na nos."
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Ah! Ora vedo: mia nipote è molto intelligente.",
+     "cs": "Aha! Teď vidím: moje vnučka je moc chytrá."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "E che cosa dice il giornale?",
+     "cs": "A co říkají noviny?"
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Non lo so. Adesso cerco il giornale.",
+     "cs": "Nevím. Teď hledám noviny."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "impossibile",
+     "cs": "nemožné"
+    },
+    {
+     "word": "nipote",
+     "cs": "vnučka"
+    },
+    {
+     "word": "intelligente",
+     "cs": "chytrá"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dove sono gli occhiali?",
+     "options": [
+      "Sulla testa del nonno",
+      "Nella borsa",
+      "Sul tavolo"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa cerca il nonno alla fine?",
+     "options": [
+      "Il giornale",
+      "Gli occhiali",
+      "La sedia"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-09-birthday",
+   "level": "A1",
+   "title": "Il compleanno dimenticato",
+   "title_cs": "Zapomenuté narozeniny",
+   "lines": [
+    {
+     "text": "Oggi è il compleanno di Paolo. Ma Paolo non lo sa.",
+     "cs": "Dnes má Pavel narozeniny. Ale Pavel to neví."
+    },
+    {
+     "text": "Paolo va in cucina. La casa è molto silenziosa.",
+     "cs": "Pavel jde do kuchyně. V domě je velké ticho."
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Nessuno dice buongiorno. Nessuno mi vuole bene?",
+     "cs": "Nikdo nepřeje dobré ráno. Nemá mě nikdo rád?"
+    },
+    {
+     "text": "Va in salotto, triste.",
+     "cs": "Smutně jde do obýváku."
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Sorpresa! Buon compleanno!",
+     "cs": "Najednou všichni zvolají: Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Di chi è il compleanno oggi?",
+     "cs": "Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Bambini",
+     "text": "Il tuo, papà!",
+     "cs": "Děti se smějí: Ty, tati!"
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Oh no! Adesso ho un anno in più!",
+     "cs": "Ale ne! Teď jsem zase o rok starší!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silenziosa",
+     "cs": "tichá"
+    },
+    {
+     "word": "triste",
+     "cs": "smutný"
+    },
+    {
+     "word": "Sorpresa",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché la casa è silenziosa?",
+     "options": [
+      "Tutti preparano una sorpresa.",
+      "Tutti dormono.",
+      "Non c'è nessuno a casa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Di chi è il compleanno?",
+     "options": [
+      "Di Paolo",
+      "Dei bambini",
+      "Della mamma"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-10-diet",
+   "level": "A1",
+   "title": "La dieta",
+   "title_cs": "Dieta se salátem",
+   "lines": [
+    {
+     "text": "Carlo fa la dieta. Oggi mangia solo insalata.",
+     "cs": "Karel drží dietu. Dnes jí jen salát."
+    },
+    {
+     "text": "A pranzo: insalata, insalata e ancora insalata.",
+     "cs": "K obědu: salát, salát a ještě více salátu."
+    },
+    {
+     "text": "Nel pomeriggio ha molta fame.",
+     "cs": "Odpoledne má velký hlad."
+    },
+    {
+     "text": "Chiama la pizzeria: Una pizza, per favore. Con l'insalata!",
+     "cs": "Volá do pizzerie: Jednu pizzu, prosím. Se salátem!"
+    },
+    {
+     "text": "La pizza arriva. Sopra c'è una foglia di insalata.",
+     "cs": "Pizza přijede. Nahoře má list salátu."
+    },
+    {
+     "text": "Carlo mangia la pizza. Poi ne mangia una seconda.",
+     "cs": "Karel sní pizzu. Potom druhou."
+    },
+    {
+     "speaker": "Lisa",
+     "text": "Carlo, sei a dieta!",
+     "cs": "Karle, vždyť držíš dietu!"
+    },
+    {
+     "speaker": "Carlo",
+     "text": "Sì! E oggi mangio molto sano: su ogni pizza c'è l'insalata.",
+     "cs": "Ano! A dnes jím velmi zdravě: na každé pizze je salát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "dieta",
+     "cs": "dieta"
+    },
+    {
+     "word": "pizzeria",
+     "cs": "pizzerie"
+    },
+    {
+     "word": "foglia",
+     "cs": "list"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Carlo nel pomeriggio?",
+     "options": [
+      "Ordina una pizza.",
+      "Va a dormire.",
+      "Prepara la zuppa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa c'è sopra la pizza?",
+     "options": [
+      "Una foglia di insalata",
+      "Formaggio",
+      "Prosciutto"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-01-satnav-cows",
+   "level": "A2",
+   "title": "L'albergo delle mucche",
+   "title_cs": "Hotel plný krav",
+   "lines": [
+    {
+     "text": "Karin e Lukas sono andati in macchina a un albergo sul mare. Il navigatore mostrava la strada.",
+     "cs": "Karin a Lukas jeli autem do hotelu u moře. Cestu jim ukazovala navigace."
+    },
+    {
+     "speaker": "Navigatore",
+     "text": "Proseguite per 500 metri dritto. Poi girate a sinistra.",
+     "cs": "Ujeďte 500 metrů rovně. Pak odbočte doleva."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Karin, qui non c'è nessuna strada. C'è solo un campo.",
+     "cs": "Karin, tady žádná cesta není. Je tu jen pole."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Il navigatore sa più di noi. Dobbiamo fidarci.",
+     "cs": "Navigace ví víc než my. Musíme jí důvěřovat."
+    },
+    {
+     "text": "Sono entrati nel campo. Dopo un minuto erano davanti a venti mucche.",
+     "cs": "Vjeli na pole. Za minutu stáli před dvaceti kravami."
+    },
+    {
+     "speaker": "Navigatore",
+     "text": "Siete arrivati a destinazione.",
+     "cs": "Dojeli jste do cíle."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Questo albergo è piuttosto... animale.",
+     "cs": "Ten hotel je docela... zvířecí."
+    },
+    {
+     "text": "Una mucca ha guardato dentro la macchina. Karin ha chiesto con gentilezza: Avete una camera libera?",
+     "cs": "Jedna kráva nakoukla do auta. Karin se zdvořile zeptala: Máte volný pokoj?"
+    },
+    {
+     "text": "Lukas ha riso così forte che le mucche sono scappate.",
+     "cs": "Lukas se smál tak hlasitě, že krávy utekly."
+    },
+    {
+     "text": "Hanno trovato l'albergo solo dopo due ore, con una cartina di carta.",
+     "cs": "Hotel našli až za dvě hodiny, podle papírové mapy."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Almeno le mucche sono state ospiti economici: non volevano soldi.",
+     "cs": "Krávy byly aspoň levní hostitelé: nechtěly žádné peníze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fidarci",
+     "cs": "důvěřovat"
+    },
+    {
+     "word": "gentilezza",
+     "cs": "zdvořilost"
+    },
+    {
+     "word": "economici",
+     "cs": "levní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dove porta il navigatore i due amici?",
+     "options": [
+      "In un campo di mucche",
+      "All'albergo",
+      "Al mare"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come trovano l'albergo?",
+     "options": [
+      "Con una cartina di carta",
+      "Con il navigatore",
+      "Una mucca indica la strada"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-02-gym",
+   "level": "A2",
+   "title": "Il cliente migliore",
+   "title_cs": "Nejlepší zákazník posilovny",
+   "lines": [
+    {
+     "text": "A gennaio Marco ha comprato un abbonamento annuale alla palestra. Era molto motivato.",
+     "cs": "V lednu si Marco koupil roční permanentku do posilovny. Byl velmi motivovaný."
+    },
+    {
+     "speaker": "Marco",
+     "text": "D'ora in poi vengo tre volte alla settimana!",
+     "cs": "Od teď budu chodit třikrát týdně!"
+    },
+    {
+     "speaker": "Nina",
+     "text": "Mi fa piacere. A gennaio lo dicono in tanti.",
+     "cs": "To mě těší. V lednu to říká hodně lidí."
+    },
+    {
+     "text": "Il primo giorno Marco si è allenato per dieci minuti. Poi ha fatto una lunga pausa al bar.",
+     "cs": "První den Marco cvičil deset minut. Pak měl dlouhou pauzu v kavárně."
+    },
+    {
+     "text": "Il secondo giorno è andato solo al bar.",
+     "cs": "Druhý den šel jen do kavárny."
+    },
+    {
+     "text": "Da marzo non è più venuto in palestra. Ma ha pagato ogni mese.",
+     "cs": "Od března už do posilovny nechodil. Ale každý měsíc platil."
+    },
+    {
+     "text": "A dicembre ha incontrato Nina per strada.",
+     "cs": "V prosinci potkal Ninu na ulici."
+    },
+    {
+     "speaker": "Nina",
+     "text": "Marco! Era da tanto che non ti vedevamo.",
+     "cs": "Marco! Dlouho jsme tě neviděli."
+    },
+    {
+     "speaker": "Marco",
+     "text": "Lo so. Vengo la settimana prossima. Sicuro.",
+     "cs": "Já vím. Přijdu příští týden. Určitě."
+    },
+    {
+     "speaker": "Nina",
+     "text": "Sei il nostro cliente migliore. Paghi e non hai mai bisogno di un attrezzo!",
+     "cs": "Jsi náš nejlepší zákazník. Platíš a nikdy nepotřebuješ žádný stroj!"
+    },
+    {
+     "speaker": "Marco",
+     "text": "Almeno il mio portafoglio fa sport: diventa più leggero ogni mese.",
+     "cs": "Aspoň moje peněženka cvičí: každý měsíc je lehčí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "motivato",
+     "cs": "motivovaný"
+    },
+    {
+     "word": "attrezzo",
+     "cs": "nářadí, přístroj"
+    },
+    {
+     "word": "portafoglio",
+     "cs": "peněženka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Marco il primo giorno?",
+     "options": [
+      "Si allena per dieci minuti.",
+      "Si allena per due ore.",
+      "Resta a casa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché Marco è il cliente migliore?",
+     "options": [
+      "Paga, ma non viene.",
+      "Viene ogni giorno.",
+      "Compra molte bevande."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-03-hotel-room",
+   "level": "A2",
+   "title": "La camera sbagliata",
+   "title_cs": "Cizí pokoj",
+   "lines": [
+    {
+     "text": "Petra è arrivata in albergo a tarda sera. Era molto stanca.",
+     "cs": "Petra přijela pozdě večer do hotelu. Byla velmi unavená."
+    },
+    {
+     "text": "Il receptionist le ha dato la chiave della camera 214.",
+     "cs": "Recepční jí dal klíč od pokoje 214."
+    },
+    {
+     "text": "Petra ha aperto la porta ed è andata subito a dormire.",
+     "cs": "Petra otevřela dveře a hned šla spát."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Buongiorno! Che cosa fa nel mio letto?",
+     "cs": "Ráno ji probudil hlas: Dobré ráno! Co děláte v mé posteli?"
+    },
+    {
+     "text": "Petra si è seduta, spaventata. Accanto a lei c'era un uomo in accappatoio.",
+     "cs": "Petra se leknutím posadila. Vedle ní stál muž v županu."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Questa è la camera 214, vero? Ho la chiave!",
+     "cs": "To je pokoj 214, ne? Mám klíč!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Anch'io. Il receptionist ha dato la chiave a tutti e due.",
+     "cs": "Já taky. Recepční dal klíč nám oběma."
+    },
+    {
+     "text": "Hanno guardato la porta. Sopra c'era il numero 241.",
+     "cs": "Oba se podívali na dveře. Na nich stálo číslo 241."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Mi scusi. Ho dormito nella sua camera tutta la notte.",
+     "cs": "Omlouvám se. Spala jsem ve vašem pokoji celou noc."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Non importa. Io ho dormito nel corridoio. Era un corridoio molto lungo.",
+     "cs": "To nevadí. Spal jsem na chodbě. Byla to velmi dlouhá chodba."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Allora la invito a colazione. È il minimo.",
+     "cs": "Pak vás zvu na snídani. To je to nejmenší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "receptionist",
+     "cs": "recepční"
+    },
+    {
+     "word": "spaventata",
+     "cs": "vyděšená"
+    },
+    {
+     "word": "minimo",
+     "cs": "minimum"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Petra dorme nella camera sbagliata?",
+     "options": [
+      "Legge male il numero.",
+      "Ha la chiave sbagliata.",
+      "L'albergo è pieno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dove ha dormito l'uomo?",
+     "options": [
+      "Nel corridoio",
+      "In bagno",
+      "In macchina"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-04-secret-sauce",
+   "level": "A2",
+   "title": "La ricetta segreta",
+   "title_cs": "Tajemství rodinné omáčky",
+   "lines": [
+    {
+     "text": "Helga ha frequentato un corso di cucina. Voleva mostrare la sua famosa salsa di famiglia.",
+     "cs": "Helga přišla na kurz vaření. Chtěla ukázat svou slavnou rodinnou omáčku."
+    },
+    {
+     "text": "Lo chef Bruno ha assaggiato la salsa.",
+     "cs": "Šéfkuchař Bruno omáčku ochutnal."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Fantastica! Qual è il suo segreto?",
+     "cs": "Báječné! Jaké je vaše tajemství?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "La ricetta è di mia nonna. Ha più di cento anni.",
+     "cs": "Recept je od mé babičky. Je mu přes sto let."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "E che cosa c'è dentro?",
+     "cs": "A co v ní je?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Pomodori, cipolle, un po' d'amore e molte erbe.",
+     "cs": "Rajčata, cibule, trochu lásky a hodně bylinek."
+    },
+    {
+     "text": "Dalla sua borsa è caduto un barattolo. Sull'etichetta c'era scritto: Salsa di pomodoro, 1,99 euro.",
+     "cs": "Z její tašky vypadla sklenice. Na etiketě stálo: Rajčatová omáčka, 1,99 eura."
+    },
+    {
+     "text": "Tutti sono rimasti in silenzio.",
+     "cs": "Všichni mlčeli."
+    },
+    {
+     "speaker": "Helga",
+     "text": "Il segreto è trovare lo scaffale giusto al supermercato.",
+     "cs": "Tajemství je najít správnou polici v supermarketu."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Per questo prende dieci. In spesa.",
+     "cs": "Za to dostanete jedničku. Z nakupování."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "segreto",
+     "cs": "tajemství"
+    },
+    {
+     "word": "erbe",
+     "cs": "bylinky"
+    },
+    {
+     "word": "etichetta",
+     "cs": "etiketa"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa c'è nella salsa di Helga?",
+     "options": [
+      "Una salsa del supermercato",
+      "Pomodori freschi del campo",
+      "Una ricetta di Bruno"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa cade dalla borsa di Helga?",
+     "options": [
+      "Un barattolo",
+      "Un libro",
+      "Un coltello"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-05-wrong-suitcase",
+   "level": "A2",
+   "title": "La valigia sbagliata",
+   "title_cs": "Cizí kufr",
+   "lines": [
+    {
+     "text": "Dopo il volo Maria ha preso la valigia dal nastro. Sembrava proprio la sua.",
+     "cs": "Po letu vzala Maria z pásu svůj kufr. Vypadal přesně jako její."
+    },
+    {
+     "text": "In albergo l'ha aperta. Dentro c'erano stivali di gomma, un cappello da pescatore e cinque scatolette di sardine.",
+     "cs": "V hotelu ho otevřela. Byly v něm gumáky, rybářský klobouk a pět plechovek sardinek."
+    },
+    {
+     "speaker": "Maria",
+     "text": "Questa non è la mia valigia! Domani ho un incontro importante!",
+     "cs": "To není můj kufr! Zítra mám důležitou schůzku!"
+    },
+    {
+     "text": "Ha chiamato la compagnia aerea, ma nessuno ha risposto.",
+     "cs": "Zavolala letecké společnosti, ale nikdo to nezvedl."
+    },
+    {
+     "text": "La mattina dopo Maria è andata all'incontro con il cappello da pescatore e gli stivali.",
+     "cs": "Druhý den ráno šla Maria na schůzku v rybářském klobouku a v gumácích."
+    },
+    {
+     "text": "Il cliente, il signor Rossi, l'ha guardata a lungo.",
+     "cs": "Zákazník, pan Rossi, se na ni dlouho díval."
+    },
+    {
+     "speaker": "Signor Rossi",
+     "text": "Lei è una pescatrice? Adoro la pesca!",
+     "cs": "Vy jste rybářka? Já miluju rybaření!"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Sì... ogni domenica.",
+     "cs": "Ano... každou neděli."
+    },
+    {
+     "text": "Hanno parlato di pesci per due ore. Poi il signor Rossi ha firmato il contratto.",
+     "cs": "Dvě hodiny mluvili o rybách. Pak pan Rossi podepsal smlouvu."
+    },
+    {
+     "text": "Più tardi l'altro viaggiatore ha telefonato: Ho i suoi vestiti. Ha le mie sardine?",
+     "cs": "Později zavolal druhý cestující: Mám vaše oblečení. Máte moje sardinky?"
+    },
+    {
+     "speaker": "Maria",
+     "text": "I suoi stivali mi hanno portato un contratto. In cambio le mando un pesce!",
+     "cs": "Vaše gumáky mi přinesly smlouvu. Pošlu vám za to rybu!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "aerea",
+     "cs": "letecký"
+    },
+    {
+     "word": "contratto",
+     "cs": "smlouva"
+    },
+    {
+     "word": "scatolette",
+     "cs": "plechovky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa c'è nella valigia?",
+     "options": [
+      "Stivali, un cappello e sardine",
+      "Vestiti e scarpe",
+      "Libri e documenti"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché il signor Rossi firma il contratto?",
+     "options": [
+      "Ama la pesca come Maria.",
+      "Maria ha un buon prezzo.",
+      "Conosce già Maria."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-06-fish-story",
+   "level": "A2",
+   "title": "Il pesce enorme",
+   "title_cs": "Obrovská ryba",
+   "lines": [
+    {
+     "text": "Lo zio Fritz è andato a pescare nel fine settimana. A cena ne ha parlato.",
+     "cs": "Strýc Fritz byl o víkendu na rybách. U večeře o tom vyprávěl."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Ho preso un pesce enorme!",
+     "cs": "Chytil jsem obrovskou rybu!"
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Quanto era grande?",
+     "cs": "Jak byla velká?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Due metri! Ha quasi rovesciato la mia barca.",
+     "cs": "Dva metry! Skoro mi převrhla loď."
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Hai fatto una foto?",
+     "cs": "Vyfotil jsi ji?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Certo. Ecco, sul mio telefono.",
+     "cs": "Samozřejmě. Tady, v mobilu."
+    },
+    {
+     "text": "Tutti hanno guardato la foto. Si vedeva un pesce molto piccolo nella mano di Fritz.",
+     "cs": "Všichni se podívali na fotku. Byla na ní velmi malá rybka na Fritzově ruce."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "È la fotocamera. Rimpicciolisce tutto.",
+     "cs": "To dělá ten fotoaparát. Všechno zmenší."
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Allora anche la tua barca è diventata piccola. Io vedo solo una vasca da bagno.",
+     "cs": "Tak se zmenšila i tvoje loď. Vidím jen vanu."
+    },
+    {
+     "text": "Nessuno ha detto niente.",
+     "cs": "Nikdo nic neřekl."
+    },
+    {
+     "speaker": "Nonna",
+     "text": "Mangia la zuppa, Fritz.",
+     "cs": "Jez polévku, Fritzi."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "enorme",
+     "cs": "obrovský"
+    },
+    {
+     "word": "rovesciato",
+     "cs": "převrhl"
+    },
+    {
+     "word": "vasca",
+     "cs": "vana"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Com'è il pesce nella foto?",
+     "options": [
+      "Molto piccolo",
+      "Due metri",
+      "Medio"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa vede il bambino al posto di una barca?",
+     "options": [
+      "Una vasca da bagno",
+      "Un lago",
+      "Una macchina"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-07-quiet-coach",
+   "level": "A2",
+   "title": "La carrozza del silenzio",
+   "title_cs": "Tichý vagon",
+   "lines": [
+    {
+     "text": "Julia sedeva sul treno, nella carrozza del silenzio. Voleva leggere un libro.",
+     "cs": "Julia seděla ve vlaku v tichém vagonu. Chtěla číst knihu."
+    },
+    {
+     "text": "Accanto a lei un uomo telefonava a voce molto alta.",
+     "cs": "Vedle ní velmi hlasitě telefonoval nějaký muž."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Scusi, questa è la carrozza del silenzio.",
+     "cs": "Promiňte, tohle je tichý vagon."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Un momento, per favore. Sto parlando con mia madre.",
+     "cs": "Moment, prosím. Telefonuju s maminkou."
+    },
+    {
+     "text": "Ha continuato per dieci minuti. Julia sembrava sempre più arrabbiata.",
+     "cs": "Mluvil dál deset minut. Julia se tvářila čím dál rozzlobeněji."
+    },
+    {
+     "text": "Poi è arrivato il controllore. Voleva vedere i biglietti.",
+     "cs": "Pak přišel průvodčí. Chtěl vidět jízdenky."
+    },
+    {
+     "speaker": "Controllore",
+     "text": "Il suo biglietto è valido per domani, signora. Oggi non può stare qui.",
+     "cs": "Vaše jízdenka platí až na zítra, paní. Dnes tu sedět nemůžete."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Ma sono seduta qui da due ore!",
+     "cs": "Ale já tu sedím už dvě hodiny!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Non si preoccupi. Domani qui sarà sicuramente più tranquillo. Io non ci sarò.",
+     "cs": "Nelekejte se. Zítra tu bude určitě klid. Já tu nebudu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silenzio",
+     "cs": "ticho"
+    },
+    {
+     "word": "arrabbiata",
+     "cs": "rozzlobená"
+    },
+    {
+     "word": "controllore",
+     "cs": "průvodčí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa l'uomo nella carrozza del silenzio?",
+     "options": [
+      "Telefona a voce alta.",
+      "Dorme.",
+      "Legge un libro."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qual è il problema del biglietto di Julia?",
+     "options": [
+      "È valido per domani.",
+      "È troppo vecchio.",
+      "È rotto."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-08-shelf",
+   "level": "A2",
+   "title": "La libreria e le viti",
+   "title_cs": "Police a zbylé šroubky",
+   "lines": [
+    {
+     "text": "Tommaso ha comprato una nuova libreria. Sulla scatola c'era scritto: Montaggio facile, 20 minuti.",
+     "cs": "Tomáš koupil novou polici. Na krabici stálo: Snadná montáž, 20 minut."
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "Ce la faccio da solo. Non ho bisogno delle istruzioni.",
+     "cs": "Tohle zvládnu sám. Návod nepotřebuju."
+    },
+    {
+     "text": "Dopo tre ore la libreria era finalmente in piedi. Sul pavimento c'erano quattro viti.",
+     "cs": "Po třech hodinách police konečně stála. Na podlaze ležely čtyři šroubky."
+    },
+    {
+     "speaker": "Lea",
+     "text": "Tommaso, queste viti sono per la libreria!",
+     "cs": "Tomáši, ty šroubky patří do police!"
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "No. Il produttore ne ha mandate alcune in più. È normale.",
+     "cs": "Ne. Výrobce poslal pár navíc, to je normální."
+    },
+    {
+     "text": "Tommaso ha messo tutti i suoi libri sulla libreria. Ha retto.",
+     "cs": "Tomáš dal na polici všechny své knihy. Police to vydržela."
+    },
+    {
+     "text": "La sera si è seduto sul divano e ha guardato la libreria soddisfatto.",
+     "cs": "Večer sedl na pohovku a spokojeně se na ni díval."
+    },
+    {
+     "text": "Poi si è sentito un leggero scricchiolio.",
+     "cs": "Pak se ozvalo tiché zapraskání."
+    },
+    {
+     "text": "La libreria si è inclinata lentamente e i libri sono caduti sul tappeto.",
+     "cs": "Police se pomalu naklonila a knihy spadly na koberec."
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "Almeno adesso so dove mancano le quattro viti.",
+     "cs": "Aspoň už vím, kde ty čtyři šroubky chybí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "istruzioni",
+     "cs": "návod"
+    },
+    {
+     "word": "produttore",
+     "cs": "výrobce"
+    },
+    {
+     "word": "inclinata",
+     "cs": "naklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Tommaso con le istruzioni?",
+     "options": [
+      "Non le usa.",
+      "Le legge con attenzione.",
+      "Le dà a Lea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa succede la sera?",
+     "options": [
+      "La libreria cade.",
+      "Tommaso va a dormire.",
+      "Lea smonta la libreria."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-09-same-as-him",
+   "level": "A2",
+   "title": "La stessa cosa di lui",
+   "title_cs": "Totéž co on",
+   "lines": [
+    {
+     "text": "Ben era per la prima volta in un ristorante a Vienna. Il menù era solo in tedesco.",
+     "cs": "Ben byl poprvé v restauraci ve Vídni. Jídelní lístek byl jen v němčině."
+    },
+    {
+     "speaker": "Ben",
+     "text": "Non capisco niente. Prendo la stessa cosa di quel signore là.",
+     "cs": "Nerozumím ničemu. Dám si totéž co támhle ten pán."
+    },
+    {
+     "text": "Anche quel signore era un turista. Neanche lui aveva capito il menù.",
+     "cs": "Ten pán byl také turista. Také nerozuměl jídelnímu lístku."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "Che cosa desidera, signore?",
+     "cs": "Co si budete přát, pane?"
+    },
+    {
+     "speaker": "Signore",
+     "text": "La stessa cosa di quel giovane là.",
+     "cs": "Totéž co támhleten mladý muž."
+    },
+    {
+     "text": "Il cameriere ha guardato i due tavoli. Poi ha aggrottato la fronte.",
+     "cs": "Číšník se podíval na oba stoly. Pak se zamračil."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "E lei che cosa ha ordinato?",
+     "cs": "A co jste si objednal vy?"
+    },
+    {
+     "speaker": "Ben",
+     "text": "La stessa cosa di lui.",
+     "cs": "Totéž co on."
+    },
+    {
+     "text": "Dopo dieci minuti il cameriere ha portato due bicchieri d'acqua del rubinetto.",
+     "cs": "Po deseti minutách přinesl číšník dvě sklenice vody z kohoutku."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "La stessa cosa. Due volte.",
+     "cs": "Totéž. Dvakrát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "menù",
+     "cs": "jídelní lístek"
+    },
+    {
+     "word": "ordinato",
+     "cs": "objednal"
+    },
+    {
+     "word": "rubinetto",
+     "cs": "kohoutek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Ben prende la stessa cosa del signore?",
+     "options": [
+      "Non capisce il menù.",
+      "Non ha fame.",
+      "Conosce il signore."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa porta il cameriere?",
+     "options": [
+      "Due bicchieri d'acqua",
+      "Due zuppe",
+      "Due bistecche"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-10-green-lawn",
+   "level": "A2",
+   "title": "Il prato più verde",
+   "title_cs": "Nejzelenější trávník",
+   "lines": [
+    {
+     "text": "Il signor Brandt e il signor Keller sono vicini di casa. Ogni anno tutti e due vogliono vincere il premio per il giardino più bello.",
+     "cs": "Pan Brandt a pan Keller jsou sousedé. Každý rok chtějí oba vyhrát cenu za nejkrásnější zahradu."
+    },
+    {
+     "text": "Quest'anno il signor Brandt ha comprato di nascosto un prato sintetico.",
+     "cs": "Letos pan Brandt tajně koupil umělý trávník."
+    },
+    {
+     "text": "Il signor Keller di notte ha dipinto di verde il suo prato.",
+     "cs": "Pan Keller v noci natřel svůj trávník na zeleno."
+    },
+    {
+     "speaker": "Brandt",
+     "text": "Il mio prato è il più verde di tutta la città!",
+     "cs": "Můj trávník je nejzelenější ve městě!"
+    },
+    {
+     "speaker": "Keller",
+     "text": "No, il mio! Brilla anche al sole.",
+     "cs": "Ne, můj! Dokonce se leskne na slunci."
+    },
+    {
+     "text": "Sabato è arrivata la giuria. Ha guardato a lungo i due giardini.",
+     "cs": "V sobotu přišla porota. Dlouho se dívala na obě zahrady."
+    },
+    {
+     "speaker": "Giuria",
+     "text": "I vostri prati sono perfetti. Troppo perfetti. Uno è di plastica e l'altro è di vernice.",
+     "cs": "Vaše trávníky jsou dokonalé. Příliš dokonalé. Jeden je z plastu a druhý z barvy."
+    },
+    {
+     "text": "Gli uomini hanno distolto in fretta lo sguardo.",
+     "cs": "Muži rychle uhnuli pohledem."
+    },
+    {
+     "text": "Il premio è andato alla signora Meier. Il suo giardino aveva erbacce, fiori e un riccio contento.",
+     "cs": "Cenu získala paní Meierová. Její zahrada měla plevel, květiny a spokojeného ježka."
+    },
+    {
+     "speaker": "Signora Meier",
+     "text": "Il segreto è semplice: non ho fatto niente.",
+     "cs": "Tajemství je jednoduché: nic jsem nedělala."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "nascosto",
+     "cs": "skrytý; di nascosto = tajně"
+    },
+    {
+     "word": "sintetico",
+     "cs": "umělý"
+    },
+    {
+     "word": "riccio",
+     "cs": "ježek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa ha fatto il signor Keller?",
+     "options": [
+      "Ha dipinto il prato.",
+      "Ha comprato un prato sintetico.",
+      "Ha comprato un riccio."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi vince il premio?",
+     "options": [
+      "La signora Meier",
+      "Il signor Brandt",
+      "Il signor Keller"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-01-urgent-meeting",
+   "level": "B1",
+   "title": "Riunione urgente",
+   "title_cs": "Naléhavá porada",
+   "lines": [
+    {
+     "text": "Alle nove la signora Wagner ha convocato tutto il team a una riunione importante. Nell'invito l'argomento era una sola parola: Urgente.",
+     "cs": "V devět hodin svolala paní Wagnerová celý tým na důležitou poradu. Téma v pozvánce tvořilo jediné slovo: Naléhavé."
+    },
+    {
+     "text": "Tutti sono arrivati puntuali, anche se nessuno sapeva di che cosa si trattasse.",
+     "cs": "Všichni přišli včas, i když nikdo nevěděl, o co jde."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Grazie di essere venuti. Vorrei comunicarvi una cosa importante.",
+     "cs": "Děkuji, že jste přišli. Chci vám oznámit něco důležitého."
+    },
+    {
+     "text": "Ha fatto una lunga pausa. Jonas ha trattenuto il fiato.",
+     "cs": "Udělala dlouhou pauzu. Jonas zadržel dech."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Dalla prossima settimana la mensa passa a piatti nuovi.",
+     "cs": "Od příštího týdne přechází jídelna na nové talíře."
+    },
+    {
+     "speaker": "Jonas",
+     "text": "E questo è tutto?",
+     "cs": "A to je všechno?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "No. Ci saranno anche forchette nuove. Ho preparato una presentazione.",
+     "cs": "Ne. Budou i nové vidličky. Připravila jsem k tomu prezentaci."
+    },
+    {
+     "text": "Ha mostrato quaranta diapositive. Sabine contava di nascosto le finestre, Jonas i minuti.",
+     "cs": "Ukázala čtyřicet snímků. Sabine tajně počítala okna, Jonas minuty."
+    },
+    {
+     "text": "Dopo novanta minuti la signora Wagner ha chiesto se c'erano altre domande.",
+     "cs": "Po devadesáti minutách se Wagnerová zeptala, jestli jsou ještě nějaké otázky."
+    },
+    {
+     "speaker": "Sabine",
+     "text": "Sì: non poteva scriverci una e-mail?",
+     "cs": "Ano: Nemohla jste nám to napsat e-mailem?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "All'inizio volevo farlo. Ma allora non avrei potuto mostrare queste belle diapositive.",
+     "cs": "To jsem původně chtěla. Ale pak bych nemohla ukázat ty krásné snímky."
+    },
+    {
+     "text": "Il giorno dopo il team ha ricevuto una e-mail. Oggetto: Riunione sulla riunione. Urgente.",
+     "cs": "Druhý den dostal tým e-mail. Předmět: Porada o poradě. Naléhavé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Urgente",
+     "cs": "naléhavé"
+    },
+    {
+     "word": "diapositive",
+     "cs": "snímky"
+    },
+    {
+     "word": "Oggetto",
+     "cs": "předmět"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Di che cosa parla la riunione?",
+     "options": [
+      "Di piatti e forchette nuovi alla mensa",
+      "Di un aumento di stipendio",
+      "Di un nuovo capo"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa propone Sabine?",
+     "options": [
+      "Una e-mail al posto della riunione",
+      "Una pausa più corta",
+      "Una seconda presentazione"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-02-smart-home",
+   "level": "B1",
+   "title": "La casa intelligente",
+   "title_cs": "Chytrý dům",
+   "lines": [
+    {
+     "text": "Il signor Albers si era fatto costruire una casa intelligente. Oggi voleva dimostrare al suo capo che tutto funzionava con la voce.",
+     "cs": "Pan Albers si postavil chytrý dům. Dnes chtěl šéfovi dokázat, že všechno funguje na hlas."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, accendi la luce del soggiorno, per favore.",
+     "cs": "Hugo, rozsviť prosím světlo v obýváku."
+    },
+    {
+     "text": "La luce si è accesa. Ma in cantina.",
+     "cs": "Světlo se rozsvítilo. Ale ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, metti del jazz piano.",
+     "cs": "Hugo, pusť tichou jazzovou hudbu."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Riproduco: Gli aspirapolvere più rumorosi del mondo.",
+     "cs": "Pouštím: Nejhlasitější vysavače světa."
+    },
+    {
+     "text": "Il capo si è tappato le orecchie e il signor Albers ha sorriso con coraggio.",
+     "cs": "Šéf si zacpal uši a pan Albers se statečně usmíval."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, stop! Imposta il riscaldamento a venti gradi.",
+     "cs": "Hugo, stop! Nastav topení na dvacet stupňů."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Ho impostato il riscaldamento a due gradi. Non ha parlato chiaramente.",
+     "cs": "Nastavil jsem topení na dva stupně. Nemluvil jste zřetelně."
+    },
+    {
+     "text": "Presto erano tutti seduti in soggiorno, con il cappotto e al buio, perché nel frattempo la luce era in cantina.",
+     "cs": "Brzy seděli všichni v obýváku, v kabátech a ve tmě, protože světlo bylo mezitím ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, ordina qualcosa che impressioni il mio capo.",
+     "cs": "Hugo, objednej prosím něco, co udělá na šéfa dojem."
+    },
+    {
+     "text": "Mezz'ora dopo hanno suonato alla porta. Fuori c'erano quaranta pizze.",
+     "cs": "O půl hodiny později někdo zazvonil. Před dveřmi stálo čtyřicet pizz."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Sono impressionato. La sua casa è l'unica che fa davvero quello che vuole.",
+     "cs": "Jsem ohromen. Váš dům je jediný, který opravdu dělá, co chce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "coraggio",
+     "cs": "statečnost"
+    },
+    {
+     "word": "chiaramente",
+     "cs": "zřetelně"
+    },
+    {
+     "word": "impressionato",
+     "cs": "ohromen"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa la luce del soggiorno?",
+     "options": [
+      "Si accende in cantina.",
+      "Resta spenta.",
+      "Si accende in bagno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa consegnano alla porta?",
+     "options": [
+      "Quaranta pizze",
+      "Una pizza",
+      "Dieci pizze"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-03-apologies",
+   "level": "B1",
+   "title": "Scuse senza fine",
+   "title_cs": "Omluvy bez konce",
+   "lines": [
+    {
+     "text": "Il signor Lehmann era di una cortesia eccezionale. Si scusava di tutto, perfino del tempo.",
+     "cs": "Pan Lehmann byl mimořádně zdvořilý člověk. Omlouval se za všechno, dokonce i za počasí."
+    },
+    {
+     "text": "Una mattina è arrivato in ufficio alle otto in punto. L'appuntamento era solo alle nove.",
+     "cs": "Jednoho rána přišel do kanceláře přesně v osm. Schůzka byla v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Mi dispiace infinitamente di essere in ritardo!",
+     "cs": "Nesmírně se omlouvám, že jdu pozdě!"
+    },
+    {
+     "speaker": "Doris",
+     "text": "Ma signor Lehmann, sono solo le otto. L'appuntamento è alle nove.",
+     "cs": "Ale pane Lehmanne, je teprve osm. Schůzka je v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Allora mi scuso di averla disturbata così presto.",
+     "cs": "Pak se omlouvám, že jsem vás tak brzy vyrušil."
+    },
+    {
+     "text": "Ha scritto una lunga e-mail a tutti i colleghi e ha chiesto perdono per la sua puntualità.",
+     "cs": "Napsal dlouhý e-mail všem kolegům a prosil o prominutí za svou přesnost."
+    },
+    {
+     "text": "Le risposte sono arrivate subito. Tutti si sono scusati a loro volta, per cortesia. A mezzogiorno la posta in arrivo era piena.",
+     "cs": "Odpovědi přišly rychle. Všichni se z ohleduplnosti omluvili zpátky. Do poledne byla schránka plná."
+    },
+    {
+     "text": "Il giorno dopo il signor Lehmann è arrivato con venti minuti di ritardo.",
+     "cs": "Druhý den přišel pan Lehmann o dvacet minut později."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Signor Lehmann! Dov'era? Sta bene?",
+     "cs": "Pane Lehmanne! Kde jste byl? Je vám dobře?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Sono in ritardo. Ma non mi scuso.",
+     "cs": "Zpozdil jsem se. Ale neomlouvám se."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Perché no?",
+     "cs": "Proč ne?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Ieri ho esaurito tutta la mia quota.",
+     "cs": "Včera jsem vyčerpal celý svůj limit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "eccezionale",
+     "cs": "mimořádná"
+    },
+    {
+     "word": "perdono",
+     "cs": "prominutí"
+    },
+    {
+     "word": "quota",
+     "cs": "limit, kvóta"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché il signor Lehmann non è in ritardo il primo giorno?",
+     "options": [
+      "È un'ora in anticipo.",
+      "Prende l'autobus.",
+      "L'appuntamento è annullato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché non si scusa il giorno dopo?",
+     "options": [
+      "Ieri ha esaurito le scuse.",
+      "È arrabbiato con Doris.",
+      "Se n'è dimenticato."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-04-flea-market",
+   "level": "B1",
+   "title": "Il vaso prezioso",
+   "title_cs": "Vzácná váza",
+   "lines": [
+    {
+     "text": "Rainer adorava i mercatini delle pulci. Era convinto di poter trattare qualsiasi prezzo.",
+     "cs": "Rainer miloval bleší trhy. Byl přesvědčen, že dokáže usmlouvat každou cenu."
+    },
+    {
+     "text": "Un sabato mattina ha scoperto su una bancarella un vaso blu. Gli sembrava stranamente familiare.",
+     "cs": "Jednoho sobotního rána uviděl na stánku modrou vázu. Připadala mu nějak povědomá."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Quanto costa questo vaso?",
+     "cs": "Kolik stojí ta váza?"
+    },
+    {
+     "speaker": "Venditrice",
+     "text": "Quaranta euro.",
+     "cs": "Čtyřicet."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Quaranta? È un po' graffiato. Gliene do cinque.",
+     "cs": "Čtyřicet? Je trochu poškrábaná. Dám vám pět."
+    },
+    {
+     "text": "La venditrice ha riflettuto e ne ha proposti trentacinque. Rainer ha scosso la testa.",
+     "cs": "Prodavačka se zamyslela a nabídla třicet pět. Rainer zavrtěl hlavou."
+    },
+    {
+     "text": "Dopo venti minuti di trattativa si sono accordati su dodici euro. Rainer se n'è andato da vincitore.",
+     "cs": "Po dvaceti minutách smlouvání se shodli na dvanácti. Rainer odcházel jako vítěz."
+    },
+    {
+     "text": "A casa lo aspettava sua moglie Karla. Ha notato subito il vaso.",
+     "cs": "Doma ho čekala jeho žena Karla. Okamžitě si všimla vázy."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Rainer, dove hai preso il nostro vaso? Quello che abbiamo regalato alla beneficenza la settimana scorsa?",
+     "cs": "Rainere, kde jsi vzal naši vázu? Tu, kterou jsme minulý týden dali na charitu?"
+    },
+    {
+     "text": "Rainer ha guardato il vaso. Aveva la stessa crepa sul bordo.",
+     "cs": "Rainer se zadíval na vázu. Měla stejnou prasklinu na okraji."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Almeno non l'ho pagato a prezzo pieno.",
+     "cs": "Aspoň že jsem ji nekoupil za plnou cenu."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Vero. Hai pagato dodici euro un vaso che abbiamo regalato.",
+     "cs": "Pravda. Zaplatil jsi dvanáct za vázu, kterou jsme darovali."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "trattare",
+     "cs": "jednat o ceně, smlouvat"
+    },
+    {
+     "word": "trattativa",
+     "cs": "vyjednávání"
+    },
+    {
+     "word": "beneficenza",
+     "cs": "charita"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa scopre Rainer al mercatino?",
+     "options": [
+      "Un vaso blu",
+      "Un vecchio libro",
+      "Un orologio"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché Karla conosce il vaso?",
+     "options": [
+      "È il loro vaso.",
+      "L'ha visto in un negozio.",
+      "Gliel'hanno regalato."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-05-marathon",
+   "level": "B1",
+   "title": "La maratona e la spazzatrice",
+   "title_cs": "Maraton s úklidem",
+   "lines": [
+    {
+     "text": "Dominik aveva promesso ai suoi amici di correre una maratona per beneficenza. Per ogni chilometro volevano donare dieci euro.",
+     "cs": "Dominik slíbil přátelům, že poběží maraton pro dobrou věc. Za každý kilometr mu chtěli darovat deset eur."
+    },
+    {
+     "text": "Per tre mesi ha comprato scarpe da corsa, orologi sportivi e barrette energetiche. Ha solo dimenticato di correre.",
+     "cs": "Tři měsíce kupoval běžecké boty, sportovní hodinky a energetické tyčinky. Jen běhat zapomněl."
+    },
+    {
+     "text": "Il giorno della maratona era in piedi, orgoglioso, sulla linea di partenza.",
+     "cs": "V den maratonu stál hrdě na startovní čáře."
+    },
+    {
+     "text": "Dopo dieci chilometri camminava soltanto. Dopo trenta era seduto su una panchina e mangiava una barretta.",
+     "cs": "Po deseti kilometrech už jen šel. Po třiceti seděl na lavičce a jedl tyčinku."
+    },
+    {
+     "text": "Verso sera ha sentito un rombo dietro di sé. Era la spazzatrice, che puliva già la strada.",
+     "cs": "K večeru uslyšel za sebou hučení. Byl to zametací vůz, který už čistil ulici."
+    },
+    {
+     "speaker": "Autista",
+     "text": "Vuole un passaggio? La gara è finita da tre ore.",
+     "cs": "Chcete svézt? Závod skončil před třemi hodinami."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "No, grazie. Questa maratona la finisco.",
+     "cs": "Ne, děkuji. Ten maraton doběhnu do konce."
+    },
+    {
+     "text": "Ha corso gli ultimi due chilometri tra le transenne, che venivano smontate subito dietro di lui.",
+     "cs": "Poslední dva kilometry běžel mezi zábranami, které za ním hned odklízeli."
+    },
+    {
+     "text": "All'arrivo c'era solo lo speaker. Ha preso il microfono: Ed ecco il nostro ultimo corridore, con il suo servizio di pulizia personale!",
+     "cs": "V cíli čekal už jen hlasatel. Vzal mikrofon: A tady je náš poslední běžec, s vlastní úklidovou službou!"
+    },
+    {
+     "text": "La gente ha applaudito come per una vittoria.",
+     "cs": "Lidé tleskali jako při vítězství."
+    },
+    {
+     "speaker": "Un amico",
+     "text": "Dominik, hai fatto quarantadue chilometri. Doniamo quattrocentoventi euro.",
+     "cs": "Dominiku, uběhl jsi dvaačtyřicet kilometrů. Darujeme čtyři sta dvacet eur."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "Sapete qual è stata la cosa più bella? La strada dietro di me era sempre pulita.",
+     "cs": "Víte, co bylo nejlepší? Silnice za mnou byla pořád čistá."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "orgoglioso",
+     "cs": "hrdý"
+    },
+    {
+     "word": "spazzatrice",
+     "cs": "zametací vůz"
+    },
+    {
+     "word": "transenne",
+     "cs": "zábrany"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Come si prepara Dominik alla maratona?",
+     "options": [
+      "Compra molta attrezzatura ma non si allena.",
+      "Corre dieci chilometri al giorno.",
+      "Non si iscrive."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi accompagna Dominik al traguardo?",
+     "options": [
+      "La spazzatrice",
+      "I suoi amici",
+      "Un ciclista"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-06-wifi-neighbours",
+   "level": "B1",
+   "title": "Wifi tra vicini",
+   "title_cs": "Wifi mezi sousedy",
+   "lines": [
+    {
+     "text": "In un condominio la signora Kranz abitava al secondo piano e il signor Brandl al terzo. Non si erano mai visti, ma si conoscevano benissimo: dal rumore.",
+     "cs": "V činžovním domě bydlela paní Kranzová ve druhém patře a pan Brandl ve třetím. Nikdy se neviděli, ale znali se velmi dobře: z hluku."
+    },
+    {
+     "text": "Una sera la signora Kranz ha cambiato il nome della sua rete wifi in: Niente stivali dopo le dieci, grazie.",
+     "cs": "Jednoho večera přejmenovala paní Kranzová svou wifi síť na: Prosím žádné boty po desáté."
+    },
+    {
+     "text": "Il giorno dopo ha trovato una risposta nell'elenco delle reti: Porto le pantofole. È il suo eco.",
+     "cs": "Druhý den našla v seznamu sítí odpověď: Nosím papuče. To je vaše ozvěna."
+    },
+    {
+     "text": "Ha risposto: E il suo cane abbaia come un martello pneumatico.",
+     "cs": "Odepsala: A váš pes štěká jako sbíječka."
+    },
+    {
+     "text": "La risposta è arrivata subito: Non è un cane. È il mio aspirapolvere.",
+     "cs": "Zpátky přišlo: To není pes. To je můj vysavač."
+    },
+    {
+     "text": "Presto tutti i vicini leggevano. Ogni mattina il palazzo aspettava il nuovo messaggio come una serie televisiva.",
+     "cs": "Brzy četli všichni sousedé. Každé ráno dům čekal na novou zprávu jako na seriál."
+    },
+    {
+     "text": "Dopo tre settimane la signora Kranz ha incontrato per caso il signor Brandl vicino alle cassette della posta.",
+     "cs": "Po třech týdnech se paní Kranzová s panem Brandlem náhodou potkala u poštovních schránek."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Lei è dunque l'uomo con le pantofole.",
+     "cs": "Vy jste tedy ten pán s papučemi."
+    },
+    {
+     "speaker": "Brandl",
+     "text": "E lei la signora con gli stivali. Pensavo fosse più alta.",
+     "cs": "A vy ta paní s botami. Myslel jsem, že jste vyšší."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Io pensavo fosse più antipatico.",
+     "cs": "Já jsem myslela, že jste nepříjemnější."
+    },
+    {
+     "text": "La sera la sua rete si chiamava: Caffè sabato alle dieci?",
+     "cs": "Večer se její síť jmenovala: Káva v sobotu v deset?"
+    },
+    {
+     "text": "La risposta è arrivata in un minuto. La rete del terzo piano si chiamava ora: Password: Sì.",
+     "cs": "Odpověď přišla za minutu. Síť ve třetím patře se teď jmenovala: Heslo: Ano."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pneumatico",
+     "cs": "pneumatický (martello pneumatico = sbíječka)"
+    },
+    {
+     "word": "caso",
+     "cs": "náhoda; per caso = náhodou"
+    },
+    {
+     "word": "cassette",
+     "cs": "schránky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Come litigano i vicini?",
+     "options": [
+      "Con i nomi delle loro reti wifi",
+      "Al telefono",
+      "Con delle lettere"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la storia?",
+     "options": [
+      "Si danno appuntamento per un caffè.",
+      "Traslocano.",
+      "Chiamano la polizia."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-07-fluent-finnish",
+   "level": "B1",
+   "title": "Finlandese corrente",
+   "title_cs": "Plynná finština",
+   "lines": [
+    {
+     "text": "Marek si candidava per un posto di direttore vendite in un'azienda internazionale. Il suo curriculum era impressionante, soprattutto la voce lingue.",
+     "cs": "Marek se ucházel o místo vedoucího prodeje v mezinárodní firmě. Jeho životopis byl působivý, zvlášť kolonka jazyky."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Qui c'è scritto che parla correntemente finlandese.",
+     "cs": "Tady stojí, že mluvíte plynně finsky."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Certo. Il finlandese è praticamente la mia seconda lingua madre.",
+     "cs": "Samozřejmě. Finština je prakticky můj druhý mateřský jazyk."
+    },
+    {
+     "text": "La signora Virtanen ha detto una lunga frase in finlandese. Marek ha sorriso e ha annuito.",
+     "cs": "Paní Virtanenová pronesla dlouhou větu finsky. Marek se usmíval a přikyvoval."
+    },
+    {
+     "text": "Ha ripetuto la frase più lentamente. Marek ha sorriso ancora più ampiamente e ha annuito ancora più forte.",
+     "cs": "Zopakovala ji pomaleji. Marek se usmál ještě šířeji a přikývl ještě rázněji."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Ho chiesto se preferiva caffè o tè. Lei ha risposto sì.",
+     "cs": "Ptala jsem se, jestli chcete kávu, nebo čaj. Řekl jste ano."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Era... voluto. Prendo tutti e due.",
+     "cs": "To byl... úmysl. Dám si obojí."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Comunque è l'unica frase che so dire in finlandese. L'ho imparata stamattina in treno.",
+     "cs": "Mimochodem, to byla jediná věta, kterou umím finsky. Naučila jsem se ji dnes ráno ve vlaku."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Allora siamo pari.",
+     "cs": "Pak jsme si asi kvit."
+    },
+    {
+     "text": "La signora Virtanen ha riso così forte che la segretaria è venuta a vedere.",
+     "cs": "Paní Virtanenová se rozesmála tak hlasitě, že nakoukla sekretářka."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "È assunto. Nel mio reparto servono persone che sorridono quando non capiscono niente.",
+     "cs": "Jste přijat. Ve svém oddělení potřebuji lidi, kteří se usmívají, když nic nechápou."
+    },
+    {
+     "text": "Il lunedì il suo primo cliente era finlandese. Marek ha sorriso e ha annuito, e il contratto è stato firmato.",
+     "cs": "V pondělí byl jeho první zákazník Fin. Marek se usmíval a přikyvoval a smlouva byla podepsaná."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "correntemente",
+     "cs": "plynně"
+    },
+    {
+     "word": "voluto",
+     "cs": "záměrný"
+    },
+    {
+     "word": "pari",
+     "cs": "vyrovnaní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa afferma Marek nel curriculum?",
+     "options": [
+      "Parla correntemente finlandese.",
+      "Ha già fatto il direttore vendite.",
+      "Parla cinque lingue."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché la signora Virtanen assume Marek?",
+     "options": [
+      "Le piacciono il suo umorismo e il suo sorriso.",
+      "Parla davvero finlandese.",
+      "Ha il miglior curriculum."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-08-step-counter",
+   "level": "B1",
+   "title": "Il contapassi al collare",
+   "title_cs": "Krokoměr na obojku",
+   "lines": [
+    {
+     "text": "Hanna voleva finalmente vivere in modo più sano. La sua assicurazione dava uno sconto a chi dimostrava diecimila passi al giorno.",
+     "cs": "Hanna chtěla konečně žít zdravěji. Její pojišťovna dávala slevu, když člověk každý den doložil deset tisíc kroků."
+    },
+    {
+     "text": "Dopo una settimana faceva in media tremila passi. Il divano era semplicemente troppo comodo.",
+     "cs": "Za týden měla v průměru tři tisíce kroků. Gauč byl prostě příliš pohodlný."
+    },
+    {
+     "text": "Allora ha avuto un'idea: ha attaccato il contapassi al collare del suo cane Bruno.",
+     "cs": "Tehdy dostala nápad: připevnila krokoměr na obojek svého psa Bruna."
+    },
+    {
+     "text": "Bruno era un border collie molto attivo. Quel giorno ha fatto trentaduemila passi.",
+     "cs": "Bruno byl velmi aktivní border kolie. Ten den nachodil třicet dva tisíc kroků."
+    },
+    {
+     "speaker": "Assicurazione",
+     "text": "Congratulazioni! Fa parte dell'uno per cento dei nostri clienti più attivi.",
+     "cs": "Gratulujeme! Patříte mezi nejaktivnější jedno procento našich klientů."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Senti, Bruno? Abbiamo lo sconto!",
+     "cs": "Slyšíš to, Bruno? Dostaneme slevu!"
+    },
+    {
+     "text": "Due mesi dopo il medico l'ha chiamata per un controllo.",
+     "cs": "O dva měsíce později ji doktor pozval na prohlídku."
+    },
+    {
+     "speaker": "Medico",
+     "text": "Il suo contapassi sostiene che lei fa trentamila passi al giorno. Ma la sua pressione dice un'altra cosa.",
+     "cs": "Váš krokoměr tvrdí, že denně ujdete třicet tisíc kroků. Ale váš krevní tlak říká něco jiného."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "La mia pressione non ha ancora i dati del cane.",
+     "cs": "Můj krevní tlak zřejmě ještě nemá data od psa."
+    },
+    {
+     "text": "Il medico ha guardato a lungo i suoi appunti. Poi Bruno, seduto accanto a lei, magro e felice.",
+     "cs": "Doktor se dlouho díval do poznámek. Pak na Bruna, který seděl vedle ní, štíhlý a šťastný."
+    },
+    {
+     "speaker": "Medico",
+     "text": "Le consiglio di dare a Bruno uno sconto sulle crocchette. Se lo è meritato.",
+     "cs": "Radím vám: Dejte Brunovi slevu na granule. Zasloužil si ji."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Ho già cominciato. Oggi ho camminato da sola per dieci metri: fino alla sua ciotola.",
+     "cs": "Už jsem začala. Dnes jsem sama ušla deset metrů: k jeho misce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "contapassi",
+     "cs": "krokoměr"
+    },
+    {
+     "word": "pressione",
+     "cs": "tlak"
+    },
+    {
+     "word": "crocchette",
+     "cs": "granule"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Come ottiene i passi Hanna?",
+     "options": [
+      "Il suo cane porta il contapassi.",
+      "Corre dieci chilometri al giorno.",
+      "Usa una bicicletta."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi è più in salute alla fine?",
+     "options": [
+      "Bruno",
+      "Hanna",
+      "Il medico"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-09-tour-guide",
+   "level": "B1",
+   "title": "La storia secondo Vittorio",
+   "title_cs": "Historie podle Viktora",
+   "lines": [
+    {
+     "text": "Vittorio lavorava come guida nel centro storico. Non voleva mai ammettere di non sapere qualcosa e completava la storia da solo.",
+     "cs": "Viktor pracoval jako průvodce po starém městě. Nechtěl připustit, že něco neví, a tak si dějiny prostě doplňoval."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Questa casa fu costruita nel 1432 dal famoso architetto Gustavo Kleber. Usava solo marmo e formaggio.",
+     "cs": "Tento dům postavil roku 1432 slavný architekt Gustav Kleber. Stavěl pouze z mramoru a ze sýra."
+    },
+    {
+     "speaker": "Turista",
+     "text": "Formaggio?",
+     "cs": "Ze sýra? zeptala se jedna turistka."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Sì. Per questo è così ben isolata.",
+     "cs": "Ano. Proto je tak dobře izolovaný."
+    },
+    {
+     "text": "Il gruppo prendeva appunti con zelo. Solo un'anziana signora sorrideva in silenzio.",
+     "cs": "Skupina si pilně dělala poznámky. Jen jedna starší dáma se tiše usmívala."
+    },
+    {
+     "text": "Alla fontana Vittorio ha continuato: Secondo la leggenda, qui l'imperatore ha cantato la sua prima aria.",
+     "cs": "U kašny Viktor pokračoval: Podle legendy tu zazpíval císař svou první árii."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Mi scusi, sono una storica. Lavoro all'archivio comunale.",
+     "cs": "Dáma zvedla ruku: Promiňte, jsem historička. Pracuji v městském archivu."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Davvero? È... una piacevole sorpresa.",
+     "cs": "Viktor polkl. Opravdu? To je... příjemné překvapení."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Posso aggiungere che l'architetto Kleber non è mai esistito e che l'imperatore non ha mai cantato?",
+     "cs": "Mohla bych tedy doplnit, že architekt Kleber nikdy neexistoval a císař nikdy nezpíval?"
+    },
+    {
+     "text": "Vittorio è rimasto in silenzio un momento. Poi ha sorriso ampiamente: Naturalmente. Proprio per questo le leggende sono così amate!",
+     "cs": "Viktor chvíli mlčel. Pak se široce usmál: Samozřejmě. Právě proto jsou legendy tak oblíbené!"
+    },
+    {
+     "text": "Alla fine della visita il gruppo ha applaudito con entusiasmo.",
+     "cs": "Na konci prohlídky mu skupina nadšeně zatleskala."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Ecco il mio biglietto. Venga a lavorare da noi. Per le invenzioni abbiamo un grande reparto.",
+     "cs": "Dáma mu dala vizitku: Pracujte u nás. Na vymýšlení máme velké oddělení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "isolata",
+     "cs": "izolovaná"
+    },
+    {
+     "word": "leggenda",
+     "cs": "legenda"
+    },
+    {
+     "word": "archivio",
+     "cs": "archiv"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa dice Vittorio sulla casa?",
+     "options": [
+      "È stata costruita con marmo e formaggio.",
+      "È la casa più antica della città.",
+      "È un museo."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi è l'anziana signora?",
+     "options": [
+      "Una storica",
+      "Una turista di Vienna",
+      "La capa di Vittorio"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-10-wrong-tom",
+   "level": "B1",
+   "title": "Il Tom sbagliato",
+   "title_cs": "Špatný Tom",
+   "lines": [
+    {
+     "text": "Mia organizzava una festa a sorpresa per il collega Tom. Era il suo quarantesimo compleanno e tutto l'ufficio aveva portato palloncini, una torta e candeline.",
+     "cs": "Mia organizovala překvapivou oslavu pro kolegu Toma. Slavil čtyřicáté narozeniny a celá kancelář sehnala balónky, dort a svíčky."
+    },
+    {
+     "text": "Il problema: in azienda lavoravano due Tom. Mia aveva invitato quello sbagliato.",
+     "cs": "Problém: ve firmě pracovali dva Tomové. Mia pozvala toho špatného."
+    },
+    {
+     "text": "Alle tre Tom della contabilità è entrato nella sala riunioni. Era timido e parlava raramente.",
+     "cs": "Ve tři hodiny vešel do zasedačky Tom z účtárny. Byl plachý a mluvil málo."
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Sorpresa! Buon compleanno!",
+     "cs": "Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "text": "Tom è rimasto sulla porta. Vedeva i palloncini, la torta e i regali.",
+     "cs": "Tom zůstal stát ve dveřích. Viděl balónky, dort a dárky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ma... il mio compleanno è solo a ottobre.",
+     "cs": "Ale... já mám narozeniny až v říjnu."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Oh no. Abbiamo il Tom sbagliato!",
+     "cs": "Ach ne. Máme špatného Toma!"
+    },
+    {
+     "text": "È calato un silenzio di tomba. Poi Tom ha detto piano: Sapete, in dodici anni qui nessuno mi ha mai fatto gli auguri di compleanno.",
+     "cs": "Nastalo hrobové ticho. Pak Tom tiše řekl: Víte, za dvanáct let mi tu ještě nikdo k narozeninám nepopřál."
+    },
+    {
+     "text": "Mia ha guardato gli altri. Tutti hanno annuito.",
+     "cs": "Mia se podívala na ostatní. Všichni přikývli."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Allora festeggiamo tutti e due i Tom. E il tuo compleanno a ottobre lo festeggiamo comunque.",
+     "cs": "Tak oslavíme oba Tomy. A ty svoje narozeniny v říjnu oslavíme taky."
+    },
+    {
+     "text": "Un'ora dopo è arrivato il vero Tom, ha visto due torte e un ufficio che ballava e ha chiesto: Chi compie gli anni oggi?",
+     "cs": "O hodinu později přišel ten pravý Tom, uviděl dva dorty a tančící kancelář a zeptal se: Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Stiamo festeggiando proprio tutti e due i Tom. Per te è rimasta una fetta.",
+     "cs": "Právě oslavujeme oba Tomy. Pro tebe ještě zbyl kousek."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "contabilità",
+     "cs": "účtárna"
+    },
+    {
+     "word": "timido",
+     "cs": "plachý"
+    },
+    {
+     "word": "tomba",
+     "cs": "hrob; silenzio di tomba = hrobové ticho"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché i colleghi festeggiano il Tom sbagliato?",
+     "options": [
+      "Mia ha invitato il Tom sbagliato.",
+      "Tutti e due compiono gli anni lo stesso giorno.",
+      "Il vero Tom è malato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa dice il Tom sbagliato sui compleanni?",
+     "options": [
+      "In dodici anni nessuno gli ha fatto gli auguri.",
+      "Non gli piace la torta.",
+      "Non compie mai gli anni."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-01-coffee-consultant",
+   "level": "B2",
+   "title": "Il consulente e la macchina del caffè",
+   "title_cs": "Poradce a kávovar",
+   "lines": [
+    {
+     "text": "L'azienda Brenner ha incaricato un consulente di aumentare la produttività del personale. Si chiamava dottor Falk e fatturava mille euro all'ora.",
+     "cs": "Firma Brenner najala podnikového poradce, aby zvýšil produktivitu zaměstnanců. Jmenoval se doktor Falk a účtoval tisíc eur za hodinu."
+    },
+    {
+     "text": "Dopo una settimana di osservazione ha annunciato alla direzione: Il più grande nemico della produttività è la macchina del caffè.",
+     "cs": "Po týdnu pozorování oznámil vedení: Největším zabijákem produktivity je kávovar."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "La macchina del caffè?",
+     "cs": "Kávovar?"
+    },
+    {
+     "speaker": "Falk",
+     "text": "Ogni dipendente aspetta quaranta minuti al giorno davanti a essa. Estrapolato, perdiamo cento ore di lavoro al mese.",
+     "cs": "Každý zaměstnanec před ním denně čeká čtyřicet minut. Po přepočtu ztrácíme sto pracovních hodin měsíčně."
+    },
+    {
+     "text": "Su sua raccomandazione la macchina è stata rimossa.",
+     "cs": "Na jeho doporučení kávovar odstranili."
+    },
+    {
+     "text": "Già dopo una settimana la produttività è calata del trenta per cento, perché tutto il team andava ora al bar di fronte.",
+     "cs": "Už po týdnu klesla produktivita o třicet procent, protože celý tým teď chodil do kavárny naproti."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Dopo una nuova analisi: Il bar è inefficiente. Ci serve una stazione del caffè centrale.",
+     "cs": "Po nové analýze: Kavárna je neefektivní. Potřebujeme centrální kávovou stanici."
+    },
+    {
+     "text": "Hanno portato su la vecchia macchina dalla cantina, l'hanno rimessa al suo posto e l'hanno ribattezzata stazione di produttività.",
+     "cs": "Starý kávovar přinesli ze sklepa, postavili ho na původní místo a přejmenovali na produktivní stanici."
+    },
+    {
+     "text": "Con la fattura sono arrivati quarantottomila euro.",
+     "cs": "Spolu s fakturou přišlo osmačtyřicet tisíc eur."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "Siamo tornati esattamente alla situazione precedente alla sua consulenza.",
+     "cs": "Dosáhli jsme přesně stavu, který jsme měli před vaším poradenstvím."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Esatto. Ma adesso è scientificamente dimostrato.",
+     "cs": "Správně. Ale teď je to vědecky doložené."
+    },
+    {
+     "text": "Più tardi in cucina è comparso un biglietto: Si prega di non ottimizzare.",
+     "cs": "Později se v kuchyňce objevil lístek: Prosím neoptimalizovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Estrapolato",
+     "cs": "extrapolováno"
+    },
+    {
+     "word": "ribattezzata",
+     "cs": "přejmenovaná"
+    },
+    {
+     "word": "dimostrato",
+     "cs": "dokázaný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa consiglia per prima cosa il dottor Falk?",
+     "options": [
+      "Di togliere la macchina del caffè",
+      "Di comprare più caffè",
+      "Di chiudere il bar"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la consulenza?",
+     "options": [
+      "Con la stessa situazione di prima, ma una fattura salata",
+      "Con una produttività più alta",
+      "Con una nuova macchina del caffè"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-02-minimalist",
+   "level": "B2",
+   "title": "Il minimalista",
+   "title_cs": "Minimalista a regály",
+   "lines": [
+    {
+     "text": "Leone aveva appena letto un libro sul minimalismo e ha deciso di semplificare radicalmente la sua vita.",
+     "cs": "Leon právě přečetl knihu o minimalismu a rozhodl se radikálně zjednodušit svůj život."
+    },
+    {
+     "text": "Ha venduto la televisione, regalato metà dei vestiti e buttato via tutti i libri tranne quello sul minimalismo.",
+     "cs": "Prodal televizi, polovinu oblečení rozdal a vyhodil všechny knihy kromě té o minimalismu."
+    },
+    {
+     "speaker": "Leone",
+     "text": "Meno cose significano più libertà.",
+     "cs": "Méně majetku znamená více svobody."
+    },
+    {
+     "text": "Poi ha notato che il suo appartamento era improvvisamente vuoto e rimbombava. Lo spazio libero aveva bisogno di ordine: scaffali!",
+     "cs": "Pak si všiml, že je jeho byt najednou prázdný a ozývá se v něm. Volný prostor potřeboval pořádek: regály!"
+    },
+    {
+     "text": "Ha ordinato un sistema di scaffali minimalista in rovere, scatole coordinate, un'etichettatrice e un libro sull'organizzazione del nulla.",
+     "cs": "Objednal minimalistický regálový systém z dubu, sladěné boxy, štítkovač a knihu o organizování ničeho."
+    },
+    {
+     "text": "La consegna ha riempito due stanze. Per gli imballaggi ha affittato un magazzino.",
+     "cs": "Zásilka zaplnila dva pokoje. Na obaly si pronajal skladový prostor."
+    },
+    {
+     "speaker": "Amica",
+     "text": "Leone, ora paghi l'affitto per una stanza piena di scatoloni. E che cosa c'è negli scatoloni? L'imballaggio del tuo ordine.",
+     "cs": "Leone, teď platíš nájem za místnost plnou krabic. A co je v těch krabicích? Obaly od tvého pořádku."
+    },
+    {
+     "speaker": "Leone",
+     "text": "Non è accumulo. È un investimento nel mio vuoto.",
+     "cs": "To není hromadění. To je investice do mé prázdnoty."
+    },
+    {
+     "text": "A fine mese aveva più oggetti di prima, ma ognuno era perfettamente etichettato.",
+     "cs": "Na konci měsíce měl víc předmětů než předtím, ale všechny byly dokonale popsané."
+    },
+    {
+     "speaker": "Amica",
+     "text": "E quando comincerai a possedere di meno?",
+     "cs": "A kdy začneš vlastnit méně?"
+    },
+    {
+     "speaker": "Leone",
+     "text": "Appena avrò il sistema giusto per farlo.",
+     "cs": "Jakmile budu mít správný systém, jak na to."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "accumulo",
+     "cs": "hromadění"
+    },
+    {
+     "word": "etichettato",
+     "cs": "označený"
+    },
+    {
+     "word": "magazzino",
+     "cs": "sklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Leone per prima cosa dopo aver letto il libro?",
+     "options": [
+      "Vende e regala molte cose.",
+      "Compra un nuovo scaffale.",
+      "Trasloca."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la storia?",
+     "options": [
+      "Leone possiede più di prima.",
+      "Leone vive senza possedere nulla.",
+      "Leone restituisce il magazzino."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-03-fine-print",
+   "level": "B2",
+   "title": "L'articolo 112",
+   "title_cs": "Odstavec 112",
+   "lines": [
+    {
+     "text": "L'avvocata Sabine Hartmann era l'unica persona ad aver mai letto fino in fondo le condizioni d'uso di un'app. Per abitudine, non per curiosità.",
+     "cs": "Právnička Sabine Hartmannová byla jediným člověkem, který kdy dočetl obchodní podmínky nějaké aplikace do konce. Z návyku, ne ze zvědavosti."
+    },
+    {
+     "text": "A pagina 84, all'articolo 112, c'era scritto: Il primo utente che segnala questo articolo riceve diecimila euro.",
+     "cs": "Na straně 84 stálo v odstavci 112: První uživatel, který tento odstavec nahlásí, obdrží deset tisíc eur."
+    },
+    {
+     "text": "Ha chiamato il servizio clienti. Il dipendente è rimasto zitto a lungo.",
+     "cs": "Zavolala na zákaznickou linku. Zaměstnanec dlouho mlčel."
+    },
+    {
+     "speaker": "Dipendente",
+     "text": "Mi scusi, devo parlarne con la mia superiore.",
+     "cs": "Promiňte, musím to konzultovat s nadřízenou."
+    },
+    {
+     "text": "La superiore ha rimandato all'ufficio legale, l'ufficio legale all'amministratore.",
+     "cs": "Nadřízená odkázala na právní oddělení, právní oddělení na jednatele."
+    },
+    {
+     "speaker": "Amministratore",
+     "text": "Chi diavolo ha scritto questo articolo?",
+     "cs": "Kdo proboha napsal tento odstavec?"
+    },
+    {
+     "text": "La risposta era in archivio: lui stesso, nel 2016, dopo una lunga serata.",
+     "cs": "Odpověď ležela v archivu: on sám, roku 2016, po dlouhém večeru."
+    },
+    {
+     "speaker": "Amministratore",
+     "text": "Era uno scherzo. Nessuno legge queste cose.",
+     "cs": "To byl vtip. Nikdo nic takového nečte."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Un contratto è un contratto, anche se nasceva come scherzo. Tanto più che l'articolo 112 è formulato in modo giuridicamente ineccepibile.",
+     "cs": "Smlouva je smlouva, i když byla míněna jako žert. Zvlášť když je odstavec 112 po právní stránce naprosto bezchybný."
+    },
+    {
+     "text": "Dopo tre settimane e due perizie l'azienda ha versato il denaro.",
+     "cs": "Po třech týdnech a dvou posudcích firma peníze převedla."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Grazie. A proposito, l'articolo 31 contraddice l'articolo 87. La consiglierò volentieri. Il mio onorario è naturalmente scritto in piccolo.",
+     "cs": "Děkuji. Mimochodem, odstavec 31 odporuje odstavci 87. Ráda vám poradím. Můj honorář je samozřejmě uveden v drobném písmu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ineccepibile",
+     "cs": "bezvadný"
+    },
+    {
+     "word": "perizie",
+     "cs": "posudky"
+    },
+    {
+     "word": "onorario",
+     "cs": "honorář"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa dice l'articolo 112?",
+     "options": [
+      "Il primo che lo segnala riceve diecimila euro.",
+      "L'app è gratuita.",
+      "L'azienda non risponde di nulla."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché l'articolo è nelle condizioni?",
+     "options": [
+      "L'amministratore l'ha scritto per scherzo.",
+      "La legge lo richiede.",
+      "Un cliente l'ha proposto."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-04-late-author",
+   "level": "B2",
+   "title": "L'autore della puntualità",
+   "title_cs": "Autor knihy o přesnosti",
+   "lines": [
+    {
+     "text": "Roland Kessler aveva fatto del suo libro Vivere puntuali un bestseller. Quella sera la presentazione era alla biblioteca comunale, inizio alle 19.",
+     "cs": "Roland Kessler se svou knihou Žít načas stal autorem bestselleru. Dnes se v městské knihovně konala prezentace, začátek v 19 hodin."
+    },
+    {
+     "text": "Nel suo libro aveva scritto: Chi arriva cinque minuti prima è puntuale.",
+     "cs": "Ve své knize napsal: Kdo je o pět minut dřív, je včas."
+    },
+    {
+     "text": "Alle 18.30 era ancora a casa, in cerca della seconda scarpa.",
+     "cs": "V 18:30 byl ještě doma a hledal druhou botu."
+    },
+    {
+     "text": "Alle 18.50 era bloccato nel traffico, che secondo il suo libro si poteva evitare con una pianificazione migliore.",
+     "cs": "V 18:50 stál v zácpě, které se podle jeho knihy dalo předejít lepším plánováním."
+    },
+    {
+     "text": "Alle 19.20 è entrato in sala. Duecento persone aspettavano. La moderatrice sorrideva a fatica.",
+     "cs": "V 19:20 vešel do sálu. Čekalo na něj dvě stě posluchačů. Moderátorka se křečovitě usmívala."
+    },
+    {
+     "speaker": "Moderatrice",
+     "text": "Signor Kessler, ha venti minuti di ritardo.",
+     "cs": "Pane Kessleri, máte dvacet minut zpoždění."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "È voluto. Capitolo sette: L'uomo sicuro di sé fa aspettare gli altri perché abbiano tempo di riflettere.",
+     "cs": "To je záměr. Kapitola sedm: Sebejistý člověk nechá ostatní čekat, aby měli čas přemýšlet."
+    },
+    {
+     "speaker": "Moderatrice",
+     "text": "Il capitolo sette si intitola: La cortesia della puntualità.",
+     "cs": "Kapitola sedm se jmenuje: Zdvořilost přesnosti."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "Mi riferivo naturalmente all'edizione ampliata.",
+     "cs": "Myslel jsem samozřejmě rozšířené vydání."
+    },
+    {
+     "speaker": "Spettatore",
+     "text": "Esiste anche in versione puntuale?",
+     "cs": "Z publika se ozvalo: Existuje i včasné?"
+    },
+    {
+     "text": "Kessler è stato il primo a ridere, ed è stata probabilmente la cosa più onesta che ha fatto quella sera.",
+     "cs": "Kessler se zasmál jako první a bylo to pravděpodobně to nejupřímnější, co ten večer udělal."
+    },
+    {
+     "text": "Poi ha firmato libri per due ore. In ognuno ha scritto come dedica: Cordiali saluti, e con ritardo.",
+     "cs": "Pak ještě dvě hodiny podepisoval knihy. Do každé napsal věnování: S pozdravem a se zpožděním."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pianificazione",
+     "cs": "plánování"
+    },
+    {
+     "word": "ampliata",
+     "cs": "rozšířená"
+    },
+    {
+     "word": "dedica",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Kessler è in ritardo?",
+     "options": [
+      "Cercava la scarpa ed era nel traffico.",
+      "Ha dimenticato l'appuntamento.",
+      "Era malato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa scrive Kessler nei libri?",
+     "options": [
+      "Cordiali saluti, e con ritardo",
+      "La puntualità è tutto",
+      "Capitolo sette"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-05-suspicious-baker",
+   "level": "B2",
+   "title": "Il fornaio sospetto",
+   "title_cs": "Podezřelý pekař",
+   "lines": [
+    {
+     "text": "La signora Holler leggeva troppi gialli. Quando ha notato che il fornaio di fronte portava ogni notte alle due pesanti sacchi in cantina, ha capito: qui si prepara un delitto.",
+     "cs": "Paní Hollerová četla příliš mnoho detektivek. Když si všimla, že pekař z protějšího domu chodí každou noc ve dvě hodiny s těžkými pytli do sklepa, měla jasno: tady se děje zločin."
+    },
+    {
+     "text": "Per una settimana l'ha osservato con discrezione dalla finestra. Annotava gli orari e ha disegnato uno schema.",
+     "cs": "Týden ho nenápadně pozorovala z okna. Zapisovala časy a nakreslila schéma."
+    },
+    {
+     "text": "Poi ha chiamato la polizia. È arrivato un poliziotto stanco.",
+     "cs": "Pak zavolala policii. Přišel unavený strážník."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Il fornaio trascina pesanti sacchi in cantina. Alle due di notte! Che cosa ci sarà dentro?",
+     "cs": "Pekař nosí do sklepa těžké pytle. Ve dvě v noci! Co v nich asi je?"
+    },
+    {
+     "text": "Il poliziotto ha interrogato il fornaio. Lui è arrossito e ha detto: Farina. Faccio il pane.",
+     "cs": "Strážník se zeptal pekaře. Ten se zarděl a řekl: Mouka. Peču chleba."
+    },
+    {
+     "speaker": "Poliziotto",
+     "text": "E perché tutto questo mistero?",
+     "cs": "A proč tolik tajnůstkářství?"
+    },
+    {
+     "speaker": "Fornaio",
+     "text": "Perché preparo una sorpresa. La signora Holler riceverà una torta per il compleanno.",
+     "cs": "Protože chci udělat překvapení. Paní Hollerová dostane k narozeninám dort."
+    },
+    {
+     "text": "La signora Holler è impallidita. Era il ventidue ottobre. Il suo compleanno l'aveva dimenticato da un pezzo.",
+     "cs": "Paní Hollerová zbledla. Bylo to dvacátého druhého října. Narozeniny už dávno zapomněla."
+    },
+    {
+     "text": "In cantina c'era una torta enorme, grande come un bambino. Il fornaio ci lavorava da tre settimane.",
+     "cs": "Ve sklepě stál obrovský dort, vysoký jako dítě. Pekař na něm pracoval už tři týdny."
+    },
+    {
+     "text": "Il delitto era dunque una torta. E molto gustosa.",
+     "cs": "Zločinem byl tedy dort. Dokonce velmi chutný."
+    },
+    {
+     "speaker": "Holler",
+     "text": "La prego, non dica a nessuno che l'ho sospettata.",
+     "cs": "Paní Hollerová nakonec přiznala: Neříkejte nikomu, že jsem vás podezřívala."
+    },
+    {
+     "speaker": "Fornaio",
+     "text": "Starò zitto. Ma l'anno prossimo farò una torta con una trama avvincente.",
+     "cs": "Pekař se usmál: Neřeknu. Ale příští rok udělám dort s napínavou zápletkou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "schema",
+     "cs": "schéma"
+    },
+    {
+     "word": "sospettata",
+     "cs": "podezřívala"
+    },
+    {
+     "word": "avvincente",
+     "cs": "napínavý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché la signora Holler chiama la polizia?",
+     "options": [
+      "Pensa che il fornaio sia un criminale.",
+      "Ha visto un ladro.",
+      "La sua cantina è allagata."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa c'è nei sacchi?",
+     "options": [
+      "Farina per una torta di compleanno",
+      "Soldi rubati",
+      "Patate"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-06-translation-app",
+   "level": "B2",
+   "title": "L'app di traduzione",
+   "title_cs": "Překladová aplikace",
+   "lines": [
+    {
+     "text": "Il signor Lindner e la signora Tanaka trattavano la fornitura di cinquecento macchine. Nessuno parlava la lingua dell'altro, quindi traduceva un'app.",
+     "cs": "Pan Lindner a paní Tanaka vyjednávali o dodávce pěti set strojů. Nikdo neuměl řeč toho druhého, a tak překládala aplikace."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "La nostra ultima offerta è un prezzo di due milioni di euro.",
+     "cs": "Naše poslední nabídka je cena dva miliony eur."
+    },
+    {
+     "text": "L'app ha detto in giapponese: La nostra ultima cena costa due milioni. La signora Tanaka si è inchinata con reverenza davanti al pasto più caro del mondo.",
+     "cs": "Aplikace řekla japonsky: Naše poslední večeře stojí dva miliony. Paní Tanaka se uctivě poklonila před nejdražším jídlem světa."
+    },
+    {
+     "speaker": "Tanaka",
+     "text": "Accettiamo, ma in cambio ci aspettiamo un invito.",
+     "cs": "Souhlasíme, ale za to očekáváme pozvání."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Un invito? Certo, volentieri. Quanti ospiti?",
+     "cs": "Pozvání? Samozřejmě, rád. Kolik hostů?"
+    },
+    {
+     "text": "L'app ha chiesto in giapponese: Quante persone cenano? La signora Tanaka ha riflettuto: Tutto il mio personale, duemila.",
+     "cs": "Aplikace se japonsky zeptala: Kolik osob bude jíst? Paní Tanaka se zamyslela: Všichni moji zaměstnanci, dva tisíce."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Duemila ospiti? Be', il livello di prezzo è coerente: due milioni.",
+     "cs": "Dva tisíce hostů? No, cenová úroveň sedí: dva miliony."
+    },
+    {
+     "text": "Entrambi sorridevano educatamente, ciascuno convinto di aver capito perfettamente l'altro.",
+     "cs": "Oba se zdvořile usmívali, každý přesvědčen, že druhému dokonale rozumí."
+    },
+    {
+     "text": "Tre ore dopo hanno firmato: cinquecento macchine e una cena per duemila persone.",
+     "cs": "O tři hodiny později podepsali: pět set strojů a večeři pro dva tisíce osob."
+    },
+    {
+     "text": "Le macchine funzionano ancora oggi. Anche la cena: si tiene ogni anno e nessuno osa chiedere all'app perché.",
+     "cs": "Stroje běží dodnes. Večeře také: koná se každý rok a nikdo se neodváží zeptat aplikace proč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "reverenza",
+     "cs": "úcta"
+    },
+    {
+     "word": "coerente",
+     "cs": "souladný"
+    },
+    {
+     "word": "convinto",
+     "cs": "přesvědčený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa intende la signora Tanaka con il prezzo di due milioni?",
+     "options": [
+      "Il prezzo di una cena",
+      "Il prezzo delle macchine",
+      "Il prezzo di una casa"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qual è il risultato della trattativa?",
+     "options": [
+      "Un contratto per macchine e una grande cena",
+      "Nessun contratto",
+      "Solo un contratto per macchine"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-07-pet-pebble",
+   "level": "B2",
+   "title": "L'animale domestico di pietra",
+   "title_cs": "Kamenný mazlíček",
+   "lines": [
+    {
+     "text": "Mira ha presentato agli investitori la sua start-up: Ciottolo & C., il primo animale domestico senza svantaggi.",
+     "cs": "Mira představila investorům svůj start-up: Oblázek & spol., první domácí mazlíček bez nevýhod."
+    },
+    {
+     "speaker": "Mira",
+     "text": "Il nostro prodotto è un ciottolo scelto a mano, con nome, certificato e abbonamento.",
+     "cs": "Naším produktem je ručně vybraný oblázek s jménem, certifikátem a předplatným."
+    },
+    {
+     "speaker": "Investitore",
+     "text": "Un sasso?",
+     "cs": "Kámen?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Un compagno facile da gestire, senza allergeni, assolutamente fedele. Niente veterinario, niente addestramento, niente peli.",
+     "cs": "Nenáročný, bez alergenů, naprosto věrný společník. Žádný veterinář, žádná výchova, žádné chlupy."
+    },
+    {
+     "speaker": "Investitore",
+     "text": "E l'abbonamento?",
+     "cs": "A to předplatné?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Ogni mese mandiamo al vostro ciottolo una foto di se stesso. Un nuovo punto di vista. Dodici euro.",
+     "cs": "Jednou měsíčně pošleme vašemu oblázku jeho vlastní fotografii. Nový úhel pohledu. Dvanáct eur."
+    },
+    {
+     "text": "Gli investitori sono rimasti in silenzio. Poi uno ha alzato la mano: Il ciottolo ha un profilo sui social?",
+     "cs": "Investoři mlčeli. Pak jeden zvedl ruku: Má ten oblázek profil na sociální síti?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Certo. Ha più follower di noi.",
+     "cs": "Samozřejmě. Má víc sledujících než my."
+    },
+    {
+     "text": "Mezz'ora dopo aveva quattro milioni di euro di capitale.",
+     "cs": "O půl hodiny později měla čtyři miliony eur kapitálu."
+    },
+    {
+     "text": "Tre anni dopo un giornalista le ha chiesto: Come spiega questo successo?",
+     "cs": "O tři roky později se jí zeptal novinář: Jak si vysvětlujete ten úspěch?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "È semplice: in tre anni non si è lamentato un solo cliente. I sassi sono sorprendentemente pazienti.",
+     "cs": "Docela jednoduše: za tři roky si nestěžoval jediný zákazník. Oblázky jsou překvapivě trpělivé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "allergeni",
+     "cs": "alergeny"
+    },
+    {
+     "word": "follower",
+     "cs": "sledující"
+    },
+    {
+     "word": "capitale",
+     "cs": "kapitál"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa vende Mira?",
+     "options": [
+      "Ciottoli come animali domestici",
+      "Cibo per cani",
+      "Mobili da giardino"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché nessun cliente si lamenta?",
+     "options": [
+      "Gli «animali» sono sassi, quindi pazienti.",
+      "Il servizio è perfetto.",
+      "I clienti ricevono un rimborso."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-08-rain-festival",
+   "level": "B2",
+   "title": "La festa nel parcheggio",
+   "title_cs": "Slavnosti v garáži",
+   "lines": [
+    {
+     "text": "Il sindaco Antonio Brandt aveva deciso che la festa cittadina di quest'anno sarebbe stata la più grande della storia: un concerto all'aperto in piazza.",
+     "cs": "Starosta Anton Brandt rozhodl, že letošní městské slavnosti budou největší v historii: open-air koncert na náměstí."
+    },
+    {
+     "text": "La mattina della festa le previsioni annunciavano: pioggia continua, raffiche di vento, grandine sparsa.",
+     "cs": "Ráno v den slavností hlásila předpověď: trvalý déšť, nárazový vítr, místy kroupy."
+    },
+    {
+     "speaker": "Antonio",
+     "text": "Le previsioni sbagliano sempre. Festeggiamo come previsto.",
+     "cs": "Předpovědi se pořád mýlí. Slavíme, jak bylo plánováno."
+    },
+    {
+     "text": "A mezzogiorno ha iniziato a diluviare. Il palco galleggiava, i tecnici sono fuggiti e la banda suonava sotto gli ombrelli.",
+     "cs": "V poledne se spustil liják. Pódium plavalo, technici utekli a dechovka hrála pod deštníky."
+    },
+    {
+     "speaker": "Segretaria",
+     "text": "Signor sindaco, il concerto è andato a monte.",
+     "cs": "Pane starosto, koncert se utopil."
+    },
+    {
+     "speaker": "Antonio",
+     "text": "In questa città c'è un solo posto asciutto e abbastanza grande, e che mi è sempre sembrato troppo caro.",
+     "cs": "V tomto městě je jediné místo, které je suché, dost velké a které mi bylo stejně vždycky moc drahé."
+    },
+    {
+     "text": "Parlava del nuovo parcheggio multipiano che la città aveva costruito per dodici milioni e che nessuno usava.",
+     "cs": "Myslel nové parkovací dům, který město postavilo za dvanáct milionů a který nikdo nepoužíval."
+    },
+    {
+     "text": "La sera la banda suonava al quarto piano, tra pilastri di cemento. L'acustica era sorprendentemente buona.",
+     "cs": "Večer hrála dechovka ve čtvrtém patře mezi betonovými pilíři. Akustika byla překvapivě dobrá."
+    },
+    {
+     "text": "Tremila visitatori sono venuti e, per la prima volta, hanno parcheggiato le auto nel parcheggio.",
+     "cs": "Přišly tři tisíce návštěvníků a poprvé zaparkovaly svá auta v garáži."
+    },
+    {
+     "text": "Il giornale locale ha scritto: La festa più bella degli ultimi anni, e finalmente il parcheggio serve a qualcosa.",
+     "cs": "Místní noviny napsaly: Nejlepší slavnosti za řadu let a konečně má parkovací dům smysl."
+    },
+    {
+     "speaker": "Antonio",
+     "text": "L'avevo pianificato così fin dall'inizio.",
+     "cs": "Já jsem to takhle plánoval od začátku."
+    },
+    {
+     "speaker": "Segretaria",
+     "text": "Certo, signor sindaco. Per questo avevamo ordinato anche la pioggia.",
+     "cs": "Samozřejmě, pane starosto. Proto jsme si také objednali ten déšť."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "grandine",
+     "cs": "kroupy"
+    },
+    {
+     "word": "banda",
+     "cs": "dechovka"
+    },
+    {
+     "word": "acustica",
+     "cs": "akustika"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché la festa si tiene nel parcheggio?",
+     "options": [
+      "Fuori piove a dirotto.",
+      "La piazza è chiusa.",
+      "Il parcheggio è appena stato aperto."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa scrive il giornale?",
+     "options": [
+      "Era la festa più bella degli ultimi anni.",
+      "La festa è stata un fiasco.",
+      "Il parcheggio è troppo caro."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-09-chess-grandmaster",
+   "level": "B2",
+   "title": "Il grande maestro e la bambina",
+   "title_cs": "Velmistr a osmiletý hráč",
+   "lines": [
+    {
+     "text": "Il grande maestro Vittorio Berger è venuto come ospite d'onore a un torneo scolastico. Doveva giocare una simultanea contro venti bambini.",
+     "cs": "Velmistr Viktor Berger přijel na školní turnaj jako čestný host. Měl zahrát simultánku proti dvaceti dětem."
+    },
+    {
+     "text": "Parlava con sicurezza, distribuiva consigli e assicurava agli organizzatori che i bambini non potevano metterlo in difficoltà.",
+     "cs": "Mluvil sebevědomě, rozdával rady a přesvědčoval pořadatele, že děti ho nemůžou ohrozit."
+    },
+    {
+     "text": "In un'ora ha vinto diciannove partite. Restava l'ultima: contro Lucia, otto anni, con le trecce.",
+     "cs": "Za hodinu vyhrál devatenáct partií. Zbývala poslední: proti osmileté Lucii s copánky."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Non essere triste, bambina, ma sarà una cosa rapida.",
+     "cs": "Nezlob se, holčičko, ale tohle skončí rychle."
+    },
+    {
+     "text": "Lucia ha annuito e ha avanzato un pedone.",
+     "cs": "Lucie přikývla a posunula pěšce."
+    },
+    {
+     "text": "Vittorio ha sorriso. Dopo dieci mosse ha smesso di sorridere. Dopo venti ha cominciato a sudare.",
+     "cs": "Viktor se usmál. Po deseti tazích se přestal usmívat. Po dvaceti se začal potit."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Ah. Interessante... Questa mossa non l'avevo mai vista.",
+     "cs": "Aha. To je zajímavé... Takový tah jsem ještě neviděl."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Me l'ha insegnata il mio nonno. La chiama la trappola della distrazione.",
+     "cs": "Naučil mě ho děda. Říká tomu léčka s rozptýlením."
+    },
+    {
+     "text": "Vittorio ha riflettuto a lungo, poi si è arreso. La sala ha trattenuto il fiato e poi è scoppiata in un applauso.",
+     "cs": "Viktor dlouho přemýšlel, pak vzdal. Sál zatajil dech a pak propukl v potlesk."
+    },
+    {
+     "text": "I giornalisti gli hanno chiesto come se lo spiegasse. Vittorio ha risposto: È stato un sacrificio tattico, per mostrare ai bambini che si può perdere con dignità.",
+     "cs": "Novináři se ho zeptali, jak to vysvětlí. Viktor odpověděl: Byla to taktická oběť, abych dětem ukázal, že se dá prohrát důstojně."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Il mio nonno dice che rispondono tutti sempre così.",
+     "cs": "Lucie, která stála za ním, tiše dodala: A dědeček říká, že vždycky tak odpovídají."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "simultanea",
+     "cs": "simultánka"
+    },
+    {
+     "word": "sicurezza",
+     "cs": "jistota"
+    },
+    {
+     "word": "dignità",
+     "cs": "důstojnost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Contro chi perde Vittorio?",
+     "options": [
+      "Contro una bambina di otto anni",
+      "Contro un insegnante",
+      "Contro un altro grande maestro"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come spiega Vittorio la sconfitta?",
+     "options": [
+      "Con un sacrificio tattico",
+      "Con la stanchezza",
+      "Con un errore dell'arbitro"
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-10-postponed-retirement",
+   "level": "B2",
+   "title": "La pensione rimandata",
+   "title_cs": "Odložený důchod",
+   "lines": [
+    {
+     "text": "Il signor Wolff era un maestro del rinvio. In quarant'anni non aveva sbrigato nessun compito che si potesse rimandare a domani.",
+     "cs": "Pan Wolff byl mistr odkládání. Za čtyřicet let nevyřídil žádný úkol, který se dal odložit na zítra."
+    },
+    {
+     "text": "L'inizio della sua pensione era fissato per il primo marzo. I colleghi hanno organizzato una grande festa.",
+     "cs": "Začátek jeho důchodu byl stanoven na 1. března. Kolegové uspořádali velkou oslavu."
+    },
+    {
+     "text": "L'ultimo giorno di lavoro il capo ha fatto un discorso: La ringraziamo per quarant'anni... e per tutti i compiti che sbrigherà ancora.",
+     "cs": "V poslední pracovní den pronesl šéf řeč: Děkujeme vám za čtyřicet let... i za všechny úkoly, které ještě vyřídíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Grazie mille. Vorrei solo far notare che non ho ancora compilato la domanda di pensione.",
+     "cs": "Děkuji. Chci jen upozornit, že jsem ještě nevyplnil žádost o důchod."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Cosa?",
+     "cs": "Cože?"
+    },
+    {
+     "speaker": "Wolff",
+     "text": "In realtà volevo compilarla ieri. Poi l'ho rimandata a oggi. E oggi a domani.",
+     "cs": "Vlastně jsem ji chtěl vyplnit včera. Pak jsem to odložil na dnes. A dnes na zítřek."
+    },
+    {
+     "text": "La burocrazia ha impiegato sei mesi. Durante tutto questo tempo il signor Wolff ha continuato a venire al lavoro, per principio, come diceva.",
+     "cs": "Úřad potřeboval šest měsíců. Celou dobu chodil pan Wolff dál do práce, z principu, jak říkal."
+    },
+    {
+     "text": "Quando la domanda è stata finalmente approvata, ha chiesto una piccola proroga, perché doveva ancora rimandare alcuni compiti.",
+     "cs": "Když byla žádost konečně schválena, požádal o krátké prodloužení, protože musel ještě pár úkolů odložit."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Signor Wolff, per quarant'anni ha rimandato tutto. La pensione è l'unica cosa che non può rimandare.",
+     "cs": "Pane Wolffe, čtyřicet let jste všechno odkládal. Důchod je jediná věc, kterou odložit nesmíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Bene. Comincio domani.",
+     "cs": "Dobře. Začnu zítra."
+    },
+    {
+     "text": "Era dieci anni fa.",
+     "cs": "To bylo před deseti lety."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "rinvio",
+     "cs": "odklad"
+    },
+    {
+     "word": "approvata",
+     "cs": "schválená"
+    },
+    {
+     "word": "proroga",
+     "cs": "prodloužení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa non ha ancora fatto il signor Wolff?",
+     "options": [
+      "Compilare la domanda di pensione",
+      "Organizzare la festa",
+      "Scrivere le dimissioni"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la storia?",
+     "options": [
+      "Dieci anni dopo lavora ancora.",
+      "Va subito in pensione.",
+      "Diventa capo."
+     ],
+     "answer_index": 0
+    }
+   ]
+  }
+ ]
+}
