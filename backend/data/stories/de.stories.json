@@ -6007,6 +6007,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-35-grant-title",
+   "level": "B2",
+   "title": "Der Forschungstitel",
+   "title_cs": "Výzkumný titul",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom beantragte einen kleinen Zuschuss, um zu untersuchen, warum ständig Bleistifte aus seiner Werkstatt verschwanden.",
+     "cs": "Tom žádal o malý grant, aby mohl v dílně zkoumat, proč mu pořád mizí tužky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich nenne das Projekt Analyse räumlicher Instabilität kleiner Arbeitsutensilien.",
+     "cs": "Projekt jsem nazval Analýza prostorové nestability drobných pracovních pomůcek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das klingt wissenschaftlich. Wie lautet deine wichtigste Hypothese?",
+     "cs": "To zní odborně. Jaká je tvoje hlavní hypotéza?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dass die Bewegung der Bleistifte nicht allein durch die Nachlässigkeit ihres Besitzers erklärt werden kann.",
+     "cs": "Že pohyb tužek nelze vysvětlit pouze nedbalostí jejich majitele."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Warum hast du dann drei Bleistifte hinter dem Ohr und vier weitere in der Tasche?",
+     "cs": "A proč máš tři tužky za uchem a další čtyři v kapse?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom änderte seinen Antrag: Die erste Forschungsphase wird einer Inventarisierung des Forschers gewidmet.",
+     "cs": "Tom si opravil návrh: První etapa výzkumu bude věnována inventarizaci výzkumníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "räumlicher",
+     "cs": "prostorový"
+    },
+    {
+     "word": "Arbeitsutensilien",
+     "cs": "pracovní pomůcky"
+    },
+    {
+     "word": "Hypothese",
+     "cs": "hypotéza"
+    },
+    {
+     "word": "Inventarisierung",
+     "cs": "inventarizace"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom zkoumá?",
+     "options": [
+      "Mizení tužek.",
+      "Vznik dřeva.",
+      "Rychlost internetu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kde jsou některé tužky?",
+     "options": [
+      "Za uchem a v kapse.",
+      "V obchodě.",
+      "Pod podlahou."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

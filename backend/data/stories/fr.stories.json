@@ -6007,6 +6007,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-35-grant-title",
+   "level": "B2",
+   "title": "Le titre de recherche",
+   "title_cs": "Výzkumný titul",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom demandait une petite subvention pour étudier pourquoi les crayons disparaissaient constamment de son atelier.",
+     "cs": "Tom žádal o malý grant, aby mohl v dílně zkoumat, proč mu pořád mizí tužky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "J'ai intitulé le projet Analyse de l'instabilité spatiale des petits outils de travail.",
+     "cs": "Projekt jsem nazval Analýza prostorové nestability drobných pracovních pomůcek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Cela semble savant. Quelle est ton hypothèse principale ?",
+     "cs": "To zní odborně. Jaká je tvoje hlavní hypotéza?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Que le déplacement des crayons ne peut s'expliquer uniquement par la négligence de leur propriétaire.",
+     "cs": "Že pohyb tužek nelze vysvětlit pouze nedbalostí jejich majitele."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Pourquoi as-tu trois crayons derrière l'oreille et quatre autres dans la poche ?",
+     "cs": "A proč máš tři tužky za uchem a další čtyři v kapse?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a modifié sa proposition : La première phase sera consacrée à l'inventaire du chercheur.",
+     "cs": "Tom si opravil návrh: První etapa výzkumu bude věnována inventarizaci výzkumníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "subvention",
+     "cs": "grant"
+    },
+    {
+     "word": "spatiale",
+     "cs": "prostorový"
+    },
+    {
+     "word": "hypothèse",
+     "cs": "hypotéza"
+    },
+    {
+     "word": "négligence",
+     "cs": "nedbalost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom zkoumá?",
+     "options": [
+      "Mizení tužek.",
+      "Vznik dřeva.",
+      "Rychlost internetu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kde jsou některé tužky?",
+     "options": [
+      "Za uchem a v kapse.",
+      "V obchodě.",
+      "Pod podlahou."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
