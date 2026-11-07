@@ -208,8 +208,8 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   const path = usePathname();
 
   useEffect(() => {
-    if (path) recordVisit(path);
-  }, [path]);
+    if (path) recordVisit(me.acting.id, path);
+  }, [path, me.acting.id]);
 
   useEffect(() => {
     if (!focusable) return;

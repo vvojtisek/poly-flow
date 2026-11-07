@@ -1535,3 +1535,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/i18n/cs.ts`: the mistake panel's help is now one line ("Podle posledních chyb v ověřeních."); the ungraded note stays once, in the intro. `app/practice/page.tsx`: the skill label sits above the chips, which form one swipeable row on phones (the group is labelled by it) and wrap from `sm` up.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height 2 754 px (from 2 842 px), no console errors.
+
+## Global Cycle 45/120 | Page: [/practice] (Page Cycle 15/15)
+
+**Summary:** keep pins, recent modes and last-used dates per profile
+
+**Observed Problem:** Pinned modes, the recent list and the new last-used dates were stored under one browser key, so on a shared family tablet a child's pins and "Naposledy dnes" appeared on a parent's practice hub and dashboard after switching profiles, and today's tip was based on someone else's activity. (A request audit of `/practice` on a production build showed 4 API calls, so no performance work was needed here.)
+
+**Implemented Solution:** `lib/practice.ts` keys `pf_pinned_modes`, `pf_recent_modes` and `pf_mode_visits` by the acting profile id; all readers and writers take the profile (`app/practice/page.tsx`, `app/page.tsx`, `components/AppShell.tsx`) and re-read when the acting profile changes. Older unkeyed entries are ignored rather than attributed to whoever logs in next.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.

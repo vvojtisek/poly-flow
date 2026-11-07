@@ -38,14 +38,15 @@ export function modesFor(language: Language): PracticeMode[] {
 export const SKILLS: Skill[] = ["listening", "speaking", "writing", "reading", "grammar"];
 
 // The last practice modes this device opened (most recent first). A convenience only: it stays
-// in this browser, is never sent to the server and never counts as progress.
-const RECENT_KEY = "pf_recent_modes";
-const PINNED_KEY = "pf_pinned_modes";
+// in this browser, is never sent to the server and never counts as progress. Keys are per
+// profile, because family members share devices.
+const RECENT_KEY = (profile: string) => `pf_recent_modes:${profile}`;
+const PINNED_KEY = (profile: string) => `pf_pinned_modes:${profile}`;
 const MAX_RECENT = 3;
 
-export function readPinned(): PracticeMode["id"][] {
+export function readPinned(profile: string): PracticeMode["id"][] {
   try {
-    const raw = JSON.parse(window.localStorage.getItem(PINNED_KEY) ?? "[]");
+    const raw = JSON.parse(window.localStorage.getItem(PINNED_KEY(profile)) ?? "[]");
     const ids = new Set(PRACTICE_MODES.map((m) => m.id));
     return Array.isArray(raw) ? [...new Set(raw.filter((x): x is PracticeMode["id"] => ids.has(x)))] : [];
   } catch {
@@ -53,20 +54,20 @@ export function readPinned(): PracticeMode["id"][] {
   }
 }
 
-export function togglePinned(id: PracticeMode["id"]): PracticeMode["id"][] {
-  const current = readPinned();
+export function togglePinned(profile: string, id: PracticeMode["id"]): PracticeMode["id"][] {
+  const current = readPinned(profile);
   const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id];
   try {
-    window.localStorage.setItem(PINNED_KEY, JSON.stringify(next));
+    window.localStorage.setItem(PINNED_KEY(profile), JSON.stringify(next));
   } catch {
     /* storage unavailable */
   }
   return next;
 }
 
-export function readRecent(): PracticeMode["id"][] {
+export function readRecent(profile: string): PracticeMode["id"][] {
   try {
-    const raw = JSON.parse(window.localStorage.getItem(RECENT_KEY) ?? "[]");
+    const raw = JSON.parse(window.localStorage.getItem(RECENT_KEY(profile)) ?? "[]");
     const ids = new Set(PRACTICE_MODES.map((m) => m.id));
     return Array.isArray(raw) ? raw.filter((x): x is PracticeMode["id"] => ids.has(x)).slice(0, MAX_RECENT) : [];
   } catch {
@@ -75,13 +76,13 @@ export function readRecent(): PracticeMode["id"][] {
 }
 
 /** Remembers a visit when `path` is a practice mode's page. */
-export function recordVisit(path: string) {
+export function recordVisit(profile: string, path: string) {
   const mode = PRACTICE_MODES.find((m) => path === m.href || path.startsWith(`${m.href}/`));
   if (!mode) return;
   try {
-    const next = [mode.id, ...readRecent().filter((id) => id !== mode.id)].slice(0, MAX_RECENT);
-    window.localStorage.setItem(RECENT_KEY, JSON.stringify(next));
-    window.localStorage.setItem(VISITS_KEY, JSON.stringify({ ...readVisits(), [mode.id]: new Date().toISOString() }));
+    const next = [mode.id, ...readRecent(profile).filter((id) => id !== mode.id)].slice(0, MAX_RECENT);
+    window.localStorage.setItem(RECENT_KEY(profile), JSON.stringify(next));
+    window.localStorage.setItem(VISITS_KEY(profile), JSON.stringify({ ...readVisits(profile), [mode.id]: new Date().toISOString() }));
   } catch {
     /* storage unavailable */
   }
@@ -89,11 +90,11 @@ export function recordVisit(path: string) {
 
 // When each mode was last opened on this device (ISO time). Like the recent list, a local
 // convenience for choosing what to do; it is not a record of learning.
-const VISITS_KEY = "pf_mode_visits";
+const VISITS_KEY = (profile: string) => `pf_mode_visits:${profile}`;
 
-export function readVisits(): Partial<Record<PracticeMode["id"], string>> {
+export function readVisits(profile: string): Partial<Record<PracticeMode["id"], string>> {
   try {
-    const raw = JSON.parse(window.localStorage.getItem(VISITS_KEY) ?? "{}");
+    const raw = JSON.parse(window.localStorage.getItem(VISITS_KEY(profile)) ?? "{}");
     if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
     const ids = new Set<string>(PRACTICE_MODES.map((m) => m.id));
     return Object.fromEntries(

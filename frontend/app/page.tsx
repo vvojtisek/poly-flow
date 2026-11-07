@@ -118,10 +118,12 @@ export default function HomePage() {
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
   const [pinned, setPinned] = useState<ReturnType<typeof readPinned>>([]);
+  const profileId = me?.acting.id;
   useEffect(() => {
-    setRecent(readRecent());
-    setPinned(readPinned());
-  }, []);
+    if (!profileId) return;
+    setRecent(readRecent(profileId));
+    setPinned(readPinned(profileId));
+  }, [profileId]);
 
   useEffect(() => {
     if (!language) return;

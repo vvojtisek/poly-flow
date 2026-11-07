@@ -113,9 +113,10 @@ export default function PracticePage() {
     const qs = params.toString();
     window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
   }, [urlRead, skills]);
-  useEffect(() => setPinned(readPinned()), []);
+  const profileId = me?.acting.id;
+  useEffect(() => setPinned(profileId ? readPinned(profileId) : []), [profileId]);
   const [visits, setVisits] = useState<ReturnType<typeof readVisits>>({});
-  useEffect(() => setVisits(readVisits()), []);
+  useEffect(() => setVisits(profileId ? readVisits(profileId) : {}), [profileId]);
   useEffect(() => {
     if (!me?.acting.active_language) return;
     let cancelled = false;
@@ -284,7 +285,7 @@ export default function PracticePage() {
           {shown.map((m, i) => (
             <li key={m.id}>
               <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => {
-                  const next = togglePinned(m.id);
+                  const next = togglePinned(me.acting.id, m.id);
                   setPinned(next);
                   setAnnounce(next.includes(m.id) ? t.pinnedNow(t.mode[m.id]?.title ?? m.id) : t.unpinnedNow(t.mode[m.id]?.title ?? m.id));
                 }} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} hotkey={i < 9 ? i + 1 : undefined} />
