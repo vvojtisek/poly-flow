@@ -5855,6 +5855,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-33-garden-reclassification",
+   "level": "B2",
+   "title": "Das seltene Beet",
+   "title_cs": "Vzácný záhon",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom wollte seinen vernachlässigten Garten bei einem Wettbewerb anmelden, ohne den Sommer mit Jäten zu verbringen.",
+     "cs": "Tom chtěl přihlásit zanedbanou zahradu do soutěže, aniž by musel celé léto plít."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich habe das Unkraut in spontane Vegetation und das Beet in einen experimentellen Lebensraum umbenannt.",
+     "cs": "Přejmenoval jsem plevel na spontánní vegetaci a záhon na experimentální stanoviště."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Interessante Terminologie. Wie belegst du einen Beitrag zur Biodiversität?",
+     "cs": "To je zajímavá terminologie. Jak doložíš přínos pro biodiverzitu?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ganz einfach. Jede Woche entdecke ich hier etwas, das ich bestimmt nicht gepflanzt habe.",
+     "cs": "Úplně jednoduše. Každý týden tady objevím něco, co jsem určitě nezasadil."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Und was ist mit dem Löwenzahn, der inzwischen auch bei den Nachbarn wächst?",
+     "cs": "A co ty pampelišky, které už rostou i u sousedů?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom lächelte zufrieden: Ein Beweis für die internationale Reichweite meiner Forschung. Mein Nachbar ist Österreicher.",
+     "cs": "Tom se spokojeně usmál: To je důkaz, že můj výzkum má skutečně mezinárodní přesah. Soused je Rakušan."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "spontane",
+     "cs": "spontánní"
+    },
+    {
+     "word": "Lebensraum",
+     "cs": "stanoviště"
+    },
+    {
+     "word": "Terminologie",
+     "cs": "terminologie"
+    },
+    {
+     "word": "Biodiversität",
+     "cs": "biodiverzita"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom ve skutečnosti změnil?",
+     "options": [
+      "Názvy, nikoli zahradu.",
+      "Celou půdu.",
+      "Plot."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč mluví o mezinárodním přesahu?",
+     "options": [
+      "Pampelišky rostou u rakouského souseda.",
+      "Zahrada je v zahraničí.",
+      "Vyhrál zahraniční cenu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
