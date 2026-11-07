@@ -3,12 +3,13 @@
 Graded like a test (one attempt, no hints, "Nevím" instead of guessing), adaptive per answer
 (`app.domain.diagnostic`). Callers own the transaction.
 
-Finishing records the band (`cefr_placements`) and unlocks curriculum nodes the way the
-vocabulary part does: nothing becomes known by assumption.
+Finishing records the estimated band (`cefr_placements`), unlocks curriculum, and applies
+aggregate prerequisite mastery below the recommended target. It does not create individual
+answer events or claim mastery of the active target band.
 
-- Grammar units at or below the band skip their lesson and wait in Ověření gramatiky
-  (`studied_by='placement'`, due now). A check confirms them or sends the learner back to the
-  lesson; a retake that places lower returns unconfirmed units above the new band to "new".
+- Grammar below the recommended target is marked mastered. Units at the target band are
+  queued for Ověření gramatiky (`studied_by='placement'`, due now); a lower retake returns only
+  unconfirmed, non-mastered units above the new band to "new".
 - The vocabulary level exams for bands at or below the result open without the 80 % known-words
   gate (they are still taken in order and still need the words in the lexicon).
 """
@@ -41,10 +42,12 @@ from app.domain.diagnostic import (
     result,
 )
 from app.domain.enums import CefrLevel, ContentFlag, Language, ProgressState
+from app.domain.level_exam import prerequisite_level_for_target
 from app.models import CefrPlacement, DiagnosticSession, GrammarUnit, User, UserGrammarProgress
 from app.services import placement as vocab_placement
 from app.services.grammar import POLICY as GRAMMAR_POLICY
 from app.services.learning import LearningError, wants_profanity
+from app.services.level_completion import complete_through
 
 ACTIVE, COMPLETED, ABANDONED = "active", "completed", "abandoned"
 DATA_DIR = Path(__file__).resolve().parents[2] / "data" / "diagnostic"
@@ -298,6 +301,9 @@ async def finish(db: AsyncSession, user: User, s: DiagnosticSession, now: dateti
         .values(user_id=user.id, language=s.language, **values)
         .on_conflict_do_update(index_elements=["user_id", "language"], set_=values)
     )
+    prerequisite_level = prerequisite_level_for_target(r.level)
+    if prerequisite_level is not None:
+        await complete_through(db, user, s.language, prerequisite_level, now)
     await db.flush()
     return s.result
 
@@ -340,6 +346,7 @@ async def _unlock_grammar(
                 p.unit_id.in_(above),
                 p.studied_by == "placement",
                 p.last_reviewed_at.is_(None),
+                p.state != ProgressState.MASTERED,
             )
             .values(studied_at=None, studied_by=None, next_review_at=None, state=ProgressState.NEW)
         )
