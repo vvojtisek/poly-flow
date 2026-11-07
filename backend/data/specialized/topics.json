@@ -1,0 +1,2427 @@
+{
+  "revision": "interests-draft-v1",
+  "review_status": "unreviewed",
+  "license": "CC0-1.0",
+  "topics": {
+    "figure-skating": {
+      "de": [
+        {
+          "lemma": "Schlittschuhkante",
+          "pos": "NOUN",
+          "rank": 8001,
+          "translation_cs": "hrana brusle",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "dreifache Axel",
+          "pos": "NOUN",
+          "rank": 8002,
+          "translation_cs": "trojitý axel",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Pirouette",
+          "pos": "NOUN",
+          "rank": 8003,
+          "translation_cs": "pirueta",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Schrittfolge",
+          "pos": "NOUN",
+          "rank": 8004,
+          "translation_cs": "kroková sekvence",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Kür",
+          "pos": "NOUN",
+          "rank": 8005,
+          "translation_cs": "volná jízda",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "skate edge",
+          "pos": "NOUN",
+          "rank": 8001,
+          "translation_cs": "hrana brusle",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "triple Axel",
+          "pos": "NOUN",
+          "rank": 8002,
+          "translation_cs": "trojitý axel",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "spin",
+          "pos": "VERB",
+          "rank": 2033,
+          "translation_cs": "pirueta",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "step sequence",
+          "pos": "NOUN",
+          "rank": 8003,
+          "translation_cs": "kroková sekvence",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "free skate",
+          "pos": "NOUN",
+          "rank": 8004,
+          "translation_cs": "volná jízda",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "carre de patin",
+          "pos": "NOUN",
+          "rank": 8001,
+          "translation_cs": "hrana brusle",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "triple axel",
+          "pos": "NOUN",
+          "rank": 8002,
+          "translation_cs": "trojitý axel",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "pirouette",
+          "pos": "NOUN",
+          "rank": 8003,
+          "translation_cs": "pirueta",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "séquence de pas",
+          "pos": "NOUN",
+          "rank": 8004,
+          "translation_cs": "kroková sekvence",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "programme libre",
+          "pos": "NOUN",
+          "rank": 8005,
+          "translation_cs": "volná jízda",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "filo del pattino",
+          "pos": "NOUN",
+          "rank": 8001,
+          "translation_cs": "hrana brusle",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "triplo axel",
+          "pos": "NOUN",
+          "rank": 8002,
+          "translation_cs": "trojitý axel",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "trottola",
+          "pos": "NOUN",
+          "rank": 8003,
+          "translation_cs": "pirueta",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "sequenza di passi",
+          "pos": "NOUN",
+          "rank": 8004,
+          "translation_cs": "kroková sekvence",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "programma libero",
+          "pos": "NOUN",
+          "rank": 8005,
+          "translation_cs": "volná jízda",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "dance": {
+      "de": [
+        {
+          "lemma": "Choreografie",
+          "pos": "NOUN",
+          "rank": 8006,
+          "translation_cs": "choreografie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Tanzpartner",
+          "pos": "NOUN",
+          "rank": 8007,
+          "translation_cs": "taneční partner",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Gewichtsverlagerung",
+          "pos": "NOUN",
+          "rank": 8008,
+          "translation_cs": "přenesení váhy",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Zählzeit",
+          "pos": "NOUN",
+          "rank": 8009,
+          "translation_cs": "doba v taktu",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Synchronisation",
+          "pos": "NOUN",
+          "rank": 8010,
+          "translation_cs": "synchronizace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "choreography",
+          "pos": "NOUN",
+          "rank": 7094,
+          "translation_cs": "choreografie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "dance partner",
+          "pos": "NOUN",
+          "rank": 8005,
+          "translation_cs": "taneční partner",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "weight transfer",
+          "pos": "NOUN",
+          "rank": 8006,
+          "translation_cs": "přenesení váhy",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "beat",
+          "pos": "VERB",
+          "rank": 653,
+          "translation_cs": "doba v taktu",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "synchronisation",
+          "pos": "NOUN",
+          "rank": 8007,
+          "translation_cs": "synchronizace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "chorégraphie",
+          "pos": "NOUN",
+          "rank": 8006,
+          "translation_cs": "choreografie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "partenaire de danse",
+          "pos": "NOUN",
+          "rank": 8007,
+          "translation_cs": "taneční partner",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "transfert de poids",
+          "pos": "NOUN",
+          "rank": 8008,
+          "translation_cs": "přenesení váhy",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "temps musical",
+          "pos": "NOUN",
+          "rank": 8009,
+          "translation_cs": "doba v taktu",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "synchronisation",
+          "pos": "NOUN",
+          "rank": 7013,
+          "translation_cs": "synchronizace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "coreografia",
+          "pos": "NOUN",
+          "rank": 8006,
+          "translation_cs": "choreografie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "partner di ballo",
+          "pos": "NOUN",
+          "rank": 8007,
+          "translation_cs": "taneční partner",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "trasferimento del peso",
+          "pos": "NOUN",
+          "rank": 8008,
+          "translation_cs": "přenesení váhy",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "tempo musicale",
+          "pos": "NOUN",
+          "rank": 8009,
+          "translation_cs": "doba v taktu",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "sincronizzazione",
+          "pos": "NOUN",
+          "rank": 8010,
+          "translation_cs": "synchronizace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "gymnastics": {
+      "de": [
+        {
+          "lemma": "Schwebebalken",
+          "pos": "NOUN",
+          "rank": 8011,
+          "translation_cs": "kladina",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Sprung",
+          "pos": "NOUN",
+          "rank": 2818,
+          "translation_cs": "přeskok",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Bodenturnen",
+          "pos": "NOUN",
+          "rank": 8012,
+          "translation_cs": "prostná",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Handstand",
+          "pos": "NOUN",
+          "rank": 8013,
+          "translation_cs": "stojka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Hilfestellung",
+          "pos": "NOUN",
+          "rank": 8014,
+          "translation_cs": "dopomoc",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "balance beam",
+          "pos": "NOUN",
+          "rank": 8008,
+          "translation_cs": "kladina",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "vault",
+          "pos": "NOUN",
+          "rank": 4579,
+          "translation_cs": "přeskok",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "floor exercise",
+          "pos": "NOUN",
+          "rank": 8009,
+          "translation_cs": "prostná",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "handstand",
+          "pos": "NOUN",
+          "rank": 8010,
+          "translation_cs": "stojka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "spotting",
+          "pos": "NOUN",
+          "rank": 8011,
+          "translation_cs": "dopomoc",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "poutre",
+          "pos": "NOUN",
+          "rank": 6087,
+          "translation_cs": "kladina",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "saut de cheval",
+          "pos": "NOUN",
+          "rank": 8010,
+          "translation_cs": "přeskok",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "exercice au sol",
+          "pos": "NOUN",
+          "rank": 8011,
+          "translation_cs": "prostná",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "équilibre sur les mains",
+          "pos": "NOUN",
+          "rank": 8012,
+          "translation_cs": "stojka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "parade",
+          "pos": "NOUN",
+          "rank": 5168,
+          "translation_cs": "dopomoc",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "trave",
+          "pos": "NOUN",
+          "rank": 8011,
+          "translation_cs": "kladina",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "volteggio",
+          "pos": "NOUN",
+          "rank": 8012,
+          "translation_cs": "přeskok",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "corpo libero",
+          "pos": "NOUN",
+          "rank": 8013,
+          "translation_cs": "prostná",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "verticale sulle mani",
+          "pos": "NOUN",
+          "rank": 8014,
+          "translation_cs": "stojka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "assistenza",
+          "pos": "NOUN",
+          "rank": 1752,
+          "translation_cs": "dopomoc",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "ice-hockey": {
+      "de": [
+        {
+          "lemma": "Puck",
+          "pos": "NOUN",
+          "rank": 8015,
+          "translation_cs": "puk",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "unerlaubte Weitschuss",
+          "pos": "NOUN",
+          "rank": 8016,
+          "translation_cs": "zakázané uvolnění",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Überzahlspiel",
+          "pos": "NOUN",
+          "rank": 8017,
+          "translation_cs": "přesilová hra",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Bully",
+          "pos": "NOUN",
+          "rank": 8018,
+          "translation_cs": "vhazování",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "blaue Linie",
+          "pos": "NOUN",
+          "rank": 8019,
+          "translation_cs": "modrá čára",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "puck",
+          "pos": "NOUN",
+          "rank": 8012,
+          "translation_cs": "puk",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "icing",
+          "pos": "NOUN",
+          "rank": 7115,
+          "translation_cs": "zakázané uvolnění",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "power play",
+          "pos": "NOUN",
+          "rank": 8013,
+          "translation_cs": "přesilová hra",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "face-off",
+          "pos": "NOUN",
+          "rank": 8014,
+          "translation_cs": "vhazování",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "blue line",
+          "pos": "NOUN",
+          "rank": 8015,
+          "translation_cs": "modrá čára",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "palet",
+          "pos": "NOUN",
+          "rank": 8013,
+          "translation_cs": "puk",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "dégagement interdit",
+          "pos": "NOUN",
+          "rank": 8014,
+          "translation_cs": "zakázané uvolnění",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "supériorité numérique",
+          "pos": "NOUN",
+          "rank": 8015,
+          "translation_cs": "přesilová hra",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mise au jeu",
+          "pos": "NOUN",
+          "rank": 8016,
+          "translation_cs": "vhazování",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "ligne bleue",
+          "pos": "NOUN",
+          "rank": 8017,
+          "translation_cs": "modrá čára",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "disco",
+          "pos": "NOUN",
+          "rank": 1441,
+          "translation_cs": "puk",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "liberazione vietata",
+          "pos": "NOUN",
+          "rank": 8015,
+          "translation_cs": "zakázané uvolnění",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "superiorità numerica",
+          "pos": "NOUN",
+          "rank": 8016,
+          "translation_cs": "přesilová hra",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "ingaggio",
+          "pos": "NOUN",
+          "rank": 8017,
+          "translation_cs": "vhazování",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "linea blu",
+          "pos": "NOUN",
+          "rank": 8018,
+          "translation_cs": "modrá čára",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "field-sports": {
+      "de": [
+        {
+          "lemma": "abseits",
+          "pos": "ADP",
+          "rank": 3176,
+          "translation_cs": "ofsajd",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Strafstoß",
+          "pos": "NOUN",
+          "rank": 8020,
+          "translation_cs": "pokutový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Versuch",
+          "pos": "NOUN",
+          "rank": 1363,
+          "translation_cs": "položení v ragby",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Eckstoß",
+          "pos": "NOUN",
+          "rank": 8021,
+          "translation_cs": "rohový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Ausdauer",
+          "pos": "NOUN",
+          "rank": 6392,
+          "translation_cs": "vytrvalost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "offside",
+          "pos": "NOUN",
+          "rank": 8016,
+          "translation_cs": "ofsajd",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "penalty kick",
+          "pos": "NOUN",
+          "rank": 8017,
+          "translation_cs": "pokutový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "try",
+          "pos": "VERB",
+          "rank": 167,
+          "translation_cs": "položení v ragby",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "corner kick",
+          "pos": "NOUN",
+          "rank": 8018,
+          "translation_cs": "rohový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "endurance",
+          "pos": "NOUN",
+          "rank": 5835,
+          "translation_cs": "vytrvalost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "hors-jeu",
+          "pos": "NOUN",
+          "rank": 8018,
+          "translation_cs": "ofsajd",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "penalty",
+          "pos": "NOUN",
+          "rank": 5253,
+          "translation_cs": "pokutový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "essai",
+          "pos": "NOUN",
+          "rank": 1306,
+          "translation_cs": "položení v ragby",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "coup de pied de coin",
+          "pos": "NOUN",
+          "rank": 8019,
+          "translation_cs": "rohový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "endurance",
+          "pos": "NOUN",
+          "rank": 5665,
+          "translation_cs": "vytrvalost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "fuorigioco",
+          "pos": "NOUN",
+          "rank": 8019,
+          "translation_cs": "ofsajd",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "calcio di rigore",
+          "pos": "NOUN",
+          "rank": 8020,
+          "translation_cs": "pokutový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "meta",
+          "pos": "NOUN",
+          "rank": 2385,
+          "translation_cs": "položení v ragby",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "calcio d'angolo",
+          "pos": "NOUN",
+          "rank": 8021,
+          "translation_cs": "rohový kop",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "resistenza",
+          "pos": "NOUN",
+          "rank": 1387,
+          "translation_cs": "vytrvalost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "nature": {
+      "de": [
+        {
+          "lemma": "Biodiversität",
+          "pos": "NOUN",
+          "rank": 8022,
+          "translation_cs": "biodiverzita",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Einzugsgebiet",
+          "pos": "NOUN",
+          "rank": 8023,
+          "translation_cs": "povodí",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Feuchtgebiet",
+          "pos": "NOUN",
+          "rank": 8024,
+          "translation_cs": "mokřad",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Bestäuber",
+          "pos": "NOUN",
+          "rank": 8025,
+          "translation_cs": "opylovač",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Nahrungskette",
+          "pos": "NOUN",
+          "rank": 8026,
+          "translation_cs": "potravní řetězec",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "biodiversity",
+          "pos": "NOUN",
+          "rank": 7220,
+          "translation_cs": "biodiverzita",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "drainage basin",
+          "pos": "NOUN",
+          "rank": 8019,
+          "translation_cs": "povodí",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "wetland",
+          "pos": "NOUN",
+          "rank": 8020,
+          "translation_cs": "mokřad",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "pollinator",
+          "pos": "NOUN",
+          "rank": 8021,
+          "translation_cs": "opylovač",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "food chain",
+          "pos": "NOUN",
+          "rank": 8022,
+          "translation_cs": "potravní řetězec",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "biodiversité",
+          "pos": "NOUN",
+          "rank": 5081,
+          "translation_cs": "biodiverzita",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "bassin versant",
+          "pos": "NOUN",
+          "rank": 8020,
+          "translation_cs": "povodí",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "zone humide",
+          "pos": "NOUN",
+          "rank": 8021,
+          "translation_cs": "mokřad",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "pollinisateur",
+          "pos": "NOUN",
+          "rank": 8022,
+          "translation_cs": "opylovač",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "chaîne alimentaire",
+          "pos": "NOUN",
+          "rank": 8023,
+          "translation_cs": "potravní řetězec",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "biodiversità",
+          "pos": "NOUN",
+          "rank": 8022,
+          "translation_cs": "biodiverzita",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "bacino idrografico",
+          "pos": "NOUN",
+          "rank": 8023,
+          "translation_cs": "povodí",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "zona umida",
+          "pos": "NOUN",
+          "rank": 8024,
+          "translation_cs": "mokřad",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "impollinatore",
+          "pos": "NOUN",
+          "rank": 8025,
+          "translation_cs": "opylovač",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "catena alimentare",
+          "pos": "NOUN",
+          "rank": 8026,
+          "translation_cs": "potravní řetězec",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "mathematics": {
+      "de": [
+        {
+          "lemma": "Eigenwert",
+          "pos": "NOUN",
+          "rank": 8027,
+          "translation_cs": "vlastní číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Ableitung",
+          "pos": "NOUN",
+          "rank": 7550,
+          "translation_cs": "derivace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Integral",
+          "pos": "NOUN",
+          "rank": 8028,
+          "translation_cs": "integrál",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Standardabweichung",
+          "pos": "NOUN",
+          "rank": 8029,
+          "translation_cs": "směrodatná odchylka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Wahrscheinlichkeit",
+          "pos": "NOUN",
+          "rank": 2664,
+          "translation_cs": "pravděpodobnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "eigenvalue",
+          "pos": "NOUN",
+          "rank": 8023,
+          "translation_cs": "vlastní číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "derivative",
+          "pos": "NOUN",
+          "rank": 6247,
+          "translation_cs": "derivace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "integral",
+          "pos": "ADJ",
+          "rank": 5154,
+          "translation_cs": "integrál",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "standard deviation",
+          "pos": "NOUN",
+          "rank": 8024,
+          "translation_cs": "směrodatná odchylka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "probability",
+          "pos": "NOUN",
+          "rank": 4443,
+          "translation_cs": "pravděpodobnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "valeur propre",
+          "pos": "NOUN",
+          "rank": 8024,
+          "translation_cs": "vlastní číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "dérivée",
+          "pos": "NOUN",
+          "rank": 8025,
+          "translation_cs": "derivace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "intégrale",
+          "pos": "NOUN",
+          "rank": 5060,
+          "translation_cs": "integrál",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "écart-type",
+          "pos": "NOUN",
+          "rank": 8026,
+          "translation_cs": "směrodatná odchylka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "probabilité",
+          "pos": "NOUN",
+          "rank": 4173,
+          "translation_cs": "pravděpodobnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "autovalore",
+          "pos": "NOUN",
+          "rank": 8027,
+          "translation_cs": "vlastní číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "derivata",
+          "pos": "NOUN",
+          "rank": 8028,
+          "translation_cs": "derivace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "integrale",
+          "pos": "ADJ",
+          "rank": 3359,
+          "translation_cs": "integrál",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "deviazione standard",
+          "pos": "NOUN",
+          "rank": 8029,
+          "translation_cs": "směrodatná odchylka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "probabilità",
+          "pos": "NOUN",
+          "rank": 2534,
+          "translation_cs": "pravděpodobnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "chemistry": {
+      "de": [
+        {
+          "lemma": "kovalente Bindung",
+          "pos": "NOUN",
+          "rank": 8030,
+          "translation_cs": "kovalentní vazba",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Katalysator",
+          "pos": "NOUN",
+          "rank": 8031,
+          "translation_cs": "katalyzátor",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Oxidationszahl",
+          "pos": "NOUN",
+          "rank": 8032,
+          "translation_cs": "oxidační číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Löslichkeit",
+          "pos": "NOUN",
+          "rank": 8033,
+          "translation_cs": "rozpustnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Titration",
+          "pos": "NOUN",
+          "rank": 8034,
+          "translation_cs": "titrace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "covalent bond",
+          "pos": "NOUN",
+          "rank": 8025,
+          "translation_cs": "kovalentní vazba",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "catalyst",
+          "pos": "NOUN",
+          "rank": 5744,
+          "translation_cs": "katalyzátor",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "oxidation state",
+          "pos": "NOUN",
+          "rank": 8026,
+          "translation_cs": "oxidační číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "solubility",
+          "pos": "NOUN",
+          "rank": 8027,
+          "translation_cs": "rozpustnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "titration",
+          "pos": "NOUN",
+          "rank": 8028,
+          "translation_cs": "titrace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "liaison covalente",
+          "pos": "NOUN",
+          "rank": 8027,
+          "translation_cs": "kovalentní vazba",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "catalyseur",
+          "pos": "NOUN",
+          "rank": 6912,
+          "translation_cs": "katalyzátor",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "nombre d'oxydation",
+          "pos": "NOUN",
+          "rank": 8028,
+          "translation_cs": "oxidační číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "solubilité",
+          "pos": "NOUN",
+          "rank": 8029,
+          "translation_cs": "rozpustnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "titration",
+          "pos": "NOUN",
+          "rank": 8030,
+          "translation_cs": "titrace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "legame covalente",
+          "pos": "NOUN",
+          "rank": 8030,
+          "translation_cs": "kovalentní vazba",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "catalizzatore",
+          "pos": "NOUN",
+          "rank": 8031,
+          "translation_cs": "katalyzátor",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "numero di ossidazione",
+          "pos": "NOUN",
+          "rank": 8032,
+          "translation_cs": "oxidační číslo",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "solubilità",
+          "pos": "NOUN",
+          "rank": 8033,
+          "translation_cs": "rozpustnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "titolazione",
+          "pos": "NOUN",
+          "rank": 8034,
+          "translation_cs": "titrace",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "biology": {
+      "de": [
+        {
+          "lemma": "Zellmembran",
+          "pos": "NOUN",
+          "rank": 8035,
+          "translation_cs": "buněčná membrána",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Genexpression",
+          "pos": "NOUN",
+          "rank": 8036,
+          "translation_cs": "genová exprese",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "natürliche Selektion",
+          "pos": "NOUN",
+          "rank": 8037,
+          "translation_cs": "přírodní výběr",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Mitochondrium",
+          "pos": "NOUN",
+          "rank": 8038,
+          "translation_cs": "mitochondrie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Enzym",
+          "pos": "NOUN",
+          "rank": 8039,
+          "translation_cs": "enzym",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "cell membrane",
+          "pos": "NOUN",
+          "rank": 8029,
+          "translation_cs": "buněčná membrána",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "gene expression",
+          "pos": "NOUN",
+          "rank": 8030,
+          "translation_cs": "genová exprese",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "natural selection",
+          "pos": "NOUN",
+          "rank": 8031,
+          "translation_cs": "přírodní výběr",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mitochondrion",
+          "pos": "NOUN",
+          "rank": 8032,
+          "translation_cs": "mitochondrie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "enzyme",
+          "pos": "NOUN",
+          "rank": 4679,
+          "translation_cs": "enzym",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "membrane cellulaire",
+          "pos": "NOUN",
+          "rank": 8031,
+          "translation_cs": "buněčná membrána",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "expression génétique",
+          "pos": "NOUN",
+          "rank": 8032,
+          "translation_cs": "genová exprese",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "sélection naturelle",
+          "pos": "NOUN",
+          "rank": 8033,
+          "translation_cs": "přírodní výběr",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mitochondrie",
+          "pos": "NOUN",
+          "rank": 8034,
+          "translation_cs": "mitochondrie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "enzyme",
+          "pos": "NOUN",
+          "rank": 8035,
+          "translation_cs": "enzym",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "membrana cellulare",
+          "pos": "NOUN",
+          "rank": 8035,
+          "translation_cs": "buněčná membrána",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "espressione genica",
+          "pos": "NOUN",
+          "rank": 8036,
+          "translation_cs": "genová exprese",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "selezione naturale",
+          "pos": "NOUN",
+          "rank": 8037,
+          "translation_cs": "přírodní výběr",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mitocondrio",
+          "pos": "NOUN",
+          "rank": 8038,
+          "translation_cs": "mitochondrie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "enzima",
+          "pos": "NOUN",
+          "rank": 8039,
+          "translation_cs": "enzym",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "physics": {
+      "de": [
+        {
+          "lemma": "Impuls",
+          "pos": "NOUN",
+          "rank": 3408,
+          "translation_cs": "hybnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Wellenlänge",
+          "pos": "NOUN",
+          "rank": 7061,
+          "translation_cs": "vlnová délka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "elektrische Feld",
+          "pos": "NOUN",
+          "rank": 8040,
+          "translation_cs": "elektrické pole",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Drehmoment",
+          "pos": "NOUN",
+          "rank": 8041,
+          "translation_cs": "moment síly",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Lichtbrechung",
+          "pos": "NOUN",
+          "rank": 8042,
+          "translation_cs": "lom světla",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "momentum",
+          "pos": "NOUN",
+          "rank": 4484,
+          "translation_cs": "hybnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "wavelength",
+          "pos": "NOUN",
+          "rank": 7383,
+          "translation_cs": "vlnová délka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "electric field",
+          "pos": "NOUN",
+          "rank": 8033,
+          "translation_cs": "elektrické pole",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "torque",
+          "pos": "NOUN",
+          "rank": 6281,
+          "translation_cs": "moment síly",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "refraction",
+          "pos": "NOUN",
+          "rank": 8034,
+          "translation_cs": "lom světla",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "quantité de mouvement",
+          "pos": "NOUN",
+          "rank": 8036,
+          "translation_cs": "hybnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "longueur d'onde",
+          "pos": "NOUN",
+          "rank": 8037,
+          "translation_cs": "vlnová délka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "champ électrique",
+          "pos": "NOUN",
+          "rank": 8038,
+          "translation_cs": "elektrické pole",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "moment de force",
+          "pos": "NOUN",
+          "rank": 8039,
+          "translation_cs": "moment síly",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "réfraction",
+          "pos": "NOUN",
+          "rank": 8040,
+          "translation_cs": "lom světla",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "quantità di moto",
+          "pos": "NOUN",
+          "rank": 8040,
+          "translation_cs": "hybnost",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "lunghezza d'onda",
+          "pos": "NOUN",
+          "rank": 8041,
+          "translation_cs": "vlnová délka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "campo elettrico",
+          "pos": "NOUN",
+          "rank": 8042,
+          "translation_cs": "elektrické pole",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "momento torcente",
+          "pos": "NOUN",
+          "rank": 8043,
+          "translation_cs": "moment síly",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "rifrazione",
+          "pos": "NOUN",
+          "rank": 8044,
+          "translation_cs": "lom světla",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "history": {
+      "de": [
+        {
+          "lemma": "Primärquelle",
+          "pos": "NOUN",
+          "rank": 8043,
+          "translation_cs": "primární pramen",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "industrielle Revolution",
+          "pos": "NOUN",
+          "rank": 8044,
+          "translation_cs": "průmyslová revoluce",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "archäologische Fund",
+          "pos": "NOUN",
+          "rank": 8045,
+          "translation_cs": "archeologický nález",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mündliche Geschichte",
+          "pos": "NOUN",
+          "rank": 8046,
+          "translation_cs": "ústní historie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Aufklärung",
+          "pos": "NOUN",
+          "rank": 8047,
+          "translation_cs": "osvícenství",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "primary source",
+          "pos": "NOUN",
+          "rank": 8035,
+          "translation_cs": "primární pramen",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Industrial Revolution",
+          "pos": "NOUN",
+          "rank": 8036,
+          "translation_cs": "průmyslová revoluce",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "archaeological find",
+          "pos": "NOUN",
+          "rank": 8037,
+          "translation_cs": "archeologický nález",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "oral history",
+          "pos": "NOUN",
+          "rank": 8038,
+          "translation_cs": "ústní historie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "enlightenment",
+          "pos": "NOUN",
+          "rank": 6159,
+          "translation_cs": "osvícenství",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "source primaire",
+          "pos": "NOUN",
+          "rank": 8041,
+          "translation_cs": "primární pramen",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "révolution industrielle",
+          "pos": "NOUN",
+          "rank": 8042,
+          "translation_cs": "průmyslová revoluce",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "découverte archéologique",
+          "pos": "NOUN",
+          "rank": 8043,
+          "translation_cs": "archeologický nález",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "histoire orale",
+          "pos": "NOUN",
+          "rank": 8044,
+          "translation_cs": "ústní historie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "siècle des Lumières",
+          "pos": "NOUN",
+          "rank": 8045,
+          "translation_cs": "osvícenství",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "fonte primaria",
+          "pos": "NOUN",
+          "rank": 8045,
+          "translation_cs": "primární pramen",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "rivoluzione industriale",
+          "pos": "NOUN",
+          "rank": 8046,
+          "translation_cs": "průmyslová revoluce",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "reperto archeologico",
+          "pos": "NOUN",
+          "rank": 8047,
+          "translation_cs": "archeologický nález",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "storia orale",
+          "pos": "NOUN",
+          "rank": 8048,
+          "translation_cs": "ústní historie",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "illuminismo",
+          "pos": "NOUN",
+          "rank": 8049,
+          "translation_cs": "osvícenství",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "woodworking": {
+      "de": [
+        {
+          "lemma": "Zapfenverbindung",
+          "pos": "NOUN",
+          "rank": 8048,
+          "translation_cs": "čepový spoj",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Faserrichtung",
+          "pos": "NOUN",
+          "rank": 8049,
+          "translation_cs": "směr vláken dřeva",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Stecheisen",
+          "pos": "NOUN",
+          "rank": 8050,
+          "translation_cs": "dláto",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Schraubzwinge",
+          "pos": "NOUN",
+          "rank": 8051,
+          "translation_cs": "svěrka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Sperrholz",
+          "pos": "NOUN",
+          "rank": 8052,
+          "translation_cs": "překližka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "mortise-and-tenon joint",
+          "pos": "NOUN",
+          "rank": 8039,
+          "translation_cs": "čepový spoj",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "grain direction",
+          "pos": "NOUN",
+          "rank": 8040,
+          "translation_cs": "směr vláken dřeva",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "chisel",
+          "pos": "NOUN",
+          "rank": 8041,
+          "translation_cs": "dláto",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "clamp",
+          "pos": "NOUN",
+          "rank": 7331,
+          "translation_cs": "svěrka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "plywood",
+          "pos": "NOUN",
+          "rank": 8042,
+          "translation_cs": "překližka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "assemblage à tenon et mortaise",
+          "pos": "NOUN",
+          "rank": 8046,
+          "translation_cs": "čepový spoj",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "sens du fil",
+          "pos": "NOUN",
+          "rank": 8047,
+          "translation_cs": "směr vláken dřeva",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "ciseau à bois",
+          "pos": "NOUN",
+          "rank": 8048,
+          "translation_cs": "dláto",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "serre-joint",
+          "pos": "NOUN",
+          "rank": 8049,
+          "translation_cs": "svěrka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "contreplaqué",
+          "pos": "NOUN",
+          "rank": 8050,
+          "translation_cs": "překližka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "incastro a tenone e mortasa",
+          "pos": "NOUN",
+          "rank": 8050,
+          "translation_cs": "čepový spoj",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "direzione della fibra",
+          "pos": "NOUN",
+          "rank": 8051,
+          "translation_cs": "směr vláken dřeva",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "scalpello",
+          "pos": "NOUN",
+          "rank": 8052,
+          "translation_cs": "dláto",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "morsetto",
+          "pos": "NOUN",
+          "rank": 8053,
+          "translation_cs": "svěrka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "compensato",
+          "pos": "NOUN",
+          "rank": 8054,
+          "translation_cs": "překližka",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "criminology": {
+      "de": [
+        {
+          "lemma": "Unschuldsvermutung",
+          "pos": "NOUN",
+          "rank": 8053,
+          "translation_cs": "presumpce neviny",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Beweismittelkette",
+          "pos": "NOUN",
+          "rank": 8054,
+          "translation_cs": "řetězec předání důkazů",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Fingerabdruck",
+          "pos": "NOUN",
+          "rank": 8055,
+          "translation_cs": "otisk prstu",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Zeugenaussage",
+          "pos": "NOUN",
+          "rank": 8056,
+          "translation_cs": "svědecká výpověď",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "kriminaltechnische Untersuchung",
+          "pos": "NOUN",
+          "rank": 8057,
+          "translation_cs": "kriminalistická analýza",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "presumption of innocence",
+          "pos": "NOUN",
+          "rank": 8043,
+          "translation_cs": "presumpce neviny",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "chain of custody",
+          "pos": "NOUN",
+          "rank": 8044,
+          "translation_cs": "řetězec předání důkazů",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "fingerprint",
+          "pos": "NOUN",
+          "rank": 7104,
+          "translation_cs": "otisk prstu",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "witness statement",
+          "pos": "NOUN",
+          "rank": 8045,
+          "translation_cs": "svědecká výpověď",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "forensic analysis",
+          "pos": "NOUN",
+          "rank": 8046,
+          "translation_cs": "kriminalistická analýza",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "présomption d'innocence",
+          "pos": "NOUN",
+          "rank": 8051,
+          "translation_cs": "presumpce neviny",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "chaîne de traçabilité",
+          "pos": "NOUN",
+          "rank": 8052,
+          "translation_cs": "řetězec předání důkazů",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "empreinte digitale",
+          "pos": "NOUN",
+          "rank": 8053,
+          "translation_cs": "otisk prstu",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "témoignage",
+          "pos": "NOUN",
+          "rank": 1752,
+          "translation_cs": "svědecká výpověď",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "analyse criminalistique",
+          "pos": "NOUN",
+          "rank": 8054,
+          "translation_cs": "kriminalistická analýza",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "presunzione d'innocenza",
+          "pos": "NOUN",
+          "rank": 8055,
+          "translation_cs": "presumpce neviny",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "catena di custodia",
+          "pos": "NOUN",
+          "rank": 8056,
+          "translation_cs": "řetězec předání důkazů",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "impronta digitale",
+          "pos": "NOUN",
+          "rank": 8057,
+          "translation_cs": "otisk prstu",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "testimonianza",
+          "pos": "NOUN",
+          "rank": 1715,
+          "translation_cs": "svědecká výpověď",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "analisi forense",
+          "pos": "NOUN",
+          "rank": 8058,
+          "translation_cs": "kriminalistická analýza",
+          "content_flags": [
+            "violence"
+          ],
+          "review_status": "unreviewed"
+        }
+      ]
+    },
+    "street-slang": {
+      "de": [
+        {
+          "lemma": "cringe",
+          "pos": "",
+          "rank": 8058,
+          "translation_cs": "trapný (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "entspannt",
+          "pos": "",
+          "rank": 8059,
+          "translation_cs": "v pohodě (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mega",
+          "pos": "",
+          "rank": 8060,
+          "translation_cs": "úplně skvělý (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "Kumpel",
+          "pos": "NOUN",
+          "rank": 2458,
+          "translation_cs": "kámoš (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "feiern",
+          "pos": "VERB",
+          "rank": 642,
+          "translation_cs": "moc se mi to líbí (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "en": [
+        {
+          "lemma": "cringe",
+          "pos": "VERB",
+          "rank": 6826,
+          "translation_cs": "trapný (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "chill",
+          "pos": "NOUN",
+          "rank": 2824,
+          "translation_cs": "v pohodě (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "awesome",
+          "pos": "ADJ",
+          "rank": 1222,
+          "translation_cs": "úplně skvělý (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mate",
+          "pos": "NOUN",
+          "rank": 2247,
+          "translation_cs": "kámoš (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "love it",
+          "pos": "",
+          "rank": 8047,
+          "translation_cs": "moc se mi to líbí (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "fr": [
+        {
+          "lemma": "gênant",
+          "pos": "ADJ",
+          "rank": 4296,
+          "translation_cs": "trapný (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "tranquille",
+          "pos": "ADJ",
+          "rank": 1779,
+          "translation_cs": "v pohodě (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "génial",
+          "pos": "ADJ",
+          "rank": 1775,
+          "translation_cs": "úplně skvělý (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "pote",
+          "pos": "NOUN",
+          "rank": 1407,
+          "translation_cs": "kámoš (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "kiffer",
+          "pos": "",
+          "rank": 8055,
+          "translation_cs": "moc se mi to líbí (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ],
+      "it": [
+        {
+          "lemma": "imbarazzante",
+          "pos": "ADJ",
+          "rank": 3065,
+          "translation_cs": "trapný (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "tranquillo",
+          "pos": "ADJ",
+          "rank": 1040,
+          "translation_cs": "v pohodě (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "mitico",
+          "pos": "ADJ",
+          "rank": 5077,
+          "translation_cs": "úplně skvělý (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "amico",
+          "pos": "NOUN",
+          "rank": 80,
+          "translation_cs": "kámoš (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        },
+        {
+          "lemma": "spacca",
+          "pos": "",
+          "rank": 8059,
+          "translation_cs": "moc se mi to líbí (hovorově)",
+          "content_flags": [],
+          "review_status": "unreviewed"
+        }
+      ]
+    }
+  }
+}

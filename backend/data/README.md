@@ -346,3 +346,12 @@ until a teacher or qualified reviewer approves them. Adding a unit is additive a
 stable unit ID, so importing a new pack preserves learner progress. Each unit has a short
 `summary` for discovery and an `objective` describing an observable outcome; older packs may omit
 `objective`, in which case the importer reuses the summary.
+
+## C1 and specialist review drafts
+
+The [C1 review packs](c1/README.md) add 3,000 candidates per language at proposed
+ranks 5001–8000. The [specialist starter packs](specialized/README.md) group 70
+concepts across four languages by 14 interests. Both are explicitly unreviewed
+and outside the default seed glob; consult their review/import instructions.
+The app now labels 8,000 words as its optional C1 vocabulary milestone, without
+claiming CEFR certification. No existing ranks or progress are changed.
