@@ -2055,3 +2055,13 @@ Vlad approves a push.
 **Implemented Solution:** → or N goes to the next line, ← or B to the previous one, and 1-9 jump to a line when it exists. Esc ends whatever is running: a recording (kept, as with R), an echo round (via its run token), and playback. The handler now uses isTypingTarget and respects defaultPrevented, so arrows inside the scene select still change the scene. Both nav buttons show their key on desktop, and the key legend lists the new keys.
 
 **Verification:** s96.js (1280px, fake mic, stubbed audio): →→ gives 3/7, B gives 2/7, ← gives 1/7, 5 gives 5/7, and 9 is ignored on a 7-line scene. A during the speak step followed by Esc leaves the echo button idle and the record button back to Nahrát. ArrowDown in the focused select switches to Moje rodina (1/8). No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 97/120 | Page: [/shadowing] (Page Cycle 7/15)
+
+**Summary:** offer true shadowing: speak along with the model
+
+**Observed Problem:** The page is called Stínování, but every mode was echo practice: listen first, then repeat. Shadowing proper, speaking over the model as it plays, trains rhythm and linking in a way delayed repetition does not, and nothing on the page allowed it.
+
+**Implemented Solution:** The echo round now has two modes. 'Po vzoru' is the existing listen, repeat and compare flow. 'Současně se vzorem' starts recording first, so the first syllable is not cut, plays the model under it, stops 700 ms after the model ends, then plays the model followed by the recording. The mode is remembered per device in localStorage (read after mount, so SSR is unaffected; storage failures fall back to the default). A note says the mode needs headphones, otherwise the microphone records the model too.
+
+**Verification:** s97.js (fake mic, stubbed 1.5 s model): the headphones note is shown. Steps: 'Mluv současně se vzorem…' at 19 ms, compare at 2326 ms (1.5 s model + 0.7 s tail), idle at 6474 ms. The wave caption reads 'Vzor 1.5 s · ty 1.6 s'. After a reload the mode is still selected. No console errors. Typecheck, build, ruff passed.

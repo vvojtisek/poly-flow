@@ -139,7 +139,25 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const [noModel, setNoModel] = useState(false);
   const urls = useRef<string[]>([]);
   // Echo round: listen, record for a window sized to the model, then hear both. null = off.
-  const [echo, setEcho] = useState<null | "listen" | "speak" | "compare">(null);
+  const [echo, setEcho] = useState<null | "listen" | "speak" | "together" | "compare">(null);
+  // "after": classic echo (listen, then repeat). "together": speak over the model as it plays,
+  // the shadowing technique proper; needs headphones, or the microphone records the model too.
+  const [echoMode, setEchoModeState] = useState<"after" | "together">("after");
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem("polyflow.shadow.echoMode") === "together") setEchoModeState("together");
+    } catch {
+      /* storage blocked: keep the default */
+    }
+  }, []);
+  function setEchoMode(value: "after" | "together") {
+    setEchoModeState(value);
+    try {
+      window.localStorage.setItem("polyflow.shadow.echoMode", value);
+    } catch {
+      /* per-device convenience only */
+    }
+  }
   const echoPending = useRef(false);
   const echoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const echoRun = useRef(0);
@@ -226,6 +244,17 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const runEcho = useCallback(async () => {
     if (!modelUrl || recording || echo) return;
     const run = ++echoRun.current;
+    if (echoMode === "together") {
+      // Record first so the learner's first syllable is not cut, then play the model under it.
+      setEcho("together");
+      echoPending.current = true;
+      await rec.start();
+      if (run !== echoRun.current) return;
+      await playToEnd(modelUrl);
+      if (run !== echoRun.current) return;
+      echoTimer.current = setTimeout(() => rec.stop(), 700); // a short tail for the last word
+      return;
+    }
     setEcho("listen");
     await playToEnd(modelUrl);
     if (run !== echoRun.current) return; // the learner moved to another line meanwhile
@@ -233,7 +262,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     echoPending.current = true;
     await rec.start();
     echoTimer.current = setTimeout(() => rec.stop(), echoWindowMs(model?.seconds));
-  }, [modelUrl, recording, echo, rec, model?.seconds]);
+  }, [modelUrl, recording, echo, rec, model?.seconds, echoMode]);
 
   // The echo recording arrived: play the model and then the learner, and end the round.
   useEffect(() => {
@@ -406,6 +435,22 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         {echo ? t.echoSteps[echo] : t.echo}
         <span className="hidden lg:inline"><Kbd>A</Kbd></span>
       </button>
+      <div role="radiogroup" aria-label={t.echoModeLabel} className="-mt-2 flex flex-wrap items-center justify-center gap-1 text-xs">
+        {(["after", "together"] as const).map((value) => (
+          <button
+            key={value}
+            type="button"
+            role="radio"
+            aria-checked={echoMode === value}
+            disabled={Boolean(echo)}
+            onClick={() => setEchoMode(value)}
+            className={`rounded-full px-2.5 py-1 font-medium disabled:opacity-50 ${echoMode === value ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900" : "bg-slate-100 dark:bg-slate-800"}`}
+          >
+            {t.echoModes[value]}
+          </button>
+        ))}
+      </div>
+      {echoMode === "together" && <p className="-mt-2 text-center text-xs text-slate-500">{t.headphones}</p>}
       <p className="sr-only" aria-live="polite">{echo ? t.echoSteps[echo] : ""}</p>
       <div className="flex justify-between gap-2">
         <button type="button" onClick={() => go(-1)} className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
