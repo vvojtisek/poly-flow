@@ -2776,6 +2776,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-02-minimalist",
+   "level": "B2",
+   "title": "Le minimaliste",
+   "title_cs": "Minimalista a regály",
+   "lines": [
+    {
+     "text": "Léon venait de lire un livre sur le minimalisme et a décidé de simplifier radicalement sa vie.",
+     "cs": "Leon právě přečetl knihu o minimalismu a rozhodl se radikálně zjednodušit svůj život."
+    },
+    {
+     "text": "Il a vendu la télévision, donné la moitié de ses vêtements et jeté tous ses livres sauf celui sur le minimalisme.",
+     "cs": "Prodal televizi, polovinu oblečení rozdal a vyhodil všechny knihy kromě té o minimalismu."
+    },
+    {
+     "speaker": "Léon",
+     "text": "Moins de biens, c'est plus de liberté.",
+     "cs": "Méně majetku znamená více svobody."
+    },
+    {
+     "text": "Puis il a remarqué que son appartement était soudain vide et résonnait. Cet espace libre avait besoin d'ordre : des étagères !",
+     "cs": "Pak si všiml, že je jeho byt najednou prázdný a ozývá se v něm. Volný prostor potřeboval pořádek: regály!"
+    },
+    {
+     "text": "Il a commandé un système d'étagères minimaliste en chêne, des boîtes assorties, une étiqueteuse et un livre sur l'organisation du rien.",
+     "cs": "Objednal minimalistický regálový systém z dubu, sladěné boxy, štítkovač a knihu o organizování ničeho."
+    },
+    {
+     "text": "La livraison a rempli deux pièces. Pour les emballages, il a loué un garde-meuble.",
+     "cs": "Zásilka zaplnila dva pokoje. Na obaly si pronajal skladový prostor."
+    },
+    {
+     "speaker": "Amie",
+     "text": "Léon, tu paies maintenant un loyer pour une pièce pleine de cartons. Et que contiennent les cartons ? L'emballage de ton rangement.",
+     "cs": "Leone, teď platíš nájem za místnost plnou krabic. A co je v těch krabicích? Obaly od tvého pořádku."
+    },
+    {
+     "speaker": "Léon",
+     "text": "Ce n'est pas de l'accumulation. C'est un investissement dans mon vide.",
+     "cs": "To není hromadění. To je investice do mé prázdnoty."
+    },
+    {
+     "text": "À la fin du mois, il possédait plus d'objets qu'avant, mais chacun était parfaitement étiqueté.",
+     "cs": "Na konci měsíce měl víc předmětů než předtím, ale všechny byly dokonale popsané."
+    },
+    {
+     "speaker": "Amie",
+     "text": "Et quand vas-tu commencer à posséder moins ?",
+     "cs": "A kdy začneš vlastnit méně?"
+    },
+    {
+     "speaker": "Léon",
+     "text": "Dès que j'aurai le bon système pour ça.",
+     "cs": "Jakmile budu mít správný systém, jak na to."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "accumulation",
+     "cs": "hromadění"
+    },
+    {
+     "word": "étiqueté",
+     "cs": "označený"
+    },
+    {
+     "word": "garde-meuble",
+     "cs": "sklad nábytku"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que fait Léon d'abord, après avoir lu le livre ?",
+     "options": [
+      "Il vend et donne beaucoup de choses.",
+      "Il achète une nouvelle étagère.",
+      "Il déménage."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Comment l'histoire se termine-t-elle ?",
+     "options": [
+      "Léon possède plus qu'avant.",
+      "Léon vit sans aucun bien.",
+      "Léon rend le garde-meuble."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -2776,6 +2776,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-02-minimalist",
+   "level": "B2",
+   "title": "The Minimalist",
+   "title_cs": "Minimalista a regály",
+   "lines": [
+    {
+     "text": "Leon had just read a book about minimalism and decided to simplify his life radically.",
+     "cs": "Leon právě přečetl knihu o minimalismu a rozhodl se radikálně zjednodušit svůj život."
+    },
+    {
+     "text": "He sold his television, gave away half of his clothes and threw out all his books except the one about minimalism.",
+     "cs": "Prodal televizi, polovinu oblečení rozdal a vyhodil všechny knihy kromě té o minimalismu."
+    },
+    {
+     "speaker": "Leon",
+     "text": "Fewer possessions mean more freedom.",
+     "cs": "Méně majetku znamená více svobody."
+    },
+    {
+     "text": "Then he noticed that his flat was suddenly empty and echoing. The free space needed order: shelves!",
+     "cs": "Pak si všiml, že je jeho byt najednou prázdný a ozývá se v něm. Volný prostor potřeboval pořádek: regály!"
+    },
+    {
+     "text": "He ordered a minimalist oak shelving system, matching boxes, a label maker and a book about organising nothing.",
+     "cs": "Objednal minimalistický regálový systém z dubu, sladěné boxy, štítkovač a knihu o organizování ničeho."
+    },
+    {
+     "text": "The delivery filled two rooms. For the packaging, he rented a storage unit.",
+     "cs": "Zásilka zaplnila dva pokoje. Na obaly si pronajal skladový prostor."
+    },
+    {
+     "speaker": "Friend",
+     "text": "Leon, you are now paying rent for a room full of cardboard boxes. And what is in the boxes? The packaging of your tidiness.",
+     "cs": "Leone, teď platíš nájem za místnost plnou krabic. A co je v těch krabicích? Obaly od tvého pořádku."
+    },
+    {
+     "speaker": "Leon",
+     "text": "It isn't hoarding. It's an investment in my emptiness.",
+     "cs": "To není hromadění. To je investice do mé prázdnoty."
+    },
+    {
+     "text": "By the end of the month, he owned more objects than before, but every one was perfectly labelled.",
+     "cs": "Na konci měsíce měl víc předmětů než předtím, ale všechny byly dokonale popsané."
+    },
+    {
+     "speaker": "Friend",
+     "text": "And when will you start owning less?",
+     "cs": "A kdy začneš vlastnit méně?"
+    },
+    {
+     "speaker": "Leon",
+     "text": "As soon as I have the right system for it.",
+     "cs": "Jakmile budu mít správný systém, jak na to."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "possessions",
+     "cs": "majetek"
+    },
+    {
+     "word": "hoarding",
+     "cs": "hromadění"
+    },
+    {
+     "word": "labelled",
+     "cs": "označený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Leon do first after reading the book?",
+     "options": [
+      "He sells and gives away many things.",
+      "He buys a new shelf.",
+      "He moves house."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How does the story end?",
+     "options": [
+      "Leon owns more than before.",
+      "Leon lives with no possessions.",
+      "Leon gives back the storage unit."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
