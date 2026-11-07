@@ -13,6 +13,7 @@ from app.domain import voices
 from app.domain.enums import Language
 from app.domain.voices import Voice
 from app.main import app
+from app.services.library import story_file as library_file_of
 from app.services.rate_limit import MemoryAttemptLimiter
 from app.services.tts import VOICES, Tts, TtsUnavailable, get_tts
 from tests.helpers import PARENT, Clock, csrf, login, make_child, setup_parent
@@ -337,3 +338,16 @@ async def test_voice_list_and_sample(db, client, tts, extra_voice):
     assert csrf(parent)
     client.cookies.clear()
     assert (await client.get("/api/v1/voices")).status_code == 401
+
+
+async def test_library_story_lines_are_spoken_through_the_gate(db, client, tts):
+    await setup_parent(client)
+    first = library_file_of(Language.DE).stories[0]
+    base = f"/api/v1/stories/library/{first.slug}/audio"
+    r = await client.get(base, params={"line": 1, "language": "de"})
+    assert r.status_code == 200 and r.content == WAV
+    assert tts.spoken[-1] == ("de", first.lines[1].text)
+    assert (await client.get(base, params={"line": 39, "language": "de"})).status_code == 404
+    assert (await client.get(base, params={"line": 41, "language": "de"})).status_code == 422
+    r = await client.get("/api/v1/stories/library/zz-none/audio", params={"line": 0})
+    assert r.status_code == 404

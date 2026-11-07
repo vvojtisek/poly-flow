@@ -1,12 +1,14 @@
 "use client";
 
-import { ArrowLeft, BookOpenText, Languages, Library, MessagesSquare } from "lucide-react";
+import { ArrowLeft, BookOpenText, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice } from "@/components/ui";
-import { getLibraryStory, getStoryLibrary, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
+import { clipSrc, playToEnd, stop } from "@/lib/audio";
+import { getLibraryStory, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -18,6 +20,46 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [failed, setFailed] = useState(false);
   const [showCs, setShowCs] = useState(false);
+  // Reading aloud: every line in turn, the current one highlighted. null = not reading.
+  const [reading, setReading] = useState<number | null>(null);
+  const [noAudio, setNoAudio] = useState(false);
+  const run = useRef(0);
+  const readFrom = useCallback(
+    async (start: number) => {
+      if (!story) return;
+      const me = ++run.current;
+      setNoAudio(false);
+      for (let i = start; i < story.lines.length; i++) {
+        if (me !== run.current) return;
+        const url = libraryAudioUrl(language, slug, i);
+        try {
+          await clipSrc(url); // fails fast when speech is unavailable, instead of skipping lines
+        } catch {
+          if (me === run.current) {
+            setNoAudio(true);
+            setReading(null);
+          }
+          return;
+        }
+        if (me !== run.current) return;
+        setReading(i);
+        document.querySelector(`[data-line="${i}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        await playToEnd(url);
+      }
+      if (me === run.current) setReading(null);
+    },
+    [story, language, slug],
+  );
+  const stopReading = useCallback(() => {
+    run.current += 1;
+    stop();
+    setReading(null);
+  }, []);
+  // Leaving the story stops its voice.
+  useEffect(() => () => {
+    run.current += 1;
+    stop();
+  }, []);
   useEffect(() => {
     let live = true;
     setStory(null);
@@ -46,20 +88,41 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
             <h2 lang={language} className="text-2xl font-bold">{story.title}</h2>
             <p className="text-sm text-slate-500">{story.title_cs}</p>
           </header>
-          <button
-            type="button"
-            onClick={() => setShowCs((v) => !v)}
-            aria-pressed={showCs}
-            className="inline-flex min-h-11 items-center gap-2 self-start rounded-xl bg-slate-100 px-3 py-2 text-sm font-medium dark:bg-slate-800"
-          >
-            <Languages className="size-4" aria-hidden /> {showCs ? t.hideCs : t.showCs}
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            {reading === null ? (
+              <button type="button" onClick={() => void readFrom(0)} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600">
+                <Play className="size-4" aria-hidden /> {t.readAloud}
+              </button>
+            ) : (
+              <button type="button" onClick={stopReading} className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-rose-600 px-4 py-2 text-sm font-semibold text-white">
+                <Square className="size-4" aria-hidden /> {t.stopReading}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setShowCs((v) => !v)}
+              aria-pressed={showCs}
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-sm font-medium dark:bg-slate-800"
+            >
+              <Languages className="size-4" aria-hidden /> {showCs ? t.hideCs : t.showCs}
+            </button>
+            <SlowToggle />
+          </div>
+          {noAudio && <Notice>{t.noAudio}</Notice>}
           <ol className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
             {story.lines.map((line, i) => (
-              <li key={i} className="flex flex-col gap-0.5">
-                {line.speaker && <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">{line.speaker}</span>}
-                <span lang={language} className="text-lg leading-relaxed">{line.text}</span>
-                {showCs && <span className="text-sm text-slate-500">{line.cs}</span>}
+              <li
+                key={i}
+                data-line={i}
+                aria-current={reading === i ? "true" : undefined}
+                className={`flex items-start gap-2 rounded-xl px-2 py-1 transition-colors ${reading === i ? "bg-brand-500/10" : ""}`}
+              >
+                <PlayButton url={libraryAudioUrl(language, slug, i)} size="sm" label={t.playLine(i + 1)} />
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  {line.speaker && <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">{line.speaker}</span>}
+                  <span lang={language} className="text-lg leading-relaxed">{line.text}</span>
+                  {showCs && <span className="text-sm text-slate-500">{line.cs}</span>}
+                </span>
               </li>
             ))}
           </ol>

@@ -313,3 +313,24 @@ async def line_audio(
     except LearningError as exc:
         raise HTTPException(exc.status, exc.code) from exc
     return await _speech(tts, story.language, text, _chosen_voice(auth.acting, story.language))
+
+
+@router.get("/library/{slug}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def library_line_audio(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    line: Annotated[int, Query(ge=0, le=40)],
+    language: Annotated[Language | None, Query()] = None,
+) -> FileResponse:
+    """One line of a library story read aloud, through the same gate as the text itself."""
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    lines = lib.stories[0].lines
+    if line >= len(lines):
+        raise HTTPException(404, "unknown_line")
+    return await _speech(tts, lang, lines[line].text, _chosen_voice(auth.acting, lang))

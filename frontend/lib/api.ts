@@ -665,6 +665,8 @@ export interface LibraryStory {
   review_status: "unreviewed" | "reviewed";
 }
 export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
+export const libraryAudioUrl = (language: Language, slug: string, line: number) =>
+  `/api/v1/stories/library/${encodeURIComponent(slug)}/audio?language=${language}&line=${line}`;
 export const getLibraryStory = (language: Language, slug: string) =>
   api<LibraryStory>(`/api/v1/stories/library/${encodeURIComponent(slug)}?language=${language}`);
 
