@@ -339,7 +339,7 @@ export default function LessonPage() {
                     aria-checked={show === value}
                     onClick={() => setShow(value)}
                     disabled={value !== "all" && n === 0}
-                    className={`shrink-0 rounded-full px-3 py-1 text-sm font-medium disabled:opacity-40 ${show === value ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                    className={`shrink-0 rounded-full px-2 py-1 text-sm sm:px-3 font-medium disabled:opacity-40 ${show === value ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
                   >
                     {cs.lesson.shows[value]} {n}
                   </button>
@@ -378,16 +378,18 @@ export default function LessonPage() {
                       {units.map((unit) => (
                         <li key={unit.id}>
                           <Link href={`/grammar/${unit.id}`} className="flex h-full flex-col gap-2 rounded-xl border border-slate-200 p-3 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:border-slate-700">
-                            <span className="flex items-center justify-between gap-2">
-                              <strong>{unit.title}</strong>
-                              <span className="flex shrink-0 items-center gap-1 text-xs">
+                            {/* Title takes the full width; badges wrap under it on narrow screens
+                                instead of squeezing the title into a one-word column. */}
+                            <span className="flex flex-wrap items-start justify-between gap-x-2 gap-y-1">
+                              <strong className="min-w-0 flex-1 basis-40">{unit.title}</strong>
+                              <span className="flex shrink-0 flex-wrap items-center gap-1 text-xs">
                                 {tree.active_lesson_unit === unit.id && <span className="rounded-full bg-brand-500/15 px-2 py-0.5 font-semibold text-brand-700 dark:text-brand-100">{cs.lesson.openBadge}</span>}
                                 {unit.recent_errors > 0 && <span className="rounded-full bg-rose-100 px-2 py-0.5 font-semibold text-rose-800 dark:bg-rose-950 dark:text-rose-200">{cs.lesson.errorsBadge(unit.recent_errors)}</span>}
                                 {unit.due && <span className="rounded-full bg-amber-100 px-2 py-0.5 font-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-200">{cs.lesson.dueBadge}</span>}
                                 <span className="text-slate-500">{cs.grammar.status[unit.status]}</span>
                               </span>
                             </span>
-                            <span className="text-sm text-slate-600 dark:text-slate-300">{unit.summary}</span>
+                            <span className="line-clamp-2 text-sm text-slate-600 sm:line-clamp-none dark:text-slate-300">{unit.summary}</span>
                             {/* Many topics use the same sentence as summary and objective; say it once. */}
                             {unit.objective.trim() !== unit.summary.trim() && (
                               <span className="flex items-center gap-1 text-xs text-slate-500"><CheckCircle2 className="size-3" aria-hidden />{cs.lesson.objective(unit.objective)}</span>

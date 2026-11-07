@@ -1965,3 +1965,13 @@ Vlad approves a push.
 **Implemented Solution:** Levels without topics are left out of the disclosure list and named on one line, 'C1, C2: zatím bez připravených lekcí.', shown only in the unfiltered view. With no topics at all, only the no-content notice is shown, without a filter or levels. This removes the dead empty branches and two unused copy keys.
 
 **Verification:** l87.js: de shows level boxes A1-B2 and the line 'C1, C2: zatím bez připravených lekcí.'; the line is hidden under the Nové filter. With a routed tree that has no units: 0 level boxes, no filter radios (the 4 radios left are the language picker), and the notice is present. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 88/120 | Page: [/lesson] (Page Cycle 13/15)
+
+**Summary:** keep topic titles readable on phones
+
+**Observed Problem:** At 390px the status badges ('rozdělaná', '2 chyby', 'Prostudováno') sat in a non-shrinking column next to the topic title. 'Já jsem, ty jsi: sloveso sein' was squeezed to 68px and four lines, and other titles to about 145px. Every summary was printed in full, so the open A1 list of 15 cards ran about 2500px. The filter chips overflowed their row by 32px, which hid 'K ověření' behind a scroll.
+
+**Implemented Solution:** The card header now wraps: the title takes a 160px-basis flexible column, and the badges wrap underneath when they do not fit. Summaries are clamped to two lines below the sm breakpoint and shown in full from sm up. Filter chips use px-2 on phones and px-3 from sm.
+
+**Verification:** l88.js at 390px, before vs after: title widths changed from 68/260/147/145px to 298/260/260/298px. Sein title height went from 96 to 24px. Radiogroup scrollWidth went from 398 to 366 (equal to clientWidth). Full-page height went from 4056 to 4008px. ov.js /lesson: no overflowing elements. Typecheck, build, ruff passed.
