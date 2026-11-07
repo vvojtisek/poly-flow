@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, ArrowRight, Dumbbell, History, Layers, Lightbulb, Pin, PinOff, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowRight, Dumbbell, Layers, Lightbulb, Pin, PinOff, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ import { useAuth, useRequireMe } from "@/lib/auth";
 import { KeyHint } from "@/components/Kbd";
 import { cs, relativePast } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
-import { modesFor, readPinned, readRecent, readVisits, SKILLS, suggestModes, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
+import { modesFor, readPinned, readVisits, SKILLS, suggestModes, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
 const ERROR_ROUTE: Record<string, (language: Language) => string> = {
@@ -85,7 +85,6 @@ export default function PracticePage() {
   const { state } = useAuth();
   const [skills, setSkills] = useState<Skill[]>([]);
   useHotkeys(); // 1-9 open the visible cards in order, Enter opens today's tip
-  const [recent, setRecent] = useState<PracticeMode["id"][]>([]);
   const [pinned, setPinned] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
@@ -94,7 +93,6 @@ export default function PracticePage() {
   const [announce, setAnnounce] = useState("");
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
-  useEffect(() => setRecent(readRecent()), []);
   // The skill filter lives in the URL (?skill=listening,speaking), so it survives back navigation
   // from a practice mode and can be linked to.
   const [urlRead, setUrlRead] = useState(false);
@@ -136,8 +134,6 @@ export default function PracticePage() {
   const filtered = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const pinRank = (m: PracticeMode) => (pinned.includes(m.id) ? pinned.indexOf(m.id) : pinned.length + modes.indexOf(m));
   const shown = [...filtered].sort((a, b) => pinRank(a) - pinRank(b));
-  const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
-  const favorites = pinned.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const tips = suggestModes(modes, visits, (m) => !(m.needsWords && introduced === 0));
   const tip = tips.length ? tips[tipIndex % tips.length]! : null;
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
@@ -250,30 +246,6 @@ export default function PracticePage() {
               </>
             )}
           </section>
-        )}
-
-        {favorites.length > 0 && (
-          <section className="flex flex-wrap items-center gap-2" aria-label={t.pinned}>
-            <span className="flex items-center gap-1 text-sm font-medium text-slate-500"><Pin className="size-4" aria-hidden /> {t.pinned}:</span>
-            {favorites.map((m) => <Link key={m.id} href={m.href} className="inline-flex items-center gap-1.5 rounded-full border border-brand-500 bg-brand-500/10 px-3 py-1.5 text-sm font-semibold text-brand-700 dark:text-brand-50"><m.icon className="size-4" aria-hidden />{t.mode[m.id]?.title}</Link>)}
-          </section>
-        )}
-        {last.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="flex items-center gap-1 text-sm font-medium text-slate-500">
-              <History className="size-4" aria-hidden /> {t.recent}:
-            </span>
-            {last.map((m) => (
-              <Link
-                key={m.id}
-                href={m.href}
-                className="inline-flex items-center gap-1.5 rounded-full border border-brand-500/40 bg-brand-500/5 px-3 py-1.5 text-sm font-semibold text-brand-600 hover:bg-brand-500/10 dark:text-brand-50"
-              >
-                <m.icon className="size-4" aria-hidden />
-                {t.mode[m.id]?.title}
-              </Link>
-            ))}
-          </div>
         )}
 
         <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t.filter}>

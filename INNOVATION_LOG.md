@@ -1495,3 +1495,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx`: the grid now lists pinned modes first in pin order (then the usual order, after the skill filter), so a favourite keeps key 1, 2… Toggling a pin announces "Čísla je připnuté a ukazuje se první." / "… už není připnuté." through a polite live region. Copy in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pinned "Čísla", it became the first card, and pressing 1 opened `/numbers`.
+
+## Global Cycle 41/120 | Page: [/practice] (Page Cycle 11/15)
+
+**Summary:** drop the duplicate pinned and recent chip rows
+
+**Observed Problem:** After cycles 32 and 40 the hub said the same thing three times: a "Moje oblíbené" chip row, a "Naposledy" chip row, and the cards themselves (pinned first, each with its last-used date). On a phone the two rows pushed the grid further down.
+
+**Implemented Solution:** `app/practice/page.tsx` removes both chip rows and their state; pinned modes are visible as the first cards with an active pin button, and recency lives on each card. The dashboard keeps its own shortcut chips.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; no console errors on the 390 px render.
