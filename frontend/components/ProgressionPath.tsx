@@ -48,13 +48,32 @@ export function ProgressionPath({ progress }: { progress: ProgressOverview | nul
         {required.map((m, i) => {
           const complete = !!progress && progress.known >= m.rank;
           const current = i === nextIndex;
+          const band = progress?.by_band.find((b) => b.band === m.rank);
           return (
-          <li key={m.rank} className={`flex items-center justify-between gap-2 rounded-xl px-2 py-1.5 text-sm ${current ? "bg-brand-500/10 font-semibold" : ""}`}>
-            <span className="flex items-center gap-2">{complete ? <CheckCircle2 className="size-4 text-emerald-600" aria-hidden /> : current ? <Target className="size-4 text-brand-600" aria-hidden /> : <Circle className="size-4 text-slate-300" aria-hidden />}{cs.progression.milestones[m.key] ?? m.key}</span>
-            <span className="flex items-baseline gap-2 text-right tabular-nums text-slate-500">
-              {complete && <span className="text-xs text-emerald-700 dark:text-emerald-300">{cs.progression.completed}</span>}
-              {fmt.format(m.rank)} {cs.progression.words}
+          <li key={m.rank} className={`flex flex-col gap-1 rounded-xl px-2 py-1.5 text-sm ${current ? "bg-brand-500/10 font-semibold" : ""}`}>
+            <span className="flex items-center justify-between gap-2">
+              <span className="flex items-center gap-2">{complete ? <CheckCircle2 className="size-4 text-emerald-600" aria-hidden /> : current ? <Target className="size-4 text-brand-600" aria-hidden /> : <Circle className="size-4 text-slate-300" aria-hidden />}{cs.progression.milestones[m.key] ?? m.key}</span>
+              <span className="flex items-baseline gap-2 text-right tabular-nums text-slate-500">
+                {complete && <span className="text-xs text-emerald-700 dark:text-emerald-300">{cs.progression.completed}</span>}
+                {fmt.format(m.rank)} {cs.progression.words}
+              </span>
             </span>
+            {/* Known words inside this frequency band (ranks after the previous milestone). */}
+            {band && band.items > 0 && (band.known > 0 || current) && (
+              <span className="ml-6 flex items-center gap-2 text-xs font-normal text-slate-500">
+                <span
+                  className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"
+                  role="progressbar"
+                  aria-label={cs.progression.bandLabel(cs.progression.milestones[m.key] ?? m.key)}
+                  aria-valuenow={band.known}
+                  aria-valuemin={0}
+                  aria-valuemax={band.items}
+                >
+                  <span className="block h-full rounded-full bg-brand-500" style={{ width: `${Math.round((band.known / band.items) * 100)}%` }} />
+                </span>
+                <span className="tabular-nums">{fmt.format(band.known)} / {fmt.format(band.items)}</span>
+              </span>
+            )}
           </li>
           );
         })}

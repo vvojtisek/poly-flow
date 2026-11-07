@@ -1205,3 +1205,13 @@ Vlad approves a push.
 **Implemented Solution:** `TodayPlan` no longer renders its own button; it exports its step map and hands the loaded plan up via `onPlan`. The hero button in `app/page.tsx` is now the only primary action and the Enter target: resume an open lesson, otherwise the plan's first step (for example "Ověřit 12 slov"), otherwise a new lesson. The note under it switches between the ungraded-lesson note and a new graded-check note (`cs.dashboard.checkNote`), and the lesson preview from cycle 10 only appears when the action is a lesson.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; desktop screenshot shows one primary button with its Enter hint and the plan panel without a duplicate.
+
+## Global Cycle 12/120 | Page: [/] (Page Cycle 12/15)
+
+**Summary:** merge duplicated band bars into the milestone path
+
+**Observed Problem:** Vocabulary progress was shown twice on the dashboard: the Progress panel had six "≤ 100 … ≤ 5 000" bars and the "Tvoje cesta" panel listed the same six milestones again, plus a third "Další milník" line. A second panel called "Moje cesta" (rank path) made the two "cesta" titles indistinguishable.
+
+**Implemented Solution:** `components/ProgressCard.tsx` keeps the six counters and the grammar line; band bars and the next-milestone line are removed. `components/ProgressionPath.tsx` now shows each milestone's band fill (known / words in that band) as a thin labelled progressbar under the row, for the current band and any band with known words. The panel is renamed "Milníky slovní zásoby" in `lib/i18n/cs.ts`; the unused `nextMilestone` string is removed.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile dashboard shrinks from 4 317 px to 4 113 px with no console errors.

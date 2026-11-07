@@ -84,7 +84,8 @@ export const cs = {
     services: { postgres: "Databáze", redis: "Fronta úloh" } as Record<string, string>,
   },
   progression: {
-    title: "Tvoje cesta",
+    title: "Milníky slovní zásoby",
+    bandLabel: (name: string) => `Známá slova v pásmu ${name}`,
     words: "slov",
     completed: "hotovo",
     nextTarget: "Další cíl",
@@ -1303,7 +1304,6 @@ export const cs = {
     active: "Napíšu",
     due: "K ověření teď",
     mastered: "Zvládnutá",
-    nextMilestone: (n: number) => `Další milník: ${n.toLocaleString("cs-CZ")} slov`,
     grammarTopics: (done: number, total: number) => `Gramatika: ${done} z ${total} témat prošlo ověřením`,
     grammarNone: "Gramatika pro tento jazyk zatím nemá žádná témata.",
     available: (n: number) => `Ve slovníku je zatím ${n} slov tohoto jazyka.`,
