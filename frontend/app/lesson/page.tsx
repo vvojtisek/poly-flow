@@ -174,6 +174,7 @@ export default function LessonPage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const focusLevel = next?.kind === "new" ? next.level : next?.kind === "resume" ? next.unit.level : (NEXT[placement ?? badge ?? "pre-A1"] ?? "A1");
   const allUnits = tree?.levels.flatMap((section) => section.units) ?? [];
+  const emptyLevels = LEVELS.filter((level) => !tree?.levels.find((section) => section.level === level)?.units.length);
   // Scaffolding after a failed check: topics with recent check mistakes, worst first, pointing back
   // to the ungraded lesson (explanation, examples, and the missed exercises as remediation).
   const skip = next && next.kind !== "check" && next.kind !== "done" ? next.unit.id : null;
@@ -320,7 +321,8 @@ export default function LessonPage() {
           {introduced !== null && introduced > 0 && <Link href="/check" className="ml-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800"><RefreshCw className="size-4" aria-hidden />{cs.check.start}</Link>}
         </section>
 
-        {tree && (
+        {tree && !allUnits.length && <Notice>{cs.lesson.noGrammarContent}</Notice>}
+        {tree && allUnits.length > 0 && (
           <div className="flex flex-col gap-3">
             <div>
               <h2 className="text-lg font-bold">{cs.lesson.allLessons}</h2>
@@ -344,7 +346,7 @@ export default function LessonPage() {
                 );
               })}
             </div>
-            {LEVELS.map((level) => {
+            {LEVELS.filter((level) => !emptyLevels.includes(level)).map((level) => {
               const levelUnits = tree.levels.find((section) => section.level === level)?.units ?? [];
               const units = show === "all" ? levelUnits : levelUnits.filter(SHOW_TEST[show]);
               // A filter hides levels with no match instead of showing empty boxes.
@@ -364,17 +366,14 @@ export default function LessonPage() {
                       {level}
                     </span>
                     <span className="text-xs font-normal text-slate-500">
-                      {levelUnits.length ? cs.lesson.levelCoverage(levelUnits.filter((u) => u.status !== "new").length, levelUnits.length, levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length) : cs.lesson.notAvailable}
+                      {cs.lesson.levelCoverage(levelUnits.filter((u) => u.status !== "new").length, levelUnits.length, levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length)}
                     </span>
                   </h3>
-                  {levelUnits.length > 0 && (
-                    <div className="flex h-1.5 overflow-hidden rounded-full bg-slate-100 group-open:mb-3 dark:bg-slate-800" aria-hidden>
-                      <div className="bg-emerald-500" style={{ width: `${(levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length / levelUnits.length) * 100}%` }} />
-                      <div className="bg-sky-400" style={{ width: `${(levelUnits.filter((u) => u.status === "studied").length / levelUnits.length) * 100}%` }} />
-                    </div>
-                  )}
+                  <div className="flex h-1.5 overflow-hidden rounded-full bg-slate-100 group-open:mb-3 dark:bg-slate-800" aria-hidden>
+                    <div className="bg-emerald-500" style={{ width: `${(levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length / levelUnits.length) * 100}%` }} />
+                    <div className="bg-sky-400" style={{ width: `${(levelUnits.filter((u) => u.status === "studied").length / levelUnits.length) * 100}%` }} />
+                  </div>
                   </summary>
-                  {units.length ? (
                     <ul className="grid gap-2 md:grid-cols-2">
                       {units.map((unit) => (
                         <li key={unit.id}>
@@ -403,11 +402,11 @@ export default function LessonPage() {
                         </li>
                       ))}
                     </ul>
-                  ) : <p className="text-sm text-slate-500">{cs.lesson.levelNotImplemented}</p>}
                 </details>
               );
             })}
-            {!allUnits.length && <Notice>{cs.lesson.noGrammarContent}</Notice>}
+            {/* Levels without any topic yet are one honest line, not empty boxes to open. */}
+            {show === "all" && emptyLevels.length > 0 && <p className="px-1 text-sm text-slate-500">{cs.lesson.emptyLevels(emptyLevels.join(", "))}</p>}
           </div>
         )}
       </div>

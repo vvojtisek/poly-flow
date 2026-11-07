@@ -1955,3 +1955,13 @@ Vlad approves a push.
 **Implemented Solution:** Tree failure now shows a RetryNotice that refetches all four requests and says the vocabulary lesson still works. A failed estimate or progress request is tracked as partial: the estimate line says it could not be loaded, with a 'Načíst odhad úrovně znovu' button. Loading shows skeleton cards in the shape of the recommendation and vocabulary panels.
 
 **Verification:** l86.js with routed 500s: the alert shows the new text, and the vocabulary link is still present. Retry restores 6 level sections. The estimate line reads the failure text. The partial retry restores the real estimate and hides its button. l86b.js with a 3 s delay: 2 skeletons while loading, then 0. No console errors other than the forced 500s. Typecheck, build, ruff passed.
+
+## Global Cycle 87/120 | Page: [/lesson] (Page Cycle 12/15)
+
+**Summary:** show levels without topics as one line, and hide the list when a language has none
+
+**Observed Problem:** C1 and C2 have no grammar topics, but each was rendered as its own box that opened onto 'Pro tuto úroveň zatím nejsou připravené lekce'. A language with no grammar at all showed six such boxes plus a filter row with zero counts above the actual notice.
+
+**Implemented Solution:** Levels without topics are left out of the disclosure list and named on one line, 'C1, C2: zatím bez připravených lekcí.', shown only in the unfiltered view. With no topics at all, only the no-content notice is shown, without a filter or levels. This removes the dead empty branches and two unused copy keys.
+
+**Verification:** l87.js: de shows level boxes A1-B2 and the line 'C1, C2: zatím bez připravených lekcí.'; the line is hidden under the Nové filter. With a routed tree that has no units: 0 level boxes, no filter radios (the 4 radios left are the language picker), and the notice is present. No console errors. Typecheck, build, ruff passed.

@@ -223,7 +223,6 @@ export const cs = {
     allLessons: "Dostupné gramatické lekce",
     progressIsPersonal: "Postup se ukládá pro tento profil a jazyk. Starší témata zůstávají dostupná k opakování.",
     availableCount: (n: number) => `${n} ${n === 1 ? "lekce" : n >= 2 && n <= 4 ? "lekce" : "lekcí"}`,
-    notAvailable: "Zatím bez obsahu",
     levelCoverage: (studied: number, total: number, known: number) =>
       `prostudováno ${studied} z ${total}${known ? ` · ověřeno ${known}` : ""}`,
     openBadge: "rozdělaná",
@@ -232,6 +231,7 @@ export const cs = {
     exercises: (n: number) => `${n} cvičení`,
     checkedTally: (ok: number, all: number) => `v ověření ${ok} z ${all} správně`,
     dueBadge: "k ověření",
+    emptyLevels: (levels: string) => `${levels}: zatím bez připravených lekcí.`,
     treeFailed: "Přehled lekcí se nepodařilo načíst. Slovní zásobu můžeš otevřít i tak.",
     estimateFailed: "Odhad úrovně se teď nepodařilo načíst, doporučení proto vychází jen z toho, co máš prostudované.",
     partialRetry: "Načíst odhad úrovně znovu",
@@ -240,7 +240,6 @@ export const cs = {
     revisitErrors: (n: number) => `${n} ${n === 1 ? "chyba" : n <= 4 ? "chyby" : "chyb"} v ověření`,
     revisitOpen: "Zopakovat lekci",
     errorsBadge: (n: number) => `${n} ${n === 1 ? "chyba" : n <= 4 ? "chyby" : "chyb"}`,
-    levelNotImplemented: "Pro tuto úroveň zatím nejsou připravené lekce.",
     noGrammarContent: "Pro vybraný jazyk zatím nejsou gramatické lekce. Slovní zásobu můžeš procvičovat samostatně.",
     objective: (text: string) => `Cíl: ${text}`,
     start: "Začít lekci",
