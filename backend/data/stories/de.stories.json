@@ -6083,6 +6083,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-36-anonymous-survey",
+   "level": "B2",
+   "title": "Anonyme Zufriedenheit",
+   "title_cs": "Anonymní spokojenost",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva bereitete eine anonyme Umfrage vor, damit Kollegen ihre Arbeitsumgebung ohne Angst offen bewerten konnten.",
+     "cs": "Eva připravila anonymní průzkum, aby se kolegové nebáli otevřeně hodnotit pracovní prostředí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich garantiere absolute Vertraulichkeit. Niemand wird wissen, wer welche Antwort geschrieben hat.",
+     "cs": "Zaručuji vám naprostou důvěrnost. Nikdo nebude vědět, kdo kterou odpověď napsal."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Warum ist dann auf jedem Formular unser Name vorgedruckt?",
+     "cs": "Proč je tedy na každém formuláři předtištěné naše jméno?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das ist lediglich eine administrative Vorkehrung, damit ich weiß, wem ich für seine Offenheit danken muss.",
+     "cs": "To je pouze administrativní opatření, abych věděla, komu mám poděkovat za upřímnost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und wenn jemand antwortet, dass er sich nicht traut, offen zu sprechen?",
+     "cs": "A co když někdo odpoví, že se bojí otevřeně mluvit?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva strahlte: Dem werde ich persönlich erklären, dass es überhaupt keinen Grund zur Angst gibt.",
+     "cs": "Eva se rozzářila: Tomu osobně vysvětlím, že se vůbec nemá čeho bát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Vertraulichkeit",
+     "cs": "důvěrnost"
+    },
+    {
+     "word": "vorgedruckt",
+     "cs": "předtištěný"
+    },
+    {
+     "word": "administrative",
+     "cs": "administrativní"
+    },
+    {
+     "word": "Vorkehrung",
+     "cs": "opatření"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co narušuje anonymitu průzkumu?",
+     "options": [
+      "Předtištěná jména.",
+      "Velikost papíru.",
+      "Barva obálek."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce Eva udělat s obavami účastníka?",
+     "options": [
+      "Osobně mu je vyvrátit.",
+      "Odpověď smazat.",
+      "Poslat mu nový stůl."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

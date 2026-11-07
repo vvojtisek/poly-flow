@@ -6083,6 +6083,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-36-anonymous-survey",
+   "level": "B2",
+   "title": "La soddisfazione anonima",
+   "title_cs": "Anonymní spokojenost",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva ha preparato un sondaggio anonimo affinché i colleghi osassero valutare apertamente l'ambiente di lavoro.",
+     "cs": "Eva připravila anonymní průzkum, aby se kolegové nebáli otevřeně hodnotit pracovní prostředí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Vi garantisco assoluta riservatezza. Nessuno saprà chi ha scritto ciascuna risposta.",
+     "cs": "Zaručuji vám naprostou důvěrnost. Nikdo nebude vědět, kdo kterou odpověď napsal."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perché allora il nostro nome è prestampato su ogni modulo?",
+     "cs": "Proč je tedy na každém formuláři předtištěné naše jméno?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "È soltanto una precauzione amministrativa per sapere chi ringraziare della sua franchezza.",
+     "cs": "To je pouze administrativní opatření, abych věděla, komu mám poděkovat za upřímnost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E se qualcuno risponde che ha paura di parlare apertamente?",
+     "cs": "A co když někdo odpoví, že se bojí otevřeně mluvit?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva si è illuminata: Gli spiegherò personalmente che non ha assolutamente nulla da temere.",
+     "cs": "Eva se rozzářila: Tomu osobně vysvětlím, že se vůbec nemá čeho bát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "riservatezza",
+     "cs": "důvěrnost"
+    },
+    {
+     "word": "prestampato",
+     "cs": "předtištěný"
+    },
+    {
+     "word": "precauzione",
+     "cs": "opatření"
+    },
+    {
+     "word": "franchezza",
+     "cs": "upřímnost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co narušuje anonymitu průzkumu?",
+     "options": [
+      "Předtištěná jména.",
+      "Velikost papíru.",
+      "Barva obálek."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce Eva udělat s obavami účastníka?",
+     "options": [
+      "Osobně mu je vyvrátit.",
+      "Odpověď smazat.",
+      "Poslat mu nový stůl."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
