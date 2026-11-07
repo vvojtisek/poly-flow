@@ -3875,6 +3875,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-05-clean-window",
+   "level": "A1",
+   "title": "The Clean Window",
+   "title_cs": "Čisté okno",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva is washing the big kitchen window today.",
+     "cs": "Eva dnes myje velké okno v kuchyni."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Finished! Now the glass is really clean.",
+     "cs": "Hotovo! Teď je sklo opravdu čisté."
+    },
+    {
+     "speaker": "Tom",
+     "text": "How lovely. But why is it so cold in here?",
+     "cs": "To je krásné. Ale proč je tady taková zima?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I don't know. I can see the whole garden clearly.",
+     "cs": "Nevím. Vidím celou zahradu úplně jasně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Eva, your window is still open.",
+     "cs": "Evo, tvoje okno je pořád otevřené."
+    },
+    {
+     "speaker": null,
+     "text": "Eva laughs and closes the window. She will wash the other side tomorrow.",
+     "cs": "Eva se směje a zavírá okno. Druhou stranu umyje zítra."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "glass",
+     "cs": "sklo"
+    },
+    {
+     "word": "clearly",
+     "cs": "jasně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč je v kuchyni zima?",
+     "options": [
+      "Okno je otevřené.",
+      "Je noc.",
+      "Lednice je otevřená."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdy Eva umyje druhou stranu?",
+     "options": [
+      "Zítra.",
+      "Včera.",
+      "Za rok."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
