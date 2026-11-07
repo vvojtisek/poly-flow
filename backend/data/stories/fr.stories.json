@@ -832,6 +832,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-01-satnav-cows",
+   "level": "A2",
+   "title": "L'hôtel des vaches",
+   "title_cs": "Hotel plný krav",
+   "lines": [
+    {
+     "text": "Karin et Lukas sont partis en voiture vers un hôtel au bord de la mer. Le GPS leur montrait le chemin.",
+     "cs": "Karin a Lukas jeli autem do hotelu u moře. Cestu jim ukazovala navigace."
+    },
+    {
+     "speaker": "GPS",
+     "text": "Roulez 500 mètres tout droit. Puis tournez à gauche.",
+     "cs": "Ujeďte 500 metrů rovně. Pak odbočte doleva."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Karin, il n'y a pas de route ici. Il y a seulement un champ.",
+     "cs": "Karin, tady žádná cesta není. Je tu jen pole."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Le GPS en sait plus que nous. Nous devons lui faire confiance.",
+     "cs": "Navigace ví víc než my. Musíme jí důvěřovat."
+    },
+    {
+     "text": "Ils sont entrés dans le champ. Une minute plus tard, ils étaient devant vingt vaches.",
+     "cs": "Vjeli na pole. Za minutu stáli před dvaceti kravami."
+    },
+    {
+     "speaker": "GPS",
+     "text": "Vous êtes arrivés à destination.",
+     "cs": "Dojeli jste do cíle."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Cet hôtel est plutôt... animal.",
+     "cs": "Ten hotel je docela... zvířecí."
+    },
+    {
+     "text": "Une vache a regardé dans la voiture. Karin a demandé poliment : Vous avez une chambre libre ?",
+     "cs": "Jedna kráva nakoukla do auta. Karin se zdvořile zeptala: Máte volný pokoj?"
+    },
+    {
+     "text": "Lukas a ri si fort que les vaches se sont enfuies.",
+     "cs": "Lukas se smál tak hlasitě, že krávy utekly."
+    },
+    {
+     "text": "Ils n'ont trouvé l'hôtel que deux heures plus tard, avec une carte en papier.",
+     "cs": "Hotel našli až za dvě hodiny, podle papírové mapy."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Au moins, les vaches étaient des hôtes bon marché : elles ne voulaient pas d'argent.",
+     "cs": "Krávy byly aspoň levní hostitelé: nechtěly žádné peníze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "confiance",
+     "cs": "důvěra"
+    },
+    {
+     "word": "poliment",
+     "cs": "zdvořile"
+    },
+    {
+     "word": "hôtes",
+     "cs": "hostitelé"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Où le GPS conduit-il les deux amis ?",
+     "options": [
+      "Dans un champ de vaches",
+      "À l'hôtel",
+      "À la mer"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Comment trouvent-ils l'hôtel ?",
+     "options": [
+      "Avec une carte en papier",
+      "Avec le GPS",
+      "Une vache montre le chemin"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

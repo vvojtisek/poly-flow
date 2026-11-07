@@ -832,6 +832,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-01-satnav-cows",
+   "level": "A2",
+   "title": "L'albergo delle mucche",
+   "title_cs": "Hotel plný krav",
+   "lines": [
+    {
+     "text": "Karin e Lukas sono andati in macchina a un albergo sul mare. Il navigatore mostrava la strada.",
+     "cs": "Karin a Lukas jeli autem do hotelu u moře. Cestu jim ukazovala navigace."
+    },
+    {
+     "speaker": "Navigatore",
+     "text": "Proseguite per 500 metri dritto. Poi girate a sinistra.",
+     "cs": "Ujeďte 500 metrů rovně. Pak odbočte doleva."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Karin, qui non c'è nessuna strada. C'è solo un campo.",
+     "cs": "Karin, tady žádná cesta není. Je tu jen pole."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Il navigatore sa più di noi. Dobbiamo fidarci.",
+     "cs": "Navigace ví víc než my. Musíme jí důvěřovat."
+    },
+    {
+     "text": "Sono entrati nel campo. Dopo un minuto erano davanti a venti mucche.",
+     "cs": "Vjeli na pole. Za minutu stáli před dvaceti kravami."
+    },
+    {
+     "speaker": "Navigatore",
+     "text": "Siete arrivati a destinazione.",
+     "cs": "Dojeli jste do cíle."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Questo albergo è piuttosto... animale.",
+     "cs": "Ten hotel je docela... zvířecí."
+    },
+    {
+     "text": "Una mucca ha guardato dentro la macchina. Karin ha chiesto con gentilezza: Avete una camera libera?",
+     "cs": "Jedna kráva nakoukla do auta. Karin se zdvořile zeptala: Máte volný pokoj?"
+    },
+    {
+     "text": "Lukas ha riso così forte che le mucche sono scappate.",
+     "cs": "Lukas se smál tak hlasitě, že krávy utekly."
+    },
+    {
+     "text": "Hanno trovato l'albergo solo dopo due ore, con una cartina di carta.",
+     "cs": "Hotel našli až za dvě hodiny, podle papírové mapy."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Almeno le mucche sono state ospiti economici: non volevano soldi.",
+     "cs": "Krávy byly aspoň levní hostitelé: nechtěly žádné peníze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fidarci",
+     "cs": "důvěřovat"
+    },
+    {
+     "word": "gentilezza",
+     "cs": "zdvořilost"
+    },
+    {
+     "word": "economici",
+     "cs": "levní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dove porta il navigatore i due amici?",
+     "options": [
+      "In un campo di mucche",
+      "All'albergo",
+      "Al mare"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come trovano l'albergo?",
+     "options": [
+      "Con una cartina di carta",
+      "Con il navigatore",
+      "Una mucca indica la strada"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

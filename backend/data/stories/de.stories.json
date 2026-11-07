@@ -832,6 +832,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-01-satnav-cows",
+   "level": "A2",
+   "title": "Das Hotel mit den Kühen",
+   "title_cs": "Hotel plný krav",
+   "lines": [
+    {
+     "text": "Karin und Lukas sind mit dem Auto zu einem Hotel am Meer gefahren. Das Navi hat ihnen den Weg gezeigt.",
+     "cs": "Karin a Lukas jeli autem do hotelu u moře. Cestu jim ukazovala navigace."
+    },
+    {
+     "speaker": "Navi",
+     "text": "Fahren Sie 500 Meter geradeaus. Dann biegen Sie links ab.",
+     "cs": "Ujeďte 500 metrů rovně. Pak odbočte doleva."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Karin, hier ist kein Weg. Hier ist nur ein Feld.",
+     "cs": "Karin, tady žádná cesta není. Je tu jen pole."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Das Navi weiß mehr als wir. Wir müssen ihm vertrauen.",
+     "cs": "Navigace ví víc než my. Musíme jí důvěřovat."
+    },
+    {
+     "text": "Sie sind auf das Feld gefahren. Nach einer Minute standen sie vor zwanzig Kühen.",
+     "cs": "Vjeli na pole. Za minutu stáli před dvaceti kravami."
+    },
+    {
+     "speaker": "Navi",
+     "text": "Sie haben Ihr Ziel erreicht.",
+     "cs": "Dojeli jste do cíle."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Das Hotel ist ziemlich ... tierisch.",
+     "cs": "Ten hotel je docela... zvířecí."
+    },
+    {
+     "text": "Eine Kuh hat ins Auto geschaut. Karin hat höflich gefragt: Haben Sie ein Zimmer frei?",
+     "cs": "Jedna kráva nakoukla do auta. Karin se zdvořile zeptala: Máte volný pokoj?"
+    },
+    {
+     "text": "Lukas hat so laut gelacht, dass die Kühe weggelaufen sind.",
+     "cs": "Lukas se smál tak hlasitě, že krávy utekly."
+    },
+    {
+     "text": "Das Hotel haben sie erst nach zwei Stunden gefunden, mit einer Karte aus Papier.",
+     "cs": "Hotel našli až za dvě hodiny, podle papírové mapy."
+    },
+    {
+     "speaker": "Karin",
+     "text": "Die Kühe waren wenigstens günstige Gastgeber: Sie wollten kein Geld.",
+     "cs": "Krávy byly aspoň levní hostitelé: nechtěly žádné peníze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "vertrauen",
+     "cs": "důvěřovat"
+    },
+    {
+     "word": "höflich",
+     "cs": "zdvořile"
+    },
+    {
+     "word": "Gastgeber",
+     "cs": "hostitelé"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wohin führt das Navi die beiden?",
+     "options": [
+      "Auf ein Feld mit Kühen",
+      "Zum Hotel",
+      "Zum Meer"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wie finden sie das Hotel?",
+     "options": [
+      "Mit einer Papierkarte",
+      "Mit dem Navi",
+      "Eine Kuh zeigt den Weg"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

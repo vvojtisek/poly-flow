@@ -832,6 +832,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-01-satnav-cows",
+   "level": "A2",
+   "title": "The Hotel with Cows",
+   "title_cs": "Hotel plný krav",
+   "lines": [
+    {
+     "text": "Karin and Lukas drove to a hotel by the sea. The satnav showed them the way.",
+     "cs": "Karin a Lukas jeli autem do hotelu u moře. Cestu jim ukazovala navigace."
+    },
+    {
+     "speaker": "Satnav",
+     "text": "Drive straight on for 500 metres. Then turn left.",
+     "cs": "Ujeďte 500 metrů rovně. Pak odbočte doleva."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Karin, there is no road here. There is only a field.",
+     "cs": "Karin, tady žádná cesta není. Je tu jen pole."
+    },
+    {
+     "speaker": "Karin",
+     "text": "The satnav knows more than we do. We have to trust it.",
+     "cs": "Navigace ví víc než my. Musíme jí důvěřovat."
+    },
+    {
+     "text": "They drove into the field. A minute later, they were in front of twenty cows.",
+     "cs": "Vjeli na pole. Za minutu stáli před dvaceti kravami."
+    },
+    {
+     "speaker": "Satnav",
+     "text": "You have reached your destination.",
+     "cs": "Dojeli jste do cíle."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "This hotel is rather... animal.",
+     "cs": "Ten hotel je docela... zvířecí."
+    },
+    {
+     "text": "A cow looked into the car. Karin asked politely: Do you have a free room?",
+     "cs": "Jedna kráva nakoukla do auta. Karin se zdvořile zeptala: Máte volný pokoj?"
+    },
+    {
+     "text": "Lukas laughed so loudly that the cows ran away.",
+     "cs": "Lukas se smál tak hlasitě, že krávy utekly."
+    },
+    {
+     "text": "They only found the hotel two hours later, with a paper map.",
+     "cs": "Hotel našli až za dvě hodiny, podle papírové mapy."
+    },
+    {
+     "speaker": "Karin",
+     "text": "At least the cows were cheap hosts: they didn't want any money.",
+     "cs": "Krávy byly aspoň levní hostitelé: nechtěly žádné peníze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "trust",
+     "cs": "důvěřovat"
+    },
+    {
+     "word": "politely",
+     "cs": "zdvořile"
+    },
+    {
+     "word": "hosts",
+     "cs": "hostitelé"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Where does the satnav take them?",
+     "options": [
+      "Into a field of cows",
+      "To the hotel",
+      "To the sea"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How do they find the hotel?",
+     "options": [
+      "With a paper map",
+      "With the satnav",
+      "A cow shows the way"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
