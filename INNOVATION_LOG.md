@@ -1765,3 +1765,13 @@ Vlad approves a push.
 **Implemented Solution:** A segmented control above the calendar (Vše / Ověření / Procvičování) recolours the days by the chosen count, scaled to that count's own maximum. The summary line then reads, for example, 'Dny s ověřením: 1 z posledních 182.' The default stays 'Vše' with the existing no-streak sentence.
 
 **Verification:** Playwright on real data: Vše colours 5 Nov and 7 Nov brand-600; Ověření makes 5 Nov empty (0 checks) and keeps 7 Nov; Procvičování colours both. The summary changes to 'Dny s ověřením: 1 z posledních 182.' No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 68/120 | Page: [/insights] (Page Cycle 8/15)
+
+**Summary:** hear the words listed in activity, forecast and mistake details
+
+**Observed Problem:** Insights lists many words (those practised on a day, those due on a forecast day, those behind a mistake type) but each was text only. To hear one, the learner had to leave the page and open the word card, which broke the review-by-ear flow the other pages support.
+
+**Implemented Solution:** Each word in the activity-day list, the forecast chips and the mistake drill-down has a small PlayButton ('Přehrát <lemma>'). It sits next to the link, not inside it, so playing does not navigate. Clips load only on click.
+
+**Verification:** Playwright 390px with ?day=2026-11-05&forecast=2026-11-08: 77 play buttons render with no audio request on load; clicking the first requests that word's audio and stays on /insights. TTS is not available in the container (503), so the request was checked, not playback. The same run found a pre-existing horizontal overflow at 390px from the calendar panel (section 560px wide); it is left for the mobile cycle. No console errors. typecheck, next build, ruff pass.

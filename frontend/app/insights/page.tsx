@@ -8,7 +8,8 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Panel } from "@/components/Panel";
 import { WeeklyRecap } from "@/components/WeeklyRecap";
 import { Notice } from "@/components/ui";
-import { getActivityDay, getInsights, type ActivityDay, type Insights } from "@/lib/api";
+import { PlayButton } from "@/components/PlayButton";
+import { getActivityDay, getInsights, myWordAudioUrl, type ActivityDay, type Insights } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -102,7 +103,19 @@ function ActivityDetails({ data, date, loading, failed, language }: { data: Acti
           {data.words.length > 0 && <section>
             <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityWords}</h4>
             <ul className="flex flex-col gap-1" lang={language}>
-              {data.words.map((word) => <li key={word.id}><a href={`/words?word=${word.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span className="font-medium">{word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}{word.lemma}<span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span></span><span className="shrink-0 text-xs text-slate-500">{t.activityCount(word.graded, word.practice)}</span></a></li>)}
+              {data.words.map((word) => (
+                <li key={word.id} className="flex items-center gap-1">
+                  <a href={`/words?word=${word.id}`} className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <span className="font-medium">
+                      {word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}
+                      {word.lemma}
+                      <span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span>
+                    </span>
+                    <span className="shrink-0 text-xs text-slate-500">{t.activityCount(word.graded, word.practice)}</span>
+                  </a>
+                  <PlayButton url={myWordAudioUrl(word.id)} size="sm" label={cs.words.playRow(word.lemma)} />
+                </li>
+              ))}
             </ul>
           </section>}
           {data.grammar.length > 0 && <section>
@@ -266,12 +279,13 @@ function ForecastDetails({ data, language, isToday }: { data: Insights["forecast
               <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.words}</h4>
               <ul className="flex flex-wrap gap-1.5" lang={language}>
                 {data.word_items.map((word) => (
-                  <li key={word.id}>
-                    <Link href={`/words?word=${word.id}`} className="block rounded-lg bg-brand-500/10 px-2 py-1 text-sm hover:bg-brand-500/20">
+                  <li key={word.id} className="flex items-center rounded-lg bg-brand-500/10">
+                    <Link href={`/words?word=${word.id}`} className="block rounded-l-lg py-1 pl-2 pr-1 text-sm hover:bg-brand-500/20">
                       {word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}
                       {word.lemma}
                       <span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span>
                     </Link>
+                    <PlayButton url={myWordAudioUrl(word.id)} size="sm" label={cs.words.playRow(word.lemma)} />
                   </li>
                 ))}
               </ul>
@@ -500,10 +514,10 @@ export default function InsightsPage() {
                         {isOpen && (
                           <ul id={`mistake-${m.tag}`} aria-label={t.mistakeBehind(label)} className="mb-1 ml-7 mt-1 flex flex-col gap-0.5 border-l border-slate-200 pl-2 dark:border-slate-800">
                             {m.items.map((item) => (
-                              <li key={`${item.kind}-${item.id}`}>
+                              <li key={`${item.kind}-${item.id}`} className="flex items-center gap-1">
                                 <a
                                   href={item.kind === "word" ? `/words?word=${item.id}` : `/grammar/${item.id}`}
-                                  className="flex items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"
+                                  className="flex min-w-0 flex-1 items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"
                                 >
                                   <span className="min-w-0 truncate">
                                     {item.kind === "word" ? (
@@ -517,6 +531,7 @@ export default function InsightsPage() {
                                   </span>
                                   <span className="shrink-0 text-xs tabular-nums text-rose-600 dark:text-rose-400">{t.mistakeTimes(item.count)}</span>
                                 </a>
+                                {item.kind === "word" && <PlayButton url={myWordAudioUrl(item.id)} size="sm" label={cs.words.playRow(item.label)} />}
                               </li>
                             ))}
                           </ul>
