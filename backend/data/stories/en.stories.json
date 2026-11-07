@@ -756,6 +756,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-10-diet",
+   "level": "A1",
+   "title": "The Diet",
+   "title_cs": "Dieta se salátem",
+   "lines": [
+    {
+     "text": "Charles is on a diet. Today he only eats salad.",
+     "cs": "Karel drží dietu. Dnes jí jen salát."
+    },
+    {
+     "text": "At lunch: salad, salad and more salad.",
+     "cs": "K obědu: salát, salát a ještě více salátu."
+    },
+    {
+     "text": "In the afternoon, he is very hungry.",
+     "cs": "Odpoledne má velký hlad."
+    },
+    {
+     "text": "He calls the pizzeria: One pizza, please. With salad!",
+     "cs": "Volá do pizzerie: Jednu pizzu, prosím. Se salátem!"
+    },
+    {
+     "text": "The pizza arrives. There is a salad leaf on top.",
+     "cs": "Pizza přijede. Nahoře má list salátu."
+    },
+    {
+     "text": "Charles eats the pizza. Then he eats a second one.",
+     "cs": "Karel sní pizzu. Potom druhou."
+    },
+    {
+     "speaker": "Lisa",
+     "text": "Charles, you are on a diet!",
+     "cs": "Karle, vždyť držíš dietu!"
+    },
+    {
+     "speaker": "Charles",
+     "text": "Yes! And today I'm eating very healthily: there is salad on every pizza.",
+     "cs": "Ano! A dnes jím velmi zdravě: na každé pizze je salát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "diet",
+     "cs": "dieta"
+    },
+    {
+     "word": "pizzeria",
+     "cs": "pizzerie"
+    },
+    {
+     "word": "leaf",
+     "cs": "list"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Charles do in the afternoon?",
+     "options": [
+      "He orders a pizza.",
+      "He goes to sleep.",
+      "He makes soup."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What is on top of the pizza?",
+     "options": [
+      "A salad leaf",
+      "Cheese",
+      "Ham"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -756,6 +756,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-10-diet",
+   "level": "A1",
+   "title": "Die Diät",
+   "title_cs": "Dieta se salátem",
+   "lines": [
+    {
+     "text": "Karl macht eine Diät. Heute isst er nur Salat.",
+     "cs": "Karel drží dietu. Dnes jí jen salát."
+    },
+    {
+     "text": "Zum Mittagessen: Salat, Salat und noch mehr Salat.",
+     "cs": "K obědu: salát, salát a ještě více salátu."
+    },
+    {
+     "text": "Am Nachmittag hat er großen Hunger.",
+     "cs": "Odpoledne má velký hlad."
+    },
+    {
+     "text": "Er ruft die Pizzeria an: Eine Pizza, bitte. Mit Salat!",
+     "cs": "Volá do pizzerie: Jednu pizzu, prosím. Se salátem!"
+    },
+    {
+     "text": "Die Pizza kommt. Oben liegt ein Salatblatt.",
+     "cs": "Pizza přijede. Nahoře má list salátu."
+    },
+    {
+     "text": "Karl isst die Pizza. Dann isst er eine zweite.",
+     "cs": "Karel sní pizzu. Potom druhou."
+    },
+    {
+     "speaker": "Lisa",
+     "text": "Karl, du machst doch eine Diät!",
+     "cs": "Karle, vždyť držíš dietu!"
+    },
+    {
+     "speaker": "Karl",
+     "text": "Ja! Und heute esse ich sehr gesund: Auf jeder Pizza liegt Salat.",
+     "cs": "Ano! A dnes jím velmi zdravě: na každé pizze je salát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Diät",
+     "cs": "dieta"
+    },
+    {
+     "word": "Pizzeria",
+     "cs": "pizzerie"
+    },
+    {
+     "word": "Salatblatt",
+     "cs": "list salátu"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was macht Karl am Nachmittag?",
+     "options": [
+      "Er bestellt Pizza.",
+      "Er geht schlafen.",
+      "Er kocht Suppe."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was liegt oben auf der Pizza?",
+     "options": [
+      "Ein Salatblatt",
+      "Käse",
+      "Wurst"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

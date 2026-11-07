@@ -756,6 +756,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-10-diet",
+   "level": "A1",
+   "title": "Le régime",
+   "title_cs": "Dieta se salátem",
+   "lines": [
+    {
+     "text": "Charles fait un régime. Aujourd'hui, il mange seulement de la salade.",
+     "cs": "Karel drží dietu. Dnes jí jen salát."
+    },
+    {
+     "text": "À midi : salade, salade et encore de la salade.",
+     "cs": "K obědu: salát, salát a ještě více salátu."
+    },
+    {
+     "text": "L'après-midi, il a très faim.",
+     "cs": "Odpoledne má velký hlad."
+    },
+    {
+     "text": "Il appelle la pizzeria : Une pizza, s'il vous plaît. Avec de la salade !",
+     "cs": "Volá do pizzerie: Jednu pizzu, prosím. Se salátem!"
+    },
+    {
+     "text": "La pizza arrive. Il y a une feuille de salade dessus.",
+     "cs": "Pizza přijede. Nahoře má list salátu."
+    },
+    {
+     "text": "Charles mange la pizza. Puis il mange une deuxième.",
+     "cs": "Karel sní pizzu. Potom druhou."
+    },
+    {
+     "speaker": "Lisa",
+     "text": "Charles, tu fais un régime !",
+     "cs": "Karle, vždyť držíš dietu!"
+    },
+    {
+     "speaker": "Charles",
+     "text": "Oui ! Et aujourd'hui, je mange très sainement : il y a de la salade sur chaque pizza.",
+     "cs": "Ano! A dnes jím velmi zdravě: na každé pizze je salát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "régime",
+     "cs": "dieta"
+    },
+    {
+     "word": "pizzeria",
+     "cs": "pizzerie"
+    },
+    {
+     "word": "feuille",
+     "cs": "list"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que fait Charles l'après-midi ?",
+     "options": [
+      "Il commande une pizza.",
+      "Il va dormir.",
+      "Il fait de la soupe."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'est-ce qu'il y a sur la pizza ?",
+     "options": [
+      "Une feuille de salade",
+      "Du fromage",
+      "Du jambon"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

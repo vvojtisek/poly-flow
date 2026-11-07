@@ -756,6 +756,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-10-diet",
+   "level": "A1",
+   "title": "La dieta",
+   "title_cs": "Dieta se salátem",
+   "lines": [
+    {
+     "text": "Carlo fa la dieta. Oggi mangia solo insalata.",
+     "cs": "Karel drží dietu. Dnes jí jen salát."
+    },
+    {
+     "text": "A pranzo: insalata, insalata e ancora insalata.",
+     "cs": "K obědu: salát, salát a ještě více salátu."
+    },
+    {
+     "text": "Nel pomeriggio ha molta fame.",
+     "cs": "Odpoledne má velký hlad."
+    },
+    {
+     "text": "Chiama la pizzeria: Una pizza, per favore. Con l'insalata!",
+     "cs": "Volá do pizzerie: Jednu pizzu, prosím. Se salátem!"
+    },
+    {
+     "text": "La pizza arriva. Sopra c'è una foglia di insalata.",
+     "cs": "Pizza přijede. Nahoře má list salátu."
+    },
+    {
+     "text": "Carlo mangia la pizza. Poi ne mangia una seconda.",
+     "cs": "Karel sní pizzu. Potom druhou."
+    },
+    {
+     "speaker": "Lisa",
+     "text": "Carlo, sei a dieta!",
+     "cs": "Karle, vždyť držíš dietu!"
+    },
+    {
+     "speaker": "Carlo",
+     "text": "Sì! E oggi mangio molto sano: su ogni pizza c'è l'insalata.",
+     "cs": "Ano! A dnes jím velmi zdravě: na každé pizze je salát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "dieta",
+     "cs": "dieta"
+    },
+    {
+     "word": "pizzeria",
+     "cs": "pizzerie"
+    },
+    {
+     "word": "foglia",
+     "cs": "list"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Carlo nel pomeriggio?",
+     "options": [
+      "Ordina una pizza.",
+      "Va a dormire.",
+      "Prepara la zuppa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa c'è sopra la pizza?",
+     "options": [
+      "Una foglia di insalata",
+      "Formaggio",
+      "Prosciutto"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
