@@ -6311,6 +6311,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-39-woodworking-units",
+   "level": "B2",
+   "title": "Das universelle Regal",
+   "title_cs": "Univerzální police",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom bestellte einen Regalplan aus dem Ausland und wollte ihn ohne weitere Modifikationen umsetzen.",
+     "cs": "Tom si objednal zahraniční plán police a rozhodl se postavit ji bez dalších úprav."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich habe die Abmessungen absolut genau eingehalten. Das Ergebnis muss mit jedem Haushalt kompatibel sein.",
+     "cs": "Rozměry jsem dodržel naprosto přesně. Výsledek musí být kompatibilní s jakoukoli domácností."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Erklärt das, warum es nicht in die Werkstatt passt? Hättest du nicht Zoll in Zentimeter umrechnen sollen?",
+     "cs": "To vysvětluje, proč se nevejde do dílny? Neměl jsi převést palce na centimetry?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Einheiten sind bloß eine Konvention. Ich habe mich auf Proportionen und die Gesamtstabilität konzentriert.",
+     "cs": "Jednotky jsou jen dohoda. Já jsem se soustředil na proporce a celkovou stabilitu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Statt eines Regals haben wir also einen kleinen Aussichtsturm. Was willst du daraufstellen?",
+     "cs": "Takže místo police máme malou rozhlednu. Co na ni chceš dát?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom schaute zum obersten Brett: Vor allem den Plan. Damit ihn niemand jemals wieder verwenden kann.",
+     "cs": "Tom vzhlédl k horní desce: Především ten plán. Ať už ho nikdo nemůže znovu použít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Modifikationen",
+     "cs": "úpravy"
+    },
+    {
+     "word": "kompatibel",
+     "cs": "slučitelný"
+    },
+    {
+     "word": "Konvention",
+     "cs": "dohoda"
+    },
+    {
+     "word": "Proportionen",
+     "cs": "proporce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom při stavbě zanedbal?",
+     "options": [
+      "Převod jednotek.",
+      "Barvu šroubů.",
+      "Otevírací dobu obchodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce dát nahoru?",
+     "options": [
+      "Plán police.",
+      "Květináč.",
+      "Televizi."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

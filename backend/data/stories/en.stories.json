@@ -6311,6 +6311,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-39-woodworking-units",
+   "level": "B2",
+   "title": "The Universal Shelf",
+   "title_cs": "Univerzální police",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ordered a shelf design from abroad and decided to build it without further modifications.",
+     "cs": "Tom si objednal zahraniční plán police a rozhodl se postavit ji bez dalších úprav."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've followed the dimensions absolutely precisely. The result must be compatible with any household.",
+     "cs": "Rozměry jsem dodržel naprosto přesně. Výsledek musí být kompatibilní s jakoukoli domácností."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Does that explain why it won't fit in the workshop? Shouldn't you have converted inches into centimetres?",
+     "cs": "To vysvětluje, proč se nevejde do dílny? Neměl jsi převést palce na centimetry?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Units are merely a convention. I concentrated on proportions and overall stability.",
+     "cs": "Jednotky jsou jen dohoda. Já jsem se soustředil na proporce a celkovou stabilitu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "So instead of a shelf, we have a small observation tower. What will you put on it?",
+     "cs": "Takže místo police máme malou rozhlednu. Co na ni chceš dát?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom looked up at the top board: The design, above all. So nobody can ever use it again.",
+     "cs": "Tom vzhlédl k horní desce: Především ten plán. Ať už ho nikdo nemůže znovu použít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "modifications",
+     "cs": "úpravy"
+    },
+    {
+     "word": "compatible",
+     "cs": "slučitelný"
+    },
+    {
+     "word": "convention",
+     "cs": "dohoda"
+    },
+    {
+     "word": "proportions",
+     "cs": "proporce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom při stavbě zanedbal?",
+     "options": [
+      "Převod jednotek.",
+      "Barvu šroubů.",
+      "Otevírací dobu obchodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce dát nahoru?",
+     "options": [
+      "Plán police.",
+      "Květináč.",
+      "Televizi."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
