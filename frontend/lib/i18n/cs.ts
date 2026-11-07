@@ -676,7 +676,7 @@ export const cs = {
     unpinMode: (name: string) => `Odepnout cvičení ${name} z přehledu`,
     count: (n: number) => `${n} ${n === 1 ? "způsob" : n < 5 ? "způsoby" : "způsobů"} procvičování`,
     recommendTitle: "Zaměř se na to, co teď dělá potíže",
-    recommendHelp: "Podle posledních chyb v ověřeních můžeš pokračovat jedním z těchto cvičení. Procvičování mimo lekce se nikam nehodnotí.",
+    recommendHelp: "Podle posledních chyb v ověřeních.",
     recommendCount: (n: number) => `${n}× v poslední době`,
     recommendExamples: "Například:",
     lastVisit: (when: string) => `Naposledy ${when}`,

@@ -256,8 +256,13 @@ export default function PracticePage() {
           </section>
         )}
 
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t.filter}>
-          <span className="text-sm font-medium text-slate-500">{t.filter}</span>
+        <span id="skill-filter" className="-mb-2 text-sm font-medium text-slate-500">{t.filter}</span>
+        {/* Phones: one swipeable chip row; wider screens wrap. */}
+        <div
+          className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&>button]:shrink-0 [&>button]:whitespace-nowrap"
+          role="group"
+          aria-labelledby="skill-filter"
+        >
           <button type="button" aria-pressed={skills.length === 0} className={chip(skills.length === 0)} onClick={() => setSkills([])}>
             {t.all}
           </button>

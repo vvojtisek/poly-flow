@@ -1525,3 +1525,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx`: below `sm` cards use tighter padding, a smaller icon tile, a two-line clamped blurb and no skill-tag row (skills remain available as filter chips); the grid gap shrinks. From `sm` up the cards are unchanged.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height drops from 3 618 px to 2 842 px with no console errors.
+
+## Global Cycle 44/120 | Page: [/practice] (Page Cycle 14/15)
+
+**Summary:** trim repeated copy and fold skill chips into one row
+
+**Observed Problem:** The top of the hub repeated itself: the intro and the mistake panel both explained that practice is not graded, and the skill label plus six chips wrapped into three rows on a phone, so the first mode card sat below the fold.
+
+**Implemented Solution:** `lib/i18n/cs.ts`: the mistake panel's help is now one line ("Podle posledních chyb v ověřeních."); the ungraded note stays once, in the intro. `app/practice/page.tsx`: the skill label sits above the chips, which form one swipeable row on phones (the group is labelled by it) and wrap from `sm` up.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height 2 754 px (from 2 842 px), no console errors.
