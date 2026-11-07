@@ -8,8 +8,8 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Notice } from "@/components/ui";
 import { getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
-import { cs } from "@/lib/i18n/cs";
-import { modesFor, readPinned, readRecent, SKILLS, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
+import { cs, relativePast } from "@/lib/i18n/cs";
+import { modesFor, readPinned, readRecent, readVisits, SKILLS, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
 const ERROR_ROUTE: Record<string, (language: Language) => string> = {
@@ -39,7 +39,7 @@ function chip(active: boolean) {
   }`;
 }
 
-function Card({ m, tint, pinned, onToggle }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void }) {
+function Card({ m, tint, pinned, onToggle, visited }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void; visited: string | undefined }) {
   const copy = t.mode[m.id]!;
   return (
     <div className={`relative h-full rounded-3xl border border-slate-200 bg-gradient-to-br ${tint} transition-transform hover:-translate-y-0.5 hover:border-brand-500 motion-reduce:transition-none dark:border-slate-800`}>
@@ -51,6 +51,7 @@ function Card({ m, tint, pinned, onToggle }: { m: PracticeMode; tint: string; pi
           <span className="text-lg font-bold">{copy.title}</span>
         </span>
         <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
+        <span className="text-xs text-slate-500">{visited ? t.lastVisit(relativePast(visited)) : t.neverVisited}</span>
         <span className="mt-auto flex flex-wrap gap-1">
           {m.skills.map((s) => (
             <span key={s} className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-900/70 dark:text-slate-300">
@@ -76,6 +77,8 @@ export default function PracticePage() {
   const [weakFailed, setWeakFailed] = useState(false);
   useEffect(() => setRecent(readRecent()), []);
   useEffect(() => setPinned(readPinned()), []);
+  const [visits, setVisits] = useState<ReturnType<typeof readVisits>>({});
+  useEffect(() => setVisits(readVisits()), []);
   useEffect(() => {
     if (!me?.acting.active_language) return;
     let cancelled = false;
@@ -199,7 +202,7 @@ export default function PracticePage() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((m) => (
             <li key={m.id}>
-              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} />
+              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} />
             </li>
           ))}
         </ul>

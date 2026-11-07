@@ -1405,3 +1405,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx`: each recommendation lists up to three of the learner's own words or grammar topics with that mistake type (from the weak-spots API, German nouns with their article) and names the action ("Procvičit rody", "Procvičit v diktátu", "Zopakovat v příští lekci"…). Meaning and word-choice mistakes now go to `/lesson/vocabulary`, whose next lesson re-practises recently missed words. Copy in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot shows "Význam slova · Například: der Hund, lesen, nein · Zopakovat v příští lekci".
+
+## Global Cycle 32/120 | Page: [/practice] (Page Cycle 2/15)
+
+**Summary:** show when each practice mode was last used
+
+**Observed Problem:** The hub listed twelve modes with no sign of which ones the learner had been neglecting; only the last three opened modes appeared in a chip row, without dates.
+
+**Implemented Solution:** `lib/practice.ts` now also stores the last-open time per mode (`pf_mode_visits`, validated on read, local to the device and never sent to the server, like the existing recent list). Each card in `app/practice/page.tsx` shows "Naposledy dnes / včera / před 5 dny" or "Zatím nevyzkoušeno". New `relativePast` helper in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/dictation`, then `/practice` showed "Naposledy dnes" on the Diktát card.

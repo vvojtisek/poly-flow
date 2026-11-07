@@ -80,8 +80,26 @@ export function recordVisit(path: string) {
   try {
     const next = [mode.id, ...readRecent().filter((id) => id !== mode.id)].slice(0, MAX_RECENT);
     window.localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+    window.localStorage.setItem(VISITS_KEY, JSON.stringify({ ...readVisits(), [mode.id]: new Date().toISOString() }));
   } catch {
     /* storage unavailable */
+  }
+}
+
+// When each mode was last opened on this device (ISO time). Like the recent list, a local
+// convenience for choosing what to do; it is not a record of learning.
+const VISITS_KEY = "pf_mode_visits";
+
+export function readVisits(): Partial<Record<PracticeMode["id"], string>> {
+  try {
+    const raw = JSON.parse(window.localStorage.getItem(VISITS_KEY) ?? "{}");
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
+    const ids = new Set<string>(PRACTICE_MODES.map((m) => m.id));
+    return Object.fromEntries(
+      Object.entries(raw).filter(([k, v]) => ids.has(k) && typeof v === "string" && !Number.isNaN(Date.parse(v))),
+    ) as Partial<Record<PracticeMode["id"], string>>;
+  } catch {
+    return {};
   }
 }
 

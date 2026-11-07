@@ -1,6 +1,18 @@
 // cs-CZ UI strings. All user-facing copy goes through this table.
 const fmt = (n: number) => new Intl.NumberFormat("cs-CZ").format(n);
 
+/** "dnes", "včera", "před 3 dny", "před 2 týdny" for a past moment, by calendar day. */
+export function relativePast(iso: string, now: Date = new Date()): string {
+  const at = new Date(iso);
+  const day = (d: Date) => Math.floor(new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 86_400_000);
+  const days = Math.max(0, day(now) - day(at));
+  if (days === 0) return "dnes";
+  if (days === 1) return "včera";
+  if (days < 14) return `před ${days} dny`;
+  if (days < 60) return `před ${Math.floor(days / 7)} týdny`;
+  return new Intl.DateTimeFormat("cs-CZ", { day: "numeric", month: "numeric", year: "numeric" }).format(at);
+}
+
 /** "za 3 h", "zítra", "v pátek", "12. 11." for a future moment, in the browser's time zone. */
 export function relativeFuture(iso: string, now: Date = new Date()): string {
   const at = new Date(iso);
@@ -666,6 +678,8 @@ export const cs = {
     recommendHelp: "Podle posledních chyb v ověřeních můžeš pokračovat jedním z těchto cvičení. Procvičování mimo lekce se nikam nehodnotí.",
     recommendCount: (n: number) => `${n}× v poslední době`,
     recommendExamples: "Například:",
+    lastVisit: (when: string) => `Naposledy ${when}`,
+    neverVisited: "Zatím nevyzkoušeno",
     recommendGo: {
       article: "Procvičit v laboratoři pádů",
       ending: "Procvičit časování",
