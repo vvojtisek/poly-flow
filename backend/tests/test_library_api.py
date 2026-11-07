@@ -21,6 +21,8 @@ async def test_library_lists_the_language_file_with_provenance(db, client):
     assert first["slug"] == f.stories[0].slug and first["level"] == "A1"
     assert first["title_cs"] and first["lines"] == len(f.stories[0].lines)
     assert first["kind"] in ("story", "dialogue") and first["stretch"] >= 1
+    # Both kinds occur, so the kind filter is a real choice.
+    assert {x["kind"] for x in out["stories"]} == {"story", "dialogue"}
     # Same plots in every language.
     en = (await client.get("/api/v1/stories/library?language=en")).json()
     assert [s["slug"] for s in en["stories"]] == [s["slug"] for s in out["stories"]]

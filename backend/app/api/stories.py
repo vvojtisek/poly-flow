@@ -151,7 +151,7 @@ class LibraryStoryOut(BaseModel):
     level: CefrLevel
     title: str
     title_cs: str
-    kind: Literal["story", "dialogue"]  # dialogue = every line has a speaker
+    kind: Literal["story", "dialogue"]  # dialogue = at least half the lines are spoken
     lines: int
     stretch: int
 
@@ -165,7 +165,9 @@ class LibraryOut(BaseModel):
 
 
 def _kind(s) -> Literal["story", "dialogue"]:
-    return "dialogue" if all(ln.speaker for ln in s.lines) else "story"
+    """Most curated stories mix narration and speech: "dialogue" when at least half is spoken."""
+    spoken = sum(1 for ln in s.lines if ln.speaker)
+    return "dialogue" if spoken * 2 >= len(s.lines) else "story"
 
 
 @router.get("/library", response_model=LibraryOut)

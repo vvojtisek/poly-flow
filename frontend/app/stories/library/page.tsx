@@ -11,11 +11,89 @@ import { clipSrc, playToEnd, stop } from "@/lib/audio";
 import { answerLibraryQuestion, getDiagnosticInfo, getLibraryStory, getProgress, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
+import { fold } from "@/lib/palette";
 
 const t = cs.library;
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2"];
 /** Reading level for an estimate: the estimated level itself (texts are ~95% of their level). */
 const READ_AT: Record<string, CefrLevel> = { "pre-A1": "A1", A1: "A1", A2: "A2", B1: "B1", B2: "B2", "B2+": "B2", C1: "B2", C2: "B2" };
+
+type Filters = { q: string; level: CefrLevel | null; kind: "story" | "dialogue" | null; unread: boolean };
+const NO_FILTERS: Filters = { q: "", level: null, kind: null, unread: false };
+const searchable = (text: string) => fold(text).replace(/ß/g, "ss");
+
+function readFilters(): Filters {
+  const q = new URLSearchParams(window.location.search);
+  const level = q.get("level");
+  const kind = q.get("kind");
+  return {
+    q: (q.get("q") ?? "").slice(0, 80),
+    level: level && (LEVELS as string[]).includes(level) ? (level as CefrLevel) : null,
+    kind: kind === "story" || kind === "dialogue" ? kind : null,
+    unread: q.get("unread") === "1",
+  };
+}
+
+function writeFilters(f: Filters) {
+  const q = new URLSearchParams(window.location.search);
+  for (const k of ["q", "level", "kind", "unread"]) q.delete(k);
+  if (f.q.trim()) q.set("q", f.q.trim());
+  if (f.level) q.set("level", f.level);
+  if (f.kind) q.set("kind", f.kind);
+  if (f.unread) q.set("unread", "1");
+  const qs = q.toString();
+  window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+}
+
+function applyFilters(stories: StoryLibrary["stories"], f: Filters, read: Set<string>) {
+  const needle = searchable(f.q.trim());
+  return stories.filter(
+    (s) =>
+      (!f.level || s.level === f.level) &&
+      (!f.kind || s.kind === f.kind) &&
+      (!f.unread || !read.has(s.slug)) &&
+      (!needle || searchable(`${s.title} ${s.title_cs}`).includes(needle)),
+  );
+}
+
+function FilterBar({ filters, onChange, shown, total }: { filters: Filters; onChange: (f: Filters) => void; shown: number; total: number }) {
+  const chip = (active: boolean) =>
+    `shrink-0 rounded-full px-3 py-1 text-sm font-medium ${active ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`;
+  return (
+    <div className="flex flex-col gap-2">
+      <input
+        type="search"
+        data-page-search
+        value={filters.q}
+        onChange={(e) => onChange({ ...filters, q: e.target.value })}
+        placeholder={t.searchPlaceholder}
+        aria-label={t.searchLabel}
+        className="min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 dark:border-slate-700 dark:bg-slate-900"
+      />
+      <div role="radiogroup" aria-label={t.levelFilter} className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none]">
+        {[null, ...LEVELS].map((level) => (
+          <button key={level ?? "all"} type="button" role="radio" aria-checked={filters.level === level} onClick={() => onChange({ ...filters, level })} className={chip(filters.level === level)}>
+            {level ?? t.allLevels}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-center gap-1">
+        <div role="radiogroup" aria-label={t.kindFilter} className="flex gap-1">
+          {([null, "story", "dialogue"] as const).map((kind) => (
+            <button key={kind ?? "all"} type="button" role="radio" aria-checked={filters.kind === kind} onClick={() => onChange({ ...filters, kind })} className={chip(filters.kind === kind)}>
+              {kind ? t.kindsPlural[kind] : t.allKinds}
+            </button>
+          ))}
+        </div>
+        <label className="ml-auto flex min-h-11 items-center gap-2 text-sm">
+          <input type="checkbox" checked={filters.unread} onChange={(e) => onChange({ ...filters, unread: e.target.checked })} className="size-4 accent-brand-500" />
+          {t.unreadOnly}
+        </label>
+      </div>
+      <p className="text-xs text-slate-500" aria-live="polite">{t.shown(shown, total)}</p>
+    </div>
+  );
+}
 
 /**
  * Stories this profile has finished on this device (all questions answered, or marked done).
@@ -324,7 +402,7 @@ function Reader({ language, slug, onBack, read, onRead }: { language: Language; 
   );
 }
 
-function Shelf({ library, onOpen, read, level: myLevel, estimate }: { library: StoryLibrary; onOpen: (slug: string) => void; read: Set<string>; level: CefrLevel | null; estimate: string | null }) {
+function Shelf({ library, stories: shown, filtered, onReset, onOpen, read, level: myLevel, estimate }: { library: StoryLibrary; stories: StoryLibrary["stories"]; filtered: boolean; onReset: () => void; onOpen: (slug: string) => void; read: Set<string>; level: CefrLevel | null; estimate: string | null }) {
   if (!library.stories.length) return <Notice>{t.empty}</Notice>;
   // Next to read: the first unread story at the learner's level, then the levels above it.
   const from = myLevel ? LEVELS.indexOf(myLevel) : 0;
@@ -333,7 +411,7 @@ function Shelf({ library, onOpen, read, level: myLevel, estimate }: { library: S
     .find((x) => !read.has(x.slug));
   return (
     <div className="flex flex-col gap-5">
-      {next && (
+      {next && !filtered && (
         <section aria-labelledby="next-title" className="rounded-2xl border border-brand-500/40 bg-brand-500/5 p-4">
           <p id="next-title" className="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200">
             {myLevel ? t.nextFor(myLevel) : t.nextStart}
@@ -347,7 +425,7 @@ function Shelf({ library, onOpen, read, level: myLevel, estimate }: { library: S
         </section>
       )}
       {LEVELS.map((level) => {
-        const stories = library.stories.filter((s) => s.level === level);
+        const stories = shown.filter((s) => s.level === level);
         if (!stories.length) return null;
         return (
           <section key={level} aria-labelledby={`level-${level}`}>
@@ -378,6 +456,12 @@ function Shelf({ library, onOpen, read, level: myLevel, estimate }: { library: S
           </section>
         );
       })}
+      {filtered && shown.length === 0 && (
+        <div className="flex flex-col items-start gap-2 rounded-2xl border border-dashed border-slate-300 p-4 text-sm dark:border-slate-700">
+          <p>{t.noMatch}</p>
+          <button type="button" onClick={onReset} className="font-semibold text-brand-700 hover:underline dark:text-brand-200">{t.resetFilters}</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -390,6 +474,14 @@ export default function StoryLibraryPage() {
   const [slug, setSlugState] = useState<string | null>(null);
   const [read, markRead] = useReadMarks(me?.acting.id, language);
   const [estimate, setEstimate] = useState<{ level: string; source: "test" | "progress" } | null>(null);
+  const [filters, setFiltersState] = useState<Filters>(NO_FILTERS);
+  useEffect(() => setFiltersState(readFilters()), []);
+  const setFilters = useCallback((f: Filters) => {
+    setFiltersState(f);
+    writeFilters(f);
+  }, []);
+  const filtered = filters.q.trim() !== "" || filters.level !== null || filters.kind !== null || filters.unread;
+  const shown = library ? applyFilters(library.stories, filters, read) : [];
 
   // The open story lives in the URL (?story=slug), so a link, reload or Back reopens it.
   useEffect(() => {
@@ -447,13 +539,19 @@ export default function StoryLibraryPage() {
           (slug ? (
             <Reader key={`${language}:${slug}`} language={language} slug={slug} onBack={() => setSlug(null)} read={read.has(slug)} onRead={() => markRead(slug)} />
           ) : (
+            <>
+            {library.stories.length > 0 && <FilterBar filters={filters} onChange={setFilters} shown={shown.length} total={library.stories.length} />}
             <Shelf
               library={library}
+              stories={shown}
+              filtered={filtered}
+              onReset={() => setFilters(NO_FILTERS)}
               onOpen={setSlug}
               read={read}
               level={estimate ? (READ_AT[estimate.level] ?? null) : null}
               estimate={estimate ? (estimate.source === "test" ? t.estimateTest(estimate.level) : t.estimateProgress(estimate.level)) : null}
             />
+            </>
           ))}
         {library && library.source && <p className="text-xs text-slate-500">{t.provenance(library.source, library.license)}</p>}
         <Link href="/stories" className="self-start text-sm font-medium text-brand-700 hover:underline dark:text-brand-200">
