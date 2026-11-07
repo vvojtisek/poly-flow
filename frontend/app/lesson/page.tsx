@@ -7,7 +7,8 @@ import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
-import { getDiagnosticInfo, getGrammarTree, getLessonPreview, getProgress, type CefrLevel, type GrammarTree, type LessonPreview, type LevelBadge } from "@/lib/api";
+import { PlayButton } from "@/components/PlayButton";
+import { getDiagnosticInfo, getGrammarTree, getGrammarUnit, getLessonPreview, grammarExampleAudioUrl, getProgress, type CefrLevel, type GrammarTree, type LessonPreview, type LevelBadge } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { isTypingTarget, useHotkeys } from "@/lib/keyboard";
 import { KeyHint } from "@/components/Kbd";
@@ -17,6 +18,34 @@ const PRIMARY = "mt-4 inline-flex min-h-11 items-center justify-center gap-2 rou
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const NEXT: Record<string, CefrLevel> = { "pre-A1": "A1", A1: "A2", A2: "B1", B1: "B2", B2: "C1", "B2+": "C1", C1: "C2", C2: "C2" };
 
+/** The topic's first example, heard and read before starting: context before the lesson itself. */
+function ExampleTaste({ unitId, language }: { unitId: string; language: string }) {
+  const [example, setExample] = useState<{ text: string; cs: string } | null>(null);
+  useEffect(() => {
+    let live = true;
+    setExample(null);
+    getGrammarUnit(unitId)
+      .then((u) => live && setExample(u.examples[0] ?? null))
+      .catch(() => undefined); // optional: the card works without it
+    return () => {
+      live = false;
+    };
+  }, [unitId]);
+  if (!example) return null;
+  return (
+    <div className="mt-3 flex items-center gap-2 rounded-xl bg-white/70 px-3 py-2 dark:bg-slate-900/60">
+      <PlayButton url={grammarExampleAudioUrl(unitId, 0)} size="sm" label={cs.audio.playSentence} hotkey />
+      <div className="min-w-0">
+        <p className="text-sm italic" lang={language}>
+          {example.text}
+        </p>
+        <p className="text-xs text-slate-500">{example.cs}</p>
+      </div>
+      <KeyHint k="P" />
+    </div>
+  );
+}
+
 function highestBadge(badges: LevelBadge[]): string | null {
   const rank = ["A1", "A2", "B1", "B2"];
   return badges.map((b) => b.level).sort((a, b) => rank.indexOf(b) - rank.indexOf(a))[0] ?? null;
@@ -24,7 +53,7 @@ function highestBadge(badges: LevelBadge[]): string | null {
 
 export default function LessonPage() {
   const me = useRequireMe();
-  useHotkeys(); // Enter opens the recommended step
+  useHotkeys(); // Enter opens the recommended step, P plays its example
   const router = useRouter();
   // V opens the vocabulary lesson (letters are free on this page: no text input).
   useEffect(() => {
@@ -153,6 +182,7 @@ export default function LessonPage() {
             <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200"><PlayCircle className="size-4" aria-hidden />{cs.lesson.openLessonLabel}</p>
             <h2 className="text-xl font-bold">{next.unit.title}</h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{next.unit.summary}</p>
+            {language && <ExampleTaste unitId={next.unit.id} language={language} />}
             <Link href={`/grammar/${next.unit.id}`} className={PRIMARY} data-hotkey="enter">
               <GraduationCap className="size-5" aria-hidden />{cs.lesson.resume}
               <KeyHint k="Enter" />
@@ -164,6 +194,7 @@ export default function LessonPage() {
             <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200"><Compass className="size-4" aria-hidden />{cs.lesson.recommendedFor(next.level)}</p>
             <h2 className="text-xl font-bold">{next.unit.title}</h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{next.unit.summary}</p>
+            {language && <ExampleTaste unitId={next.unit.id} language={language} />}
             <p className="mt-2 text-xs text-slate-500">{next.fallback
               ? cs.lesson.recommendFallback(next.target, next.level)
               : next.source === "placement"

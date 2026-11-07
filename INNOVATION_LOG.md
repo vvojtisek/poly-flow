@@ -1905,3 +1905,13 @@ Vlad approves a push.
 **Implemented Solution:** The page installs the shared hotkey listener. The single primary action (resume the open lesson, open the recommended topic, or start the due grammar check) carries data-hotkey='enter' with an Enter key hint. V opens the vocabulary lesson, with a hint on its button. V is a page-local letter shortcut: the page has no text input, and it is ignored with modifiers or while typing.
 
 **Verification:** Playwright: Enter on the page body navigates to /grammar/de-a1-sein (the open lesson); V navigates to /lesson/vocabulary. Key hints render on desktop only (KeyHint is lg-only). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 82/120 | Page: [/lesson] (Page Cycle 7/15)
+
+**Summary:** let the learner hear and read the recommended topic's first example
+
+**Observed Problem:** The recommended or open topic was introduced only by a one-line Czech summary. The product's rule is context before drill, but the overview gave no feel for the target language before the click. The grammar example audio added earlier was not used here.
+
+**Implemented Solution:** The recommended and open-lesson cards load that topic's first example (one extra request, optional: the card works without it) and show it in the target language with its Czech translation and a play button for the sentence audio. P plays it on desktop, with a P key hint.
+
+**Verification:** Playwright on real data: the open-lesson card shows 'Ich bin Anna und ich bin acht. | Jsem Anna a je mi osm.'; pressing P requests grammar/units/de-a1-sein/audio?example=0 (TTS is unavailable in the container, so the request was checked, not playback). No console errors besides the expected 503. typecheck, next build, ruff pass.
