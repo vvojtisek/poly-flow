@@ -1,0 +1,72 @@
+name: release
+
+# Every push to main publishes (or refreshes) the GitHub release for the version in /VERSION:
+# tag v<VERSION>, auto-generated change notes, and downloadable artefacts. Pre-release versions
+# (1.0.0-alpha.N) are marked as pre-releases. Every PR bumps /VERSION, so each merge makes a new release.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.17"
+
+      - name: Read version
+        id: v
+        run: |
+          version=$(tr -d '[:space:]' < VERSION)
+          if ! [[ $version =~ ^[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)\.[0-9]+)?$ ]]; then
+            echo "::error::VERSION is not a supported SemVer: $version"; exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          if [[ $version == *-* ]]; then echo "prerelease=true" >> "$GITHUB_OUTPUT"; else echo "prerelease=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Build artefacts
+        run: |
+          mkdir -p dist
+          (cd backend && uv build --out-dir ../dist)
+          # Deployment bundle: everything needed to run the stack from published images/sources.
+          tar -czf "dist/polyflow-${{ steps.v.outputs.version }}-deploy.tar.gz" \
+            VERSION README.md LICENSE .env.example docker-compose.yml docker-compose.gpu.yml docker-compose.local.yml \
+            docker deploy scripts
+          # Curated datasets (lexicon, grammar, scenes, stories, diagnostics) as a separate download.
+          tar -czf "dist/polyflow-${{ steps.v.outputs.version }}-data.tar.gz" backend/data
+          (cd dist && sha256sum * > SHA256SUMS)
+          ls -l dist
+
+      - name: Create or refresh the release
+        env:
+          TAG: ${{ steps.v.outputs.tag }}
+          PRERELEASE: ${{ steps.v.outputs.prerelease }}
+        run: |
+          flags=()
+          [ "$PRERELEASE" = "true" ] && flags+=(--prerelease) || flags+=(--latest)
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            # Same version pushed again (a merge that did not bump it): refresh the artefacts only.
+            echo "Release $TAG exists; refreshing artefacts."
+            gh release upload "$TAG" dist/* --clobber
+          else
+            gh release create "$TAG" dist/* \
+              --target "$GITHUB_SHA" \
+              --title "PolyFlow $TAG" \
+              --generate-notes \
+              "${flags[@]}"
+          fi
