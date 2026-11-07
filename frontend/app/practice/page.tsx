@@ -82,6 +82,22 @@ export default function PracticePage() {
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
   useEffect(() => setRecent(readRecent()), []);
+  // The skill filter lives in the URL (?skill=listening,speaking), so it survives back navigation
+  // from a practice mode and can be linked to.
+  const [urlRead, setUrlRead] = useState(false);
+  useEffect(() => {
+    const raw = new URLSearchParams(window.location.search).get("skill") ?? "";
+    setSkills(raw.split(",").filter((x): x is Skill => (SKILLS as string[]).includes(x)));
+    setUrlRead(true);
+  }, []);
+  useEffect(() => {
+    if (!urlRead) return;
+    const params = new URLSearchParams(window.location.search);
+    if (skills.length) params.set("skill", skills.join(","));
+    else params.delete("skill");
+    const qs = params.toString();
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+  }, [urlRead, skills]);
   useEffect(() => setPinned(readPinned()), []);
   const [visits, setVisits] = useState<ReturnType<typeof readVisits>>({});
   useEffect(() => setVisits(readVisits()), []);
@@ -200,7 +216,7 @@ export default function PracticePage() {
           </button>
           {available.map((s) => (
             <button key={s} type="button" aria-pressed={skills.includes(s)} className={chip(skills.includes(s))} onClick={() => setSkills((current) => current.includes(s) ? current.filter((item) => item !== s) : [...current, s])}>
-              {t.skill[s]}
+              {t.skill[s]} <span className="tabular-nums opacity-70">{modes.filter((m) => m.skills.includes(s)).length}</span>
             </button>
           ))}
         </div>

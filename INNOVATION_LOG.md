@@ -1425,3 +1425,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/practice.ts` flags the four modes with `needsWords`. `app/practice/page.tsx` reads the learner's introduced-word count for the active language from the cheap per-language summary endpoint (cycle 5) and, while it is zero, replaces those cards' last-used line with "Pracuje se slovy z lekcí: nejdřív projdi první lekci." The cards stay links (the modes explain themselves); the other eight modes, which use the whole lexicon, are unchanged.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright in French (no lessons) shows the note on exactly 4 cards, and none in German.
+
+## Global Cycle 34/120 | Page: [/practice] (Page Cycle 4/15)
+
+**Summary:** keep the skill filter in the URL and show counts per skill
+
+**Observed Problem:** Choosing "mluvení" on the hub, opening a mode and pressing Back reset the filter to all twelve modes; the chips also gave no idea how many modes each skill offers in the current language.
+
+**Implemented Solution:** `app/practice/page.tsx` reads `?skill=a,b` on load (unknown values ignored) and mirrors the selection with `history.replaceState`, so Back and shared links restore it. Each skill chip shows how many modes train it for the active language (for example "mluvení 2").
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/practice?skill=speaking` ("2 způsoby procvičování") and adding listening updated the URL to `?skill=speaking,listening`.
