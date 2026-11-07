@@ -3807,6 +3807,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-04-cat-chair",
+   "level": "A1",
+   "title": "Un posto per il gatto",
+   "title_cs": "Místo pro kočku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha un nuovo tavolino e due sedie.",
+     "cs": "Tom má nový malý stůl a dvě židle."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Questa sedia è mia. Un ospite può sedersi sull'altra.",
+     "cs": "Tahle židle je moje. Na druhé může sedět návštěva."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E dove si siede il tuo gatto?",
+     "cs": "A kde sedí tvoje kočka?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Il gatto ha un bel cuscino morbido per terra.",
+     "cs": "Kočka má svůj krásný měkký polštář na zemi."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Guarda, è già sulla tua sedia.",
+     "cs": "Podívej, už sedí na tvé židli."
+    },
+    {
+     "speaker": null,
+     "text": "Tom si siede sul cuscino. Al gatto piace una vita comoda.",
+     "cs": "Tom sedí na polštáři. Kočka má ráda pohodlný život."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "cuscino",
+     "cs": "polštář"
+    },
+    {
+     "word": "comoda",
+     "cs": "pohodlný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec sedí Tom?",
+     "options": [
+      "Na polštáři.",
+      "Na stole.",
+      "Venku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo má Tomovu židli?",
+     "options": [
+      "Kočka.",
+      "Návštěva.",
+      "Eva."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
