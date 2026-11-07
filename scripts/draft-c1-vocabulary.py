@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import xml.etree.ElementTree as ET
+from collections import Counter
 from pathlib import Path
 
 from simplemma import lemmatize
@@ -168,6 +169,7 @@ def main():
     dest = ROOT / "backend/data/c1"
     manifest_path = dest / "sources.json"
     manifest = json.loads(manifest_path.read_text())
+    review = {}
     for language, iso in LANGS.items():
         path = args.sources / f"wd-{iso}.tei"
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -201,7 +203,27 @@ def main():
                         "revision": "c1-candidates-v1",
                     }
                 )
+        base = []
+        for base_path in (ROOT / "backend/data/lexicon").glob(f"{language}.*.csv"):
+            with base_path.open(encoding="utf-8") as base_file:
+                base.extend(
+                    csv.DictReader(x for x in base_file if not x.startswith("#"))
+                )
+        counts = Counter(r["translation_cs"] for r in [*base, *rows[:3000]])
+        ambiguities = [
+            {"lemma": r["lemma"], "translation_cs": r["translation_cs"], "rank": rank}
+            for rank, r in enumerate(rows[:3000], 5001)
+            if counts[r["translation_cs"]] > 1
+        ]
+        review[language] = {
+            "candidate_count": 3000,
+            "ambiguous_gloss_count": len(ambiguities),
+            "ambiguous_glosses": ambiguities,
+        }
         print(f"{language}: 3000 review candidates; lowest Zipf {rows[2999]['score']}")
+    (dest / "review-ambiguities.json").write_text(
+        json.dumps(review, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
 
 
 if __name__ == "__main__":

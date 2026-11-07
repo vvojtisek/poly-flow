@@ -38,6 +38,14 @@ terms. Rank is a proposed teaching order. British spelling and individual meanin
 still require review. Sample exclusions include Italian `mettersi` → `sada` and
 `salvatore` → `úspory`. Filtering cannot establish semantic correctness or safety.
 
+## Known review blockers
+
+`review-ambiguities.json` lists candidates whose Czech gloss is also used by
+another entry: DE 204, EN 131, FR 116, IT 960. They need contextual sense
+disambiguation before recall exercises can expect a single correct answer.
+The source contains semantic errors beyond these detectable ambiguities. These
+files are review material, not a completed, learner-ready C1 dictionary.
+
 ## Reproduction and review
 
 Outside the runtime environment, install the build-only tools in a separate venv:

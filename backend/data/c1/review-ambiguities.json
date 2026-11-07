@@ -1,0 +1,7081 @@
+{
+  "de": {
+    "candidate_count": 3000,
+    "ambiguous_gloss_count": 204,
+    "ambiguous_glosses": [
+      {
+        "lemma": "beschäftigt",
+        "translation_cs": "zaměstnaný",
+        "rank": 5046
+      },
+      {
+        "lemma": "Zusammenarbeit",
+        "translation_cs": "spolupráce",
+        "rank": 5053
+      },
+      {
+        "lemma": "Fahrer",
+        "translation_cs": "řidič",
+        "rank": 5087
+      },
+      {
+        "lemma": "Bedarf",
+        "translation_cs": "potřeba",
+        "rank": 5091
+      },
+      {
+        "lemma": "Verlauf",
+        "translation_cs": "průběh",
+        "rank": 5132
+      },
+      {
+        "lemma": "schmerzen",
+        "translation_cs": "bolet",
+        "rank": 5161
+      },
+      {
+        "lemma": "Wolle",
+        "translation_cs": "vlna",
+        "rank": 5174
+      },
+      {
+        "lemma": "Übersicht",
+        "translation_cs": "přehled",
+        "rank": 5179
+      },
+      {
+        "lemma": "Pflege",
+        "translation_cs": "péče",
+        "rank": 5184
+      },
+      {
+        "lemma": "Verstand",
+        "translation_cs": "rozum",
+        "rank": 5187
+      },
+      {
+        "lemma": "Zeitschrift",
+        "translation_cs": "časopis",
+        "rank": 5192
+      },
+      {
+        "lemma": "Augenblick",
+        "translation_cs": "okamžik",
+        "rank": 5193
+      },
+      {
+        "lemma": "Frühjahr",
+        "translation_cs": "jaro",
+        "rank": 5194
+      },
+      {
+        "lemma": "Vorbereitung",
+        "translation_cs": "příprava",
+        "rank": 5205
+      },
+      {
+        "lemma": "Vorbild",
+        "translation_cs": "vzor",
+        "rank": 5230
+      },
+      {
+        "lemma": "Mischung",
+        "translation_cs": "směs",
+        "rank": 5241
+      },
+      {
+        "lemma": "Mittelpunkt",
+        "translation_cs": "střed",
+        "rank": 5242
+      },
+      {
+        "lemma": "Veröffentlichung",
+        "translation_cs": "publikace",
+        "rank": 5258
+      },
+      {
+        "lemma": "erheblich",
+        "translation_cs": "podstatný",
+        "rank": 5270
+      },
+      {
+        "lemma": "Lebensmittel",
+        "translation_cs": "potravina",
+        "rank": 5291
+      },
+      {
+        "lemma": "Fassung",
+        "translation_cs": "znění",
+        "rank": 5314
+      },
+      {
+        "lemma": "beschränkt",
+        "translation_cs": "omezený",
+        "rank": 5316
+      },
+      {
+        "lemma": "Ehemann",
+        "translation_cs": "manžel; muž; choť",
+        "rank": 5333
+      },
+      {
+        "lemma": "Betreuung",
+        "translation_cs": "péče",
+        "rank": 5349
+      },
+      {
+        "lemma": "Autofahrer",
+        "translation_cs": "řidič",
+        "rank": 5355
+      },
+      {
+        "lemma": "Verteilung",
+        "translation_cs": "rozdělení",
+        "rank": 5391
+      },
+      {
+        "lemma": "Radfahrer",
+        "translation_cs": "cyklista",
+        "rank": 5401
+      },
+      {
+        "lemma": "Bekannter",
+        "translation_cs": "známý",
+        "rank": 5407
+      },
+      {
+        "lemma": "Beschäftigung",
+        "translation_cs": "zaměstnání",
+        "rank": 5408
+      },
+      {
+        "lemma": "Schoß",
+        "translation_cs": "klín",
+        "rank": 5413
+      },
+      {
+        "lemma": "unnötig",
+        "translation_cs": "zbytečný",
+        "rank": 5433
+      },
+      {
+        "lemma": "Füllen",
+        "translation_cs": "hříbě; hříbátko",
+        "rank": 5437
+      },
+      {
+        "lemma": "rechtlich",
+        "translation_cs": "právní",
+        "rank": 5466
+      },
+      {
+        "lemma": "Mitleid",
+        "translation_cs": "soucit",
+        "rank": 5474
+      },
+      {
+        "lemma": "Abschaffung",
+        "translation_cs": "zrušení",
+        "rank": 5559
+      },
+      {
+        "lemma": "Passwort",
+        "translation_cs": "heslo",
+        "rank": 5566
+      },
+      {
+        "lemma": "besiegt",
+        "translation_cs": "poražený",
+        "rank": 5589
+      },
+      {
+        "lemma": "Abwechslung",
+        "translation_cs": "rozmanitost",
+        "rank": 5592
+      },
+      {
+        "lemma": "Ausgangspunkt",
+        "translation_cs": "východisko",
+        "rank": 5602
+      },
+      {
+        "lemma": "Aufhebung",
+        "translation_cs": "zrušení",
+        "rank": 5623
+      },
+      {
+        "lemma": "Großmutter",
+        "translation_cs": "babička",
+        "rank": 5627
+      },
+      {
+        "lemma": "Speicher",
+        "translation_cs": "paměť",
+        "rank": 5634
+      },
+      {
+        "lemma": "Stichwort",
+        "translation_cs": "heslo",
+        "rank": 5635
+      },
+      {
+        "lemma": "nu",
+        "translation_cs": "teď",
+        "rank": 5641
+      },
+      {
+        "lemma": "geehrt",
+        "translation_cs": "vážený",
+        "rank": 5650
+      },
+      {
+        "lemma": "Aufforderung",
+        "translation_cs": "výzva",
+        "rank": 5682
+      },
+      {
+        "lemma": "Drachen",
+        "translation_cs": "drak",
+        "rank": 5686
+      },
+      {
+        "lemma": "Entschädigung",
+        "translation_cs": "náhrada",
+        "rank": 5688
+      },
+      {
+        "lemma": "Gleichgewicht",
+        "translation_cs": "rovnováha",
+        "rank": 5691
+      },
+      {
+        "lemma": "Anmerkung",
+        "translation_cs": "poznámka",
+        "rank": 5698
+      },
+      {
+        "lemma": "Beachtung",
+        "translation_cs": "dodržování",
+        "rank": 5699
+      },
+      {
+        "lemma": "Mitarbeit",
+        "translation_cs": "spolupráce",
+        "rank": 5705
+      },
+      {
+        "lemma": "Besatzung",
+        "translation_cs": "posádka",
+        "rank": 5714
+      },
+      {
+        "lemma": "Einhaltung",
+        "translation_cs": "dodržování",
+        "rank": 5734
+      },
+      {
+        "lemma": "Weltbild",
+        "translation_cs": "světový názor",
+        "rank": 5745
+      },
+      {
+        "lemma": "Abgeordneter",
+        "translation_cs": "poslanec",
+        "rank": 5749
+      },
+      {
+        "lemma": "Badezimmer",
+        "translation_cs": "koupelna",
+        "rank": 5751
+      },
+      {
+        "lemma": "Finanz",
+        "translation_cs": "finance",
+        "rank": 5777
+      },
+      {
+        "lemma": "Handschrift",
+        "translation_cs": "rukopis",
+        "rank": 5792
+      },
+      {
+        "lemma": "vornehmlich",
+        "translation_cs": "zejména",
+        "rank": 5803
+      },
+      {
+        "lemma": "Heiliger",
+        "translation_cs": "svatý",
+        "rank": 5807
+      },
+      {
+        "lemma": "Gattin",
+        "translation_cs": "manželka; choť; žena",
+        "rank": 5855
+      },
+      {
+        "lemma": "Jahrestag",
+        "translation_cs": "výročí",
+        "rank": 5858
+      },
+      {
+        "lemma": "Südwesten",
+        "translation_cs": "jihozápad",
+        "rank": 5868
+      },
+      {
+        "lemma": "Buchhandlung",
+        "translation_cs": "knihkupectví",
+        "rank": 5875
+      },
+      {
+        "lemma": "Einbrecher",
+        "translation_cs": "lupič",
+        "rank": 5877
+      },
+      {
+        "lemma": "Entschluss",
+        "translation_cs": "rozhodnutí",
+        "rank": 5879
+      },
+      {
+        "lemma": "förmlich",
+        "translation_cs": "úřední",
+        "rank": 5896
+      },
+      {
+        "lemma": "Mehrzahl",
+        "translation_cs": "množné číslo; plurál",
+        "rank": 5919
+      },
+      {
+        "lemma": "Mitgefühl",
+        "translation_cs": "soucit",
+        "rank": 5920
+      },
+      {
+        "lemma": "Neugier",
+        "translation_cs": "zvědavost",
+        "rank": 5922
+      },
+      {
+        "lemma": "anfassen",
+        "translation_cs": "dotknout se",
+        "rank": 5933
+      },
+      {
+        "lemma": "ekelhaft",
+        "translation_cs": "ošklivý",
+        "rank": 5934
+      },
+      {
+        "lemma": "Ausweg",
+        "translation_cs": "východisko",
+        "rank": 5940
+      },
+      {
+        "lemma": "munter",
+        "translation_cs": "čerstvý",
+        "rank": 5970
+      },
+      {
+        "lemma": "Abc",
+        "translation_cs": "abeceda",
+        "rank": 5974
+      },
+      {
+        "lemma": "Kunststoff",
+        "translation_cs": "plast",
+        "rank": 5987
+      },
+      {
+        "lemma": "Nahrungsmittel",
+        "translation_cs": "potravina",
+        "rank": 5989
+      },
+      {
+        "lemma": "Vorlesung",
+        "translation_cs": "přednáška",
+        "rank": 6025
+      },
+      {
+        "lemma": "bisweilen",
+        "translation_cs": "někdy",
+        "rank": 6026
+      },
+      {
+        "lemma": "montags",
+        "translation_cs": "pondělí",
+        "rank": 6029
+      },
+      {
+        "lemma": "Aufteilung",
+        "translation_cs": "rozdělení",
+        "rank": 6032
+      },
+      {
+        "lemma": "Dienstleistung",
+        "translation_cs": "služba",
+        "rank": 6036
+      },
+      {
+        "lemma": "Erwachsener",
+        "translation_cs": "dospělý",
+        "rank": 6061
+      },
+      {
+        "lemma": "Fachbereich",
+        "translation_cs": "obor; odvětví",
+        "rank": 6062
+      },
+      {
+        "lemma": "Gesundheitswesen",
+        "translation_cs": "zdravotnictví",
+        "rank": 6064
+      },
+      {
+        "lemma": "Same",
+        "translation_cs": "semeno",
+        "rank": 6074
+      },
+      {
+        "lemma": "Anschein",
+        "translation_cs": "dojem",
+        "rank": 6111
+      },
+      {
+        "lemma": "Schleife",
+        "translation_cs": "cyklus",
+        "rank": 6135
+      },
+      {
+        "lemma": "Zutritt",
+        "translation_cs": "přístup",
+        "rank": 6146
+      },
+      {
+        "lemma": "Beerdigung",
+        "translation_cs": "pohřeb",
+        "rank": 6153
+      },
+      {
+        "lemma": "Mitbewohner",
+        "translation_cs": "spolubydlící",
+        "rank": 6164
+      },
+      {
+        "lemma": "Abstammung",
+        "translation_cs": "původ",
+        "rank": 6182
+      },
+      {
+        "lemma": "Fels",
+        "translation_cs": "skála",
+        "rank": 6190
+      },
+      {
+        "lemma": "Gasthaus",
+        "translation_cs": "hospoda",
+        "rank": 6192
+      },
+      {
+        "lemma": "Vetter",
+        "translation_cs": "bratranec",
+        "rank": 6207
+      },
+      {
+        "lemma": "Weltraum",
+        "translation_cs": "vesmír",
+        "rank": 6209
+      },
+      {
+        "lemma": "Radfahren",
+        "translation_cs": "cyklistika",
+        "rank": 6233
+      },
+      {
+        "lemma": "Vorrang",
+        "translation_cs": "přednost",
+        "rank": 6243
+      },
+      {
+        "lemma": "Piano",
+        "translation_cs": "klavír",
+        "rank": 6274
+      },
+      {
+        "lemma": "kostenfrei",
+        "translation_cs": "bezplatný",
+        "rank": 6281
+      },
+      {
+        "lemma": "Anstellung",
+        "translation_cs": "zaměstnání",
+        "rank": 6288
+      },
+      {
+        "lemma": "Aufschrift",
+        "translation_cs": "nápis",
+        "rank": 6290
+      },
+      {
+        "lemma": "Desaster",
+        "translation_cs": "katastrofa",
+        "rank": 6293
+      },
+      {
+        "lemma": "Angestellter",
+        "translation_cs": "zaměstnanec",
+        "rank": 6312
+      },
+      {
+        "lemma": "Manuskript",
+        "translation_cs": "rukopis",
+        "rank": 6323
+      },
+      {
+        "lemma": "unwichtig",
+        "translation_cs": "nedůležitý",
+        "rank": 6334
+      },
+      {
+        "lemma": "Gulden",
+        "translation_cs": "zlatý",
+        "rank": 6353
+      },
+      {
+        "lemma": "Kofferraum",
+        "translation_cs": "kufr",
+        "rank": 6358
+      },
+      {
+        "lemma": "Wartung",
+        "translation_cs": "údržba",
+        "rank": 6380
+      },
+      {
+        "lemma": "Wortlaut",
+        "translation_cs": "znění",
+        "rank": 6384
+      },
+      {
+        "lemma": "Fauna",
+        "translation_cs": "zvířena",
+        "rank": 6433
+      },
+      {
+        "lemma": "Ritt",
+        "translation_cs": "jízda",
+        "rank": 6483
+      },
+      {
+        "lemma": "Südwest",
+        "translation_cs": "jihozápad",
+        "rank": 6487
+      },
+      {
+        "lemma": "Isolation",
+        "translation_cs": "izolace",
+        "rank": 6508
+      },
+      {
+        "lemma": "auffallend",
+        "translation_cs": "nápadný",
+        "rank": 6532
+      },
+      {
+        "lemma": "obendrein",
+        "translation_cs": "navíc",
+        "rank": 6533
+      },
+      {
+        "lemma": "Mister",
+        "translation_cs": "pán",
+        "rank": 6555
+      },
+      {
+        "lemma": "amüsant",
+        "translation_cs": "zábavný",
+        "rank": 6570
+      },
+      {
+        "lemma": "Flugplatz",
+        "translation_cs": "letiště",
+        "rank": 6580
+      },
+      {
+        "lemma": "Mami",
+        "translation_cs": "maminka",
+        "rank": 6591
+      },
+      {
+        "lemma": "verehrt",
+        "translation_cs": "vážený",
+        "rank": 6617
+      },
+      {
+        "lemma": "Leichnam",
+        "translation_cs": "mrtvola",
+        "rank": 6636
+      },
+      {
+        "lemma": "Weltanschauung",
+        "translation_cs": "světový názor",
+        "rank": 6650
+      },
+      {
+        "lemma": "Wirbelsäule",
+        "translation_cs": "páteř",
+        "rank": 6651
+      },
+      {
+        "lemma": "Plural",
+        "translation_cs": "množné číslo; plurál",
+        "rank": 6677
+      },
+      {
+        "lemma": "Radler",
+        "translation_cs": "cyklista",
+        "rank": 6678
+      },
+      {
+        "lemma": "Remis",
+        "translation_cs": "remíza",
+        "rank": 6680
+      },
+      {
+        "lemma": "Schwamm",
+        "translation_cs": "houba",
+        "rank": 6684
+      },
+      {
+        "lemma": "Yen",
+        "translation_cs": "jen",
+        "rank": 6691
+      },
+      {
+        "lemma": "Tracht",
+        "translation_cs": "kroj",
+        "rank": 6727
+      },
+      {
+        "lemma": "beständig",
+        "translation_cs": "trvalý",
+        "rank": 6737
+      },
+      {
+        "lemma": "irrelevant",
+        "translation_cs": "nedůležitý",
+        "rank": 6742
+      },
+      {
+        "lemma": "Nordwesten",
+        "translation_cs": "severozápad",
+        "rank": 6768
+      },
+      {
+        "lemma": "Palais",
+        "translation_cs": "palác",
+        "rank": 6769
+      },
+      {
+        "lemma": "Alphabet",
+        "translation_cs": "abeceda",
+        "rank": 6791
+      },
+      {
+        "lemma": "Geige",
+        "translation_cs": "housle",
+        "rank": 6803
+      },
+      {
+        "lemma": "Prozentsatz",
+        "translation_cs": "procento",
+        "rank": 6817
+      },
+      {
+        "lemma": "Violine",
+        "translation_cs": "housle",
+        "rank": 6827
+      },
+      {
+        "lemma": "aufrichtig",
+        "translation_cs": "upřímný",
+        "rank": 6830
+      },
+      {
+        "lemma": "hausen",
+        "translation_cs": "bydlet",
+        "rank": 6831
+      },
+      {
+        "lemma": "Druckerei",
+        "translation_cs": "tiskárna",
+        "rank": 6845
+      },
+      {
+        "lemma": "Kranker",
+        "translation_cs": "nemocný",
+        "rank": 6856
+      },
+      {
+        "lemma": "Küken",
+        "translation_cs": "kuře",
+        "rank": 6857
+      },
+      {
+        "lemma": "Para",
+        "translation_cs": "peníze",
+        "rank": 6859
+      },
+      {
+        "lemma": "Rückgrat",
+        "translation_cs": "páteř",
+        "rank": 6863
+      },
+      {
+        "lemma": "Gemahlin",
+        "translation_cs": "manželka; choť; žena",
+        "rank": 6896
+      },
+      {
+        "lemma": "Inhaltsverzeichnis",
+        "translation_cs": "obsah",
+        "rank": 6899
+      },
+      {
+        "lemma": "Keil",
+        "translation_cs": "klín",
+        "rank": 6902
+      },
+      {
+        "lemma": "Klassenzimmer",
+        "translation_cs": "třída",
+        "rank": 6904
+      },
+      {
+        "lemma": "Mülleimer",
+        "translation_cs": "popelnice",
+        "rank": 6909
+      },
+      {
+        "lemma": "Weltall",
+        "translation_cs": "vesmír",
+        "rank": 6958
+      },
+      {
+        "lemma": "Zubereitung",
+        "translation_cs": "příprava",
+        "rank": 6961
+      },
+      {
+        "lemma": "fürchterlich",
+        "translation_cs": "strašný",
+        "rank": 6965
+      },
+      {
+        "lemma": "Campingplatz",
+        "translation_cs": "kemp",
+        "rank": 6982
+      },
+      {
+        "lemma": "Uraufführung",
+        "translation_cs": "premiéra",
+        "rank": 7016
+      },
+      {
+        "lemma": "Befund",
+        "translation_cs": "nález",
+        "rank": 7030
+      },
+      {
+        "lemma": "Instandhaltung",
+        "translation_cs": "údržba",
+        "rank": 7039
+      },
+      {
+        "lemma": "Gratulation",
+        "translation_cs": "blahopřání",
+        "rank": 7081
+      },
+      {
+        "lemma": "Bataillon",
+        "translation_cs": "prapor",
+        "rank": 7115
+      },
+      {
+        "lemma": "Rangliste",
+        "translation_cs": "žebříček",
+        "rank": 7135
+      },
+      {
+        "lemma": "Fahrstuhl",
+        "translation_cs": "výtah",
+        "rank": 7167
+      },
+      {
+        "lemma": "Fürsorge",
+        "translation_cs": "starost",
+        "rank": 7169
+      },
+      {
+        "lemma": "Gemisch",
+        "translation_cs": "směs",
+        "rank": 7211
+      },
+      {
+        "lemma": "Trainingslager",
+        "translation_cs": "kemp",
+        "rank": 7234
+      },
+      {
+        "lemma": "begnügen",
+        "translation_cs": "spokojit se",
+        "rank": 7241
+      },
+      {
+        "lemma": "violett",
+        "translation_cs": "fialový",
+        "rank": 7247
+      },
+      {
+        "lemma": "übersichtlich",
+        "translation_cs": "přehledný",
+        "rank": 7249
+      },
+      {
+        "lemma": "Anschrift",
+        "translation_cs": "adresa",
+        "rank": 7254
+      },
+      {
+        "lemma": "Anwender",
+        "translation_cs": "uživatel",
+        "rank": 7255
+      },
+      {
+        "lemma": "Bekanntgabe",
+        "translation_cs": "oznámení",
+        "rank": 7258
+      },
+      {
+        "lemma": "Matura",
+        "translation_cs": "maturita",
+        "rank": 7274
+      },
+      {
+        "lemma": "Nordwest",
+        "translation_cs": "severozápad",
+        "rank": 7277
+      },
+      {
+        "lemma": "formell",
+        "translation_cs": "formální",
+        "rank": 7302
+      },
+      {
+        "lemma": "Bekanntmachung",
+        "translation_cs": "oznámení",
+        "rank": 7345
+      },
+      {
+        "lemma": "Radsport",
+        "translation_cs": "cyklistika",
+        "rank": 7375
+      },
+      {
+        "lemma": "Neugierde",
+        "translation_cs": "zvědavost",
+        "rank": 7430
+      },
+      {
+        "lemma": "Zweikampf",
+        "translation_cs": "souboj",
+        "rank": 7446
+      },
+      {
+        "lemma": "Hähnchen",
+        "translation_cs": "kuře",
+        "rank": 7462
+      },
+      {
+        "lemma": "Gesundheitssystem",
+        "translation_cs": "zdravotnictví",
+        "rank": 7519
+      },
+      {
+        "lemma": "ausgedehnt",
+        "translation_cs": "rozsáhlý",
+        "rank": 7540
+      },
+      {
+        "lemma": "erliegen",
+        "translation_cs": "podlehnout",
+        "rank": 7544
+      },
+      {
+        "lemma": "Sitte",
+        "translation_cs": "zvyk; obyčej",
+        "rank": 7629
+      },
+      {
+        "lemma": "Kluft",
+        "translation_cs": "kroj",
+        "rank": 7668
+      },
+      {
+        "lemma": "Sichtweite",
+        "translation_cs": "dohled",
+        "rank": 7682
+      },
+      {
+        "lemma": "abfinden",
+        "translation_cs": "spokojit se",
+        "rank": 7690
+      },
+      {
+        "lemma": "Ungewissheit",
+        "translation_cs": "nejistota",
+        "rank": 7767
+      },
+      {
+        "lemma": "überschaubar",
+        "translation_cs": "přehledný",
+        "rank": 7782
+      },
+      {
+        "lemma": "Gatte",
+        "translation_cs": "manžel; muž; choť",
+        "rank": 7793
+      },
+      {
+        "lemma": "Isolierung",
+        "translation_cs": "izolace",
+        "rank": 7801
+      },
+      {
+        "lemma": "Mitbewohnerin",
+        "translation_cs": "spolubydlící",
+        "rank": 7810
+      },
+      {
+        "lemma": "lautlos",
+        "translation_cs": "tichý",
+        "rank": 7826
+      },
+      {
+        "lemma": "Bestattung",
+        "translation_cs": "pohřeb",
+        "rank": 7837
+      },
+      {
+        "lemma": "Fohlen",
+        "translation_cs": "hříbě; hříbátko",
+        "rank": 7844
+      },
+      {
+        "lemma": "Kinderspiel",
+        "translation_cs": "hračka",
+        "rank": 7855
+      },
+      {
+        "lemma": "Strauch",
+        "translation_cs": "keř",
+        "rank": 7872
+      },
+      {
+        "lemma": "Tierwelt",
+        "translation_cs": "zvířena",
+        "rank": 7874
+      },
+      {
+        "lemma": "träge",
+        "translation_cs": "líný",
+        "rank": 7890
+      },
+      {
+        "lemma": "Buchhandel",
+        "translation_cs": "knihkupectví",
+        "rank": 7903
+      },
+      {
+        "lemma": "Vorzug",
+        "translation_cs": "přednost",
+        "rank": 7929
+      },
+      {
+        "lemma": "Begräbnis",
+        "translation_cs": "pohřeb",
+        "rank": 7943
+      },
+      {
+        "lemma": "Mülltonne",
+        "translation_cs": "popelnice",
+        "rank": 7969
+      },
+      {
+        "lemma": "Restauration",
+        "translation_cs": "restaurace",
+        "rank": 7974
+      },
+      {
+        "lemma": "unsinnig",
+        "translation_cs": "nesmyslný",
+        "rank": 7992
+      }
+    ]
+  },
+  "en": {
+    "candidate_count": 3000,
+    "ambiguous_gloss_count": 131,
+    "ambiguous_glosses": [
+      {
+        "lemma": "beginning",
+        "translation_cs": "začátek; počátek",
+        "rank": 5009
+      },
+      {
+        "lemma": "nick",
+        "translation_cs": "vrub; zářez",
+        "rank": 5031
+      },
+      {
+        "lemma": "pc",
+        "translation_cs": "ks",
+        "rank": 5034
+      },
+      {
+        "lemma": "gray",
+        "translation_cs": "šedý",
+        "rank": 5044
+      },
+      {
+        "lemma": "theater",
+        "translation_cs": "divadlo",
+        "rank": 5052
+      },
+      {
+        "lemma": "offense",
+        "translation_cs": "urážka",
+        "rank": 5062
+      },
+      {
+        "lemma": "wright",
+        "translation_cs": "výrobce",
+        "rank": 5074
+      },
+      {
+        "lemma": "harbor",
+        "translation_cs": "přístav",
+        "rank": 5084
+      },
+      {
+        "lemma": "hp",
+        "translation_cs": "ks",
+        "rank": 5088
+      },
+      {
+        "lemma": "flavor",
+        "translation_cs": "příchuť",
+        "rank": 5107
+      },
+      {
+        "lemma": "hart",
+        "translation_cs": "jelen",
+        "rank": 5108
+      },
+      {
+        "lemma": "cannabis",
+        "translation_cs": "konopí",
+        "rank": 5110
+      },
+      {
+        "lemma": "tumor",
+        "translation_cs": "nádor",
+        "rank": 5141
+      },
+      {
+        "lemma": "circular",
+        "translation_cs": "kulatý",
+        "rank": 5145
+      },
+      {
+        "lemma": "flu",
+        "translation_cs": "chřipka",
+        "rank": 5152
+      },
+      {
+        "lemma": "supposedly",
+        "translation_cs": "údajně",
+        "rank": 5160
+      },
+      {
+        "lemma": "thankful",
+        "translation_cs": "vděčný",
+        "rank": 5220
+      },
+      {
+        "lemma": "velocity",
+        "translation_cs": "rychlost",
+        "rank": 5244
+      },
+      {
+        "lemma": "accountability",
+        "translation_cs": "odpovědnost",
+        "rank": 5245
+      },
+      {
+        "lemma": "exterior",
+        "translation_cs": "vnější",
+        "rank": 5253
+      },
+      {
+        "lemma": "chorus",
+        "translation_cs": "refrén",
+        "rank": 5276
+      },
+      {
+        "lemma": "rejection",
+        "translation_cs": "odmítnutí",
+        "rank": 5294
+      },
+      {
+        "lemma": "immense",
+        "translation_cs": "ohromný",
+        "rank": 5329
+      },
+      {
+        "lemma": "sadness",
+        "translation_cs": "smutek",
+        "rank": 5339
+      },
+      {
+        "lemma": "rubbish",
+        "translation_cs": "nesmysl",
+        "rank": 5364
+      },
+      {
+        "lemma": "wee",
+        "translation_cs": "malý",
+        "rank": 5372
+      },
+      {
+        "lemma": "lively",
+        "translation_cs": "živý",
+        "rank": 5397
+      },
+      {
+        "lemma": "compilation",
+        "translation_cs": "překlad",
+        "rank": 5419
+      },
+      {
+        "lemma": "violet",
+        "translation_cs": "fialový",
+        "rank": 5463
+      },
+      {
+        "lemma": "critique",
+        "translation_cs": "kritika",
+        "rank": 5469
+      },
+      {
+        "lemma": "notorious",
+        "translation_cs": "nechvalně známý",
+        "rank": 5487
+      },
+      {
+        "lemma": "refusal",
+        "translation_cs": "odmítnutí",
+        "rank": 5493
+      },
+      {
+        "lemma": "scent",
+        "translation_cs": "vůně",
+        "rank": 5530
+      },
+      {
+        "lemma": "atlas",
+        "translation_cs": "atlas",
+        "rank": 5576
+      },
+      {
+        "lemma": "minimize",
+        "translation_cs": "minimalizovat",
+        "rank": 5597
+      },
+      {
+        "lemma": "probable",
+        "translation_cs": "pravděpodobný",
+        "rank": 5645
+      },
+      {
+        "lemma": "notch",
+        "translation_cs": "vrub; zářez",
+        "rank": 5678
+      },
+      {
+        "lemma": "fortress",
+        "translation_cs": "pevnost",
+        "rank": 5712
+      },
+      {
+        "lemma": "seminar",
+        "translation_cs": "seminář",
+        "rank": 5732
+      },
+      {
+        "lemma": "heavenly",
+        "translation_cs": "nebeský",
+        "rank": 5756
+      },
+      {
+        "lemma": "café",
+        "translation_cs": "kavárna",
+        "rank": 5781
+      },
+      {
+        "lemma": "infamous",
+        "translation_cs": "nechvalně známý",
+        "rank": 5796
+      },
+      {
+        "lemma": "vivid",
+        "translation_cs": "živý",
+        "rank": 5816
+      },
+      {
+        "lemma": "amusement",
+        "translation_cs": "zábava",
+        "rank": 5817
+      },
+      {
+        "lemma": "anticipation",
+        "translation_cs": "očekávání",
+        "rank": 5818
+      },
+      {
+        "lemma": "supper",
+        "translation_cs": "večeře",
+        "rank": 5856
+      },
+      {
+        "lemma": "blink",
+        "translation_cs": "mrknutí",
+        "rank": 5875
+      },
+      {
+        "lemma": "genus",
+        "translation_cs": "rod",
+        "rank": 5886
+      },
+      {
+        "lemma": "sorrow",
+        "translation_cs": "smutek",
+        "rank": 5905
+      },
+      {
+        "lemma": "insecure",
+        "translation_cs": "nejistý",
+        "rank": 5929
+      },
+      {
+        "lemma": "greatness",
+        "translation_cs": "velikost",
+        "rank": 5974
+      },
+      {
+        "lemma": "masculine",
+        "translation_cs": "mužský; mužný",
+        "rank": 5984
+      },
+      {
+        "lemma": "outdoors",
+        "translation_cs": "příroda",
+        "rank": 5988
+      },
+      {
+        "lemma": "slick",
+        "translation_cs": "kluzký",
+        "rank": 5999
+      },
+      {
+        "lemma": "compulsory",
+        "translation_cs": "povinný",
+        "rank": 6022
+      },
+      {
+        "lemma": "moist",
+        "translation_cs": "vlhký",
+        "rank": 6086
+      },
+      {
+        "lemma": "manifest",
+        "translation_cs": "manifest",
+        "rank": 6119
+      },
+      {
+        "lemma": "dependence",
+        "translation_cs": "závislost",
+        "rank": 6206
+      },
+      {
+        "lemma": "drunken",
+        "translation_cs": "opilý",
+        "rank": 6211
+      },
+      {
+        "lemma": "earnest",
+        "translation_cs": "vážný",
+        "rank": 6212
+      },
+      {
+        "lemma": "manly",
+        "translation_cs": "mužský; mužný",
+        "rank": 6221
+      },
+      {
+        "lemma": "exemption",
+        "translation_cs": "výjimka",
+        "rank": 6252
+      },
+      {
+        "lemma": "manifesto",
+        "translation_cs": "manifest",
+        "rank": 6263
+      },
+      {
+        "lemma": "optic",
+        "translation_cs": "optický",
+        "rank": 6271
+      },
+      {
+        "lemma": "smack",
+        "translation_cs": "příchuť",
+        "rank": 6327
+      },
+      {
+        "lemma": "criticize",
+        "translation_cs": "kritizovat",
+        "rank": 6348
+      },
+      {
+        "lemma": "refrain",
+        "translation_cs": "refrén",
+        "rank": 6371
+      },
+      {
+        "lemma": "barbecue",
+        "translation_cs": "gril",
+        "rank": 6388
+      },
+      {
+        "lemma": "damp",
+        "translation_cs": "vlhký",
+        "rank": 6394
+      },
+      {
+        "lemma": "faulty",
+        "translation_cs": "vadný",
+        "rank": 6402
+      },
+      {
+        "lemma": "linen",
+        "translation_cs": "plátno",
+        "rank": 6457
+      },
+      {
+        "lemma": "scarce",
+        "translation_cs": "vzácný",
+        "rank": 6479
+      },
+      {
+        "lemma": "slippery",
+        "translation_cs": "kluzký",
+        "rank": 6481
+      },
+      {
+        "lemma": "spectacle",
+        "translation_cs": "podívaná",
+        "rank": 6482
+      },
+      {
+        "lemma": "meadow",
+        "translation_cs": "louka",
+        "rank": 6522
+      },
+      {
+        "lemma": "banquet",
+        "translation_cs": "hostina",
+        "rank": 6542
+      },
+      {
+        "lemma": "booty",
+        "translation_cs": "kořist",
+        "rank": 6544
+      },
+      {
+        "lemma": "blackout",
+        "translation_cs": "okno",
+        "rank": 6602
+      },
+      {
+        "lemma": "eccentric",
+        "translation_cs": "výstřední",
+        "rank": 6618
+      },
+      {
+        "lemma": "priceless",
+        "translation_cs": "nedocenitelný",
+        "rank": 6637
+      },
+      {
+        "lemma": "defective",
+        "translation_cs": "vadný",
+        "rank": 6664
+      },
+      {
+        "lemma": "latitude",
+        "translation_cs": "šířka",
+        "rank": 6678
+      },
+      {
+        "lemma": "lea",
+        "translation_cs": "louka",
+        "rank": 6679
+      },
+      {
+        "lemma": "captivity",
+        "translation_cs": "zajetí",
+        "rank": 6710
+      },
+      {
+        "lemma": "catastrophe",
+        "translation_cs": "katastrofa",
+        "rank": 6711
+      },
+      {
+        "lemma": "glitter",
+        "translation_cs": "blesk",
+        "rank": 6723
+      },
+      {
+        "lemma": "vapor",
+        "translation_cs": "pára",
+        "rank": 6753
+      },
+      {
+        "lemma": "clap",
+        "translation_cs": "tleskat",
+        "rank": 6823
+      },
+      {
+        "lemma": "invaluable",
+        "translation_cs": "nedocenitelný",
+        "rank": 6841
+      },
+      {
+        "lemma": "menace",
+        "translation_cs": "hrozba",
+        "rank": 6844
+      },
+      {
+        "lemma": "seminary",
+        "translation_cs": "seminář",
+        "rank": 6862
+      },
+      {
+        "lemma": "celestial",
+        "translation_cs": "nebeský",
+        "rank": 6880
+      },
+      {
+        "lemma": "fragrance",
+        "translation_cs": "vůně",
+        "rank": 6886
+      },
+      {
+        "lemma": "dependency",
+        "translation_cs": "závislost",
+        "rank": 6933
+      },
+      {
+        "lemma": "footprint",
+        "translation_cs": "stopa",
+        "rank": 6946
+      },
+      {
+        "lemma": "mediocre",
+        "translation_cs": "průměrný",
+        "rank": 6956
+      },
+      {
+        "lemma": "influenza",
+        "translation_cs": "chřipka",
+        "rank": 6994
+      },
+      {
+        "lemma": "pageant",
+        "translation_cs": "podívaná",
+        "rank": 7000
+      },
+      {
+        "lemma": "wholesome",
+        "translation_cs": "zdravý",
+        "rank": 7026
+      },
+      {
+        "lemma": "hind",
+        "translation_cs": "zadní",
+        "rank": 7052
+      },
+      {
+        "lemma": "humid",
+        "translation_cs": "vlhký",
+        "rank": 7054
+      },
+      {
+        "lemma": "mixer",
+        "translation_cs": "mixér",
+        "rank": 7064
+      },
+      {
+        "lemma": "wink",
+        "translation_cs": "mrknutí",
+        "rank": 7082
+      },
+      {
+        "lemma": "axle",
+        "translation_cs": "osa",
+        "rank": 7087
+      },
+      {
+        "lemma": "abolish",
+        "translation_cs": "zrušit",
+        "rank": 7147
+      },
+      {
+        "lemma": "inconvenient",
+        "translation_cs": "nepohodlný",
+        "rank": 7239
+      },
+      {
+        "lemma": "throttle",
+        "translation_cs": "ventil",
+        "rank": 7259
+      },
+      {
+        "lemma": "applaud",
+        "translation_cs": "tleskat",
+        "rank": 7266
+      },
+      {
+        "lemma": "confinement",
+        "translation_cs": "zajetí",
+        "rank": 7271
+      },
+      {
+        "lemma": "lineage",
+        "translation_cs": "rod",
+        "rank": 7293
+      },
+      {
+        "lemma": "serpent",
+        "translation_cs": "had",
+        "rank": 7305
+      },
+      {
+        "lemma": "heed",
+        "translation_cs": "pozornost",
+        "rank": 7351
+      },
+      {
+        "lemma": "outset",
+        "translation_cs": "začátek; počátek",
+        "rank": 7413
+      },
+      {
+        "lemma": "precursor",
+        "translation_cs": "předchůdce",
+        "rank": 7419
+      },
+      {
+        "lemma": "ache",
+        "translation_cs": "bolest",
+        "rank": 7450
+      },
+      {
+        "lemma": "blender",
+        "translation_cs": "mixér",
+        "rank": 7456
+      },
+      {
+        "lemma": "posterior",
+        "translation_cs": "zadní",
+        "rank": 7490
+      },
+      {
+        "lemma": "wager",
+        "translation_cs": "sázka",
+        "rank": 7507
+      },
+      {
+        "lemma": "hemp",
+        "translation_cs": "konopí",
+        "rank": 7535
+      },
+      {
+        "lemma": "unbelievably",
+        "translation_cs": "neuvěřitelně",
+        "rank": 7561
+      },
+      {
+        "lemma": "hurdle",
+        "translation_cs": "překážka",
+        "rank": 7589
+      },
+      {
+        "lemma": "extravagant",
+        "translation_cs": "výstřední",
+        "rank": 7639
+      },
+      {
+        "lemma": "evade",
+        "translation_cs": "vyhnout se",
+        "rank": 7698
+      },
+      {
+        "lemma": "satin",
+        "translation_cs": "atlas",
+        "rank": 7734
+      },
+      {
+        "lemma": "cleric",
+        "translation_cs": "duchovní",
+        "rank": 7758
+      },
+      {
+        "lemma": "scarcity",
+        "translation_cs": "nedostatek",
+        "rank": 7859
+      },
+      {
+        "lemma": "surpass",
+        "translation_cs": "překonat",
+        "rank": 7865
+      },
+      {
+        "lemma": "mastermind",
+        "translation_cs": "mozek",
+        "rank": 7910
+      },
+      {
+        "lemma": "supplementary",
+        "translation_cs": "dodatečný",
+        "rank": 7928
+      },
+      {
+        "lemma": "ostensibly",
+        "translation_cs": "zdánlivě",
+        "rank": 7976
+      },
+      {
+        "lemma": "unavoidable",
+        "translation_cs": "nevyhnutelný",
+        "rank": 7995
+      }
+    ]
+  },
+  "fr": {
+    "candidate_count": 3000,
+    "ambiguous_gloss_count": 116,
+    "ambiguous_glosses": [
+      {
+        "lemma": "cache",
+        "translation_cs": "skrýš; úkryt",
+        "rank": 5014
+      },
+      {
+        "lemma": "voyant",
+        "translation_cs": "viditelný",
+        "rank": 5027
+      },
+      {
+        "lemma": "ile",
+        "translation_cs": "ostrov",
+        "rank": 5031
+      },
+      {
+        "lemma": "occident",
+        "translation_cs": "západ",
+        "rank": 5034
+      },
+      {
+        "lemma": "cannabis",
+        "translation_cs": "konopí",
+        "rank": 5047
+      },
+      {
+        "lemma": "réclame",
+        "translation_cs": "reklama",
+        "rank": 5048
+      },
+      {
+        "lemma": "évènement",
+        "translation_cs": "událost",
+        "rank": 5054
+      },
+      {
+        "lemma": "toilette",
+        "translation_cs": "záchod",
+        "rank": 5093
+      },
+      {
+        "lemma": "jadis",
+        "translation_cs": "kdysi",
+        "rank": 5107
+      },
+      {
+        "lemma": "compassion",
+        "translation_cs": "soucit; slitování",
+        "rank": 5128
+      },
+      {
+        "lemma": "funérailles",
+        "translation_cs": "pohřeb",
+        "rank": 5129
+      },
+      {
+        "lemma": "ratio",
+        "translation_cs": "poměr",
+        "rank": 5135
+      },
+      {
+        "lemma": "mousse",
+        "translation_cs": "tupý",
+        "rank": 5167
+      },
+      {
+        "lemma": "poison",
+        "translation_cs": "jed",
+        "rank": 5201
+      },
+      {
+        "lemma": "transit",
+        "translation_cs": "přechod",
+        "rank": 5238
+      },
+      {
+        "lemma": "fermement",
+        "translation_cs": "pevně",
+        "rank": 5245
+      },
+      {
+        "lemma": "ivre",
+        "translation_cs": "opilý",
+        "rank": 5249
+      },
+      {
+        "lemma": "tranquillité",
+        "translation_cs": "pohoda; pokoj",
+        "rank": 5259
+      },
+      {
+        "lemma": "enterrement",
+        "translation_cs": "pohřeb",
+        "rank": 5271
+      },
+      {
+        "lemma": "réciproque",
+        "translation_cs": "vzájemný",
+        "rank": 5297
+      },
+      {
+        "lemma": "dôme",
+        "translation_cs": "kupole; kopule",
+        "rank": 5305
+      },
+      {
+        "lemma": "crochet",
+        "translation_cs": "háček",
+        "rank": 5321
+      },
+      {
+        "lemma": "soul",
+        "translation_cs": "opilý",
+        "rank": 5332
+      },
+      {
+        "lemma": "garnison",
+        "translation_cs": "posádka",
+        "rank": 5371
+      },
+      {
+        "lemma": "mater",
+        "translation_cs": "maminka",
+        "rank": 5376
+      },
+      {
+        "lemma": "éponge",
+        "translation_cs": "houba",
+        "rank": 5390
+      },
+      {
+        "lemma": "aout",
+        "translation_cs": "srpen",
+        "rank": 5393
+      },
+      {
+        "lemma": "courtois",
+        "translation_cs": "zdvořilý",
+        "rank": 5421
+      },
+      {
+        "lemma": "étang",
+        "translation_cs": "rybník",
+        "rank": 5448
+      },
+      {
+        "lemma": "falaise",
+        "translation_cs": "útes",
+        "rank": 5455
+      },
+      {
+        "lemma": "politesse",
+        "translation_cs": "zdvořilost",
+        "rank": 5514
+      },
+      {
+        "lemma": "escroquerie",
+        "translation_cs": "podvod",
+        "rank": 5530
+      },
+      {
+        "lemma": "mécontentement",
+        "translation_cs": "nespokojenost",
+        "rank": 5562
+      },
+      {
+        "lemma": "précaire",
+        "translation_cs": "nejistý",
+        "rank": 5569
+      },
+      {
+        "lemma": "latitude",
+        "translation_cs": "šířka",
+        "rank": 5593
+      },
+      {
+        "lemma": "mutuel",
+        "translation_cs": "vzájemný",
+        "rank": 5621
+      },
+      {
+        "lemma": "gai",
+        "translation_cs": "veselý",
+        "rank": 5641
+      },
+      {
+        "lemma": "scie",
+        "translation_cs": "pila",
+        "rank": 5677
+      },
+      {
+        "lemma": "rite",
+        "translation_cs": "obřad",
+        "rank": 5700
+      },
+      {
+        "lemma": "atroce",
+        "translation_cs": "krutý",
+        "rank": 5711
+      },
+      {
+        "lemma": "cachet",
+        "translation_cs": "pečeť",
+        "rank": 5716
+      },
+      {
+        "lemma": "nef",
+        "translation_cs": "loď",
+        "rank": 5758
+      },
+      {
+        "lemma": "sente",
+        "translation_cs": "stezka",
+        "rank": 5761
+      },
+      {
+        "lemma": "remords",
+        "translation_cs": "výčitka",
+        "rank": 5792
+      },
+      {
+        "lemma": "courtoisie",
+        "translation_cs": "zdvořilost",
+        "rank": 5803
+      },
+      {
+        "lemma": "faubourg",
+        "translation_cs": "předměstí",
+        "rank": 5805
+      },
+      {
+        "lemma": "cachette",
+        "translation_cs": "skrýš; úkryt",
+        "rank": 5842
+      },
+      {
+        "lemma": "donneur",
+        "translation_cs": "dárce",
+        "rank": 5876
+      },
+      {
+        "lemma": "caron",
+        "translation_cs": "háček",
+        "rank": 5921
+      },
+      {
+        "lemma": "granit",
+        "translation_cs": "žula",
+        "rank": 5934
+      },
+      {
+        "lemma": "positionner",
+        "translation_cs": "umístit",
+        "rank": 5986
+      },
+      {
+        "lemma": "glacier",
+        "translation_cs": "ledovec",
+        "rank": 6005
+      },
+      {
+        "lemma": "dessein",
+        "translation_cs": "cíl",
+        "rank": 6032
+      },
+      {
+        "lemma": "hacker",
+        "translation_cs": "hacknout",
+        "rank": 6038
+      },
+      {
+        "lemma": "athée",
+        "translation_cs": "bezbožný",
+        "rank": 6175
+      },
+      {
+        "lemma": "catch",
+        "translation_cs": "zápas",
+        "rank": 6203
+      },
+      {
+        "lemma": "caverne",
+        "translation_cs": "jeskyně",
+        "rank": 6204
+      },
+      {
+        "lemma": "colombe",
+        "translation_cs": "holub",
+        "rank": 6206
+      },
+      {
+        "lemma": "tata",
+        "translation_cs": "teta",
+        "rank": 6223
+      },
+      {
+        "lemma": "cessation",
+        "translation_cs": "přestávka",
+        "rank": 6233
+      },
+      {
+        "lemma": "salive",
+        "translation_cs": "slina",
+        "rank": 6259
+      },
+      {
+        "lemma": "utilisable",
+        "translation_cs": "použitelný",
+        "rank": 6306
+      },
+      {
+        "lemma": "écorce",
+        "translation_cs": "kůra",
+        "rank": 6310
+      },
+      {
+        "lemma": "cortex",
+        "translation_cs": "kůra",
+        "rank": 6326
+      },
+      {
+        "lemma": "instantané",
+        "translation_cs": "okamžitý",
+        "rank": 6338
+      },
+      {
+        "lemma": "solidement",
+        "translation_cs": "pevně",
+        "rank": 6390
+      },
+      {
+        "lemma": "arête",
+        "translation_cs": "kost",
+        "rank": 6401
+      },
+      {
+        "lemma": "venin",
+        "translation_cs": "jed",
+        "rank": 6456
+      },
+      {
+        "lemma": "thorax",
+        "translation_cs": "hruď",
+        "rank": 6491
+      },
+      {
+        "lemma": "étoffe",
+        "translation_cs": "látka",
+        "rank": 6495
+      },
+      {
+        "lemma": "pirater",
+        "translation_cs": "hacknout",
+        "rank": 6560
+      },
+      {
+        "lemma": "sermon",
+        "translation_cs": "kázání",
+        "rank": 6598
+      },
+      {
+        "lemma": "récipient",
+        "translation_cs": "nádobí",
+        "rank": 6635
+      },
+      {
+        "lemma": "iceberg",
+        "translation_cs": "ledovec",
+        "rank": 6704
+      },
+      {
+        "lemma": "insoutenable",
+        "translation_cs": "nesnesitelný",
+        "rank": 6708
+      },
+      {
+        "lemma": "raquette",
+        "translation_cs": "raketa",
+        "rank": 6724
+      },
+      {
+        "lemma": "chanvre",
+        "translation_cs": "konopí",
+        "rank": 6742
+      },
+      {
+        "lemma": "dérisoire",
+        "translation_cs": "směšný",
+        "rank": 6747
+      },
+      {
+        "lemma": "bave",
+        "translation_cs": "slina",
+        "rank": 6818
+      },
+      {
+        "lemma": "conjugal",
+        "translation_cs": "manželský",
+        "rank": 6841
+      },
+      {
+        "lemma": "roquette",
+        "translation_cs": "raketa",
+        "rank": 6892
+      },
+      {
+        "lemma": "vivier",
+        "translation_cs": "rybník",
+        "rank": 6945
+      },
+      {
+        "lemma": "prêche",
+        "translation_cs": "kázání",
+        "rank": 6969
+      },
+      {
+        "lemma": "terne",
+        "translation_cs": "tupý",
+        "rank": 6974
+      },
+      {
+        "lemma": "coupole",
+        "translation_cs": "kupole; kopule",
+        "rank": 6986
+      },
+      {
+        "lemma": "feuillet",
+        "translation_cs": "kniha",
+        "rank": 7020
+      },
+      {
+        "lemma": "recevable",
+        "translation_cs": "přijatelný",
+        "rank": 7038
+      },
+      {
+        "lemma": "conteneur",
+        "translation_cs": "kontejner",
+        "rank": 7055
+      },
+      {
+        "lemma": "donateur",
+        "translation_cs": "dárce",
+        "rank": 7097
+      },
+      {
+        "lemma": "semence",
+        "translation_cs": "semeno",
+        "rank": 7141
+      },
+      {
+        "lemma": "invraisemblable",
+        "translation_cs": "neuvěřitelný",
+        "rank": 7194
+      },
+      {
+        "lemma": "fugitif",
+        "translation_cs": "uprchlík",
+        "rank": 7227
+      },
+      {
+        "lemma": "futile",
+        "translation_cs": "marný",
+        "rank": 7269
+      },
+      {
+        "lemma": "granite",
+        "translation_cs": "žula",
+        "rank": 7337
+      },
+      {
+        "lemma": "infirme",
+        "translation_cs": "postižený",
+        "rank": 7341
+      },
+      {
+        "lemma": "quiétude",
+        "translation_cs": "pohoda; pokoj",
+        "rank": 7352
+      },
+      {
+        "lemma": "chapelet",
+        "translation_cs": "růženec",
+        "rank": 7368
+      },
+      {
+        "lemma": "pointeur",
+        "translation_cs": "ukazatel",
+        "rank": 7387
+      },
+      {
+        "lemma": "benne",
+        "translation_cs": "kontejner",
+        "rank": 7409
+      },
+      {
+        "lemma": "citrouille",
+        "translation_cs": "dýně",
+        "rank": 7485
+      },
+      {
+        "lemma": "écu",
+        "translation_cs": "štít",
+        "rank": 7551
+      },
+      {
+        "lemma": "rosaire",
+        "translation_cs": "růženec",
+        "rank": 7586
+      },
+      {
+        "lemma": "scierie",
+        "translation_cs": "pila",
+        "rank": 7587
+      },
+      {
+        "lemma": "lev",
+        "translation_cs": "lev",
+        "rank": 7615
+      },
+      {
+        "lemma": "pupitre",
+        "translation_cs": "pult",
+        "rank": 7623
+      },
+      {
+        "lemma": "lagon",
+        "translation_cs": "laguna",
+        "rank": 7752
+      },
+      {
+        "lemma": "impie",
+        "translation_cs": "bezbožný",
+        "rank": 7787
+      },
+      {
+        "lemma": "lagune",
+        "translation_cs": "laguna",
+        "rank": 7788
+      },
+      {
+        "lemma": "monticule",
+        "translation_cs": "kopec",
+        "rank": 7790
+      },
+      {
+        "lemma": "courge",
+        "translation_cs": "dýně",
+        "rank": 7817
+      },
+      {
+        "lemma": "matrimonial",
+        "translation_cs": "manželský",
+        "rank": 7832
+      },
+      {
+        "lemma": "chemisier",
+        "translation_cs": "košile",
+        "rank": 7857
+      },
+      {
+        "lemma": "récif",
+        "translation_cs": "útes",
+        "rank": 7888
+      },
+      {
+        "lemma": "redouter",
+        "translation_cs": "obávat se",
+        "rank": 7935
+      },
+      {
+        "lemma": "aigre",
+        "translation_cs": "kyselý",
+        "rank": 7944
+      },
+      {
+        "lemma": "insatisfaction",
+        "translation_cs": "nespokojenost",
+        "rank": 7965
+      }
+    ]
+  },
+  "it": {
+    "candidate_count": 3000,
+    "ambiguous_gloss_count": 960,
+    "ambiguous_glosses": [
+      {
+        "lemma": "muoversi",
+        "translation_cs": "hýbat",
+        "rank": 5007
+      },
+      {
+        "lemma": "governare",
+        "translation_cs": "vládnout",
+        "rank": 5008
+      },
+      {
+        "lemma": "ingiusto",
+        "translation_cs": "nespravedlivý",
+        "rank": 5017
+      },
+      {
+        "lemma": "sposarsi",
+        "translation_cs": "brát",
+        "rank": 5020
+      },
+      {
+        "lemma": "espressamente",
+        "translation_cs": "výslovně",
+        "rank": 5022
+      },
+      {
+        "lemma": "mosso",
+        "translation_cs": "bouřlivý",
+        "rank": 5024
+      },
+      {
+        "lemma": "opporsi",
+        "translation_cs": "bojovnost",
+        "rank": 5025
+      },
+      {
+        "lemma": "dimesso",
+        "translation_cs": "otrhaný",
+        "rank": 5033
+      },
+      {
+        "lemma": "spostarsi",
+        "translation_cs": "hýbat",
+        "rank": 5034
+      },
+      {
+        "lemma": "chic",
+        "translation_cs": "elegantní",
+        "rank": 5036
+      },
+      {
+        "lemma": "lamentarsi",
+        "translation_cs": "stěžovat",
+        "rank": 5037
+      },
+      {
+        "lemma": "trasferirsi",
+        "translation_cs": "přestěhovat",
+        "rank": 5039
+      },
+      {
+        "lemma": "concentrarsi",
+        "translation_cs": "soustředit",
+        "rank": 5040
+      },
+      {
+        "lemma": "insopportabile",
+        "translation_cs": "nesnesitelný",
+        "rank": 5044
+      },
+      {
+        "lemma": "dinanzi",
+        "translation_cs": "fasáda",
+        "rank": 5047
+      },
+      {
+        "lemma": "preservare",
+        "translation_cs": "uchovat",
+        "rank": 5048
+      },
+      {
+        "lemma": "allontanarsi",
+        "translation_cs": "zanechat",
+        "rank": 5051
+      },
+      {
+        "lemma": "cruciale",
+        "translation_cs": "kritický",
+        "rank": 5053
+      },
+      {
+        "lemma": "feroce",
+        "translation_cs": "krutý",
+        "rank": 5054
+      },
+      {
+        "lemma": "incerto",
+        "translation_cs": "nejistý",
+        "rank": 5055
+      },
+      {
+        "lemma": "tenero",
+        "translation_cs": "měkký",
+        "rank": 5058
+      },
+      {
+        "lemma": "vicario",
+        "translation_cs": "poslanec",
+        "rank": 5059
+      },
+      {
+        "lemma": "disperatamente",
+        "translation_cs": "zoufale",
+        "rank": 5064
+      },
+      {
+        "lemma": "fatale",
+        "translation_cs": "osudný",
+        "rank": 5065
+      },
+      {
+        "lemma": "fertile",
+        "translation_cs": "plodný",
+        "rank": 5066
+      },
+      {
+        "lemma": "accrescere",
+        "translation_cs": "růst",
+        "rank": 5069
+      },
+      {
+        "lemma": "convincente",
+        "translation_cs": "přesvědčivý",
+        "rank": 5072
+      },
+      {
+        "lemma": "messaggero",
+        "translation_cs": "kurýr",
+        "rank": 5076
+      },
+      {
+        "lemma": "adattarsi",
+        "translation_cs": "přizpůsobit",
+        "rank": 5079
+      },
+      {
+        "lemma": "insufficiente",
+        "translation_cs": "nedostatečný",
+        "rank": 5083
+      },
+      {
+        "lemma": "letale",
+        "translation_cs": "smrtelný",
+        "rank": 5084
+      },
+      {
+        "lemma": "matrimoniale",
+        "translation_cs": "manželský",
+        "rank": 5085
+      },
+      {
+        "lemma": "rintracciare",
+        "translation_cs": "najít",
+        "rank": 5086
+      },
+      {
+        "lemma": "casualmente",
+        "translation_cs": "náhodou",
+        "rank": 5091
+      },
+      {
+        "lemma": "depresso",
+        "translation_cs": "dozadu",
+        "rank": 5092
+      },
+      {
+        "lemma": "graduale",
+        "translation_cs": "postupný",
+        "rank": 5093
+      },
+      {
+        "lemma": "prepararsi",
+        "translation_cs": "připravit",
+        "rank": 5097
+      },
+      {
+        "lemma": "efficacemente",
+        "translation_cs": "efektivně",
+        "rank": 5098
+      },
+      {
+        "lemma": "nuotare",
+        "translation_cs": "plavat",
+        "rank": 5099
+      },
+      {
+        "lemma": "adorabile",
+        "translation_cs": "kráska",
+        "rank": 5102
+      },
+      {
+        "lemma": "fronteggiare",
+        "translation_cs": "fasáda",
+        "rank": 5114
+      },
+      {
+        "lemma": "monumentale",
+        "translation_cs": "litr",
+        "rank": 5124
+      },
+      {
+        "lemma": "occasionale",
+        "translation_cs": "náhodný",
+        "rank": 5125
+      },
+      {
+        "lemma": "patetico",
+        "translation_cs": "dojemný",
+        "rank": 5126
+      },
+      {
+        "lemma": "arrendersi",
+        "translation_cs": "kapitulovat",
+        "rank": 5128
+      },
+      {
+        "lemma": "internamente",
+        "translation_cs": "vnitřní",
+        "rank": 5132
+      },
+      {
+        "lemma": "tremendo",
+        "translation_cs": "hrozivý",
+        "rank": 5134
+      },
+      {
+        "lemma": "commovente",
+        "translation_cs": "dojemný",
+        "rank": 5137
+      },
+      {
+        "lemma": "didattico",
+        "translation_cs": "didaktický",
+        "rank": 5138
+      },
+      {
+        "lemma": "enormemente",
+        "translation_cs": "strašně",
+        "rank": 5139
+      },
+      {
+        "lemma": "abitualmente",
+        "translation_cs": "pravidelně",
+        "rank": 5143
+      },
+      {
+        "lemma": "laggiù",
+        "translation_cs": "tam",
+        "rank": 5145
+      },
+      {
+        "lemma": "surreale",
+        "translation_cs": "snový",
+        "rank": 5148
+      },
+      {
+        "lemma": "autorevole",
+        "translation_cs": "autoritativní",
+        "rank": 5150
+      },
+      {
+        "lemma": "insignificante",
+        "translation_cs": "zanedbatelný",
+        "rank": 5153
+      },
+      {
+        "lemma": "promettente",
+        "translation_cs": "nadějný",
+        "rank": 5172
+      },
+      {
+        "lemma": "incontrarsi",
+        "translation_cs": "vidět",
+        "rank": 5179
+      },
+      {
+        "lemma": "oratorio",
+        "translation_cs": "řečnický",
+        "rank": 5181
+      },
+      {
+        "lemma": "papale",
+        "translation_cs": "papežský",
+        "rank": 5182
+      },
+      {
+        "lemma": "schifoso",
+        "translation_cs": "nefér",
+        "rank": 5184
+      },
+      {
+        "lemma": "trattarsi",
+        "translation_cs": "dělat to",
+        "rank": 5188
+      },
+      {
+        "lemma": "gradevole",
+        "translation_cs": "příjemný",
+        "rank": 5195
+      },
+      {
+        "lemma": "reperire",
+        "translation_cs": "pauzovat",
+        "rank": 5210
+      },
+      {
+        "lemma": "trascurabile",
+        "translation_cs": "zanedbatelný",
+        "rank": 5211
+      },
+      {
+        "lemma": "uscente",
+        "translation_cs": "odchozí",
+        "rank": 5212
+      },
+      {
+        "lemma": "accogliente",
+        "translation_cs": "pohodlný",
+        "rank": 5213
+      },
+      {
+        "lemma": "agevolare",
+        "translation_cs": "ulehčit",
+        "rank": 5214
+      },
+      {
+        "lemma": "sfortunato",
+        "translation_cs": "nešťastník",
+        "rank": 5222
+      },
+      {
+        "lemma": "sgradevole",
+        "translation_cs": "mrzutý",
+        "rank": 5223
+      },
+      {
+        "lemma": "clamoroso",
+        "translation_cs": "halasný",
+        "rank": 5225
+      },
+      {
+        "lemma": "impegnativo",
+        "translation_cs": "formální",
+        "rank": 5227
+      },
+      {
+        "lemma": "occasionalmente",
+        "translation_cs": "občas",
+        "rank": 5229
+      },
+      {
+        "lemma": "asciutto",
+        "translation_cs": "suchý",
+        "rank": 5232
+      },
+      {
+        "lemma": "peculiare",
+        "translation_cs": "charakteristický",
+        "rank": 5236
+      },
+      {
+        "lemma": "colmo",
+        "translation_cs": "plný",
+        "rank": 5243
+      },
+      {
+        "lemma": "irrazionale",
+        "translation_cs": "iracionální",
+        "rank": 5245
+      },
+      {
+        "lemma": "sorridente",
+        "translation_cs": "dobrosrdečný",
+        "rank": 5253
+      },
+      {
+        "lemma": "disattivare",
+        "translation_cs": "deaktivovat",
+        "rank": 5258
+      },
+      {
+        "lemma": "denso",
+        "translation_cs": "hustý",
+        "rank": 5266
+      },
+      {
+        "lemma": "sopprimere",
+        "translation_cs": "krátit",
+        "rank": 5279
+      },
+      {
+        "lemma": "spargere",
+        "translation_cs": "rozdat",
+        "rank": 5280
+      },
+      {
+        "lemma": "vile",
+        "translation_cs": "meta",
+        "rank": 5281
+      },
+      {
+        "lemma": "soffocare",
+        "translation_cs": "dusit",
+        "rank": 5290
+      },
+      {
+        "lemma": "affidarsi",
+        "translation_cs": "zařadit",
+        "rank": 5292
+      },
+      {
+        "lemma": "deliberatamente",
+        "translation_cs": "záměrně",
+        "rank": 5296
+      },
+      {
+        "lemma": "accidentalmente",
+        "translation_cs": "náhodou",
+        "rank": 5301
+      },
+      {
+        "lemma": "aggiustare",
+        "translation_cs": "oprava",
+        "rank": 5304
+      },
+      {
+        "lemma": "barbaro",
+        "translation_cs": "barbarský",
+        "rank": 5305
+      },
+      {
+        "lemma": "mercantile",
+        "translation_cs": "reklama",
+        "rank": 5307
+      },
+      {
+        "lemma": "pallido",
+        "translation_cs": "bledý",
+        "rank": 5308
+      },
+      {
+        "lemma": "sovente",
+        "translation_cs": "často",
+        "rank": 5311
+      },
+      {
+        "lemma": "candido",
+        "translation_cs": "bělásek",
+        "rank": 5312
+      },
+      {
+        "lemma": "ritenersi",
+        "translation_cs": "ohled",
+        "rank": 5315
+      },
+      {
+        "lemma": "scorretto",
+        "translation_cs": "nespravedlivý",
+        "rank": 5316
+      },
+      {
+        "lemma": "corrispettivo",
+        "translation_cs": "ekvivalent",
+        "rank": 5319
+      },
+      {
+        "lemma": "glorioso",
+        "translation_cs": "slavný",
+        "rank": 5321
+      },
+      {
+        "lemma": "ostacolare",
+        "translation_cs": "bránit",
+        "rank": 5323
+      },
+      {
+        "lemma": "rigoroso",
+        "translation_cs": "mezlomný",
+        "rank": 5325
+      },
+      {
+        "lemma": "sovrana",
+        "translation_cs": "absolutní",
+        "rank": 5326
+      },
+      {
+        "lemma": "virtuoso",
+        "translation_cs": "ctnostný",
+        "rank": 5329
+      },
+      {
+        "lemma": "agevolmente",
+        "translation_cs": "jednoduše",
+        "rank": 5330
+      },
+      {
+        "lemma": "intenzionalmente",
+        "translation_cs": "záměrně",
+        "rank": 5333
+      },
+      {
+        "lemma": "obbedire",
+        "translation_cs": "poslouchat",
+        "rank": 5337
+      },
+      {
+        "lemma": "casalingo",
+        "translation_cs": "domácí",
+        "rank": 5343
+      },
+      {
+        "lemma": "curarsi",
+        "translation_cs": "mít",
+        "rank": 5345
+      },
+      {
+        "lemma": "rinforzare",
+        "translation_cs": "vycpávka",
+        "rank": 5355
+      },
+      {
+        "lemma": "utilizzabile",
+        "translation_cs": "použitelný",
+        "rank": 5357
+      },
+      {
+        "lemma": "anticamente",
+        "translation_cs": "dříve",
+        "rank": 5359
+      },
+      {
+        "lemma": "bruscamente",
+        "translation_cs": "hrubě",
+        "rank": 5362
+      },
+      {
+        "lemma": "bullo",
+        "translation_cs": "prvotřídní",
+        "rank": 5363
+      },
+      {
+        "lemma": "inusuale",
+        "translation_cs": "neobvyklý",
+        "rank": 5370
+      },
+      {
+        "lemma": "osseo",
+        "translation_cs": "kostní",
+        "rank": 5372
+      },
+      {
+        "lemma": "autoritario",
+        "translation_cs": "autoritativní",
+        "rank": 5374
+      },
+      {
+        "lemma": "concettuale",
+        "translation_cs": "výtažek",
+        "rank": 5376
+      },
+      {
+        "lemma": "cortesemente",
+        "translation_cs": "zdvořile",
+        "rank": 5377
+      },
+      {
+        "lemma": "organizzarsi",
+        "translation_cs": "organizovat",
+        "rank": 5387
+      },
+      {
+        "lemma": "simulare",
+        "translation_cs": "předstírat",
+        "rank": 5389
+      },
+      {
+        "lemma": "germanico",
+        "translation_cs": "germánský",
+        "rank": 5395
+      },
+      {
+        "lemma": "grazioso",
+        "translation_cs": "hezký",
+        "rank": 5396
+      },
+      {
+        "lemma": "inaugurale",
+        "translation_cs": "otevření",
+        "rank": 5397
+      },
+      {
+        "lemma": "serenamente",
+        "translation_cs": "klidně",
+        "rank": 5405
+      },
+      {
+        "lemma": "toccante",
+        "translation_cs": "dojemný",
+        "rank": 5407
+      },
+      {
+        "lemma": "affermarsi",
+        "translation_cs": "dobýt",
+        "rank": 5409
+      },
+      {
+        "lemma": "frizzante",
+        "translation_cs": "perlivý",
+        "rank": 5413
+      },
+      {
+        "lemma": "genuino",
+        "translation_cs": "pravý",
+        "rank": 5414
+      },
+      {
+        "lemma": "inadeguato",
+        "translation_cs": "nejapný",
+        "rank": 5415
+      },
+      {
+        "lemma": "riscrivere",
+        "translation_cs": "přepsat",
+        "rank": 5422
+      },
+      {
+        "lemma": "sollecito",
+        "translation_cs": "upozornění",
+        "rank": 5425
+      },
+      {
+        "lemma": "ambulante",
+        "translation_cs": "toulající se",
+        "rank": 5428
+      },
+      {
+        "lemma": "apprezzabile",
+        "translation_cs": "značný",
+        "rank": 5429
+      },
+      {
+        "lemma": "inconcepibile",
+        "translation_cs": "nepředstavitelný",
+        "rank": 5434
+      },
+      {
+        "lemma": "pervenire",
+        "translation_cs": "dosah",
+        "rank": 5437
+      },
+      {
+        "lemma": "rimpiazzare",
+        "translation_cs": "nahradit",
+        "rank": 5439
+      },
+      {
+        "lemma": "stupirsi",
+        "translation_cs": "užasnout",
+        "rank": 5440
+      },
+      {
+        "lemma": "considerevolmente",
+        "translation_cs": "značně",
+        "rank": 5446
+      },
+      {
+        "lemma": "incognito",
+        "translation_cs": "neznámá",
+        "rank": 5448
+      },
+      {
+        "lemma": "intrattenere",
+        "translation_cs": "bavit",
+        "rank": 5451
+      },
+      {
+        "lemma": "espellere",
+        "translation_cs": "vyloučit",
+        "rank": 5460
+      },
+      {
+        "lemma": "invariato",
+        "translation_cs": "nezměněný",
+        "rank": 5464
+      },
+      {
+        "lemma": "prepotente",
+        "translation_cs": "prvotřídní",
+        "rank": 5466
+      },
+      {
+        "lemma": "squallido",
+        "translation_cs": "hnusný",
+        "rank": 5471
+      },
+      {
+        "lemma": "stravagante",
+        "translation_cs": "cizí",
+        "rank": 5473
+      },
+      {
+        "lemma": "bombardare",
+        "translation_cs": "bombardovat",
+        "rank": 5478
+      },
+      {
+        "lemma": "disastroso",
+        "translation_cs": "hrozivý",
+        "rank": 5479
+      },
+      {
+        "lemma": "erigere",
+        "translation_cs": "sestrojit",
+        "rank": 5481
+      },
+      {
+        "lemma": "glaciale",
+        "translation_cs": "ledový",
+        "rank": 5482
+      },
+      {
+        "lemma": "inestimabile",
+        "translation_cs": "neocenitelný",
+        "rank": 5485
+      },
+      {
+        "lemma": "prolungare",
+        "translation_cs": "odkládat",
+        "rank": 5489
+      },
+      {
+        "lemma": "salariale",
+        "translation_cs": "vyplatit",
+        "rank": 5490
+      },
+      {
+        "lemma": "speculare",
+        "translation_cs": "souměrný",
+        "rank": 5491
+      },
+      {
+        "lemma": "tenace",
+        "translation_cs": "houževnatý",
+        "rank": 5492
+      },
+      {
+        "lemma": "assolvere",
+        "translation_cs": "mimo",
+        "rank": 5494
+      },
+      {
+        "lemma": "astuto",
+        "translation_cs": "mazaný",
+        "rank": 5495
+      },
+      {
+        "lemma": "rimettersi",
+        "translation_cs": "uplatnit put opci (Opce s právem prodeje za uvedenou cenu)",
+        "rank": 5503
+      },
+      {
+        "lemma": "soffice",
+        "translation_cs": "měkký",
+        "rank": 5507
+      },
+      {
+        "lemma": "esilarante",
+        "translation_cs": "k popukání",
+        "rank": 5513
+      },
+      {
+        "lemma": "pungente",
+        "translation_cs": "ostrý",
+        "rank": 5519
+      },
+      {
+        "lemma": "discretamente",
+        "translation_cs": "tiše",
+        "rank": 5523
+      },
+      {
+        "lemma": "istruire",
+        "translation_cs": "cvičit",
+        "rank": 5526
+      },
+      {
+        "lemma": "selettivo",
+        "translation_cs": "náročný",
+        "rank": 5530
+      },
+      {
+        "lemma": "bilanciare",
+        "translation_cs": "stabilizovat",
+        "rank": 5532
+      },
+      {
+        "lemma": "innocuo",
+        "translation_cs": "neškodný",
+        "rank": 5539
+      },
+      {
+        "lemma": "seppellire",
+        "translation_cs": "pohřbít",
+        "rank": 5546
+      },
+      {
+        "lemma": "truffatore",
+        "translation_cs": "darebák",
+        "rank": 5547
+      },
+      {
+        "lemma": "imprevisto",
+        "translation_cs": "nepředvídaný",
+        "rank": 5555
+      },
+      {
+        "lemma": "tremendamente",
+        "translation_cs": "strašně",
+        "rank": 5566
+      },
+      {
+        "lemma": "approdare",
+        "translation_cs": "místo",
+        "rank": 5567
+      },
+      {
+        "lemma": "eclatante",
+        "translation_cs": "vnímavý",
+        "rank": 5572
+      },
+      {
+        "lemma": "esaltare",
+        "translation_cs": "rozdmýchat",
+        "rank": 5573
+      },
+      {
+        "lemma": "ignobile",
+        "translation_cs": "meta",
+        "rank": 5575
+      },
+      {
+        "lemma": "immane",
+        "translation_cs": "hrozivý",
+        "rank": 5576
+      },
+      {
+        "lemma": "incessante",
+        "translation_cs": "neustálý",
+        "rank": 5577
+      },
+      {
+        "lemma": "moderatamente",
+        "translation_cs": "mírně",
+        "rank": 5579
+      },
+      {
+        "lemma": "ruotare",
+        "translation_cs": "otočit",
+        "rank": 5584
+      },
+      {
+        "lemma": "signorile",
+        "translation_cs": "šlechtic",
+        "rank": 5587
+      },
+      {
+        "lemma": "suggestivo",
+        "translation_cs": "vnímavý",
+        "rank": 5588
+      },
+      {
+        "lemma": "cospicuo",
+        "translation_cs": "značný",
+        "rank": 5592
+      },
+      {
+        "lemma": "gaio",
+        "translation_cs": "veselý",
+        "rank": 5598
+      },
+      {
+        "lemma": "intrinsecamente",
+        "translation_cs": "skutečně",
+        "rank": 5601
+      },
+      {
+        "lemma": "invadente",
+        "translation_cs": "invazivní",
+        "rank": 5603
+      },
+      {
+        "lemma": "lampante",
+        "translation_cs": "mimo",
+        "rank": 5604
+      },
+      {
+        "lemma": "rimorchiare",
+        "translation_cs": "táhnout",
+        "rank": 5614
+      },
+      {
+        "lemma": "aggiungersi",
+        "translation_cs": "předejít",
+        "rank": 5619
+      },
+      {
+        "lemma": "connettere",
+        "translation_cs": "spojit",
+        "rank": 5622
+      },
+      {
+        "lemma": "decifrare",
+        "translation_cs": "dekódovat",
+        "rank": 5623
+      },
+      {
+        "lemma": "incessantemente",
+        "translation_cs": "neustálý",
+        "rank": 5627
+      },
+      {
+        "lemma": "magenta",
+        "translation_cs": "nachový",
+        "rank": 5629
+      },
+      {
+        "lemma": "penoso",
+        "translation_cs": "trapný",
+        "rank": 5630
+      },
+      {
+        "lemma": "placido",
+        "translation_cs": "klidný",
+        "rank": 5631
+      },
+      {
+        "lemma": "tagliente",
+        "translation_cs": "ostrý",
+        "rank": 5634
+      },
+      {
+        "lemma": "confortevole",
+        "translation_cs": "pohodlný",
+        "rank": 5640
+      },
+      {
+        "lemma": "ingannevole",
+        "translation_cs": "falešný",
+        "rank": 5644
+      },
+      {
+        "lemma": "introduttivo",
+        "translation_cs": "otevření",
+        "rank": 5646
+      },
+      {
+        "lemma": "letterato",
+        "translation_cs": "kultivovaný",
+        "rank": 5648
+      },
+      {
+        "lemma": "ricevente",
+        "translation_cs": "adresát",
+        "rank": 5652
+      },
+      {
+        "lemma": "sottomesso",
+        "translation_cs": "pokorný",
+        "rank": 5656
+      },
+      {
+        "lemma": "spudoratamente",
+        "translation_cs": "drze",
+        "rank": 5657
+      },
+      {
+        "lemma": "vittorioso",
+        "translation_cs": "vítězný",
+        "rank": 5659
+      },
+      {
+        "lemma": "gelido",
+        "translation_cs": "ledový",
+        "rank": 5663
+      },
+      {
+        "lemma": "inequivocabile",
+        "translation_cs": "jednoznačný",
+        "rank": 5665
+      },
+      {
+        "lemma": "ingrandire",
+        "translation_cs": "zvětšit",
+        "rank": 5667
+      },
+      {
+        "lemma": "possente",
+        "translation_cs": "mocný",
+        "rank": 5671
+      },
+      {
+        "lemma": "strepitoso",
+        "translation_cs": "halasný",
+        "rank": 5674
+      },
+      {
+        "lemma": "amabile",
+        "translation_cs": "kráska",
+        "rank": 5677
+      },
+      {
+        "lemma": "desideroso",
+        "translation_cs": "milostný",
+        "rank": 5678
+      },
+      {
+        "lemma": "incoerente",
+        "translation_cs": "nesoudržný",
+        "rank": 5682
+      },
+      {
+        "lemma": "indebolire",
+        "translation_cs": "oslabit",
+        "rank": 5683
+      },
+      {
+        "lemma": "saltuariamente",
+        "translation_cs": "občas",
+        "rank": 5686
+      },
+      {
+        "lemma": "cauto",
+        "translation_cs": "obezřetný",
+        "rank": 5699
+      },
+      {
+        "lemma": "desistere",
+        "translation_cs": "přestat",
+        "rank": 5703
+      },
+      {
+        "lemma": "equamente",
+        "translation_cs": "poctivě",
+        "rank": 5704
+      },
+      {
+        "lemma": "posteriormente",
+        "translation_cs": "následně",
+        "rank": 5716
+      },
+      {
+        "lemma": "ripugnante",
+        "translation_cs": "odporný",
+        "rank": 5718
+      },
+      {
+        "lemma": "rovente",
+        "translation_cs": "palčivý",
+        "rank": 5719
+      },
+      {
+        "lemma": "inaccessibile",
+        "translation_cs": "nedostupný",
+        "rank": 5725
+      },
+      {
+        "lemma": "turbare",
+        "translation_cs": "trápit",
+        "rank": 5732
+      },
+      {
+        "lemma": "impadronirsi",
+        "translation_cs": "dostat záchvat",
+        "rank": 5738
+      },
+      {
+        "lemma": "irragionevole",
+        "translation_cs": "iracionální",
+        "rank": 5739
+      },
+      {
+        "lemma": "soave",
+        "translation_cs": "příjemný",
+        "rank": 5742
+      },
+      {
+        "lemma": "accostare",
+        "translation_cs": "být",
+        "rank": 5743
+      },
+      {
+        "lemma": "annientare",
+        "translation_cs": "vyhladit",
+        "rank": 5744
+      },
+      {
+        "lemma": "esigente",
+        "translation_cs": "náročný",
+        "rank": 5748
+      },
+      {
+        "lemma": "interminabile",
+        "translation_cs": "nekonečný",
+        "rank": 5749
+      },
+      {
+        "lemma": "presuntuoso",
+        "translation_cs": "domýšlivý",
+        "rank": 5752
+      },
+      {
+        "lemma": "stabilizzare",
+        "translation_cs": "stabilizovat",
+        "rank": 5755
+      },
+      {
+        "lemma": "svanire",
+        "translation_cs": "zmizet",
+        "rank": 5757
+      },
+      {
+        "lemma": "tenue",
+        "translation_cs": "mdloba",
+        "rank": 5758
+      },
+      {
+        "lemma": "allestire",
+        "translation_cs": "organizovat",
+        "rank": 5761
+      },
+      {
+        "lemma": "involontario",
+        "translation_cs": "neochotný",
+        "rank": 5766
+      },
+      {
+        "lemma": "ammirevole",
+        "translation_cs": "obdivuhodný",
+        "rank": 5770
+      },
+      {
+        "lemma": "binomio",
+        "translation_cs": "párovat",
+        "rank": 5772
+      },
+      {
+        "lemma": "difficoltoso",
+        "translation_cs": "náročný",
+        "rank": 5775
+      },
+      {
+        "lemma": "fervente",
+        "translation_cs": "planoucí",
+        "rank": 5778
+      },
+      {
+        "lemma": "innato",
+        "translation_cs": "vrozený",
+        "rank": 5785
+      },
+      {
+        "lemma": "lodevole",
+        "translation_cs": "chvályhodný",
+        "rank": 5786
+      },
+      {
+        "lemma": "rifiutarsi",
+        "translation_cs": "odmítnout",
+        "rank": 5792
+      },
+      {
+        "lemma": "sottomettere",
+        "translation_cs": "podmanit si",
+        "rank": 5796
+      },
+      {
+        "lemma": "sporgere",
+        "translation_cs": "prodloužit",
+        "rank": 5798
+      },
+      {
+        "lemma": "aggravare",
+        "translation_cs": "přibarvit",
+        "rank": 5802
+      },
+      {
+        "lemma": "deliberare",
+        "translation_cs": "rozhodnout",
+        "rank": 5806
+      },
+      {
+        "lemma": "ingombrante",
+        "translation_cs": "objemný",
+        "rank": 5810
+      },
+      {
+        "lemma": "mischiare",
+        "translation_cs": "míchat",
+        "rank": 5814
+      },
+      {
+        "lemma": "monotono",
+        "translation_cs": "monotónní",
+        "rank": 5816
+      },
+      {
+        "lemma": "pilotare",
+        "translation_cs": "kastrovat",
+        "rank": 5819
+      },
+      {
+        "lemma": "savio",
+        "translation_cs": "moudrý",
+        "rank": 5820
+      },
+      {
+        "lemma": "seducente",
+        "translation_cs": "lákavý",
+        "rank": 5821
+      },
+      {
+        "lemma": "sintetizzare",
+        "translation_cs": "shrnout",
+        "rank": 5822
+      },
+      {
+        "lemma": "anteriormente",
+        "translation_cs": "dříve",
+        "rank": 5825
+      },
+      {
+        "lemma": "cordialmente",
+        "translation_cs": "teple",
+        "rank": 5833
+      },
+      {
+        "lemma": "fruibile",
+        "translation_cs": "použitelný",
+        "rank": 5836
+      },
+      {
+        "lemma": "incredulo",
+        "translation_cs": "neuvěřitelný",
+        "rank": 5839
+      },
+      {
+        "lemma": "menare",
+        "translation_cs": "cesta",
+        "rank": 5842
+      },
+      {
+        "lemma": "persuadere",
+        "translation_cs": "přesvědčit",
+        "rank": 5846
+      },
+      {
+        "lemma": "somministrare",
+        "translation_cs": "podat",
+        "rank": 5849
+      },
+      {
+        "lemma": "durevole",
+        "translation_cs": "trvalý",
+        "rank": 5855
+      },
+      {
+        "lemma": "insicuro",
+        "translation_cs": "nejistý",
+        "rank": 5857
+      },
+      {
+        "lemma": "meravigliarsi",
+        "translation_cs": "užasnout",
+        "rank": 5860
+      },
+      {
+        "lemma": "spregevole",
+        "translation_cs": "opovrženíhodný",
+        "rank": 5866
+      },
+      {
+        "lemma": "uniformemente",
+        "translation_cs": "pravidelně",
+        "rank": 5867
+      },
+      {
+        "lemma": "affogare",
+        "translation_cs": "topit",
+        "rank": 5870
+      },
+      {
+        "lemma": "ausiliario",
+        "translation_cs": "pomocný",
+        "rank": 5874
+      },
+      {
+        "lemma": "lussuoso",
+        "translation_cs": "bohatý",
+        "rank": 5885
+      },
+      {
+        "lemma": "riluttante",
+        "translation_cs": "neochotný",
+        "rank": 5894
+      },
+      {
+        "lemma": "sterminare",
+        "translation_cs": "vyhladit",
+        "rank": 5895
+      },
+      {
+        "lemma": "capitolare",
+        "translation_cs": "kapitulovat",
+        "rank": 5899
+      },
+      {
+        "lemma": "prioritario",
+        "translation_cs": "prvotřídní",
+        "rank": 5907
+      },
+      {
+        "lemma": "stuprare",
+        "translation_cs": "znásilnit",
+        "rank": 5911
+      },
+      {
+        "lemma": "annegare",
+        "translation_cs": "topit",
+        "rank": 5915
+      },
+      {
+        "lemma": "cavallino",
+        "translation_cs": "koňský",
+        "rank": 5916
+      },
+      {
+        "lemma": "incastrare",
+        "translation_cs": "cesta",
+        "rank": 5919
+      },
+      {
+        "lemma": "infuriare",
+        "translation_cs": "hit",
+        "rank": 5920
+      },
+      {
+        "lemma": "regnare",
+        "translation_cs": "vládnout",
+        "rank": 5922
+      },
+      {
+        "lemma": "vibrare",
+        "translation_cs": "brnknout",
+        "rank": 5924
+      },
+      {
+        "lemma": "abominevole",
+        "translation_cs": "hanebný",
+        "rank": 5925
+      },
+      {
+        "lemma": "agitare",
+        "translation_cs": "míchat",
+        "rank": 5926
+      },
+      {
+        "lemma": "diffidente",
+        "translation_cs": "podezíravý",
+        "rank": 5929
+      },
+      {
+        "lemma": "disputare",
+        "translation_cs": "bojovnost",
+        "rank": 5931
+      },
+      {
+        "lemma": "fumante",
+        "translation_cs": "kouřící",
+        "rank": 5934
+      },
+      {
+        "lemma": "insensato",
+        "translation_cs": "blázen",
+        "rank": 5937
+      },
+      {
+        "lemma": "proclamare",
+        "translation_cs": "oznamovat",
+        "rank": 5940
+      },
+      {
+        "lemma": "apporre",
+        "translation_cs": "uplatnit put opci (Opce s právem prodeje za uvedenou cenu)",
+        "rank": 5942
+      },
+      {
+        "lemma": "aspro",
+        "translation_cs": "křížek",
+        "rank": 5944
+      },
+      {
+        "lemma": "assiduo",
+        "translation_cs": "pečlivý",
+        "rank": 5945
+      },
+      {
+        "lemma": "inatteso",
+        "translation_cs": "nepředvídaný",
+        "rank": 5952
+      },
+      {
+        "lemma": "sponsorizzare",
+        "translation_cs": "sponzorovat",
+        "rank": 5959
+      },
+      {
+        "lemma": "alloggiare",
+        "translation_cs": "bydlet",
+        "rank": 5961
+      },
+      {
+        "lemma": "dubbioso",
+        "translation_cs": "nejistý",
+        "rank": 5963
+      },
+      {
+        "lemma": "impenetrabile",
+        "translation_cs": "nedobytný",
+        "rank": 5965
+      },
+      {
+        "lemma": "indenne",
+        "translation_cs": "nedotčený",
+        "rank": 5966
+      },
+      {
+        "lemma": "insuperabile",
+        "translation_cs": "nepřekonatelný",
+        "rank": 5968
+      },
+      {
+        "lemma": "nocivo",
+        "translation_cs": "škodlivý",
+        "rank": 5970
+      },
+      {
+        "lemma": "pauroso",
+        "translation_cs": "děsivý",
+        "rank": 5971
+      },
+      {
+        "lemma": "pigliare",
+        "translation_cs": "dobýt",
+        "rank": 5974
+      },
+      {
+        "lemma": "sproporzionato",
+        "translation_cs": "nezřízený",
+        "rank": 5977
+      },
+      {
+        "lemma": "zeppo",
+        "translation_cs": "nacpaný",
+        "rank": 5979
+      },
+      {
+        "lemma": "docile",
+        "translation_cs": "poddajný",
+        "rank": 5984
+      },
+      {
+        "lemma": "esercitarsi",
+        "translation_cs": "cvičit",
+        "rank": 5985
+      },
+      {
+        "lemma": "finanziatore",
+        "translation_cs": "sponzorovat",
+        "rank": 5986
+      },
+      {
+        "lemma": "notificare",
+        "translation_cs": "upozornit",
+        "rank": 5990
+      },
+      {
+        "lemma": "riempirsi",
+        "translation_cs": "naplnit",
+        "rank": 5992
+      },
+      {
+        "lemma": "volgere",
+        "translation_cs": "vést",
+        "rank": 5994
+      },
+      {
+        "lemma": "boreale",
+        "translation_cs": "severní",
+        "rank": 5998
+      },
+      {
+        "lemma": "impugnare",
+        "translation_cs": "dostat záchvat",
+        "rank": 6002
+      },
+      {
+        "lemma": "insaziabile",
+        "translation_cs": "neukojitelný",
+        "rank": 6003
+      },
+      {
+        "lemma": "pluviale",
+        "translation_cs": "sypat",
+        "rank": 6004
+      },
+      {
+        "lemma": "scaturire",
+        "translation_cs": "prýštit",
+        "rank": 6006
+      },
+      {
+        "lemma": "solubile",
+        "translation_cs": "řešitelný",
+        "rank": 6007
+      },
+      {
+        "lemma": "sostitutivo",
+        "translation_cs": "ekvivalent",
+        "rank": 6008
+      },
+      {
+        "lemma": "univoco",
+        "translation_cs": "jednoznačný",
+        "rank": 6010
+      },
+      {
+        "lemma": "esaudire",
+        "translation_cs": "naplnit",
+        "rank": 6014
+      },
+      {
+        "lemma": "impressionare",
+        "translation_cs": "úder",
+        "rank": 6016
+      },
+      {
+        "lemma": "indicativamente",
+        "translation_cs": "asi",
+        "rank": 6018
+      },
+      {
+        "lemma": "infettare",
+        "translation_cs": "infikovat",
+        "rank": 6019
+      },
+      {
+        "lemma": "inimmaginabile",
+        "translation_cs": "nepředstavitelný",
+        "rank": 6020
+      },
+      {
+        "lemma": "personalizzare",
+        "translation_cs": "přizpůsobit",
+        "rank": 6024
+      },
+      {
+        "lemma": "riposarsi",
+        "translation_cs": "planoucí",
+        "rank": 6025
+      },
+      {
+        "lemma": "stagnante",
+        "translation_cs": "statický",
+        "rank": 6028
+      },
+      {
+        "lemma": "arcano",
+        "translation_cs": "tajuplný",
+        "rank": 6031
+      },
+      {
+        "lemma": "decretare",
+        "translation_cs": "uspořádaná množina",
+        "rank": 6033
+      },
+      {
+        "lemma": "demenziale",
+        "translation_cs": "blázen",
+        "rank": 6034
+      },
+      {
+        "lemma": "giocoso",
+        "translation_cs": "bavit",
+        "rank": 6037
+      },
+      {
+        "lemma": "levarsi",
+        "translation_cs": "stoupání",
+        "rank": 6040
+      },
+      {
+        "lemma": "penetrante",
+        "translation_cs": "jizlivý",
+        "rank": 6041
+      },
+      {
+        "lemma": "procreare",
+        "translation_cs": "plodit",
+        "rank": 6044
+      },
+      {
+        "lemma": "sanguinoso",
+        "translation_cs": "krvavý",
+        "rank": 6045
+      },
+      {
+        "lemma": "sospettoso",
+        "translation_cs": "podezíravý",
+        "rank": 6047
+      },
+      {
+        "lemma": "artefatto",
+        "translation_cs": "umělý",
+        "rank": 6051
+      },
+      {
+        "lemma": "celare",
+        "translation_cs": "schovat",
+        "rank": 6053
+      },
+      {
+        "lemma": "implorare",
+        "translation_cs": "doprošovat se",
+        "rank": 6058
+      },
+      {
+        "lemma": "imputabile",
+        "translation_cs": "dovršený",
+        "rank": 6059
+      },
+      {
+        "lemma": "losco",
+        "translation_cs": "zlověstný",
+        "rank": 6066
+      },
+      {
+        "lemma": "sedare",
+        "translation_cs": "klid",
+        "rank": 6071
+      },
+      {
+        "lemma": "ambire",
+        "translation_cs": "přát si",
+        "rank": 6072
+      },
+      {
+        "lemma": "ripetitivo",
+        "translation_cs": "opakující se",
+        "rank": 6081
+      },
+      {
+        "lemma": "disabilitare",
+        "translation_cs": "deaktivovat",
+        "rank": 6088
+      },
+      {
+        "lemma": "dissimile",
+        "translation_cs": "nepodobný",
+        "rank": 6089
+      },
+      {
+        "lemma": "etichettare",
+        "translation_cs": "označit",
+        "rank": 6090
+      },
+      {
+        "lemma": "fantomatico",
+        "translation_cs": "tajuplný",
+        "rank": 6091
+      },
+      {
+        "lemma": "lurido",
+        "translation_cs": "nefér",
+        "rank": 6098
+      },
+      {
+        "lemma": "molestare",
+        "translation_cs": "dotírat",
+        "rank": 6100
+      },
+      {
+        "lemma": "patire",
+        "translation_cs": "trpět",
+        "rank": 6102
+      },
+      {
+        "lemma": "predire",
+        "translation_cs": "prorokovat",
+        "rank": 6103
+      },
+      {
+        "lemma": "purificare",
+        "translation_cs": "uklízet",
+        "rank": 6104
+      },
+      {
+        "lemma": "comparare",
+        "translation_cs": "porovnat",
+        "rank": 6109
+      },
+      {
+        "lemma": "sgombrare",
+        "translation_cs": "mimo",
+        "rank": 6118
+      },
+      {
+        "lemma": "sondare",
+        "translation_cs": "měřit hloubku",
+        "rank": 6119
+      },
+      {
+        "lemma": "cocente",
+        "translation_cs": "palčivý",
+        "rank": 6123
+      },
+      {
+        "lemma": "egregio",
+        "translation_cs": "obdivuhodný",
+        "rank": 6125
+      },
+      {
+        "lemma": "giudeo",
+        "translation_cs": "židovský",
+        "rank": 6129
+      },
+      {
+        "lemma": "imprecisato",
+        "translation_cs": "neznámá",
+        "rank": 6130
+      },
+      {
+        "lemma": "irrompere",
+        "translation_cs": "protáhnout se",
+        "rank": 6132
+      },
+      {
+        "lemma": "quieto",
+        "translation_cs": "tichý",
+        "rank": 6137
+      },
+      {
+        "lemma": "scioperare",
+        "translation_cs": "úder",
+        "rank": 6141
+      },
+      {
+        "lemma": "vistoso",
+        "translation_cs": "nápadný",
+        "rank": 6145
+      },
+      {
+        "lemma": "fatidico",
+        "translation_cs": "osudný",
+        "rank": 6154
+      },
+      {
+        "lemma": "spensierato",
+        "translation_cs": "bezstarostný",
+        "rank": 6164
+      },
+      {
+        "lemma": "educatamente",
+        "translation_cs": "zdvořile",
+        "rank": 6169
+      },
+      {
+        "lemma": "galleggiare",
+        "translation_cs": "plavat",
+        "rank": 6170
+      },
+      {
+        "lemma": "imbattersi",
+        "translation_cs": "narazit",
+        "rank": 6171
+      },
+      {
+        "lemma": "mirabile",
+        "translation_cs": "obdivuhodný",
+        "rank": 6173
+      },
+      {
+        "lemma": "saliente",
+        "translation_cs": "nápadný",
+        "rank": 6176
+      },
+      {
+        "lemma": "sgombro",
+        "translation_cs": "mimo",
+        "rank": 6178
+      },
+      {
+        "lemma": "sommare",
+        "translation_cs": "sečíst",
+        "rank": 6179
+      },
+      {
+        "lemma": "sostenersi",
+        "translation_cs": "podporovat",
+        "rank": 6180
+      },
+      {
+        "lemma": "testardo",
+        "translation_cs": "neústupný",
+        "rank": 6181
+      },
+      {
+        "lemma": "commerciare",
+        "translation_cs": "obchod",
+        "rank": 6185
+      },
+      {
+        "lemma": "giammai",
+        "translation_cs": "nikdy",
+        "rank": 6189
+      },
+      {
+        "lemma": "insolente",
+        "translation_cs": "drzý",
+        "rank": 6192
+      },
+      {
+        "lemma": "privilegiare",
+        "translation_cs": "dávat přednost",
+        "rank": 6197
+      },
+      {
+        "lemma": "retorico",
+        "translation_cs": "řečnický",
+        "rank": 6199
+      },
+      {
+        "lemma": "specialistico",
+        "translation_cs": "specializovaný",
+        "rank": 6201
+      },
+      {
+        "lemma": "amplificare",
+        "translation_cs": "zvětšit",
+        "rank": 6205
+      },
+      {
+        "lemma": "coatto",
+        "translation_cs": "povinný",
+        "rank": 6206
+      },
+      {
+        "lemma": "esternare",
+        "translation_cs": "výslovný",
+        "rank": 6210
+      },
+      {
+        "lemma": "struggente",
+        "translation_cs": "choulostivý",
+        "rank": 6216
+      },
+      {
+        "lemma": "accorciare",
+        "translation_cs": "zkracovat",
+        "rank": 6218
+      },
+      {
+        "lemma": "dirottare",
+        "translation_cs": "unést",
+        "rank": 6220
+      },
+      {
+        "lemma": "impossessarsi",
+        "translation_cs": "dostat záchvat",
+        "rank": 6223
+      },
+      {
+        "lemma": "riprovevole",
+        "translation_cs": "hanebný",
+        "rank": 6231
+      },
+      {
+        "lemma": "smisurato",
+        "translation_cs": "neocenitelný",
+        "rank": 6234
+      },
+      {
+        "lemma": "trionfante",
+        "translation_cs": "jásající",
+        "rank": 6235
+      },
+      {
+        "lemma": "definibile",
+        "translation_cs": "definovatelný",
+        "rank": 6241
+      },
+      {
+        "lemma": "elogiare",
+        "translation_cs": "chválit",
+        "rank": 6243
+      },
+      {
+        "lemma": "espiare",
+        "translation_cs": "napravit",
+        "rank": 6245
+      },
+      {
+        "lemma": "inalterato",
+        "translation_cs": "nezměněný",
+        "rank": 6249
+      },
+      {
+        "lemma": "inebriante",
+        "translation_cs": "omamný",
+        "rank": 6250
+      },
+      {
+        "lemma": "infastidire",
+        "translation_cs": "dotírat",
+        "rank": 6251
+      },
+      {
+        "lemma": "montuoso",
+        "translation_cs": "hornatý",
+        "rank": 6253
+      },
+      {
+        "lemma": "sborsare",
+        "translation_cs": "vyplatit",
+        "rank": 6255
+      },
+      {
+        "lemma": "transitare",
+        "translation_cs": "cesta",
+        "rank": 6259
+      },
+      {
+        "lemma": "fortuito",
+        "translation_cs": "náhodný",
+        "rank": 6264
+      },
+      {
+        "lemma": "poggiare",
+        "translation_cs": "uplatnit put opci (Opce s právem prodeje za uvedenou cenu)",
+        "rank": 6267
+      },
+      {
+        "lemma": "appurare",
+        "translation_cs": "mimo",
+        "rank": 6274
+      },
+      {
+        "lemma": "dissuadere",
+        "translation_cs": "rozmluvit",
+        "rank": 6277
+      },
+      {
+        "lemma": "spogliarsi",
+        "translation_cs": "svléci",
+        "rank": 6284
+      },
+      {
+        "lemma": "violentare",
+        "translation_cs": "znásilnit",
+        "rank": 6289
+      },
+      {
+        "lemma": "grossolanamente",
+        "translation_cs": "hrubě",
+        "rank": 6298
+      },
+      {
+        "lemma": "grossolano",
+        "translation_cs": "hrubý",
+        "rank": 6299
+      },
+      {
+        "lemma": "insormontabile",
+        "translation_cs": "nepřekonatelný",
+        "rank": 6301
+      },
+      {
+        "lemma": "mutevole",
+        "translation_cs": "nejistý",
+        "rank": 6303
+      },
+      {
+        "lemma": "perspicace",
+        "translation_cs": "vnímavý",
+        "rank": 6305
+      },
+      {
+        "lemma": "tranquillizzare",
+        "translation_cs": "klid",
+        "rank": 6308
+      },
+      {
+        "lemma": "veritiero",
+        "translation_cs": "pravý",
+        "rank": 6309
+      },
+      {
+        "lemma": "benevolo",
+        "translation_cs": "benevolentní",
+        "rank": 6312
+      },
+      {
+        "lemma": "capirsi",
+        "translation_cs": "realizovat se",
+        "rank": 6313
+      },
+      {
+        "lemma": "enigmatico",
+        "translation_cs": "tajemný",
+        "rank": 6318
+      },
+      {
+        "lemma": "flebile",
+        "translation_cs": "chabý",
+        "rank": 6319
+      },
+      {
+        "lemma": "illeso",
+        "translation_cs": "nedotčený",
+        "rank": 6320
+      },
+      {
+        "lemma": "illudere",
+        "translation_cs": "oklamat",
+        "rank": 6321
+      },
+      {
+        "lemma": "rettificare",
+        "translation_cs": "předělat",
+        "rank": 6326
+      },
+      {
+        "lemma": "ritrattare",
+        "translation_cs": "odvolat",
+        "rank": 6328
+      },
+      {
+        "lemma": "smagliante",
+        "translation_cs": "oslepující",
+        "rank": 6329
+      },
+      {
+        "lemma": "ausiliare",
+        "translation_cs": "pomocný",
+        "rank": 6335
+      },
+      {
+        "lemma": "concretizzare",
+        "translation_cs": "zhmotnit",
+        "rank": 6339
+      },
+      {
+        "lemma": "fasullo",
+        "translation_cs": "falešný",
+        "rank": 6342
+      },
+      {
+        "lemma": "indicibile",
+        "translation_cs": "nevýslovný",
+        "rank": 6346
+      },
+      {
+        "lemma": "professionistico",
+        "translation_cs": "profesionál",
+        "rank": 6349
+      },
+      {
+        "lemma": "ruvido",
+        "translation_cs": "hrubý",
+        "rank": 6351
+      },
+      {
+        "lemma": "simmetrico",
+        "translation_cs": "souměrný",
+        "rank": 6353
+      },
+      {
+        "lemma": "sontuoso",
+        "translation_cs": "litr",
+        "rank": 6354
+      },
+      {
+        "lemma": "vivido",
+        "translation_cs": "živý",
+        "rank": 6356
+      },
+      {
+        "lemma": "equiparare",
+        "translation_cs": "harmonizovat",
+        "rank": 6365
+      },
+      {
+        "lemma": "imprecare",
+        "translation_cs": "klít",
+        "rank": 6369
+      },
+      {
+        "lemma": "invasivo",
+        "translation_cs": "invazivní",
+        "rank": 6370
+      },
+      {
+        "lemma": "irremovibile",
+        "translation_cs": "mezlomný",
+        "rank": 6371
+      },
+      {
+        "lemma": "scontroso",
+        "translation_cs": "mrzutý",
+        "rank": 6374
+      },
+      {
+        "lemma": "abbindolare",
+        "translation_cs": "podvést",
+        "rank": 6380
+      },
+      {
+        "lemma": "basico",
+        "translation_cs": "zásaditý",
+        "rank": 6382
+      },
+      {
+        "lemma": "comprimere",
+        "translation_cs": "komprimovat",
+        "rank": 6385
+      },
+      {
+        "lemma": "impetuoso",
+        "translation_cs": "násilný",
+        "rank": 6390
+      },
+      {
+        "lemma": "infierire",
+        "translation_cs": "hit",
+        "rank": 6393
+      },
+      {
+        "lemma": "intrepido",
+        "translation_cs": "nebojácný",
+        "rank": 6395
+      },
+      {
+        "lemma": "isolano",
+        "translation_cs": "ostrovní",
+        "rank": 6396
+      },
+      {
+        "lemma": "perentorio",
+        "translation_cs": "despotický",
+        "rank": 6403
+      },
+      {
+        "lemma": "scottante",
+        "translation_cs": "palčivý",
+        "rank": 6405
+      },
+      {
+        "lemma": "silvestre",
+        "translation_cs": "lesní",
+        "rank": 6406
+      },
+      {
+        "lemma": "adoperare",
+        "translation_cs": "použití",
+        "rank": 6408
+      },
+      {
+        "lemma": "casto",
+        "translation_cs": "ctnostný",
+        "rank": 6411
+      },
+      {
+        "lemma": "cruento",
+        "translation_cs": "krvavý",
+        "rank": 6412
+      },
+      {
+        "lemma": "encomiabile",
+        "translation_cs": "chvályhodný",
+        "rank": 6413
+      },
+      {
+        "lemma": "escogitare",
+        "translation_cs": "sestrojit",
+        "rank": 6414
+      },
+      {
+        "lemma": "retrogrado",
+        "translation_cs": "dozadu",
+        "rank": 6423
+      },
+      {
+        "lemma": "sensitivo",
+        "translation_cs": "jasnovidec",
+        "rank": 6426
+      },
+      {
+        "lemma": "deleterio",
+        "translation_cs": "škodlivý",
+        "rank": 6431
+      },
+      {
+        "lemma": "discontinuo",
+        "translation_cs": "nerovnoměrný",
+        "rank": 6432
+      },
+      {
+        "lemma": "indistinto",
+        "translation_cs": "nezřetelný",
+        "rank": 6435
+      },
+      {
+        "lemma": "irriverente",
+        "translation_cs": "hezký",
+        "rank": 6437
+      },
+      {
+        "lemma": "rossastro",
+        "translation_cs": "červenavý",
+        "rank": 6440
+      },
+      {
+        "lemma": "trito",
+        "translation_cs": "banální",
+        "rank": 6443
+      },
+      {
+        "lemma": "brillo",
+        "translation_cs": "opilý",
+        "rank": 6447
+      },
+      {
+        "lemma": "congratularsi",
+        "translation_cs": "blahopřát",
+        "rank": 6448
+      },
+      {
+        "lemma": "immondo",
+        "translation_cs": "nefér",
+        "rank": 6456
+      },
+      {
+        "lemma": "immutato",
+        "translation_cs": "nezměněný",
+        "rank": 6457
+      },
+      {
+        "lemma": "ostentare",
+        "translation_cs": "nabrat",
+        "rank": 6463
+      },
+      {
+        "lemma": "partenopeo",
+        "translation_cs": "neapolský",
+        "rank": 6464
+      },
+      {
+        "lemma": "retributivo",
+        "translation_cs": "vyplatit",
+        "rank": 6466
+      },
+      {
+        "lemma": "strisciare",
+        "translation_cs": "lézt",
+        "rank": 6470
+      },
+      {
+        "lemma": "acchiappare",
+        "translation_cs": "dostat záchvat",
+        "rank": 6474
+      },
+      {
+        "lemma": "coronare",
+        "translation_cs": "realizovat se",
+        "rank": 6480
+      },
+      {
+        "lemma": "pignolo",
+        "translation_cs": "akurátní",
+        "rank": 6487
+      },
+      {
+        "lemma": "scrupoloso",
+        "translation_cs": "přesný",
+        "rank": 6489
+      },
+      {
+        "lemma": "freddamente",
+        "translation_cs": "klidně",
+        "rank": 6494
+      },
+      {
+        "lemma": "inculare",
+        "translation_cs": "debil",
+        "rank": 6495
+      },
+      {
+        "lemma": "insulare",
+        "translation_cs": "ostrovní",
+        "rank": 6496
+      },
+      {
+        "lemma": "laterizio",
+        "translation_cs": "cihla",
+        "rank": 6498
+      },
+      {
+        "lemma": "lattico",
+        "translation_cs": "mléčný",
+        "rank": 6499
+      },
+      {
+        "lemma": "risoluto",
+        "translation_cs": "houževnatý",
+        "rank": 6505
+      },
+      {
+        "lemma": "rossiccio",
+        "translation_cs": "červenavý",
+        "rank": 6506
+      },
+      {
+        "lemma": "sfacciato",
+        "translation_cs": "drzý",
+        "rank": 6508
+      },
+      {
+        "lemma": "soggiogare",
+        "translation_cs": "podmanit si",
+        "rank": 6510
+      },
+      {
+        "lemma": "supplicare",
+        "translation_cs": "doprošovat se",
+        "rank": 6512
+      },
+      {
+        "lemma": "traslocare",
+        "translation_cs": "přestěhovat",
+        "rank": 6513
+      },
+      {
+        "lemma": "utopico",
+        "translation_cs": "ideální",
+        "rank": 6514
+      },
+      {
+        "lemma": "violetto",
+        "translation_cs": "fialový",
+        "rank": 6515
+      },
+      {
+        "lemma": "cremisi",
+        "translation_cs": "karmínový",
+        "rank": 6520
+      },
+      {
+        "lemma": "dispotico",
+        "translation_cs": "despotický",
+        "rank": 6522
+      },
+      {
+        "lemma": "grossomodo",
+        "translation_cs": "asi",
+        "rank": 6527
+      },
+      {
+        "lemma": "insofferente",
+        "translation_cs": "nepřátelský",
+        "rank": 6530
+      },
+      {
+        "lemma": "lugubre",
+        "translation_cs": "pochmurný",
+        "rank": 6531
+      },
+      {
+        "lemma": "gassoso",
+        "translation_cs": "perlivý",
+        "rank": 6544
+      },
+      {
+        "lemma": "inattaccabile",
+        "translation_cs": "nedobytný",
+        "rank": 6545
+      },
+      {
+        "lemma": "spogliare",
+        "translation_cs": "svléci",
+        "rank": 6551
+      },
+      {
+        "lemma": "stuzzicare",
+        "translation_cs": "přibarvit",
+        "rank": 6552
+      },
+      {
+        "lemma": "temerario",
+        "translation_cs": "nebojácný",
+        "rank": 6553
+      },
+      {
+        "lemma": "condire",
+        "translation_cs": "ochutit",
+        "rank": 6554
+      },
+      {
+        "lemma": "convalidare",
+        "translation_cs": "ověřit",
+        "rank": 6555
+      },
+      {
+        "lemma": "ininterrotto",
+        "translation_cs": "neustálý",
+        "rank": 6562
+      },
+      {
+        "lemma": "onirico",
+        "translation_cs": "snový",
+        "rank": 6564
+      },
+      {
+        "lemma": "riesumare",
+        "translation_cs": "dobýt",
+        "rank": 6565
+      },
+      {
+        "lemma": "sopraggiungere",
+        "translation_cs": "dosah",
+        "rank": 6566
+      },
+      {
+        "lemma": "impertinente",
+        "translation_cs": "drzý",
+        "rank": 6576
+      },
+      {
+        "lemma": "pacatamente",
+        "translation_cs": "klidně",
+        "rank": 6580
+      },
+      {
+        "lemma": "tremante",
+        "translation_cs": "třes",
+        "rank": 6583
+      },
+      {
+        "lemma": "armonizzare",
+        "translation_cs": "harmonizovat",
+        "rank": 6585
+      },
+      {
+        "lemma": "ineluttabile",
+        "translation_cs": "nevyhnutelný",
+        "rank": 6590
+      },
+      {
+        "lemma": "mescolarsi",
+        "translation_cs": "mixovat",
+        "rank": 6593
+      },
+      {
+        "lemma": "stazionario",
+        "translation_cs": "statický",
+        "rank": 6599
+      },
+      {
+        "lemma": "calzante",
+        "translation_cs": "kování",
+        "rank": 6601
+      },
+      {
+        "lemma": "cazzuto",
+        "translation_cs": "milý",
+        "rank": 6602
+      },
+      {
+        "lemma": "emendare",
+        "translation_cs": "napravit",
+        "rank": 6605
+      },
+      {
+        "lemma": "grattare",
+        "translation_cs": "škrábat",
+        "rank": 6606
+      },
+      {
+        "lemma": "impavido",
+        "translation_cs": "nebojácný",
+        "rank": 6607
+      },
+      {
+        "lemma": "maledire",
+        "translation_cs": "klít",
+        "rank": 6608
+      },
+      {
+        "lemma": "puntualizzare",
+        "translation_cs": "kvalifikovat",
+        "rank": 6612
+      },
+      {
+        "lemma": "abbagliante",
+        "translation_cs": "oslepující",
+        "rank": 6617
+      },
+      {
+        "lemma": "appagare",
+        "translation_cs": "klid",
+        "rank": 6620
+      },
+      {
+        "lemma": "novizio",
+        "translation_cs": "novic",
+        "rank": 6626
+      },
+      {
+        "lemma": "pressappoco",
+        "translation_cs": "asi",
+        "rank": 6630
+      },
+      {
+        "lemma": "prorogare",
+        "translation_cs": "oddalovat",
+        "rank": 6631
+      },
+      {
+        "lemma": "ragguardevole",
+        "translation_cs": "značný",
+        "rank": 6633
+      },
+      {
+        "lemma": "arguto",
+        "translation_cs": "křížek",
+        "rank": 6639
+      },
+      {
+        "lemma": "malevolo",
+        "translation_cs": "nepřátelský",
+        "rank": 6645
+      },
+      {
+        "lemma": "annoiare",
+        "translation_cs": "nudit",
+        "rank": 6650
+      },
+      {
+        "lemma": "arrotondare",
+        "translation_cs": "vrhnout",
+        "rank": 6651
+      },
+      {
+        "lemma": "avvalorare",
+        "translation_cs": "podporovat",
+        "rank": 6652
+      },
+      {
+        "lemma": "furtivamente",
+        "translation_cs": "kradmo",
+        "rank": 6655
+      },
+      {
+        "lemma": "serrare",
+        "translation_cs": "zavřít",
+        "rank": 6659
+      },
+      {
+        "lemma": "balordo",
+        "translation_cs": "hustý",
+        "rank": 6664
+      },
+      {
+        "lemma": "penitente",
+        "translation_cs": "kajícník",
+        "rank": 6670
+      },
+      {
+        "lemma": "perorare",
+        "translation_cs": "podporovat",
+        "rank": 6671
+      },
+      {
+        "lemma": "tenebroso",
+        "translation_cs": "tajuplný",
+        "rank": 6676
+      },
+      {
+        "lemma": "fortificare",
+        "translation_cs": "držet se",
+        "rank": 6684
+      },
+      {
+        "lemma": "furibondo",
+        "translation_cs": "násilný",
+        "rank": 6691
+      },
+      {
+        "lemma": "incrollabile",
+        "translation_cs": "firma",
+        "rank": 6692
+      },
+      {
+        "lemma": "presupporre",
+        "translation_cs": "předpokládat",
+        "rank": 6697
+      },
+      {
+        "lemma": "speranzoso",
+        "translation_cs": "nadějný",
+        "rank": 6700
+      },
+      {
+        "lemma": "trainare",
+        "translation_cs": "táhnout",
+        "rank": 6702
+      },
+      {
+        "lemma": "ubbidire",
+        "translation_cs": "poslouchat",
+        "rank": 6703
+      },
+      {
+        "lemma": "accoppiare",
+        "translation_cs": "párovat",
+        "rank": 6705
+      },
+      {
+        "lemma": "captare",
+        "translation_cs": "zachytit",
+        "rank": 6708
+      },
+      {
+        "lemma": "compiacente",
+        "translation_cs": "ochotný",
+        "rank": 6709
+      },
+      {
+        "lemma": "meticoloso",
+        "translation_cs": "akurátní",
+        "rank": 6715
+      },
+      {
+        "lemma": "moscio",
+        "translation_cs": "ochablý",
+        "rank": 6716
+      },
+      {
+        "lemma": "pericolante",
+        "translation_cs": "nejistý",
+        "rank": 6720
+      },
+      {
+        "lemma": "voluminoso",
+        "translation_cs": "objemný",
+        "rank": 6728
+      },
+      {
+        "lemma": "accomodarsi",
+        "translation_cs": "předejít",
+        "rank": 6729
+      },
+      {
+        "lemma": "contrapporre",
+        "translation_cs": "být",
+        "rank": 6734
+      },
+      {
+        "lemma": "insulso",
+        "translation_cs": "nejapný",
+        "rank": 6741
+      },
+      {
+        "lemma": "nefasto",
+        "translation_cs": "neblahý",
+        "rank": 6742
+      },
+      {
+        "lemma": "pretenzioso",
+        "translation_cs": "domýšlivý",
+        "rank": 6743
+      },
+      {
+        "lemma": "risolvibile",
+        "translation_cs": "řešitelný",
+        "rank": 6745
+      },
+      {
+        "lemma": "solerte",
+        "translation_cs": "svěží",
+        "rank": 6748
+      },
+      {
+        "lemma": "contagiare",
+        "translation_cs": "infikovat",
+        "rank": 6751
+      },
+      {
+        "lemma": "desumere",
+        "translation_cs": "dobýt",
+        "rank": 6752
+      },
+      {
+        "lemma": "equilibrare",
+        "translation_cs": "držet v rovnováze",
+        "rank": 6753
+      },
+      {
+        "lemma": "gracile",
+        "translation_cs": "choulostivý",
+        "rank": 6754
+      },
+      {
+        "lemma": "irrisorio",
+        "translation_cs": "směšný",
+        "rank": 6756
+      },
+      {
+        "lemma": "trafficare",
+        "translation_cs": "obchod",
+        "rank": 6763
+      },
+      {
+        "lemma": "evanescente",
+        "translation_cs": "nezřetelný",
+        "rank": 6767
+      },
+      {
+        "lemma": "lealmente",
+        "translation_cs": "poctivě",
+        "rank": 6770
+      },
+      {
+        "lemma": "tassativo",
+        "translation_cs": "absolutní",
+        "rank": 6776
+      },
+      {
+        "lemma": "tondeggiante",
+        "translation_cs": "vrhnout",
+        "rank": 6777
+      },
+      {
+        "lemma": "truce",
+        "translation_cs": "divoký",
+        "rank": 6778
+      },
+      {
+        "lemma": "balzano",
+        "translation_cs": "cizí",
+        "rank": 6781
+      },
+      {
+        "lemma": "focoso",
+        "translation_cs": "bouřlivý",
+        "rank": 6785
+      },
+      {
+        "lemma": "lussureggiante",
+        "translation_cs": "bujný",
+        "rank": 6791
+      },
+      {
+        "lemma": "perire",
+        "translation_cs": "hynout",
+        "rank": 6797
+      },
+      {
+        "lemma": "saturnino",
+        "translation_cs": "mrzutý",
+        "rank": 6798
+      },
+      {
+        "lemma": "tardare",
+        "translation_cs": "oddalovat",
+        "rank": 6802
+      },
+      {
+        "lemma": "timoroso",
+        "translation_cs": "děsivý",
+        "rank": 6803
+      },
+      {
+        "lemma": "canuto",
+        "translation_cs": "bělásek",
+        "rank": 6805
+      },
+      {
+        "lemma": "esonerare",
+        "translation_cs": "bez nároku na placené přesčasy",
+        "rank": 6809
+      },
+      {
+        "lemma": "incarnare",
+        "translation_cs": "zahrnout",
+        "rank": 6812
+      },
+      {
+        "lemma": "incostante",
+        "translation_cs": "nerovnoměrný",
+        "rank": 6813
+      },
+      {
+        "lemma": "ineffabile",
+        "translation_cs": "nevýslovný",
+        "rank": 6814
+      },
+      {
+        "lemma": "ipotizzabile",
+        "translation_cs": "nabrat",
+        "rank": 6815
+      },
+      {
+        "lemma": "procrastinare",
+        "translation_cs": "odkládat",
+        "rank": 6826
+      },
+      {
+        "lemma": "allertare",
+        "translation_cs": "upozornění",
+        "rank": 6831
+      },
+      {
+        "lemma": "infiammare",
+        "translation_cs": "rozdmýchat",
+        "rank": 6835
+      },
+      {
+        "lemma": "persuasivo",
+        "translation_cs": "přesvědčivý",
+        "rank": 6840
+      },
+      {
+        "lemma": "scivoloso",
+        "translation_cs": "kluzký",
+        "rank": 6841
+      },
+      {
+        "lemma": "alcalino",
+        "translation_cs": "zásaditý",
+        "rank": 6842
+      },
+      {
+        "lemma": "decodificare",
+        "translation_cs": "dekódovat",
+        "rank": 6844
+      },
+      {
+        "lemma": "osé",
+        "translation_cs": "choulostivý",
+        "rank": 6852
+      },
+      {
+        "lemma": "sindacare",
+        "translation_cs": "kontrolovat",
+        "rank": 6855
+      },
+      {
+        "lemma": "sommessamente",
+        "translation_cs": "tiše",
+        "rank": 6856
+      },
+      {
+        "lemma": "strofinare",
+        "translation_cs": "třít",
+        "rank": 6858
+      },
+      {
+        "lemma": "approntare",
+        "translation_cs": "připravit",
+        "rank": 6863
+      },
+      {
+        "lemma": "bieco",
+        "translation_cs": "zlověstný",
+        "rank": 6866
+      },
+      {
+        "lemma": "degustare",
+        "translation_cs": "ochutnat",
+        "rank": 6867
+      },
+      {
+        "lemma": "esortare",
+        "translation_cs": "držet se",
+        "rank": 6869
+      },
+      {
+        "lemma": "terso",
+        "translation_cs": "mimo",
+        "rank": 6878
+      },
+      {
+        "lemma": "teutonico",
+        "translation_cs": "germánský",
+        "rank": 6879
+      },
+      {
+        "lemma": "arrampicare",
+        "translation_cs": "růst",
+        "rank": 6880
+      },
+      {
+        "lemma": "burrascoso",
+        "translation_cs": "bouřlivý",
+        "rank": 6882
+      },
+      {
+        "lemma": "inespugnabile",
+        "translation_cs": "nedobytný",
+        "rank": 6886
+      },
+      {
+        "lemma": "rallegrarsi",
+        "translation_cs": "blahopřát",
+        "rank": 6889
+      },
+      {
+        "lemma": "sotterrare",
+        "translation_cs": "pohřbít",
+        "rank": 6893
+      },
+      {
+        "lemma": "avallare",
+        "translation_cs": "ověřit",
+        "rank": 6896
+      },
+      {
+        "lemma": "condiscendente",
+        "translation_cs": "benevolentní",
+        "rank": 6899
+      },
+      {
+        "lemma": "inondare",
+        "translation_cs": "zaplavit",
+        "rank": 6904
+      },
+      {
+        "lemma": "trasandato",
+        "translation_cs": "otrhaný",
+        "rank": 6909
+      },
+      {
+        "lemma": "vorace",
+        "translation_cs": "vyhladovělý",
+        "rank": 6910
+      },
+      {
+        "lemma": "autenticare",
+        "translation_cs": "ověřit",
+        "rank": 6911
+      },
+      {
+        "lemma": "corpulento",
+        "translation_cs": "neústupný",
+        "rank": 6921
+      },
+      {
+        "lemma": "indisponibile",
+        "translation_cs": "nedostupný",
+        "rank": 6927
+      },
+      {
+        "lemma": "abbreviare",
+        "translation_cs": "zkracovat",
+        "rank": 6929
+      },
+      {
+        "lemma": "spassoso",
+        "translation_cs": "k popukání",
+        "rank": 6940
+      },
+      {
+        "lemma": "babbeo",
+        "translation_cs": "hloupý",
+        "rank": 6946
+      },
+      {
+        "lemma": "coevo",
+        "translation_cs": "současný",
+        "rank": 6950
+      },
+      {
+        "lemma": "condensare",
+        "translation_cs": "shrnout",
+        "rank": 6951
+      },
+      {
+        "lemma": "cullare",
+        "translation_cs": "kolébat",
+        "rank": 6952
+      },
+      {
+        "lemma": "inoffensivo",
+        "translation_cs": "neškodný",
+        "rank": 6955
+      },
+      {
+        "lemma": "palustre",
+        "translation_cs": "zaplavit",
+        "rank": 6958
+      },
+      {
+        "lemma": "risibile",
+        "translation_cs": "směšný",
+        "rank": 6961
+      },
+      {
+        "lemma": "congenito",
+        "translation_cs": "vrozený",
+        "rank": 6969
+      },
+      {
+        "lemma": "equino",
+        "translation_cs": "koňský",
+        "rank": 6971
+      },
+      {
+        "lemma": "gioviale",
+        "translation_cs": "bavit",
+        "rank": 6973
+      },
+      {
+        "lemma": "indomito",
+        "translation_cs": "mezlomný",
+        "rank": 6975
+      },
+      {
+        "lemma": "ingannatore",
+        "translation_cs": "podvést",
+        "rank": 6976
+      },
+      {
+        "lemma": "chiassoso",
+        "translation_cs": "křiklavý",
+        "rank": 6986
+      },
+      {
+        "lemma": "consolidarsi",
+        "translation_cs": "sada",
+        "rank": 6988
+      },
+      {
+        "lemma": "gentilizio",
+        "translation_cs": "šlechtic",
+        "rank": 6993
+      },
+      {
+        "lemma": "giocondo",
+        "translation_cs": "krásný",
+        "rank": 6994
+      },
+      {
+        "lemma": "ligio",
+        "translation_cs": "věrný",
+        "rank": 6996
+      },
+      {
+        "lemma": "raschiare",
+        "translation_cs": "škrábat",
+        "rank": 6997
+      },
+      {
+        "lemma": "settare",
+        "translation_cs": "sada",
+        "rank": 6998
+      },
+      {
+        "lemma": "accoltellare",
+        "translation_cs": "bodnout",
+        "rank": 7000
+      },
+      {
+        "lemma": "dilettevole",
+        "translation_cs": "krásný",
+        "rank": 7005
+      },
+      {
+        "lemma": "paffuto",
+        "translation_cs": "praštit sebou",
+        "rank": 7012
+      },
+      {
+        "lemma": "sdolcinato",
+        "translation_cs": "limonádový",
+        "rank": 7013
+      },
+      {
+        "lemma": "folgorante",
+        "translation_cs": "oslepující",
+        "rank": 7015
+      },
+      {
+        "lemma": "infausto",
+        "translation_cs": "neblahý",
+        "rank": 7017
+      },
+      {
+        "lemma": "riconsegnare",
+        "translation_cs": "návratnost",
+        "rank": 7023
+      },
+      {
+        "lemma": "sloggiare",
+        "translation_cs": "zanechat",
+        "rank": 7025
+      },
+      {
+        "lemma": "affiancarsi",
+        "translation_cs": "úbočí",
+        "rank": 7028
+      },
+      {
+        "lemma": "debuttante",
+        "translation_cs": "novic",
+        "rank": 7031
+      },
+      {
+        "lemma": "macellare",
+        "translation_cs": "porazit",
+        "rank": 7036
+      },
+      {
+        "lemma": "scialbo",
+        "translation_cs": "mdloba",
+        "rank": 7040
+      },
+      {
+        "lemma": "soprassedere",
+        "translation_cs": "oddalovat",
+        "rank": 7041
+      },
+      {
+        "lemma": "freneticamente",
+        "translation_cs": "zoufale",
+        "rank": 7047
+      },
+      {
+        "lemma": "incontaminato",
+        "translation_cs": "uklízet",
+        "rank": 7048
+      },
+      {
+        "lemma": "ingordo",
+        "translation_cs": "chamtivý",
+        "rank": 7049
+      },
+      {
+        "lemma": "sboccare",
+        "translation_cs": "předejít",
+        "rank": 7052
+      },
+      {
+        "lemma": "ovino",
+        "translation_cs": "ovce",
+        "rank": 7063
+      },
+      {
+        "lemma": "ricalcare",
+        "translation_cs": "pauzovat",
+        "rank": 7065
+      },
+      {
+        "lemma": "suadente",
+        "translation_cs": "přesvědčivý",
+        "rank": 7066
+      },
+      {
+        "lemma": "vanificare",
+        "translation_cs": "křižmo",
+        "rank": 7067
+      },
+      {
+        "lemma": "bighellonare",
+        "translation_cs": "courat se",
+        "rank": 7070
+      },
+      {
+        "lemma": "impervio",
+        "translation_cs": "nedobytný",
+        "rank": 7072
+      },
+      {
+        "lemma": "sentitamente",
+        "translation_cs": "teple",
+        "rank": 7077
+      },
+      {
+        "lemma": "viscoso",
+        "translation_cs": "hustý",
+        "rank": 7078
+      },
+      {
+        "lemma": "ascrivere",
+        "translation_cs": "dojem",
+        "rank": 7081
+      },
+      {
+        "lemma": "dilatare",
+        "translation_cs": "prodloužit",
+        "rank": 7086
+      },
+      {
+        "lemma": "espansivo",
+        "translation_cs": "odchozí",
+        "rank": 7087
+      },
+      {
+        "lemma": "fumoso",
+        "translation_cs": "kouřící",
+        "rank": 7090
+      },
+      {
+        "lemma": "ondeggiare",
+        "translation_cs": "kolébat",
+        "rank": 7093
+      },
+      {
+        "lemma": "regolarsi",
+        "translation_cs": "dělat to",
+        "rank": 7094
+      },
+      {
+        "lemma": "saziare",
+        "translation_cs": "uspokojit",
+        "rank": 7095
+      },
+      {
+        "lemma": "sdoganare",
+        "translation_cs": "mimo",
+        "rank": 7096
+      },
+      {
+        "lemma": "sforare",
+        "translation_cs": "protáhnout se",
+        "rank": 7097
+      },
+      {
+        "lemma": "strozzare",
+        "translation_cs": "dusit",
+        "rank": 7098
+      },
+      {
+        "lemma": "altezzoso",
+        "translation_cs": "slavný",
+        "rank": 7100
+      },
+      {
+        "lemma": "cagionevole",
+        "translation_cs": "choulostivý",
+        "rank": 7101
+      },
+      {
+        "lemma": "carnoso",
+        "translation_cs": "praštit sebou",
+        "rank": 7102
+      },
+      {
+        "lemma": "efferato",
+        "translation_cs": "odporný",
+        "rank": 7104
+      },
+      {
+        "lemma": "fieristico",
+        "translation_cs": "hladce spojit",
+        "rank": 7106
+      },
+      {
+        "lemma": "malauguratamente",
+        "translation_cs": "bohužel",
+        "rank": 7107
+      },
+      {
+        "lemma": "arioso",
+        "translation_cs": "bezstarostný",
+        "rank": 7115
+      },
+      {
+        "lemma": "flaccido",
+        "translation_cs": "ochablý",
+        "rank": 7119
+      },
+      {
+        "lemma": "incutere",
+        "translation_cs": "ovládat",
+        "rank": 7122
+      },
+      {
+        "lemma": "aleatorio",
+        "translation_cs": "narazit",
+        "rank": 7131
+      },
+      {
+        "lemma": "imperversare",
+        "translation_cs": "hit",
+        "rank": 7135
+      },
+      {
+        "lemma": "attonito",
+        "translation_cs": "postižený",
+        "rank": 7147
+      },
+      {
+        "lemma": "percosso",
+        "translation_cs": "rána",
+        "rank": 7155
+      },
+      {
+        "lemma": "purpureo",
+        "translation_cs": "nachový",
+        "rank": 7156
+      },
+      {
+        "lemma": "rigare",
+        "translation_cs": "vláda",
+        "rank": 7157
+      },
+      {
+        "lemma": "schiarire",
+        "translation_cs": "mimo",
+        "rank": 7158
+      },
+      {
+        "lemma": "zozzo",
+        "translation_cs": "nefér",
+        "rank": 7161
+      },
+      {
+        "lemma": "acculturato",
+        "translation_cs": "kultivovaný",
+        "rank": 7163
+      },
+      {
+        "lemma": "barbarico",
+        "translation_cs": "barbarský",
+        "rank": 7165
+      },
+      {
+        "lemma": "difforme",
+        "translation_cs": "nepodobný",
+        "rank": 7167
+      },
+      {
+        "lemma": "ebbro",
+        "translation_cs": "jásající",
+        "rank": 7168
+      },
+      {
+        "lemma": "imbiancare",
+        "translation_cs": "zdobit",
+        "rank": 7171
+      },
+      {
+        "lemma": "maleodorante",
+        "translation_cs": "páchnoucí",
+        "rank": 7173
+      },
+      {
+        "lemma": "sportivamente",
+        "translation_cs": "poctivě",
+        "rank": 7177
+      },
+      {
+        "lemma": "assurgere",
+        "translation_cs": "stoupání",
+        "rank": 7182
+      },
+      {
+        "lemma": "camuffare",
+        "translation_cs": "maska",
+        "rank": 7183
+      },
+      {
+        "lemma": "distendersi",
+        "translation_cs": "prodloužit",
+        "rank": 7186
+      },
+      {
+        "lemma": "fetente",
+        "translation_cs": "bujný",
+        "rank": 7187
+      },
+      {
+        "lemma": "interloquire",
+        "translation_cs": "vložit",
+        "rank": 7190
+      },
+      {
+        "lemma": "rapportare",
+        "translation_cs": "být",
+        "rank": 7194
+      },
+      {
+        "lemma": "stemperare",
+        "translation_cs": "mixovat",
+        "rank": 7198
+      },
+      {
+        "lemma": "erroneo",
+        "translation_cs": "chybný",
+        "rank": 7200
+      },
+      {
+        "lemma": "frodare",
+        "translation_cs": "podvést",
+        "rank": 7201
+      },
+      {
+        "lemma": "assillante",
+        "translation_cs": "nesnesitelný",
+        "rank": 7207
+      },
+      {
+        "lemma": "confinare",
+        "translation_cs": "omezit",
+        "rank": 7209
+      },
+      {
+        "lemma": "inficiare",
+        "translation_cs": "napadnout",
+        "rank": 7212
+      },
+      {
+        "lemma": "stordire",
+        "translation_cs": "ochromit",
+        "rank": 7218
+      },
+      {
+        "lemma": "appassire",
+        "translation_cs": "ochromit",
+        "rank": 7221
+      },
+      {
+        "lemma": "fragoroso",
+        "translation_cs": "křiklavý",
+        "rank": 7227
+      },
+      {
+        "lemma": "indigesto",
+        "translation_cs": "nesnesitelný",
+        "rank": 7230
+      },
+      {
+        "lemma": "insaporire",
+        "translation_cs": "ochutit",
+        "rank": 7231
+      },
+      {
+        "lemma": "pagatore",
+        "translation_cs": "vyplatit",
+        "rank": 7235
+      },
+      {
+        "lemma": "pignorare",
+        "translation_cs": "dostat záchvat",
+        "rank": 7236
+      },
+      {
+        "lemma": "ammassare",
+        "translation_cs": "hromadit",
+        "rank": 7239
+      },
+      {
+        "lemma": "canalizzare",
+        "translation_cs": "kastrovat",
+        "rank": 7241
+      },
+      {
+        "lemma": "gironzolare",
+        "translation_cs": "courat se",
+        "rank": 7248
+      },
+      {
+        "lemma": "interrompersi",
+        "translation_cs": "přestat",
+        "rank": 7250
+      },
+      {
+        "lemma": "lagnarsi",
+        "translation_cs": "stěžovat",
+        "rank": 7251
+      },
+      {
+        "lemma": "scandagliare",
+        "translation_cs": "měřit hloubku",
+        "rank": 7256
+      },
+      {
+        "lemma": "dissoluto",
+        "translation_cs": "uvolněný",
+        "rank": 7262
+      },
+      {
+        "lemma": "precludere",
+        "translation_cs": "vyloučit",
+        "rank": 7264
+      },
+      {
+        "lemma": "pugnalare",
+        "translation_cs": "bodnout",
+        "rank": 7265
+      },
+      {
+        "lemma": "sommesso",
+        "translation_cs": "poddajný",
+        "rank": 7268
+      },
+      {
+        "lemma": "castrare",
+        "translation_cs": "kastrovat",
+        "rank": 7271
+      },
+      {
+        "lemma": "didascalico",
+        "translation_cs": "didaktický",
+        "rank": 7274
+      },
+      {
+        "lemma": "disporsi",
+        "translation_cs": "zařadit",
+        "rank": 7275
+      },
+      {
+        "lemma": "imbrattare",
+        "translation_cs": "nefér",
+        "rank": 7276
+      },
+      {
+        "lemma": "meravigliare",
+        "translation_cs": "překvapit",
+        "rank": 7278
+      },
+      {
+        "lemma": "oculato",
+        "translation_cs": "obezřetný",
+        "rank": 7279
+      },
+      {
+        "lemma": "corroborare",
+        "translation_cs": "držet se",
+        "rank": 7284
+      },
+      {
+        "lemma": "irruente",
+        "translation_cs": "násilný",
+        "rank": 7287
+      },
+      {
+        "lemma": "lambire",
+        "translation_cs": "aut",
+        "rank": 7289
+      },
+      {
+        "lemma": "permissivo",
+        "translation_cs": "benevolentní",
+        "rank": 7290
+      },
+      {
+        "lemma": "veniale",
+        "translation_cs": "malý",
+        "rank": 7298
+      },
+      {
+        "lemma": "artificioso",
+        "translation_cs": "umělý",
+        "rank": 7300
+      },
+      {
+        "lemma": "efficientemente",
+        "translation_cs": "efektivně",
+        "rank": 7302
+      },
+      {
+        "lemma": "fondarsi",
+        "translation_cs": "meta",
+        "rank": 7303
+      },
+      {
+        "lemma": "tritare",
+        "translation_cs": "brousit",
+        "rank": 7309
+      },
+      {
+        "lemma": "accamparsi",
+        "translation_cs": "afektovaný",
+        "rank": 7311
+      },
+      {
+        "lemma": "borbottare",
+        "translation_cs": "bručet",
+        "rank": 7313
+      },
+      {
+        "lemma": "famelico",
+        "translation_cs": "vyhladovělý",
+        "rank": 7315
+      },
+      {
+        "lemma": "miserevole",
+        "translation_cs": "bídný",
+        "rank": 7319
+      },
+      {
+        "lemma": "scollegare",
+        "translation_cs": "odpojit",
+        "rank": 7320
+      },
+      {
+        "lemma": "spigliato",
+        "translation_cs": "svěží",
+        "rank": 7323
+      },
+      {
+        "lemma": "ingranare",
+        "translation_cs": "zachytit",
+        "rank": 7329
+      },
+      {
+        "lemma": "sordido",
+        "translation_cs": "hnusný",
+        "rank": 7335
+      },
+      {
+        "lemma": "usabile",
+        "translation_cs": "použitelný",
+        "rank": 7338
+      },
+      {
+        "lemma": "vacuo",
+        "translation_cs": "hloupý",
+        "rank": 7339
+      },
+      {
+        "lemma": "complimentarsi",
+        "translation_cs": "blahopřát",
+        "rank": 7342
+      },
+      {
+        "lemma": "spigoloso",
+        "translation_cs": "kostní",
+        "rank": 7347
+      },
+      {
+        "lemma": "appellare",
+        "translation_cs": "odvolat",
+        "rank": 7352
+      },
+      {
+        "lemma": "distaccare",
+        "translation_cs": "odpojit",
+        "rank": 7355
+      },
+      {
+        "lemma": "fetido",
+        "translation_cs": "páchnoucí",
+        "rank": 7357
+      },
+      {
+        "lemma": "marchiare",
+        "translation_cs": "označit",
+        "rank": 7358
+      },
+      {
+        "lemma": "smussare",
+        "translation_cs": "hladká",
+        "rank": 7362
+      },
+      {
+        "lemma": "tempestoso",
+        "translation_cs": "bouřlivý",
+        "rank": 7365
+      },
+      {
+        "lemma": "materializzare",
+        "translation_cs": "zhmotnit",
+        "rank": 7374
+      },
+      {
+        "lemma": "estromettere",
+        "translation_cs": "vyhostit",
+        "rank": 7386
+      },
+      {
+        "lemma": "incalzare",
+        "translation_cs": "krok",
+        "rank": 7388
+      },
+      {
+        "lemma": "infornare",
+        "translation_cs": "uplatnit put opci (Opce s právem prodeje za uvedenou cenu)",
+        "rank": 7389
+      },
+      {
+        "lemma": "radiare",
+        "translation_cs": "vyhostit",
+        "rank": 7392
+      },
+      {
+        "lemma": "sfregare",
+        "translation_cs": "třít",
+        "rank": 7395
+      },
+      {
+        "lemma": "sterzare",
+        "translation_cs": "kastrovat",
+        "rank": 7397
+      },
+      {
+        "lemma": "taccagno",
+        "translation_cs": "chamtivý",
+        "rank": 7399
+      },
+      {
+        "lemma": "bonariamente",
+        "translation_cs": "dobrosrdečný",
+        "rank": 7402
+      },
+      {
+        "lemma": "sconsigliare",
+        "translation_cs": "rozmluvit",
+        "rank": 7407
+      },
+      {
+        "lemma": "agguantare",
+        "translation_cs": "chytit",
+        "rank": 7408
+      },
+      {
+        "lemma": "agiato",
+        "translation_cs": "ochotný",
+        "rank": 7409
+      },
+      {
+        "lemma": "astutamente",
+        "translation_cs": "chytře",
+        "rank": 7412
+      },
+      {
+        "lemma": "increscioso",
+        "translation_cs": "nešťastník",
+        "rank": 7416
+      },
+      {
+        "lemma": "astrarre",
+        "translation_cs": "výtažek",
+        "rank": 7423
+      },
+      {
+        "lemma": "dimorare",
+        "translation_cs": "bydlet",
+        "rank": 7426
+      },
+      {
+        "lemma": "strampalato",
+        "translation_cs": "cizí",
+        "rank": 7435
+      },
+      {
+        "lemma": "esigibile",
+        "translation_cs": "dovršený",
+        "rank": 7443
+      },
+      {
+        "lemma": "sconclusionato",
+        "translation_cs": "nesoudržný",
+        "rank": 7450
+      },
+      {
+        "lemma": "stuzzicante",
+        "translation_cs": "lákavý",
+        "rank": 7451
+      },
+      {
+        "lemma": "amalgamare",
+        "translation_cs": "mixovat",
+        "rank": 7454
+      },
+      {
+        "lemma": "compattare",
+        "translation_cs": "komprimovat",
+        "rank": 7455
+      },
+      {
+        "lemma": "proclamarsi",
+        "translation_cs": "oznamovat",
+        "rank": 7460
+      },
+      {
+        "lemma": "sbaragliare",
+        "translation_cs": "anulovat",
+        "rank": 7462
+      },
+      {
+        "lemma": "sublimare",
+        "translation_cs": "umocnit",
+        "rank": 7464
+      },
+      {
+        "lemma": "addobbare",
+        "translation_cs": "zdobit",
+        "rank": 7466
+      },
+      {
+        "lemma": "brioso",
+        "translation_cs": "živý",
+        "rank": 7467
+      },
+      {
+        "lemma": "chiaroveggente",
+        "translation_cs": "jasnovidec",
+        "rank": 7468
+      },
+      {
+        "lemma": "infestare",
+        "translation_cs": "protáhnout se",
+        "rank": 7472
+      },
+      {
+        "lemma": "lascivo",
+        "translation_cs": "přední",
+        "rank": 7473
+      },
+      {
+        "lemma": "vicendevole",
+        "translation_cs": "vzájemný",
+        "rank": 7481
+      },
+      {
+        "lemma": "esacerbare",
+        "translation_cs": "zhoršit",
+        "rank": 7485
+      },
+      {
+        "lemma": "uggioso",
+        "translation_cs": "pochmurný",
+        "rank": 7493
+      },
+      {
+        "lemma": "assestare",
+        "translation_cs": "obchod",
+        "rank": 7495
+      },
+      {
+        "lemma": "brontolare",
+        "translation_cs": "kručení",
+        "rank": 7496
+      },
+      {
+        "lemma": "ciarlare",
+        "translation_cs": "plkat",
+        "rank": 7497
+      },
+      {
+        "lemma": "picchiarsi",
+        "translation_cs": "bojovnost",
+        "rank": 7501
+      },
+      {
+        "lemma": "caseario",
+        "translation_cs": "mléčný",
+        "rank": 7505
+      },
+      {
+        "lemma": "claudicante",
+        "translation_cs": "chabý",
+        "rank": 7506
+      },
+      {
+        "lemma": "grassoccio",
+        "translation_cs": "praštit sebou",
+        "rank": 7507
+      },
+      {
+        "lemma": "litigioso",
+        "translation_cs": "hádavý",
+        "rank": 7509
+      },
+      {
+        "lemma": "bisticciare",
+        "translation_cs": "bojovnost",
+        "rank": 7520
+      },
+      {
+        "lemma": "melenso",
+        "translation_cs": "limonádový",
+        "rank": 7525
+      },
+      {
+        "lemma": "piovano",
+        "translation_cs": "sypat",
+        "rank": 7527
+      },
+      {
+        "lemma": "sbarazzare",
+        "translation_cs": "mimo",
+        "rank": 7530
+      },
+      {
+        "lemma": "carminio",
+        "translation_cs": "karmínový",
+        "rank": 7535
+      },
+      {
+        "lemma": "ineguale",
+        "translation_cs": "nerovnoměrný",
+        "rank": 7539
+      },
+      {
+        "lemma": "languido",
+        "translation_cs": "mdloba",
+        "rank": 7541
+      },
+      {
+        "lemma": "lisciare",
+        "translation_cs": "hladká",
+        "rank": 7542
+      },
+      {
+        "lemma": "rissoso",
+        "translation_cs": "hádavý",
+        "rank": 7550
+      },
+      {
+        "lemma": "sgominare",
+        "translation_cs": "anulovat",
+        "rank": 7554
+      },
+      {
+        "lemma": "arraffare",
+        "translation_cs": "chytit",
+        "rank": 7558
+      },
+      {
+        "lemma": "conturbante",
+        "translation_cs": "lákavý",
+        "rank": 7560
+      },
+      {
+        "lemma": "fremere",
+        "translation_cs": "chvět se",
+        "rank": 7563
+      },
+      {
+        "lemma": "risicato",
+        "translation_cs": "nedostatečný",
+        "rank": 7565
+      },
+      {
+        "lemma": "tonificare",
+        "translation_cs": "držet se",
+        "rank": 7566
+      },
+      {
+        "lemma": "compiacersi",
+        "translation_cs": "blahopřát",
+        "rank": 7569
+      },
+      {
+        "lemma": "battagliare",
+        "translation_cs": "bojovat",
+        "rank": 7578
+      },
+      {
+        "lemma": "cozzare",
+        "translation_cs": "rána",
+        "rank": 7580
+      },
+      {
+        "lemma": "floscio",
+        "translation_cs": "ochablý",
+        "rank": 7581
+      },
+      {
+        "lemma": "ieratico",
+        "translation_cs": "impozantní",
+        "rank": 7582
+      },
+      {
+        "lemma": "intonso",
+        "translation_cs": "nedotčený",
+        "rank": 7584
+      },
+      {
+        "lemma": "pettinarsi",
+        "translation_cs": "dělat to",
+        "rank": 7586
+      },
+      {
+        "lemma": "tremulo",
+        "translation_cs": "třes",
+        "rank": 7588
+      },
+      {
+        "lemma": "appiccicare",
+        "translation_cs": "obchod",
+        "rank": 7589
+      },
+      {
+        "lemma": "ramingo",
+        "translation_cs": "toulající se",
+        "rank": 7593
+      },
+      {
+        "lemma": "tentennare",
+        "translation_cs": "chvět se",
+        "rank": 7595
+      },
+      {
+        "lemma": "testé",
+        "translation_cs": "přesně",
+        "rank": 7597
+      },
+      {
+        "lemma": "traslare",
+        "translation_cs": "dobýt",
+        "rank": 7600
+      },
+      {
+        "lemma": "abietto",
+        "translation_cs": "opovrženíhodný",
+        "rank": 7601
+      },
+      {
+        "lemma": "beffare",
+        "translation_cs": "hraný",
+        "rank": 7603
+      },
+      {
+        "lemma": "bislacco",
+        "translation_cs": "divný",
+        "rank": 7604
+      },
+      {
+        "lemma": "enfatico",
+        "translation_cs": "důrazný",
+        "rank": 7609
+      },
+      {
+        "lemma": "mangiabile",
+        "translation_cs": "jedlý",
+        "rank": 7613
+      },
+      {
+        "lemma": "patrocinare",
+        "translation_cs": "naléhat",
+        "rank": 7615
+      },
+      {
+        "lemma": "stridulo",
+        "translation_cs": "důrazný",
+        "rank": 7617
+      },
+      {
+        "lemma": "conficcare",
+        "translation_cs": "brát",
+        "rank": 7619
+      },
+      {
+        "lemma": "contraccambiare",
+        "translation_cs": "návratnost",
+        "rank": 7620
+      },
+      {
+        "lemma": "impregnare",
+        "translation_cs": "naplnit",
+        "rank": 7623
+      },
+      {
+        "lemma": "accrescersi",
+        "translation_cs": "růst",
+        "rank": 7626
+      },
+      {
+        "lemma": "imbelle",
+        "translation_cs": "děsivý",
+        "rank": 7629
+      },
+      {
+        "lemma": "recalcitrante",
+        "translation_cs": "odolný",
+        "rank": 7633
+      },
+      {
+        "lemma": "smorto",
+        "translation_cs": "bledý",
+        "rank": 7638
+      },
+      {
+        "lemma": "deteriorare",
+        "translation_cs": "zhoršit",
+        "rank": 7643
+      },
+      {
+        "lemma": "ordinativo",
+        "translation_cs": "uspořádaná množina",
+        "rank": 7648
+      },
+      {
+        "lemma": "propinare",
+        "translation_cs": "podat",
+        "rank": 7649
+      },
+      {
+        "lemma": "suffragare",
+        "translation_cs": "podporovat",
+        "rank": 7653
+      },
+      {
+        "lemma": "determinabile",
+        "translation_cs": "definovatelný",
+        "rank": 7660
+      },
+      {
+        "lemma": "adulare",
+        "translation_cs": "lichotit",
+        "rank": 7666
+      },
+      {
+        "lemma": "architetturale",
+        "translation_cs": "architektonický",
+        "rank": 7667
+      },
+      {
+        "lemma": "cianciare",
+        "translation_cs": "plkat",
+        "rank": 7668
+      },
+      {
+        "lemma": "imbambolato",
+        "translation_cs": "mezera",
+        "rank": 7670
+      },
+      {
+        "lemma": "permutare",
+        "translation_cs": "obchod",
+        "rank": 7677
+      },
+      {
+        "lemma": "stralciare",
+        "translation_cs": "svléct",
+        "rank": 7681
+      },
+      {
+        "lemma": "bevere",
+        "translation_cs": "pít",
+        "rank": 7695
+      },
+      {
+        "lemma": "esentare",
+        "translation_cs": "bez nároku na placené přesčasy",
+        "rank": 7696
+      },
+      {
+        "lemma": "irridere",
+        "translation_cs": "hraný",
+        "rank": 7698
+      },
+      {
+        "lemma": "tangere",
+        "translation_cs": "aut",
+        "rank": 7700
+      },
+      {
+        "lemma": "baldanzoso",
+        "translation_cs": "nebojácný",
+        "rank": 7703
+      },
+      {
+        "lemma": "sovrascrivere",
+        "translation_cs": "přepsat",
+        "rank": 7711
+      },
+      {
+        "lemma": "lezioso",
+        "translation_cs": "afektovaný",
+        "rank": 7717
+      },
+      {
+        "lemma": "pingue",
+        "translation_cs": "plodný",
+        "rank": 7718
+      },
+      {
+        "lemma": "tintinnare",
+        "translation_cs": "brnknout",
+        "rank": 7719
+      },
+      {
+        "lemma": "cassare",
+        "translation_cs": "krátit",
+        "rank": 7722
+      },
+      {
+        "lemma": "cervellotico",
+        "translation_cs": "cizí",
+        "rank": 7723
+      },
+      {
+        "lemma": "sistematizzare",
+        "translation_cs": "organizovat",
+        "rank": 7727
+      },
+      {
+        "lemma": "enumerare",
+        "translation_cs": "vyjmenovat",
+        "rank": 7730
+      },
+      {
+        "lemma": "filisteo",
+        "translation_cs": "barbarský",
+        "rank": 7731
+      },
+      {
+        "lemma": "machiavellico",
+        "translation_cs": "milý",
+        "rank": 7734
+      },
+      {
+        "lemma": "malaugurato",
+        "translation_cs": "bídný",
+        "rank": 7735
+      },
+      {
+        "lemma": "perpetuamente",
+        "translation_cs": "neustále",
+        "rank": 7737
+      },
+      {
+        "lemma": "rannicchiarsi",
+        "translation_cs": "choulit se",
+        "rank": 7738
+      },
+      {
+        "lemma": "triturare",
+        "translation_cs": "brousit",
+        "rank": 7740
+      },
+      {
+        "lemma": "affrancare",
+        "translation_cs": "vyplatit",
+        "rank": 7741
+      },
+      {
+        "lemma": "dilazionare",
+        "translation_cs": "oddalovat",
+        "rank": 7747
+      },
+      {
+        "lemma": "inespressivo",
+        "translation_cs": "mezera",
+        "rank": 7748
+      },
+      {
+        "lemma": "montagnoso",
+        "translation_cs": "hornatý",
+        "rank": 7749
+      },
+      {
+        "lemma": "sgranare",
+        "translation_cs": "hlubotiskový",
+        "rank": 7752
+      },
+      {
+        "lemma": "sovraffollato",
+        "translation_cs": "nacpaný",
+        "rank": 7753
+      },
+      {
+        "lemma": "ignudo",
+        "translation_cs": "nahý",
+        "rank": 7757
+      },
+      {
+        "lemma": "intercorrere",
+        "translation_cs": "mít",
+        "rank": 7758
+      },
+      {
+        "lemma": "lattiginoso",
+        "translation_cs": "mléčný",
+        "rank": 7759
+      },
+      {
+        "lemma": "ritrito",
+        "translation_cs": "banální",
+        "rank": 7762
+      },
+      {
+        "lemma": "valersi",
+        "translation_cs": "použití",
+        "rank": 7766
+      },
+      {
+        "lemma": "bersagliare",
+        "translation_cs": "bombarda",
+        "rank": 7768
+      },
+      {
+        "lemma": "bonaccione",
+        "translation_cs": "dobrosrdečný",
+        "rank": 7769
+      },
+      {
+        "lemma": "cerimonioso",
+        "translation_cs": "formální",
+        "rank": 7770
+      },
+      {
+        "lemma": "contrito",
+        "translation_cs": "kajícník",
+        "rank": 7771
+      },
+      {
+        "lemma": "inappuntabile",
+        "translation_cs": "čistý",
+        "rank": 7774
+      },
+      {
+        "lemma": "levigare",
+        "translation_cs": "hladká",
+        "rank": 7776
+      },
+      {
+        "lemma": "licenzioso",
+        "translation_cs": "uvolněný",
+        "rank": 7777
+      },
+      {
+        "lemma": "ritorcere",
+        "translation_cs": "odseknout",
+        "rank": 7779
+      },
+      {
+        "lemma": "vaporoso",
+        "translation_cs": "chabý",
+        "rank": 7783
+      },
+      {
+        "lemma": "affaristico",
+        "translation_cs": "obchod",
+        "rank": 7785
+      },
+      {
+        "lemma": "incontentabile",
+        "translation_cs": "neukojitelný",
+        "rank": 7789
+      },
+      {
+        "lemma": "mordace",
+        "translation_cs": "jizlivý",
+        "rank": 7792
+      },
+      {
+        "lemma": "riepilogare",
+        "translation_cs": "shrnout",
+        "rank": 7793
+      },
+      {
+        "lemma": "vivacizzare",
+        "translation_cs": "oživit",
+        "rank": 7794
+      },
+      {
+        "lemma": "depennare",
+        "translation_cs": "svléct",
+        "rank": 7797
+      },
+      {
+        "lemma": "deteriore",
+        "translation_cs": "hůře",
+        "rank": 7798
+      },
+      {
+        "lemma": "panciuto",
+        "translation_cs": "vrhnout",
+        "rank": 7801
+      },
+      {
+        "lemma": "profetizzare",
+        "translation_cs": "prorokovat",
+        "rank": 7803
+      },
+      {
+        "lemma": "scrosciare",
+        "translation_cs": "bombardovat",
+        "rank": 7804
+      },
+      {
+        "lemma": "suppergiù",
+        "translation_cs": "hrubě",
+        "rank": 7806
+      },
+      {
+        "lemma": "turgido",
+        "translation_cs": "dmoucí se",
+        "rank": 7807
+      },
+      {
+        "lemma": "deperire",
+        "translation_cs": "hynout",
+        "rank": 7810
+      },
+      {
+        "lemma": "bacchettare",
+        "translation_cs": "rána",
+        "rank": 7814
+      },
+      {
+        "lemma": "monocorde",
+        "translation_cs": "monotónní",
+        "rank": 7819
+      },
+      {
+        "lemma": "arditamente",
+        "translation_cs": "drze",
+        "rank": 7824
+      },
+      {
+        "lemma": "ergere",
+        "translation_cs": "umocnit",
+        "rank": 7826
+      },
+      {
+        "lemma": "brulicare",
+        "translation_cs": "lézt",
+        "rank": 7830
+      },
+      {
+        "lemma": "malmesso",
+        "translation_cs": "otrhaný",
+        "rank": 7832
+      },
+      {
+        "lemma": "sodomizzare",
+        "translation_cs": "debil",
+        "rank": 7836
+      },
+      {
+        "lemma": "debosciato",
+        "translation_cs": "nezřízený",
+        "rank": 7838
+      },
+      {
+        "lemma": "ingiurioso",
+        "translation_cs": "napadení",
+        "rank": 7840
+      },
+      {
+        "lemma": "lusingare",
+        "translation_cs": "lichotit",
+        "rank": 7842
+      },
+      {
+        "lemma": "purgare",
+        "translation_cs": "uklízet",
+        "rank": 7844
+      },
+      {
+        "lemma": "zampillare",
+        "translation_cs": "prýštit",
+        "rank": 7847
+      },
+      {
+        "lemma": "abbonare",
+        "translation_cs": "podepsat",
+        "rank": 7848
+      },
+      {
+        "lemma": "biascicare",
+        "translation_cs": "bručet",
+        "rank": 7852
+      },
+      {
+        "lemma": "perturbare",
+        "translation_cs": "trápit",
+        "rank": 7854
+      },
+      {
+        "lemma": "pucciare",
+        "translation_cs": "krém",
+        "rank": 7856
+      },
+      {
+        "lemma": "dissennato",
+        "translation_cs": "blázen",
+        "rank": 7859
+      },
+      {
+        "lemma": "rovesciarsi",
+        "translation_cs": "dav",
+        "rank": 7861
+      },
+      {
+        "lemma": "sfregiare",
+        "translation_cs": "sekera",
+        "rank": 7862
+      },
+      {
+        "lemma": "sozzo",
+        "translation_cs": "nefér",
+        "rank": 7864
+      },
+      {
+        "lemma": "straripare",
+        "translation_cs": "zaplavit",
+        "rank": 7869
+      },
+      {
+        "lemma": "cannoneggiare",
+        "translation_cs": "hlubotiskový",
+        "rank": 7870
+      },
+      {
+        "lemma": "latteo",
+        "translation_cs": "mléčný",
+        "rank": 7872
+      },
+      {
+        "lemma": "melmoso",
+        "translation_cs": "falešný",
+        "rank": 7873
+      },
+      {
+        "lemma": "svestire",
+        "translation_cs": "svléci",
+        "rank": 7875
+      },
+      {
+        "lemma": "blandire",
+        "translation_cs": "lichotit",
+        "rank": 7877
+      },
+      {
+        "lemma": "frustrare",
+        "translation_cs": "křižmo",
+        "rank": 7880
+      },
+      {
+        "lemma": "propugnare",
+        "translation_cs": "bránit",
+        "rank": 7885
+      },
+      {
+        "lemma": "tumefatto",
+        "translation_cs": "dmoucí se",
+        "rank": 7887
+      },
+      {
+        "lemma": "conciare",
+        "translation_cs": "vydělat",
+        "rank": 7889
+      },
+      {
+        "lemma": "salace",
+        "translation_cs": "křížek",
+        "rank": 7896
+      },
+      {
+        "lemma": "sfiorire",
+        "translation_cs": "ochromit",
+        "rank": 7898
+      },
+      {
+        "lemma": "assillare",
+        "translation_cs": "bombarda",
+        "rank": 7900
+      },
+      {
+        "lemma": "rintuzzare",
+        "translation_cs": "odseknout",
+        "rank": 7905
+      },
+      {
+        "lemma": "fiancheggiare",
+        "translation_cs": "úbočí",
+        "rank": 7912
+      },
+      {
+        "lemma": "guerreggiare",
+        "translation_cs": "bojovnost",
+        "rank": 7913
+      },
+      {
+        "lemma": "inebriare",
+        "translation_cs": "omamný",
+        "rank": 7914
+      },
+      {
+        "lemma": "ammansire",
+        "translation_cs": "klid",
+        "rank": 7917
+      },
+      {
+        "lemma": "sopire",
+        "translation_cs": "ulehčit",
+        "rank": 7922
+      },
+      {
+        "lemma": "discolo",
+        "translation_cs": "darebák",
+        "rank": 7926
+      },
+      {
+        "lemma": "fruttificare",
+        "translation_cs": "plodit",
+        "rank": 7928
+      },
+      {
+        "lemma": "nascostamente",
+        "translation_cs": "kradmo",
+        "rank": 7930
+      },
+      {
+        "lemma": "tediare",
+        "translation_cs": "nudit",
+        "rank": 7933
+      },
+      {
+        "lemma": "appioppare",
+        "translation_cs": "obchod",
+        "rank": 7934
+      },
+      {
+        "lemma": "contrariare",
+        "translation_cs": "křižmo",
+        "rank": 7935
+      },
+      {
+        "lemma": "gattonare",
+        "translation_cs": "lézt",
+        "rank": 7938
+      },
+      {
+        "lemma": "taroccare",
+        "translation_cs": "kručení",
+        "rank": 7941
+      },
+      {
+        "lemma": "concludente",
+        "translation_cs": "přesvědčivý",
+        "rank": 7943
+      },
+      {
+        "lemma": "ingegnosamente",
+        "translation_cs": "chytře",
+        "rank": 7944
+      },
+      {
+        "lemma": "sdrucciolevole",
+        "translation_cs": "kluzký",
+        "rank": 7946
+      },
+      {
+        "lemma": "temprare",
+        "translation_cs": "vycpávka",
+        "rank": 7947
+      },
+      {
+        "lemma": "accovacciarsi",
+        "translation_cs": "choulit se",
+        "rank": 7949
+      },
+      {
+        "lemma": "addizionare",
+        "translation_cs": "sečíst",
+        "rank": 7950
+      },
+      {
+        "lemma": "ghermire",
+        "translation_cs": "dostat záchvat",
+        "rank": 7952
+      },
+      {
+        "lemma": "pulcro",
+        "translation_cs": "hladce spojit",
+        "rank": 7954
+      },
+      {
+        "lemma": "raggelare",
+        "translation_cs": "mrznout",
+        "rank": 7955
+      },
+      {
+        "lemma": "affievolire",
+        "translation_cs": "oslabit",
+        "rank": 7961
+      },
+      {
+        "lemma": "fievole",
+        "translation_cs": "chabý",
+        "rank": 7964
+      },
+      {
+        "lemma": "specioso",
+        "translation_cs": "zdánlivý",
+        "rank": 7967
+      },
+      {
+        "lemma": "abilitarsi",
+        "translation_cs": "kvalifikovat",
+        "rank": 7969
+      },
+      {
+        "lemma": "ammucchiare",
+        "translation_cs": "hromadit",
+        "rank": 7971
+      },
+      {
+        "lemma": "apprestare",
+        "translation_cs": "vystrojit",
+        "rank": 7972
+      },
+      {
+        "lemma": "capeggiare",
+        "translation_cs": "vést",
+        "rank": 7973
+      },
+      {
+        "lemma": "convenevole",
+        "translation_cs": "kování",
+        "rank": 7974
+      },
+      {
+        "lemma": "edule",
+        "translation_cs": "jedlý",
+        "rank": 7975
+      },
+      {
+        "lemma": "mediocremente",
+        "translation_cs": "mírně",
+        "rank": 7976
+      },
+      {
+        "lemma": "alacre",
+        "translation_cs": "svěží",
+        "rank": 7978
+      },
+      {
+        "lemma": "cooptare",
+        "translation_cs": "zahrnout",
+        "rank": 7980
+      },
+      {
+        "lemma": "decelerare",
+        "translation_cs": "zpomalit",
+        "rank": 7981
+      },
+      {
+        "lemma": "discolpare",
+        "translation_cs": "mimo",
+        "rank": 7983
+      },
+      {
+        "lemma": "maritale",
+        "translation_cs": "manželský",
+        "rank": 7985
+      },
+      {
+        "lemma": "ribassare",
+        "translation_cs": "oddělit",
+        "rank": 7988
+      },
+      {
+        "lemma": "riottoso",
+        "translation_cs": "hádavý",
+        "rank": 7993
+      },
+      {
+        "lemma": "spalleggiare",
+        "translation_cs": "podporovat",
+        "rank": 7994
+      },
+      {
+        "lemma": "utilitario",
+        "translation_cs": "praktický",
+        "rank": 7995
+      },
+      {
+        "lemma": "librare",
+        "translation_cs": "držet v rovnováze",
+        "rank": 8000
+      }
+    ]
+  }
+}
