@@ -8,13 +8,20 @@ import { useEffect, useMemo, useState } from "react";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
 import { PlayButton } from "@/components/PlayButton";
-import { getDiagnosticInfo, getGrammarTree, getGrammarUnit, getLessonPreview, grammarExampleAudioUrl, getProgress, type CefrLevel, type GrammarTree, type LessonPreview, type LevelBadge } from "@/lib/api";
+import { getDiagnosticInfo, getGrammarTree, getGrammarUnit, getLessonPreview, grammarExampleAudioUrl, getProgress, type CefrLevel, type GrammarTree, type GrammarUnitSummary, type LessonPreview, type LevelBadge } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { isTypingTarget, useHotkeys } from "@/lib/keyboard";
 import { KeyHint } from "@/components/Kbd";
 import { cs } from "@/lib/i18n/cs";
 
 const PRIMARY = "mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2 font-semibold text-white hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2";
+type Show = "all" | "new" | "studied" | "due";
+const SHOWS: Show[] = ["all", "new", "studied", "due"];
+const SHOW_TEST: Record<Exclude<Show, "all">, (u: GrammarUnitSummary) => boolean> = {
+  new: (u) => u.status === "new",
+  studied: (u) => u.status !== "new",
+  due: (u) => u.due,
+};
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const NEXT: Record<string, CefrLevel> = { "pre-A1": "A1", A1: "A2", A2: "B1", B1: "B2", B2: "C1", "B2+": "C1", C1: "C2", C2: "C2" };
 
@@ -77,6 +84,20 @@ export default function LessonPage() {
   const [estimate, setEstimate] = useState<{ level: string; at: string | null; source: "test" | "progress" } | null>(null);
   const [testOpen, setTestOpen] = useState(false);
   const [testAvailable, setTestAvailable] = useState(false);
+  const [show, setShowState] = useState<Show>("all");
+  // The filter lives in the URL so Back from a topic returns to the same list.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("show");
+    if (wanted && (SHOWS as string[]).includes(wanted)) setShowState(wanted as Show);
+  }, []);
+  function setShow(value: Show) {
+    setShowState(value);
+    const params = new URLSearchParams(window.location.search);
+    if (value === "all") params.delete("show");
+    else params.set("show", value);
+    const qs = params.toString();
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+  }
   const [preview, setPreview] = useState<LessonPreview | null>(null);
 
   useEffect(() => {
@@ -258,20 +279,41 @@ export default function LessonPage() {
               <h2 className="text-lg font-bold">{cs.lesson.allLessons}</h2>
               <p className="text-xs text-slate-500">{cs.lesson.progressIsPersonal}</p>
             </div>
+            <div role="radiogroup" aria-label={cs.lesson.showLabel} className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none]">
+              {SHOWS.map((value) => {
+                const n = value === "all" ? allUnits.length : allUnits.filter(SHOW_TEST[value]).length;
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    role="radio"
+                    aria-checked={show === value}
+                    onClick={() => setShow(value)}
+                    disabled={value !== "all" && n === 0}
+                    className={`shrink-0 rounded-full px-3 py-1 text-sm font-medium disabled:opacity-40 ${show === value ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                  >
+                    {cs.lesson.shows[value]} {n}
+                  </button>
+                );
+              })}
+            </div>
             {LEVELS.map((level) => {
-              const units = tree.levels.find((section) => section.level === level)?.units ?? [];
+              const levelUnits = tree.levels.find((section) => section.level === level)?.units ?? [];
+              const units = show === "all" ? levelUnits : levelUnits.filter(SHOW_TEST[show]);
+              // A filter hides levels with no match instead of showing empty boxes.
+              if (show !== "all" && units.length === 0) return null;
               return (
                 <section key={level} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
                   <h3 className="mb-3 flex items-center justify-between gap-2 font-bold">
                     <span>{level}</span>
                     <span className="text-xs font-normal text-slate-500">
-                      {units.length ? cs.lesson.levelCoverage(units.filter((u) => u.status !== "new").length, units.length, units.filter((u) => u.status === "known" || u.status === "mastered").length) : cs.lesson.notAvailable}
+                      {levelUnits.length ? cs.lesson.levelCoverage(levelUnits.filter((u) => u.status !== "new").length, levelUnits.length, levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length) : cs.lesson.notAvailable}
                     </span>
                   </h3>
-                  {units.length > 0 && (
+                  {levelUnits.length > 0 && (
                     <div className="-mt-1 mb-3 flex h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" aria-hidden>
-                      <div className="bg-emerald-500" style={{ width: `${(units.filter((u) => u.status === "known" || u.status === "mastered").length / units.length) * 100}%` }} />
-                      <div className="bg-sky-400" style={{ width: `${(units.filter((u) => u.status === "studied").length / units.length) * 100}%` }} />
+                      <div className="bg-emerald-500" style={{ width: `${(levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length / levelUnits.length) * 100}%` }} />
+                      <div className="bg-sky-400" style={{ width: `${(levelUnits.filter((u) => u.status === "studied").length / levelUnits.length) * 100}%` }} />
                     </div>
                   )}
                   {units.length ? (

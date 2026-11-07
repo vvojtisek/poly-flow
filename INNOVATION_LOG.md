@@ -1915,3 +1915,13 @@ Vlad approves a push.
 **Implemented Solution:** The recommended and open-lesson cards load that topic's first example (one extra request, optional: the card works without it) and show it in the target language with its Czech translation and a play button for the sentence audio. P plays it on desktop, with a P key hint.
 
 **Verification:** Playwright on real data: the open-lesson card shows 'Ich bin Anna und ich bin acht. | Jsem Anna a je mi osm.'; pressing P requests grammar/units/de-a1-sein/audio?example=0 (TTS is unavailable in the container, so the request was checked, not playback). No console errors besides the expected 503. typecheck, next build, ruff pass.
+
+## Global Cycle 83/120 | Page: [/lesson] (Page Cycle 8/15)
+
+**Summary:** filter the lesson list to new, studied or due topics
+
+**Observed Problem:** The full topic list showed all 37 German topics across six level boxes. Finding the 2 studied ones or the 2 due for a check meant scanning every card. C1 and C2 also showed empty boxes regardless of what the learner was looking for.
+
+**Implemented Solution:** A chip row above the list (Vše 37 / Nové 35 / Prostudované 2 / K ověření 2) filters the topic cards. Chips with no match are disabled. With a filter on, levels without matches are hidden, while each level header keeps its full coverage numbers. The choice is kept in the URL (?show=), so Back from a topic returns to the same filtered list.
+
+**Verification:** Playwright 390px: the chips read 'Vše 37, Nové 35, Prostudované 2, K ověření 2'; K ověření shows only the A1 box with sein and der/die/das and sets ?show=due; opening a topic and going Back keeps ?show=due and the same two cards; no horizontal overflow. No console errors. typecheck, next build, ruff pass.

@@ -227,6 +227,8 @@ export const cs = {
     levelCoverage: (studied: number, total: number, known: number) =>
       `prostudováno ${studied} z ${total}${known ? ` · ověřeno ${known}` : ""}`,
     openBadge: "rozdělaná",
+    showLabel: "Které lekce ukázat",
+    shows: { all: "Vše", new: "Nové", studied: "Prostudované", due: "K ověření" } as Record<string, string>,
     exercises: (n: number) => `${n} cvičení`,
     checkedTally: (ok: number, all: number) => `v ověření ${ok} z ${all} správně`,
     dueBadge: "k ověření",
