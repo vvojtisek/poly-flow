@@ -4695,6 +4695,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-17-door-for-cat",
+   "level": "B1",
+   "title": "Die perfekte Katzenklappe",
+   "title_cs": "Přesná dvířka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva baute nach einem genauen Plan eine kleine Klappe für ihre Katze.",
+     "cs": "Eva si podle přesného plánu vyrobila malá dvířka pro kočku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe die Abmessungen dreimal geprüft, und die Öffnung ist vollkommen rund.",
+     "cs": "Rozměry jsem zkontrolovala třikrát a otvor je dokonale kulatý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Schöne Arbeit. Aber warum wartet die Katze noch draußen?",
+     "cs": "To je krásná práce. Proč ale kočka pořád čeká venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Vielleicht hat sie noch nicht verstanden, wie ein moderner Eingang funktioniert.",
+     "cs": "Možná ještě nepochopila, jak moderní vchod funguje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Hättest du die Klappe nicht in die Tür statt in die Arbeitsplatte einbauen sollen?",
+     "cs": "Neměla jsi ta dvířka dát do dveří místo do pracovní desky?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva legte das Brett auf den Boden: Natürlich. Heute testen wir nur den Zugang, nicht den Standort.",
+     "cs": "Eva položila desku na zem: Samozřejmě. Dnes testujeme jen průchod, ne umístění."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Abmessungen",
+     "cs": "rozměry"
+    },
+    {
+     "word": "Arbeitsplatte",
+     "cs": "pracovní deska"
+    },
+    {
+     "word": "Standort",
+     "cs": "umístění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde Eva vyrobila otvor?",
+     "options": [
+      "V pracovní desce.",
+      "Ve dveřích.",
+      "Ve zdi."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co tvrdí na konci?",
+     "options": [
+      "Že testuje pouze průchod.",
+      "Že kočka je velká.",
+      "Že plán ztratila."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

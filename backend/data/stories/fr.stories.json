@@ -4695,6 +4695,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-17-door-for-cat",
+   "level": "B1",
+   "title": "La chatière parfaite",
+   "title_cs": "Přesná dvířka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva a suivi un plan précis pour fabriquer une petite trappe pour son chat.",
+     "cs": "Eva si podle přesného plánu vyrobila malá dvířka pro kočku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "J'ai vérifié les dimensions trois fois, et l'ouverture est parfaitement ronde.",
+     "cs": "Rozměry jsem zkontrolovala třikrát a otvor je dokonale kulatý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Beau travail. Mais pourquoi le chat attend-il toujours dehors ?",
+     "cs": "To je krásná práce. Proč ale kočka pořád čeká venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Il n'a peut-être pas encore compris le fonctionnement d'une entrée moderne.",
+     "cs": "Možná ještě nepochopila, jak moderní vchod funguje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Tu n'aurais pas dû installer la trappe dans la porte plutôt que dans le plan de travail ?",
+     "cs": "Neměla jsi ta dvířka dát do dveří místo do pracovní desky?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva a posé la planche par terre : Bien sûr. Aujourd'hui, on teste seulement l'accès, pas l'emplacement.",
+     "cs": "Eva položila desku na zem: Samozřejmě. Dnes testujeme jen průchod, ne umístění."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "dimensions",
+     "cs": "rozměry"
+    },
+    {
+     "word": "accès",
+     "cs": "přístup"
+    },
+    {
+     "word": "emplacement",
+     "cs": "umístění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde Eva vyrobila otvor?",
+     "options": [
+      "V pracovní desce.",
+      "Ve dveřích.",
+      "Ve zdi."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co tvrdí na konci?",
+     "options": [
+      "Že testuje pouze průchod.",
+      "Že kočka je velká.",
+      "Že plán ztratila."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

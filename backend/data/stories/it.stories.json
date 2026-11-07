@@ -4695,6 +4695,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-17-door-for-cat",
+   "level": "B1",
+   "title": "La gattaiola perfetta",
+   "title_cs": "Přesná dvířka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva ha seguito un piano preciso per costruire uno sportellino per il gatto.",
+     "cs": "Eva si podle přesného plánu vyrobila malá dvířka pro kočku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ho controllato le dimensioni tre volte e l'apertura è perfettamente rotonda.",
+     "cs": "Rozměry jsem zkontrolovala třikrát a otvor je dokonale kulatý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bel lavoro. Ma perché il gatto aspetta ancora fuori?",
+     "cs": "To je krásná práce. Proč ale kočka pořád čeká venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Forse non ha ancora capito come funziona un ingresso moderno.",
+     "cs": "Možná ještě nepochopila, jak moderní vchod funguje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Non dovevi mettere lo sportellino nella porta invece che nel piano di lavoro?",
+     "cs": "Neměla jsi ta dvířka dát do dveří místo do pracovní desky?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha posato l'asse per terra: Certamente. Oggi proviamo solo l'accesso, non la collocazione.",
+     "cs": "Eva položila desku na zem: Samozřejmě. Dnes testujeme jen průchod, ne umístění."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "dimensioni",
+     "cs": "rozměry"
+    },
+    {
+     "word": "accesso",
+     "cs": "přístup"
+    },
+    {
+     "word": "collocazione",
+     "cs": "umístění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde Eva vyrobila otvor?",
+     "options": [
+      "V pracovní desce.",
+      "Ve dveřích.",
+      "Ve zdi."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co tvrdí na konci?",
+     "options": [
+      "Že testuje pouze průchod.",
+      "Že kočka je velká.",
+      "Že plán ztratila."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
