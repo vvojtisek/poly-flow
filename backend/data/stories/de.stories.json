@@ -5703,6 +5703,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-31-noise-committee",
+   "level": "B2",
+   "title": "Der Ausschuss für Ruhe",
+   "title_cs": "Komise pro ticho",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom leitete den Hausausschuss, der endlich Beschwerden über nächtlichen Lärm lösen sollte.",
+     "cs": "Tom předsedal domovní komisi, která měla konečně vyřešit rušení nočního klidu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich schlage vor, dass wir zunächst einstimmig Regeln für ein rücksichtsvolles Zusammenleben verabschieden.",
+     "cs": "Navrhuji, abychom nejdřív jednomyslně schválili pravidla ohleduplného soužití."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Einverstanden, aber der Nachbar unter uns klopft gerade an die Decke. Sollten wir leiser sprechen?",
+     "cs": "Souhlasím, ale soused pod námi právě buší na strop. Neměli bychom ztišit hlas?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wir können die Verhandlung nicht unterbrechen. Ohne lückenloses Protokoll hätte unser Beschluss nicht genügend Gewicht.",
+     "cs": "Nemůžeme přerušit jednání. Bez úplného zápisu by naše rozhodnutí nemělo dostatečnou váhu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Dann gibt es noch eine Beschwerde: Es ist nach Mitternacht, und Ihr Ausschuss macht am meisten Lärm.",
+     "cs": "Pak je tu ještě druhá stížnost: Už je po půlnoci a vaše komise křičí nejvíc."
+    },
+    {
+     "speaker": null,
+     "text": "Tom schloss die Mappe: Ausgezeichnet. Endlich haben wir einen konkreten Fall für unsere nächste Sitzung.",
+     "cs": "Tom zavřel složku: Výborně. Konečně máme konkrétní případ, na kterém můžeme příště pracovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "einstimmig",
+     "cs": "jednomyslně"
+    },
+    {
+     "word": "verabschieden",
+     "cs": "schválit"
+    },
+    {
+     "word": "lückenloses",
+     "cs": "úplný"
+    },
+    {
+     "word": "Beschluss",
+     "cs": "usnesení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kdo podle stížnosti ruší nejvíc?",
+     "options": [
+      "Komise.",
+      "Děti na dvoře.",
+      "Návštěva."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Tom na stížnost reaguje?",
+     "options": [
+      "Využije ji jako téma příštího jednání.",
+      "Okamžitě se odstěhuje.",
+      "Zruší pravidla."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
