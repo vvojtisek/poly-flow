@@ -3512,6 +3512,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-10-postponed-retirement",
+   "level": "B2",
+   "title": "The Postponed Retirement",
+   "title_cs": "Odložený důchod",
+   "lines": [
+    {
+     "text": "Mr Wolff was a master of postponement. In forty years, he had never completed a task that could be put off until tomorrow.",
+     "cs": "Pan Wolff byl mistr odkládání. Za čtyřicet let nevyřídil žádný úkol, který se dal odložit na zítra."
+    },
+    {
+     "text": "The start of his retirement was set for 1 March. His colleagues organised a big party.",
+     "cs": "Začátek jeho důchodu byl stanoven na 1. března. Kolegové uspořádali velkou oslavu."
+    },
+    {
+     "text": "On his last working day, the boss gave a speech: We thank you for forty years... and for all the tasks you will still complete.",
+     "cs": "V poslední pracovní den pronesl šéf řeč: Děkujeme vám za čtyřicet let... i za všechny úkoly, které ještě vyřídíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Thank you very much. I would just like to point out that I haven't filled in my pension application yet.",
+     "cs": "Děkuji. Chci jen upozornit, že jsem ještě nevyplnil žádost o důchod."
+    },
+    {
+     "speaker": "Boss",
+     "text": "What?",
+     "cs": "Cože?"
+    },
+    {
+     "speaker": "Wolff",
+     "text": "I actually meant to fill it in yesterday. Then I put it off until today. And today until tomorrow.",
+     "cs": "Vlastně jsem ji chtěl vyplnit včera. Pak jsem to odložil na dnes. A dnes na zítřek."
+    },
+    {
+     "text": "The bureaucracy took six months. During all that time, Mr Wolff kept coming to work, on principle, as he said.",
+     "cs": "Úřad potřeboval šest měsíců. Celou dobu chodil pan Wolff dál do práce, z principu, jak říkal."
+    },
+    {
+     "text": "When the application was finally approved, he asked for a short extension, because he still had a few tasks to put off.",
+     "cs": "Když byla žádost konečně schválena, požádal o krátké prodloužení, protože musel ještě pár úkolů odložit."
+    },
+    {
+     "speaker": "Boss",
+     "text": "Mr Wolff, for forty years you have put everything off. Retirement is the only thing you may not put off.",
+     "cs": "Pane Wolffe, čtyřicet let jste všechno odkládal. Důchod je jediná věc, kterou odložit nesmíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Fine. I'll start tomorrow.",
+     "cs": "Dobře. Začnu zítra."
+    },
+    {
+     "text": "That was ten years ago.",
+     "cs": "To bylo před deseti lety."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "postponement",
+     "cs": "odkládání"
+    },
+    {
+     "word": "approved",
+     "cs": "schválená"
+    },
+    {
+     "word": "extension",
+     "cs": "prodloužení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What has Mr Wolff not done yet?",
+     "options": [
+      "Filled in his pension application",
+      "Organised the party",
+      "Written his resignation"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How does the story end?",
+     "options": [
+      "He is still working ten years later.",
+      "He retires immediately.",
+      "He becomes boss."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

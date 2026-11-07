@@ -3512,6 +3512,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-10-postponed-retirement",
+   "level": "B2",
+   "title": "La pensione rimandata",
+   "title_cs": "Odložený důchod",
+   "lines": [
+    {
+     "text": "Il signor Wolff era un maestro del rinvio. In quarant'anni non aveva sbrigato nessun compito che si potesse rimandare a domani.",
+     "cs": "Pan Wolff byl mistr odkládání. Za čtyřicet let nevyřídil žádný úkol, který se dal odložit na zítra."
+    },
+    {
+     "text": "L'inizio della sua pensione era fissato per il primo marzo. I colleghi hanno organizzato una grande festa.",
+     "cs": "Začátek jeho důchodu byl stanoven na 1. března. Kolegové uspořádali velkou oslavu."
+    },
+    {
+     "text": "L'ultimo giorno di lavoro il capo ha fatto un discorso: La ringraziamo per quarant'anni... e per tutti i compiti che sbrigherà ancora.",
+     "cs": "V poslední pracovní den pronesl šéf řeč: Děkujeme vám za čtyřicet let... i za všechny úkoly, které ještě vyřídíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Grazie mille. Vorrei solo far notare che non ho ancora compilato la domanda di pensione.",
+     "cs": "Děkuji. Chci jen upozornit, že jsem ještě nevyplnil žádost o důchod."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Cosa?",
+     "cs": "Cože?"
+    },
+    {
+     "speaker": "Wolff",
+     "text": "In realtà volevo compilarla ieri. Poi l'ho rimandata a oggi. E oggi a domani.",
+     "cs": "Vlastně jsem ji chtěl vyplnit včera. Pak jsem to odložil na dnes. A dnes na zítřek."
+    },
+    {
+     "text": "La burocrazia ha impiegato sei mesi. Durante tutto questo tempo il signor Wolff ha continuato a venire al lavoro, per principio, come diceva.",
+     "cs": "Úřad potřeboval šest měsíců. Celou dobu chodil pan Wolff dál do práce, z principu, jak říkal."
+    },
+    {
+     "text": "Quando la domanda è stata finalmente approvata, ha chiesto una piccola proroga, perché doveva ancora rimandare alcuni compiti.",
+     "cs": "Když byla žádost konečně schválena, požádal o krátké prodloužení, protože musel ještě pár úkolů odložit."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Signor Wolff, per quarant'anni ha rimandato tutto. La pensione è l'unica cosa che non può rimandare.",
+     "cs": "Pane Wolffe, čtyřicet let jste všechno odkládal. Důchod je jediná věc, kterou odložit nesmíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Bene. Comincio domani.",
+     "cs": "Dobře. Začnu zítra."
+    },
+    {
+     "text": "Era dieci anni fa.",
+     "cs": "To bylo před deseti lety."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "rinvio",
+     "cs": "odklad"
+    },
+    {
+     "word": "approvata",
+     "cs": "schválená"
+    },
+    {
+     "word": "proroga",
+     "cs": "prodloužení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa non ha ancora fatto il signor Wolff?",
+     "options": [
+      "Compilare la domanda di pensione",
+      "Organizzare la festa",
+      "Scrivere le dimissioni"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la storia?",
+     "options": [
+      "Dieci anni dopo lavora ancora.",
+      "Va subito in pensione.",
+      "Diventa capo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

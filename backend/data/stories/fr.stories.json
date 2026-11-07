@@ -3512,6 +3512,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-10-postponed-retirement",
+   "level": "B2",
+   "title": "La retraite remise à plus tard",
+   "title_cs": "Odložený důchod",
+   "lines": [
+    {
+     "text": "M. Wolff était un maître de la procrastination. En quarante ans, il n'avait réglé aucune tâche que l'on pouvait remettre au lendemain.",
+     "cs": "Pan Wolff byl mistr odkládání. Za čtyřicet let nevyřídil žádný úkol, který se dal odložit na zítra."
+    },
+    {
+     "text": "Le début de sa retraite était fixé au 1er mars. Ses collègues ont organisé une grande fête.",
+     "cs": "Začátek jeho důchodu byl stanoven na 1. března. Kolegové uspořádali velkou oslavu."
+    },
+    {
+     "text": "Le dernier jour de travail, le chef a fait un discours : Nous vous remercions pour quarante ans... et pour toutes les tâches que vous réglerez encore.",
+     "cs": "V poslední pracovní den pronesl šéf řeč: Děkujeme vám za čtyřicet let... i za všechny úkoly, které ještě vyřídíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Merci beaucoup. Je voudrais juste signaler que je n'ai pas encore rempli ma demande de retraite.",
+     "cs": "Děkuji. Chci jen upozornit, že jsem ještě nevyplnil žádost o důchod."
+    },
+    {
+     "speaker": "Chef",
+     "text": "Quoi ?",
+     "cs": "Cože?"
+    },
+    {
+     "speaker": "Wolff",
+     "text": "En fait, je voulais la remplir hier. Puis je l'ai remise à aujourd'hui. Et aujourd'hui, à demain.",
+     "cs": "Vlastně jsem ji chtěl vyplnit včera. Pak jsem to odložil na dnes. A dnes na zítřek."
+    },
+    {
+     "text": "L'administration a mis six mois. Pendant tout ce temps, M. Wolff a continué à venir travailler, par principe, comme il disait.",
+     "cs": "Úřad potřeboval šest měsíců. Celou dobu chodil pan Wolff dál do práce, z principu, jak říkal."
+    },
+    {
+     "text": "Quand la demande a enfin été acceptée, il a demandé une petite prolongation, car il devait encore remettre quelques tâches à plus tard.",
+     "cs": "Když byla žádost konečně schválena, požádal o krátké prodloužení, protože musel ještě pár úkolů odložit."
+    },
+    {
+     "speaker": "Chef",
+     "text": "Monsieur Wolff, pendant quarante ans, vous avez tout remis à plus tard. La retraite est la seule chose que vous n'avez pas le droit de remettre.",
+     "cs": "Pane Wolffe, čtyřicet let jste všechno odkládal. Důchod je jediná věc, kterou odložit nesmíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Très bien. Je commence demain.",
+     "cs": "Dobře. Začnu zítra."
+    },
+    {
+     "text": "C'était il y a dix ans.",
+     "cs": "To bylo před deseti lety."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "procrastination",
+     "cs": "odkládání"
+    },
+    {
+     "word": "acceptée",
+     "cs": "přijatá"
+    },
+    {
+     "word": "prolongation",
+     "cs": "prodloužení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'est-ce que M. Wolff n'a pas encore fait ?",
+     "options": [
+      "Remplir sa demande de retraite",
+      "Organiser la fête",
+      "Écrire sa démission"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Comment l'histoire se termine-t-elle ?",
+     "options": [
+      "Il travaille toujours dix ans plus tard.",
+      "Il part tout de suite à la retraite.",
+      "Il devient chef."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

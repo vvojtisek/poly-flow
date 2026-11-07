@@ -3512,6 +3512,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-10-postponed-retirement",
+   "level": "B2",
+   "title": "Der verschobene Ruhestand",
+   "title_cs": "Odložený důchod",
+   "lines": [
+    {
+     "text": "Herr Wolff war ein Meister des Aufschiebens. In vierzig Jahren hatte er keine Aufgabe erledigt, die man auf morgen verschieben konnte.",
+     "cs": "Pan Wolff byl mistr odkládání. Za čtyřicet let nevyřídil žádný úkol, který se dal odložit na zítra."
+    },
+    {
+     "text": "Sein Ruhestand sollte am 1. März beginnen. Die Kollegen organisierten eine große Feier.",
+     "cs": "Začátek jeho důchodu byl stanoven na 1. března. Kolegové uspořádali velkou oslavu."
+    },
+    {
+     "text": "Am letzten Arbeitstag hielt der Chef eine Rede: Wir danken Ihnen für vierzig Jahre ... und für alle Aufgaben, die Sie noch erledigen werden.",
+     "cs": "V poslední pracovní den pronesl šéf řeč: Děkujeme vám za čtyřicet let... i za všechny úkoly, které ještě vyřídíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Vielen Dank. Ich möchte nur anmerken, dass ich den Rentenantrag noch nicht ausgefüllt habe.",
+     "cs": "Děkuji. Chci jen upozornit, že jsem ještě nevyplnil žádost o důchod."
+    },
+    {
+     "speaker": "Chef",
+     "text": "Was?",
+     "cs": "Cože?"
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Eigentlich wollte ich ihn gestern ausfüllen. Dann habe ich es auf heute verschoben. Und heute auf morgen.",
+     "cs": "Vlastně jsem ji chtěl vyplnit včera. Pak jsem to odložil na dnes. A dnes na zítřek."
+    },
+    {
+     "text": "Die Behörde brauchte sechs Monate. Die ganze Zeit kam Herr Wolff weiter zur Arbeit, aus Prinzip, wie er sagte.",
+     "cs": "Úřad potřeboval šest měsíců. Celou dobu chodil pan Wolff dál do práce, z principu, jak říkal."
+    },
+    {
+     "text": "Als der Antrag endlich bewilligt war, bat er um eine kurze Verlängerung, weil er noch ein paar Aufgaben aufschieben musste.",
+     "cs": "Když byla žádost konečně schválena, požádal o krátké prodloužení, protože musel ještě pár úkolů odložit."
+    },
+    {
+     "speaker": "Chef",
+     "text": "Herr Wolff, vierzig Jahre lang haben Sie alles aufgeschoben. Der Ruhestand ist das Einzige, was Sie nicht aufschieben dürfen.",
+     "cs": "Pane Wolffe, čtyřicet let jste všechno odkládal. Důchod je jediná věc, kterou odložit nesmíte."
+    },
+    {
+     "speaker": "Wolff",
+     "text": "Gut. Ich fange morgen an.",
+     "cs": "Dobře. Začnu zítra."
+    },
+    {
+     "text": "Das war vor zehn Jahren.",
+     "cs": "To bylo před deseti lety."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "aufschieben",
+     "cs": "odkládat"
+    },
+    {
+     "word": "bewilligt",
+     "cs": "schválená"
+    },
+    {
+     "word": "Verlängerung",
+     "cs": "prodloužení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was hat Herr Wolff noch nicht gemacht?",
+     "options": [
+      "Den Rentenantrag ausgefüllt",
+      "Die Feier organisiert",
+      "Seine Kündigung geschrieben"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wie endet die Geschichte?",
+     "options": [
+      "Er arbeitet zehn Jahre später noch immer.",
+      "Er geht sofort in Rente.",
+      "Er wird Chef."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
