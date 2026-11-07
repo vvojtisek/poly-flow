@@ -1,6 +1,6 @@
 "use client";
 
-import { BookMarked, Clock, Download, FolderOpen, Layers, List, Search, X } from "lucide-react";
+import { ArrowUpDown, BookMarked, Clock, Download, FolderOpen, Layers, List, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -11,10 +11,10 @@ import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordScope, type WordStatus } from "@/lib/api";
+import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { genderClass } from "@/lib/gender";
-import { cs } from "@/lib/i18n/cs";
+import { cs, relativeFuture } from "@/lib/i18n/cs";
 
 const t = cs.words;
 const STATUSES: WordStatus[] = ["learning", "passive", "known", "mastered", "seen"];
@@ -27,6 +27,7 @@ const PILL: Record<WordStatus, string> = {
   seen: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
 };
 const PAGE = 60;
+const SORTS: WordSort[] = ["rank", "review", "errors", "recent"];
 type Tab = "all" | "levels" | "topics";
 const TABS: { id: Tab; label: string }[] = [
   { id: "levels", label: t.tabLevels },
@@ -76,9 +77,8 @@ function GroupCard({
 
 function when(iso: string | null): string {
   if (!iso) return "–";
-  const days = Math.round((new Date(iso).getTime() - Date.now()) / 86_400_000);
-  if (days <= 0) return t.dueNow;
-  return t.inDays(days);
+  // Day rounding called a check due in 11 hours "now"; only a past date is due.
+  return new Date(iso).getTime() <= Date.now() ? t.dueNow : relativeFuture(iso);
 }
 
 function EvidenceRow({ label, done, correct, days, needCorrect, needDays }: { label: string; done: boolean; correct: number; days: number; needCorrect: number; needDays: number }) {
@@ -269,6 +269,7 @@ export default function WordsPage() {
   const [q, setQ] = useState("");
   const [status, setStatus] = useState<WordStatus | null>(null);
   const [due, setDue] = useState(false);
+  const [sort, setSort] = useState<WordSort>("rank");
   const [data, setData] = useState<WordList | null>(null);
   const [more, setMore] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -299,13 +300,15 @@ export default function WordsPage() {
     const initialStatus = params.get("status");
     const level = params.get("level");
     const topic = params.get("topic");
-    const filtered = Boolean(initialQuery || initialWord || initialStatus || params.get("due") || level || topic);
+    const filtered = Boolean(initialQuery || initialWord || initialStatus || params.get("due") || params.get("sort") || level || topic);
     if (filtered) setTab("all");
     else if (initialTab === "all" || initialTab === "levels" || initialTab === "topics") setTab(initialTab);
     if (initialQuery) setQ(initialQuery);
     if (initialWord) setOpen(initialWord);
     if (initialStatus && (STATUSES as string[]).includes(initialStatus)) setStatus(initialStatus as WordStatus);
     if (params.get("due") === "1") setDue(true);
+    const initialSort = params.get("sort");
+    if (initialSort && (SORTS as string[]).includes(initialSort)) setSort(initialSort as WordSort);
     if (level) setScope({ kind: "level", key: level, label: t.level(level) });
     else if (topic) pendingTopic.current = topic;
     setUrlRead(true);
@@ -318,6 +321,7 @@ export default function WordsPage() {
     set("q", tab === "all" ? q.trim() || null : null);
     set("status", tab === "all" ? status : null);
     set("due", tab === "all" && due ? "1" : null);
+    set("sort", tab === "all" && sort !== "rank" ? sort : null);
     set("word", tab === "all" ? open : null);
     if (!pendingTopic.current) {
       set("level", tab === "all" && scope?.kind === "level" ? scope.key : null);
@@ -326,13 +330,13 @@ export default function WordsPage() {
     const qs = params.toString();
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
     if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
-  }, [urlRead, tab, q, status, due, open, scope, groups]);
+  }, [urlRead, tab, q, status, due, sort, open, scope, groups]);
 
   useEffect(() => {
     if (!language) return;
     const ctrl = new AbortController();
     const timer = setTimeout(() => {
-      listWords(language, { q, status, due, limit: PAGE, scope }, ctrl.signal)
+      listWords(language, { q, status, due, limit: PAGE, scope, sort }, ctrl.signal)
         .then((d) => {
           setData(d);
           setCursor(0);
@@ -344,7 +348,7 @@ export default function WordsPage() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [language, q, status, due, scope, me?.acting.id]);
+  }, [language, q, status, due, scope, sort, me?.acting.id]);
 
   useEffect(() => {
     if (!language) return;
@@ -386,12 +390,12 @@ export default function WordsPage() {
     if (!language || !data) return;
     setMore(true);
     try {
-      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope });
+      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope, sort });
       setData({ ...data, items: [...data.items, ...next.items] });
     } finally {
       setMore(false);
     }
-  }, [language, data, q, status, due, scope]);
+  }, [language, data, q, status, due, scope, sort]);
 
   function onListKey(e: React.KeyboardEvent) {
     if ((e.target as HTMLElement).closest("input, select, textarea, button")) return;
@@ -605,6 +609,22 @@ export default function WordsPage() {
                   >
                     <Clock className="size-3.5" aria-hidden /> {t.dueOnly}
                   </button>
+                  <label className="ml-auto inline-flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-300">
+                    <ArrowUpDown className="size-4" aria-hidden />
+                    <span className="sr-only sm:not-sr-only">{t.sortLabel}</span>
+                    <select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value as WordSort)}
+                      aria-label={t.sortLabel}
+                      className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
+                    >
+                      {SORTS.map((value) => (
+                        <option key={value} value={value}>
+                          {t.sorts[value]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                 </div>
                 {failed && <Notice tone="error">{cs.common.error}</Notice>}
                 {selected.length > 0 && (
@@ -651,6 +671,8 @@ export default function WordsPage() {
                           </span>
                           <span className="block truncate text-sm text-slate-500">{w.translation}</span>
                         </span>
+                        {sort === "review" && !w.due && w.next_review_at && <span className="shrink-0 text-xs text-slate-500">{when(w.next_review_at)}</span>}
+                        {sort === "errors" && <span className={`shrink-0 text-xs tabular-nums ${w.errors ? "text-rose-600 dark:text-rose-400" : "text-slate-500"}`}>{t.rowErrors(w.errors)}</span>}
                         {w.due && <Clock className="size-4 text-amber-500" aria-label={t.dueNow} />}
                         <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${PILL[w.status]}`}>{t.status[w.status]}</span>
                       </button>

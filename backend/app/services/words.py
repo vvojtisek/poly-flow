@@ -45,6 +45,22 @@ def _status():
     )
 
 
+SORTS = ("rank", "review", "errors", "recent")
+
+
+def _order(sort: str) -> list:
+    """List order; every option ends on rank and id so paging with offset stays stable."""
+    p, li = UserWordProgress, LexiconItem
+    tail = [li.frequency_rank, li.id]
+    if sort == "review":  # soonest check first; words not introduced yet have no date and go last
+        return [p.next_review_at.asc().nulls_last(), *tail]
+    if sort == "errors":
+        return [p.error_count.desc(), *tail]
+    if sort == "recent":
+        return [p.introduced_at.desc().nulls_last(), *tail]
+    return tail
+
+
 def _escape(q: str) -> str:
     return q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
 
@@ -62,6 +78,7 @@ async def list_words(
     limit: int,
     level: str | None = None,
     topic: uuid.UUID | None = None,
+    sort: str = "rank",
 ) -> dict:
     p, li = UserWordProgress, LexiconItem
     st = _status().label("status")
@@ -95,7 +112,7 @@ async def list_words(
     if due:
         base = base.where(p.introduced_at.is_not(None), p.next_review_at <= now)
     total = await db.scalar(select(func.count()).select_from(base.subquery()))
-    rows = (await db.execute(base.order_by(li.frequency_rank).offset(offset).limit(limit))).all()
+    rows = (await db.execute(base.order_by(*_order(sort)).offset(offset).limit(limit))).all()
     return {
         "total": total or 0,
         "counts": {s: counts.get(s, 0) for s in STATUSES},

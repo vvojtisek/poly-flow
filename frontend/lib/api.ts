@@ -885,9 +885,11 @@ export function getWordDeck(language: Language, scope: DeckScope, signal?: Abort
   return api<Deck>(`/api/v1/words/deck?${p}`, { signal, cache: "no-store" });
 }
 
+export type WordSort = "rank" | "review" | "errors" | "recent";
+
 export function listWords(
   language: Language,
-  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number; scope?: WordScope | null },
+  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number; scope?: WordScope | null; sort?: WordSort },
   signal?: AbortSignal,
 ) {
   const p = new URLSearchParams({ language });
@@ -897,6 +899,7 @@ export function listWords(
   if (opts.due) p.set("due", "true");
   if (opts.offset) p.set("offset", String(opts.offset));
   if (opts.limit) p.set("limit", String(opts.limit));
+  if (opts.sort && opts.sort !== "rank") p.set("sort", opts.sort);
   return api<WordList>(`/api/v1/words?${p}`, { signal });
 }
 export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);

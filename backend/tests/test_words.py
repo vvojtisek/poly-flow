@@ -305,3 +305,36 @@ async def test_word_detail_counts_check_evidence_separately_for_recognition_and_
     assert out["required_correct"] == 3 and out["production_required_days"] == 2
     none = (await client.get(f"/api/v1/words/{ids['schön']}")).json()["evidence"]
     assert none["recognition"] == {"correct": 0, "days": 0}
+
+
+async def test_word_list_sorts_by_review_errors_and_recent(db, client, clock):
+    from datetime import timedelta
+
+    me = await setup_parent(client)
+    uid = uuid.UUID(me["acting"]["id"])
+    ids = await seed(uid, clock)
+    async for db_ in get_session():
+        rows = {
+            r.lexicon_item_id: r
+            for r in (
+                await db_.execute(select(UserWordProgress).where(UserWordProgress.user_id == uid))
+            ).scalars()
+        }
+        rows[ids["gehen"]].next_review_at = clock.now - timedelta(days=1)
+        rows[ids["schön"]].next_review_at = clock.now + timedelta(days=3)
+        rows[ids["schön"]].error_count = 4
+        rows[ids["Mord"]].error_count = 1
+        rows[ids["gehen"]].introduced_at = clock.now - timedelta(days=5)
+        rows[ids["Haus"]].introduced_at = clock.now - timedelta(days=2)
+        await db_.commit()
+        break
+
+    async def lemmas(sort: str) -> list[str]:
+        out = (await client.get(f"/api/v1/words?language=de&sort={sort}")).json()
+        return [w["lemma"] for w in out["items"]]
+
+    assert await lemmas("rank") == ["Haus", "gehen", "schön", "Mord"]
+    assert await lemmas("review") == ["gehen", "Haus", "schön", "Mord"]
+    assert await lemmas("errors") == ["schön", "Mord", "Haus", "gehen"]
+    assert await lemmas("recent") == ["schön", "Mord", "Haus", "gehen"]
+    assert (await client.get("/api/v1/words?language=de&sort=nope")).status_code == 422

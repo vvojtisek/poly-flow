@@ -1575,3 +1575,13 @@ Vlad approves a push.
 **Implemented Solution:** The word detail API now returns check-evidence tallies (correct answers and distinct days) for recognition and for recall, plus the policy thresholds. The counting moved into a shared evidence_counts() helper, so the card and the progress update use the same query. The inspector shows a 'Co ukázala ověření' block with two separate rows. Each row says 'splněno', 'zatím neověřeno' (no evidence: unknown, not zero) or 'N z 3 správně · N z 2 dnů', with a bar that follows the weaker of the two requirements.
 
 **Verification:** New pytest test_word_detail_counts_check_evidence_separately_for_recognition_and_recall: recall counts toward both, a non-evidence miss is ignored, and a word without events shows 0/0. tests/test_words.py and tests/test_learning.py pass. Playwright with a stubbed response shows 'splněno' and '2 z 3 správně · 1 z 2 dnů', and real data shows 'zatím neověřeno'. No console errors. typecheck, next build, ruff check/format pass.
+
+## Global Cycle 49/120 | Page: [/words] (Page Cycle 4/15)
+
+**Summary:** sort the word list by next check, mistakes or lesson date
+
+**Observed Problem:** The list could only be read in frequency order. A learner who wanted to see which words are checked next, which ones cause the most mistakes, or what the last lesson brought had to scan up to the full list page by page. The row also said 'teď k ověření' for a check due in up to 12 hours, because the date was rounded to whole days.
+
+**Implemented Solution:** The words API accepts sort=rank|review|errors|recent. The order is server-side and always ends on rank and id, so offset paging stays stable. Words with no date sort last. The page adds a 'Řadit' select that is kept in the URL (?sort=). Rows show the next check time when sorted by review and an error count when sorted by mistakes. Due wording uses relativeFuture, so only a past date reads as due ('do hodiny', 'zítra' and so on otherwise).
+
+**Verification:** New pytest test_word_list_sorts_by_review_errors_and_recent covers all four orders, the null-last rule and 422 on an unknown sort; tests/test_words.py 9 passed. Playwright: each option reorders rows (errors shows '1 chyba', review shows 'do hodiny', recent starts with Schule), the URL gets ?sort=… and a reload keeps it. Mobile 390px screenshot checked. No console errors. typecheck, next build, ruff pass.

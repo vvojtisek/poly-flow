@@ -209,6 +209,7 @@ async def list_words(
     limit: Annotated[int, Query(ge=1, le=200)] = 60,
     level: Annotated[str | None, Query(max_length=16)] = None,
     topic: uuid.UUID | None = None,
+    sort: Literal["rank", "review", "errors", "recent"] = "rank",
 ) -> WordListOut:
     try:
         out = await svc.list_words(
@@ -223,6 +224,7 @@ async def list_words(
             limit=limit,
             level=level,
             topic=topic,
+            sort=sort,
         )
     except LearningError as exc:
         raise _http(exc) from exc
