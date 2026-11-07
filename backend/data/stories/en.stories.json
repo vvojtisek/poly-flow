@@ -5779,6 +5779,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-32-average-socks",
+   "level": "B2",
+   "title": "Correct on Average",
+   "title_cs": "Průměrně správně",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva assessed the comfort of new socks using a questionnaire she had designed herself.",
+     "cs": "Eva vyhodnocovala pohodlí nových ponožek pomocí dotazníku, který sama navrhla."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The results are excellent. The average size corresponds perfectly to our customers' requirements.",
+     "cs": "Výsledky jsou výborné. Průměrná velikost dokonale odpovídá potřebám zákazníků."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why does every participant have one sock that's too small and another that's too large, then?",
+     "cs": "Proč má tedy každý účastník jednu ponožku příliš malou a druhou příliš velkou?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Because we account for variability. Individual values matter less than the aggregate indicator.",
+     "cs": "Protože zohledňujeme variabilitu. Jednotlivé hodnoty jsou méně důležité než celkový ukazatel."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wouldn't you rather measure each foot separately?",
+     "cs": "A nebudeš raději měřit každou nohu zvlášť?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva made a note: Good point. Next time we'll send a questionnaire to the other foot as well.",
+     "cs": "Eva si zapsala poznámku: Dobrá připomínka. Příští dotazník pošleme také druhé noze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "assessed",
+     "cs": "vyhodnotila"
+    },
+    {
+     "word": "variability",
+     "cs": "variabilita"
+    },
+    {
+     "word": "aggregate",
+     "cs": "souhrnný"
+    },
+    {
+     "word": "indicator",
+     "cs": "ukazatel"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co je s ponožkami špatně?",
+     "options": [
+      "Každá má jinou nevhodnou velikost.",
+      "Jsou mokré.",
+      "Chybí obě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Eva navrhne na konci?",
+     "options": [
+      "Poslat dotazník druhé noze.",
+      "Zavřít obchod.",
+      "Změnit barvu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
