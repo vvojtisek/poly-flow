@@ -7,7 +7,7 @@ from app.main import app
 
 
 def test_milestone_sequence():
-    assert [m.rank for m in MILESTONES] == [100, 500, 1000, 2500, 4000, 5000, 6000]
+    assert [m.rank for m in MILESTONES] == [100, 500, 1000, 2500, 4000, 5000, 6000, 7000, 8000]
     by_rank = {m.rank: m for m in MILESTONES}
     assert by_rank[100].cefr is None
     assert by_rank[500].cefr is CefrLevel.A1
@@ -16,13 +16,13 @@ def test_milestone_sequence():
     assert by_rank[4000].cefr is by_rank[5000].cefr is CefrLevel.B2
 
 
-def test_nothing_past_curriculum_is_required_or_claims_cefr():
+def test_extension_is_optional_and_c1_is_a_vocabulary_band():
     for m in MILESTONES:
         past = m.rank > CURRICULUM_END
         assert m.voluntary is past
         assert m.passive_focus is past
         if past:
-            assert m.cefr is None  # no C1 claim from vocabulary drills
+            assert m.cefr is (CefrLevel.C1 if m.rank == 8000 else None)
 
 
 @pytest.mark.parametrize(
@@ -63,9 +63,9 @@ async def test_milestones_endpoint():
     body = r.json()
     assert body["curriculum_end"] == 5000
     assert body["milestones"][-1] == {
-        "rank": 6000,
-        "key": "extension_passive",
-        "cefr": None,
+        "rank": 8000,
+        "key": "c1_vocabulary",
+        "cefr": "C1",
         "voluntary": True,
         "passive_focus": True,
     }

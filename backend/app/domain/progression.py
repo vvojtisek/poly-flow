@@ -1,9 +1,9 @@
 """Vocabulary progression: frequency-rank milestones and the voluntary extension beyond B2.
 
 Curriculum: 100 -> 500 (A1) -> 1000 (A2) -> 2500 (B1) -> 4000 (B2 threshold) -> 5000 (full B2).
-Beyond 5000 the app offers an open-ended, voluntary extension (6000+, passive-recognition
-focus). It makes no CEFR claim there: progress past B2 depends on real use of the language
-(conversation with people, media, culture), which the app can support but not replace.
+Beyond 5000 the app offers a voluntary, passive-focused extension. At 8000 it labels the
+app-specific C1 vocabulary band (product decision 2026-11-07). This is not CEFR certification:
+communicative proficiency still depends on real use of the language.
 
 The CEFR tags are heuristics. CEFR describes communicative ability, not vocabulary size; the
 word counts only indicate a vocabulary consistent with that level. The level exams
@@ -34,6 +34,8 @@ MILESTONES: tuple[Milestone, ...] = (
     Milestone(4000, "b2_threshold", CefrLevel.B2),
     Milestone(5000, "b2_full", CefrLevel.B2),
     Milestone(6000, "extension_passive", voluntary=True, passive_focus=True),
+    Milestone(7000, "extension_passive", voluntary=True, passive_focus=True),
+    Milestone(8000, "c1_vocabulary", CefrLevel.C1, voluntary=True, passive_focus=True),
 )
 
 CURRICULUM_END = 5000  # last required milestone (full B2)

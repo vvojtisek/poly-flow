@@ -1,0 +1,34 @@
+{
+  "de": {
+    "url": "https://download.wikdict.com/dictionaries/tei/recommended/deu-ces.tei",
+    "edition": "2025.11.21",
+    "sha256": "7d05bd653610e23e42e6b1ab7067c77e9de8ad9df1f134ebb33787d554b95443",
+    "license": "CC-BY-SA-3.0",
+    "attribution": "Karl Bartel, WikDict; Wiktionary contributors via DBnary",
+    "adaptation_license": "CC-BY-SA-4.0"
+  },
+  "en": {
+    "url": "https://download.wikdict.com/dictionaries/tei/recommended/eng-ces.tei",
+    "edition": "2025.11.21",
+    "sha256": "2ee7ca1d9bb092e5e50faa5145e3bcfffe8bb3bc8c5ba5564c73a0426cbc5bf9",
+    "license": "CC-BY-SA-3.0",
+    "attribution": "Karl Bartel, WikDict; Wiktionary contributors via DBnary",
+    "adaptation_license": "CC-BY-SA-4.0"
+  },
+  "fr": {
+    "url": "https://download.wikdict.com/dictionaries/tei/recommended/fra-ces.tei",
+    "edition": "2025.11.21",
+    "sha256": "341252b1db169d0ce0383c4c11217f4c18ce841dddbfc071de2d3c490db6b627",
+    "license": "CC-BY-SA-3.0",
+    "attribution": "Karl Bartel, WikDict; Wiktionary contributors via DBnary",
+    "adaptation_license": "CC-BY-SA-4.0"
+  },
+  "it": {
+    "url": "https://download.wikdict.com/dictionaries/tei/recommended/ita-ces.tei",
+    "edition": "2025.11.21",
+    "sha256": "338b12f16cd27e3b9d7b2aeab914d972f374b283d70bab364b8df0cb0feafede",
+    "license": "CC-BY-SA-3.0",
+    "attribution": "Karl Bartel, WikDict; Wiktionary contributors via DBnary",
+    "adaptation_license": "CC-BY-SA-4.0"
+  }
+}

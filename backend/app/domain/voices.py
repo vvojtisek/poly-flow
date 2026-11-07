@@ -58,6 +58,19 @@ TOPICS: tuple[str, ...] = (
     "science",
     "technology",
     "business",
+    "figure-skating",
+    "dance",
+    "gymnastics",
+    "ice-hockey",
+    "field-sports",
+    "mathematics",
+    "chemistry",
+    "biology",
+    "physics",
+    "history",
+    "woodworking",
+    "criminology",
+    "street-slang",
 )
 MAX_INTERESTS = 20
 MAX_KEYWORD_CHARS = 40
