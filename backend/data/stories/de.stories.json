@@ -4487,6 +4487,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-14-bicycle-basket",
+   "level": "A2",
+   "title": "Der Fahrradkorb",
+   "title_cs": "Nákup na kole",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom kaufte einen großen Korb für sein Fahrrad.",
+     "cs": "Tom koupil na kolo velký košík."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Jetzt kann ich den ganzen Einkauf ohne Auto nach Hause bringen.",
+     "cs": "Teď odvezu celý nákup bez auta."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Prima. Hast du Brot, Milch und Eier?",
+     "cs": "Výborně. Máš chleba, mléko a vejce?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Alles. Nur lässt sich das Fahrrad ziemlich schwer lenken.",
+     "cs": "Všechno. Jen se to kolo nějak špatně řídí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ist die Ladung in deinem Korb zu schwer?",
+     "cs": "Nemáš v košíku příliš těžký náklad?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom holte das letzte Stück heraus: Vielleicht hätte ich keinen zweiten Korb für den Rückweg kaufen sollen.",
+     "cs": "Tom vytáhl poslední věc: Možná jsem neměl kupovat ještě jeden košík na cestu zpátky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "lenken",
+     "cs": "řídit směr"
+    },
+    {
+     "word": "Ladung",
+     "cs": "náklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom přidal k nákupu?",
+     "options": [
+      "Další košík.",
+      "Nové auto.",
+      "Stan."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak chtěl vézt nákup?",
+     "options": [
+      "Na kole.",
+      "Vlakem.",
+      "Lodí."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

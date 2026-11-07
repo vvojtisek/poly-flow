@@ -4487,6 +4487,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-14-bicycle-basket",
+   "level": "A2",
+   "title": "Il cestino della bicicletta",
+   "title_cs": "Nákup na kole",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha comprato un grande cestino per la bicicletta.",
+     "cs": "Tom koupil na kolo velký košík."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Adesso posso portare a casa tutta la spesa senza macchina.",
+     "cs": "Teď odvezu celý nákup bez auta."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bene. Hai il pane, il latte e le uova?",
+     "cs": "Výborně. Máš chleba, mléko a vejce?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tutto. Solo che la bicicletta è piuttosto difficile da guidare.",
+     "cs": "Všechno. Jen se to kolo nějak špatně řídí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Il carico nel cestino è troppo pesante?",
+     "cs": "Nemáš v košíku příliš těžký náklad?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha tirato fuori l'ultimo oggetto: Forse non dovevo comprare un secondo cestino per il ritorno.",
+     "cs": "Tom vytáhl poslední věc: Možná jsem neměl kupovat ještě jeden košík na cestu zpátky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "guidare",
+     "cs": "řídit"
+    },
+    {
+     "word": "carico",
+     "cs": "náklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom přidal k nákupu?",
+     "options": [
+      "Další košík.",
+      "Nové auto.",
+      "Stan."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak chtěl vézt nákup?",
+     "options": [
+      "Na kole.",
+      "Vlakem.",
+      "Lodí."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -4487,6 +4487,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-14-bicycle-basket",
+   "level": "A2",
+   "title": "Le panier du vélo",
+   "title_cs": "Nákup na kole",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a acheté un grand panier pour son vélo.",
+     "cs": "Tom koupil na kolo velký košík."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Maintenant, je peux rapporter toutes les courses sans voiture.",
+     "cs": "Teď odvezu celý nákup bez auta."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Parfait. Tu as le pain, le lait et les œufs ?",
+     "cs": "Výborně. Máš chleba, mléko a vejce?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tout. Seulement, le vélo est assez difficile à diriger.",
+     "cs": "Všechno. Jen se to kolo nějak špatně řídí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "La charge dans ton panier est peut-être trop lourde ?",
+     "cs": "Nemáš v košíku příliš těžký náklad?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a sorti le dernier objet : Je n'aurais peut-être pas dû acheter un deuxième panier pour le retour.",
+     "cs": "Tom vytáhl poslední věc: Možná jsem neměl kupovat ještě jeden košík na cestu zpátky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "diriger",
+     "cs": "řídit směr"
+    },
+    {
+     "word": "charge",
+     "cs": "náklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom přidal k nákupu?",
+     "options": [
+      "Další košík.",
+      "Nové auto.",
+      "Stan."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak chtěl vézt nákup?",
+     "options": [
+      "Na kole.",
+      "Vlakem.",
+      "Lodí."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

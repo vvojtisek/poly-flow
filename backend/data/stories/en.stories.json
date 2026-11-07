@@ -4487,6 +4487,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-14-bicycle-basket",
+   "level": "A2",
+   "title": "The Bicycle Basket",
+   "title_cs": "Nákup na kole",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom bought a big basket for his bicycle.",
+     "cs": "Tom koupil na kolo velký košík."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Now I can bring all the shopping home without a car.",
+     "cs": "Teď odvezu celý nákup bez auta."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Great. Have you got bread, milk and eggs?",
+     "cs": "Výborně. Máš chleba, mléko a vejce?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Everything. Only the bicycle is rather hard to steer.",
+     "cs": "Všechno. Jen se to kolo nějak špatně řídí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Is the load in your basket too heavy?",
+     "cs": "Nemáš v košíku příliš těžký náklad?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom took out the last item: Perhaps I shouldn't have bought another basket for the return journey.",
+     "cs": "Tom vytáhl poslední věc: Možná jsem neměl kupovat ještě jeden košík na cestu zpátky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "steer",
+     "cs": "řídit směr"
+    },
+    {
+     "word": "load",
+     "cs": "náklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom přidal k nákupu?",
+     "options": [
+      "Další košík.",
+      "Nové auto.",
+      "Stan."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak chtěl vézt nákup?",
+     "options": [
+      "Na kole.",
+      "Vlakem.",
+      "Lodí."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
