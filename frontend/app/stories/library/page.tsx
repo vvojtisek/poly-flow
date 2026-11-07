@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BookOpenText, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
+import { ArrowLeft, BookOpenText, CheckCircle2, XCircle, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -8,7 +8,7 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice } from "@/components/ui";
 import { clipSrc, playToEnd, stop } from "@/lib/audio";
-import { getLibraryStory, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
+import { answerLibraryQuestion, getLibraryStory, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -64,6 +64,82 @@ function GlossedLine({ text, stretch, language }: { text: string; stretch: Gloss
         ),
       )}
     </span>
+  );
+}
+
+/**
+ * Comprehension questions after reading: a check of understanding, not a test. Wrong picks can be
+ * retried (learning mode), the answer can be shown, and nothing is stored or counted.
+ */
+function Questions({ language, slug, questions }: { language: Language; slug: string; questions: { question: string; options: string[] }[] }) {
+  const [state, setState] = useState<Record<number, { wrong: number[]; right: number | null }>>({});
+  const [busy, setBusy] = useState<number | null>(null);
+  const [failed, setFailed] = useState(false);
+  async function pick(q: number, choice: number, reveal = false) {
+    setBusy(q);
+    setFailed(false);
+    try {
+      const r = await answerLibraryQuestion(language, slug, q, choice);
+      setState((s) => {
+        const cur = s[q] ?? { wrong: [], right: null };
+        if (reveal || r.correct) return { ...s, [q]: { ...cur, right: r.answer_index } };
+        return { ...s, [q]: { ...cur, wrong: [...cur.wrong, choice] } };
+      });
+    } catch {
+      setFailed(true);
+    } finally {
+      setBusy(null);
+    }
+  }
+  if (!questions.length) return null;
+  return (
+    <section aria-labelledby="questions-title" className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+      <div>
+        <h3 id="questions-title" className="text-lg font-bold">{t.questionsTitle}</h3>
+        <p className="text-xs text-slate-500">{t.questionsHelp}</p>
+      </div>
+      {questions.map((q, qi) => {
+        const st = state[qi] ?? { wrong: [], right: null };
+        const done = st.right !== null;
+        return (
+          <fieldset key={qi} className="flex flex-col gap-2">
+            <legend lang={language} className="mb-1 font-medium">{q.question}</legend>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {q.options.map((option, oi) => {
+                const right = st.right === oi;
+                const wrong = st.wrong.includes(oi);
+                return (
+                  <button
+                    key={oi}
+                    type="button"
+                    lang={language}
+                    disabled={done || wrong || busy === qi}
+                    onClick={() => void pick(qi, oi)}
+                    className={`flex min-h-11 items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-sm ${
+                      right
+                        ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40"
+                        : wrong
+                          ? "border-rose-400 bg-rose-50 text-rose-800 dark:bg-rose-950/40 dark:text-rose-200"
+                          : "border-slate-200 hover:border-brand-500 dark:border-slate-700"
+                    }`}
+                  >
+                    {option}
+                    {right && <CheckCircle2 className="size-4 shrink-0 text-emerald-600" aria-label={t.right} />}
+                    {wrong && <XCircle className="size-4 shrink-0" aria-label={t.wrong} />}
+                  </button>
+                );
+              })}
+            </div>
+            {!done && st.wrong.length > 0 && (
+              <button type="button" onClick={() => void pick(qi, st.wrong[0] ?? 0, true)} className="self-start text-xs font-semibold text-brand-700 hover:underline dark:text-brand-200">
+                {t.reveal}
+              </button>
+            )}
+          </fieldset>
+        );
+      })}
+      {failed && <Notice tone="error">{cs.common.error}</Notice>}
+    </section>
   );
 }
 
@@ -192,6 +268,7 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
               </li>
             ))}
           </ol>
+          <Questions key={story.slug} language={language} slug={story.slug} questions={story.questions} />
         </>
       )}
     </article>

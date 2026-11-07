@@ -6,7 +6,7 @@ from app.db.session import get_session
 from app.domain.enums import BlacklistCategory, BlacklistPatternType, Language
 from app.models import ContentBlacklistEntry, LearningEvent
 from app.services.library import story_file
-from tests.helpers import setup_parent
+from tests.helpers import csrf, setup_parent
 from tests.test_learning import child_session
 
 
@@ -78,3 +78,33 @@ async def test_reading_a_story_returns_lines_with_czech_and_hides_gated_ones(db,
         await s.commit()
     r = await client.get(f"/api/v1/stories/library/{first.slug}?language=de")
     assert r.status_code == 404
+
+
+async def test_comprehension_answers_are_checked_on_the_server_and_not_stored(db, client):
+    me = await setup_parent(client)
+    first = story_file(Language.DE).stories[0]
+    out = (await client.get(f"/api/v1/stories/library/{first.slug}?language=de")).json()
+    assert [q["question"] for q in out["questions"]] == [q.question for q in first.questions]
+    assert all("answer_index" not in q for q in out["questions"])
+    q0 = first.questions[0]
+    base = f"/api/v1/stories/library/{first.slug}/questions"
+    right = await client.post(
+        f"{base}/0/answer?language=de", json={"choice": q0.answer_index}, headers=csrf(me)
+    )
+    assert right.json() == {"correct": True, "answer_index": q0.answer_index}
+    wrong_choice = (q0.answer_index + 1) % len(q0.options)
+    wrong = await client.post(
+        f"{base}/0/answer?language=de", json={"choice": wrong_choice}, headers=csrf(me)
+    )
+    assert wrong.json() == {"correct": False, "answer_index": q0.answer_index}
+    n = len(first.questions)
+    r = await client.post(f"{base}/{n}/answer?language=de", json={"choice": 0}, headers=csrf(me))
+    assert r.status_code == 404
+    r = await client.post(f"{base}/0/answer?language=de", json={"choice": 9}, headers=csrf(me))
+    assert r.status_code == 422
+    # Without the CSRF header the write-shaped call is refused like every other POST.
+    assert (
+        await client.post(f"{base}/0/answer?language=de", json={"choice": 0})
+    ).status_code == 403
+    async for s in get_session():
+        assert await s.scalar(select(func.count()).select_from(LearningEvent)) == 0

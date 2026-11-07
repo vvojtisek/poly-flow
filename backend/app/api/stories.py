@@ -199,8 +199,14 @@ async def story_library(
     )
 
 
+class LibraryQuestionOut(BaseModel):
+    question: str
+    options: list[str]
+
+
 class LibraryReadOut(BaseModel):
     slug: str
+    questions: list[LibraryQuestionOut]  # answers stay on the server
     stretch: list[GlossOut]  # words from the level above, with a Czech gloss
     language: Language
     level: CefrLevel
@@ -233,6 +239,7 @@ async def library_story(
         kind=_kind(s),
         lines=[LibraryLineOut(speaker=ln.speaker, text=ln.text, cs=ln.cs) for ln in s.lines],
         stretch=[GlossOut(word=w.word, cs=w.cs) for w in s.stretch],
+        questions=[LibraryQuestionOut(question=q.question, options=q.options) for q in s.questions],
         review_status=lib.file.review_status,
     )
 
@@ -336,3 +343,27 @@ async def library_line_audio(
     if line >= len(lines):
         raise HTTPException(404, "unknown_line")
     return await _speech(tts, lang, lines[line].text, _chosen_voice(auth.acting, lang))
+
+
+@router.post("/library/{slug}/questions/{index}/answer", response_model=AnswerOut)
+async def library_answer(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    index: Annotated[int, Path(ge=0, le=9)],
+    body: AnswerIn,
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+) -> AnswerOut:
+    """A comprehension check while reading: says whether the choice is right. Nothing is stored."""
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    questions = lib.stories[0].questions
+    if index >= len(questions):
+        raise HTTPException(404, "unknown_question")
+    q = questions[index]
+    if body.choice >= len(q.options):
+        raise HTTPException(422, "invalid_choice")
+    return AnswerOut(correct=body.choice == q.answer_index, answer_index=q.answer_index)

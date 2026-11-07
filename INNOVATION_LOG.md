@@ -2175,3 +2175,13 @@ Vlad approves a push.
 **Implemented Solution:** The reader API returns stretch [{word, cs}]. Before the text, a 'Slova z vyšší úrovně' panel lists them with glosses (context first). In the lines, every occurrence is matched as a whole word, case-insensitive and Unicode-aware with longest form first, and rendered as a dotted-underlined button. Tapping it shows the Czech gloss in place; aria-expanded and aria-label are set.
 
 **Verification:** test_library_api.py: 4 passed, including the exact stretch list. b108.js: the panel lists 'Wettervorhersage = předpověď počasí | ruhig = klidný', all three occurrences are marked, and tapping shows 'předpověď počasí'. A sweep over all 360 stories (de, en, fr, it) found 0 stretch words the matcher misses. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 109/120 | Page: [/stories/library] (Page Cycle 4/15)
+
+**Summary:** check understanding after reading, without grading it
+
+**Observed Problem:** Every curated story carries 2-4 comprehension questions with an answer key. The library did not expose them, so a learner finished a text with no way to check whether they had understood it. Shipping the answer key to the browser would also have made the 'check' a lookup.
+
+**Implemented Solution:** The reader API returns the questions without answers. A new POST /stories/library/{slug}/questions/{i}/answer checks a choice on the server and records nothing (CSRF-protected like other POSTs; unknown question 404; out-of-range choice 422). Below the text, 'Porozuměl(a) jsi?' presents each question in Lekce style: a wrong pick turns red and can be retried, a right one turns green and locks the question, and after a miss 'Ukázat správnou odpověď' reveals it. A note says this is a check of understanding, not a test.
+
+**Verification:** New test test_comprehension_answers_are_checked_on_the_server_and_not_stored covers: no answer_index in the payload, right and wrong verdicts, 404, 422, 403 without CSRF, and 0 learning events. test_library_api.py: 5 passed. b109.js: two questions shown. On q1, picks 2 and 1 were wrong and 0 right, after which all options are disabled. On q2, a miss then reveal shows 'Im Park'. No console errors. Typecheck, build, ruff passed.

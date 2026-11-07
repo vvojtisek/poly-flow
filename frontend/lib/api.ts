@@ -663,11 +663,17 @@ export interface LibraryStory {
   kind: "story" | "dialogue";
   lines: { speaker: string | null; text: string; cs: string }[];
   stretch: { word: string; cs: string }[];
+  questions: { question: string; options: string[] }[];
   review_status: "unreviewed" | "reviewed";
 }
 export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
 export const libraryAudioUrl = (language: Language, slug: string, line: number) =>
   `/api/v1/stories/library/${encodeURIComponent(slug)}/audio?language=${language}&line=${line}`;
+export const answerLibraryQuestion = (language: Language, slug: string, index: number, choice: number) =>
+  api<{ correct: boolean; answer_index: number }>(
+    `/api/v1/stories/library/${encodeURIComponent(slug)}/questions/${index}/answer?language=${language}`,
+    { json: { choice } },
+  );
 export const getLibraryStory = (language: Language, slug: string) =>
   api<LibraryStory>(`/api/v1/stories/library/${encodeURIComponent(slug)}?language=${language}`);
 
