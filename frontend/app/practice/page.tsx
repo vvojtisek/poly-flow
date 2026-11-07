@@ -91,6 +91,7 @@ export default function PracticePage() {
   const [weakFailed, setWeakFailed] = useState(false);
   const [weakCards, setWeakCards] = useState(false);
   const [tipIndex, setTipIndex] = useState(0);
+  const [announce, setAnnounce] = useState("");
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
   useEffect(() => setRecent(readRecent()), []);
@@ -131,7 +132,10 @@ export default function PracticePage() {
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const modes = modesFor(me.acting.active_language);
-  const shown = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
+  // Pinned modes lead the grid (in pin order), so their 1-9 shortcuts stay put.
+  const filtered = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
+  const pinRank = (m: PracticeMode) => (pinned.includes(m.id) ? pinned.indexOf(m.id) : pinned.length + modes.indexOf(m));
+  const shown = [...filtered].sort((a, b) => pinRank(a) - pinRank(b));
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const favorites = pinned.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const tips = suggestModes(modes, visits, (m) => !(m.needsWords && introduced === 0));
@@ -287,11 +291,18 @@ export default function PracticePage() {
         <p className="text-xs text-slate-500" aria-live="polite">
           {t.count(shown.length)}
         </p>
+        <p className="sr-only" aria-live="polite">
+          {announce}
+        </p>
 
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((m, i) => (
             <li key={m.id}>
-              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} hotkey={i < 9 ? i + 1 : undefined} />
+              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => {
+                  const next = togglePinned(m.id);
+                  setPinned(next);
+                  setAnnounce(next.includes(m.id) ? t.pinnedNow(t.mode[m.id]?.title ?? m.id) : t.unpinnedNow(t.mode[m.id]?.title ?? m.id));
+                }} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} hotkey={i < 9 ? i + 1 : undefined} />
             </li>
           ))}
         </ul>

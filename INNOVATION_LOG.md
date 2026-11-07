@@ -1485,3 +1485,13 @@ Vlad approves a push.
 **Implemented Solution:** `components/FlashcardSession.tsx`: the summary offers "Znovu jen 3 kartičky, které jsem nevěděl(a)" (focused, primary) whenever any card was marked again, starting a round with exactly those cards; "Projít znovu" and the close button stay. Still practice only, nothing is stored. Copy with Czech plural forms in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright ran the 10-card weak deck from `/practice` with the keyboard, marked 3 cards again, and the follow-up round had exactly 3 cards.
+
+## Global Cycle 40/120 | Page: [/practice] (Page Cycle 10/15)
+
+**Summary:** pinned modes lead the grid and keep their shortcuts
+
+**Observed Problem:** Pinning a mode only added a chip above the grid; the card itself stayed in the middle of the list, so pinned favourites got shifting 1-9 shortcuts and the pin button gave no feedback beyond its icon.
+
+**Implemented Solution:** `app/practice/page.tsx`: the grid now lists pinned modes first in pin order (then the usual order, after the skill filter), so a favourite keeps key 1, 2… Toggling a pin announces "Čísla je připnuté a ukazuje se první." / "… už není připnuté." through a polite live region. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pinned "Čísla", it became the first card, and pressing 1 opened `/numbers`.

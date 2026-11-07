@@ -686,6 +686,8 @@ export const cs = {
     backToHub: "Zpět na procvičování",
     tipTitle: "Tip na dnes",
     tipOther: "Jiný tip",
+    pinnedNow: (name: string) => `${name} je připnuté a ukazuje se první.`,
+    unpinnedNow: (name: string) => `${name} už není připnuté.`,
     tipSince: (skill: string, when: string) => `Na ${skill} ses na tomto zařízení naposledy zaměřil(a) ${when}.`,
     tipNever: (skill: string) => `Na ${skill} ses na tomto zařízení ještě nezaměřil(a).`,
     needsLesson: "Pracuje se slovy z lekcí: nejdřív projdi první lekci.",
