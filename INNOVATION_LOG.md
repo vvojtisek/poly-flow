@@ -2095,3 +2095,13 @@ Vlad approves a push.
 **Implemented Solution:** A checkbox 'Po kole rovnou další věta (až do konce)' chains rounds. When a round's compare step ends, the page moves to the next line (respecting the chosen role) and starts that line's round 500 ms after it becomes current. The pending start is keyed to the target line index and re-armed if the line's model envelope arrives meanwhile, so a round never plays the previous line's audio. The run stops at the last target line. Esc, or moving manually during a round, ends it through the run token.
 
 **Verification:** s100.js (fake mic, stubbed audio, role Tom, chain on), one click: rounds on line 2 (0.1-10.1 s), line 4 (10.7-20.7 s) and line 6 (21.4-31.3 s), then stop. The count goes to 'nahráno 3 z 3', the completion note appears, and there is no fourth round. An earlier version stalled after the first advance (a timer cleared by runEcho changing); this was fixed by keying the start to the index and arming it in the timer. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 101/120 | Page: [/shadowing] (Page Cycle 11/15)
+
+**Summary:** retry failed loads, and never report a failed scene list as no scenes
+
+**Observed Problem:** A failed sentence request left a generic red notice with no retry. Loading was one 'Načítám…' line. A failed scene-list request was swallowed as an empty list, so the page said 'Rozhovory se tu objeví, až projdeš lekci se scénou': a learner who had done those lessons was told to do them, and the scene option was disabled.
+
+**Implemented Solution:** Sentence and scene loads now fail into a RetryNotice whose text names what failed (word sentences or this scene) and refetches the same source. Loading shows a skeleton card and an action bar placeholder. The scene list keeps a separate failed state that says the list could not be loaded, with its own retry. The 'no scenes yet' note now appears only for a real empty list.
+
+**Verification:** s101.js with routed 500s and a 1.5 s delay. While loading, the skeleton is present. Then the alert reads 'Věty ke stínování se nepodařilo načíst.' The scene-list failure text is shown, and the false 'Rozhovory se tu objeví' claim is absent. Retry loads 1/20. The scene-list retry enables 'Rozhovor ze scény'. No console errors other than the forced 500s. Typecheck, build, ruff passed.

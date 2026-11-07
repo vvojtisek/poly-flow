@@ -683,6 +683,9 @@ export const cs = {
     scenePick: "Scéna",
     sceneOption: (title: string, lines: number) => `${title} (${lines} ${lines < 5 ? "repliky" : "replik"})`,
     noScenes: "Rozhovory se tu objeví, až projdeš lekci se scénou.",
+    wordsFailed: "Věty ke stínování se nepodařilo načíst.",
+    sceneFailed: "Tuhle scénu se nepodařilo načíst.",
+    scenesFailed: "Seznam rozhovorů se nepodařilo načíst.",
     sceneEmpty: "Tuhle scénu teď nejde načíst. Vyber jinou nebo stínuj věty ze slov.",
   },
   genders: {

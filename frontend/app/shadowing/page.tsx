@@ -7,7 +7,7 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Kbd } from "@/components/Kbd";
 import { digitOf, isTypingTarget } from "@/lib/keyboard";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
-import { Notice } from "@/components/ui";
+import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { useRecorder } from "@/hooks/useRecorder";
 import { getPracticeSentences, getRoleplay, listRoleplay, myWordAudioUrl, roleplayAudioUrl, type Language, type RoleplayScene } from "@/lib/api";
 import { clipSrc, play, playToEnd, stop } from "@/lib/audio";
@@ -136,6 +136,7 @@ function ActionButton({
 function Shadowing({ language, source, start, onIndex }: { language: Language; source: Source; start: number; onIndex: (i: number) => void }) {
   const [list, setList] = useState<Line[] | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [index, setIndex] = useState(start);
   const [support, setSupport] = useState<Support>("full");
   const cycleSupport = useCallback(() => setSupport((v) => SUPPORTS[(SUPPORTS.indexOf(v) + 1) % SUPPORTS.length] ?? "full"), []);
@@ -190,6 +191,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
 
   useEffect(() => {
     let cancelled = false;
+    setFailed(false);
     loadLines(language, source)
       .then((l) => {
         if (cancelled) return;
@@ -203,7 +205,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     };
     // The parent remounts this component per source, so the source object is stable here.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [language]);
+  }, [language, attempt]);
 
   // Recordings live only in this tab; free them when leaving.
   useEffect(
@@ -399,8 +401,14 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     return () => document.removeEventListener("keydown", onKey);
   }, [modelUrl, mineUrl, toggleRecord, compare, go, runEcho, jump, list, recording, rec]);
 
-  if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
-  if (!list) return <p className="text-sm text-slate-500">{cs.common.loading}</p>;
+  if (failed) return <RetryNotice text={source.kind === "scene" ? t.sceneFailed : t.wordsFailed} onRetry={() => setAttempt((n) => n + 1)} />;
+  if (!list)
+    return (
+      <div aria-busy className="flex flex-col gap-4">
+        <div className="rounded-3xl border border-slate-200 p-5 dark:border-slate-800"><Skeleton lines={4} /></div>
+        <div className="h-20 rounded-2xl bg-slate-100 motion-safe:animate-pulse dark:bg-slate-800" aria-hidden />
+      </div>
+    );
   if (!current || !modelUrl) return <Notice>{source.kind === "scene" ? t.sceneEmpty : t.empty}</Notice>;
 
   return (
@@ -567,15 +575,19 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
 /** Which lines to shadow: example sentences of lesson words, or a whole dialogue from a met scene. */
 function SourcePicker({ language, source, onChange }: { language: Language; source: Source; onChange: (s: Source) => void }) {
   const [scenes, setScenes] = useState<RoleplayScene[] | null>(null);
+  // A failed list is not "no scenes yet": that would tell the learner to do lessons they did.
+  const [scenesFailed, setScenesFailed] = useState(false);
+  const [scenesAttempt, setScenesAttempt] = useState(0);
   useEffect(() => {
     let live = true;
+    setScenesFailed(false);
     listRoleplay(language)
       .then((x) => live && setScenes(x))
-      .catch(() => live && setScenes([]));
+      .catch(() => live && setScenesFailed(true));
     return () => {
       live = false;
     };
-  }, [language]);
+  }, [language, scenesAttempt]);
   const sceneId = source.kind === "scene" ? source.id : "";
   // Coming back from a scene keeps the word order the learner chose before.
   const lastOrder = useRef<Order>("recent");
@@ -631,6 +643,14 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
         </label>
       )}
       {scenes !== null && scenes.length === 0 && <p className="text-xs text-slate-500">{t.noScenes}</p>}
+      {scenesFailed && (
+        <p className="flex flex-wrap items-center gap-2 text-xs text-red-700 dark:text-red-300">
+          {t.scenesFailed}
+          <button type="button" onClick={() => setScenesAttempt((n) => n + 1)} className="font-semibold underline">
+            {cs.common.retry}
+          </button>
+        </p>
+      )}
     </div>
   );
 }
