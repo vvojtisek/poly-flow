@@ -1345,3 +1345,13 @@ Vlad approves a push.
 **Implemented Solution:** New `GET /api/v1/grammar/units/{id}/audio?example=N` (`api/grammar.py`) speaks one of the unit's curated examples through the existing TTS path and the profile's chosen voice; it never accepts free text and returns 404 for unknown units or example indexes. The topic preview in `app/grammar/page.tsx` gets a play button per example (`PlayButton` shows the unavailable state when no voice is installed). Test `test_example_audio_only_for_existing_examples`.
 
 **Verification:** `tests/test_grammar.py` 15 passed; ruff (one file reformatted), typecheck, production build, `git diff --check` passed. Audio playback itself not verified: this container has no TTS voices (the endpoint returns 503 there, as the test expects).
+
+## Global Cycle 26/120 | Page: [/grammar] (Page Cycle 11/15)
+
+**Summary:** compact topic cards: one meta line, clamped summary
+
+**Observed Problem:** After cycles 17 and 20 a studied card stacked up to four small text lines (exercise count, next check, check tally, open link) under a full-length summary; on a phone two cards filled the screen.
+
+**Implemented Solution:** `app/grammar/page.tsx`: the card's meta is one line ("8 cvičení · v ověřeních 3 správně, 1 chyba · ověření zítra") next to the open/resume link, and the summary is clamped to two lines. Strings in `lib/i18n/cs.ts` lower-cased to read as one sentence fragment.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single meta line per card and the mobile page at 2 521 px.

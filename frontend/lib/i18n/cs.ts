@@ -1167,7 +1167,7 @@ export const cs = {
     activeFromBadge: (level: string) => `Úroveň podle tvé nejvyšší zkoušky slovní zásoby (${level}). Ostatní úrovně jsou níže a zůstávají otevřené.`,
     activeChosen: "Úroveň, kterou sis vybral(a). Ostatní úrovně jsou níže a zůstávají otevřené.",
     focusLevel: "Zaměřit se na úroveň",
-    nextCheck: (when: string) => `Ověření ${when}`,
+    nextCheck: (when: string) => `ověření ${when}`,
     enterOpens: "Enter otevře první, Esc vše zruší",
     preview: "Náhled výkladu",
     withErrors: "S chybami",
@@ -1175,7 +1175,7 @@ export const cs = {
     previewHide: "Skrýt náhled",
     previewGoal: "Cíl:",
     checkedTally: (ok: number, wrong: number) =>
-      `V ověřeních: ${ok} správně${wrong ? `, ${wrong} ${wrong === 1 ? "chyba" : wrong < 5 ? "chyby" : "chyb"}` : ""}`,
+      `v ověřeních ${ok} správně${wrong ? `, ${wrong} ${wrong === 1 ? "chyba" : wrong < 5 ? "chyby" : "chyb"}` : ""}`,
     focusAuto: (level: string) => `Podle odhadu (${level})`,
     inProgress: "Právě se učíš",
     nothingInProgress: "Zatím nic rozpracovaného. Začni prvním tématem z nabídky níže.",

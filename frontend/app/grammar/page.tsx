@@ -122,20 +122,19 @@ function UnitCard({ u, recommended, resumable, language, highlight }: { u: Gramm
           )}
         </div>
         <p className="font-semibold">{u.title}</p>
-        <p className="text-sm text-slate-600 dark:text-slate-300">{u.summary}</p>
-        <p className="mt-auto flex items-center justify-between gap-2 text-xs text-slate-500">
+        <p className="line-clamp-2 text-sm text-slate-600 dark:text-slate-300">{u.summary}</p>
+        <p className="mt-auto flex items-end justify-between gap-2 text-xs text-slate-500">
+          {/* One meta line: size, then the check result or when the next check opens. */}
           <span>
-            {cs.grammar.exercises(u.exercises)}
-            {/* When a studied topic can be checked next (checks open from the next day). */}
-            {!u.due && u.next_review_at && u.status !== "new" && (
-              <span className="block text-slate-500">{cs.grammar.nextCheck(relativeFuture(u.next_review_at))}</span>
-            )}
-            {/* Graded evidence only; a topic never checked shows nothing rather than "0 %". */}
-            {u.checked_correct + u.checked_errors > 0 && (
-              <span className="block text-slate-500">{cs.grammar.checkedTally(u.checked_correct, u.checked_errors)}</span>
-            )}
+            {[
+              cs.grammar.exercises(u.exercises),
+              u.checked_correct + u.checked_errors > 0 ? cs.grammar.checkedTally(u.checked_correct, u.checked_errors) : null,
+              !u.due && u.next_review_at && u.status !== "new" ? cs.grammar.nextCheck(relativeFuture(u.next_review_at)) : null,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
           </span>
-          <span className="font-semibold text-brand-600">
+          <span className="shrink-0 font-semibold text-brand-600">
             {resumable ? (
               <>
                 <RotateCcw className="mr-1 inline size-3" aria-hidden />
