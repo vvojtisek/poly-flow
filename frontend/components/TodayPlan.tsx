@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Skeleton } from "@/components/ui";
+import { RetryNotice, Skeleton } from "@/components/ui";
 import { getToday, listStoryArchive, updateOwnProfile, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
@@ -60,6 +60,8 @@ export function TodayPlan({ language, profileId, onPlan }: { language: Language;
   const [plan, setPlan] = useState<Plan | null>(null);
   const [editGoal, setEditGoal] = useState(false);
   const [goalFailed, setGoalFailed] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [recentStories, setRecentStories] = useState<StoryArchiveItem[]>([]);
   useHotkeys(); // Enter and digit keys on the dashboard
   useEffect(() => {
@@ -67,13 +69,14 @@ export function TodayPlan({ language, profileId, onPlan }: { language: Language;
   }, [plan, onPlan]);
   useEffect(() => {
     let cancelled = false;
+    setFailed(false);
     getToday(language)
       .then((p) => !cancelled && setPlan(p))
-      .catch(() => undefined);
+      .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
-  }, [language, profileId]);
+  }, [language, profileId, attempt]);
   useEffect(() => {
     let cancelled = false;
     listStoryArchive(language)
@@ -94,6 +97,12 @@ export function TodayPlan({ language, profileId, onPlan }: { language: Language;
     }
   }
 
+  if (!plan && failed)
+    return (
+      <section aria-label={t.title} className="rounded-3xl border border-brand-500/30 p-4 lg:col-span-3">
+        <RetryNotice text={t.failed} onRetry={() => setAttempt((n) => n + 1)} />
+      </section>
+    );
   if (!plan)
     return (
       <section aria-label={t.title} className="flex items-center gap-4 rounded-3xl border border-brand-500/30 p-4 lg:col-span-3">

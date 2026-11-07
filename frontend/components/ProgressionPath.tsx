@@ -4,7 +4,7 @@ import { CheckCircle2, Circle, Info, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { getProgression, type Progression, type ProgressOverview } from "@/lib/api";
-import { Skeleton } from "@/components/ui";
+import { RetryNotice, Skeleton } from "@/components/ui";
 import { cs } from "@/lib/i18n/cs";
 
 const fmt = new Intl.NumberFormat("cs-CZ");
@@ -12,16 +12,18 @@ const fmt = new Intl.NumberFormat("cs-CZ");
 export function ProgressionPath({ progress }: { progress: ProgressOverview | null }) {
   const [data, setData] = useState<Progression | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
+    setFailed(false);
     getProgression(controller.signal)
       .then(setData)
       .catch((err: Error) => err.name !== "AbortError" && setFailed(true));
     return () => controller.abort();
-  }, []);
+  }, [attempt]);
 
-  if (failed) return <p className="text-sm text-red-600">{cs.progression.unavailable}</p>;
+  if (failed) return <RetryNotice text={cs.progression.unavailable} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!data) return <Skeleton lines={6} />;
 
   const required = data.milestones.filter((m) => !m.voluntary);

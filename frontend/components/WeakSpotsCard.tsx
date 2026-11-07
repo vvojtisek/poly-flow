@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { PlayButton } from "@/components/PlayButton";
-import { Notice, Skeleton } from "@/components/ui";
+import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { getWeakSpots, myWordAudioUrl, type Language, type WeakSpots } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 
@@ -15,6 +15,7 @@ export function WeakSpotsCard({ language }: { language: Language }) {
   const [data, setData] = useState<WeakSpots | null>(null);
   const [failed, setFailed] = useState(false);
   const [all, setAll] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let cancelled = false;
     setData(null);
@@ -25,9 +26,9 @@ export function WeakSpotsCard({ language }: { language: Language }) {
     return () => {
       cancelled = true;
     };
-  }, [language]);
+  }, [language, attempt]);
 
-  if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
+  if (failed) return <RetryNotice onRetry={() => setAttempt((n) => n + 1)} />;
   if (!data) return <Skeleton lines={4} />;
   const empty = !data.words.length && !data.units.length;
   // The worst few first (the API orders by errors); the rest on request, so the panel stays short.

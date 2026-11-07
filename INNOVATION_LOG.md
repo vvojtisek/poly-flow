@@ -1225,3 +1225,13 @@ Vlad approves a push.
 **Implemented Solution:** `LanguagePicker` with summaries uses an even 2 × 2 grid on phones and the inline row from `sm` up (`components/AppShell.tsx`). The quick actions in `app/page.tsx` form a 2-column grid on phones with the icon above the text and help clamped to two lines; from `sm` they return to the icon-beside-text layout and four columns on wide screens.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows the 2 × 2 switcher and action grid, no console errors.
+
+## Global Cycle 14/120 | Page: [/] (Page Cycle 14/15)
+
+**Summary:** retry failed dashboard panels instead of dead ends
+
+**Observed Problem:** If today's plan failed to load, the panel stayed a loading skeleton forever (its error was swallowed); progress, weak spots and the milestone path showed a red "Něco se nepovedlo" with no way to recover short of reloading the whole page.
+
+**Implemented Solution:** New `RetryNotice` in `components/ui.tsx` (alert text plus "Zkusit znovu"). `TodayPlan` now records failures and offers a retry; the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath` re-run their own request through an attempt counter. Copy `cs.today.failed` added.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with `/today` and `/learning/progress` returning 500 showed two retry notices, and after the API recovered, pressing them restored both panels.

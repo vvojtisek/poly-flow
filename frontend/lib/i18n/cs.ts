@@ -388,6 +388,7 @@ export const cs = {
     } as Record<string, (n: number) => string>,
     go: "Pokračovat",
     changeGoal: "Změnit cíl",
+    failed: "Dnešní plán se nepodařilo načíst.",
     recentReadings: "Nedávná čtení",
     tomorrow: (n: number) => `Zítra přijde na řadu ${n} slov.`,
   },

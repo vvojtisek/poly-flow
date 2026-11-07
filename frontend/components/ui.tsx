@@ -91,3 +91,19 @@ export function Skeleton({ lines = 3, className = "" }: { lines?: number; classN
     </div>
   );
 }
+
+/** A failed panel: says so and offers to load it again, instead of a dead end or endless loading. */
+export function RetryNotice({ onRetry, text = cs.common.error }: { onRetry: () => void; text?: string }) {
+  return (
+    <div role="alert" className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-200">
+      <span>{text}</span>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="rounded-lg border border-red-300 px-2.5 py-1 text-xs font-semibold hover:bg-red-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:border-red-800 dark:hover:bg-red-900"
+      >
+        {cs.common.retry}
+      </button>
+    </div>
+  );
+}

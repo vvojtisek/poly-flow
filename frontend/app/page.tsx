@@ -19,7 +19,7 @@ import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
-import { Button, Notice, Skeleton } from "@/components/ui";
+import { Button, RetryNotice, Skeleton } from "@/components/ui";
 import { getGrammarTree, getLanguageSummaries, getLessonPreview, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type LessonPreview, type ProgressOverview, type TodayPlan as Plan } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
@@ -109,6 +109,7 @@ export default function HomePage() {
   const [progress, setProgress] = useState<ProgressOverview | null>(null);
   const [failed, setFailed] = useState(false);
   const [grammar, setGrammar] = useState<GrammarTree | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const [summaries, setSummaries] = useState<LanguageSummary[] | null>(null);
   const [preview, setPreview] = useState<LessonPreview | null>(null);
   const [firstStep, setFirstStep] = useState<Plan["steps"][number] | null>(null);
@@ -146,7 +147,7 @@ export default function HomePage() {
     return () => {
       cancelled = true;
     };
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, attempt]);
 
   // Offered once per language, before anything is learned; skipping or taking it decides.
   const offerPlacement =
@@ -301,7 +302,7 @@ export default function HomePage() {
 
         <Panel title={cs.progress.title} icon={BarChart3} className="lg:col-span-2">
           {failed ? (
-            <Notice tone="error">{cs.common.error}</Notice>
+            <RetryNotice onRetry={() => setAttempt((n) => n + 1)} />
           ) : progress ? (
             <ProgressCard progress={progress} grammar={grammar} />
           ) : (
