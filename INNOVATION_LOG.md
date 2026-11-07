@@ -1615,3 +1615,13 @@ Vlad approves a push.
 **Implemented Solution:** Each list row now has a small play button labelled 'Přehrát <lemma>' next to the row (not nested inside the row button). The page installs useHotkeys, so P plays the open word and Alt+P works from the search box. The card shows the P key hint and the shared 'Pomaleji' toggle.
 
 **Verification:** Playwright: no audio request on load (60 play buttons stay idle); 'Přehrát sein' requests that word's audio without opening the card; P with the card open requests the open word; Alt+P from the focused search plays and types nothing. The container has no TTS, so audio answers 503 and the button shows its unavailable state; the requests are what was checked. No other console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 53/120 | Page: [/words] (Page Cycle 8/15)
+
+**Summary:** filter the word list by part of speech
+
+**Observed Problem:** The list could be narrowed by status, due date and scope but not by kind of word, although learners practise by kind: noun genders, verb forms, adjectives. Finding the 8 verbs among 41 German words meant scrolling or guessing search terms.
+
+**Implemented Solution:** The words API takes kind=noun|verb|adj|adv|other, which maps Universal Dependencies POS tags to learner-facing groups (PROPN counts with nouns, AUX with verbs, every other tag is 'other'). Kind is one of the facet filters, so the status counts follow it. The page adds a swipeable 'Druh slova' chip row (Podstatná jména, Slovesa, Přídavná jména, Příslovce, Ostatní). Tapping a chip again clears it, and the choice is kept in the URL (?kind=).
+
+**Verification:** New pytest test_word_list_filters_by_word_kind (noun/verb/adj/other, counts add up to total, 422 on unknown); tests/test_words.py 11 passed. Playwright: Slovesa shows 'Vše 8' with sein, haben, können, kommen; nouns show der Mann, die Frau; Ostatní shows der, und, in, ein; a reload keeps the choice; no horizontal overflow at 390px. No console errors. typecheck, next build, ruff pass.

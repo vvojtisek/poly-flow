@@ -46,6 +46,20 @@ def _status():
 
 
 SORTS = ("rank", "review", "errors", "recent")
+# Word-kind filter over Universal Dependencies POS tags; "other" is every remaining (function) tag.
+KINDS: dict[str, tuple[str, ...]] = {
+    "noun": ("NOUN", "PROPN"),
+    "verb": ("VERB", "AUX"),
+    "adj": ("ADJ",),
+    "adv": ("ADV",),
+}
+
+
+def _kind_filter(kind: str):
+    li = LexiconItem
+    if kind == "other":
+        return li.pos.not_in([tag for tags in KINDS.values() for tag in tags])
+    return li.pos.in_(KINDS[kind])
 
 
 def _order(sort: str) -> list:
@@ -79,6 +93,7 @@ async def list_words(
     level: str | None = None,
     topic: uuid.UUID | None = None,
     sort: str = "rank",
+    kind: str | None = None,
 ) -> dict:
     p, li = UserWordProgress, LexiconItem
     st = _status().label("status")
@@ -88,8 +103,8 @@ async def list_words(
         .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
         .where(li.language == language, _suitable(user), *scope)
     )
-    # Facet counts follow the search, due and scope filters (but not the status filter itself), so
-    # the status chips always add up to what the list can show.
+    # Facet counts follow the search, due, kind and scope filters (not the status filter itself),
+    # so the status chips always add up to what the list can show.
     narrow: list = []
     if q and q.strip():
         pat = f"%{_escape(q.strip().lower())}%"
@@ -101,6 +116,8 @@ async def list_words(
         )
     if due:
         narrow += [p.introduced_at.is_not(None), p.next_review_at <= now]
+    if kind is not None:
+        narrow.append(_kind_filter(kind))
     base = base.where(*narrow)
     counts = dict(
         (

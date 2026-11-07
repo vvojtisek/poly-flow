@@ -11,7 +11,7 @@ import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
+import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { useHotkeys } from "@/lib/keyboard";
 import { genderClass } from "@/lib/gender";
@@ -29,6 +29,7 @@ const PILL: Record<WordStatus, string> = {
 };
 const PAGE = 60;
 const SORTS: WordSort[] = ["rank", "review", "errors", "recent"];
+const KINDS: WordKind[] = ["noun", "verb", "adj", "adv", "other"];
 type Tab = "all" | "levels" | "topics";
 const TABS: { id: Tab; label: string }[] = [
   { id: "levels", label: t.tabLevels },
@@ -276,6 +277,7 @@ export default function WordsPage() {
   const [status, setStatus] = useState<WordStatus | null>(null);
   const [due, setDue] = useState(false);
   const [sort, setSort] = useState<WordSort>("rank");
+  const [kind, setKind] = useState<WordKind | null>(null);
   const [data, setData] = useState<WordList | null>(null);
   const [more, setMore] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -306,7 +308,7 @@ export default function WordsPage() {
     const initialStatus = params.get("status");
     const level = params.get("level");
     const topic = params.get("topic");
-    const filtered = Boolean(initialQuery || initialWord || initialStatus || params.get("due") || params.get("sort") || level || topic);
+    const filtered = Boolean(initialQuery || initialWord || initialStatus || params.get("due") || params.get("sort") || params.get("kind") || level || topic);
     if (filtered) setTab("all");
     else if (initialTab === "all" || initialTab === "levels" || initialTab === "topics") setTab(initialTab);
     if (initialQuery) setQ(initialQuery);
@@ -315,6 +317,8 @@ export default function WordsPage() {
     if (params.get("due") === "1") setDue(true);
     const initialSort = params.get("sort");
     if (initialSort && (SORTS as string[]).includes(initialSort)) setSort(initialSort as WordSort);
+    const initialKind = params.get("kind");
+    if (initialKind && (KINDS as string[]).includes(initialKind)) setKind(initialKind as WordKind);
     if (level) setScope({ kind: "level", key: level, label: t.level(level) });
     else if (topic) pendingTopic.current = topic;
     setUrlRead(true);
@@ -328,6 +332,7 @@ export default function WordsPage() {
     set("status", tab === "all" ? status : null);
     set("due", tab === "all" && due ? "1" : null);
     set("sort", tab === "all" && sort !== "rank" ? sort : null);
+    set("kind", tab === "all" ? kind : null);
     set("word", tab === "all" ? open : null);
     if (!pendingTopic.current) {
       set("level", tab === "all" && scope?.kind === "level" ? scope.key : null);
@@ -336,13 +341,13 @@ export default function WordsPage() {
     const qs = params.toString();
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
     if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
-  }, [urlRead, tab, q, status, due, sort, open, scope, groups]);
+  }, [urlRead, tab, q, status, due, sort, kind, open, scope, groups]);
 
   useEffect(() => {
     if (!language) return;
     const ctrl = new AbortController();
     const timer = setTimeout(() => {
-      listWords(language, { q, status, due, limit: PAGE, scope, sort }, ctrl.signal)
+      listWords(language, { q, status, due, limit: PAGE, scope, sort, kind }, ctrl.signal)
         .then((d) => {
           setData(d);
           setCursor(0);
@@ -354,7 +359,7 @@ export default function WordsPage() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [language, q, status, due, scope, sort, me?.acting.id]);
+  }, [language, q, status, due, scope, sort, kind, me?.acting.id]);
 
   useEffect(() => {
     if (!language) return;
@@ -396,12 +401,12 @@ export default function WordsPage() {
     if (!language || !data) return;
     setMore(true);
     try {
-      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope, sort });
+      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope, sort, kind });
       setData({ ...data, items: [...data.items, ...next.items] });
     } finally {
       setMore(false);
     }
-  }, [language, data, q, status, due, scope, sort]);
+  }, [language, data, q, status, due, scope, sort, kind]);
 
   // Moving the highlight with the inspector open browses word by word: the card follows the row.
   function move(delta: number) {
@@ -475,7 +480,7 @@ export default function WordsPage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   // Status counts follow search, due and scope, so `total` is "matching words" and adds up with the chips.
   const total = data ? Object.values(data.counts).reduce((a, b) => a + b, 0) : 0;
-  const narrowed = Boolean(q.trim() || status || due || scope);
+  const narrowed = Boolean(q.trim() || status || due || kind || scope);
   return (
     <AppShell me={me}>
       <div className="flex flex-col gap-4">
@@ -672,6 +677,21 @@ export default function WordsPage() {
                       ))}
                     </select>
                   </label>
+                </div>
+                <div role="group" aria-label={t.kindLabel} className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none]">
+                  {KINDS.map((value) => (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={kind === value}
+                      onClick={() => setKind(kind === value ? null : value)}
+                      className={`shrink-0 rounded-lg border px-2.5 py-1 text-xs font-medium ${
+                        kind === value ? "border-brand-500 bg-brand-500/10 text-brand-600 dark:text-brand-50" : "border-slate-200 text-slate-600 hover:border-brand-500 dark:border-slate-700 dark:text-slate-300"
+                      }`}
+                    >
+                      {t.kinds[value]}
+                    </button>
+                  ))}
                 </div>
                 {failed && <Notice tone="error">{cs.common.error}</Notice>}
                 {selected.length > 0 && (

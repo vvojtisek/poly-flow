@@ -352,3 +352,19 @@ async def test_status_counts_follow_search_and_due_filters(db, client, clock):
     learning = (await client.get("/api/v1/words?language=de&status=learning")).json()
     assert learning["counts"]["passive"] == 1
     assert learning["total"] == learning["counts"]["learning"]
+
+
+async def test_word_list_filters_by_word_kind(db, client, clock):
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+
+    async def lemmas(kind: str) -> list[str]:
+        out = (await client.get(f"/api/v1/words?language=de&kind={kind}")).json()
+        assert sum(out["counts"].values()) == out["total"]
+        return [w["lemma"] for w in out["items"]]
+
+    assert await lemmas("noun") == ["Haus", "Mord"]
+    assert await lemmas("verb") == ["gehen"]
+    assert await lemmas("adj") == ["schön"]
+    assert await lemmas("other") == []
+    assert (await client.get("/api/v1/words?language=de&kind=x")).status_code == 422
