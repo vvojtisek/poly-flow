@@ -98,6 +98,25 @@ have no scene: a lesson shows each word's example sentence as its context.
 provenance, noun capitalisation and gender. Adding `sein/DET` (possessive) made `sein` and `zu`
 ambiguous in scene markup, so `de.core100.json` now writes `sein/AUX` and `zu/ADP`.
 
+### `de.1001-5000.csv` (German ranks 1001-5000, revision `de5000-draft-v1`)
+
+4,000 words that take German from the A2 milestone to full B2 (5,000), so placement can place up
+to 5,000 and the B1 and B2 exams open. Unlike ranks 101-1000, the order comes from a corpus:
+wordfreq's German frequencies (CC-BY-SA-4.0), summed per lemma and walked from the top, skipping
+lemmas already in ranks 1-1000. wordfreq lists lower-cased word forms, so forms were grouped with
+simplemma (MIT) and a Hunspell German word list (used only to tell nouns from verbs; nothing is
+copied from it), and every lemma was then checked by hand while glossing. The lemmatiser makes
+mistakes (`Tage` -> `tagen`), so the order is approximate. Skipped: personal and place names
+(countries are kept as `PROPN` without gender), abbreviations, brand names and English words.
+Nouns carry `der/die/das` (plural-only nouns `die`). Flags follow the English list: profanity
+(`ficken`, `Arsch`, `Mist`, `verdammt`...) and sexual words are adult opt-in only, violent words
+(`Krieg`, `töten`, `Waffe`, `Mord`...) are flagged `violence`, and unflagged examples use no
+flagged word. About 76% of examples contain the lemma verbatim (separable and conjugated verbs
+often do not). **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/de-1001-5000-review.md` in the project files.
+`tests/test_lexicon_de.py` checks ranks 1-5000, unique keys and glosses, provenance, noun gender,
+complete A1-B2 bands and clean examples.
+
 ### Producing the full lists (not done yet)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)

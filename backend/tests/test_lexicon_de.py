@@ -1,4 +1,4 @@
-"""The committed German lexicon (core-100 + drafted ranks 101-1000): shape, provenance, gates."""
+"""The committed German lexicon (core-100 + drafted ranks 101-5000): shape, provenance, gates."""
 
 import re
 from pathlib import Path
@@ -16,16 +16,16 @@ def _de() -> list[LexiconRow]:
     return [r for p in DE_FILES for r in read_rows(p, LexiconRow)]
 
 
-def test_ranks_run_1_to_1000_and_keys_are_unique():
+def test_ranks_run_1_to_5000_and_keys_are_unique():
     rows = _de()
-    assert sorted(r.rank for r in rows) == list(range(1, 1001))
+    assert sorted(r.rank for r in rows) == list(range(1, 5001))
     keys = [(r.lemma, r.pos) for r in rows]
     assert len(set(keys)) == len(keys)
 
 
-def test_a1_and_a2_bands_count_as_imported():
+def test_a1_to_b2_bands_count_as_imported():
     ranks = [r.rank for r in _de()]
-    for level in (CefrLevel.A1, CefrLevel.A2):
+    for level in (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2):
         band = BY_LEVEL[level]
         assert band_complete(band, sum(band.low < r <= band.high for r in ranks))
 
@@ -38,9 +38,14 @@ def test_glosses_are_unique():
 
 def test_drafted_block_is_marked_and_complete():
     drafted = [r for r in _de() if r.rank > 100]
-    assert len(drafted) == 900
+    assert len(drafted) == 4900
     for r in drafted:
-        assert (r.source, r.license, r.revision) == ("claude-drafted", "CC0-1.0", "de1000-draft-v1")
+        expected = (
+            ("claude-drafted", "CC0-1.0", "de1000-draft-v1")
+            if r.rank <= 1000
+            else ("claude-drafted", "CC-BY-SA-4.0", "de5000-draft-v1")
+        )
+        assert (r.source, r.license, r.revision) == expected, r.lemma
         assert r.translation_cs and r.example, r.lemma
         assert r.gender in (None, "", *ARTICLES), r.lemma
 
@@ -57,3 +62,21 @@ def test_examples_are_sentences_in_german():
         if r.rank > 100:
             assert re.match(r"^[A-ZÄÖÜ]", r.example), r.lemma
             assert r.example.rstrip()[-1] in ".!?", r.lemma
+
+
+def test_flagged_words_use_known_flags_and_profanity_is_flagged():
+    """Adult-only vocabulary must carry a flag so child profiles never see it."""
+    rows = {r.lemma: {f.value for f in r.content_flags} for r in _de()}
+    for lemma in ("ficken", "Arsch", "Scheiße", "töten", "Krieg", "Sex"):
+        if lemma in rows:
+            assert rows[lemma], lemma
+
+
+def test_unflagged_examples_do_not_use_flagged_words():
+    rows = _de()
+    flagged = {r.lemma for r in rows if r.content_flags}
+    for r in rows:
+        if r.content_flags or not r.example:
+            continue
+        hits = [w for w in flagged if re.search(rf"(?<!\w){re.escape(w)}(?!\w)", r.example, re.I)]
+        assert hits == [], f"{r.lemma}: example uses flagged {hits}"
