@@ -90,6 +90,88 @@
      "answer_index": 1
     }
    ]
+  },
+  {
+   "slug": "a1-02-guard-dog",
+   "level": "A1",
+   "title": "Il cane da guardia",
+   "title_cs": "Hlídací pes",
+   "lines": [
+    {
+     "text": "Mia mette un panino sul tavolo.",
+     "cs": "Mia položí sendvič na stůl."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max, tu sei il mio cane da guardia. Fai attenzione!",
+     "cs": "Maxi, ty jsi můj hlídací pes. Dávej dobrý pozor!"
+    },
+    {
+     "text": "Max è seduto vicino al tavolo. Sembra molto serio.",
+     "cs": "Max sedí vedle stolu. Vypadá velmi vážně."
+    },
+    {
+     "text": "Mia va in cucina. Dopo cinque minuti torna.",
+     "cs": "Mia jde do kuchyně. Za pět minut se vrátí."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Dov'è il mio panino?",
+     "cs": "Kde je můj sendvič?"
+    },
+    {
+     "text": "Max guarda da un'altra parte. Ha del formaggio sul naso.",
+     "cs": "Max se dívá stranou. Na čumáku má sýr."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max! Hai mangiato il panino!",
+     "cs": "Maxi! Snědl jsi sendvič!"
+    },
+    {
+     "text": "Max non dice niente. Si addormenta subito.",
+     "cs": "Max neříká nic. Rychle usne."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Va bene. Il panino adesso è al sicuro: nella tua pancia.",
+     "cs": "No dobře. Sendvič je teď v bezpečí: v tvém břiše."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "guardia",
+     "cs": "hlídání (cane da guardia = hlídací pes)"
+    },
+    {
+     "word": "serio",
+     "cs": "vážný"
+    },
+    {
+     "word": "sicuro",
+     "cs": "jistý; al sicuro = v bezpečí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dov'è il panino alla fine?",
+     "options": [
+      "Sul tavolo",
+      "In cucina",
+      "Nella pancia di Max"
+     ],
+     "answer_index": 2
+    },
+    {
+     "question": "Che cosa c'è sul naso di Max?",
+     "options": [
+      "Formaggio",
+      "Pane",
+      "Acqua"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

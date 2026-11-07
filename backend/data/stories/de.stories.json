@@ -90,6 +90,88 @@
      "answer_index": 1
     }
    ]
+  },
+  {
+   "slug": "a1-02-guard-dog",
+   "level": "A1",
+   "title": "Der Wachhund",
+   "title_cs": "Hlídací pes",
+   "lines": [
+    {
+     "text": "Mia legt ein Sandwich auf den Tisch.",
+     "cs": "Mia položí sendvič na stůl."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max, du bist mein Wachhund. Pass gut auf!",
+     "cs": "Maxi, ty jsi můj hlídací pes. Dávej dobrý pozor!"
+    },
+    {
+     "text": "Max sitzt neben dem Tisch. Er schaut sehr ernst.",
+     "cs": "Max sedí vedle stolu. Vypadá velmi vážně."
+    },
+    {
+     "text": "Mia geht in die Küche. Nach fünf Minuten kommt sie zurück.",
+     "cs": "Mia jde do kuchyně. Za pět minut se vrátí."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Wo ist mein Sandwich?",
+     "cs": "Kde je můj sendvič?"
+    },
+    {
+     "text": "Max schaut zur Seite. An seiner Nase ist Käse.",
+     "cs": "Max se dívá stranou. Na čumáku má sýr."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max! Du hast das Sandwich gegessen!",
+     "cs": "Maxi! Snědl jsi sendvič!"
+    },
+    {
+     "text": "Max sagt nichts. Er schläft schnell ein.",
+     "cs": "Max neříká nic. Rychle usne."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Na gut. Das Sandwich ist jetzt sicher: in deinem Bauch.",
+     "cs": "No dobře. Sendvič je teď v bezpečí: v tvém břiše."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Wachhund",
+     "cs": "hlídací pes"
+    },
+    {
+     "word": "ernst",
+     "cs": "vážný"
+    },
+    {
+     "word": "sicher",
+     "cs": "v bezpečí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wo ist das Sandwich am Ende?",
+     "options": [
+      "Auf dem Tisch",
+      "In der Küche",
+      "In Max' Bauch"
+     ],
+     "answer_index": 2
+    },
+    {
+     "question": "Was ist an Max' Nase?",
+     "options": [
+      "Käse",
+      "Brot",
+      "Wasser"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

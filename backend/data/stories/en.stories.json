@@ -90,6 +90,88 @@
      "answer_index": 1
     }
    ]
+  },
+  {
+   "slug": "a1-02-guard-dog",
+   "level": "A1",
+   "title": "The Guard Dog",
+   "title_cs": "Hlídací pes",
+   "lines": [
+    {
+     "text": "Mia puts a sandwich on the table.",
+     "cs": "Mia položí sendvič na stůl."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max, you are my guard dog. Pay attention!",
+     "cs": "Maxi, ty jsi můj hlídací pes. Dávej dobrý pozor!"
+    },
+    {
+     "text": "Max sits next to the table. He looks very serious.",
+     "cs": "Max sedí vedle stolu. Vypadá velmi vážně."
+    },
+    {
+     "text": "Mia goes to the kitchen. Five minutes later, she comes back.",
+     "cs": "Mia jde do kuchyně. Za pět minut se vrátí."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Where is my sandwich?",
+     "cs": "Kde je můj sendvič?"
+    },
+    {
+     "text": "Max looks away. There is cheese on his nose.",
+     "cs": "Max se dívá stranou. Na čumáku má sýr."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max! You ate the sandwich!",
+     "cs": "Maxi! Snědl jsi sendvič!"
+    },
+    {
+     "text": "Max says nothing. He falls asleep quickly.",
+     "cs": "Max neříká nic. Rychle usne."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Well. The sandwich is safe now: in your stomach.",
+     "cs": "No dobře. Sendvič je teď v bezpečí: v tvém břiše."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "guard",
+     "cs": "hlídací (guard dog = hlídací pes)"
+    },
+    {
+     "word": "serious",
+     "cs": "vážný"
+    },
+    {
+     "word": "safe",
+     "cs": "v bezpečí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Where is the sandwich at the end?",
+     "options": [
+      "On the table",
+      "In the kitchen",
+      "In Max's stomach"
+     ],
+     "answer_index": 2
+    },
+    {
+     "question": "What is on Max's nose?",
+     "options": [
+      "Cheese",
+      "Bread",
+      "Water"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

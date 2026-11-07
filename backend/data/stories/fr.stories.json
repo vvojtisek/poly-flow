@@ -90,6 +90,88 @@
      "answer_index": 1
     }
    ]
+  },
+  {
+   "slug": "a1-02-guard-dog",
+   "level": "A1",
+   "title": "Le chien de garde",
+   "title_cs": "Hlídací pes",
+   "lines": [
+    {
+     "text": "Mia met un sandwich sur la table.",
+     "cs": "Mia položí sendvič na stůl."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max, tu es mon chien de garde. Fais bien attention !",
+     "cs": "Maxi, ty jsi můj hlídací pes. Dávej dobrý pozor!"
+    },
+    {
+     "text": "Max est assis près de la table. Il a l'air très sérieux.",
+     "cs": "Max sedí vedle stolu. Vypadá velmi vážně."
+    },
+    {
+     "text": "Mia va dans la cuisine. Cinq minutes plus tard, elle revient.",
+     "cs": "Mia jde do kuchyně. Za pět minut se vrátí."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Où est mon sandwich ?",
+     "cs": "Kde je můj sendvič?"
+    },
+    {
+     "text": "Max regarde ailleurs. Il a du fromage sur le nez.",
+     "cs": "Max se dívá stranou. Na čumáku má sýr."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Max ! Tu as mangé le sandwich !",
+     "cs": "Maxi! Snědl jsi sendvič!"
+    },
+    {
+     "text": "Max ne dit rien. Il s'endort vite.",
+     "cs": "Max neříká nic. Rychle usne."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Bon. Le sandwich est en sécurité maintenant : dans ton ventre.",
+     "cs": "No dobře. Sendvič je teď v bezpečí: v tvém břiše."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "garde",
+     "cs": "hlídání (chien de garde = hlídací pes)"
+    },
+    {
+     "word": "sérieux",
+     "cs": "vážný"
+    },
+    {
+     "word": "sécurité",
+     "cs": "bezpečí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Où est le sandwich à la fin ?",
+     "options": [
+      "Sur la table",
+      "Dans la cuisine",
+      "Dans le ventre de Max"
+     ],
+     "answer_index": 2
+    },
+    {
+     "question": "Qu'est-ce qu'il y a sur le nez de Max ?",
+     "options": [
+      "Du fromage",
+      "Du pain",
+      "De l'eau"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
