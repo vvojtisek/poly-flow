@@ -4215,6 +4215,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-10-laundry-team",
+   "level": "A2",
+   "title": "Das neue Mannschaftstrikot",
+   "title_cs": "Nový týmový dres",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom wusch die weißen Trikots der ganzen Eishockeymannschaft.",
+     "cs": "Tom pral bílé dresy celého hokejového týmu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe nur eine kleine rote Socke dazugelegt.",
+     "cs": "Přidal jsem jen jednu malou červenou ponožku."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Warum sind dann alle Trikots rosa?",
+     "cs": "Tak proč jsou všechny dresy růžové?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das ist unsere neue Mannschaftsfarbe. Jeder wird uns erkennen.",
+     "cs": "To je nové týmové zbarvení. Určitě nás každý pozná."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und was sagen wir dem Trainer vor dem Spiel?",
+     "cs": "A co máme říct trenérovi před zápasem?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom brachte ein zusätzliches rosa Trikot: Dass wir auch an ihn gedacht haben.",
+     "cs": "Tom přinesl růžový dres navíc: Že jsme mysleli i na něj."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "erkennen",
+     "cs": "poznat"
+    },
+    {
+     "word": "zusätzliches",
+     "cs": "navíc"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč jsou dresy růžové?",
+     "options": [
+      "Praly se s červenou ponožkou.",
+      "Tým je koupil růžové.",
+      "Byly na slunci."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pro koho je dres navíc?",
+     "options": [
+      "Pro trenéra.",
+      "Pro rozhodčího.",
+      "Pro psa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
