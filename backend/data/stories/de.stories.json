@@ -2203,6 +2203,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-06-wifi-neighbours",
+   "level": "B1",
+   "title": "WLAN unter Nachbarn",
+   "title_cs": "Wifi mezi sousedy",
+   "lines": [
+    {
+     "text": "In einem Mietshaus wohnte Frau Kranz im zweiten und Herr Brandl im dritten Stock. Sie hatten sich nie gesehen, aber sie kannten sich sehr gut: vom Lärm.",
+     "cs": "V činžovním domě bydlela paní Kranzová ve druhém patře a pan Brandl ve třetím. Nikdy se neviděli, ale znali se velmi dobře: z hluku."
+    },
+    {
+     "text": "Eines Abends änderte Frau Kranz den Namen ihres WLAN-Netzes in: Bitte keine Stiefel nach 22 Uhr.",
+     "cs": "Jednoho večera přejmenovala paní Kranzová svou wifi síť na: Prosím žádné boty po desáté."
+    },
+    {
+     "text": "Am nächsten Tag fand sie in der Netzwerkliste eine Antwort: Ich trage Pantoffeln. Das ist Ihr Echo.",
+     "cs": "Druhý den našla v seznamu sítí odpověď: Nosím papuče. To je vaše ozvěna."
+    },
+    {
+     "text": "Sie schrieb zurück: Und Ihr Hund bellt wie ein Presslufthammer.",
+     "cs": "Odepsala: A váš pes štěká jako sbíječka."
+    },
+    {
+     "text": "Die Antwort kam prompt: Das ist kein Hund. Das ist mein Staubsauger.",
+     "cs": "Zpátky přišlo: To není pes. To je můj vysavač."
+    },
+    {
+     "text": "Bald lasen alle Nachbarn mit. Jeden Morgen wartete das Haus auf die neue Nachricht wie auf eine Fernsehserie.",
+     "cs": "Brzy četli všichni sousedé. Každé ráno dům čekal na novou zprávu jako na seriál."
+    },
+    {
+     "text": "Nach drei Wochen traf Frau Kranz Herrn Brandl zufällig am Briefkasten.",
+     "cs": "Po třech týdnech se paní Kranzová s panem Brandlem náhodou potkala u poštovních schránek."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Sie sind also der Mann mit den Pantoffeln.",
+     "cs": "Vy jste tedy ten pán s papučemi."
+    },
+    {
+     "speaker": "Brandl",
+     "text": "Und Sie sind die Frau mit den Stiefeln. Ich dachte, Sie sind größer.",
+     "cs": "A vy ta paní s botami. Myslel jsem, že jste vyšší."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Ich dachte, Sie sind unfreundlicher.",
+     "cs": "Já jsem myslela, že jste nepříjemnější."
+    },
+    {
+     "text": "Am Abend hieß ihr Netz: Kaffee am Samstag um zehn?",
+     "cs": "Večer se její síť jmenovala: Káva v sobotu v deset?"
+    },
+    {
+     "text": "Die Antwort kam nach einer Minute. Das Netz im dritten Stock hieß jetzt: Passwort: Ja.",
+     "cs": "Odpověď přišla za minutu. Síť ve třetím patře se teď jmenovala: Heslo: Ano."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Presslufthammer",
+     "cs": "sbíječka"
+    },
+    {
+     "word": "zufällig",
+     "cs": "náhodou"
+    },
+    {
+     "word": "Briefkasten",
+     "cs": "poštovní schránka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wie streiten die Nachbarn?",
+     "options": [
+      "Über die Namen ihrer WLAN-Netze",
+      "Am Telefon",
+      "Mit Briefen"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wie endet die Geschichte?",
+     "options": [
+      "Sie verabreden sich zum Kaffee.",
+      "Sie ziehen aus.",
+      "Sie rufen die Polizei."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

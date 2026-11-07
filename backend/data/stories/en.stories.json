@@ -2203,6 +2203,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-06-wifi-neighbours",
+   "level": "B1",
+   "title": "Wifi Between Neighbours",
+   "title_cs": "Wifi mezi sousedy",
+   "lines": [
+    {
+     "text": "In an apartment block, Mrs Kranz lived on the second floor and Mr Brandl on the third. They had never met, but they knew each other very well: through noise.",
+     "cs": "V činžovním domě bydlela paní Kranzová ve druhém patře a pan Brandl ve třetím. Nikdy se neviděli, ale znali se velmi dobře: z hluku."
+    },
+    {
+     "text": "One evening, Mrs Kranz changed the name of her wifi network to: No boots after 10 p.m., please.",
+     "cs": "Jednoho večera přejmenovala paní Kranzová svou wifi síť na: Prosím žádné boty po desáté."
+    },
+    {
+     "text": "The next day, she found a reply in the list of networks: I wear slippers. That's your echo.",
+     "cs": "Druhý den našla v seznamu sítí odpověď: Nosím papuče. To je vaše ozvěna."
+    },
+    {
+     "text": "She answered: And your dog barks like a pneumatic drill.",
+     "cs": "Odepsala: A váš pes štěká jako sbíječka."
+    },
+    {
+     "text": "The reply came back at once: That's not a dog. That's my vacuum cleaner.",
+     "cs": "Zpátky přišlo: To není pes. To je můj vysavač."
+    },
+    {
+     "text": "Soon all the neighbours were reading along. Every morning, the building waited for the new message like a TV series.",
+     "cs": "Brzy četli všichni sousedé. Každé ráno dům čekal na novou zprávu jako na seriál."
+    },
+    {
+     "text": "After three weeks, Mrs Kranz bumped into Mr Brandl by chance at the letterboxes.",
+     "cs": "Po třech týdnech se paní Kranzová s panem Brandlem náhodou potkala u poštovních schránek."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "So you're the man with the slippers.",
+     "cs": "Vy jste tedy ten pán s papučemi."
+    },
+    {
+     "speaker": "Brandl",
+     "text": "And you're the lady with the boots. I thought you were taller.",
+     "cs": "A vy ta paní s botami. Myslel jsem, že jste vyšší."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "I thought you were less friendly.",
+     "cs": "Já jsem myslela, že jste nepříjemnější."
+    },
+    {
+     "text": "That evening, her network was called: Coffee on Saturday at ten?",
+     "cs": "Večer se její síť jmenovala: Káva v sobotu v deset?"
+    },
+    {
+     "text": "The reply came within a minute. The network on the third floor was now called: Password: Yes.",
+     "cs": "Odpověď přišla za minutu. Síť ve třetím patře se teď jmenovala: Heslo: Ano."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pneumatic",
+     "cs": "pneumatický"
+    },
+    {
+     "word": "drill",
+     "cs": "vrtačka, sbíječka"
+    },
+    {
+     "word": "letterboxes",
+     "cs": "poštovní schránky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "How do the neighbours argue?",
+     "options": [
+      "Through the names of their wifi networks",
+      "On the phone",
+      "With letters"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How does the story end?",
+     "options": [
+      "They arrange to have coffee.",
+      "They move out.",
+      "They call the police."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

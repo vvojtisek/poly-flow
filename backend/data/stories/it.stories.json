@@ -2203,6 +2203,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-06-wifi-neighbours",
+   "level": "B1",
+   "title": "Wifi tra vicini",
+   "title_cs": "Wifi mezi sousedy",
+   "lines": [
+    {
+     "text": "In un condominio la signora Kranz abitava al secondo piano e il signor Brandl al terzo. Non si erano mai visti, ma si conoscevano benissimo: dal rumore.",
+     "cs": "V činžovním domě bydlela paní Kranzová ve druhém patře a pan Brandl ve třetím. Nikdy se neviděli, ale znali se velmi dobře: z hluku."
+    },
+    {
+     "text": "Una sera la signora Kranz ha cambiato il nome della sua rete wifi in: Niente stivali dopo le dieci, grazie.",
+     "cs": "Jednoho večera přejmenovala paní Kranzová svou wifi síť na: Prosím žádné boty po desáté."
+    },
+    {
+     "text": "Il giorno dopo ha trovato una risposta nell'elenco delle reti: Porto le pantofole. È il suo eco.",
+     "cs": "Druhý den našla v seznamu sítí odpověď: Nosím papuče. To je vaše ozvěna."
+    },
+    {
+     "text": "Ha risposto: E il suo cane abbaia come un martello pneumatico.",
+     "cs": "Odepsala: A váš pes štěká jako sbíječka."
+    },
+    {
+     "text": "La risposta è arrivata subito: Non è un cane. È il mio aspirapolvere.",
+     "cs": "Zpátky přišlo: To není pes. To je můj vysavač."
+    },
+    {
+     "text": "Presto tutti i vicini leggevano. Ogni mattina il palazzo aspettava il nuovo messaggio come una serie televisiva.",
+     "cs": "Brzy četli všichni sousedé. Každé ráno dům čekal na novou zprávu jako na seriál."
+    },
+    {
+     "text": "Dopo tre settimane la signora Kranz ha incontrato per caso il signor Brandl vicino alle cassette della posta.",
+     "cs": "Po třech týdnech se paní Kranzová s panem Brandlem náhodou potkala u poštovních schránek."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Lei è dunque l'uomo con le pantofole.",
+     "cs": "Vy jste tedy ten pán s papučemi."
+    },
+    {
+     "speaker": "Brandl",
+     "text": "E lei la signora con gli stivali. Pensavo fosse più alta.",
+     "cs": "A vy ta paní s botami. Myslel jsem, že jste vyšší."
+    },
+    {
+     "speaker": "Kranz",
+     "text": "Io pensavo fosse più antipatico.",
+     "cs": "Já jsem myslela, že jste nepříjemnější."
+    },
+    {
+     "text": "La sera la sua rete si chiamava: Caffè sabato alle dieci?",
+     "cs": "Večer se její síť jmenovala: Káva v sobotu v deset?"
+    },
+    {
+     "text": "La risposta è arrivata in un minuto. La rete del terzo piano si chiamava ora: Password: Sì.",
+     "cs": "Odpověď přišla za minutu. Síť ve třetím patře se teď jmenovala: Heslo: Ano."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pneumatico",
+     "cs": "pneumatický (martello pneumatico = sbíječka)"
+    },
+    {
+     "word": "caso",
+     "cs": "náhoda; per caso = náhodou"
+    },
+    {
+     "word": "cassette",
+     "cs": "schránky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Come litigano i vicini?",
+     "options": [
+      "Con i nomi delle loro reti wifi",
+      "Al telefono",
+      "Con delle lettere"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la storia?",
+     "options": [
+      "Si danno appuntamento per un caffè.",
+      "Traslocano.",
+      "Chiamano la polizia."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
