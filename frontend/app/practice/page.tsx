@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, Dumbbell, History, Pin, PinOff, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowRight, Dumbbell, History, Lightbulb, Pin, PinOff, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,7 @@ import { Notice } from "@/components/ui";
 import { getLanguageSummaries, getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativePast } from "@/lib/i18n/cs";
-import { modesFor, readPinned, readRecent, readVisits, SKILLS, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
+import { modesFor, readPinned, readRecent, readVisits, SKILLS, suggestMode, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
 const ERROR_ROUTE: Record<string, (language: Language) => string> = {
@@ -122,6 +122,7 @@ export default function PracticePage() {
   const shown = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const favorites = pinned.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
+  const tip = suggestMode(modes, visits, (m) => !(m.needsWords && introduced === 0));
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
   const recommendations = (weakSpots?.tags ?? [])
     .filter(([tag]) => !!ERROR_ROUTE[tag])
@@ -146,6 +147,25 @@ export default function PracticePage() {
         </h1>
         <p className="max-w-2xl text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
+
+        {tip && (
+          <Link
+            href={tip.mode.href}
+            className="flex items-center gap-3 rounded-3xl border border-brand-500/40 bg-brand-500/5 p-4 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+          >
+            <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
+              <Lightbulb className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
+            </span>
+            <span className="flex min-w-0 flex-1 flex-col">
+              <span className="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200">{t.tipTitle}</span>
+              <span className="font-bold">{t.mode[tip.mode.id]?.title}</span>
+              <span className="text-sm text-slate-600 dark:text-slate-300">
+                {tip.since ? t.tipSince(t.skill[tip.skill] ?? tip.skill, relativePast(tip.since)) : t.tipNever(t.skill[tip.skill] ?? tip.skill)}
+              </span>
+            </span>
+            <ArrowRight className="size-5 shrink-0 text-brand-600" aria-hidden />
+          </Link>
+        )}
 
         {(weakFailed || recommendations.length > 0) && (
           <section className="flex flex-col gap-3 rounded-3xl border border-amber-300/70 bg-amber-50/70 p-4 dark:border-amber-900 dark:bg-amber-950/25">

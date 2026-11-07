@@ -680,6 +680,9 @@ export const cs = {
     recommendExamples: "Například:",
     lastVisit: (when: string) => `Naposledy ${when}`,
     neverVisited: "Zatím nevyzkoušeno",
+    tipTitle: "Tip na dnes",
+    tipSince: (skill: string, when: string) => `Na ${skill} ses na tomto zařízení naposledy zaměřil(a) ${when}.`,
+    tipNever: (skill: string) => `Na ${skill} ses na tomto zařízení ještě nezaměřil(a).`,
     needsLesson: "Pracuje se slovy z lekcí: nejdřív projdi první lekci.",
     recommendGo: {
       article: "Procvičit v laboratoři pádů",

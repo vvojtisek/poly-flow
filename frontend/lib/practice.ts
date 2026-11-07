@@ -112,3 +112,23 @@ export function byRecent(modes: PracticeMode[], recent: PracticeMode["id"][]): P
   };
   return [...modes].sort((a, b) => rank(a) - rank(b));
 }
+
+/**
+ * A suggestion for today: the skill trained longest ago on this device (never first), then the
+ * least recently opened mode for it. Deterministic, so the tip does not change on every visit.
+ */
+export function suggestMode(
+  modes: PracticeMode[],
+  visits: Partial<Record<PracticeMode["id"], string>>,
+  usable: (m: PracticeMode) => boolean = () => true,
+): { mode: PracticeMode; skill: Skill; since: string | null } | null {
+  const pool = modes.filter(usable);
+  if (!pool.length) return null;
+  const at = (m: PracticeMode) => (visits[m.id] ? Date.parse(visits[m.id]!) : 0);
+  const skills = SKILLS.filter((s) => pool.some((m) => m.skills.includes(s)));
+  const lastFor = (s: Skill) => Math.max(0, ...pool.filter((m) => m.skills.includes(s)).map(at));
+  const skill = [...skills].sort((a, b) => lastFor(a) - lastFor(b) || SKILLS.indexOf(a) - SKILLS.indexOf(b))[0]!;
+  const mode = pool.filter((m) => m.skills.includes(skill)).sort((a, b) => at(a) - at(b) || pool.indexOf(a) - pool.indexOf(b))[0]!;
+  const last = lastFor(skill);
+  return { mode, skill, since: last ? new Date(last).toISOString() : null };
+}

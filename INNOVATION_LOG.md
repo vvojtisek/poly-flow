@@ -1435,3 +1435,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx` reads `?skill=a,b` on load (unknown values ignored) and mirrors the selection with `history.replaceState`, so Back and shared links restore it. Each skill chip shows how many modes train it for the active language (for example "mluvení 2").
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/practice?skill=speaking` ("2 způsoby procvičování") and adding listening updated the URL to `?skill=speaking,listening`.
+
+## Global Cycle 35/120 | Page: [/practice] (Page Cycle 5/15)
+
+**Summary:** a daily tip that balances neglected skills
+
+**Observed Problem:** With twelve modes and no guidance beyond recent mistakes, learners tended to reopen the same one or two modes; skills such as listening or speaking could go untrained for weeks without any hint.
+
+**Implemented Solution:** `lib/practice.ts` gains `suggestMode`: from the modes usable now (lesson-dependent ones excluded before the first lesson), it picks the skill opened longest ago on this device (never-trained first, stable tie-break) and its least recently opened mode. `app/practice/page.tsx` shows it as a "Tip na dnes" link card with the reason ("Na poslech ses na tomto zařízení naposledy zaměřil(a) před 5 dny."). The tip is deterministic and local, with no streaks or pressure.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot on a fresh browser suggests "Hraj roli" for listening, never trained on that device.
