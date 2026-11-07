@@ -4147,6 +4147,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-09-wrong-seeds",
+   "level": "A2",
+   "title": "L'orto veloce",
+   "title_cs": "Rychlá zahrada",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva ha piantato dei semi e controllava l'orto ogni giorno.",
+     "cs": "Eva zasadila semínka a každý den kontrolovala záhon."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Sulla confezione c'è scritto: Pronto in tre minuti.",
+     "cs": "Na sáčku píšou: Hotovo za tři minuty."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È strano. Le mie carote crescono per tutta l'estate.",
+     "cs": "To je zvláštní. Moje mrkev roste celé léto."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Forse ho una varietà più veloce. Però non vedo ancora niente.",
+     "cs": "Tak mám asi rychlejší odrůdu. Jen ještě nic nevidím."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Fammi vedere la confezione. Sono spaghetti istantanei!",
+     "cs": "Ukaž mi ten sáček. To jsou instantní nudle!"
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha guardato la terra vuota: E io li annaffio con acqua fredda da tutta la primavera.",
+     "cs": "Eva se podívala na prázdný záhon: A já je celé jaro zalévám studenou vodou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "varietà",
+     "cs": "odrůda"
+    },
+    {
+     "word": "istantanei",
+     "cs": "instantní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva zasadila?",
+     "options": [
+      "Nudle.",
+      "Mrkev.",
+      "Fazole."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čím záhon zalévala?",
+     "options": [
+      "Studenou vodou.",
+      "Mlékem.",
+      "Čajem."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
