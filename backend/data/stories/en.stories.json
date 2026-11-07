@@ -6615,6 +6615,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-43-tea-neutrality",
+   "level": "B2",
+   "title": "Neutral Tea",
+   "title_cs": "Neutrální čaj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom led a family debate about who should make the next tea, determined to remain scientifically impartial.",
+     "cs": "Tom vedl rodinnou debatu o tom, kdo má příště připravovat čaj, a snažil se zůstat vědecky nestranný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I propose an objective criterion. We'll label samples with letters and assess their aroma without knowing the author.",
+     "cs": "Navrhuji objektivní kritérium. Vzorky označíme písmeny a posoudíme jejich aroma bez znalosti autora."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Fine. Why is your pot labelled exceptionally balanced reference sample, then?",
+     "cs": "Dobře. Proč je tedy tvoje konvice označená jako výjimečně vyvážený referenční vzorek?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's not an evaluation but a methodological clarification necessary for correct interpretation.",
+     "cs": "To není hodnocení, nýbrž metodologické upřesnění potřebné pro správnou interpretaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And why are the other pots labelled deviation one and deviation two?",
+     "cs": "A proč jsou ostatní konvice označené jako odchylka jedna a odchylka dvě?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom raised an empty cup: To avoid prejudice. We haven't actually identified anyone as the culprit yet.",
+     "cs": "Tom zvedl prázdný šálek: Abychom předešli předsudkům. Ještě jsme přece nikoho neoznačili za viníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "criterion",
+     "cs": "kritérium"
+    },
+    {
+     "word": "methodological",
+     "cs": "metodologický"
+    },
+    {
+     "word": "clarification",
+     "cs": "upřesnění"
+    },
+    {
+     "word": "deviation",
+     "cs": "odchylka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč Tomovo označení není nestranné?",
+     "options": [
+      "Vlastní čaj označil za referenční a ostatní za odchylky.",
+      "Použil písmena.",
+      "Čaj je studený."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co mělo být předmětem hodnocení?",
+     "options": [
+      "Aroma čaje.",
+      "Cena konvic.",
+      "Množství vody v řece."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

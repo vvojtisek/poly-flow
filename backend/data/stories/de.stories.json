@@ -6615,6 +6615,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-43-tea-neutrality",
+   "level": "B2",
+   "title": "Neutraler Tee",
+   "title_cs": "Neutrální čaj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom leitete eine Familiendebatte darüber, wer künftig Tee kochen sollte, und wollte wissenschaftlich unparteiisch bleiben.",
+     "cs": "Tom vedl rodinnou debatu o tom, kdo má příště připravovat čaj, a snažil se zůstat vědecky nestranný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich schlage ein objektives Kriterium vor. Wir kennzeichnen Proben mit Buchstaben und beurteilen ihr Aroma ohne Kenntnis des Urhebers.",
+     "cs": "Navrhuji objektivní kritérium. Vzorky označíme písmeny a posoudíme jejich aroma bez znalosti autora."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Gut. Warum ist deine Kanne dann als außergewöhnlich ausgewogene Referenzprobe bezeichnet?",
+     "cs": "Dobře. Proč je tedy tvoje konvice označená jako výjimečně vyvážený referenční vzorek?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das ist keine Bewertung, sondern eine methodologische Präzisierung, die für die richtige Interpretation nötig ist.",
+     "cs": "To není hodnocení, nýbrž metodologické upřesnění potřebné pro správnou interpretaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Und warum heißen die anderen Kannen Abweichung eins und Abweichung zwei?",
+     "cs": "A proč jsou ostatní konvice označené jako odchylka jedna a odchylka dvě?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom hob eine leere Tasse: Um Vorurteile zu vermeiden. Wir haben schließlich noch niemanden als Schuldigen bezeichnet.",
+     "cs": "Tom zvedl prázdný šálek: Abychom předešli předsudkům. Ještě jsme přece nikoho neoznačili za viníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Kriterium",
+     "cs": "kritérium"
+    },
+    {
+     "word": "Referenzprobe",
+     "cs": "referenční vzorek"
+    },
+    {
+     "word": "methodologische",
+     "cs": "metodologický"
+    },
+    {
+     "word": "Präzisierung",
+     "cs": "upřesnění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč Tomovo označení není nestranné?",
+     "options": [
+      "Vlastní čaj označil za referenční a ostatní za odchylky.",
+      "Použil písmena.",
+      "Čaj je studený."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co mělo být předmětem hodnocení?",
+     "options": [
+      "Aroma čaje.",
+      "Cena konvic.",
+      "Množství vody v řece."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
