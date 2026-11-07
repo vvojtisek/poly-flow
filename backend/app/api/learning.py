@@ -20,6 +20,7 @@ from app.schemas.learning import (
     AnswerOut,
     IdempotencyKey,
     LanguageSummaryOut,
+    LessonPreviewOut,
     LevelsInfo,
     LevelStatusOut,
     NextOut,
@@ -342,6 +343,15 @@ async def progress(
     return await svc.progress_overview(
         db, auth.acting, language or auth.acting.active_language, now
     )
+
+
+@router.get("/next-lesson", response_model=LessonPreviewOut)
+async def next_lesson(
+    auth: Auth, db: DB, now: Now, language: Annotated[Language | None, Query()] = None
+) -> LessonPreviewOut:
+    """Preview of the next lesson's scene and word counts; starts nothing."""
+    lang = language or auth.acting.active_language
+    return LessonPreviewOut(**await svc.preview_lesson(db, auth.acting, lang, now))
 
 
 @router.get("/languages", response_model=list[LanguageSummaryOut])

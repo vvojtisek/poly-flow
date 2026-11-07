@@ -253,6 +253,17 @@ async def _plan_learn(
     return scene, plan
 
 
+async def preview_lesson(db: AsyncSession, user: User, language: Language, now: datetime) -> dict:
+    """What the next lesson would contain, without starting it (read-only, same planner)."""
+    scene, plan = await _plan_learn(db, user, language, now)
+    new = [p.item for p in plan if p.is_new and p.task_type == TaskType.RECOGNITION]
+    return {
+        "scene_title": scene.title_cs if scene else None,
+        "new_words": len(new),
+        "review_words": sum(1 for p in plan if not p.is_new),
+    }
+
+
 async def _plan_check(
     db: AsyncSession, user: User, language: Language, now: datetime
 ) -> list[_Planned]:

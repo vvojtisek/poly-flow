@@ -544,6 +544,15 @@ export interface WeakSpots {
   tags: [string, number][];
 }
 
+export interface LessonPreview {
+  scene_title: string | null;
+  new_words: number;
+  review_words: number;
+}
+
+export const getLessonPreview = (language: Language) =>
+  api<LessonPreview>(`/api/v1/learning/next-lesson?language=${language}`, { cache: "no-store" });
+
 export interface LanguageSummary {
   language: Language;
   introduced: number;

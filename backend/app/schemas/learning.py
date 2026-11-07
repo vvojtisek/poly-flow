@@ -240,6 +240,12 @@ class ProgressOut(BaseModel):
     cefr_level: str | None = None  # latest CEFR diagnostic: "pre-A1", "A1".."B2", "B2+"
 
 
+class LessonPreviewOut(BaseModel):
+    scene_title: str | None  # Czech title of the next scene; None = words with example sentences
+    new_words: int
+    review_words: int  # recently missed words practised again (ungraded)
+
+
 class LanguageSummaryOut(BaseModel):
     language: Language
     introduced: int

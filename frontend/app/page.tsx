@@ -20,7 +20,7 @@ import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
 import { Button, Notice, Skeleton } from "@/components/ui";
-import { getGrammarTree, getLanguageSummaries, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type ProgressOverview } from "@/lib/api";
+import { getGrammarTree, getLanguageSummaries, getLessonPreview, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type LessonPreview, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent } from "@/lib/practice";
@@ -109,6 +109,7 @@ export default function HomePage() {
   const [failed, setFailed] = useState(false);
   const [grammar, setGrammar] = useState<GrammarTree | null>(null);
   const [summaries, setSummaries] = useState<LanguageSummary[] | null>(null);
+  const [preview, setPreview] = useState<LessonPreview | null>(null);
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
@@ -124,6 +125,10 @@ export default function HomePage() {
     setProgress(null);
     setFailed(false);
     setGrammar(null);
+    setPreview(null);
+    getLessonPreview(language)
+      .then((p) => !cancelled && setPreview(p))
+      .catch(() => undefined);
     getProgress(language)
       .then((p) => !cancelled && setProgress(p))
       .catch(() => !cancelled && setFailed(true));
@@ -176,6 +181,18 @@ export default function HomePage() {
           <div className="flex flex-col gap-1">
             <h1 id="continue-title" className="text-2xl font-bold">{t.continueTitle}</h1>
             <p className="max-w-xl text-sm text-white/85">{progress?.active_session_id ? t.continueResume : t.continueNext}</p>
+            {!progress?.active_session_id && preview && (
+              <p className="mt-1 text-sm text-white" aria-live="polite">
+                {preview.new_words === 0 && preview.review_words === 0 ? (
+                  t.nothingNew
+                ) : (
+                  <>
+                    <span className="font-semibold">{preview.scene_title ? t.nextScene(preview.scene_title) : t.nextWords}</span>
+                    <span className="block text-xs text-white/85">{t.nextCounts(preview.new_words, preview.review_words)}</span>
+                  </>
+                )}
+              </p>
+            )}
           </div>
           {offerPlacement && (
             <section className="flex flex-col gap-2 rounded-2xl bg-white p-4 text-slate-800 dark:bg-slate-900 dark:text-slate-100">

@@ -41,6 +41,16 @@ export const cs = {
     continueTitle: "Pokračovat ve výuce",
     continueResume: "Máš rozpracovanou lekci. Navaž tam, kde jsi skončil(a).",
     continueNext: "Další krok na tvé cestě: scénka s novými slovy a jejich procvičení.",
+    nextScene: (title: string) => `Další scénka: „${title}“`,
+    nextWords: "Další lekce: nová slova v příkladových větách",
+    nextCounts: (fresh: number, review: number) =>
+      [
+        fresh ? `${fresh} ${fresh === 1 ? "nové slovo" : fresh < 5 ? "nová slova" : "nových slov"}` : null,
+        review ? `${review} ${review === 1 ? "slovo" : review < 5 ? "slova" : "slov"} znovu k procvičení` : null,
+      ]
+        .filter(Boolean)
+        .join(" · "),
+    nothingNew: "Všechna slova tohoto jazyka už jsi potkal(a). Pokračuj ověřením a opakováním.",
     quickActions: "Na každý den",
     daily: "Denní opakování",
     dailyDue: (n: number) => (n === 1 ? "1 slovo čeká na ověření" : n > 1 && n < 5 ? `${n} slova čekají na ověření` : `${n} slov čeká na ověření`),

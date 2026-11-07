@@ -1185,3 +1185,13 @@ Vlad approves a push.
 **Implemented Solution:** New `Skeleton` component in `components/ui.tsx` (sized placeholder lines, one polite "Načítám" status for screen readers, shimmer only when motion is allowed). Used by `TodayPlan` (ring-shaped placeholder of the final height), the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the dashboard APIs delayed by 4 s shows the placeholders in place of the panels.
+
+## Global Cycle 10/120 | Page: [/] (Page Cycle 10/15)
+
+**Summary:** preview the next lesson's scene and word counts on the start button
+
+**Observed Problem:** The main dashboard button said only "Začít lekci"; the learner could not see which situation came next or that missed words would be practised again, although lessons are built around a scene (context first).
+
+**Implemented Solution:** New read-only `GET /api/v1/learning/next-lesson` (`api/learning.py`, `services/learning.preview_lesson`, `LessonPreviewOut`) runs the same lesson planner used by session start, with the child-content filter, and returns the scene's Czech title, new-word count and remediation count without creating a session. The dashboard hero shows "Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení", or a clear message when every word has been met. New test checks that the preview matches the started lesson and starts nothing.
+
+**Verification:** `tests/test_learning.py` preview/summary tests passed; ruff, typecheck, production build, `git diff --check` passed; mobile screenshot shows the preview.

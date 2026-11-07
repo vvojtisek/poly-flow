@@ -590,6 +590,17 @@ async def test_progress_overview(db, client):
     assert p["by_band"] == [{"band": 100, "items": 6, "known": 0}]
 
 
+async def test_next_lesson_preview_matches_the_lesson_and_starts_nothing(db, client):
+    await seed_words()
+    me = await child_session(client)
+    preview = (await client.get("/api/v1/learning/next-lesson?language=de")).json()
+    assert preview["new_words"] == 4 and preview["review_words"] == 0
+    current = await client.get("/api/v1/learning/sessions/current?language=de")
+    assert current.status_code == 200 and current.json()["session"] is None
+    s = await start(client, me)
+    assert s["total"] == preview["new_words"] * 2
+
+
 async def test_language_summaries_count_only_own_words(db, client):
     await seed_words()
     me = await child_session(client)
