@@ -338,3 +338,17 @@ async def test_word_list_sorts_by_review_errors_and_recent(db, client, clock):
     assert await lemmas("errors") == ["schön", "Mord", "Haus", "gehen"]
     assert await lemmas("recent") == ["schön", "Mord", "Haus", "gehen"]
     assert (await client.get("/api/v1/words?language=de&sort=nope")).status_code == 422
+
+
+async def test_status_counts_follow_search_and_due_filters(db, client, clock):
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+    found = (await client.get("/api/v1/words?language=de&q=geh")).json()
+    assert found["counts"] == {"mastered": 0, "known": 0, "passive": 1, "learning": 0, "seen": 0}
+    due = (await client.get("/api/v1/words?language=de&due=true")).json()
+    assert [w["lemma"] for w in due["items"]] == ["Haus"]
+    assert sum(due["counts"].values()) == due["total"] == 1
+    # The status filter narrows the list but not its own facet counts.
+    learning = (await client.get("/api/v1/words?language=de&status=learning")).json()
+    assert learning["counts"]["passive"] == 1
+    assert learning["total"] == learning["counts"]["learning"]

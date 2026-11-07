@@ -88,29 +88,33 @@ async def list_words(
         .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
         .where(li.language == language, _suitable(user), *scope)
     )
+    # Facet counts follow the search, due and scope filters (but not the status filter itself), so
+    # the status chips always add up to what the list can show.
+    narrow: list = []
+    if q and q.strip():
+        pat = f"%{_escape(q.strip().lower())}%"
+        narrow.append(
+            or_(
+                func.lower(li.lemma).like(pat, escape="\\"),
+                func.lower(li.translation_cs).like(pat, escape="\\"),
+            )
+        )
+    if due:
+        narrow += [p.introduced_at.is_not(None), p.next_review_at <= now]
+    base = base.where(*narrow)
     counts = dict(
         (
             await db.execute(
                 select(st, func.count())
                 .select_from(li)
                 .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
-                .where(li.language == language, _suitable(user), *scope)
+                .where(li.language == language, _suitable(user), *scope, *narrow)
                 .group_by(st)
             )
         ).all()
     )
-    if q and q.strip():
-        pat = f"%{_escape(q.strip().lower())}%"
-        base = base.where(
-            or_(
-                func.lower(li.lemma).like(pat, escape="\\"),
-                func.lower(li.translation_cs).like(pat, escape="\\"),
-            )
-        )
     if status in STATUSES:
         base = base.where(_status() == status)
-    if due:
-        base = base.where(p.introduced_at.is_not(None), p.next_review_at <= now)
     total = await db.scalar(select(func.count()).select_from(base.subquery()))
     rows = (await db.execute(base.order_by(*_order(sort)).offset(offset).limit(limit))).all()
     return {

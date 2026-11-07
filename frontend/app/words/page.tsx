@@ -433,7 +433,9 @@ export default function WordsPage() {
   }, [cursor]);
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
+  // Status counts follow search, due and scope, so `total` is "matching words" and adds up with the chips.
   const total = data ? Object.values(data.counts).reduce((a, b) => a + b, 0) : 0;
+  const narrowed = Boolean(q.trim() || status || due || scope);
   return (
     <AppShell me={me}>
       <div className="flex flex-col gap-4">
@@ -546,7 +548,7 @@ export default function WordsPage() {
                 </Button>
               </div>
             )}
-            {total > 0 && me.acting.active_language && (
+            {(total > 0 || narrowed) && me.acting.active_language && (
               <details className="group self-start text-sm">
                 <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
                   <Download className="size-4" aria-hidden />
@@ -646,7 +648,7 @@ export default function WordsPage() {
                   </section>
                 )}
                 {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
-                {data && data.items.length === 0 && <Notice>{total === 0 ? t.empty : t.noMatch}</Notice>}
+                {data && data.items.length === 0 && <Notice>{narrowed ? t.noMatch : t.empty}</Notice>}
                 <ul className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
                   {data?.items.map((w, i) => (
                     <li key={w.id} id={`word-row-${i}`}>

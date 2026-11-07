@@ -1585,3 +1585,13 @@ Vlad approves a push.
 **Implemented Solution:** The words API accepts sort=rank|review|errors|recent. The order is server-side and always ends on rank and id, so offset paging stays stable. Words with no date sort last. The page adds a 'Řadit' select that is kept in the URL (?sort=). Rows show the next check time when sorted by review and an error count when sorted by mistakes. Due wording uses relativeFuture, so only a past date reads as due ('do hodiny', 'zítra' and so on otherwise).
 
 **Verification:** New pytest test_word_list_sorts_by_review_errors_and_recent covers all four orders, the null-last rule and 422 on an unknown sort; tests/test_words.py 9 passed. Playwright: each option reorders rows (errors shows '1 chyba', review shows 'do hodiny', recent starts with Schule), the URL gets ?sort=… and a reload keeps it. Mobile 390px screenshot checked. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 50/120 | Page: [/words] (Page Cycle 5/15)
+
+**Summary:** make status counts follow the search and due filters
+
+**Observed Problem:** The status chips always counted every word in the scope and ignored the search and 'K opakování' filters. With the due filter on, the chips still said 'Učím se 41' over a list of 3 rows. The 'Vše' chip added up the same unfiltered counts, so it disagreed with the list, and the chips were no help for narrowing a search result.
+
+**Implemented Solution:** The list endpoint now applies search, due and scope before counting statuses (the status filter still narrows only the rows, not its own chips). The chips and 'Vše' now always match what the list can show. The empty-state copy now depends on whether any filter is active, not on a zero count, so a search with no match reads 'Nic neodpovídá hledání.' rather than the first-run 'Zatím tu nic není'. The export stays available while filtering.
+
+**Verification:** New pytest test_status_counts_follow_search_and_due_filters (search, due, status-filter facet rule); tests/test_words.py 10 passed. Playwright: unfiltered 'Vše 41 | Učím se 41'; search 'hund' gives 'Vše 1 | Učím se 1' with 1 row; 'zzzz' gives 0 counts with 'Nic neodpovídá hledání.' and export still visible. The command palette only reads items, so it is unaffected. typecheck, next build, ruff pass.
