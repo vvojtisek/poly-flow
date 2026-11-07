@@ -2013,6 +2013,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-04-flea-market",
+   "level": "B1",
+   "title": "The Valuable Vase",
+   "title_cs": "Vzácná váza",
+   "lines": [
+    {
+     "text": "Rainer loved flea markets. He was convinced that he could haggle down any price.",
+     "cs": "Rainer miloval bleší trhy. Byl přesvědčen, že dokáže usmlouvat každou cenu."
+    },
+    {
+     "text": "One Saturday morning, he spotted a blue vase on a stall. It looked oddly familiar.",
+     "cs": "Jednoho sobotního rána uviděl na stánku modrou vázu. Připadala mu nějak povědomá."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "How much is the vase?",
+     "cs": "Kolik stojí ta váza?"
+    },
+    {
+     "speaker": "Seller",
+     "text": "Forty pounds.",
+     "cs": "Čtyřicet."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Forty? It's a bit scratched. I'll give you five.",
+     "cs": "Čtyřicet? Je trochu poškrábaná. Dám vám pět."
+    },
+    {
+     "text": "The seller thought about it and offered thirty-five. Rainer shook his head.",
+     "cs": "Prodavačka se zamyslela a nabídla třicet pět. Rainer zavrtěl hlavou."
+    },
+    {
+     "text": "After twenty minutes of haggling, they agreed on twelve pounds. Rainer left like a winner.",
+     "cs": "Po dvaceti minutách smlouvání se shodli na dvanácti. Rainer odcházel jako vítěz."
+    },
+    {
+     "text": "At home, his wife Karla was waiting. She noticed the vase straight away.",
+     "cs": "Doma ho čekala jeho žena Karla. Okamžitě si všimla vázy."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Rainer, where did you get our vase? The one we gave to charity last week?",
+     "cs": "Rainere, kde jsi vzal naši vázu? Tu, kterou jsme minulý týden dali na charitu?"
+    },
+    {
+     "text": "Rainer looked at the vase. It had the same crack on the rim.",
+     "cs": "Rainer se zadíval na vázu. Měla stejnou prasklinu na okraji."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "At least I didn't pay the full price.",
+     "cs": "Aspoň že jsem ji nekoupil za plnou cenu."
+    },
+    {
+     "speaker": "Karla",
+     "text": "True. You paid twelve pounds for a vase we gave away.",
+     "cs": "Pravda. Zaplatil jsi dvanáct za vázu, kterou jsme darovali."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "haggle",
+     "cs": "smlouvat"
+    },
+    {
+     "word": "haggling",
+     "cs": "smlouvání"
+    },
+    {
+     "word": "rim",
+     "cs": "okraj"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Rainer find at the flea market?",
+     "options": [
+      "A blue vase",
+      "An old book",
+      "A watch"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why does Karla recognise the vase?",
+     "options": [
+      "It is their own vase.",
+      "She saw it in a shop.",
+      "It was a present."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

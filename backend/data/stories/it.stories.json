@@ -2013,6 +2013,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-04-flea-market",
+   "level": "B1",
+   "title": "Il vaso prezioso",
+   "title_cs": "Vzácná váza",
+   "lines": [
+    {
+     "text": "Rainer adorava i mercatini delle pulci. Era convinto di poter trattare qualsiasi prezzo.",
+     "cs": "Rainer miloval bleší trhy. Byl přesvědčen, že dokáže usmlouvat každou cenu."
+    },
+    {
+     "text": "Un sabato mattina ha scoperto su una bancarella un vaso blu. Gli sembrava stranamente familiare.",
+     "cs": "Jednoho sobotního rána uviděl na stánku modrou vázu. Připadala mu nějak povědomá."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Quanto costa questo vaso?",
+     "cs": "Kolik stojí ta váza?"
+    },
+    {
+     "speaker": "Venditrice",
+     "text": "Quaranta euro.",
+     "cs": "Čtyřicet."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Quaranta? È un po' graffiato. Gliene do cinque.",
+     "cs": "Čtyřicet? Je trochu poškrábaná. Dám vám pět."
+    },
+    {
+     "text": "La venditrice ha riflettuto e ne ha proposti trentacinque. Rainer ha scosso la testa.",
+     "cs": "Prodavačka se zamyslela a nabídla třicet pět. Rainer zavrtěl hlavou."
+    },
+    {
+     "text": "Dopo venti minuti di trattativa si sono accordati su dodici euro. Rainer se n'è andato da vincitore.",
+     "cs": "Po dvaceti minutách smlouvání se shodli na dvanácti. Rainer odcházel jako vítěz."
+    },
+    {
+     "text": "A casa lo aspettava sua moglie Karla. Ha notato subito il vaso.",
+     "cs": "Doma ho čekala jeho žena Karla. Okamžitě si všimla vázy."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Rainer, dove hai preso il nostro vaso? Quello che abbiamo regalato alla beneficenza la settimana scorsa?",
+     "cs": "Rainere, kde jsi vzal naši vázu? Tu, kterou jsme minulý týden dali na charitu?"
+    },
+    {
+     "text": "Rainer ha guardato il vaso. Aveva la stessa crepa sul bordo.",
+     "cs": "Rainer se zadíval na vázu. Měla stejnou prasklinu na okraji."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Almeno non l'ho pagato a prezzo pieno.",
+     "cs": "Aspoň že jsem ji nekoupil za plnou cenu."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Vero. Hai pagato dodici euro un vaso che abbiamo regalato.",
+     "cs": "Pravda. Zaplatil jsi dvanáct za vázu, kterou jsme darovali."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "trattare",
+     "cs": "jednat o ceně, smlouvat"
+    },
+    {
+     "word": "trattativa",
+     "cs": "vyjednávání"
+    },
+    {
+     "word": "beneficenza",
+     "cs": "charita"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa scopre Rainer al mercatino?",
+     "options": [
+      "Un vaso blu",
+      "Un vecchio libro",
+      "Un orologio"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché Karla conosce il vaso?",
+     "options": [
+      "È il loro vaso.",
+      "L'ha visto in un negozio.",
+      "Gliel'hanno regalato."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

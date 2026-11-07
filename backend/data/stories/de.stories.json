@@ -2013,6 +2013,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-04-flea-market",
+   "level": "B1",
+   "title": "Die wertvolle Vase",
+   "title_cs": "Vzácná váza",
+   "lines": [
+    {
+     "text": "Rainer liebte Flohmärkte. Er war überzeugt, dass er jeden Preis herunterhandeln konnte.",
+     "cs": "Rainer miloval bleší trhy. Byl přesvědčen, že dokáže usmlouvat každou cenu."
+    },
+    {
+     "text": "An einem Samstagmorgen entdeckte er an einem Stand eine blaue Vase. Sie kam ihm irgendwie bekannt vor.",
+     "cs": "Jednoho sobotního rána uviděl na stánku modrou vázu. Připadala mu nějak povědomá."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Was kostet die Vase?",
+     "cs": "Kolik stojí ta váza?"
+    },
+    {
+     "speaker": "Verkäuferin",
+     "text": "Vierzig Euro.",
+     "cs": "Čtyřicet."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Vierzig? Sie ist ein bisschen zerkratzt. Ich gebe Ihnen fünf.",
+     "cs": "Čtyřicet? Je trochu poškrábaná. Dám vám pět."
+    },
+    {
+     "text": "Die Verkäuferin überlegte und bot fünfunddreißig an. Rainer schüttelte den Kopf.",
+     "cs": "Prodavačka se zamyslela a nabídla třicet pět. Rainer zavrtěl hlavou."
+    },
+    {
+     "text": "Nach zwanzig Minuten Feilschen einigten sie sich auf zwölf Euro. Rainer ging als Sieger davon.",
+     "cs": "Po dvaceti minutách smlouvání se shodli na dvanácti. Rainer odcházel jako vítěz."
+    },
+    {
+     "text": "Zu Hause wartete seine Frau Karla. Sie bemerkte die Vase sofort.",
+     "cs": "Doma ho čekala jeho žena Karla. Okamžitě si všimla vázy."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Rainer, woher hast du unsere Vase? Die, die wir letzte Woche gespendet haben?",
+     "cs": "Rainere, kde jsi vzal naši vázu? Tu, kterou jsme minulý týden dali na charitu?"
+    },
+    {
+     "text": "Rainer betrachtete die Vase. Sie hatte denselben Sprung am Rand.",
+     "cs": "Rainer se zadíval na vázu. Měla stejnou prasklinu na okraji."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Wenigstens habe ich sie nicht zum vollen Preis gekauft.",
+     "cs": "Aspoň že jsem ji nekoupil za plnou cenu."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Stimmt. Du hast zwölf Euro für eine Vase bezahlt, die wir verschenkt haben.",
+     "cs": "Pravda. Zaplatil jsi dvanáct za vázu, kterou jsme darovali."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Flohmärkte",
+     "cs": "bleší trhy"
+    },
+    {
+     "word": "feilschen",
+     "cs": "smlouvat"
+    },
+    {
+     "word": "gespendet",
+     "cs": "darovali"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was entdeckt Rainer auf dem Flohmarkt?",
+     "options": [
+      "Eine blaue Vase",
+      "Ein altes Buch",
+      "Eine Uhr"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Woher kennt Karla die Vase?",
+     "options": [
+      "Es ist ihre eigene Vase.",
+      "Sie hat sie im Laden gesehen.",
+      "Sie hat sie geschenkt bekommen."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

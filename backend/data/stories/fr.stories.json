@@ -2013,6 +2013,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-04-flea-market",
+   "level": "B1",
+   "title": "Le vase précieux",
+   "title_cs": "Vzácná váza",
+   "lines": [
+    {
+     "text": "Rainer adorait les marchés aux puces. Il était persuadé de pouvoir marchander n'importe quel prix.",
+     "cs": "Rainer miloval bleší trhy. Byl přesvědčen, že dokáže usmlouvat každou cenu."
+    },
+    {
+     "text": "Un samedi matin, il a découvert un vase bleu sur un stand. Il lui paraissait étrangement familier.",
+     "cs": "Jednoho sobotního rána uviděl na stánku modrou vázu. Připadala mu nějak povědomá."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Combien coûte ce vase ?",
+     "cs": "Kolik stojí ta váza?"
+    },
+    {
+     "speaker": "Vendeuse",
+     "text": "Quarante euros.",
+     "cs": "Čtyřicet."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Quarante ? Il est un peu rayé. Je vous en donne cinq.",
+     "cs": "Čtyřicet? Je trochu poškrábaná. Dám vám pět."
+    },
+    {
+     "text": "La vendeuse a réfléchi et en a proposé trente-cinq. Rainer a secoué la tête.",
+     "cs": "Prodavačka se zamyslela a nabídla třicet pět. Rainer zavrtěl hlavou."
+    },
+    {
+     "text": "Après vingt minutes de marchandage, ils se sont mis d'accord sur douze euros. Rainer est parti en vainqueur.",
+     "cs": "Po dvaceti minutách smlouvání se shodli na dvanácti. Rainer odcházel jako vítěz."
+    },
+    {
+     "text": "À la maison, sa femme Karla l'attendait. Elle a tout de suite remarqué le vase.",
+     "cs": "Doma ho čekala jeho žena Karla. Okamžitě si všimla vázy."
+    },
+    {
+     "speaker": "Karla",
+     "text": "Rainer, où as-tu trouvé notre vase ? Celui qu'on a donné à une association la semaine dernière ?",
+     "cs": "Rainere, kde jsi vzal naši vázu? Tu, kterou jsme minulý týden dali na charitu?"
+    },
+    {
+     "text": "Rainer a regardé le vase. Il avait la même fêlure sur le bord.",
+     "cs": "Rainer se zadíval na vázu. Měla stejnou prasklinu na okraji."
+    },
+    {
+     "speaker": "Rainer",
+     "text": "Au moins, je ne l'ai pas payé plein tarif.",
+     "cs": "Aspoň že jsem ji nekoupil za plnou cenu."
+    },
+    {
+     "speaker": "Karla",
+     "text": "C'est vrai. Tu as payé douze euros un vase qu'on a donné.",
+     "cs": "Pravda. Zaplatil jsi dvanáct za vázu, kterou jsme darovali."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "marchander",
+     "cs": "smlouvat"
+    },
+    {
+     "word": "marchandage",
+     "cs": "smlouvání"
+    },
+    {
+     "word": "association",
+     "cs": "charitativní organizace"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que découvre Rainer au marché aux puces ?",
+     "options": [
+      "Un vase bleu",
+      "Un vieux livre",
+      "Une montre"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi Karla connaît-elle le vase ?",
+     "options": [
+      "C'est leur propre vase.",
+      "Elle l'a vu en magasin.",
+      "On le lui a offert."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
