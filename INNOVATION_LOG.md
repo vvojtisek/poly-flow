@@ -1605,3 +1605,13 @@ Vlad approves a push.
 **Implemented Solution:** The search input is now the page search ('/' focuses it) and acts as a combobox: ↑/↓ move the highlighted row (aria-activedescendant), Enter opens it, Escape clears the search and a second Escape closes the card. Arrows also work from a focused row and move focus with the highlight. While a card is open, moving the highlight browses: the card follows the row. The hint shows / ↑ ↓ Enter.
 
 **Verification:** Playwright: '/' focuses data-page-search; typing 's', ↓, Enter opens 'sie'; ↓ switches the card to 'ja'; Escape clears the query, a second Escape closes the card; clicking row 3 ('sein') then ↓ opens 'in' with focus on word-row-3. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 52/120 | Page: [/words] (Page Cycle 7/15)
+
+**Summary:** play words from the list and make P work on the word card
+
+**Observed Problem:** Hearing a word in the dictionary took a click to open its card first, and the card's play button advertised the P hotkey that never fired: the words page did not install the shared hotkey listener. Slower playback, offered on practice screens, was missing here.
+
+**Implemented Solution:** Each list row now has a small play button labelled 'Přehrát <lemma>' next to the row (not nested inside the row button). The page installs useHotkeys, so P plays the open word and Alt+P works from the search box. The card shows the P key hint and the shared 'Pomaleji' toggle.
+
+**Verification:** Playwright: no audio request on load (60 play buttons stay idle); 'Přehrát sein' requests that word's audio without opening the card; P with the card open requests the open word; Alt+P from the focused search plays and types nothing. The container has no TTS, so audio answers 503 and the button shows its unavailable state; the requests are what was checked. No other console errors. typecheck, next build, ruff pass.

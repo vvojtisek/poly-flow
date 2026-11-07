@@ -6,13 +6,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { FlashcardSession } from "@/components/FlashcardSession";
-import { Kbd } from "@/components/Kbd";
+import { Kbd, KeyHint } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
-import { PlayButton } from "@/components/PlayButton";
+import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
 import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
+import { useHotkeys } from "@/lib/keyboard";
 import { genderClass } from "@/lib/gender";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 
@@ -167,7 +168,11 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
             <p className="text-3xl font-bold" lang={w.language}>
               <Article gender={w.gender} lemma={w.lemma} />
             </p>
-            <PlayButton url={myWordAudioUrl(w.id)} hotkey />
+            <PlayButton url={myWordAudioUrl(w.id)} label={cs.audio.playWord} hotkey />
+            <KeyHint k="P" />
+            <span className="ml-auto">
+              <SlowToggle />
+            </span>
           </div>
           <div>
             <p className="text-lg">{w.translation}</p>
@@ -265,6 +270,7 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
 
 export default function WordsPage() {
   const me = useRequireMe();
+  useHotkeys(); // P plays the open word (Alt+P from the search box)
   const language = me?.acting.active_language;
   const [q, setQ] = useState("");
   const [status, setStatus] = useState<WordStatus | null>(null);
@@ -718,6 +724,9 @@ export default function WordsPage() {
                         {w.due && <Clock className="size-4 text-amber-500" aria-label={t.dueNow} />}
                         <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${PILL[w.status]}`}>{t.status[w.status]}</span>
                       </button>
+                      <span className="shrink-0 pr-2">
+                        <PlayButton url={myWordAudioUrl(w.id)} size="sm" label={t.playRow(w.lemma)} />
+                      </span>
                       </div>
                     </li>
                   ))}

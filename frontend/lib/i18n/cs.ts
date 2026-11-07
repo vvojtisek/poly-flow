@@ -451,6 +451,7 @@ export const cs = {
     status: { seen: "Viděné", learning: "Učím se", passive: "Poznám", known: "Umím", mastered: "Zvládnuté" } as Record<string, string>,
     dueOnly: "K opakování",
     sortLabel: "Řadit",
+    playRow: (lemma: string) => `Přehrát ${lemma}`,
     sorts: { rank: "Podle četnosti", review: "Nejbližší ověření", errors: "Nejvíc chyb", recent: "Naposledy z lekce" } as Record<string, string>,
     rowErrors: (n: number) => (n === 0 ? "bez chyb" : `${n} ${n === 1 ? "chyba" : n < 5 ? "chyby" : "chyb"}`),
     export: "Stáhnout",
