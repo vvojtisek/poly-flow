@@ -29,6 +29,7 @@ from app.api import (
     roleplay,
     sounds,
     stories,
+    story_library,
     today,
     tutor,
     verbs,
@@ -88,6 +89,7 @@ def create_app() -> FastAPI:
     app.include_router(grammar.router)
     app.include_router(tutor.router)
     app.include_router(stories.router)
+    app.include_router(story_library.router)
     app.include_router(lexicon.router)
     return app
 

@@ -591,6 +591,27 @@ export interface StoryArchiveItem {
   targets: string[];
 }
 
+export interface LibraryStorySummary {
+  slug: string;
+  level: CefrLevel;
+  title: string;
+  title_cs: string;
+  line_count: number;
+  question_count: number;
+  review_status: "unreviewed" | "reviewed";
+}
+export interface LibraryStory extends Omit<LibraryStorySummary, "line_count" | "question_count"> {
+  lines: { speaker: string | null; text: string; cs: string }[];
+  stretch: { word: string; cs: string }[];
+  questions: { question: string; options: string[] }[];
+}
+export const listLibraryStories = (language: Language, level?: CefrLevel) =>
+  api<LibraryStorySummary[]>(`/api/v1/story-library?language=${language}${level ? `&level=${level}` : ""}`, { cache: "no-store" });
+export const getLibraryStory = (language: Language, slug: string) =>
+  api<LibraryStory>(`/api/v1/story-library/${encodeURIComponent(slug)}?language=${language}`, { cache: "no-store" });
+export const answerLibraryStory = (language: Language, slug: string, question: number, choice: number) =>
+  api<{ correct: boolean; answer: number }>(`/api/v1/story-library/${encodeURIComponent(slug)}/answer?language=${language}`, { json: { question, choice } });
+
 export const getStoryToday = (language: Language) =>
   api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
     cache: "no-store",
