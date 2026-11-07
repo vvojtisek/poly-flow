@@ -2586,6 +2586,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-10-wrong-tom",
+   "level": "B1",
+   "title": "Il Tom sbagliato",
+   "title_cs": "Špatný Tom",
+   "lines": [
+    {
+     "text": "Mia organizzava una festa a sorpresa per il collega Tom. Era il suo quarantesimo compleanno e tutto l'ufficio aveva portato palloncini, una torta e candeline.",
+     "cs": "Mia organizovala překvapivou oslavu pro kolegu Toma. Slavil čtyřicáté narozeniny a celá kancelář sehnala balónky, dort a svíčky."
+    },
+    {
+     "text": "Il problema: in azienda lavoravano due Tom. Mia aveva invitato quello sbagliato.",
+     "cs": "Problém: ve firmě pracovali dva Tomové. Mia pozvala toho špatného."
+    },
+    {
+     "text": "Alle tre Tom della contabilità è entrato nella sala riunioni. Era timido e parlava raramente.",
+     "cs": "Ve tři hodiny vešel do zasedačky Tom z účtárny. Byl plachý a mluvil málo."
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Sorpresa! Buon compleanno!",
+     "cs": "Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "text": "Tom è rimasto sulla porta. Vedeva i palloncini, la torta e i regali.",
+     "cs": "Tom zůstal stát ve dveřích. Viděl balónky, dort a dárky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ma... il mio compleanno è solo a ottobre.",
+     "cs": "Ale... já mám narozeniny až v říjnu."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Oh no. Abbiamo il Tom sbagliato!",
+     "cs": "Ach ne. Máme špatného Toma!"
+    },
+    {
+     "text": "È calato un silenzio di tomba. Poi Tom ha detto piano: Sapete, in dodici anni qui nessuno mi ha mai fatto gli auguri di compleanno.",
+     "cs": "Nastalo hrobové ticho. Pak Tom tiše řekl: Víte, za dvanáct let mi tu ještě nikdo k narozeninám nepopřál."
+    },
+    {
+     "text": "Mia ha guardato gli altri. Tutti hanno annuito.",
+     "cs": "Mia se podívala na ostatní. Všichni přikývli."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Allora festeggiamo tutti e due i Tom. E il tuo compleanno a ottobre lo festeggiamo comunque.",
+     "cs": "Tak oslavíme oba Tomy. A ty svoje narozeniny v říjnu oslavíme taky."
+    },
+    {
+     "text": "Un'ora dopo è arrivato il vero Tom, ha visto due torte e un ufficio che ballava e ha chiesto: Chi compie gli anni oggi?",
+     "cs": "O hodinu později přišel ten pravý Tom, uviděl dva dorty a tančící kancelář a zeptal se: Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Stiamo festeggiando proprio tutti e due i Tom. Per te è rimasta una fetta.",
+     "cs": "Právě oslavujeme oba Tomy. Pro tebe ještě zbyl kousek."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "contabilità",
+     "cs": "účtárna"
+    },
+    {
+     "word": "timido",
+     "cs": "plachý"
+    },
+    {
+     "word": "tomba",
+     "cs": "hrob; silenzio di tomba = hrobové ticho"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché i colleghi festeggiano il Tom sbagliato?",
+     "options": [
+      "Mia ha invitato il Tom sbagliato.",
+      "Tutti e due compiono gli anni lo stesso giorno.",
+      "Il vero Tom è malato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa dice il Tom sbagliato sui compleanni?",
+     "options": [
+      "In dodici anni nessuno gli ha fatto gli auguri.",
+      "Non gli piace la torta.",
+      "Non compie mai gli anni."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

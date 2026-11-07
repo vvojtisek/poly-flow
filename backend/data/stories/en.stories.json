@@ -2586,6 +2586,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-10-wrong-tom",
+   "level": "B1",
+   "title": "The Wrong Tom",
+   "title_cs": "Špatný Tom",
+   "lines": [
+    {
+     "text": "Mia was organising a surprise party for her colleague Tom. It was his fortieth birthday, and the whole office had brought balloons, a cake and candles.",
+     "cs": "Mia organizovala překvapivou oslavu pro kolegu Toma. Slavil čtyřicáté narozeniny a celá kancelář sehnala balónky, dort a svíčky."
+    },
+    {
+     "text": "The problem: two Toms worked at the company. Mia had invited the wrong one.",
+     "cs": "Problém: ve firmě pracovali dva Tomové. Mia pozvala toho špatného."
+    },
+    {
+     "text": "At three o'clock, Tom from accounts walked into the meeting room. He was shy and rarely spoke.",
+     "cs": "Ve tři hodiny vešel do zasedačky Tom z účtárny. Byl plachý a mluvil málo."
+    },
+    {
+     "speaker": "Everyone",
+     "text": "Surprise! Happy birthday!",
+     "cs": "Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "text": "Tom stayed standing in the doorway. He saw the balloons, the cake and the presents.",
+     "cs": "Tom zůstal stát ve dveřích. Viděl balónky, dort a dárky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But... my birthday isn't until October.",
+     "cs": "Ale... já mám narozeniny až v říjnu."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Oh no. We've got the wrong Tom!",
+     "cs": "Ach ne. Máme špatného Toma!"
+    },
+    {
+     "text": "A dead silence fell. Then Tom said quietly: You know, in twelve years nobody here has ever wished me a happy birthday.",
+     "cs": "Nastalo hrobové ticho. Pak Tom tiše řekl: Víte, za dvanáct let mi tu ještě nikdo k narozeninám nepopřál."
+    },
+    {
+     "text": "Mia looked at the others. Everyone nodded.",
+     "cs": "Mia se podívala na ostatní. Všichni přikývli."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Then we'll celebrate both Toms. And we'll celebrate yours in October too.",
+     "cs": "Tak oslavíme oba Tomy. A ty svoje narozeniny v říjnu oslavíme taky."
+    },
+    {
+     "text": "An hour later, the real Tom arrived, saw two cakes and a dancing office, and asked: Whose birthday is it today?",
+     "cs": "O hodinu později přišel ten pravý Tom, uviděl dva dorty a tančící kancelář a zeptal se: Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Everyone",
+     "text": "We're celebrating both Toms. There's a slice left for you.",
+     "cs": "Právě oslavujeme oba Tomy. Pro tebe ještě zbyl kousek."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "accounts",
+     "cs": "účtárna"
+    },
+    {
+     "word": "shy",
+     "cs": "plachý"
+    },
+    {
+     "word": "doorway",
+     "cs": "dveře, vchod"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why does the office celebrate the wrong Tom?",
+     "options": [
+      "Mia invited the wrong Tom.",
+      "Both have their birthday on the same day.",
+      "The real Tom is ill."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What does the wrong Tom say about birthdays?",
+     "options": [
+      "In twelve years nobody has wished him a happy birthday.",
+      "He doesn't like cake.",
+      "He never has a birthday."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

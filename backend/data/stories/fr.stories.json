@@ -2586,6 +2586,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-10-wrong-tom",
+   "level": "B1",
+   "title": "Le mauvais Tom",
+   "title_cs": "Špatný Tom",
+   "lines": [
+    {
+     "text": "Mia organisait une fête surprise pour son collègue Tom. C'était son quarantième anniversaire, et tout le bureau avait apporté des ballons, un gâteau et des bougies.",
+     "cs": "Mia organizovala překvapivou oslavu pro kolegu Toma. Slavil čtyřicáté narozeniny a celá kancelář sehnala balónky, dort a svíčky."
+    },
+    {
+     "text": "Le problème : deux Tom travaillaient dans l'entreprise. Mia avait invité le mauvais.",
+     "cs": "Problém: ve firmě pracovali dva Tomové. Mia pozvala toho špatného."
+    },
+    {
+     "text": "À trois heures, Tom, de la comptabilité, est entré dans la salle de réunion. Il était timide et parlait rarement.",
+     "cs": "Ve tři hodiny vešel do zasedačky Tom z účtárny. Byl plachý a mluvil málo."
+    },
+    {
+     "speaker": "Tous",
+     "text": "Surprise ! Joyeux anniversaire !",
+     "cs": "Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "text": "Tom est resté dans l'embrasure de la porte. Il voyait les ballons, le gâteau et les cadeaux.",
+     "cs": "Tom zůstal stát ve dveřích. Viděl balónky, dort a dárky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Mais... mon anniversaire n'est qu'en octobre.",
+     "cs": "Ale... já mám narozeniny až v říjnu."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Oh non. Nous avons le mauvais Tom !",
+     "cs": "Ach ne. Máme špatného Toma!"
+    },
+    {
+     "text": "Un silence de mort est tombé. Puis Tom a dit doucement : Vous savez, en douze ans, personne ici ne m'a jamais souhaité mon anniversaire.",
+     "cs": "Nastalo hrobové ticho. Pak Tom tiše řekl: Víte, za dvanáct let mi tu ještě nikdo k narozeninám nepopřál."
+    },
+    {
+     "text": "Mia a regardé les autres. Tous ont hoché la tête.",
+     "cs": "Mia se podívala na ostatní. Všichni přikývli."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Alors nous fêtons les deux Tom. Et le tien en octobre aussi.",
+     "cs": "Tak oslavíme oba Tomy. A ty svoje narozeniny v říjnu oslavíme taky."
+    },
+    {
+     "text": "Une heure plus tard, le vrai Tom est arrivé, a vu deux gâteaux et un bureau qui dansait, et a demandé : Qui a son anniversaire aujourd'hui ?",
+     "cs": "O hodinu později přišel ten pravý Tom, uviděl dva dorty a tančící kancelář a zeptal se: Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Tous",
+     "text": "Nous fêtons justement les deux Tom. Il en reste un morceau pour toi.",
+     "cs": "Právě oslavujeme oba Tomy. Pro tebe ještě zbyl kousek."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "comptabilité",
+     "cs": "účtárna"
+    },
+    {
+     "word": "timide",
+     "cs": "plachý"
+    },
+    {
+     "word": "embrasure",
+     "cs": "rám dveří"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi les collègues fêtent-ils le mauvais Tom ?",
+     "options": [
+      "Mia a invité le mauvais Tom.",
+      "Les deux ont leur anniversaire le même jour.",
+      "Le vrai Tom est malade."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que dit le mauvais Tom sur les anniversaires ?",
+     "options": [
+      "En douze ans, personne ne lui a souhaité son anniversaire.",
+      "Il n'aime pas le gâteau.",
+      "Il n'a jamais d'anniversaire."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

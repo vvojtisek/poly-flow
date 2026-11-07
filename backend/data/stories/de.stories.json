@@ -2586,6 +2586,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-10-wrong-tom",
+   "level": "B1",
+   "title": "Der falsche Tom",
+   "title_cs": "Špatný Tom",
+   "lines": [
+    {
+     "text": "Mia organisierte eine Überraschungsparty für ihren Kollegen Tom. Es war sein vierzigster Geburtstag, und das ganze Büro hatte Luftballons, eine Torte und Kerzen besorgt.",
+     "cs": "Mia organizovala překvapivou oslavu pro kolegu Toma. Slavil čtyřicáté narozeniny a celá kancelář sehnala balónky, dort a svíčky."
+    },
+    {
+     "text": "Das Problem: In der Firma arbeiteten zwei Toms. Mia hatte den falschen eingeladen.",
+     "cs": "Problém: ve firmě pracovali dva Tomové. Mia pozvala toho špatného."
+    },
+    {
+     "text": "Um drei Uhr betrat Tom aus der Buchhaltung den Besprechungsraum. Er war schüchtern und sprach selten.",
+     "cs": "Ve tři hodiny vešel do zasedačky Tom z účtárny. Byl plachý a mluvil málo."
+    },
+    {
+     "speaker": "Alle",
+     "text": "Überraschung! Alles Gute zum Geburtstag!",
+     "cs": "Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "text": "Tom blieb in der Tür stehen. Er sah die Luftballons, die Torte und die Geschenke.",
+     "cs": "Tom zůstal stát ve dveřích. Viděl balónky, dort a dárky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Aber ... mein Geburtstag ist erst im Oktober.",
+     "cs": "Ale... já mám narozeniny až v říjnu."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Oh nein. Wir haben den falschen Tom!",
+     "cs": "Ach ne. Máme špatného Toma!"
+    },
+    {
+     "text": "Es wurde totenstill. Dann sagte Tom leise: Wissen Sie, in zwölf Jahren hat mir hier noch nie jemand zum Geburtstag gratuliert.",
+     "cs": "Nastalo hrobové ticho. Pak Tom tiše řekl: Víte, za dvanáct let mi tu ještě nikdo k narozeninám nepopřál."
+    },
+    {
+     "text": "Mia schaute die anderen an. Alle nickten.",
+     "cs": "Mia se podívala na ostatní. Všichni přikývli."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Dann feiern wir eben beide Toms. Und deinen Geburtstag im Oktober feiern wir auch.",
+     "cs": "Tak oslavíme oba Tomy. A ty svoje narozeniny v říjnu oslavíme taky."
+    },
+    {
+     "text": "Eine Stunde später kam der richtige Tom, sah zwei Torten und ein tanzendes Büro und fragte: Wer hat denn heute Geburtstag?",
+     "cs": "O hodinu později přišel ten pravý Tom, uviděl dva dorty a tančící kancelář a zeptal se: Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Alle",
+     "text": "Wir feiern gerade beide Toms. Für dich ist noch ein Stück übrig.",
+     "cs": "Právě oslavujeme oba Tomy. Pro tebe ještě zbyl kousek."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Buchhaltung",
+     "cs": "účtárna"
+    },
+    {
+     "word": "schüchtern",
+     "cs": "plachý"
+    },
+    {
+     "word": "totenstill",
+     "cs": "hrobové ticho"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum feiern die Kollegen den falschen Tom?",
+     "options": [
+      "Mia hat den falschen Tom eingeladen.",
+      "Beide haben am selben Tag Geburtstag.",
+      "Der richtige Tom ist krank."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was sagt der falsche Tom über Geburtstage?",
+     "options": [
+      "In zwölf Jahren hat ihm niemand gratuliert.",
+      "Er mag keine Torte.",
+      "Er hat nie Geburtstag."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
