@@ -1465,3 +1465,13 @@ Vlad approves a push.
 **Implemented Solution:** The deck API accepts a third scope, `weak=true`: the profile's unresolved check mistakes from the weak-spots service, still child-filtered and due-first (`services/words.word_deck`, `api/words.py`; exactly one scope is still enforced). `lib/api.ts` adds `DeckScope`; `FlashcardSession` accepts it and an optional close label. `app/practice/page.tsx` offers "Kartičky ze slov s chybami (N)" in the mistake panel and runs the ungraded flashcards in place, returning "Zpět na procvičování". New test `test_weak_deck_holds_exactly_the_unresolved_words`.
 
 **Verification:** `tests/test_mistakes.py` and `tests/test_words.py` 11 passed; ruff, typecheck, production build, `git diff --check` passed; Playwright opened the deck from `/practice` (10 cards, first "können").
+
+## Global Cycle 38/120 | Page: [/practice] (Page Cycle 8/15)
+
+**Summary:** "Jiný tip": step through ranked suggestions
+
+**Observed Problem:** Today's tip offered a single mode; a learner who did not feel like that mode had to fall back to scanning all twelve cards.
+
+**Implemented Solution:** `lib/practice.ts`: `suggestModes` replaces `suggestMode` and returns a full ranking: one mode per skill in order of how long ago the skill was trained (each mode used once), then the remaining modes oldest first. `app/practice/page.tsx` shows the first suggestion and a "Jiný tip" button that cycles through the ranking; the tip text is a polite live region so the change is announced. Enter still opens the shown tip.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright cycled six tips on a fresh device: Hraj roli (listening), Stínování (speaking), Diktát (writing), Slovosled (reading), Rody (grammar), Laboratoř pádů.

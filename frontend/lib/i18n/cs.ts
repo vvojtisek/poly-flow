@@ -684,6 +684,7 @@ export const cs = {
     weakDeck: "slova s chybami",
     backToHub: "Zpět na procvičování",
     tipTitle: "Tip na dnes",
+    tipOther: "Jiný tip",
     tipSince: (skill: string, when: string) => `Na ${skill} ses na tomto zařízení naposledy zaměřil(a) ${when}.`,
     tipNever: (skill: string) => `Na ${skill} ses na tomto zařízení ještě nezaměřil(a).`,
     needsLesson: "Pracuje se slovy z lekcí: nejdřív projdi první lekci.",

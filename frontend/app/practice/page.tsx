@@ -12,7 +12,7 @@ import { useAuth, useRequireMe } from "@/lib/auth";
 import { KeyHint } from "@/components/Kbd";
 import { cs, relativePast } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
-import { modesFor, readPinned, readRecent, readVisits, SKILLS, suggestMode, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
+import { modesFor, readPinned, readRecent, readVisits, SKILLS, suggestModes, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
 const ERROR_ROUTE: Record<string, (language: Language) => string> = {
@@ -90,6 +90,7 @@ export default function PracticePage() {
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
   const [weakCards, setWeakCards] = useState(false);
+  const [tipIndex, setTipIndex] = useState(0);
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
   useEffect(() => setRecent(readRecent()), []);
@@ -133,7 +134,8 @@ export default function PracticePage() {
   const shown = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const last = recent.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
   const favorites = pinned.map((id) => modes.find((m) => m.id === id)).filter((m): m is PracticeMode => !!m);
-  const tip = suggestMode(modes, visits, (m) => !(m.needsWords && introduced === 0));
+  const tips = suggestModes(modes, visits, (m) => !(m.needsWords && introduced === 0));
+  const tip = tips.length ? tips[tipIndex % tips.length]! : null;
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
   const recommendations = (weakSpots?.tags ?? [])
     .filter(([tag]) => !!ERROR_ROUTE[tag])
@@ -167,25 +169,36 @@ export default function PracticePage() {
         <LanguagePicker me={me} />
 
         {tip && (
-          <Link
-            href={tip.mode.href}
-            data-hotkey="enter"
-            aria-keyshortcuts="Enter"
-            className="flex items-center gap-3 rounded-3xl border border-brand-500/40 bg-brand-500/5 p-4 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
-          >
-            <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
-              <Lightbulb className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
-            </span>
-            <span className="flex min-w-0 flex-1 flex-col">
-              <span className="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200">{t.tipTitle}</span>
-              <span className="font-bold">{t.mode[tip.mode.id]?.title}</span>
-              <span className="text-sm text-slate-600 dark:text-slate-300">
-                {tip.since ? t.tipSince(t.skill[tip.skill] ?? tip.skill, relativePast(tip.since)) : t.tipNever(t.skill[tip.skill] ?? tip.skill)}
+          <div className="flex items-stretch gap-2 rounded-3xl border border-brand-500/40 bg-brand-500/5 p-2 sm:p-3">
+            <Link
+              href={tip.mode.href}
+              data-hotkey="enter"
+              aria-keyshortcuts="Enter"
+              className="flex min-w-0 flex-1 items-center gap-3 rounded-2xl p-2 hover:bg-brand-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+            >
+              <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
+                <Lightbulb className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
               </span>
-            </span>
-            <KeyHint k="Enter" />
-            <ArrowRight className="size-5 shrink-0 text-brand-600" aria-hidden />
-          </Link>
+              <span className="flex min-w-0 flex-1 flex-col" aria-live="polite">
+                <span className="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200">{t.tipTitle}</span>
+                <span className="font-bold">{t.mode[tip.mode.id]?.title}</span>
+                <span className="text-sm text-slate-600 dark:text-slate-300">
+                  {tip.since ? t.tipSince(t.skill[tip.skill] ?? tip.skill, relativePast(tip.since)) : t.tipNever(t.skill[tip.skill] ?? tip.skill)}
+                </span>
+              </span>
+              <KeyHint k="Enter" />
+              <ArrowRight className="size-5 shrink-0 text-brand-600" aria-hidden />
+            </Link>
+            {tips.length > 1 && (
+              <button
+                type="button"
+                onClick={() => setTipIndex((i) => i + 1)}
+                className="shrink-0 self-center rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-brand-100"
+              >
+                {t.tipOther}
+              </button>
+            )}
+          </div>
         )}
 
         {(weakFailed || recommendations.length > 0) && (

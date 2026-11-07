@@ -114,21 +114,35 @@ export function byRecent(modes: PracticeMode[], recent: PracticeMode["id"][]): P
 }
 
 /**
- * A suggestion for today: the skill trained longest ago on this device (never first), then the
- * least recently opened mode for it. Deterministic, so the tip does not change on every visit.
+ * Suggestions for today, best first: skills ordered by how long ago they were trained on this
+ * device (never first), each with its least recently opened mode, then the remaining modes by age.
+ * Deterministic, so the tip does not change on every visit.
  */
-export function suggestMode(
+export function suggestModes(
   modes: PracticeMode[],
   visits: Partial<Record<PracticeMode["id"], string>>,
   usable: (m: PracticeMode) => boolean = () => true,
-): { mode: PracticeMode; skill: Skill; since: string | null } | null {
+): { mode: PracticeMode; skill: Skill; since: string | null }[] {
   const pool = modes.filter(usable);
-  if (!pool.length) return null;
   const at = (m: PracticeMode) => (visits[m.id] ? Date.parse(visits[m.id]!) : 0);
-  const skills = SKILLS.filter((s) => pool.some((m) => m.skills.includes(s)));
   const lastFor = (s: Skill) => Math.max(0, ...pool.filter((m) => m.skills.includes(s)).map(at));
-  const skill = [...skills].sort((a, b) => lastFor(a) - lastFor(b) || SKILLS.indexOf(a) - SKILLS.indexOf(b))[0]!;
-  const mode = pool.filter((m) => m.skills.includes(skill)).sort((a, b) => at(a) - at(b) || pool.indexOf(a) - pool.indexOf(b))[0]!;
-  const last = lastFor(skill);
-  return { mode, skill, since: last ? new Date(last).toISOString() : null };
+  const skills = SKILLS.filter((s) => pool.some((m) => m.skills.includes(s))).sort(
+    (a, b) => lastFor(a) - lastFor(b) || SKILLS.indexOf(a) - SKILLS.indexOf(b),
+  );
+  const out: { mode: PracticeMode; skill: Skill; since: string | null }[] = [];
+  const taken = new Set<string>();
+  const byAge = (a: PracticeMode, b: PracticeMode) => at(a) - at(b) || pool.indexOf(a) - pool.indexOf(b);
+  for (const skill of skills) {
+    const mode = pool.filter((m) => m.skills.includes(skill) && !taken.has(m.id)).sort(byAge)[0];
+    if (!mode) continue;
+    taken.add(mode.id);
+    const last = lastFor(skill);
+    out.push({ mode, skill, since: last ? new Date(last).toISOString() : null });
+  }
+  for (const mode of pool.filter((m) => !taken.has(m.id)).sort(byAge)) {
+    const skill = mode.skills[0]!;
+    const last = at(mode);
+    out.push({ mode, skill, since: last ? new Date(last).toISOString() : null });
+  }
+  return out;
 }
