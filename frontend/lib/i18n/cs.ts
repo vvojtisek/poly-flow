@@ -1044,6 +1044,8 @@ export const cs = {
     noAnswers: "Zatím žádné odpovědi v ověření.",
     heatmapKeys: "Šipky: ← → týden, ↑ ↓ den",
     heatModeLabel: "Co kalendář ukazuje",
+    weekdays: ["Po", "Út", "St", "Čt", "Pá", "So", "Ne"],
+    months: ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"],
     heatModes: { all: "Vše", graded: "Ověření", practice: "Procvičování" } as Record<string, string>,
     modeDays: (mode: string, n: number) => `Dny ${mode === "graded" ? "s ověřením" : "s procvičováním"}: ${n} z posledních 182.`,
     funnelTitle: "Od lekce k jistotě",

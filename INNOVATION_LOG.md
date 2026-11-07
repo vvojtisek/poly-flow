@@ -1775,3 +1775,13 @@ Vlad approves a push.
 **Implemented Solution:** Each word in the activity-day list, the forecast chips and the mistake drill-down has a small PlayButton ('Přehrát <lemma>'). It sits next to the link, not inside it, so playing does not navigate. Clips load only on click.
 
 **Verification:** Playwright 390px with ?day=2026-11-05&forecast=2026-11-08: 77 play buttons render with no audio request on load; clicking the first requests that word's audio and stays on /insights. TTS is not available in the container (503), so the request was checked, not playback. The same run found a pre-existing horizontal overflow at 390px from the calendar panel (section 560px wide); it is left for the mobile cycle. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 69/120 | Page: [/insights] (Page Cycle 9/15)
+
+**Summary:** label the activity calendar with weekdays and months and open it on recent weeks
+
+**Observed Problem:** The 26-week calendar was an unlabelled grid of squares: no weekday or month labels, so 'which day was that?' meant hovering each cell. The padding cells in the first column were smaller than the day cells (size-3 vs size-4), so the first week's days sat one pixel step off. On a phone the panel was wider than the screen (560px at 390px, because the grid item could not shrink), so the page scrolled sideways and opened on May.
+
+**Implemented Solution:** A sticky weekday column (Po, St, Pá, Ne) and a month label over the first week of each month (Czech abbreviations, aria-hidden, since every day button already has its full date). Padding cells now match the day size. The panel grid items get min-w-0, so the calendar scrolls inside its own panel, and it opens scrolled to the latest weeks.
+
+**Verification:** Playwright: at 390px there is no page overflow (overflow scan finds no element) and the calendar's scrollLeft equals its maximum (209) on load; at 1280px it fits without scrolling. Desktop and mobile screenshots show 'čvn … lis' labels and Po/St/Pá/Ne aligned with the rows. No console errors. typecheck, next build, ruff pass.

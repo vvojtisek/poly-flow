@@ -2,7 +2,7 @@
 
 import { BarChart3, CalendarDays, ChevronRight, Filter, Target, TrendingUp, TriangleAlert } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Panel } from "@/components/Panel";
@@ -53,11 +53,36 @@ function Heatmap({ data, selected, onSelect, mode }: { data: Insights["heatmap"]
   const cells: (Insights["heatmap"][number] | null)[] = [...Array(pad).fill(null), ...data];
   const weeks: (typeof cells)[] = [];
   for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+  const monthStarts: Record<number, string> = {};
+  weeks.forEach((w, i) => {
+    const firstDay = w.find((d) => d)?.date;
+    const month = firstDay?.slice(0, 7);
+    const prev = i > 0 ? weeks[i - 1]!.find((d) => d)?.date.slice(0, 7) : null;
+    if (firstDay && month !== prev && (i > 0 || Number(firstDay.slice(8)) <= 7)) monthStarts[i] = t.months[Number(firstDay.slice(5, 7)) - 1]!;
+  });
+  // Open on the latest weeks: on a phone only part of the half year fits.
+  const scroller = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = scroller.current;
+    if (el) el.scrollLeft = el.scrollWidth;
+  }, []);
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-[3px] overflow-x-auto pb-1" role="group" aria-label={t.heatmapLabel} aria-describedby="heatmap-keys" onKeyDown={onGridKey}>
+      <div ref={scroller} className="flex gap-[3px] overflow-x-auto pb-1" role="group" aria-label={t.heatmapLabel} aria-describedby="heatmap-keys" onKeyDown={onGridKey}>
+        {/* Weekday labels (Monday on top) and a month label over the first week of each month. */}
+        <div aria-hidden className="sticky left-0 z-10 flex shrink-0 flex-col gap-[3px] bg-white pr-1 text-[0.6rem] leading-none text-slate-400 dark:bg-slate-900">
+          <span className="h-3" />
+          {t.weekdays.map((day, j) => (
+            <span key={j} className="flex size-4 items-center lg:size-5">
+              {j % 2 === 0 ? day : ""}
+            </span>
+          ))}
+        </div>
         {weeks.map((w, i) => (
           <div key={i} className="flex flex-col gap-[3px]">
+            <span aria-hidden className="h-3 whitespace-nowrap text-[0.6rem] leading-none text-slate-400">
+              {monthStarts[i] ?? ""}
+            </span>
             {w.map((d, j) =>
               d ? (
                 <button
@@ -73,7 +98,7 @@ function Heatmap({ data, selected, onSelect, mode }: { data: Insights["heatmap"]
                   className={`size-4 shrink-0 rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-brand-500 lg:size-5 ${level(amount(d, mode), max)} ${selected === d.date ? "ring-2 ring-brand-700 dark:ring-brand-200" : ""}`}
                 />
               ) : (
-                <span key={`pad-${j}`} className="size-3 lg:size-4" />
+                <span key={`pad-${j}`} className="size-4 lg:size-5" />
               ),
             )}
           </div>
@@ -400,7 +425,7 @@ export default function InsightsPage() {
         {!data ? (
           !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>
         ) : (
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
             <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
               <div role="radiogroup" aria-label={t.heatModeLabel} className="mb-2 inline-flex rounded-lg bg-slate-100 p-0.5 text-xs dark:bg-slate-800">
                 {(["all", "graded", "practice"] as const).map((m) => (
