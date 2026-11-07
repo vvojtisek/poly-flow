@@ -1715,3 +1715,13 @@ Vlad approves a push.
 **Implemented Solution:** Each mistake type now carries up to six words or grammar topics behind it, with per-item counts, most frequent first. Words show their article and Czech meaning, topics their level. Rows in the panel are buttons (aria-expanded) that open the list, and each entry links to the word card (/words?word=…) or the grammar topic. The word side uses _suitable(user), like the forecast and day views.
 
 **Verification:** tests/test_insights.py: gender mistake lists ('word', und, 1); the child profile's tagged miss on a violence-flagged word no longer appears. Run against the old service, both tests fail ('Left contains one more item: meaning'), confirming the leak; with the change, 2 passed. Playwright with stubbed data at 390px: 'Rod (der/die/das)' expands to 'der Mann · muž 2×' and 'Členy · A1 1×' with correct hrefs. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 63/120 | Page: [/insights] (Page Cycle 3/15)
+
+**Summary:** turn the review forecast into actions: check today, open words later
+
+**Observed Problem:** The forecast showed what is due per day, but its links all went to the unfiltered dictionary or grammar index, and the word chips were plain text. Seeing '41 words due today' led nowhere near the check that clears them. Future days gave no hint that those words do not need checking yet.
+
+**Implemented Solution:** Today's detail now offers 'Ověřit slova (N)' (/check) and 'Ověřit gramatiku (N)' (/grammar/check), and its heading reads 'Co tě čeká dnes'. For a later day, the link opens the dictionary ordered by next check (/words?tab=all&sort=review, cycle 49), and a note says those items can wait. Every word chip links to its word card, and topics use client-side Links.
+
+**Verification:** Playwright, real data (no words due before local midnight): 8 Nov shows 'Otevřít slovník -> /words?tab=all&sort=review', chips link to /words?word=…, and the later note is shown. With a stub that makes today due: 'Ověřit slova (41) -> /check', 'Ověřit gramatiku (1) -> /grammar/check', and no later note. No console errors. typecheck, next build, ruff pass.

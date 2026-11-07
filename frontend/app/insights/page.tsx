@@ -1,6 +1,7 @@
 "use client";
 
 import { BarChart3, CalendarDays, ChevronRight, Filter, Target, TrendingUp, TriangleAlert } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -193,15 +194,29 @@ function Forecast({
   );
 }
 
-function ForecastDetails({ data, language }: { data: Insights["forecast"][number]; language: string }) {
+function ForecastDetails({ data, language, isToday }: { data: Insights["forecast"][number]; language: string; isToday: boolean }) {
   const empty = data.word_items.length === 0 && data.grammar_items.length === 0;
   return (
     <section className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-800" aria-live="polite">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="font-semibold">{t.forecastDetails(dayFmt(data.date))}</h3>
-        <div className="flex gap-3 text-sm">
-          {data.word_items.length > 0 && <a href="/words?tab=all" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openWords}</a>}
-          {data.grammar_items.length > 0 && <a href="/grammar" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openGrammar}</a>}
+        <h3 className="font-semibold">{t.forecastDetails(isToday ? t.today.toLowerCase() : dayFmt(data.date))}</h3>
+        {/* Today: go straight to the checks. Later days: the dictionary ordered by the next check. */}
+        <div className="flex flex-wrap gap-2 text-sm">
+          {isToday && data.word_items.length > 0 && (
+            <Link href="/check" className="rounded-lg bg-brand-600 px-3 py-1.5 font-semibold text-white hover:bg-brand-700">
+              {t.checkWordsNow(data.word_items.length)}
+            </Link>
+          )}
+          {isToday && data.grammar_items.length > 0 && (
+            <Link href="/grammar/check" className="rounded-lg border border-amber-400 px-3 py-1.5 font-semibold text-amber-800 hover:bg-amber-50 dark:text-amber-200 dark:hover:bg-amber-950">
+              {t.checkGrammarNow(data.grammar_items.length)}
+            </Link>
+          )}
+          {!isToday && data.word_items.length > 0 && (
+            <Link href="/words?tab=all&sort=review" className="font-medium text-brand-700 hover:underline dark:text-brand-200">
+              {t.openWords}
+            </Link>
+          )}
         </div>
       </div>
       {empty ? <p className="text-sm text-slate-500">{t.forecastEmpty}</p> : (
@@ -210,7 +225,15 @@ function ForecastDetails({ data, language }: { data: Insights["forecast"][number
             <section>
               <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.words}</h4>
               <ul className="flex flex-wrap gap-1.5" lang={language}>
-                {data.word_items.map((word) => <li key={word.id} className="rounded-lg bg-brand-500/10 px-2 py-1 text-sm">{word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}{word.lemma}<span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span></li>)}
+                {data.word_items.map((word) => (
+                  <li key={word.id}>
+                    <Link href={`/words?word=${word.id}`} className="block rounded-lg bg-brand-500/10 px-2 py-1 text-sm hover:bg-brand-500/20">
+                      {word.gender && word.gender.length > 1 ? `${word.gender} ` : ""}
+                      {word.lemma}
+                      <span className="ml-1 text-slate-500" lang="cs">· {word.translation}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </section>
           )}
@@ -218,12 +241,13 @@ function ForecastDetails({ data, language }: { data: Insights["forecast"][number
             <section>
               <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.grammar}</h4>
               <ul className="flex flex-col gap-1">
-                {data.grammar_items.map((unit) => <li key={unit.id}><a href={`/grammar/${unit.id}`} className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span className="text-xs text-slate-500">{unit.level}</span>{unit.title}</a></li>)}
+                {data.grammar_items.map((unit) => <li key={unit.id}><Link href={`/grammar/${unit.id}`} className="flex items-center gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"><span className="text-xs text-slate-500">{unit.level}</span>{unit.title}</Link></li>)}
               </ul>
             </section>
           )}
         </div>
       )}
+      {!isToday && !empty && <p className="mt-2 text-xs text-slate-500">{t.laterNote}</p>}
     </section>
   );
 }
@@ -309,7 +333,7 @@ export default function InsightsPage() {
             <Panel title={t.forecast} icon={Target}>
               <Forecast data={data.forecast} selected={forecastDate} onSelect={setForecastDate} />
               {forecastDate && data.forecast.find((day) => day.date === forecastDate) && (
-                <ForecastDetails data={data.forecast.find((day) => day.date === forecastDate)!} language={data.language} />
+                <ForecastDetails data={data.forecast.find((day) => day.date === forecastDate)!} language={data.language} isToday={forecastDate === data.forecast[0]?.date} />
               )}
               <p className="mt-2 flex gap-3 text-xs text-slate-500">
                 <span className="flex items-center gap-1">
