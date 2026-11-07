@@ -240,6 +240,7 @@ class ProgressOut(BaseModel):
 
 
 class WeakWordOut(BaseModel):
+    item_id: uuid.UUID
     lemma: str
     gender: str | None
     translation: str

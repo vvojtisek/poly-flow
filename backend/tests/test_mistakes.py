@@ -111,6 +111,8 @@ async def test_weak_spots_list_unresolved_words_and_mistake_kinds(db, client, cl
     w = r.json()
     assert len(w["words"]) == len(set(missed)) and w["window_days"] == 21
     assert all(x["errors"] >= 1 and x["tags"] for x in w["words"])
+    # Each word carries its lexicon id so the dashboard can open its dictionary card and audio.
+    assert len({x["item_id"] for x in w["words"]}) == len(w["words"])
     assert dict(w["tags"]).get("meaning", 0) + dict(w["tags"]).get("spelling", 0) == len(missed)
     # Answering them right in the next check resolves them.
     clock.advance(days=1)

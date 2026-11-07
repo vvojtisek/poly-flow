@@ -538,7 +538,7 @@ export const completeGrammar = (sessionId: string) =>
 export interface WeakSpots {
   language: Language;
   window_days: number;
-  words: { lemma: string; gender: string | null; translation: string; errors: number; last_error_at: string; tags: string[] }[];
+  words: { item_id: string; lemma: string; gender: string | null; translation: string; errors: number; last_error_at: string; tags: string[] }[];
   units: { id: string; title: string; level: string; errors: number; last_error_at: string; tags: string[] }[];
   tags: [string, number][];
 }

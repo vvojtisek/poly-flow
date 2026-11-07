@@ -355,6 +355,7 @@ async def weak_spots(
         window_days=w.window_days,
         words=[
             WeakWordOut(
+                item_id=x.item.id,
                 lemma=x.item.lemma,
                 gender=x.item.gender,
                 translation=x.item.translation_cs,

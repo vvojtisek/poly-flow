@@ -1115,3 +1115,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/page.tsx` now loads the learner's grammar tree for the active language alongside progress. The Grammar quick action shows a resumable lesson (and links straight to it), the number of topics due for review (highlighted), or the recommended next topic. `components/ProgressCard.tsx` replaces the lock line with "Gramatika: X z Y témat prošlo ověřením", counting only units in the known or mastered state. Obsolete `grammarLocked`/`grammarUnlocked` strings removed from `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; dashboard rendered with seeded German progress shows "Gramatika: 0 z 37 témat prošlo ověřením" and no console errors.
+
+## Global Cycle 3/120 | Page: [/] (Page Cycle 3/15)
+
+**Summary:** make weak spots actionable: audio, dictionary links, top five first
+
+**Observed Problem:** The Weak spots panel listed every unresolved word (10+ rows on a phone after one check) as plain text: the learner could not hear the word or open its dictionary card from the place where the mistake was surfaced.
+
+**Implemented Solution:** The weak-spots API now returns each word's `item_id` (`backend/app/schemas/learning.py`, `backend/app/api/learning.py`). `components/WeakSpotsCard.tsx` shows the five worst words first with a "Zobrazit všechna (N)" toggle, each row has a play button (dictionary audio) and links to `/words?word=<id>`, which opens that word's inspector. Types in `lib/api.ts`, copy in `lib/i18n/cs.ts`; `tests/test_mistakes.py` asserts the ids.
+
+**Verification:** `tests/test_mistakes.py` 4 passed; ruff, typecheck, production build, `git diff --check` passed; dashboard renders the capped list with audio buttons and no console errors.

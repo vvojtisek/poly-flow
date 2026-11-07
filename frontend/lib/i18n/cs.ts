@@ -1197,6 +1197,9 @@ export const cs = {
     kinds: "Druhy chyb",
     none: "Žádná neopravená chyba. Dobrá práce!",
     errors: (n: number) => (n === 1 ? "1 chyba" : n < 5 ? `${n} chyby` : `${n} chyb`),
+    showAll: (n: number) => `Zobrazit všechna (${n})`,
+    showFewer: "Zobrazit méně",
+    open: (lemma: string) => `Otevřít ${lemma} ve slovníku`,
   },
   stories: {
     link: "Čtení",
