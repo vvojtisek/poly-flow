@@ -425,6 +425,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-06-ice-cream",
+   "level": "A1",
+   "title": "Il gelato per gli amici",
+   "title_cs": "Zmrzlina pro přátele",
+   "lines": [
+    {
+     "text": "Fa molto caldo. Tom e Anna vanno al chiosco dei gelati.",
+     "cs": "Je velké horko. Tom a Anna jdou ke stánku se zmrzlinou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Compro i gelati per Ben, Tina e te.",
+     "cs": "Koupím zmrzlinu pro Bena, Tinu a pro tebe."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Che gentile! Prendo la vaniglia.",
+     "cs": "To je milé! Dám si vanilkovou."
+    },
+    {
+     "text": "Tom torna. Ha quattro gelati in mano.",
+     "cs": "Tom se vrací. V ruce má čtyři zmrzliny."
+    },
+    {
+     "text": "Tom mangia in fretta il suo gelato. Poi mangia il gelato di Ben.",
+     "cs": "Tom rychle sní svou zmrzlinu. Pak sní Benovu."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Tom, che cosa fai?",
+     "cs": "Tome, co děláš?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Il gelato si scioglie. Ben e Tina non sono qui.",
+     "cs": "Zmrzlina taje. Ben a Tina tu nejsou."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Mangi anche il gelato di Tina!",
+     "cs": "Ty jíš i Tininu zmrzlinu!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Mangio per i miei amici. Questa si chiama amicizia.",
+     "cs": "Jím za své přátele. Tomu se říká přátelství."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "chiosco",
+     "cs": "stánek"
+    },
+    {
+     "word": "scioglie",
+     "cs": "taje"
+    },
+    {
+     "word": "amicizia",
+     "cs": "přátelství"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Per chi compra i gelati Tom?",
+     "options": [
+      "Per Ben, Tina e Anna",
+      "Solo per sé",
+      "Per Tom e Anna"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi mangia i gelati di Ben e Tina?",
+     "options": [
+      "Tom",
+      "Anna",
+      "Ben"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

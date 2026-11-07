@@ -425,6 +425,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-06-ice-cream",
+   "level": "A1",
+   "title": "Les glaces pour les amis",
+   "title_cs": "Zmrzlina pro přátele",
+   "lines": [
+    {
+     "text": "Il fait très chaud. Tom et Anna vont au stand de glaces.",
+     "cs": "Je velké horko. Tom a Anna jdou ke stánku se zmrzlinou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "J'achète des glaces pour Ben, Tina et toi.",
+     "cs": "Koupím zmrzlinu pro Bena, Tinu a pro tebe."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Comme c'est gentil ! Je prends la vanille.",
+     "cs": "To je milé! Dám si vanilkovou."
+    },
+    {
+     "text": "Tom revient. Il a quatre glaces dans la main.",
+     "cs": "Tom se vrací. V ruce má čtyři zmrzliny."
+    },
+    {
+     "text": "Tom mange vite sa glace. Puis il mange la glace de Ben.",
+     "cs": "Tom rychle sní svou zmrzlinu. Pak sní Benovu."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Tom, qu'est-ce que tu fais ?",
+     "cs": "Tome, co děláš?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "La glace fond. Ben et Tina ne sont pas là.",
+     "cs": "Zmrzlina taje. Ben a Tina tu nejsou."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Tu manges aussi la glace de Tina !",
+     "cs": "Ty jíš i Tininu zmrzlinu!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Je mange pour mes amis. Ça s'appelle l'amitié.",
+     "cs": "Jím za své přátele. Tomu se říká přátelství."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "stand",
+     "cs": "stánek"
+    },
+    {
+     "word": "fond",
+     "cs": "taje"
+    },
+    {
+     "word": "amitié",
+     "cs": "přátelství"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pour qui Tom achète-t-il des glaces ?",
+     "options": [
+      "Pour Ben, Tina et Anna",
+      "Seulement pour lui",
+      "Pour Tom et Anna"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qui mange les glaces de Ben et Tina ?",
+     "options": [
+      "Tom",
+      "Anna",
+      "Ben"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -425,6 +425,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-06-ice-cream",
+   "level": "A1",
+   "title": "Ice Cream for Friends",
+   "title_cs": "Zmrzlina pro přátele",
+   "lines": [
+    {
+     "text": "It is very hot. Tom and Anna go to the ice cream stand.",
+     "cs": "Je velké horko. Tom a Anna jdou ke stánku se zmrzlinou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'll buy ice creams for Ben, Tina and you.",
+     "cs": "Koupím zmrzlinu pro Bena, Tinu a pro tebe."
+    },
+    {
+     "speaker": "Anna",
+     "text": "How kind! I'll have vanilla.",
+     "cs": "To je milé! Dám si vanilkovou."
+    },
+    {
+     "text": "Tom comes back. He has four ice creams in his hands.",
+     "cs": "Tom se vrací. V ruce má čtyři zmrzliny."
+    },
+    {
+     "text": "Tom eats his ice cream quickly. Then he eats Ben's ice cream.",
+     "cs": "Tom rychle sní svou zmrzlinu. Pak sní Benovu."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Tom, what are you doing?",
+     "cs": "Tome, co děláš?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "The ice cream is melting. Ben and Tina are not here.",
+     "cs": "Zmrzlina taje. Ben a Tina tu nejsou."
+    },
+    {
+     "speaker": "Anna",
+     "text": "You're eating Tina's ice cream too!",
+     "cs": "Ty jíš i Tininu zmrzlinu!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'm eating for my friends. That's called friendship.",
+     "cs": "Jím za své přátele. Tomu se říká přátelství."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "stand",
+     "cs": "stánek"
+    },
+    {
+     "word": "melting",
+     "cs": "tající"
+    },
+    {
+     "word": "friendship",
+     "cs": "přátelství"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Who does Tom buy ice cream for?",
+     "options": [
+      "Ben, Tina and Anna",
+      "Only himself",
+      "Tom and Anna"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Who eats Ben's and Tina's ice cream?",
+     "options": [
+      "Tom",
+      "Anna",
+      "Ben"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
