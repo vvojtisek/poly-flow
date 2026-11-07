@@ -593,6 +593,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-08-glasses",
+   "level": "A1",
+   "title": "Les lunettes de grand-père",
+   "title_cs": "Dědečkovy brýle",
+   "lines": [
+    {
+     "text": "Grand-père veut lire le journal. Mais il ne voit pas bien.",
+     "cs": "Dědeček chce číst noviny. Ale nevidí dobře."
+    },
+    {
+     "speaker": "Grand-père",
+     "text": "Où sont mes lunettes ? Je ne peux pas les trouver !",
+     "cs": "Kde jsou moje brýle? Nemůžu je najít!"
+    },
+    {
+     "text": "Il cherche sur la table, sous la chaise et dans le sac.",
+     "cs": "Hledá na stole, pod židlí a v tašce."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Papi, elles sont sur ta tête !",
+     "cs": "Dědo, jsou na tvé hlavě!"
+    },
+    {
+     "speaker": "Grand-père",
+     "text": "Impossible. Je les sentirais.",
+     "cs": "Nemožné. Já bych je cítil."
+    },
+    {
+     "text": "Lucie prend les lunettes et les met sur son nez.",
+     "cs": "Lucie vezme brýle a dá mu je na nos."
+    },
+    {
+     "speaker": "Grand-père",
+     "text": "Ah ! Maintenant je vois : ma petite-fille est très intelligente.",
+     "cs": "Aha! Teď vidím: moje vnučka je moc chytrá."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Et que dit le journal ?",
+     "cs": "A co říkají noviny?"
+    },
+    {
+     "speaker": "Grand-père",
+     "text": "Je ne sais pas. Maintenant, je cherche le journal.",
+     "cs": "Nevím. Teď hledám noviny."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "impossible",
+     "cs": "nemožné"
+    },
+    {
+     "word": "petite-fille",
+     "cs": "vnučka"
+    },
+    {
+     "word": "intelligente",
+     "cs": "chytrá"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Où sont les lunettes ?",
+     "options": [
+      "Sur la tête de grand-père",
+      "Dans le sac",
+      "Sur la table"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que cherche grand-père à la fin ?",
+     "options": [
+      "Le journal",
+      "Les lunettes",
+      "La chaise"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

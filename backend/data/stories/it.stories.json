@@ -593,6 +593,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-08-glasses",
+   "level": "A1",
+   "title": "Gli occhiali del nonno",
+   "title_cs": "Dědečkovy brýle",
+   "lines": [
+    {
+     "text": "Il nonno vuole leggere il giornale. Ma non vede bene.",
+     "cs": "Dědeček chce číst noviny. Ale nevidí dobře."
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Dove sono i miei occhiali? Non riesco a trovarli!",
+     "cs": "Kde jsou moje brýle? Nemůžu je najít!"
+    },
+    {
+     "text": "Cerca sul tavolo, sotto la sedia e nella borsa.",
+     "cs": "Hledá na stole, pod židlí a v tašce."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Nonno, sono sulla tua testa!",
+     "cs": "Dědo, jsou na tvé hlavě!"
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Impossibile. Li sentirei.",
+     "cs": "Nemožné. Já bych je cítil."
+    },
+    {
+     "text": "Lucia prende gli occhiali e li mette sul suo naso.",
+     "cs": "Lucie vezme brýle a dá mu je na nos."
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Ah! Ora vedo: mia nipote è molto intelligente.",
+     "cs": "Aha! Teď vidím: moje vnučka je moc chytrá."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "E che cosa dice il giornale?",
+     "cs": "A co říkají noviny?"
+    },
+    {
+     "speaker": "Nonno",
+     "text": "Non lo so. Adesso cerco il giornale.",
+     "cs": "Nevím. Teď hledám noviny."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "impossibile",
+     "cs": "nemožné"
+    },
+    {
+     "word": "nipote",
+     "cs": "vnučka"
+    },
+    {
+     "word": "intelligente",
+     "cs": "chytrá"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Dove sono gli occhiali?",
+     "options": [
+      "Sulla testa del nonno",
+      "Nella borsa",
+      "Sul tavolo"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa cerca il nonno alla fine?",
+     "options": [
+      "Il giornale",
+      "Gli occhiali",
+      "La sedia"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -593,6 +593,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-08-glasses",
+   "level": "A1",
+   "title": "Opas Brille",
+   "title_cs": "Dědečkovy brýle",
+   "lines": [
+    {
+     "text": "Opa will die Zeitung lesen. Aber er sieht nicht gut.",
+     "cs": "Dědeček chce číst noviny. Ale nevidí dobře."
+    },
+    {
+     "speaker": "Opa",
+     "text": "Wo ist meine Brille? Ich kann sie nicht finden!",
+     "cs": "Kde jsou moje brýle? Nemůžu je najít!"
+    },
+    {
+     "text": "Er sucht auf dem Tisch, unter dem Stuhl und in der Tasche.",
+     "cs": "Hledá na stole, pod židlí a v tašce."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Opa, sie ist auf deinem Kopf!",
+     "cs": "Dědo, jsou na tvé hlavě!"
+    },
+    {
+     "speaker": "Opa",
+     "text": "Unmöglich. Ich würde sie fühlen.",
+     "cs": "Nemožné. Já bych je cítil."
+    },
+    {
+     "text": "Lucie nimmt die Brille und setzt sie auf seine Nase.",
+     "cs": "Lucie vezme brýle a dá mu je na nos."
+    },
+    {
+     "speaker": "Opa",
+     "text": "Ah! Jetzt sehe ich: Meine Enkelin ist sehr klug.",
+     "cs": "Aha! Teď vidím: moje vnučka je moc chytrá."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Und was steht in der Zeitung?",
+     "cs": "A co říkají noviny?"
+    },
+    {
+     "speaker": "Opa",
+     "text": "Das weiß ich nicht. Jetzt suche ich die Zeitung.",
+     "cs": "Nevím. Teď hledám noviny."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "unmöglich",
+     "cs": "nemožné"
+    },
+    {
+     "word": "Enkelin",
+     "cs": "vnučka"
+    },
+    {
+     "word": "klug",
+     "cs": "chytrý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wo ist die Brille?",
+     "options": [
+      "Auf Opas Kopf",
+      "In der Tasche",
+      "Auf dem Tisch"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was sucht Opa am Ende?",
+     "options": [
+      "Die Zeitung",
+      "Die Brille",
+      "Den Stuhl"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
