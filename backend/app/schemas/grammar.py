@@ -33,6 +33,8 @@ class UnitSummaryOut(BaseModel):
     due: bool  # studied and due for a grammar check now
     recent_errors: int  # check mistakes in the remediation window
     next_review_at: datetime | None
+    checked_correct: int = 0  # first-try correct answers in grammar checks (graded evidence)
+    checked_errors: int = 0  # wrong first answers in grammar checks
 
 
 class LevelOut(BaseModel):

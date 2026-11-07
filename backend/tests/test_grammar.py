@@ -293,6 +293,9 @@ async def test_check_is_one_attempt_and_moves_the_schedule(db, client, clock):
     p = await progress()
     assert p.error_count == 1 and p.correct_count == 1
     assert p.next_review_at > clock.now
+    tree = (await client.get("/api/v1/grammar?language=de")).json()
+    unit = next(u for lv in tree["levels"] for u in lv["units"] if u["id"] == "t-a")
+    assert unit["checked_correct"] == 1 and unit["checked_errors"] == 1
 
 
 async def test_duplicate_submission_replays(db, client, clock):

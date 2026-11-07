@@ -1285,3 +1285,13 @@ Vlad approves a push.
 **Implemented Solution:** New `GET /api/v1/grammar/search-index` (`api/grammar.py`, `SearchEntryOut`) returns each active unit's objective, note headings and text, table cells and examples as plain text (markdown markers stripped). `app/grammar/page.tsx` fetches it lazily the first time the learner types a query (about 30 kB for German), folds diacritics like the existing search, and also matches the objective; titles and summaries keep working if the index fails. Test `test_search_index_has_plain_explanation_text`.
 
 **Verification:** `tests/test_grammar.py` search/tree tests passed; ruff, typecheck, production build, `git diff --check` passed; Playwright search "vykání" now shows 1 of 37 topics (was 0).
+
+## Global Cycle 20/120 | Page: [/grammar] (Page Cycle 5/15)
+
+**Summary:** show graded check results on each topic
+
+**Observed Problem:** Topic cards showed a status label and recent errors, but not how the learner actually did in grammar checks, so "Prostudováno" after three good checks looked the same as after none.
+
+**Implemented Solution:** The grammar tree now returns `checked_correct` and `checked_errors` per unit (first-try graded answers already counted in `UserGrammarProgress`; `schemas/grammar.py`, `api/grammar.py`). Cards in `app/grammar/page.tsx` show "V ověřeních: 3 správně, 1 chyba" once at least one check answer exists; unmeasured topics show nothing instead of a misleading zero. The check test asserts both counts.
+
+**Verification:** `tests/test_grammar.py` 14 passed; ruff, typecheck, production build, `git diff --check` passed.

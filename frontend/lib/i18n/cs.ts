@@ -1168,6 +1168,8 @@ export const cs = {
     activeChosen: "Úroveň, kterou sis vybral(a). Ostatní úrovně jsou níže a zůstávají otevřené.",
     focusLevel: "Zaměřit se na úroveň",
     nextCheck: (when: string) => `Ověření ${when}`,
+    checkedTally: (ok: number, wrong: number) =>
+      `V ověřeních: ${ok} správně${wrong ? `, ${wrong} ${wrong === 1 ? "chyba" : wrong < 5 ? "chyby" : "chyb"}` : ""}`,
     focusAuto: (level: string) => `Podle odhadu (${level})`,
     inProgress: "Právě se učíš",
     nothingInProgress: "Zatím nic rozpracovaného. Začni prvním tématem z nabídky níže.",

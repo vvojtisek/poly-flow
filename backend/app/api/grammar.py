@@ -135,6 +135,8 @@ async def get_tree(
                 due=bool(p and p.studied_at and p.next_review_at and p.next_review_at <= now),
                 recent_errors=u.recent_errors,
                 next_review_at=p.next_review_at if p and p.studied_at else None,
+                checked_correct=p.correct_count if p else 0,
+                checked_errors=p.error_count if p else 0,
             )
         )
     lesson = await svc.get_active(db, user, lang, svc.LEARN)

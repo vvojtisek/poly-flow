@@ -64,6 +64,10 @@ function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recomm
             {!u.due && u.next_review_at && u.status !== "new" && (
               <span className="block text-slate-500">{cs.grammar.nextCheck(relativeFuture(u.next_review_at))}</span>
             )}
+            {/* Graded evidence only; a topic never checked shows nothing rather than "0 %". */}
+            {u.checked_correct + u.checked_errors > 0 && (
+              <span className="block text-slate-500">{cs.grammar.checkedTally(u.checked_correct, u.checked_errors)}</span>
+            )}
           </span>
           <span className="font-semibold text-brand-600">
             {resumable ? (

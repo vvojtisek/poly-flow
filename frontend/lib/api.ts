@@ -436,6 +436,8 @@ export interface GrammarUnitSummary {
   due: boolean;
   recent_errors: number;
   next_review_at: string | null;
+  checked_correct: number;
+  checked_errors: number;
 }
 
 export interface GrammarTree {
