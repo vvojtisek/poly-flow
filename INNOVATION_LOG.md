@@ -1855,3 +1855,13 @@ Vlad approves a push.
 **Implemented Solution:** The overview now decides in this order. A lesson still open in a topic: 'Rozdělaná lekce' with 'Pokračovat v lekci'. Otherwise the first topic with status 'new', looking at the target level after the learner's estimate, then higher levels, then gaps in lower levels, with the existing explanation lines, plus 'Ověřit gramatiku (N)' when checks are due. If every topic is studied: a due-check card, or a calm 'all studied' note.
 
 **Verification:** Real data (de): tree has active_lesson_unit=de-a1-sein, due=2; the page shows 'Rozdělaná lekce · Já jsem, ty jsi: sloveso sein · Pokračovat v lekci'. Stubbed variants: no open lesson recommends 'Přítomný čas pravidelných sloves' (the first new A1 topic, not the studied sein); all studied with due=2 shows 'Ověřit gramatiku (2)'; all studied with due=0 shows the all-studied note. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 77/120 | Page: [/lesson] (Page Cycle 2/15)
+
+**Summary:** preview the next vocabulary lesson and survive partial load failures
+
+**Observed Problem:** The vocabulary card on /lesson only said how many words were introduced and linked to the runner. It did not show what the next lesson holds (scene, new and review words), which the dashboard already had, or that a lesson was open, so the button always read 'Otevřít lekce slovní zásoby'. All four data sources loaded with Promise.all, so if the placement estimate or progress request failed, the whole overview (all grammar lists) went blank.
+
+**Implemented Solution:** The card shows the next lesson preview from /learning/next-lesson, for example 'Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení', or 'all words known' when empty. When a session is open, the button reads 'Pokračovat v lekci'. Loading uses Promise.allSettled: only a failed grammar tree is fatal. A failed estimate, progress or preview just leaves that detail out, and the 'Představeno slov' counter no longer sticks on 'Načítám…'.
+
+**Verification:** Playwright real data: the card shows 'Další scénka: „Oběd“ | 4 nová slova · 2 slova znovu k procvičení'. With progress and diagnostic requests forced to 500, the page still renders the preview and all 6 level sections, and the counter is hidden rather than stuck loading. No console errors besides the injected 500s. typecheck, next build, ruff pass.

@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
-import { getDiagnosticInfo, getGrammarTree, getProgress, type CefrLevel, type GrammarTree, type LevelBadge } from "@/lib/api";
+import { getDiagnosticInfo, getGrammarTree, getLessonPreview, getProgress, type CefrLevel, type GrammarTree, type LessonPreview, type LevelBadge } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -27,22 +27,38 @@ export default function LessonPage() {
   const [badge, setBadge] = useState<string | null>(null);
   const [introduced, setIntroduced] = useState<number | null>(null);
   const [failed, setFailed] = useState(false);
+  const [openSession, setOpenSession] = useState(false);
+  const [preview, setPreview] = useState<LessonPreview | null>(null);
 
   useEffect(() => {
     if (!language) return;
     let live = true;
     setTree(null);
     setFailed(false);
-    Promise.all([getGrammarTree(language), getDiagnosticInfo(language), getProgress(language)])
-      .then(([grammar, assessment, progress]) => {
+    setPreview(null);
+    setOpenSession(false);
+    // The grammar tree is the page; the estimate, progress and lesson preview only refine it, so
+    // one of them failing must not blank the whole overview.
+    Promise.allSettled([getGrammarTree(language), getDiagnosticInfo(language), getProgress(language), getLessonPreview(language)]).then(
+      ([grammar, assessment, progress, next]) => {
         if (!live) return;
-        setTree(grammar);
-        setPlacement(assessment.latest?.level ?? progress.cefr_level ?? null);
-        setBadge(highestBadge(progress.level_badges));
-        setIntroduced(progress.introduced);
-      })
-      .catch(() => live && setFailed(true));
-    return () => { live = false; };
+        if (grammar.status === "rejected") {
+          setFailed(true);
+          return;
+        }
+        setTree(grammar.value);
+        const p = progress.status === "fulfilled" ? progress.value : null;
+        const a = assessment.status === "fulfilled" ? assessment.value : null;
+        setPlacement(a?.latest?.level ?? p?.cefr_level ?? null);
+        setBadge(p ? highestBadge(p.level_badges) : null);
+        setIntroduced(p?.introduced ?? null);
+        setOpenSession(Boolean(p?.active_session_id));
+        if (next.status === "fulfilled") setPreview(next.value);
+      },
+    );
+    return () => {
+      live = false;
+    };
   }, [language, me?.acting.id]);
 
   // What to do next, in order: finish a lesson that is open, clear due checks, then the first topic
@@ -137,11 +153,23 @@ export default function LessonPage() {
         <section className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-lg font-bold">{cs.lesson.vocabularyCourse}</h2>
-            <span className="text-xs text-slate-500">{introduced === null ? cs.common.loading : cs.lesson.vocabularyProgress(introduced)}</span>
+            <span className="text-xs text-slate-500">{introduced !== null ? cs.lesson.vocabularyProgress(introduced) : !tree && !failed ? cs.common.loading : null}</span>
           </div>
           <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">{cs.lesson.vocabularyCourseHelp}</p>
+          {!openSession && preview && (
+            <p className="mb-3 rounded-xl bg-slate-50 px-3 py-2 text-sm dark:bg-slate-800/60">
+              {preview.new_words === 0 && preview.review_words === 0 ? (
+                cs.lesson.empty
+              ) : (
+                <>
+                  <span className="font-semibold">{preview.scene_title ? cs.dashboard.nextScene(preview.scene_title) : cs.dashboard.nextWords}</span>
+                  <span className="block text-xs text-slate-500">{cs.dashboard.nextCounts(preview.new_words, preview.review_words)}</span>
+                </>
+              )}
+            </p>
+          )}
           <Link href="/lesson/vocabulary" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-brand-500/50 px-4 py-2 font-semibold text-brand-700 hover:bg-brand-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-brand-100">
-            <BookOpen className="size-4" aria-hidden />{cs.lesson.openVocabulary}
+            <BookOpen className="size-4" aria-hidden />{openSession ? cs.lesson.resume : cs.lesson.openVocabulary}
           </Link>
           {introduced !== null && introduced > 0 && <Link href="/check" className="ml-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800"><RefreshCw className="size-4" aria-hidden />{cs.check.start}</Link>}
         </section>
