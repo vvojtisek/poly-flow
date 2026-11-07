@@ -1265,3 +1265,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx` unit cards now show "Ověření za 3 h / zítra / ve středu / 12. 11." under the exercise count for studied, known or mastered topics that are not yet due, using the tree's existing `next_review_at` and the shared `relativeFuture` helper. Due topics keep the amber "K ověření" badge. Copy `cs.grammar.nextCheck`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; after studying two German A1 units through the API, the mobile grammar page shows "Ověření za 1 h" on both cards.
+
+## Global Cycle 18/120 | Page: [/grammar] (Page Cycle 3/15)
+
+**Summary:** keep topic filters in the URL; dashboard opens the due list
+
+**Observed Problem:** Search text and the status/due filters lived only in component state: reloading, going back from a lesson or following a link always reset the list, and the dashboard could not send a learner straight to the topics waiting for a check.
+
+**Implemented Solution:** `app/grammar/page.tsx` reads `q`, `status` and `due` from the query string on load and keeps them in sync with `history.replaceState` (no extra history entries while typing). The dashboard's Grammar action (`app/page.tsx`) links to `/grammar?due=1` when topics are due and no lesson is open.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?status=studied` ("Zobrazeno 2 z 37 témat") and typing a search updated the URL to `?status=studied&q=sein`.

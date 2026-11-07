@@ -262,7 +262,13 @@ export default function HomePage() {
               }
             />
             <QuickAction
-              href={grammar?.active_lesson_unit ? `/grammar/${encodeURIComponent(grammar.active_lesson_unit)}` : "/grammar"}
+              href={
+                grammar?.active_lesson_unit
+                  ? `/grammar/${encodeURIComponent(grammar.active_lesson_unit)}`
+                  : grammar && grammar.due > 0
+                    ? "/grammar?due=1"
+                    : "/grammar"
+              }
               icon={GraduationCap}
               hotkey={2}
               title={t.grammar}

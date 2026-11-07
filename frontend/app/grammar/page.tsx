@@ -179,6 +179,29 @@ export default function GrammarPage() {
     };
   }, [language, me?.acting.id]);
 
+  // Filters live in the URL (?q=…&status=studied&due=1): links can open a filtered view, and the
+  // browser's back button returns to the same list.
+  const [urlRead, setUrlRead] = useState(false);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setQuery(params.get("q") ?? "");
+    const status = params.get("status");
+    setStatusFilter(STATUS_FILTERS.includes(status as UnitState) ? (status as UnitState) : null);
+    setDueOnly(params.get("due") === "1");
+    setUrlRead(true);
+  }, []);
+  useEffect(() => {
+    if (!urlRead) return;
+    const params = new URLSearchParams(window.location.search);
+    const set = (k: string, v: string | null) => (v ? params.set(k, v) : params.delete(k));
+    set("q", query.trim() || null);
+    set("status", statusFilter);
+    set("due", dueOnly ? "1" : null);
+    const qs = params.toString();
+    const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
+  }, [urlRead, query, statusFilter, dueOnly]);
+
   useEffect(() => {
     if (!focusKey) return;
     try {
