@@ -1,7 +1,7 @@
 {
  "language": "en",
  "source": "polyflow-curated",
- "revision": "stories-v1",
+ "revision": "stories-v2",
  "license": "CC0-1.0",
  "review_status": "unreviewed",
  "stories": [
@@ -3599,6 +3599,74 @@
       "He is still working ten years later.",
       "He retires immediately.",
       "He becomes boss."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-01-two-shoes",
+   "level": "A1",
+   "title": "Two Left Shoes",
+   "title_cs": "Dvě levé boty",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva has two new shoes and goes to work.",
+     "cs": "Eva má dvě nové boty a jde do práce."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I walk in a strange way today. My feet hurt.",
+     "cs": "Dnes chodím nějak divně. Bolí mě nohy."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Look at your shoes. Both are left shoes!",
+     "cs": "Podívej se na boty. Obě jsou levé!"
+    },
+    {
+     "speaker": "Eva",
+     "text": "What a surprise. Where is the right shoe?",
+     "cs": "To je ale překvapení. Kde je pravá bota?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "At home. I have another identical pair there.",
+     "cs": "Doma. Tam mám ještě jeden stejný pár."
+    },
+    {
+     "speaker": null,
+     "text": "Eva goes home. Now she walks slowly, but she laughs.",
+     "cs": "Eva se vrací domů. Teď chodí pomalu, ale směje se."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "identical",
+     "cs": "stejný"
+    },
+    {
+     "word": "surprise",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co je s botami?",
+     "options": [
+      "Obě jsou levé.",
+      "Jsou malé.",
+      "Jsou mokré."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co má Eva doma?",
+     "options": [
+      "Další stejný pár.",
+      "Nové kolo.",
+      "Pravou rukavici."
      ],
      "answer_index": 0
     }
