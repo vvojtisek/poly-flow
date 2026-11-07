@@ -686,6 +686,9 @@ export const cs = {
     wordsFailed: "Věty ke stínování se nepodařilo načíst.",
     sceneFailed: "Tuhle scénu se nepodařilo načíst.",
     scenesFailed: "Seznam rozhovorů se nepodařilo načíst.",
+    emptyAction: "Otevřít lekci slovní zásoby",
+    sceneReplaced: "Scéna z odkazu tu není k dispozici, proto se otevřela jiná.",
+    sceneReplacedWords: "Scéna z odkazu tu není k dispozici a jiné rozhovory zatím nemáš, proto se otevřely věty ze slov.",
     sceneEmpty: "Tuhle scénu teď nejde načíst. Vyber jinou nebo stínuj věty ze slov.",
   },
   genders: {

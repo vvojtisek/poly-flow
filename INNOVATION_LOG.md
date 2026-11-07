@@ -2105,3 +2105,13 @@ Vlad approves a push.
 **Implemented Solution:** Sentence and scene loads now fail into a RetryNotice whose text names what failed (word sentences or this scene) and refetches the same source. Loading shows a skeleton card and an action bar placeholder. The scene list keeps a separate failed state that says the list could not be loaded, with its own retry. The 'no scenes yet' note now appears only for a real empty list.
 
 **Verification:** s101.js with routed 500s and a 1.5 s delay. While loading, the skeleton is present. Then the alert reads 'Věty ke stínování se nepodařilo načíst.' The scene-list failure text is shown, and the false 'Rozhovory se tu objeví' claim is absent. Retry loads 1/20. The scene-list retry enables 'Rozhovor ze scény'. No console errors other than the forced 500s. Typecheck, build, ruff passed.
+
+## Global Cycle 102/120 | Page: [/shadowing] (Page Cycle 12/15)
+
+**Summary:** recover from scene links the profile cannot open, and give the empty state a way forward
+
+**Observed Problem:** A ?scene= id this profile cannot open loaded zero lines and showed 'Tuhle scénu teď nejde načíst', with the select silently displaying a different scene. Such ids come from an old URL, another profile or language, a scene not yet met, or one hidden by the child filter. A learner with no taught words got a dead-end notice saying to do lessons, with no link.
+
+**Implemented Solution:** Once the scene list is loaded, a scene source that is not in it is replaced. The page opens the first open scene, or the word sentences when there is none, and a one-line note says which fallback happened. The URL is rewritten to match. The empty word state is now a card with an 'Otevřít lekci slovní zásoby' button. No server data about the unavailable scene is exposed: the list endpoint already applies the met and child filters.
+
+**Verification:** s102.js: ?scene=<unknown>&line=3 shows the 'otevřela jiná' note, select and URL both on the first scene, and card 1/7. With routed empty sentence and scene lists, a known scene id falls back to words with the 'otevřely věty ze slov' note, and the empty card links to /lesson/vocabulary. No console errors. Typecheck, build, ruff passed.

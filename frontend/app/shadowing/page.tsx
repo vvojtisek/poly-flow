@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Eye, EyeOff, Mic, Repeat, Square, Volume2, Waves, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -409,7 +410,17 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         <div className="h-20 rounded-2xl bg-slate-100 motion-safe:animate-pulse dark:bg-slate-800" aria-hidden />
       </div>
     );
-  if (!current || !modelUrl) return <Notice>{source.kind === "scene" ? t.sceneEmpty : t.empty}</Notice>;
+  if (!current || !modelUrl)
+    return source.kind === "scene" ? (
+      <Notice>{t.sceneEmpty}</Notice>
+    ) : (
+      <div className="flex flex-col items-start gap-3 rounded-2xl border border-dashed border-slate-300 p-5 dark:border-slate-700">
+        <p className="text-sm text-slate-600 dark:text-slate-300">{t.empty}</p>
+        <Link href="/lesson/vocabulary" className="inline-flex min-h-11 items-center rounded-xl bg-brand-500 px-4 py-2 font-semibold text-white hover:bg-brand-600">
+          {t.emptyAction}
+        </Link>
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-4">
@@ -589,6 +600,14 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
     };
   }, [language, scenesAttempt]);
   const sceneId = source.kind === "scene" ? source.id : "";
+  // A scene from a link or an old URL that this profile cannot open (not met yet, hidden by the
+  // child filter, or another language): fall back to the first open scene, or to words, and say so.
+  const [replaced, setReplaced] = useState<null | "scene" | "words">(null);
+  useEffect(() => {
+    if (!scenes || source.kind !== "scene" || scenes.some((x) => x.id === source.id)) return;
+    setReplaced(scenes[0] ? "scene" : "words");
+    onChange(scenes[0] ? { kind: "scene", id: scenes[0].id } : { kind: "words", order: "recent" });
+  }, [scenes, source, onChange]);
   // Coming back from a scene keeps the word order the learner chose before.
   const lastOrder = useRef<Order>("recent");
   if (source.kind === "words") lastOrder.current = source.order;
@@ -642,6 +661,7 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
           </select>
         </label>
       )}
+      {replaced && <p className="text-xs text-amber-700 dark:text-amber-300">{replaced === "scene" ? t.sceneReplaced : t.sceneReplacedWords}</p>}
       {scenes !== null && scenes.length === 0 && <p className="text-xs text-slate-500">{t.noScenes}</p>}
       {scenesFailed && (
         <p className="flex flex-wrap items-center gap-2 text-xs text-red-700 dark:text-red-300">
