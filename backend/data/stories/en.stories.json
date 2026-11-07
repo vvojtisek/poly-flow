@@ -5271,6 +5271,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-25-scale-recipe",
+   "level": "B1",
+   "title": "The Exact Cake",
+   "title_cs": "Přesný koláč",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva decided to bake a cake by following the recipe exactly.",
+     "cs": "Eva se rozhodla upéct koláč přesně podle receptu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "This time I'll weigh every ingredient. No estimates.",
+     "cs": "Tentokrát budu vážit každou přísadu. Žádné odhady."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why have you put the entire cookbook on the scales?",
+     "cs": "Proč máš na váze položenou celou kuchařku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "It says: Add two hundred grams according to the recipe.",
+     "cs": "Píše se tu: Přidejte dvě stě gramů podle receptu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That means two hundred grams of flour, not of the book.",
+     "cs": "To znamená dvě stě gramů mouky, ne knihy."
+    },
+    {
+     "speaker": null,
+     "text": "Eva lifted the cookbook: A pity. With this firm binding, the cake would certainly hold together.",
+     "cs": "Eva zvedla kuchařku: Škoda. S touhle pevnou vazbou by koláč určitě držel pohromadě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ingredient",
+     "cs": "přísada"
+    },
+    {
+     "word": "estimates",
+     "cs": "odhady"
+    },
+    {
+     "word": "binding",
+     "cs": "vazba knihy"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva položila na váhu?",
+     "options": [
+      "Kuchařku.",
+      "Hotový koláč.",
+      "Talíř."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co měla vážit?",
+     "options": [
+      "Mouku.",
+      "Knihu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

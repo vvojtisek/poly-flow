@@ -5271,6 +5271,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-25-scale-recipe",
+   "level": "B1",
+   "title": "Le gâteau exact",
+   "title_cs": "Přesný koláč",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva a décidé de faire un gâteau en suivant exactement la recette.",
+     "cs": "Eva se rozhodla upéct koláč přesně podle receptu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Cette fois, je vais peser chaque ingrédient. Aucune estimation.",
+     "cs": "Tentokrát budu vážit každou přísadu. Žádné odhady."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Pourquoi as-tu posé tout le livre de cuisine sur la balance ?",
+     "cs": "Proč máš na váze položenou celou kuchařku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Il est écrit : Ajouter deux cents grammes selon la recette.",
+     "cs": "Píše se tu: Přidejte dvě stě gramů podle receptu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Cela veut dire deux cents grammes de farine, pas de livre.",
+     "cs": "To znamená dvě stě gramů mouky, ne knihy."
+    },
+    {
+     "speaker": null,
+     "text": "Eva a soulevé le livre : Dommage. Avec cette reliure solide, le gâteau tiendrait certainement bien.",
+     "cs": "Eva zvedla kuchařku: Škoda. S touhle pevnou vazbou by koláč určitě držel pohromadě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ingrédient",
+     "cs": "přísada"
+    },
+    {
+     "word": "estimation",
+     "cs": "odhad"
+    },
+    {
+     "word": "reliure",
+     "cs": "vazba knihy"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva položila na váhu?",
+     "options": [
+      "Kuchařku.",
+      "Hotový koláč.",
+      "Talíř."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co měla vážit?",
+     "options": [
+      "Mouku.",
+      "Knihu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

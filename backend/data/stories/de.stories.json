@@ -5271,6 +5271,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-25-scale-recipe",
+   "level": "B1",
+   "title": "Der genaue Kuchen",
+   "title_cs": "Přesný koláč",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva beschloss, einen Kuchen ganz genau nach Rezept zu backen.",
+     "cs": "Eva se rozhodla upéct koláč přesně podle receptu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Diesmal werde ich jede Zutat wiegen. Keine Schätzungen.",
+     "cs": "Tentokrát budu vážit každou přísadu. Žádné odhady."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Warum hast du das ganze Kochbuch auf die Waage gelegt?",
+     "cs": "Proč máš na váze položenou celou kuchařku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Hier steht: Zweihundert Gramm nach Rezept hinzufügen.",
+     "cs": "Píše se tu: Přidejte dvě stě gramů podle receptu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das bedeutet zweihundert Gramm Mehl, nicht Buch.",
+     "cs": "To znamená dvě stě gramů mouky, ne knihy."
+    },
+    {
+     "speaker": null,
+     "text": "Eva hob das Kochbuch hoch: Schade. Mit dieser festen Bindung würde der Kuchen bestimmt zusammenhalten.",
+     "cs": "Eva zvedla kuchařku: Škoda. S touhle pevnou vazbou by koláč určitě držel pohromadě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Zutat",
+     "cs": "přísada"
+    },
+    {
+     "word": "Schätzungen",
+     "cs": "odhady"
+    },
+    {
+     "word": "Bindung",
+     "cs": "vazba"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva položila na váhu?",
+     "options": [
+      "Kuchařku.",
+      "Hotový koláč.",
+      "Talíř."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co měla vážit?",
+     "options": [
+      "Mouku.",
+      "Knihu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
