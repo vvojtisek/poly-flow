@@ -4623,6 +4623,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-16-humidity-fair",
+   "level": "B1",
+   "title": "Une pluie scientifique",
+   "title_cs": "Vědecký deštník",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a apporté un appareil mesurant l'humidité à la journée scientifique de l'école.",
+     "cs": "Tom přinesl na školní vědecký den přístroj na měření vlhkosti."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Mon expérience prévoira la pluie plus précisément que n'importe quelle application.",
+     "cs": "Můj experiment předpoví déšť přesněji než jakákoli aplikace."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Pourquoi ton équipement est-il donc placé juste sous ce torchon mouillé ?",
+     "cs": "Proč tedy stojí tvoje zařízení přímo pod tou mokrou utěrkou?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "C'est seulement un contrôle. Je dois d'abord prouver qu'il fonctionne.",
+     "cs": "To je jen kontrola. Nejdřív musím dokázat, že funguje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Et quand commenceras-tu à mesurer le vrai temps qu'il fait ?",
+     "cs": "A kdy začneš měřit skutečné počasí?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a caché le torchon dans son sac : Quand il arrêtera de gâcher mes résultats.",
+     "cs": "Tom schoval utěrku do tašky: Až mi přestane kazit výsledky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "humidité",
+     "cs": "vlhkost"
+    },
+    {
+     "word": "précisément",
+     "cs": "přesně"
+    },
+    {
+     "word": "équipement",
+     "cs": "vybavení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom měří?",
+     "options": [
+      "Vlhkost.",
+      "Hluk.",
+      "Rychlost."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čím ovlivňuje výsledek?",
+     "options": [
+      "Mokrou utěrkou.",
+      "Telefonem.",
+      "Světlem."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
