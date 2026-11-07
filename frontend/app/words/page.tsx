@@ -319,7 +319,11 @@ export default function WordsPage() {
   const [moreFailed, setMoreFailed] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [cursor, setCursor] = useState(0);
-  const [collections, setCollections] = useState<WordCollection[]>([]);
+  // Collections only matter once something is selected; they load then, not on every visit.
+  const [collections, setCollections] = useState<WordCollection[] | null>(null);
+  // The full list loads the first time the "all words" tab is shown; the group tabs don't need it.
+  const [listWanted, setListWanted] = useState(false);
+  const typedQuery = useRef("");
   const [selected, setSelected] = useState<string[]>([]);
   const [targetCollection, setTargetCollection] = useState("");
   const [savingSelected, setSavingSelected] = useState(false);
@@ -380,7 +384,7 @@ export default function WordsPage() {
   }, [urlRead, tab, q, status, due, sort, kind, open, scope, groups]);
 
   useEffect(() => {
-    if (!language) return;
+    if (!language || !listWanted) return;
     const ctrl = new AbortController();
     const timer = setTimeout(() => {
       listWords(language, { q, status, due, limit: PAGE, scope, sort, kind }, ctrl.signal)
@@ -390,12 +394,13 @@ export default function WordsPage() {
           setFailed(false);
         })
         .catch((e) => e?.name !== "AbortError" && setFailed(true));
-    }, 180);
+    }, q === typedQuery.current ? 0 : 180); // debounce typing only; first load and chip taps go at once
+    typedQuery.current = q;
     return () => {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [language, q, status, due, scope, sort, kind, me?.acting.id, listAttempt]);
+  }, [language, listWanted, q, status, due, scope, sort, kind, me?.acting.id, listAttempt]);
 
   // Another language or profile: never show the previous one's words while the new list loads.
   useEffect(() => {
@@ -436,8 +441,24 @@ export default function WordsPage() {
     setSelected([]);
     setTargetCollection("");
     setBulkNotice(null);
-    listWordCollections(language).then(setCollections).catch(() => setCollections([]));
+    setCollections(null);
   }, [language, me?.acting.id]);
+
+  const wantCollections = selected.length > 0 && collections === null;
+  useEffect(() => {
+    if (!language || !wantCollections) return;
+    let cancelled = false;
+    listWordCollections(language)
+      .then((c) => !cancelled && setCollections(c))
+      .catch(() => !cancelled && setCollections([]));
+    return () => {
+      cancelled = true;
+    };
+  }, [language, wantCollections]);
+
+  useEffect(() => {
+    if (tab === "all") setListWanted(true);
+  }, [tab]);
 
   const loadMore = useCallback(async () => {
     if (!language || !data) return;
@@ -783,7 +804,9 @@ export default function WordsPage() {
                     <Button variant="secondary" onClick={() => setCards({ kind: "picked", ids: selected, label: t.pickedDeck(selected.length) })}>
                       <Layers className="size-4" aria-hidden /> {t.practiseSelected}
                     </Button>
-                    {collections.length ? (
+                    {collections === null ? (
+                      <span className="text-sm text-slate-500">{cs.common.loading}</span>
+                    ) : collections.length ? (
                       <>
                         <label className="sr-only" htmlFor="bulk-collection">{t.selectCollection}</label>
                         <select id="bulk-collection" value={targetCollection} onChange={(e) => setTargetCollection(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">

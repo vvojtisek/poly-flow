@@ -1675,3 +1675,13 @@ Vlad approves a push.
 **Implemented Solution:** Search now folds diacritics on both sides without a database extension. In Python, fold() lowercases, maps the Czech, German, French and Italian accented letters and turns ß into ss. In SQL, replace(translate(lower(col))) does the same, so 'dum', 'dům' and 'DŮM' all match the same rows. LIKE wildcards in the input stay literal. A 404 on the word card now shows a calm note ('Toto slovo ve tvém slovníku zatím není…') instead of an error with a useless retry.
 
 **Verification:** New pytest test_word_search_ignores_diacritics_on_both_sides covers dum/dům, schon, HEZKÝ, the '50%' literal and fold('Straße Žluťoučký'); tests/test_words.py 13 passed. Playwright on real data: 'skola' finds die Schule and 'gross' finds groß; ?word=<unknown uuid> shows the missing-word note without a retry button. No console errors apart from the expected 404. typecheck, next build, ruff pass.
+
+## Global Cycle 59/120 | Page: [/words] (Page Cycle 14/15)
+
+**Summary:** load the word list and collections only when they are needed
+
+**Observed Problem:** Every visit to /words (which opens on the level tab) made 5 API calls. Two of them were not needed: the full word list (three SQL queries for counts, total and rows) was rendered into a hidden panel, and the collection list is only used once a word is selected. Every list change also waited a fixed 180 ms debounce, including the first load and chip taps, which need no debounce.
+
+**Implemented Solution:** The word list loads the first time the 'Všechna slova' tab is shown and stays loaded across tab switches. Collections load the first time something is selected, and the bar shows 'Načítám…' until then. The 180 ms debounce now applies only while typing in the search, so the first load, chips, sort and kind run at once.
+
+**Verification:** Production build (next start on :3002): /words went from 5 API requests to 3 (me, ranks, groups). Opening 'Všechna slova' makes 1 list request; going back and forth makes 0 more; typing 'haus' makes 1 list request; the first selection makes 1 collections request. Deep links with ?tab=all still load the list at once (cycle 46 test path). No console errors. typecheck, next build, ruff pass.
