@@ -6767,6 +6767,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-45-telescope-cap",
+   "level": "B2",
+   "title": "Une galaxie privée",
+   "title_cs": "Soukromá galaxie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a organisé une soirée d'observation pour les voisins en leur promettant de voir des galaxies lointaines.",
+     "cs": "Tom uspořádal pro sousedy večer pozorování oblohy a slíbil jim pohled do vzdálených galaxií."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Grâce à la nouvelle optique, vous distinguerez des détails totalement inaccessibles à l'œil nu.",
+     "cs": "Díky nové optice rozeznáte detaily, které jsou pouhým okem zcela nepřístupné."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je ne vois qu'une obscurité totale. Est-ce la région à la matière interstellaire exceptionnellement dense ?",
+     "cs": "Vidím jen naprostou tmu. To je ta oblast s mimořádně hustou mezihvězdnou hmotou?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Probablement. L'observation directe exige parfois une interprétation plus audacieuse qu'une photo de manuel.",
+     "cs": "Pravděpodobně. Přímé pozorování někdy vyžaduje odvážnější interpretaci než fotografie v učebnici."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ne faudrait-il pas enlever d'abord ce bouchon de l'objectif ?",
+     "cs": "A nesundáme nejdřív z objektivu tu krytku?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom l'a vite caché : Bien sûr. C'était seulement une démonstration de l'univers dans sa plus stricte intimité.",
+     "cs": "Tom ji rychle schoval: Samozřejmě. To byla pouze ukázka, jak vesmír vypadá při úplném soukromí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "optique",
+     "cs": "optika"
+    },
+    {
+     "word": "inaccessibles",
+     "cs": "nepřístupný"
+    },
+    {
+     "word": "interstellaire",
+     "cs": "mezihvězdný"
+    },
+    {
+     "word": "intimité",
+     "cs": "soukromí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč soused vidí tmu?",
+     "options": [
+      "Na objektivu je krytka.",
+      "Je pod zemí.",
+      "Teleskop míří do moře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Tom chybu vysvětluje?",
+     "options": [
+      "Jako ukázku soukromí vesmíru.",
+      "Jako změnu počasí.",
+      "Jako rozbitý telefon."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
