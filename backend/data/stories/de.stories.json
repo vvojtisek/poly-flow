@@ -255,6 +255,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-04-sunday-bus",
+   "level": "A1",
+   "title": "Der Bus am Sonntag",
+   "title_cs": "Autobus v neděli",
+   "lines": [
+    {
+     "text": "Lena steht an der Bushaltestelle. Sie wartet schon eine halbe Stunde.",
+     "cs": "Lena stojí na autobusové zastávce. Čeká už půl hodiny."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Guten Tag. Warten Sie auf die Fünf?",
+     "cs": "Dobrý den. Čekáte na číslo pět?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Ja. Der Bus hat sehr viel Verspätung.",
+     "cs": "Ano. Autobus je velmi pozdě."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Heute ist Sonntag. Sonntags fährt hier kein Bus.",
+     "cs": "Dnes je neděle, paní. V neděli autobus nejezdí."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Was? Aber ich muss zur Arbeit!",
+     "cs": "Co? Ale já chci do práce!"
+    },
+    {
+     "speaker": "Mann",
+     "text": "Sie arbeiten am Sonntag?",
+     "cs": "Vy pracujete v neděli?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Nein ... heute ist frei. Ich habe es vergessen.",
+     "cs": "Ne... dnes je volno. Já jsem zapomněla."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Wenigstens habe ich heute einen sehr guten Platz im Bus.",
+     "cs": "Aspoň mám dnes velmi dobré místo v autobuse."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Ja. Sie können alle Plätze nehmen.",
+     "cs": "Ano. Můžete si vybrat všechna místa."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Bushaltestelle",
+     "cs": "autobusová zastávka"
+    },
+    {
+     "word": "Verspätung",
+     "cs": "zpoždění"
+    },
+    {
+     "word": "vergessen",
+     "cs": "zapomenout"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum kommt der Bus nicht?",
+     "options": [
+      "Es ist Sonntag.",
+      "Es regnet.",
+      "Der Bus ist kaputt."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was hat Lena vergessen?",
+     "options": [
+      "Dass heute frei ist",
+      "Ihr Geld",
+      "Ihre Tasche"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

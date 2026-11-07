@@ -255,6 +255,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-04-sunday-bus",
+   "level": "A1",
+   "title": "Le bus du dimanche",
+   "title_cs": "Autobus v neděli",
+   "lines": [
+    {
+     "text": "Léna est à l'arrêt de bus. Elle attend depuis une demi-heure.",
+     "cs": "Lena stojí na autobusové zastávce. Čeká už půl hodiny."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Bonjour. Vous attendez le cinq ?",
+     "cs": "Dobrý den. Čekáte na číslo pět?"
+    },
+    {
+     "speaker": "Léna",
+     "text": "Oui. Le bus a beaucoup de retard.",
+     "cs": "Ano. Autobus je velmi pozdě."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Aujourd'hui, c'est dimanche. Le dimanche, il n'y a pas de bus ici.",
+     "cs": "Dnes je neděle, paní. V neděli autobus nejezdí."
+    },
+    {
+     "speaker": "Léna",
+     "text": "Quoi ? Mais je dois aller au travail !",
+     "cs": "Co? Ale já chci do práce!"
+    },
+    {
+     "speaker": "Homme",
+     "text": "Vous travaillez le dimanche ?",
+     "cs": "Vy pracujete v neděli?"
+    },
+    {
+     "speaker": "Léna",
+     "text": "Non... aujourd'hui, c'est congé. Je l'ai oublié.",
+     "cs": "Ne... dnes je volno. Já jsem zapomněla."
+    },
+    {
+     "speaker": "Léna",
+     "text": "Au moins, j'ai une très bonne place dans le bus aujourd'hui.",
+     "cs": "Aspoň mám dnes velmi dobré místo v autobuse."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Oui. Vous pouvez prendre toutes les places.",
+     "cs": "Ano. Můžete si vybrat všechna místa."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "arrêt",
+     "cs": "zastávka"
+    },
+    {
+     "word": "retard",
+     "cs": "zpoždění"
+    },
+    {
+     "word": "oublié",
+     "cs": "zapomenutý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi le bus ne vient pas ?",
+     "options": [
+      "C'est dimanche.",
+      "Il pleut.",
+      "Le bus est en panne."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'est-ce que Léna a oublié ?",
+     "options": [
+      "Qu'aujourd'hui, c'est congé",
+      "Son argent",
+      "Son sac"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

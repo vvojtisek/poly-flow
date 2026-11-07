@@ -255,6 +255,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-04-sunday-bus",
+   "level": "A1",
+   "title": "L'autobus della domenica",
+   "title_cs": "Autobus v neděli",
+   "lines": [
+    {
+     "text": "Lena è alla fermata dell'autobus. Aspetta da mezz'ora.",
+     "cs": "Lena stojí na autobusové zastávce. Čeká už půl hodiny."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Buongiorno. Aspetta il cinque?",
+     "cs": "Dobrý den. Čekáte na číslo pět?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Sì. L'autobus è molto in ritardo.",
+     "cs": "Ano. Autobus je velmi pozdě."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Oggi è domenica. La domenica qui non passa nessun autobus.",
+     "cs": "Dnes je neděle, paní. V neděli autobus nejezdí."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Cosa? Ma devo andare al lavoro!",
+     "cs": "Co? Ale já chci do práce!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Lavora la domenica?",
+     "cs": "Vy pracujete v neděli?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "No... oggi è giorno libero. L'ho dimenticato.",
+     "cs": "Ne... dnes je volno. Já jsem zapomněla."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Almeno oggi ho un posto molto bello sull'autobus.",
+     "cs": "Aspoň mám dnes velmi dobré místo v autobuse."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Sì. Può prendere tutti i posti.",
+     "cs": "Ano. Můžete si vybrat všechna místa."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fermata",
+     "cs": "zastávka"
+    },
+    {
+     "word": "ritardo",
+     "cs": "zpoždění"
+    },
+    {
+     "word": "dimenticato",
+     "cs": "zapomenutý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché l'autobus non arriva?",
+     "options": [
+      "È domenica.",
+      "Piove.",
+      "L'autobus è rotto."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa ha dimenticato Lena?",
+     "options": [
+      "Che oggi è libero",
+      "I soldi",
+      "La borsa"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

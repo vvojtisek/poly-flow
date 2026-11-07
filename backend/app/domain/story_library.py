@@ -9,6 +9,7 @@ are drafted without native-speaker review: `review_status` stays `unreviewed` un
 signs the text off, and nothing here may be shown as reviewed fact before then.
 """
 
+import re
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
@@ -22,6 +23,11 @@ SLUG = r"^[a-z0-9][a-z0-9-]{0,63}$"
 STORY_LEVELS: tuple[CefrLevel, ...] = (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2)
 STORIES_PER_LEVEL = 10
 MAX_STRETCH_SHARE = 0.10  # stretch tokens / all tokens; the aim is about 5%
+
+
+def split_elision(token: str) -> list[str]:
+    """`l'arrêt` -> `l`, `arrêt`: a stretch word may follow an elided article."""
+    return [p for p in re.split(r"['\u2019]", token.casefold()) if p]
 
 
 class StoryLine(BaseModel):
@@ -57,11 +63,11 @@ class LibraryStory(BaseModel):
         return self
 
     def token_list(self) -> list[str]:
-        return [t.casefold() for line in self.lines for t in tokens(line.text)]
+        return [w for line in self.lines for t in tokens(line.text) for w in split_elision(t)]
 
     def stretch_share(self) -> float:
         toks = self.token_list()
-        forms = {s.word.casefold() for s in self.stretch}
+        forms = {s.word.casefold() for s in self.stretch}  # single-token forms count
         return sum(1 for t in toks if t in forms) / max(len(toks), 1)
 
 
@@ -87,7 +93,7 @@ def validate_story_file(f: StoryFile) -> list[str]:
         seen.add(s.slug)
         toks = set(s.token_list())
         for w in s.stretch:
-            parts = [t.casefold() for t in tokens(w.word)]
+            parts = [p for t in tokens(w.word) for p in split_elision(t)]
             if not parts or any(p not in toks for p in parts):
                 errors.append(f"{where}: stretch word {w.word!r} is not in the text")
         share = s.stretch_share()
