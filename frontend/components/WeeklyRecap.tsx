@@ -14,7 +14,7 @@ const pct = (x: number | null) => (x === null ? null : `${Math.round(x * 100)} %
 const day = (iso: string) => new Date(iso + "T12:00:00").toLocaleDateString("cs-CZ", { day: "numeric", month: "numeric" });
 const TARGET: Record<Recap["suggestion"], string> = {
   check_due: "/check",
-  fix_mistakes: "/words",
+  fix_mistakes: "/words?tab=all",
   new_lesson: "/lesson",
   start_small: "/lesson",
   keep_going: "/practice",

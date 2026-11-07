@@ -794,12 +794,64 @@ export interface WordDetail extends Omit<WordRow, "due"> {
   note: string | null;
 }
 
+// Vocabulary groups: levels by frequency rank (indicative CEFR, "extension" past the C1 band) and
+// lesson topics. `mine` = words of the group this profile has met; only those become flashcards.
+export interface WordLevelGroup {
+  key: string;
+  first_rank: number;
+  last_rank: number | null;
+  total: number;
+  mine: number;
+}
+export interface WordTopicGroup {
+  id: string;
+  title: string;
+  total: number;
+  mine: number;
+}
+export interface WordGroups {
+  levels: WordLevelGroup[];
+  topics: WordTopicGroup[];
+}
+export type WordScope = { kind: "level"; key: string; label: string } | { kind: "topic"; id: string; label: string };
+
+export interface DeckCard {
+  id: string;
+  lemma: string;
+  gender: string | null;
+  pos: string;
+  rank: number;
+  translation: string;
+  example: string | null;
+  status: WordStatus;
+  due: boolean;
+}
+export interface Deck {
+  total: number;
+  items: DeckCard[];
+}
+
+export const getWordGroups = (language: Language, signal?: AbortSignal) =>
+  api<WordGroups>(`/api/v1/words/groups?language=${language}`, { signal, cache: "no-store" });
+
+function scopeParams(p: URLSearchParams, scope: WordScope | null | undefined) {
+  if (scope?.kind === "level") p.set("level", scope.key);
+  if (scope?.kind === "topic") p.set("topic", scope.id);
+}
+
+export function getWordDeck(language: Language, scope: WordScope, signal?: AbortSignal) {
+  const p = new URLSearchParams({ language });
+  scopeParams(p, scope);
+  return api<Deck>(`/api/v1/words/deck?${p}`, { signal, cache: "no-store" });
+}
+
 export function listWords(
   language: Language,
-  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number },
+  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number; scope?: WordScope | null },
   signal?: AbortSignal,
 ) {
   const p = new URLSearchParams({ language });
+  scopeParams(p, opts.scope);
   if (opts.q) p.set("q", opts.q);
   if (opts.status) p.set("status", opts.status);
   if (opts.due) p.set("due", "true");
