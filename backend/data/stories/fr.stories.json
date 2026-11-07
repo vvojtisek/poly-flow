@@ -1819,6 +1819,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-02-smart-home",
+   "level": "B1",
+   "title": "La maison intelligente",
+   "title_cs": "Chytrý dům",
+   "lines": [
+    {
+     "text": "M. Albers s'était construit une maison intelligente. Aujourd'hui, il voulait prouver à son chef que tout fonctionnait à la voix.",
+     "cs": "Pan Albers si postavil chytrý dům. Dnes chtěl šéfovi dokázat, že všechno funguje na hlas."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, allume la lumière du salon, s'il te plaît.",
+     "cs": "Hugo, rozsviť prosím světlo v obýváku."
+    },
+    {
+     "text": "La lumière s'est allumée. Mais à la cave.",
+     "cs": "Světlo se rozsvítilo. Ale ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, mets du jazz doux.",
+     "cs": "Hugo, pusť tichou jazzovou hudbu."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Je lance : Les aspirateurs les plus bruyants du monde.",
+     "cs": "Pouštím: Nejhlasitější vysavače světa."
+    },
+    {
+     "text": "Le chef s'est bouché les oreilles et M. Albers a souri courageusement.",
+     "cs": "Šéf si zacpal uši a pan Albers se statečně usmíval."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, stop ! Règle le chauffage sur vingt degrés.",
+     "cs": "Hugo, stop! Nastav topení na dvacet stupňů."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "J'ai réglé le chauffage sur deux degrés. Vous n'avez pas parlé clairement.",
+     "cs": "Nastavil jsem topení na dva stupně. Nemluvil jste zřetelně."
+    },
+    {
+     "text": "Bientôt, tout le monde était assis au salon, en manteau et dans le noir, car la lumière était maintenant à la cave.",
+     "cs": "Brzy seděli všichni v obýváku, v kabátech a ve tmě, protože světlo bylo mezitím ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, commande quelque chose qui impressionne mon chef.",
+     "cs": "Hugo, objednej prosím něco, co udělá na šéfa dojem."
+    },
+    {
+     "text": "Une demi-heure plus tard, on a sonné. Devant la porte, il y avait quarante pizzas.",
+     "cs": "O půl hodiny později někdo zazvonil. Před dveřmi stálo čtyřicet pizz."
+    },
+    {
+     "speaker": "Chef",
+     "text": "Je suis impressionné. Votre maison est la seule qui fait vraiment ce qu'elle veut.",
+     "cs": "Jsem ohromen. Váš dům je jediný, který opravdu dělá, co chce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "courageusement",
+     "cs": "statečně"
+    },
+    {
+     "word": "clairement",
+     "cs": "zřetelně"
+    },
+    {
+     "word": "impressionné",
+     "cs": "ohromen"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que fait la lumière du salon ?",
+     "options": [
+      "Elle s'allume à la cave.",
+      "Elle reste éteinte.",
+      "Elle s'allume dans la salle de bains."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que livre-t-on à la porte ?",
+     "options": [
+      "Quarante pizzas",
+      "Une pizza",
+      "Dix pizzas"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

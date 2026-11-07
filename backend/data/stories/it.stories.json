@@ -1819,6 +1819,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-02-smart-home",
+   "level": "B1",
+   "title": "La casa intelligente",
+   "title_cs": "Chytrý dům",
+   "lines": [
+    {
+     "text": "Il signor Albers si era fatto costruire una casa intelligente. Oggi voleva dimostrare al suo capo che tutto funzionava con la voce.",
+     "cs": "Pan Albers si postavil chytrý dům. Dnes chtěl šéfovi dokázat, že všechno funguje na hlas."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, accendi la luce del soggiorno, per favore.",
+     "cs": "Hugo, rozsviť prosím světlo v obýváku."
+    },
+    {
+     "text": "La luce si è accesa. Ma in cantina.",
+     "cs": "Světlo se rozsvítilo. Ale ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, metti del jazz piano.",
+     "cs": "Hugo, pusť tichou jazzovou hudbu."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Riproduco: Gli aspirapolvere più rumorosi del mondo.",
+     "cs": "Pouštím: Nejhlasitější vysavače světa."
+    },
+    {
+     "text": "Il capo si è tappato le orecchie e il signor Albers ha sorriso con coraggio.",
+     "cs": "Šéf si zacpal uši a pan Albers se statečně usmíval."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, stop! Imposta il riscaldamento a venti gradi.",
+     "cs": "Hugo, stop! Nastav topení na dvacet stupňů."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Ho impostato il riscaldamento a due gradi. Non ha parlato chiaramente.",
+     "cs": "Nastavil jsem topení na dva stupně. Nemluvil jste zřetelně."
+    },
+    {
+     "text": "Presto erano tutti seduti in soggiorno, con il cappotto e al buio, perché nel frattempo la luce era in cantina.",
+     "cs": "Brzy seděli všichni v obýváku, v kabátech a ve tmě, protože světlo bylo mezitím ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, ordina qualcosa che impressioni il mio capo.",
+     "cs": "Hugo, objednej prosím něco, co udělá na šéfa dojem."
+    },
+    {
+     "text": "Mezz'ora dopo hanno suonato alla porta. Fuori c'erano quaranta pizze.",
+     "cs": "O půl hodiny později někdo zazvonil. Před dveřmi stálo čtyřicet pizz."
+    },
+    {
+     "speaker": "Capo",
+     "text": "Sono impressionato. La sua casa è l'unica che fa davvero quello che vuole.",
+     "cs": "Jsem ohromen. Váš dům je jediný, který opravdu dělá, co chce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "coraggio",
+     "cs": "statečnost"
+    },
+    {
+     "word": "chiaramente",
+     "cs": "zřetelně"
+    },
+    {
+     "word": "impressionato",
+     "cs": "ohromen"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa la luce del soggiorno?",
+     "options": [
+      "Si accende in cantina.",
+      "Resta spenta.",
+      "Si accende in bagno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa consegnano alla porta?",
+     "options": [
+      "Quaranta pizze",
+      "Una pizza",
+      "Dieci pizze"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

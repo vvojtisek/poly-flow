@@ -1819,6 +1819,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-02-smart-home",
+   "level": "B1",
+   "title": "The Smart Home",
+   "title_cs": "Chytrý dům",
+   "lines": [
+    {
+     "text": "Mr Albers had built himself a smart home. Today he wanted to prove to his boss that everything worked by voice.",
+     "cs": "Pan Albers si postavil chytrý dům. Dnes chtěl šéfovi dokázat, že všechno funguje na hlas."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, please turn on the living-room light.",
+     "cs": "Hugo, rozsviť prosím světlo v obýváku."
+    },
+    {
+     "text": "The light came on. But in the cellar.",
+     "cs": "Světlo se rozsvítilo. Ale ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, play some quiet jazz.",
+     "cs": "Hugo, pusť tichou jazzovou hudbu."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "Now playing: The Loudest Vacuum Cleaners in the World.",
+     "cs": "Pouštím: Nejhlasitější vysavače světa."
+    },
+    {
+     "text": "The boss covered his ears, and Mr Albers smiled bravely.",
+     "cs": "Šéf si zacpal uši a pan Albers se statečně usmíval."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, stop! Set the heating to twenty degrees.",
+     "cs": "Hugo, stop! Nastav topení na dvacet stupňů."
+    },
+    {
+     "speaker": "Hugo",
+     "text": "I have set the heating to two degrees. You did not speak clearly.",
+     "cs": "Nastavil jsem topení na dva stupně. Nemluvil jste zřetelně."
+    },
+    {
+     "text": "Soon everyone was sitting in the living room, in coats and in the dark, because the light was now in the cellar.",
+     "cs": "Brzy seděli všichni v obýváku, v kabátech a ve tmě, protože světlo bylo mezitím ve sklepě."
+    },
+    {
+     "speaker": "Albers",
+     "text": "Hugo, please order something that will impress my boss.",
+     "cs": "Hugo, objednej prosím něco, co udělá na šéfa dojem."
+    },
+    {
+     "text": "Half an hour later, the doorbell rang. Outside stood forty pizzas.",
+     "cs": "O půl hodiny později někdo zazvonil. Před dveřmi stálo čtyřicet pizz."
+    },
+    {
+     "speaker": "Boss",
+     "text": "I'm impressed. Yours is the only house that really does what it wants.",
+     "cs": "Jsem ohromen. Váš dům je jediný, který opravdu dělá, co chce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "bravely",
+     "cs": "statečně"
+    },
+    {
+     "word": "clearly",
+     "cs": "zřetelně"
+    },
+    {
+     "word": "impressed",
+     "cs": "ohromen"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does the living-room light do?",
+     "options": [
+      "It comes on in the cellar.",
+      "It stays off.",
+      "It comes on in the bathroom."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What is delivered to the door?",
+     "options": [
+      "Forty pizzas",
+      "One pizza",
+      "Ten pizzas"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
