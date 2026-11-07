@@ -1637,6 +1637,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-10-green-lawn",
+   "level": "A2",
+   "title": "La pelouse la plus verte",
+   "title_cs": "Nejzelenější trávník",
+   "lines": [
+    {
+     "text": "M. Brandt et M. Keller sont voisins. Chaque année, ils veulent tous les deux gagner le prix du plus beau jardin.",
+     "cs": "Pan Brandt a pan Keller jsou sousedé. Každý rok chtějí oba vyhrát cenu za nejkrásnější zahradu."
+    },
+    {
+     "text": "Cette année, M. Brandt a acheté en cachette du gazon artificiel.",
+     "cs": "Letos pan Brandt tajně koupil umělý trávník."
+    },
+    {
+     "text": "M. Keller a peint sa pelouse en vert pendant la nuit.",
+     "cs": "Pan Keller v noci natřel svůj trávník na zeleno."
+    },
+    {
+     "speaker": "Brandt",
+     "text": "Ma pelouse est la plus verte de toute la ville !",
+     "cs": "Můj trávník je nejzelenější ve městě!"
+    },
+    {
+     "speaker": "Keller",
+     "text": "Non, la mienne ! Elle brille même au soleil.",
+     "cs": "Ne, můj! Dokonce se leskne na slunci."
+    },
+    {
+     "text": "Samedi, le jury est venu. Il a longtemps regardé les deux jardins.",
+     "cs": "V sobotu přišla porota. Dlouho se dívala na obě zahrady."
+    },
+    {
+     "speaker": "Jury",
+     "text": "Vos pelouses sont parfaites. Trop parfaites. L'une est en plastique et l'autre en peinture.",
+     "cs": "Vaše trávníky jsou dokonalé. Příliš dokonalé. Jeden je z plastu a druhý z barvy."
+    },
+    {
+     "text": "Les hommes ont vite détourné les yeux.",
+     "cs": "Muži rychle uhnuli pohledem."
+    },
+    {
+     "text": "Le prix est allé à Mme Meier. Son jardin avait des mauvaises herbes, des fleurs et un hérisson content.",
+     "cs": "Cenu získala paní Meierová. Její zahrada měla plevel, květiny a spokojeného ježka."
+    },
+    {
+     "speaker": "Mme Meier",
+     "text": "Le secret est simple : je n'ai rien fait.",
+     "cs": "Tajemství je jednoduché: nic jsem nedělala."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "cachette",
+     "cs": "skrýš; en cachette = tajně"
+    },
+    {
+     "word": "gazon",
+     "cs": "trávník"
+    },
+    {
+     "word": "hérisson",
+     "cs": "ježek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'a fait M. Keller ?",
+     "options": [
+      "Il a peint sa pelouse.",
+      "Il a acheté du gazon artificiel.",
+      "Il a acheté un hérisson."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qui gagne le prix ?",
+     "options": [
+      "Mme Meier",
+      "M. Brandt",
+      "M. Keller"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1637,6 +1637,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-10-green-lawn",
+   "level": "A2",
+   "title": "Der grünste Rasen",
+   "title_cs": "Nejzelenější trávník",
+   "lines": [
+    {
+     "text": "Herr Brandt und Herr Keller sind Nachbarn. Jedes Jahr wollen beide den Preis für den schönsten Garten gewinnen.",
+     "cs": "Pan Brandt a pan Keller jsou sousedé. Každý rok chtějí oba vyhrát cenu za nejkrásnější zahradu."
+    },
+    {
+     "text": "In diesem Jahr hat Herr Brandt heimlich Kunstrasen gekauft.",
+     "cs": "Letos pan Brandt tajně koupil umělý trávník."
+    },
+    {
+     "text": "Herr Keller hat in der Nacht seinen Rasen grün angemalt.",
+     "cs": "Pan Keller v noci natřel svůj trávník na zeleno."
+    },
+    {
+     "speaker": "Brandt",
+     "text": "Mein Rasen ist der grünste in der ganzen Stadt!",
+     "cs": "Můj trávník je nejzelenější ve městě!"
+    },
+    {
+     "speaker": "Keller",
+     "text": "Nein, meiner! Er glänzt sogar in der Sonne.",
+     "cs": "Ne, můj! Dokonce se leskne na slunci."
+    },
+    {
+     "text": "Am Samstag ist die Jury gekommen. Sie hat lange auf beide Gärten geschaut.",
+     "cs": "V sobotu přišla porota. Dlouho se dívala na obě zahrady."
+    },
+    {
+     "speaker": "Jury",
+     "text": "Ihre Rasen sind perfekt. Zu perfekt. Einer ist aus Plastik und einer ist aus Farbe.",
+     "cs": "Vaše trávníky jsou dokonalé. Příliš dokonalé. Jeden je z plastu a druhý z barvy."
+    },
+    {
+     "text": "Die Männer haben schnell weggeschaut.",
+     "cs": "Muži rychle uhnuli pohledem."
+    },
+    {
+     "text": "Den Preis hat Frau Meier bekommen. Ihr Garten hatte Unkraut, Blumen und einen zufriedenen Igel.",
+     "cs": "Cenu získala paní Meierová. Její zahrada měla plevel, květiny a spokojeného ježka."
+    },
+    {
+     "speaker": "Frau Meier",
+     "text": "Das Geheimnis ist einfach: Ich habe nichts gemacht.",
+     "cs": "Tajemství je jednoduché: nic jsem nedělala."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "heimlich",
+     "cs": "tajně"
+    },
+    {
+     "word": "Kunstrasen",
+     "cs": "umělý trávník"
+    },
+    {
+     "word": "Unkraut",
+     "cs": "plevel"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was hat Herr Keller gemacht?",
+     "options": [
+      "Er hat seinen Rasen angemalt.",
+      "Er hat Kunstrasen gekauft.",
+      "Er hat einen Igel gekauft."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wer gewinnt den Preis?",
+     "options": [
+      "Frau Meier",
+      "Herr Brandt",
+      "Herr Keller"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

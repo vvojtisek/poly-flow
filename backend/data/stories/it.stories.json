@@ -1637,6 +1637,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-10-green-lawn",
+   "level": "A2",
+   "title": "Il prato più verde",
+   "title_cs": "Nejzelenější trávník",
+   "lines": [
+    {
+     "text": "Il signor Brandt e il signor Keller sono vicini di casa. Ogni anno tutti e due vogliono vincere il premio per il giardino più bello.",
+     "cs": "Pan Brandt a pan Keller jsou sousedé. Každý rok chtějí oba vyhrát cenu za nejkrásnější zahradu."
+    },
+    {
+     "text": "Quest'anno il signor Brandt ha comprato di nascosto un prato sintetico.",
+     "cs": "Letos pan Brandt tajně koupil umělý trávník."
+    },
+    {
+     "text": "Il signor Keller di notte ha dipinto di verde il suo prato.",
+     "cs": "Pan Keller v noci natřel svůj trávník na zeleno."
+    },
+    {
+     "speaker": "Brandt",
+     "text": "Il mio prato è il più verde di tutta la città!",
+     "cs": "Můj trávník je nejzelenější ve městě!"
+    },
+    {
+     "speaker": "Keller",
+     "text": "No, il mio! Brilla anche al sole.",
+     "cs": "Ne, můj! Dokonce se leskne na slunci."
+    },
+    {
+     "text": "Sabato è arrivata la giuria. Ha guardato a lungo i due giardini.",
+     "cs": "V sobotu přišla porota. Dlouho se dívala na obě zahrady."
+    },
+    {
+     "speaker": "Giuria",
+     "text": "I vostri prati sono perfetti. Troppo perfetti. Uno è di plastica e l'altro è di vernice.",
+     "cs": "Vaše trávníky jsou dokonalé. Příliš dokonalé. Jeden je z plastu a druhý z barvy."
+    },
+    {
+     "text": "Gli uomini hanno distolto in fretta lo sguardo.",
+     "cs": "Muži rychle uhnuli pohledem."
+    },
+    {
+     "text": "Il premio è andato alla signora Meier. Il suo giardino aveva erbacce, fiori e un riccio contento.",
+     "cs": "Cenu získala paní Meierová. Její zahrada měla plevel, květiny a spokojeného ježka."
+    },
+    {
+     "speaker": "Signora Meier",
+     "text": "Il segreto è semplice: non ho fatto niente.",
+     "cs": "Tajemství je jednoduché: nic jsem nedělala."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "nascosto",
+     "cs": "skrytý; di nascosto = tajně"
+    },
+    {
+     "word": "sintetico",
+     "cs": "umělý"
+    },
+    {
+     "word": "riccio",
+     "cs": "ježek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa ha fatto il signor Keller?",
+     "options": [
+      "Ha dipinto il prato.",
+      "Ha comprato un prato sintetico.",
+      "Ha comprato un riccio."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi vince il premio?",
+     "options": [
+      "La signora Meier",
+      "Il signor Brandt",
+      "Il signor Keller"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

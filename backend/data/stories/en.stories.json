@@ -1637,6 +1637,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-10-green-lawn",
+   "level": "A2",
+   "title": "The Greenest Lawn",
+   "title_cs": "Nejzelenější trávník",
+   "lines": [
+    {
+     "text": "Mr Brandt and Mr Keller are neighbours. Every year, both want to win the prize for the most beautiful garden.",
+     "cs": "Pan Brandt a pan Keller jsou sousedé. Každý rok chtějí oba vyhrát cenu za nejkrásnější zahradu."
+    },
+    {
+     "text": "This year, Mr Brandt secretly bought artificial grass.",
+     "cs": "Letos pan Brandt tajně koupil umělý trávník."
+    },
+    {
+     "text": "Mr Keller painted his lawn green during the night.",
+     "cs": "Pan Keller v noci natřel svůj trávník na zeleno."
+    },
+    {
+     "speaker": "Brandt",
+     "text": "My lawn is the greenest in the whole town!",
+     "cs": "Můj trávník je nejzelenější ve městě!"
+    },
+    {
+     "speaker": "Keller",
+     "text": "No, mine is! It even shines in the sun.",
+     "cs": "Ne, můj! Dokonce se leskne na slunci."
+    },
+    {
+     "text": "On Saturday, the jury came. They looked at both gardens for a long time.",
+     "cs": "V sobotu přišla porota. Dlouho se dívala na obě zahrady."
+    },
+    {
+     "speaker": "Jury",
+     "text": "Your lawns are perfect. Too perfect. One is plastic and the other is paint.",
+     "cs": "Vaše trávníky jsou dokonalé. Příliš dokonalé. Jeden je z plastu a druhý z barvy."
+    },
+    {
+     "text": "The men quickly looked away.",
+     "cs": "Muži rychle uhnuli pohledem."
+    },
+    {
+     "text": "The prize went to Mrs Meier. Her garden had weeds, flowers and a happy hedgehog.",
+     "cs": "Cenu získala paní Meierová. Její zahrada měla plevel, květiny a spokojeného ježka."
+    },
+    {
+     "speaker": "Mrs Meier",
+     "text": "The secret is simple: I did nothing.",
+     "cs": "Tajemství je jednoduché: nic jsem nedělala."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "secretly",
+     "cs": "tajně"
+    },
+    {
+     "word": "artificial",
+     "cs": "umělý"
+    },
+    {
+     "word": "hedgehog",
+     "cs": "ježek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What did Mr Keller do?",
+     "options": [
+      "He painted his lawn.",
+      "He bought artificial grass.",
+      "He bought a hedgehog."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Who wins the prize?",
+     "options": [
+      "Mrs Meier",
+      "Mr Brandt",
+      "Mr Keller"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
