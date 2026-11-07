@@ -4011,6 +4011,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-library-whisper",
+   "level": "A2",
+   "title": "Eine leise Bestellung",
+   "title_cs": "Tichá objednávka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva besuchte zum ersten Mal die neue Bibliothek.",
+     "cs": "Eva šla poprvé do nové knihovny."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich hätte gern einen Kaffee und zwei Kuchenstücke.",
+     "cs": "Prosím vás, dám si kávu a dva koláče."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Meine Dame, das ist eine Bibliothek. Sie müssen leise sprechen.",
+     "cs": "Paní, tady je knihovna. Musíte mluvit potichu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ach, Entschuldigung. Ich habe das Schild nicht bemerkt.",
+     "cs": "Ach, promiňte. Já jsem si nevšimla nápisu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und was für ein Buch suchen Sie?",
+     "cs": "A co tedy hledáte za knihu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva flüsterte: Zuerst den Kaffee, bitte. Dann ein Buch übers Backen.",
+     "cs": "Eva zašeptala: Nejdřív prosím tu kávu. Pak nějakou knihu o pečení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "flüsterte",
+     "cs": "zašeptala"
+    },
+    {
+     "word": "Backen",
+     "cs": "pečení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde je Eva?",
+     "options": [
+      "V knihovně.",
+      "V kavárně.",
+      "Na poště."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jakou knihu chce?",
+     "options": [
+      "O pečení.",
+      "O lodích.",
+      "O běhání."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

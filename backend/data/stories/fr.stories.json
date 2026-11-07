@@ -4011,6 +4011,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-library-whisper",
+   "level": "A2",
+   "title": "Une commande discrète",
+   "title_cs": "Tichá objednávka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva est entrée pour la première fois dans la nouvelle bibliothèque.",
+     "cs": "Eva šla poprvé do nové knihovny."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je voudrais un café et deux gâteaux, s'il vous plaît.",
+     "cs": "Prosím vás, dám si kávu a dva koláče."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Madame, c'est une bibliothèque. Il faut parler doucement.",
+     "cs": "Paní, tady je knihovna. Musíte mluvit potichu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Oh, pardon. Je n'ai pas remarqué la pancarte.",
+     "cs": "Ach, promiňte. Já jsem si nevšimla nápisu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Et quel genre de livre cherchez-vous ?",
+     "cs": "A co tedy hledáte za knihu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva a chuchoté : D'abord le café, s'il vous plaît. Puis un livre de pâtisserie.",
+     "cs": "Eva zašeptala: Nejdřív prosím tu kávu. Pak nějakou knihu o pečení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "chuchoté",
+     "cs": "zašeptala"
+    },
+    {
+     "word": "pâtisserie",
+     "cs": "pečení sladkého pečiva"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde je Eva?",
+     "options": [
+      "V knihovně.",
+      "V kavárně.",
+      "Na poště."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jakou knihu chce?",
+     "options": [
+      "O pečení.",
+      "O lodích.",
+      "O běhání."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
