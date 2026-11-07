@@ -1295,3 +1295,13 @@ Vlad approves a push.
 **Implemented Solution:** The grammar tree now returns `checked_correct` and `checked_errors` per unit (first-try graded answers already counted in `UserGrammarProgress`; `schemas/grammar.py`, `api/grammar.py`). Cards in `app/grammar/page.tsx` show "V ověřeních: 3 správně, 1 chyba" once at least one check answer exists; unmeasured topics show nothing instead of a misleading zero. The check test asserts both counts.
 
 **Verification:** `tests/test_grammar.py` 14 passed; ruff, typecheck, production build, `git diff --check` passed.
+
+## Global Cycle 21/120 | Page: [/grammar] (Page Cycle 6/15)
+
+**Summary:** keyboard topic search: /, Enter opens, Esc clears
+
+**Observed Problem:** Finding a grammar topic on desktop needed the mouse: no shortcut reached the search box, Enter did nothing, and resetting search plus filters took several clicks.
+
+**Implemented Solution:** `components/CommandPalette.tsx`: "/" now focuses the current page's own search box when one is marked `data-page-search` and visible, and still opens the global palette elsewhere (Ctrl+K always opens the palette). `app/grammar/page.tsx` marks its topic search, shows a "/" key badge, opens the first matching topic on Enter and clears search and status/due filters on Escape; a desktop hint "Enter otevře první, Esc vše zruší" appears while filtering.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright: "/" then typing "akuzativ" filtered to 1 of 37, Escape restored 37, typing "sein" + Enter opened `/grammar/de-a1-sein`.

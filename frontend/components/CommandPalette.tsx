@@ -79,6 +79,17 @@ export function CommandPalette({ me }: { me: Me }) {
     function onKey(e: KeyboardEvent) {
       const combo = (e.ctrlKey || e.metaKey) && !e.altKey && e.code === "KeyK";
       const slash = e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !isTypingTarget(e.target);
+      if (slash) {
+        // "/" searches the current page when it has its own search box (data-page-search);
+        // Ctrl+K always opens the global palette.
+        const local = document.querySelector<HTMLInputElement>("input[data-page-search]");
+        if (local && local.getClientRects().length > 0) {
+          e.preventDefault();
+          local.focus();
+          local.select();
+          return;
+        }
+      }
       if (combo || slash) {
         e.preventDefault();
         setOpen((o) => !o || !combo);

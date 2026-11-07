@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { Kbd } from "@/components/Kbd";
+
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
 import { Button, Notice } from "@/components/ui";
@@ -158,6 +160,7 @@ export default function GrammarPage() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
   const [dueOnly, setDueOnly] = useState(false);
+
   // Explanation text per unit, fetched the first time the learner searches (about 30 kB).
   const [index, setIndex] = useState<Map<string, string> | null>(null);
   const wantIndex = !!query.trim();
@@ -265,12 +268,35 @@ export default function GrammarPage() {
         <label className="flex min-w-56 flex-1 items-center gap-2 rounded-xl border border-slate-300 px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700">
           <Search className="size-4 shrink-0 text-slate-400" aria-hidden />
           <input
+            type="search"
+            data-page-search
             value={query}
             onChange={(event) => setQuery(event.target.value)}
+            onKeyDown={(event) => {
+              // Enter opens the first matching topic; Escape clears the search and all filters.
+              if (event.key === "Enter" && filtering) {
+                const first = filteredLevels.find((lv) => lv.units.length)?.units[0];
+                if (first) {
+                  event.preventDefault();
+                  router.push(`/grammar/${first.id}`);
+                }
+              } else if (event.key === "Escape" && (query || statusFilter || dueOnly)) {
+                event.preventDefault();
+                setQuery("");
+                setStatusFilter(null);
+                setDueOnly(false);
+              }
+            }}
             placeholder={cs.grammar.searchTopics}
             aria-label={cs.grammar.searchTopics}
-            className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none"
+            aria-keyshortcuts="/"
+            className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none [&::-webkit-search-cancel-button]:hidden"
           />
+          {!query && (
+            <span className="hidden lg:inline" aria-hidden>
+              <Kbd>/</Kbd>
+            </span>
+          )}
           {query && (
             <button type="button" onClick={() => setQuery("")} aria-label={cs.grammar.clearSearch} className="rounded-full p-1 hover:bg-slate-100 dark:hover:bg-slate-800">
               <X className="size-4" aria-hidden />
@@ -279,6 +305,7 @@ export default function GrammarPage() {
         </label>
         <span aria-live="polite" className="text-xs tabular-nums text-slate-500">
           {cs.grammar.visibleTopics(visibleCount, units.length)}
+          {filtering && visibleCount > 0 && <span className="ml-2 hidden lg:inline">{cs.grammar.enterOpens}</span>}
         </span>
       </div>
       <div className="flex flex-wrap gap-1.5">
