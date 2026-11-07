@@ -2393,6 +2393,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-08-step-counter",
+   "level": "B1",
+   "title": "Il contapassi al collare",
+   "title_cs": "Krokoměr na obojku",
+   "lines": [
+    {
+     "text": "Hanna voleva finalmente vivere in modo più sano. La sua assicurazione dava uno sconto a chi dimostrava diecimila passi al giorno.",
+     "cs": "Hanna chtěla konečně žít zdravěji. Její pojišťovna dávala slevu, když člověk každý den doložil deset tisíc kroků."
+    },
+    {
+     "text": "Dopo una settimana faceva in media tremila passi. Il divano era semplicemente troppo comodo.",
+     "cs": "Za týden měla v průměru tři tisíce kroků. Gauč byl prostě příliš pohodlný."
+    },
+    {
+     "text": "Allora ha avuto un'idea: ha attaccato il contapassi al collare del suo cane Bruno.",
+     "cs": "Tehdy dostala nápad: připevnila krokoměr na obojek svého psa Bruna."
+    },
+    {
+     "text": "Bruno era un border collie molto attivo. Quel giorno ha fatto trentaduemila passi.",
+     "cs": "Bruno byl velmi aktivní border kolie. Ten den nachodil třicet dva tisíc kroků."
+    },
+    {
+     "speaker": "Assicurazione",
+     "text": "Congratulazioni! Fa parte dell'uno per cento dei nostri clienti più attivi.",
+     "cs": "Gratulujeme! Patříte mezi nejaktivnější jedno procento našich klientů."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Senti, Bruno? Abbiamo lo sconto!",
+     "cs": "Slyšíš to, Bruno? Dostaneme slevu!"
+    },
+    {
+     "text": "Due mesi dopo il medico l'ha chiamata per un controllo.",
+     "cs": "O dva měsíce později ji doktor pozval na prohlídku."
+    },
+    {
+     "speaker": "Medico",
+     "text": "Il suo contapassi sostiene che lei fa trentamila passi al giorno. Ma la sua pressione dice un'altra cosa.",
+     "cs": "Váš krokoměr tvrdí, že denně ujdete třicet tisíc kroků. Ale váš krevní tlak říká něco jiného."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "La mia pressione non ha ancora i dati del cane.",
+     "cs": "Můj krevní tlak zřejmě ještě nemá data od psa."
+    },
+    {
+     "text": "Il medico ha guardato a lungo i suoi appunti. Poi Bruno, seduto accanto a lei, magro e felice.",
+     "cs": "Doktor se dlouho díval do poznámek. Pak na Bruna, který seděl vedle ní, štíhlý a šťastný."
+    },
+    {
+     "speaker": "Medico",
+     "text": "Le consiglio di dare a Bruno uno sconto sulle crocchette. Se lo è meritato.",
+     "cs": "Radím vám: Dejte Brunovi slevu na granule. Zasloužil si ji."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Ho già cominciato. Oggi ho camminato da sola per dieci metri: fino alla sua ciotola.",
+     "cs": "Už jsem začala. Dnes jsem sama ušla deset metrů: k jeho misce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "contapassi",
+     "cs": "krokoměr"
+    },
+    {
+     "word": "pressione",
+     "cs": "tlak"
+    },
+    {
+     "word": "crocchette",
+     "cs": "granule"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Come ottiene i passi Hanna?",
+     "options": [
+      "Il suo cane porta il contapassi.",
+      "Corre dieci chilometri al giorno.",
+      "Usa una bicicletta."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi è più in salute alla fine?",
+     "options": [
+      "Bruno",
+      "Hanna",
+      "Il medico"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

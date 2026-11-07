@@ -2393,6 +2393,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-08-step-counter",
+   "level": "B1",
+   "title": "Le podomètre au collier",
+   "title_cs": "Krokoměr na obojku",
+   "lines": [
+    {
+     "text": "Hanna voulait enfin vivre plus sainement. Son assurance accordait une réduction si l'on prouvait dix mille pas par jour.",
+     "cs": "Hanna chtěla konečně žít zdravěji. Její pojišťovna dávala slevu, když člověk každý den doložil deset tisíc kroků."
+    },
+    {
+     "text": "Au bout d'une semaine, elle faisait en moyenne trois mille pas. Le canapé était simplement trop confortable.",
+     "cs": "Za týden měla v průměru tři tisíce kroků. Gauč byl prostě příliš pohodlný."
+    },
+    {
+     "text": "Alors elle a eu une idée : elle a fixé le podomètre au collier de son chien Bruno.",
+     "cs": "Tehdy dostala nápad: připevnila krokoměr na obojek svého psa Bruna."
+    },
+    {
+     "text": "Bruno était un border collie très actif. Ce jour-là, il a fait trente-deux mille pas.",
+     "cs": "Bruno byl velmi aktivní border kolie. Ten den nachodil třicet dva tisíc kroků."
+    },
+    {
+     "speaker": "Assurance",
+     "text": "Félicitations ! Vous faites partie du meilleur un pour cent de nos clients les plus actifs.",
+     "cs": "Gratulujeme! Patříte mezi nejaktivnější jedno procento našich klientů."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Tu entends, Bruno ? On a une réduction !",
+     "cs": "Slyšíš to, Bruno? Dostaneme slevu!"
+    },
+    {
+     "text": "Deux mois plus tard, le médecin l'a convoquée pour un contrôle.",
+     "cs": "O dva měsíce později ji doktor pozval na prohlídku."
+    },
+    {
+     "speaker": "Médecin",
+     "text": "Votre podomètre affirme que vous faites trente mille pas par jour. Mais votre tension dit autre chose.",
+     "cs": "Váš krokoměr tvrdí, že denně ujdete třicet tisíc kroků. Ale váš krevní tlak říká něco jiného."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Ma tension n'a sans doute pas encore les données du chien.",
+     "cs": "Můj krevní tlak zřejmě ještě nemá data od psa."
+    },
+    {
+     "text": "Le médecin a longtemps regardé ses notes. Puis Bruno, assis à côté d'elle, mince et heureux.",
+     "cs": "Doktor se dlouho díval do poznámek. Pak na Bruna, který seděl vedle ní, štíhlý a šťastný."
+    },
+    {
+     "speaker": "Médecin",
+     "text": "Mon conseil : donnez une réduction à Bruno sur ses croquettes. Il l'a méritée.",
+     "cs": "Radím vám: Dejte Brunovi slevu na granule. Zasloužil si ji."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "J'ai déjà commencé. Aujourd'hui, j'ai marché seule dix mètres : jusqu'à sa gamelle.",
+     "cs": "Už jsem začala. Dnes jsem sama ušla deset metrů: k jeho misce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "podomètre",
+     "cs": "krokoměr"
+    },
+    {
+     "word": "tension",
+     "cs": "krevní tlak"
+    },
+    {
+     "word": "croquettes",
+     "cs": "granule"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Comment Hanna obtient-elle ses pas ?",
+     "options": [
+      "Son chien porte le podomètre.",
+      "Elle court dix kilomètres par jour.",
+      "Elle utilise un vélo."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qui est en meilleure santé à la fin ?",
+     "options": [
+      "Bruno",
+      "Hanna",
+      "Le médecin"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

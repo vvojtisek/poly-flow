@@ -2393,6 +2393,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-08-step-counter",
+   "level": "B1",
+   "title": "Der Schrittzähler am Halsband",
+   "title_cs": "Krokoměr na obojku",
+   "lines": [
+    {
+     "text": "Hanna wollte endlich gesünder leben. Ihre Versicherung gab Rabatt, wenn man jeden Tag zehntausend Schritte nachwies.",
+     "cs": "Hanna chtěla konečně žít zdravěji. Její pojišťovna dávala slevu, když člověk každý den doložil deset tisíc kroků."
+    },
+    {
+     "text": "Nach einer Woche hatte sie im Durchschnitt dreitausend Schritte. Das Sofa war einfach zu bequem.",
+     "cs": "Za týden měla v průměru tři tisíce kroků. Gauč byl prostě příliš pohodlný."
+    },
+    {
+     "text": "Da kam ihr eine Idee: Sie befestigte den Schrittzähler am Halsband ihres Hundes Bruno.",
+     "cs": "Tehdy dostala nápad: připevnila krokoměr na obojek svého psa Bruna."
+    },
+    {
+     "text": "Bruno war ein sehr aktiver Border Collie. An diesem Tag schaffte er zweiunddreißigtausend Schritte.",
+     "cs": "Bruno byl velmi aktivní border kolie. Ten den nachodil třicet dva tisíc kroků."
+    },
+    {
+     "speaker": "Versicherung",
+     "text": "Herzlichen Glückwunsch! Sie gehören zu den aktivsten ein Prozent unserer Kunden.",
+     "cs": "Gratulujeme! Patříte mezi nejaktivnější jedno procento našich klientů."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Hörst du das, Bruno? Wir bekommen Rabatt!",
+     "cs": "Slyšíš to, Bruno? Dostaneme slevu!"
+    },
+    {
+     "text": "Zwei Monate später bestellte der Arzt sie zur Kontrolle.",
+     "cs": "O dva měsíce později ji doktor pozval na prohlídku."
+    },
+    {
+     "speaker": "Arzt",
+     "text": "Ihr Schrittzähler behauptet, Sie gehen dreißigtausend Schritte am Tag. Aber Ihr Blutdruck sagt etwas anderes.",
+     "cs": "Váš krokoměr tvrdí, že denně ujdete třicet tisíc kroků. Ale váš krevní tlak říká něco jiného."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Mein Blutdruck hat wahrscheinlich noch keine Daten vom Hund.",
+     "cs": "Můj krevní tlak zřejmě ještě nemá data od psa."
+    },
+    {
+     "text": "Der Arzt schaute lange auf seine Notizen. Dann auf Bruno, der schlank und glücklich neben ihr saß.",
+     "cs": "Doktor se dlouho díval do poznámek. Pak na Bruna, který seděl vedle ní, štíhlý a šťastný."
+    },
+    {
+     "speaker": "Arzt",
+     "text": "Mein Rat: Geben Sie Bruno einen Rabatt auf sein Futter. Er hat ihn verdient.",
+     "cs": "Radím vám: Dejte Brunovi slevu na granule. Zasloužil si ji."
+    },
+    {
+     "speaker": "Hanna",
+     "text": "Ich habe schon angefangen. Heute bin ich selbst zehn Meter gegangen: bis zu seinem Napf.",
+     "cs": "Už jsem začala. Dnes jsem sama ušla deset metrů: k jeho misce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "nachwies",
+     "cs": "doložil"
+    },
+    {
+     "word": "Schrittzähler",
+     "cs": "krokoměr"
+    },
+    {
+     "word": "Blutdruck",
+     "cs": "krevní tlak"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wie bekommt Hanna ihre Schritte?",
+     "options": [
+      "Ihr Hund trägt den Schrittzähler.",
+      "Sie läuft jeden Tag zehn Kilometer.",
+      "Sie benutzt ein Fahrrad."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wer ist am Ende gesünder?",
+     "options": [
+      "Bruno",
+      "Hanna",
+      "Der Arzt"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
