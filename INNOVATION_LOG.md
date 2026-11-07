@@ -1845,3 +1845,13 @@ Vlad approves a push.
 **Implemented Solution:** The panels now go forecast, mistake types, accuracy, funnel, then the activity calendar full width last. The loading skeletons follow the same order, so nothing jumps when data arrives. URL state, arrow-key navigation and the day view are unchanged.
 
 **Verification:** Playwright 390px: panel order is Týden v kostce, Co tě čeká, Druhy chyb, Přesnost, Od lekce k jistotě, Aktivita; the forecast heading is now at y=780 (it was below the calendar). Regression scripts for keyboard navigation (cycle 66), URL day restore after Back (cycle 65) and retry states (cycle 71) pass after updating their selectors to the calendar's label. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 76/120 | Page: [/lesson] (Page Cycle 1/15)
+
+**Summary:** recommend the next unstudied topic, an open lesson or due checks
+
+**Observed Problem:** The lesson overview recommended 'the first non-mastered unit' of the target level. A topic the learner had already studied but not yet mastered (the normal state after one lesson) was recommended again as the next lesson: for the test profile, 'Já jsem, ty jsi: sloveso sein' even though it was studied and a lesson in it was still open. The page also ignored the open lesson and the due grammar checks that the API already returned.
+
+**Implemented Solution:** The overview now decides in this order. A lesson still open in a topic: 'Rozdělaná lekce' with 'Pokračovat v lekci'. Otherwise the first topic with status 'new', looking at the target level after the learner's estimate, then higher levels, then gaps in lower levels, with the existing explanation lines, plus 'Ověřit gramatiku (N)' when checks are due. If every topic is studied: a due-check card, or a calm 'all studied' note.
+
+**Verification:** Real data (de): tree has active_lesson_unit=de-a1-sein, due=2; the page shows 'Rozdělaná lekce · Já jsem, ty jsi: sloveso sein · Pokračovat v lekci'. Stubbed variants: no open lesson recommends 'Přítomný čas pravidelných sloves' (the first new A1 topic, not the studied sein); all studied with due=2 shows 'Ověřit gramatiku (2)'; all studied with due=0 shows the all-studied note. No console errors. typecheck, next build, ruff pass.
