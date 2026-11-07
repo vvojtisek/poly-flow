@@ -364,7 +364,7 @@ export default function GrammarPage() {
   const filters = tree && (
     <section className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900" aria-label={cs.grammar.findTopics}>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <label className="flex min-w-56 flex-1 items-center gap-2 rounded-xl border border-slate-300 px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700">
+        <label className="flex w-full min-w-0 flex-1 items-center gap-2 rounded-xl sm:w-auto sm:min-w-56 border border-slate-300 px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700">
           <Search className="size-4 shrink-0 text-slate-400" aria-hidden />
           <input
             type="search"
@@ -408,7 +408,8 @@ export default function GrammarPage() {
           {filtering && visibleCount > 0 && <span className="ml-2 hidden lg:inline">{cs.grammar.enterOpens}</span>}
         </span>
       </div>
-      <div className="flex flex-wrap gap-1.5">
+      {/* Phones: one swipeable row instead of three wrapped rows; wider screens wrap. */}
+      <div className="-mx-4 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&>button]:shrink-0 [&>button]:whitespace-nowrap">
         <button
           type="button"
           aria-pressed={!statusFilter}

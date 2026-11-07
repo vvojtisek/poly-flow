@@ -1365,3 +1365,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: a placeholder in the shape of the focus panel (two text lines and three card blocks, pulse only with motion allowed) holds the layout while loading; a failure shows `RetryNotice` ("Gramatiku se nepodařilo načíst." + Zkusit znovu) that re-runs the tree and level requests through an attempt counter.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the tree request failing showed the retry alert, and after recovery the retry loaded all 37 topics.
+
+## Global Cycle 28/120 | Page: [/grammar] (Page Cycle 13/15)
+
+**Summary:** one swipeable filter row on phones
+
+**Observed Problem:** On a 390 px phone the seven status/due/error chips wrapped into three rows and, together with the search box, pushed the topic list half a screen down.
+
+**Implemented Solution:** `app/grammar/page.tsx`: below `sm` the chips form one horizontally scrollable row that bleeds to the screen edge (no scrollbar, chips never shrink or wrap their labels); from `sm` up they wrap as before. The search field takes the full width on phones.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single chip row with the next chip cut at the edge as a swipe cue.
