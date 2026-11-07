@@ -5931,6 +5931,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-34-theatre-sneeze",
+   "level": "B2",
+   "title": "The Reliable Understudy",
+   "title_cs": "Spolehlivý záskok",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva became the theatre's understudy and learnt the entire script, including the marginal notes.",
+     "cs": "Eva dostala v divadle roli záskoku a naučila se celý text včetně poznámek na okraji."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I'm prepared for any eventuality. I even know the pauses that aren't explicitly indicated.",
+     "cs": "Jsem připravená na jakoukoli situaci. Dokonce znám i pauzy, které nejsou výslovně uvedené."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I appreciate that. Today, though, you'll replace the tree in the background because the original actor is ill.",
+     "cs": "To oceňuji. Dnes ale budeš zastupovat strom v pozadí, protože původní herec onemocněl."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Never mind. Every character deserves a carefully considered motivation.",
+     "cs": "Nevadí. Každá postava má právo na promyšlenou motivaci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Just please don't move at all during the final monologue.",
+     "cs": "Jen tě prosím, aby ses během závěrečného monologu vůbec nehýbala."
+    },
+    {
+     "speaker": null,
+     "text": "When Eva sneezed, she bowed: Sorry. The tree was expressing its opposition to the pollen season.",
+     "cs": "Když Eva kýchla, uklonila se: Promiňte. Strom právě vyjádřil nesouhlas s pylovou sezonou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "understudy",
+     "cs": "záskok"
+    },
+    {
+     "word": "marginal",
+     "cs": "okrajový"
+    },
+    {
+     "word": "eventuality",
+     "cs": "možná situace"
+    },
+    {
+     "word": "explicitly",
+     "cs": "výslovně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Koho má Eva zastupovat?",
+     "options": [
+      "Strom.",
+      "Královnu.",
+      "Vypravěče."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje kýchnutí?",
+     "options": [
+      "Jako nesouhlas stromu s pylem.",
+      "Jako část monologu krále.",
+      "Jako potlesk."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

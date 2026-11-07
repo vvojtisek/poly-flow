@@ -5931,6 +5931,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-34-theatre-sneeze",
+   "level": "B2",
+   "title": "Die zuverlässige Zweitbesetzung",
+   "title_cs": "Spolehlivý záskok",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wurde am Theater Zweitbesetzung und lernte den gesamten Text samt Randbemerkungen auswendig.",
+     "cs": "Eva dostala v divadle roli záskoku a naučila se celý text včetně poznámek na okraji."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich bin auf jede Eventualität vorbereitet. Sogar auf Pausen, die nicht ausdrücklich angegeben sind.",
+     "cs": "Jsem připravená na jakoukoli situaci. Dokonce znám i pauzy, které nejsou výslovně uvedené."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das schätze ich. Heute ersetzt du allerdings den Baum im Hintergrund, weil der ursprüngliche Schauspieler krank ist.",
+     "cs": "To oceňuji. Dnes ale budeš zastupovat strom v pozadí, protože původní herec onemocněl."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Macht nichts. Jede Figur verdient eine sorgfältig durchdachte Motivation.",
+     "cs": "Nevadí. Každá postava má právo na promyšlenou motivaci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bitte beweg dich nur während des abschließenden Monologs überhaupt nicht.",
+     "cs": "Jen tě prosím, aby ses během závěrečného monologu vůbec nehýbala."
+    },
+    {
+     "speaker": null,
+     "text": "Als Eva nieste, verbeugte sie sich: Entschuldigung. Der Baum hat gerade seinen Unmut über die Pollensaison geäußert.",
+     "cs": "Když Eva kýchla, uklonila se: Promiňte. Strom právě vyjádřil nesouhlas s pylovou sezonou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Zweitbesetzung",
+     "cs": "záskok"
+    },
+    {
+     "word": "Randbemerkungen",
+     "cs": "poznámky na okraji"
+    },
+    {
+     "word": "Eventualität",
+     "cs": "možná situace"
+    },
+    {
+     "word": "Monologs",
+     "cs": "monologu"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Koho má Eva zastupovat?",
+     "options": [
+      "Strom.",
+      "Královnu.",
+      "Vypravěče."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje kýchnutí?",
+     "options": [
+      "Jako nesouhlas stromu s pylem.",
+      "Jako část monologu krále.",
+      "Jako potlesk."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
