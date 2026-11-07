@@ -1916,6 +1916,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-03-apologies",
+   "level": "B1",
+   "title": "Endless Apologies",
+   "title_cs": "Omluvy bez konce",
+   "lines": [
+    {
+     "text": "Mr Lehmann was exceptionally polite. He apologised for everything, even the weather.",
+     "cs": "Pan Lehmann byl mimořádně zdvořilý člověk. Omlouval se za všechno, dokonce i za počasí."
+    },
+    {
+     "text": "One morning, he arrived at the office at eight o'clock sharp. The appointment was only at nine.",
+     "cs": "Jednoho rána přišel do kanceláře přesně v osm. Schůzka byla v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "I'm terribly sorry that I'm late!",
+     "cs": "Nesmírně se omlouvám, že jdu pozdě!"
+    },
+    {
+     "speaker": "Doris",
+     "text": "But Mr Lehmann, it's only eight. The appointment is at nine.",
+     "cs": "Ale pane Lehmanne, je teprve osm. Schůzka je v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Then I apologise for disturbing you so early.",
+     "cs": "Pak se omlouvám, že jsem vás tak brzy vyrušil."
+    },
+    {
+     "text": "He wrote a long email to all his colleagues, begging forgiveness for his punctuality.",
+     "cs": "Napsal dlouhý e-mail všem kolegům a prosil o prominutí za svou přesnost."
+    },
+    {
+     "text": "The replies came quickly. Everyone apologised back, out of politeness. By noon the inbox was full.",
+     "cs": "Odpovědi přišly rychle. Všichni se z ohleduplnosti omluvili zpátky. Do poledne byla schránka plná."
+    },
+    {
+     "text": "The next day, Mr Lehmann arrived twenty minutes late.",
+     "cs": "Druhý den přišel pan Lehmann o dvacet minut později."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Mr Lehmann! Where were you? Are you all right?",
+     "cs": "Pane Lehmanne! Kde jste byl? Je vám dobře?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "I'm late. But I'm not apologising.",
+     "cs": "Zpozdil jsem se. Ale neomlouvám se."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Why not?",
+     "cs": "Proč ne?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "I used up my whole quota yesterday.",
+     "cs": "Včera jsem vyčerpal celý svůj limit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "exceptionally",
+     "cs": "mimořádně"
+    },
+    {
+     "word": "forgiveness",
+     "cs": "prominutí"
+    },
+    {
+     "word": "quota",
+     "cs": "limit, kvóta"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why is Mr Lehmann not late on the first day?",
+     "options": [
+      "He is an hour early.",
+      "He takes the bus.",
+      "The appointment is cancelled."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why does he not apologise the next day?",
+     "options": [
+      "He used up his apologies yesterday.",
+      "He is angry with Doris.",
+      "He forgot."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

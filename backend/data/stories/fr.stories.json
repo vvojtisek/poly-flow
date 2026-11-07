@@ -1916,6 +1916,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-03-apologies",
+   "level": "B1",
+   "title": "Des excuses sans fin",
+   "title_cs": "Omluvy bez konce",
+   "lines": [
+    {
+     "text": "M. Lehmann était d'une politesse exceptionnelle. Il s'excusait de tout, même du temps qu'il faisait.",
+     "cs": "Pan Lehmann byl mimořádně zdvořilý člověk. Omlouval se za všechno, dokonce i za počasí."
+    },
+    {
+     "text": "Un matin, il est arrivé au bureau à huit heures précises. Le rendez-vous n'était qu'à neuf heures.",
+     "cs": "Jednoho rána přišel do kanceláře přesně v osm. Schůzka byla v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Je suis infiniment désolé d'être en retard !",
+     "cs": "Nesmírně se omlouvám, že jdu pozdě!"
+    },
+    {
+     "speaker": "Doris",
+     "text": "Mais monsieur Lehmann, il n'est que huit heures. Le rendez-vous est à neuf heures.",
+     "cs": "Ale pane Lehmanne, je teprve osm. Schůzka je v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Alors je m'excuse de vous avoir dérangée si tôt.",
+     "cs": "Pak se omlouvám, že jsem vás tak brzy vyrušil."
+    },
+    {
+     "text": "Il a écrit un long e-mail à tous ses collègues pour demander pardon de sa ponctualité.",
+     "cs": "Napsal dlouhý e-mail všem kolegům a prosil o prominutí za svou přesnost."
+    },
+    {
+     "text": "Les réponses sont arrivées vite. Tout le monde s'est excusé en retour, par politesse. À midi, la boîte de réception était pleine.",
+     "cs": "Odpovědi přišly rychle. Všichni se z ohleduplnosti omluvili zpátky. Do poledne byla schránka plná."
+    },
+    {
+     "text": "Le lendemain, M. Lehmann est arrivé avec vingt minutes de retard.",
+     "cs": "Druhý den přišel pan Lehmann o dvacet minut později."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Monsieur Lehmann ! Où étiez-vous ? Vous allez bien ?",
+     "cs": "Pane Lehmanne! Kde jste byl? Je vám dobře?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Je suis en retard. Mais je ne m'excuse pas.",
+     "cs": "Zpozdil jsem se. Ale neomlouvám se."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Pourquoi pas ?",
+     "cs": "Proč ne?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Hier, j'ai épuisé tout mon quota.",
+     "cs": "Včera jsem vyčerpal celý svůj limit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "exceptionnelle",
+     "cs": "mimořádná"
+    },
+    {
+     "word": "pardon",
+     "cs": "prominutí"
+    },
+    {
+     "word": "quota",
+     "cs": "limit, kvóta"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi M. Lehmann n'est-il pas en retard le premier jour ?",
+     "options": [
+      "Il est une heure en avance.",
+      "Il prend le bus.",
+      "Le rendez-vous est annulé."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi ne s'excuse-t-il pas le lendemain ?",
+     "options": [
+      "Il a épuisé ses excuses hier.",
+      "Il est fâché contre Doris.",
+      "Il a oublié."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1916,6 +1916,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-03-apologies",
+   "level": "B1",
+   "title": "Entschuldigungen ohne Ende",
+   "title_cs": "Omluvy bez konce",
+   "lines": [
+    {
+     "text": "Herr Lehmann war ein außergewöhnlich höflicher Mensch. Er entschuldigte sich für alles, sogar für das Wetter.",
+     "cs": "Pan Lehmann byl mimořádně zdvořilý člověk. Omlouval se za všechno, dokonce i za počasí."
+    },
+    {
+     "text": "Eines Morgens kam er um Punkt acht Uhr ins Büro. Der Termin war erst um neun.",
+     "cs": "Jednoho rána přišel do kanceláře přesně v osm. Schůzka byla v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Es tut mir unendlich leid, dass ich zu spät bin!",
+     "cs": "Nesmírně se omlouvám, že jdu pozdě!"
+    },
+    {
+     "speaker": "Doris",
+     "text": "Aber Herr Lehmann, es ist erst acht. Der Termin ist um neun.",
+     "cs": "Ale pane Lehmanne, je teprve osm. Schůzka je v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Dann entschuldige ich mich dafür, dass ich Sie so früh gestört habe.",
+     "cs": "Pak se omlouvám, že jsem vás tak brzy vyrušil."
+    },
+    {
+     "text": "Er schrieb eine lange E-Mail an alle Kollegen und bat um Verzeihung für seine Pünktlichkeit.",
+     "cs": "Napsal dlouhý e-mail všem kolegům a prosil o prominutí za svou přesnost."
+    },
+    {
+     "text": "Die Antworten kamen schnell. Alle entschuldigten sich aus Höflichkeit zurück. Bis Mittag war der Posteingang voll.",
+     "cs": "Odpovědi přišly rychle. Všichni se z ohleduplnosti omluvili zpátky. Do poledne byla schránka plná."
+    },
+    {
+     "text": "Am nächsten Tag kam Herr Lehmann zwanzig Minuten zu spät.",
+     "cs": "Druhý den přišel pan Lehmann o dvacet minut později."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Herr Lehmann! Wo waren Sie? Geht es Ihnen gut?",
+     "cs": "Pane Lehmanne! Kde jste byl? Je vám dobře?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Ich habe mich verspätet. Aber ich entschuldige mich nicht.",
+     "cs": "Zpozdil jsem se. Ale neomlouvám se."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Warum nicht?",
+     "cs": "Proč ne?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Ich habe gestern mein ganzes Kontingent verbraucht.",
+     "cs": "Včera jsem vyčerpal celý svůj limit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "außergewöhnlich",
+     "cs": "mimořádně"
+    },
+    {
+     "word": "Verzeihung",
+     "cs": "prominutí"
+    },
+    {
+     "word": "Kontingent",
+     "cs": "limit, kvóta"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum ist Herr Lehmann am ersten Tag nicht zu spät?",
+     "options": [
+      "Er ist eine Stunde zu früh.",
+      "Er nimmt den Bus.",
+      "Der Termin ist abgesagt."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum entschuldigt er sich am nächsten Tag nicht?",
+     "options": [
+      "Er hat gestern zu viele Entschuldigungen verbraucht.",
+      "Er ist böse auf Doris.",
+      "Er hat es vergessen."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

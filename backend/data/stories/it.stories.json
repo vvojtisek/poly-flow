@@ -1916,6 +1916,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-03-apologies",
+   "level": "B1",
+   "title": "Scuse senza fine",
+   "title_cs": "Omluvy bez konce",
+   "lines": [
+    {
+     "text": "Il signor Lehmann era di una cortesia eccezionale. Si scusava di tutto, perfino del tempo.",
+     "cs": "Pan Lehmann byl mimořádně zdvořilý člověk. Omlouval se za všechno, dokonce i za počasí."
+    },
+    {
+     "text": "Una mattina è arrivato in ufficio alle otto in punto. L'appuntamento era solo alle nove.",
+     "cs": "Jednoho rána přišel do kanceláře přesně v osm. Schůzka byla v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Mi dispiace infinitamente di essere in ritardo!",
+     "cs": "Nesmírně se omlouvám, že jdu pozdě!"
+    },
+    {
+     "speaker": "Doris",
+     "text": "Ma signor Lehmann, sono solo le otto. L'appuntamento è alle nove.",
+     "cs": "Ale pane Lehmanne, je teprve osm. Schůzka je v devět."
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Allora mi scuso di averla disturbata così presto.",
+     "cs": "Pak se omlouvám, že jsem vás tak brzy vyrušil."
+    },
+    {
+     "text": "Ha scritto una lunga e-mail a tutti i colleghi e ha chiesto perdono per la sua puntualità.",
+     "cs": "Napsal dlouhý e-mail všem kolegům a prosil o prominutí za svou přesnost."
+    },
+    {
+     "text": "Le risposte sono arrivate subito. Tutti si sono scusati a loro volta, per cortesia. A mezzogiorno la posta in arrivo era piena.",
+     "cs": "Odpovědi přišly rychle. Všichni se z ohleduplnosti omluvili zpátky. Do poledne byla schránka plná."
+    },
+    {
+     "text": "Il giorno dopo il signor Lehmann è arrivato con venti minuti di ritardo.",
+     "cs": "Druhý den přišel pan Lehmann o dvacet minut později."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Signor Lehmann! Dov'era? Sta bene?",
+     "cs": "Pane Lehmanne! Kde jste byl? Je vám dobře?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Sono in ritardo. Ma non mi scuso.",
+     "cs": "Zpozdil jsem se. Ale neomlouvám se."
+    },
+    {
+     "speaker": "Doris",
+     "text": "Perché no?",
+     "cs": "Proč ne?"
+    },
+    {
+     "speaker": "Lehmann",
+     "text": "Ieri ho esaurito tutta la mia quota.",
+     "cs": "Včera jsem vyčerpal celý svůj limit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "eccezionale",
+     "cs": "mimořádná"
+    },
+    {
+     "word": "perdono",
+     "cs": "prominutí"
+    },
+    {
+     "word": "quota",
+     "cs": "limit, kvóta"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché il signor Lehmann non è in ritardo il primo giorno?",
+     "options": [
+      "È un'ora in anticipo.",
+      "Prende l'autobus.",
+      "L'appuntamento è annullato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché non si scusa il giorno dopo?",
+     "options": [
+      "Ieri ha esaurito le scuse.",
+      "È arrabbiato con Doris.",
+      "Se n'è dimenticato."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
