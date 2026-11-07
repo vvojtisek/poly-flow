@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
 import { Panel } from "@/components/Panel";
+import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
 import { ApiError, getGenders, type GenderNoun, type GenderSet, type Language } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
@@ -132,15 +133,14 @@ function Sorter({ data, mode, onRoundEnd }: { data: GenderSet; mode: "practice" 
   return (
     <div className="flex flex-col gap-4">
       {mode === "round" ? (
-        <div className="flex flex-col gap-1">
-          <div className="h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800" role="progressbar" aria-valuemin={0} aria-valuemax={ROUND_QUESTIONS} aria-valuenow={Math.min(total, ROUND_QUESTIONS)}>
-            <div className="h-full bg-brand-500 transition-[width]" style={{ width: `${(Math.min(total, ROUND_QUESTIONS) / ROUND_QUESTIONS) * 100}%` }} />
-          </div>
-          <p className="flex justify-between text-sm text-slate-500">
-            <span>{t.roundProgress(Math.min(total, ROUND_QUESTIONS), ROUND_QUESTIONS)}</span>
-            <span>{t.untimedRound}</span>
-          </p>
-        </div>
+        <SessionProgress
+          current={Math.min(total + 1, ROUND_QUESTIONS)}
+          done={Math.min(total, ROUND_QUESTIONS)}
+          total={ROUND_QUESTIONS}
+          label={t.roundProgress(Math.min(total, ROUND_QUESTIONS), ROUND_QUESTIONS)}
+        >
+          <span>{t.untimedRound}</span>
+        </SessionProgress>
       ) : (
         <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-500">
           <span>{total > 0 && t.score(right, total)}</span>

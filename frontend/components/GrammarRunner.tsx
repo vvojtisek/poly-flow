@@ -7,6 +7,7 @@ import { AnswerInput } from "@/components/AnswerInput";
 import { GrammarNotes } from "@/components/GrammarNotes";
 import { KeyHint, ShortcutLegend } from "@/components/Kbd";
 import { TutorButton } from "@/components/TutorButton";
+import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
 import {
   answerGrammar,
@@ -379,8 +380,7 @@ export function GrammarRunner({
 
   return wrap(
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between gap-2 text-xs text-slate-500">
-        <span>{cs.grammar.exercise(item.position + 1, item.total)}</span>
+      <div className="flex items-center justify-end gap-2 text-xs text-slate-500">
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           {item.is_remediation ? (
             <span className="inline-flex items-center gap-1">
@@ -393,9 +393,7 @@ export function GrammarRunner({
           )}
         </span>
       </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-        <div className="h-full bg-brand-500" style={{ width: `${(item.position / item.total) * 100}%` }} />
-      </div>
+      <SessionProgress current={item.position + 1} total={item.total} label={cs.grammar.exercise(item.position + 1, item.total)} />
 
       <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <p className="text-sm text-slate-500">{kindLabel(item)}</p>

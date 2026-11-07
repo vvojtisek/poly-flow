@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { KeyHint, ShortcutLegend } from "@/components/Kbd";
 import { OPTION_BASE, OPTION_STATES } from "@/components/LessonRunner";
 import { PlayButton } from "@/components/PlayButton";
+import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
 import {
   answerDiagnostic,
@@ -135,12 +136,12 @@ export function DiagnosticRunner({ language, englishVariant = "uk", onAgain }: {
   const theta = feedback?.theta ?? q.theta;
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between text-sm text-slate-500">
-        <span>{cs.cefr.question(q.asked + 1, q.max_items)}</span>
+      <div className="flex justify-end text-sm text-slate-500">
         <button type="button" className="underline-offset-2 hover:underline" onClick={() => void stop()} disabled={busy}>
           {cs.cefr.stop}
         </button>
       </div>
+      <SessionProgress current={q.asked + 1} total={q.max_items} upperBound label={cs.cefr.question(q.asked + 1, q.max_items)} />
       <div className="flex flex-col gap-1">
         <p className="text-xs text-slate-500">{cs.cefr.probing}</p>
         <BandLadder band={q.band} theta={theta} />

@@ -8,6 +8,14 @@ export const cs = {
   tagline: "Rodinná jazyková škola – němčina, francouzština, italština, angličtina",
   todayPractice: "Dnešní procvičování",
   startDrill: "Začít procvičovat",
+  sessionProgress: {
+    label: "Průběh",
+    question: (n: number, total: number) => `Otázka ${n} z ${total}`,
+    card: (n: number, total: number) => `Kartička ${n} z ${total}`,
+    remaining: (n: number) => `Zbývá: ${n}`,
+    remainingAtMost: (n: number) => `Zbývá nejvýš: ${n}`,
+    valueText: (n: number, total: number, percent: number) => `${n} z ${total}, hotovo ${percent} %`,
+  },
   comingSoon: "Připravujeme",
   dashboard: {
     title: "Přehled",
