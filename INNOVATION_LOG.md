@@ -1415,3 +1415,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/practice.ts` now also stores the last-open time per mode (`pf_mode_visits`, validated on read, local to the device and never sent to the server, like the existing recent list). Each card in `app/practice/page.tsx` shows "Naposledy dnes / včera / před 5 dny" or "Zatím nevyzkoušeno". New `relativePast` helper in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/dictation`, then `/practice` showed "Naposledy dnes" on the Diktát card.
+
+## Global Cycle 33/120 | Page: [/practice] (Page Cycle 3/15)
+
+**Summary:** mark modes that need lesson words before the first lesson
+
+**Observed Problem:** In a language with no lessons yet, role-play, dictation, shadowing and word order looked as available as the rest, but each builds on scenes or example sentences the learner has met and opened to an empty state.
+
+**Implemented Solution:** `lib/practice.ts` flags the four modes with `needsWords`. `app/practice/page.tsx` reads the learner's introduced-word count for the active language from the cheap per-language summary endpoint (cycle 5) and, while it is zero, replaces those cards' last-used line with "Pracuje se slovy z lekcí: nejdřív projdi první lekci." The cards stay links (the modes explain themselves); the other eight modes, which use the whole lexicon, are unchanged.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright in French (no lessons) shows the note on exactly 4 cards, and none in German.

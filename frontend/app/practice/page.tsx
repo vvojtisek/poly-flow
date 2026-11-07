@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Notice } from "@/components/ui";
-import { getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
+import { getLanguageSummaries, getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativePast } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent, readVisits, SKILLS, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
@@ -39,7 +39,7 @@ function chip(active: boolean) {
   }`;
 }
 
-function Card({ m, tint, pinned, onToggle, visited }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void; visited: string | undefined }) {
+function Card({ m, tint, pinned, onToggle, visited, locked }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void; visited: string | undefined; locked: boolean }) {
   const copy = t.mode[m.id]!;
   return (
     <div className={`relative h-full rounded-3xl border border-slate-200 bg-gradient-to-br ${tint} transition-transform hover:-translate-y-0.5 hover:border-brand-500 motion-reduce:transition-none dark:border-slate-800`}>
@@ -51,7 +51,11 @@ function Card({ m, tint, pinned, onToggle, visited }: { m: PracticeMode; tint: s
           <span className="text-lg font-bold">{copy.title}</span>
         </span>
         <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
-        <span className="text-xs text-slate-500">{visited ? t.lastVisit(relativePast(visited)) : t.neverVisited}</span>
+        {locked ? (
+          <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">{t.needsLesson}</span>
+        ) : (
+          <span className="text-xs text-slate-500">{visited ? t.lastVisit(relativePast(visited)) : t.neverVisited}</span>
+        )}
         <span className="mt-auto flex flex-wrap gap-1">
           {m.skills.map((s) => (
             <span key={s} className="rounded-full bg-white/70 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-900/70 dark:text-slate-300">
@@ -75,6 +79,8 @@ export default function PracticePage() {
   const [pinned, setPinned] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
+  // Words met in this language; modes built on them are marked until the first lesson.
+  const [introduced, setIntroduced] = useState<number | null>(null);
   useEffect(() => setRecent(readRecent()), []);
   useEffect(() => setPinned(readPinned()), []);
   const [visits, setVisits] = useState<ReturnType<typeof readVisits>>({});
@@ -84,6 +90,10 @@ export default function PracticePage() {
     let cancelled = false;
     setWeakSpots(null);
     setWeakFailed(false);
+    setIntroduced(null);
+    getLanguageSummaries()
+      .then((rows) => !cancelled && setIntroduced(rows.find((r) => r.language === me.acting.active_language)?.introduced ?? 0))
+      .catch(() => undefined);
     getWeakSpots(me.acting.active_language)
       .then((data) => !cancelled && setWeakSpots(data))
       .catch(() => !cancelled && setWeakFailed(true));
@@ -202,7 +212,7 @@ export default function PracticePage() {
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((m) => (
             <li key={m.id}>
-              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} />
+              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} />
             </li>
           ))}
         </ul>

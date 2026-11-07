@@ -13,16 +13,17 @@ export interface PracticeMode {
   icon: LucideIcon;
   skills: Skill[];
   languages?: Language[]; // only these languages; all when absent
+  needsWords?: boolean; // builds on words or scenes the learner has met in lessons
 }
 
 export const PRACTICE_MODES: PracticeMode[] = [
-  { id: "roleplay", href: "/roleplay", icon: Drama, skills: ["reading", "writing", "listening"] },
-  { id: "dictation", href: "/dictation", icon: Headphones, skills: ["listening", "writing"] },
-  { id: "shadowing", href: "/shadowing", icon: Waves, skills: ["listening", "speaking"] },
+  { id: "roleplay", needsWords: true, href: "/roleplay", icon: Drama, skills: ["reading", "writing", "listening"] },
+  { id: "dictation", needsWords: true, href: "/dictation", icon: Headphones, skills: ["listening", "writing"] },
+  { id: "shadowing", needsWords: true, href: "/shadowing", icon: Waves, skills: ["listening", "speaking"] },
   { id: "genders", href: "/genders", icon: Shapes, skills: ["grammar"], languages: ["de", "fr", "it"] },
   { id: "cases", href: "/grammar/cases", icon: FlaskConical, skills: ["grammar"], languages: ["de"] },
   { id: "verbs", href: "/grammar/verbs", icon: Repeat, skills: ["grammar", "writing"], languages: ["de", "fr", "it"] },
-  { id: "wordOrder", href: "/word-order", icon: ArrowDownUp, skills: ["grammar", "reading"] },
+  { id: "wordOrder", needsWords: true, href: "/word-order", icon: ArrowDownUp, skills: ["grammar", "reading"] },
   { id: "numbers", href: "/numbers", icon: Hash, skills: ["listening", "writing", "reading"] },
   { id: "clock", href: "/clock", icon: AlarmClock, skills: ["reading", "listening"] },
   { id: "sounds", href: "/sounds", icon: AudioLines, skills: ["speaking", "reading"] },
