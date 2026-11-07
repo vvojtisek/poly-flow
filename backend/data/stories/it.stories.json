@@ -5415,6 +5415,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-27-referee-silence",
+   "level": "B1",
+   "title": "L'arbitro silenzioso",
+   "title_cs": "Tichý rozhodčí",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom doveva arbitrare un'amichevole di hockey.",
+     "cs": "Tom dostal za úkol rozhodovat přátelský hokejový zápas."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Sarò imparziale e soprattutto non farò aspettare i giocatori.",
+     "cs": "Budu spravedlivý a hlavně nenechám hráče zbytečně čekat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Perché allora siamo fermi da cinque minuti senza che succeda niente?",
+     "cs": "Tak proč už pět minut stojíme a nic se neděje?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Aspetto che qualcuno mi dia il fischietto.",
+     "cs": "Čekám, až mi někdo podá píšťalku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ce l'hai in bocca dall'inizio.",
+     "cs": "Vždyť ji máš celou dobu v puse."
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha tolto il fischietto: Certamente. Non volevo semplicemente parlare con la bocca piena.",
+     "cs": "Tom vyndal píšťalku: Samozřejmě. Jen jsem nechtěl mluvit s plnou pusou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "arbitrare",
+     "cs": "rozhodovat zápas"
+    },
+    {
+     "word": "imparziale",
+     "cs": "nestranný"
+    },
+    {
+     "word": "fischietto",
+     "cs": "píšťalka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Na co Tom čeká?",
+     "options": [
+      "Na píšťalku, kterou už má.",
+      "Na brankáře.",
+      "Na nové brusle."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje mlčení?",
+     "options": [
+      "Nechtěl mluvit s plnou pusou.",
+      "Zapomněl pravidla.",
+      "Byl unavený."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

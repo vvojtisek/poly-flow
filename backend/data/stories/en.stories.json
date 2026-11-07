@@ -5415,6 +5415,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-27-referee-silence",
+   "level": "B1",
+   "title": "The Silent Referee",
+   "title_cs": "Tichý rozhodčí",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom was asked to referee a friendly hockey match.",
+     "cs": "Tom dostal za úkol rozhodovat přátelský hokejový zápas."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'll be impartial, and above all I won't keep the players waiting.",
+     "cs": "Budu spravedlivý a hlavně nenechám hráče zbytečně čekat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Then why have we been standing here for five minutes without anything happening?",
+     "cs": "Tak proč už pět minut stojíme a nic se neděje?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'm waiting for someone to hand me the whistle.",
+     "cs": "Čekám, až mi někdo podá píšťalku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "You've had it in your mouth the whole time.",
+     "cs": "Vždyť ji máš celou dobu v puse."
+    },
+    {
+     "speaker": null,
+     "text": "Tom took out the whistle: Naturally. I just didn't want to speak with my mouth full.",
+     "cs": "Tom vyndal píšťalku: Samozřejmě. Jen jsem nechtěl mluvit s plnou pusou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "referee",
+     "cs": "rozhodovat zápas"
+    },
+    {
+     "word": "impartial",
+     "cs": "nestranný"
+    },
+    {
+     "word": "whistle",
+     "cs": "píšťalka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Na co Tom čeká?",
+     "options": [
+      "Na píšťalku, kterou už má.",
+      "Na brankáře.",
+      "Na nové brusle."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje mlčení?",
+     "options": [
+      "Nechtěl mluvit s plnou pusou.",
+      "Zapomněl pravidla.",
+      "Byl unavený."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

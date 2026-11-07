@@ -5415,6 +5415,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-27-referee-silence",
+   "level": "B1",
+   "title": "L'arbitre silencieux",
+   "title_cs": "Tichý rozhodčí",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom devait arbitrer un match amical de hockey.",
+     "cs": "Tom dostal za úkol rozhodovat přátelský hokejový zápas."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Je serai impartial et surtout je ne ferai pas attendre les joueurs.",
+     "cs": "Budu spravedlivý a hlavně nenechám hráče zbytečně čekat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Pourquoi sommes-nous alors immobiles depuis cinq minutes sans que rien ne se passe ?",
+     "cs": "Tak proč už pět minut stojíme a nic se neděje?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "J'attends que quelqu'un me donne le sifflet.",
+     "cs": "Čekám, až mi někdo podá píšťalku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tu l'as dans la bouche depuis le début.",
+     "cs": "Vždyť ji máš celou dobu v puse."
+    },
+    {
+     "speaker": null,
+     "text": "Tom a retiré le sifflet : Bien sûr. Je ne voulais simplement pas parler la bouche pleine.",
+     "cs": "Tom vyndal píšťalku: Samozřejmě. Jen jsem nechtěl mluvit s plnou pusou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "arbitrer",
+     "cs": "rozhodovat zápas"
+    },
+    {
+     "word": "impartial",
+     "cs": "nestranný"
+    },
+    {
+     "word": "sifflet",
+     "cs": "píšťalka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Na co Tom čeká?",
+     "options": [
+      "Na píšťalku, kterou už má.",
+      "Na brankáře.",
+      "Na nové brusle."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje mlčení?",
+     "options": [
+      "Nechtěl mluvit s plnou pusou.",
+      "Zapomněl pravidla.",
+      "Byl unavený."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

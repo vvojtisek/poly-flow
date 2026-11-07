@@ -5415,6 +5415,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-27-referee-silence",
+   "level": "B1",
+   "title": "Der stille Schiedsrichter",
+   "title_cs": "Tichý rozhodčí",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom sollte ein freundschaftliches Eishockeyspiel als Schiedsrichter leiten.",
+     "cs": "Tom dostal za úkol rozhodovat přátelský hokejový zápas."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich werde unparteiisch sein und die Spieler vor allem nicht warten lassen.",
+     "cs": "Budu spravedlivý a hlavně nenechám hráče zbytečně čekat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Warum stehen wir dann seit fünf Minuten hier, ohne dass etwas passiert?",
+     "cs": "Tak proč už pět minut stojíme a nic se neděje?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich warte darauf, dass mir jemand die Pfeife reicht.",
+     "cs": "Čekám, až mi někdo podá píšťalku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Die hast du doch die ganze Zeit im Mund.",
+     "cs": "Vždyť ji máš celou dobu v puse."
+    },
+    {
+     "speaker": null,
+     "text": "Tom nahm die Pfeife heraus: Natürlich. Ich wollte nur nicht mit vollem Mund sprechen.",
+     "cs": "Tom vyndal píšťalku: Samozřejmě. Jen jsem nechtěl mluvit s plnou pusou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Schiedsrichter",
+     "cs": "rozhodčí"
+    },
+    {
+     "word": "unparteiisch",
+     "cs": "nestranný"
+    },
+    {
+     "word": "Pfeife",
+     "cs": "píšťalka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Na co Tom čeká?",
+     "options": [
+      "Na píšťalku, kterou už má.",
+      "Na brankáře.",
+      "Na nové brusle."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje mlčení?",
+     "options": [
+      "Nechtěl mluvit s plnou pusou.",
+      "Zapomněl pravidla.",
+      "Byl unavený."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
