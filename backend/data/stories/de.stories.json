@@ -4767,6 +4767,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-18-medieval-watch",
+   "level": "B1",
+   "title": "Die mittelalterliche Uhr",
+   "title_cs": "Středověký čas",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom führte Besucher in einem sorgfältig vorbereiteten mittelalterlichen Kostüm durch eine Burg.",
+     "cs": "Tom prováděl návštěvníky hradu v pečlivě připraveném středověkém kostýmu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Unsere Vorführung zeigt das Leben ohne Strom und moderne Erfindungen.",
+     "cs": "Naše představení ukazuje život bez elektřiny a moderních vynálezů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Woher wissen Sie dann, wann es Zeit fürs Mittagessen ist?",
+     "cs": "Jak tedy poznáte, kdy je čas na oběd?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Von der Sonne. Unsere Vorfahren kannten die Natur sehr gut.",
+     "cs": "Podle slunce. Naši předkové dobře znali přírodu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und warum piept gerade jetzt Ihr Ärmel?",
+     "cs": "A proč vám právě teď pípá rukáv?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom versteckte seine Uhr: Das ist nur eine sehr genau trainierte Grille.",
+     "cs": "Tom schoval hodinky: To je jen velmi přesně vycvičený cvrček."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "mittelalterlichen",
+     "cs": "středověký"
+    },
+    {
+     "word": "Vorfahren",
+     "cs": "předkové"
+    },
+    {
+     "word": "Grille",
+     "cs": "cvrček"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Tom schované v rukávu?",
+     "options": [
+      "Hodinky.",
+      "Cvrčka.",
+      "Vstupenku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje pípání?",
+     "options": [
+      "Vycvičeným cvrčkem.",
+      "Bouřkou.",
+      "Telefonem návštěvníka."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

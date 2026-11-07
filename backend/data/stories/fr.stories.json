@@ -4767,6 +4767,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-18-medieval-watch",
+   "level": "B1",
+   "title": "L'heure médiévale",
+   "title_cs": "Středověký čas",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom guidait les visiteurs d'un château dans un costume médiéval soigneusement préparé.",
+     "cs": "Tom prováděl návštěvníky hradu v pečlivě připraveném středověkém kostýmu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Notre spectacle montre la vie sans électricité ni inventions modernes.",
+     "cs": "Naše představení ukazuje život bez elektřiny a moderních vynálezů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Comment savez-vous alors quand c'est l'heure du déjeuner ?",
+     "cs": "Jak tedy poznáte, kdy je čas na oběd?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Grâce au soleil. Nos ancêtres connaissaient très bien la nature.",
+     "cs": "Podle slunce. Naši předkové dobře znali přírodu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Et pourquoi votre manche sonne-t-elle en ce moment ?",
+     "cs": "A proč vám právě teď pípá rukáv?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a caché sa montre : C'est seulement un grillon entraîné avec une grande précision.",
+     "cs": "Tom schoval hodinky: To je jen velmi přesně vycvičený cvrček."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "médiéval",
+     "cs": "středověký"
+    },
+    {
+     "word": "ancêtres",
+     "cs": "předkové"
+    },
+    {
+     "word": "grillon",
+     "cs": "cvrček"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Tom schované v rukávu?",
+     "options": [
+      "Hodinky.",
+      "Cvrčka.",
+      "Vstupenku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje pípání?",
+     "options": [
+      "Vycvičeným cvrčkem.",
+      "Bouřkou.",
+      "Telefonem návštěvníka."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

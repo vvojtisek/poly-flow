@@ -4767,6 +4767,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-18-medieval-watch",
+   "level": "B1",
+   "title": "L'ora medievale",
+   "title_cs": "Středověký čas",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom guidava i visitatori di un castello con un costume medievale preparato con cura.",
+     "cs": "Tom prováděl návštěvníky hradu v pečlivě připraveném středověkém kostýmu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Il nostro spettacolo mostra la vita senza elettricità e invenzioni moderne.",
+     "cs": "Naše představení ukazuje život bez elektřiny a moderních vynálezů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Come sapete allora quando è ora di pranzare?",
+     "cs": "Jak tedy poznáte, kdy je čas na oběd?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Grazie al sole. I nostri antenati conoscevano molto bene la natura.",
+     "cs": "Podle slunce. Naši předkové dobře znali přírodu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E perché proprio adesso la vostra manica emette un suono?",
+     "cs": "A proč vám právě teď pípá rukáv?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha nascosto l'orologio: È soltanto un grillo addestrato con grande precisione.",
+     "cs": "Tom schoval hodinky: To je jen velmi přesně vycvičený cvrček."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "medievale",
+     "cs": "středověký"
+    },
+    {
+     "word": "antenati",
+     "cs": "předkové"
+    },
+    {
+     "word": "grillo",
+     "cs": "cvrček"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Tom schované v rukávu?",
+     "options": [
+      "Hodinky.",
+      "Cvrčka.",
+      "Vstupenku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje pípání?",
+     "options": [
+      "Vycvičeným cvrčkem.",
+      "Bouřkou.",
+      "Telefonem návštěvníka."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
