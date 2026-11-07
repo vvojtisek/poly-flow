@@ -118,7 +118,11 @@ function Heatmap({ data, selected, onSelect, mode }: { data: Insights["heatmap"]
   );
 }
 
+const DAY_WORDS = 8; // words shown for a day before "show all": a busy day can list 40+
+
 function ActivityDetails({ data, date, loading, failed, language, onRetry }: { data: ActivityDay | null; date: string | null; loading: boolean; failed: boolean; language: string; onRetry: () => void }) {
+  const [allWords, setAllWords] = useState(false);
+  useEffect(() => setAllWords(false), [date]);
   if (!date) return null;
   return (
     <section className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-800" aria-live="polite">
@@ -128,7 +132,7 @@ function ActivityDetails({ data, date, loading, failed, language, onRetry }: { d
           {data.words.length > 0 && <section>
             <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityWords}</h4>
             <ul className="flex flex-col gap-1" lang={language}>
-              {data.words.map((word) => (
+              {(allWords ? data.words : data.words.slice(0, DAY_WORDS)).map((word) => (
                 <li key={word.id} className="flex items-center gap-1">
                   <a href={`/words?word=${word.id}`} className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
                     <span className="font-medium">
@@ -142,6 +146,11 @@ function ActivityDetails({ data, date, loading, failed, language, onRetry }: { d
                 </li>
               ))}
             </ul>
+            {data.words.length > DAY_WORDS && (
+              <button type="button" onClick={() => setAllWords(!allWords)} className="mt-1 px-2 text-sm font-medium text-brand-700 hover:underline dark:text-brand-200">
+                {allWords ? t.fewerWords : t.allWords(data.words.length)}
+              </button>
+            )}
           </section>}
           {data.grammar.length > 0 && <section>
             <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityGrammar}</h4>
@@ -300,8 +309,9 @@ function Forecast({
               <div className="bg-amber-400" style={{ flexGrow: d.grammar }} />
               <div className="bg-brand-500" style={{ flexGrow: d.words }} />
             </div>
-            <span className={`text-[0.6rem] ${i === 0 ? "font-bold text-slate-700 dark:text-slate-200" : "text-slate-400"}`}>
-              {i === 0 ? t.today : dayFmt(d.date)}
+            <span className={`whitespace-nowrap text-[0.6rem] ${i === 0 ? "font-bold text-slate-700 dark:text-slate-200" : "text-slate-400"}`}>
+              {/* Day of month only (the month when it changes) so 14 labels fit a phone. */}
+              {i === 0 ? t.today : d.date.slice(8) === "01" ? dayFmt(d.date) : `${Number(d.date.slice(8))}.`}
             </span>
           </button>
         );

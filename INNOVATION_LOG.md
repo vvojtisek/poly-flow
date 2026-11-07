@@ -1815,3 +1815,13 @@ Vlad approves a push.
 **Implemented Solution:** When the language has no active days, no studied words and nothing in the forecast, the page shows one dashed card: what the statistics will show, why nothing is there yet, and a 'Začít lekci' button to /lesson/vocabulary. The weekly recap is hidden in that state. With data present but no checks, the mistakes panel says 'Zatím žádné ověření…' instead of claiming there were no mistakes.
 
 **Verification:** Playwright 390px: switching to Francouzština shows the first-run card once with no recap (screenshot inspected); switching back to Němčina shows the 6 panels including the recap. API confirms fr has active_days 0 and an all-zero funnel. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 73/120 | Page: [/insights] (Page Cycle 13/15)
+
+**Summary:** shorten the statistics page on phones
+
+**Observed Problem:** At 390px the statistics page was 4361px tall. The weekly recap stacked its four stat tiles one per row, a busy day's activity listed all 41 practised words, and the 14 forecast labels ('8. 11.') wrapped onto two lines under bars about 20px wide.
+
+**Implemented Solution:** The recap tiles form a 2x2 grid on phones (four across on desktop), which also tightens the dashboard where the recap is reused. A day's word list shows the first 8 words with 'Zobrazit všech N slov' / 'Zobrazit méně'; the toggle resets when another day is picked. Forecast labels show only the day of month ('9.'), with the full date at a month start, and do not wrap.
+
+**Verification:** Playwright 390px: page height went from 4361px to 2918px; the overflow scan finds no element wider than the viewport; the forecast screenshot shows single-line labels 'dnes 8. 9. … 20.'. No console errors. typecheck, next build, ruff pass.

@@ -1047,6 +1047,8 @@ export const cs = {
     heatmapKeys: "Šipky: ← → týden, ↑ ↓ den",
     heatModeLabel: "Co kalendář ukazuje",
     loadFailed: "Statistiky se nepodařilo načíst.",
+    allWords: (n: number) => `Zobrazit všech ${n} slov`,
+    fewerWords: "Zobrazit méně",
     dayFailed: "Přehled dne se nepodařilo načíst.",
     weekdays: ["Po", "Út", "St", "Čt", "Pá", "So", "Ne"],
     months: ["led", "úno", "bře", "dub", "kvě", "čvn", "čvc", "srp", "zář", "říj", "lis", "pro"],
