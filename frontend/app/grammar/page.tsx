@@ -242,6 +242,8 @@ export default function GrammarPage() {
   const [errorsOnly, setErrorsOnly] = useState(false);
   // Back from a lesson (?studied=<unit>): bring that topic into view and mark it briefly.
   const [justStudied, setJustStudied] = useState<string | null>(null);
+  // Kept after the highlight fades, so a collapsed group that holds that topic opens once and stays.
+  const [revealUnit, setRevealUnit] = useState<string | null>(null);
 
   // Explanation text per unit, fetched the first time the learner searches (about 30 kB).
   const [index, setIndex] = useState<Map<string, string> | null>(null);
@@ -293,6 +295,7 @@ export default function GrammarPage() {
     setDueOnly(params.get("due") === "1");
     setErrorsOnly(params.get("errors") === "1");
     setJustStudied(params.get("studied"));
+    setRevealUnit(params.get("studied"));
     setUrlRead(true);
   }, []);
   useEffect(() => {
@@ -533,8 +536,8 @@ export default function GrammarPage() {
                     </div>
                     {upcoming.length > 0 && (
                       <Disclosure
-                        key={`up-${activeLevel}-${current.length === 0}`}
-                        defaultOpen={current.length === 0}
+                        key={`up-${activeLevel}-${current.length === 0}-${revealUnit}`}
+                        defaultOpen={current.length === 0 || upcoming.some((u) => u.id === revealUnit)}
                         summary={<GroupSummary title={cs.grammar.upNext} count={upcoming.length} />}
                         summaryClassName="px-1"
                       >
@@ -542,7 +545,12 @@ export default function GrammarPage() {
                       </Disclosure>
                     )}
                     {done.length > 0 && (
-                      <Disclosure summary={<GroupSummary title={cs.grammar.completed} count={done.length} />} summaryClassName="px-1">
+                      <Disclosure
+                        key={`done-${revealUnit}`}
+                        defaultOpen={done.some((u) => u.id === revealUnit)}
+                        summary={<GroupSummary title={cs.grammar.completed} count={done.length} />}
+                        summaryClassName="px-1"
+                      >
                         <div className="pt-2"><UnitGrid units={done} tree={tree} highlight={justStudied} /></div>
                       </Disclosure>
                     )}
@@ -573,7 +581,8 @@ export default function GrammarPage() {
                   const list = unitsOf(level);
                   return (
                     <Disclosure
-                      key={level}
+                      key={`${level}-${revealUnit}`}
+                      defaultOpen={list.some((u) => u.id === revealUnit)}
                       className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
                       summaryClassName="p-3"
                       summary={<LevelHeader level={level} units={list} />}

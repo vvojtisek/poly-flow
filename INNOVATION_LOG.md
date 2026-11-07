@@ -1385,3 +1385,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: "Ostatní úrovně" renders panels only for levels with topics and adds one quiet line for the rest ("C1, C2: zatím bez připravených témat.", `cs.grammar.emptyLevels`). The focus-level picker already offered only levels with topics.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile page shrinks from 2 521 px to 2 277 px with no console errors.
+
+## Global Cycle 30/120 | Page: [/grammar] (Page Cycle 15/15)
+
+**Summary:** open the collapsed group that holds the topic just studied
+
+**Observed Problem:** The return-to-topic jump from cycle 24 failed silently when the studied topic sat in a collapsed group ("Další témata", "Hotovo" or another level such as A2): the card was not rendered, so nothing scrolled or got focus.
+
+**Implemented Solution:** `app/grammar/page.tsx` remembers the `studied` unit for the page visit (separately from the 4-second highlight) and opens whichever disclosure contains it (upcoming, completed or another level's panel) via `defaultOpen`; the group then stays open after the highlight fades. Measured API timings showed no backend bottleneck on this page (tree, progress and levels each answer in about 20 ms locally), so this consolidation cycle went to the edge case instead.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a2-dative` (an A2 topic while the focus level is A1): the A2 panel opened, the card got focus and the highlight.
