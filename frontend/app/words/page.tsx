@@ -11,7 +11,7 @@ import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Button, Notice, RetryNotice, Skeleton } from "@/components/ui";
-import { addWordsToCollection, type DeckScope, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
+import { ApiError, addWordsToCollection, type DeckScope, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { isTypingTarget, useHotkeys } from "@/lib/keyboard";
 import { genderClass } from "@/lib/gender";
@@ -141,14 +141,21 @@ function Article({ gender, lemma }: { gender: string | null; lemma: string }) {
 function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; onTopic: (scope: WordScope) => void }) {
   const [w, setW] = useState<WordDetail | null>(null);
   const [failed, setFailed] = useState(false);
+  const [missing, setMissing] = useState(false);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let cancelled = false;
     setW(null);
     setFailed(false); // a failure belongs to one word; browsing on must not keep showing it
+    setMissing(false);
     getWord(id)
       .then((d) => !cancelled && setW(d))
-      .catch(() => !cancelled && setFailed(true));
+      .catch((e) => {
+        if (cancelled) return;
+        // A stale or shared link to a word this profile never met (or may not see): retrying won't help.
+        if (e instanceof ApiError && e.status === 404) setMissing(true);
+        else setFailed(true);
+      });
     return () => {
       cancelled = true;
     };
@@ -185,8 +192,9 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
         </button>
       </div>
       {failed && <RetryNotice text={t.detailFailed} onRetry={() => setAttempt((n) => n + 1)} />}
+      {missing && <Notice>{t.detailMissing}</Notice>}
       {!w ? (
-        !failed && <Skeleton lines={5} className="mt-2" />
+        !failed && !missing && <Skeleton lines={5} className="mt-2" />
       ) : (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">

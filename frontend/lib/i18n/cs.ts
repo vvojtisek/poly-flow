@@ -445,6 +445,7 @@ export const cs = {
     listFailed: "Seznam slov se nepodařilo načíst.",
     moreFailed: "Další slova se nepodařilo načíst.",
     detailFailed: "Kartu slova se nepodařilo načíst.",
+    detailMissing: "Toto slovo ve tvém slovníku zatím není. Objeví se tu, až ho potkáš v lekci.",
     nothingYet: "Zatím žádné potkané slovo",
     title: "Můj slovník",
     link: "Slovník",

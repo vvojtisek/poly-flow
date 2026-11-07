@@ -383,3 +383,21 @@ async def test_deck_from_picked_words_keeps_only_own_suitable_words(db, client, 
     assert (await client.get(both)).status_code == 422
     many = "&".join(f"ids={uuid.uuid4()}" for _ in range(101))
     assert (await client.get(f"/api/v1/words/deck?language=de&{many}")).status_code == 422
+
+
+async def test_word_search_ignores_diacritics_on_both_sides(db, client, clock):
+    from app.services.words import fold
+
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+
+    async def lemmas(q: str) -> list[str]:
+        out = (await client.get("/api/v1/words", params={"language": "de", "q": q})).json()
+        return [w["lemma"] for w in out["items"]]
+
+    assert await lemmas("dum") == ["Haus"]  # dům, typed without the ring
+    assert await lemmas("schon") == ["schön"]
+    assert await lemmas("HEZKÝ") == ["schön"]
+    assert await lemmas("dům") == ["Haus"]
+    assert await lemmas("50%") == []  # LIKE wildcards stay literal
+    assert fold("Straße Žluťoučký") == "strasse zlutoucky"

@@ -75,6 +75,22 @@ def _order(sort: str) -> list:
     return tail
 
 
+# Accent-insensitive search without a database extension: the same letters folded on both sides.
+# Czech learners often type without diacritics ("dum" for "dům", "schon" for "schön").
+_ACCENTED = "áàâäãåčçćďéèêëěíìîïľĺňñóòôöõőřŕšśťúùûüůűýÿžźż"
+_PLAIN = "aaaaaacccdeeeeeiiiillnnoooooorrsstuuuuuuyyzzz"
+_FOLD = str.maketrans(_ACCENTED, _PLAIN)
+
+
+def fold(text: str) -> str:
+    """Lower case without diacritics; ß becomes ss (Straße ~ strasse)."""
+    return text.lower().translate(_FOLD).replace("ß", "ss")
+
+
+def _folded(column):
+    return func.replace(func.translate(func.lower(column), _ACCENTED, _PLAIN), "ß", "ss")
+
+
 def _escape(q: str) -> str:
     return q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
 
@@ -107,11 +123,11 @@ async def list_words(
     # so the status chips always add up to what the list can show.
     narrow: list = []
     if q and q.strip():
-        pat = f"%{_escape(q.strip().lower())}%"
+        pat = f"%{_escape(fold(q.strip()))}%"
         narrow.append(
             or_(
-                func.lower(li.lemma).like(pat, escape="\\"),
-                func.lower(li.translation_cs).like(pat, escape="\\"),
+                _folded(li.lemma).like(pat, escape="\\"),
+                _folded(li.translation_cs).like(pat, escape="\\"),
             )
         )
     if due:

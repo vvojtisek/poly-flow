@@ -1665,3 +1665,13 @@ Vlad approves a push.
 **Implemented Solution:** On phones the card is a sheet above the navigation (z-50) with a dimmed backdrop that closes it. Page scroll is locked while the sheet is open and restored on close, and the sheet uses overscroll-contain, a max of 85dvh and safe-area bottom padding. A sticky header with a grab handle keeps the close button reachable, and Escape closes the card on every screen size (unless typing). On desktop the card stays a sticky side panel with no backdrop or scroll lock and is capped at the viewport height. Highlighting now matches the tagged word on Unicode word boundaries.
 
 **Verification:** Playwright at 390px: the card opens with body overflow hidden; scrolled to the end, the last text ends at y=823 and is visible above the bottom edge; a backdrop tap closes it and restores overflow; Escape closes it. At 1280px the backdrop is hidden and there is no scroll lock. The highlight for 'in' marks the word in 'Berlin ist eine Stadt in Deutschland', not Berl-in. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 58/120 | Page: [/words] (Page Cycle 13/15)
+
+**Summary:** search without diacritics and explain links to words not in the dictionary
+
+**Observed Problem:** Search matched exact characters only. A Czech learner typing 'skola' did not find 'die Schule — škola', 'dum' did not find 'dům', and a German learner typing 'gross' or 'schon' missed 'groß' and 'schön'. Desktop keyboards without a Czech layout make that the common case. A shared or stale ?word= link to a word the profile has never met showed 'could not load' with a retry button that could never work.
+
+**Implemented Solution:** Search now folds diacritics on both sides without a database extension. In Python, fold() lowercases, maps the Czech, German, French and Italian accented letters and turns ß into ss. In SQL, replace(translate(lower(col))) does the same, so 'dum', 'dům' and 'DŮM' all match the same rows. LIKE wildcards in the input stay literal. A 404 on the word card now shows a calm note ('Toto slovo ve tvém slovníku zatím není…') instead of an error with a useless retry.
+
+**Verification:** New pytest test_word_search_ignores_diacritics_on_both_sides covers dum/dům, schon, HEZKÝ, the '50%' literal and fold('Straße Žluťoučký'); tests/test_words.py 13 passed. Playwright on real data: 'skola' finds die Schule and 'gross' finds groß; ?word=<unknown uuid> shows the missing-word note without a retry button. No console errors apart from the expected 404. typecheck, next build, ruff pass.
