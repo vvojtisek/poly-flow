@@ -1196,6 +1196,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-05-wrong-suitcase",
+   "level": "A2",
+   "title": "The Wrong Suitcase",
+   "title_cs": "Cizí kufr",
+   "lines": [
+    {
+     "text": "After the flight, Maria took her suitcase from the belt. It looked exactly like hers.",
+     "cs": "Po letu vzala Maria z pásu svůj kufr. Vypadal přesně jako její."
+    },
+    {
+     "text": "At the hotel she opened it. Inside were wellies, a fishing hat and five tins of sardines.",
+     "cs": "V hotelu ho otevřela. Byly v něm gumáky, rybářský klobouk a pět plechovek sardinek."
+    },
+    {
+     "speaker": "Maria",
+     "text": "This isn't my suitcase! Tomorrow I have an important meeting!",
+     "cs": "To není můj kufr! Zítra mám důležitou schůzku!"
+    },
+    {
+     "text": "She called the airline, but nobody answered.",
+     "cs": "Zavolala letecké společnosti, ale nikdo to nezvedl."
+    },
+    {
+     "text": "The next morning, Maria went to the meeting in the fishing hat and the wellies.",
+     "cs": "Druhý den ráno šla Maria na schůzku v rybářském klobouku a v gumácích."
+    },
+    {
+     "text": "The client, Mr Rossi, looked at her for a long time.",
+     "cs": "Zákazník, pan Rossi, se na ni dlouho díval."
+    },
+    {
+     "speaker": "Mr Rossi",
+     "text": "You are an angler? I love fishing!",
+     "cs": "Vy jste rybářka? Já miluju rybaření!"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Yes... every Sunday.",
+     "cs": "Ano... každou neděli."
+    },
+    {
+     "text": "They talked about fish for two hours. Then Mr Rossi signed the contract.",
+     "cs": "Dvě hodiny mluvili o rybách. Pak pan Rossi podepsal smlouvu."
+    },
+    {
+     "text": "Later the other traveller called: I have your clothes. Do you have my sardines?",
+     "cs": "Později zavolal druhý cestující: Mám vaše oblečení. Máte moje sardinky?"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Your wellies got me a contract. I'll send you a fish in return!",
+     "cs": "Vaše gumáky mi přinesly smlouvu. Pošlu vám za to rybu!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "airline",
+     "cs": "letecká společnost"
+    },
+    {
+     "word": "contract",
+     "cs": "smlouva"
+    },
+    {
+     "word": "wellies",
+     "cs": "gumáky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What is in the suitcase?",
+     "options": [
+      "Wellies, a hat and sardines",
+      "Clothes and shoes",
+      "Books and papers"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why does Mr Rossi sign the contract?",
+     "options": [
+      "He loves fishing like Maria.",
+      "Maria has a good price.",
+      "He already knows Maria."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1196,6 +1196,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-05-wrong-suitcase",
+   "level": "A2",
+   "title": "La mauvaise valise",
+   "title_cs": "Cizí kufr",
+   "lines": [
+    {
+     "text": "Après le vol, Maria a pris sa valise sur le tapis. Elle ressemblait exactement à la sienne.",
+     "cs": "Po letu vzala Maria z pásu svůj kufr. Vypadal přesně jako její."
+    },
+    {
+     "text": "À l'hôtel, elle l'a ouverte. Dedans, il y avait des bottes en caoutchouc, un chapeau de pêcheur et cinq boîtes de sardines.",
+     "cs": "V hotelu ho otevřela. Byly v něm gumáky, rybářský klobouk a pět plechovek sardinek."
+    },
+    {
+     "speaker": "Maria",
+     "text": "Ce n'est pas ma valise ! Demain, j'ai un rendez-vous important !",
+     "cs": "To není můj kufr! Zítra mám důležitou schůzku!"
+    },
+    {
+     "text": "Elle a appelé la compagnie aérienne, mais personne n'a répondu.",
+     "cs": "Zavolala letecké společnosti, ale nikdo to nezvedl."
+    },
+    {
+     "text": "Le lendemain matin, Maria est allée au rendez-vous avec le chapeau de pêcheur et les bottes.",
+     "cs": "Druhý den ráno šla Maria na schůzku v rybářském klobouku a v gumácích."
+    },
+    {
+     "text": "Le client, M. Rossi, l'a regardée longtemps.",
+     "cs": "Zákazník, pan Rossi, se na ni dlouho díval."
+    },
+    {
+     "speaker": "M. Rossi",
+     "text": "Vous êtes pêcheuse ? J'adore la pêche !",
+     "cs": "Vy jste rybářka? Já miluju rybaření!"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Oui... tous les dimanches.",
+     "cs": "Ano... každou neděli."
+    },
+    {
+     "text": "Ils ont parlé de poissons pendant deux heures. Puis M. Rossi a signé le contrat.",
+     "cs": "Dvě hodiny mluvili o rybách. Pak pan Rossi podepsal smlouvu."
+    },
+    {
+     "text": "Plus tard, l'autre voyageur a appelé : J'ai vos vêtements. Vous avez mes sardines ?",
+     "cs": "Později zavolal druhý cestující: Mám vaše oblečení. Máte moje sardinky?"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Vos bottes m'ont apporté un contrat. Je vous envoie un poisson en échange !",
+     "cs": "Vaše gumáky mi přinesly smlouvu. Pošlu vám za to rybu!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "aérienne",
+     "cs": "letecký"
+    },
+    {
+     "word": "contrat",
+     "cs": "smlouva"
+    },
+    {
+     "word": "caoutchouc",
+     "cs": "guma"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'y a-t-il dans la valise ?",
+     "options": [
+      "Des bottes, un chapeau et des sardines",
+      "Des vêtements et des chaussures",
+      "Des livres et des papiers"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi M. Rossi signe-t-il le contrat ?",
+     "options": [
+      "Il aime la pêche comme Maria.",
+      "Maria a un bon prix.",
+      "Il connaît déjà Maria."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

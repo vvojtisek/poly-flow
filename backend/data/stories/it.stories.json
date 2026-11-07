@@ -1196,6 +1196,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-05-wrong-suitcase",
+   "level": "A2",
+   "title": "La valigia sbagliata",
+   "title_cs": "Cizí kufr",
+   "lines": [
+    {
+     "text": "Dopo il volo Maria ha preso la valigia dal nastro. Sembrava proprio la sua.",
+     "cs": "Po letu vzala Maria z pásu svůj kufr. Vypadal přesně jako její."
+    },
+    {
+     "text": "In albergo l'ha aperta. Dentro c'erano stivali di gomma, un cappello da pescatore e cinque scatolette di sardine.",
+     "cs": "V hotelu ho otevřela. Byly v něm gumáky, rybářský klobouk a pět plechovek sardinek."
+    },
+    {
+     "speaker": "Maria",
+     "text": "Questa non è la mia valigia! Domani ho un incontro importante!",
+     "cs": "To není můj kufr! Zítra mám důležitou schůzku!"
+    },
+    {
+     "text": "Ha chiamato la compagnia aerea, ma nessuno ha risposto.",
+     "cs": "Zavolala letecké společnosti, ale nikdo to nezvedl."
+    },
+    {
+     "text": "La mattina dopo Maria è andata all'incontro con il cappello da pescatore e gli stivali.",
+     "cs": "Druhý den ráno šla Maria na schůzku v rybářském klobouku a v gumácích."
+    },
+    {
+     "text": "Il cliente, il signor Rossi, l'ha guardata a lungo.",
+     "cs": "Zákazník, pan Rossi, se na ni dlouho díval."
+    },
+    {
+     "speaker": "Signor Rossi",
+     "text": "Lei è una pescatrice? Adoro la pesca!",
+     "cs": "Vy jste rybářka? Já miluju rybaření!"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Sì... ogni domenica.",
+     "cs": "Ano... každou neděli."
+    },
+    {
+     "text": "Hanno parlato di pesci per due ore. Poi il signor Rossi ha firmato il contratto.",
+     "cs": "Dvě hodiny mluvili o rybách. Pak pan Rossi podepsal smlouvu."
+    },
+    {
+     "text": "Più tardi l'altro viaggiatore ha telefonato: Ho i suoi vestiti. Ha le mie sardine?",
+     "cs": "Později zavolal druhý cestující: Mám vaše oblečení. Máte moje sardinky?"
+    },
+    {
+     "speaker": "Maria",
+     "text": "I suoi stivali mi hanno portato un contratto. In cambio le mando un pesce!",
+     "cs": "Vaše gumáky mi přinesly smlouvu. Pošlu vám za to rybu!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "aerea",
+     "cs": "letecký"
+    },
+    {
+     "word": "contratto",
+     "cs": "smlouva"
+    },
+    {
+     "word": "scatolette",
+     "cs": "plechovky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa c'è nella valigia?",
+     "options": [
+      "Stivali, un cappello e sardine",
+      "Vestiti e scarpe",
+      "Libri e documenti"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché il signor Rossi firma il contratto?",
+     "options": [
+      "Ama la pesca come Maria.",
+      "Maria ha un buon prezzo.",
+      "Conosce già Maria."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

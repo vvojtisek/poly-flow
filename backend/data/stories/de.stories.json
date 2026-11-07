@@ -1196,6 +1196,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-05-wrong-suitcase",
+   "level": "A2",
+   "title": "Der falsche Koffer",
+   "title_cs": "Cizí kufr",
+   "lines": [
+    {
+     "text": "Nach dem Flug hat Maria ihren Koffer vom Band genommen. Er sah genau wie ihr Koffer aus.",
+     "cs": "Po letu vzala Maria z pásu svůj kufr. Vypadal přesně jako její."
+    },
+    {
+     "text": "Im Hotel hat sie ihn geöffnet. Darin lagen Gummistiefel, ein Angelhut und fünf Dosen Sardinen.",
+     "cs": "V hotelu ho otevřela. Byly v něm gumáky, rybářský klobouk a pět plechovek sardinek."
+    },
+    {
+     "speaker": "Maria",
+     "text": "Das ist nicht mein Koffer! Morgen habe ich ein wichtiges Treffen!",
+     "cs": "To není můj kufr! Zítra mám důležitou schůzku!"
+    },
+    {
+     "text": "Sie hat die Fluggesellschaft angerufen, aber niemand hat geantwortet.",
+     "cs": "Zavolala letecké společnosti, ale nikdo to nezvedl."
+    },
+    {
+     "text": "Am nächsten Morgen ist Maria im Angelhut und in Gummistiefeln zum Treffen gegangen.",
+     "cs": "Druhý den ráno šla Maria na schůzku v rybářském klobouku a v gumácích."
+    },
+    {
+     "text": "Der Kunde, Herr Rossi, hat sie lange angeschaut.",
+     "cs": "Zákazník, pan Rossi, se na ni dlouho díval."
+    },
+    {
+     "speaker": "Herr Rossi",
+     "text": "Sie sind Anglerin? Ich liebe das Angeln!",
+     "cs": "Vy jste rybářka? Já miluju rybaření!"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Ja ... jeden Sonntag.",
+     "cs": "Ano... každou neděli."
+    },
+    {
+     "text": "Sie haben zwei Stunden über Fische gesprochen. Dann hat Herr Rossi den Vertrag unterschrieben.",
+     "cs": "Dvě hodiny mluvili o rybách. Pak pan Rossi podepsal smlouvu."
+    },
+    {
+     "text": "Später hat der andere Reisende angerufen: Ich habe Ihre Kleider. Haben Sie meine Sardinen?",
+     "cs": "Později zavolal druhý cestující: Mám vaše oblečení. Máte moje sardinky?"
+    },
+    {
+     "speaker": "Maria",
+     "text": "Ihre Stiefel haben mir einen Vertrag gebracht. Ich schicke Ihnen dafür einen Fisch!",
+     "cs": "Vaše gumáky mi přinesly smlouvu. Pošlu vám za to rybu!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Fluggesellschaft",
+     "cs": "letecká společnost"
+    },
+    {
+     "word": "Vertrag",
+     "cs": "smlouva"
+    },
+    {
+     "word": "Gummistiefel",
+     "cs": "gumáky"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was ist im Koffer?",
+     "options": [
+      "Gummistiefel, ein Hut und Sardinen",
+      "Kleider und Schuhe",
+      "Bücher und Papiere"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum unterschreibt Herr Rossi den Vertrag?",
+     "options": [
+      "Er liebt das Angeln wie Maria.",
+      "Maria hat einen guten Preis.",
+      "Er kennt Maria schon."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
