@@ -21,7 +21,7 @@ import { Welcome } from "@/components/Welcome";
 import { Button, Notice } from "@/components/ui";
 import { getGrammarTree, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
-import { cs } from "@/lib/i18n/cs";
+import { cs, relativeFuture } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent } from "@/lib/practice";
 import { invalidateRanks, useRanks } from "@/lib/useRanks";
 
@@ -209,7 +209,9 @@ export default function HomePage() {
                     ? t.dailyResume
                     : progress.due_now
                       ? t.dailyDue(progress.due_now)
-                      : t.dailyNone
+                      : progress.next_review_at
+                        ? t.dailyNext(relativeFuture(progress.next_review_at))
+                        : t.dailyNone
               }
             />
             <QuickAction

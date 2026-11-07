@@ -294,6 +294,7 @@ export interface ProgressOverview {
   due_now: number;
   orthography_avg: number | null;
   phonetic_measured: number;
+  next_review_at: string | null;
   grammar_unlocked: boolean;
   grammar_gate: number;
   next_milestone: number | null;

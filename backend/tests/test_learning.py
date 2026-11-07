@@ -582,6 +582,8 @@ async def test_progress_overview(db, client):
     assert p["language"] == "de" and p["lexicon_items"] == 6 and p["seen"] == 4
     assert p["by_state"]["LEARNING"] == 4 and p["known"] == 0
     assert p["introduced"] == 4 and p["due_now"] == 0  # checkable from tomorrow
+    # Nothing due yet, so the dashboard can say when the first check opens.
+    assert p["next_review_at"] is not None
     assert p["next_milestone"] == 100 and p["grammar_gate"] == 1000
     assert p["phonetic_measured"] == 0 and p["active_session_id"] is None
     assert p["active_check_session_id"] is None

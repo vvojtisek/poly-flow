@@ -1125,3 +1125,13 @@ Vlad approves a push.
 **Implemented Solution:** The weak-spots API now returns each word's `item_id` (`backend/app/schemas/learning.py`, `backend/app/api/learning.py`). `components/WeakSpotsCard.tsx` shows the five worst words first with a "Zobrazit všechna (N)" toggle, each row has a play button (dictionary audio) and links to `/words?word=<id>`, which opens that word's inspector. Types in `lib/api.ts`, copy in `lib/i18n/cs.ts`; `tests/test_mistakes.py` asserts the ids.
 
 **Verification:** `tests/test_mistakes.py` 4 passed; ruff, typecheck, production build, `git diff --check` passed; dashboard renders the capped list with audio buttons and no console errors.
+
+## Global Cycle 4/120 | Page: [/] (Page Cycle 4/15)
+
+**Summary:** say when the next review opens instead of a dead "nothing due" card
+
+**Observed Problem:** After a lesson the Daily review card showed a greyed "Dnes nic nečeká" with no hint of when checking becomes possible (words are checkable from the next day), so learners could not plan their return.
+
+**Implemented Solution:** `services/learning.py` progress overview now also returns `next_review_at`, the earliest future review among introduced words (one extra aggregate in the existing query; schema in `schemas/learning.py`). The dashboard card reads "Teď nic nečeká · další za 3 h / zítra / ve středu / 12. 11." via a new Czech `relativeFuture` helper in `lib/i18n/cs.ts` with correct weekday prepositions. `tests/test_learning.py` covers the new field.
+
+**Verification:** `tests/test_learning.py -k progress` 2 passed; ruff, typecheck, production build and `git diff --check` passed.

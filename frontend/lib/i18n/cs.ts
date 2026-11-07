@@ -1,6 +1,19 @@
 // cs-CZ UI strings. All user-facing copy goes through this table.
 const fmt = (n: number) => new Intl.NumberFormat("cs-CZ").format(n);
 
+/** "za 3 h", "zítra", "v pátek", "12. 11." for a future moment, in the browser's time zone. */
+export function relativeFuture(iso: string, now: Date = new Date()): string {
+  const at = new Date(iso);
+  const hours = (at.getTime() - now.getTime()) / 3_600_000;
+  if (hours < 1) return "do hodiny";
+  const day = (d: Date) => Math.floor(new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 86_400_000);
+  const days = day(at) - day(now);
+  if (days === 0) return `za ${Math.round(hours)} h`;
+  if (days === 1) return "zítra";
+  if (days < 7) return ["v neděli", "v pondělí", "v úterý", "ve středu", "ve čtvrtek", "v pátek", "v sobotu"][at.getDay()]!;
+  return new Intl.DateTimeFormat("cs-CZ", { day: "numeric", month: "numeric" }).format(at);
+}
+
 export const cs = {
   appName: "PolyFlow",
   appInstall: {
@@ -33,6 +46,7 @@ export const cs = {
     dailyDue: (n: number) => (n === 1 ? "1 slovo čeká na ověření" : n > 1 && n < 5 ? `${n} slova čekají na ověření` : `${n} slov čeká na ověření`),
     dailyResume: "Rozpracované ověření",
     dailyNone: "Dnes nic nečeká",
+    dailyNext: (when: string) => `Teď nic nečeká · další ${when}`,
     grammar: "Gramatika",
     grammarHelp: (level: string | null) => (level ? `Témata úrovně ${level}` : "Témata tvé úrovně"),
     grammarDue: (n: number) => (n === 1 ? "1 téma k opakování" : n > 1 && n < 5 ? `${n} témata k opakování` : `${n} témat k opakování`),

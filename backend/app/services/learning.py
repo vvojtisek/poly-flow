@@ -969,13 +969,16 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
                 func.count().filter(and_(p.introduced_at.is_not(None), p.next_review_at <= now)),
                 func.avg(p.orthography_score),
                 func.count(p.phonetic_score),
+                func.min(p.next_review_at).filter(
+                    and_(p.introduced_at.is_not(None), p.next_review_at > now)
+                ),
             )
             .select_from(p)
             .join(li, li.id == p.lexicon_item_id)
             .where(p.user_id == user.id, li.language == language)
         )
     ).one()
-    seen, passive, active, known, introduced, due, ortho_avg, phonetic = row
+    seen, passive, active, known, introduced, due, ortho_avg, phonetic, next_due = row
 
     by_state = dict.fromkeys(ProgressState, 0)
     for state, n in (
@@ -1033,6 +1036,7 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         known=known,
         introduced=introduced,
         due_now=due,
+        next_review_at=next_due,
         orthography_avg=round(float(ortho_avg), 3) if ortho_avg is not None else None,
         phonetic_measured=phonetic,
         grammar_unlocked=unlocked,

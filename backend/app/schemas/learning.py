@@ -223,6 +223,7 @@ class ProgressOut(BaseModel):
     known: int  # both passive and active
     introduced: int  # presented in a finished lesson
     due_now: int  # introduced words a check can ask about now
+    next_review_at: datetime | None = None  # earliest future review, for "nothing due yet"
     orthography_avg: float | None
     phonetic_measured: int  # profiles start at 0: pronunciation scoring is not validated yet
     grammar_unlocked: bool
