@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { PlayButton } from "@/components/PlayButton";
-import { Notice } from "@/components/ui";
+import { Notice, Skeleton } from "@/components/ui";
 import { getWeakSpots, myWordAudioUrl, type Language, type WeakSpots } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 
@@ -28,7 +28,7 @@ export function WeakSpotsCard({ language }: { language: Language }) {
   }, [language]);
 
   if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
-  if (!data) return <p className="text-sm text-slate-500">{cs.common.loading}</p>;
+  if (!data) return <Skeleton lines={4} />;
   const empty = !data.words.length && !data.units.length;
   // The worst few first (the API orders by errors); the rest on request, so the panel stays short.
   const words = all ? data.words : data.words.slice(0, LIMIT);

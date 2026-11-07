@@ -4,6 +4,7 @@ import { CheckCircle2, Circle, Info, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { getProgression, type Progression, type ProgressOverview } from "@/lib/api";
+import { Skeleton } from "@/components/ui";
 import { cs } from "@/lib/i18n/cs";
 
 const fmt = new Intl.NumberFormat("cs-CZ");
@@ -21,7 +22,7 @@ export function ProgressionPath({ progress }: { progress: ProgressOverview | nul
   }, []);
 
   if (failed) return <p className="text-sm text-red-600">{cs.progression.unavailable}</p>;
-  if (!data) return null;
+  if (!data) return <Skeleton lines={6} />;
 
   const required = data.milestones.filter((m) => !m.voluntary);
   // Consecutive voluntary milestones can share a key (6000 and 7000 are both passive extension):

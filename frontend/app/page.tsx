@@ -19,7 +19,7 @@ import { RankCelebration } from "@/components/RankCelebration";
 import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
-import { Button, Notice } from "@/components/ui";
+import { Button, Notice, Skeleton } from "@/components/ui";
 import { getGrammarTree, getLanguageSummaries, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
@@ -275,7 +275,7 @@ export default function HomePage() {
           ) : progress ? (
             <ProgressCard progress={progress} grammar={grammar} />
           ) : (
-            <p className="text-sm text-slate-500">{cs.common.loading}</p>
+            <Skeleton lines={5} />
           )}
         </Panel>
 

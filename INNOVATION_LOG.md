@@ -1175,3 +1175,13 @@ Vlad approves a push.
 **Implemented Solution:** These five entry points now open `/lesson/vocabulary` (the scene-first LessonRunner, which resumes an active session): `app/page.tsx`, `components/TodayPlan.tsx`, `components/Welcome.tsx`, `components/CommandPalette.tsx`, `components/WeeklyRecap.tsx`. The bottom tab "Lekce" still opens the `/lesson` overview.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 9/120 | Page: [/] (Page Cycle 9/15)
+
+**Summary:** hold the dashboard layout with loading skeletons
+
+**Observed Problem:** While the dashboard loaded, today's plan rendered nothing and then popped in above the other panels, pushing them down; progress and weak spots showed a bare "Načítám…" line and the progression path was blank. On a slow home-server connection the page jumped several times.
+
+**Implemented Solution:** New `Skeleton` component in `components/ui.tsx` (sized placeholder lines, one polite "Načítám" status for screen readers, shimmer only when motion is allowed). Used by `TodayPlan` (ring-shaped placeholder of the final height), the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the dashboard APIs delayed by 4 s shows the placeholders in place of the panels.

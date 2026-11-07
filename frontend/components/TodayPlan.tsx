@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { KeyHint } from "@/components/Kbd";
-import { Button } from "@/components/ui";
+import { Button, Skeleton } from "@/components/ui";
 import { getToday, listStoryArchive, updateOwnProfile, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
@@ -88,7 +88,13 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
     }
   }
 
-  if (!plan) return null;
+  if (!plan)
+    return (
+      <section aria-label={t.title} className="flex items-center gap-4 rounded-3xl border border-brand-500/30 p-4 lg:col-span-3">
+        <span aria-hidden className="size-24 shrink-0 rounded-full border-8 border-slate-100 motion-safe:animate-pulse dark:border-slate-800" />
+        <Skeleton lines={3} className="flex-1" />
+      </section>
+    );
   const first = plan.steps[0];
   const done = plan.minutes_today >= plan.goal_minutes;
   return (
