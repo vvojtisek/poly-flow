@@ -1135,3 +1135,13 @@ Vlad approves a push.
 **Implemented Solution:** `services/learning.py` progress overview now also returns `next_review_at`, the earliest future review among introduced words (one extra aggregate in the existing query; schema in `schemas/learning.py`). The dashboard card reads "Teď nic nečeká · další za 3 h / zítra / ve středu / 12. 11." via a new Czech `relativeFuture` helper in `lib/i18n/cs.ts` with correct weekday prepositions. `tests/test_learning.py` covers the new field.
 
 **Verification:** `tests/test_learning.py -k progress` 2 passed; ruff, typecheck, production build and `git diff --check` passed.
+
+## Global Cycle 5/120 | Page: [/] (Page Cycle 5/15)
+
+**Summary:** show each language's words and due checks in the dashboard switcher
+
+**Observed Problem:** Learners studying several languages had to switch blindly: the language buttons gave no sign which language had checks waiting or had not been started, and the radio group ignored arrow keys.
+
+**Implemented Solution:** New `GET /api/v1/learning/languages` (`api/learning.py`, `services/learning.language_summaries`, `LanguageSummaryOut`) returns introduced, known and due words for all four languages from one grouped query over the acting profile's own progress. On the dashboard, `LanguagePicker` (`components/AppShell.tsx`) shows "41 slov · 3 k ověření" or "zatím nezačato" under each language (amber when checks are waiting) and now implements the radio-group keyboard pattern (arrow keys move and select, roving tabindex). Other pages keep the compact switcher. Test `test_language_summaries_count_only_own_words`.
+
+**Verification:** `tests/test_learning.py` summaries/progress tests passed; ruff (import order fixed), typecheck, production build, `git diff --check` passed; screenshot shows per-language summaries.

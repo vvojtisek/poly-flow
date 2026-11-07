@@ -97,6 +97,8 @@ export const cs = {
       "Úrovně CEFR jsou orientační. Počet slov je jen jedna složka jazykové úrovně.",
     unavailable: "Nepodařilo se načíst postup.",
   },
+  languageSummary: (introduced: number, due: number) =>
+    introduced === 0 ? "zatím nezačato" : `${fmt(introduced)} slov${due ? ` · ${fmt(due)} k ověření` : ""}`,
   languages: { de: "Němčina", fr: "Francouzština", it: "Italština", en: "Angličtina" } as Record<string, string>,
   common: {
     close: "Zavřít",

@@ -590,6 +590,17 @@ async def test_progress_overview(db, client):
     assert p["by_band"] == [{"band": 100, "items": 6, "known": 0}]
 
 
+async def test_language_summaries_count_only_own_words(db, client):
+    await seed_words()
+    me = await child_session(client)
+    await run_lesson(client, me)
+    rows = (await client.get("/api/v1/learning/languages")).json()
+    by = {r["language"]: r for r in rows}
+    assert set(by) == {"de", "fr", "it", "en"}
+    assert by["de"] == {"language": "de", "introduced": 4, "known": 0, "due_now": 0}
+    assert by["fr"]["introduced"] == 0
+
+
 async def test_recall_shows_cloze_for_ambiguous_words(db, client):
     from app.cli import LexiconRow, upsert_lexicon
 

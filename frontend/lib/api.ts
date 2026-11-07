@@ -544,6 +544,16 @@ export interface WeakSpots {
   tags: [string, number][];
 }
 
+export interface LanguageSummary {
+  language: Language;
+  introduced: number;
+  known: number;
+  due_now: number;
+}
+
+export const getLanguageSummaries = () =>
+  api<LanguageSummary[]>("/api/v1/learning/languages", { cache: "no-store" });
+
 export const getWeakSpots = (language: Language) =>
   api<WeakSpots>(`/api/v1/learning/weak-spots?language=${language}`, { cache: "no-store" });
 

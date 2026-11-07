@@ -240,6 +240,13 @@ class ProgressOut(BaseModel):
     cefr_level: str | None = None  # latest CEFR diagnostic: "pre-A1", "A1".."B2", "B2+"
 
 
+class LanguageSummaryOut(BaseModel):
+    language: Language
+    introduced: int
+    known: int  # passive and active both proven
+    due_now: int
+
+
 class WeakWordOut(BaseModel):
     item_id: uuid.UUID
     lemma: str

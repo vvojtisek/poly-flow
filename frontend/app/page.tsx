@@ -19,7 +19,7 @@ import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
 import { Button, Notice } from "@/components/ui";
-import { getGrammarTree, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type ProgressOverview } from "@/lib/api";
+import { getGrammarTree, getLanguageSummaries, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type LanguageSummary, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent } from "@/lib/practice";
@@ -98,6 +98,7 @@ export default function HomePage() {
   const [progress, setProgress] = useState<ProgressOverview | null>(null);
   const [failed, setFailed] = useState(false);
   const [grammar, setGrammar] = useState<GrammarTree | null>(null);
+  const [summaries, setSummaries] = useState<LanguageSummary[] | null>(null);
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
@@ -116,6 +117,10 @@ export default function HomePage() {
     getProgress(language)
       .then((p) => !cancelled && setProgress(p))
       .catch(() => !cancelled && setFailed(true));
+    // Optional extras: the switcher and the grammar card fall back to plain labels if these fail.
+    getLanguageSummaries()
+      .then((s) => !cancelled && setSummaries(s))
+      .catch(() => undefined);
     // Optional: the grammar card falls back to its generic hint if this fails.
     getGrammarTree(language)
       .then((g) => !cancelled && setGrammar(g))
@@ -152,7 +157,7 @@ export default function HomePage() {
     <AppShell me={me}>
       <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="flex min-w-0 justify-end lg:col-span-3 [&>*]:justify-end">
-          <LanguagePicker me={me} />
+          <LanguagePicker me={me} summaries={summaries} />
         </div>
         <section
           aria-labelledby="continue-title"

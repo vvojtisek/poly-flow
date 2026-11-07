@@ -19,6 +19,7 @@ from app.schemas.learning import (
     AnswerIn,
     AnswerOut,
     IdempotencyKey,
+    LanguageSummaryOut,
     LevelsInfo,
     LevelStatusOut,
     NextOut,
@@ -341,6 +342,13 @@ async def progress(
     return await svc.progress_overview(
         db, auth.acting, language or auth.acting.active_language, now
     )
+
+
+@router.get("/languages", response_model=list[LanguageSummaryOut])
+async def languages(auth: Auth, db: DB, now: Now) -> list[LanguageSummaryOut]:
+    """Introduced, known and due words per language, for the dashboard language switcher."""
+    rows = await svc.language_summaries(db, auth.acting, now)
+    return [LanguageSummaryOut(**r) for r in rows]
 
 
 @router.get("/weak-spots", response_model=WeakSpotsOut)

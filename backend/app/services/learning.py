@@ -950,6 +950,35 @@ async def prune_expired_sessions(db: AsyncSession, now: datetime) -> int:
 # ---------------------------------------------------------------- overview
 
 
+async def language_summaries(db: AsyncSession, user: User, now: datetime) -> list[dict]:
+    """Per-language word counts for the language switcher, in one grouped query."""
+    p, li = UserWordProgress, LexiconItem
+    rows = (
+        await db.execute(
+            select(
+                li.language,
+                func.count().filter(p.introduced_at.is_not(None)),
+                func.count().filter(and_(p.passive_known.is_(True), p.active_known.is_(True))),
+                func.count().filter(and_(p.introduced_at.is_not(None), p.next_review_at <= now)),
+            )
+            .select_from(p)
+            .join(li, li.id == p.lexicon_item_id)
+            .where(p.user_id == user.id)
+            .group_by(li.language)
+        )
+    ).all()
+    found = {lang: (introduced, known, due) for lang, introduced, known, due in rows}
+    return [
+        {
+            "language": lang,
+            "introduced": found.get(lang, (0, 0, 0))[0],
+            "known": found.get(lang, (0, 0, 0))[1],
+            "due_now": found.get(lang, (0, 0, 0))[2],
+        }
+        for lang in Language
+    ]
+
+
 async def progress_overview(db: AsyncSession, user: User, language: Language, now: datetime):
     from app.domain.diagnostic import band_label
     from app.domain.progression import MILESTONES
