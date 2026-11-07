@@ -141,7 +141,10 @@ export default function GrammarPage() {
   const language = me?.acting.active_language;
   const [tree, setTree] = useState<GrammarTree | null>(null);
   const [failed, setFailed] = useState(false);
-  const [measured, setMeasured] = useState<Level | null>(null);
+  const [measured, setMeasured] = useState<{ level: Level; source: "test" | "badge" } | null>(null);
+  // The learner's own choice of focus level, remembered per profile and language on this device.
+  const [chosen, setChosen] = useState<Level | null>(null);
+  const focusKey = me && language ? `polyflow:grammar-focus:${me.acting.id}:${language}` : null;
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
   const [dueOnly, setDueOnly] = useState(false);
@@ -156,18 +159,45 @@ export default function GrammarPage() {
       .then((t) => !cancelled && setTree(t))
       .catch(() => !cancelled && setFailed(true));
     // The active level is a convenience for ordering; without it the page falls back to A1.
+    // Evidence order: the CEFR estimate, then the highest passed vocabulary exam.
     getProgress(language)
-      .then((p) => !cancelled && setMeasured(normaliseLevel(p.cefr_level)))
+      .then((p) => {
+        if (cancelled) return;
+        const test = normaliseLevel(p.cefr_level);
+        const badge = p.level_badges.map((b) => normaliseLevel(b.level)).filter((l): l is Level => !!l).sort().at(-1);
+        setMeasured(test ? { level: test, source: "test" } : badge ? { level: badge, source: "badge" } : null);
+      })
       .catch(() => undefined);
     return () => {
       cancelled = true;
     };
   }, [language, me?.acting.id]);
 
+  useEffect(() => {
+    if (!focusKey) return;
+    try {
+      setChosen(normaliseLevel(window.localStorage.getItem(focusKey)));
+    } catch {
+      setChosen(null);
+    }
+  }, [focusKey]);
+
+  function chooseFocus(level: Level | null) {
+    setChosen(level);
+    if (!focusKey) return;
+    try {
+      if (level) window.localStorage.setItem(focusKey, level);
+      else window.localStorage.removeItem(focusKey);
+    } catch {
+      /* private mode: the choice lasts for this visit only */
+    }
+  }
+
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const units = tree?.levels.flatMap((l) => l.units) ?? [];
   const unitsOf = (level: string) => tree?.levels.find((section) => section.level === level)?.units ?? [];
-  const activeLevel: Level = measured ?? "A1";
+  const autoLevel: Level = measured?.level ?? "A1";
+  const activeLevel: Level = chosen ?? autoLevel;
   const filtering = !!query.trim() || !!statusFilter || dueOnly;
   const foldedQuery = fold(query.trim());
   const matches = (u: Unit) =>
@@ -267,7 +297,38 @@ export default function GrammarPage() {
                 className="flex flex-col gap-4 rounded-3xl border-2 border-brand-500/60 bg-brand-500/5 p-4 sm:p-5"
               >
                 <LevelHeader level={activeLevel} units={activeUnits} active />
-                <p className="-mt-2 text-xs text-slate-500">{measured ? cs.grammar.activeFromTest : cs.grammar.activeDefault}</p>
+                <p className="-mt-2 text-xs text-slate-500">
+                  {chosen
+                    ? cs.grammar.activeChosen
+                    : measured?.source === "test"
+                      ? cs.grammar.activeFromTest
+                      : measured?.source === "badge"
+                        ? cs.grammar.activeFromBadge(measured.level)
+                        : cs.grammar.activeDefault}
+                </p>
+                <div role="radiogroup" aria-label={cs.grammar.focusLevel} className="-mt-1 flex flex-wrap items-center gap-1">
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={!chosen}
+                    onClick={() => chooseFocus(null)}
+                    className={`rounded-full px-2.5 py-1 text-xs font-semibold ${!chosen ? "bg-brand-500 text-white" : "bg-white text-slate-700 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700"}`}
+                  >
+                    {cs.grammar.focusAuto(autoLevel)}
+                  </button>
+                  {CEFR_LEVELS.filter((level) => unitsOf(level).length > 0).map((level) => (
+                    <button
+                      key={level}
+                      type="button"
+                      role="radio"
+                      aria-checked={chosen === level}
+                      onClick={() => chooseFocus(level)}
+                      className={`rounded-full px-2.5 py-1 text-xs font-semibold tabular-nums ${chosen === level ? "bg-brand-500 text-white" : "bg-white text-slate-700 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700"}`}
+                    >
+                      {level}
+                    </button>
+                  ))}
+                </div>
                 {activeUnits.length === 0 ? (
                   <p className="rounded-xl border border-dashed border-slate-300 p-3 text-sm text-slate-500 dark:border-slate-700">{cs.grammar.levelNotImplemented}</p>
                 ) : (

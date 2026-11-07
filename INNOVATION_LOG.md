@@ -1245,3 +1245,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/useRanks.ts` shares one in-flight request per profile and language between concurrent users of the hook (cleared by `invalidateRanks`). `components/ProgressionPath.tsx` keeps the static milestone ladder in a module-level promise for the page session, dropping it after a failure so the retry from cycle 14 asks again.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright against `next start` counts 13 API requests on `/` with `/ranks` once (was 14 with two).
+
+## Global Cycle 16/120 | Page: [/grammar] (Page Cycle 1/15)
+
+**Summary:** pick the focus level; fall back to passed vocabulary exams
+
+**Observed Problem:** The highlighted grammar level came only from the CEFR estimate and otherwise stayed on A1, ignoring passed vocabulary level exams, and a learner who wanted to work on A2 topics had no way to bring them to the top: they stayed collapsed under "Ostatní úrovně".
+
+**Implemented Solution:** `app/grammar/page.tsx`: the default focus level now uses the CEFR estimate, then the highest earned vocabulary badge, then A1, with a matching explanation (`activeFromBadge`). A radio row under the level header lets the learner choose any level that has topics, or go back to "Podle odhadu (A1)"; the choice is a per-device convenience stored per profile and language in localStorage (guarded for private mode). Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright chose A2, saw the A2 panel promoted, and the choice survived a reload.
