@@ -6539,6 +6539,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-42-video-replay",
+   "level": "B2",
+   "title": "L'enregistrement décisif",
+   "title_cs": "Rozhodující záznam",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva filmait un match amateur pour que les buts contestés puissent être vérifiés sur la vidéo.",
+     "cs": "Eva měla při amatérském zápase obsluhovat kameru, aby sporné góly šlo ověřit ze záznamu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Cette technologie éliminera enfin les spéculations subjectives et permettra de décider sur la base de preuves.",
+     "cs": "Díky této technologii konečně odstraníme subjektivní dohady a rozhodneme na základě důkazů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Excellent. Peux-tu repasser la dernière action au ralenti ? Les joueurs en discutent depuis dix minutes.",
+     "cs": "Výborně. Můžeš pustit poslední situaci zpomaleně? Hráči se kvůli ní dohadují už deset minut."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Bien sûr. Je dois seulement me rappeler quel bouton active l'enregistrement.",
+     "cs": "Samozřejmě. Jen si musím připomenout, které tlačítko spouští nahrávání."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Tu veux dire que tu as regardé tout le match uniquement sur l'écran ?",
+     "cs": "Chceš říct, že jsi celý zápas sledovala jen přes obrazovku?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva a retourné la caméra : Nous n'avons aucune séquence, mais je suis prête à fournir un témoignage très détaillé.",
+     "cs": "Eva otočila kameru: Záznam nemáme, ale já jsem připravená podat velmi podrobnou svědeckou výpověď."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "spéculations",
+     "cs": "dohady"
+    },
+    {
+     "word": "subjectives",
+     "cs": "subjektivní"
+    },
+    {
+     "word": "séquence",
+     "cs": "záznam situace"
+    },
+    {
+     "word": "témoignage",
+     "cs": "výpověď"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč není dostupný záznam?",
+     "options": [
+      "Eva nezapnula nahrávání.",
+      "Kamera spadla.",
+      "Zápas se nekonal."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Eva místo záznamu nabídne?",
+     "options": [
+      "Svědeckou výpověď.",
+      "Nový míč.",
+      "Opravu branek."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
