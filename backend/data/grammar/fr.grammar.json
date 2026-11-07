@@ -1,0 +1,3818 @@
+{
+ "language": "fr",
+ "source": "claude-draft",
+ "license": "MIT",
+ "revision": "grammar-fr-v1",
+ "review_status": "unreviewed",
+ "note": "French grammar A1-A2 explained in Czech. Drafted by Claude (2026-11-06); not yet reviewed by a French teacher or a native Czech speaker. Treat explanations and accepted answers as drafts.",
+ "units": [
+  {
+   "id": "fr-a1-etre",
+   "level": "A1",
+   "title": "Já jsem, ty jsi: sloveso être",
+   "summary": "Řekneš, kdo jsi, odkud jsi a jaký jsi.",
+   "notes": [
+    {
+     "heading": "Tvary slovesa être",
+     "text": "Sloveso **être** (být) je nepravidelné. Zájmeno se ve francouzštině nevynechává: „jsem unavený“ je **je suis fatigué**.",
+     "table": [
+      [
+       "zájmeno",
+       "être",
+       "česky"
+      ],
+      [
+       "je",
+       "suis",
+       "já jsem"
+      ],
+      [
+       "tu",
+       "es",
+       "ty jsi"
+      ],
+      [
+       "il / elle / on",
+       "est",
+       "on / ona je, my (hovorově)"
+      ],
+      [
+       "nous",
+       "sommes",
+       "my jsme"
+      ],
+      [
+       "vous",
+       "êtes",
+       "vy jste / Vy jste (vykání)"
+      ],
+      [
+       "ils / elles",
+       "sont",
+       "oni / ony jsou"
+      ]
+     ]
+    },
+    {
+     "heading": "Vykání",
+     "text": "Vykání jedné osobě i více lidem je **vous**: **Vous êtes Madame Nováková ?**"
+    },
+    {
+     "heading": "Povolání bez členu",
+     "text": "Po être se u povolání a národnosti člen nepíše: **Elle est professeur.** (Je učitelka.)"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je suis tchèque.",
+     "cs": "Jsem Čech."
+    },
+    {
+     "text": "Nous sommes à Prague.",
+     "cs": "Jsme v Praze."
+    },
+    {
+     "text": "Vous êtes médecin ?",
+     "cs": "Jste lékař?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-etre-01",
+     "kind": "choice",
+     "prompt": "Je ___ fatigué.",
+     "prompt_cs": "Jsem unavený.",
+     "options": [
+      "suis",
+      "es",
+      "est",
+      "sont"
+     ],
+     "answers": [
+      "suis"
+     ],
+     "explain": "K je patří tvar suis: je suis = já jsem."
+    },
+    {
+     "id": "fr-a1-etre-02",
+     "kind": "choice",
+     "prompt": "Nous ___ à Prague.",
+     "prompt_cs": "Jsme v Praze.",
+     "options": [
+      "sommes",
+      "êtes",
+      "sont",
+      "est"
+     ],
+     "answers": [
+      "sommes"
+     ],
+     "explain": "nous (my) má tvar sommes."
+    },
+    {
+     "id": "fr-a1-etre-03",
+     "kind": "gap",
+     "prompt": "Tu ___ très gentil. (être)",
+     "prompt_cs": "Jsi moc milý.",
+     "answers": [
+      "es"
+     ],
+     "explain": "tu (ty) má tvar es: tu es = ty jsi."
+    },
+    {
+     "id": "fr-a1-etre-04",
+     "kind": "gap",
+     "prompt": "Ils ___ en France. (être)",
+     "prompt_cs": "Jsou ve Francii.",
+     "answers": [
+      "sont"
+     ],
+     "explain": "ils / elles (oni, ony) mají tvar sont."
+    },
+    {
+     "id": "fr-a1-etre-05",
+     "kind": "choice",
+     "prompt": "Vous ___ Monsieur Novák ?",
+     "prompt_cs": "Jste pan Novák?",
+     "options": [
+      "êtes",
+      "sommes",
+      "es",
+      "est"
+     ],
+     "answers": [
+      "êtes"
+     ],
+     "explain": "Vykání vous má tvar êtes."
+    },
+    {
+     "id": "fr-a1-etre-06",
+     "kind": "order",
+     "prompt": "Ona je učitelka.",
+     "tokens": [
+      "professeur",
+      "est",
+      "elle"
+     ],
+     "answers": [
+      "Elle est professeur"
+     ],
+     "explain": "Podmět, sloveso, povolání bez členu."
+    },
+    {
+     "id": "fr-a1-etre-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jsme Češi.",
+     "answers": [
+      "Nous sommes tchèques",
+      "On est tchèques"
+     ],
+     "explain": "my = nous sommes; národnost se píše malým písmenem."
+    },
+    {
+     "id": "fr-a1-etre-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Il est à la maison.",
+     "answers": [
+      "Je doma",
+      "On je doma"
+     ],
+     "explain": "être à la maison = být doma."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-avoir",
+   "level": "A1",
+   "title": "Mít: sloveso avoir",
+   "summary": "Řekneš, co máš a kolik je ti let.",
+   "notes": [
+    {
+     "heading": "Tvary slovesa avoir",
+     "text": "**avoir** (mít) je nepravidelné. Před samohláskou se je zkracuje na **j'**: **j'ai**.",
+     "table": [
+      [
+       "zájmeno",
+       "avoir"
+      ],
+      [
+       "j'",
+       "ai"
+      ],
+      [
+       "tu",
+       "as"
+      ],
+      [
+       "il / elle / on",
+       "a"
+      ],
+      [
+       "nous",
+       "avons"
+      ],
+      [
+       "vous",
+       "avez"
+      ],
+      [
+       "ils / elles",
+       "ont"
+      ]
+     ]
+    },
+    {
+     "heading": "Věk se říká s avoir",
+     "text": "Česky „je mi deset“, francouzsky „mám deset let“: **J'ai dix ans.**"
+    },
+    {
+     "heading": "Pozor: il a × il est",
+     "text": "**il a** = on má, **il est** = on je. Liší se jen jedním písmenem, ale význam je jiný."
+    }
+   ],
+   "examples": [
+    {
+     "text": "J'ai un chien.",
+     "cs": "Mám psa."
+    },
+    {
+     "text": "Elle a dix ans.",
+     "cs": "Je jí deset let."
+    },
+    {
+     "text": "Vous avez une voiture ?",
+     "cs": "Máte auto?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-avoir-01",
+     "kind": "choice",
+     "prompt": "J'___ un frère.",
+     "prompt_cs": "Mám bratra.",
+     "options": [
+      "ai",
+      "as",
+      "a",
+      "ont"
+     ],
+     "answers": [
+      "ai"
+     ],
+     "explain": "je + ai se stahuje na j'ai."
+    },
+    {
+     "id": "fr-a1-avoir-02",
+     "kind": "choice",
+     "prompt": "Ils ___ deux enfants.",
+     "prompt_cs": "Mají dvě děti.",
+     "options": [
+      "ont",
+      "sont",
+      "avons",
+      "a"
+     ],
+     "answers": [
+      "ont"
+     ],
+     "explain": "ils má u avoir tvar ont; sont je tvar slovesa être."
+    },
+    {
+     "id": "fr-a1-avoir-03",
+     "kind": "gap",
+     "prompt": "Tu ___ quel âge ? (avoir)",
+     "prompt_cs": "Kolik ti je let?",
+     "answers": [
+      "as"
+     ],
+     "explain": "tu má tvar as."
+    },
+    {
+     "id": "fr-a1-avoir-04",
+     "kind": "gap",
+     "prompt": "Nous ___ un chat. (avoir)",
+     "prompt_cs": "Máme kočku.",
+     "answers": [
+      "avons"
+     ],
+     "explain": "nous má tvar avons."
+    },
+    {
+     "id": "fr-a1-avoir-05",
+     "kind": "choice",
+     "prompt": "Elle ___ huit ans.",
+     "prompt_cs": "Je jí osm let.",
+     "options": [
+      "a",
+      "est",
+      "as",
+      "ai"
+     ],
+     "answers": [
+      "a"
+     ],
+     "explain": "Věk se vyjadřuje slovesem avoir: elle a huit ans."
+    },
+    {
+     "id": "fr-a1-avoir-06",
+     "kind": "order",
+     "prompt": "Mám dvě sestry.",
+     "tokens": [
+      "sœurs",
+      "deux",
+      "j'ai"
+     ],
+     "answers": [
+      "J'ai deux sœurs"
+     ],
+     "explain": "j'ai + číslovka + podstatné jméno v množném čísle."
+    },
+    {
+     "id": "fr-a1-avoir-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Je mi dvanáct let.",
+     "answers": [
+      "J'ai douze ans"
+     ],
+     "explain": "Věk = avoir + číslo + ans."
+    },
+    {
+     "id": "fr-a1-avoir-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Vous avez une question ?",
+     "answers": [
+      "Máte otázku",
+      "Máte dotaz"
+     ],
+     "explain": "vous avez = máte."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-present-er",
+   "level": "A1",
+   "title": "Přítomný čas sloves na -er",
+   "summary": "Popíšeš, co obvykle děláš: parler, aimer, habiter.",
+   "notes": [
+    {
+     "heading": "Koncovky",
+     "text": "Většina francouzských sloves končí na **-er** a časuje se pravidelně: kmen + koncovka. Koncovky -e, -es, -ent se nevyslovují, proto parle, parles, parlent zní stejně.",
+     "table": [
+      [
+       "zájmeno",
+       "koncovka",
+       "parler"
+      ],
+      [
+       "je",
+       "-e",
+       "parle"
+      ],
+      [
+       "tu",
+       "-es",
+       "parles"
+      ],
+      [
+       "il / elle / on",
+       "-e",
+       "parle"
+      ],
+      [
+       "nous",
+       "-ons",
+       "parlons"
+      ],
+      [
+       "vous",
+       "-ez",
+       "parlez"
+      ],
+      [
+       "ils / elles",
+       "-ent",
+       "parlent"
+      ]
+     ]
+    },
+    {
+     "heading": "Žádný průběhový čas",
+     "text": "**Je mange** znamená jím i jím právě teď. Francouzština nemá zvláštní průběhový tvar."
+    },
+    {
+     "heading": "Samohláska na začátku",
+     "text": "Před samohláskou a němým h se je mění na **j'**: **j'aime, j'habite**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "J'habite à Brno.",
+     "cs": "Bydlím v Brně."
+    },
+    {
+     "text": "Nous parlons français.",
+     "cs": "Mluvíme francouzsky."
+    },
+    {
+     "text": "Ils aiment le chocolat.",
+     "cs": "Mají rádi čokoládu."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-present-er-01",
+     "kind": "choice",
+     "prompt": "Nous ___ tchèque.",
+     "prompt_cs": "Mluvíme česky.",
+     "options": [
+      "parlons",
+      "parlez",
+      "parlent",
+      "parle"
+     ],
+     "answers": [
+      "parlons"
+     ],
+     "explain": "nous → koncovka -ons."
+    },
+    {
+     "id": "fr-a1-present-er-02",
+     "kind": "gap",
+     "prompt": "Vous ___ à Paris ? (habiter)",
+     "prompt_cs": "Bydlíte v Paříži?",
+     "answers": [
+      "habitez"
+     ],
+     "explain": "vous → koncovka -ez."
+    },
+    {
+     "id": "fr-a1-present-er-03",
+     "kind": "gap",
+     "prompt": "Ils ___ la musique. (aimer)",
+     "prompt_cs": "Mají rádi hudbu.",
+     "answers": [
+      "aiment"
+     ],
+     "explain": "ils → koncovka -ent (nevyslovuje se)."
+    },
+    {
+     "id": "fr-a1-present-er-04",
+     "kind": "choice",
+     "prompt": "Tu ___ beaucoup.",
+     "prompt_cs": "Hodně pracuješ.",
+     "options": [
+      "travailles",
+      "travaille",
+      "travaillez",
+      "travaillent"
+     ],
+     "answers": [
+      "travailles"
+     ],
+     "explain": "tu → koncovka -es."
+    },
+    {
+     "id": "fr-a1-present-er-05",
+     "kind": "gap",
+     "prompt": "Je ___ une pomme. (manger)",
+     "prompt_cs": "Jím jablko.",
+     "answers": [
+      "mange"
+     ],
+     "explain": "je → koncovka -e."
+    },
+    {
+     "id": "fr-a1-present-er-06",
+     "kind": "order",
+     "prompt": "Bydlím v Praze.",
+     "tokens": [
+      "à",
+      "Prague",
+      "j'habite"
+     ],
+     "answers": [
+      "J'habite à Prague"
+     ],
+     "explain": "je + habite = j'habite; ve městě = à."
+    },
+    {
+     "id": "fr-a1-present-er-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Posloucháme rádio.",
+     "answers": [
+      "Nous écoutons la radio",
+      "On écoute la radio"
+     ],
+     "explain": "écouter, nous → écoutons."
+    },
+    {
+     "id": "fr-a1-present-er-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Elle regarde la télé.",
+     "answers": [
+      "Dívá se na televizi",
+      "Ona se dívá na televizi",
+      "Kouká na televizi"
+     ],
+     "explain": "regarder = dívat se."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-articles",
+   "level": "A1",
+   "title": "Rod a členy: le, la, les, un, une",
+   "summary": "Použiješ správný člen podle rodu a čísla.",
+   "notes": [
+    {
+     "heading": "Dva rody",
+     "text": "Francouzština má jen **mužský** a **ženský** rod. Rod se často liší od češtiny (**la table** je ženského rodu, **le livre** mužského), proto se slovo učte se členem.",
+     "table": [
+      [
+       "",
+       "mužský",
+       "ženský",
+       "množné číslo"
+      ],
+      [
+       "určitý",
+       "le (l')",
+       "la (l')",
+       "les"
+      ],
+      [
+       "neurčitý",
+       "un",
+       "une",
+       "des"
+      ]
+     ]
+    },
+    {
+     "heading": "l' před samohláskou",
+     "text": "le a la se před samohláskou nebo němým h zkracují na **l'**: **l'ami, l'école, l'hôtel**."
+    },
+    {
+     "heading": "Kdy který",
+     "text": "Neurčitý člen (un, une, des) uvádí něco nového nebo jedno z mnoha: **J'ai un chat.** Určitý člen (le, la, les) označuje něco známého nebo věc obecně: **Le chat est noir. J'aime les chats.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Le garçon et la fille.",
+     "cs": "Chlapec a dívka."
+    },
+    {
+     "text": "J'ai une idée.",
+     "cs": "Mám nápad."
+    },
+    {
+     "text": "L'école est grande.",
+     "cs": "Škola je velká."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-articles-01",
+     "kind": "choice",
+     "prompt": "___ soleil brille.",
+     "prompt_cs": "Slunce svítí.",
+     "options": [
+      "Le",
+      "La",
+      "Les",
+      "L'"
+     ],
+     "answers": [
+      "Le"
+     ],
+     "explain": "soleil je mužského rodu: le soleil."
+    },
+    {
+     "id": "fr-a1-articles-02",
+     "kind": "choice",
+     "prompt": "___ maison est belle.",
+     "prompt_cs": "Ten dům je krásný.",
+     "options": [
+      "La",
+      "Le",
+      "Un",
+      "Les"
+     ],
+     "answers": [
+      "La"
+     ],
+     "explain": "maison je ženského rodu: la maison."
+    },
+    {
+     "id": "fr-a1-articles-03",
+     "kind": "choice",
+     "prompt": "___ enfants jouent.",
+     "prompt_cs": "Děti si hrají.",
+     "options": [
+      "Les",
+      "Le",
+      "La",
+      "Une"
+     ],
+     "answers": [
+      "Les"
+     ],
+     "explain": "Množné číslo má pro oba rody člen les."
+    },
+    {
+     "id": "fr-a1-articles-04",
+     "kind": "choice",
+     "prompt": "J'ai ___ voiture rouge.",
+     "prompt_cs": "Mám červené auto.",
+     "options": [
+      "une",
+      "un",
+      "le",
+      "des"
+     ],
+     "answers": [
+      "une"
+     ],
+     "explain": "voiture je ženského rodu; nová informace → neurčitý člen une."
+    },
+    {
+     "id": "fr-a1-articles-05",
+     "kind": "choice",
+     "prompt": "C'est ___ hôtel.",
+     "prompt_cs": "To je hotel.",
+     "options": [
+      "un",
+      "une",
+      "l'",
+      "les"
+     ],
+     "answers": [
+      "un"
+     ],
+     "explain": "hôtel je mužského rodu; neurčitý člen se nezkracuje: un hôtel."
+    },
+    {
+     "id": "fr-a1-articles-06",
+     "kind": "gap",
+     "prompt": "___ ami de Paul est ici.",
+     "prompt_cs": "Pavlův kamarád je tady.",
+     "answers": [
+      "L'"
+     ],
+     "explain": "Před samohláskou se le zkracuje na l'."
+    },
+    {
+     "id": "fr-a1-articles-07",
+     "kind": "order",
+     "prompt": "Mám rád ty knihy.",
+     "tokens": [
+      "les",
+      "j'aime",
+      "livres"
+     ],
+     "answers": [
+      "J'aime les livres"
+     ],
+     "explain": "Po aimer stojí určitý člen."
+    },
+    {
+     "id": "fr-a1-articles-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pes a kočka.",
+     "answers": [
+      "Le chien et le chat",
+      "Un chien et un chat"
+     ],
+     "explain": "chien i chat jsou mužského rodu."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-plural-adjectives",
+   "level": "A1",
+   "title": "Množné číslo a shoda přídavných jmen",
+   "summary": "Utvoříš množné číslo a přizpůsobíš přídavné jméno rodu a číslu.",
+   "notes": [
+    {
+     "heading": "Množné číslo",
+     "text": "Většinou se přidá **-s**, které se nevyslovuje: **un livre → des livres**. Slova na -eau a většina na -al mají **-eaux, -aux**: **un gâteau → des gâteaux, un journal → des journaux**."
+    },
+    {
+     "heading": "Shoda přídavného jména",
+     "text": "Přídavné jméno se shoduje s podstatným jménem: ženský rod přidá **-e**, množné číslo **-s**.",
+     "table": [
+      [
+       "",
+       "mužský",
+       "ženský"
+      ],
+      [
+       "jednotné",
+       "petit",
+       "petite"
+      ],
+      [
+       "množné",
+       "petits",
+       "petites"
+      ]
+     ]
+    },
+    {
+     "heading": "Postavení",
+     "text": "Přídavné jméno stojí většinou **za** podstatným jménem: **une voiture rouge**. Před ním stojí krátká častá slova: **grand, petit, bon, beau, jeune, vieux, nouveau**: **un petit chien**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "des chats noirs",
+     "cs": "černé kočky"
+    },
+    {
+     "text": "une grande maison",
+     "cs": "velký dům"
+    },
+    {
+     "text": "Les filles sont contentes.",
+     "cs": "Dívky jsou spokojené."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-plural-adjectives-01",
+     "kind": "choice",
+     "prompt": "Elle est très ___.",
+     "prompt_cs": "Je velmi malá.",
+     "options": [
+      "petite",
+      "petit",
+      "petits",
+      "petites"
+     ],
+     "answers": [
+      "petite"
+     ],
+     "explain": "elle je ženského rodu jednotného čísla → petite."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-02",
+     "kind": "choice",
+     "prompt": "J'ai deux ___.",
+     "prompt_cs": "Mám dva dorty.",
+     "options": [
+      "gâteaux",
+      "gâteaus",
+      "gâteau",
+      "gâteaues"
+     ],
+     "answers": [
+      "gâteaux"
+     ],
+     "explain": "Slova na -eau mají v množném čísle -eaux."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-03",
+     "kind": "gap",
+     "prompt": "Les murs sont ___. (blanc)",
+     "prompt_cs": "Zdi jsou bílé.",
+     "answers": [
+      "blancs"
+     ],
+     "explain": "les murs je mužský rod množného čísla → přidáme -s."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-04",
+     "kind": "gap",
+     "prompt": "Une robe ___. (vert)",
+     "prompt_cs": "Zelené šaty.",
+     "answers": [
+      "verte"
+     ],
+     "explain": "robe je ženského rodu → přidáme -e."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-05",
+     "kind": "choice",
+     "prompt": "C'est un ___ garçon.",
+     "prompt_cs": "Je to hodný chlapec.",
+     "options": [
+      "bon",
+      "bonne",
+      "bons",
+      "bonnes"
+     ],
+     "answers": [
+      "bon"
+     ],
+     "explain": "garçon je mužský rod jednotného čísla."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-06",
+     "kind": "order",
+     "prompt": "Mám černou kočku.",
+     "tokens": [
+      "noire",
+      "chatte",
+      "une",
+      "j'ai"
+     ],
+     "answers": [
+      "J'ai une chatte noire"
+     ],
+     "explain": "Barva stojí za podstatným jménem."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-07",
+     "kind": "order",
+     "prompt": "Je to malý dům.",
+     "tokens": [
+      "maison",
+      "petite",
+      "c'est",
+      "une"
+     ],
+     "answers": [
+      "C'est une petite maison"
+     ],
+     "explain": "petit patří mezi krátká přídavná jména, která stojí před podstatným jménem."
+    },
+    {
+     "id": "fr-a1-plural-adjectives-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Les livres sont intéressants.",
+     "answers": [
+      "Knihy jsou zajímavé",
+      "Ty knihy jsou zajímavé"
+     ],
+     "explain": "intéressants: mužský rod, množné číslo."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-negation",
+   "level": "A1",
+   "title": "Zápor: ne … pas",
+   "summary": "Řekneš, co neděláš a co nemáš.",
+   "notes": [
+    {
+     "heading": "Dvě části záporu",
+     "text": "Zápor má dvě části, které obklopí sloveso: **ne + sloveso + pas**. Před samohláskou se ne zkracuje na **n'**: **Je n'aime pas.**"
+    },
+    {
+     "heading": "pas de místo členu",
+     "text": "Po záporu se neurčitý člen un, une, des mění na **de (d')**: **J'ai un chat. → Je n'ai pas de chat.**"
+    },
+    {
+     "heading": "Hovorová řeč",
+     "text": "V mluvené řeči se **ne** často vynechává: **J'sais pas.** V psaní ho pište vždy."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je ne parle pas allemand.",
+     "cs": "Nemluvím německy."
+    },
+    {
+     "text": "Il n'a pas de voiture.",
+     "cs": "Nemá auto."
+    },
+    {
+     "text": "Nous ne sommes pas fatigués.",
+     "cs": "Nejsme unavení."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-negation-01",
+     "kind": "choice",
+     "prompt": "Je ___ suis pas français.",
+     "prompt_cs": "Nejsem Francouz.",
+     "options": [
+      "ne",
+      "n'",
+      "pas",
+      "non"
+     ],
+     "answers": [
+      "ne"
+     ],
+     "explain": "První část záporu ne stojí před slovesem."
+    },
+    {
+     "id": "fr-a1-negation-02",
+     "kind": "choice",
+     "prompt": "Elle ___ aime pas le café.",
+     "prompt_cs": "Nemá ráda kávu.",
+     "options": [
+      "n'",
+      "ne",
+      "pas",
+      "non"
+     ],
+     "answers": [
+      "n'"
+     ],
+     "explain": "Před samohláskou se ne zkracuje na n'."
+    },
+    {
+     "id": "fr-a1-negation-03",
+     "kind": "choice",
+     "prompt": "Je n'ai pas ___ frère.",
+     "prompt_cs": "Nemám bratra.",
+     "options": [
+      "de",
+      "un",
+      "le",
+      "du"
+     ],
+     "answers": [
+      "de"
+     ],
+     "explain": "Po záporu se un mění na de."
+    },
+    {
+     "id": "fr-a1-negation-04",
+     "kind": "gap",
+     "prompt": "Nous ne travaillons ___ aujourd'hui.",
+     "prompt_cs": "Dnes nepracujeme.",
+     "answers": [
+      "pas"
+     ],
+     "explain": "Druhá část záporu pas stojí za slovesem."
+    },
+    {
+     "id": "fr-a1-negation-05",
+     "kind": "gap",
+     "prompt": "Ils n'ont pas ___ enfants.",
+     "prompt_cs": "Nemají děti.",
+     "answers": [
+      "d'"
+     ],
+     "explain": "des se po záporu mění na de, před samohláskou d'."
+    },
+    {
+     "id": "fr-a1-negation-06",
+     "kind": "order",
+     "prompt": "Nemluvím anglicky.",
+     "tokens": [
+      "anglais",
+      "parle",
+      "pas",
+      "je",
+      "ne"
+     ],
+     "answers": [
+      "Je ne parle pas anglais"
+     ],
+     "explain": "ne + sloveso + pas."
+    },
+    {
+     "id": "fr-a1-negation-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Nemáme čas.",
+     "answers": [
+      "Nous n'avons pas de temps",
+      "Nous n'avons pas le temps",
+      "On n'a pas le temps",
+      "On n'a pas de temps"
+     ],
+     "explain": "avons začíná samohláskou → n'avons; po záporu de."
+    },
+    {
+     "id": "fr-a1-negation-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Il ne mange pas de viande.",
+     "answers": [
+      "Nejí maso",
+      "On nejí maso"
+     ],
+     "explain": "ne … pas de = žádné, ne."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-questions",
+   "level": "A1",
+   "title": "Otázky: est-ce que a tázací slova",
+   "summary": "Zeptáš se na jméno, bydliště a čas.",
+   "notes": [
+    {
+     "heading": "Tři způsoby otázky",
+     "text": "Otázka bez tázacího slova: 1) jen intonací: **Tu viens ?** 2) s **est-ce que**: **Est-ce que tu viens ?** 3) obrácením slovesa a zájmena (spisovně): **Viens-tu ?**"
+    },
+    {
+     "heading": "Tázací slova",
+     "text": "**où** (kde), **quand** (kdy), **comment** (jak), **pourquoi** (proč), **combien** (kolik), **qui** (kdo), **que / qu'est-ce que** (co), **quel / quelle** (jaký, který).",
+     "table": [
+      [
+       "otázka",
+       "česky"
+      ],
+      [
+       "Où habites-tu ?",
+       "Kde bydlíš?"
+      ],
+      [
+       "Comment tu t'appelles ?",
+       "Jak se jmenuješ?"
+      ],
+      [
+       "Qu'est-ce que tu fais ?",
+       "Co děláš?"
+      ]
+     ]
+    },
+    {
+     "heading": "Vložené -t-",
+     "text": "Když sloveso končí samohláskou a následuje il/elle, vkládá se **-t-**: **Parle-t-il français ?**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Est-ce que vous parlez anglais ?",
+     "cs": "Mluvíte anglicky?"
+    },
+    {
+     "text": "Où est la gare ?",
+     "cs": "Kde je nádraží?"
+    },
+    {
+     "text": "Quelle heure est-il ?",
+     "cs": "Kolik je hodin?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-questions-01",
+     "kind": "choice",
+     "prompt": "___ habites-tu ?",
+     "prompt_cs": "Kde bydlíš?",
+     "options": [
+      "Où",
+      "Quand",
+      "Qui",
+      "Combien"
+     ],
+     "answers": [
+      "Où"
+     ],
+     "explain": "où = kde."
+    },
+    {
+     "id": "fr-a1-questions-02",
+     "kind": "choice",
+     "prompt": "___ est-ce que tu fais ?",
+     "prompt_cs": "Co děláš?",
+     "options": [
+      "Qu'",
+      "Où",
+      "Quel",
+      "Qui"
+     ],
+     "answers": [
+      "Qu'"
+     ],
+     "explain": "co = qu'est-ce que."
+    },
+    {
+     "id": "fr-a1-questions-03",
+     "kind": "choice",
+     "prompt": "___ âge as-tu ?",
+     "prompt_cs": "Kolik ti je let?",
+     "options": [
+      "Quel",
+      "Quelle",
+      "Combien",
+      "Comment"
+     ],
+     "answers": [
+      "Quel"
+     ],
+     "explain": "âge je mužského rodu → quel."
+    },
+    {
+     "id": "fr-a1-questions-04",
+     "kind": "choice",
+     "prompt": "___ vous parlez français ?",
+     "prompt_cs": "Mluvíte francouzsky?",
+     "options": [
+      "Est-ce que",
+      "Qu'est-ce que",
+      "Où",
+      "Quand"
+     ],
+     "answers": [
+      "Est-ce que"
+     ],
+     "explain": "Otázka bez tázacího slova: est-ce que."
+    },
+    {
+     "id": "fr-a1-questions-05",
+     "kind": "choice",
+     "prompt": "Parle-___-il anglais ?",
+     "prompt_cs": "Mluví anglicky?",
+     "options": [
+      "t",
+      "s",
+      "l",
+      "d"
+     ],
+     "answers": [
+      "t"
+     ],
+     "explain": "Mezi samohlásky v obrácené otázce se vkládá -t-."
+    },
+    {
+     "id": "fr-a1-questions-06",
+     "kind": "order",
+     "prompt": "Jak se jmenuješ?",
+     "tokens": [
+      "t'appelles",
+      "comment",
+      "tu"
+     ],
+     "answers": [
+      "Comment tu t'appelles"
+     ],
+     "explain": "Hovorově: tázací slovo + zájmeno + sloveso."
+    },
+    {
+     "id": "fr-a1-questions-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Kdy přijdeš?",
+     "answers": [
+      "Quand est-ce que tu viens",
+      "Tu viens quand",
+      "Quand viens-tu",
+      "Quand tu viens"
+     ],
+     "explain": "quand = kdy; venir, tu → viens."
+    },
+    {
+     "id": "fr-a1-questions-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Pourquoi tu pleures ?",
+     "answers": [
+      "Proč pláčeš",
+      "Proč brečíš"
+     ],
+     "explain": "pourquoi = proč."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-aller-faire",
+   "level": "A1",
+   "title": "Nepravidelná slovesa aller, faire, venir",
+   "summary": "Řekneš, kam jdeš, odkud jsi a co děláš.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Tři velmi častá nepravidelná slovesa:",
+     "table": [
+      [
+       "",
+       "aller (jít)",
+       "faire (dělat)",
+       "venir (přijít)"
+      ],
+      [
+       "je",
+       "vais",
+       "fais",
+       "viens"
+      ],
+      [
+       "tu",
+       "vas",
+       "fais",
+       "viens"
+      ],
+      [
+       "il / elle",
+       "va",
+       "fait",
+       "vient"
+      ],
+      [
+       "nous",
+       "allons",
+       "faisons",
+       "venons"
+      ],
+      [
+       "vous",
+       "allez",
+       "faites",
+       "venez"
+      ],
+      [
+       "ils / elles",
+       "vont",
+       "font",
+       "viennent"
+      ]
+     ]
+    },
+    {
+     "heading": "Blízká budoucnost",
+     "text": "**aller + infinitiv** vyjadřuje, co se brzy stane: **Je vais manger.** (Budu jíst, chystám se jíst.)"
+    },
+    {
+     "heading": "Odkud jsi",
+     "text": "**Je viens de Prague.** (Jsem z Prahy.) Před samohláskou **d'**: **Il vient d'Italie.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je vais à l'école.",
+     "cs": "Jdu do školy."
+    },
+    {
+     "text": "Qu'est-ce que tu fais ?",
+     "cs": "Co děláš?"
+    },
+    {
+     "text": "Nous allons partir.",
+     "cs": "Brzy odjedeme."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-aller-faire-01",
+     "kind": "choice",
+     "prompt": "Nous ___ au cinéma.",
+     "prompt_cs": "Jdeme do kina.",
+     "options": [
+      "allons",
+      "allez",
+      "vont",
+      "vais"
+     ],
+     "answers": [
+      "allons"
+     ],
+     "explain": "aller, nous → allons."
+    },
+    {
+     "id": "fr-a1-aller-faire-02",
+     "kind": "choice",
+     "prompt": "Vous ___ du sport ?",
+     "prompt_cs": "Sportujete?",
+     "options": [
+      "faites",
+      "faisez",
+      "font",
+      "fais"
+     ],
+     "answers": [
+      "faites"
+     ],
+     "explain": "faire má nepravidelný tvar vous faites."
+    },
+    {
+     "id": "fr-a1-aller-faire-03",
+     "kind": "gap",
+     "prompt": "Ils ___ au travail en bus. (aller)",
+     "prompt_cs": "Jezdí do práce autobusem.",
+     "answers": [
+      "vont"
+     ],
+     "explain": "aller, ils → vont."
+    },
+    {
+     "id": "fr-a1-aller-faire-04",
+     "kind": "gap",
+     "prompt": "Je ___ de Brno. (venir)",
+     "prompt_cs": "Jsem z Brna.",
+     "answers": [
+      "viens"
+     ],
+     "explain": "venir, je → viens."
+    },
+    {
+     "id": "fr-a1-aller-faire-05",
+     "kind": "choice",
+     "prompt": "Demain, je vais ___ mes amis.",
+     "prompt_cs": "Zítra navštívím kamarády.",
+     "options": [
+      "voir",
+      "vois",
+      "vu",
+      "voit"
+     ],
+     "answers": [
+      "voir"
+     ],
+     "explain": "Po aller v blízké budoucnosti stojí infinitiv."
+    },
+    {
+     "id": "fr-a1-aller-faire-06",
+     "kind": "order",
+     "prompt": "Budeme jíst.",
+     "tokens": [
+      "manger",
+      "allons",
+      "nous"
+     ],
+     "answers": [
+      "Nous allons manger"
+     ],
+     "explain": "aller + infinitiv = blízká budoucnost."
+    },
+    {
+     "id": "fr-a1-aller-faire-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Co dělají?",
+     "answers": [
+      "Qu'est-ce qu'ils font",
+      "Ils font quoi",
+      "Que font-ils",
+      "Qu'est-ce qu'elles font",
+      "Elles font quoi"
+     ],
+     "explain": "faire, ils → font."
+    },
+    {
+     "id": "fr-a1-aller-faire-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Elle va arriver ce soir.",
+     "answers": [
+      "Přijede dnes večer",
+      "Dorazí dnes večer",
+      "Přijde dnes večer"
+     ],
+     "explain": "aller + infinitiv vyjadřuje blízkou budoucnost."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-prepositions-places",
+   "level": "A1",
+   "title": "Předložky místa: à, au, en, dans",
+   "summary": "Řekneš, kde jsi a kam jdeš: ve městě, v zemi, u někoho.",
+   "notes": [
+    {
+     "heading": "Města a země",
+     "text": "Města: **à** (à Paris). Země ženského rodu (většinou na -e): **en** (en France). Země mužského rodu: **au** (au Canada). Množné číslo: **aux** (aux États-Unis)."
+    },
+    {
+     "heading": "Stažené tvary",
+     "text": "à + le = **au**, à + les = **aux**, de + le = **du**, de + les = **des**. à la a à l' se nemění.",
+     "table": [
+      [
+       "",
+       "le",
+       "la",
+       "l'",
+       "les"
+      ],
+      [
+       "à",
+       "au",
+       "à la",
+       "à l'",
+       "aux"
+      ],
+      [
+       "de",
+       "du",
+       "de la",
+       "de l'",
+       "des"
+      ]
+     ]
+    },
+    {
+     "heading": "Další předložky",
+     "text": "**dans** (v, uvnitř), **sur** (na), **sous** (pod), **devant** (před), **derrière** (za), **chez** (u někoho): **chez moi** = u mě doma."
+    }
+   ],
+   "examples": [
+    {
+     "text": "J'habite en Italie.",
+     "cs": "Bydlím v Itálii."
+    },
+    {
+     "text": "Il va au marché.",
+     "cs": "Jde na trh."
+    },
+    {
+     "text": "Le chat est sous la table.",
+     "cs": "Kočka je pod stolem."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-prepositions-places-01",
+     "kind": "choice",
+     "prompt": "Nous habitons ___ Tchéquie.",
+     "prompt_cs": "Bydlíme v Česku.",
+     "options": [
+      "en",
+      "au",
+      "à",
+      "aux"
+     ],
+     "answers": [
+      "en"
+     ],
+     "explain": "Tchéquie je ženského rodu → en."
+    },
+    {
+     "id": "fr-a1-prepositions-places-02",
+     "kind": "choice",
+     "prompt": "Elle travaille ___ Portugal.",
+     "prompt_cs": "Pracuje v Portugalsku.",
+     "options": [
+      "au",
+      "en",
+      "à",
+      "aux"
+     ],
+     "answers": [
+      "au"
+     ],
+     "explain": "Portugal je mužského rodu → au."
+    },
+    {
+     "id": "fr-a1-prepositions-places-03",
+     "kind": "choice",
+     "prompt": "Je vais ___ Rome.",
+     "prompt_cs": "Jedu do Říma.",
+     "options": [
+      "à",
+      "en",
+      "au",
+      "dans"
+     ],
+     "answers": [
+      "à"
+     ],
+     "explain": "U měst se používá à."
+    },
+    {
+     "id": "fr-a1-prepositions-places-04",
+     "kind": "choice",
+     "prompt": "Ils vont ___ cinéma.",
+     "prompt_cs": "Jdou do kina.",
+     "options": [
+      "au",
+      "à le",
+      "à la",
+      "en"
+     ],
+     "answers": [
+      "au"
+     ],
+     "explain": "à + le se stahuje na au."
+    },
+    {
+     "id": "fr-a1-prepositions-places-05",
+     "kind": "gap",
+     "prompt": "Le livre est ___ la table. (na)",
+     "prompt_cs": "Kniha je na stole.",
+     "answers": [
+      "sur"
+     ],
+     "explain": "na = sur."
+    },
+    {
+     "id": "fr-a1-prepositions-places-06",
+     "kind": "gap",
+     "prompt": "Je reste ___ moi ce soir. (u)",
+     "prompt_cs": "Dnes večer zůstanu doma.",
+     "answers": [
+      "chez"
+     ],
+     "explain": "chez moi = u mě doma."
+    },
+    {
+     "id": "fr-a1-prepositions-places-07",
+     "kind": "order",
+     "prompt": "Jdeme do parku.",
+     "tokens": [
+      "parc",
+      "allons",
+      "au",
+      "nous"
+     ],
+     "answers": [
+      "Nous allons au parc"
+     ],
+     "explain": "à + le parc = au parc."
+    },
+    {
+     "id": "fr-a1-prepositions-places-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Bydlí ve Spojených státech.",
+     "answers": [
+      "Il habite aux États-Unis",
+      "Elle habite aux États-Unis",
+      "Ils habitent aux États-Unis"
+     ],
+     "explain": "Množné číslo zemí → aux."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-partitive",
+   "level": "A1",
+   "title": "Dělivý člen: du, de la, des",
+   "summary": "Řekneš, co jíš a piješ a kolik čeho chceš.",
+   "notes": [
+    {
+     "heading": "Nepočitatelné množství",
+     "text": "Když mluvíte o neurčitém množství (nějaký chléb, trochu vody), použijte **dělivý člen**: **du** (mužský), **de la** (ženský), **de l'** (před samohláskou), **des** (množné). Česky se nepřekládá: **Je bois de l'eau.** = Piju vodu."
+    },
+    {
+     "heading": "Po záporu a množství",
+     "text": "Po záporu a po výrazech množství je jen **de (d')**: **Je ne mange pas de viande. Un kilo de pommes. Beaucoup de temps.**"
+    },
+    {
+     "heading": "Obecně: le, la",
+     "text": "Když mluvíte o věci obecně (mít rád, nesnášet), stojí určitý člen: **J'aime le fromage**, ale **Je mange du fromage**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je voudrais du pain.",
+     "cs": "Chtěl bych chleba."
+    },
+    {
+     "text": "Elle boit de la limonade.",
+     "cs": "Pije limonádu."
+    },
+    {
+     "text": "Un verre d'eau, s'il vous plaît.",
+     "cs": "Sklenici vody, prosím."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-partitive-01",
+     "kind": "choice",
+     "prompt": "Je mange ___ pain.",
+     "prompt_cs": "Jím chleba.",
+     "options": [
+      "du",
+      "de la",
+      "des",
+      "le"
+     ],
+     "answers": [
+      "du"
+     ],
+     "explain": "pain je mužského rodu, neurčité množství → du."
+    },
+    {
+     "id": "fr-a1-partitive-02",
+     "kind": "choice",
+     "prompt": "Tu veux ___ soupe ?",
+     "prompt_cs": "Chceš polévku?",
+     "options": [
+      "de la",
+      "du",
+      "des",
+      "la"
+     ],
+     "answers": [
+      "de la"
+     ],
+     "explain": "soupe je ženského rodu → de la."
+    },
+    {
+     "id": "fr-a1-partitive-03",
+     "kind": "choice",
+     "prompt": "J'aime ___ chocolat.",
+     "prompt_cs": "Mám rád čokoládu.",
+     "options": [
+      "le",
+      "du",
+      "de",
+      "un"
+     ],
+     "answers": [
+      "le"
+     ],
+     "explain": "Po aimer se mluví obecně → určitý člen."
+    },
+    {
+     "id": "fr-a1-partitive-04",
+     "kind": "choice",
+     "prompt": "Il ne boit pas ___ café.",
+     "prompt_cs": "Nepije kávu.",
+     "options": [
+      "de",
+      "du",
+      "le",
+      "des"
+     ],
+     "answers": [
+      "de"
+     ],
+     "explain": "Po záporu se du mění na de."
+    },
+    {
+     "id": "fr-a1-partitive-05",
+     "kind": "gap",
+     "prompt": "Un kilo ___ tomates.",
+     "prompt_cs": "Kilo rajčat.",
+     "answers": [
+      "de"
+     ],
+     "explain": "Po výrazu množství stojí jen de."
+    },
+    {
+     "id": "fr-a1-partitive-06",
+     "kind": "gap",
+     "prompt": "Nous buvons ___ eau.",
+     "prompt_cs": "Pijeme vodu.",
+     "answers": [
+      "de l'"
+     ],
+     "explain": "eau začíná samohláskou → de l'."
+    },
+    {
+     "id": "fr-a1-partitive-07",
+     "kind": "order",
+     "prompt": "Chci trochu mléka.",
+     "tokens": [
+      "lait",
+      "peu",
+      "veux",
+      "de",
+      "un",
+      "je"
+     ],
+     "answers": [
+      "Je veux un peu de lait"
+     ],
+     "explain": "un peu de + podstatné jméno bez členu."
+    },
+    {
+     "id": "fr-a1-partitive-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Nemáme cukr.",
+     "answers": [
+      "Nous n'avons pas de sucre",
+      "On n'a pas de sucre"
+     ],
+     "explain": "Po záporu stojí de."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-possessives",
+   "level": "A1",
+   "title": "Přivlastňovací zájmena: mon, ma, mes",
+   "summary": "Řekneš, čí co je: můj bratr, tvoje matka, jejich dům.",
+   "notes": [
+    {
+     "heading": "Tvar podle předmětu",
+     "text": "Tvar se řídí rodem a číslem **věci, kterou vlastníme**, ne vlastníka: **sa mère** = jeho i její matka.",
+     "table": [
+      [
+       "",
+       "mužský",
+       "ženský",
+       "množné"
+      ],
+      [
+       "můj",
+       "mon",
+       "ma",
+       "mes"
+      ],
+      [
+       "tvůj",
+       "ton",
+       "ta",
+       "tes"
+      ],
+      [
+       "jeho / její",
+       "son",
+       "sa",
+       "ses"
+      ],
+      [
+       "náš",
+       "notre",
+       "notre",
+       "nos"
+      ],
+      [
+       "váš",
+       "votre",
+       "votre",
+       "vos"
+      ],
+      [
+       "jejich",
+       "leur",
+       "leur",
+       "leurs"
+      ]
+     ]
+    },
+    {
+     "heading": "mon místo ma",
+     "text": "Před ženským slovem začínajícím samohláskou se píše **mon, ton, son**: **mon amie, son école**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Mon père est grand.",
+     "cs": "Můj otec je vysoký."
+    },
+    {
+     "text": "Où sont tes clés ?",
+     "cs": "Kde máš klíče?"
+    },
+    {
+     "text": "C'est leur maison.",
+     "cs": "To je jejich dům."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-possessives-01",
+     "kind": "choice",
+     "prompt": "___ sœur s'appelle Eva.",
+     "prompt_cs": "Moje sestra se jmenuje Eva.",
+     "options": [
+      "Ma",
+      "Mon",
+      "Mes",
+      "Ta"
+     ],
+     "answers": [
+      "Ma"
+     ],
+     "explain": "sœur je ženského rodu → ma."
+    },
+    {
+     "id": "fr-a1-possessives-02",
+     "kind": "choice",
+     "prompt": "Voici ___ parents.",
+     "prompt_cs": "To jsou moji rodiče.",
+     "options": [
+      "mes",
+      "mon",
+      "ma",
+      "nos"
+     ],
+     "answers": [
+      "mes"
+     ],
+     "explain": "Množné číslo → mes."
+    },
+    {
+     "id": "fr-a1-possessives-03",
+     "kind": "choice",
+     "prompt": "Paul aime ___ mère.",
+     "prompt_cs": "Pavel má rád svou matku.",
+     "options": [
+      "sa",
+      "son",
+      "ses",
+      "leur"
+     ],
+     "answers": [
+      "sa"
+     ],
+     "explain": "Rozhoduje rod slova mère (ženský) → sa."
+    },
+    {
+     "id": "fr-a1-possessives-04",
+     "kind": "choice",
+     "prompt": "C'est ___ amie Claire.",
+     "prompt_cs": "To je moje kamarádka Klára.",
+     "options": [
+      "mon",
+      "ma",
+      "mes",
+      "ta"
+     ],
+     "answers": [
+      "mon"
+     ],
+     "explain": "Před samohláskou stojí mon i u ženského rodu."
+    },
+    {
+     "id": "fr-a1-possessives-05",
+     "kind": "gap",
+     "prompt": "Les enfants jouent avec ___ chien. (jejich)",
+     "prompt_cs": "Děti si hrají se svým psem.",
+     "answers": [
+      "leur"
+     ],
+     "explain": "Jeden pes více majitelů → leur."
+    },
+    {
+     "id": "fr-a1-possessives-06",
+     "kind": "gap",
+     "prompt": "Vous avez ___ passeports ? (váš)",
+     "prompt_cs": "Máte své pasy?",
+     "answers": [
+      "vos"
+     ],
+     "explain": "váš + množné číslo → vos."
+    },
+    {
+     "id": "fr-a1-possessives-07",
+     "kind": "order",
+     "prompt": "Náš dům je malý.",
+     "tokens": [
+      "est",
+      "maison",
+      "petite",
+      "notre"
+     ],
+     "answers": [
+      "Notre maison est petite"
+     ],
+     "explain": "notre platí pro oba rody."
+    },
+    {
+     "id": "fr-a1-possessives-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jeho auto je červené.",
+     "answers": [
+      "Sa voiture est rouge"
+     ],
+     "explain": "voiture je ženského rodu → sa, i když vlastník je on."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-demonstratives",
+   "level": "A1",
+   "title": "Ukazovací zájmena: ce, cet, cette, ces",
+   "summary": "Ukážeš na věc: tento dům, ta kniha, tito lidé.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "**ce** (mužský), **cet** (mužský před samohláskou), **cette** (ženský), **ces** (množné).",
+     "table": [
+      [
+       "",
+       "příklad"
+      ],
+      [
+       "ce",
+       "ce livre"
+      ],
+      [
+       "cet",
+       "cet homme"
+      ],
+      [
+       "cette",
+       "cette femme"
+      ],
+      [
+       "ces",
+       "ces enfants"
+      ]
+     ]
+    },
+    {
+     "heading": "Tady a tam",
+     "text": "Pro rozlišení se přidává **-ci** (tento) nebo **-là** (tamten): **ce livre-ci, ce livre-là**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ce film est super.",
+     "cs": "Ten film je super."
+    },
+    {
+     "text": "Cette robe est chère.",
+     "cs": "Ty šaty jsou drahé."
+    },
+    {
+     "text": "Cet hôtel est près de la gare.",
+     "cs": "Ten hotel je blízko nádraží."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-demonstratives-01",
+     "kind": "choice",
+     "prompt": "___ voiture est neuve.",
+     "prompt_cs": "To auto je nové.",
+     "options": [
+      "Cette",
+      "Ce",
+      "Cet",
+      "Ces"
+     ],
+     "answers": [
+      "Cette"
+     ],
+     "explain": "voiture je ženského rodu → cette."
+    },
+    {
+     "id": "fr-a1-demonstratives-02",
+     "kind": "choice",
+     "prompt": "___ arbre est très vieux.",
+     "prompt_cs": "Ten strom je velmi starý.",
+     "options": [
+      "Cet",
+      "Ce",
+      "Cette",
+      "Ces"
+     ],
+     "answers": [
+      "Cet"
+     ],
+     "explain": "arbre je mužského rodu a začíná samohláskou → cet."
+    },
+    {
+     "id": "fr-a1-demonstratives-03",
+     "kind": "choice",
+     "prompt": "___ chaussures sont belles.",
+     "prompt_cs": "Ty boty jsou krásné.",
+     "options": [
+      "Ces",
+      "Cette",
+      "Ce",
+      "Cet"
+     ],
+     "answers": [
+      "Ces"
+     ],
+     "explain": "Množné číslo → ces."
+    },
+    {
+     "id": "fr-a1-demonstratives-04",
+     "kind": "gap",
+     "prompt": "J'aime ___ chanson.",
+     "prompt_cs": "Mám rád tu písničku.",
+     "answers": [
+      "cette"
+     ],
+     "explain": "chanson je ženského rodu."
+    },
+    {
+     "id": "fr-a1-demonstratives-05",
+     "kind": "gap",
+     "prompt": "___ garçon est mon frère.",
+     "prompt_cs": "Ten chlapec je můj bratr.",
+     "answers": [
+      "Ce"
+     ],
+     "explain": "garçon je mužského rodu a začíná souhláskou."
+    },
+    {
+     "id": "fr-a1-demonstratives-06",
+     "kind": "order",
+     "prompt": "Tento sýr je výborný.",
+     "tokens": [
+      "fromage",
+      "excellent",
+      "est",
+      "ce"
+     ],
+     "answers": [
+      "Ce fromage est excellent"
+     ],
+     "explain": "ce + mužský rod."
+    },
+    {
+     "id": "fr-a1-demonstratives-07",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Ces enfants sont gentils.",
+     "answers": [
+      "Ty děti jsou hodné",
+      "Tyto děti jsou hodné",
+      "Ty děti jsou milé"
+     ],
+     "explain": "ces = tito, ti (množné číslo)."
+    }
+   ]
+  },
+  {
+   "id": "fr-a1-imperative",
+   "level": "A1",
+   "title": "Rozkazovací způsob",
+   "summary": "Požádáš někoho, ať něco udělá, a dáš radu.",
+   "notes": [
+    {
+     "heading": "Tři osoby bez zájmena",
+     "text": "Rozkaz se tvoří z přítomného času **tu, nous, vous** bez zájmena: **Viens ! Venons ! Venez !** U sloves na -er tvar pro tu ztrácí **-s**: **tu parles → Parle !**"
+    },
+    {
+     "heading": "Nepravidelné",
+     "text": "**être**: sois, soyons, soyez; **avoir**: aie, ayons, ayez; **aller**: va, allons, allez."
+    },
+    {
+     "heading": "Zápor",
+     "text": "Zápor obklopí sloveso: **Ne parle pas ! Ne mangez pas !** Zdvořile se přidá **s'il te plaît / s'il vous plaît**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Écoute !",
+     "cs": "Poslouchej!"
+    },
+    {
+     "text": "Fermez la porte, s'il vous plaît.",
+     "cs": "Zavřete prosím dveře."
+    },
+    {
+     "text": "Allons au parc !",
+     "cs": "Pojďme do parku!"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a1-imperative-01",
+     "kind": "choice",
+     "prompt": "___ la fenêtre, s'il te plaît.",
+     "prompt_cs": "Otevři prosím okno.",
+     "options": [
+      "Ouvre",
+      "Ouvres",
+      "Ouvrez",
+      "Ouvrons"
+     ],
+     "answers": [
+      "Ouvre"
+     ],
+     "explain": "ouvrir se časuje jako sloveso na -er: tu ouvres → Ouvre ! (bez -s)."
+    },
+    {
+     "id": "fr-a1-imperative-02",
+     "kind": "choice",
+     "prompt": "___ sage !",
+     "prompt_cs": "Buď hodný!",
+     "options": [
+      "Sois",
+      "Es",
+      "Êtes",
+      "Soyons"
+     ],
+     "answers": [
+      "Sois"
+     ],
+     "explain": "Rozkaz od être pro tu je sois."
+    },
+    {
+     "id": "fr-a1-imperative-03",
+     "kind": "gap",
+     "prompt": "___ ici ! (venir, vous)",
+     "prompt_cs": "Pojďte sem!",
+     "answers": [
+      "Venez"
+     ],
+     "explain": "vous venez → Venez !"
+    },
+    {
+     "id": "fr-a1-imperative-04",
+     "kind": "gap",
+     "prompt": "___ au cinéma ce soir ! (aller, nous)",
+     "prompt_cs": "Pojďme dnes večer do kina!",
+     "answers": [
+      "Allons"
+     ],
+     "explain": "nous allons → Allons !"
+    },
+    {
+     "id": "fr-a1-imperative-05",
+     "kind": "choice",
+     "prompt": "Ne ___ pas !",
+     "prompt_cs": "Neplač!",
+     "options": [
+      "pleure",
+      "pleures",
+      "pleurer",
+      "pleurez"
+     ],
+     "answers": [
+      "pleure"
+     ],
+     "explain": "tu pleures → Ne pleure pas ! (bez -s)."
+    },
+    {
+     "id": "fr-a1-imperative-06",
+     "kind": "order",
+     "prompt": "Nemluvte tak rychle!",
+     "tokens": [
+      "parlez",
+      "vite",
+      "pas",
+      "ne",
+      "si"
+     ],
+     "answers": [
+      "Ne parlez pas si vite"
+     ],
+     "explain": "ne + sloveso + pas; si vite = tak rychle."
+    },
+    {
+     "id": "fr-a1-imperative-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Poslouchej mě!",
+     "answers": [
+      "Écoute-moi"
+     ],
+     "explain": "U kladného rozkazu stojí zájmeno za slovesem se spojovníkem: écoute-moi."
+    },
+    {
+     "id": "fr-a1-imperative-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Prenez vos livres.",
+     "answers": [
+      "Vezměte si knihy",
+      "Vezměte si své knihy",
+      "Vezměte své knihy"
+     ],
+     "explain": "prendre, vous → prenez."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-passe-compose-avoir",
+   "level": "A2",
+   "title": "Minulý čas: passé composé s avoir",
+   "summary": "Řekneš, co jsi dělal včera nebo o víkendu.",
+   "notes": [
+    {
+     "heading": "Stavba",
+     "text": "Passé composé = přítomný čas **avoir** + **příčestí minulé**. Česky je to obyčejný minulý čas: **J'ai mangé.** = Jedl jsem."
+    },
+    {
+     "heading": "Příčestí",
+     "text": "Slovesa na -er: **-é** (parler → parlé). Na -ir: **-i** (finir → fini). Časté nepravidelné:",
+     "table": [
+      [
+       "infinitiv",
+       "příčestí"
+      ],
+      [
+       "faire",
+       "fait"
+      ],
+      [
+       "prendre",
+       "pris"
+      ],
+      [
+       "voir",
+       "vu"
+      ],
+      [
+       "avoir",
+       "eu"
+      ],
+      [
+       "être",
+       "été"
+      ],
+      [
+       "boire",
+       "bu"
+      ],
+      [
+       "lire",
+       "lu"
+      ],
+      [
+       "écrire",
+       "écrit"
+      ]
+     ]
+    },
+    {
+     "heading": "Zápor",
+     "text": "ne … pas obklopí tvar avoir: **Je n'ai pas mangé.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Hier, j'ai travaillé.",
+     "cs": "Včera jsem pracoval."
+    },
+    {
+     "text": "Nous avons vu un film.",
+     "cs": "Viděli jsme film."
+    },
+    {
+     "text": "Il n'a pas fini.",
+     "cs": "Nedokončil to."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-passe-compose-avoir-01",
+     "kind": "choice",
+     "prompt": "Hier, nous ___ joué au foot.",
+     "prompt_cs": "Včera jsme hráli fotbal.",
+     "options": [
+      "avons",
+      "sommes",
+      "avez",
+      "ont"
+     ],
+     "answers": [
+      "avons"
+     ],
+     "explain": "jouer se pojí s avoir: nous avons joué."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-02",
+     "kind": "choice",
+     "prompt": "Tu as ___ ce livre ?",
+     "prompt_cs": "Četl jsi tu knihu?",
+     "options": [
+      "lu",
+      "lit",
+      "lire",
+      "lisé"
+     ],
+     "answers": [
+      "lu"
+     ],
+     "explain": "Příčestí slovesa lire je lu."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-03",
+     "kind": "gap",
+     "prompt": "J'ai ___ un café. (prendre)",
+     "prompt_cs": "Dal jsem si kávu.",
+     "answers": [
+      "pris"
+     ],
+     "explain": "Příčestí slovesa prendre je pris."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-04",
+     "kind": "gap",
+     "prompt": "Ils ont ___ leurs devoirs. (finir)",
+     "prompt_cs": "Dokončili úkoly.",
+     "answers": [
+      "fini"
+     ],
+     "explain": "Slovesa na -ir mají příčestí na -i."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-05",
+     "kind": "choice",
+     "prompt": "Elle n'a pas ___ la télé.",
+     "prompt_cs": "Nedívala se na televizi.",
+     "options": [
+      "regardé",
+      "regarder",
+      "regarde",
+      "regardée"
+     ],
+     "answers": [
+      "regardé"
+     ],
+     "explain": "Slovesa na -er mají příčestí na -é."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-06",
+     "kind": "order",
+     "prompt": "Neviděl jsem ho.",
+     "tokens": [
+      "vu",
+      "l'ai",
+      "je",
+      "pas",
+      "ne"
+     ],
+     "answers": [
+      "Je ne l'ai pas vu"
+     ],
+     "explain": "Zájmeno l' stojí před avoir; ne … pas obklopí ai."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Co jsi dělal o víkendu?",
+     "answers": [
+      "Qu'est-ce que tu as fait ce week-end",
+      "Tu as fait quoi ce week-end",
+      "Qu'as-tu fait ce week-end"
+     ],
+     "explain": "faire → fait."
+    },
+    {
+     "id": "fr-a2-passe-compose-avoir-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Nous avons beaucoup travaillé.",
+     "answers": [
+      "Hodně jsme pracovali",
+      "Hodně jsme pracovaly"
+     ],
+     "explain": "avons travaillé = pracovali jsme."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-passe-compose-etre",
+   "level": "A2",
+   "title": "Minulý čas: passé composé s être",
+   "summary": "Popíšeš cestu a pohyb v minulosti: šel jsem, přijela, narodil se.",
+   "notes": [
+    {
+     "heading": "Slovesa s être",
+     "text": "S **être** se pojí asi 15 sloves pohybu a změny stavu: **aller, venir, arriver, partir, entrer, sortir, monter, descendre, tomber, rester, naître, mourir, devenir, retourner, rentrer** a všechna **zvratná** slovesa."
+    },
+    {
+     "heading": "Shoda",
+     "text": "Příčestí se u être shoduje s podmětem jako přídavné jméno: **Il est allé. Elle est allée. Ils sont allés. Elles sont allées.**"
+    },
+    {
+     "heading": "Zvratná slovesa",
+     "text": "**Je me suis levé(e).** (Vstal(a) jsem.) Zvratné zájmeno stojí před être."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Elle est arrivée hier.",
+     "cs": "Přijela včera."
+    },
+    {
+     "text": "Nous sommes allés à la mer.",
+     "cs": "Jeli jsme k moři."
+    },
+    {
+     "text": "Je suis né à Brno.",
+     "cs": "Narodil jsem se v Brně."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-passe-compose-etre-01",
+     "kind": "choice",
+     "prompt": "Ils ___ partis à huit heures.",
+     "prompt_cs": "Odjeli v osm.",
+     "options": [
+      "sont",
+      "ont",
+      "êtes",
+      "est"
+     ],
+     "answers": [
+      "sont"
+     ],
+     "explain": "partir se pojí s être."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-02",
+     "kind": "choice",
+     "prompt": "Marie est ___ en retard.",
+     "prompt_cs": "Marie přišla pozdě.",
+     "options": [
+      "arrivée",
+      "arrivé",
+      "arrivés",
+      "arriver"
+     ],
+     "answers": [
+      "arrivée"
+     ],
+     "explain": "U être se příčestí shoduje: Marie (ženský rod) → arrivée."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-03",
+     "kind": "choice",
+     "prompt": "Nous ___ mangé au restaurant.",
+     "prompt_cs": "Jedli jsme v restauraci.",
+     "options": [
+      "avons",
+      "sommes",
+      "êtes",
+      "ont"
+     ],
+     "answers": [
+      "avons"
+     ],
+     "explain": "manger není sloveso pohybu → avoir."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-04",
+     "kind": "gap",
+     "prompt": "Elles sont ___ à la maison. (rester)",
+     "prompt_cs": "Zůstaly doma.",
+     "answers": [
+      "restées"
+     ],
+     "explain": "Ženský rod, množné číslo → -ées."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-05",
+     "kind": "gap",
+     "prompt": "Je me ___ levé tôt. (être)",
+     "prompt_cs": "Vstal jsem brzy.",
+     "answers": [
+      "suis"
+     ],
+     "explain": "Zvratná slovesa se pojí s être."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-06",
+     "kind": "order",
+     "prompt": "Šli jsme do kina.",
+     "tokens": [
+      "sommes",
+      "cinéma",
+      "au",
+      "allés",
+      "nous"
+     ],
+     "answers": [
+      "Nous sommes allés au cinéma"
+     ],
+     "explain": "aller + être; shoda allés."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Spadla.",
+     "answers": [
+      "Elle est tombée"
+     ],
+     "explain": "tomber + être; ženský rod → tombée."
+    },
+    {
+     "id": "fr-a2-passe-compose-etre-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Ils sont rentrés tard.",
+     "answers": [
+      "Vrátili se pozdě",
+      "Přišli domů pozdě",
+      "Vrátili se domů pozdě"
+     ],
+     "explain": "rentrer = vrátit se domů."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-imparfait",
+   "level": "A2",
+   "title": "Imparfait: jaké to bylo",
+   "summary": "Popíšeš, jaké to bylo a co se dělávalo, a odlišíš to od jednorázové události.",
+   "notes": [
+    {
+     "heading": "Tvoření",
+     "text": "Vezměte tvar **nous** přítomného času bez -ons (nous parl-ons, nous finiss-ons) a přidejte **-ais, -ais, -ait, -ions, -iez, -aient**. Jediná výjimka kmene: **être → ét-** (j'étais).",
+     "table": [
+      [
+       "",
+       "parler",
+       "être"
+      ],
+      [
+       "je",
+       "parlais",
+       "étais"
+      ],
+      [
+       "tu",
+       "parlais",
+       "étais"
+      ],
+      [
+       "il",
+       "parlait",
+       "était"
+      ],
+      [
+       "nous",
+       "parlions",
+       "étions"
+      ],
+      [
+       "vous",
+       "parliez",
+       "étiez"
+      ],
+      [
+       "ils",
+       "parlaient",
+       "étaient"
+      ]
+     ]
+    },
+    {
+     "heading": "Imparfait × passé composé",
+     "text": "**Imparfait** popisuje kulisu, stav a zvyk (Bylo hezky. Každé léto jsme jezdili…). **Passé composé** vypráví jednotlivé události (Pak přišel.). Česky to často odpovídá nedokonavému × dokonavému vidu."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Quand j'étais petit, j'habitais à Ostrava.",
+     "cs": "Když jsem byl malý, bydlel jsem v Ostravě."
+    },
+    {
+     "text": "Il faisait beau.",
+     "cs": "Bylo hezky."
+    },
+    {
+     "text": "Je lisais quand il est arrivé.",
+     "cs": "Četl jsem, když přišel."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-imparfait-01",
+     "kind": "choice",
+     "prompt": "Quand j'___ enfant, j'avais un chien.",
+     "prompt_cs": "Když jsem byl dítě, měl jsem psa.",
+     "options": [
+      "étais",
+      "ai été",
+      "suis",
+      "était"
+     ],
+     "answers": [
+      "étais"
+     ],
+     "explain": "Stav v minulosti → imparfait."
+    },
+    {
+     "id": "fr-a2-imparfait-02",
+     "kind": "choice",
+     "prompt": "Il ___ quand je suis sorti.",
+     "prompt_cs": "Pršelo, když jsem vyšel ven.",
+     "options": [
+      "pleuvait",
+      "a plu",
+      "pleut",
+      "pleuvra"
+     ],
+     "answers": [
+      "pleuvait"
+     ],
+     "explain": "Kulisa děje → imparfait."
+    },
+    {
+     "id": "fr-a2-imparfait-03",
+     "kind": "gap",
+     "prompt": "Nous ___ souvent à la mer. (aller)",
+     "prompt_cs": "Často jsme jezdili k moři.",
+     "answers": [
+      "allions"
+     ],
+     "explain": "Opakovaný děj v minulosti → imparfait; nous allons → all- + -ions."
+    },
+    {
+     "id": "fr-a2-imparfait-04",
+     "kind": "gap",
+     "prompt": "Tu ___ la télé ? (regarder)",
+     "prompt_cs": "Díval ses na televizi?",
+     "answers": [
+      "regardais"
+     ],
+     "explain": "tu → -ais."
+    },
+    {
+     "id": "fr-a2-imparfait-05",
+     "kind": "choice",
+     "prompt": "Soudain, le téléphone ___.",
+     "prompt_cs": "Najednou zazvonil telefon.",
+     "options": [
+      "a sonné",
+      "sonnait",
+      "sonne",
+      "sonnais"
+     ],
+     "answers": [
+      "a sonné"
+     ],
+     "explain": "Jednorázová událost → passé composé."
+    },
+    {
+     "id": "fr-a2-imparfait-06",
+     "kind": "gap",
+     "prompt": "Ils ___ fatigués. (être)",
+     "prompt_cs": "Byli unavení.",
+     "answers": [
+      "étaient"
+     ],
+     "explain": "être má kmen ét-; ils → -aient."
+    },
+    {
+     "id": "fr-a2-imparfait-07",
+     "kind": "order",
+     "prompt": "Bylo hezky.",
+     "tokens": [
+      "beau",
+      "faisait",
+      "il"
+     ],
+     "answers": [
+      "Il faisait beau"
+     ],
+     "explain": "Počasí v minulosti se popisuje v imparfait."
+    },
+    {
+     "id": "fr-a2-imparfait-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Když jsem byl malý, hrál jsem si venku.",
+     "answers": [
+      "Quand j'étais petit, je jouais dehors",
+      "Quand j'étais petite, je jouais dehors"
+     ],
+     "explain": "Oba děje jsou popis a zvyk → imparfait."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-object-pronouns",
+   "level": "A2",
+   "title": "Zájmena v předmětu: le, la, les, lui, leur",
+   "summary": "Nahradíš podstatné jméno zájmenem: vidím ho, dám jí to.",
+   "notes": [
+    {
+     "heading": "Přímý a nepřímý předmět",
+     "text": "Přímý předmět (koho, co): **le, la, l', les**. Nepřímý předmět (komu): **lui** (jemu i jí), **leur** (jim). 1. a 2. osoba: **me, te, nous, vous**.",
+     "table": [
+      [
+       "",
+       "přímý",
+       "nepřímý"
+      ],
+      [
+       "on",
+       "le",
+       "lui"
+      ],
+      [
+       "ona",
+       "la",
+       "lui"
+      ],
+      [
+       "oni",
+       "les",
+       "leur"
+      ]
+     ]
+    },
+    {
+     "heading": "Postavení",
+     "text": "Zájmeno stojí **před slovesem**: **Je le vois.** V passé composé před avoir/être: **Je l'ai vu.** Po modálním slovese před infinitivem: **Je veux le voir.**"
+    },
+    {
+     "heading": "Pozor",
+     "text": "**Je lui parle** = mluvím s ním / s ní (parler à quelqu'un)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Tu connais Marc ? Oui, je le connais.",
+     "cs": "Znáš Marka? Ano, znám ho."
+    },
+    {
+     "text": "Je leur téléphone.",
+     "cs": "Volám jim."
+    },
+    {
+     "text": "Je l'ai acheté hier.",
+     "cs": "Koupil jsem to včera."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-object-pronouns-01",
+     "kind": "choice",
+     "prompt": "Cette robe ? Je ___ prends.",
+     "prompt_cs": "Ty šaty? Vezmu si je.",
+     "options": [
+      "la",
+      "le",
+      "lui",
+      "les"
+     ],
+     "answers": [
+      "la"
+     ],
+     "explain": "robe je ženského rodu, přímý předmět → la."
+    },
+    {
+     "id": "fr-a2-object-pronouns-02",
+     "kind": "choice",
+     "prompt": "Tu parles à ta mère ? Oui, je ___ parle.",
+     "prompt_cs": "Mluvíš s matkou? Ano, mluvím s ní.",
+     "options": [
+      "lui",
+      "la",
+      "le",
+      "leur"
+     ],
+     "answers": [
+      "lui"
+     ],
+     "explain": "parler à → nepřímý předmět → lui."
+    },
+    {
+     "id": "fr-a2-object-pronouns-03",
+     "kind": "choice",
+     "prompt": "J'écris à mes amis. Je ___ écris.",
+     "prompt_cs": "Píšu kamarádům. Píšu jim.",
+     "options": [
+      "leur",
+      "les",
+      "lui",
+      "leurs"
+     ],
+     "answers": [
+      "leur"
+     ],
+     "explain": "écrire à + více lidí → leur."
+    },
+    {
+     "id": "fr-a2-object-pronouns-04",
+     "kind": "gap",
+     "prompt": "Les clés ? Je ___ ai perdues. (je)",
+     "prompt_cs": "Klíče? Ztratil jsem je.",
+     "answers": [
+      "les"
+     ],
+     "explain": "Množné číslo, přímý předmět → les."
+    },
+    {
+     "id": "fr-a2-object-pronouns-05",
+     "kind": "choice",
+     "prompt": "Je veux ___ voir.",
+     "prompt_cs": "Chci ho vidět.",
+     "options": [
+      "le",
+      "lui",
+      "leur",
+      "la"
+     ],
+     "answers": [
+      "le"
+     ],
+     "explain": "voir quelqu'un → přímý předmět; zájmeno stojí před infinitivem."
+    },
+    {
+     "id": "fr-a2-object-pronouns-06",
+     "kind": "order",
+     "prompt": "Vidím ji.",
+     "tokens": [
+      "vois",
+      "la",
+      "je"
+     ],
+     "answers": [
+      "Je la vois"
+     ],
+     "explain": "Zájmeno stojí před slovesem."
+    },
+    {
+     "id": "fr-a2-object-pronouns-07",
+     "kind": "order",
+     "prompt": "Nedal jsem jim to.",
+     "tokens": [
+      "pas",
+      "ai",
+      "donné",
+      "je",
+      "ne",
+      "leur"
+     ],
+     "answers": [
+      "Je ne leur ai pas donné"
+     ],
+     "explain": "ne + zájmeno + avoir + pas + příčestí."
+    },
+    {
+     "id": "fr-a2-object-pronouns-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Je te comprends.",
+     "answers": [
+      "Rozumím ti",
+      "Chápu tě"
+     ],
+     "explain": "te = tobě / tě."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-y-en",
+   "level": "A2",
+   "title": "Zájmena y a en",
+   "summary": "Řekneš „tam“ a „toho“ bez opakování slov: J'y vais. J'en veux.",
+   "notes": [
+    {
+     "heading": "y",
+     "text": "**y** nahrazuje místo s à, en, dans, chez (tam): **Tu vas à Paris ? Oui, j'y vais.**"
+    },
+    {
+     "heading": "en",
+     "text": "**en** nahrazuje výraz s **de** nebo s dělivým členem a množstvím (toho, z toho): **Tu veux du café ? Oui, j'en veux. J'ai deux frères. → J'en ai deux.**"
+    },
+    {
+     "heading": "Postavení",
+     "text": "Stejně jako ostatní zájmena stojí před slovesem: **Je n'y vais pas. Il y en a.** (Je tam toho.) Pevné spojení: **il y a** = je, jsou, existuje."
+    }
+   ],
+   "examples": [
+    {
+     "text": "On y va !",
+     "cs": "Jdeme!"
+    },
+    {
+     "text": "Des pommes ? J'en ai acheté.",
+     "cs": "Jablka? Koupil jsem nějaká."
+    },
+    {
+     "text": "Il y a un problème.",
+     "cs": "Je tu problém."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-y-en-01",
+     "kind": "choice",
+     "prompt": "Tu vas au marché ? Oui, j'___ vais.",
+     "prompt_cs": "Jdeš na trh? Ano, jdu tam.",
+     "options": [
+      "y",
+      "en",
+      "le",
+      "lui"
+     ],
+     "answers": [
+      "y"
+     ],
+     "explain": "Místo s à → y."
+    },
+    {
+     "id": "fr-a2-y-en-02",
+     "kind": "choice",
+     "prompt": "Tu as des enfants ? Oui, j'___ ai trois.",
+     "prompt_cs": "Máš děti? Ano, mám tři.",
+     "options": [
+      "en",
+      "y",
+      "les",
+      "leur"
+     ],
+     "answers": [
+      "en"
+     ],
+     "explain": "Množství → en."
+    },
+    {
+     "id": "fr-a2-y-en-03",
+     "kind": "choice",
+     "prompt": "Vous voulez du thé ? Non, merci, je n'___ veux pas.",
+     "prompt_cs": "Chcete čaj? Ne, děkuji, nechci.",
+     "options": [
+      "en",
+      "y",
+      "le",
+      "la"
+     ],
+     "answers": [
+      "en"
+     ],
+     "explain": "Dělivý člen du → en."
+    },
+    {
+     "id": "fr-a2-y-en-04",
+     "kind": "gap",
+     "prompt": "Il ___ a beaucoup de monde ici.",
+     "prompt_cs": "Je tu hodně lidí.",
+     "answers": [
+      "y"
+     ],
+     "explain": "Pevné spojení il y a."
+    },
+    {
+     "id": "fr-a2-y-en-05",
+     "kind": "gap",
+     "prompt": "Elle habite à Lyon depuis cinq ans ? Oui, elle ___ habite depuis cinq ans.",
+     "prompt_cs": "Bydlí v Lyonu pět let? Ano, bydlí tam pět let.",
+     "answers": [
+      "y"
+     ],
+     "explain": "Místo → y."
+    },
+    {
+     "id": "fr-a2-y-en-06",
+     "kind": "order",
+     "prompt": "Nejdu tam.",
+     "tokens": [
+      "vais",
+      "n'y",
+      "pas",
+      "je"
+     ],
+     "answers": [
+      "Je n'y vais pas"
+     ],
+     "explain": "ne + y + sloveso + pas."
+    },
+    {
+     "id": "fr-a2-y-en-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Kolik jich máš?",
+     "answers": [
+      "Combien tu en as",
+      "Tu en as combien",
+      "Combien en as-tu",
+      "Combien est-ce que tu en as"
+     ],
+     "explain": "Množství → en."
+    },
+    {
+     "id": "fr-a2-y-en-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "J'y pense souvent.",
+     "answers": [
+      "Často na to myslím",
+      "Myslím na to často"
+     ],
+     "explain": "penser à quelque chose → y."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-reflexive",
+   "level": "A2",
+   "title": "Zvratná slovesa: se lever, s'appeler",
+   "summary": "Popíšeš svůj den: vstávám, myju se, jmenuji se.",
+   "notes": [
+    {
+     "heading": "Zvratné zájmeno",
+     "text": "Zvratné sloveso má zájmeno podle osoby: **me, te, se, nous, vous, se**. Před samohláskou **m', t', s'**.",
+     "table": [
+      [
+       "",
+       "se lever (vstávat)"
+      ],
+      [
+       "je",
+       "me lève"
+      ],
+      [
+       "tu",
+       "te lèves"
+      ],
+      [
+       "il / elle",
+       "se lève"
+      ],
+      [
+       "nous",
+       "nous levons"
+      ],
+      [
+       "vous",
+       "vous levez"
+      ],
+      [
+       "ils / elles",
+       "se lèvent"
+      ]
+     ]
+    },
+    {
+     "heading": "Rozdíl od češtiny",
+     "text": "Některá slovesa jsou zvratná jen v jednom jazyce: **se promener** = procházet se, ale **se réveiller** = probudit se, **se dépêcher** = pospíšit si, **se souvenir** = vzpomenout si."
+    },
+    {
+     "heading": "Zápor a rozkaz",
+     "text": "**Je ne me lève pas.** Rozkaz: **Lève-toi ! Dépêchez-vous !** V záporu: **Ne te lève pas !**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je m'appelle Petr.",
+     "cs": "Jmenuji se Petr."
+    },
+    {
+     "text": "Nous nous levons à sept heures.",
+     "cs": "Vstáváme v sedm."
+    },
+    {
+     "text": "Dépêche-toi !",
+     "cs": "Pospěš si!"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-reflexive-01",
+     "kind": "choice",
+     "prompt": "Tu ___ couches à quelle heure ?",
+     "prompt_cs": "V kolik chodíš spát?",
+     "options": [
+      "te",
+      "se",
+      "me",
+      "vous"
+     ],
+     "answers": [
+      "te"
+     ],
+     "explain": "tu → te."
+    },
+    {
+     "id": "fr-a2-reflexive-02",
+     "kind": "choice",
+     "prompt": "Ils ___ promènent dans le parc.",
+     "prompt_cs": "Procházejí se v parku.",
+     "options": [
+      "se",
+      "s'",
+      "leur",
+      "nous"
+     ],
+     "answers": [
+      "se"
+     ],
+     "explain": "ils → se."
+    },
+    {
+     "id": "fr-a2-reflexive-03",
+     "kind": "gap",
+     "prompt": "Je ___ appelle Lucie.",
+     "prompt_cs": "Jmenuji se Lucie.",
+     "answers": [
+      "m'"
+     ],
+     "explain": "me se před samohláskou zkracuje na m'."
+    },
+    {
+     "id": "fr-a2-reflexive-04",
+     "kind": "gap",
+     "prompt": "Nous ___ lavons les mains.",
+     "prompt_cs": "Myjeme si ruce.",
+     "answers": [
+      "nous"
+     ],
+     "explain": "nous → nous."
+    },
+    {
+     "id": "fr-a2-reflexive-05",
+     "kind": "choice",
+     "prompt": "___-toi, on est en retard !",
+     "prompt_cs": "Pospěš si, máme zpoždění!",
+     "options": [
+      "Dépêche",
+      "Dépêches",
+      "Te dépêche",
+      "Dépêchez"
+     ],
+     "answers": [
+      "Dépêche"
+     ],
+     "explain": "Kladný rozkaz: sloveso + -toi."
+    },
+    {
+     "id": "fr-a2-reflexive-06",
+     "kind": "order",
+     "prompt": "Nevstávám brzy.",
+     "tokens": [
+      "lève",
+      "ne",
+      "tôt",
+      "me",
+      "je",
+      "pas"
+     ],
+     "answers": [
+      "Je ne me lève pas tôt"
+     ],
+     "explain": "ne + zájmeno + sloveso + pas."
+    },
+    {
+     "id": "fr-a2-reflexive-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Jak se jmenujete?",
+     "answers": [
+      "Comment vous appelez-vous",
+      "Comment est-ce que vous vous appelez",
+      "Vous vous appelez comment"
+     ],
+     "explain": "s'appeler, vous → vous vous appelez."
+    },
+    {
+     "id": "fr-a2-reflexive-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Elle se réveille à six heures.",
+     "answers": [
+      "Probouzí se v šest",
+      "Budí se v šest",
+      "Probouzí se v šest hodin",
+      "Budí se v šest hodin"
+     ],
+     "explain": "se réveiller = probouzet se."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-futur",
+   "level": "A2",
+   "title": "Budoucí čas: futur simple",
+   "summary": "Řekneš, co uděláš příští rok a jaké máš plány.",
+   "notes": [
+    {
+     "heading": "Tvoření",
+     "text": "**Infinitiv + koncovky -ai, -as, -a, -ons, -ez, -ont**. Slovesa na -re ztratí -e: **prendre → je prendrai**.",
+     "table": [
+      [
+       "",
+       "parler"
+      ],
+      [
+       "je",
+       "parlerai"
+      ],
+      [
+       "tu",
+       "parleras"
+      ],
+      [
+       "il",
+       "parlera"
+      ],
+      [
+       "nous",
+       "parlerons"
+      ],
+      [
+       "vous",
+       "parlerez"
+      ],
+      [
+       "ils",
+       "parleront"
+      ]
+     ]
+    },
+    {
+     "heading": "Nepravidelné kmeny",
+     "text": "Koncovky jsou stejné, mění se kmen:",
+     "table": [
+      [
+       "infinitiv",
+       "kmen"
+      ],
+      [
+       "être",
+       "ser-"
+      ],
+      [
+       "avoir",
+       "aur-"
+      ],
+      [
+       "aller",
+       "ir-"
+      ],
+      [
+       "faire",
+       "fer-"
+      ],
+      [
+       "venir",
+       "viendr-"
+      ],
+      [
+       "pouvoir",
+       "pourr-"
+      ],
+      [
+       "voir",
+       "verr-"
+      ],
+      [
+       "vouloir",
+       "voudr-"
+      ]
+     ]
+    },
+    {
+     "heading": "Futur proche × futur simple",
+     "text": "**Je vais partir** (brzy, už je to rozhodnuté) × **Je partirai** (v budoucnu, obecněji, ve spisovném textu)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Demain, il fera beau.",
+     "cs": "Zítra bude hezky."
+    },
+    {
+     "text": "Nous irons en Espagne.",
+     "cs": "Pojedeme do Španělska."
+    },
+    {
+     "text": "Je t'appellerai ce soir.",
+     "cs": "Zavolám ti večer."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-futur-01",
+     "kind": "choice",
+     "prompt": "L'année prochaine, je ___ en France.",
+     "prompt_cs": "Příští rok budu ve Francii.",
+     "options": [
+      "serai",
+      "suis",
+      "étais",
+      "serais"
+     ],
+     "answers": [
+      "serai"
+     ],
+     "explain": "être má v budoucím čase kmen ser-."
+    },
+    {
+     "id": "fr-a2-futur-02",
+     "kind": "choice",
+     "prompt": "Nous ___ la voiture.",
+     "prompt_cs": "Vezmeme auto.",
+     "options": [
+      "prendrons",
+      "prenons",
+      "prenderons",
+      "prendrions"
+     ],
+     "answers": [
+      "prendrons"
+     ],
+     "explain": "prendre → prendr- + -ons."
+    },
+    {
+     "id": "fr-a2-futur-03",
+     "kind": "gap",
+     "prompt": "Tu ___ ce soir ? (venir)",
+     "prompt_cs": "Přijdeš dnes večer?",
+     "answers": [
+      "viendras"
+     ],
+     "explain": "venir má kmen viendr-."
+    },
+    {
+     "id": "fr-a2-futur-04",
+     "kind": "gap",
+     "prompt": "Ils ___ du ski en hiver. (faire)",
+     "prompt_cs": "V zimě budou lyžovat.",
+     "answers": [
+      "feront"
+     ],
+     "explain": "faire má kmen fer-."
+    },
+    {
+     "id": "fr-a2-futur-05",
+     "kind": "gap",
+     "prompt": "Vous ___ beaucoup de choses. (voir)",
+     "prompt_cs": "Uvidíte spoustu věcí.",
+     "answers": [
+      "verrez"
+     ],
+     "explain": "voir má kmen verr-."
+    },
+    {
+     "id": "fr-a2-futur-06",
+     "kind": "order",
+     "prompt": "Budeme mít čas.",
+     "tokens": [
+      "temps",
+      "aurons",
+      "nous",
+      "le"
+     ],
+     "answers": [
+      "Nous aurons le temps"
+     ],
+     "explain": "avoir → aur- + -ons."
+    },
+    {
+     "id": "fr-a2-futur-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pojedu do Paříže.",
+     "answers": [
+      "J'irai à Paris"
+     ],
+     "explain": "aller má kmen ir-; ve městě/do města à."
+    },
+    {
+     "id": "fr-a2-futur-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Il pleuvra demain.",
+     "answers": [
+      "Zítra bude pršet",
+      "Zítra bude pršet."
+     ],
+     "explain": "pleuvoir → pleuvr-."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-comparison",
+   "level": "A2",
+   "title": "Stupňování: plus, moins, aussi",
+   "summary": "Porovnáš dvě věci a řekneš, co je nejlepší.",
+   "notes": [
+    {
+     "heading": "Druhý stupeň",
+     "text": "**plus … que** (víc než), **moins … que** (méně než), **aussi … que** (stejně jako): **Paul est plus grand que Marc.**"
+    },
+    {
+     "heading": "Třetí stupeň",
+     "text": "Určitý člen + plus/moins: **le plus grand, la plus belle, les plus chers**. „v“ se řekne **de**: **le plus haut de la ville**."
+    },
+    {
+     "heading": "Nepravidelné",
+     "text": "**bon → meilleur → le meilleur** (dobrý, lepší, nejlepší); **bien → mieux → le mieux** (dobře, lépe, nejlépe)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Le train est plus rapide que le bus.",
+     "cs": "Vlak je rychlejší než autobus."
+    },
+    {
+     "text": "C'est le meilleur restaurant de Brno.",
+     "cs": "To je nejlepší restaurace v Brně."
+    },
+    {
+     "text": "Elle chante mieux que moi.",
+     "cs": "Zpívá lépe než já."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-comparison-01",
+     "kind": "choice",
+     "prompt": "Mon frère est ___ grand que moi.",
+     "prompt_cs": "Můj bratr je vyšší než já.",
+     "options": [
+      "plus",
+      "plus de",
+      "le plus",
+      "très"
+     ],
+     "answers": [
+      "plus"
+     ],
+     "explain": "plus + přídavné jméno + que."
+    },
+    {
+     "id": "fr-a2-comparison-02",
+     "kind": "choice",
+     "prompt": "Ce gâteau est ___ que l'autre.",
+     "prompt_cs": "Tento dort je lepší než ten druhý.",
+     "options": [
+      "meilleur",
+      "plus bon",
+      "mieux",
+      "bien"
+     ],
+     "answers": [
+      "meilleur"
+     ],
+     "explain": "bon se stupňuje nepravidelně: meilleur."
+    },
+    {
+     "id": "fr-a2-comparison-03",
+     "kind": "choice",
+     "prompt": "Elle parle ___ que lui.",
+     "prompt_cs": "Mluví lépe než on.",
+     "options": [
+      "mieux",
+      "meilleur",
+      "plus bien",
+      "meilleure"
+     ],
+     "answers": [
+      "mieux"
+     ],
+     "explain": "Příslovce bien → mieux."
+    },
+    {
+     "id": "fr-a2-comparison-04",
+     "kind": "gap",
+     "prompt": "Prague est aussi belle ___ Paris.",
+     "prompt_cs": "Praha je stejně krásná jako Paříž.",
+     "answers": [
+      "que"
+     ],
+     "explain": "aussi … que."
+    },
+    {
+     "id": "fr-a2-comparison-05",
+     "kind": "gap",
+     "prompt": "C'est la plus haute montagne ___ pays.",
+     "prompt_cs": "Je to nejvyšší hora v zemi.",
+     "answers": [
+      "du"
+     ],
+     "explain": "Třetí stupeň + de; de + le pays → du pays."
+    },
+    {
+     "id": "fr-a2-comparison-06",
+     "kind": "order",
+     "prompt": "Je méně unavená než ty.",
+     "tokens": [
+      "fatiguée",
+      "que",
+      "moins",
+      "toi",
+      "est",
+      "elle"
+     ],
+     "answers": [
+      "Elle est moins fatiguée que toi"
+     ],
+     "explain": "moins + přídavné jméno + que."
+    },
+    {
+     "id": "fr-a2-comparison-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "To je nejlepší film.",
+     "answers": [
+      "C'est le meilleur film"
+     ],
+     "explain": "nejlepší = le meilleur."
+    },
+    {
+     "id": "fr-a2-comparison-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Le vélo est moins cher que la voiture.",
+     "answers": [
+      "Kolo je levnější než auto",
+      "Jízdní kolo je levnější než auto"
+     ],
+     "explain": "moins cher = méně drahý = levnější."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-modals",
+   "level": "A2",
+   "title": "Pouvoir, vouloir, devoir a il faut",
+   "summary": "Řekneš, co můžeš, chceš a musíš udělat.",
+   "notes": [
+    {
+     "heading": "Tvary",
+     "text": "Po těchto slovesech stojí **infinitiv**: **Je peux venir.**",
+     "table": [
+      [
+       "",
+       "pouvoir",
+       "vouloir",
+       "devoir"
+      ],
+      [
+       "je",
+       "peux",
+       "veux",
+       "dois"
+      ],
+      [
+       "tu",
+       "peux",
+       "veux",
+       "dois"
+      ],
+      [
+       "il",
+       "peut",
+       "veut",
+       "doit"
+      ],
+      [
+       "nous",
+       "pouvons",
+       "voulons",
+       "devons"
+      ],
+      [
+       "vous",
+       "pouvez",
+       "voulez",
+       "devez"
+      ],
+      [
+       "ils",
+       "peuvent",
+       "veulent",
+       "doivent"
+      ]
+     ]
+    },
+    {
+     "heading": "il faut",
+     "text": "**Il faut + infinitiv** = je třeba, musí se (neosobně): **Il faut partir.**"
+    },
+    {
+     "heading": "Zdvořile",
+     "text": "**Je voudrais** (chtěl bych) a **Pourriez-vous …?** (Mohl byste…?) jsou zdvořilejší než je veux."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Je peux entrer ?",
+     "cs": "Můžu dál?"
+    },
+    {
+     "text": "Nous devons travailler.",
+     "cs": "Musíme pracovat."
+    },
+    {
+     "text": "Je voudrais un café, s'il vous plaît.",
+     "cs": "Chtěl bych kávu, prosím."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-modals-01",
+     "kind": "choice",
+     "prompt": "Tu ___ venir demain ?",
+     "prompt_cs": "Můžeš přijít zítra?",
+     "options": [
+      "peux",
+      "peut",
+      "pouvez",
+      "pouvons"
+     ],
+     "answers": [
+      "peux"
+     ],
+     "explain": "pouvoir, tu → peux."
+    },
+    {
+     "id": "fr-a2-modals-02",
+     "kind": "choice",
+     "prompt": "Ils ___ partir tôt.",
+     "prompt_cs": "Musí odejít brzy.",
+     "options": [
+      "doivent",
+      "devent",
+      "doit",
+      "devons"
+     ],
+     "answers": [
+      "doivent"
+     ],
+     "explain": "devoir, ils → doivent."
+    },
+    {
+     "id": "fr-a2-modals-03",
+     "kind": "gap",
+     "prompt": "Vous ___ du thé ? (vouloir)",
+     "prompt_cs": "Chcete čaj?",
+     "answers": [
+      "voulez"
+     ],
+     "explain": "vouloir, vous → voulez."
+    },
+    {
+     "id": "fr-a2-modals-04",
+     "kind": "gap",
+     "prompt": "Il ___ manger des légumes.",
+     "prompt_cs": "Je třeba jíst zeleninu.",
+     "answers": [
+      "faut"
+     ],
+     "explain": "il faut + infinitiv."
+    },
+    {
+     "id": "fr-a2-modals-05",
+     "kind": "choice",
+     "prompt": "Je voudrais ___ une chambre.",
+     "prompt_cs": "Chtěl bych si rezervovat pokoj.",
+     "options": [
+      "réserver",
+      "réserve",
+      "réservé",
+      "réserves"
+     ],
+     "answers": [
+      "réserver"
+     ],
+     "explain": "Po vouloir stojí infinitiv."
+    },
+    {
+     "id": "fr-a2-modals-06",
+     "kind": "order",
+     "prompt": "Nemůžu přijít.",
+     "tokens": [
+      "venir",
+      "peux",
+      "pas",
+      "ne",
+      "je"
+     ],
+     "answers": [
+      "Je ne peux pas venir"
+     ],
+     "explain": "ne … pas obklopí modální sloveso."
+    },
+    {
+     "id": "fr-a2-modals-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Musíme se učit.",
+     "answers": [
+      "Nous devons étudier",
+      "On doit étudier",
+      "Il faut étudier",
+      "Nous devons apprendre",
+      "On doit apprendre"
+     ],
+     "explain": "devoir + infinitiv."
+    },
+    {
+     "id": "fr-a2-modals-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Elle veut dormir.",
+     "answers": [
+      "Chce spát",
+      "Ona chce spát"
+     ],
+     "explain": "vouloir = chtít."
+    }
+   ]
+  },
+  {
+   "id": "fr-a2-relative",
+   "level": "A2",
+   "title": "Vztažné věty: qui, que, où",
+   "summary": "Spojíš dvě věty: muž, který…, kniha, kterou…, město, kde…",
+   "notes": [
+    {
+     "heading": "qui a que",
+     "text": "**qui** je podmět vedlejší věty (který dělá): **l'homme qui parle**. **que (qu')** je předmět (kterého, kterou): **le livre que je lis**. Pomůcka: po **qui** následuje sloveso, po **que** podmět."
+    },
+    {
+     "heading": "où",
+     "text": "**où** označuje místo i čas: **la ville où j'habite, le jour où il est arrivé**."
+    }
+   ],
+   "examples": [
+    {
+     "text": "C'est la femme qui habite ici.",
+     "cs": "To je žena, která tu bydlí."
+    },
+    {
+     "text": "Le film que j'ai vu était bon.",
+     "cs": "Film, který jsem viděl, byl dobrý."
+    },
+    {
+     "text": "Voici la maison où je suis né.",
+     "cs": "Tady je dům, kde jsem se narodil."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a2-relative-01",
+     "kind": "choice",
+     "prompt": "Le garçon ___ joue est mon fils.",
+     "prompt_cs": "Chlapec, který si hraje, je můj syn.",
+     "options": [
+      "qui",
+      "que",
+      "où",
+      "qu'"
+     ],
+     "answers": [
+      "qui"
+     ],
+     "explain": "Následuje sloveso → qui je podmět."
+    },
+    {
+     "id": "fr-a2-relative-02",
+     "kind": "choice",
+     "prompt": "La robe ___ tu portes est belle.",
+     "prompt_cs": "Šaty, které máš na sobě, jsou krásné.",
+     "options": [
+      "que",
+      "qui",
+      "où",
+      "quoi"
+     ],
+     "answers": [
+      "que"
+     ],
+     "explain": "Následuje podmět tu → que."
+    },
+    {
+     "id": "fr-a2-relative-03",
+     "kind": "choice",
+     "prompt": "C'est le café ___ nous nous sommes rencontrés.",
+     "prompt_cs": "To je kavárna, kde jsme se seznámili.",
+     "options": [
+      "où",
+      "que",
+      "qui",
+      "dont"
+     ],
+     "answers": [
+      "où"
+     ],
+     "explain": "Místo → où."
+    },
+    {
+     "id": "fr-a2-relative-04",
+     "kind": "gap",
+     "prompt": "Le livre ___ il lit est intéressant.",
+     "prompt_cs": "Kniha, kterou čte, je zajímavá.",
+     "answers": [
+      "qu'"
+     ],
+     "explain": "que se před samohláskou zkracuje na qu'."
+    },
+    {
+     "id": "fr-a2-relative-05",
+     "kind": "gap",
+     "prompt": "J'ai un ami ___ parle japonais.",
+     "prompt_cs": "Mám kamaráda, který mluví japonsky.",
+     "answers": [
+      "qui"
+     ],
+     "explain": "Následuje sloveso → qui."
+    },
+    {
+     "id": "fr-a2-relative-06",
+     "kind": "order",
+     "prompt": "Muž, kterého vidím, je učitel.",
+     "tokens": [
+      "professeur",
+      "l'homme",
+      "que",
+      "est",
+      "vois",
+      "je"
+     ],
+     "answers": [
+      "L'homme que je vois est professeur"
+     ],
+     "explain": "que je vois = kterého vidím."
+    },
+    {
+     "id": "fr-a2-relative-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "To je město, kde bydlím.",
+     "answers": [
+      "C'est la ville où j'habite"
+     ],
+     "explain": "Místo → où."
+    },
+    {
+     "id": "fr-a2-relative-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "La fille qui chante est ma sœur.",
+     "answers": [
+      "Dívka, která zpívá, je moje sestra",
+      "Holka, která zpívá, je moje sestra"
+     ],
+     "explain": "qui = která (podmět)."
+    }
+   ]
+  }
+ ]
+}

@@ -2,7 +2,7 @@
  "language": "de",
  "source": "claude-draft",
  "license": "MIT",
- "revision": "grammar-v1",
+ "revision": "grammar-v2",
  "review_status": "unreviewed",
  "note": "German grammar A1-B2 explained in Czech. Drafted by Claude (2026-11-05); not yet reviewed by a German teacher or a native Czech speaker. Treat explanations and accepted answers as drafts.",
  "units": [
@@ -2053,6 +2053,494 @@
    ]
   },
   {
+   "id": "de-a1-stem-change",
+   "level": "A1",
+   "title": "Slovesa se změnou kmene: fahren, sprechen, lesen",
+   "summary": "Správně vyčasuješ častá slovesa, která mění samohlásku v du a er/sie/es.",
+   "notes": [
+    {
+     "heading": "Změna jen ve dvou osobách",
+     "text": "Některá silná slovesa mění kmenovou samohlásku jen ve **2. a 3. osobě jednotného čísla**. Ostatní osoby jsou pravidelné.",
+     "table": [
+      [
+       "",
+       "fahren (a → ä)",
+       "sprechen (e → i)",
+       "lesen (e → ie)"
+      ],
+      [
+       "ich",
+       "fahre",
+       "spreche",
+       "lese"
+      ],
+      [
+       "du",
+       "fährst",
+       "sprichst",
+       "liest"
+      ],
+      [
+       "er / sie / es",
+       "fährt",
+       "spricht",
+       "liest"
+      ],
+      [
+       "wir",
+       "fahren",
+       "sprechen",
+       "lesen"
+      ],
+      [
+       "ihr",
+       "fahrt",
+       "sprecht",
+       "lest"
+      ],
+      [
+       "sie / Sie",
+       "fahren",
+       "sprechen",
+       "lesen"
+      ]
+     ]
+    },
+    {
+     "heading": "Další častá slovesa",
+     "text": "a → ä: **schlafen, tragen, waschen, laufen (au → äu)**; e → i: **essen (isst), geben, helfen, nehmen (nimmt), treffen**; e → ie: **sehen (sieht)**. Nepravidelné **wissen**: ich weiß, du weißt, er weiß."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Er fährt nach Berlin.",
+     "cs": "Jede do Berlína."
+    },
+    {
+     "text": "Sprichst du Deutsch?",
+     "cs": "Mluvíš německy?"
+    },
+    {
+     "text": "Sie liest ein Buch.",
+     "cs": "Čte knihu."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-stem-change-01",
+     "kind": "choice",
+     "prompt": "Mein Bruder ___ gern Fußball im Fernsehen.",
+     "prompt_cs": "Můj bratr se rád dívá na fotbal v televizi.",
+     "options": [
+      "sieht",
+      "seht",
+      "sehe",
+      "siehst"
+     ],
+     "answers": [
+      "sieht"
+     ],
+     "explain": "sehen: e → ie ve 3. osobě."
+    },
+    {
+     "id": "de-a1-stem-change-02",
+     "kind": "choice",
+     "prompt": "___ du Englisch?",
+     "prompt_cs": "Mluvíš anglicky?",
+     "options": [
+      "Sprichst",
+      "Sprechst",
+      "Spricht",
+      "Sprecht"
+     ],
+     "answers": [
+      "Sprichst"
+     ],
+     "explain": "sprechen: e → i v du."
+    },
+    {
+     "id": "de-a1-stem-change-03",
+     "kind": "gap",
+     "prompt": "Sie ___ jeden Tag mit dem Bus. (fahren)",
+     "prompt_cs": "Každý den jezdí autobusem.",
+     "answers": [
+      "fährt"
+     ],
+     "explain": "fahren: a → ä ve 3. osobě."
+    },
+    {
+     "id": "de-a1-stem-change-04",
+     "kind": "gap",
+     "prompt": "Was ___ du zum Frühstück? (essen)",
+     "prompt_cs": "Co jíš k snídani?",
+     "answers": [
+      "isst"
+     ],
+     "explain": "essen: du isst (s + st → st)."
+    },
+    {
+     "id": "de-a1-stem-change-05",
+     "kind": "choice",
+     "prompt": "Wir ___ heute Pizza.",
+     "prompt_cs": "Dnes jíme pizzu.",
+     "options": [
+      "essen",
+      "isst",
+      "esst",
+      "esse"
+     ],
+     "answers": [
+      "essen"
+     ],
+     "explain": "V množném čísle se kmen nemění."
+    },
+    {
+     "id": "de-a1-stem-change-06",
+     "kind": "gap",
+     "prompt": "Ich ___ es nicht. (wissen)",
+     "prompt_cs": "Nevím to.",
+     "answers": [
+      "weiß"
+     ],
+     "explain": "wissen je nepravidelné: ich weiß."
+    },
+    {
+     "id": "de-a1-stem-change-07",
+     "kind": "order",
+     "prompt": "Spí dlouho.",
+     "tokens": [
+      "lange",
+      "er",
+      "schläft"
+     ],
+     "answers": [
+      "Er schläft lange"
+     ],
+     "explain": "schlafen: a → ä; sloveso na druhém místě."
+    },
+    {
+     "id": "de-a1-stem-change-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pomáhá mi.",
+     "answers": [
+      "Er hilft mir",
+      "Sie hilft mir"
+     ],
+     "explain": "helfen: e → i; helfen se pojí se 3. pádem (mir)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-imperative",
+   "level": "A1",
+   "title": "Rozkazovací způsob",
+   "summary": "Požádáš někoho, ať něco udělá: Komm! Kommt! Kommen Sie!",
+   "notes": [
+    {
+     "heading": "Tři tvary",
+     "text": "**du**: kmen bez koncovky a bez du: **Komm! Mach das!** **ihr**: tvar přítomného času bez ihr: **Kommt!** **Sie**: sloveso + Sie: **Kommen Sie!**",
+     "table": [
+      [
+       "",
+       "kommen",
+       "machen",
+       "sein"
+      ],
+      [
+       "du",
+       "Komm!",
+       "Mach!",
+       "Sei!"
+      ],
+      [
+       "ihr",
+       "Kommt!",
+       "Macht!",
+       "Seid!"
+      ],
+      [
+       "Sie",
+       "Kommen Sie!",
+       "Machen Sie!",
+       "Seien Sie!"
+      ]
+     ]
+    },
+    {
+     "heading": "Změna e → i zůstává",
+     "text": "Slovesa se změnou **e → i / ie** ji mají i v rozkazu pro du: **sprechen → Sprich! lesen → Lies! nehmen → Nimm!** Změna a → ä ne: **fahren → Fahr!**"
+    },
+    {
+     "heading": "Odlučitelné předpony a bitte",
+     "text": "Předpona jde na konec: **Mach die Tür zu!** Zdvořile se přidá **bitte**: **Hilf mir bitte!**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Komm her!",
+     "cs": "Pojď sem!"
+    },
+    {
+     "text": "Seid bitte leise!",
+     "cs": "Buďte prosím zticha!"
+    },
+    {
+     "text": "Nehmen Sie Platz!",
+     "cs": "Posaďte se!"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-imperative-01",
+     "kind": "choice",
+     "prompt": "___ bitte langsamer!",
+     "prompt_cs": "Mluv prosím pomaleji!",
+     "options": [
+      "Sprich",
+      "Sprech",
+      "Sprichst",
+      "Sprechen"
+     ],
+     "answers": [
+      "Sprich"
+     ],
+     "explain": "sprechen: e → i i v rozkazu pro du."
+    },
+    {
+     "id": "de-a1-imperative-02",
+     "kind": "choice",
+     "prompt": "___ ruhig, Kinder!",
+     "prompt_cs": "Buďte zticha, děti!",
+     "options": [
+      "Seid",
+      "Sind",
+      "Sei",
+      "Seien"
+     ],
+     "answers": [
+      "Seid"
+     ],
+     "explain": "ihr → Seid."
+    },
+    {
+     "id": "de-a1-imperative-03",
+     "kind": "gap",
+     "prompt": "___ Sie bitte hier! (warten)",
+     "prompt_cs": "Počkejte prosím tady!",
+     "answers": [
+      "Warten"
+     ],
+     "explain": "Sie: sloveso + Sie."
+    },
+    {
+     "id": "de-a1-imperative-04",
+     "kind": "gap",
+     "prompt": "___ das Buch! (lesen, du)",
+     "prompt_cs": "Přečti si tu knihu!",
+     "answers": [
+      "Lies"
+     ],
+     "explain": "lesen → Lies!"
+    },
+    {
+     "id": "de-a1-imperative-05",
+     "kind": "choice",
+     "prompt": "Mach bitte das Fenster ___!",
+     "prompt_cs": "Zavři prosím okno!",
+     "options": [
+      "zu",
+      "auf",
+      "an",
+      "aus"
+     ],
+     "answers": [
+      "zu"
+     ],
+     "explain": "zumachen = zavřít; předpona na konci."
+    },
+    {
+     "id": "de-a1-imperative-06",
+     "kind": "order",
+     "prompt": "Pomoz mi prosím!",
+     "tokens": [
+      "bitte",
+      "mir",
+      "hilf"
+     ],
+     "answers": [
+      "Hilf mir bitte"
+     ],
+     "explain": "helfen → Hilf! (e → i)."
+    },
+    {
+     "id": "de-a1-imperative-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Pojďte sem! (vykání)",
+     "answers": [
+      "Kommen Sie her",
+      "Kommen Sie hierher"
+     ],
+     "explain": "Sie: Kommen Sie!"
+    },
+    {
+     "id": "de-a1-imperative-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Fahr vorsichtig!",
+     "answers": [
+      "Jeď opatrně",
+      "Řiď opatrně"
+     ],
+     "explain": "fahren → Fahr! (bez přehlásky)."
+    }
+   ]
+  },
+  {
+   "id": "de-a1-time",
+   "level": "A1",
+   "title": "Kdy: am, um, im a es gibt",
+   "summary": "Řekneš, kdy se něco děje, a co kde je.",
+   "notes": [
+    {
+     "heading": "Předložky času",
+     "text": "**um** + hodina: **um acht Uhr**. **am** + den, část dne, datum: **am Montag, am Abend, am 5. Mai** (ale **in der Nacht**). **im** + měsíc, roční období: **im Juli, im Sommer**. Rok bez předložky: **2020** nebo **im Jahr 2020**."
+    },
+    {
+     "heading": "es gibt",
+     "text": "**es gibt + 4. pád** = je, existuje, máme: **Es gibt hier einen Park. Gibt es noch Kaffee?** Jen v jednotném tvaru gibt i pro množné číslo: **Es gibt viele Cafés.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Der Kurs beginnt um neun Uhr.",
+     "cs": "Kurz začíná v devět."
+    },
+    {
+     "text": "Am Wochenende schlafe ich lange.",
+     "cs": "O víkendu spím dlouho."
+    },
+    {
+     "text": "Es gibt hier keinen Supermarkt.",
+     "cs": "Není tu supermarket."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a1-time-01",
+     "kind": "choice",
+     "prompt": "Wir treffen uns ___ halb acht.",
+     "prompt_cs": "Sejdeme se v půl osmé.",
+     "options": [
+      "um",
+      "am",
+      "im",
+      "in"
+     ],
+     "answers": [
+      "um"
+     ],
+     "explain": "Hodina → um."
+    },
+    {
+     "id": "de-a1-time-02",
+     "kind": "choice",
+     "prompt": "___ Sonntag gehen wir spazieren.",
+     "prompt_cs": "V neděli jdeme na procházku.",
+     "options": [
+      "Am",
+      "Um",
+      "Im",
+      "In"
+     ],
+     "answers": [
+      "Am"
+     ],
+     "explain": "Den → am."
+    },
+    {
+     "id": "de-a1-time-03",
+     "kind": "choice",
+     "prompt": "___ Winter ist es kalt.",
+     "prompt_cs": "V zimě je zima.",
+     "options": [
+      "Im",
+      "Am",
+      "Um",
+      "In"
+     ],
+     "answers": [
+      "Im"
+     ],
+     "explain": "Roční období → im."
+    },
+    {
+     "id": "de-a1-time-04",
+     "kind": "gap",
+     "prompt": "Mein Geburtstag ist ___ Mai.",
+     "prompt_cs": "Narozeniny mám v květnu.",
+     "answers": [
+      "im"
+     ],
+     "explain": "Měsíc → im."
+    },
+    {
+     "id": "de-a1-time-05",
+     "kind": "gap",
+     "prompt": "Es ___ hier viele Restaurants.",
+     "prompt_cs": "Je tu hodně restaurací.",
+     "answers": [
+      "gibt"
+     ],
+     "explain": "es gibt má jen tvar gibt, i pro množné číslo."
+    },
+    {
+     "id": "de-a1-time-06",
+     "kind": "choice",
+     "prompt": "Gibt es hier ___ Bank?",
+     "prompt_cs": "Je tu banka?",
+     "options": [
+      "eine",
+      "ein",
+      "einer",
+      "einen"
+     ],
+     "answers": [
+      "eine"
+     ],
+     "explain": "es gibt + 4. pád; die Bank → eine."
+    },
+    {
+     "id": "de-a1-time-07",
+     "kind": "order",
+     "prompt": "Večer se dívám na televizi.",
+     "tokens": [
+      "Abend",
+      "ich",
+      "sehe",
+      "fern",
+      "am"
+     ],
+     "answers": [
+      "Am Abend sehe ich fern"
+     ],
+     "explain": "Časový údaj na začátku → sloveso na druhém místě."
+    },
+    {
+     "id": "de-a1-time-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "V pondělí v osm.",
+     "answers": [
+      "Am Montag um acht",
+      "Am Montag um acht Uhr"
+     ],
+     "explain": "Den → am, hodina → um."
+    }
+   ]
+  },
+  {
    "id": "de-a2-dative",
    "level": "A2",
    "title": "Třetí pád (Dativ)",
@@ -3243,6 +3731,692 @@
       "Ich fühle mich gut"
      ],
      "explain": "sich fühlen = cítit se; ich → mich."
+    }
+   ]
+  },
+  {
+   "id": "de-a2-praeteritum-basic",
+   "level": "A2",
+   "title": "Minulý čas: war, hatte, konnte",
+   "summary": "Řekneš, kde jsi byl, co jsi měl a co jsi musel nebo mohl.",
+   "notes": [
+    {
+     "heading": "Préteritum u sein, haben a způsobových sloves",
+     "text": "V mluvené řeči se minulost vyjadřuje perfektem, ale u **sein, haben** a **způsobových sloves** se i v hovoru používá préteritum: **Ich war krank.** (ne ich bin krank gewesen).",
+     "table": [
+      [
+       "",
+       "sein",
+       "haben",
+       "können",
+       "müssen",
+       "wollen"
+      ],
+      [
+       "ich",
+       "war",
+       "hatte",
+       "konnte",
+       "musste",
+       "wollte"
+      ],
+      [
+       "du",
+       "warst",
+       "hattest",
+       "konntest",
+       "musstest",
+       "wolltest"
+      ],
+      [
+       "er / sie / es",
+       "war",
+       "hatte",
+       "konnte",
+       "musste",
+       "wollte"
+      ],
+      [
+       "wir",
+       "waren",
+       "hatten",
+       "konnten",
+       "mussten",
+       "wollten"
+      ],
+      [
+       "ihr",
+       "wart",
+       "hattet",
+       "konntet",
+       "musstet",
+       "wolltet"
+      ],
+      [
+       "sie / Sie",
+       "waren",
+       "hatten",
+       "konnten",
+       "mussten",
+       "wollten"
+      ]
+     ]
+    },
+    {
+     "heading": "ich = er",
+     "text": "V préteritu má **ich** a **er/sie/es** stejný tvar bez koncovky: **ich war, er war**. Způsobová slovesa ztrácejí přehlásku: **können → konnte, müssen → musste**. Další préteritum je v lekci B1."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Gestern war ich müde.",
+     "cs": "Včera jsem byl unavený."
+    },
+    {
+     "text": "Wir hatten keine Zeit.",
+     "cs": "Neměli jsme čas."
+    },
+    {
+     "text": "Ich musste arbeiten.",
+     "cs": "Musel jsem pracovat."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a2-praeteritum-basic-01",
+     "kind": "choice",
+     "prompt": "Letztes Jahr ___ wir in Wien.",
+     "prompt_cs": "Loni jsme byli ve Vídni.",
+     "options": [
+      "waren",
+      "war",
+      "wart",
+      "sind"
+     ],
+     "answers": [
+      "waren"
+     ],
+     "explain": "wir → waren."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-02",
+     "kind": "choice",
+     "prompt": "Ich ___ gestern Kopfschmerzen.",
+     "prompt_cs": "Včera mě bolela hlava.",
+     "options": [
+      "hatte",
+      "hattest",
+      "habe",
+      "hatten"
+     ],
+     "answers": [
+      "hatte"
+     ],
+     "explain": "ich → hatte."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-03",
+     "kind": "gap",
+     "prompt": "Er ___ nicht kommen. (können)",
+     "prompt_cs": "Nemohl přijít.",
+     "answers": [
+      "konnte"
+     ],
+     "explain": "können → konnte (bez přehlásky)."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-04",
+     "kind": "gap",
+     "prompt": "Wo ___ du am Wochenende? (sein)",
+     "prompt_cs": "Kde jsi byl o víkendu?",
+     "answers": [
+      "warst"
+     ],
+     "explain": "du → warst."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-05",
+     "kind": "gap",
+     "prompt": "Wir ___ lange warten. (müssen)",
+     "prompt_cs": "Museli jsme dlouho čekat.",
+     "answers": [
+      "mussten"
+     ],
+     "explain": "müssen → mussten."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-06",
+     "kind": "choice",
+     "prompt": "___ ihr schon in Prag?",
+     "prompt_cs": "Byli jste už v Praze?",
+     "options": [
+      "Wart",
+      "Waren",
+      "War",
+      "Seid"
+     ],
+     "answers": [
+      "Wart"
+     ],
+     "explain": "ihr → wart."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-07",
+     "kind": "order",
+     "prompt": "Chtěla jsem jít domů.",
+     "tokens": [
+      "nach",
+      "ich",
+      "gehen",
+      "wollte",
+      "Hause"
+     ],
+     "answers": [
+      "Ich wollte nach Hause gehen"
+     ],
+     "explain": "Způsobové sloveso na druhém místě, infinitiv na konci."
+    },
+    {
+     "id": "de-a2-praeteritum-basic-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Byl jsem nemocný.",
+     "answers": [
+      "Ich war krank"
+     ],
+     "explain": "sein → war."
+    }
+   ]
+  },
+  {
+   "id": "de-a2-verbs-prepositions",
+   "level": "A2",
+   "title": "Slovesa s předložkou: warten auf, denken an",
+   "summary": "Použiješ slovesa s pevnou předložkou a zeptáš se Worauf? Woran?",
+   "notes": [
+    {
+     "heading": "Pevné předložky",
+     "text": "Mnohá slovesa mají pevnou předložku a pád; učte se je jako celek:",
+     "table": [
+      [
+       "sloveso",
+       "česky"
+      ],
+      [
+       "warten auf + 4. p.",
+       "čekat na"
+      ],
+      [
+       "denken an + 4. p.",
+       "myslet na"
+      ],
+      [
+       "sich freuen auf + 4. p.",
+       "těšit se na"
+      ],
+      [
+       "sich interessieren für + 4. p.",
+       "zajímat se o"
+      ],
+      [
+       "sprechen über + 4. p.",
+       "mluvit o"
+      ],
+      [
+       "Angst haben vor + 3. p.",
+       "bát se"
+      ],
+      [
+       "träumen von + 3. p.",
+       "snít o"
+      ],
+      [
+       "teilnehmen an + 3. p.",
+       "zúčastnit se"
+      ]
+     ]
+    },
+    {
+     "heading": "wo(r)- a da(r)-",
+     "text": "U věcí se ptáme **wo + předložka** a odkazujeme **da + předložka** (před samohláskou s **r**): **Worauf wartest du? – Auf den Bus. Ich warte darauf.** U osob předložka + zájmeno: **Auf wen wartest du? – Auf ihn.**"
+    }
+   ],
+   "examples": [
+    {
+     "text": "Ich warte auf den Bus.",
+     "cs": "Čekám na autobus."
+    },
+    {
+     "text": "Woran denkst du?",
+     "cs": "Na co myslíš?"
+    },
+    {
+     "text": "Wir freuen uns auf den Urlaub.",
+     "cs": "Těšíme se na dovolenou."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a2-verbs-prepositions-01",
+     "kind": "choice",
+     "prompt": "Ich warte ___ meine Freundin.",
+     "prompt_cs": "Čekám na kamarádku.",
+     "options": [
+      "auf",
+      "für",
+      "an",
+      "nach"
+     ],
+     "answers": [
+      "auf"
+     ],
+     "explain": "warten auf."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-02",
+     "kind": "choice",
+     "prompt": "Er interessiert sich ___ Musik.",
+     "prompt_cs": "Zajímá se o hudbu.",
+     "options": [
+      "für",
+      "über",
+      "auf",
+      "an"
+     ],
+     "answers": [
+      "für"
+     ],
+     "explain": "sich interessieren für."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-03",
+     "kind": "choice",
+     "prompt": "Sie hat Angst ___ dem Hund.",
+     "prompt_cs": "Bojí se psa.",
+     "options": [
+      "vor",
+      "von",
+      "für",
+      "an"
+     ],
+     "answers": [
+      "vor"
+     ],
+     "explain": "Angst haben vor + 3. pád."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-04",
+     "kind": "gap",
+     "prompt": "___ denkst du? – An die Prüfung.",
+     "prompt_cs": "Na co myslíš? – Na zkoušku.",
+     "answers": [
+      "Woran"
+     ],
+     "explain": "denken an → woran (r před samohláskou)."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-05",
+     "kind": "gap",
+     "prompt": "Freust du dich auf die Ferien? – Ja, ich freue mich sehr ___.",
+     "prompt_cs": "Těšíš se na prázdniny? – Ano, moc se na ně těším.",
+     "answers": [
+      "darauf"
+     ],
+     "explain": "Odkaz na věc: da(r) + předložka."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-06",
+     "kind": "choice",
+     "prompt": "Wir sprechen über ___ Film.",
+     "prompt_cs": "Mluvíme o tom filmu.",
+     "options": [
+      "den",
+      "dem",
+      "der",
+      "des"
+     ],
+     "answers": [
+      "den"
+     ],
+     "explain": "sprechen über + 4. pád: der Film → den Film."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-07",
+     "kind": "order",
+     "prompt": "Na koho čekáš?",
+     "tokens": [
+      "du",
+      "wen",
+      "wartest",
+      "auf"
+     ],
+     "answers": [
+      "Auf wen wartest du"
+     ],
+     "explain": "U osob: předložka + wen."
+    },
+    {
+     "id": "de-a2-verbs-prepositions-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Těším se na víkend.",
+     "answers": [
+      "Ich freue mich auf das Wochenende",
+      "Ich freue mich aufs Wochenende"
+     ],
+     "explain": "sich freuen auf + 4. pád."
+    }
+   ]
+  },
+  {
+   "id": "de-a2-connectors",
+   "level": "A2",
+   "title": "Spojovací slova: deshalb, trotzdem, dann",
+   "summary": "Spojíš věty příslovci, po kterých jde sloveso hned za ně.",
+   "notes": [
+    {
+     "heading": "Sloveso na druhém místě",
+     "text": "Příslovce **deshalb** (proto), **trotzdem** (přesto), **dann** (potom), **danach** (potom), **sonst** (jinak), **außerdem** (kromě toho) zabírají první místo. Sloveso následuje hned za nimi a podmět až za slovesem: **Ich bin krank, deshalb bleibe ich zu Hause.**"
+    },
+    {
+     "heading": "Porovnání",
+     "text": "**weil** posílá sloveso na konec (vedlejší věta), **denn** nemění slovosled, **deshalb** ho obrací:",
+     "table": [
+      [
+       "spojka",
+       "příklad"
+      ],
+      [
+       "weil",
+       "…, weil ich krank bin."
+      ],
+      [
+       "denn",
+       "…, denn ich bin krank."
+      ],
+      [
+       "deshalb",
+       "…, deshalb bleibe ich zu Hause."
+      ]
+     ]
+    }
+   ],
+   "examples": [
+    {
+     "text": "Es regnet, trotzdem gehen wir spazieren.",
+     "cs": "Prší, přesto jdeme na procházku."
+    },
+    {
+     "text": "Zuerst frühstücke ich, dann gehe ich zur Arbeit.",
+     "cs": "Nejdřív posnídám, pak jdu do práce."
+    },
+    {
+     "text": "Beeil dich, sonst verpasst du den Zug.",
+     "cs": "Pospěš si, jinak ti ujede vlak."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a2-connectors-01",
+     "kind": "choice",
+     "prompt": "Ich habe Hunger, deshalb ___ ich ein Brot.",
+     "prompt_cs": "Mám hlad, proto si dám chleba.",
+     "options": [
+      "esse",
+      "isst",
+      "essen",
+      "gegessen"
+     ],
+     "answers": [
+      "esse"
+     ],
+     "explain": "Po deshalb stojí sloveso a pak podmět: deshalb esse ich."
+    },
+    {
+     "id": "de-a2-connectors-02",
+     "kind": "choice",
+     "prompt": "Er ist müde, ___ arbeitet er weiter.",
+     "prompt_cs": "Je unavený, přesto pracuje dál.",
+     "options": [
+      "trotzdem",
+      "weil",
+      "deshalb",
+      "denn"
+     ],
+     "answers": [
+      "trotzdem"
+     ],
+     "explain": "přesto = trotzdem."
+    },
+    {
+     "id": "de-a2-connectors-03",
+     "kind": "gap",
+     "prompt": "Wir haben keine Zeit, ___ kommen wir nicht. (proto)",
+     "prompt_cs": "Nemáme čas, proto nepřijdeme.",
+     "answers": [
+      "deshalb"
+     ],
+     "explain": "proto = deshalb."
+    },
+    {
+     "id": "de-a2-connectors-04",
+     "kind": "order",
+     "prompt": "Prší, proto zůstávám doma.",
+     "tokens": [
+      "bleibe",
+      "deshalb",
+      "Hause",
+      "ich",
+      "zu",
+      "es",
+      "regnet"
+     ],
+     "answers": [
+      "Es regnet deshalb bleibe ich zu Hause"
+     ],
+     "explain": "deshalb + sloveso + podmět."
+    },
+    {
+     "id": "de-a2-connectors-05",
+     "kind": "order",
+     "prompt": "Nejdřív nakoupím, pak uvařím.",
+     "tokens": [
+      "koche",
+      "zuerst",
+      "ein",
+      "dann",
+      "kaufe",
+      "ich",
+      "ich"
+     ],
+     "answers": [
+      "Zuerst kaufe ich ein dann koche ich"
+     ],
+     "explain": "Po zuerst i dann je sloveso na druhém místě."
+    },
+    {
+     "id": "de-a2-connectors-06",
+     "kind": "choice",
+     "prompt": "Nimm einen Schirm, ___ wirst du nass.",
+     "prompt_cs": "Vezmi si deštník, jinak zmokneš.",
+     "options": [
+      "sonst",
+      "dann",
+      "trotzdem",
+      "denn"
+     ],
+     "answers": [
+      "sonst"
+     ],
+     "explain": "jinak = sonst."
+    },
+    {
+     "id": "de-a2-connectors-07",
+     "kind": "gap",
+     "prompt": "Ich bleibe zu Hause, ___ ich krank bin.",
+     "prompt_cs": "Zůstanu doma, protože jsem nemocný.",
+     "answers": [
+      "weil"
+     ],
+     "explain": "Sloveso na konci → weil."
+    },
+    {
+     "id": "de-a2-connectors-08",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Je zima, přesto jdeme ven.",
+     "answers": [
+      "Es ist kalt, trotzdem gehen wir raus",
+      "Es ist kalt, trotzdem gehen wir nach draußen",
+      "Es ist kalt, trotzdem gehen wir hinaus"
+     ],
+     "explain": "trotzdem + sloveso + podmět."
+    }
+   ]
+  },
+  {
+   "id": "de-a2-indirect-questions",
+   "level": "A2",
+   "title": "Nepřímé otázky: ob a tázací slova",
+   "summary": "Zdvořile se zeptáš: Víte, kde je…? Nevím, jestli…",
+   "notes": [
+    {
+     "heading": "ob = jestli",
+     "text": "Otázka bez tázacího slova se v nepřímé otázce uvede spojkou **ob** (jestli, zda). Sloveso jde na konec: **Kommt er? → Ich weiß nicht, ob er kommt.**"
+    },
+    {
+     "heading": "Tázací slovo zůstává",
+     "text": "Otázka s tázacím slovem ho ponechá jako spojku, sloveso jde na konec: **Wo ist der Bahnhof? → Können Sie mir sagen, wo der Bahnhof ist?** Tak se ptáme zdvořile."
+    },
+    {
+     "heading": "Pozor: ob × wenn",
+     "text": "Česky „jestli“ = **ob** (nejistota, otázka), „když, jestliže“ = **wenn** (podmínka)."
+    }
+   ],
+   "examples": [
+    {
+     "text": "Wissen Sie, wo die Post ist?",
+     "cs": "Víte, kde je pošta?"
+    },
+    {
+     "text": "Ich weiß nicht, ob sie Zeit hat.",
+     "cs": "Nevím, jestli má čas."
+    },
+    {
+     "text": "Kannst du mir sagen, wann der Zug kommt?",
+     "cs": "Můžeš mi říct, kdy jede vlak?"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a2-indirect-questions-01",
+     "kind": "choice",
+     "prompt": "Ich weiß nicht, ___ er heute kommt.",
+     "prompt_cs": "Nevím, jestli dnes přijde.",
+     "options": [
+      "ob",
+      "wenn",
+      "dass",
+      "weil"
+     ],
+     "answers": [
+      "ob"
+     ],
+     "explain": "jestli (otázka) = ob."
+    },
+    {
+     "id": "de-a2-indirect-questions-02",
+     "kind": "choice",
+     "prompt": "Wissen Sie, wo der Bahnhof ___?",
+     "prompt_cs": "Víte, kde je nádraží?",
+     "options": [
+      "ist",
+      "sein",
+      "ist er",
+      "bist"
+     ],
+     "answers": [
+      "ist"
+     ],
+     "explain": "V nepřímé otázce jde sloveso na konec."
+    },
+    {
+     "id": "de-a2-indirect-questions-03",
+     "kind": "gap",
+     "prompt": "Kannst du mir sagen, wie spät es ___? (sein)",
+     "prompt_cs": "Můžeš mi říct, kolik je hodin?",
+     "answers": [
+      "ist"
+     ],
+     "explain": "Sloveso na konec."
+    },
+    {
+     "id": "de-a2-indirect-questions-04",
+     "kind": "gap",
+     "prompt": "Er fragt, ___ wir mitkommen. (jestli)",
+     "prompt_cs": "Ptá se, jestli půjdeme s ním.",
+     "answers": [
+      "ob"
+     ],
+     "explain": "jestli = ob."
+    },
+    {
+     "id": "de-a2-indirect-questions-05",
+     "kind": "choice",
+     "prompt": "Ich frage mich, ___ sie so traurig ist.",
+     "prompt_cs": "Říkám si, proč je tak smutná.",
+     "options": [
+      "warum",
+      "ob",
+      "dass",
+      "wenn"
+     ],
+     "answers": [
+      "warum"
+     ],
+     "explain": "proč = warum."
+    },
+    {
+     "id": "de-a2-indirect-questions-06",
+     "kind": "order",
+     "prompt": "Nevím, kde bydlí.",
+     "tokens": [
+      "wohnt",
+      "nicht",
+      "weiß",
+      "wo",
+      "er",
+      "ich"
+     ],
+     "answers": [
+      "Ich weiß nicht wo er wohnt"
+     ],
+     "explain": "Tázací slovo + podmět + sloveso na konci."
+    },
+    {
+     "id": "de-a2-indirect-questions-07",
+     "kind": "translate",
+     "direction": "cs-target",
+     "prompt": "Víte, kolik to stojí?",
+     "answers": [
+      "Wissen Sie, wie viel das kostet",
+      "Wissen Sie, was das kostet",
+      "Wissen Sie, wieviel das kostet"
+     ],
+     "explain": "Sloveso kostet na konci."
+    },
+    {
+     "id": "de-a2-indirect-questions-08",
+     "kind": "translate",
+     "direction": "target-cs",
+     "prompt": "Ich weiß nicht, ob das stimmt.",
+     "answers": [
+      "Nevím, jestli je to pravda",
+      "Nevím, jestli to platí",
+      "Nevím, zda je to pravda",
+      "Nevím, jestli to sedí"
+     ],
+     "explain": "ob = jestli."
     }
    ]
   },

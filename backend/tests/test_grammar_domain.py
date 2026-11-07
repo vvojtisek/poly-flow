@@ -50,6 +50,18 @@ def test_shipped_packs_validate_and_only_claim_available_levels():
                 assert g.correct, f"{e.id}: shown answer does not grade as correct"
 
 
+def test_every_course_language_has_a1_and_a2_grammar():
+    """Each course language ships a pack covering A1 and A2 (Vlad, 2026-11-06)."""
+    shipped = {}
+    for f in DATA.glob("*.grammar.json"):
+        pack = GrammarPack.model_validate(json.loads(f.read_text(encoding="utf-8")))
+        shipped[pack.language] = pack
+    assert set(shipped) == set(Language)
+    for lang, pack in shipped.items():
+        per_level = {lv: sum(u.level == lv for u in pack.units) for lv in LEVELS[:2]}
+        assert all(n >= 8 for n in per_level.values()), (lang, per_level)
+
+
 def test_shipped_de_pack_has_every_exercise_kind():
     pack = GrammarPack.model_validate_json((DATA / "de.grammar.json").read_text(encoding="utf-8"))
     kinds = {e.kind for u in pack.units for e in u.exercises}

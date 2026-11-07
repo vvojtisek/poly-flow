@@ -61,7 +61,7 @@ say "building and starting PolyFlow at ${local_sha:0:12}"
 
 # Keep packaged curriculum and safety rules in sync with the deployed commit.
 "${compose[@]}" run --rm --no-deps backend sh -c \
-  'python -m app.cli seed-lexicon data/lexicon/*.csv'
+  'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json && python -m app.cli seed-grammar data/grammar/*.json'
 "${compose[@]}" run --rm --no-deps backend \
   python -m app.cli seed-blacklist data/blacklist/default.csv
 

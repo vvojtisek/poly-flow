@@ -53,6 +53,32 @@ the frequency list, plus `battle` (violence) and `fucking` (profanity, missing f
 derive from wordfreq. `tests/test_lexicon_data.py` checks ranks 1-1000 without gaps, unique
 glosses, the en_GB order, carried-over flags, and that no unflagged example uses a flagged word.
 
+### `en.1001-5000.csv` (English ranks 1001-5000, revision `en5000-draft-v1`)
+
+4,000 words that take the English course from the A2 milestone (1,000) through B1 (2,500) and the
+B2 threshold (4,000) to full B2 (5,000), so the placement test can place up to 5,000 and the B1
+and B2 level exams can open. Same method as ranks 101-1000: walk `frequency/en_GB.lemmas.csv`
+from where the previous block stopped (en_GB rank 1002), skip lemmas already in the lexicon, and
+number the rest 1001-5000. 68 list entries were skipped because they are not useful headwords for
+a Czech learner: proper names and name fragments (`victor`, `bailey`, `sander`), prefixes and
+clippings (`anti`, `sub`, `micro`, `mod`), fillers (`uh`, `um`, `hmm`), archaic forms (`thou`,
+`thee`), drug names (`marijuana`, `cannabis`, `cocaine`, `coke`, `dope`) and US-only or slang
+entries (`interstate`, `capitol`, `cum`); the file header lists the policy. Where the list's POS
+tag is an artefact (`ant` ADJ, `brutal` NOUN, `vein` ADV), the row uses the learner sense.
+Language and nationality nouns are capitalised (`Czech`, `Arabic`, `Portuguese`).
+
+Flags: profanity and sexual vocabulary carry `profanity` or `sexual` (adult opt-in only, never in
+child profiles); violent vocabulary carries `violence` (`weapon`, `bomb`, `hostage`, `massacre`,
+`pistol`, `warfare`...), added by hand where the frequency list has no flag. Examples of unflagged
+words use no flagged word. 97.5% of examples contain the lemma verbatim (cloze).
+
+**Not reviewed by a native Czech speaker** (`source` = `claude-drafted`, licence CC-BY-SA-4.0 as
+the order derives from wordfreq). The review list is kept with the project files
+(`reviews/en-1001-5000-review.md`). Still open: the second senses of `bear` (animal, carry),
+`unite` (verb) and `china` (porcelain), which need their own rows outside the frequency order.
+`tests/test_lexicon_data.py` checks ranks 1-5000 without gaps, unique glosses, en_GB order,
+provenance, carried-over flags and clean examples, and that the A1-B2 exam bands are complete.
+
 ### `de.0101-1000.csv` (German ranks 101-1000, revision `de1000-draft-v1`)
 
 900 words that take the German course from the core-100 to the A2 milestone (1,000), so the
@@ -72,7 +98,58 @@ have no scene: a lesson shows each word's example sentence as its context.
 provenance, noun capitalisation and gender. Adding `sein/DET` (possessive) made `sein` and `zu`
 ambiguous in scene markup, so `de.core100.json` now writes `sein/AUX` and `zu/ADP`.
 
-### Producing the full lists (not done yet)
+### `de.1001-5000.csv` (German ranks 1001-5000, revision `de5000-draft-v1`)
+
+4,000 words that take German from the A2 milestone to full B2 (5,000), so placement can place up
+to 5,000 and the B1 and B2 exams open. Unlike ranks 101-1000, the order comes from a corpus:
+wordfreq's German frequencies (CC-BY-SA-4.0), summed per lemma and walked from the top, skipping
+lemmas already in ranks 1-1000. wordfreq lists lower-cased word forms, so forms were grouped with
+simplemma (MIT) and a Hunspell German word list (used only to tell nouns from verbs; nothing is
+copied from it), and every lemma was then checked by hand while glossing. The lemmatiser makes
+mistakes (`Tage` -> `tagen`), so the order is approximate. Skipped: personal and place names
+(countries are kept as `PROPN` without gender), abbreviations, brand names and English words.
+Nouns carry `der/die/das` (plural-only nouns `die`). Flags follow the English list: profanity
+(`ficken`, `Arsch`, `Mist`, `verdammt`...) and sexual words are adult opt-in only, violent words
+(`Krieg`, `töten`, `Waffe`, `Mord`...) are flagged `violence`, and unflagged examples use no
+flagged word. About 76% of examples contain the lemma verbatim (separable and conjugated verbs
+often do not). **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/de-1001-5000-review.md` in the project files.
+`tests/test_lexicon_de.py` checks ranks 1-5000, unique keys and glosses, provenance, noun gender,
+complete A1-B2 bands and clean examples.
+
+### `fr.0101-5000.csv` (French ranks 101-5000, revision `fr5000-draft-v1`)
+
+4,900 words that take French from the core 100 to full B2 (5,000), so placement can place up to
+5,000 and every exam opens. Order: wordfreq's French frequencies (CC-BY-SA-4.0), grouped into
+lemmas with simplemma (MIT), summed per lemma and walked from the top, skipping core-100 lemmas;
+every lemma was checked by hand while glossing, so the order is approximate (within a few hundred
+ranks). Skipped: personal and place names, abbreviations, brand names, English words, lemmatiser
+artefacts and drug names. Nouns carry `m`/`f` (the masculine form for nouns of both genders).
+Flags follow the English list: profanity (`putain`, `merde`, `con`, `connard`...) and sexual words
+are adult opt-in only, violent words (`guerre`, `tuer`, `arme`, `meurtre`...) are flagged
+`violence`, and unflagged examples use no flagged word. About 78% of examples contain the lemma
+verbatim. **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/fr-0101-5000-review.md` in the project files.
+`tests/test_lexicon_romance.py` checks ranks 1-5000, unique keys and glosses, provenance, noun
+gender, complete A1-B2 bands, flags and clean examples.
+
+### `it.0101-5000.csv` (Italian ranks 101-5000, revision `it5000-draft-v1`)
+
+4,900 words that take Italian from the core 100 to full B2 (5,000), built the same way as the
+French list: wordfreq's Italian frequencies (CC-BY-SA-4.0), grouped into lemmas with simplemma
+(MIT), summed per lemma and walked from the top, skipping core-100 lemmas, with every lemma
+checked by hand, so the order is approximate (within a few hundred ranks). Skipped: personal and
+place names, abbreviations, brand names, English words not established in Italian, spelling
+variants (`oramai`, `famigliare`), lemmatiser artefacts and drug names. Nouns carry `m`/`f`.
+Profanity (`cazzo`, `merda`, `stronzo`, `vaffanculo`...) and sexual words are adult opt-in only;
+violent words (`guerra`, `uccidere`, `bomba`, `assassino`...) are flagged `violence`. As in the
+English list, plain insults such as `cretino` and `imbecille` and neutral military words such as
+`esercito` are not flagged. Unflagged examples use no flagged word. About 76% of examples contain
+the lemma verbatim. **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/it-0101-5000-review.md` in the project files. Checked by the
+same `tests/test_lexicon_romance.py`.
+
+### Producing the full lists (pipeline notes)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
 used only for voluntary, recognition-focused practice.
@@ -225,9 +302,23 @@ not that C1/C2 was assessed or certified.
 
 ## Grammar packs (`grammar/<lang>.grammar.json`)
 
-Grammar packs contain editable Czech explanations, examples, and exercises. Current packs may
-cover only selected topics: `en.grammar.json` provides one draft unit at each of A1-C2 and does
-not claim full CEFR coverage; the German pack currently covers A1-B2. Packs are marked unreviewed
+Grammar packs contain editable Czech explanations, examples, and exercises. Every course
+language has a draft A1-A2 syllabus (added 2026-11-06, revision in brackets):
+
+| pack | A1 | A2 | above A2 |
+|---|---|---|---|
+| `de.grammar.json` (`grammar-v2`) | 15 units | 11 units | B1 6, B2 5 |
+| `fr.grammar.json` (`grammar-fr-v1`) | 13 units | 10 units | none yet |
+| `it.grammar.json` (`grammar-it-v1`) | 12 units | 9 units | none yet |
+| `en.grammar.json` (`english-grammar-v2`) | 13 units | 10 units | one introductory unit each B1-C2 |
+
+The A1-A2 topics follow the usual CEFR grammar inventories for each language (verb *be*/*have*,
+present tense and irregular verbs, articles and gender, plurals and agreement, negation and
+questions, possessives, prepositions, imperative at A1; past tenses, object pronouns, future,
+comparison, modal verbs, reflexive verbs and the language's typical A2 points at A2). They were
+drafted by Claude (`source`, `review_status: unreviewed`) and still need a teacher or native
+speaker's review; `tests/test_grammar_domain.py` requires at least 8 units at A1 and at A2 for
+every language and checks that every shown answer grades as correct. Packs are marked unreviewed
 until a teacher or qualified reviewer approves them. Adding a unit is additive and keyed by
 stable unit ID, so importing a new pack preserves learner progress. Each unit has a short
 `summary` for discovery and an `objective` describing an observable outcome; older packs may omit

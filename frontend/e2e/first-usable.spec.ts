@@ -1,5 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
 
+// A fresh profile gets the first-run welcome wizard over the dashboard once its progress loads,
+// which can happen mid-step. Skip it whenever it blocks the flow under test.
+test.beforeEach(async ({ page }) => {
+  const welcome = page.locator('[role="dialog"][aria-labelledby="welcome-title"]');
+  await page.addLocatorHandler(welcome, async () => {
+    await welcome.getByRole("button", { name: "Přeskočit" }).click();
+    await expect(welcome).toHaveCount(0);
+  });
+});
+
 // Plan §6 "první použitelná verze": profile creation -> lesson -> progress survives reload.
 // The first German lesson takes the first four words of the "hallo" scene (data/scenes).
 const DE: Record<string, string> = { ich: "já", heißen: "jmenovat se", wie: "jak", du: "ty" };
@@ -72,6 +82,9 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(page.getByRole("button", { name: "Ověřit, co umím" })).toBeDisabled();
   await page.getByRole("button", { name: "Začít lekci" }).click();
   await page.waitForURL("**/lesson");
+  // The lesson page lists grammar by level; the vocabulary course with its scenes is one step in.
+  await page.getByRole("link", { name: "Otevřít lekce slovní zásoby" }).click();
+  await page.waitForURL("**/lesson/vocabulary");
 
   // Context first: the scene, with Czech on demand, then the new words, then practice.
   await expect(page.getByRole("heading", { name: "Ahoj, jak se jmenuješ?" })).toBeVisible();

@@ -5,8 +5,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 compose=(docker compose "$@")
-BACKEND=${SMOKE_BACKEND_URL:-http://localhost:8000}
-FRONTEND=${SMOKE_FRONTEND_URL:-http://localhost:3000}
+BACKEND=${SMOKE_BACKEND_URL:-http://localhost:8001}
+FRONTEND=${SMOKE_FRONTEND_URL:-http://localhost:3001}
 
 cleanup() {
   status=$?
