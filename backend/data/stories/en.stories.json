@@ -677,6 +677,85 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-09-birthday",
+   "level": "A1",
+   "title": "The Forgotten Birthday",
+   "title_cs": "Zapomenuté narozeniny",
+   "lines": [
+    {
+     "text": "Today is Paul's birthday. But Paul doesn't know.",
+     "cs": "Dnes má Pavel narozeniny. Ale Pavel to neví."
+    },
+    {
+     "text": "Paul goes to the kitchen. The house is very quiet.",
+     "cs": "Pavel jde do kuchyně. V domě je velké ticho."
+    },
+    {
+     "speaker": "Paul",
+     "text": "Nobody says good morning. Doesn't anybody love me?",
+     "cs": "Nikdo nepřeje dobré ráno. Nemá mě nikdo rád?"
+    },
+    {
+     "text": "He goes to the living room, looking sad.",
+     "cs": "Smutně jde do obýváku."
+    },
+    {
+     "speaker": "Everybody",
+     "text": "Surprise! Happy birthday!",
+     "cs": "Najednou všichni zvolají: Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "Whose birthday is it today?",
+     "cs": "Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Children",
+     "text": "Yours, Dad!",
+     "cs": "Děti se smějí: Ty, tati!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "Oh no! Now I'm a year older again!",
+     "cs": "Ale ne! Teď jsem zase o rok starší!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "quiet",
+     "cs": "tichý"
+    },
+    {
+     "word": "sad",
+     "cs": "smutný"
+    },
+    {
+     "word": "Surprise",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why is the house quiet?",
+     "options": [
+      "Everybody is planning a surprise.",
+      "Everybody is asleep.",
+      "Nobody is at home."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Whose birthday is it?",
+     "options": [
+      "Paul's",
+      "The children's",
+      "Mum's"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

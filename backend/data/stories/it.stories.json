@@ -677,6 +677,85 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-09-birthday",
+   "level": "A1",
+   "title": "Il compleanno dimenticato",
+   "title_cs": "Zapomenuté narozeniny",
+   "lines": [
+    {
+     "text": "Oggi è il compleanno di Paolo. Ma Paolo non lo sa.",
+     "cs": "Dnes má Pavel narozeniny. Ale Pavel to neví."
+    },
+    {
+     "text": "Paolo va in cucina. La casa è molto silenziosa.",
+     "cs": "Pavel jde do kuchyně. V domě je velké ticho."
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Nessuno dice buongiorno. Nessuno mi vuole bene?",
+     "cs": "Nikdo nepřeje dobré ráno. Nemá mě nikdo rád?"
+    },
+    {
+     "text": "Va in salotto, triste.",
+     "cs": "Smutně jde do obýváku."
+    },
+    {
+     "speaker": "Tutti",
+     "text": "Sorpresa! Buon compleanno!",
+     "cs": "Najednou všichni zvolají: Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Di chi è il compleanno oggi?",
+     "cs": "Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Bambini",
+     "text": "Il tuo, papà!",
+     "cs": "Děti se smějí: Ty, tati!"
+    },
+    {
+     "speaker": "Paolo",
+     "text": "Oh no! Adesso ho un anno in più!",
+     "cs": "Ale ne! Teď jsem zase o rok starší!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silenziosa",
+     "cs": "tichá"
+    },
+    {
+     "word": "triste",
+     "cs": "smutný"
+    },
+    {
+     "word": "Sorpresa",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché la casa è silenziosa?",
+     "options": [
+      "Tutti preparano una sorpresa.",
+      "Tutti dormono.",
+      "Non c'è nessuno a casa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Di chi è il compleanno?",
+     "options": [
+      "Di Paolo",
+      "Dei bambini",
+      "Della mamma"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

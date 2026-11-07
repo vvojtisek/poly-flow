@@ -677,6 +677,85 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-09-birthday",
+   "level": "A1",
+   "title": "L'anniversaire oublié",
+   "title_cs": "Zapomenuté narozeniny",
+   "lines": [
+    {
+     "text": "Aujourd'hui, c'est l'anniversaire de Paul. Mais Paul ne le sait pas.",
+     "cs": "Dnes má Pavel narozeniny. Ale Pavel to neví."
+    },
+    {
+     "text": "Paul va dans la cuisine. La maison est très silencieuse.",
+     "cs": "Pavel jde do kuchyně. V domě je velké ticho."
+    },
+    {
+     "speaker": "Paul",
+     "text": "Personne ne dit bonjour. Personne ne m'aime ?",
+     "cs": "Nikdo nepřeje dobré ráno. Nemá mě nikdo rád?"
+    },
+    {
+     "text": "Il va au salon, l'air triste.",
+     "cs": "Smutně jde do obýváku."
+    },
+    {
+     "speaker": "Tous",
+     "text": "Surprise ! Joyeux anniversaire !",
+     "cs": "Najednou všichni zvolají: Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "L'anniversaire de qui, aujourd'hui ?",
+     "cs": "Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Enfants",
+     "text": "Le tien, papa !",
+     "cs": "Děti se smějí: Ty, tati!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "Oh non ! Maintenant, j'ai encore un an de plus !",
+     "cs": "Ale ne! Teď jsem zase o rok starší!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silencieuse",
+     "cs": "tichá"
+    },
+    {
+     "word": "triste",
+     "cs": "smutný"
+    },
+    {
+     "word": "Surprise",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi la maison est-elle silencieuse ?",
+     "options": [
+      "Tout le monde prépare une surprise.",
+      "Tout le monde dort.",
+      "Personne n'est à la maison."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qui a son anniversaire ?",
+     "options": [
+      "Paul",
+      "Les enfants",
+      "Maman"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

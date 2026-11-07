@@ -677,6 +677,85 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-09-birthday",
+   "level": "A1",
+   "title": "Der vergessene Geburtstag",
+   "title_cs": "Zapomenuté narozeniny",
+   "lines": [
+    {
+     "text": "Heute ist Pauls Geburtstag. Aber Paul weiß es nicht.",
+     "cs": "Dnes má Pavel narozeniny. Ale Pavel to neví."
+    },
+    {
+     "text": "Paul geht in die Küche. Das Haus ist ganz still.",
+     "cs": "Pavel jde do kuchyně. V domě je velké ticho."
+    },
+    {
+     "speaker": "Paul",
+     "text": "Niemand sagt guten Morgen. Hat mich keiner lieb?",
+     "cs": "Nikdo nepřeje dobré ráno. Nemá mě nikdo rád?"
+    },
+    {
+     "text": "Traurig geht er ins Wohnzimmer.",
+     "cs": "Smutně jde do obýváku."
+    },
+    {
+     "speaker": "Alle",
+     "text": "Überraschung! Alles Gute zum Geburtstag!",
+     "cs": "Najednou všichni zvolají: Překvapení! Všechno nejlepší k narozeninám!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "Wessen Geburtstag ist heute?",
+     "cs": "Kdo má dnes narozeniny?"
+    },
+    {
+     "speaker": "Kinder",
+     "text": "Deiner, Papa!",
+     "cs": "Děti se smějí: Ty, tati!"
+    },
+    {
+     "speaker": "Paul",
+     "text": "Oh nein! Jetzt bin ich wieder ein Jahr älter!",
+     "cs": "Ale ne! Teď jsem zase o rok starší!"
+    }
+   ],
+   "stretch": [
+    {
+     "word": "still",
+     "cs": "tichý"
+    },
+    {
+     "word": "traurig",
+     "cs": "smutný"
+    },
+    {
+     "word": "Überraschung",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum ist das Haus still?",
+     "options": [
+      "Alle wollen eine Überraschung machen.",
+      "Alle schlafen.",
+      "Niemand ist zu Hause."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wer hat Geburtstag?",
+     "options": [
+      "Paul",
+      "Die Kinder",
+      "Die Mama"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
