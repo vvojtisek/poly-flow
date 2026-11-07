@@ -26,8 +26,11 @@ function level(n: number, max: number): string {
 }
 
 /** Activity calendar: 26 weeks, Monday on top. A calendar, not a streak counter. */
-function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; selected: string | null; onSelect: (date: string) => void }) {
-  const max = Math.max(...data.map((d) => d.graded + d.practice));
+type HeatMode = "all" | "graded" | "practice";
+const amount = (d: Insights["heatmap"][number], mode: HeatMode) => (mode === "all" ? d.graded + d.practice : d[mode]);
+
+function Heatmap({ data, selected, onSelect, mode }: { data: Insights["heatmap"]; selected: string | null; onSelect: (date: string) => void; mode: HeatMode }) {
+  const max = Math.max(...data.map((d) => amount(d, mode)));
   const focusDate = selected && data.some((d) => d.date === selected) ? selected : data[data.length - 1]!.date;
   // ←/→ move a week, ↑/↓ a day, Home/End to the first/last day; the moved-to day is selected.
   function onGridKey(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -66,7 +69,7 @@ function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; sele
                   aria-label={t.activityDayLabel(dayFmt(d.date), d.graded, d.practice)}
                   onClick={() => onSelect(d.date)}
                   title={`${dayFmt(d.date)}: ${t.dayTitle(d.graded, d.practice)}`}
-                  className={`size-4 shrink-0 rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-brand-500 lg:size-5 ${level(d.graded + d.practice, max)} ${selected === d.date ? "ring-2 ring-brand-700 dark:ring-brand-200" : ""}`}
+                  className={`size-4 shrink-0 rounded-[3px] outline-none focus-visible:ring-2 focus-visible:ring-brand-500 lg:size-5 ${level(amount(d, mode), max)} ${selected === d.date ? "ring-2 ring-brand-700 dark:ring-brand-200" : ""}`}
                 />
               ) : (
                 <span key={`pad-${j}`} className="size-3 lg:size-4" />
@@ -300,6 +303,7 @@ export default function InsightsPage() {
   const [activityLoading, setActivityLoading] = useState(false);
   const [activityFailed, setActivityFailed] = useState(false);
   const [openMistake, setOpenMistake] = useState<string | null>(null);
+  const [heatMode, setHeatMode] = useState<HeatMode>("all");
 
   useEffect(() => {
     if (!language) return;
@@ -384,9 +388,25 @@ export default function InsightsPage() {
         ) : (
           <div className="grid gap-4 lg:grid-cols-2">
             <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
-              <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} />
+              <div role="radiogroup" aria-label={t.heatModeLabel} className="mb-2 inline-flex rounded-lg bg-slate-100 p-0.5 text-xs dark:bg-slate-800">
+                {(["all", "graded", "practice"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    role="radio"
+                    aria-checked={heatMode === m}
+                    onClick={() => setHeatMode(m)}
+                    className={`rounded-md px-2.5 py-1 font-medium ${heatMode === m ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 dark:text-slate-300"}`}
+                  >
+                    {t.heatModes[m]}
+                  </button>
+                ))}
+              </div>
+              <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} mode={heatMode} />
               <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} />
-              <p className="mt-2 text-xs text-slate-500">{t.activeDays(data.active_days)}</p>
+              <p className="mt-2 text-xs text-slate-500">
+                {heatMode === "all" ? t.activeDays(data.active_days) : t.modeDays(heatMode, data.heatmap.filter((d) => d[heatMode] > 0).length)}
+              </p>
             </Panel>
             <Panel title={t.forecast} icon={Target}>
               <Forecast data={data.forecast} selected={forecastDate} onSelect={setForecastDate} />

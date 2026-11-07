@@ -1755,3 +1755,13 @@ Vlad approves a push.
 **Implemented Solution:** Both charts use a roving tabindex. The calendar is one tab stop (the selected day): ←/→ move a week, ↑/↓ a day, Home/End jump to the first/last day, and the moved-to day is selected (and its details load) with focus following. The forecast is one tab stop with ←/→/Home/End. A desktop hint 'Šipky: ← → týden, ↑ ↓ den' is linked through aria-describedby.
 
 **Verification:** Playwright: 2 tab stops across 196 chart buttons; from 7 Nov, ← goes to 31 Oct (URL ?day=2026-10-31), ↑ to 30 Oct, End to 7 Nov, Home to 10 May; in the forecast, →→ focuses and selects 9 Nov (?forecast=2026-11-09). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 67/120 | Page: [/insights] (Page Cycle 7/15)
+
+**Summary:** filter the activity calendar by checks or practice
+
+**Observed Problem:** The calendar coloured each day by all answers together. A day with 84 lesson-practice answers looked the same as a day of real checks, although only checks count as evidence. A learner who wanted to see how regularly they actually verify words (the rule that moves words forward and keeps them from fading) could not see it.
+
+**Implemented Solution:** A segmented control above the calendar (Vše / Ověření / Procvičování) recolours the days by the chosen count, scaled to that count's own maximum. The summary line then reads, for example, 'Dny s ověřením: 1 z posledních 182.' The default stays 'Vše' with the existing no-streak sentence.
+
+**Verification:** Playwright on real data: Vše colours 5 Nov and 7 Nov brand-600; Ověření makes 5 Nov empty (0 checks) and keeps 7 Nov; Procvičování colours both. The summary changes to 'Dny s ověřením: 1 z posledních 182.' No console errors. typecheck, next build, ruff pass.
