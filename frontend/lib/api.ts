@@ -759,7 +759,15 @@ export interface Insights {
   today: string;
   heatmap: { date: string; graded: number; practice: number }[];
   active_days: number;
-  accuracy: { week: string; answered: number; correct: number }[];
+  /** Graded first-try answers per week, in total and per skill (recognition, recall, grammar). */
+  accuracy: {
+    week: string;
+    answered: number;
+    correct: number;
+    recognition: { answered: number; correct: number };
+    recall: { answered: number; correct: number };
+    grammar: { answered: number; correct: number };
+  }[];
   mistakes: { tag: string; count: number }[];
   forecast: {
     date: string;

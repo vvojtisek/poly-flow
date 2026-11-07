@@ -21,10 +21,18 @@ class DayOut(BaseModel):
     practice: int
 
 
-class WeekOut(BaseModel):
-    week: date
+class TallyOut(BaseModel):
     answered: int
     correct: int
+
+
+class WeekOut(BaseModel):
+    week: date
+    answered: int  # all graded answers of the week
+    correct: int
+    recognition: TallyOut  # word -> meaning (and other non-production word checks)
+    recall: TallyOut  # meaning -> written or spoken word
+    grammar: TallyOut
 
 
 class MistakeOut(BaseModel):

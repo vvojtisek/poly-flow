@@ -21,6 +21,7 @@ from app.models import (
     UserGrammarProgress,
     UserWordProgress,
 )
+from app.models.learning import TaskType
 from app.services.learning import _suitable
 
 HEATMAP_DAYS = 182
@@ -54,32 +55,47 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
     for d, graded, n in rows.all():
         days[d]["graded" if graded else "practice"] += n
 
-    # First-try accuracy per ISO week (graded answers only).
+    # First-try accuracy per ISO week (graded answers only), kept apart per skill: recognising a
+    # word, producing it, and grammar are different abilities, and one average would hide which
+    # of them is moving.
     week_start = today - timedelta(days=today.weekday()) - timedelta(weeks=ACCURACY_WEEKS - 1)
-    weeks: dict[date, list[int]] = {
-        week_start + timedelta(weeks=i): [0, 0] for i in range(ACCURACY_WEEKS)
+    skills = ("recognition", "recall", "grammar")
+    weeks: dict[date, dict[str, list[int]]] = {
+        week_start + timedelta(weeks=i): {k: [0, 0] for k in skills} for i in range(ACCURACY_WEEKS)
     }
-    for model, join_on, lang_col in (
-        (ev, li.id == ev.lexicon_item_id, li.language),
-        (ga, gu.id == ga.unit_id, gu.language),
-    ):
-        target = li if model is ev else gu
-        wk = cast(func.date_trunc("week", model.local_date), Date)
-        rows = await db.execute(
-            select(wk, func.count(), func.count().filter(model.is_correct.is_(True)))
-            .join(target, join_on)
-            .where(
-                model.user_id == user.id,
-                lang_col == language,
-                model.counts_as_evidence.is_(True),
-                model.local_date >= week_start,
-            )
-            .group_by(wk)
+    wk = cast(func.date_trunc("week", ev.local_date), Date)
+    rows = await db.execute(
+        select(wk, ev.task_type, func.count(), func.count().filter(ev.is_correct.is_(True)))
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(
+            ev.user_id == user.id,
+            li.language == language,
+            ev.counts_as_evidence.is_(True),
+            ev.local_date >= week_start,
         )
-        for w, n, ok in rows.all():
-            if w in weeks:
-                weeks[w][0] += n
-                weeks[w][1] += ok
+        .group_by(wk, ev.task_type)
+    )
+    for w, task, n, ok in rows.all():
+        if w in weeks:
+            skill = "recall" if task == TaskType.RECALL else "recognition"
+            weeks[w][skill][0] += n
+            weeks[w][skill][1] += ok
+    gwk = cast(func.date_trunc("week", ga.local_date), Date)
+    rows = await db.execute(
+        select(gwk, func.count(), func.count().filter(ga.is_correct.is_(True)))
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            ga.counts_as_evidence.is_(True),
+            ga.local_date >= week_start,
+        )
+        .group_by(gwk)
+    )
+    for w, n, ok in rows.all():
+        if w in weeks:
+            weeks[w]["grammar"][0] += n
+            weeks[w]["grammar"][1] += ok
 
     # Mistake types in graded answers.
     tags: dict[str, int] = defaultdict(int)
@@ -173,7 +189,15 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             for i in range(HEATMAP_DAYS)
         ],
         "active_days": active_days,
-        "accuracy": [{"week": w, "answered": n, "correct": ok} for w, (n, ok) in weeks.items()],
+        "accuracy": [
+            {
+                "week": w,
+                "answered": sum(v[0] for v in by.values()),
+                "correct": sum(v[1] for v in by.values()),
+                **{k: {"answered": v[0], "correct": v[1]} for k, v in by.items()},
+            }
+            for w, by in weeks.items()
+        ],
         "mistakes": sorted(
             ({"tag": t, "count": n} for t, n in tags.items()), key=lambda x: -x["count"]
         ),

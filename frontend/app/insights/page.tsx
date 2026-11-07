@@ -90,35 +90,75 @@ function ActivityDetails({ data, date, loading, failed, language }: { data: Acti
   );
 }
 
+const SKILLS = [
+  { key: "recognition", stroke: "stroke-sky-500", dot: "stroke-sky-600", swatch: "bg-sky-500" },
+  { key: "recall", stroke: "stroke-emerald-500", dot: "stroke-emerald-600", swatch: "bg-emerald-500" },
+  { key: "grammar", stroke: "stroke-amber-400", dot: "stroke-amber-500", swatch: "bg-amber-400" },
+] as const;
+
+/** One line per skill. A week without answers breaks the line instead of being drawn as 0 %. */
 function AccuracyChart({ data }: { data: Insights["accuracy"] }) {
   const W = 480, H = 160, P = 24;
   const step = (W - 2 * P) / Math.max(data.length - 1, 1);
-  const pts = data.map((w, i) => ({ x: P + i * step, y: w.answered ? H - P - ((H - 2 * P) * w.correct) / w.answered : null, w }));
-  const line = pts.filter((p) => p.y !== null).map((p) => `${p.x},${p.y}`).join(" ");
+  const y = (share: number) => H - P - (H - 2 * P) * share;
+  const most = Math.max(1, ...data.flatMap((w) => SKILLS.map((s) => w[s.key].answered)));
+  const shown = SKILLS.filter((s) => data.some((w) => w[s.key].answered));
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={t.accuracyLabel}>
-      {[0, 0.5, 1].map((v) => (
-        <g key={v}>
-          <line x1={P} x2={W - P} y1={H - P - (H - 2 * P) * v} y2={H - P - (H - 2 * P) * v} className="stroke-slate-200 dark:stroke-slate-800" />
-          <text x={2} y={H - P - (H - 2 * P) * v + 4} className="fill-slate-400 text-[10px]">
-            {v * 100}%
-          </text>
-        </g>
-      ))}
-      {line && <polyline points={line} fill="none" className="stroke-brand-500" strokeWidth={2.5} strokeLinejoin="round" />}
-      {pts.map((p) =>
-        p.y === null ? null : (
-          <circle key={p.w.week} cx={p.x} cy={p.y} r={4} className="fill-white stroke-brand-600 dark:fill-slate-900" strokeWidth={2}>
-            <title>{`${t.weekOf(dayFmt(p.w.week))}: ${p.w.correct}/${p.w.answered}`}</title>
-          </circle>
-        ),
-      )}
-      {pts.filter((_, i) => i % 3 === 0 || i === pts.length - 1).map((p) => (
-        <text key={`l-${p.w.week}`} x={p.x} y={H - 6} textAnchor="middle" className="fill-slate-400 text-[10px]">
-          {dayFmt(p.w.week)}
-        </text>
-      ))}
-    </svg>
+    <div className="flex flex-col gap-2">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={t.accuracyLabel}>
+        {[0, 0.5, 1].map((v) => (
+          <g key={v}>
+            <line x1={P} x2={W - P} y1={y(v)} y2={y(v)} className="stroke-slate-200 dark:stroke-slate-800" />
+            <text x={2} y={y(v) + 4} className="fill-slate-400 text-[10px]">
+              {v * 100}%
+            </text>
+          </g>
+        ))}
+        {shown.map((s) => {
+          const segments: string[][] = [[]];
+          data.forEach((w, i) => {
+            const tally = w[s.key];
+            if (tally.answered) segments[segments.length - 1]!.push(`${P + i * step},${y(tally.correct / tally.answered)}`);
+            else if (segments[segments.length - 1]!.length) segments.push([]);
+          });
+          return (
+            <g key={s.key}>
+              {segments.filter((seg) => seg.length > 1).map((seg, i) => (
+                <polyline key={i} points={seg.join(" ")} fill="none" className={s.stroke} strokeWidth={2.5} strokeLinejoin="round" />
+              ))}
+              {data.map((w, i) => {
+                const tally = w[s.key];
+                if (!tally.answered) return null;
+                return (
+                  <circle key={w.week} cx={P + i * step} cy={y(tally.correct / tally.answered)} r={2.5 + 3 * Math.sqrt(tally.answered / most)} className={`fill-white dark:fill-slate-900 ${s.dot}`} strokeWidth={2}>
+                    <title>{t.skillPoint(t.skills[s.key]!, t.weekOf(dayFmt(w.week)), tally.correct, tally.answered)}</title>
+                  </circle>
+                );
+              })}
+            </g>
+          );
+        })}
+        {data.map((w, i) =>
+          i % 3 === 0 || i === data.length - 1 ? (
+            <text key={`l-${w.week}`} x={P + i * step} y={H - 6} textAnchor="middle" className="fill-slate-400 text-[10px]">
+              {dayFmt(w.week)}
+            </text>
+          ) : null,
+        )}
+      </svg>
+      <ul className="flex flex-wrap gap-3 text-xs text-slate-600 dark:text-slate-300">
+        {shown.map((s) => {
+          const answered = data.reduce((n, w) => n + w[s.key].answered, 0);
+          const correct = data.reduce((n, w) => n + w[s.key].correct, 0);
+          return (
+            <li key={s.key} className="flex items-center gap-1.5">
+              <span className={`size-2.5 rounded-sm ${s.swatch}`} aria-hidden />
+              {t.skills[s.key]} <span className="tabular-nums text-slate-500">{Math.round((correct / answered) * 100)} % · {answered}×</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

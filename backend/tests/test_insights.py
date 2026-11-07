@@ -26,11 +26,11 @@ def clock():
     app.dependency_overrides.clear()
 
 
-def event(uid, item, at, *, correct, graded=True, tag=None):
+def event(uid, item, at, *, correct, graded=True, tag=None, task=TaskType.RECOGNITION):
     return LearningEvent(
         user_id=uid,
         lexicon_item_id=item,
-        task_type=TaskType.RECOGNITION,
+        task_type=task,
         attempt_no=1,
         answer="x",
         is_correct=correct,
@@ -60,7 +60,7 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
                 event(uid, items[0], now, correct=True),
                 event(uid, items[1], now, correct=False, tag="gender"),
                 event(uid, items[1], now, correct=False, graded=False),
-                event(uid, items[2], now - timedelta(days=3), correct=True),
+                event(uid, items[2], now - timedelta(days=3), correct=True, task=TaskType.RECALL),
                 UserWordProgress(
                     user_id=uid,
                     lexicon_item_id=items[0],
@@ -95,6 +95,12 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
     assert out["active_days"] == 2 and len(out["heatmap"]) == 182
     assert sum(w["answered"] for w in out["accuracy"]) == 3
     assert sum(w["correct"] for w in out["accuracy"]) == 2
+    # Recognition and recall are tallied apart; the total is their sum (no grammar here).
+    assert sum(w["recognition"]["answered"] for w in out["accuracy"]) == 2
+    assert sum(w["recognition"]["correct"] for w in out["accuracy"]) == 1
+    assert sum(w["recall"]["answered"] for w in out["accuracy"]) == 1
+    assert sum(w["recall"]["correct"] for w in out["accuracy"]) == 1
+    assert all(w["grammar"] == {"answered": 0, "correct": 0} for w in out["accuracy"])
     assert out["mistakes"] == [{"tag": "gender", "count": 1}]
     assert out["forecast"][0]["words"] == 1 and out["forecast"][2]["words"] == 1
     assert out["forecast"][0]["word_items"][0]["lemma"] == "und"

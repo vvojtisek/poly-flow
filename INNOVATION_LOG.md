@@ -1695,3 +1695,13 @@ Vlad approves a push.
 **Implemented Solution:** On phones the intro is hidden and the collections link sits beside the title. The tabs no longer wrap. The status chips scroll in one row (they still wrap on wider screens). Sort shares a row with the legend toggle. The rarely used CSV/Anki export moved below the list. Desktop keeps the same structure, with the intro and the collections button in the header.
 
 **Verification:** Playwright 390x844: the first row moved from y=812 to y=627 with no horizontal overflow, and mobile and 1280px screenshots were inspected. Regression scripts for sort (cycle 49), kind filter (cycle 53) and URL state (cycle 46) pass. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 61/120 | Page: [/insights] (Page Cycle 1/15)
+
+**Summary:** split weekly check accuracy into recognition, recall and grammar
+
+**Observed Problem:** The accuracy chart averaged every graded answer, word recognition, word recall and grammar, into one line. The product keeps passive recognition and active production as separate knowledge states, but the chart could not show that a learner recognises words at 95% and produces them at 40%. A week without answers was joined across as if the line continued.
+
+**Implemented Solution:** The insights API returns, per week, the total and separate tallies for recognition (non-recall word checks), recall (written or spoken production) and grammar. The tallies come from one grouped query by task type plus the grammar query. The chart draws one coloured line per skill that has data. Weeks without answers break the line instead of being bridged, and dot size grows with the number of answers, so a 1/1 week no longer looks as solid as 40/50. A legend gives each skill's overall share and count, and point titles give 'N z M správně'.
+
+**Verification:** tests/test_insights.py extended: recognition 1/2, recall 1/1 and grammar 0 tallied apart, and the totals equal their sum; 2 passed. Real data: week of 2 Nov shows 'Poznat význam, Týden od 2. 11.: 23 z 23 správně' and the legend 'Poznat význam 100 % · 23×'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
