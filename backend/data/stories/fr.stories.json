@@ -5559,6 +5559,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-29-puzzle-label",
+   "level": "B1",
+   "title": "Un record de puzzle",
+   "title_cs": "Rekord ve skládání",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a invité Eva à admirer son puzzle terminé.",
+     "cs": "Tom pozval Evu, aby obdivovala jeho dokončené puzzle."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Je l'ai fini en six mois. C'est une véritable réussite.",
+     "cs": "Mám hotovo za šest měsíců. To je opravdový úspěch."
+    },
+    {
+     "speaker": "Eva",
+     "text": "L'image est jolie. Il y avait combien de pièces ?",
+     "cs": "Obrázek vypadá hezky. Kolik měl dílků?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Cinq cents. Mais regarde la boîte : Elle indique trois à cinq ans.",
+     "cs": "Pět set. Ale podívej na krabici: Je na ní napsáno tři až pět let."
+    },
+    {
+     "speaker": "Eva",
+     "text": "C'est l'âge recommandé, pas une estimation du temps nécessaire.",
+     "cs": "To je přece doporučený věk, ne odhad času."
+    },
+    {
+     "speaker": null,
+     "text": "Tom a retourné la boîte : On ferait mieux de garder ce record dans la famille.",
+     "cs": "Tom otočil krabici: Tak tenhle rekord raději necháme v rodině."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "admirer",
+     "cs": "obdivovat"
+    },
+    {
+     "word": "réussite",
+     "cs": "úspěch"
+    },
+    {
+     "word": "recommandé",
+     "cs": "doporučený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co znamená údaj na krabici?",
+     "options": [
+      "Doporučený věk.",
+      "Čas skládání.",
+      "Počet dílků."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak dlouho Tom skládal?",
+     "options": [
+      "Šest měsíců.",
+      "Pět let.",
+      "Tři dny."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

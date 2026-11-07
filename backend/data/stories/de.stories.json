@@ -5559,6 +5559,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-29-puzzle-label",
+   "level": "B1",
+   "title": "Ein Puzzlerekord",
+   "title_cs": "Rekord ve skládání",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom lud Eva ein, sein fertiges Puzzle zu bewundern.",
+     "cs": "Tom pozval Evu, aby obdivovala jeho dokončené puzzle."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich bin in sechs Monaten fertig geworden. Das ist eine echte Leistung.",
+     "cs": "Mám hotovo za šest měsíců. To je opravdový úspěch."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das Bild sieht schön aus. Wie viele Teile waren es?",
+     "cs": "Obrázek vypadá hezky. Kolik měl dílků?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Fünfhundert. Aber schau auf die Schachtel: Da steht drei bis fünf Jahre.",
+     "cs": "Pět set. Ale podívej na krabici: Je na ní napsáno tři až pět let."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das ist die Altersempfehlung, keine Schätzung der benötigten Zeit.",
+     "cs": "To je přece doporučený věk, ne odhad času."
+    },
+    {
+     "speaker": null,
+     "text": "Tom drehte die Schachtel um: Diesen Rekord behalten wir lieber in der Familie.",
+     "cs": "Tom otočil krabici: Tak tenhle rekord raději necháme v rodině."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "bewundern",
+     "cs": "obdivovat"
+    },
+    {
+     "word": "Leistung",
+     "cs": "výkon"
+    },
+    {
+     "word": "Altersempfehlung",
+     "cs": "doporučený věk"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co znamená údaj na krabici?",
+     "options": [
+      "Doporučený věk.",
+      "Čas skládání.",
+      "Počet dílků."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak dlouho Tom skládal?",
+     "options": [
+      "Šest měsíců.",
+      "Pět let.",
+      "Tři dny."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
