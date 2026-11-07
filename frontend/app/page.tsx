@@ -47,13 +47,13 @@ function QuickAction({
     // Nothing to do here today: shown for orientation, but not a dead-end link.
     return (
       <li>
-        <div aria-disabled="true" className="flex h-full items-center gap-3 rounded-2xl border border-dashed border-slate-200 p-4 text-slate-500 dark:border-slate-800">
-          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-slate-100 dark:bg-slate-800">
+        <div aria-disabled="true" className="flex h-full flex-col items-start gap-2 rounded-2xl border border-dashed border-slate-200 p-3 text-slate-500 sm:flex-row sm:items-center sm:gap-3 sm:p-4 dark:border-slate-800">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-slate-100 sm:size-11 dark:bg-slate-800">
             <Icon className="size-5" aria-hidden />
           </span>
           <span className="flex min-w-0 flex-col">
             <span className="font-semibold">{title}</span>
-            <span className="text-sm">{help}</span>
+            <span className="line-clamp-2 text-sm">{help}</span>
           </span>
         </div>
       </li>
@@ -65,16 +65,16 @@ function QuickAction({
         href={href}
         data-hotkey={hotkey ? String(hotkey) : undefined}
         aria-keyshortcuts={hotkey ? String(hotkey) : undefined}
-        className={`relative flex h-full items-center gap-3 rounded-2xl border p-4 outline-none transition hover:border-brand-500 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-brand-500 ${
+        className={`relative flex h-full flex-col items-start gap-2 rounded-2xl border p-3 outline-none sm:flex-row sm:items-center sm:gap-3 sm:p-4 transition hover:border-brand-500 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-brand-500 ${
           highlight ? "border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/40" : "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
         }`}
       >
-        <span className={`grid size-11 shrink-0 place-items-center rounded-xl ${highlight ? "bg-amber-500 text-white" : "bg-brand-500/10 text-brand-600 dark:text-brand-50"}`}>
+        <span className={`grid size-9 shrink-0 place-items-center rounded-xl sm:size-11 ${highlight ? "bg-amber-500 text-white" : "bg-brand-500/10 text-brand-600 dark:text-brand-50"}`}>
           <Icon className="size-5" aria-hidden />
         </span>
         <span className="flex min-w-0 flex-col">
           <span className="font-semibold">{title}</span>
-          <span className="text-sm text-slate-600 dark:text-slate-300">{help}</span>
+          <span className="line-clamp-2 text-sm text-slate-600 dark:text-slate-300">{help}</span>
         </span>
         {hotkey && (
           <span className="absolute right-2 top-2">
@@ -240,7 +240,7 @@ export default function HomePage() {
 
         <section aria-labelledby="quick-actions" className="flex flex-col gap-2 lg:col-span-3">
           <h2 id="quick-actions" className="text-sm font-semibold text-slate-600 dark:text-slate-300">{t.quickActions}</h2>
-          <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-2 sm:gap-3 xl:grid-cols-4">
             <QuickAction
               href="/check"
               icon={ClipboardCheck}

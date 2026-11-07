@@ -109,7 +109,7 @@ export function LanguagePicker({
   }
 
   return (
-    <div role="radiogroup" aria-label={cs.profiles.language} className="flex flex-wrap gap-1">
+    <div role="radiogroup" aria-label={cs.profiles.language} className={summaries ? "grid w-full grid-cols-2 gap-1 sm:flex sm:w-auto sm:flex-wrap" : "flex flex-wrap gap-1"}>
       {LANGUAGES.map((l, i) => {
         const active = me.acting.active_language === l;
         const sum = summaries?.find((x) => x.language === l);

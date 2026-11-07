@@ -1215,3 +1215,13 @@ Vlad approves a push.
 **Implemented Solution:** `components/ProgressCard.tsx` keeps the six counters and the grammar line; band bars and the next-milestone line are removed. `components/ProgressionPath.tsx` now shows each milestone's band fill (known / words in that band) as a thin labelled progressbar under the row, for the current band and any band with known words. The panel is renamed "Milníky slovní zásoby" in `lib/i18n/cs.ts`; the unused `nextMilestone` string is removed.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile dashboard shrinks from 4 317 px to 4 113 px with no console errors.
+
+## Global Cycle 13/120 | Page: [/] (Page Cycle 13/15)
+
+**Summary:** fit the language switcher and daily actions to phone width
+
+**Observed Problem:** On a 390 px phone the four language buttons (now with summaries) wrapped into a ragged 3 + 1 layout, and the four daily actions stacked as full-width rows, pushing today's plan below the first screen.
+
+**Implemented Solution:** `LanguagePicker` with summaries uses an even 2 × 2 grid on phones and the inline row from `sm` up (`components/AppShell.tsx`). The quick actions in `app/page.tsx` form a 2-column grid on phones with the icon above the text and help clamped to two lines; from `sm` they return to the icon-beside-text layout and four columns on wide screens.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows the 2 × 2 switcher and action grid, no console errors.
