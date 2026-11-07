@@ -29,6 +29,9 @@ HEATMAP_DAYS = 182
 ACCURACY_WEEKS = 12
 MISTAKE_DAYS = 60
 FORECAST_DAYS = 14
+# Per-day items sent with the forecast. Counts stay exact; at a few thousand words the full lists
+# made the response grow without bound while the page shows a handful per day.
+FORECAST_ITEMS = 30
 
 
 async def insights(db: AsyncSession, user: User, language: Language, now: datetime) -> dict:
@@ -164,13 +167,17 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             p.next_review_at.is_not(None),
             p.next_review_at < horizon,
         )
+        .order_by(p.next_review_at, li.frequency_rank)  # the first items per day are stable
     )
+    word_counts: dict[date, int] = defaultdict(int)
     for item_id, lemma, gender, translation, at in word_due.all():
         d = max(at.astimezone(tz).date(), today)
         if d in forecast:
-            forecast[d]["words"].append(
-                {"id": item_id, "lemma": lemma, "gender": gender, "translation": translation}
-            )
+            word_counts[d] += 1
+            if len(forecast[d]["words"]) < FORECAST_ITEMS:
+                forecast[d]["words"].append(
+                    {"id": item_id, "lemma": lemma, "gender": gender, "translation": translation}
+                )
     grammar_due = await db.execute(
         select(gu.id, gu.title, gu.level, gp.next_review_at)
         .join(gu, gu.id == gp.unit_id)
@@ -247,7 +254,7 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
         "forecast": [
             {
                 "date": d,
-                "words": len(v["words"]),
+                "words": word_counts.get(d, 0),
                 "grammar": len(v["grammar"]),
                 "word_items": v["words"],
                 "grammar_items": v["grammar"],

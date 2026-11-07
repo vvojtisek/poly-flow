@@ -1031,6 +1031,7 @@ export const cs = {
     openGrammar: "Otevřít gramatiku",
     checkWordsNow: (n: number) => `Ověřit slova (${n})`,
     checkGrammarNow: (n: number) => `Ověřit gramatiku (${n})`,
+    moreDue: (n: number) => `a ${n} dalších…`,
     laterNote: "Tyhle přijdou na řadu později; dřív je ověřovat nemusíš.",
     today: "dnes",
     words: "slova",

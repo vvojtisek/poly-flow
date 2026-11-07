@@ -330,12 +330,12 @@ function ForecastDetails({ data, language, isToday }: { data: Insights["forecast
         <div className="flex flex-wrap gap-2 text-sm">
           {isToday && data.word_items.length > 0 && (
             <Link href="/check" className="rounded-lg bg-brand-600 px-3 py-1.5 font-semibold text-white hover:bg-brand-700">
-              {t.checkWordsNow(data.word_items.length)}
+              {t.checkWordsNow(data.words)}
             </Link>
           )}
           {isToday && data.grammar_items.length > 0 && (
             <Link href="/grammar/check" className="rounded-lg border border-amber-400 px-3 py-1.5 font-semibold text-amber-800 hover:bg-amber-50 dark:text-amber-200 dark:hover:bg-amber-950">
-              {t.checkGrammarNow(data.grammar_items.length)}
+              {t.checkGrammarNow(data.grammar)}
             </Link>
           )}
           {!isToday && data.word_items.length > 0 && (
@@ -361,6 +361,13 @@ function ForecastDetails({ data, language, isToday }: { data: Insights["forecast
                     <PlayButton url={myWordAudioUrl(word.id)} size="sm" label={cs.words.playRow(word.lemma)} />
                   </li>
                 ))}
+                {data.words > data.word_items.length && (
+                  <li>
+                    <Link href="/words?tab=all&sort=review" className="block rounded-lg px-2 py-1 text-sm font-medium text-brand-700 hover:underline dark:text-brand-200">
+                      {t.moreDue(data.words - data.word_items.length)}
+                    </Link>
+                  </li>
+                )}
               </ul>
             </section>
           )}
@@ -437,11 +444,17 @@ export default function InsightsPage() {
     setActivity(null);
     setActivityLoading(true);
     setActivityFailed(false);
-    getActivityDay(language, activityDate)
-      .then((day) => !cancelled && setActivity(day))
-      .catch(() => !cancelled && setActivityFailed(true))
-      .finally(() => !cancelled && setActivityLoading(false));
-    return () => { cancelled = true; };
+    // Arrow keys can walk the calendar a day per key press; only the day it settles on is fetched.
+    const timer = window.setTimeout(() => {
+      getActivityDay(language, activityDate)
+        .then((day) => !cancelled && setActivity(day))
+        .catch(() => !cancelled && setActivityFailed(true))
+        .finally(() => !cancelled && setActivityLoading(false));
+    }, 150);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, [language, activityDate, me?.acting.id, dayAttempt]);
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;

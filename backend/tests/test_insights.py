@@ -162,3 +162,32 @@ async def test_review_forecast_does_not_reveal_child_filtered_words(db, client, 
     activity = await client.get(f"/api/v1/insights/day?language=de&date={clock.now.date()}")
     assert activity.status_code == 200
     assert all(word["id"] != str(item_id) for word in activity.json()["words"])
+
+
+async def test_forecast_lists_at_most_30_words_per_day_but_counts_all(db, client, clock):
+    from app.services.insights import FORECAST_ITEMS
+
+    me = await setup_parent(client)
+    uid = uuid.UUID(me["acting"]["id"])
+    await upsert_lexicon(
+        [
+            LexiconRow(language="de", rank=i, lemma=f"Wort{i}", pos="NOUN", translation_cs="slovo")
+            for i in range(1, FORECAST_ITEMS + 6)
+        ]
+    )
+    async for s in get_session():
+        for item_id in (await s.execute(select(LexiconItem.id))).scalars():
+            s.add(
+                UserWordProgress(
+                    user_id=uid,
+                    lexicon_item_id=item_id,
+                    introduced_at=clock.now - timedelta(days=2),
+                    next_review_at=clock.now - timedelta(hours=1),
+                    policy_version="v4",
+                )
+            )
+        await s.commit()
+    today = (await client.get("/api/v1/insights?language=de")).json()["forecast"][0]
+    assert today["words"] == FORECAST_ITEMS + 5
+    assert len(today["word_items"]) == FORECAST_ITEMS
+    assert today["word_items"][0]["lemma"] == "Wort1"  # frequency order within the day

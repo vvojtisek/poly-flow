@@ -1825,3 +1825,13 @@ Vlad approves a push.
 **Implemented Solution:** The recap tiles form a 2x2 grid on phones (four across on desktop), which also tightens the dashboard where the recap is reused. A day's word list shows the first 8 words with 'Zobrazit všech N slov' / 'Zobrazit méně'; the toggle resets when another day is picked. Forecast labels show only the day of month ('9.'), with the full date at a month start, and do not wrap.
 
 **Verification:** Playwright 390px: page height went from 4361px to 2918px; the overflow scan finds no element wider than the viewport; the forecast screenshot shows single-line labels 'dnes 8. 9. … 20.'. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 74/120 | Page: [/insights] (Page Cycle 14/15)
+
+**Summary:** bound the forecast payload and fetch only the day the calendar settles on
+
+**Observed Problem:** Insights is fast on test data (about 15ms, 16KB), but the forecast sent every word due in the next 14 days with lemma and translation. At the 2500-5000 words the curriculum aims for, the response grows without limit while the page shows a few chips per day. Walking the calendar with the new arrow keys also fired one day request per key press.
+
+**Implemented Solution:** The forecast keeps exact per-day counts but sends at most 30 words per day, ordered by next check and then frequency, so the first items are stable. The day view shows 'a N dalších…' linking to the dictionary ordered by review, and the 'Ověřit slova (N)' count uses the exact total. The day request waits 150ms and is cancelled when the selection moves on, so only the settled day is fetched.
+
+**Verification:** New pytest test_forecast_lists_at_most_30_words_per_day_but_counts_all: 35 due words give words=35, 30 items, Wort1 first; tests/test_insights.py 3 passed. Real data: 8 Nov is words=41 with 30 items, and the UI shows 30 chips plus 'a 11 dalších…'. Playwright: six ↑ presses make 1 day request (2026-11-01). Endpoint timings measured locally: insights 15-19ms, recap 11-13ms, day 6-7ms. No console errors. typecheck, next build, ruff pass.
