@@ -1865,3 +1865,13 @@ Vlad approves a push.
 **Implemented Solution:** The card shows the next lesson preview from /learning/next-lesson, for example 'Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení', or 'all words known' when empty. When a session is open, the button reads 'Pokračovat v lekci'. Loading uses Promise.allSettled: only a failed grammar tree is fatal. A failed estimate, progress or preview just leaves that detail out, and the 'Představeno slov' counter no longer sticks on 'Načítám…'.
 
 **Verification:** Playwright real data: the card shows 'Další scénka: „Oběd“ | 4 nová slova · 2 slova znovu k procvičení'. With progress and diagnostic requests forced to 500, the page still renders the preview and all 6 level sections, and the counter is hidden rather than stuck loading. No console errors besides the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 78/120 | Page: [/lesson] (Page Cycle 3/15)
+
+**Summary:** show coverage per level and mark open and due topics
+
+**Observed Problem:** The 'Dostupné gramatické lekce' list gave each level only an availability count ('15 lekcí'). Each topic card showed its status word but not that a lesson in it was still open or that its check was due. A learner could not see how far into A1 they were or which topic cards needed attention without opening /grammar.
+
+**Implemented Solution:** Each level header shows 'prostudováno X z Y' and, when any are verified, '· ověřeno Z', with a two-tone bar (verified emerald, studied sky). Topic cards get a 'rozdělaná' badge for the open lesson and 'k ověření' when due, both from the grammar tree the page already loads.
+
+**Verification:** Playwright on real data: headers read 'A1 prostudováno 2 z 15', 'A2 prostudováno 0 z 11', 'B1 … 0 z 6', 'B2 … 0 z 5'; the sein card shows 'rozdělaná | k ověření | Prostudováno'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.

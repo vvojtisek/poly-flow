@@ -184,13 +184,31 @@ export default function LessonPage() {
               const units = tree.levels.find((section) => section.level === level)?.units ?? [];
               return (
                 <section key={level} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                  <h3 className="mb-3 flex items-center justify-between font-bold"><span>{level}</span><span className="text-xs font-normal text-slate-500">{units.length ? cs.lesson.availableCount(units.length) : cs.lesson.notAvailable}</span></h3>
+                  <h3 className="mb-3 flex items-center justify-between gap-2 font-bold">
+                    <span>{level}</span>
+                    <span className="text-xs font-normal text-slate-500">
+                      {units.length ? cs.lesson.levelCoverage(units.filter((u) => u.status !== "new").length, units.length, units.filter((u) => u.status === "known" || u.status === "mastered").length) : cs.lesson.notAvailable}
+                    </span>
+                  </h3>
+                  {units.length > 0 && (
+                    <div className="-mt-1 mb-3 flex h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" aria-hidden>
+                      <div className="bg-emerald-500" style={{ width: `${(units.filter((u) => u.status === "known" || u.status === "mastered").length / units.length) * 100}%` }} />
+                      <div className="bg-sky-400" style={{ width: `${(units.filter((u) => u.status === "studied").length / units.length) * 100}%` }} />
+                    </div>
+                  )}
                   {units.length ? (
                     <ul className="grid gap-2 md:grid-cols-2">
                       {units.map((unit) => (
                         <li key={unit.id}>
                           <Link href={`/grammar/${unit.id}`} className="flex h-full flex-col gap-2 rounded-xl border border-slate-200 p-3 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:border-slate-700">
-                            <span className="flex items-center justify-between gap-2"><strong>{unit.title}</strong><span className="shrink-0 text-xs text-slate-500">{cs.grammar.status[unit.status]}</span></span>
+                            <span className="flex items-center justify-between gap-2">
+                              <strong>{unit.title}</strong>
+                              <span className="flex shrink-0 items-center gap-1 text-xs">
+                                {tree.active_lesson_unit === unit.id && <span className="rounded-full bg-brand-500/15 px-2 py-0.5 font-semibold text-brand-700 dark:text-brand-100">{cs.lesson.openBadge}</span>}
+                                {unit.due && <span className="rounded-full bg-amber-100 px-2 py-0.5 font-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-200">{cs.lesson.dueBadge}</span>}
+                                <span className="text-slate-500">{cs.grammar.status[unit.status]}</span>
+                              </span>
+                            </span>
                             <span className="text-sm text-slate-600 dark:text-slate-300">{unit.summary}</span>
                             <span className="mt-auto flex items-center gap-1 text-xs text-slate-500"><CheckCircle2 className="size-3" aria-hidden />{cs.lesson.objective(unit.objective)}</span>
                           </Link>

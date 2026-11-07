@@ -217,6 +217,10 @@ export const cs = {
     progressIsPersonal: "Postup se ukládá pro tento profil a jazyk. Starší témata zůstávají dostupná k opakování.",
     availableCount: (n: number) => `${n} ${n === 1 ? "lekce" : n >= 2 && n <= 4 ? "lekce" : "lekcí"}`,
     notAvailable: "Zatím bez obsahu",
+    levelCoverage: (studied: number, total: number, known: number) =>
+      `prostudováno ${studied} z ${total}${known ? ` · ověřeno ${known}` : ""}`,
+    openBadge: "rozdělaná",
+    dueBadge: "k ověření",
     levelNotImplemented: "Pro tuto úroveň zatím nejsou připravené lekce.",
     noGrammarContent: "Pro vybraný jazyk zatím nejsou gramatické lekce. Slovní zásobu můžeš procvičovat samostatně.",
     objective: (text: string) => `Cíl: ${text}`,
