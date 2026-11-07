@@ -1595,3 +1595,13 @@ Vlad approves a push.
 **Implemented Solution:** The list endpoint now applies search, due and scope before counting statuses (the status filter still narrows only the rows, not its own chips). The chips and 'Vše' now always match what the list can show. The empty-state copy now depends on whether any filter is active, not on a zero count, so a search with no match reads 'Nic neodpovídá hledání.' rather than the first-run 'Zatím tu nic není'. The export stays available while filtering.
 
 **Verification:** New pytest test_status_counts_follow_search_and_due_filters (search, due, status-filter facet rule); tests/test_words.py 10 passed. Playwright: unfiltered 'Vše 41 | Učím se 41'; search 'hund' gives 'Vše 1 | Učím se 1' with 1 row; 'zzzz' gives 0 counts with 'Nic neodpovídá hledání.' and export still visible. The command palette only reads items, so it is unaffected. typecheck, next build, ruff pass.
+
+## Global Cycle 51/120 | Page: [/words] (Page Cycle 6/15)
+
+**Summary:** drive the word list from the search box and browse cards with arrows
+
+**Observed Problem:** Keyboard use of the dictionary was fragmented. '/' opened the command palette instead of the page search. ↑/↓/Enter worked only when focus was on the list background, not in the search box where typing happens. Once a row was clicked (a button), the arrows did nothing. With a word card open, moving down the list did not change the card, so reading through words meant clicking each one.
+
+**Implemented Solution:** The search input is now the page search ('/' focuses it) and acts as a combobox: ↑/↓ move the highlighted row (aria-activedescendant), Enter opens it, Escape clears the search and a second Escape closes the card. Arrows also work from a focused row and move focus with the highlight. While a card is open, moving the highlight browses: the card follows the row. The hint shows / ↑ ↓ Enter.
+
+**Verification:** Playwright: '/' focuses data-page-search; typing 's', ↓, Enter opens 'sie'; ↓ switches the card to 'ja'; Escape clears the query, a second Escape closes the card; clicking row 3 ('sein') then ↓ opens 'in' with focus on word-row-3. No console errors. typecheck, next build, ruff pass.

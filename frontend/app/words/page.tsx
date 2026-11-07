@@ -397,19 +397,53 @@ export default function WordsPage() {
     }
   }, [language, data, q, status, due, scope, sort]);
 
+  // Moving the highlight with the inspector open browses word by word: the card follows the row.
+  function move(delta: number) {
+    const items = data?.items ?? [];
+    if (!items.length) return;
+    const next = Math.max(0, Math.min(cursor + delta, items.length - 1));
+    setCursor(next);
+    if (open) setOpen(items[next]!.id);
+    // Keep keyboard focus on the highlighted row when it was on a row already.
+    if ((document.activeElement as HTMLElement | null)?.dataset.wordRow !== undefined) {
+      document.querySelector<HTMLElement>(`#word-row-${next} [data-word-row]`)?.focus();
+    }
+  }
+
   function onListKey(e: React.KeyboardEvent) {
-    if ((e.target as HTMLElement).closest("input, select, textarea, button")) return;
+    const target = e.target as HTMLElement;
+    if (target.closest("input, select, textarea") || (target.closest("button") && target.dataset.wordRow === undefined)) return;
     if (!data?.items.length) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setCursor((c) => Math.min(c + 1, data.items.length - 1));
+      move(1);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setCursor((c) => Math.max(c - 1, 0));
+      move(-1);
     } else if (e.key === "Enter") {
       e.preventDefault();
       setOpen(data.items[cursor]!.id);
     } else if (e.key === "Escape") setOpen(null);
+  }
+
+  // The search box drives the list like a combobox: ↑/↓ move the highlighted row, Enter opens it and
+  // Escape clears the search (a second Escape closes the open word).
+  function onSearchKey(e: React.KeyboardEvent<HTMLInputElement>) {
+    const items = data?.items ?? [];
+    if (e.key === "ArrowDown" && items.length) {
+      e.preventDefault();
+      move(1);
+    } else if (e.key === "ArrowUp" && items.length) {
+      e.preventDefault();
+      move(-1);
+    } else if (e.key === "Enter" && items[cursor]) {
+      e.preventDefault();
+      setOpen(items[cursor]!.id);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      if (q) setQ("");
+      else setOpen(null);
+    }
   }
 
   async function saveSelected() {
@@ -573,14 +607,19 @@ export default function WordsPage() {
                   <Search className="size-5 text-slate-400" aria-hidden />
                   <input
                     ref={search}
+                    type="search"
+                    data-page-search
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
+                    onKeyDown={onSearchKey}
+                    aria-controls="word-list"
+                    aria-activedescendant={data?.items.length ? `word-row-${cursor}` : undefined}
                     placeholder={t.search}
                     aria-label={t.search}
                     className="w-full bg-transparent py-3 outline-none"
                   />
-                  <span className="hidden text-xs text-slate-400 lg:inline">
-                    <Kbd>↑</Kbd> <Kbd>↓</Kbd> <Kbd>Enter</Kbd>
+                  <span className="hidden shrink-0 text-xs text-slate-400 lg:inline">
+                    <Kbd>/</Kbd> <Kbd>↑</Kbd> <Kbd>↓</Kbd> <Kbd>Enter</Kbd>
                   </span>
                 </label>
                 <div className="flex flex-wrap gap-1">
@@ -649,7 +688,7 @@ export default function WordsPage() {
                 )}
                 {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
                 {data && data.items.length === 0 && <Notice>{narrowed ? t.noMatch : t.empty}</Notice>}
-                <ul className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
+                <ul id="word-list" className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
                   {data?.items.map((w, i) => (
                     <li key={w.id} id={`word-row-${i}`}>
                       <div className="flex items-center">
@@ -658,6 +697,7 @@ export default function WordsPage() {
                       </label>
                       <button
                         type="button"
+                        data-word-row
                         onClick={() => {
                           setCursor(i);
                           setOpen(w.id);
