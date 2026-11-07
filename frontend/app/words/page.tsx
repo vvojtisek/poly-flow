@@ -1,16 +1,17 @@
 "use client";
 
-import { BookMarked, Clock, Download, FolderOpen, Search, X } from "lucide-react";
+import { BookMarked, Clock, Download, FolderOpen, Layers, List, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { FlashcardSession } from "@/components/FlashcardSession";
 import { Kbd } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { addWordsToCollection, getWord, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordList, type WordStatus } from "@/lib/api";
+import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordScope, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { genderClass } from "@/lib/gender";
 import { cs } from "@/lib/i18n/cs";
@@ -26,6 +27,52 @@ const PILL: Record<WordStatus, string> = {
   seen: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
 };
 const PAGE = 60;
+type Tab = "all" | "levels" | "topics";
+const TABS: { id: Tab; label: string }[] = [
+  { id: "levels", label: t.tabLevels },
+  { id: "topics", label: t.tabTopics },
+  { id: "all", label: t.tabAll },
+];
+
+function GroupCard({
+  title,
+  subtitle,
+  mine,
+  total,
+  onFlashcards,
+  onShow,
+}: {
+  title: string;
+  subtitle?: string;
+  mine: number;
+  total: number;
+  onFlashcards: () => void;
+  onShow: () => void;
+}) {
+  const percent = total ? Math.round((mine / total) * 100) : 0;
+  return (
+    <li className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-col gap-0.5">
+        <p className="text-lg font-bold">{title}</p>
+        {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
+      </div>
+      <div className="flex flex-col gap-1">
+        <p className="text-sm tabular-nums text-slate-600 dark:text-slate-300">{mine ? t.met(mine, total) : t.nothingYet}</p>
+        <div className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" aria-hidden>
+          <div className="h-full rounded-full bg-emerald-500" style={{ width: `${percent}%` }} />
+        </div>
+      </div>
+      <div className="mt-auto flex flex-wrap gap-2">
+        <Button className="flex-1 !py-2 text-sm" disabled={!mine} onClick={onFlashcards}>
+          <Layers className="size-4" aria-hidden /> {cs.flashcards.run}
+        </Button>
+        <Button variant="secondary" className="!py-2 text-sm" disabled={!mine} onClick={onShow}>
+          <List className="size-4" aria-hidden /> {t.showWords}
+        </Button>
+      </div>
+    </li>
+  );
+}
 
 function when(iso: string | null): string {
   if (!iso) return "–";
@@ -163,11 +210,19 @@ export default function WordsPage() {
   const [savingSelected, setSavingSelected] = useState(false);
   const [bulkNotice, setBulkNotice] = useState<{ text: string; error?: boolean } | null>(null);
   const search = useRef<HTMLInputElement>(null);
+  const [tab, setTab] = useState<Tab>("levels");
+  const [groups, setGroups] = useState<WordGroups | null>(null);
+  const [groupsFailed, setGroupsFailed] = useState(false);
+  const [scope, setScope] = useState<WordScope | null>(null);
+  const [cards, setCards] = useState<WordScope | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get("q");
     const initialWord = params.get("word");
+    const initialTab = params.get("tab");
+    if (initialQuery || initialWord) setTab("all");
+    else if (initialTab === "all" || initialTab === "levels" || initialTab === "topics") setTab(initialTab);
     if (initialQuery) setQ(initialQuery);
     if (initialWord) setOpen(initialWord);
   }, []);
@@ -176,7 +231,7 @@ export default function WordsPage() {
     if (!language) return;
     const ctrl = new AbortController();
     const timer = setTimeout(() => {
-      listWords(language, { q, status, due, limit: PAGE }, ctrl.signal)
+      listWords(language, { q, status, due, limit: PAGE, scope }, ctrl.signal)
         .then((d) => {
           setData(d);
           setCursor(0);
@@ -188,7 +243,20 @@ export default function WordsPage() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [language, q, status, due, me?.acting.id]);
+  }, [language, q, status, due, scope, me?.acting.id]);
+
+  useEffect(() => {
+    if (!language) return;
+    const ctrl = new AbortController();
+    setGroups(null);
+    setGroupsFailed(false);
+    setScope(null);
+    setCards(null);
+    getWordGroups(language, ctrl.signal)
+      .then(setGroups)
+      .catch((e) => e?.name !== "AbortError" && setGroupsFailed(true));
+    return () => ctrl.abort();
+  }, [language, me?.acting.id]);
 
   useEffect(() => {
     if (!language) return;
@@ -202,12 +270,12 @@ export default function WordsPage() {
     if (!language || !data) return;
     setMore(true);
     try {
-      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE });
+      const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope });
       setData({ ...data, items: [...data.items, ...next.items] });
     } finally {
       setMore(false);
     }
-  }, [language, data, q, status, due]);
+  }, [language, data, q, status, due, scope]);
 
   function onListKey(e: React.KeyboardEvent) {
     if ((e.target as HTMLElement).closest("input, select, textarea, button")) return;
@@ -262,139 +330,237 @@ export default function WordsPage() {
             <FolderOpen className="size-4" aria-hidden /> {cs.collections.link}
           </Link>
         </div>
-        {total > 0 && me.acting.active_language && (
-          <details className="group self-start text-sm">
-            <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
-              <Download className="size-4" aria-hidden />
-              {t.export}
-            </summary>
-            <div className="mt-2 flex max-w-md flex-col gap-2 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
-              <p className="text-xs text-slate-500">{t.exportHelp}</p>
-              <div className="flex gap-2">
-                <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "csv")} download>
-                  {t.exportCsv}
-                </a>
-                <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "anki")} download>
-                  {t.exportAnki}
-                </a>
-              </div>
-            </div>
-          </details>
-        )}
-        <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
-          <div className="flex min-w-0 flex-col gap-3" onKeyDown={onListKey}>
-            <label className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900">
-              <Search className="size-5 text-slate-400" aria-hidden />
-              <input
-                ref={search}
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder={t.search}
-                aria-label={t.search}
-                autoFocus
-                className="w-full bg-transparent py-3 outline-none"
-              />
-              <span className="hidden text-xs text-slate-400 lg:inline">
-                <Kbd>↑</Kbd> <Kbd>↓</Kbd> <Kbd>Enter</Kbd>
-              </span>
-            </label>
-            <div className="flex flex-wrap gap-1">
-              <button
-                type="button"
-                aria-pressed={status === null}
-                onClick={() => setStatus(null)}
-                className={`rounded-full px-3 py-1 text-sm font-medium ${status === null ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
-              >
-                {t.all} {total}
-              </button>
-              {STATUSES.map((s) => (
+        {cards && language ? (
+          <FlashcardSession key={`${cards.kind}:${cards.label}`} language={language} scope={cards} onClose={() => setCards(null)} />
+        ) : (
+          <>
+            <div role="tablist" aria-label={t.browseBy} className="flex flex-wrap gap-1 rounded-2xl bg-slate-100 p-1 dark:bg-slate-800/60">
+              {TABS.map((item) => (
                 <button
-                  key={s}
+                  key={item.id}
+                  id={`words-tab-${item.id}`}
                   type="button"
-                  aria-pressed={status === s}
-                  onClick={() => setStatus(status === s ? null : s)}
-                  className={`rounded-full px-3 py-1 text-sm font-medium ${status === s ? "ring-2 ring-brand-500" : ""} ${PILL[s]}`}
+                  role="tab"
+                  aria-selected={tab === item.id}
+                  aria-controls={`words-panel-${item.id}`}
+                  onClick={() => setTab(item.id)}
+                  className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+                    tab === item.id ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 hover:bg-white/60 dark:text-slate-300 dark:hover:bg-slate-900/60"
+                  }`}
                 >
-                  {t.status[s]} {data?.counts[s] ?? 0}
+                  {item.label}
                 </button>
               ))}
-              <button
-                type="button"
-                aria-pressed={due}
-                onClick={() => setDue(!due)}
-                className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${due ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
-              >
-                <Clock className="size-3.5" aria-hidden /> {t.dueOnly}
-              </button>
             </div>
-            {failed && <Notice tone="error">{cs.common.error}</Notice>}
-            {selected.length > 0 && (
-              <section aria-label={t.addSelected} className="flex flex-wrap items-center gap-2 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-3">
-                <span className="mr-auto text-sm font-semibold">{t.selected(selected.length)}</span>
-                {collections.length ? (
+
+            {tab !== "all" && (
+              <div id={`words-panel-${tab}`} role="tabpanel" aria-labelledby={`words-tab-${tab}`} className="flex flex-col gap-3">
+                {groupsFailed && <Notice tone="error">{t.groupsFailed}</Notice>}
+                {!groups && !groupsFailed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
+                {groups && tab === "levels" && (
                   <>
-                    <label className="sr-only" htmlFor="bulk-collection">{t.selectCollection}</label>
-                    <select id="bulk-collection" value={targetCollection} onChange={(e) => setTargetCollection(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
-                      <option value="">{t.selectCollection}</option>
-                      {collections.map((collection) => <option key={collection.id} value={collection.id}>{collection.name} · {cs.collections.count(collection.count)}</option>)}
-                    </select>
-                    <Button disabled={!targetCollection || savingSelected} onClick={() => void saveSelected()}>{savingSelected ? cs.common.loading : t.addSelected}</Button>
+                    <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                      {groups.levels.map((level) => {
+                        const label = t.level(level.key);
+                        const pick: WordScope = { kind: "level", key: level.key, label };
+                        return (
+                          <GroupCard
+                            key={level.key}
+                            title={label}
+                            subtitle={t.levelRanks(level.first_rank, level.last_rank)}
+                            mine={level.mine}
+                            total={level.total}
+                            onFlashcards={() => setCards(pick)}
+                            onShow={() => {
+                              setScope(pick);
+                              setTab("all");
+                            }}
+                          />
+                        );
+                      })}
+                    </ul>
+                    <p className="text-xs text-slate-500">{t.levelNote}</p>
                   </>
-                ) : (
-                  <Link href="/collections" className="rounded-lg bg-brand-500 px-3 py-2 text-sm font-semibold text-white">{t.createCollection}</Link>
                 )}
-                <button type="button" onClick={() => setSelected([])} aria-label={cs.common.close} className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-800"><X className="size-4" aria-hidden /></button>
-              </section>
+                {groups && tab === "topics" && (
+                  groups.topics.length === 0 ? (
+                    <Notice>{t.noTopics}</Notice>
+                  ) : (
+                    <>
+                      <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                        {groups.topics.map((topic) => {
+                          const pick: WordScope = { kind: "topic", id: topic.id, label: topic.title };
+                          return (
+                            <GroupCard
+                              key={topic.id}
+                              title={topic.title}
+                              mine={topic.mine}
+                              total={topic.total}
+                              onFlashcards={() => setCards(pick)}
+                              onShow={() => {
+                                setScope(pick);
+                                setTab("all");
+                              }}
+                            />
+                          );
+                        })}
+                      </ul>
+                      <p className="text-xs text-slate-500">{t.topicsNote}</p>
+                    </>
+                  )
+                )}
+              </div>
             )}
-            {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
-            {data && data.items.length === 0 && <Notice>{total === 0 ? t.empty : t.noMatch}</Notice>}
-            <ul className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
-              {data?.items.map((w, i) => (
-                <li key={w.id} id={`word-row-${i}`}>
-                  <div className="flex items-center">
-                  <label className="flex shrink-0 items-center pl-3" title={t.selectWord(w.lemma)}>
-                    <input type="checkbox" checked={selected.includes(w.id)} aria-label={t.selectWord(w.lemma)} onChange={(e) => setSelected((current) => e.target.checked ? [...current, w.id] : current.filter((id) => id !== w.id))} className="size-4 accent-brand-600" />
-                  </label>
+
+            <div id="words-panel-all" role="tabpanel" aria-labelledby="words-tab-all" hidden={tab !== "all"} className="flex flex-col gap-4">
+            {scope && (
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 px-3 py-1.5 text-sm font-semibold text-brand-600 dark:text-brand-50">
+                  {t.scoped(scope.label)}
+                  <button type="button" onClick={() => setScope(null)} aria-label={t.clearScope} className="rounded-full p-0.5 hover:bg-brand-500/20">
+                    <X className="size-3.5" aria-hidden />
+                  </button>
+                </span>
+                <Button variant="secondary" className="!py-1.5 text-sm" onClick={() => setCards(scope)}>
+                  <Layers className="size-4" aria-hidden /> {cs.flashcards.run}
+                </Button>
+              </div>
+            )}
+            {total > 0 && me.acting.active_language && (
+              <details className="group self-start text-sm">
+                <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
+                  <Download className="size-4" aria-hidden />
+                  {t.export}
+                </summary>
+                <div className="mt-2 flex max-w-md flex-col gap-2 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
+                  <p className="text-xs text-slate-500">{t.exportHelp}</p>
+                  <div className="flex gap-2">
+                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "csv")} download>
+                      {t.exportCsv}
+                    </a>
+                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "anki")} download>
+                      {t.exportAnki}
+                    </a>
+                  </div>
+                </div>
+              </details>
+            )}
+            <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
+              <div className="flex min-w-0 flex-col gap-3" onKeyDown={onListKey}>
+                <label className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900">
+                  <Search className="size-5 text-slate-400" aria-hidden />
+                  <input
+                    ref={search}
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder={t.search}
+                    aria-label={t.search}
+                    className="w-full bg-transparent py-3 outline-none"
+                  />
+                  <span className="hidden text-xs text-slate-400 lg:inline">
+                    <Kbd>↑</Kbd> <Kbd>↓</Kbd> <Kbd>Enter</Kbd>
+                  </span>
+                </label>
+                <div className="flex flex-wrap gap-1">
                   <button
                     type="button"
-                    onClick={() => {
-                      setCursor(i);
-                      setOpen(w.id);
-                    }}
-                    className={`flex min-w-0 flex-1 items-center gap-3 px-4 py-2.5 text-left ${
-                      open === w.id ? "bg-brand-500/10" : i === cursor ? "bg-slate-50 dark:bg-slate-800/60" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                    }`}
+                    aria-pressed={status === null}
+                    onClick={() => setStatus(null)}
+                    className={`rounded-full px-3 py-1 text-sm font-medium ${status === null ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
                   >
-                    <span className="w-10 shrink-0 text-right text-xs tabular-nums text-slate-400">{w.rank}</span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate font-semibold" lang={language}>
-                        <Article gender={w.gender} lemma={w.lemma} />
-                      </span>
-                      <span className="block truncate text-sm text-slate-500">{w.translation}</span>
-                    </span>
-                    {w.due && <Clock className="size-4 text-amber-500" aria-label={t.dueNow} />}
-                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${PILL[w.status]}`}>{t.status[w.status]}</span>
+                    {t.all} {total}
                   </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            {data && data.items.length < data.total && (
-              <Button variant="secondary" disabled={more} onClick={() => void loadMore()}>
-                {t.more(data.total - data.items.length)}
-              </Button>
-            )}
-          </div>
-          <div>
-            {open ? (
-              <Inspector id={open} onClose={() => setOpen(null)} />
-            ) : (
-              <p className="hidden rounded-3xl border border-dashed border-slate-300 p-6 text-sm text-slate-500 dark:border-slate-700 lg:block">
-                {t.pick}
-              </p>
-            )}
-          </div>
-        </div>
+                  {STATUSES.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      aria-pressed={status === s}
+                      onClick={() => setStatus(status === s ? null : s)}
+                      className={`rounded-full px-3 py-1 text-sm font-medium ${status === s ? "ring-2 ring-brand-500" : ""} ${PILL[s]}`}
+                    >
+                      {t.status[s]} {data?.counts[s] ?? 0}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    aria-pressed={due}
+                    onClick={() => setDue(!due)}
+                    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${due ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                  >
+                    <Clock className="size-3.5" aria-hidden /> {t.dueOnly}
+                  </button>
+                </div>
+                {failed && <Notice tone="error">{cs.common.error}</Notice>}
+                {selected.length > 0 && (
+                  <section aria-label={t.addSelected} className="flex flex-wrap items-center gap-2 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-3">
+                    <span className="mr-auto text-sm font-semibold">{t.selected(selected.length)}</span>
+                    {collections.length ? (
+                      <>
+                        <label className="sr-only" htmlFor="bulk-collection">{t.selectCollection}</label>
+                        <select id="bulk-collection" value={targetCollection} onChange={(e) => setTargetCollection(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+                          <option value="">{t.selectCollection}</option>
+                          {collections.map((collection) => <option key={collection.id} value={collection.id}>{collection.name} · {cs.collections.count(collection.count)}</option>)}
+                        </select>
+                        <Button disabled={!targetCollection || savingSelected} onClick={() => void saveSelected()}>{savingSelected ? cs.common.loading : t.addSelected}</Button>
+                      </>
+                    ) : (
+                      <Link href="/collections" className="rounded-lg bg-brand-500 px-3 py-2 text-sm font-semibold text-white">{t.createCollection}</Link>
+                    )}
+                    <button type="button" onClick={() => setSelected([])} aria-label={cs.common.close} className="rounded-lg p-2 hover:bg-slate-100 dark:hover:bg-slate-800"><X className="size-4" aria-hidden /></button>
+                  </section>
+                )}
+                {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
+                {data && data.items.length === 0 && <Notice>{total === 0 ? t.empty : t.noMatch}</Notice>}
+                <ul className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
+                  {data?.items.map((w, i) => (
+                    <li key={w.id} id={`word-row-${i}`}>
+                      <div className="flex items-center">
+                      <label className="flex shrink-0 items-center pl-3" title={t.selectWord(w.lemma)}>
+                        <input type="checkbox" checked={selected.includes(w.id)} aria-label={t.selectWord(w.lemma)} onChange={(e) => setSelected((current) => e.target.checked ? [...current, w.id] : current.filter((id) => id !== w.id))} className="size-4 accent-brand-600" />
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCursor(i);
+                          setOpen(w.id);
+                        }}
+                        className={`flex min-w-0 flex-1 items-center gap-3 px-4 py-2.5 text-left ${
+                          open === w.id ? "bg-brand-500/10" : i === cursor ? "bg-slate-50 dark:bg-slate-800/60" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                        }`}
+                      >
+                        <span className="w-10 shrink-0 text-right text-xs tabular-nums text-slate-400">{w.rank}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate font-semibold" lang={language}>
+                            <Article gender={w.gender} lemma={w.lemma} />
+                          </span>
+                          <span className="block truncate text-sm text-slate-500">{w.translation}</span>
+                        </span>
+                        {w.due && <Clock className="size-4 text-amber-500" aria-label={t.dueNow} />}
+                        <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${PILL[w.status]}`}>{t.status[w.status]}</span>
+                      </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                {data && data.items.length < data.total && (
+                  <Button variant="secondary" disabled={more} onClick={() => void loadMore()}>
+                    {t.more(data.total - data.items.length)}
+                  </Button>
+                )}
+              </div>
+              <div>
+                {open ? (
+                  <Inspector id={open} onClose={() => setOpen(null)} />
+                ) : (
+                  <p className="hidden rounded-3xl border border-dashed border-slate-300 p-6 text-sm text-slate-500 dark:border-slate-700 lg:block">
+                    {t.pick}
+                  </p>
+                )}
+              </div>
+            </div>
+            </div>
+          </>
+        )}
       </div>
     </AppShell>
   );

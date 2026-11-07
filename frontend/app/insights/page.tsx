@@ -160,7 +160,7 @@ function ForecastDetails({ data, language }: { data: Insights["forecast"][number
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <h3 className="font-semibold">{t.forecastDetails(dayFmt(data.date))}</h3>
         <div className="flex gap-3 text-sm">
-          {data.word_items.length > 0 && <a href="/words" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openWords}</a>}
+          {data.word_items.length > 0 && <a href="/words?tab=all" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openWords}</a>}
           {data.grammar_items.length > 0 && <a href="/grammar" className="font-medium text-brand-700 hover:underline dark:text-brand-200">{t.openGrammar}</a>}
         </div>
       </div>

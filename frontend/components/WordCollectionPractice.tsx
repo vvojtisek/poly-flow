@@ -4,6 +4,7 @@ import { Brain, Headphones, RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
+import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
 import { myWordAudioUrl, type WordCollectionDetail } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
@@ -50,8 +51,8 @@ function RecallCards({ collection, onClose }: { collection: WordCollectionDetail
     <section className="flex flex-col gap-4 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-4 sm:p-6">
       <header className="flex items-center justify-between gap-2">
         <h3 className="flex items-center gap-2 text-lg font-bold"><Brain className="size-5 text-brand-500" aria-hidden /> {t.recallTitle}</h3>
-        <span className="text-sm tabular-nums text-slate-500">{t.position(index + 1, deck.length)}</span>
       </header>
+      <SessionProgress current={index + 1} total={deck.length} label={cs.sessionProgress.card(index + 1, deck.length)} />
       <div className="flex min-h-56 flex-col items-center justify-center gap-5 rounded-xl bg-white p-6 text-center dark:bg-slate-900">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{t.recallPrompt}</p>
         <p lang="cs" className="text-2xl font-semibold">{current.translation}</p>
@@ -130,8 +131,8 @@ export function WordCollectionPractice({
           </h3>
           <p className="text-sm text-slate-600 dark:text-slate-300">{t.sentencePrompt}</p>
         </div>
-        <span className="text-sm tabular-nums text-slate-500">{t.position(index + 1, examples.length)}</span>
       </header>
+      <SessionProgress current={index + 1} total={examples.length} />
 
       <div className="flex flex-col gap-3 rounded-xl bg-white p-4 dark:bg-slate-900">
         <div className="flex items-center gap-2">

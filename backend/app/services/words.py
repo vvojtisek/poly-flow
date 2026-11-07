@@ -9,12 +9,16 @@ from datetime import datetime
 
 from sqlalchemy import and_, case, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import aliased
 
 from app.domain.enums import Language, ProgressState
 from app.domain.export import Row
+from app.domain.progression import vocabulary_level, vocabulary_levels
 from app.models import (
     LearningEvent,
     LexiconItem,
+    Scene,
+    SceneWord,
     User,
     UserWordProgress,
     WordCollection,
@@ -22,6 +26,8 @@ from app.models import (
 )
 from app.services.learning import LearningError, _suitable
 from app.services.notes import notes_for
+
+DECK_LIMIT = 50
 
 STATUSES = ("mastered", "known", "passive", "learning", "seen")
 
@@ -52,13 +58,16 @@ async def list_words(
     due: bool,
     offset: int,
     limit: int,
+    level: str | None = None,
+    topic: uuid.UUID | None = None,
 ) -> dict:
     p, li = UserWordProgress, LexiconItem
     st = _status().label("status")
+    scope = await _scope(db, user, language, level, topic)
     base = (
         select(li, p, st)
         .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
-        .where(li.language == language, _suitable(user))
+        .where(li.language == language, _suitable(user), *scope)
     )
     counts = dict(
         (
@@ -66,7 +75,7 @@ async def list_words(
                 select(st, func.count())
                 .select_from(li)
                 .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
-                .where(li.language == language, _suitable(user))
+                .where(li.language == language, _suitable(user), *scope)
                 .group_by(st)
             )
         ).all()
@@ -249,3 +258,152 @@ def _export_row(item, prog, status: str, language: Language, note: str | None) -
         errors=prog.error_count,
         source=item.source,
     )
+
+
+# ---------------------------------------------------------------- groups and scoped flashcards
+# Levels group words by frequency rank (indicative CEFR, app.domain.progression); topics are the
+# lesson scenes, the reviewed thematic grouping the curriculum has. Counts and decks cover only
+# the profile's own words (a progress row), like the rest of the dictionary: flashcards repeat
+# what lessons introduced, they do not replace the lesson's context-first introduction.
+
+
+def _scene_ok(user: User):
+    """A scene with a word this profile does not get is hidden as a whole, as in lessons."""
+    hidden = aliased(LexiconItem)
+    return ~(
+        select(SceneWord.scene_id)
+        .join(hidden, hidden.id == SceneWord.lexicon_item_id)
+        .where(SceneWord.scene_id == Scene.id, ~_suitable(user, hidden))
+        .exists()
+    )
+
+
+async def _scope(
+    db: AsyncSession, user: User, language: Language, level: str | None, topic: uuid.UUID | None
+) -> list:
+    """Filters for one vocabulary level and/or one lesson topic (validated; unknown -> error)."""
+    li = LexiconItem
+    out: list = []
+    if level is not None:
+        bounds = {key: (lo, hi) for key, lo, hi in vocabulary_levels()}
+        if level not in bounds:
+            raise LearningError("unknown_level", 422)
+        lo, hi = bounds[level]
+        out.append(li.frequency_rank >= lo)
+        if hi is not None:
+            out.append(li.frequency_rank <= hi)
+    if topic is not None:
+        found = (
+            await db.execute(
+                select(Scene.id).where(
+                    Scene.id == topic, Scene.language == language, _scene_ok(user)
+                )
+            )
+        ).scalar_one_or_none()
+        if found is None:
+            raise LearningError("topic_not_found", 404)
+        out.append(li.id.in_(select(SceneWord.lexicon_item_id).where(SceneWord.scene_id == topic)))
+    return out
+
+
+async def word_groups(db: AsyncSession, user: User, language: Language) -> dict:
+    p, li = UserWordProgress, LexiconItem
+    on = and_(p.lexicon_item_id == li.id, p.user_id == user.id)
+    by_band = (
+        await db.execute(
+            select(li.frequency_band, func.count(li.id), func.count(p.lexicon_item_id))
+            .outerjoin(p, on)
+            .where(li.language == language, _suitable(user))
+            .group_by(li.frequency_band)
+        )
+    ).all()
+    totals: dict[str, list[int]] = {key: [0, 0] for key, _, _ in vocabulary_levels()}
+    for band, total, mine in by_band:
+        counts = totals[vocabulary_level(band)]
+        counts[0] += total
+        counts[1] += mine
+    levels = [
+        {
+            "key": key,
+            "first_rank": lo,
+            "last_rank": hi,
+            "total": totals[key][0],
+            "mine": totals[key][1],
+        }
+        for key, lo, hi in vocabulary_levels()
+        if totals[key][0] > 0
+    ]
+    topics = (
+        await db.execute(
+            select(Scene.id, Scene.title_cs, func.count(li.id), func.count(p.lexicon_item_id))
+            .join(SceneWord, SceneWord.scene_id == Scene.id)
+            .join(li, li.id == SceneWord.lexicon_item_id)
+            .outerjoin(p, on)
+            .where(Scene.language == language, _scene_ok(user))
+            .group_by(Scene.id, Scene.title_cs, Scene.position)
+            .order_by(Scene.position)
+        )
+    ).all()
+    return {
+        "levels": levels,
+        "topics": [
+            {"id": sid, "title": title, "total": total, "mine": mine}
+            for sid, title, total, mine in topics
+        ],
+    }
+
+
+async def word_deck(
+    db: AsyncSession,
+    user: User,
+    language: Language,
+    now: datetime,
+    *,
+    level: str | None,
+    topic: uuid.UUID | None,
+    limit: int = DECK_LIMIT,
+) -> dict:
+    """The profile's own words in one level or topic, due and unfinished words first."""
+    if (level is None) == (topic is None):
+        raise LearningError("deck_scope_required", 422)
+    p, li = UserWordProgress, LexiconItem
+    st = _status().label("status")
+    due = and_(p.introduced_at.is_not(None), p.next_review_at <= now)
+    q = (
+        select(li, p, st)
+        .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
+        .where(
+            li.language == language,
+            _suitable(user),
+            *await _scope(db, user, language, level, topic),
+        )
+    )
+    total = (await db.execute(select(func.count()).select_from(q.subquery()))).scalar_one()
+    rows = (
+        await db.execute(
+            q.order_by(
+                case((due, 0), else_=1),
+                case((p.state == ProgressState.MASTERED, 1), else_=0),
+                li.frequency_rank,
+            ).limit(limit)
+        )
+    ).all()
+    return {
+        "total": total,
+        "items": [
+            {
+                "id": item.id,
+                "lemma": item.lemma,
+                "gender": item.gender,
+                "pos": item.pos,
+                "rank": item.frequency_rank,
+                "translation": item.translation_cs,
+                "example": item.example_sentence,
+                "status": status,
+                "due": prog.introduced_at is not None
+                and prog.next_review_at is not None
+                and prog.next_review_at <= now,
+            }
+            for item, prog, status in rows
+        ],
+    }

@@ -10,6 +10,7 @@ import { NoteEditor } from "@/components/NoteEditor";
 import { SessionReview } from "@/components/SessionReview";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { SceneView } from "@/components/SceneView";
+import { SessionProgress } from "@/components/SessionProgress";
 import { SpeakAnswer } from "@/components/SpeakAnswer";
 import { TutorButton } from "@/components/TutorButton";
 import { Button, Notice } from "@/components/ui";
@@ -647,11 +648,6 @@ export function LessonRunner({
   const practice = (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-4">
       <div className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
-        <span>
-          {mode === "placement"
-            ? cs.placement.question(task.position + 1, task.total)
-            : cs.lesson.progress(task.position + 1, task.total)}
-        </span>
         <SlowToggle />
         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           {mode === "check"
@@ -679,9 +675,12 @@ export function LessonRunner({
           {speechBlocked && <p role="status" className="w-full text-xs text-amber-700 dark:text-amber-300">{cs.check.speechBlocked}</p>}
         </div>
       )}
-      <div className="h-1.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-        <div className="h-full bg-brand-500" style={{ width: `${(task.position / task.total) * 100}%` }} />
-      </div>
+      <SessionProgress
+        current={task.position + 1}
+        total={task.total}
+        upperBound={mode === "placement"}
+        label={mode === "placement" ? cs.placement.question(task.position + 1, task.total) : cs.lesson.progress(task.position + 1, task.total)}
+      />
 
       <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <p className="text-sm text-slate-500 dark:text-slate-400">
