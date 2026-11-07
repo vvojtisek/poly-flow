@@ -5631,6 +5631,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-30-map-scale",
+   "level": "B1",
+   "title": "La tour toute proche",
+   "title_cs": "Blízká rozhledna",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva a prévu une courte promenade vers la tour d'observation sur la colline.",
+     "cs": "Eva naplánovala krátký výlet k rozhledně na kopci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ce n'est pas loin sur la carte. Partons sans goûter.",
+     "cs": "Na mapě je to jen kousek. Pojďme bez svačiny."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Quelle est l'échelle de cette carte ? Ne devrait-on pas vérifier ?",
+     "cs": "Jaké má ta mapa měřítko? Neměli bychom si to ověřit?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Inutile. J'ai mesuré le chemin avec mon doigt : Il ne fait que deux centimètres.",
+     "cs": "Není třeba. Změřila jsem cestu prstem a je dlouhá jen dva centimetry."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Mais chaque centimètre représente cinq kilomètres.",
+     "cs": "Jenže každý centimetr představuje pět kilometrů."
+    },
+    {
+     "speaker": null,
+     "text": "Eva a étudié la carte à nouveau : Prenons donc un doigt plus petit et un goûter plus grand.",
+     "cs": "Eva si znovu prohlédla mapu: Tak si raději vezmeme menší prst a větší svačinu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "observation",
+     "cs": "pozorování"
+    },
+    {
+     "word": "échelle",
+     "cs": "měřítko"
+    },
+    {
+     "word": "vérifier",
+     "cs": "ověřit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Jak dlouhá je cesta podle měřítka?",
+     "options": [
+      "Deset kilometrů.",
+      "Dva kilometry.",
+      "Pět metrů."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co se Eva rozhodne vzít?",
+     "options": [
+      "Větší svačinu.",
+      "Nové boty.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
