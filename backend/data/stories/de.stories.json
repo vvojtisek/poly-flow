@@ -2681,6 +2681,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-01-coffee-consultant",
+   "level": "B2",
+   "title": "Der Berater und die Kaffeemaschine",
+   "title_cs": "Poradce a kávovar",
+   "lines": [
+    {
+     "text": "Die Firma Brenner beauftragte einen Unternehmensberater, die Produktivität der Belegschaft zu steigern. Er hieß Dr. Falk und berechnete tausend Euro pro Stunde.",
+     "cs": "Firma Brenner najala podnikového poradce, aby zvýšil produktivitu zaměstnanců. Jmenoval se doktor Falk a účtoval tisíc eur za hodinu."
+    },
+    {
+     "text": "Nach einer Woche der Beobachtung verkündete er der Geschäftsleitung: Der größte Produktivitätskiller ist die Kaffeemaschine.",
+     "cs": "Po týdnu pozorování oznámil vedení: Největším zabijákem produktivity je kávovar."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "Die Kaffeemaschine?",
+     "cs": "Kávovar?"
+    },
+    {
+     "speaker": "Falk",
+     "text": "Jeder Mitarbeiter wartet täglich vierzig Minuten davor. Hochgerechnet verlieren wir hundert Arbeitsstunden im Monat.",
+     "cs": "Každý zaměstnanec před ním denně čeká čtyřicet minut. Po přepočtu ztrácíme sto pracovních hodin měsíčně."
+    },
+    {
+     "text": "Auf seine Empfehlung hin wurde die Maschine entfernt.",
+     "cs": "Na jeho doporučení kávovar odstranili."
+    },
+    {
+     "text": "Schon nach einer Woche sank die Produktivität um dreißig Prozent, denn das ganze Team ging nun ins Café gegenüber.",
+     "cs": "Už po týdnu klesla produktivita o třicet procent, protože celý tým teď chodil do kavárny naproti."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Nach einer neuen Analyse: Das Café ist ineffizient. Wir brauchen eine zentrale Kaffeestation.",
+     "cs": "Po nové analýze: Kavárna je neefektivní. Potřebujeme centrální kávovou stanici."
+    },
+    {
+     "text": "Man holte die alte Maschine aus dem Keller, stellte sie an ihren alten Platz und nannte sie fortan Produktivitätsstation.",
+     "cs": "Starý kávovar přinesli ze sklepa, postavili ho na původní místo a přejmenovali na produktivní stanici."
+    },
+    {
+     "text": "Mit der Rechnung kamen achtundvierzigtausend Euro.",
+     "cs": "Spolu s fakturou přišlo osmačtyřicet tisíc eur."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "Wir haben exakt den Zustand erreicht, den wir vor Ihrer Beratung hatten.",
+     "cs": "Dosáhli jsme přesně stavu, který jsme měli před vaším poradenstvím."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Richtig. Aber jetzt ist er wissenschaftlich belegt.",
+     "cs": "Správně. Ale teď je to vědecky doložené."
+    },
+    {
+     "text": "Später hing in der Küche ein Zettel: Bitte nicht optimieren.",
+     "cs": "Později se v kuchyňce objevil lístek: Prosím neoptimalizovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Belegschaft",
+     "cs": "zaměstnanci, personál"
+    },
+    {
+     "word": "hochgerechnet",
+     "cs": "přepočteno"
+    },
+    {
+     "word": "belegt",
+     "cs": "doložený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was empfiehlt Dr. Falk zuerst?",
+     "options": [
+      "Die Kaffeemaschine zu entfernen",
+      "Mehr Kaffee zu kaufen",
+      "Das Café zu schließen"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wie endet die Beratung?",
+     "options": [
+      "Mit demselben Zustand wie vorher, aber einer hohen Rechnung",
+      "Mit höherer Produktivität",
+      "Mit einer neuen Kaffeemaschine"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

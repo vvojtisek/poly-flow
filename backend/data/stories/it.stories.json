@@ -2681,6 +2681,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-01-coffee-consultant",
+   "level": "B2",
+   "title": "Il consulente e la macchina del caffè",
+   "title_cs": "Poradce a kávovar",
+   "lines": [
+    {
+     "text": "L'azienda Brenner ha incaricato un consulente di aumentare la produttività del personale. Si chiamava dottor Falk e fatturava mille euro all'ora.",
+     "cs": "Firma Brenner najala podnikového poradce, aby zvýšil produktivitu zaměstnanců. Jmenoval se doktor Falk a účtoval tisíc eur za hodinu."
+    },
+    {
+     "text": "Dopo una settimana di osservazione ha annunciato alla direzione: Il più grande nemico della produttività è la macchina del caffè.",
+     "cs": "Po týdnu pozorování oznámil vedení: Největším zabijákem produktivity je kávovar."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "La macchina del caffè?",
+     "cs": "Kávovar?"
+    },
+    {
+     "speaker": "Falk",
+     "text": "Ogni dipendente aspetta quaranta minuti al giorno davanti a essa. Estrapolato, perdiamo cento ore di lavoro al mese.",
+     "cs": "Každý zaměstnanec před ním denně čeká čtyřicet minut. Po přepočtu ztrácíme sto pracovních hodin měsíčně."
+    },
+    {
+     "text": "Su sua raccomandazione la macchina è stata rimossa.",
+     "cs": "Na jeho doporučení kávovar odstranili."
+    },
+    {
+     "text": "Già dopo una settimana la produttività è calata del trenta per cento, perché tutto il team andava ora al bar di fronte.",
+     "cs": "Už po týdnu klesla produktivita o třicet procent, protože celý tým teď chodil do kavárny naproti."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Dopo una nuova analisi: Il bar è inefficiente. Ci serve una stazione del caffè centrale.",
+     "cs": "Po nové analýze: Kavárna je neefektivní. Potřebujeme centrální kávovou stanici."
+    },
+    {
+     "text": "Hanno portato su la vecchia macchina dalla cantina, l'hanno rimessa al suo posto e l'hanno ribattezzata stazione di produttività.",
+     "cs": "Starý kávovar přinesli ze sklepa, postavili ho na původní místo a přejmenovali na produktivní stanici."
+    },
+    {
+     "text": "Con la fattura sono arrivati quarantottomila euro.",
+     "cs": "Spolu s fakturou přišlo osmačtyřicet tisíc eur."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "Siamo tornati esattamente alla situazione precedente alla sua consulenza.",
+     "cs": "Dosáhli jsme přesně stavu, který jsme měli před vaším poradenstvím."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Esatto. Ma adesso è scientificamente dimostrato.",
+     "cs": "Správně. Ale teď je to vědecky doložené."
+    },
+    {
+     "text": "Più tardi in cucina è comparso un biglietto: Si prega di non ottimizzare.",
+     "cs": "Později se v kuchyňce objevil lístek: Prosím neoptimalizovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Estrapolato",
+     "cs": "extrapolováno"
+    },
+    {
+     "word": "ribattezzata",
+     "cs": "přejmenovaná"
+    },
+    {
+     "word": "dimostrato",
+     "cs": "dokázaný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa consiglia per prima cosa il dottor Falk?",
+     "options": [
+      "Di togliere la macchina del caffè",
+      "Di comprare più caffè",
+      "Di chiudere il bar"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come finisce la consulenza?",
+     "options": [
+      "Con la stessa situazione di prima, ma una fattura salata",
+      "Con una produttività più alta",
+      "Con una nuova macchina del caffè"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

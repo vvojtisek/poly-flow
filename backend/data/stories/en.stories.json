@@ -2681,6 +2681,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-01-coffee-consultant",
+   "level": "B2",
+   "title": "The Consultant and the Coffee Machine",
+   "title_cs": "Poradce a kávovar",
+   "lines": [
+    {
+     "text": "The Brenner company hired a consultant to increase its staff's productivity. His name was Dr Falk, and he charged a thousand euros an hour.",
+     "cs": "Firma Brenner najala podnikového poradce, aby zvýšil produktivitu zaměstnanců. Jmenoval se doktor Falk a účtoval tisíc eur za hodinu."
+    },
+    {
+     "text": "After a week of observation, he announced to the management: The biggest productivity killer is the coffee machine.",
+     "cs": "Po týdnu pozorování oznámil vedení: Největším zabijákem produktivity je kávovar."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "The coffee machine?",
+     "cs": "Kávovar?"
+    },
+    {
+     "speaker": "Falk",
+     "text": "Each employee waits forty minutes a day in front of it. Extrapolated, that is a hundred working hours lost every month.",
+     "cs": "Každý zaměstnanec před ním denně čeká čtyřicet minut. Po přepočtu ztrácíme sto pracovních hodin měsíčně."
+    },
+    {
+     "text": "On his recommendation, the machine was removed.",
+     "cs": "Na jeho doporučení kávovar odstranili."
+    },
+    {
+     "text": "Within a week, productivity fell by thirty per cent, because the whole team now went to the café across the road.",
+     "cs": "Už po týdnu klesla produktivita o třicet procent, protože celý tým teď chodil do kavárny naproti."
+    },
+    {
+     "speaker": "Falk",
+     "text": "After a new analysis: The café is inefficient. We need a central coffee station.",
+     "cs": "Po nové analýze: Kavárna je neefektivní. Potřebujeme centrální kávovou stanici."
+    },
+    {
+     "text": "The old machine was brought up from the cellar, put back in its old place and renamed the productivity station.",
+     "cs": "Starý kávovar přinesli ze sklepa, postavili ho na původní místo a přejmenovali na produktivní stanici."
+    },
+    {
+     "text": "The invoice arrived with it: forty-eight thousand euros.",
+     "cs": "Spolu s fakturou přišlo osmačtyřicet tisíc eur."
+    },
+    {
+     "speaker": "Brenner",
+     "text": "We have achieved exactly the situation we had before your consultancy.",
+     "cs": "Dosáhli jsme přesně stavu, který jsme měli před vaším poradenstvím."
+    },
+    {
+     "speaker": "Falk",
+     "text": "Correct. But now it is scientifically proven.",
+     "cs": "Správně. Ale teď je to vědecky doložené."
+    },
+    {
+     "text": "Later, a note appeared in the kitchen: Please do not optimise.",
+     "cs": "Později se v kuchyňce objevil lístek: Prosím neoptimalizovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Extrapolated",
+     "cs": "extrapolovaný"
+    },
+    {
+     "word": "consultancy",
+     "cs": "poradenství"
+    },
+    {
+     "word": "optimise",
+     "cs": "optimalizovat"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Dr Falk recommend first?",
+     "options": [
+      "Removing the coffee machine",
+      "Buying more coffee",
+      "Closing the café"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How does the consultancy end?",
+     "options": [
+      "With the same situation as before, but a big invoice",
+      "With higher productivity",
+      "With a new coffee machine"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
