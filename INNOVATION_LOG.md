@@ -2135,3 +2135,13 @@ Vlad approves a push.
 **Implemented Solution:** After the current line's model outline is decoded, the next practised line's clip (role-aware) is prefetched. clipSrc in lib/audio.ts now shares one in-flight request per URL, and prefetchClip ignores failures. Decoded model envelopes are cached per URL in module memory. A new take revokes the take it replaces, and leaving a line revokes its take, since it can no longer be reached.
 
 **Verification:** s104.js with stubbed audio delayed 800 ms: the line 2 outline appeared 34 ms after N, versus 823 ms on the stashed baseline. Each line's audio was requested exactly once ({0:1,1:1,2:1,3:1}). Regressions s94 (7/7 recorded, jump) and s100 (continuous Tom run to 3 z 3) still pass. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 105/120 | Page: [/shadowing] (Page Cycle 15/15)
+
+**Summary:** remember the chosen part in the URL, and re-run the page's regressions
+
+**Observed Problem:** Cycle 98 added a role choice, but it lived only in component state. A reload or Back from another page while practising Tom's lines returned to all lines, while the URL still pointed to Tom's line 4. Fifteen cycles of changes to one page also needed a full regression pass.
+
+**Implemented Solution:** ?role=<speaker> is written when the part changes and restored once the dialogue has loaded. A role that is not in the dialogue is dropped from the URL, falling back to all lines. Changing the source (another scene, or words) clears the role, because a part belongs to one dialogue. Line and scene writes keep the role parameter.
+
+**Verification:** s105.js: choosing Tom then N gives role=Tom&scene=…&line=4. A reload restores 4/7 with Tom checked and 'nahráno 0 z 3'. A scene change gives scene=… with no role. ?role=Nobody is removed and 'Všechny repliky' is checked. Regressions s91-s99 and s101-s103 all finished without console errors and with expected output (s93 URL round trip, s94 recording tally, s95 echo, s96 keys, s97 together mode, s98 roles, s99 support, s101 retry, s102 fallbacks, s103 sticky bar). Typecheck, build, ruff passed.

@@ -332,7 +332,21 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
 
   // In a dialogue the learner can take one character's part: only that speaker's lines are
   // practised, and the partner's preceding line is shown (and playable) as the cue.
-  const [role, setRole] = useState<string | null>(null);
+  const [role, setRoleState] = useState<string | null>(null);
+  // The chosen part lives in the URL next to the scene and line (?role=Tom).
+  const setRole = useCallback((value: string | null) => {
+    setRoleState(value);
+    const q = new URLSearchParams(window.location.search);
+    if (value) q.set("role", value);
+    else q.delete("role");
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}?${q.toString()}`.replace(/\?$/, ""));
+  }, []);
+  useEffect(() => {
+    if (!list) return;
+    const wanted = new URLSearchParams(window.location.search).get("role");
+    if (wanted && list.some((l) => l.speaker === wanted)) setRoleState(wanted);
+    else if (wanted) setRole(null); // a part that is not in this dialogue
+  }, [list, setRole]);
   const speakers = list ? [...new Set(list.flatMap((l) => (l.speaker ? [l.speaker] : [])))] : [];
   const isTarget = useCallback((i: number) => !role || list?.[i]?.speaker === role, [role, list]);
   const targets = list ? list.map((_, i) => i).filter(isTarget) : [];
@@ -722,11 +736,12 @@ export default function ShadowingPage() {
     if (Number.isInteger(line) && line > 0 && line < 200) setStart(line - 1);
     setReady(true);
   }, []);
-  const writeUrl = useCallback((next: Source, index: number) => {
+  const writeUrl = useCallback((next: Source, index: number, resetRole = false) => {
     const q = new URLSearchParams(window.location.search);
     q.delete("scene");
     q.delete("order");
     q.delete("line");
+    if (resetRole) q.delete("role");
     if (next.kind === "scene") q.set("scene", next.id);
     else if (next.order === "random") q.set("order", "random");
     // A random sample differs on every load, so only a stable list remembers its line.
@@ -737,7 +752,7 @@ export default function ShadowingPage() {
   const setSource = useCallback((next: Source) => {
     setSourceState(next);
     setStart(0);
-    writeUrl(next, 0);
+    writeUrl(next, 0, true); // a part belongs to one dialogue
   }, [writeUrl]);
   const onIndex = useCallback((i: number) => writeUrl(source, i), [source, writeUrl]);
   // A scene belongs to one language: switching language goes back to that language's words.
