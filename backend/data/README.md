@@ -263,9 +263,9 @@ committed lexicon and requires every core-100 word to have a scene. The `*.core1
 (revision `scenes-v1`) were drafted without native-speaker review; target-language grammar and the
 Czech translations still need it.
 
-## Curated graded stories (`stories/<lang>.stories.json`, revision `stories-v1`)
+## Curated graded stories (`stories/<lang>.stories.json`, revision `stories-v2`)
 
-Forty short, humorous stories per language: ten each at A1, A2, B1 and B2. The same plot (`slug`,
+Ninety short, humorous stories per language: 15 A1, 20 A2, 25 B1 and 30 B2. The same plot (`slug`,
 `level`) exists in German, French, Italian and British English, adapted per language, so a learner
 can compare versions. They are authored content, separate from the per-learner generated reading
 (`daily_stories`, `app.domain.stories`), and are not imported into the database yet: today the files
@@ -279,7 +279,7 @@ header: `source`, `revision`, `license` (CC0-1.0) and `review_status`.
 Level policy: about 95% of the vocabulary and grammar at the story's level and about 5% stretch words
 one level up (A1 story: A2 stretch; B2 story: C1 stretch), with context that lets the learner infer the
 stretch word. The tests enforce only what is mechanical: schema, every stretch word occurring in the
-text, stretch tokens at most 10% of the text, identical plots in all four languages and ten stories
+text, stretch tokens at most 10% of the text, identical plots in all four languages and the configured story totals
 per level. The level split itself was written by hand and is not verified against the lexicon.
 
 All files are `review_status: unreviewed`: drafted without native-speaker review, so the target-language
@@ -355,3 +355,7 @@ concepts across four languages by 14 interests. Both are explicitly unreviewed
 and outside the default seed glob; consult their review/import instructions.
 The app now labels 8,000 words as its optional C1 vocabulary milestone, without
 claiming CEFR certification. No existing ranks or progress are changed.
+
+The [fifty-story expansion](stories/ADDITIONS.md) records the added plots and the
+family owner’s acceptance of the existing vocabulary and grammar as the grading
+basis. Each new multilingual plot was validated and committed individually.

@@ -21,7 +21,7 @@ NonEmpty = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)
 SLUG = r"^[a-z0-9][a-z0-9-]{0,63}$"
 
 STORY_LEVELS: tuple[CefrLevel, ...] = (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2)
-STORIES_PER_LEVEL = 10
+STORIES_PER_LEVEL = {CefrLevel.A1: 15, CefrLevel.A2: 20, CefrLevel.B1: 25, CefrLevel.B2: 30}
 MAX_STRETCH_SHARE = 0.10  # stretch tokens / all tokens; the aim is about 5%
 
 
@@ -116,12 +116,12 @@ def validate_parity(files: list[StoryFile]) -> list[str]:
 
 
 def validate_counts(f: StoryFile) -> list[str]:
-    """The finished library holds STORIES_PER_LEVEL stories per level."""
+    """The finished library holds the configured total for each level."""
     errors: list[str] = []
     for level in STORY_LEVELS:
         n = sum(1 for s in f.stories if s.level == level)
-        if n != STORIES_PER_LEVEL:
+        if n != STORIES_PER_LEVEL[level]:
             errors.append(
-                f"{f.language.value}: {n} {level.value} stories, want {STORIES_PER_LEVEL}"
+                f"{f.language.value}: {n} {level.value} stories, want {STORIES_PER_LEVEL[level]}"
             )
     return errors

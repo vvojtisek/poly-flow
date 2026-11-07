@@ -3684,22 +3684,22 @@
      "cs": "Tom má v kanceláři zelenou rostlinu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I give it water every day. It always looks the same.",
      "cs": "Každý den jí dávám vodu. Je pořád stejná."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "How strange. Does it grow at all?",
      "cs": "To je zvláštní. Roste vůbec?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "No. But there is a puddle under the desk every day.",
      "cs": "Ne. Ale pod stolem je každý den louže."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Tom, that plant is not alive. It is plastic.",
      "cs": "Tome, to není živá rostlina. Je plastová."
     },
@@ -3820,22 +3820,22 @@
      "cs": "Tom má nový malý stůl a dvě židle."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "This chair is mine. A visitor can sit on the other.",
      "cs": "Tahle židle je moje. Na druhé může sedět návštěva."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "And where does your cat sit?",
      "cs": "A kde sedí tvoje kočka?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "The cat has a beautiful soft cushion on the floor.",
      "cs": "Kočka má svůj krásný měkký polštář na zemi."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Look, she is already sitting on your chair.",
      "cs": "Podívej, už sedí na tvé židli."
     },
@@ -3956,22 +3956,22 @@
      "cs": "Tom si večer nastavil budík, aby ráno koupil čerstvý chléb."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I put it in the wardrobe. Otherwise I turn it off and sleep again.",
      "cs": "Dal jsem ho do skříně. Jinak ho vypnu a zase usnu."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "That's clever. You really have to get up in the morning.",
      "cs": "To je chytré. Ráno musíš opravdu vstát."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I got up, opened the wardrobe and found my shoes.",
      "cs": "Ráno jsem vstal, otevřel skříň a našel svoje boty."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "And did you buy the bread as well?",
      "cs": "A koupil jsi také chléb?"
     },
@@ -4029,7 +4029,7 @@
      "cs": "Prosím vás, dám si kávu a dva koláče."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Knihovník",
      "text": "Madam, this is a library. You must speak quietly.",
      "cs": "Paní, tady je knihovna. Musíte mluvit potichu."
     },
@@ -4039,7 +4039,7 @@
      "cs": "Ach, promiňte. Já jsem si nevšimla nápisu."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Knihovník",
      "text": "And what sort of book are you looking for?",
      "cs": "A co tedy hledáte za knihu?"
     },
@@ -4092,22 +4092,22 @@
      "cs": "Tom koupil nové brusle a šel na první hodinu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I can do everything already. I've seen it on television.",
      "cs": "Já už umím všechno. Viděl jsem to v televizi."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Trenér",
      "text": "Good. First we'll learn how to stop safely.",
      "cs": "Dobře. Nejdřív se naučíme bezpečně zastavit."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Stop? I want to learn a triple jump.",
      "cs": "Zastavit? Já se chci naučit trojitý skok."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Trenér",
      "text": "Then start slowly. And please let go of the railing.",
      "cs": "Začněte tedy pomalu. A pusťte prosím to zábradlí."
     },
@@ -4228,22 +4228,22 @@
      "cs": "Tom pral bílé dresy celého hokejového týmu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I only added one small red sock.",
      "cs": "Přidal jsem jen jednu malou červenou ponožku."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Then why are all the shirts pink?",
      "cs": "Tak proč jsou všechny dresy růžové?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "It's our new team colour. Everyone will recognise us.",
      "cs": "To je nové týmové zbarvení. Určitě nás každý pozná."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "And what shall we tell the coach before the match?",
      "cs": "A co máme říct trenérovi před zápasem?"
     },
@@ -4364,22 +4364,22 @@
      "cs": "Tom vzal Evu do malého muzea."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Look at this lovely colourful ticket. I'll keep it.",
      "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "There are even nicer paintings inside. Come on.",
      "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "First I must photograph it from every side.",
      "cs": "Nejdřív ji musím vyfotit ze všech stran."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Pracovník muzea",
      "text": "Sir, I need to punch your ticket at the entrance.",
      "cs": "Pane, musím vám vstupenku označit u vchodu."
     },
@@ -4500,22 +4500,22 @@
      "cs": "Tom koupil na kolo velký košík."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Now I can bring all the shopping home without a car.",
      "cs": "Teď odvezu celý nákup bez auta."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Great. Have you got bread, milk and eggs?",
      "cs": "Výborně. Máš chleba, mléko a vejce?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Everything. Only the bicycle is rather hard to steer.",
      "cs": "Všechno. Jen se to kolo nějak špatně řídí."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Is the load in your basket too heavy?",
      "cs": "Nemáš v košíku příliš těžký náklad?"
     },
@@ -4636,22 +4636,22 @@
      "cs": "Tom přinesl na školní vědecký den přístroj na měření vlhkosti."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "My experiment will predict rain more accurately than any app.",
      "cs": "Můj experiment předpoví déšť přesněji než jakákoli aplikace."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Why is your equipment standing directly under that wet cloth, then?",
      "cs": "Proč tedy stojí tvoje zařízení přímo pod tou mokrou utěrkou?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "That's just a control. First I must prove that it works.",
      "cs": "To je jen kontrola. Nejdřív musím dokázat, že funguje."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "And when will you start measuring the actual weather?",
      "cs": "A kdy začneš měřit skutečné počasí?"
     },
@@ -4780,22 +4780,22 @@
      "cs": "Tom prováděl návštěvníky hradu v pečlivě připraveném středověkém kostýmu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Our performance shows life without electricity or modern inventions.",
      "cs": "Naše představení ukazuje život bez elektřiny a moderních vynálezů."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "How do you know when it's time for lunch, then?",
      "cs": "Jak tedy poznáte, kdy je čas na oběd?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "From the sun. Our ancestors understood nature very well.",
      "cs": "Podle slunce. Naši předkové dobře znali přírodu."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Why is your sleeve beeping just now?",
      "cs": "A proč vám právě teď pípá rukáv?"
     },
@@ -4924,22 +4924,22 @@
      "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I must stay completely still. Any movement will frighten it away.",
      "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Why have you got so many crumbs on your hat?",
      "cs": "A proč máš na klobouku tolik drobků?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "That's my strategy. The bird will come closer and the picture will be perfect.",
      "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Certainly. Just look where you put your camera.",
      "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
     },
@@ -5068,22 +5068,22 @@
      "cs": "Tom vyhrál soutěž o nejlepší nápad na třídění odpadu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "My proposal will save hundreds of plastic containers every year.",
      "cs": "Můj návrh ušetří ročně stovky plastových obalů."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Congratulations. Here is your prize and your official certificate.",
      "cs": "Gratulujeme. Tady je vaše cena a slavnostní diplom."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Thank you. I'd just like to ask what the trophy is made of.",
      "cs": "Děkuji. Jen bych se rád zeptal, z čeho je ten pohár."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Plastic. But we can wrap it in another bag for you.",
      "cs": "Z plastu. Ale můžeme vám ho zabalit do dalšího sáčku."
     },
@@ -5212,22 +5212,22 @@
      "cs": "Tom si před návštěvou restaurace pečlivě procvičil výslovnost názvů jídel."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "Today I'll order without hesitation. The waiter will notice that I'm learning.",
      "cs": "Dnes objednám bez zaváhání. Číšník určitě pozná, že se učím."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Go ahead, then. I'm very hungry already.",
      "cs": "Tak začni. Já už mám velký hlad."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I'd like this dish with that unusual sauce, please.",
      "cs": "Prosím, jednou tohle jídlo s tou zvláštní omáčkou."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "Is that what you've been practising all week?",
      "cs": "To sis procvičoval celý týden?"
     },
@@ -5356,22 +5356,22 @@
      "cs": "Tom posílal kamarádovi balík a chtěl mít jistotu, že dorazí."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I've written the street, the house number and a description of the door.",
      "cs": "Napsal jsem ulici, číslo domu i popis dveří."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "That's thorough. But why is the address two pages long?",
      "cs": "To je pečlivé. Proč je ale adresa dlouhá dvě stránky?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Tom",
      "text": "I added directions from the station and a recommendation for a good café.",
      "cs": "Přidal jsem pokyny od nádraží a doporučení na dobrou kavárnu."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Eva",
      "text": "And where is the recipient's name on the envelope?",
      "cs": "A kde je na obálce jméno příjemce?"
     },
@@ -6330,8 +6330,8 @@
     },
     {
      "speaker": "Eva",
-     "text": "Does that explain why it won't fit in the workshop? Shouldn't you have converted inches into centimetres?",
-     "cs": "To vysvětluje, proč se nevejde do dílny? Neměl jsi převést palce na centimetry?"
+     "text": "Does that explain why it won't fit in the workshop? Shouldn't you have checked which units the plan uses?",
+     "cs": "To vysvětluje, proč se nevejde do dílny? Neměl jsi ověřit jednotky v plánu?"
     },
     {
      "speaker": "Tom",
@@ -6709,7 +6709,7 @@
      "cs": "Když napíšeš, že něco má dobrý vibe, znamená to, že to na tebe příjemně působí."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Babička",
      "text": "I understand. An informal designation for the overall atmosphere, rather than a technical term.",
      "cs": "Rozumím. Jde tedy o neformální označení celkové atmosféry, nikoli o odborný termín."
     },
@@ -6719,7 +6719,7 @@
      "cs": "Přesně. Jen nemusíš každé slovo tak podrobně definovat."
     },
     {
-     "speaker": "Tom",
+     "speaker": "Babička",
      "text": "I wouldn't dream of it. Context is essential to accurate interpretation.",
      "cs": "To bych si nedovolila. Kontext je přece zásadní pro správnou interpretaci."
     },
@@ -7089,7 +7089,7 @@
      "cs": "Systém slibuje optimalizaci času a přednostní odbavení přesně v určenou hodinu."
     },
     {
-     "speaker": "Eva",
+     "speaker": "Pracovník úřadu",
      "text": "Excellent. You just need to collect a sequential number from the machine so the counter knows you're here.",
      "cs": "To je skvělé. Jen si musíte vyzvednout pořadové číslo u automatu, aby o vás přepážka věděla."
     },
@@ -7099,7 +7099,7 @@
      "cs": "Samozřejmě. A proč je před automatem delší fronta než před přepážkou?"
     },
     {
-     "speaker": "Eva",
+     "speaker": "Pracovník úřadu",
      "text": "Because everyone must verify their reservation first. It's an indispensable step towards eliminating waiting.",
      "cs": "Protože si každý musí nejdřív ověřit rezervaci. Je to nezbytný krok k odstranění čekání."
     },
