@@ -5199,6 +5199,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-24-menu-pronunciation",
+   "level": "B1",
+   "title": "De la prononciation au dîner",
+   "title_cs": "Výslovnost k večeři",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Avant le restaurant, Tom a soigneusement travaillé la prononciation des noms des plats.",
+     "cs": "Tom si před návštěvou restaurace pečlivě procvičil výslovnost názvů jídel."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Aujourd'hui, je commanderai sans hésitation. Le serveur remarquera que j'apprends.",
+     "cs": "Dnes objednám bez zaváhání. Číšník určitě pozná, že se učím."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Alors commence. J'ai déjà très faim.",
+     "cs": "Tak začni. Já už mám velký hlad."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je voudrais ce plat avec cette sauce inhabituelle, s'il vous plaît.",
+     "cs": "Prosím, jednou tohle jídlo s tou zvláštní omáčkou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "C'est ce que tu as travaillé toute la semaine ?",
+     "cs": "To sis procvičoval celý týden?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a souri : Non. Mais ils ont changé la carte aujourd'hui, et le mot ce est resté le même.",
+     "cs": "Tom se usmál: Ne. Ale jídelní lístek dnes změnili a slovo tohle zůstalo stejné."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "prononciation",
+     "cs": "výslovnost"
+    },
+    {
+     "word": "hésitation",
+     "cs": "zaváhání"
+    },
+    {
+     "word": "inhabituelle",
+     "cs": "neobvyklý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co se v restauraci změnilo?",
+     "options": [
+      "Jídelní lístek.",
+      "Číšníkovo jméno.",
+      "Otevírací doba."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec použil?",
+     "options": [
+      "Ukázání na jídlo.",
+      "Dokonalý název jídla.",
+      "Telefonát domů."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

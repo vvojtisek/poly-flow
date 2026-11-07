@@ -5199,6 +5199,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-24-menu-pronunciation",
+   "level": "B1",
+   "title": "Aussprache zum Abendessen",
+   "title_cs": "Výslovnost k večeři",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom übte vor dem Restaurantbesuch sorgfältig die Aussprache der Namen der Gerichte.",
+     "cs": "Tom si před návštěvou restaurace pečlivě procvičil výslovnost názvů jídel."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Heute bestelle ich ohne Zögern. Der Kellner wird merken, dass ich lerne.",
+     "cs": "Dnes objednám bez zaváhání. Číšník určitě pozná, že se učím."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dann fang an. Ich habe schon großen Hunger.",
+     "cs": "Tak začni. Já už mám velký hlad."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich hätte gern dieses Gericht mit der ungewöhnlichen Soße.",
+     "cs": "Prosím, jednou tohle jídlo s tou zvláštní omáčkou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das hast du die ganze Woche geübt?",
+     "cs": "To sis procvičoval celý týden?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom lächelte: Nein. Aber heute haben sie die Speisekarte geändert, und das Wort dieses ist gleich geblieben.",
+     "cs": "Tom se usmál: Ne. Ale jídelní lístek dnes změnili a slovo tohle zůstalo stejné."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Aussprache",
+     "cs": "výslovnost"
+    },
+    {
+     "word": "Zögern",
+     "cs": "zaváhání"
+    },
+    {
+     "word": "ungewöhnlichen",
+     "cs": "neobvyklý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co se v restauraci změnilo?",
+     "options": [
+      "Jídelní lístek.",
+      "Číšníkovo jméno.",
+      "Otevírací doba."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec použil?",
+     "options": [
+      "Ukázání na jídlo.",
+      "Dokonalý název jídla.",
+      "Telefonát domů."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

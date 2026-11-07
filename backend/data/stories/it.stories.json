@@ -5199,6 +5199,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-24-menu-pronunciation",
+   "level": "B1",
+   "title": "Pronuncia a cena",
+   "title_cs": "Výslovnost k večeři",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Prima del ristorante, Tom ha esercitato con cura la pronuncia dei nomi dei piatti.",
+     "cs": "Tom si před návštěvou restaurace pečlivě procvičil výslovnost názvů jídel."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Oggi ordinerò senza esitazione. Il cameriere noterà che sto imparando.",
+     "cs": "Dnes objednám bez zaváhání. Číšník určitě pozná, že se učím."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Allora comincia. Ho già molta fame.",
+     "cs": "Tak začni. Já už mám velký hlad."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Vorrei questo piatto con quella salsa insolita, per favore.",
+     "cs": "Prosím, jednou tohle jídlo s tou zvláštní omáčkou."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È questo che hai provato tutta la settimana?",
+     "cs": "To sis procvičoval celý týden?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha sorriso: No. Ma oggi hanno cambiato il menù e la parola questo è rimasta uguale.",
+     "cs": "Tom se usmál: Ne. Ale jídelní lístek dnes změnili a slovo tohle zůstalo stejné."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pronuncia",
+     "cs": "výslovnost"
+    },
+    {
+     "word": "esitazione",
+     "cs": "zaváhání"
+    },
+    {
+     "word": "insolita",
+     "cs": "neobvyklý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co se v restauraci změnilo?",
+     "options": [
+      "Jídelní lístek.",
+      "Číšníkovo jméno.",
+      "Otevírací doba."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec použil?",
+     "options": [
+      "Ukázání na jídlo.",
+      "Dokonalý název jídla.",
+      "Telefonát domů."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
