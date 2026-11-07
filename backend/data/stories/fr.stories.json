@@ -3053,6 +3053,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-05-suspicious-baker",
+   "level": "B2",
+   "title": "Le boulanger suspect",
+   "title_cs": "Podezřelý pekař",
+   "lines": [
+    {
+     "text": "Mme Holler lisait trop de romans policiers. Quand elle a remarqué que le boulanger d'en face portait chaque nuit à deux heures de lourds sacs à la cave, elle a su : un crime se prépare ici.",
+     "cs": "Paní Hollerová četla příliš mnoho detektivek. Když si všimla, že pekař z protějšího domu chodí každou noc ve dvě hodiny s těžkými pytli do sklepa, měla jasno: tady se děje zločin."
+    },
+    {
+     "text": "Pendant une semaine, elle l'a observé discrètement depuis sa fenêtre. Elle notait les heures et a dessiné un schéma.",
+     "cs": "Týden ho nenápadně pozorovala z okna. Zapisovala časy a nakreslila schéma."
+    },
+    {
+     "text": "Puis elle a appelé la police. Un policier fatigué est venu.",
+     "cs": "Pak zavolala policii. Přišel unavený strážník."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Le boulanger traîne de lourds sacs à la cave. À deux heures du matin ! Qu'y a-t-il dedans, à votre avis ?",
+     "cs": "Pekař nosí do sklepa těžké pytle. Ve dvě v noci! Co v nich asi je?"
+    },
+    {
+     "text": "Le policier a interrogé le boulanger. Celui-ci a rougi et a dit : De la farine. Je fais du pain.",
+     "cs": "Strážník se zeptal pekaře. Ten se zarděl a řekl: Mouka. Peču chleba."
+    },
+    {
+     "speaker": "Policier",
+     "text": "Et pourquoi tant de mystère ?",
+     "cs": "A proč tolik tajnůstkářství?"
+    },
+    {
+     "speaker": "Boulanger",
+     "text": "Parce que je prépare une surprise. Mme Holler va recevoir un gâteau pour son anniversaire.",
+     "cs": "Protože chci udělat překvapení. Paní Hollerová dostane k narozeninám dort."
+    },
+    {
+     "text": "Mme Holler a pâli. On était le vingt-deux octobre. Elle avait oublié son anniversaire depuis longtemps.",
+     "cs": "Paní Hollerová zbledla. Bylo to dvacátého druhého října. Narozeniny už dávno zapomněla."
+    },
+    {
+     "text": "À la cave, il y avait un énorme gâteau, grand comme un enfant. Le boulanger y travaillait depuis trois semaines.",
+     "cs": "Ve sklepě stál obrovský dort, vysoký jako dítě. Pekař na něm pracoval už tři týdny."
+    },
+    {
+     "text": "Le crime, c'était donc un gâteau. Et un gâteau très délicieux.",
+     "cs": "Zločinem byl tedy dort. Dokonce velmi chutný."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Ne dites à personne que je vous ai soupçonné, s'il vous plaît.",
+     "cs": "Paní Hollerová nakonec přiznala: Neříkejte nikomu, že jsem vás podezřívala."
+    },
+    {
+     "speaker": "Boulanger",
+     "text": "Je me tairai. Mais l'année prochaine, je ferai un gâteau avec une intrigue captivante.",
+     "cs": "Pekař se usmál: Neřeknu. Ale příští rok udělám dort s napínavou zápletkou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "schéma",
+     "cs": "schéma"
+    },
+    {
+     "word": "soupçonné",
+     "cs": "podezříval"
+    },
+    {
+     "word": "intrigue",
+     "cs": "zápletka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi Mme Holler appelle-t-elle la police ?",
+     "options": [
+      "Elle pense que le boulanger est un criminel.",
+      "Elle a vu un cambrioleur.",
+      "Sa cave est inondée."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'y a-t-il dans les sacs ?",
+     "options": [
+      "De la farine pour un gâteau d'anniversaire",
+      "De l'argent volé",
+      "Des pommes de terre"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

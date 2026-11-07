@@ -3053,6 +3053,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-05-suspicious-baker",
+   "level": "B2",
+   "title": "Il fornaio sospetto",
+   "title_cs": "Podezřelý pekař",
+   "lines": [
+    {
+     "text": "La signora Holler leggeva troppi gialli. Quando ha notato che il fornaio di fronte portava ogni notte alle due pesanti sacchi in cantina, ha capito: qui si prepara un delitto.",
+     "cs": "Paní Hollerová četla příliš mnoho detektivek. Když si všimla, že pekař z protějšího domu chodí každou noc ve dvě hodiny s těžkými pytli do sklepa, měla jasno: tady se děje zločin."
+    },
+    {
+     "text": "Per una settimana l'ha osservato con discrezione dalla finestra. Annotava gli orari e ha disegnato uno schema.",
+     "cs": "Týden ho nenápadně pozorovala z okna. Zapisovala časy a nakreslila schéma."
+    },
+    {
+     "text": "Poi ha chiamato la polizia. È arrivato un poliziotto stanco.",
+     "cs": "Pak zavolala policii. Přišel unavený strážník."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Il fornaio trascina pesanti sacchi in cantina. Alle due di notte! Che cosa ci sarà dentro?",
+     "cs": "Pekař nosí do sklepa těžké pytle. Ve dvě v noci! Co v nich asi je?"
+    },
+    {
+     "text": "Il poliziotto ha interrogato il fornaio. Lui è arrossito e ha detto: Farina. Faccio il pane.",
+     "cs": "Strážník se zeptal pekaře. Ten se zarděl a řekl: Mouka. Peču chleba."
+    },
+    {
+     "speaker": "Poliziotto",
+     "text": "E perché tutto questo mistero?",
+     "cs": "A proč tolik tajnůstkářství?"
+    },
+    {
+     "speaker": "Fornaio",
+     "text": "Perché preparo una sorpresa. La signora Holler riceverà una torta per il compleanno.",
+     "cs": "Protože chci udělat překvapení. Paní Hollerová dostane k narozeninám dort."
+    },
+    {
+     "text": "La signora Holler è impallidita. Era il ventidue ottobre. Il suo compleanno l'aveva dimenticato da un pezzo.",
+     "cs": "Paní Hollerová zbledla. Bylo to dvacátého druhého října. Narozeniny už dávno zapomněla."
+    },
+    {
+     "text": "In cantina c'era una torta enorme, grande come un bambino. Il fornaio ci lavorava da tre settimane.",
+     "cs": "Ve sklepě stál obrovský dort, vysoký jako dítě. Pekař na něm pracoval už tři týdny."
+    },
+    {
+     "text": "Il delitto era dunque una torta. E molto gustosa.",
+     "cs": "Zločinem byl tedy dort. Dokonce velmi chutný."
+    },
+    {
+     "speaker": "Holler",
+     "text": "La prego, non dica a nessuno che l'ho sospettata.",
+     "cs": "Paní Hollerová nakonec přiznala: Neříkejte nikomu, že jsem vás podezřívala."
+    },
+    {
+     "speaker": "Fornaio",
+     "text": "Starò zitto. Ma l'anno prossimo farò una torta con una trama avvincente.",
+     "cs": "Pekař se usmál: Neřeknu. Ale příští rok udělám dort s napínavou zápletkou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "schema",
+     "cs": "schéma"
+    },
+    {
+     "word": "sospettata",
+     "cs": "podezřívala"
+    },
+    {
+     "word": "avvincente",
+     "cs": "napínavý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché la signora Holler chiama la polizia?",
+     "options": [
+      "Pensa che il fornaio sia un criminale.",
+      "Ha visto un ladro.",
+      "La sua cantina è allagata."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa c'è nei sacchi?",
+     "options": [
+      "Farina per una torta di compleanno",
+      "Soldi rubati",
+      "Patate"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

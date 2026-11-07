@@ -3053,6 +3053,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-05-suspicious-baker",
+   "level": "B2",
+   "title": "Der verdächtige Bäcker",
+   "title_cs": "Podezřelý pekař",
+   "lines": [
+    {
+     "text": "Frau Holler las zu viele Kriminalromane. Als sie bemerkte, dass der Bäcker von gegenüber jede Nacht um zwei Uhr schwere Säcke in den Keller trug, war ihr klar: Hier geschieht ein Verbrechen.",
+     "cs": "Paní Hollerová četla příliš mnoho detektivek. Když si všimla, že pekař z protějšího domu chodí každou noc ve dvě hodiny s těžkými pytli do sklepa, měla jasno: tady se děje zločin."
+    },
+    {
+     "text": "Eine Woche lang beobachtete sie ihn unauffällig vom Fenster aus. Sie notierte Uhrzeiten und zeichnete ein Schema.",
+     "cs": "Týden ho nenápadně pozorovala z okna. Zapisovala časy a nakreslila schéma."
+    },
+    {
+     "text": "Dann rief sie die Polizei. Ein müder Polizist kam.",
+     "cs": "Pak zavolala policii. Přišel unavený strážník."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Der Bäcker schleppt schwere Säcke in den Keller. Um zwei Uhr nachts! Was ist da wohl drin?",
+     "cs": "Pekař nosí do sklepa těžké pytle. Ve dvě v noci! Co v nich asi je?"
+    },
+    {
+     "text": "Der Polizist fragte den Bäcker. Der wurde rot und sagte: Mehl. Ich backe Brot.",
+     "cs": "Strážník se zeptal pekaře. Ten se zarděl a řekl: Mouka. Peču chleba."
+    },
+    {
+     "speaker": "Polizist",
+     "text": "Und warum so viel Heimlichtuerei?",
+     "cs": "A proč tolik tajnůstkářství?"
+    },
+    {
+     "speaker": "Bäcker",
+     "text": "Weil ich eine Überraschung vorbereite. Frau Holler bekommt zum Geburtstag eine Torte.",
+     "cs": "Protože chci udělat překvapení. Paní Hollerová dostane k narozeninám dort."
+    },
+    {
+     "text": "Frau Holler wurde blass. Es war der zweiundzwanzigste Oktober. Ihren Geburtstag hatte sie längst vergessen.",
+     "cs": "Paní Hollerová zbledla. Bylo to dvacátého druhého října. Narozeniny už dávno zapomněla."
+    },
+    {
+     "text": "Im Keller stand eine riesige Torte, so groß wie ein Kind. Der Bäcker arbeitete seit drei Wochen daran.",
+     "cs": "Ve sklepě stál obrovský dort, vysoký jako dítě. Pekař na něm pracoval už tři týdny."
+    },
+    {
+     "text": "Das Verbrechen war also eine Torte. Und zwar eine sehr leckere.",
+     "cs": "Zločinem byl tedy dort. Dokonce velmi chutný."
+    },
+    {
+     "speaker": "Holler",
+     "text": "Sagen Sie bitte niemandem, dass ich Sie verdächtigt habe.",
+     "cs": "Paní Hollerová nakonec přiznala: Neříkejte nikomu, že jsem vás podezřívala."
+    },
+    {
+     "speaker": "Bäcker",
+     "text": "Ich schweige. Aber nächstes Jahr backe ich eine Torte mit einer spannenden Handlung.",
+     "cs": "Pekař se usmál: Neřeknu. Ale příští rok udělám dort s napínavou zápletkou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Heimlichtuerei",
+     "cs": "tajnůstkářství"
+    },
+    {
+     "word": "verdächtigt",
+     "cs": "podezřívala"
+    },
+    {
+     "word": "spannenden",
+     "cs": "napínavou"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum ruft Frau Holler die Polizei?",
+     "options": [
+      "Sie hält den Bäcker für einen Verbrecher.",
+      "Sie hat einen Einbrecher gesehen.",
+      "Ihr Keller ist überflutet."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was ist in den Säcken?",
+     "options": [
+      "Mehl für eine Geburtstagstorte",
+      "Gestohlenes Geld",
+      "Kartoffeln"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
