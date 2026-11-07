@@ -2958,6 +2958,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-04-late-author",
+   "level": "B2",
+   "title": "L'autore della puntualità",
+   "title_cs": "Autor knihy o přesnosti",
+   "lines": [
+    {
+     "text": "Roland Kessler aveva fatto del suo libro Vivere puntuali un bestseller. Quella sera la presentazione era alla biblioteca comunale, inizio alle 19.",
+     "cs": "Roland Kessler se svou knihou Žít načas stal autorem bestselleru. Dnes se v městské knihovně konala prezentace, začátek v 19 hodin."
+    },
+    {
+     "text": "Nel suo libro aveva scritto: Chi arriva cinque minuti prima è puntuale.",
+     "cs": "Ve své knize napsal: Kdo je o pět minut dřív, je včas."
+    },
+    {
+     "text": "Alle 18.30 era ancora a casa, in cerca della seconda scarpa.",
+     "cs": "V 18:30 byl ještě doma a hledal druhou botu."
+    },
+    {
+     "text": "Alle 18.50 era bloccato nel traffico, che secondo il suo libro si poteva evitare con una pianificazione migliore.",
+     "cs": "V 18:50 stál v zácpě, které se podle jeho knihy dalo předejít lepším plánováním."
+    },
+    {
+     "text": "Alle 19.20 è entrato in sala. Duecento persone aspettavano. La moderatrice sorrideva a fatica.",
+     "cs": "V 19:20 vešel do sálu. Čekalo na něj dvě stě posluchačů. Moderátorka se křečovitě usmívala."
+    },
+    {
+     "speaker": "Moderatrice",
+     "text": "Signor Kessler, ha venti minuti di ritardo.",
+     "cs": "Pane Kessleri, máte dvacet minut zpoždění."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "È voluto. Capitolo sette: L'uomo sicuro di sé fa aspettare gli altri perché abbiano tempo di riflettere.",
+     "cs": "To je záměr. Kapitola sedm: Sebejistý člověk nechá ostatní čekat, aby měli čas přemýšlet."
+    },
+    {
+     "speaker": "Moderatrice",
+     "text": "Il capitolo sette si intitola: La cortesia della puntualità.",
+     "cs": "Kapitola sedm se jmenuje: Zdvořilost přesnosti."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "Mi riferivo naturalmente all'edizione ampliata.",
+     "cs": "Myslel jsem samozřejmě rozšířené vydání."
+    },
+    {
+     "speaker": "Spettatore",
+     "text": "Esiste anche in versione puntuale?",
+     "cs": "Z publika se ozvalo: Existuje i včasné?"
+    },
+    {
+     "text": "Kessler è stato il primo a ridere, ed è stata probabilmente la cosa più onesta che ha fatto quella sera.",
+     "cs": "Kessler se zasmál jako první a bylo to pravděpodobně to nejupřímnější, co ten večer udělal."
+    },
+    {
+     "text": "Poi ha firmato libri per due ore. In ognuno ha scritto come dedica: Cordiali saluti, e con ritardo.",
+     "cs": "Pak ještě dvě hodiny podepisoval knihy. Do každé napsal věnování: S pozdravem a se zpožděním."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pianificazione",
+     "cs": "plánování"
+    },
+    {
+     "word": "ampliata",
+     "cs": "rozšířená"
+    },
+    {
+     "word": "dedica",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Kessler è in ritardo?",
+     "options": [
+      "Cercava la scarpa ed era nel traffico.",
+      "Ha dimenticato l'appuntamento.",
+      "Era malato."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa scrive Kessler nei libri?",
+     "options": [
+      "Cordiali saluti, e con ritardo",
+      "La puntualità è tutto",
+      "Capitolo sette"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

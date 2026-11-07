@@ -2958,6 +2958,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-04-late-author",
+   "level": "B2",
+   "title": "Der Autor und die Pünktlichkeit",
+   "title_cs": "Autor knihy o přesnosti",
+   "lines": [
+    {
+     "text": "Roland Kessler hatte mit seinem Buch Pünktlich leben einen Bestseller gelandet. Heute fand die Buchpräsentation in der Stadtbibliothek statt, Beginn: 19 Uhr.",
+     "cs": "Roland Kessler se svou knihou Žít načas stal autorem bestselleru. Dnes se v městské knihovně konala prezentace, začátek v 19 hodin."
+    },
+    {
+     "text": "In seinem Buch hatte er geschrieben: Wer fünf Minuten zu früh kommt, ist pünktlich.",
+     "cs": "Ve své knize napsal: Kdo je o pět minut dřív, je včas."
+    },
+    {
+     "text": "Um 18.30 Uhr war er noch zu Hause und suchte seinen zweiten Schuh.",
+     "cs": "V 18:30 byl ještě doma a hledal druhou botu."
+    },
+    {
+     "text": "Um 18.50 Uhr stand er im Stau, den man laut seinem Buch durch bessere Planung vermeiden konnte.",
+     "cs": "V 18:50 stál v zácpě, které se podle jeho knihy dalo předejít lepším plánováním."
+    },
+    {
+     "text": "Um 19.20 Uhr betrat er den Saal. Zweihundert Zuhörer warteten. Die Moderatorin lächelte gequält.",
+     "cs": "V 19:20 vešel do sálu. Čekalo na něj dvě stě posluchačů. Moderátorka se křečovitě usmívala."
+    },
+    {
+     "speaker": "Moderatorin",
+     "text": "Herr Kessler, Sie sind zwanzig Minuten zu spät.",
+     "cs": "Pane Kessleri, máte dvacet minut zpoždění."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "Das ist Absicht. Kapitel sieben: Der souveräne Mensch lässt andere warten, damit sie Zeit zum Nachdenken haben.",
+     "cs": "To je záměr. Kapitola sedm: Sebejistý člověk nechá ostatní čekat, aby měli čas přemýšlet."
+    },
+    {
+     "speaker": "Moderatorin",
+     "text": "Kapitel sieben heißt: Die Höflichkeit der Pünktlichkeit.",
+     "cs": "Kapitola sedm se jmenuje: Zdvořilost přesnosti."
+    },
+    {
+     "speaker": "Kessler",
+     "text": "Ich meinte natürlich die erweiterte Neuauflage.",
+     "cs": "Myslel jsem samozřejmě rozšířené vydání."
+    },
+    {
+     "speaker": "Zuhörer",
+     "text": "Gibt es die auch pünktlich?",
+     "cs": "Z publika se ozvalo: Existuje i včasné?"
+    },
+    {
+     "text": "Kessler lachte als Erster, und das war vermutlich das Ehrlichste, was er an diesem Abend tat.",
+     "cs": "Kessler se zasmál jako první a bylo to pravděpodobně to nejupřímnější, co ten večer udělal."
+    },
+    {
+     "text": "Dann signierte er zwei Stunden lang Bücher. In jedes schrieb er als Widmung: Mit freundlichen Grüßen und mit Verspätung.",
+     "cs": "Pak ještě dvě hodiny podepisoval knihy. Do každé napsal věnování: S pozdravem a se zpožděním."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "gequält",
+     "cs": "křečovitě"
+    },
+    {
+     "word": "souveräne",
+     "cs": "sebejistý, suverénní"
+    },
+    {
+     "word": "Widmung",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum kommt Kessler zu spät?",
+     "options": [
+      "Er hat seinen Schuh gesucht und stand im Stau.",
+      "Er hat den Termin vergessen.",
+      "Er war krank."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was schreibt Kessler in die Bücher?",
+     "options": [
+      "Mit freundlichen Grüßen und mit Verspätung",
+      "Pünktlichkeit ist alles",
+      "Kapitel sieben"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
