@@ -1375,3 +1375,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: below `sm` the chips form one horizontally scrollable row that bleeds to the screen edge (no scrollbar, chips never shrink or wrap their labels); from `sm` up they wrap as before. The search field takes the full width on phones.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single chip row with the next chip cut at the edge as a swipe cue.
+
+## Global Cycle 29/120 | Page: [/grammar] (Page Cycle 14/15)
+
+**Summary:** list empty levels once instead of as empty panels
+
+**Observed Problem:** C1 and C2 have no grammar topics yet, but each still rendered as a full collapsible level panel; opening one revealed only "Pro tuto úroveň zatím není připravené žádné téma", a dead end that also lengthened the page.
+
+**Implemented Solution:** `app/grammar/page.tsx`: "Ostatní úrovně" renders panels only for levels with topics and adds one quiet line for the rest ("C1, C2: zatím bez připravených témat.", `cs.grammar.emptyLevels`). The focus-level picker already offered only levels with topics.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile page shrinks from 2 521 px to 2 277 px with no console errors.

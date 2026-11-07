@@ -1172,6 +1172,7 @@ export const cs = {
     preview: "Náhled výkladu",
     withErrors: "S chybami",
     loadFailed: "Gramatiku se nepodařilo načíst.",
+    emptyLevels: (levels: string) => `${levels}: zatím bez připravených témat.`,
     justStudied: (title: string) => `Právě prostudováno: ${title}`,
     previewHide: "Skrýt náhled",
     previewGoal: "Cíl:",

@@ -569,7 +569,7 @@ export default function GrammarPage() {
             ) : (
               <section className="flex flex-col gap-2" aria-labelledby="grammar-other-levels">
                 <h2 id="grammar-other-levels" className="text-sm font-semibold text-slate-600 dark:text-slate-300">{cs.grammar.otherLevels}</h2>
-                {CEFR_LEVELS.filter((level) => level !== activeLevel).map((level) => {
+                {CEFR_LEVELS.filter((level) => level !== activeLevel && unitsOf(level).length > 0).map((level) => {
                   const list = unitsOf(level);
                   return (
                     <Disclosure
@@ -579,11 +579,16 @@ export default function GrammarPage() {
                       summary={<LevelHeader level={level} units={list} />}
                     >
                       <div className="px-3 pb-3">
-                        {list.length ? <UnitGrid units={list} tree={tree} /> : <p className="text-sm text-slate-500">{cs.grammar.levelNotImplemented}</p>}
+                        <UnitGrid units={list} tree={tree} highlight={justStudied} />
                       </div>
                     </Disclosure>
                   );
                 })}
+                {/* Levels without content are listed once instead of as empty panels to open. */}
+                {(() => {
+                  const empty = CEFR_LEVELS.filter((level) => level !== activeLevel && unitsOf(level).length === 0);
+                  return empty.length ? <p className="px-1 text-xs text-slate-500">{cs.grammar.emptyLevels(empty.join(", "))}</p> : null;
+                })()}
               </section>
             )}
 
