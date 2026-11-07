@@ -4351,6 +4351,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-12-museum-ticket",
+   "level": "A2",
+   "title": "Die schöne Eintrittskarte",
+   "title_cs": "Nejhezčí vstupenka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom nahm Eva in ein kleines Museum mit.",
+     "cs": "Tom vzal Evu do malého muzea."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Schau diese schöne bunte Eintrittskarte an. Die hebe ich auf.",
+     "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Drinnen gibt es noch schönere Bilder. Komm schon.",
+     "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Zuerst muss ich sie von allen Seiten fotografieren.",
+     "cs": "Nejdřív ji musím vyfotit ze všech stran."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Mein Herr, ich muss Ihre Karte am Eingang lochen.",
+     "cs": "Pane, musím vám vstupenku označit u vchodu."
+    },
+    {
+     "speaker": null,
+     "text": "Tom blieb draußen: So teure Kunst dürfen wir doch nicht mit einem Loch beschädigen.",
+     "cs": "Tom zůstal venku: Tak drahé umění přece nebudeme ničit dírou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "lochen",
+     "cs": "proděravět"
+    },
+    {
+     "word": "beschädigen",
+     "cs": "poškodit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom obdivuje?",
+     "options": [
+      "Vstupenku.",
+      "Sochu.",
+      "Dveře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč zůstává venku?",
+     "options": [
+      "Nechce díru ve vstupence.",
+      "Nemá peníze.",
+      "Muzeum je zavřené."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

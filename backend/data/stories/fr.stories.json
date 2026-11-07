@@ -4351,6 +4351,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-12-museum-ticket",
+   "level": "A2",
+   "title": "Le beau billet",
+   "title_cs": "Nejhezčí vstupenka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a emmené Eva dans un petit musée.",
+     "cs": "Tom vzal Evu do malého muzea."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Regarde ce beau billet coloré. Je vais le garder.",
+     "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Il y a de plus beaux tableaux à l'intérieur. Viens.",
+     "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
+    },
+    {
+     "speaker": "Eva",
+     "text": "D'abord, je dois le photographier de tous les côtés.",
+     "cs": "Nejdřív ji musím vyfotit ze všech stran."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Monsieur, je dois poinçonner votre billet à l'entrée.",
+     "cs": "Pane, musím vám vstupenku označit u vchodu."
+    },
+    {
+     "speaker": null,
+     "text": "Tom est resté dehors : On ne va pas abîmer une œuvre si chère avec un trou.",
+     "cs": "Tom zůstal venku: Tak drahé umění přece nebudeme ničit dírou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "poinçonner",
+     "cs": "označit proděravěním"
+    },
+    {
+     "word": "abîmer",
+     "cs": "poškodit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom obdivuje?",
+     "options": [
+      "Vstupenku.",
+      "Sochu.",
+      "Dveře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč zůstává venku?",
+     "options": [
+      "Nechce díru ve vstupence.",
+      "Nemá peníze.",
+      "Muzeum je zavřené."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

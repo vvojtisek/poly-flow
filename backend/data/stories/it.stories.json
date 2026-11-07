@@ -4351,6 +4351,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-12-museum-ticket",
+   "level": "A2",
+   "title": "Il bel biglietto",
+   "title_cs": "Nejhezčí vstupenka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha portato Eva in un piccolo museo.",
+     "cs": "Tom vzal Evu do malého muzea."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Guarda questo bel biglietto colorato. Lo conserverò.",
+     "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dentro ci sono quadri ancora più belli. Vieni.",
+     "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Prima devo fotografarlo da tutti i lati.",
+     "cs": "Nejdřív ji musím vyfotit ze všech stran."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Signore, devo forare il suo biglietto all'ingresso.",
+     "cs": "Pane, musím vám vstupenku označit u vchodu."
+    },
+    {
+     "speaker": null,
+     "text": "Tom è rimasto fuori: Non possiamo rovinare un'opera così cara con un buco.",
+     "cs": "Tom zůstal venku: Tak drahé umění přece nebudeme ničit dírou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "forare",
+     "cs": "proděravět"
+    },
+    {
+     "word": "rovinare",
+     "cs": "poškodit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom obdivuje?",
+     "options": [
+      "Vstupenku.",
+      "Sochu.",
+      "Dveře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč zůstává venku?",
+     "options": [
+      "Nechce díru ve vstupence.",
+      "Nemá peníze.",
+      "Muzeum je zavřené."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

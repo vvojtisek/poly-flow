@@ -4351,6 +4351,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-12-museum-ticket",
+   "level": "A2",
+   "title": "The Beautiful Ticket",
+   "title_cs": "Nejhezčí vstupenka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom took Eva to a small museum.",
+     "cs": "Tom vzal Evu do malého muzea."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Look at this lovely colourful ticket. I'll keep it.",
+     "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
+    },
+    {
+     "speaker": "Tom",
+     "text": "There are even nicer paintings inside. Come on.",
+     "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
+    },
+    {
+     "speaker": "Eva",
+     "text": "First I must photograph it from every side.",
+     "cs": "Nejdřív ji musím vyfotit ze všech stran."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Sir, I need to punch your ticket at the entrance.",
+     "cs": "Pane, musím vám vstupenku označit u vchodu."
+    },
+    {
+     "speaker": null,
+     "text": "Tom stayed outside: We can't damage such expensive art with a hole.",
+     "cs": "Tom zůstal venku: Tak drahé umění přece nebudeme ničit dírou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "punch",
+     "cs": "označit proděravěním"
+    },
+    {
+     "word": "entrance",
+     "cs": "vchod"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom obdivuje?",
+     "options": [
+      "Vstupenku.",
+      "Sochu.",
+      "Dveře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč zůstává venku?",
+     "options": [
+      "Nechce díru ve vstupence.",
+      "Nemá peníze.",
+      "Muzeum je zavřené."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
