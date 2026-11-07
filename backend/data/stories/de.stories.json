@@ -5055,6 +5055,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-22-recycling-trophy",
+   "level": "B1",
+   "title": "Der rückgabefähige Preis",
+   "title_cs": "Vratná cena",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom gewann einen Wettbewerb für die beste Idee zur Mülltrennung.",
+     "cs": "Tom vyhrál soutěž o nejlepší nápad na třídění odpadu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Mein Vorschlag wird jedes Jahr Hunderte von Plastikverpackungen einsparen.",
+     "cs": "Můj návrh ušetří ročně stovky plastových obalů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Herzlichen Glückwunsch. Hier sind Ihr Preis und Ihre offizielle Urkunde.",
+     "cs": "Gratulujeme. Tady je vaše cena a slavnostní diplom."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Danke. Ich würde nur gern fragen, woraus der Pokal besteht.",
+     "cs": "Děkuji. Jen bych se rád zeptal, z čeho je ten pohár."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Aus Plastik. Aber wir können ihn für Sie in eine weitere Tüte einpacken.",
+     "cs": "Z plastu. Ale můžeme vám ho zabalit do dalšího sáčku."
+    },
+    {
+     "speaker": null,
+     "text": "Tom gab den Pokal zurück: Dann fangen wir sofort an. Schicken Sie die Urkunde bitte elektronisch.",
+     "cs": "Tom vrátil pohár pořadateli: Tak začneme hned. Diplom mi pošlete elektronicky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "einsparen",
+     "cs": "ušetřit"
+    },
+    {
+     "word": "Urkunde",
+     "cs": "diplom"
+    },
+    {
+     "word": "Pokal",
+     "cs": "pohár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Z čeho je pohár?",
+     "options": [
+      "Z plastu.",
+      "Ze dřeva.",
+      "Ze skla."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom požádal poslat elektronicky?",
+     "options": [
+      "Diplom.",
+      "Pohár.",
+      "Sáček."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

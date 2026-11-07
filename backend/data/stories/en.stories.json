@@ -5055,6 +5055,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-22-recycling-trophy",
+   "level": "B1",
+   "title": "The Returnable Prize",
+   "title_cs": "Vratná cena",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom won a competition for the best idea about sorting waste.",
+     "cs": "Tom vyhrál soutěž o nejlepší nápad na třídění odpadu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "My proposal will save hundreds of plastic containers every year.",
+     "cs": "Můj návrh ušetří ročně stovky plastových obalů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Congratulations. Here is your prize and your official certificate.",
+     "cs": "Gratulujeme. Tady je vaše cena a slavnostní diplom."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Thank you. I'd just like to ask what the trophy is made of.",
+     "cs": "Děkuji. Jen bych se rád zeptal, z čeho je ten pohár."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Plastic. But we can wrap it in another bag for you.",
+     "cs": "Z plastu. Ale můžeme vám ho zabalit do dalšího sáčku."
+    },
+    {
+     "speaker": null,
+     "text": "Tom returned the trophy: Let's start now, then. Please send the certificate electronically.",
+     "cs": "Tom vrátil pohár pořadateli: Tak začneme hned. Diplom mi pošlete elektronicky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "proposal",
+     "cs": "návrh"
+    },
+    {
+     "word": "certificate",
+     "cs": "diplom"
+    },
+    {
+     "word": "trophy",
+     "cs": "pohár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Z čeho je pohár?",
+     "options": [
+      "Z plastu.",
+      "Ze dřeva.",
+      "Ze skla."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom požádal poslat elektronicky?",
+     "options": [
+      "Diplom.",
+      "Pohár.",
+      "Sáček."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

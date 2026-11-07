@@ -5055,6 +5055,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-22-recycling-trophy",
+   "level": "B1",
+   "title": "Il premio da restituire",
+   "title_cs": "Vratná cena",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha vinto un concorso per la migliore idea sulla raccolta differenziata.",
+     "cs": "Tom vyhrál soutěž o nejlepší nápad na třídění odpadu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "La mia proposta farà risparmiare centinaia di imballaggi di plastica ogni anno.",
+     "cs": "Můj návrh ušetří ročně stovky plastových obalů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Congratulazioni. Ecco il suo premio e il certificato ufficiale.",
+     "cs": "Gratulujeme. Tady je vaše cena a slavnostní diplom."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Grazie. Vorrei solo sapere di che materiale è la coppa.",
+     "cs": "Děkuji. Jen bych se rád zeptal, z čeho je ten pohár."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Di plastica. Ma possiamo avvolgerla in un altro sacchetto.",
+     "cs": "Z plastu. Ale můžeme vám ho zabalit do dalšího sáčku."
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha restituito la coppa: Cominciamo subito, allora. Mandatemi il certificato in formato elettronico.",
+     "cs": "Tom vrátil pohár pořadateli: Tak začneme hned. Diplom mi pošlete elektronicky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "proposta",
+     "cs": "návrh"
+    },
+    {
+     "word": "certificato",
+     "cs": "diplom"
+    },
+    {
+     "word": "coppa",
+     "cs": "pohár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Z čeho je pohár?",
+     "options": [
+      "Z plastu.",
+      "Ze dřeva.",
+      "Ze skla."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom požádal poslat elektronicky?",
+     "options": [
+      "Diplom.",
+      "Pohár.",
+      "Sáček."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
