@@ -1,8 +1,8 @@
 "use client";
 
-import { Lock, LockOpen } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
-import type { ProgressOverview } from "@/lib/api";
+import type { GrammarTree, ProgressOverview } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 
 const fmt = new Intl.NumberFormat("cs-CZ");
@@ -16,8 +16,11 @@ function Stat({ label, value }: { label: string; value: number }) {
   );
 }
 
-export function ProgressCard({ progress }: { progress: ProgressOverview }) {
+export function ProgressCard({ progress, grammar }: { progress: ProgressOverview; grammar?: GrammarTree | null }) {
   const p = progress;
+  // Grammar is open from A1 (decision 2026-11-06); show proven topics instead of the old word gate.
+  const units = grammar?.levels.flatMap((l) => l.units) ?? [];
+  const provenUnits = units.filter((u) => u.status === "known" || u.status === "mastered").length;
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -58,14 +61,12 @@ export function ProgressCard({ progress }: { progress: ProgressOverview }) {
 
       <div className="flex flex-col gap-1 text-sm text-slate-600 dark:text-slate-300">
         {p.next_milestone && <p>{cs.progress.nextMilestone(p.next_milestone)}</p>}
-        <p className="flex items-center gap-2">
-          {p.grammar_unlocked ? (
-            <LockOpen className="size-4 text-emerald-600" aria-hidden />
-          ) : (
-            <Lock className="size-4" aria-hidden />
-          )}
-          {p.grammar_unlocked ? cs.progress.grammarUnlocked : cs.progress.grammarLocked(p.grammar_gate)}
-        </p>
+        {grammar && (
+          <p className="flex items-center gap-2">
+            <GraduationCap className="size-4 text-brand-600" aria-hidden />
+            {units.length ? cs.progress.grammarTopics(provenUnits, units.length) : cs.progress.grammarNone}
+          </p>
+        )}
         <p className="text-xs text-slate-500">{cs.progress.available(p.lexicon_items)}</p>
         <p className="text-xs text-slate-500">{cs.progress.pronunciation}</p>
       </div>

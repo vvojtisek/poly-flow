@@ -19,7 +19,7 @@ import { ServerStatus } from "@/components/ServerStatus";
 import { WeakSpotsCard } from "@/components/WeakSpotsCard";
 import { Welcome } from "@/components/Welcome";
 import { Button, Notice } from "@/components/ui";
-import { getProgress, markRanksSeen, skipPlacement, type ProgressOverview } from "@/lib/api";
+import { getGrammarTree, getProgress, markRanksSeen, skipPlacement, type GrammarTree, type ProgressOverview } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { modesFor, readPinned, readRecent } from "@/lib/practice";
@@ -76,6 +76,18 @@ function QuickAction({
   );
 }
 
+function grammarHelp(tree: GrammarTree | null, level: string | null): string {
+  const t = cs.dashboard;
+  if (!tree) return t.grammarHelp(level);
+  const units = tree.levels.flatMap((l) => l.units);
+  const title = (id: string | null) => units.find((u) => u.id === id)?.title;
+  const active = title(tree.active_lesson_unit);
+  if (active) return t.grammarResume(active);
+  if (tree.due > 0) return t.grammarDue(tree.due);
+  const next = title(tree.recommended);
+  return next ? t.grammarNext(next) : t.grammarHelp(level);
+}
+
 // Daily-first: the next learning step and one-click daily actions above the fold; progress below;
 // placement, CEFR estimate and level exams (occasional) in a collapsed section at the bottom.
 export default function HomePage() {
@@ -85,6 +97,7 @@ export default function HomePage() {
   const language = me?.acting.active_language;
   const [progress, setProgress] = useState<ProgressOverview | null>(null);
   const [failed, setFailed] = useState(false);
+  const [grammar, setGrammar] = useState<GrammarTree | null>(null);
   const ranks = useRanks(language, me?.acting.id);
   const [celebrated, setCelebrated] = useState(false);
   const [recent, setRecent] = useState<ReturnType<typeof readRecent>>([]);
@@ -99,9 +112,14 @@ export default function HomePage() {
     let cancelled = false;
     setProgress(null);
     setFailed(false);
+    setGrammar(null);
     getProgress(language)
       .then((p) => !cancelled && setProgress(p))
       .catch(() => !cancelled && setFailed(true));
+    // Optional: the grammar card falls back to its generic hint if this fails.
+    getGrammarTree(language)
+      .then((g) => !cancelled && setGrammar(g))
+      .catch(() => undefined);
     return () => {
       cancelled = true;
     };
@@ -194,7 +212,13 @@ export default function HomePage() {
                       : t.dailyNone
               }
             />
-            <QuickAction href="/grammar" icon={GraduationCap} title={t.grammar} help={t.grammarHelp(progress?.cefr_level ?? null)} />
+            <QuickAction
+              href={grammar?.active_lesson_unit ? `/grammar/${encodeURIComponent(grammar.active_lesson_unit)}` : "/grammar"}
+              icon={GraduationCap}
+              title={t.grammar}
+              highlight={!!grammar && grammar.due > 0}
+              help={grammarHelp(grammar, progress?.cefr_level ?? null)}
+            />
             <QuickAction href="/words?tab=levels" icon={Layers} title={t.flashcards} help={t.flashcardsHelp} />
             <QuickAction href="/practice" icon={Dumbbell} title={t.practice} help={t.practiceHelp} />
           </ul>
@@ -230,7 +254,7 @@ export default function HomePage() {
           {failed ? (
             <Notice tone="error">{cs.common.error}</Notice>
           ) : progress ? (
-            <ProgressCard progress={progress} />
+            <ProgressCard progress={progress} grammar={grammar} />
           ) : (
             <p className="text-sm text-slate-500">{cs.common.loading}</p>
           )}

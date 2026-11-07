@@ -1105,3 +1105,13 @@ Vlad approves a push.
 **Implemented Solution:** `components/ProgressionPath.tsx` now merges consecutive voluntary milestones with the same key into one row that shows the rank range it covers (5 001–7 000, 7 001–8 000) and, once the learner has proven words in that range, how many. Required milestone rows are keyed by rank. New `cs.progression.inBand` string in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff and `git diff --check` passed; rendering `/` in Chromium shows no console errors (previously 2 duplicate-key errors).
+
+## Global Cycle 2/120 | Page: [/] (Page Cycle 2/15)
+
+**Summary:** replace the obsolete grammar lock line with real grammar progress
+
+**Observed Problem:** Grammar has been open from A1 since 2026-11-06, but the dashboard still printed the old word-gate copy ("Gramatické minilekce jsou odemčené" / "odemknou po 1 000 slov"), and the Grammar quick action always said "Témata tvé úrovně" regardless of what was due or in progress.
+
+**Implemented Solution:** `app/page.tsx` now loads the learner's grammar tree for the active language alongside progress. The Grammar quick action shows a resumable lesson (and links straight to it), the number of topics due for review (highlighted), or the recommended next topic. `components/ProgressCard.tsx` replaces the lock line with "Gramatika: X z Y témat prošlo ověřením", counting only units in the known or mastered state. Obsolete `grammarLocked`/`grammarUnlocked` strings removed from `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; dashboard rendered with seeded German progress shows "Gramatika: 0 z 37 témat prošlo ověřením" and no console errors.
