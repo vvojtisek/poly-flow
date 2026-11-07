@@ -5487,6 +5487,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-28-quiet-orchestra",
+   "level": "B1",
+   "title": "Das leiseste Instrument",
+   "title_cs": "Nejtišší nástroj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva kam mit einer großen leeren Schachtel zum Amateurorchester.",
+     "cs": "Eva přišla do amatérského orchestru s velkou prázdnou krabicí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe ein neues Instrument mitgebracht. Es ist leicht und muss nie gestimmt werden.",
+     "cs": "Přinesla jsem nový nástroj. Je lehký a nemusí se ladit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das klingt praktisch. Welche Klangfarbe hat es?",
+     "cs": "To zní prakticky. Jakou má barvu zvuku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Eine sehr zarte. Nur aufmerksame Zuhörer können es hören.",
+     "cs": "Velmi jemnou. Slyší ho jen pozorní posluchači."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Kannst du uns dann etwas vorspielen?",
+     "cs": "Můžeš nám tedy něco zahrát?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva öffnete die Schachtel und wartete: Das war die ganze Komposition. Auch der Beifall darf still bleiben.",
+     "cs": "Eva otevřela krabici a čekala: To byla celá skladba. Potlesk můžete také nechat v tichosti."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Klangfarbe",
+     "cs": "barva zvuku"
+    },
+    {
+     "word": "aufmerksame",
+     "cs": "pozorný"
+    },
+    {
+     "word": "Komposition",
+     "cs": "skladba"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co bylo v krabici?",
+     "options": [
+      "Nic.",
+      "Housle.",
+      "Buben."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Eva vysvětluje ticho?",
+     "options": [
+      "Jako skladbu pro pozorné posluchače.",
+      "Jako rozbitý nástroj.",
+      "Jako přestávku."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

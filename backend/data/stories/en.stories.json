@@ -5487,6 +5487,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-28-quiet-orchestra",
+   "level": "B1",
+   "title": "The Quietest Instrument",
+   "title_cs": "Nejtišší nástroj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva arrived at the amateur orchestra carrying a large empty box.",
+     "cs": "Eva přišla do amatérského orchestru s velkou prázdnou krabicí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I've brought a new instrument. It's light and never needs tuning.",
+     "cs": "Přinesla jsem nový nástroj. Je lehký a nemusí se ladit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That sounds practical. What sort of tone does it have?",
+     "cs": "To zní prakticky. Jakou má barvu zvuku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "A very delicate one. Only attentive listeners can hear it.",
+     "cs": "Velmi jemnou. Slyší ho jen pozorní posluchači."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Could you play something for us, then?",
+     "cs": "Můžeš nám tedy něco zahrát?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva opened the box and waited: That was the whole composition. You may keep the applause silent too.",
+     "cs": "Eva otevřela krabici a čekala: To byla celá skladba. Potlesk můžete také nechat v tichosti."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "tuning",
+     "cs": "ladění"
+    },
+    {
+     "word": "attentive",
+     "cs": "pozorný"
+    },
+    {
+     "word": "composition",
+     "cs": "skladba"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co bylo v krabici?",
+     "options": [
+      "Nic.",
+      "Housle.",
+      "Buben."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Eva vysvětluje ticho?",
+     "options": [
+      "Jako skladbu pro pozorné posluchače.",
+      "Jako rozbitý nástroj.",
+      "Jako přestávku."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

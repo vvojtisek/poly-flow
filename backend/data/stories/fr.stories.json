@@ -5487,6 +5487,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-28-quiet-orchestra",
+   "level": "B1",
+   "title": "L'instrument le plus silencieux",
+   "title_cs": "Nejtišší nástroj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva est arrivée à l'orchestre amateur avec une grande boîte vide.",
+     "cs": "Eva přišla do amatérského orchestru s velkou prázdnou krabicí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "J'ai apporté un nouvel instrument. Il est léger et n'a jamais besoin d'accordage.",
+     "cs": "Přinesla jsem nový nástroj. Je lehký a nemusí se ladit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ça semble pratique. Quel timbre a-t-il ?",
+     "cs": "To zní prakticky. Jakou má barvu zvuku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Un timbre très délicat. Seuls les auditeurs attentifs peuvent l'entendre.",
+     "cs": "Velmi jemnou. Slyší ho jen pozorní posluchači."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Peux-tu donc nous jouer quelque chose ?",
+     "cs": "Můžeš nám tedy něco zahrát?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva a ouvert la boîte et attendu : C'était toute la composition. Les applaudissements peuvent aussi rester silencieux.",
+     "cs": "Eva otevřela krabici a čekala: To byla celá skladba. Potlesk můžete také nechat v tichosti."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "accordage",
+     "cs": "ladění"
+    },
+    {
+     "word": "timbre",
+     "cs": "barva zvuku"
+    },
+    {
+     "word": "attentifs",
+     "cs": "pozorný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co bylo v krabici?",
+     "options": [
+      "Nic.",
+      "Housle.",
+      "Buben."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Eva vysvětluje ticho?",
+     "options": [
+      "Jako skladbu pro pozorné posluchače.",
+      "Jako rozbitý nástroj.",
+      "Jako přestávku."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
