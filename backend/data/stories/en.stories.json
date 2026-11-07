@@ -6843,6 +6843,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-46-chemical-free-water",
+   "level": "B2",
+   "title": "Chemical-Free Water",
+   "title_cs": "Voda bez chemie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva prepared a jug of water for the neighbourhood party, and Tom brought a new advertising sign.",
+     "cs": "Eva připravila na sousedskou oslavu džbán vody a Tom k němu přinesl nový reklamní nápis."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've written entirely chemical-free. Surely everyone appreciates that nowadays.",
+     "cs": "Napsal jsem stoprocentně bez chemie. To dnes přece každý oceňuje."
+    },
+    {
+     "speaker": "Eva",
+     "text": "But water is a chemical substance. Its formula is H₂O, and there's nothing wrong with that.",
+     "cs": "Jenže voda je chemická látka. Její vzorec je H₂O a na tom není nic špatného."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Fine. Then we'll specify that it contains no superfluous chemical additives.",
+     "cs": "Dobře, tak doplníme, že neobsahuje žádné zbytečné chemické přísady."
+    },
+    {
+     "speaker": "Eva",
+     "text": "If you mean ordinary drinking water, write exactly that. Precision is preferable to exaggeration.",
+     "cs": "Pokud tím myslíš obyčejnou pitnou vodu, napiš raději právě to. Přesnost je lepší než přehánění."
+    },
+    {
+     "speaker": null,
+     "text": "Tom turned the sign over: Drinking water. Explanation free; repeated explanation free as well.",
+     "cs": "Tom nápis otočil: Pitná voda. Vysvětlení zdarma, opakované vysvětlení také."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "superfluous",
+     "cs": "zbytečný"
+    },
+    {
+     "word": "additives",
+     "cs": "přísady"
+    },
+    {
+     "word": "preferable",
+     "cs": "vhodnější"
+    },
+    {
+     "word": "exaggeration",
+     "cs": "přehánění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Jak Eva opravuje reklamní tvrzení?",
+     "options": [
+      "Vysvětluje, že voda sama je chemická látka.",
+      "Tvrdí, že voda není pitná.",
+      "Doporučuje nic nepít."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co nakonec stojí na nápisu?",
+     "options": [
+      "Pitná voda.",
+      "Bez molekul.",
+      "Zakázaný vstup."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
