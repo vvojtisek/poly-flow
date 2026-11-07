@@ -4839,6 +4839,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-19-choir-echo",
+   "level": "B1",
+   "title": "Il cantante più fedele",
+   "title_cs": "Nejvěrnější zpěvák",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva ha fondato un piccolo coro e cercava l'ultimo membro.",
+     "cs": "Eva založila malý pěvecký sbor a hledala posledního člena."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ho trovato qualcuno che ripete sempre la melodia senza errori.",
+     "cs": "Našla jsem někoho, kdo vždycky zopakuje melodii bez chyby."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ottimo. Questo cantante ha esperienza sul palco?",
+     "cs": "To je výborné. Má zkušenosti s vystupováním?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Canta qui da anni e non chiede mai un pagamento.",
+     "cs": "Zpívá tady už mnoho let a nikdy nechce zaplatit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dov'è allora? Cominciamo fra cinque minuti.",
+     "cs": "Tak kde je? Začínáme přece za pět minut."
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha aperto la finestra sul cortile: Senti quell'eco? È solo un po' in ritardo.",
+     "cs": "Eva otevřela okno do dvora: Slyšíš tu ozvěnu? Jen trochu chodí pozdě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "coro",
+     "cs": "pěvecký sbor"
+    },
+    {
+     "word": "melodia",
+     "cs": "melodie"
+    },
+    {
+     "word": "eco",
+     "cs": "ozvěna"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Koho Eva vydává za zpěváka?",
+     "options": [
+      "Ozvěnu.",
+      "Souseda.",
+      "Učitele."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co novému členu vytýká?",
+     "options": [
+      "Chodí trochu pozdě.",
+      "Chce hodně peněz.",
+      "Zpívá jinou melodii."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
