@@ -3148,6 +3148,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-06-translation-app",
+   "level": "B2",
+   "title": "Die Übersetzungs-App",
+   "title_cs": "Překladová aplikace",
+   "lines": [
+    {
+     "text": "Herr Lindner und Frau Tanaka verhandelten über die Lieferung von fünfhundert Maschinen. Keiner sprach die Sprache des anderen, also übersetzte eine App.",
+     "cs": "Pan Lindner a paní Tanaka vyjednávali o dodávce pěti set strojů. Nikdo neuměl řeč toho druhého, a tak překládala aplikace."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Unser letztes Angebot ist ein Preis von zwei Millionen Euro.",
+     "cs": "Naše poslední nabídka je cena dva miliony eur."
+    },
+    {
+     "text": "Die App sagte auf Japanisch: Unser letztes Abendessen kostet zwei Millionen. Frau Tanaka verneigte sich ehrfürchtig vor dem teuersten Essen der Welt.",
+     "cs": "Aplikace řekla japonsky: Naše poslední večeře stojí dva miliony. Paní Tanaka se uctivě poklonila před nejdražším jídlem světa."
+    },
+    {
+     "speaker": "Tanaka",
+     "text": "Wir akzeptieren, erwarten dafür aber eine Einladung.",
+     "cs": "Souhlasíme, ale za to očekáváme pozvání."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Eine Einladung? Natürlich, sehr gern. Wie viele Gäste?",
+     "cs": "Pozvání? Samozřejmě, rád. Kolik hostů?"
+    },
+    {
+     "text": "Die App fragte auf Japanisch: Wie viele Personen essen? Frau Tanaka überlegte: Meine gesamte Belegschaft, zweitausend.",
+     "cs": "Aplikace se japonsky zeptala: Kolik osob bude jíst? Paní Tanaka se zamyslela: Všichni moji zaměstnanci, dva tisíce."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Zweitausend Gäste? Nun, das Preisniveau passt: zwei Millionen.",
+     "cs": "Dva tisíce hostů? No, cenová úroveň sedí: dva miliony."
+    },
+    {
+     "text": "Beide lächelten höflich, jeder überzeugt, den anderen vollkommen verstanden zu haben.",
+     "cs": "Oba se zdvořile usmívali, každý přesvědčen, že druhému dokonale rozumí."
+    },
+    {
+     "text": "Drei Stunden später unterschrieben sie: fünfhundert Maschinen und ein Abendessen für zweitausend Personen.",
+     "cs": "O tři hodiny později podepsali: pět set strojů a večeři pro dva tisíce osob."
+    },
+    {
+     "text": "Die Maschinen laufen bis heute. Das Abendessen auch: Es findet jedes Jahr statt, und niemand traut sich, die App zu fragen, warum.",
+     "cs": "Stroje běží dodnes. Večeře také: koná se každý rok a nikdo se neodváží zeptat aplikace proč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ehrfürchtig",
+     "cs": "uctivě"
+    },
+    {
+     "word": "überzeugt",
+     "cs": "přesvědčený"
+    },
+    {
+     "word": "Belegschaft",
+     "cs": "zaměstnanci"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was versteht Frau Tanaka unter dem Preis von zwei Millionen?",
+     "options": [
+      "Den Preis eines Abendessens",
+      "Den Preis der Maschinen",
+      "Den Preis eines Hauses"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was ist das Ergebnis der Verhandlung?",
+     "options": [
+      "Ein Vertrag über Maschinen und ein großes Abendessen",
+      "Kein Vertrag",
+      "Nur ein Vertrag über Maschinen"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

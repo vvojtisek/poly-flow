@@ -3148,6 +3148,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-06-translation-app",
+   "level": "B2",
+   "title": "The Translation App",
+   "title_cs": "Překladová aplikace",
+   "lines": [
+    {
+     "text": "Mr Lindner and Ms Tanaka were negotiating the delivery of five hundred machines. Neither spoke the other's language, so an app translated.",
+     "cs": "Pan Lindner a paní Tanaka vyjednávali o dodávce pěti set strojů. Nikdo neuměl řeč toho druhého, a tak překládala aplikace."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Our final offer is a price of two million euros.",
+     "cs": "Naše poslední nabídka je cena dva miliony eur."
+    },
+    {
+     "text": "The app said in Japanese: Our final dinner costs two million. Ms Tanaka bowed reverently before the most expensive meal in the world.",
+     "cs": "Aplikace řekla japonsky: Naše poslední večeře stojí dva miliony. Paní Tanaka se uctivě poklonila před nejdražším jídlem světa."
+    },
+    {
+     "speaker": "Tanaka",
+     "text": "We accept, but we expect an invitation in return.",
+     "cs": "Souhlasíme, ale za to očekáváme pozvání."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "An invitation? Of course, gladly. How many guests?",
+     "cs": "Pozvání? Samozřejmě, rád. Kolik hostů?"
+    },
+    {
+     "text": "The app asked in Japanese: How many people are dining? Ms Tanaka thought: All my staff, two thousand.",
+     "cs": "Aplikace se japonsky zeptala: Kolik osob bude jíst? Paní Tanaka se zamyslela: Všichni moji zaměstnanci, dva tisíce."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Two thousand guests? Well, the price level is consistent: two million.",
+     "cs": "Dva tisíce hostů? No, cenová úroveň sedí: dva miliony."
+    },
+    {
+     "text": "Both smiled politely, each convinced that they had understood the other perfectly.",
+     "cs": "Oba se zdvořile usmívali, každý přesvědčen, že druhému dokonale rozumí."
+    },
+    {
+     "text": "Three hours later, they signed: five hundred machines and a dinner for two thousand people.",
+     "cs": "O tři hodiny později podepsali: pět set strojů a večeři pro dva tisíce osob."
+    },
+    {
+     "text": "The machines are still running today. So is the dinner: it takes place every year, and nobody dares to ask the app why.",
+     "cs": "Stroje běží dodnes. Večeře také: koná se každý rok a nikdo se neodváží zeptat aplikace proč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "reverently",
+     "cs": "uctivě"
+    },
+    {
+     "word": "consistent",
+     "cs": "souladný"
+    },
+    {
+     "word": "convinced",
+     "cs": "přesvědčený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Ms Tanaka think the price of two million is for?",
+     "options": [
+      "A dinner",
+      "The machines",
+      "A house"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What is the result of the negotiation?",
+     "options": [
+      "A contract for machines and a huge dinner",
+      "No contract",
+      "Only a contract for machines"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -3148,6 +3148,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-06-translation-app",
+   "level": "B2",
+   "title": "L'app di traduzione",
+   "title_cs": "Překladová aplikace",
+   "lines": [
+    {
+     "text": "Il signor Lindner e la signora Tanaka trattavano la fornitura di cinquecento macchine. Nessuno parlava la lingua dell'altro, quindi traduceva un'app.",
+     "cs": "Pan Lindner a paní Tanaka vyjednávali o dodávce pěti set strojů. Nikdo neuměl řeč toho druhého, a tak překládala aplikace."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "La nostra ultima offerta è un prezzo di due milioni di euro.",
+     "cs": "Naše poslední nabídka je cena dva miliony eur."
+    },
+    {
+     "text": "L'app ha detto in giapponese: La nostra ultima cena costa due milioni. La signora Tanaka si è inchinata con reverenza davanti al pasto più caro del mondo.",
+     "cs": "Aplikace řekla japonsky: Naše poslední večeře stojí dva miliony. Paní Tanaka se uctivě poklonila před nejdražším jídlem světa."
+    },
+    {
+     "speaker": "Tanaka",
+     "text": "Accettiamo, ma in cambio ci aspettiamo un invito.",
+     "cs": "Souhlasíme, ale za to očekáváme pozvání."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Un invito? Certo, volentieri. Quanti ospiti?",
+     "cs": "Pozvání? Samozřejmě, rád. Kolik hostů?"
+    },
+    {
+     "text": "L'app ha chiesto in giapponese: Quante persone cenano? La signora Tanaka ha riflettuto: Tutto il mio personale, duemila.",
+     "cs": "Aplikace se japonsky zeptala: Kolik osob bude jíst? Paní Tanaka se zamyslela: Všichni moji zaměstnanci, dva tisíce."
+    },
+    {
+     "speaker": "Lindner",
+     "text": "Duemila ospiti? Be', il livello di prezzo è coerente: due milioni.",
+     "cs": "Dva tisíce hostů? No, cenová úroveň sedí: dva miliony."
+    },
+    {
+     "text": "Entrambi sorridevano educatamente, ciascuno convinto di aver capito perfettamente l'altro.",
+     "cs": "Oba se zdvořile usmívali, každý přesvědčen, že druhému dokonale rozumí."
+    },
+    {
+     "text": "Tre ore dopo hanno firmato: cinquecento macchine e una cena per duemila persone.",
+     "cs": "O tři hodiny později podepsali: pět set strojů a večeři pro dva tisíce osob."
+    },
+    {
+     "text": "Le macchine funzionano ancora oggi. Anche la cena: si tiene ogni anno e nessuno osa chiedere all'app perché.",
+     "cs": "Stroje běží dodnes. Večeře také: koná se každý rok a nikdo se neodváží zeptat aplikace proč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "reverenza",
+     "cs": "úcta"
+    },
+    {
+     "word": "coerente",
+     "cs": "souladný"
+    },
+    {
+     "word": "convinto",
+     "cs": "přesvědčený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa intende la signora Tanaka con il prezzo di due milioni?",
+     "options": [
+      "Il prezzo di una cena",
+      "Il prezzo delle macchine",
+      "Il prezzo di una casa"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qual è il risultato della trattativa?",
+     "options": [
+      "Un contratto per macchine e una grande cena",
+      "Nessun contratto",
+      "Solo un contratto per macchine"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
