@@ -2125,3 +2125,13 @@ Vlad approves a push.
 **Implemented Solution:** Below lg, the action bar is sticky just above the tab bar (safe-area aware), with a translucent background. The buttons are compact (min-h-12, smaller icon and text) while still fitting their labels. From lg up the bar is a normal static row. On phones the intro folds into a 'Jak stínovat a co se děje s nahrávkou' disclosure, so the sentence sits clear of the sticky bar.
 
 **Verification:** s103.js / s103b.js at 390×844 on first paint: Nahrát spans 712-780, inside the viewport (it was below the fold before). Sentence bottom 623 < bar top 708, no overlap. All four labels fit without overflow. At 1280px the bar is static. ov.js /shadowing: no overflowing elements. Viewport screenshot checked. Typecheck, build, ruff passed.
+
+## Global Cycle 104/120 | Page: [/shadowing] (Page Cycle 14/15)
+
+**Summary:** have the next line's model ready before the learner gets there
+
+**Observed Problem:** Each new line waited for its model clip, which is local speech synthesis in production, before the outline appeared and a round could start. With an 800 ms synthesis delay, the next line took 823 ms after N, and a continuous run paused that long on every line. Revisiting a line decoded its audio again. Each re-recorded take stayed in memory as a blob URL until the page was left. clipSrc also had no in-flight dedupe, so a prefetch and a play of the same clip would have fetched it twice.
+
+**Implemented Solution:** After the current line's model outline is decoded, the next practised line's clip (role-aware) is prefetched. clipSrc in lib/audio.ts now shares one in-flight request per URL, and prefetchClip ignores failures. Decoded model envelopes are cached per URL in module memory. A new take revokes the take it replaces, and leaving a line revokes its take, since it can no longer be reached.
+
+**Verification:** s104.js with stubbed audio delayed 800 ms: the line 2 outline appeared 34 ms after N, versus 823 ms on the stashed baseline. Each line's audio was requested exactly once ({0:1,1:1,2:1,3:1}). Regressions s94 (7/7 recorded, jump) and s100 (continuous Tom run to 3 z 3) still pass. No console errors. Typecheck, build, ruff passed.

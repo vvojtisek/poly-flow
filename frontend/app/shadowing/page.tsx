@@ -11,13 +11,15 @@ import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { useRecorder } from "@/hooks/useRecorder";
 import { getPracticeSentences, getRoleplay, listRoleplay, myWordAudioUrl, roleplayAudioUrl, type Language, type RoleplayScene } from "@/lib/api";
-import { clipSrc, play, playToEnd, stop } from "@/lib/audio";
+import { clipSrc, play, playToEnd, prefetchClip, stop } from "@/lib/audio";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { envelopeFromUrl, type Envelope } from "@/lib/envelope";
 import { cs } from "@/lib/i18n/cs";
 
 const t = cs.shadow;
 const MAX_RECORDING_MS = 15000;
+/** Decoded model outlines per clip URL: revisiting a line does not decode its audio again. */
+const MODEL_ENVELOPES = new Map<string, Envelope | null>();
 /** Text support, from most to least: the whole line, first letters only, nothing (ear only). */
 type Support = "full" | "hint" | "none";
 const SUPPORTS: Support[] = ["full", "hint", "none"];
@@ -182,7 +184,14 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const onRecording = useCallback((blob: Blob) => {
     const url = URL.createObjectURL(blob);
     urls.current.push(url);
-    setMineUrl(url);
+    // Only the latest take of a line can be played back; free the one it replaces.
+    setMineUrl((previous) => {
+      if (previous) {
+        URL.revokeObjectURL(previous);
+        urls.current = urls.current.filter((u) => u !== previous);
+      }
+      return url;
+    });
     const at = indexRef.current;
     setPracticed((p) => ({ ...p, [at]: (p[at] ?? 0) + 1 }));
     void envelopeFromUrl(url).then(setMine);
@@ -225,7 +234,14 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const modelUrl = current?.audio ?? null;
 
   useEffect(() => {
-    setMineUrl(null);
+    // Leaving a line drops its take (it cannot be reached again), so free it now, not at unmount.
+    setMineUrl((previous) => {
+      if (previous) {
+        URL.revokeObjectURL(previous);
+        urls.current = urls.current.filter((u) => u !== previous);
+      }
+      return null;
+    });
     setMine(null);
     setModel(null);
     setNoModel(false);
@@ -236,9 +252,16 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     setEcho(null);
     if (!modelUrl) return;
     let cancelled = false;
+    if (MODEL_ENVELOPES.has(modelUrl)) {
+      setModel(MODEL_ENVELOPES.get(modelUrl) ?? null);
+      return;
+    }
     clipSrc(modelUrl)
       .then((src) => envelopeFromUrl(src))
-      .then((e) => !cancelled && setModel(e))
+      .then((e) => {
+        MODEL_ENVELOPES.set(modelUrl, e);
+        if (!cancelled) setModel(e);
+      })
       .catch(() => !cancelled && setNoModel(true));
     return () => {
       cancelled = true;
@@ -313,6 +336,13 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const speakers = list ? [...new Set(list.flatMap((l) => (l.speaker ? [l.speaker] : [])))] : [];
   const isTarget = useCallback((i: number) => !role || list?.[i]?.speaker === role, [role, list]);
   const targets = list ? list.map((_, i) => i).filter(isTarget) : [];
+  // Warm the next line's model while this one is practised, so N or a continuous run does not
+  // wait for speech synthesis. Only after the current clip arrived, never competing with it.
+  const nextTarget = targets.find((i) => i > index) ?? targets[0];
+  const nextAudio = nextTarget !== undefined && nextTarget !== index ? list?.[nextTarget]?.audio : undefined;
+  useEffect(() => {
+    if (model && nextAudio) prefetchClip(nextAudio);
+  }, [model, nextAudio]);
   useEffect(() => {
     if (list && role && !isTarget(index)) {
       const first = list.findIndex((_, i) => isTarget(i));
