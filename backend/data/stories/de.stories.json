@@ -4983,6 +4983,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-21-detective-crumbs",
+   "level": "B1",
+   "title": "Das Keksrätsel",
+   "title_cs": "Záhada sušenek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva fand eine leere Keksschachtel und beschloss, der Sache nachzugehen.",
+     "cs": "Eva našla prázdnou krabici od sušenek a rozhodla se pátrat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Der Täter hat Krümel von der Küche bis zum Sofa hinterlassen.",
+     "cs": "Pachatel za sebou nechal drobky od kuchyně až k pohovce."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das ist ein überzeugender Beweis. Wen verdächtigst du?",
+     "cs": "To je přesvědčivý důkaz. Koho podezíráš?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Dich. Du sitzt am Ende der Spur und schaust unschuldig.",
+     "cs": "Tebe. Sedíš na konci té cesty a tváříš se nevinně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und hast du die Schokolade auf deinem Pullover bemerkt?",
+     "cs": "A všimla sis, že máš na svetru čokoládu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva schloss ihr Notizbuch: Die Untersuchung geht weiter, sobald ich den Beweis gewechselt habe.",
+     "cs": "Eva zavřela zápisník: Vyšetřování bude pokračovat, až si převléknu důkazy."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Täter",
+     "cs": "pachatel"
+    },
+    {
+     "word": "Beweis",
+     "cs": "důkaz"
+    },
+    {
+     "word": "unschuldig",
+     "cs": "nevinný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Eva na svetru?",
+     "options": [
+      "Čokoládu.",
+      "Barvu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co naznačuje konec příběhu?",
+     "options": [
+      "Sušenky možná snědla Eva.",
+      "Krabice nebyla otevřená.",
+      "Sušenky se ztratily v obchodě."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

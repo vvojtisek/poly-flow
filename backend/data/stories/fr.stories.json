@@ -4983,6 +4983,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-21-detective-crumbs",
+   "level": "B1",
+   "title": "Le mystère des biscuits",
+   "title_cs": "Záhada sušenek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva a trouvé une boîte de biscuits vide et a décidé d'enquêter.",
+     "cs": "Eva našla prázdnou krabici od sušenek a rozhodla se pátrat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Le coupable a laissé des miettes de la cuisine jusqu'au canapé.",
+     "cs": "Pachatel za sebou nechal drobky od kuchyně až k pohovce."
+    },
+    {
+     "speaker": "Tom",
+     "text": "C'est une preuve convaincante. Qui soupçonnes-tu ?",
+     "cs": "To je přesvědčivý důkaz. Koho podezíráš?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Toi. Tu es assis au bout de la piste avec un air innocent.",
+     "cs": "Tebe. Sedíš na konci té cesty a tváříš se nevinně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Et as-tu remarqué le chocolat sur ton pull ?",
+     "cs": "A všimla sis, že máš na svetru čokoládu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva a fermé son carnet : L'enquête continuera quand j'aurai changé la preuve.",
+     "cs": "Eva zavřela zápisník: Vyšetřování bude pokračovat, až si převléknu důkazy."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "coupable",
+     "cs": "pachatel"
+    },
+    {
+     "word": "preuve",
+     "cs": "důkaz"
+    },
+    {
+     "word": "innocent",
+     "cs": "nevinný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Eva na svetru?",
+     "options": [
+      "Čokoládu.",
+      "Barvu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co naznačuje konec příběhu?",
+     "options": [
+      "Sušenky možná snědla Eva.",
+      "Krabice nebyla otevřená.",
+      "Sušenky se ztratily v obchodě."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
