@@ -447,6 +447,7 @@ export default function InsightsPage() {
         [t.funnel.mastered, funnel.mastered, "/words?tab=all&status=mastered"],
       ]
     : [];
+  const firstRun = Boolean(data && data.active_days === 0 && data.funnel.introduced === 0 && data.forecast.every((d) => d.words + d.grammar === 0));
   const mistakeMax = Math.max(1, ...(data?.mistakes.map((m) => m.count) ?? [1]));
   return (
     <AppShell me={me}>
@@ -461,7 +462,8 @@ export default function InsightsPage() {
           </div>
           <LanguagePicker me={me} />
         </div>
-        {language && <WeeklyRecap language={language} />}
+        {/* The recap would repeat the first-run call to action, so it waits for something to recap. */}
+        {language && data && !firstRun && <WeeklyRecap language={language} />}
         {failed && <RetryNotice text={t.loadFailed} onRetry={() => setAttempt((n) => n + 1)} />}
         {!data ? (
           !failed && (
@@ -474,6 +476,16 @@ export default function InsightsPage() {
               ))}
             </div>
           )
+        ) : firstRun ? (
+          // Nothing to measure yet: one clear next step instead of five empty charts.
+          <section className="flex flex-col items-start gap-3 rounded-2xl border border-dashed border-slate-300 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
+            <BarChart3 className="size-8 text-slate-300 dark:text-slate-600" aria-hidden />
+            <p className="font-semibold">{t.firstRunTitle}</p>
+            <p className="max-w-prose text-sm text-slate-600 dark:text-slate-300">{t.firstRunText}</p>
+            <Link href="/lesson/vocabulary" className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700">
+              {t.firstRunCta}
+            </Link>
+          </section>
         ) : (
           <div className="grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
             <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
@@ -564,7 +576,7 @@ export default function InsightsPage() {
             </Panel>
             <Panel title={t.mistakes} icon={TriangleAlert}>
               {data.mistakes.length === 0 ? (
-                <p className="text-sm text-slate-500">{t.noMistakes}</p>
+                <p className="text-sm text-slate-500">{data.accuracy.some((w) => w.answered) ? t.noMistakes : t.noChecksYet}</p>
               ) : (
                 <ul className="flex flex-col gap-1">
                   {data.mistakes.map((m) => {

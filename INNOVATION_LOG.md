@@ -1805,3 +1805,13 @@ Vlad approves a push.
 **Implemented Solution:** Loading shows four outlined skeleton panels titled like the real ones (calendar full width), so the layout does not jump. Failures show RetryNotice with their own messages: 'Statistiky se nepodařilo načíst.' refetches the whole page through an attempt counter, and 'Přehled dne se nepodařilo načíst.' refetches only the selected day. The failure flag resets on every load. The day view uses a skeleton instead of loading text.
 
 **Verification:** Playwright with interception: during a 1.2s delayed request, 4 skeletons (role=status) show; a failing insights request shows the statistics alert; retry renders all panels; a failing day request shows the day alert, and retry shows 'Učení · 7. 11.'. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 72/120 | Page: [/insights] (Page Cycle 12/15)
+
+**Summary:** replace five empty charts with one first-run step
+
+**Observed Problem:** For a language with no lessons yet (French for the test admin), the page showed an empty 26-week calendar, an empty forecast, 'Zatím žádné odpovědi', a funnel of zeros and 'Žádné chyby s rozpoznaným druhem'. The last one implied checks had happened and were clean. The weekly recap above repeated its own 'Začít lekci' prompt.
+
+**Implemented Solution:** When the language has no active days, no studied words and nothing in the forecast, the page shows one dashed card: what the statistics will show, why nothing is there yet, and a 'Začít lekci' button to /lesson/vocabulary. The weekly recap is hidden in that state. With data present but no checks, the mistakes panel says 'Zatím žádné ověření…' instead of claiming there were no mistakes.
+
+**Verification:** Playwright 390px: switching to Francouzština shows the first-run card once with no recap (screenshot inspected); switching back to Němčina shows the 6 panels including the recap. API confirms fr has active_days 0 and an all-zero funnel. No console errors. typecheck, next build, ruff pass.
