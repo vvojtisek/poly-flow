@@ -117,10 +117,10 @@ function ActionButton({
   );
 }
 
-function Shadowing({ language, source }: { language: Language; source: Source }) {
+function Shadowing({ language, source, start, onIndex }: { language: Language; source: Source; start: number; onIndex: (i: number) => void }) {
   const [list, setList] = useState<Line[] | null>(null);
   const [failed, setFailed] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(start);
   const [hidden, setHidden] = useState(false);
   const [mineUrl, setMineUrl] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
@@ -142,7 +142,12 @@ function Shadowing({ language, source }: { language: Language; source: Source })
   useEffect(() => {
     let cancelled = false;
     loadLines(language, source)
-      .then((l) => !cancelled && setList(l))
+      .then((l) => {
+        if (cancelled) return;
+        setList(l);
+        // A remembered line that no longer exists (fewer sentences now) falls back to the first.
+        setIndex((i) => (i < l.length ? i : 0));
+      })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
@@ -158,6 +163,10 @@ function Shadowing({ language, source }: { language: Language; source: Source })
     },
     [],
   );
+
+  useEffect(() => {
+    if (list) onIndex(index);
+  }, [index, list, onIndex]);
 
   const current = list?.[index];
   const modelUrl = current?.audio ?? null;
@@ -374,7 +383,46 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
 export default function ShadowingPage() {
   const me = useRequireMe();
   const { state } = useAuth();
-  const [source, setSource] = useState<Source>({ kind: "words", order: "recent" });
+  const [source, setSourceState] = useState<Source>({ kind: "words", order: "recent" });
+  const [start, setStart] = useState(0);
+  const [ready, setReady] = useState(false);
+  // The source and line live in the URL, so a reload or Back returns to the same sentence.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const scene = q.get("scene");
+    if (scene && /^[0-9a-f-]{36}$/i.test(scene)) setSourceState({ kind: "scene", id: scene });
+    else if (q.get("order") === "random") setSourceState({ kind: "words", order: "random" });
+    const line = Number(q.get("line"));
+    if (Number.isInteger(line) && line > 0 && line < 200) setStart(line - 1);
+    setReady(true);
+  }, []);
+  const writeUrl = useCallback((next: Source, index: number) => {
+    const q = new URLSearchParams(window.location.search);
+    q.delete("scene");
+    q.delete("order");
+    q.delete("line");
+    if (next.kind === "scene") q.set("scene", next.id);
+    else if (next.order === "random") q.set("order", "random");
+    // A random sample differs on every load, so only a stable list remembers its line.
+    if (index > 0 && (next.kind === "scene" || next.order === "recent")) q.set("line", String(index + 1));
+    const qs = q.toString();
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
+  }, []);
+  const setSource = useCallback((next: Source) => {
+    setSourceState(next);
+    setStart(0);
+    writeUrl(next, 0);
+  }, [writeUrl]);
+  const onIndex = useCallback((i: number) => writeUrl(source, i), [source, writeUrl]);
+  // A scene belongs to one language: switching language goes back to that language's words.
+  const activeLanguage = me?.acting.active_language;
+  const seenLanguage = useRef(activeLanguage);
+  useEffect(() => {
+    if (seenLanguage.current && activeLanguage && seenLanguage.current !== activeLanguage && source.kind === "scene") {
+      setSource({ kind: "words", order: "recent" });
+    }
+    seenLanguage.current = activeLanguage;
+  }, [activeLanguage, source.kind, setSource]);
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const language = me.acting.active_language;
@@ -387,8 +435,12 @@ export default function ShadowingPage() {
         </h1>
         <p className="text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
-        <SourcePicker key={`${me.acting.id}:${language}`} language={language} source={source} onChange={setSource} />
-        <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : source.order}`} language={language} source={source} />
+        {ready && (
+          <>
+            <SourcePicker key={`${me.acting.id}:${language}`} language={language} source={source} onChange={setSource} />
+            <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : source.order}`} language={language} source={source} start={start} onIndex={onIndex} />
+          </>
+        )}
       </section>
     </AppShell>
   );

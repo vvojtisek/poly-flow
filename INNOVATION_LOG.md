@@ -2015,3 +2015,13 @@ Vlad approves a push.
 **Implemented Solution:** GET /dictation/sentences takes order=random|recent (default random, so existing callers are unchanged). recent orders by introduced_at descending, then frequency rank and id, using the same taught, child-filtered pool. The page defaults to 'Nejnovější slova z lekcí' with a 'Náhodně ze všech' alternative. The chosen order survives switching to a scene and back.
 
 **Verification:** New test test_shadowing_recent_order_lists_latest_lesson_words_first: newest lesson first, rank within a lesson, untaught words excluded, random still returns the taught pool, and order=rank returns 422. test_dictation.py: 6 passed. s92.js: recent starts at Schule (the latest lesson), random starts elsewhere, requests carry order=recent and then random, and the order is kept after a scene round trip. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 93/120 | Page: [/shadowing] (Page Cycle 3/15)
+
+**Summary:** keep the source and sentence in the URL
+
+**Observed Problem:** The page held its position only in memory. A reload, a Back from another page, or a shared link restarted at sentence 1 of the default source, so a learner working through an 8-line dialogue lost their place whenever they left the page.
+
+**Implemented Solution:** ?scene=<id> or ?order=random plus ?line=N (1-based) are read on mount and written with replaceState on every move. line is kept only for stable lists (recent words, scenes); a random sample changes on each load. An out-of-range or malformed line falls back to the first sentence. Switching language while on a scene returns to that language's words, because a scene belongs to one language.
+
+**Verification:** s93.js: words N N gives 3/20 with line=3, and a reload stays at 3/20. Scene Moje rodina plus N N N gives 4/8 with scene=dd12…&line=4. /words then Back restores 4/8 and the select keeps the same scene. ?line=999 falls back to 1/20. No console errors. Typecheck, build, ruff passed.
