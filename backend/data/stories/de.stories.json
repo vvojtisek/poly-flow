@@ -3422,6 +3422,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-09-chess-grandmaster",
+   "level": "B2",
+   "title": "Der Großmeister und das Kind",
+   "title_cs": "Velmistr a osmiletý hráč",
+   "lines": [
+    {
+     "text": "Großmeister Viktor Berger kam als Ehrengast zu einem Schulturnier. Er sollte eine Simultanpartie gegen zwanzig Kinder spielen.",
+     "cs": "Velmistr Viktor Berger přijel na školní turnaj jako čestný host. Měl zahrát simultánku proti dvaceti dětem."
+    },
+    {
+     "text": "Er sprach selbstbewusst, verteilte Ratschläge und versicherte den Veranstaltern, dass ihm die Kinder nicht gefährlich werden könnten.",
+     "cs": "Mluvil sebevědomě, rozdával rady a přesvědčoval pořadatele, že děti ho nemůžou ohrozit."
+    },
+    {
+     "text": "Innerhalb einer Stunde gewann er neunzehn Partien. Es blieb die letzte: gegen die achtjährige Lucie mit den Zöpfen.",
+     "cs": "Za hodinu vyhrál devatenáct partií. Zbývala poslední: proti osmileté Lucii s copánky."
+    },
+    {
+     "speaker": "Viktor",
+     "text": "Sei nicht traurig, Mädchen, aber das geht schnell.",
+     "cs": "Nezlob se, holčičko, ale tohle skončí rychle."
+    },
+    {
+     "text": "Lucie nickte und schob einen Bauern vor.",
+     "cs": "Lucie přikývla a posunula pěšce."
+    },
+    {
+     "text": "Viktor lächelte. Nach zehn Zügen hörte er auf zu lächeln. Nach zwanzig begann er zu schwitzen.",
+     "cs": "Viktor se usmál. Po deseti tazích se přestal usmívat. Po dvaceti se začal potit."
+    },
+    {
+     "speaker": "Viktor",
+     "text": "Ah. Interessant ... Diesen Zug habe ich noch nie gesehen.",
+     "cs": "Aha. To je zajímavé... Takový tah jsem ještě neviděl."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Den hat mir mein Opa beigebracht. Er nennt ihn die Ablenkungsfalle.",
+     "cs": "Naučil mě ho děda. Říká tomu léčka s rozptýlením."
+    },
+    {
+     "text": "Viktor überlegte lange, dann gab er auf. Der Saal hielt den Atem an und brach dann in Applaus aus.",
+     "cs": "Viktor dlouho přemýšlel, pak vzdal. Sál zatajil dech a pak propukl v potlesk."
+    },
+    {
+     "text": "Journalisten fragten, wie er sich das erkläre. Viktor antwortete: Es war ein taktisches Opfer, um den Kindern zu zeigen, dass man würdevoll verlieren kann.",
+     "cs": "Novináři se ho zeptali, jak to vysvětlí. Viktor odpověděl: Byla to taktická oběť, abych dětem ukázal, že se dá prohrát důstojně."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Mein Opa sagt, so antworten alle immer.",
+     "cs": "Lucie, která stála za ním, tiše dodala: A dědeček říká, že vždycky tak odpovídají."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Simultanpartie",
+     "cs": "simultánka"
+    },
+    {
+     "word": "selbstbewusst",
+     "cs": "sebevědomě"
+    },
+    {
+     "word": "würdevoll",
+     "cs": "důstojně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Gegen wen verliert Viktor?",
+     "options": [
+      "Gegen ein achtjähriges Mädchen",
+      "Gegen einen Lehrer",
+      "Gegen einen anderen Großmeister"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wie erklärt Viktor die Niederlage?",
+     "options": [
+      "Als taktisches Opfer",
+      "Mit Müdigkeit",
+      "Mit einem Fehler des Schiedsrichters"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

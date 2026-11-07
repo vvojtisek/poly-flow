@@ -3422,6 +3422,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-09-chess-grandmaster",
+   "level": "B2",
+   "title": "The Grandmaster and the Child",
+   "title_cs": "Velmistr a osmiletý hráč",
+   "lines": [
+    {
+     "text": "Grandmaster Victor Berger came as guest of honour to a school tournament. He was to play a simultaneous display against twenty children.",
+     "cs": "Velmistr Viktor Berger přijel na školní turnaj jako čestný host. Měl zahrát simultánku proti dvaceti dětem."
+    },
+    {
+     "text": "He spoke with confidence, handed out advice and assured the organisers that the children could not pose any danger to him.",
+     "cs": "Mluvil sebevědomě, rozdával rady a přesvědčoval pořadatele, že děti ho nemůžou ohrozit."
+    },
+    {
+     "text": "Within an hour, he won nineteen games. Only the last one remained: against eight-year-old Lucy with the plaits.",
+     "cs": "Za hodinu vyhrál devatenáct partií. Zbývala poslední: proti osmileté Lucii s copánky."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Don't be sad, little girl, but this will be quick.",
+     "cs": "Nezlob se, holčičko, ale tohle skončí rychle."
+    },
+    {
+     "text": "Lucy nodded and pushed a pawn forward.",
+     "cs": "Lucie přikývla a posunula pěšce."
+    },
+    {
+     "text": "Victor smiled. After ten moves, he stopped smiling. After twenty, he began to sweat.",
+     "cs": "Viktor se usmál. Po deseti tazích se přestal usmívat. Po dvaceti se začal potit."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Ah. Interesting... I have never seen that move before.",
+     "cs": "Aha. To je zajímavé... Takový tah jsem ještě neviděl."
+    },
+    {
+     "speaker": "Lucy",
+     "text": "My grandad taught it to me. He calls it the distraction trap.",
+     "cs": "Naučil mě ho děda. Říká tomu léčka s rozptýlením."
+    },
+    {
+     "text": "Victor thought for a long time, then resigned. The hall held its breath and then burst into applause.",
+     "cs": "Viktor dlouho přemýšlel, pak vzdal. Sál zatajil dech a pak propukl v potlesk."
+    },
+    {
+     "text": "Journalists asked how he explained it. Victor answered: It was a tactical sacrifice, to show the children that one can lose with dignity.",
+     "cs": "Novináři se ho zeptali, jak to vysvětlí. Viktor odpověděl: Byla to taktická oběť, abych dětem ukázal, že se dá prohrát důstojně."
+    },
+    {
+     "speaker": "Lucy",
+     "text": "My grandad says everybody always answers like that.",
+     "cs": "Lucie, která stála za ním, tiše dodala: A dědeček říká, že vždycky tak odpovídají."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "simultaneous",
+     "cs": "simultánní"
+    },
+    {
+     "word": "confidence",
+     "cs": "sebedůvěra"
+    },
+    {
+     "word": "dignity",
+     "cs": "důstojnost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Who does Victor lose to?",
+     "options": [
+      "An eight-year-old girl",
+      "A teacher",
+      "Another grandmaster"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "How does Victor explain his defeat?",
+     "options": [
+      "As a tactical sacrifice",
+      "With tiredness",
+      "With a mistake by the referee"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -3422,6 +3422,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-09-chess-grandmaster",
+   "level": "B2",
+   "title": "Le grand maître et l'enfant",
+   "title_cs": "Velmistr a osmiletý hráč",
+   "lines": [
+    {
+     "text": "Le grand maître Victor Berger est venu en invité d'honneur à un tournoi scolaire. Il devait jouer une simultanée contre vingt enfants.",
+     "cs": "Velmistr Viktor Berger přijel na školní turnaj jako čestný host. Měl zahrát simultánku proti dvaceti dětem."
+    },
+    {
+     "text": "Il parlait avec assurance, distribuait des conseils et assurait aux organisateurs que les enfants ne pouvaient pas le mettre en danger.",
+     "cs": "Mluvil sebevědomě, rozdával rady a přesvědčoval pořadatele, že děti ho nemůžou ohrozit."
+    },
+    {
+     "text": "En une heure, il a gagné dix-neuf parties. Il restait la dernière : contre Lucie, huit ans, aux nattes.",
+     "cs": "Za hodinu vyhrál devatenáct partií. Zbývala poslední: proti osmileté Lucii s copánky."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Ne sois pas triste, petite, mais ça va aller vite.",
+     "cs": "Nezlob se, holčičko, ale tohle skončí rychle."
+    },
+    {
+     "text": "Lucie a hoché la tête et avancé un pion.",
+     "cs": "Lucie přikývla a posunula pěšce."
+    },
+    {
+     "text": "Victor a souri. Après dix coups, il a cessé de sourire. Après vingt, il a commencé à transpirer.",
+     "cs": "Viktor se usmál. Po deseti tazích se přestal usmívat. Po dvaceti se začal potit."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Ah. Intéressant... Ce coup, je ne l'avais encore jamais vu.",
+     "cs": "Aha. To je zajímavé... Takový tah jsem ještě neviděl."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "C'est mon papi qui me l'a appris. Il l'appelle le piège de la diversion.",
+     "cs": "Naučil mě ho děda. Říká tomu léčka s rozptýlením."
+    },
+    {
+     "text": "Victor a réfléchi longtemps, puis il a abandonné. La salle a retenu son souffle, puis a éclaté en applaudissements.",
+     "cs": "Viktor dlouho přemýšlel, pak vzdal. Sál zatajil dech a pak propukl v potlesk."
+    },
+    {
+     "text": "Les journalistes lui ont demandé comment il l'expliquait. Victor a répondu : C'était un sacrifice tactique pour montrer aux enfants qu'on peut perdre dignement.",
+     "cs": "Novináři se ho zeptali, jak to vysvětlí. Viktor odpověděl: Byla to taktická oběť, abych dětem ukázal, že se dá prohrát důstojně."
+    },
+    {
+     "speaker": "Lucie",
+     "text": "Mon papi dit que tout le monde répond toujours comme ça.",
+     "cs": "Lucie, která stála za ním, tiše dodala: A dědeček říká, že vždycky tak odpovídají."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "simultanée",
+     "cs": "simultánka"
+    },
+    {
+     "word": "assurance",
+     "cs": "sebejistota"
+    },
+    {
+     "word": "dignement",
+     "cs": "důstojně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Contre qui Victor perd-il ?",
+     "options": [
+      "Contre une fillette de huit ans",
+      "Contre un professeur",
+      "Contre un autre grand maître"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Comment Victor explique-t-il sa défaite ?",
+     "options": [
+      "Par un sacrifice tactique",
+      "Par la fatigue",
+      "Par une erreur de l'arbitre"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -3422,6 +3422,96 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-09-chess-grandmaster",
+   "level": "B2",
+   "title": "Il grande maestro e la bambina",
+   "title_cs": "Velmistr a osmiletý hráč",
+   "lines": [
+    {
+     "text": "Il grande maestro Vittorio Berger è venuto come ospite d'onore a un torneo scolastico. Doveva giocare una simultanea contro venti bambini.",
+     "cs": "Velmistr Viktor Berger přijel na školní turnaj jako čestný host. Měl zahrát simultánku proti dvaceti dětem."
+    },
+    {
+     "text": "Parlava con sicurezza, distribuiva consigli e assicurava agli organizzatori che i bambini non potevano metterlo in difficoltà.",
+     "cs": "Mluvil sebevědomě, rozdával rady a přesvědčoval pořadatele, že děti ho nemůžou ohrozit."
+    },
+    {
+     "text": "In un'ora ha vinto diciannove partite. Restava l'ultima: contro Lucia, otto anni, con le trecce.",
+     "cs": "Za hodinu vyhrál devatenáct partií. Zbývala poslední: proti osmileté Lucii s copánky."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Non essere triste, bambina, ma sarà una cosa rapida.",
+     "cs": "Nezlob se, holčičko, ale tohle skončí rychle."
+    },
+    {
+     "text": "Lucia ha annuito e ha avanzato un pedone.",
+     "cs": "Lucie přikývla a posunula pěšce."
+    },
+    {
+     "text": "Vittorio ha sorriso. Dopo dieci mosse ha smesso di sorridere. Dopo venti ha cominciato a sudare.",
+     "cs": "Viktor se usmál. Po deseti tazích se přestal usmívat. Po dvaceti se začal potit."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Ah. Interessante... Questa mossa non l'avevo mai vista.",
+     "cs": "Aha. To je zajímavé... Takový tah jsem ještě neviděl."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Me l'ha insegnata il mio nonno. La chiama la trappola della distrazione.",
+     "cs": "Naučil mě ho děda. Říká tomu léčka s rozptýlením."
+    },
+    {
+     "text": "Vittorio ha riflettuto a lungo, poi si è arreso. La sala ha trattenuto il fiato e poi è scoppiata in un applauso.",
+     "cs": "Viktor dlouho přemýšlel, pak vzdal. Sál zatajil dech a pak propukl v potlesk."
+    },
+    {
+     "text": "I giornalisti gli hanno chiesto come se lo spiegasse. Vittorio ha risposto: È stato un sacrificio tattico, per mostrare ai bambini che si può perdere con dignità.",
+     "cs": "Novináři se ho zeptali, jak to vysvětlí. Viktor odpověděl: Byla to taktická oběť, abych dětem ukázal, že se dá prohrát důstojně."
+    },
+    {
+     "speaker": "Lucia",
+     "text": "Il mio nonno dice che rispondono tutti sempre così.",
+     "cs": "Lucie, která stála za ním, tiše dodala: A dědeček říká, že vždycky tak odpovídají."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "simultanea",
+     "cs": "simultánka"
+    },
+    {
+     "word": "sicurezza",
+     "cs": "jistota"
+    },
+    {
+     "word": "dignità",
+     "cs": "důstojnost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Contro chi perde Vittorio?",
+     "options": [
+      "Contro una bambina di otto anni",
+      "Contro un insegnante",
+      "Contro un altro grande maestro"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Come spiega Vittorio la sconfitta?",
+     "options": [
+      "Con un sacrificio tattico",
+      "Con la stanchezza",
+      "Con un errore dell'arbitro"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
