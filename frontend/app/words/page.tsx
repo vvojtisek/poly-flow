@@ -550,16 +550,20 @@ export default function WordsPage() {
   return (
     <AppShell me={me}>
       <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap items-end justify-between gap-2">
-          <div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
+          <div className="flex items-center justify-between gap-2 sm:block">
             <h1 className="flex items-center gap-2 text-xl font-bold">
               <BookMarked className="size-6 text-brand-500" aria-hidden />
               {t.title}
             </h1>
-            <p className="text-sm text-slate-600 dark:text-slate-300">{t.intro}</p>
+            {/* The intro is for wide screens; on a phone the list should start within the first screen. */}
+            <p className="hidden text-sm text-slate-600 dark:text-slate-300 sm:block">{t.intro}</p>
+            <Link href="/collections" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-2.5 py-1.5 text-sm font-medium hover:border-brand-500 dark:border-slate-700 sm:hidden">
+              <FolderOpen className="size-4" aria-hidden /> {cs.collections.link}
+            </Link>
           </div>
           <LanguagePicker me={me} />
-          <Link href="/collections" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium hover:border-brand-500 dark:border-slate-700">
+          <Link href="/collections" className="hidden items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium hover:border-brand-500 dark:border-slate-700 sm:inline-flex">
             <FolderOpen className="size-4" aria-hidden /> {cs.collections.link}
           </Link>
         </div>
@@ -567,7 +571,7 @@ export default function WordsPage() {
           <FlashcardSession key={`${cards.kind}:${cards.label}`} language={language} scope={cards} onClose={() => setCards(null)} />
         ) : (
           <>
-            <div role="tablist" aria-label={t.browseBy} className="flex flex-wrap gap-1 rounded-2xl bg-slate-100 p-1 dark:bg-slate-800/60">
+            <div role="tablist" aria-label={t.browseBy} className="flex gap-1 rounded-2xl bg-slate-100 p-1 dark:bg-slate-800/60">
               {TABS.map((item) => (
                 <button
                   key={item.id}
@@ -577,7 +581,7 @@ export default function WordsPage() {
                   aria-selected={tab === item.id}
                   aria-controls={`words-panel-${item.id}`}
                   onClick={() => setTab(item.id)}
-                  className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+                  className={`flex-1 whitespace-nowrap rounded-xl px-2 py-2 text-sm font-semibold outline-none sm:px-3 focus-visible:ring-2 focus-visible:ring-brand-500 ${
                     tab === item.id ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 hover:bg-white/60 dark:text-slate-300 dark:hover:bg-slate-900/60"
                   }`}
                 >
@@ -665,25 +669,6 @@ export default function WordsPage() {
                 </Button>
               </div>
             )}
-            {(total > 0 || narrowed) && me.acting.active_language && (
-              <details className="group self-start text-sm">
-                <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
-                  <Download className="size-4" aria-hidden />
-                  {t.export}
-                </summary>
-                <div className="mt-2 flex max-w-md flex-col gap-2 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
-                  <p className="text-xs text-slate-500">{t.exportHelp}</p>
-                  <div className="flex gap-2">
-                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "csv")} download>
-                      {t.exportCsv}
-                    </a>
-                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "anki")} download>
-                      {t.exportAnki}
-                    </a>
-                  </div>
-                </div>
-              </details>
-            )}
             <div className="grid gap-4 lg:grid-cols-[1fr_22rem]">
               <div className="flex min-w-0 flex-col gap-3" onKeyDown={onListKey}>
                 <label className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900">
@@ -705,12 +690,12 @@ export default function WordsPage() {
                     <Kbd>/</Kbd> <Kbd>↑</Kbd> <Kbd>↓</Kbd> <Kbd>Enter</Kbd>
                   </span>
                 </label>
-                <div className="flex flex-wrap gap-1">
+                <div className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none] sm:flex-wrap">
                   <button
                     type="button"
                     aria-pressed={status === null}
                     onClick={() => setStatus(null)}
-                    className={`rounded-full px-3 py-1 text-sm font-medium ${status === null ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                    className={`shrink-0 rounded-full px-3 py-1 text-sm font-medium ${status === null ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
                   >
                     {t.all} {total}
                   </button>
@@ -720,7 +705,7 @@ export default function WordsPage() {
                       type="button"
                       aria-pressed={status === s}
                       onClick={() => setStatus(status === s ? null : s)}
-                      className={`rounded-full px-3 py-1 text-sm font-medium ${status === s ? "ring-2 ring-brand-500" : ""} ${PILL[s]}`}
+                      className={`shrink-0 whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium ${status === s ? "ring-2 ring-brand-500" : ""} ${PILL[s]}`}
                     >
                       {t.status[s]} {data?.counts[s] ?? 0}
                     </button>
@@ -729,29 +714,14 @@ export default function WordsPage() {
                     type="button"
                     aria-pressed={due}
                     onClick={() => setDue(!due)}
-                    className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${due ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+                    className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium ${due ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
                   >
                     <Clock className="size-3.5" aria-hidden /> {t.dueOnly}
                   </button>
-                  <label className="ml-auto inline-flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-300">
-                    <ArrowUpDown className="size-4" aria-hidden />
-                    <span className="sr-only sm:not-sr-only">{t.sortLabel}</span>
-                    <select
-                      value={sort}
-                      onChange={(e) => setSort(e.target.value as WordSort)}
-                      aria-label={t.sortLabel}
-                      className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
-                    >
-                      {SORTS.map((value) => (
-                        <option key={value} value={value}>
-                          {t.sorts[value]}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
                 </div>
-                <details className="self-start text-sm">
-                  <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-1 py-0.5 text-xs font-medium text-slate-500 hover:text-brand-600">
+                <div className="flex flex-wrap items-start justify-between gap-2">
+                <details className="min-w-0 flex-1 text-sm">
+                  <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-1 py-1 text-xs font-medium text-slate-500 hover:text-brand-600">
                     <CircleHelp className="size-3.5" aria-hidden /> {t.legendTitle}
                   </summary>
                   <dl className="mt-2 flex max-w-xl flex-col gap-1.5 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
@@ -781,6 +751,23 @@ export default function WordsPage() {
                     )}
                   </dl>
                 </details>
+                  <label className="inline-flex shrink-0 items-center gap-1.5 text-sm text-slate-600 dark:text-slate-300">
+                    <ArrowUpDown className="size-4" aria-hidden />
+                    <span className="sr-only sm:not-sr-only">{t.sortLabel}</span>
+                    <select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value as WordSort)}
+                      aria-label={t.sortLabel}
+                      className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
+                    >
+                      {SORTS.map((value) => (
+                        <option key={value} value={value}>
+                          {t.sorts[value]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
                 <div role="group" aria-label={t.kindLabel} className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none]">
                   {KINDS.map((value) => (
                     <button
@@ -903,6 +890,25 @@ export default function WordsPage() {
                 )}
               </div>
             </div>
+            {(total > 0 || narrowed) && me.acting.active_language && (
+              <details className="group self-start text-sm">
+                <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1 font-medium text-brand-600 hover:bg-brand-500/10 dark:text-brand-50">
+                  <Download className="size-4" aria-hidden />
+                  {t.export}
+                </summary>
+                <div className="mt-2 flex max-w-md flex-col gap-2 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
+                  <p className="text-xs text-slate-500">{t.exportHelp}</p>
+                  <div className="flex gap-2">
+                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "csv")} download>
+                      {t.exportCsv}
+                    </a>
+                    <a className="rounded-lg bg-slate-100 px-3 py-1.5 font-medium hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700" href={wordExportUrl(me.acting.active_language, "anki")} download>
+                      {t.exportAnki}
+                    </a>
+                  </div>
+                </div>
+              </details>
+            )}
             </div>
           </>
         )}

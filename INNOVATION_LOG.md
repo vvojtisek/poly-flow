@@ -1685,3 +1685,13 @@ Vlad approves a push.
 **Implemented Solution:** The word list loads the first time the 'Všechna slova' tab is shown and stays loaded across tab switches. Collections load the first time something is selected, and the bar shows 'Načítám…' until then. The 180 ms debounce now applies only while typing in the search, so the first load, chips, sort and kind run at once.
 
 **Verification:** Production build (next start on :3002): /words went from 5 API requests to 3 (me, ranks, groups). Opening 'Všechna slova' makes 1 list request; going back and forth makes 0 more; typing 'haus' makes 1 list request; the first selection makes 1 collections request. Deep links with ?tab=all still load the list at once (cycle 46 test path). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 60/120 | Page: [/words] (Page Cycle 15/15)
+
+**Summary:** bring the first word into view on a phone
+
+**Observed Problem:** Fourteen cycles of filters, legend and selection piled controls above the list. On a 390x844 phone the first word row started at y=812, under the bottom navigation, so opening the dictionary showed no words at all. The intro paragraph, a full-width collections button, a wrapping tab label, an export disclosure and two rows of wrapping status chips came first.
+
+**Implemented Solution:** On phones the intro is hidden and the collections link sits beside the title. The tabs no longer wrap. The status chips scroll in one row (they still wrap on wider screens). Sort shares a row with the legend toggle. The rarely used CSV/Anki export moved below the list. Desktop keeps the same structure, with the intro and the collections button in the header.
+
+**Verification:** Playwright 390x844: the first row moved from y=812 to y=627 with no horizontal overflow, and mobile and 1280px screenshots were inspected. Regression scripts for sort (cycle 49), kind filter (cycle 53) and URL state (cycle 46) pass. No console errors. typecheck, next build, ruff pass.
