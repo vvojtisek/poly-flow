@@ -231,6 +231,8 @@ export const cs = {
     exercises: (n: number) => `${n} cvičení`,
     checkedTally: (ok: number, all: number) => `v ověření ${ok} z ${all} správně`,
     dueBadge: "k ověření",
+    reviewDraft: "Témata jsou zatím návrh, který nezkontroloval rodilý mluvčí ani učitel; pravidla jsou zjednodušená.",
+    reviewMixed: "Část témat je zatím nezkontrolovaný návrh; pravidla jsou zjednodušená.",
     emptyLevels: (levels: string) => `${levels}: zatím bez připravených lekcí.`,
     treeFailed: "Přehled lekcí se nepodařilo načíst. Slovní zásobu můžeš otevřít i tak.",
     estimateFailed: "Odhad úrovně se teď nepodařilo načíst, doporučení proto vychází jen z toho, co máš prostudované.",

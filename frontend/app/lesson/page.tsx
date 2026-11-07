@@ -372,6 +372,10 @@ export default function LessonPage() {
             <div>
               <h2 className="text-lg font-bold">{cs.lesson.allLessons}</h2>
               <p className="text-xs text-slate-500">{cs.lesson.progressIsPersonal}</p>
+              {/* Drafted topics are not presented as reviewed fact (null means the tree has no content). */}
+              {tree.review_status && tree.review_status !== "reviewed" && (
+                <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">{tree.review_status === "mixed" ? cs.lesson.reviewMixed : cs.lesson.reviewDraft}</p>
+              )}
             </div>
             <div role="radiogroup" aria-label={cs.lesson.showLabel} className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none]">
               {SHOWS.map((value) => {

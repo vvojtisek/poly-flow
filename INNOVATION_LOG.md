@@ -1985,3 +1985,13 @@ Vlad approves a push.
 **Implemented Solution:** A module-level snapshot per profile and language holds the last complete overview: tree, estimate, progress and preview. Returning to the page renders it immediately and refreshes it in the background. Partial loads are not cached. A failed refresh drops the snapshot and shows the retry state, so stale data is never presented as current. Keys include the acting profile id, so profiles never share an entry.
 
 **Verification:** l89.js with the grammar tree delayed 1200 ms. Opening a topic and pressing Back showed the levels in 141 ms with no skeleton, versus 1353 ms on the stashed baseline. After the refresh, 4 level sections were present. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 90/120 | Page: [/lesson] (Page Cycle 15/15)
+
+**Summary:** say when topics are an unreviewed draft, and re-run the page's regressions
+
+**Observed Problem:** The grammar tree reports review_status ('unreviewed' for every de topic today), and /grammar shows it. /lesson recommended and listed the same drafted topics with no such signal, which presents generated rules as reviewed fact and breaks a product invariant. Folding the levels into disclosures (cycle 84) also broke two of this page's regression scripts, which still selected sections.
+
+**Implemented Solution:** Under 'Dostupné gramatické lekce' the page now says when topics are an unreviewed draft. It uses a separate wording when only some topics are reviewed, and says nothing when all are reviewed or there is no content. The l78 and l83 regression scripts were updated to the details structure, and l83 now uses the Prostudované filter, because the check made in cycle 85 left nothing due.
+
+**Verification:** l90.js: de shows the draft note; with a routed review_status 'reviewed' the note is gone. Regressions re-run at 390px all completed with no console errors: l76 (resume card and Enter), l78 (coverage and first card), l83 (filter, URL and Back), l84 (folding), l85 (revisit), l87 (empty levels), l88 (title widths and chips fit). Typecheck, build, ruff passed.
