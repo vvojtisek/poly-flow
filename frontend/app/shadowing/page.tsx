@@ -17,6 +17,16 @@ import { cs } from "@/lib/i18n/cs";
 
 const t = cs.shadow;
 const MAX_RECORDING_MS = 15000;
+/** Text support, from most to least: the whole line, first letters only, nothing (ear only). */
+type Support = "full" | "hint" | "none";
+const SUPPORTS: Support[] = ["full", "hint", "none"];
+/** "Ich heiße Anna." -> "I__ h____ A___." : first letter and word length, punctuation kept. */
+function hintText(text: string): string {
+  return text.replace(/\p{L}+/gu, (word) => {
+    const [first, ...rest] = Array.from(word);
+    return first + rest.map(() => "_").join("");
+  });
+}
 /** Echo round: time to repeat after the model, from the model's voiced length (or a default). */
 function echoWindowMs(modelSeconds: number | undefined): number {
   const ms = Math.round(((modelSeconds ?? 3) * 1.5 + 1) * 1000);
@@ -127,7 +137,8 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const [list, setList] = useState<Line[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [index, setIndex] = useState(start);
-  const [hidden, setHidden] = useState(false);
+  const [support, setSupport] = useState<Support>("full");
+  const cycleSupport = useCallback(() => setSupport((v) => SUPPORTS[(SUPPORTS.indexOf(v) + 1) % SUPPORTS.length] ?? "full"), []);
   const [mineUrl, setMineUrl] = useState<string | null>(null);
   // Recordings made per line in this visit (local only, never sent or scored).
   const [practiced, setPracticed] = useState<Record<number, number>>({});
@@ -346,7 +357,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           if (recording) rec.stop();
           stop();
         },
-        KeyH: () => setHidden((h) => !h),
+        KeyH: cycleSupport,
         KeyA: () => void runEcho(),
       };
       const run = actions[e.code];
@@ -375,11 +386,12 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
             <SlowToggle />
             <button
               type="button"
-              onClick={() => setHidden((h) => !h)}
+              onClick={cycleSupport}
+              aria-label={t.supportButton(t.supports[support])}
               className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium dark:bg-slate-800"
             >
-              {hidden ? <Eye className="size-3.5" aria-hidden /> : <EyeOff className="size-3.5" aria-hidden />}
-              {hidden ? t.showText : t.hideText}
+              {support === "none" ? <EyeOff className="size-3.5" aria-hidden /> : <Eye className="size-3.5" aria-hidden />}
+              {t.supports[support]}
             </button>
           </span>
         </div>
@@ -396,9 +408,17 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           <PlayButton url={modelUrl} label={t.listen} />
           <div className="min-w-0">
             {current.speaker && <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{current.speaker}</p>}
-            <p lang={language} className={`text-2xl font-medium leading-snug ${hidden ? "select-none blur-md" : ""}`}>
-              {current.text}
-            </p>
+            {support === "full" && (
+              <p lang={language} className="text-2xl font-medium leading-snug">
+                {current.text}
+              </p>
+            )}
+            {support === "hint" && (
+              <p lang={language} aria-label={t.hintAria} className="font-mono text-2xl leading-snug tracking-wide">
+                {hintText(current.text)}
+              </p>
+            )}
+            {support === "none" && <p className="text-base italic text-slate-500">{t.earOnly}</p>}
           </div>
         </div>
         {current.cs && <p className="text-sm text-slate-600 dark:text-slate-300">{current.cs}</p>}

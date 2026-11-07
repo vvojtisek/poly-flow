@@ -2075,3 +2075,13 @@ Vlad approves a push.
 **Implemented Solution:** In scene mode with two or more speakers, a 'Moje role' radio (Všechny repliky / each speaker) restricts practice to that speaker's lines. Next, previous and digits skip the other lines, the line strip disables them, and the recorded count and completion note use only the chosen role's lines. The partner's preceding line is shown above as a cue ('Anna říká: …') with its own play button. Word mode has no role control.
 
 **Verification:** s98.js (scene Ahoj, jak se jmenuješ?, 390px): roles are Všechny repliky / Anna / Tom. Choosing Tom moves to 2/7 with the cue 'Anna říká: Hallo! Ich heiße Anna. Wie heißt du?' and the count 'nahráno 0 z 3'. N visits 4, 6, 2, 4 (all TOM). Dots 1, 3, 5 and 7 are disabled. Back to all lines: 0 z 7 and no cue. Word mode has no role group. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 99/120 | Page: [/shadowing] (Page Cycle 9/15)
+
+**Summary:** fade text support in steps: full text, first letters, ear only
+
+**Observed Problem:** Text support was all or nothing. 'Skrýt text' blurred the sentence, so a learner went straight from reading the line to having no support at all. The blur also kept the text in the DOM, where it could be selected or read by assistive tech. Shadowing is easier to scaffold when the text fades gradually.
+
+**Implemented Solution:** The toggle (H or the button) now cycles through three levels. Celý text shows the line. Počáteční písmena shows each word's first letter plus underscores for its length, keeping punctuation and handling Unicode letters (ß, accents). Bez textu removes the line from the DOM and says to repeat by ear. The Czech meaning stays visible at every level, so the meaning cue remains while the form fades. The completion notes now suggest a pass with less support.
+
+**Verification:** s99.js on Hallo! Ich heiße Anna. Wie heißt du?: level 0 shows the full text. Level 1 gives 'H____! I__ h____ A___. W__ h____ d_?' (ß counted as one letter). Level 2 gives the ear-only note and no target text. Level 3 is back to the full text. The button label follows each level, and the Czech line stays visible throughout. No console errors. Typecheck, build, ruff passed.
