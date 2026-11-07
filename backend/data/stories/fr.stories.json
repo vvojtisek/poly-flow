@@ -1016,6 +1016,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-03-hotel-room",
+   "level": "A2",
+   "title": "La mauvaise chambre",
+   "title_cs": "Cizí pokoj",
+   "lines": [
+    {
+     "text": "Petra est arrivée à l'hôtel tard le soir. Elle était très fatiguée.",
+     "cs": "Petra přijela pozdě večer do hotelu. Byla velmi unavená."
+    },
+    {
+     "text": "Le réceptionniste lui a donné la clé de la chambre 214.",
+     "cs": "Recepční jí dal klíč od pokoje 214."
+    },
+    {
+     "text": "Petra a ouvert la porte et elle est tout de suite allée dormir.",
+     "cs": "Petra otevřela dveře a hned šla spát."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Bonjour ! Qu'est-ce que vous faites dans mon lit ?",
+     "cs": "Ráno ji probudil hlas: Dobré ráno! Co děláte v mé posteli?"
+    },
+    {
+     "text": "Petra s'est assise, effrayée. À côté d'elle, il y avait un homme en peignoir.",
+     "cs": "Petra se leknutím posadila. Vedle ní stál muž v županu."
+    },
+    {
+     "speaker": "Petra",
+     "text": "C'est bien la chambre 214 ? J'ai la clé !",
+     "cs": "To je pokoj 214, ne? Mám klíč!"
+    },
+    {
+     "speaker": "Homme",
+     "text": "Moi aussi. Le réceptionniste nous a donné une clé à tous les deux.",
+     "cs": "Já taky. Recepční dal klíč nám oběma."
+    },
+    {
+     "text": "Ils ont regardé la porte. Dessus, il y avait le numéro 241.",
+     "cs": "Oba se podívali na dveře. Na nich stálo číslo 241."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Excusez-moi. J'ai dormi dans votre chambre toute la nuit.",
+     "cs": "Omlouvám se. Spala jsem ve vašem pokoji celou noc."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Ce n'est pas grave. J'ai dormi dans le couloir. C'était un très long couloir.",
+     "cs": "To nevadí. Spal jsem na chodbě. Byla to velmi dlouhá chodba."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Alors je vous invite au petit déjeuner. C'est le minimum.",
+     "cs": "Pak vás zvu na snídani. To je to nejmenší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "réceptionniste",
+     "cs": "recepční"
+    },
+    {
+     "word": "effrayée",
+     "cs": "vyděšená"
+    },
+    {
+     "word": "minimum",
+     "cs": "minimum"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi Petra dort-elle dans la mauvaise chambre ?",
+     "options": [
+      "Elle lit mal le numéro.",
+      "Elle a la mauvaise clé.",
+      "L'hôtel est complet."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Où l'homme a-t-il dormi ?",
+     "options": [
+      "Dans le couloir",
+      "Dans la salle de bains",
+      "Dans la voiture"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

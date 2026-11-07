@@ -1016,6 +1016,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-03-hotel-room",
+   "level": "A2",
+   "title": "Das falsche Zimmer",
+   "title_cs": "Cizí pokoj",
+   "lines": [
+    {
+     "text": "Petra ist spät am Abend im Hotel angekommen. Sie war sehr müde.",
+     "cs": "Petra přijela pozdě večer do hotelu. Byla velmi unavená."
+    },
+    {
+     "text": "Der Mann an der Rezeption hat ihr den Schlüssel für Zimmer 214 gegeben.",
+     "cs": "Recepční jí dal klíč od pokoje 214."
+    },
+    {
+     "text": "Petra hat die Tür geöffnet und ist sofort schlafen gegangen.",
+     "cs": "Petra otevřela dveře a hned šla spát."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Guten Morgen! Was machen Sie in meinem Bett?",
+     "cs": "Ráno ji probudil hlas: Dobré ráno! Co děláte v mé posteli?"
+    },
+    {
+     "text": "Petra hat sich erschrocken aufgesetzt. Neben ihr stand ein Mann im Bademantel.",
+     "cs": "Petra se leknutím posadila. Vedle ní stál muž v županu."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Das ist doch Zimmer 214? Ich habe den Schlüssel!",
+     "cs": "To je pokoj 214, ne? Mám klíč!"
+    },
+    {
+     "speaker": "Mann",
+     "text": "Ich auch. Der Mann an der Rezeption hat uns beiden einen Schlüssel gegeben.",
+     "cs": "Já taky. Recepční dal klíč nám oběma."
+    },
+    {
+     "text": "Beide haben auf die Tür geschaut. Dort stand die Nummer 241.",
+     "cs": "Oba se podívali na dveře. Na nich stálo číslo 241."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Entschuldigung. Ich habe die ganze Nacht in Ihrem Zimmer geschlafen.",
+     "cs": "Omlouvám se. Spala jsem ve vašem pokoji celou noc."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Kein Problem. Ich habe auf dem Flur geschlafen. Es war ein sehr langer Flur.",
+     "cs": "To nevadí. Spal jsem na chodbě. Byla to velmi dlouhá chodba."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Dann lade ich Sie zum Frühstück ein. Das ist das Mindeste.",
+     "cs": "Pak vás zvu na snídani. To je to nejmenší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Rezeption",
+     "cs": "recepce"
+    },
+    {
+     "word": "erschrocken",
+     "cs": "vyděšeně"
+    },
+    {
+     "word": "Mindeste",
+     "cs": "nejmenší, to nejmenší"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum schläft Petra im falschen Zimmer?",
+     "options": [
+      "Sie liest die Zimmernummer falsch.",
+      "Sie hat den falschen Schlüssel.",
+      "Das Hotel ist voll."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wo hat der Mann geschlafen?",
+     "options": [
+      "Auf dem Flur",
+      "Im Bad",
+      "Im Auto"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

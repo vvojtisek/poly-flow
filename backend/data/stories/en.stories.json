@@ -1016,6 +1016,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-03-hotel-room",
+   "level": "A2",
+   "title": "The Wrong Room",
+   "title_cs": "Cizí pokoj",
+   "lines": [
+    {
+     "text": "Petra arrived at the hotel late in the evening. She was very tired.",
+     "cs": "Petra přijela pozdě večer do hotelu. Byla velmi unavená."
+    },
+    {
+     "text": "The man at reception gave her the key to room 214.",
+     "cs": "Recepční jí dal klíč od pokoje 214."
+    },
+    {
+     "text": "Petra opened the door and went straight to sleep.",
+     "cs": "Petra otevřela dveře a hned šla spát."
+    },
+    {
+     "speaker": "Man",
+     "text": "Good morning! What are you doing in my bed?",
+     "cs": "Ráno ji probudil hlas: Dobré ráno! Co děláte v mé posteli?"
+    },
+    {
+     "text": "Petra sat up in shock. Next to her stood a man in a dressing gown.",
+     "cs": "Petra se leknutím posadila. Vedle ní stál muž v županu."
+    },
+    {
+     "speaker": "Petra",
+     "text": "This is room 214, isn't it? I have the key!",
+     "cs": "To je pokoj 214, ne? Mám klíč!"
+    },
+    {
+     "speaker": "Man",
+     "text": "So do I. The man at reception gave us both a key.",
+     "cs": "Já taky. Recepční dal klíč nám oběma."
+    },
+    {
+     "text": "They both looked at the door. The number on it was 241.",
+     "cs": "Oba se podívali na dveře. Na nich stálo číslo 241."
+    },
+    {
+     "speaker": "Petra",
+     "text": "I'm so sorry. I slept in your room all night.",
+     "cs": "Omlouvám se. Spala jsem ve vašem pokoji celou noc."
+    },
+    {
+     "speaker": "Man",
+     "text": "Don't worry. I slept in the corridor. It was a very long corridor.",
+     "cs": "To nevadí. Spal jsem na chodbě. Byla to velmi dlouhá chodba."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Then let me invite you to breakfast. It's the least I can do.",
+     "cs": "Pak vás zvu na snídani. To je to nejmenší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "reception",
+     "cs": "recepce"
+    },
+    {
+     "word": "shock",
+     "cs": "šok"
+    },
+    {
+     "word": "corridor",
+     "cs": "chodba"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why does Petra sleep in the wrong room?",
+     "options": [
+      "She reads the room number wrongly.",
+      "She has the wrong key.",
+      "The hotel is full."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Where did the man sleep?",
+     "options": [
+      "In the corridor",
+      "In the bathroom",
+      "In his car"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

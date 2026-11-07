@@ -1016,6 +1016,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-03-hotel-room",
+   "level": "A2",
+   "title": "La camera sbagliata",
+   "title_cs": "Cizí pokoj",
+   "lines": [
+    {
+     "text": "Petra è arrivata in albergo a tarda sera. Era molto stanca.",
+     "cs": "Petra přijela pozdě večer do hotelu. Byla velmi unavená."
+    },
+    {
+     "text": "Il receptionist le ha dato la chiave della camera 214.",
+     "cs": "Recepční jí dal klíč od pokoje 214."
+    },
+    {
+     "text": "Petra ha aperto la porta ed è andata subito a dormire.",
+     "cs": "Petra otevřela dveře a hned šla spát."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Buongiorno! Che cosa fa nel mio letto?",
+     "cs": "Ráno ji probudil hlas: Dobré ráno! Co děláte v mé posteli?"
+    },
+    {
+     "text": "Petra si è seduta, spaventata. Accanto a lei c'era un uomo in accappatoio.",
+     "cs": "Petra se leknutím posadila. Vedle ní stál muž v županu."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Questa è la camera 214, vero? Ho la chiave!",
+     "cs": "To je pokoj 214, ne? Mám klíč!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Anch'io. Il receptionist ha dato la chiave a tutti e due.",
+     "cs": "Já taky. Recepční dal klíč nám oběma."
+    },
+    {
+     "text": "Hanno guardato la porta. Sopra c'era il numero 241.",
+     "cs": "Oba se podívali na dveře. Na nich stálo číslo 241."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Mi scusi. Ho dormito nella sua camera tutta la notte.",
+     "cs": "Omlouvám se. Spala jsem ve vašem pokoji celou noc."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Non importa. Io ho dormito nel corridoio. Era un corridoio molto lungo.",
+     "cs": "To nevadí. Spal jsem na chodbě. Byla to velmi dlouhá chodba."
+    },
+    {
+     "speaker": "Petra",
+     "text": "Allora la invito a colazione. È il minimo.",
+     "cs": "Pak vás zvu na snídani. To je to nejmenší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "receptionist",
+     "cs": "recepční"
+    },
+    {
+     "word": "spaventata",
+     "cs": "vyděšená"
+    },
+    {
+     "word": "minimo",
+     "cs": "minimum"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Petra dorme nella camera sbagliata?",
+     "options": [
+      "Legge male il numero.",
+      "Ha la chiave sbagliata.",
+      "L'albergo è pieno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dove ha dormito l'uomo?",
+     "options": [
+      "Nel corridoio",
+      "In bagno",
+      "In macchina"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
