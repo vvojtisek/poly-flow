@@ -2065,3 +2065,13 @@ Vlad approves a push.
 **Implemented Solution:** The echo round now has two modes. 'Po vzoru' is the existing listen, repeat and compare flow. 'Současně se vzorem' starts recording first, so the first syllable is not cut, plays the model under it, stops 700 ms after the model ends, then plays the model followed by the recording. The mode is remembered per device in localStorage (read after mount, so SSR is unaffected; storage failures fall back to the default). A note says the mode needs headphones, otherwise the microphone records the model too.
 
 **Verification:** s97.js (fake mic, stubbed 1.5 s model): the headphones note is shown. Steps: 'Mluv současně se vzorem…' at 19 ms, compare at 2326 ms (1.5 s model + 0.7 s tail), idle at 6474 ms. The wave caption reads 'Vzor 1.5 s · ty 1.6 s'. After a reload the mode is still selected. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 98/120 | Page: [/shadowing] (Page Cycle 8/15)
+
+**Summary:** take one character's part in a dialogue, with the partner's line as cue
+
+**Observed Problem:** A scene dialogue was shadowed as one undifferentiated list. A learner who wants to practise speaking as Tom, the way the dialogue will be used in roleplay, had to step through Anna's lines too. On Tom's line, nothing showed what he was answering.
+
+**Implemented Solution:** In scene mode with two or more speakers, a 'Moje role' radio (Všechny repliky / each speaker) restricts practice to that speaker's lines. Next, previous and digits skip the other lines, the line strip disables them, and the recorded count and completion note use only the chosen role's lines. The partner's preceding line is shown above as a cue ('Anna říká: …') with its own play button. Word mode has no role control.
+
+**Verification:** s98.js (scene Ahoj, jak se jmenuješ?, 390px): roles are Všechny repliky / Anna / Tom. Choosing Tom moves to 2/7 with the cue 'Anna říká: Hallo! Ich heiße Anna. Wie heißt du?' and the count 'nahráno 0 z 3'. N visits 4, 6, 2, 4 (all TOM). Dots 1, 3, 5 and 7 are disabled. Back to all lines: 0 z 7 and no cue. Word mode has no role group. No console errors. Typecheck, build, ruff passed.

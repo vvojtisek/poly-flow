@@ -203,6 +203,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   }, [index, list, onIndex]);
 
   const current = list?.[index];
+  const cueLine = index > 0 ? list?.[index - 1] : undefined;
   const modelUrl = current?.audio ?? null;
 
   useEffect(() => {
@@ -283,21 +284,39 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     if (echoTimer.current) clearTimeout(echoTimer.current);
   }, []);
 
+  // In a dialogue the learner can take one character's part: only that speaker's lines are
+  // practised, and the partner's preceding line is shown (and playable) as the cue.
+  const [role, setRole] = useState<string | null>(null);
+  const speakers = list ? [...new Set(list.flatMap((l) => (l.speaker ? [l.speaker] : [])))] : [];
+  const isTarget = useCallback((i: number) => !role || list?.[i]?.speaker === role, [role, list]);
+  const targets = list ? list.map((_, i) => i).filter(isTarget) : [];
+  useEffect(() => {
+    if (list && role && !isTarget(index)) {
+      const first = list.findIndex((_, i) => isTarget(i));
+      if (first >= 0) setIndex(first);
+    }
+  }, [role, list, index, isTarget]);
   const go = useCallback(
     (delta: number) => {
       if (!list?.length || recording) return;
       stop();
-      setIndex((i) => (i + delta + list.length) % list.length);
+      setIndex((i) => {
+        for (let step = 1; step <= list.length; step++) {
+          const j = (((i + delta * step) % list.length) + list.length) % list.length;
+          if (isTarget(j)) return j;
+        }
+        return i;
+      });
     },
-    [list, recording],
+    [list, recording, isTarget],
   );
   const jump = useCallback(
     (i: number) => {
-      if (recording) return;
+      if (recording || !isTarget(i)) return;
       stop();
       setIndex(i);
     },
-    [recording],
+    [recording, isTarget],
   );
 
   useEffect(() => {
@@ -350,7 +369,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         <div className="flex items-center justify-between gap-2 text-sm text-slate-500">
           <span>
             {index + 1} / {list.length}
-            <span className="ml-2 text-xs">{t.recordedCount(Object.keys(practiced).length, list.length)}</span>
+            <span className="ml-2 text-xs">{t.recordedCount(targets.filter((i) => practiced[i]).length, targets.length)}</span>
           </span>
           <span className="flex items-center gap-2">
             <SlowToggle />
@@ -364,6 +383,15 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
             </button>
           </span>
         </div>
+        {role && cueLine && cueLine.speaker !== role && (
+          <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2 text-sm dark:bg-slate-800/60">
+            <PlayButton url={cueLine.audio} size="sm" label={t.cuePlay} />
+            <span className="min-w-0">
+              <span className="block text-xs text-slate-500">{t.cue(cueLine.speaker ?? "")}</span>
+              <span lang={language} className="block">{cueLine.text}</span>
+            </span>
+          </div>
+        )}
         <div className="flex items-center gap-3">
           <PlayButton url={modelUrl} label={t.listen} />
           <div className="min-w-0">
@@ -386,6 +414,23 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         </p>
       </section>
 
+      {speakers.length > 1 && (
+        <div role="radiogroup" aria-label={t.roleLabel} className="-mt-1 flex flex-wrap items-center gap-1 text-xs">
+          <span className="mr-1 text-slate-500">{t.roleLabel}:</span>
+          {[null, ...speakers].map((value) => (
+            <button
+              key={value ?? "all"}
+              type="button"
+              role="radio"
+              aria-checked={role === value}
+              onClick={() => setRole(value)}
+              className={`rounded-full px-2.5 py-1 font-medium ${role === value ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900" : "bg-slate-100 dark:bg-slate-800"}`}
+            >
+              {value ?? t.allRoles}
+            </button>
+          ))}
+        </div>
+      )}
       {/* Every line at a glance: filled once recorded in this visit; tap to jump. */}
       <nav aria-label={t.linesNav} className="-mt-1 flex flex-wrap gap-1.5">
         {list.map((line, i) => (
@@ -393,10 +438,11 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
             key={line.key}
             type="button"
             onClick={() => jump(i)}
+            disabled={!isTarget(i)}
             aria-current={i === index ? "true" : undefined}
             aria-label={t.lineDot(i + 1, Boolean(practiced[i]))}
             title={line.speaker ? `${line.speaker}: ${line.text}` : line.text}
-            className={`size-7 rounded-full text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+            className={`size-7 rounded-full text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 disabled:opacity-30 ${
               practiced[i] ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
             } ${i === index ? "ring-2 ring-brand-500 ring-offset-1 dark:ring-offset-slate-950" : ""}`}
           >
@@ -404,7 +450,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           </button>
         ))}
       </nav>
-      {Object.keys(practiced).length === list.length && (
+      {targets.length > 0 && targets.every((i) => practiced[i]) && (
         <Notice>{source.kind === "scene" ? t.allRecordedScene : t.allRecorded}</Notice>
       )}
 
