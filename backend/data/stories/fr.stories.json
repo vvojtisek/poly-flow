@@ -4419,6 +4419,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-13-camping-ceiling",
+   "level": "A2",
+   "title": "Le camping au salon",
+   "title_cs": "Stan v obýváku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva voulait dormir sous une tente pour la première fois, mais il a plu tout le week-end.",
+     "cs": "Eva chtěla poprvé spát ve stanu, ale celý víkend pršelo."
+    },
+    {
+     "speaker": "Eva",
+     "text": "On va la monter dans le salon. Au moins, elle restera sèche.",
+     "cs": "Postavíme ho v obýváku. Aspoň zůstane suchý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bien. J'apporte les sacs de couchage et tu prépares le dîner.",
+     "cs": "Dobře. Já přinesu spacáky a ty připrav večeři."
+    },
+    {
+     "speaker": "Eva",
+     "text": "C'est prêt. Et les oiseaux chantent déjà dehors.",
+     "cs": "Hotovo. A venku už zpívají ptáci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "C'est seulement la radio. Tu vis vraiment une aventure dans la nature ?",
+     "cs": "To je jen rádio. Máš vůbec nějaký zážitek z přírody?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom a montré le coin : Oui. Je cherche un moustique depuis dix minutes.",
+     "cs": "Tom ukázal do rohu: Ano. Už deset minut hledám komára."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "aventure",
+     "cs": "dobrodružství"
+    },
+    {
+     "word": "moustique",
+     "cs": "komár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde stojí stan?",
+     "options": [
+      "V obýváku.",
+      "U řeky.",
+      "Na střeše."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom hledá?",
+     "options": [
+      "Komára.",
+      "Rádio.",
+      "Klíče."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

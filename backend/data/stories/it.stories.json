@@ -4419,6 +4419,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-13-camping-ceiling",
+   "level": "A2",
+   "title": "Campeggio in salotto",
+   "title_cs": "Stan v obýváku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva voleva dormire in tenda per la prima volta, ma ha piovuto tutto il fine settimana.",
+     "cs": "Eva chtěla poprvé spát ve stanu, ale celý víkend pršelo."
+    },
+    {
+     "speaker": "Eva",
+     "text": "La montiamo in salotto. Almeno resterà asciutta.",
+     "cs": "Postavíme ho v obýváku. Aspoň zůstane suchý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bene. Porto i sacchi a pelo e tu prepari la cena.",
+     "cs": "Dobře. Já přinesu spacáky a ty připrav večeři."
+    },
+    {
+     "speaker": "Eva",
+     "text": "È pronto. E fuori gli uccelli cantano già.",
+     "cs": "Hotovo. A venku už zpívají ptáci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È solo la radio. Stai vivendo una vera avventura nella natura?",
+     "cs": "To je jen rádio. Máš vůbec nějaký zážitek z přírody?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha indicato l'angolo: Sì. Cerco una zanzara da dieci minuti.",
+     "cs": "Tom ukázal do rohu: Ano. Už deset minut hledám komára."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "avventura",
+     "cs": "dobrodružství"
+    },
+    {
+     "word": "zanzara",
+     "cs": "komár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde stojí stan?",
+     "options": [
+      "V obýváku.",
+      "U řeky.",
+      "Na střeše."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom hledá?",
+     "options": [
+      "Komára.",
+      "Rádio.",
+      "Klíče."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
