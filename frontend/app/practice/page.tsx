@@ -8,7 +8,9 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Notice } from "@/components/ui";
 import { getLanguageSummaries, getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
+import { KeyHint } from "@/components/Kbd";
 import { cs, relativePast } from "@/lib/i18n/cs";
+import { useHotkeys } from "@/lib/keyboard";
 import { modesFor, readPinned, readRecent, readVisits, SKILLS, suggestMode, togglePinned, type PracticeMode, type Skill } from "@/lib/practice";
 
 const t = cs.practice;
@@ -39,16 +41,22 @@ function chip(active: boolean) {
   }`;
 }
 
-function Card({ m, tint, pinned, onToggle, visited, locked }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void; visited: string | undefined; locked: boolean }) {
+function Card({ m, tint, pinned, onToggle, visited, locked, hotkey }: { m: PracticeMode; tint: string; pinned: boolean; onToggle: () => void; visited: string | undefined; locked: boolean; hotkey?: number }) {
   const copy = t.mode[m.id]!;
   return (
     <div className={`relative h-full rounded-3xl border border-slate-200 bg-gradient-to-br ${tint} transition-transform hover:-translate-y-0.5 hover:border-brand-500 motion-reduce:transition-none dark:border-slate-800`}>
-      <Link href={m.href} className="group flex h-full flex-col gap-3 p-5 pr-14">
+      <Link
+        href={m.href}
+        data-hotkey={hotkey ? String(hotkey) : undefined}
+        aria-keyshortcuts={hotkey ? String(hotkey) : undefined}
+        className="group flex h-full flex-col gap-3 p-5 pr-14"
+      >
         <span className="flex items-center gap-3">
           <span className="grid size-11 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
             <m.icon className="size-6 text-brand-600 dark:text-brand-50" aria-hidden />
           </span>
           <span className="text-lg font-bold">{copy.title}</span>
+          {hotkey && <KeyHint k={String(hotkey)} />}
         </span>
         <span className="text-sm text-slate-600 dark:text-slate-300">{copy.blurb}</span>
         {locked ? (
@@ -75,6 +83,7 @@ export default function PracticePage() {
   const me = useRequireMe();
   const { state } = useAuth();
   const [skills, setSkills] = useState<Skill[]>([]);
+  useHotkeys(); // 1-9 open the visible cards in order, Enter opens today's tip
   const [recent, setRecent] = useState<PracticeMode["id"][]>([]);
   const [pinned, setPinned] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
@@ -151,6 +160,8 @@ export default function PracticePage() {
         {tip && (
           <Link
             href={tip.mode.href}
+            data-hotkey="enter"
+            aria-keyshortcuts="Enter"
             className="flex items-center gap-3 rounded-3xl border border-brand-500/40 bg-brand-500/5 p-4 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
           >
             <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white shadow-sm dark:bg-slate-900">
@@ -163,6 +174,7 @@ export default function PracticePage() {
                 {tip.since ? t.tipSince(t.skill[tip.skill] ?? tip.skill, relativePast(tip.since)) : t.tipNever(t.skill[tip.skill] ?? tip.skill)}
               </span>
             </span>
+            <KeyHint k="Enter" />
             <ArrowRight className="size-5 shrink-0 text-brand-600" aria-hidden />
           </Link>
         )}
@@ -246,9 +258,9 @@ export default function PracticePage() {
         </p>
 
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map((m) => (
+          {shown.map((m, i) => (
             <li key={m.id}>
-              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} />
+              <Card m={m} tint={TINT[modes.indexOf(m) % TINT.length]!} pinned={pinned.includes(m.id)} onToggle={() => setPinned(togglePinned(m.id))} visited={visits[m.id]} locked={!!m.needsWords && introduced === 0} hotkey={i < 9 ? i + 1 : undefined} />
             </li>
           ))}
         </ul>

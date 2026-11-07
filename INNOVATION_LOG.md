@@ -1445,3 +1445,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/practice.ts` gains `suggestMode`: from the modes usable now (lesson-dependent ones excluded before the first lesson), it picks the skill opened longest ago on this device (never-trained first, stable tie-break) and its least recently opened mode. `app/practice/page.tsx` shows it as a "Tip na dnes" link card with the reason ("Na poslech ses na tomto zařízení naposledy zaměřil(a) před 5 dny."). The tip is deterministic and local, with no streaks or pressure.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot on a fresh browser suggests "Hraj roli" for listening, never trained on that device.
+
+## Global Cycle 36/120 | Page: [/practice] (Page Cycle 6/15)
+
+**Summary:** open modes with 1-9 and today's tip with Enter
+
+**Observed Problem:** The practice hub had no keyboard shortcuts; on desktop each mode needed the mouse or many Tab stops past the language switcher, recommendations and chips.
+
+**Implemented Solution:** `app/practice/page.tsx` installs the shared hotkey listener: digits 1-9 open the visible cards in order (so they follow the active skill filter), Enter opens the "Tip na dnes" card. Cards and the tip show key badges on wide screens and carry `aria-keyshortcuts`; digit codes are layout-independent (`lib/keyboard.ts`), so the Czech number row works.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pressed 2 on `/practice?skill=speaking` and landed on `/sounds` (the second speaking mode), and Enter on `/practice` opened the tip's `/roleplay`.
