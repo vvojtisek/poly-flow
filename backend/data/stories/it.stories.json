@@ -2489,6 +2489,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-09-tour-guide",
+   "level": "B1",
+   "title": "La storia secondo Vittorio",
+   "title_cs": "Historie podle Viktora",
+   "lines": [
+    {
+     "text": "Vittorio lavorava come guida nel centro storico. Non voleva mai ammettere di non sapere qualcosa e completava la storia da solo.",
+     "cs": "Viktor pracoval jako průvodce po starém městě. Nechtěl připustit, že něco neví, a tak si dějiny prostě doplňoval."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Questa casa fu costruita nel 1432 dal famoso architetto Gustavo Kleber. Usava solo marmo e formaggio.",
+     "cs": "Tento dům postavil roku 1432 slavný architekt Gustav Kleber. Stavěl pouze z mramoru a ze sýra."
+    },
+    {
+     "speaker": "Turista",
+     "text": "Formaggio?",
+     "cs": "Ze sýra? zeptala se jedna turistka."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Sì. Per questo è così ben isolata.",
+     "cs": "Ano. Proto je tak dobře izolovaný."
+    },
+    {
+     "text": "Il gruppo prendeva appunti con zelo. Solo un'anziana signora sorrideva in silenzio.",
+     "cs": "Skupina si pilně dělala poznámky. Jen jedna starší dáma se tiše usmívala."
+    },
+    {
+     "text": "Alla fontana Vittorio ha continuato: Secondo la leggenda, qui l'imperatore ha cantato la sua prima aria.",
+     "cs": "U kašny Viktor pokračoval: Podle legendy tu zazpíval císař svou první árii."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Mi scusi, sono una storica. Lavoro all'archivio comunale.",
+     "cs": "Dáma zvedla ruku: Promiňte, jsem historička. Pracuji v městském archivu."
+    },
+    {
+     "speaker": "Vittorio",
+     "text": "Davvero? È... una piacevole sorpresa.",
+     "cs": "Viktor polkl. Opravdu? To je... příjemné překvapení."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Posso aggiungere che l'architetto Kleber non è mai esistito e che l'imperatore non ha mai cantato?",
+     "cs": "Mohla bych tedy doplnit, že architekt Kleber nikdy neexistoval a císař nikdy nezpíval?"
+    },
+    {
+     "text": "Vittorio è rimasto in silenzio un momento. Poi ha sorriso ampiamente: Naturalmente. Proprio per questo le leggende sono così amate!",
+     "cs": "Viktor chvíli mlčel. Pak se široce usmál: Samozřejmě. Právě proto jsou legendy tak oblíbené!"
+    },
+    {
+     "text": "Alla fine della visita il gruppo ha applaudito con entusiasmo.",
+     "cs": "Na konci prohlídky mu skupina nadšeně zatleskala."
+    },
+    {
+     "speaker": "Signora",
+     "text": "Ecco il mio biglietto. Venga a lavorare da noi. Per le invenzioni abbiamo un grande reparto.",
+     "cs": "Dáma mu dala vizitku: Pracujte u nás. Na vymýšlení máme velké oddělení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "isolata",
+     "cs": "izolovaná"
+    },
+    {
+     "word": "leggenda",
+     "cs": "legenda"
+    },
+    {
+     "word": "archivio",
+     "cs": "archiv"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa dice Vittorio sulla casa?",
+     "options": [
+      "È stata costruita con marmo e formaggio.",
+      "È la casa più antica della città.",
+      "È un museo."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Chi è l'anziana signora?",
+     "options": [
+      "Una storica",
+      "Una turista di Vienna",
+      "La capa di Vittorio"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

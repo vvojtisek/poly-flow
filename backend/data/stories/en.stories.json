@@ -2489,6 +2489,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-09-tour-guide",
+   "level": "B1",
+   "title": "History According to Victor",
+   "title_cs": "Historie podle Viktora",
+   "lines": [
+    {
+     "text": "Victor worked as a guide in the old town. He never wanted to admit that he didn't know something, so he simply filled in the history himself.",
+     "cs": "Viktor pracoval jako průvodce po starém městě. Nechtěl připustit, že něco neví, a tak si dějiny prostě doplňoval."
+    },
+    {
+     "speaker": "Victor",
+     "text": "This house was built in 1432 by the famous architect Gustav Kleber. He used only marble and cheese.",
+     "cs": "Tento dům postavil roku 1432 slavný architekt Gustav Kleber. Stavěl pouze z mramoru a ze sýra."
+    },
+    {
+     "speaker": "Tourist",
+     "text": "Cheese?",
+     "cs": "Ze sýra? zeptala se jedna turistka."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Yes. That's why it is so well insulated.",
+     "cs": "Ano. Proto je tak dobře izolovaný."
+    },
+    {
+     "text": "The group eagerly took notes. Only an elderly lady smiled quietly.",
+     "cs": "Skupina si pilně dělala poznámky. Jen jedna starší dáma se tiše usmívala."
+    },
+    {
+     "text": "At the fountain, Victor went on: According to legend, the emperor sang his first aria here.",
+     "cs": "U kašny Viktor pokračoval: Podle legendy tu zazpíval císař svou první árii."
+    },
+    {
+     "speaker": "Lady",
+     "text": "Excuse me, I am a historian. I work at the city archive.",
+     "cs": "Dáma zvedla ruku: Promiňte, jsem historička. Pracuji v městském archivu."
+    },
+    {
+     "speaker": "Victor",
+     "text": "Really? That is... a pleasant surprise.",
+     "cs": "Viktor polkl. Opravdu? To je... příjemné překvapení."
+    },
+    {
+     "speaker": "Lady",
+     "text": "May I add that the architect Kleber never existed and the emperor never sang?",
+     "cs": "Mohla bych tedy doplnit, že architekt Kleber nikdy neexistoval a císař nikdy nezpíval?"
+    },
+    {
+     "text": "Victor was silent for a moment. Then he smiled broadly: Of course. That is exactly why legends are so popular!",
+     "cs": "Viktor chvíli mlčel. Pak se široce usmál: Samozřejmě. Právě proto jsou legendy tak oblíbené!"
+    },
+    {
+     "text": "At the end of the tour, the group applauded enthusiastically.",
+     "cs": "Na konci prohlídky mu skupina nadšeně zatleskala."
+    },
+    {
+     "speaker": "Lady",
+     "text": "Here is my card. Come and work for us. We have a big department for inventions.",
+     "cs": "Dáma mu dala vizitku: Pracujte u nás. Na vymýšlení máme velké oddělení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "insulated",
+     "cs": "izolovaný"
+    },
+    {
+     "word": "legend",
+     "cs": "legenda"
+    },
+    {
+     "word": "archive",
+     "cs": "archiv"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Victor say about the house?",
+     "options": [
+      "It was built from marble and cheese.",
+      "It is the oldest house in the town.",
+      "It is a museum."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Who is the elderly lady?",
+     "options": [
+      "A historian",
+      "A tourist from Vienna",
+      "Victor's boss"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

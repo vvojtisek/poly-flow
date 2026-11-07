@@ -2489,6 +2489,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-09-tour-guide",
+   "level": "B1",
+   "title": "Geschichte nach Viktor",
+   "title_cs": "Historie podle Viktora",
+   "lines": [
+    {
+     "text": "Viktor arbeitete als Stadtführer in der Altstadt. Er wollte nie zugeben, dass er etwas nicht wusste, und ergänzte die Geschichte einfach selbst.",
+     "cs": "Viktor pracoval jako průvodce po starém městě. Nechtěl připustit, že něco neví, a tak si dějiny prostě doplňoval."
+    },
+    {
+     "speaker": "Viktor",
+     "text": "Dieses Haus baute 1432 der berühmte Architekt Gustav Kleber. Er verwendete nur Marmor und Käse.",
+     "cs": "Tento dům postavil roku 1432 slavný architekt Gustav Kleber. Stavěl pouze z mramoru a ze sýra."
+    },
+    {
+     "speaker": "Touristin",
+     "text": "Käse?",
+     "cs": "Ze sýra? zeptala se jedna turistka."
+    },
+    {
+     "speaker": "Viktor",
+     "text": "Ja. Deshalb ist es so gut isoliert.",
+     "cs": "Ano. Proto je tak dobře izolovaný."
+    },
+    {
+     "text": "Die Gruppe machte eifrig Notizen. Nur eine ältere Dame lächelte still.",
+     "cs": "Skupina si pilně dělala poznámky. Jen jedna starší dáma se tiše usmívala."
+    },
+    {
+     "text": "Am Brunnen fuhr Viktor fort: Der Legende nach sang hier der Kaiser seine erste Arie.",
+     "cs": "U kašny Viktor pokračoval: Podle legendy tu zazpíval císař svou první árii."
+    },
+    {
+     "speaker": "Dame",
+     "text": "Entschuldigung, ich bin Historikerin. Ich arbeite im Stadtarchiv.",
+     "cs": "Dáma zvedla ruku: Promiňte, jsem historička. Pracuji v městském archivu."
+    },
+    {
+     "speaker": "Viktor",
+     "text": "Wirklich? Das ist ... eine angenehme Überraschung.",
+     "cs": "Viktor polkl. Opravdu? To je... příjemné překvapení."
+    },
+    {
+     "speaker": "Dame",
+     "text": "Darf ich ergänzen, dass es einen Architekten Kleber nie gab und der Kaiser nie gesungen hat?",
+     "cs": "Mohla bych tedy doplnit, že architekt Kleber nikdy neexistoval a císař nikdy nezpíval?"
+    },
+    {
+     "text": "Viktor schwieg einen Moment. Dann lächelte er breit: Natürlich. Gerade deshalb sind Legenden so beliebt!",
+     "cs": "Viktor chvíli mlčel. Pak se široce usmál: Samozřejmě. Právě proto jsou legendy tak oblíbené!"
+    },
+    {
+     "text": "Am Ende der Führung applaudierte die Gruppe begeistert.",
+     "cs": "Na konci prohlídky mu skupina nadšeně zatleskala."
+    },
+    {
+     "speaker": "Dame",
+     "text": "Hier ist meine Karte. Arbeiten Sie bei uns. Für Erfindungen haben wir eine große Abteilung.",
+     "cs": "Dáma mu dala vizitku: Pracujte u nás. Na vymýšlení máme velké oddělení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Stadtführer",
+     "cs": "průvodce městem"
+    },
+    {
+     "word": "isoliert",
+     "cs": "izolovaný"
+    },
+    {
+     "word": "Legende",
+     "cs": "legenda"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was sagt Viktor über das Haus?",
+     "options": [
+      "Es wurde aus Marmor und Käse gebaut.",
+      "Es ist das älteste Haus der Stadt.",
+      "Es ist ein Museum."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wer ist die ältere Dame?",
+     "options": [
+      "Eine Historikerin",
+      "Eine Touristin aus Wien",
+      "Viktors Chefin"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
