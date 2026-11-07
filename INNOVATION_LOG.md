@@ -1635,3 +1635,13 @@ Vlad approves a push.
 **Implemented Solution:** The flashcard deck API takes a hand-picked scope (ids=…, up to 100). The same own-words join and child filter apply, so ids of unmet or hidden words are just left out. The selection bar gets 'Kartičky z vybraných', which opens the practice-only flashcard session on exactly those words. A 'Vybrat zobrazená (N)' checkbox selects or clears all visible rows. Selection is capped at 100 with a note, and further row checkboxes are disabled.
 
 **Verification:** New pytest test_deck_from_picked_words_keeps_only_own_suitable_words: a child profile gets Haus and gehen (Mord hidden, neu unmet), with the due word first; mixing ids with level gives 422, and 101 ids give 422. tests/test_words.py 12 passed. Playwright: ?kind=verb, select shown gives 'Vybráno slov: 8', 'Kartičky z vybraných' opens 'Vybraná slova (8)' with a deck request. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 55/120 | Page: [/words] (Page Cycle 10/15)
+
+**Summary:** explain the status chips, due clock and gender colours in a legend
+
+**Observed Problem:** The dictionary used five status labels, a clock icon and coloured articles without saying what any of them meant. 'Učím se' versus 'Poznám' versus 'Umím' encodes the separate recognition and recall evidence rules, and 'Zvládnuté' needs a later confirming check. A learner seeing 41 words stuck at 'Učím se' could not tell that lesson practice does not count and that only checks move a word on.
+
+**Implemented Solution:** A collapsed 'Co znamenají stavy a barvy' disclosure under the status chips explains each state in ladder order with its pill colour. Each explanation matches the backend rules: seen is exposure without a lesson; learning is a lesson or placement word waiting for a check; passive is repeated correct recognition in checks on different days; known adds recall; mastered is confirmed again later. It also explains the due clock, including the 30-day review rule, and, for German, French and Italian, the article colours (der/die/das or m/f).
+
+**Verification:** Copy checked against services/words._status, learning.mark_seen, placement re-queueing and LearningPolicy (decay_after 30 days). Playwright at 390px: the legend opens, has no horizontal overflow, and the screenshot was inspected. No console errors. typecheck, next build, ruff pass.

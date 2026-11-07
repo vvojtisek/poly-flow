@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpDown, BookMarked, Clock, Download, FolderOpen, Layers, List, Search, X } from "lucide-react";
+import { ArrowUpDown, BookMarked, CircleHelp, Clock, Download, FolderOpen, Layers, List, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -679,6 +679,37 @@ export default function WordsPage() {
                     </select>
                   </label>
                 </div>
+                <details className="self-start text-sm">
+                  <summary className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-1 py-0.5 text-xs font-medium text-slate-500 hover:text-brand-600">
+                    <CircleHelp className="size-3.5" aria-hidden /> {t.legendTitle}
+                  </summary>
+                  <dl className="mt-2 flex max-w-xl flex-col gap-1.5 rounded-xl border border-slate-200 p-3 dark:border-slate-800">
+                    {LADDER.map((s) => (
+                      <div key={s} className="flex items-start gap-2">
+                        <dt className={`w-24 shrink-0 rounded-full px-2 py-0.5 text-center text-xs font-semibold ${PILL[s]}`}>{t.status[s]}</dt>
+                        <dd className="text-xs text-slate-600 dark:text-slate-300">{t.legend[s]}</dd>
+                      </div>
+                    ))}
+                    <div className="flex items-start gap-2">
+                      <dt className="flex w-24 shrink-0 justify-center">
+                        <Clock className="size-4 text-amber-500" aria-hidden />
+                      </dt>
+                      <dd className="text-xs text-slate-600 dark:text-slate-300">{t.legendDue}</dd>
+                    </div>
+                    {language && language !== "en" && (
+                      <div className="flex items-start gap-2">
+                        <dt className="w-24 shrink-0 text-center text-xs font-semibold">
+                          {(language === "de" ? ["der", "die", "das"] : ["m", "f"]).map((g) => (
+                            <span key={g} className={`mr-1 ${genderClass(g)}`}>
+                              {g}
+                            </span>
+                          ))}
+                        </dt>
+                        <dd className="text-xs text-slate-600 dark:text-slate-300">{t.legendGender}</dd>
+                      </div>
+                    )}
+                  </dl>
+                </details>
                 <div role="group" aria-label={t.kindLabel} className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none]">
                   {KINDS.map((value) => (
                     <button
