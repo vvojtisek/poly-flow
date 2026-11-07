@@ -5127,6 +5127,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-23-calendar-walk",
+   "level": "B1",
+   "title": "La passeggiata programmata",
+   "title_cs": "Procházka podle kalendáře",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva ha inserito una passeggiata quotidiana nel calendario di lavoro.",
+     "cs": "Eva si do pracovního kalendáře zapsala každodenní procházku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Se la programmo come una riunione, nessuno mi darà altro lavoro a quell'ora.",
+     "cs": "Když ji naplánuji jako schůzku, nikdo mi do ní nedá další práci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È ragionevole. Sei già uscita oggi?",
+     "cs": "To je rozumné. Už jsi dnes byla venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "No. Il responsabile ha rinviato l'appuntamento di mezz'ora.",
+     "cs": "Ne. Vedoucí mi ten termín přesunul o půl hodiny."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perché accetti questo cambiamento?",
+     "cs": "A proč s přesunutím souhlasíš?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha mostrato l'invito: Perché ha aggiunto sette partecipanti e un verbale alla mia passeggiata.",
+     "cs": "Eva ukázala pozvánku: Protože mi na procházku přidal sedm účastníků a zápis."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "rinviato",
+     "cs": "odložil"
+    },
+    {
+     "word": "partecipanti",
+     "cs": "účastníci"
+    },
+    {
+     "word": "verbale",
+     "cs": "zápis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co si Eva zapsala?",
+     "options": [
+      "Procházku.",
+      "Dovolenou.",
+      "Lékaře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co vedoucí k termínu přidal?",
+     "options": [
+      "Účastníky a zápis.",
+      "Oběd.",
+      "Psa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

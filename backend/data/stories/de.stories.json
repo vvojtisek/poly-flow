@@ -5127,6 +5127,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-23-calendar-walk",
+   "level": "B1",
+   "title": "Der geplante Spaziergang",
+   "title_cs": "Procházka podle kalendáře",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva trug einen täglichen Spaziergang in ihren Arbeitskalender ein.",
+     "cs": "Eva si do pracovního kalendáře zapsala každodenní procházku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Wenn ich ihn als Besprechung plane, gibt mir niemand in dieser Zeit andere Arbeit.",
+     "cs": "Když ji naplánuji jako schůzku, nikdo mi do ní nedá další práci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das ist vernünftig. Warst du heute schon draußen?",
+     "cs": "To je rozumné. Už jsi dnes byla venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Nein. Mein Chef hat den Termin um eine halbe Stunde verschoben.",
+     "cs": "Ne. Vedoucí mi ten termín přesunul o půl hodiny."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Warum stimmst du der Änderung zu?",
+     "cs": "A proč s přesunutím souhlasíš?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva zeigte die Einladung: Weil er meinem Spaziergang sieben Teilnehmer und ein Protokoll hinzugefügt hat.",
+     "cs": "Eva ukázala pozvánku: Protože mi na procházku přidal sedm účastníků a zápis."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "verschoben",
+     "cs": "posunul"
+    },
+    {
+     "word": "Teilnehmer",
+     "cs": "účastníci"
+    },
+    {
+     "word": "Protokoll",
+     "cs": "zápis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co si Eva zapsala?",
+     "options": [
+      "Procházku.",
+      "Dovolenou.",
+      "Lékaře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co vedoucí k termínu přidal?",
+     "options": [
+      "Účastníky a zápis.",
+      "Oběd.",
+      "Psa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
