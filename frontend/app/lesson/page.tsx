@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CheckCircle2, ChevronRight, Compass, Gauge, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronRight, Compass, Gauge, GraduationCap, LifeBuoy, PlayCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -22,6 +22,7 @@ const SHOW_TEST: Record<Exclude<Show, "all">, (u: GrammarUnitSummary) => boolean
   studied: (u) => u.status !== "new",
   due: (u) => u.due,
 };
+const REVISIT = 3;
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const NEXT: Record<string, CefrLevel> = { "pre-A1": "A1", A1: "A2", A2: "B1", B1: "B2", B2: "C1", "B2+": "C1", C1: "C2", C2: "C2" };
 
@@ -167,6 +168,13 @@ export default function LessonPage() {
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const focusLevel = next?.kind === "new" ? next.level : next?.kind === "resume" ? next.unit.level : (NEXT[placement ?? badge ?? "pre-A1"] ?? "A1");
   const allUnits = tree?.levels.flatMap((section) => section.units) ?? [];
+  // Scaffolding after a failed check: topics with recent check mistakes, worst first, pointing back
+  // to the ungraded lesson (explanation, examples, and the missed exercises as remediation).
+  const skip = next && next.kind !== "check" && next.kind !== "done" ? next.unit.id : null;
+  const revisit = allUnits
+    .filter((u) => u.recent_errors > 0 && u.id !== skip)
+    .sort((a, b) => b.recent_errors - a.recent_errors || LEVELS.indexOf(a.level) - LEVELS.indexOf(b.level))
+    .slice(0, REVISIT);
   return (
     <AppShell me={me}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
@@ -248,6 +256,26 @@ export default function LessonPage() {
           </section>
         )}
         {next?.kind === "done" && <Notice>{cs.lesson.allStudied}</Notice>}
+
+        {revisit.length > 0 && (
+          <section aria-labelledby="revisit-title" className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+            <h2 id="revisit-title" className="flex items-center gap-2 text-lg font-bold"><LifeBuoy className="size-5 text-amber-500" aria-hidden />{cs.lesson.revisitTitle}</h2>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{cs.lesson.revisitHelp}</p>
+            <ul className="mt-3 flex flex-col gap-2">
+              {revisit.map((unit) => (
+                <li key={unit.id}>
+                  <Link href={`/grammar/${unit.id}`} className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-slate-200 px-3 py-2 hover:border-brand-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:border-slate-700">
+                    <span className="min-w-0">
+                      <span className="block truncate font-semibold">{unit.title}</span>
+                      <span className="block text-xs text-slate-500">{unit.level} · {cs.lesson.revisitErrors(unit.recent_errors)}</span>
+                    </span>
+                    <span className="shrink-0 text-sm font-semibold text-brand-700 dark:text-brand-200">{cs.lesson.revisitOpen}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <section className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
           <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -337,6 +365,7 @@ export default function LessonPage() {
                               <strong>{unit.title}</strong>
                               <span className="flex shrink-0 items-center gap-1 text-xs">
                                 {tree.active_lesson_unit === unit.id && <span className="rounded-full bg-brand-500/15 px-2 py-0.5 font-semibold text-brand-700 dark:text-brand-100">{cs.lesson.openBadge}</span>}
+                                {unit.recent_errors > 0 && <span className="rounded-full bg-rose-100 px-2 py-0.5 font-semibold text-rose-800 dark:bg-rose-950 dark:text-rose-200">{cs.lesson.errorsBadge(unit.recent_errors)}</span>}
                                 {unit.due && <span className="rounded-full bg-amber-100 px-2 py-0.5 font-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-200">{cs.lesson.dueBadge}</span>}
                                 <span className="text-slate-500">{cs.grammar.status[unit.status]}</span>
                               </span>

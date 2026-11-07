@@ -1935,3 +1935,13 @@ Vlad approves a push.
 **Implemented Solution:** Each level is now a details/summary disclosure with its coverage bar in the summary. It is open for the focus level (the level of the recommended next topic, otherwise the one above the placement/badge estimate), for any level holding a due or open lesson, and for every level while a filter is active.
 
 **Verification:** l84.js: default A1 open and A2-C2 closed; clicking A2 opens it; the Nové filter shows A1-B2 open; no console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 85/120 | Page: [/lesson] (Page Cycle 10/15)
+
+**Summary:** point back to the explanation after failed checks
+
+**Observed Problem:** When a grammar check went wrong, /lesson kept recommending only the next new topic. The tree already returned recent_errors per unit (check mistakes within the 21-day remediation window), but nothing on the page used it, so a learner who failed a topic had no route back to its ungraded explanation.
+
+**Implemented Solution:** A 'Vrátit se k výkladu' panel lists up to three topics with recent check mistakes, worst first and lower level first on ties, excluding the topic already on the recommendation card. Each links to the ungraded lesson, which already replays the missed exercises as remediation. Topic cards get a matching 'N chyby' badge. No score is created: the panel only reads check evidence.
+
+**Verification:** Made 4 wrong check answers in de (sein 2, articles 2) through the API. l85.js at 390px: panel lists articles only (sein is the open-lesson card), link /grammar/de-a1-articles, both cards show '2 chyby', no horizontal overflow, no console errors. Typecheck, build, ruff passed.
