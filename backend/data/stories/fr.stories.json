@@ -509,6 +509,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-07-lost-phone",
+   "level": "A1",
+   "title": "Le téléphone perdu",
+   "title_cs": "Ztracený mobil",
+   "lines": [
+    {
+     "text": "Jean cherche son téléphone. Il cherche dans la salle de bains, dans la cuisine et dans le lit.",
+     "cs": "Jan hledá mobil. Hledá v koupelně, v kuchyni a v posteli."
+    },
+    {
+     "text": "Jean appelle Mia.",
+     "cs": "Jan volá Mie."
+    },
+    {
+     "speaker": "Jean",
+     "text": "Allô Mia ! Je ne trouve pas mon téléphone. Tu peux m'aider ?",
+     "cs": "Ahoj, Mio! Nemůžu najít mobil. Můžeš mi pomoct?"
+    },
+    {
+     "speaker": "Mia",
+     "text": "Bien sûr. Où es-tu ?",
+     "cs": "Jasně. Kde jsi?"
+    },
+    {
+     "speaker": "Jean",
+     "text": "Je suis à la maison. Je ne le vois nulle part.",
+     "cs": "Jsem doma. Nikde ho nevidím."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Et avec quel téléphone tu me parles ?",
+     "cs": "A čím mi voláš?"
+    },
+    {
+     "speaker": "Jean",
+     "text": "Avec... mon téléphone.",
+     "cs": "Mým... mobilem."
+    },
+    {
+     "text": "Mia rit. Elle dit : Alors tu l'as dans la main, Jean !",
+     "cs": "Mia se směje: Tak ho máš v ruce, Jane!"
+    },
+    {
+     "speaker": "Jean",
+     "text": "Ah oui. Merci, Mia ! Tu es la meilleure.",
+     "cs": "Aha. Díky, Mio! Jsi nejlepší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "sûr",
+     "cs": "sûr: bien sûr = samozřejmě"
+    },
+    {
+     "word": "nulle",
+     "cs": "nulle part = nikde"
+    },
+    {
+     "word": "rit",
+     "cs": "směje se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que cherche Jean ?",
+     "options": [
+      "Son téléphone",
+      "Sa clé",
+      "Son livre"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Où est le téléphone ?",
+     "options": [
+      "Dans sa main",
+      "Dans le lit",
+      "Dans la cuisine"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -509,6 +509,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-07-lost-phone",
+   "level": "A1",
+   "title": "Das verlorene Handy",
+   "title_cs": "Ztracený mobil",
+   "lines": [
+    {
+     "text": "Jan sucht sein Handy. Er sucht im Bad, in der Küche und im Bett.",
+     "cs": "Jan hledá mobil. Hledá v koupelně, v kuchyni a v posteli."
+    },
+    {
+     "text": "Jan ruft Mia an.",
+     "cs": "Jan volá Mie."
+    },
+    {
+     "speaker": "Jan",
+     "text": "Hallo Mia! Ich finde mein Handy nicht. Kannst du mir helfen?",
+     "cs": "Ahoj, Mio! Nemůžu najít mobil. Můžeš mi pomoct?"
+    },
+    {
+     "speaker": "Mia",
+     "text": "Natürlich. Wo bist du?",
+     "cs": "Jasně. Kde jsi?"
+    },
+    {
+     "speaker": "Jan",
+     "text": "Ich bin zu Hause. Ich sehe es nirgends.",
+     "cs": "Jsem doma. Nikde ho nevidím."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Und mit welchem Telefon sprichst du mit mir?",
+     "cs": "A čím mi voláš?"
+    },
+    {
+     "speaker": "Jan",
+     "text": "Mit ... meinem Handy.",
+     "cs": "Mým... mobilem."
+    },
+    {
+     "text": "Mia lacht. Sie sagt: Dann hast du es in der Hand, Jan!",
+     "cs": "Mia se směje: Tak ho máš v ruce, Jane!"
+    },
+    {
+     "speaker": "Jan",
+     "text": "Ach ja. Danke, Mia! Du bist die Beste.",
+     "cs": "Aha. Díky, Mio! Jsi nejlepší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "natürlich",
+     "cs": "samozřejmě"
+    },
+    {
+     "word": "nirgends",
+     "cs": "nikde"
+    },
+    {
+     "word": "lacht",
+     "cs": "směje se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was sucht Jan?",
+     "options": [
+      "Sein Handy",
+      "Seinen Schlüssel",
+      "Sein Buch"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wo ist das Handy?",
+     "options": [
+      "In seiner Hand",
+      "Im Bett",
+      "In der Küche"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

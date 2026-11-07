@@ -509,6 +509,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-07-lost-phone",
+   "level": "A1",
+   "title": "Il telefono perso",
+   "title_cs": "Ztracený mobil",
+   "lines": [
+    {
+     "text": "Gianni cerca il telefono. Cerca in bagno, in cucina e nel letto.",
+     "cs": "Jan hledá mobil. Hledá v koupelně, v kuchyni a v posteli."
+    },
+    {
+     "text": "Gianni chiama Mia.",
+     "cs": "Jan volá Mie."
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Ciao Mia! Non trovo il mio telefono. Puoi aiutarmi?",
+     "cs": "Ahoj, Mio! Nemůžu najít mobil. Můžeš mi pomoct?"
+    },
+    {
+     "speaker": "Mia",
+     "text": "Certo. Dove sei?",
+     "cs": "Jasně. Kde jsi?"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Sono a casa. Non lo vedo da nessuna parte.",
+     "cs": "Jsem doma. Nikde ho nevidím."
+    },
+    {
+     "speaker": "Mia",
+     "text": "E con che telefono mi parli?",
+     "cs": "A čím mi voláš?"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Con... il mio telefono.",
+     "cs": "Mým... mobilem."
+    },
+    {
+     "text": "Mia ride. Dice: Allora ce l'hai in mano, Gianni!",
+     "cs": "Mia se směje: Tak ho máš v ruce, Jane!"
+    },
+    {
+     "speaker": "Gianni",
+     "text": "Ah, già. Grazie, Mia! Sei la migliore.",
+     "cs": "Aha. Díky, Mio! Jsi nejlepší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Certo",
+     "cs": "samozřejmě"
+    },
+    {
+     "word": "nessuna",
+     "cs": "žádná; da nessuna parte = nikde"
+    },
+    {
+     "word": "ride",
+     "cs": "směje se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa cerca Gianni?",
+     "options": [
+      "Il telefono",
+      "La chiave",
+      "Il libro"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è il telefono?",
+     "options": [
+      "In mano",
+      "Nel letto",
+      "In cucina"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

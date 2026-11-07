@@ -509,6 +509,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-07-lost-phone",
+   "level": "A1",
+   "title": "The Lost Phone",
+   "title_cs": "Ztracený mobil",
+   "lines": [
+    {
+     "text": "John is looking for his phone. He looks in the bathroom, in the kitchen and in bed.",
+     "cs": "Jan hledá mobil. Hledá v koupelně, v kuchyni a v posteli."
+    },
+    {
+     "text": "John calls Mia.",
+     "cs": "Jan volá Mie."
+    },
+    {
+     "speaker": "John",
+     "text": "Hello Mia! I can't find my phone. Can you help me?",
+     "cs": "Ahoj, Mio! Nemůžu najít mobil. Můžeš mi pomoct?"
+    },
+    {
+     "speaker": "Mia",
+     "text": "Of course. Where are you?",
+     "cs": "Jasně. Kde jsi?"
+    },
+    {
+     "speaker": "John",
+     "text": "I'm at home. I can't see it anywhere.",
+     "cs": "Jsem doma. Nikde ho nevidím."
+    },
+    {
+     "speaker": "Mia",
+     "text": "And which phone are you talking to me on?",
+     "cs": "A čím mi voláš?"
+    },
+    {
+     "speaker": "John",
+     "text": "On... my phone.",
+     "cs": "Mým... mobilem."
+    },
+    {
+     "text": "Mia laughs. She says: Then you have it in your hand, John!",
+     "cs": "Mia se směje: Tak ho máš v ruce, Jane!"
+    },
+    {
+     "speaker": "John",
+     "text": "Oh yes. Thanks, Mia! You are the best.",
+     "cs": "Aha. Díky, Mio! Jsi nejlepší."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "course",
+     "cs": "of course = samozřejmě"
+    },
+    {
+     "word": "anywhere",
+     "cs": "kdekoli; nikde"
+    },
+    {
+     "word": "laughs",
+     "cs": "směje se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What is John looking for?",
+     "options": [
+      "His phone",
+      "His key",
+      "His book"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Where is the phone?",
+     "options": [
+      "In his hand",
+      "In bed",
+      "In the kitchen"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
