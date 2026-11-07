@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CheckCircle2, Compass, Gauge, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronRight, Compass, Gauge, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -165,6 +165,7 @@ export default function LessonPage() {
   }, [tree, placement, badge]);
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
+  const focusLevel = next?.kind === "new" ? next.level : next?.kind === "resume" ? next.unit.level : (NEXT[placement ?? badge ?? "pre-A1"] ?? "A1");
   const allUnits = tree?.levels.flatMap((section) => section.units) ?? [];
   return (
     <AppShell me={me}>
@@ -302,20 +303,31 @@ export default function LessonPage() {
               const units = show === "all" ? levelUnits : levelUnits.filter(SHOW_TEST[show]);
               // A filter hides levels with no match instead of showing empty boxes.
               if (show !== "all" && units.length === 0) return null;
+              // Open by default: any filtered view, the level the recommendation comes from, and
+              // levels holding an open lesson or a due check. The rest start folded to their header.
+              const expanded =
+                show !== "all" ||
+                level === focusLevel ||
+                levelUnits.some((u) => u.due || u.id === tree.active_lesson_unit);
               return (
-                <section key={level} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-                  <h3 className="mb-3 flex items-center justify-between gap-2 font-bold">
-                    <span>{level}</span>
+                <details key={`${level}:${show}`} open={expanded} className="group rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+                  <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <h3 className="mb-2 flex items-center justify-between gap-2 font-bold">
+                    <span className="flex items-center gap-1.5">
+                      <ChevronRight className="size-4 text-slate-400 transition-transform group-open:rotate-90" aria-hidden />
+                      {level}
+                    </span>
                     <span className="text-xs font-normal text-slate-500">
                       {levelUnits.length ? cs.lesson.levelCoverage(levelUnits.filter((u) => u.status !== "new").length, levelUnits.length, levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length) : cs.lesson.notAvailable}
                     </span>
                   </h3>
                   {levelUnits.length > 0 && (
-                    <div className="-mt-1 mb-3 flex h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" aria-hidden>
+                    <div className="flex h-1.5 overflow-hidden rounded-full bg-slate-100 group-open:mb-3 dark:bg-slate-800" aria-hidden>
                       <div className="bg-emerald-500" style={{ width: `${(levelUnits.filter((u) => u.status === "known" || u.status === "mastered").length / levelUnits.length) * 100}%` }} />
                       <div className="bg-sky-400" style={{ width: `${(levelUnits.filter((u) => u.status === "studied").length / levelUnits.length) * 100}%` }} />
                     </div>
                   )}
+                  </summary>
                   {units.length ? (
                     <ul className="grid gap-2 md:grid-cols-2">
                       {units.map((unit) => (
@@ -345,7 +357,7 @@ export default function LessonPage() {
                       ))}
                     </ul>
                   ) : <p className="text-sm text-slate-500">{cs.lesson.levelNotImplemented}</p>}
-                </section>
+                </details>
               );
             })}
             {!allUnits.length && <Notice>{cs.lesson.noGrammarContent}</Notice>}

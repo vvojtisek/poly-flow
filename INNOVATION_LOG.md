@@ -1925,3 +1925,13 @@ Vlad approves a push.
 **Implemented Solution:** A chip row above the list (Vše 37 / Nové 35 / Prostudované 2 / K ověření 2) filters the topic cards. Chips with no match are disabled. With a filter on, levels without matches are hidden, while each level header keeps its full coverage numbers. The choice is kept in the URL (?show=), so Back from a topic returns to the same filtered list.
 
 **Verification:** Playwright 390px: the chips read 'Vše 37, Nové 35, Prostudované 2, K ověření 2'; K ověření shows only the A1 box with sein and der/die/das and sets ?show=due; opening a topic and going Back keeps ?show=due and the same two cards; no horizontal overflow. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 84/120 | Page: [/lesson] (Page Cycle 9/15)
+
+**Summary:** fold levels away from the learner's focus
+
+**Observed Problem:** With 37 topic cards spread across six level boxes that were all open, the page was about 4000px tall on a phone, and the learner's own level was buried under levels they had not reached.
+
+**Implemented Solution:** Each level is now a details/summary disclosure with its coverage bar in the summary. It is open for the focus level (the level of the recommended next topic, otherwise the one above the placement/badge estimate), for any level holding a due or open lesson, and for every level while a filter is active.
+
+**Verification:** l84.js: default A1 open and A2-C2 closed; clicking A2 opens it; the Nové filter shows A1-B2 open; no console errors. Typecheck, build, ruff passed.
