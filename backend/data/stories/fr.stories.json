@@ -2867,6 +2867,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-03-fine-print",
+   "level": "B2",
+   "title": "L'article 112",
+   "title_cs": "Odstavec 112",
+   "lines": [
+    {
+     "text": "L'avocate Sabine Hartmann était la seule personne à avoir jamais lu jusqu'au bout les conditions d'utilisation d'une application. Par habitude, pas par curiosité.",
+     "cs": "Právnička Sabine Hartmannová byla jediným člověkem, který kdy dočetl obchodní podmínky nějaké aplikace do konce. Z návyku, ne ze zvědavosti."
+    },
+    {
+     "text": "À la page 84, à l'article 112, il était écrit : Le premier utilisateur qui signale cet article reçoit dix mille euros.",
+     "cs": "Na straně 84 stálo v odstavci 112: První uživatel, který tento odstavec nahlásí, obdrží deset tisíc eur."
+    },
+    {
+     "text": "Elle a appelé le service client. L'employé s'est tu longtemps.",
+     "cs": "Zavolala na zákaznickou linku. Zaměstnanec dlouho mlčel."
+    },
+    {
+     "speaker": "Employé",
+     "text": "Excusez-moi, je dois en parler avec ma supérieure.",
+     "cs": "Promiňte, musím to konzultovat s nadřízenou."
+    },
+    {
+     "text": "La supérieure a renvoyé au service juridique, le service juridique au directeur.",
+     "cs": "Nadřízená odkázala na právní oddělení, právní oddělení na jednatele."
+    },
+    {
+     "speaker": "Directeur",
+     "text": "Qui, bon sang, a écrit cet article ?",
+     "cs": "Kdo proboha napsal tento odstavec?"
+    },
+    {
+     "text": "La réponse se trouvait dans les archives : lui-même, en 2016, après une longue soirée.",
+     "cs": "Odpověď ležela v archivu: on sám, roku 2016, po dlouhém večeru."
+    },
+    {
+     "speaker": "Directeur",
+     "text": "C'était une blague. Personne ne lit ces choses-là.",
+     "cs": "To byl vtip. Nikdo nic takového nečte."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Un contrat reste un contrat, même s'il était censé être drôle. D'autant que l'article 112 est juridiquement irréprochable.",
+     "cs": "Smlouva je smlouva, i když byla míněna jako žert. Zvlášť když je odstavec 112 po právní stránce naprosto bezchybný."
+    },
+    {
+     "text": "Au bout de trois semaines et de deux expertises, l'entreprise a viré l'argent.",
+     "cs": "Po třech týdnech a dvou posudcích firma peníze převedla."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Merci. Au fait, l'article 31 contredit l'article 87. Je vous conseillerai volontiers. Mes honoraires figurent évidemment dans les petits caractères.",
+     "cs": "Děkuji. Mimochodem, odstavec 31 odporuje odstavci 87. Ráda vám poradím. Můj honorář je samozřejmě uveden v drobném písmu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "juridique",
+     "cs": "právní"
+    },
+    {
+     "word": "irréprochable",
+     "cs": "bezchybný"
+    },
+    {
+     "word": "honoraires",
+     "cs": "honorář"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que dit l'article 112 ?",
+     "options": [
+      "Le premier qui le signale reçoit dix mille euros.",
+      "L'application est gratuite.",
+      "L'entreprise n'est responsable de rien."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi cet article figure-t-il dans les conditions ?",
+     "options": [
+      "Le directeur l'a écrit pour plaisanter.",
+      "La loi l'exige.",
+      "Un client l'a proposé."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

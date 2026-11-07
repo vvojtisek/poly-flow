@@ -2867,6 +2867,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-03-fine-print",
+   "level": "B2",
+   "title": "Absatz 112",
+   "title_cs": "Odstavec 112",
+   "lines": [
+    {
+     "text": "Die Rechtsanwältin Sabine Hartmann war die einzige Person, die jemals die Nutzungsbedingungen einer App bis zum Ende gelesen hatte. Aus Gewohnheit, nicht aus Neugier.",
+     "cs": "Právnička Sabine Hartmannová byla jediným člověkem, který kdy dočetl obchodní podmínky nějaké aplikace do konce. Z návyku, ne ze zvědavosti."
+    },
+    {
+     "text": "Auf Seite 84, in Absatz 112, stand: Der erste Nutzer, der diesen Absatz meldet, erhält zehntausend Euro.",
+     "cs": "Na straně 84 stálo v odstavci 112: První uživatel, který tento odstavec nahlásí, obdrží deset tisíc eur."
+    },
+    {
+     "text": "Sie rief den Kundendienst an. Der Mitarbeiter schwieg lange.",
+     "cs": "Zavolala na zákaznickou linku. Zaměstnanec dlouho mlčel."
+    },
+    {
+     "speaker": "Mitarbeiter",
+     "text": "Entschuldigen Sie, ich muss das mit meiner Vorgesetzten klären.",
+     "cs": "Promiňte, musím to konzultovat s nadřízenou."
+    },
+    {
+     "text": "Die Vorgesetzte verwies auf die Rechtsabteilung, die Rechtsabteilung auf den Geschäftsführer.",
+     "cs": "Nadřízená odkázala na právní oddělení, právní oddělení na jednatele."
+    },
+    {
+     "speaker": "Geschäftsführer",
+     "text": "Wer um Himmels willen hat diesen Absatz geschrieben?",
+     "cs": "Kdo proboha napsal tento odstavec?"
+    },
+    {
+     "text": "Die Antwort lag im Archiv: er selbst, im Jahr 2016, nach einem langen Abend.",
+     "cs": "Odpověď ležela v archivu: on sám, roku 2016, po dlouhém večeru."
+    },
+    {
+     "speaker": "Geschäftsführer",
+     "text": "Das war ein Scherz. Niemand liest so etwas.",
+     "cs": "To byl vtip. Nikdo nic takového nečte."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Ein Vertrag ist ein Vertrag, auch wenn er scherzhaft gemeint war. Zumal Absatz 112 rechtlich völlig einwandfrei formuliert ist.",
+     "cs": "Smlouva je smlouva, i když byla míněna jako žert. Zvlášť když je odstavec 112 po právní stránce naprosto bezchybný."
+    },
+    {
+     "text": "Nach drei Wochen und zwei Gutachten überwies die Firma das Geld.",
+     "cs": "Po třech týdnech a dvou posudcích firma peníze převedla."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Danke. Übrigens widerspricht Absatz 31 dem Absatz 87. Ich berate Sie gern. Mein Honorar steht natürlich im Kleingedruckten.",
+     "cs": "Děkuji. Mimochodem, odstavec 31 odporuje odstavci 87. Ráda vám poradím. Můj honorář je samozřejmě uveden v drobném písmu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Rechtsabteilung",
+     "cs": "právní oddělení"
+    },
+    {
+     "word": "einwandfrei",
+     "cs": "bezchybně"
+    },
+    {
+     "word": "Kleingedruckten",
+     "cs": "drobné písmo"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was steht in Absatz 112?",
+     "options": [
+      "Der erste Melder bekommt zehntausend Euro.",
+      "Die App ist kostenlos.",
+      "Die Firma haftet für nichts."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum steht der Absatz in den Bedingungen?",
+     "options": [
+      "Der Geschäftsführer hat ihn als Scherz geschrieben.",
+      "Das Gesetz verlangt ihn.",
+      "Ein Kunde hat ihn vorgeschlagen."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

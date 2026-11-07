@@ -2867,6 +2867,97 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-03-fine-print",
+   "level": "B2",
+   "title": "Clause 112",
+   "title_cs": "Odstavec 112",
+   "lines": [
+    {
+     "text": "The solicitor Sabine Hartmann was the only person who had ever read an app's terms and conditions to the end. Out of habit, not curiosity.",
+     "cs": "Právnička Sabine Hartmannová byla jediným člověkem, který kdy dočetl obchodní podmínky nějaké aplikace do konce. Z návyku, ne ze zvědavosti."
+    },
+    {
+     "text": "On page 84, in clause 112, it said: The first user to report this clause will receive ten thousand euros.",
+     "cs": "Na straně 84 stálo v odstavci 112: První uživatel, který tento odstavec nahlásí, obdrží deset tisíc eur."
+    },
+    {
+     "text": "She phoned customer service. The employee was silent for a long time.",
+     "cs": "Zavolala na zákaznickou linku. Zaměstnanec dlouho mlčel."
+    },
+    {
+     "speaker": "Employee",
+     "text": "Excuse me, I have to check this with my supervisor.",
+     "cs": "Promiňte, musím to konzultovat s nadřízenou."
+    },
+    {
+     "text": "The supervisor referred her to the legal department, the legal department to the managing director.",
+     "cs": "Nadřízená odkázala na právní oddělení, právní oddělení na jednatele."
+    },
+    {
+     "speaker": "Director",
+     "text": "Who on earth wrote this clause?",
+     "cs": "Kdo proboha napsal tento odstavec?"
+    },
+    {
+     "text": "The answer was in the archive: he himself, in 2016, after a long evening.",
+     "cs": "Odpověď ležela v archivu: on sám, roku 2016, po dlouhém večeru."
+    },
+    {
+     "speaker": "Director",
+     "text": "It was a joke. Nobody reads these things.",
+     "cs": "To byl vtip. Nikdo nic takového nečte."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "A contract is a contract, even if it was meant as a joke. Especially as clause 112 is legally flawless.",
+     "cs": "Smlouva je smlouva, i když byla míněna jako žert. Zvlášť když je odstavec 112 po právní stránce naprosto bezchybný."
+    },
+    {
+     "text": "After three weeks and two expert opinions, the company transferred the money.",
+     "cs": "Po třech týdnech a dvou posudcích firma peníze převedla."
+    },
+    {
+     "speaker": "Hartmann",
+     "text": "Thank you. By the way, clause 31 contradicts clause 87. I would be happy to advise you. My fee is, of course, in the small print.",
+     "cs": "Děkuji. Mimochodem, odstavec 31 odporuje odstavci 87. Ráda vám poradím. Můj honorář je samozřejmě uveden v drobném písmu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "solicitor",
+     "cs": "právník"
+    },
+    {
+     "word": "clause",
+     "cs": "odstavec, klauzule"
+    },
+    {
+     "word": "flawless",
+     "cs": "bezvadný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does clause 112 say?",
+     "options": [
+      "The first person to report it gets ten thousand euros.",
+      "The app is free.",
+      "The company is not liable for anything."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why is the clause in the terms?",
+     "options": [
+      "The director wrote it as a joke.",
+      "The law requires it.",
+      "A customer suggested it."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
