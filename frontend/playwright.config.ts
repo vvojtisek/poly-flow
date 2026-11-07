@@ -9,7 +9,7 @@ export default defineConfig({
   retries: 0,
   reporter: [["list"]],
   use: {
-    baseURL: process.env.E2E_BASE_URL ?? "http://localhost:3000",
+    baseURL: process.env.E2E_BASE_URL ?? "http://localhost:3001",
     locale: "cs-CZ",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
