@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
-import { Button, Notice } from "@/components/ui";
+import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { PlayButton } from "@/components/PlayButton";
 import { getDiagnosticInfo, getGrammarTree, getGrammarUnit, getLessonPreview, grammarExampleAudioUrl, getProgress, type CefrLevel, type GrammarTree, type GrammarUnitSummary, type LessonPreview, type LevelBadge } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
@@ -81,6 +81,10 @@ export default function LessonPage() {
   const [badge, setBadge] = useState<string | null>(null);
   const [introduced, setIntroduced] = useState<number | null>(null);
   const [failed, setFailed] = useState(false);
+  // The estimate and vocabulary progress are optional refinements; when they fail, say so instead
+  // of presenting "no estimate yet", which would turn missing data into a claim.
+  const [partial, setPartial] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [openSession, setOpenSession] = useState(false);
   const [estimate, setEstimate] = useState<{ level: string; at: string | null; source: "test" | "progress" } | null>(null);
   const [testOpen, setTestOpen] = useState(false);
@@ -108,6 +112,7 @@ export default function LessonPage() {
     setFailed(false);
     setPreview(null);
     setOpenSession(false);
+    setPartial(false);
     // The grammar tree is the page; the estimate, progress and lesson preview only refine it, so
     // one of them failing must not blank the whole overview.
     Promise.allSettled([getGrammarTree(language), getDiagnosticInfo(language), getProgress(language), getLessonPreview(language)]).then(
@@ -118,6 +123,7 @@ export default function LessonPage() {
           return;
         }
         setTree(grammar.value);
+        setPartial(assessment.status === "rejected" || progress.status === "rejected");
         const p = progress.status === "fulfilled" ? progress.value : null;
         const a = assessment.status === "fulfilled" ? assessment.value : null;
         setPlacement(a?.latest?.level ?? p?.cefr_level ?? null);
@@ -135,7 +141,7 @@ export default function LessonPage() {
     return () => {
       live = false;
     };
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, attempt]);
 
   // What to do next, in order: finish a lesson that is open, clear due checks, then the first topic
   // not studied yet, starting at the level after the learner's estimate. A studied topic is never
@@ -190,7 +196,9 @@ export default function LessonPage() {
           // Where the recommendation comes from, and how to change it.
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-600 dark:text-slate-300">
             <Gauge className="size-4 text-slate-400" aria-hidden />
-            {estimate
+            {partial && !estimate && !badge
+              ? cs.lesson.estimateFailed
+              : estimate
               ? estimate.source === "test" && estimate.at
                 ? cs.lesson.estimateFromTest(estimate.level, new Date(estimate.at).toLocaleDateString("cs-CZ"))
                 : cs.lesson.estimateFromProgress(estimate.level)
@@ -204,8 +212,18 @@ export default function LessonPage() {
             )}
           </p>
         )}
-        {failed && <Notice tone="error">{cs.common.error}</Notice>}
-        {!tree && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
+        {failed && <RetryNotice text={cs.lesson.treeFailed} onRetry={() => setAttempt((n) => n + 1)} />}
+        {partial && tree && (
+          <button type="button" onClick={() => setAttempt((n) => n + 1)} className="self-start text-xs font-semibold text-brand-700 hover:underline dark:text-brand-200">
+            {cs.lesson.partialRetry}
+          </button>
+        )}
+        {!tree && !failed && (
+          <div className="flex flex-col gap-5" aria-busy>
+            <div className="rounded-2xl border border-slate-200 p-4 dark:border-slate-800 sm:p-5"><Skeleton lines={4} /></div>
+            <div className="rounded-2xl border border-slate-200 p-4 dark:border-slate-800"><Skeleton lines={2} /></div>
+          </div>
+        )}
 
         {next?.kind === "resume" && (
           <section className="rounded-2xl border border-brand-500/40 bg-brand-500/5 p-4 sm:p-5">

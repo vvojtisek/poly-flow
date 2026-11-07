@@ -1945,3 +1945,13 @@ Vlad approves a push.
 **Implemented Solution:** A 'Vrátit se k výkladu' panel lists up to three topics with recent check mistakes, worst first and lower level first on ties, excluding the topic already on the recommendation card. Each links to the ungraded lesson, which already replays the missed exercises as remediation. Topic cards get a matching 'N chyby' badge. No score is created: the panel only reads check evidence.
 
 **Verification:** Made 4 wrong check answers in de (sein 2, articles 2) through the API. l85.js at 390px: panel lists articles only (sein is the open-lesson card), link /grammar/de-a1-articles, both cards show '2 chyby', no horizontal overflow, no console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 86/120 | Page: [/lesson] (Page Cycle 11/15)
+
+**Summary:** retry a failed overview and never pass off a failed estimate as no estimate
+
+**Observed Problem:** A grammar tree failure left a dead red notice with no way to retry except reloading. Loading was a single 'Načítám…' line, so the page jumped when the content arrived. When only the diagnostic or progress request failed, the estimate line said 'Zatím bez odhadu úrovně', which presents a failed request as a fact about the learner.
+
+**Implemented Solution:** Tree failure now shows a RetryNotice that refetches all four requests and says the vocabulary lesson still works. A failed estimate or progress request is tracked as partial: the estimate line says it could not be loaded, with a 'Načíst odhad úrovně znovu' button. Loading shows skeleton cards in the shape of the recommendation and vocabulary panels.
+
+**Verification:** l86.js with routed 500s: the alert shows the new text, and the vocabulary link is still present. Retry restores 6 level sections. The estimate line reads the failure text. The partial retry restores the real estimate and hides its button. l86b.js with a 3 s delay: 2 skeletons while loading, then 0. No console errors other than the forced 500s. Typecheck, build, ruff passed.
