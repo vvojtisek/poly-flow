@@ -3234,6 +3234,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-07-pet-pebble",
+   "level": "B2",
+   "title": "L'animal de compagnie en pierre",
+   "title_cs": "Kamenný mazlíček",
+   "lines": [
+    {
+     "text": "Mira a présenté à des investisseurs sa start-up : Galet & Cie, le premier animal de compagnie sans inconvénients.",
+     "cs": "Mira představila investorům svůj start-up: Oblázek & spol., první domácí mazlíček bez nevýhod."
+    },
+    {
+     "speaker": "Mira",
+     "text": "Notre produit est un galet choisi à la main, avec un nom, un certificat et un abonnement.",
+     "cs": "Naším produktem je ručně vybraný oblázek s jménem, certifikátem a předplatným."
+    },
+    {
+     "speaker": "Investisseur",
+     "text": "Un caillou ?",
+     "cs": "Kámen?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Un compagnon facile à vivre, sans allergènes, absolument fidèle. Pas de vétérinaire, pas de dressage, pas de poils.",
+     "cs": "Nenáročný, bez alergenů, naprosto věrný společník. Žádný veterinář, žádná výchova, žádné chlupy."
+    },
+    {
+     "speaker": "Investisseur",
+     "text": "Et l'abonnement ?",
+     "cs": "A to předplatné?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Chaque mois, nous envoyons à votre galet une photo de lui-même. Un nouvel angle de vue. Douze euros.",
+     "cs": "Jednou měsíčně pošleme vašemu oblázku jeho vlastní fotografii. Nový úhel pohledu. Dvanáct eur."
+    },
+    {
+     "text": "Les investisseurs se sont tus. Puis l'un d'eux a levé la main : Le galet a-t-il un profil sur les réseaux sociaux ?",
+     "cs": "Investoři mlčeli. Pak jeden zvedl ruku: Má ten oblázek profil na sociální síti?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Bien sûr. Il a plus d'abonnés que nous.",
+     "cs": "Samozřejmě. Má víc sledujících než my."
+    },
+    {
+     "text": "Une demi-heure plus tard, elle avait quatre millions d'euros de capital.",
+     "cs": "O půl hodiny později měla čtyři miliony eur kapitálu."
+    },
+    {
+     "text": "Trois ans plus tard, un journaliste lui a demandé : Comment expliquez-vous ce succès ?",
+     "cs": "O tři roky později se jí zeptal novinář: Jak si vysvětlujete ten úspěch?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "C'est simple : en trois ans, pas un seul client ne s'est plaint. Les galets sont étonnamment patients.",
+     "cs": "Docela jednoduše: za tři roky si nestěžoval jediný zákazník. Oblázky jsou překvapivě trpělivé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "allergènes",
+     "cs": "alergeny"
+    },
+    {
+     "word": "abonnés",
+     "cs": "sledující"
+    },
+    {
+     "word": "capital",
+     "cs": "kapitál"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que vend Mira ?",
+     "options": [
+      "Des galets comme animaux de compagnie",
+      "De la nourriture pour chiens",
+      "Des meubles de jardin"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi aucun client ne se plaint-il ?",
+     "options": [
+      "Les « animaux » sont des pierres, donc patients.",
+      "Le service est parfait.",
+      "Les clients sont remboursés."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

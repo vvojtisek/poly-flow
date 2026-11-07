@@ -3234,6 +3234,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-07-pet-pebble",
+   "level": "B2",
+   "title": "Das Haustier aus Stein",
+   "title_cs": "Kamenný mazlíček",
+   "lines": [
+    {
+     "text": "Mira stellte Investoren ihr Start-up vor: Kiesel & Co., das erste Haustier ohne Nachteile.",
+     "cs": "Mira představila investorům svůj start-up: Oblázek & spol., první domácí mazlíček bez nevýhod."
+    },
+    {
+     "speaker": "Mira",
+     "text": "Unser Produkt ist ein handverlesener Kieselstein mit Namen, Zertifikat und Abonnement.",
+     "cs": "Naším produktem je ručně vybraný oblázek s jménem, certifikátem a předplatným."
+    },
+    {
+     "speaker": "Investor",
+     "text": "Ein Stein?",
+     "cs": "Kámen?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Ein pflegeleichter, allergenfreier, absolut treuer Begleiter. Kein Tierarzt, keine Erziehung, keine Haare.",
+     "cs": "Nenáročný, bez alergenů, naprosto věrný společník. Žádný veterinář, žádná výchova, žádné chlupy."
+    },
+    {
+     "speaker": "Investor",
+     "text": "Und das Abonnement?",
+     "cs": "A to předplatné?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Jeden Monat schicken wir Ihrem Kiesel ein Foto von sich selbst. Ein neuer Blickwinkel. Zwölf Euro.",
+     "cs": "Jednou měsíčně pošleme vašemu oblázku jeho vlastní fotografii. Nový úhel pohledu. Dvanáct eur."
+    },
+    {
+     "text": "Die Investoren schwiegen. Dann hob einer die Hand: Hat der Kiesel ein Profil in den sozialen Netzwerken?",
+     "cs": "Investoři mlčeli. Pak jeden zvedl ruku: Má ten oblázek profil na sociální síti?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Natürlich. Er hat mehr Follower als wir.",
+     "cs": "Samozřejmě. Má víc sledujících než my."
+    },
+    {
+     "text": "Eine halbe Stunde später hatte sie vier Millionen Euro Kapital.",
+     "cs": "O půl hodiny později měla čtyři miliony eur kapitálu."
+    },
+    {
+     "text": "Drei Jahre später fragte sie ein Journalist: Wie erklären Sie diesen Erfolg?",
+     "cs": "O tři roky později se jí zeptal novinář: Jak si vysvětlujete ten úspěch?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Ganz einfach: In drei Jahren hat sich kein einziger Kunde beschwert. Kiesel sind erstaunlich geduldig.",
+     "cs": "Docela jednoduše: za tři roky si nestěžoval jediný zákazník. Oblázky jsou překvapivě trpělivé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "handverlesener",
+     "cs": "ručně vybraný"
+    },
+    {
+     "word": "pflegeleichter",
+     "cs": "nenáročný"
+    },
+    {
+     "word": "Kapital",
+     "cs": "kapitál"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was verkauft Mira?",
+     "options": [
+      "Kieselsteine als Haustiere",
+      "Hundefutter",
+      "Gartenmöbel"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum beschwert sich kein Kunde?",
+     "options": [
+      "Die „Haustiere“ sind Steine und damit geduldig.",
+      "Der Service ist perfekt.",
+      "Die Kunden bekommen Geld zurück."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

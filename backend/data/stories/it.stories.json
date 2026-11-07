@@ -3234,6 +3234,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-07-pet-pebble",
+   "level": "B2",
+   "title": "L'animale domestico di pietra",
+   "title_cs": "Kamenný mazlíček",
+   "lines": [
+    {
+     "text": "Mira ha presentato agli investitori la sua start-up: Ciottolo & C., il primo animale domestico senza svantaggi.",
+     "cs": "Mira představila investorům svůj start-up: Oblázek & spol., první domácí mazlíček bez nevýhod."
+    },
+    {
+     "speaker": "Mira",
+     "text": "Il nostro prodotto è un ciottolo scelto a mano, con nome, certificato e abbonamento.",
+     "cs": "Naším produktem je ručně vybraný oblázek s jménem, certifikátem a předplatným."
+    },
+    {
+     "speaker": "Investitore",
+     "text": "Un sasso?",
+     "cs": "Kámen?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Un compagno facile da gestire, senza allergeni, assolutamente fedele. Niente veterinario, niente addestramento, niente peli.",
+     "cs": "Nenáročný, bez alergenů, naprosto věrný společník. Žádný veterinář, žádná výchova, žádné chlupy."
+    },
+    {
+     "speaker": "Investitore",
+     "text": "E l'abbonamento?",
+     "cs": "A to předplatné?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Ogni mese mandiamo al vostro ciottolo una foto di se stesso. Un nuovo punto di vista. Dodici euro.",
+     "cs": "Jednou měsíčně pošleme vašemu oblázku jeho vlastní fotografii. Nový úhel pohledu. Dvanáct eur."
+    },
+    {
+     "text": "Gli investitori sono rimasti in silenzio. Poi uno ha alzato la mano: Il ciottolo ha un profilo sui social?",
+     "cs": "Investoři mlčeli. Pak jeden zvedl ruku: Má ten oblázek profil na sociální síti?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Certo. Ha più follower di noi.",
+     "cs": "Samozřejmě. Má víc sledujících než my."
+    },
+    {
+     "text": "Mezz'ora dopo aveva quattro milioni di euro di capitale.",
+     "cs": "O půl hodiny později měla čtyři miliony eur kapitálu."
+    },
+    {
+     "text": "Tre anni dopo un giornalista le ha chiesto: Come spiega questo successo?",
+     "cs": "O tři roky později se jí zeptal novinář: Jak si vysvětlujete ten úspěch?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "È semplice: in tre anni non si è lamentato un solo cliente. I sassi sono sorprendentemente pazienti.",
+     "cs": "Docela jednoduše: za tři roky si nestěžoval jediný zákazník. Oblázky jsou překvapivě trpělivé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "allergeni",
+     "cs": "alergeny"
+    },
+    {
+     "word": "follower",
+     "cs": "sledující"
+    },
+    {
+     "word": "capitale",
+     "cs": "kapitál"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa vende Mira?",
+     "options": [
+      "Ciottoli come animali domestici",
+      "Cibo per cani",
+      "Mobili da giardino"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Perché nessun cliente si lamenta?",
+     "options": [
+      "Gli «animali» sono sassi, quindi pazienti.",
+      "Il servizio è perfetto.",
+      "I clienti ricevono un rimborso."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

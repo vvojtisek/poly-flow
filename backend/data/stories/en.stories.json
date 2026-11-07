@@ -3234,6 +3234,99 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-07-pet-pebble",
+   "level": "B2",
+   "title": "The Pet Pebble",
+   "title_cs": "Kamenný mazlíček",
+   "lines": [
+    {
+     "text": "Mira presented her start-up to investors: Pebble & Co., the first pet with no downsides.",
+     "cs": "Mira představila investorům svůj start-up: Oblázek & spol., první domácí mazlíček bez nevýhod."
+    },
+    {
+     "speaker": "Mira",
+     "text": "Our product is a hand-picked pebble with a name, a certificate and a subscription.",
+     "cs": "Naším produktem je ručně vybraný oblázek s jménem, certifikátem a předplatným."
+    },
+    {
+     "speaker": "Investor",
+     "text": "A rock?",
+     "cs": "Kámen?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "An easy-care, allergen-free, absolutely loyal companion. No vet, no training, no hair.",
+     "cs": "Nenáročný, bez alergenů, naprosto věrný společník. Žádný veterinář, žádná výchova, žádné chlupy."
+    },
+    {
+     "speaker": "Investor",
+     "text": "And the subscription?",
+     "cs": "A to předplatné?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Every month, we send your pebble a photo of itself. A new angle. Twelve euros.",
+     "cs": "Jednou měsíčně pošleme vašemu oblázku jeho vlastní fotografii. Nový úhel pohledu. Dvanáct eur."
+    },
+    {
+     "text": "The investors fell silent. Then one raised his hand: Does the pebble have a social media profile?",
+     "cs": "Investoři mlčeli. Pak jeden zvedl ruku: Má ten oblázek profil na sociální síti?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "Of course. It has more followers than we do.",
+     "cs": "Samozřejmě. Má víc sledujících než my."
+    },
+    {
+     "text": "Half an hour later, she had four million euros in capital.",
+     "cs": "O půl hodiny později měla čtyři miliony eur kapitálu."
+    },
+    {
+     "text": "Three years later, a journalist asked her: How do you explain this success?",
+     "cs": "O tři roky později se jí zeptal novinář: Jak si vysvětlujete ten úspěch?"
+    },
+    {
+     "speaker": "Mira",
+     "text": "It's simple: in three years, not a single customer has complained. Pebbles are surprisingly patient.",
+     "cs": "Docela jednoduše: za tři roky si nestěžoval jediný zákazník. Oblázky jsou překvapivě trpělivé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "hand-picked",
+     "cs": "ručně vybraný"
+    },
+    {
+     "word": "allergen-free",
+     "cs": "bez alergenů"
+    },
+    {
+     "word": "capital",
+     "cs": "kapitál"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Mira sell?",
+     "options": [
+      "Pebbles as pets",
+      "Dog food",
+      "Garden furniture"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why does no customer complain?",
+     "options": [
+      "The 'pets' are stones and therefore patient.",
+      "The service is perfect.",
+      "Customers get refunds."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
