@@ -230,6 +230,17 @@ async def test_search_index_has_plain_explanation_text(db, client):
     assert all("**" not in x["text"] for x in rows)
 
 
+async def test_example_audio_only_for_existing_examples(db, client):
+    await seed()
+    await adult(client)
+    # The test container has no voices: an existing example reaches the speech layer (503),
+    # a missing one is rejected before it.
+    r = await client.get("/api/v1/grammar/units/t-a/audio?example=0")
+    assert r.status_code in (200, 503), r.text
+    assert (await client.get("/api/v1/grammar/units/t-a/audio?example=5")).status_code == 404
+    assert (await client.get("/api/v1/grammar/units/nope/audio?example=0")).status_code == 404
+
+
 async def test_exercise_never_leaks_answers(db, client):
     await seed()
     me = await adult(client)

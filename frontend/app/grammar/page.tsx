@@ -9,8 +9,9 @@ import { Kbd } from "@/components/Kbd";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
+import { PlayButton } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { getGrammarSearchIndex, getGrammarTree, getGrammarUnit, getProgress, type GrammarTree, type GrammarUnit, type GrammarUnitSummary, type UnitState } from "@/lib/api";
+import { getGrammarSearchIndex, getGrammarTree, grammarExampleAudioUrl, getGrammarUnit, getProgress, type GrammarTree, type GrammarUnit, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 
@@ -67,10 +68,13 @@ function UnitPreview({ id, language }: { id: string; language: string }) {
       )}
       {unit.examples.length > 0 && (
         <ul className="flex flex-col gap-1">
-          {unit.examples.slice(0, 3).map((ex) => (
-            <li key={ex.text} className="rounded-lg bg-slate-50 px-2 py-1 dark:bg-slate-800/60">
-              <span className="font-medium" lang={language}>{ex.text}</span>
-              <span className="block text-xs text-slate-500">{ex.cs}</span>
+          {unit.examples.slice(0, 3).map((ex, i) => (
+            <li key={ex.text} className="flex items-center gap-1 rounded-lg bg-slate-50 py-1 pl-1 pr-2 dark:bg-slate-800/60">
+              <PlayButton url={grammarExampleAudioUrl(unit.id, i)} size="sm" />
+              <span className="min-w-0">
+                <span className="font-medium" lang={language}>{ex.text}</span>
+                <span className="block text-xs text-slate-500">{ex.cs}</span>
+              </span>
             </li>
           ))}
         </ul>

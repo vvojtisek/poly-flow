@@ -1335,3 +1335,13 @@ Vlad approves a push.
 **Implemented Solution:** The lesson's exit (`app/grammar/[unit]/page.tsx`) now opens `/grammar?studied=<unit>`. `app/grammar/page.tsx` scrolls that card into view (instant when reduced motion is preferred), moves focus to its link, rings it in green for four seconds and announces "Právě prostudováno: …" to screen readers. The parameter is one-shot: it is removed from the URL so a reload does not scroll again.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a1-articles`: focus landed in that card, it carried the highlight, and the URL was cleaned to `/grammar`.
+
+## Global Cycle 25/120 | Page: [/grammar] (Page Cycle 10/15)
+
+**Summary:** listen to topic examples from the preview
+
+**Observed Problem:** Grammar examples could only be read; the overview offered no way to hear how "Sind Sie Herr Novák?" sounds, while vocabulary, stories and drills all have audio.
+
+**Implemented Solution:** New `GET /api/v1/grammar/units/{id}/audio?example=N` (`api/grammar.py`) speaks one of the unit's curated examples through the existing TTS path and the profile's chosen voice; it never accepts free text and returns 404 for unknown units or example indexes. The topic preview in `app/grammar/page.tsx` gets a play button per example (`PlayButton` shows the unavailable state when no voice is installed). Test `test_example_audio_only_for_existing_examples`.
+
+**Verification:** `tests/test_grammar.py` 15 passed; ruff (one file reformatted), typecheck, production build, `git diff --check` passed. Audio playback itself not verified: this container has no TTS voices (the endpoint returns 503 there, as the test expects).

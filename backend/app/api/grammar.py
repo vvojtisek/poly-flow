@@ -2,11 +2,12 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import DB, Auth
-from app.api.learning import Now
+from app.api.learning import AUDIO_RESPONSES, Now, TtsDep, _chosen_voice, _speech
 from app.domain.enums import Language
 from app.domain.grammar import GRAMMAR_OPEN_FROM_START, LEVELS
 from app.models import (
@@ -179,6 +180,24 @@ async def search_index(
         )
     ).scalars()
     return [SearchEntryOut(id=u.id, text=_search_text(u)) for u in units]
+
+
+@router.get("/units/{unit_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def example_audio(
+    unit_id: str,
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    example: Annotated[int, Query(ge=0, le=50)] = 0,
+) -> FileResponse:
+    """Speech for one of a unit's curated examples (never for arbitrary text)."""
+    unit = await db.get(GrammarUnit, unit_id)
+    if unit is None or not unit.active or example >= len(unit.examples or []):
+        raise HTTPException(404, "not_found")
+    text = unit.examples[example].get("text") or ""
+    if not text:
+        raise HTTPException(404, "not_found")
+    return await _speech(tts, unit.language, text, _chosen_voice(auth.acting, unit.language))
 
 
 @router.get("/units/{unit_id}", response_model=UnitOut)
