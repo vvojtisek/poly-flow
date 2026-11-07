@@ -172,6 +172,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-soup",
+   "level": "A1",
+   "title": "The Soup",
+   "title_cs": "Polévka jako dezert",
+   "lines": [
+    {
+     "text": "Dad is making soup today.",
+     "cs": "Táta dnes vaří polévku."
+    },
+    {
+     "speaker": "Dad",
+     "text": "I am a good cook. Here is my recipe!",
+     "cs": "Jsem dobrý kuchař. Tady je můj recept!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "It smells good!",
+     "cs": "Voní to dobře!"
+    },
+    {
+     "text": "Dad takes the white powder from the jar and puts it in the pot.",
+     "cs": "Táta vezme bílý prášek ze sklenice a dá ho do hrnce."
+    },
+    {
+     "text": "Everybody is at the table. Emma tastes the soup.",
+     "cs": "Všichni sedí u stolu. Emma ochutná."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Dad, the soup is very sweet.",
+     "cs": "Tati, ta polévka je moc sladká."
+    },
+    {
+     "text": "Dad tastes it too. He pulls a funny face.",
+     "cs": "Táta taky ochutná. Udělá legrační obličej."
+    },
+    {
+     "speaker": "Dad",
+     "text": "Salt and sugar are the same colour!",
+     "cs": "Sůl a cukr mají stejnou barvu!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "No problem, Dad. Today the soup is our dessert.",
+     "cs": "Žádný problém, tati. Dnes je polévka náš dezert."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "recipe",
+     "cs": "recept"
+    },
+    {
+     "word": "powder",
+     "cs": "prášek"
+    },
+    {
+     "word": "dessert",
+     "cs": "dezert"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Dad put in the pot?",
+     "options": [
+      "Salt",
+      "Sugar",
+      "Water"
+     ],
+     "answer_index": 1
+    },
+    {
+     "question": "How is the soup?",
+     "options": [
+      "Very sweet",
+      "Very cold",
+      "Very spicy"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

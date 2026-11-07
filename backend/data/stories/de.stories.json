@@ -172,6 +172,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-soup",
+   "level": "A1",
+   "title": "Die Suppe",
+   "title_cs": "Polévka jako dezert",
+   "lines": [
+    {
+     "text": "Heute kocht Papa Suppe.",
+     "cs": "Táta dnes vaří polévku."
+    },
+    {
+     "speaker": "Papa",
+     "text": "Ich bin ein guter Koch. Hier ist mein Rezept!",
+     "cs": "Jsem dobrý kuchař. Tady je můj recept!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Das riecht gut!",
+     "cs": "Voní to dobře!"
+    },
+    {
+     "text": "Papa nimmt das weiße Pulver aus dem Glas und gibt es in den Topf.",
+     "cs": "Táta vezme bílý prášek ze sklenice a dá ho do hrnce."
+    },
+    {
+     "text": "Alle sitzen am Tisch. Emma probiert.",
+     "cs": "Všichni sedí u stolu. Emma ochutná."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Papa, die Suppe ist sehr süß.",
+     "cs": "Tati, ta polévka je moc sladká."
+    },
+    {
+     "text": "Papa probiert auch. Er macht ein komisches Gesicht.",
+     "cs": "Táta taky ochutná. Udělá legrační obličej."
+    },
+    {
+     "speaker": "Papa",
+     "text": "Salz und Zucker haben die gleiche Farbe!",
+     "cs": "Sůl a cukr mají stejnou barvu!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Kein Problem, Papa. Heute ist die Suppe unser Dessert.",
+     "cs": "Žádný problém, tati. Dnes je polévka náš dezert."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Rezept",
+     "cs": "recept"
+    },
+    {
+     "word": "Pulver",
+     "cs": "prášek"
+    },
+    {
+     "word": "Dessert",
+     "cs": "dezert"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was macht Papa in den Topf?",
+     "options": [
+      "Salz",
+      "Zucker",
+      "Wasser"
+     ],
+     "answer_index": 1
+    },
+    {
+     "question": "Wie ist die Suppe?",
+     "options": [
+      "Sehr süß",
+      "Sehr kalt",
+      "Sehr scharf"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -172,6 +172,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-soup",
+   "level": "A1",
+   "title": "La soupe",
+   "title_cs": "Polévka jako dezert",
+   "lines": [
+    {
+     "text": "Aujourd'hui, papa fait de la soupe.",
+     "cs": "Táta dnes vaří polévku."
+    },
+    {
+     "speaker": "Papa",
+     "text": "Je suis un bon cuisinier. Voici ma recette !",
+     "cs": "Jsem dobrý kuchař. Tady je můj recept!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Ça sent bon !",
+     "cs": "Voní to dobře!"
+    },
+    {
+     "text": "Papa prend la poudre blanche dans le pot et la met dans la casserole.",
+     "cs": "Táta vezme bílý prášek ze sklenice a dá ho do hrnce."
+    },
+    {
+     "text": "Tout le monde est à table. Emma goûte.",
+     "cs": "Všichni sedí u stolu. Emma ochutná."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Papa, la soupe est très sucrée.",
+     "cs": "Tati, ta polévka je moc sladká."
+    },
+    {
+     "text": "Papa goûte aussi. Il fait une drôle de tête.",
+     "cs": "Táta taky ochutná. Udělá legrační obličej."
+    },
+    {
+     "speaker": "Papa",
+     "text": "Le sel et le sucre ont la même couleur !",
+     "cs": "Sůl a cukr mají stejnou barvu!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Pas de problème, papa. Aujourd'hui, la soupe est notre dessert.",
+     "cs": "Žádný problém, tati. Dnes je polévka náš dezert."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "recette",
+     "cs": "recept"
+    },
+    {
+     "word": "poudre",
+     "cs": "prášek"
+    },
+    {
+     "word": "dessert",
+     "cs": "dezert"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'est-ce que papa met dans la casserole ?",
+     "options": [
+      "Du sel",
+      "Du sucre",
+      "De l'eau"
+     ],
+     "answer_index": 1
+    },
+    {
+     "question": "Comment est la soupe ?",
+     "options": [
+      "Très sucrée",
+      "Très froide",
+      "Très piquante"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

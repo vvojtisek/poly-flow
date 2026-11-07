@@ -172,6 +172,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-soup",
+   "level": "A1",
+   "title": "La zuppa",
+   "title_cs": "Polévka jako dezert",
+   "lines": [
+    {
+     "text": "Oggi papà prepara la zuppa.",
+     "cs": "Táta dnes vaří polévku."
+    },
+    {
+     "speaker": "Papà",
+     "text": "Sono un bravo cuoco. Ecco la mia ricetta!",
+     "cs": "Jsem dobrý kuchař. Tady je můj recept!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Che buon profumo!",
+     "cs": "Voní to dobře!"
+    },
+    {
+     "text": "Papà prende la polvere bianca dal barattolo e la mette nella pentola.",
+     "cs": "Táta vezme bílý prášek ze sklenice a dá ho do hrnce."
+    },
+    {
+     "text": "Tutti sono a tavola. Emma assaggia.",
+     "cs": "Všichni sedí u stolu. Emma ochutná."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Papà, la zuppa è molto dolce.",
+     "cs": "Tati, ta polévka je moc sladká."
+    },
+    {
+     "text": "Anche papà assaggia. Fa una faccia strana.",
+     "cs": "Táta taky ochutná. Udělá legrační obličej."
+    },
+    {
+     "speaker": "Papà",
+     "text": "Il sale e lo zucchero hanno lo stesso colore!",
+     "cs": "Sůl a cukr mají stejnou barvu!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Nessun problema, papà. Oggi la zuppa è il nostro dolce.",
+     "cs": "Žádný problém, tati. Dnes je polévka náš dezert."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ricetta",
+     "cs": "recept"
+    },
+    {
+     "word": "polvere",
+     "cs": "prášek"
+    },
+    {
+     "word": "assaggia",
+     "cs": "ochutná"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa mette papà nella pentola?",
+     "options": [
+      "Sale",
+      "Zucchero",
+      "Acqua"
+     ],
+     "answer_index": 1
+    },
+    {
+     "question": "Com'è la zuppa?",
+     "options": [
+      "Molto dolce",
+      "Molto fredda",
+      "Molto piccante"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
