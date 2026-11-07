@@ -671,6 +671,7 @@ export const cs = {
     echoModes: { after: "Po vzoru", together: "Současně se vzorem" } as Record<string, string>,
     headphones: "Současně jen se sluchátky, jinak mikrofon nahraje i vzor a porovnání nic neukáže.",
     word: "Slovo z lekce",
+    howTo: "Jak stínovat a co se děje s nahrávkou",
     sourceLabel: "Co stínovat",
     sources: { words: "Věty ze slov", scene: "Rozhovor ze scény" } as Record<string, string>,
     recordedCount: (n: number, total: number) => `· nahráno ${n} z ${total}`,

@@ -2115,3 +2115,13 @@ Vlad approves a push.
 **Implemented Solution:** Once the scene list is loaded, a scene source that is not in it is replaced. The page opens the first open scene, or the word sentences when there is none, and a one-line note says which fallback happened. The URL is rewritten to match. The empty word state is now a card with an 'Otevřít lekci slovní zásoby' button. No server data about the unavailable scene is exposed: the list endpoint already applies the met and child filters.
 
 **Verification:** s102.js: ?scene=<unknown>&line=3 shows the 'otevřela jiná' note, select and URL both on the first scene, and card 1/7. With routed empty sentence and scene lists, a known scene id falls back to words with the 'otevřely věty ze slov' note, and the empty card links to /lesson/vocabulary. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 103/120 | Page: [/shadowing] (Page Cycle 13/15)
+
+**Summary:** keep the record controls in reach on phones
+
+**Observed Problem:** At 390px the Vzor/Nahrát/Moje/Porovnat bar sat about 1150px down, below the card, wave, role picker, line strip and notices. Recording a line meant reading the sentence at the top and then scrolling down to press Nahrát, which breaks the listen-and-repeat loop. The four-line privacy intro also pushed the sentence low.
+
+**Implemented Solution:** Below lg, the action bar is sticky just above the tab bar (safe-area aware), with a translucent background. The buttons are compact (min-h-12, smaller icon and text) while still fitting their labels. From lg up the bar is a normal static row. On phones the intro folds into a 'Jak stínovat a co se děje s nahrávkou' disclosure, so the sentence sits clear of the sticky bar.
+
+**Verification:** s103.js / s103b.js at 390×844 on first paint: Nahrát spans 712-780, inside the viewport (it was below the fold before). Sentence bottom 623 < bar top 708, no overlap. All four labels fit without overflow. At 1280px the bar is static. ov.js /shadowing: no overflowing elements. Viewport screenshot checked. Typecheck, build, ruff passed.

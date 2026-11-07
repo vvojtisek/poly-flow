@@ -123,9 +123,9 @@ function ActionButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex flex-1 flex-col items-center gap-1 rounded-2xl px-3 py-3 text-sm font-semibold disabled:opacity-40 ${tones[tone]}`}
+      className={`flex min-h-12 min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-2xl px-1.5 py-2 text-xs font-semibold leading-tight disabled:opacity-40 sm:gap-1 sm:px-3 sm:py-3 sm:text-sm ${tones[tone]}`}
     >
-      <Icon className="size-6" aria-hidden />
+      <Icon className="size-5 sm:size-6" aria-hidden />
       <span>{label}</span>
       <span className="hidden opacity-70 lg:inline">
         <Kbd>{kbd}</Kbd>
@@ -527,7 +527,8 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         <Notice tone="error">{rec.state.reason === "denied" ? t.denied : t.unsupported}</Notice>
       )}
 
-      <div className="flex gap-2">
+      {/* On phones the controls stay reachable above the tab bar while the card scrolls. */}
+      <div className="sticky bottom-[calc(3.75rem+env(safe-area-inset-bottom))] z-20 -mx-1 flex gap-1.5 rounded-3xl bg-slate-50/95 p-1 backdrop-blur sm:gap-2 lg:static lg:mx-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none dark:bg-slate-950/95 lg:dark:bg-transparent">
         <ActionButton icon={Volume2} label={t.listen} onClick={() => void play(modelUrl)} kbd="P" />
         <ActionButton
           icon={recording ? Square : Mic}
@@ -728,7 +729,12 @@ export default function ShadowingPage() {
           <Waves className="size-6 text-brand-500" aria-hidden />
           {t.title}
         </h1>
-        <p className="text-slate-600 dark:text-slate-300">{t.intro}</p>
+        {/* On phones the how-to folds away so the sentence is above the sticky controls. */}
+        <p className="hidden text-slate-600 sm:block dark:text-slate-300">{t.intro}</p>
+        <details className="-mt-2 text-sm text-slate-600 sm:hidden dark:text-slate-300">
+          <summary className="cursor-pointer font-medium text-brand-700 dark:text-brand-200">{t.howTo}</summary>
+          <p className="mt-1">{t.intro}</p>
+        </details>
         <LanguagePicker me={me} />
         {ready && (
           <>
