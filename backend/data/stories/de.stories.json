@@ -1108,6 +1108,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-04-secret-sauce",
+   "level": "A2",
+   "title": "Das Geheimrezept",
+   "title_cs": "Tajemství rodinné omáčky",
+   "lines": [
+    {
+     "text": "Helga hat einen Kochkurs besucht. Sie wollte ihre berühmte Familiensoße zeigen.",
+     "cs": "Helga přišla na kurz vaření. Chtěla ukázat svou slavnou rodinnou omáčku."
+    },
+    {
+     "text": "Küchenchef Bruno hat die Soße probiert.",
+     "cs": "Šéfkuchař Bruno omáčku ochutnal."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Fantastisch! Was ist Ihr Geheimnis?",
+     "cs": "Báječné! Jaké je vaše tajemství?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Das Rezept ist von meiner Oma. Es ist über hundert Jahre alt.",
+     "cs": "Recept je od mé babičky. Je mu přes sto let."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Und was ist drin?",
+     "cs": "A co v ní je?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Tomaten, Zwiebeln, ein bisschen Liebe und viele Kräuter.",
+     "cs": "Rajčata, cibule, trochu lásky a hodně bylinek."
+    },
+    {
+     "text": "Da ist ein Glas aus ihrer Tasche gefallen. Auf dem Etikett stand: Tomatensoße, 1,99 Euro.",
+     "cs": "Z její tašky vypadla sklenice. Na etiketě stálo: Rajčatová omáčka, 1,99 eura."
+    },
+    {
+     "text": "Alle haben geschwiegen.",
+     "cs": "Všichni mlčeli."
+    },
+    {
+     "speaker": "Helga",
+     "text": "Das Geheimnis ist, das richtige Regal im Supermarkt zu finden.",
+     "cs": "Tajemství je najít správnou polici v supermarketu."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Dafür bekommen Sie eine Eins. Im Einkaufen.",
+     "cs": "Za to dostanete jedničku. Z nakupování."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Geheimnis",
+     "cs": "tajemství"
+    },
+    {
+     "word": "Kräuter",
+     "cs": "bylinky"
+    },
+    {
+     "word": "Etikett",
+     "cs": "etiketa"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was ist in Helgas Soße?",
+     "options": [
+      "Eine Soße aus dem Supermarkt",
+      "Frische Tomaten vom Feld",
+      "Ein Rezept von Bruno"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was fällt aus Helgas Tasche?",
+     "options": [
+      "Ein Glas",
+      "Ein Buch",
+      "Ein Messer"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

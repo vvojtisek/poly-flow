@@ -1108,6 +1108,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-04-secret-sauce",
+   "level": "A2",
+   "title": "La recette secrète",
+   "title_cs": "Tajemství rodinné omáčky",
+   "lines": [
+    {
+     "text": "Helga a suivi un cours de cuisine. Elle voulait montrer sa célèbre sauce de famille.",
+     "cs": "Helga přišla na kurz vaření. Chtěla ukázat svou slavnou rodinnou omáčku."
+    },
+    {
+     "text": "Le chef Bruno a goûté la sauce.",
+     "cs": "Šéfkuchař Bruno omáčku ochutnal."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Fantastique ! Quel est votre secret ?",
+     "cs": "Báječné! Jaké je vaše tajemství?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "La recette vient de ma grand-mère. Elle a plus de cent ans.",
+     "cs": "Recept je od mé babičky. Je mu přes sto let."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Et qu'est-ce qu'il y a dedans ?",
+     "cs": "A co v ní je?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Des tomates, des oignons, un peu d'amour et beaucoup d'herbes.",
+     "cs": "Rajčata, cibule, trochu lásky a hodně bylinek."
+    },
+    {
+     "text": "Un pot est tombé de son sac. Sur l'étiquette, il y avait : Sauce tomate, 1,99 euro.",
+     "cs": "Z její tašky vypadla sklenice. Na etiketě stálo: Rajčatová omáčka, 1,99 eura."
+    },
+    {
+     "text": "Tout le monde s'est tu.",
+     "cs": "Všichni mlčeli."
+    },
+    {
+     "speaker": "Helga",
+     "text": "Le secret, c'est de trouver le bon rayon au supermarché.",
+     "cs": "Tajemství je najít správnou polici v supermarketu."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Pour ça, vous avez dix sur dix. En courses.",
+     "cs": "Za to dostanete jedničku. Z nakupování."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "secret",
+     "cs": "tajemství"
+    },
+    {
+     "word": "herbes",
+     "cs": "bylinky"
+    },
+    {
+     "word": "étiquette",
+     "cs": "etiketa"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'est-ce qu'il y a dans la sauce d'Helga ?",
+     "options": [
+      "Une sauce du supermarché",
+      "Des tomates fraîches du champ",
+      "Une recette de Bruno"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'est-ce qui tombe du sac d'Helga ?",
+     "options": [
+      "Un pot",
+      "Un livre",
+      "Un couteau"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1108,6 +1108,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-04-secret-sauce",
+   "level": "A2",
+   "title": "La ricetta segreta",
+   "title_cs": "Tajemství rodinné omáčky",
+   "lines": [
+    {
+     "text": "Helga ha frequentato un corso di cucina. Voleva mostrare la sua famosa salsa di famiglia.",
+     "cs": "Helga přišla na kurz vaření. Chtěla ukázat svou slavnou rodinnou omáčku."
+    },
+    {
+     "text": "Lo chef Bruno ha assaggiato la salsa.",
+     "cs": "Šéfkuchař Bruno omáčku ochutnal."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Fantastica! Qual è il suo segreto?",
+     "cs": "Báječné! Jaké je vaše tajemství?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "La ricetta è di mia nonna. Ha più di cento anni.",
+     "cs": "Recept je od mé babičky. Je mu přes sto let."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "E che cosa c'è dentro?",
+     "cs": "A co v ní je?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Pomodori, cipolle, un po' d'amore e molte erbe.",
+     "cs": "Rajčata, cibule, trochu lásky a hodně bylinek."
+    },
+    {
+     "text": "Dalla sua borsa è caduto un barattolo. Sull'etichetta c'era scritto: Salsa di pomodoro, 1,99 euro.",
+     "cs": "Z její tašky vypadla sklenice. Na etiketě stálo: Rajčatová omáčka, 1,99 eura."
+    },
+    {
+     "text": "Tutti sono rimasti in silenzio.",
+     "cs": "Všichni mlčeli."
+    },
+    {
+     "speaker": "Helga",
+     "text": "Il segreto è trovare lo scaffale giusto al supermercato.",
+     "cs": "Tajemství je najít správnou polici v supermarketu."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Per questo prende dieci. In spesa.",
+     "cs": "Za to dostanete jedničku. Z nakupování."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "segreto",
+     "cs": "tajemství"
+    },
+    {
+     "word": "erbe",
+     "cs": "bylinky"
+    },
+    {
+     "word": "etichetta",
+     "cs": "etiketa"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa c'è nella salsa di Helga?",
+     "options": [
+      "Una salsa del supermercato",
+      "Pomodori freschi del campo",
+      "Una ricetta di Bruno"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa cade dalla borsa di Helga?",
+     "options": [
+      "Un barattolo",
+      "Un libro",
+      "Un coltello"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

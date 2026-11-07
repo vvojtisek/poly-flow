@@ -1108,6 +1108,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-04-secret-sauce",
+   "level": "A2",
+   "title": "The Secret Recipe",
+   "title_cs": "Tajemství rodinné omáčky",
+   "lines": [
+    {
+     "text": "Helga went to a cooking class. She wanted to show her famous family sauce.",
+     "cs": "Helga přišla na kurz vaření. Chtěla ukázat svou slavnou rodinnou omáčku."
+    },
+    {
+     "text": "Chef Bruno tasted the sauce.",
+     "cs": "Šéfkuchař Bruno omáčku ochutnal."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "Fantastic! What is your secret?",
+     "cs": "Báječné! Jaké je vaše tajemství?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "The recipe is from my grandmother. It is over a hundred years old.",
+     "cs": "Recept je od mé babičky. Je mu přes sto let."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "And what is in it?",
+     "cs": "A co v ní je?"
+    },
+    {
+     "speaker": "Helga",
+     "text": "Tomatoes, onions, a little love and lots of herbs.",
+     "cs": "Rajčata, cibule, trochu lásky a hodně bylinek."
+    },
+    {
+     "text": "A jar fell out of her bag. The label said: Tomato sauce, £1.99.",
+     "cs": "Z její tašky vypadla sklenice. Na etiketě stálo: Rajčatová omáčka, 1,99 eura."
+    },
+    {
+     "text": "Everybody was silent.",
+     "cs": "Všichni mlčeli."
+    },
+    {
+     "speaker": "Helga",
+     "text": "The secret is finding the right shelf in the supermarket.",
+     "cs": "Tajemství je najít správnou polici v supermarketu."
+    },
+    {
+     "speaker": "Bruno",
+     "text": "For that you get top marks. In shopping.",
+     "cs": "Za to dostanete jedničku. Z nakupování."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "secret",
+     "cs": "tajemství"
+    },
+    {
+     "word": "herbs",
+     "cs": "bylinky"
+    },
+    {
+     "word": "label",
+     "cs": "etiketa"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What is in Helga's sauce?",
+     "options": [
+      "A sauce from the supermarket",
+      "Fresh tomatoes from a field",
+      "A recipe from Bruno"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What falls out of Helga's bag?",
+     "options": [
+      "A jar",
+      "A book",
+      "A knife"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
