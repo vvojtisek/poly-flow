@@ -2,12 +2,15 @@
 
 import { BookOpen, CheckCircle2, Compass, Gauge, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
 import { getDiagnosticInfo, getGrammarTree, getLessonPreview, getProgress, type CefrLevel, type GrammarTree, type LessonPreview, type LevelBadge } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
+import { isTypingTarget, useHotkeys } from "@/lib/keyboard";
+import { KeyHint } from "@/components/Kbd";
 import { cs } from "@/lib/i18n/cs";
 
 const PRIMARY = "mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2 font-semibold text-white hover:bg-brand-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2";
@@ -21,6 +24,20 @@ function highestBadge(badges: LevelBadge[]): string | null {
 
 export default function LessonPage() {
   const me = useRequireMe();
+  useHotkeys(); // Enter opens the recommended step
+  const router = useRouter();
+  // V opens the vocabulary lesson (letters are free on this page: no text input).
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || isTypingTarget(e.target)) return;
+      if (e.code === "KeyV") {
+        e.preventDefault();
+        router.push("/lesson/vocabulary");
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [router]);
   const language = me?.acting.active_language;
   const [tree, setTree] = useState<GrammarTree | null>(null);
   const [placement, setPlacement] = useState<string | null>(null);
@@ -136,8 +153,9 @@ export default function LessonPage() {
             <p className="mb-1 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200"><PlayCircle className="size-4" aria-hidden />{cs.lesson.openLessonLabel}</p>
             <h2 className="text-xl font-bold">{next.unit.title}</h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{next.unit.summary}</p>
-            <Link href={`/grammar/${next.unit.id}`} className={PRIMARY}>
+            <Link href={`/grammar/${next.unit.id}`} className={PRIMARY} data-hotkey="enter">
               <GraduationCap className="size-5" aria-hidden />{cs.lesson.resume}
+              <KeyHint k="Enter" />
             </Link>
           </section>
         )}
@@ -154,8 +172,9 @@ export default function LessonPage() {
                   ? cs.lesson.recommendVocabulary(next.current, next.target)
                   : cs.lesson.recommendNewUser(next.target)}</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
-              <Link href={`/grammar/${next.unit.id}`} className={PRIMARY.replace("mt-4 ", "")}>
+              <Link href={`/grammar/${next.unit.id}`} className={PRIMARY.replace("mt-4 ", "")} data-hotkey="enter">
                 <GraduationCap className="size-5" aria-hidden />{cs.lesson.startRecommended}
+                <KeyHint k="Enter" />
               </Link>
               {tree && tree.due > 0 && (
                 <Link href="/grammar/check" className="inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">
@@ -169,8 +188,9 @@ export default function LessonPage() {
           <section className="rounded-2xl border border-amber-400/50 bg-amber-50 p-4 dark:bg-amber-950/30 sm:p-5">
             <h2 className="text-lg font-bold">{cs.lesson.allStudiedTitle}</h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{cs.lesson.allStudiedDue(next.due)}</p>
-            <Link href="/grammar/check" className={PRIMARY}>
+            <Link href="/grammar/check" className={PRIMARY} data-hotkey="enter">
               <RefreshCw className="size-5" aria-hidden />{cs.lesson.checkDue(next.due)}
+              <KeyHint k="Enter" />
             </Link>
           </section>
         )}
@@ -196,6 +216,7 @@ export default function LessonPage() {
           )}
           <Link href="/lesson/vocabulary" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-brand-500/50 px-4 py-2 font-semibold text-brand-700 hover:bg-brand-500/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-brand-100">
             <BookOpen className="size-4" aria-hidden />{openSession ? cs.lesson.resume : cs.lesson.openVocabulary}
+            <KeyHint k="V" />
           </Link>
           {introduced !== null && introduced > 0 && <Link href="/check" className="ml-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800"><RefreshCw className="size-4" aria-hidden />{cs.check.start}</Link>}
         </section>

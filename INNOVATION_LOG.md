@@ -1895,3 +1895,13 @@ Vlad approves a push.
 **Implemented Solution:** The objective line is shown only when it differs from the summary. Each card ends with 'N cvičení' and, once checked, 'v ověření X z Y správně' from checked_correct and checked_errors.
 
 **Verification:** API: 37 German topics, 37 with identical summary and objective. Playwright: the sein card now reads '… Řekneš, kdo jsi a odkud jsi … | 8 cvičení' without the duplicate Cíl line. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 81/120 | Page: [/lesson] (Page Cycle 6/15)
+
+**Summary:** open the recommended step with Enter and the vocabulary lesson with V
+
+**Observed Problem:** The lesson overview had no keyboard shortcuts, while the dashboard and practice pages open their main step with Enter. On desktop, reaching the recommended topic meant tabbing through the header, the language picker and the estimate link first.
+
+**Implemented Solution:** The page installs the shared hotkey listener. The single primary action (resume the open lesson, open the recommended topic, or start the due grammar check) carries data-hotkey='enter' with an Enter key hint. V opens the vocabulary lesson, with a hint on its button. V is a page-local letter shortcut: the page has no text input, and it is ignored with modifiers or while typing.
+
+**Verification:** Playwright: Enter on the page body navigates to /grammar/de-a1-sein (the open lesson); V navigates to /lesson/vocabulary. Key hints render on desktop only (KeyHint is lg-only). No console errors. typecheck, next build, ruff pass.
