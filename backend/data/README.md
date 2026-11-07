@@ -117,6 +117,22 @@ CC-BY-SA-4.0); review list: `reviews/de-1001-5000-review.md` in the project file
 `tests/test_lexicon_de.py` checks ranks 1-5000, unique keys and glosses, provenance, noun gender,
 complete A1-B2 bands and clean examples.
 
+### `fr.0101-5000.csv` (French ranks 101-5000, revision `fr5000-draft-v1`)
+
+4,900 words that take French from the core 100 to full B2 (5,000), so placement can place up to
+5,000 and every exam opens. Order: wordfreq's French frequencies (CC-BY-SA-4.0), grouped into
+lemmas with simplemma (MIT), summed per lemma and walked from the top, skipping core-100 lemmas;
+every lemma was checked by hand while glossing, so the order is approximate (within a few hundred
+ranks). Skipped: personal and place names, abbreviations, brand names, English words, lemmatiser
+artefacts and drug names. Nouns carry `m`/`f` (the masculine form for nouns of both genders).
+Flags follow the English list: profanity (`putain`, `merde`, `con`, `connard`...) and sexual words
+are adult opt-in only, violent words (`guerre`, `tuer`, `arme`, `meurtre`...) are flagged
+`violence`, and unflagged examples use no flagged word. About 78% of examples contain the lemma
+verbatim. **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/fr-0101-5000-review.md` in the project files.
+`tests/test_lexicon_romance.py` checks ranks 1-5000, unique keys and glosses, provenance, noun
+gender, complete A1-B2 bands, flags and clean examples.
+
 ### Producing the full lists (not done yet)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
