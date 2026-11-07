@@ -1255,3 +1255,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: the default focus level now uses the CEFR estimate, then the highest earned vocabulary badge, then A1, with a matching explanation (`activeFromBadge`). A radio row under the level header lets the learner choose any level that has topics, or go back to "Podle odhadu (A1)"; the choice is a per-device convenience stored per profile and language in localStorage (guarded for private mode). Copy in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright chose A2, saw the A2 panel promoted, and the choice survived a reload.
+
+## Global Cycle 17/120 | Page: [/grammar] (Page Cycle 2/15)
+
+**Summary:** show when each studied topic can be checked
+
+**Observed Problem:** A studied grammar topic looked the same as any other until it became due; the learner could not tell that its check opens tomorrow (topics become checkable from the next day), so a "Prostudováno" card gave no next step.
+
+**Implemented Solution:** `app/grammar/page.tsx` unit cards now show "Ověření za 3 h / zítra / ve středu / 12. 11." under the exercise count for studied, known or mastered topics that are not yet due, using the tree's existing `next_review_at` and the shared `relativeFuture` helper. Due topics keep the amber "K ověření" badge. Copy `cs.grammar.nextCheck`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; after studying two German A1 units through the API, the mobile grammar page shows "Ověření za 1 h" on both cards.

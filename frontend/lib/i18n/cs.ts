@@ -1167,6 +1167,7 @@ export const cs = {
     activeFromBadge: (level: string) => `Úroveň podle tvé nejvyšší zkoušky slovní zásoby (${level}). Ostatní úrovně jsou níže a zůstávají otevřené.`,
     activeChosen: "Úroveň, kterou sis vybral(a). Ostatní úrovně jsou níže a zůstávají otevřené.",
     focusLevel: "Zaměřit se na úroveň",
+    nextCheck: (when: string) => `Ověření ${when}`,
     focusAuto: (level: string) => `Podle odhadu (${level})`,
     inProgress: "Právě se učíš",
     nothingInProgress: "Zatím nic rozpracovaného. Začni prvním tématem z nabídky níže.",

@@ -10,7 +10,7 @@ import { Disclosure } from "@/components/Disclosure";
 import { Button, Notice } from "@/components/ui";
 import { getGrammarTree, getProgress, type GrammarTree, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
-import { cs } from "@/lib/i18n/cs";
+import { cs, relativeFuture } from "@/lib/i18n/cs";
 
 const STATUS_STYLE: Record<string, string> = {
   new: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
@@ -57,8 +57,14 @@ function UnitCard({ u, recommended, resumable }: { u: GrammarUnitSummary; recomm
         </div>
         <p className="font-semibold">{u.title}</p>
         <p className="text-sm text-slate-600 dark:text-slate-300">{u.summary}</p>
-        <p className="mt-auto flex items-center justify-between text-xs text-slate-500">
-          <span>{cs.grammar.exercises(u.exercises)}</span>
+        <p className="mt-auto flex items-center justify-between gap-2 text-xs text-slate-500">
+          <span>
+            {cs.grammar.exercises(u.exercises)}
+            {/* When a studied topic can be checked next (checks open from the next day). */}
+            {!u.due && u.next_review_at && u.status !== "new" && (
+              <span className="block text-slate-500">{cs.grammar.nextCheck(relativeFuture(u.next_review_at))}</span>
+            )}
+          </span>
           <span className="font-semibold text-brand-600">
             {resumable ? (
               <>
