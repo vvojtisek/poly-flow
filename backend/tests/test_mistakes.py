@@ -123,3 +123,15 @@ async def test_weak_spots_list_unresolved_words_and_mistake_kinds(db, client, cl
     w = (await client.get("/api/v1/learning/weak-spots?language=de")).json()
     assert w["words"] == []
     assert csrf(me)
+
+
+async def test_weak_deck_holds_exactly_the_unresolved_words(db, client, clock):
+    await seed_words()
+    me = await child_session(client)
+    missed = await miss_everything_in_a_check(client, me, clock)
+    deck = (await client.get("/api/v1/words/deck?language=de&weak=true")).json()
+    weak = (await client.get("/api/v1/learning/weak-spots?language=de")).json()
+    assert {c["id"] for c in deck["items"]} == {w["item_id"] for w in weak["words"]}
+    assert deck["total"] == len(set(missed))
+    both = await client.get("/api/v1/words/deck?language=de&weak=true&level=A1")
+    assert both.status_code == 422

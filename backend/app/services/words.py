@@ -361,12 +361,21 @@ async def word_deck(
     *,
     level: str | None,
     topic: uuid.UUID | None,
+    weak: bool = False,
     limit: int = DECK_LIMIT,
 ) -> dict:
-    """The profile's own words in one level or topic, due and unfinished words first."""
-    if (level is None) == (topic is None):
+    """The profile's own words in one scope (a level, a topic, or its unresolved check mistakes),
+    due and unfinished words first."""
+    if sum((level is not None, topic is not None, weak)) != 1:
         raise LearningError("deck_scope_required", 422)
     p, li = UserWordProgress, LexiconItem
+    if weak:
+        from app.services import mistakes
+
+        missed = [w.item.id for w in (await mistakes.weak_spots(db, user, language, now)).words]
+        scope = [li.id.in_(missed)]
+    else:
+        scope = await _scope(db, user, language, level, topic)
     st = _status().label("status")
     due = and_(p.introduced_at.is_not(None), p.next_review_at <= now)
     q = (
@@ -375,7 +384,7 @@ async def word_deck(
         .where(
             li.language == language,
             _suitable(user),
-            *await _scope(db, user, language, level, topic),
+            *scope,
         )
     )
     total = (await db.execute(select(func.count()).select_from(q.subquery()))).scalar_one()

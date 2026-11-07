@@ -220,14 +220,22 @@ async def word_deck(
     language: Annotated[Language | None, Query()] = None,
     level: Annotated[str | None, Query(max_length=16)] = None,
     topic: uuid.UUID | None = None,
+    weak: bool = False,
 ) -> DeckOut:
-    """Flashcards from the profile's own words in one level or one topic (exactly one scope).
+    """Flashcards from the profile's own words in one level, one topic, or its unresolved check
+    mistakes (`weak=true`); exactly one scope.
 
     Practice only: flipping and marking cards is not recorded and does not change progress.
     """
     try:
         out = await svc.word_deck(
-            db, auth.acting, language or auth.acting.active_language, now, level=level, topic=topic
+            db,
+            auth.acting,
+            language or auth.acting.active_language,
+            now,
+            level=level,
+            topic=topic,
+            weak=weak,
         )
     except LearningError as exc:
         raise _http(exc) from exc

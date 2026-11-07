@@ -1455,3 +1455,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx` installs the shared hotkey listener: digits 1-9 open the visible cards in order (so they follow the active skill filter), Enter opens the "Tip na dnes" card. Cards and the tip show key badges on wide screens and carry `aria-keyshortcuts`; digit codes are layout-independent (`lib/keyboard.ts`), so the Czech number row works.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pressed 2 on `/practice?skill=speaking` and landed on `/sounds` (the second speaking mode), and Enter on `/practice` opened the tip's `/roleplay`.
+
+## Global Cycle 37/120 | Page: [/practice] (Page Cycle 7/15)
+
+**Summary:** flashcards from the words you got wrong
+
+**Observed Problem:** The hub's mistake panel pointed to other modes, but there was no quick way to simply rehearse the specific words missed in recent checks; flashcards existed only per level or topic in the dictionary.
+
+**Implemented Solution:** The deck API accepts a third scope, `weak=true`: the profile's unresolved check mistakes from the weak-spots service, still child-filtered and due-first (`services/words.word_deck`, `api/words.py`; exactly one scope is still enforced). `lib/api.ts` adds `DeckScope`; `FlashcardSession` accepts it and an optional close label. `app/practice/page.tsx` offers "Kartičky ze slov s chybami (N)" in the mistake panel and runs the ungraded flashcards in place, returning "Zpět na procvičování". New test `test_weak_deck_holds_exactly_the_unresolved_words`.
+
+**Verification:** `tests/test_mistakes.py` and `tests/test_words.py` 11 passed; ruff, typecheck, production build, `git diff --check` passed; Playwright opened the deck from `/practice` (10 cards, first "können").

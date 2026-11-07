@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { PlayButton } from "@/components/PlayButton";
 import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
-import { getWordDeck, myWordAudioUrl, type Deck, type DeckCard, type Language, type WordScope } from "@/lib/api";
+import { getWordDeck, myWordAudioUrl, type Deck, type DeckCard, type DeckScope, type Language } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
 
@@ -31,10 +31,12 @@ export function FlashcardSession({
   language,
   scope,
   onClose,
+  closeLabel = t.close,
 }: {
   language: Language;
-  scope: WordScope;
+  scope: DeckScope;
   onClose: () => void;
+  closeLabel?: string;
 }) {
   const [deck, setDeck] = useState<Deck | null>(null);
   const [failed, setFailed] = useState(false);
@@ -87,7 +89,7 @@ export function FlashcardSession({
         <Layers className="size-5 text-brand-500" aria-hidden /> {t.title(scope.label)}
       </h2>
       <Button variant="ghost" className="!px-2 !py-1 text-sm" onClick={onClose}>
-        <ArrowLeft className="size-4" aria-hidden /> {t.close}
+        <ArrowLeft className="size-4" aria-hidden /> {closeLabel}
       </Button>
     </header>
   );
@@ -114,7 +116,7 @@ export function FlashcardSession({
           <Button variant="secondary" onClick={restart}>
             <RotateCcw className="size-4" aria-hidden /> {t.restart}
           </Button>
-          <Button onClick={onClose}>{t.close}</Button>
+          <Button onClick={onClose}>{closeLabel}</Button>
         </div>
       </div>,
     );

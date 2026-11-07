@@ -1,10 +1,11 @@
 "use client";
 
-import { AlertTriangle, ArrowRight, Dumbbell, History, Lightbulb, Pin, PinOff, Sparkles } from "lucide-react";
+import { AlertTriangle, ArrowRight, Dumbbell, History, Layers, Lightbulb, Pin, PinOff, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { FlashcardSession } from "@/components/FlashcardSession";
 import { Notice } from "@/components/ui";
 import { getLanguageSummaries, getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
@@ -88,6 +89,7 @@ export default function PracticePage() {
   const [pinned, setPinned] = useState<PracticeMode["id"][]>([]);
   const [weakSpots, setWeakSpots] = useState<WeakSpots | null>(null);
   const [weakFailed, setWeakFailed] = useState(false);
+  const [weakCards, setWeakCards] = useState(false);
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
   useEffect(() => setRecent(readRecent()), []);
@@ -147,6 +149,13 @@ export default function PracticePage() {
       ].slice(0, 3),
     }));
 
+  if (weakCards)
+    return (
+      <AppShell me={me}>
+        <FlashcardSession language={me.acting.active_language} scope={{ kind: "weak", label: t.weakDeck }} onClose={() => setWeakCards(false)} closeLabel={t.backToHub} />
+      </AppShell>
+    );
+
   return (
     <AppShell me={me}>
       <section className="flex flex-col gap-4">
@@ -190,6 +199,15 @@ export default function PracticePage() {
             ) : (
               <>
                 <p className="text-sm text-slate-600 dark:text-slate-300">{t.recommendHelp}</p>
+                {(weakSpots?.words.length ?? 0) > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setWeakCards(true)}
+                    className="inline-flex items-center gap-2 self-start rounded-xl bg-amber-500 px-3 py-2 text-sm font-semibold text-white hover:bg-amber-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
+                  >
+                    <Layers className="size-4" aria-hidden /> {t.weakCards(weakSpots!.words.length)}
+                  </button>
+                )}
                 <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                   {recommendations.map(({ tag, count, href, examples }) => (
                     <li key={tag}>
