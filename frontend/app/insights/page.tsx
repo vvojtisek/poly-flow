@@ -161,6 +161,8 @@ const SKILLS = [
   { key: "grammar", stroke: "stroke-amber-400", dot: "stroke-amber-500", swatch: "bg-amber-400" },
 ] as const;
 
+const FEW = 5; // answers in a week below which a point is marked as thin evidence
+
 /** One line per skill. A week without answers breaks the line instead of being drawn as 0 %. */
 function AccuracyChart({ data }: { data: Insights["accuracy"] }) {
   const W = 480, H = 160, P = 24;
@@ -195,7 +197,16 @@ function AccuracyChart({ data }: { data: Insights["accuracy"] }) {
                 const tally = w[s.key];
                 if (!tally.answered) return null;
                 return (
-                  <circle key={w.week} cx={P + i * step} cy={y(tally.correct / tally.answered)} r={2.5 + 3 * Math.sqrt(tally.answered / most)} className={`fill-white dark:fill-slate-900 ${s.dot}`} strokeWidth={2}>
+                  <circle
+                    key={w.week}
+                    cx={P + i * step}
+                    cy={y(tally.correct / tally.answered)}
+                    r={2.5 + 3 * Math.sqrt(tally.answered / most)}
+                    className={`fill-white dark:fill-slate-900 ${s.dot}`}
+                    strokeWidth={2}
+                    // Fewer than FEW answers: a dashed ring, so 1 of 1 does not read like a solid 100 %.
+                    strokeDasharray={tally.answered < FEW ? "2 2" : undefined}
+                  >
                     <title>{t.skillPoint(t.skills[s.key]!, t.weekOf(dayFmt(w.week)), tally.correct, tally.answered)}</title>
                   </circle>
                 );
@@ -211,6 +222,33 @@ function AccuracyChart({ data }: { data: Insights["accuracy"] }) {
           ) : null,
         )}
       </svg>
+      <details className="text-xs">
+        <summary className="cursor-pointer text-slate-500 hover:text-brand-600">{t.accuracyTable}</summary>
+        <div className="mt-2 overflow-x-auto">
+          <table className="w-full text-left tabular-nums">
+            <thead className="text-slate-500">
+              <tr>
+                <th scope="col" className="py-1 pr-2 font-medium">{t.weekCol}</th>
+                {shown.map((s) => (
+                  <th key={s.key} scope="col" className="py-1 pr-2 font-medium">{t.skills[s.key]}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.filter((w) => shown.some((s) => w[s.key].answered)).map((w) => (
+                <tr key={w.week} className="border-t border-slate-100 dark:border-slate-800">
+                  <th scope="row" className="py-1 pr-2 font-normal">{dayFmt(w.week)}</th>
+                  {shown.map((s) => (
+                    <td key={s.key} className="py-1 pr-2">
+                      {w[s.key].answered ? `${w[s.key].correct}/${w[s.key].answered}` : "–"}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
       <ul className="flex flex-wrap gap-3 text-xs text-slate-600 dark:text-slate-300">
         {shown.map((s) => {
           const answered = data.reduce((n, w) => n + w[s.key].answered, 0);

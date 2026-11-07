@@ -1785,3 +1785,13 @@ Vlad approves a push.
 **Implemented Solution:** A sticky weekday column (Po, St, Pá, Ne) and a month label over the first week of each month (Czech abbreviations, aria-hidden, since every day button already has its full date). Padding cells now match the day size. The panel grid items get min-w-0, so the calendar scrolls inside its own panel, and it opens scrolled to the latest weeks.
 
 **Verification:** Playwright: at 390px there is no page overflow (overflow scan finds no element) and the calendar's scrollLeft equals its maximum (209) on load; at 1280px it fits without scrolling. Desktop and mobile screenshots show 'čvn … lis' labels and Po/St/Pá/Ne aligned with the rows. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 70/120 | Page: [/insights] (Page Cycle 10/15)
+
+**Summary:** mark thin weekly evidence and offer the accuracy numbers as a table
+
+**Observed Problem:** The accuracy chart drew a week with 1 of 1 correct answers as a solid 100% point, visually as strong as a week of 40 answers. The exact numbers were only in SVG <title> tooltips, which touch screens and many screen readers never show. On a phone the chart could not be read precisely at all.
+
+**Implemented Solution:** Points for weeks with fewer than five answers get a dashed ring, and the help text explains this (together with the dot size growing with answer count). A 'Zobrazit čísla po týdnech' disclosure under the chart opens a real table: rows are weeks with answers, columns are the skills, cells show 'správně/odpovědí' or '–'. It scrolls inside its panel on narrow screens.
+
+**Verification:** Playwright 390px with stubbed tallies: 2 of 4 points are dashed (recall 1/2 and grammar 3/3); the table lists '19. 10. – 1/2 –', '26. 10. – 6/12 3/3' and '2. 11. 23/23 – –'; no page overflow. No console errors. typecheck, next build, ruff pass.
