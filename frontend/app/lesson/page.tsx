@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, CheckCircle2, Compass, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
+import { BookOpen, CheckCircle2, Compass, Gauge, GraduationCap, PlayCircle, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -28,6 +28,9 @@ export default function LessonPage() {
   const [introduced, setIntroduced] = useState<number | null>(null);
   const [failed, setFailed] = useState(false);
   const [openSession, setOpenSession] = useState(false);
+  const [estimate, setEstimate] = useState<{ level: string; at: string | null; source: "test" | "progress" } | null>(null);
+  const [testOpen, setTestOpen] = useState(false);
+  const [testAvailable, setTestAvailable] = useState(false);
   const [preview, setPreview] = useState<LessonPreview | null>(null);
 
   useEffect(() => {
@@ -50,6 +53,11 @@ export default function LessonPage() {
         const p = progress.status === "fulfilled" ? progress.value : null;
         const a = assessment.status === "fulfilled" ? assessment.value : null;
         setPlacement(a?.latest?.level ?? p?.cefr_level ?? null);
+        setEstimate(
+          a?.latest ? { level: a.latest.level, at: a.latest.decided_at, source: "test" } : p?.cefr_level ? { level: p.cefr_level, at: null, source: "progress" } : null,
+        );
+        setTestOpen(Boolean(a?.active_session_id));
+        setTestAvailable(Boolean(a?.available));
         setBadge(p ? highestBadge(p.level_badges) : null);
         setIntroduced(p?.introduced ?? null);
         setOpenSession(Boolean(p?.active_session_id));
@@ -102,6 +110,24 @@ export default function LessonPage() {
           <LanguagePicker me={me} />
         </header>
 
+        {tree && (
+          // Where the recommendation comes from, and how to change it.
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-600 dark:text-slate-300">
+            <Gauge className="size-4 text-slate-400" aria-hidden />
+            {estimate
+              ? estimate.source === "test" && estimate.at
+                ? cs.lesson.estimateFromTest(estimate.level, new Date(estimate.at).toLocaleDateString("cs-CZ"))
+                : cs.lesson.estimateFromProgress(estimate.level)
+              : badge
+                ? cs.lesson.estimateFromBadge(badge)
+                : cs.lesson.noEstimate}
+            {testAvailable && (
+              <Link href="/placement/cefr" className="font-medium text-brand-700 hover:underline dark:text-brand-200">
+                {testOpen ? cs.lesson.resumeTest : estimate?.source === "test" ? cs.lesson.retakeTest : cs.lesson.takeTest}
+              </Link>
+            )}
+          </p>
+        )}
         {failed && <Notice tone="error">{cs.common.error}</Notice>}
         {!tree && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
 

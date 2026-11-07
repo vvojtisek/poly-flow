@@ -1875,3 +1875,13 @@ Vlad approves a push.
 **Implemented Solution:** Each level header shows 'prostudováno X z Y' and, when any are verified, '· ověřeno Z', with a two-tone bar (verified emerald, studied sky). Topic cards get a 'rozdělaná' badge for the open lesson and 'k ověření' when due, both from the grammar tree the page already loads.
 
 **Verification:** Playwright on real data: headers read 'A1 prostudováno 2 z 15', 'A2 prostudováno 0 z 11', 'B1 … 0 z 6', 'B2 … 0 z 5'; the sein card shows 'rozdělaná | k ověření | Prostudováno'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 79/120 | Page: [/lesson] (Page Cycle 4/15)
+
+**Summary:** say where the level estimate comes from and link to the level test
+
+**Observed Problem:** The overview based its recommendation on a placement estimate, vocabulary badge or progress level, but it never showed which one or what level, except inside the explanation under the recommended topic (and not at all while a lesson was open). A learner without an estimate had no route to the CEFR level test from this page, and an open test was not offered for resuming.
+
+**Implemented Solution:** A one-line strip under the header names the basis: 'Orientační úroveň A2 z testu 3. 11. 2026.', 'Orientační úroveň X podle postupu.', 'Bez testu úrovně; zkouška slovní zásoby X.' or 'Zatím bez odhadu úrovně, doporučení začíná od A1.'. When the test is available it adds 'Zjistit úroveň testem', 'Udělat test znovu' or 'Pokračovat v testu úrovně' linking to /placement/cefr. The wording stays 'orientační' (indicative), as the product requires for CEFR labels.
+
+**Verification:** Playwright 390px, real data: 'Zatím bez odhadu úrovně, doporučení začíná od A1. Zjistit úroveň testem' -> /placement/cefr. With a stubbed A2 estimate dated 3 Nov: 'Orientační úroveň A2 z testu 3. 11. 2026. Udělat test znovu'. No console errors. typecheck, next build, ruff pass.
