@@ -34,5 +34,5 @@ def test_languages_have_the_same_plots():
 
 
 @pytest.mark.parametrize("path", FILES, ids=lambda p: p.name)
-def test_ten_stories_per_level(path: Path):
+def test_expected_stories_per_level(path: Path):
     assert validate_counts(_load(path)) == []

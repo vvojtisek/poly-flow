@@ -1,7 +1,7 @@
 {
  "language": "en",
  "source": "polyflow-curated",
- "revision": "stories-v1",
+ "revision": "stories-v2",
  "license": "CC0-1.0",
  "review_status": "unreviewed",
  "stories": [
@@ -3599,6 +3599,3626 @@
       "He is still working ten years later.",
       "He retires immediately.",
       "He becomes boss."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-01-two-shoes",
+   "level": "A1",
+   "title": "Two Left Shoes",
+   "title_cs": "Dvě levé boty",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva has two new shoes and goes to work.",
+     "cs": "Eva má dvě nové boty a jde do práce."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I walk in a strange way today. My feet hurt.",
+     "cs": "Dnes chodím nějak divně. Bolí mě nohy."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Look at your shoes. Both are left shoes!",
+     "cs": "Podívej se na boty. Obě jsou levé!"
+    },
+    {
+     "speaker": "Eva",
+     "text": "What a surprise. Where is the right shoe?",
+     "cs": "To je ale překvapení. Kde je pravá bota?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "At home. I have another identical pair there.",
+     "cs": "Doma. Tam mám ještě jeden stejný pár."
+    },
+    {
+     "speaker": null,
+     "text": "Eva goes home. Now she walks slowly, but she laughs.",
+     "cs": "Eva se vrací domů. Teď chodí pomalu, ale směje se."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "identical",
+     "cs": "stejný"
+    },
+    {
+     "word": "surprise",
+     "cs": "překvapení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co je s botami?",
+     "options": [
+      "Obě jsou levé.",
+      "Jsou malé.",
+      "Jsou mokré."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co má Eva doma?",
+     "options": [
+      "Další stejný pár.",
+      "Nové kolo.",
+      "Pravou rukavici."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-02-plant-water",
+   "level": "A1",
+   "title": "A Thirsty Plant",
+   "title_cs": "Žíznivá rostlina",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom has a green plant in his office.",
+     "cs": "Tom má v kanceláři zelenou rostlinu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I give it water every day. It always looks the same.",
+     "cs": "Každý den jí dávám vodu. Je pořád stejná."
+    },
+    {
+     "speaker": "Eva",
+     "text": "How strange. Does it grow at all?",
+     "cs": "To je zvláštní. Roste vůbec?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "No. But there is a puddle under the desk every day.",
+     "cs": "Ne. Ale pod stolem je každý den louže."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom, that plant is not alive. It is plastic.",
+     "cs": "Tome, to není živá rostlina. Je plastová."
+    },
+    {
+     "speaker": null,
+     "text": "Tom buys a living flower and a new towel for his colleague.",
+     "cs": "Tom si kupuje živou květinu a kolegovi nový ručník."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "puddle",
+     "cs": "louže"
+    },
+    {
+     "word": "plastic",
+     "cs": "plastový"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč rostlina neroste?",
+     "options": [
+      "Je plastová.",
+      "Nemá vodu.",
+      "Je noc."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co dostane kolega?",
+     "options": [
+      "Ručník.",
+      "Stůl.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-03-quiet-bell",
+   "level": "A1",
+   "title": "The Quiet Doorbell",
+   "title_cs": "Tichý zvonek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva is at home waiting for a visitor.",
+     "cs": "Eva čeká doma na návštěvu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom is already outside. Why does he not come in?",
+     "cs": "Tom už stojí před domem. Proč nejde dál?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I ring and ring. Nobody opens the door.",
+     "cs": "Zvoním a zvoním. Nikdo neotvírá."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The doorbell does not work. Call my phone.",
+     "cs": "Ten zvonek nefunguje. Zavolej mi na telefon."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That is very modern. And what do I do now?",
+     "cs": "To je moc moderní. A co mám dělat teď?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva opens the window. A new sign on the door says: Please shout.",
+     "cs": "Eva otvírá okno. Na dveřích visí nový nápis: Prosím, křičte."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "doorbell",
+     "cs": "zvonek"
+    },
+    {
+     "word": "sign",
+     "cs": "nápis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co nefunguje?",
+     "options": [
+      "Zvonek.",
+      "Telefon.",
+      "Okno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co říká nový nápis?",
+     "options": [
+      "Prosím, křičte.",
+      "Nechoďte dovnitř.",
+      "Přijďte zítra."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-04-cat-chair",
+   "level": "A1",
+   "title": "A Seat for the Cat",
+   "title_cs": "Místo pro kočku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom has a new small table and two chairs.",
+     "cs": "Tom má nový malý stůl a dvě židle."
+    },
+    {
+     "speaker": "Tom",
+     "text": "This chair is mine. A visitor can sit on the other.",
+     "cs": "Tahle židle je moje. Na druhé může sedět návštěva."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And where does your cat sit?",
+     "cs": "A kde sedí tvoje kočka?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "The cat has a beautiful soft cushion on the floor.",
+     "cs": "Kočka má svůj krásný měkký polštář na zemi."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Look, she is already sitting on your chair.",
+     "cs": "Podívej, už sedí na tvé židli."
+    },
+    {
+     "speaker": null,
+     "text": "Tom sits on the cushion. The cat likes a comfortable life.",
+     "cs": "Tom sedí na polštáři. Kočka má ráda pohodlný život."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "cushion",
+     "cs": "polštář"
+    },
+    {
+     "word": "comfortable",
+     "cs": "pohodlný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec sedí Tom?",
+     "options": [
+      "Na polštáři.",
+      "Na stole.",
+      "Venku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo má Tomovu židli?",
+     "options": [
+      "Kočka.",
+      "Návštěva.",
+      "Eva."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a1-05-clean-window",
+   "level": "A1",
+   "title": "The Clean Window",
+   "title_cs": "Čisté okno",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva is washing the big kitchen window today.",
+     "cs": "Eva dnes myje velké okno v kuchyni."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Finished! Now the glass is really clean.",
+     "cs": "Hotovo! Teď je sklo opravdu čisté."
+    },
+    {
+     "speaker": "Tom",
+     "text": "How lovely. But why is it so cold in here?",
+     "cs": "To je krásné. Ale proč je tady taková zima?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I don't know. I can see the whole garden clearly.",
+     "cs": "Nevím. Vidím celou zahradu úplně jasně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Eva, your window is still open.",
+     "cs": "Evo, tvoje okno je pořád otevřené."
+    },
+    {
+     "speaker": null,
+     "text": "Eva laughs and closes the window. She will wash the other side tomorrow.",
+     "cs": "Eva se směje a zavírá okno. Druhou stranu umyje zítra."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "glass",
+     "cs": "sklo"
+    },
+    {
+     "word": "clearly",
+     "cs": "jasně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč je v kuchyni zima?",
+     "options": [
+      "Okno je otevřené.",
+      "Je noc.",
+      "Lednice je otevřená."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdy Eva umyje druhou stranu?",
+     "options": [
+      "Zítra.",
+      "Včera.",
+      "Za rok."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-06-bread-alarm",
+   "level": "A2",
+   "title": "The Bread Alarm",
+   "title_cs": "Budík na chleba",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom set his alarm in the evening to buy fresh bread in the morning.",
+     "cs": "Tom si večer nastavil budík, aby ráno koupil čerstvý chléb."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I put it in the wardrobe. Otherwise I turn it off and sleep again.",
+     "cs": "Dal jsem ho do skříně. Jinak ho vypnu a zase usnu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's clever. You really have to get up in the morning.",
+     "cs": "To je chytré. Ráno musíš opravdu vstát."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I got up, opened the wardrobe and found my shoes.",
+     "cs": "Ráno jsem vstal, otevřel skříň a našel svoje boty."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And did you buy the bread as well?",
+     "cs": "A koupil jsi také chléb?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom showed his bag: Yes. Only now my wife carries the alarm in her handbag.",
+     "cs": "Tom ukázal tašku: Koupil. Jen ten budík teď nosí moje žena v kabelce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "wardrobe",
+     "cs": "šatní skříň"
+    },
+    {
+     "word": "otherwise",
+     "cs": "jinak"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč dal Tom budík do skříně?",
+     "options": [
+      "Aby musel vstát.",
+      "Aby byl potichu.",
+      "Aby ho prodal."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo má nakonec budík?",
+     "options": [
+      "Jeho žena.",
+      "Pekař.",
+      "Soused."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-07-library-whisper",
+   "level": "A2",
+   "title": "A Quiet Order",
+   "title_cs": "Tichá objednávka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva visited the new library for the first time.",
+     "cs": "Eva šla poprvé do nové knihovny."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I'd like a coffee and two cakes, please.",
+     "cs": "Prosím vás, dám si kávu a dva koláče."
+    },
+    {
+     "speaker": "Knihovník",
+     "text": "Madam, this is a library. You must speak quietly.",
+     "cs": "Paní, tady je knihovna. Musíte mluvit potichu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Oh, sorry. I didn't notice the sign.",
+     "cs": "Ach, promiňte. Já jsem si nevšimla nápisu."
+    },
+    {
+     "speaker": "Knihovník",
+     "text": "And what sort of book are you looking for?",
+     "cs": "A co tedy hledáte za knihu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva whispered: First the coffee, please. Then a book about baking.",
+     "cs": "Eva zašeptala: Nejdřív prosím tu kávu. Pak nějakou knihu o pečení."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "whispered",
+     "cs": "zašeptala"
+    },
+    {
+     "word": "baking",
+     "cs": "pečení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde je Eva?",
+     "options": [
+      "V knihovně.",
+      "V kavárně.",
+      "Na poště."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jakou knihu chce?",
+     "options": [
+      "O pečení.",
+      "O lodích.",
+      "O běhání."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-08-skate-lesson",
+   "level": "A2",
+   "title": "The First Skating Lesson",
+   "title_cs": "Lekce na ledě",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom bought new skates and went to his first lesson.",
+     "cs": "Tom koupil nové brusle a šel na první hodinu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I can do everything already. I've seen it on television.",
+     "cs": "Já už umím všechno. Viděl jsem to v televizi."
+    },
+    {
+     "speaker": "Trenér",
+     "text": "Good. First we'll learn how to stop safely.",
+     "cs": "Dobře. Nejdřív se naučíme bezpečně zastavit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Stop? I want to learn a triple jump.",
+     "cs": "Zastavit? Já se chci naučit trojitý skok."
+    },
+    {
+     "speaker": "Trenér",
+     "text": "Then start slowly. And please let go of the railing.",
+     "cs": "Začněte tedy pomalu. A pusťte prosím to zábradlí."
+    },
+    {
+     "speaker": null,
+     "text": "Tom kept holding on: Today I'm mainly training my arms.",
+     "cs": "Tom držel zábradlí dál: Dnes trénuji hlavně silné ruce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "triple",
+     "cs": "trojitý"
+    },
+    {
+     "word": "railing",
+     "cs": "zábradlí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Tom umět?",
+     "options": [
+      "Trojitý skok.",
+      "Plavat.",
+      "Tancovat valčík."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čeho se Tom drží?",
+     "options": [
+      "Zábradlí.",
+      "Trenéra.",
+      "Stromu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-09-wrong-seeds",
+   "level": "A2",
+   "title": "The Fast Garden",
+   "title_cs": "Rychlá zahrada",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva planted some seeds and checked her garden bed every day.",
+     "cs": "Eva zasadila semínka a každý den kontrolovala záhon."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The packet says: Ready in three minutes.",
+     "cs": "Na sáčku píšou: Hotovo za tři minuty."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's strange. My carrots grow all summer.",
+     "cs": "To je zvláštní. Moje mrkev roste celé léto."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Perhaps I have a faster variety. I just can't see anything yet.",
+     "cs": "Tak mám asi rychlejší odrůdu. Jen ještě nic nevidím."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Show me the packet. Those are instant noodles!",
+     "cs": "Ukaž mi ten sáček. To jsou instantní nudle!"
+    },
+    {
+     "speaker": null,
+     "text": "Eva looked at the empty bed: And I've watered them with cold water all spring.",
+     "cs": "Eva se podívala na prázdný záhon: A já je celé jaro zalévám studenou vodou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "variety",
+     "cs": "odrůda"
+    },
+    {
+     "word": "instant",
+     "cs": "instantní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva zasadila?",
+     "options": [
+      "Nudle.",
+      "Mrkev.",
+      "Fazole."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čím záhon zalévala?",
+     "options": [
+      "Studenou vodou.",
+      "Mlékem.",
+      "Čajem."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-10-laundry-team",
+   "level": "A2",
+   "title": "The New Team Shirt",
+   "title_cs": "Nový týmový dres",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom washed the white shirts of the whole hockey team.",
+     "cs": "Tom pral bílé dresy celého hokejového týmu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I only added one small red sock.",
+     "cs": "Přidal jsem jen jednu malou červenou ponožku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Then why are all the shirts pink?",
+     "cs": "Tak proč jsou všechny dresy růžové?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "It's our new team colour. Everyone will recognise us.",
+     "cs": "To je nové týmové zbarvení. Určitě nás každý pozná."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And what shall we tell the coach before the match?",
+     "cs": "A co máme říct trenérovi před zápasem?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom brought an extra pink shirt: That we thought of him too.",
+     "cs": "Tom přinesl růžový dres navíc: Že jsme mysleli i na něj."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "recognise",
+     "cs": "poznat"
+    },
+    {
+     "word": "coach",
+     "cs": "trenér"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč jsou dresy růžové?",
+     "options": [
+      "Praly se s červenou ponožkou.",
+      "Tým je koupil růžové.",
+      "Byly na slunci."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pro koho je dres navíc?",
+     "options": [
+      "Pro trenéra.",
+      "Pro rozhodčího.",
+      "Pro psa."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-11-dance-broom",
+   "level": "A2",
+   "title": "The Dance Partner",
+   "title_cs": "Taneční partner",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wanted to practise a new dance at home.",
+     "cs": "Eva chtěla doma nacvičit nový tanec."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom is busy today. I'll dance with the broom.",
+     "cs": "Tom dnes nemá čas. Budu tančit s koštětem."
+    },
+    {
+     "speaker": "Tom",
+     "text": "At least it won't step on your feet.",
+     "cs": "Aspoň ti nebude šlapat na nohy."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Exactly. And it doesn't keep correcting me.",
+     "cs": "Přesně. A také mě pořád neopravuje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But why is the broom wearing a tie?",
+     "cs": "Jen proč má to koště na sobě kravatu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva bowed with the broom: It must come properly dressed to its first lesson.",
+     "cs": "Eva uklonila koště: Na první hodinu přece musí přijít slušně oblečené."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "broom",
+     "cs": "koště"
+    },
+    {
+     "word": "bowed",
+     "cs": "uklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "S čím Eva tančí?",
+     "options": [
+      "S koštětem.",
+      "S kabátem.",
+      "Se židlí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co má partner na sobě?",
+     "options": [
+      "Kravatu.",
+      "Brusle.",
+      "Klobouk."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-12-museum-ticket",
+   "level": "A2",
+   "title": "The Beautiful Ticket",
+   "title_cs": "Nejhezčí vstupenka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom took Eva to a small museum.",
+     "cs": "Tom vzal Evu do malého muzea."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Look at this lovely colourful ticket. I'll keep it.",
+     "cs": "Podívej na tu krásnou barevnou vstupenku. Tu si schovám."
+    },
+    {
+     "speaker": "Eva",
+     "text": "There are even nicer paintings inside. Come on.",
+     "cs": "Uvnitř jsou ještě krásnější obrazy. Pojď už."
+    },
+    {
+     "speaker": "Tom",
+     "text": "First I must photograph it from every side.",
+     "cs": "Nejdřív ji musím vyfotit ze všech stran."
+    },
+    {
+     "speaker": "Pracovník muzea",
+     "text": "Sir, I need to punch your ticket at the entrance.",
+     "cs": "Pane, musím vám vstupenku označit u vchodu."
+    },
+    {
+     "speaker": null,
+     "text": "Tom stayed outside: We can't damage such expensive art with a hole.",
+     "cs": "Tom zůstal venku: Tak drahé umění přece nebudeme ničit dírou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "punch",
+     "cs": "označit proděravěním"
+    },
+    {
+     "word": "entrance",
+     "cs": "vchod"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom obdivuje?",
+     "options": [
+      "Vstupenku.",
+      "Sochu.",
+      "Dveře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč zůstává venku?",
+     "options": [
+      "Nechce díru ve vstupence.",
+      "Nemá peníze.",
+      "Muzeum je zavřené."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-13-camping-ceiling",
+   "level": "A2",
+   "title": "Indoor Camping",
+   "title_cs": "Stan v obýváku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wanted to sleep in a tent for the first time, but it rained all weekend.",
+     "cs": "Eva chtěla poprvé spát ve stanu, ale celý víkend pršelo."
+    },
+    {
+     "speaker": "Eva",
+     "text": "We'll put it up in the living room. At least it will stay dry.",
+     "cs": "Postavíme ho v obýváku. Aspoň zůstane suchý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Good. I'll bring the sleeping bags and you can prepare dinner.",
+     "cs": "Dobře. Já přinesu spacáky a ty připrav večeři."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ready. And the birds are already singing outside.",
+     "cs": "Hotovo. A venku už zpívají ptáci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's just the radio. Are you having any real experience of nature?",
+     "cs": "To je jen rádio. Máš vůbec nějaký zážitek z přírody?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom pointed to the corner: Yes. I've been looking for a mosquito for ten minutes.",
+     "cs": "Tom ukázal do rohu: Ano. Už deset minut hledám komára."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "experience",
+     "cs": "zážitek"
+    },
+    {
+     "word": "mosquito",
+     "cs": "komár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde stojí stan?",
+     "options": [
+      "V obýváku.",
+      "U řeky.",
+      "Na střeše."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom hledá?",
+     "options": [
+      "Komára.",
+      "Rádio.",
+      "Klíče."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-14-bicycle-basket",
+   "level": "A2",
+   "title": "The Bicycle Basket",
+   "title_cs": "Nákup na kole",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom bought a big basket for his bicycle.",
+     "cs": "Tom koupil na kolo velký košík."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Now I can bring all the shopping home without a car.",
+     "cs": "Teď odvezu celý nákup bez auta."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Great. Have you got bread, milk and eggs?",
+     "cs": "Výborně. Máš chleba, mléko a vejce?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Everything. Only the bicycle is rather hard to steer.",
+     "cs": "Všechno. Jen se to kolo nějak špatně řídí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Is the load in your basket too heavy?",
+     "cs": "Nemáš v košíku příliš těžký náklad?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom took out the last item: Perhaps I shouldn't have bought another basket for the return journey.",
+     "cs": "Tom vytáhl poslední věc: Možná jsem neměl kupovat ještě jeden košík na cestu zpátky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "steer",
+     "cs": "řídit směr"
+    },
+    {
+     "word": "load",
+     "cs": "náklad"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom přidal k nákupu?",
+     "options": [
+      "Další košík.",
+      "Nové auto.",
+      "Stan."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak chtěl vézt nákup?",
+     "options": [
+      "Na kole.",
+      "Vlakem.",
+      "Lodí."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "a2-15-scarf-season",
+   "level": "A2",
+   "title": "The Long Scarf",
+   "title_cs": "Dlouhá šála",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva started learning to knit a scarf in January.",
+     "cs": "Eva se v lednu začala učit plést šálu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I add a little every evening. It'll be ready for winter.",
+     "cs": "Každý večer přidám kousek. Do zimy bude hotová."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But winter is now. How long is it already?",
+     "cs": "Ale zima je teď. Jak dlouhá už je?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I don't know. One end is in the kitchen and the other is by the television.",
+     "cs": "Nevím. Jeden konec mám v kuchyni a druhý u televize."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perhaps you could stop now.",
+     "cs": "Tak už bys možná mohla přestat."
+    },
+    {
+     "speaker": null,
+     "text": "Eva thought for a moment: I can't. I've finally learnt to start, but not to finish.",
+     "cs": "Eva se zamyslela: Nemůžu. Konečně jsem se naučila začít, ale ještě ne skončit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "knit",
+     "cs": "plést"
+    },
+    {
+     "word": "scarf",
+     "cs": "šála"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kdy Eva začala?",
+     "options": [
+      "V lednu.",
+      "V červenci.",
+      "Včera."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč stále plete?",
+     "options": [
+      "Neumí práci ukončit.",
+      "Potřebuje dvě šály.",
+      "Je jí pořád zima."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-16-humidity-fair",
+   "level": "B1",
+   "title": "Scientific Rain",
+   "title_cs": "Vědecký deštník",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom brought a device for measuring humidity to the school science day.",
+     "cs": "Tom přinesl na školní vědecký den přístroj na měření vlhkosti."
+    },
+    {
+     "speaker": "Tom",
+     "text": "My experiment will predict rain more accurately than any app.",
+     "cs": "Můj experiment předpoví déšť přesněji než jakákoli aplikace."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Why is your equipment standing directly under that wet cloth, then?",
+     "cs": "Proč tedy stojí tvoje zařízení přímo pod tou mokrou utěrkou?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's just a control. First I must prove that it works.",
+     "cs": "To je jen kontrola. Nejdřív musím dokázat, že funguje."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And when will you start measuring the actual weather?",
+     "cs": "A kdy začneš měřit skutečné počasí?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom hid the cloth in his bag: When it stops spoiling my results.",
+     "cs": "Tom schoval utěrku do tašky: Až mi přestane kazit výsledky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "humidity",
+     "cs": "vlhkost"
+    },
+    {
+     "word": "accurately",
+     "cs": "přesně"
+    },
+    {
+     "word": "equipment",
+     "cs": "zařízení"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom měří?",
+     "options": [
+      "Vlhkost.",
+      "Hluk.",
+      "Rychlost."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čím ovlivňuje výsledek?",
+     "options": [
+      "Mokrou utěrkou.",
+      "Telefonem.",
+      "Světlem."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-17-door-for-cat",
+   "level": "B1",
+   "title": "The Perfect Cat Flap",
+   "title_cs": "Přesná dvířka",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva followed a precise plan to make a little flap for her cat.",
+     "cs": "Eva si podle přesného plánu vyrobila malá dvířka pro kočku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I checked the dimensions three times, and the opening is perfectly round.",
+     "cs": "Rozměry jsem zkontrolovala třikrát a otvor je dokonale kulatý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Beautiful work. But why is the cat still waiting outside?",
+     "cs": "To je krásná práce. Proč ale kočka pořád čeká venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Perhaps she hasn't understood how a modern entrance works yet.",
+     "cs": "Možná ještě nepochopila, jak moderní vchod funguje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Shouldn't you have put the flap in the door instead of the worktop?",
+     "cs": "Neměla jsi ta dvířka dát do dveří místo do pracovní desky?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva laid the board on the floor: Naturally. Today we're only testing access, not location.",
+     "cs": "Eva položila desku na zem: Samozřejmě. Dnes testujeme jen průchod, ne umístění."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "dimensions",
+     "cs": "rozměry"
+    },
+    {
+     "word": "worktop",
+     "cs": "pracovní deska"
+    },
+    {
+     "word": "access",
+     "cs": "přístup"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde Eva vyrobila otvor?",
+     "options": [
+      "V pracovní desce.",
+      "Ve dveřích.",
+      "Ve zdi."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co tvrdí na konci?",
+     "options": [
+      "Že testuje pouze průchod.",
+      "Že kočka je velká.",
+      "Že plán ztratila."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-18-medieval-watch",
+   "level": "B1",
+   "title": "Medieval Timekeeping",
+   "title_cs": "Středověký čas",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom guided visitors around a castle in a carefully prepared medieval costume.",
+     "cs": "Tom prováděl návštěvníky hradu v pečlivě připraveném středověkém kostýmu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Our performance shows life without electricity or modern inventions.",
+     "cs": "Naše představení ukazuje život bez elektřiny a moderních vynálezů."
+    },
+    {
+     "speaker": "Eva",
+     "text": "How do you know when it's time for lunch, then?",
+     "cs": "Jak tedy poznáte, kdy je čas na oběd?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "From the sun. Our ancestors understood nature very well.",
+     "cs": "Podle slunce. Naši předkové dobře znali přírodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Why is your sleeve beeping just now?",
+     "cs": "A proč vám právě teď pípá rukáv?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom hid his watch: That's only a very precisely trained cricket.",
+     "cs": "Tom schoval hodinky: To je jen velmi přesně vycvičený cvrček."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "medieval",
+     "cs": "středověký"
+    },
+    {
+     "word": "ancestors",
+     "cs": "předkové"
+    },
+    {
+     "word": "cricket",
+     "cs": "cvrček"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Tom schované v rukávu?",
+     "options": [
+      "Hodinky.",
+      "Cvrčka.",
+      "Vstupenku."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje pípání?",
+     "options": [
+      "Vycvičeným cvrčkem.",
+      "Bouřkou.",
+      "Telefonem návštěvníka."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-19-choir-echo",
+   "level": "B1",
+   "title": "The Most Faithful Singer",
+   "title_cs": "Nejvěrnější zpěvák",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva started a small choir and was looking for its final member.",
+     "cs": "Eva založila malý pěvecký sbor a hledala posledního člena."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I've found someone who always repeats the melody without a mistake.",
+     "cs": "Našla jsem někoho, kdo vždycky zopakuje melodii bez chyby."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Excellent. Does this singer have experience of performing?",
+     "cs": "To je výborné. Má zkušenosti s vystupováním?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "He's been singing here for years and never asks for payment.",
+     "cs": "Zpívá tady už mnoho let a nikdy nechce zaplatit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Where is he, then? We're starting in five minutes.",
+     "cs": "Tak kde je? Začínáme přece za pět minut."
+    },
+    {
+     "speaker": null,
+     "text": "Eva opened the courtyard window: Hear that echo? He's just a little late.",
+     "cs": "Eva otevřela okno do dvora: Slyšíš tu ozvěnu? Jen trochu chodí pozdě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "choir",
+     "cs": "pěvecký sbor"
+    },
+    {
+     "word": "melody",
+     "cs": "melodie"
+    },
+    {
+     "word": "echo",
+     "cs": "ozvěna"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Koho Eva vydává za zpěváka?",
+     "options": [
+      "Ozvěnu.",
+      "Souseda.",
+      "Učitele."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co novému členu vytýká?",
+     "options": [
+      "Chodí trochu pozdě.",
+      "Chce hodně peněz.",
+      "Zpívá jinou melodii."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-20-bird-photographer",
+   "level": "B1",
+   "title": "The Patient Photographer",
+   "title_cs": "Trpělivý fotograf",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom waited in the woods all morning to photograph a rare bird.",
+     "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I must stay completely still. Any movement will frighten it away.",
+     "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Why have you got so many crumbs on your hat?",
+     "cs": "A proč máš na klobouku tolik drobků?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's my strategy. The bird will come closer and the picture will be perfect.",
+     "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Certainly. Just look where you put your camera.",
+     "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
+    },
+    {
+     "speaker": null,
+     "text": "In Eva's photograph, the bird sat on the camera while Tom patiently watched an empty branch.",
+     "cs": "Na fotografii od Evy seděl pták na fotoaparátu a Tom dál trpělivě sledoval prázdnou větev."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "crumbs",
+     "cs": "drobky"
+    },
+    {
+     "word": "strategy",
+     "cs": "strategie"
+    },
+    {
+     "word": "patiently",
+     "cs": "trpělivě"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec seděl pták?",
+     "options": [
+      "Na fotoaparátu.",
+      "Na větvi.",
+      "Na Evě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo pořídil fotografii?",
+     "options": [
+      "Eva.",
+      "Tom.",
+      "Nikdo."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-21-detective-crumbs",
+   "level": "B1",
+   "title": "The Biscuit Mystery",
+   "title_cs": "Záhada sušenek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva found an empty biscuit box and decided to investigate.",
+     "cs": "Eva našla prázdnou krabici od sušenek a rozhodla se pátrat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The culprit left crumbs all the way from the kitchen to the sofa.",
+     "cs": "Pachatel za sebou nechal drobky od kuchyně až k pohovce."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's convincing evidence. Who do you suspect?",
+     "cs": "To je přesvědčivý důkaz. Koho podezíráš?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "You. You're sitting at the end of the trail looking innocent.",
+     "cs": "Tebe. Sedíš na konci té cesty a tváříš se nevinně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "And have you noticed the chocolate on your jumper?",
+     "cs": "A všimla sis, že máš na svetru čokoládu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva closed her notebook: The investigation will continue once I've changed the evidence.",
+     "cs": "Eva zavřela zápisník: Vyšetřování bude pokračovat, až si převléknu důkazy."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "culprit",
+     "cs": "pachatel"
+    },
+    {
+     "word": "evidence",
+     "cs": "důkazy"
+    },
+    {
+     "word": "innocent",
+     "cs": "nevinný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co má Eva na svetru?",
+     "options": [
+      "Čokoládu.",
+      "Barvu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co naznačuje konec příběhu?",
+     "options": [
+      "Sušenky možná snědla Eva.",
+      "Krabice nebyla otevřená.",
+      "Sušenky se ztratily v obchodě."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-22-recycling-trophy",
+   "level": "B1",
+   "title": "The Returnable Prize",
+   "title_cs": "Vratná cena",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom won a competition for the best idea about sorting waste.",
+     "cs": "Tom vyhrál soutěž o nejlepší nápad na třídění odpadu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "My proposal will save hundreds of plastic containers every year.",
+     "cs": "Můj návrh ušetří ročně stovky plastových obalů."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Congratulations. Here is your prize and your official certificate.",
+     "cs": "Gratulujeme. Tady je vaše cena a slavnostní diplom."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Thank you. I'd just like to ask what the trophy is made of.",
+     "cs": "Děkuji. Jen bych se rád zeptal, z čeho je ten pohár."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Plastic. But we can wrap it in another bag for you.",
+     "cs": "Z plastu. Ale můžeme vám ho zabalit do dalšího sáčku."
+    },
+    {
+     "speaker": null,
+     "text": "Tom returned the trophy: Let's start now, then. Please send the certificate electronically.",
+     "cs": "Tom vrátil pohár pořadateli: Tak začneme hned. Diplom mi pošlete elektronicky."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "proposal",
+     "cs": "návrh"
+    },
+    {
+     "word": "certificate",
+     "cs": "diplom"
+    },
+    {
+     "word": "trophy",
+     "cs": "pohár"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Z čeho je pohár?",
+     "options": [
+      "Z plastu.",
+      "Ze dřeva.",
+      "Ze skla."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom požádal poslat elektronicky?",
+     "options": [
+      "Diplom.",
+      "Pohár.",
+      "Sáček."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-23-calendar-walk",
+   "level": "B1",
+   "title": "The Scheduled Walk",
+   "title_cs": "Procházka podle kalendáře",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva put a daily walk into her work calendar.",
+     "cs": "Eva si do pracovního kalendáře zapsala každodenní procházku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "If I schedule it as a meeting, nobody will give me other work then.",
+     "cs": "Když ji naplánuji jako schůzku, nikdo mi do ní nedá další práci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's sensible. Have you been outside today yet?",
+     "cs": "To je rozumné. Už jsi dnes byla venku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "No. My manager postponed the appointment by half an hour.",
+     "cs": "Ne. Vedoucí mi ten termín přesunul o půl hodiny."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why are you agreeing to the change?",
+     "cs": "A proč s přesunutím souhlasíš?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva showed the invitation: Because he added seven participants and meeting minutes to my walk.",
+     "cs": "Eva ukázala pozvánku: Protože mi na procházku přidal sedm účastníků a zápis."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "schedule",
+     "cs": "naplánovat"
+    },
+    {
+     "word": "postponed",
+     "cs": "odložil"
+    },
+    {
+     "word": "participants",
+     "cs": "účastníci"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co si Eva zapsala?",
+     "options": [
+      "Procházku.",
+      "Dovolenou.",
+      "Lékaře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co vedoucí k termínu přidal?",
+     "options": [
+      "Účastníky a zápis.",
+      "Oběd.",
+      "Psa."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-24-menu-pronunciation",
+   "level": "B1",
+   "title": "Pronunciation for Dinner",
+   "title_cs": "Výslovnost k večeři",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom carefully practised pronouncing dish names before visiting the restaurant.",
+     "cs": "Tom si před návštěvou restaurace pečlivě procvičil výslovnost názvů jídel."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Today I'll order without hesitation. The waiter will notice that I'm learning.",
+     "cs": "Dnes objednám bez zaváhání. Číšník určitě pozná, že se učím."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Go ahead, then. I'm very hungry already.",
+     "cs": "Tak začni. Já už mám velký hlad."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'd like this dish with that unusual sauce, please.",
+     "cs": "Prosím, jednou tohle jídlo s tou zvláštní omáčkou."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Is that what you've been practising all week?",
+     "cs": "To sis procvičoval celý týden?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom smiled: No. But they changed the menu today, and the word this stayed the same.",
+     "cs": "Tom se usmál: Ne. Ale jídelní lístek dnes změnili a slovo tohle zůstalo stejné."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pronouncing",
+     "cs": "vyslovování"
+    },
+    {
+     "word": "hesitation",
+     "cs": "zaváhání"
+    },
+    {
+     "word": "unusual",
+     "cs": "neobvyklý"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co se v restauraci změnilo?",
+     "options": [
+      "Jídelní lístek.",
+      "Číšníkovo jméno.",
+      "Otevírací doba."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec použil?",
+     "options": [
+      "Ukázání na jídlo.",
+      "Dokonalý název jídla.",
+      "Telefonát domů."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-25-scale-recipe",
+   "level": "B1",
+   "title": "The Exact Cake",
+   "title_cs": "Přesný koláč",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva decided to bake a cake by following the recipe exactly.",
+     "cs": "Eva se rozhodla upéct koláč přesně podle receptu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "This time I'll weigh every ingredient. No estimates.",
+     "cs": "Tentokrát budu vážit každou přísadu. Žádné odhady."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why have you put the entire cookbook on the scales?",
+     "cs": "Proč máš na váze položenou celou kuchařku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "It says: Add two hundred grams according to the recipe.",
+     "cs": "Píše se tu: Přidejte dvě stě gramů podle receptu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That means two hundred grams of flour, not of the book.",
+     "cs": "To znamená dvě stě gramů mouky, ne knihy."
+    },
+    {
+     "speaker": null,
+     "text": "Eva lifted the cookbook: A pity. With this firm binding, the cake would certainly hold together.",
+     "cs": "Eva zvedla kuchařku: Škoda. S touhle pevnou vazbou by koláč určitě držel pohromadě."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "ingredient",
+     "cs": "přísada"
+    },
+    {
+     "word": "estimates",
+     "cs": "odhady"
+    },
+    {
+     "word": "binding",
+     "cs": "vazba knihy"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva položila na váhu?",
+     "options": [
+      "Kuchařku.",
+      "Hotový koláč.",
+      "Talíř."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co měla vážit?",
+     "options": [
+      "Mouku.",
+      "Knihu.",
+      "Vodu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-26-parcel-address",
+   "level": "B1",
+   "title": "A Very Precise Address",
+   "title_cs": "Velmi přesná adresa",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom was sending a parcel to a friend and wanted to be sure it arrived.",
+     "cs": "Tom posílal kamarádovi balík a chtěl mít jistotu, že dorazí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've written the street, the house number and a description of the door.",
+     "cs": "Napsal jsem ulici, číslo domu i popis dveří."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's thorough. But why is the address two pages long?",
+     "cs": "To je pečlivé. Proč je ale adresa dlouhá dvě stránky?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I added directions from the station and a recommendation for a good café.",
+     "cs": "Přidal jsem pokyny od nádraží a doporučení na dobrou kavárnu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And where is the recipient's name on the envelope?",
+     "cs": "A kde je na obálce jméno příjemce?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom searched for a space: The postman must work that out. I've planned him a lovely outing.",
+     "cs": "Tom chvíli hledal volné místo: Na to už musí přijít pošťák. Já mu naplánoval pěkný výlet."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "thorough",
+     "cs": "důkladný"
+    },
+    {
+     "word": "recommendation",
+     "cs": "doporučení"
+    },
+    {
+     "word": "recipient",
+     "cs": "příjemce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co v adrese chybí?",
+     "options": [
+      "Jméno příjemce.",
+      "Číslo domu.",
+      "Ulice."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom přidal navíc?",
+     "options": [
+      "Pokyny a doporučení kavárny.",
+      "Fotku psa.",
+      "Mapu světa."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-27-referee-silence",
+   "level": "B1",
+   "title": "The Silent Referee",
+   "title_cs": "Tichý rozhodčí",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom was asked to referee a friendly hockey match.",
+     "cs": "Tom dostal za úkol rozhodovat přátelský hokejový zápas."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'll be impartial, and above all I won't keep the players waiting.",
+     "cs": "Budu spravedlivý a hlavně nenechám hráče zbytečně čekat."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Then why have we been standing here for five minutes without anything happening?",
+     "cs": "Tak proč už pět minut stojíme a nic se neděje?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'm waiting for someone to hand me the whistle.",
+     "cs": "Čekám, až mi někdo podá píšťalku."
+    },
+    {
+     "speaker": "Eva",
+     "text": "You've had it in your mouth the whole time.",
+     "cs": "Vždyť ji máš celou dobu v puse."
+    },
+    {
+     "speaker": null,
+     "text": "Tom took out the whistle: Naturally. I just didn't want to speak with my mouth full.",
+     "cs": "Tom vyndal píšťalku: Samozřejmě. Jen jsem nechtěl mluvit s plnou pusou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "referee",
+     "cs": "rozhodovat zápas"
+    },
+    {
+     "word": "impartial",
+     "cs": "nestranný"
+    },
+    {
+     "word": "whistle",
+     "cs": "píšťalka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Na co Tom čeká?",
+     "options": [
+      "Na píšťalku, kterou už má.",
+      "Na brankáře.",
+      "Na nové brusle."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje mlčení?",
+     "options": [
+      "Nechtěl mluvit s plnou pusou.",
+      "Zapomněl pravidla.",
+      "Byl unavený."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-28-quiet-orchestra",
+   "level": "B1",
+   "title": "The Quietest Instrument",
+   "title_cs": "Nejtišší nástroj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva arrived at the amateur orchestra carrying a large empty box.",
+     "cs": "Eva přišla do amatérského orchestru s velkou prázdnou krabicí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I've brought a new instrument. It's light and never needs tuning.",
+     "cs": "Přinesla jsem nový nástroj. Je lehký a nemusí se ladit."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That sounds practical. What sort of tone does it have?",
+     "cs": "To zní prakticky. Jakou má barvu zvuku?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "A very delicate one. Only attentive listeners can hear it.",
+     "cs": "Velmi jemnou. Slyší ho jen pozorní posluchači."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Could you play something for us, then?",
+     "cs": "Můžeš nám tedy něco zahrát?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva opened the box and waited: That was the whole composition. You may keep the applause silent too.",
+     "cs": "Eva otevřela krabici a čekala: To byla celá skladba. Potlesk můžete také nechat v tichosti."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "tuning",
+     "cs": "ladění"
+    },
+    {
+     "word": "attentive",
+     "cs": "pozorný"
+    },
+    {
+     "word": "composition",
+     "cs": "skladba"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co bylo v krabici?",
+     "options": [
+      "Nic.",
+      "Housle.",
+      "Buben."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Eva vysvětluje ticho?",
+     "options": [
+      "Jako skladbu pro pozorné posluchače.",
+      "Jako rozbitý nástroj.",
+      "Jako přestávku."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-29-puzzle-label",
+   "level": "B1",
+   "title": "A Puzzle Record",
+   "title_cs": "Rekord ve skládání",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom invited Eva to admire his completed jigsaw puzzle.",
+     "cs": "Tom pozval Evu, aby obdivovala jeho dokončené puzzle."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I finished it in six months. That's a genuine achievement.",
+     "cs": "Mám hotovo za šest měsíců. To je opravdový úspěch."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The picture looks nice. How many pieces were there?",
+     "cs": "Obrázek vypadá hezky. Kolik měl dílků?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Five hundred. But look at the box: It says three to five years.",
+     "cs": "Pět set. Ale podívej na krabici: Je na ní napsáno tři až pět let."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's the recommended age, not an estimate of the time.",
+     "cs": "To je přece doporučený věk, ne odhad času."
+    },
+    {
+     "speaker": null,
+     "text": "Tom turned the box over: We'd better keep this record in the family.",
+     "cs": "Tom otočil krabici: Tak tenhle rekord raději necháme v rodině."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "jigsaw",
+     "cs": "skládací puzzle"
+    },
+    {
+     "word": "achievement",
+     "cs": "úspěch"
+    },
+    {
+     "word": "recommended",
+     "cs": "doporučený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co znamená údaj na krabici?",
+     "options": [
+      "Doporučený věk.",
+      "Čas skládání.",
+      "Počet dílků."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak dlouho Tom skládal?",
+     "options": [
+      "Šest měsíců.",
+      "Pět let.",
+      "Tři dny."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b1-30-map-scale",
+   "level": "B1",
+   "title": "The Nearby Tower",
+   "title_cs": "Blízká rozhledna",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva planned a short walk to the observation tower on the hill.",
+     "cs": "Eva naplánovala krátký výlet k rozhledně na kopci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "It's only a little way on the map. Let's go without a snack.",
+     "cs": "Na mapě je to jen kousek. Pojďme bez svačiny."
+    },
+    {
+     "speaker": "Tom",
+     "text": "What's the scale of that map? Shouldn't we verify it?",
+     "cs": "Jaké má ta mapa měřítko? Neměli bychom si to ověřit?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "No need. I measured the route with my finger, and it's only two centimetres long.",
+     "cs": "Není třeba. Změřila jsem cestu prstem a je dlouhá jen dva centimetry."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But each centimetre represents five kilometres.",
+     "cs": "Jenže každý centimetr představuje pět kilometrů."
+    },
+    {
+     "speaker": null,
+     "text": "Eva studied the map again: Then we'd better take a smaller finger and a bigger snack.",
+     "cs": "Eva si znovu prohlédla mapu: Tak si raději vezmeme menší prst a větší svačinu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "observation",
+     "cs": "pozorování"
+    },
+    {
+     "word": "scale",
+     "cs": "měřítko"
+    },
+    {
+     "word": "verify",
+     "cs": "ověřit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Jak dlouhá je cesta podle měřítka?",
+     "options": [
+      "Deset kilometrů.",
+      "Dva kilometry.",
+      "Pět metrů."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co se Eva rozhodne vzít?",
+     "options": [
+      "Větší svačinu.",
+      "Nové boty.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-31-noise-committee",
+   "level": "B2",
+   "title": "The Silence Committee",
+   "title_cs": "Komise pro ticho",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom chaired the residents' committee, which was finally supposed to resolve complaints about noise at night.",
+     "cs": "Tom předsedal domovní komisi, která měla konečně vyřešit rušení nočního klidu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I propose that we first unanimously approve some rules for considerate coexistence.",
+     "cs": "Navrhuji, abychom nejdřív jednomyslně schválili pravidla ohleduplného soužití."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Agreed, but the neighbour below is banging on the ceiling. Shouldn't we lower our voices?",
+     "cs": "Souhlasím, ale soused pod námi právě buší na strop. Neměli bychom ztišit hlas?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "We can't interrupt proceedings. Without comprehensive minutes, our decision wouldn't carry sufficient weight.",
+     "cs": "Nemůžeme přerušit jednání. Bez úplného zápisu by naše rozhodnutí nemělo dostatečnou váhu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Then here's another complaint: It's past midnight, and your committee is making the most noise.",
+     "cs": "Pak je tu ještě druhá stížnost: Už je po půlnoci a vaše komise křičí nejvíc."
+    },
+    {
+     "speaker": null,
+     "text": "Tom closed the folder: Excellent. At last we have a concrete case to work on at our next meeting.",
+     "cs": "Tom zavřel složku: Výborně. Konečně máme konkrétní případ, na kterém můžeme příště pracovat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "unanimously",
+     "cs": "jednomyslně"
+    },
+    {
+     "word": "coexistence",
+     "cs": "soužití"
+    },
+    {
+     "word": "proceedings",
+     "cs": "jednání"
+    },
+    {
+     "word": "comprehensive",
+     "cs": "úplný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kdo podle stížnosti ruší nejvíc?",
+     "options": [
+      "Komise.",
+      "Děti na dvoře.",
+      "Návštěva."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Tom na stížnost reaguje?",
+     "options": [
+      "Využije ji jako téma příštího jednání.",
+      "Okamžitě se odstěhuje.",
+      "Zruší pravidla."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-32-average-socks",
+   "level": "B2",
+   "title": "Correct on Average",
+   "title_cs": "Průměrně správně",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva assessed the comfort of new socks using a questionnaire she had designed herself.",
+     "cs": "Eva vyhodnocovala pohodlí nových ponožek pomocí dotazníku, který sama navrhla."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The results are excellent. The average size corresponds perfectly to our customers' requirements.",
+     "cs": "Výsledky jsou výborné. Průměrná velikost dokonale odpovídá potřebám zákazníků."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why does every participant have one sock that's too small and another that's too large, then?",
+     "cs": "Proč má tedy každý účastník jednu ponožku příliš malou a druhou příliš velkou?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Because we account for variability. Individual values matter less than the aggregate indicator.",
+     "cs": "Protože zohledňujeme variabilitu. Jednotlivé hodnoty jsou méně důležité než celkový ukazatel."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wouldn't you rather measure each foot separately?",
+     "cs": "A nebudeš raději měřit každou nohu zvlášť?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva made a note: Good point. Next time we'll send a questionnaire to the other foot as well.",
+     "cs": "Eva si zapsala poznámku: Dobrá připomínka. Příští dotazník pošleme také druhé noze."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "assessed",
+     "cs": "vyhodnotila"
+    },
+    {
+     "word": "variability",
+     "cs": "variabilita"
+    },
+    {
+     "word": "aggregate",
+     "cs": "souhrnný"
+    },
+    {
+     "word": "indicator",
+     "cs": "ukazatel"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co je s ponožkami špatně?",
+     "options": [
+      "Každá má jinou nevhodnou velikost.",
+      "Jsou mokré.",
+      "Chybí obě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Eva navrhne na konci?",
+     "options": [
+      "Poslat dotazník druhé noze.",
+      "Zavřít obchod.",
+      "Změnit barvu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-33-garden-reclassification",
+   "level": "B2",
+   "title": "The Rare Garden",
+   "title_cs": "Vzácný záhon",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom wanted to enter his neglected garden in a competition without spending the summer weeding.",
+     "cs": "Tom chtěl přihlásit zanedbanou zahradu do soutěže, aniž by musel celé léto plít."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've renamed the weeds spontaneous vegetation and the flower bed an experimental habitat.",
+     "cs": "Přejmenoval jsem plevel na spontánní vegetaci a záhon na experimentální stanoviště."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Interesting terminology. How will you demonstrate a contribution to biodiversity?",
+     "cs": "To je zajímavá terminologie. Jak doložíš přínos pro biodiverzitu?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Very simply. Every week I discover something here that I certainly didn't plant.",
+     "cs": "Úplně jednoduše. Každý týden tady objevím něco, co jsem určitě nezasadil."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And what about the dandelions now growing in the neighbours' gardens too?",
+     "cs": "A co ty pampelišky, které už rostou i u sousedů?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom smiled contentedly: Proof that my research has genuine international reach. My neighbour is Austrian.",
+     "cs": "Tom se spokojeně usmál: To je důkaz, že můj výzkum má skutečně mezinárodní přesah. Soused je Rakušan."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "spontaneous",
+     "cs": "spontánní"
+    },
+    {
+     "word": "habitat",
+     "cs": "stanoviště"
+    },
+    {
+     "word": "terminology",
+     "cs": "terminologie"
+    },
+    {
+     "word": "biodiversity",
+     "cs": "biodiverzita"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom ve skutečnosti změnil?",
+     "options": [
+      "Názvy, nikoli zahradu.",
+      "Celou půdu.",
+      "Plot."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč mluví o mezinárodním přesahu?",
+     "options": [
+      "Pampelišky rostou u rakouského souseda.",
+      "Zahrada je v zahraničí.",
+      "Vyhrál zahraniční cenu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-34-theatre-sneeze",
+   "level": "B2",
+   "title": "The Reliable Understudy",
+   "title_cs": "Spolehlivý záskok",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva became the theatre's understudy and learnt the entire script, including the marginal notes.",
+     "cs": "Eva dostala v divadle roli záskoku a naučila se celý text včetně poznámek na okraji."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I'm prepared for any eventuality. I even know the pauses that aren't explicitly indicated.",
+     "cs": "Jsem připravená na jakoukoli situaci. Dokonce znám i pauzy, které nejsou výslovně uvedené."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I appreciate that. Today, though, you'll replace the tree in the background because the original actor is ill.",
+     "cs": "To oceňuji. Dnes ale budeš zastupovat strom v pozadí, protože původní herec onemocněl."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Never mind. Every character deserves a carefully considered motivation.",
+     "cs": "Nevadí. Každá postava má právo na promyšlenou motivaci."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Just please don't move at all during the final monologue.",
+     "cs": "Jen tě prosím, aby ses během závěrečného monologu vůbec nehýbala."
+    },
+    {
+     "speaker": null,
+     "text": "When Eva sneezed, she bowed: Sorry. The tree was expressing its opposition to the pollen season.",
+     "cs": "Když Eva kýchla, uklonila se: Promiňte. Strom právě vyjádřil nesouhlas s pylovou sezonou."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "understudy",
+     "cs": "záskok"
+    },
+    {
+     "word": "marginal",
+     "cs": "okrajový"
+    },
+    {
+     "word": "eventuality",
+     "cs": "možná situace"
+    },
+    {
+     "word": "explicitly",
+     "cs": "výslovně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Koho má Eva zastupovat?",
+     "options": [
+      "Strom.",
+      "Královnu.",
+      "Vypravěče."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak vysvětluje kýchnutí?",
+     "options": [
+      "Jako nesouhlas stromu s pylem.",
+      "Jako část monologu krále.",
+      "Jako potlesk."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-35-grant-title",
+   "level": "B2",
+   "title": "The Research Title",
+   "title_cs": "Výzkumný titul",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom applied for a small grant to investigate why pencils kept disappearing from his workshop.",
+     "cs": "Tom žádal o malý grant, aby mohl v dílně zkoumat, proč mu pořád mizí tužky."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've called the project An Analysis of Spatial Instability in Minor Working Implements.",
+     "cs": "Projekt jsem nazval Analýza prostorové nestability drobných pracovních pomůcek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That sounds scholarly. What's your main hypothesis?",
+     "cs": "To zní odborně. Jaká je tvoje hlavní hypotéza?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "That the movement of pencils cannot be explained solely by their owner's negligence.",
+     "cs": "Že pohyb tužek nelze vysvětlit pouze nedbalostí jejich majitele."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Why have you got three pencils behind your ear and another four in your pocket?",
+     "cs": "A proč máš tři tužky za uchem a další čtyři v kapse?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom amended his proposal: The first phase of the research will be devoted to an inventory of the researcher.",
+     "cs": "Tom si opravil návrh: První etapa výzkumu bude věnována inventarizaci výzkumníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "spatial",
+     "cs": "prostorový"
+    },
+    {
+     "word": "implements",
+     "cs": "pomůcky"
+    },
+    {
+     "word": "hypothesis",
+     "cs": "hypotéza"
+    },
+    {
+     "word": "negligence",
+     "cs": "nedbalost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom zkoumá?",
+     "options": [
+      "Mizení tužek.",
+      "Vznik dřeva.",
+      "Rychlost internetu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kde jsou některé tužky?",
+     "options": [
+      "Za uchem a v kapse.",
+      "V obchodě.",
+      "Pod podlahou."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-36-anonymous-survey",
+   "level": "B2",
+   "title": "Anonymous Satisfaction",
+   "title_cs": "Anonymní spokojenost",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva prepared an anonymous survey so colleagues wouldn't fear assessing their working environment openly.",
+     "cs": "Eva připravila anonymní průzkum, aby se kolegové nebáli otevřeně hodnotit pracovní prostředí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I guarantee absolute confidentiality. Nobody will know who wrote which response.",
+     "cs": "Zaručuji vám naprostou důvěrnost. Nikdo nebude vědět, kdo kterou odpověď napsal."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why is our name preprinted on every form, then?",
+     "cs": "Proč je tedy na každém formuláři předtištěné naše jméno?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's merely an administrative precaution so I know whom to thank for their candour.",
+     "cs": "To je pouze administrativní opatření, abych věděla, komu mám poděkovat za upřímnost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "What if someone answers that they're afraid to speak openly?",
+     "cs": "A co když někdo odpoví, že se bojí otevřeně mluvit?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva brightened: I'll personally explain to that person that there's absolutely nothing to fear.",
+     "cs": "Eva se rozzářila: Tomu osobně vysvětlím, že se vůbec nemá čeho bát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "confidentiality",
+     "cs": "důvěrnost"
+    },
+    {
+     "word": "preprinted",
+     "cs": "předtištěný"
+    },
+    {
+     "word": "precaution",
+     "cs": "opatření"
+    },
+    {
+     "word": "candour",
+     "cs": "upřímnost"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co narušuje anonymitu průzkumu?",
+     "options": [
+      "Předtištěná jména.",
+      "Velikost papíru.",
+      "Barva obálek."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce Eva udělat s obavami účastníka?",
+     "options": [
+      "Osobně mu je vyvrátit.",
+      "Odpověď smazat.",
+      "Poslat mu nový stůl."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-37-museum-dust",
+   "level": "B2",
+   "title": "Original Dust",
+   "title_cs": "Původní prach",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom volunteered at a museum and was asked to clean the display case containing old tools.",
+     "cs": "Tom pracoval jako dobrovolník v muzeu a dostal za úkol očistit vitrínu se starými nástroji."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've removed all the dust, but preserved a small pile in case it has historical significance.",
+     "cs": "Odstranil jsem všechen prach, ale nechal jsem stranou malou hromádku pro případ, že by byla historická."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's cautious. Do you have any documentation concerning its provenance?",
+     "cs": "To je opatrné. Máš nějaké doklady o jejím původu?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Not yet, but considering the age of the display case, I wouldn't rule anything out.",
+     "cs": "Zatím ne, ale vzhledem ke stáří vitríny bych nic nevylučoval."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That case was installed last week. They repaired the ceiling here yesterday.",
+     "cs": "Ta vitrína byla instalovaná minulý týden. Včera tu opravovali strop."
+    },
+    {
+     "speaker": null,
+     "text": "Tom added a label to the pile: Then we have an exceptionally well-dated specimen of contemporary construction.",
+     "cs": "Tom přidal k hromádce štítek: Takže máme výjimečně přesně datovanou ukázku současného stavebnictví."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "provenance",
+     "cs": "původ"
+    },
+    {
+     "word": "documentation",
+     "cs": "doklady"
+    },
+    {
+     "word": "specimen",
+     "cs": "ukázka"
+    },
+    {
+     "word": "contemporary",
+     "cs": "současný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Odkud prach pravděpodobně pochází?",
+     "options": [
+      "Z opravy stropu.",
+      "Ze středověku.",
+      "Z vykopávek."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec udělá?",
+     "options": [
+      "Vytvoří popisek k prachu.",
+      "Přestane v muzeu pracovat.",
+      "Schová vitrínu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-38-compost-diplomacy",
+   "level": "B2",
+   "title": "Compost Diplomacy",
+   "title_cs": "Kompostová diplomacie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva was trying to persuade the neighbours to start a communal compost heap instead of buying more bins.",
+     "cs": "Eva se snažila přesvědčit sousedy, aby místo dalších popelnic založili společný kompost."
+    },
+    {
+     "speaker": "Eva",
+     "text": "We need sustained cooperation and an equitable distribution of responsibility for the different layers.",
+     "cs": "Potřebujeme dlouhodobou spolupráci a spravedlivé rozdělení odpovědnosti za jednotlivé vrstvy."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I'll contribute leaves. Who will represent the earthworms in the deliberations?",
+     "cs": "Já dodám listí. Kdo bude zastupovat žížaly při rozhodování?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "The worms aren't committee members. They're part of the biological process.",
+     "cs": "Žížaly nejsou členy výboru. Jsou součástí biologického procesu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Yet they'll process the greatest quantity of material without receiving any remuneration.",
+     "cs": "Přitom právě ony zpracují největší množství materiálu a nedostanou žádnou odměnu."
+    },
+    {
+     "speaker": null,
+     "text": "Eva rewrote the invitation: Fine. We'll hold the next meeting inside the compost so everyone has equal access.",
+     "cs": "Eva přepsala pozvánku: Dobře. Příští poradu uspořádáme přímo v kompostu, ať má každý stejný přístup."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "equitable",
+     "cs": "spravedlivý"
+    },
+    {
+     "word": "deliberations",
+     "cs": "jednání"
+    },
+    {
+     "word": "remuneration",
+     "cs": "odměna"
+    },
+    {
+     "word": "communal",
+     "cs": "společný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Eva založit?",
+     "options": [
+      "Společný kompost.",
+      "Další parkoviště.",
+      "Klub zahraničních hostů."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč chce poradu v kompostu?",
+     "options": [
+      "Aby měly přístup i žížaly.",
+      "Aby bylo teplo.",
+      "Aby se sousedi nedostavili."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-39-woodworking-units",
+   "level": "B2",
+   "title": "The Universal Shelf",
+   "title_cs": "Univerzální police",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ordered a shelf design from abroad and decided to build it without further modifications.",
+     "cs": "Tom si objednal zahraniční plán police a rozhodl se postavit ji bez dalších úprav."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've followed the dimensions absolutely precisely. The result must be compatible with any household.",
+     "cs": "Rozměry jsem dodržel naprosto přesně. Výsledek musí být kompatibilní s jakoukoli domácností."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Does that explain why it won't fit in the workshop? Shouldn't you have checked which units the plan uses?",
+     "cs": "To vysvětluje, proč se nevejde do dílny? Neměl jsi ověřit jednotky v plánu?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Units are merely a convention. I concentrated on proportions and overall stability.",
+     "cs": "Jednotky jsou jen dohoda. Já jsem se soustředil na proporce a celkovou stabilitu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "So instead of a shelf, we have a small observation tower. What will you put on it?",
+     "cs": "Takže místo police máme malou rozhlednu. Co na ni chceš dát?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom looked up at the top board: The design, above all. So nobody can ever use it again.",
+     "cs": "Tom vzhlédl k horní desce: Především ten plán. Ať už ho nikdo nemůže znovu použít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "modifications",
+     "cs": "úpravy"
+    },
+    {
+     "word": "compatible",
+     "cs": "slučitelný"
+    },
+    {
+     "word": "convention",
+     "cs": "dohoda"
+    },
+    {
+     "word": "proportions",
+     "cs": "proporce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Tom při stavbě zanedbal?",
+     "options": [
+      "Převod jednotek.",
+      "Barvu šroubů.",
+      "Otevírací dobu obchodu."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co chce dát nahoru?",
+     "options": [
+      "Plán police.",
+      "Květináč.",
+      "Televizi."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-40-robot-socks",
+   "level": "B2",
+   "title": "The Sock Robot",
+   "title_cs": "Robot na ponožky",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva programmed a robot to finally solve the household problem of matching socks.",
+     "cs": "Eva naprogramovala robota, který měl konečně vyřešit domácí problém s párováním ponožek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The algorithm compares colour, size and fabric texture while eliminating human bias.",
+     "cs": "Algoritmus porovnává barvu, velikost i strukturu látky a vylučuje lidskou zaujatost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Excellent. Why has it put every sock into a single pile labelled miscellaneous, then?",
+     "cs": "Výborně. Proč tedy odložil všechny ponožky do jediné hromady označené ostatní?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Because no two are entirely identical. Even slight wear alters the input data.",
+     "cs": "Protože žádné dvě nejsou zcela totožné. I drobné opotřebení mění vstupní data."
+    },
+    {
+     "speaker": "Tom",
+     "text": "So we spent the whole weekend automating something we'll ultimately have to do manually?",
+     "cs": "Takže jsme strávili celý víkend automatizací něčeho, co musíme nakonec udělat ručně?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva launched another program: Not quite. Now the robot can at least calculate precisely how many pairs it can't find.",
+     "cs": "Eva spustila další program: Ne tak úplně. Robot nám teď aspoň dokonale spočítá, kolik párů neumí najít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "bias",
+     "cs": "zaujatost"
+    },
+    {
+     "word": "miscellaneous",
+     "cs": "různé"
+    },
+    {
+     "word": "automating",
+     "cs": "automatizace"
+    },
+    {
+     "word": "manually",
+     "cs": "ručně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč robot nevytvořil páry?",
+     "options": [
+      "Považuje i malé rozdíly za zásadní.",
+      "Nemá proud.",
+      "Ponožky nevidí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co zvládne další program?",
+     "options": [
+      "Spočítat nenalezené páry.",
+      "Vyprat ponožky.",
+      "Opravit díry."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-41-archaeology-spoon",
+   "level": "B2",
+   "title": "Sunday's Discovery",
+   "title_cs": "Nález z neděle",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom found a spoon while digging in the garden and invited Eva to assess its historical significance.",
+     "cs": "Tom našel při kopání na zahradě lžíci a pozval Evu, aby posoudila její historický význam."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Judging by surface corrosion and the location of the find, it could originate from a very old settlement.",
+     "cs": "Podle povrchové koroze a polohy nálezu by mohla pocházet z velmi starého osídlení."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Couldn't it originate from our last garden lunch instead?",
+     "cs": "A nemohla by pocházet z našeho posledního zahradního oběda?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I wouldn't rule that out, but science requires independent verification and meticulous documentation.",
+     "cs": "To bych nevylučoval, ale věda potřebuje nezávislé ověření a pečlivou dokumentaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "My name is on the handle. I engraved it there last Sunday.",
+     "cs": "Tady na držadle je moje jméno. Vyryla jsem ho tam minulou neděli."
+    },
+    {
+     "speaker": null,
+     "text": "Tom held the spoon against the light: Excellent. We have not only a date, but even the original inhabitant's signature.",
+     "cs": "Tom obrátil lžíci proti světlu: Výborně. Máme nejen datování, ale dokonce i podpis původního obyvatele."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "corrosion",
+     "cs": "koroze"
+    },
+    {
+     "word": "verification",
+     "cs": "ověření"
+    },
+    {
+     "word": "meticulous",
+     "cs": "pečlivý"
+    },
+    {
+     "word": "engraved",
+     "cs": "vyryla"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Odkud lžíce pravděpodobně pochází?",
+     "options": [
+      "Z nedávného oběda na zahradě.",
+      "Ze starého hradu.",
+      "Z muzea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co je na držadle?",
+     "options": [
+      "Evino jméno.",
+      "Cena.",
+      "Letopočet vykopávek."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-42-video-replay",
+   "level": "B2",
+   "title": "The Decisive Replay",
+   "title_cs": "Rozhodující záznam",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva operated the camera at an amateur match so disputed goals could be verified on video.",
+     "cs": "Eva měla při amatérském zápase obsluhovat kameru, aby sporné góly šlo ověřit ze záznamu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "This technology will finally eliminate subjective speculation and let us decide on the basis of evidence.",
+     "cs": "Díky této technologii konečně odstraníme subjektivní dohady a rozhodneme na základě důkazů."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Excellent. Could you replay the last incident in slow motion? The players have argued about it for ten minutes.",
+     "cs": "Výborně. Můžeš pustit poslední situaci zpomaleně? Hráči se kvůli ní dohadují už deset minut."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Certainly. I just need to remember which button activates recording.",
+     "cs": "Samozřejmě. Jen si musím připomenout, které tlačítko spouští nahrávání."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Do you mean you've watched the entire match only through the screen?",
+     "cs": "Chceš říct, že jsi celý zápas sledovala jen přes obrazovku?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva turned the camera around: We have no footage, but I'm prepared to provide very detailed eyewitness testimony.",
+     "cs": "Eva otočila kameru: Záznam nemáme, ale já jsem připravená podat velmi podrobnou svědeckou výpověď."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "subjective",
+     "cs": "subjektivní"
+    },
+    {
+     "word": "speculation",
+     "cs": "dohady"
+    },
+    {
+     "word": "footage",
+     "cs": "záznam"
+    },
+    {
+     "word": "testimony",
+     "cs": "výpověď"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč není dostupný záznam?",
+     "options": [
+      "Eva nezapnula nahrávání.",
+      "Kamera spadla.",
+      "Zápas se nekonal."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Eva místo záznamu nabídne?",
+     "options": [
+      "Svědeckou výpověď.",
+      "Nový míč.",
+      "Opravu branek."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-43-tea-neutrality",
+   "level": "B2",
+   "title": "Neutral Tea",
+   "title_cs": "Neutrální čaj",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom led a family debate about who should make the next tea, determined to remain scientifically impartial.",
+     "cs": "Tom vedl rodinnou debatu o tom, kdo má příště připravovat čaj, a snažil se zůstat vědecky nestranný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I propose an objective criterion. We'll label samples with letters and assess their aroma without knowing the author.",
+     "cs": "Navrhuji objektivní kritérium. Vzorky označíme písmeny a posoudíme jejich aroma bez znalosti autora."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Fine. Why is your pot labelled exceptionally balanced reference sample, then?",
+     "cs": "Dobře. Proč je tedy tvoje konvice označená jako výjimečně vyvážený referenční vzorek?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's not an evaluation but a methodological clarification necessary for correct interpretation.",
+     "cs": "To není hodnocení, nýbrž metodologické upřesnění potřebné pro správnou interpretaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "And why are the other pots labelled deviation one and deviation two?",
+     "cs": "A proč jsou ostatní konvice označené jako odchylka jedna a odchylka dvě?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom raised an empty cup: To avoid prejudice. We haven't actually identified anyone as the culprit yet.",
+     "cs": "Tom zvedl prázdný šálek: Abychom předešli předsudkům. Ještě jsme přece nikoho neoznačili za viníka."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "criterion",
+     "cs": "kritérium"
+    },
+    {
+     "word": "methodological",
+     "cs": "metodologický"
+    },
+    {
+     "word": "clarification",
+     "cs": "upřesnění"
+    },
+    {
+     "word": "deviation",
+     "cs": "odchylka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč Tomovo označení není nestranné?",
+     "options": [
+      "Vlastní čaj označil za referenční a ostatní za odchylky.",
+      "Použil písmena.",
+      "Čaj je studený."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co mělo být předmětem hodnocení?",
+     "options": [
+      "Aroma čaje.",
+      "Cena konvic.",
+      "Množství vody v řece."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-44-slang-grandmother",
+   "level": "B2",
+   "title": "Grandma's Update",
+   "title_cs": "Babiččina aktualizace",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva taught her grandmother some contemporary slang so she could participate more easily in the family chat.",
+     "cs": "Eva naučila babičku několik současných hovorových výrazů, aby se snáze zapojila do rodinného chatu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "When you say something has a good vibe, you mean it makes a pleasant impression.",
+     "cs": "Když napíšeš, že něco má dobrý vibe, znamená to, že to na tebe příjemně působí."
+    },
+    {
+     "speaker": "Babička",
+     "text": "I understand. An informal designation for the overall atmosphere, rather than a technical term.",
+     "cs": "Rozumím. Jde tedy o neformální označení celkové atmosféry, nikoli o odborný termín."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Exactly. You just don't have to define every word in such detail.",
+     "cs": "Přesně. Jen nemusíš každé slovo tak podrobně definovat."
+    },
+    {
+     "speaker": "Babička",
+     "text": "I wouldn't dream of it. Context is essential to accurate interpretation.",
+     "cs": "To bych si nedovolila. Kontext je přece zásadní pro správnou interpretaci."
+    },
+    {
+     "speaker": null,
+     "text": "That evening Grandma wrote: Lunch was lovely, but your grandfather currently has the vibe of an outstanding tax return.",
+     "cs": "Večer babička napsala: Oběd byl skvělý, ale tvůj děda má dnes vibe nevyřízeného daňového přiznání."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "designation",
+     "cs": "označení"
+    },
+    {
+     "word": "interpretation",
+     "cs": "výklad"
+    },
+    {
+     "word": "outstanding",
+     "cs": "dosud nevyřízený"
+    },
+    {
+     "word": "vibe",
+     "cs": "celkový dojem či atmosféra"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva učí babičku?",
+     "options": [
+      "Hovorový výraz vibe.",
+      "Nový sport.",
+      "Daňové zákony."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "K čemu babička přirovnala dědovu náladu?",
+     "options": [
+      "K nevyřízenému daňovému přiznání.",
+      "K oslavě.",
+      "K hudebnímu koncertu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-45-telescope-cap",
+   "level": "B2",
+   "title": "A Private Galaxy",
+   "title_cs": "Soukromá galaxie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom organised a stargazing evening for the neighbours, promising them views of distant galaxies.",
+     "cs": "Tom uspořádal pro sousedy večer pozorování oblohy a slíbil jim pohled do vzdálených galaxií."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Thanks to the new optics, you'll distinguish details entirely inaccessible to the naked eye.",
+     "cs": "Díky nové optice rozeznáte detaily, které jsou pouhým okem zcela nepřístupné."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I can only see total darkness. Is that the region with exceptionally dense interstellar matter?",
+     "cs": "Vidím jen naprostou tmu. To je ta oblast s mimořádně hustou mezihvězdnou hmotou?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Probably. Direct observation sometimes demands a more adventurous interpretation than a textbook photograph.",
+     "cs": "Pravděpodobně. Přímé pozorování někdy vyžaduje odvážnější interpretaci než fotografie v učebnici."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Shouldn't we remove that cap from the lens first?",
+     "cs": "A nesundáme nejdřív z objektivu tu krytku?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom quickly concealed it: Of course. That was merely a demonstration of the universe enjoying complete privacy.",
+     "cs": "Tom ji rychle schoval: Samozřejmě. To byla pouze ukázka, jak vesmír vypadá při úplném soukromí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "optics",
+     "cs": "optika"
+    },
+    {
+     "word": "inaccessible",
+     "cs": "nepřístupný"
+    },
+    {
+     "word": "interstellar",
+     "cs": "mezihvězdný"
+    },
+    {
+     "word": "concealed",
+     "cs": "schoval"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč soused vidí tmu?",
+     "options": [
+      "Na objektivu je krytka.",
+      "Je pod zemí.",
+      "Teleskop míří do moře."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Jak Tom chybu vysvětluje?",
+     "options": [
+      "Jako ukázku soukromí vesmíru.",
+      "Jako změnu počasí.",
+      "Jako rozbitý telefon."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-46-chemical-free-water",
+   "level": "B2",
+   "title": "Chemical-Free Water",
+   "title_cs": "Voda bez chemie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva prepared a jug of water for the neighbourhood party, and Tom brought a new advertising sign.",
+     "cs": "Eva připravila na sousedskou oslavu džbán vody a Tom k němu přinesl nový reklamní nápis."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've written entirely chemical-free. Surely everyone appreciates that nowadays.",
+     "cs": "Napsal jsem stoprocentně bez chemie. To dnes přece každý oceňuje."
+    },
+    {
+     "speaker": "Eva",
+     "text": "But water is a chemical substance. Its formula is H₂O, and there's nothing wrong with that.",
+     "cs": "Jenže voda je chemická látka. Její vzorec je H₂O a na tom není nic špatného."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Fine. Then we'll specify that it contains no superfluous chemical additives.",
+     "cs": "Dobře, tak doplníme, že neobsahuje žádné zbytečné chemické přísady."
+    },
+    {
+     "speaker": "Eva",
+     "text": "If you mean ordinary drinking water, write exactly that. Precision is preferable to exaggeration.",
+     "cs": "Pokud tím myslíš obyčejnou pitnou vodu, napiš raději právě to. Přesnost je lepší než přehánění."
+    },
+    {
+     "speaker": null,
+     "text": "Tom turned the sign over: Drinking water. Explanation free; repeated explanation free as well.",
+     "cs": "Tom nápis otočil: Pitná voda. Vysvětlení zdarma, opakované vysvětlení také."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "superfluous",
+     "cs": "zbytečný"
+    },
+    {
+     "word": "additives",
+     "cs": "přísady"
+    },
+    {
+     "word": "preferable",
+     "cs": "vhodnější"
+    },
+    {
+     "word": "exaggeration",
+     "cs": "přehánění"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Jak Eva opravuje reklamní tvrzení?",
+     "options": [
+      "Vysvětluje, že voda sama je chemická látka.",
+      "Tvrdí, že voda není pitná.",
+      "Doporučuje nic nepít."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co nakonec stojí na nápisu?",
+     "options": [
+      "Pitná voda.",
+      "Bez molekul.",
+      "Zakázaný vstup."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-47-automatic-thanks",
+   "level": "B2",
+   "title": "Perfectly Polite Mail",
+   "title_cs": "Dokonale zdvořilá pošta",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom configured an automatic thank-you for every email so he would never appear discourteous again.",
+     "cs": "Tom si nastavil automatické poděkování za každý e-mail, aby už nikdy nepůsobil nezdvořile."
+    },
+    {
+     "speaker": "Tom",
+     "text": "The system responds instantly and maintains a consistent tone regardless of my current mood.",
+     "cs": "Systém reaguje okamžitě a zachovává konzistentní tón bez ohledu na mou momentální náladu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That sounds useful. Why have sixty messages arrived from my address in a minute, though?",
+     "cs": "To zní užitečně. Proč ti ale z mé adresy přišlo během minuty šedesát zpráv?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Because your automatic response thanks me for my acknowledgement, and my system reciprocates.",
+     "cs": "Protože tvoje automatická odpověď děkuje za moje poděkování a můj systém jí děkuje znovu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Then we should disable both programs before they fill our inboxes.",
+     "cs": "Tak bychom měli oba programy vypnout, než nám zaplní schránky."
+    },
+    {
+     "speaker": null,
+     "text": "Tom hesitated: First we must determine who stops thanking whom. I don't want to spoil such a courteously initiated conversation.",
+     "cs": "Tom zaváhal: Nejdřív musíme určit, kdo přestane děkovat první. Nechci pokazit tolik slušně zahájenou konverzaci."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "discourteous",
+     "cs": "nezdvořilý"
+    },
+    {
+     "word": "acknowledgement",
+     "cs": "potvrzení přijetí"
+    },
+    {
+     "word": "reciprocates",
+     "cs": "opětuje"
+    },
+    {
+     "word": "initiated",
+     "cs": "zahájený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč přibývají zprávy?",
+     "options": [
+      "Dvě automatické odpovědi si stále děkují.",
+      "Tom píše každou ručně.",
+      "Někdo posílá fotografie."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Toma zdržuje od vypnutí?",
+     "options": [
+      "Nechce být první, kdo přestane děkovat.",
+      "Neví, kde je počítač.",
+      "Čeká na opravu proudu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-48-parking-pie-chart",
+   "level": "B2",
+   "title": "The Pie-Chart Budget",
+   "title_cs": "Koláčový rozpočet",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva presented the neighbours with a budget for a new bicycle rack using an impressive coloured chart.",
+     "cs": "Eva představovala sousedům rozpočet nového stojanu na kola pomocí působivého barevného grafu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The largest proportion covers materials; the remaining segments show transport and a contingency reserve.",
+     "cs": "Největší podíl připadá na materiál, zbývající segmenty ukazují dopravu a rezervu na nepředvídané výdaje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's clear. But why does the chart have six slices when you list only three items?",
+     "cs": "To je přehledné. Ale proč má graf šest dílů, když tady uvádíš jen tři položky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I've subdivided each item so the budget appears more balanced and visually representative.",
+     "cs": "Každou položku jsem rozdělila, aby rozpočet působil vyváženěji a vizuálně reprezentativně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "And how much does the actual rack cost, then?",
+     "cs": "A kolik tedy stojí samotný stojan?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva closed the presentation: We don't know yet. So far we've only approved refreshments, because the chart made everyone want pie.",
+     "cs": "Eva zavřela prezentaci: To ještě nevíme. Zatím jsme schválili jen občerstvení, protože po tom grafu dostali všichni chuť na koláč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "proportion",
+     "cs": "podíl"
+    },
+    {
+     "word": "contingency",
+     "cs": "nepředvídaná událost"
+    },
+    {
+     "word": "subdivided",
+     "cs": "dále rozdělila"
+    },
+    {
+     "word": "representative",
+     "cs": "reprezentativní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "O čem měl být rozpočet?",
+     "options": [
+      "O stojanu na kola.",
+      "O novém divadle.",
+      "O vydání knihy."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co sousedé zatím schválili?",
+     "options": [
+      "Občerstvení.",
+      "Nákup stojanu.",
+      "Zrušení rezervy."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-49-queue-appointment",
+   "level": "B2",
+   "title": "Waiting by Appointment",
+   "title_cs": "Objednané čekání",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom arrived at the office with an electronically reserved appointment, delighted that this time he wouldn't queue.",
+     "cs": "Tom dorazil na úřad s elektronicky rezervovaným termínem a měl radost, že tentokrát nebude stát ve frontě."
+    },
+    {
+     "speaker": "Tom",
+     "text": "The system promises time optimisation and priority processing at precisely the designated hour.",
+     "cs": "Systém slibuje optimalizaci času a přednostní odbavení přesně v určenou hodinu."
+    },
+    {
+     "speaker": "Pracovník úřadu",
+     "text": "Excellent. You just need to collect a sequential number from the machine so the counter knows you're here.",
+     "cs": "To je skvělé. Jen si musíte vyzvednout pořadové číslo u automatu, aby o vás přepážka věděla."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Certainly. Why is the queue at the machine longer than the one at the counter?",
+     "cs": "Samozřejmě. A proč je před automatem delší fronta než před přepážkou?"
+    },
+    {
+     "speaker": "Pracovník úřadu",
+     "text": "Because everyone must verify their reservation first. It's an indispensable step towards eliminating waiting.",
+     "cs": "Protože si každý musí nejdřív ověřit rezervaci. Je to nezbytný krok k odstranění čekání."
+    },
+    {
+     "speaker": null,
+     "text": "Tom opened his calendar: I understand. Next time I'll also reserve a place in the queue for confirmation that I don't have to wait.",
+     "cs": "Tom si otevřel kalendář: Rozumím. Příště si tedy rezervuji i místo ve frontě na potvrzení, že nemusím čekat."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "optimisation",
+     "cs": "optimalizace"
+    },
+    {
+     "word": "designated",
+     "cs": "určený"
+    },
+    {
+     "word": "sequential",
+     "cs": "pořadový"
+    },
+    {
+     "word": "indispensable",
+     "cs": "nezbytný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde musí Tom nově čekat?",
+     "options": [
+      "U automatu na pořadové číslo.",
+      "Na letišti.",
+      "V knihovně."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co systém podle slibu optimalizuje?",
+     "options": [
+      "Čas návštěvníků.",
+      "Cenu kávy.",
+      "Velikost úřadu."
+     ],
+     "answer_index": 0
+    }
+   ]
+  },
+  {
+   "slug": "b2-50-book-club-cover",
+   "level": "B2",
+   "title": "The Book Club Begins",
+   "title_cs": "Čtenářský klub na začátku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva founded a book club and brought the novel everyone was supposed to have read before the first meeting.",
+     "cs": "Eva založila čtenářský klub a na první setkání přinesla román, který si měli všichni předem přečíst."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I suggest beginning with an interpretation of the title, since it undoubtedly shapes the reader's expectations.",
+     "cs": "Navrhuji začít interpretací názvu, protože ten nepochybně určuje očekávání čtenáře."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Agreed. We can add an analysis of the cover, typography and any symbolic associations.",
+     "cs": "Souhlasím. Můžeme přidat analýzu obálky, typografie a případných symbolických souvislostí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That will easily fill this evening. Who would like to discuss the actual plot next time?",
+     "cs": "To bude na dnešní večer bohatě stačit. Kdo by chtěl příště probrat samotný děj?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perhaps we shouldn't rush our methodology. We haven't evaluated the dedication or the contents page yet.",
+     "cs": "Možná bychom neměli uspěchat metodiku. Ještě jsme nevyhodnotili věnování a obsah."
+    },
+    {
+     "speaker": null,
+     "text": "Eva closed the book: Excellent. We have a programme for the whole year, and haven't had to spoil the ending for anyone.",
+     "cs": "Eva zavřela knihu: Výborně. Máme program na celý rok a zatím jsme nemuseli nikomu prozradit konec."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "typography",
+     "cs": "typografie"
+    },
+    {
+     "word": "associations",
+     "cs": "souvislosti"
+    },
+    {
+     "word": "methodology",
+     "cs": "metodika"
+    },
+    {
+     "word": "dedication",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Čemu se klub zatím vyhýbá?",
+     "options": [
+      "Samotnému ději románu.",
+      "Názvu knihy.",
+      "Obálce."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč Eva říká, že mají program na rok?",
+     "options": [
+      "Rozebírají velmi podrobně už úvodní části knihy.",
+      "Budou číst každý den jinou knihu.",
+      "Román má dvanáct dílů."
      ],
      "answer_index": 0
     }
