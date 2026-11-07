@@ -3739,6 +3739,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-quiet-bell",
+   "level": "A1",
+   "title": "La sonnette silencieuse",
+   "title_cs": "Tichý zvonek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva attend une visite à la maison.",
+     "cs": "Eva čeká doma na návštěvu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom est déjà dehors. Pourquoi n'entre-t-il pas ?",
+     "cs": "Tom už stojí před domem. Proč nejde dál?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "J'appuie encore et encore. Personne n'ouvre la porte.",
+     "cs": "Zvoním a zvoním. Nikdo neotvírá."
+    },
+    {
+     "speaker": "Eva",
+     "text": "La sonnette ne marche pas. Appelle-moi sur mon téléphone.",
+     "cs": "Ten zvonek nefunguje. Zavolej mi na telefon."
+    },
+    {
+     "speaker": "Tom",
+     "text": "C'est très moderne. Et maintenant, je fais quoi ?",
+     "cs": "To je moc moderní. A co mám dělat teď?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva ouvre la fenêtre. Une nouvelle pancarte sur la porte dit : Criez, s'il vous plaît.",
+     "cs": "Eva otvírá okno. Na dveřích visí nový nápis: Prosím, křičte."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "sonnette",
+     "cs": "zvonek"
+    },
+    {
+     "word": "pancarte",
+     "cs": "nápis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co nefunguje?",
+     "options": [
+      "Zvonek.",
+      "Telefon.",
+      "Okno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co říká nový nápis?",
+     "options": [
+      "Prosím, křičte.",
+      "Nechoďte dovnitř.",
+      "Přijďte zítra."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

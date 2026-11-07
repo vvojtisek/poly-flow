@@ -3739,6 +3739,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-03-quiet-bell",
+   "level": "A1",
+   "title": "The Quiet Doorbell",
+   "title_cs": "Tichý zvonek",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva is at home waiting for a visitor.",
+     "cs": "Eva čeká doma na návštěvu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom is already outside. Why does he not come in?",
+     "cs": "Tom už stojí před domem. Proč nejde dál?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I ring and ring. Nobody opens the door.",
+     "cs": "Zvoním a zvoním. Nikdo neotvírá."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The doorbell does not work. Call my phone.",
+     "cs": "Ten zvonek nefunguje. Zavolej mi na telefon."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That is very modern. And what do I do now?",
+     "cs": "To je moc moderní. A co mám dělat teď?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva opens the window. A new sign on the door says: Please shout.",
+     "cs": "Eva otvírá okno. Na dveřích visí nový nápis: Prosím, křičte."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "doorbell",
+     "cs": "zvonek"
+    },
+    {
+     "word": "sign",
+     "cs": "nápis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co nefunguje?",
+     "options": [
+      "Zvonek.",
+      "Telefon.",
+      "Okno."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co říká nový nápis?",
+     "options": [
+      "Prosím, křičte.",
+      "Nechoďte dovnitř.",
+      "Přijďte zítra."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
