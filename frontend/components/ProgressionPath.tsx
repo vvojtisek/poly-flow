@@ -9,18 +9,30 @@ import { cs } from "@/lib/i18n/cs";
 
 const fmt = new Intl.NumberFormat("cs-CZ");
 
+// The milestone ladder is static server configuration: fetch it once per page load.
+let ladder: Promise<Progression> | null = null;
+function loadLadder(): Promise<Progression> {
+  ladder ??= getProgression().catch((err: unknown) => {
+    ladder = null; // let a retry ask again
+    throw err;
+  });
+  return ladder;
+}
+
 export function ProgressionPath({ progress }: { progress: ProgressOverview | null }) {
   const [data, setData] = useState<Progression | null>(null);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    const controller = new AbortController();
+    let live = true;
     setFailed(false);
-    getProgression(controller.signal)
-      .then(setData)
-      .catch((err: Error) => err.name !== "AbortError" && setFailed(true));
-    return () => controller.abort();
+    loadLadder()
+      .then((d) => live && setData(d))
+      .catch(() => live && setFailed(true));
+    return () => {
+      live = false;
+    };
   }, [attempt]);
 
   if (failed) return <RetryNotice text={cs.progression.unavailable} onRetry={() => setAttempt((n) => n + 1)} />;

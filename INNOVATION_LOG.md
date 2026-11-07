@@ -1235,3 +1235,13 @@ Vlad approves a push.
 **Implemented Solution:** New `RetryNotice` in `components/ui.tsx` (alert text plus "Zkusit znovu"). `TodayPlan` now records failures and offers a retry; the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath` re-run their own request through an attempt counter. Copy `cs.today.failed` added.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with `/today` and `/learning/progress` returning 500 showed two retry notices, and after the API recovered, pressing them restored both panels.
+
+## Global Cycle 15/120 | Page: [/] (Page Cycle 15/15)
+
+**Summary:** share in-flight rank and milestone requests
+
+**Observed Problem:** A production-build load of `/` sent 14 API requests, with `/api/v1/ranks` twice (the header emblem and the rank card mounted together and both missed the 30 s cache), and the static milestone ladder was refetched on every visit to the dashboard.
+
+**Implemented Solution:** `lib/useRanks.ts` shares one in-flight request per profile and language between concurrent users of the hook (cleared by `invalidateRanks`). `components/ProgressionPath.tsx` keeps the static milestone ladder in a module-level promise for the page session, dropping it after a failure so the retry from cycle 14 asks again.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright against `next start` counts 13 API requests on `/` with `/ranks` once (was 14 with two).
