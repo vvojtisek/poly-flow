@@ -6463,6 +6463,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-41-archaeology-spoon",
+   "level": "B2",
+   "title": "Ein Fund vom Sonntag",
+   "title_cs": "Nález z neděle",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom fand beim Graben im Garten einen Löffel und bat Eva, seine historische Bedeutung einzuschätzen.",
+     "cs": "Tom našel při kopání na zahradě lžíci a pozval Evu, aby posoudila její historický význam."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Nach der Oberflächenkorrosion und der Fundlage könnte er aus einer sehr alten Siedlung stammen.",
+     "cs": "Podle povrchové koroze a polohy nálezu by mohla pocházet z velmi starého osídlení."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Könnte er nicht von unserem letzten Mittagessen im Garten stammen?",
+     "cs": "A nemohla by pocházet z našeho posledního zahradního oběda?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das würde ich nicht ausschließen, aber die Wissenschaft braucht unabhängige Verifizierung und sorgfältige Dokumentation.",
+     "cs": "To bych nevylučoval, ale věda potřebuje nezávislé ověření a pečlivou dokumentaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Auf dem Griff steht mein Name. Den habe ich letzten Sonntag eingraviert.",
+     "cs": "Tady na držadle je moje jméno. Vyryla jsem ho tam minulou neděli."
+    },
+    {
+     "speaker": null,
+     "text": "Tom hielt den Löffel gegen das Licht: Ausgezeichnet. Wir haben nicht nur eine Datierung, sondern sogar die Signatur des ursprünglichen Bewohners.",
+     "cs": "Tom obrátil lžíci proti světlu: Výborně. Máme nejen datování, ale dokonce i podpis původního obyvatele."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Oberflächenkorrosion",
+     "cs": "povrchová koroze"
+    },
+    {
+     "word": "Verifizierung",
+     "cs": "ověření"
+    },
+    {
+     "word": "eingraviert",
+     "cs": "vyryla"
+    },
+    {
+     "word": "Signatur",
+     "cs": "podpis"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Odkud lžíce pravděpodobně pochází?",
+     "options": [
+      "Z nedávného oběda na zahradě.",
+      "Ze starého hradu.",
+      "Z muzea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co je na držadle?",
+     "options": [
+      "Evino jméno.",
+      "Cena.",
+      "Letopočet vykopávek."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

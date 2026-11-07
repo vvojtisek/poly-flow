@@ -6463,6 +6463,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-41-archaeology-spoon",
+   "level": "B2",
+   "title": "La scoperta della domenica",
+   "title_cs": "Nález z neděle",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha trovato un cucchiaio scavando in giardino e ha invitato Eva a valutarne l'importanza storica.",
+     "cs": "Tom našel při kopání na zahradě lžíci a pozval Evu, aby posoudila její historický význam."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dalla corrosione superficiale e dalla posizione del ritrovamento potrebbe provenire da un insediamento molto antico.",
+     "cs": "Podle povrchové koroze a polohy nálezu by mohla pocházet z velmi starého osídlení."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Non potrebbe provenire invece dal nostro ultimo pranzo in giardino?",
+     "cs": "A nemohla by pocházet z našeho posledního zahradního oběda?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Non lo escludo, ma la scienza richiede una verifica indipendente e una documentazione meticolosa.",
+     "cs": "To bych nevylučoval, ale věda potřebuje nezávislé ověření a pečlivou dokumentaci."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Sul manico c'è il mio nome. L'ho inciso domenica scorsa.",
+     "cs": "Tady na držadle je moje jméno. Vyryla jsem ho tam minulou neděli."
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha alzato il cucchiaio verso la luce: Ottimo. Abbiamo una datazione e perfino la firma dell'abitante originaria.",
+     "cs": "Tom obrátil lžíci proti světlu: Výborně. Máme nejen datování, ale dokonce i podpis původního obyvatele."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "corrosione",
+     "cs": "koroze"
+    },
+    {
+     "word": "verifica",
+     "cs": "ověření"
+    },
+    {
+     "word": "meticolosa",
+     "cs": "pečlivý"
+    },
+    {
+     "word": "inciso",
+     "cs": "vyryla"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Odkud lžíce pravděpodobně pochází?",
+     "options": [
+      "Z nedávného oběda na zahradě.",
+      "Ze starého hradu.",
+      "Z muzea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co je na držadle?",
+     "options": [
+      "Evino jméno.",
+      "Cena.",
+      "Letopočet vykopávek."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
