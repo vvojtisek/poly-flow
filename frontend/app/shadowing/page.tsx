@@ -8,7 +8,7 @@ import { Kbd } from "@/components/Kbd";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice } from "@/components/ui";
 import { useRecorder } from "@/hooks/useRecorder";
-import { getPracticeSentences, myWordAudioUrl, type Language, type PracticeSentence } from "@/lib/api";
+import { getPracticeSentences, getRoleplay, listRoleplay, myWordAudioUrl, roleplayAudioUrl, type Language, type RoleplayScene } from "@/lib/api";
 import { clipSrc, play, playToEnd, stop } from "@/lib/audio";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { envelopeFromUrl, type Envelope } from "@/lib/envelope";
@@ -16,6 +16,24 @@ import { cs } from "@/lib/i18n/cs";
 
 const t = cs.shadow;
 const MAX_RECORDING_MS = 15000;
+
+/** One line to shadow, from either source: a lesson word's example or a scene's dialogue line. */
+type Line = { key: string; text: string; audio: string; cs?: string; speaker?: string; word?: { lemma: string; translation: string } };
+type Source = { kind: "words" } | { kind: "scene"; id: string };
+
+async function loadLines(language: Language, source: Source): Promise<Line[]> {
+  if (source.kind === "words") {
+    const list = await getPracticeSentences(language);
+    return list.map((x) => ({ key: x.item_id, text: x.sentence, audio: myWordAudioUrl(x.item_id, "example"), word: { lemma: x.lemma, translation: x.translation } }));
+  }
+  // The role only decides which lines roleplay quizzes; shadowing repeats every line in order.
+  const scenes = await listRoleplay(language);
+  const scene = scenes.find((x) => x.id === source.id);
+  const role = scene?.speakers[0];
+  if (!scene || !role) return [];
+  const script = await getRoleplay(scene.id, role);
+  return script.lines.map((l, i) => ({ key: `${scene.id}:${i}`, text: l.text, cs: l.cs, speaker: l.speaker, audio: roleplayAudioUrl(scene.id, i) }));
+}
 
 /** Two loudness outlines on a shared time axis: the model above, the learner below. */
 function Waves2({ model, mine }: { model: Envelope | null; mine: Envelope | null }) {
@@ -98,8 +116,8 @@ function ActionButton({
   );
 }
 
-function Shadowing({ language }: { language: Language }) {
-  const [list, setList] = useState<PracticeSentence[] | null>(null);
+function Shadowing({ language, source }: { language: Language; source: Source }) {
+  const [list, setList] = useState<Line[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [index, setIndex] = useState(0);
   const [hidden, setHidden] = useState(false);
@@ -122,12 +140,14 @@ function Shadowing({ language }: { language: Language }) {
 
   useEffect(() => {
     let cancelled = false;
-    getPracticeSentences(language)
+    loadLines(language, source)
       .then((l) => !cancelled && setList(l))
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
+    // The parent remounts this component per source, so the source object is stable here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language]);
 
   // Recordings live only in this tab; free them when leaving.
@@ -139,7 +159,7 @@ function Shadowing({ language }: { language: Language }) {
   );
 
   const current = list?.[index];
-  const modelUrl = current ? myWordAudioUrl(current.item_id, "example") : null;
+  const modelUrl = current?.audio ?? null;
 
   useEffect(() => {
     setMineUrl(null);
@@ -206,7 +226,7 @@ function Shadowing({ language }: { language: Language }) {
 
   if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
   if (!list) return <p className="text-sm text-slate-500">{cs.common.loading}</p>;
-  if (!current || !modelUrl) return <Notice>{t.empty}</Notice>;
+  if (!current || !modelUrl) return <Notice>{source.kind === "scene" ? t.sceneEmpty : t.empty}</Notice>;
 
   return (
     <div className="flex flex-col gap-4">
@@ -229,13 +249,19 @@ function Shadowing({ language }: { language: Language }) {
         </div>
         <div className="flex items-center gap-3">
           <PlayButton url={modelUrl} label={t.listen} />
-          <p lang={language} className={`text-2xl font-medium leading-snug ${hidden ? "select-none blur-md" : ""}`}>
-            {current.sentence}
-          </p>
+          <div className="min-w-0">
+            {current.speaker && <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{current.speaker}</p>}
+            <p lang={language} className={`text-2xl font-medium leading-snug ${hidden ? "select-none blur-md" : ""}`}>
+              {current.text}
+            </p>
+          </div>
         </div>
-        <p className="text-sm text-slate-500">
-          {t.word}: <strong lang={language}>{current.lemma}</strong> = {current.translation}
-        </p>
+        {current.cs && <p className="text-sm text-slate-600 dark:text-slate-300">{current.cs}</p>}
+        {current.word && (
+          <p className="text-sm text-slate-500">
+            {t.word}: <strong lang={language}>{current.word.lemma}</strong> = {current.word.translation}
+          </p>
+        )}
         <Waves2 model={model} mine={mine} />
         <p className="text-xs text-slate-500">
           {t.waveHelp}
@@ -273,9 +299,61 @@ function Shadowing({ language }: { language: Language }) {
   );
 }
 
+/** Which lines to shadow: example sentences of lesson words, or a whole dialogue from a met scene. */
+function SourcePicker({ language, source, onChange }: { language: Language; source: Source; onChange: (s: Source) => void }) {
+  const [scenes, setScenes] = useState<RoleplayScene[] | null>(null);
+  useEffect(() => {
+    let live = true;
+    listRoleplay(language)
+      .then((x) => live && setScenes(x))
+      .catch(() => live && setScenes([]));
+    return () => {
+      live = false;
+    };
+  }, [language]);
+  const sceneId = source.kind === "scene" ? source.id : "";
+  return (
+    <div className="flex flex-col gap-2">
+      <div role="radiogroup" aria-label={t.sourceLabel} className="flex flex-wrap gap-1">
+        {(["words", "scene"] as const).map((kind) => (
+          <button
+            key={kind}
+            type="button"
+            role="radio"
+            aria-checked={source.kind === kind}
+            disabled={kind === "scene" && !scenes?.length}
+            onClick={() => kind === "words" ? onChange({ kind }) : scenes?.[0] && onChange({ kind, id: sceneId || scenes[0].id })}
+            className={`rounded-full px-3 py-1 text-sm font-medium disabled:opacity-40 ${source.kind === kind ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+          >
+            {t.sources[kind]}
+          </button>
+        ))}
+      </div>
+      {source.kind === "scene" && scenes && scenes.length > 0 && (
+        <label className="flex flex-col gap-1 text-sm">
+          <span className="text-slate-500">{t.scenePick}</span>
+          <select
+            value={sceneId}
+            onChange={(e) => onChange({ kind: "scene", id: e.target.value })}
+            className="min-h-11 rounded-xl border border-slate-300 bg-white px-3 dark:border-slate-700 dark:bg-slate-900"
+          >
+            {scenes.map((x) => (
+              <option key={x.id} value={x.id}>
+                {t.sceneOption(x.title, x.lines)}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+      {scenes !== null && scenes.length === 0 && <p className="text-xs text-slate-500">{t.noScenes}</p>}
+    </div>
+  );
+}
+
 export default function ShadowingPage() {
   const me = useRequireMe();
   const { state } = useAuth();
+  const [source, setSource] = useState<Source>({ kind: "words" });
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const language = me.acting.active_language;
@@ -288,7 +366,8 @@ export default function ShadowingPage() {
         </h1>
         <p className="text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
-        <Shadowing key={`${me.acting.id}:${language}`} language={language} />
+        <SourcePicker key={`${me.acting.id}:${language}`} language={language} source={source} onChange={setSource} />
+        <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : "words"}`} language={language} source={source} />
       </section>
     </AppShell>
   );

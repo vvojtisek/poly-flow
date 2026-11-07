@@ -1995,3 +1995,13 @@ Vlad approves a push.
 **Implemented Solution:** Under 'Dostupné gramatické lekce' the page now says when topics are an unreviewed draft. It uses a separate wording when only some topics are reviewed, and says nothing when all are reviewed or there is no content. The l78 and l83 regression scripts were updated to the details structure, and l83 now uses the Prostudované filter, because the check made in cycle 85 left nothing due.
 
 **Verification:** l90.js: de shows the draft note; with a routed review_status 'reviewed' the note is gone. Regressions re-run at 390px all completed with no console errors: l76 (resume card and Enter), l78 (coverage and first card), l83 (filter, URL and Back), l84 (folding), l85 (revisit), l87 (empty levels), l88 (title widths and chips fit). Typecheck, build, ruff passed.
+
+## Global Cycle 91/120 | Page: [/shadowing] (Page Cycle 1/15)
+
+**Summary:** shadow whole dialogues from met scenes, with speaker and Czech meaning
+
+**Observed Problem:** /shadowing only offered 20 random example sentences of lesson words, shown with the word's gloss but no meaning for the sentence itself, so a learner repeated sentences they might not understand. Shadowing works best on connected speech, and the met lesson scenes already have ordered dialogue lines with Czech translations and per-line TTS (roleplay API), but nothing on this page used them.
+
+**Implemented Solution:** Shadowing now works on a generic line (text, audio, optional speaker, Czech meaning, lesson word). A source radio switches between 'Věty ze slov' and 'Rozhovor ze scény'. Scene mode lists the scenes the profile has met, with the child filter applied server-side by the roleplay API. It loads the selected dialogue in order, with speaker, line, Czech meaning and line audio. The scene option is disabled when no scene has been met yet, with a note explaining why. Recording state resets per source.
+
+**Verification:** s91.js at 390px (de): word mode unchanged (1/20). Scene mode lists 5 met scenes with line counts. Ahoj, jak se jmenuješ? shows ANNA / 'Hallo! Ich heiße Anna. Wie heißt du?' / Czech line. Switching to Odkud jsi? shows BEN, 1/8. N advances to 2/8. Audio requests go to /roleplay/{id}/audio?line=0, then 1. No console errors other than TTS 503. Typecheck, build, ruff passed.

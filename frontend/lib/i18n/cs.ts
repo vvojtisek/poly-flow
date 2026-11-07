@@ -659,6 +659,12 @@ export const cs = {
     noModel: "Hlas pro tento jazyk teď neběží, takže chybí vzor. Větu si můžeš přečíst nahlas, nahrát a poslechnout.",
     keys: "P vzor · R nahrát/zastavit · M moje nahrávka · C porovnat · H skrýt text · N další",
     word: "Slovo z lekce",
+    sourceLabel: "Co stínovat",
+    sources: { words: "Věty ze slov", scene: "Rozhovor ze scény" } as Record<string, string>,
+    scenePick: "Scéna",
+    sceneOption: (title: string, lines: number) => `${title} (${lines} ${lines < 5 ? "repliky" : "replik"})`,
+    noScenes: "Rozhovory se tu objeví, až projdeš lekci se scénou.",
+    sceneEmpty: "Tuhle scénu teď nejde načíst. Vyber jinou nebo stínuj věty ze slov.",
   },
   genders: {
     title: "Rody",
