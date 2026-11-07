@@ -683,6 +683,7 @@ export const cs = {
     neverVisited: "Zatím nevyzkoušeno",
     weakCards: (n: number) => `Kartičky ze slov s chybami (${n})`,
     weakDeck: "slova s chybami",
+    weakFailed: "Nepodařilo se načíst poslední chyby.",
     backToHub: "Zpět na procvičování",
     tipTitle: "Tip na dnes",
     tipOther: "Jiný tip",

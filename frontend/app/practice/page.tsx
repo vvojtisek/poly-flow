@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { FlashcardSession } from "@/components/FlashcardSession";
-import { Notice } from "@/components/ui";
+import { RetryNotice } from "@/components/ui";
 import { getLanguageSummaries, getWeakSpots, type Language, type WeakSpots } from "@/lib/api";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { KeyHint } from "@/components/Kbd";
@@ -93,6 +93,9 @@ export default function PracticePage() {
   const [announce, setAnnounce] = useState("");
   // Words met in this language; modes built on them are marked until the first lesson.
   const [introduced, setIntroduced] = useState<number | null>(null);
+  // The summary is optional: if it fails, treat the count as unknown and lock nothing.
+  const [summaryDone, setSummaryDone] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   // The skill filter lives in the URL (?skill=listening,speaking), so it survives back navigation
   // from a practice mode and can be linked to.
   const [urlRead, setUrlRead] = useState(false);
@@ -118,14 +121,16 @@ export default function PracticePage() {
     setWeakSpots(null);
     setWeakFailed(false);
     setIntroduced(null);
+    setSummaryDone(false);
     getLanguageSummaries()
       .then((rows) => !cancelled && setIntroduced(rows.find((r) => r.language === me.acting.active_language)?.introduced ?? 0))
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => !cancelled && setSummaryDone(true));
     getWeakSpots(me.acting.active_language)
       .then((data) => !cancelled && setWeakSpots(data))
       .catch(() => !cancelled && setWeakFailed(true));
     return () => { cancelled = true; };
-  }, [me?.acting.active_language, me?.acting.id]);
+  }, [me?.acting.active_language, me?.acting.id, attempt]);
 
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
@@ -134,7 +139,8 @@ export default function PracticePage() {
   const filtered = skills.length ? modes.filter((m) => m.skills.some((skill) => skills.includes(skill))) : modes;
   const pinRank = (m: PracticeMode) => (pinned.includes(m.id) ? pinned.indexOf(m.id) : pinned.length + modes.indexOf(m));
   const shown = [...filtered].sort((a, b) => pinRank(a) - pinRank(b));
-  const tips = suggestModes(modes, visits, (m) => !(m.needsWords && introduced === 0));
+  // Wait for the word count before suggesting, so the tip does not jump to another mode.
+  const tips = !summaryDone ? [] : suggestModes(modes, visits, (m) => !(m.needsWords && introduced === 0));
   const tip = tips.length ? tips[tipIndex % tips.length]! : null;
   const available = SKILLS.filter((s) => modes.some((m) => m.skills.includes(s)));
   const recommendations = (weakSpots?.tags ?? [])
@@ -168,6 +174,7 @@ export default function PracticePage() {
         <p className="max-w-2xl text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
 
+        {!summaryDone && <div aria-hidden className="h-[88px] rounded-3xl border border-brand-500/20 bg-brand-500/5 motion-safe:animate-pulse" />}
         {tip && (
           <div className="flex items-stretch gap-2 rounded-3xl border border-brand-500/40 bg-brand-500/5 p-2 sm:p-3">
             <Link
@@ -208,7 +215,7 @@ export default function PracticePage() {
               <h2 className="font-bold">{t.recommendTitle}</h2>
             </div>
             {weakFailed ? (
-              <Notice tone="error">{cs.common.error}</Notice>
+              <RetryNotice text={t.weakFailed} onRetry={() => setAttempt((n) => n + 1)} />
             ) : (
               <>
                 <p className="text-sm text-slate-600 dark:text-slate-300">{t.recommendHelp}</p>

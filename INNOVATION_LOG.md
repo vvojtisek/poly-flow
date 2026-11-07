@@ -1505,3 +1505,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/practice/page.tsx` removes both chip rows and their state; pinned modes are visible as the first cards with an active pin button, and recency lives on each card. The dashboard keeps its own shortcut chips.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; no console errors on the 390 px render.
+
+## Global Cycle 42/120 | Page: [/practice] (Page Cycle 12/15)
+
+**Summary:** steady tip while loading; retry when mistakes fail to load
+
+**Observed Problem:** The tip was computed before the word count arrived, so in a fresh language it first suggested a lesson-dependent mode and then jumped to another one; a failed weak-spots request left a dead "Něco se nepovedlo" in the mistake panel.
+
+**Implemented Solution:** `app/practice/page.tsx` waits for the per-language summary (success or failure) before suggesting, showing a tip-sized placeholder meanwhile; if the summary fails, nothing is locked. The mistake panel uses `RetryNotice` ("Nepodařilo se načíst poslední chyby.") that re-runs both requests.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with weak-spots returning 500 showed the retry notice, and after recovery the recommendations ("Například: …") appeared.
