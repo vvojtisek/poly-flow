@@ -8,12 +8,47 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice } from "@/components/ui";
 import { clipSrc, playToEnd, stop } from "@/lib/audio";
-import { answerLibraryQuestion, getLibraryStory, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
+import { answerLibraryQuestion, getDiagnosticInfo, getLibraryStory, getProgress, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
 const t = cs.library;
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2"];
+/** Reading level for an estimate: the estimated level itself (texts are ~95% of their level). */
+const READ_AT: Record<string, CefrLevel> = { "pre-A1": "A1", A1: "A1", A2: "A2", B1: "B1", B2: "B2", "B2+": "B2", C1: "B2", C2: "B2" };
+
+/**
+ * Stories this profile has finished on this device (all questions answered, or marked done).
+ * A per-device convenience keyed by profile and language: it is not learning evidence.
+ */
+function useReadMarks(profileId: string | undefined, language: Language | undefined) {
+  const key = profileId && language ? `polyflow.library.read.${profileId}.${language}` : null;
+  const [read, setRead] = useState<Set<string>>(new Set());
+  useEffect(() => {
+    if (!key) return;
+    try {
+      setRead(new Set(JSON.parse(window.localStorage.getItem(key) ?? "[]") as string[]));
+    } catch {
+      setRead(new Set());
+    }
+  }, [key]);
+  const mark = useCallback(
+    (slug: string) => {
+      setRead((prev) => {
+        if (prev.has(slug)) return prev;
+        const next = new Set(prev).add(slug);
+        try {
+          if (key) window.localStorage.setItem(key, JSON.stringify([...next]));
+        } catch {
+          /* storage blocked: the mark lasts for this visit */
+        }
+        return next;
+      });
+    },
+    [key],
+  );
+  return [read, mark] as const;
+}
 
 type Gloss = { word: string; cs: string };
 
@@ -71,7 +106,7 @@ function GlossedLine({ text, stretch, language }: { text: string; stretch: Gloss
  * Comprehension questions after reading: a check of understanding, not a test. Wrong picks can be
  * retried (learning mode), the answer can be shown, and nothing is stored or counted.
  */
-function Questions({ language, slug, questions }: { language: Language; slug: string; questions: { question: string; options: string[] }[] }) {
+function Questions({ language, slug, questions, onAllDone }: { language: Language; slug: string; questions: { question: string; options: string[] }[]; onAllDone: () => void }) {
   const [state, setState] = useState<Record<number, { wrong: number[]; right: number | null }>>({});
   const [busy, setBusy] = useState<number | null>(null);
   const [failed, setFailed] = useState(false);
@@ -91,6 +126,10 @@ function Questions({ language, slug, questions }: { language: Language; slug: st
       setBusy(null);
     }
   }
+  const allDone = questions.length > 0 && questions.every((_, i) => state[i]?.right != null);
+  useEffect(() => {
+    if (allDone) onAllDone();
+  }, [allDone, onAllDone]);
   if (!questions.length) return null;
   return (
     <section aria-labelledby="questions-title" className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
@@ -144,7 +183,7 @@ function Questions({ language, slug, questions }: { language: Language; slug: st
 }
 
 /** One story, read line by line. Ungraded: no questions are scored and nothing is recorded. */
-function Reader({ language, slug, onBack }: { language: Language; slug: string; onBack: () => void }) {
+function Reader({ language, slug, onBack, read, onRead }: { language: Language; slug: string; onBack: () => void; read: boolean; onRead: () => void }) {
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [failed, setFailed] = useState(false);
   const [showCs, setShowCs] = useState(false);
@@ -268,23 +307,54 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
               </li>
             ))}
           </ol>
-          <Questions key={story.slug} language={language} slug={story.slug} questions={story.questions} />
+          <Questions key={story.slug} language={language} slug={story.slug} questions={story.questions} onAllDone={onRead} />
+          <button
+            type="button"
+            onClick={() => {
+              onRead();
+              onBack();
+            }}
+            className="inline-flex min-h-11 items-center gap-2 self-start rounded-xl border border-brand-500/50 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/5 dark:text-brand-100"
+          >
+            <CheckCircle2 className="size-4" aria-hidden /> {read ? t.backRead : t.doneBack}
+          </button>
         </>
       )}
     </article>
   );
 }
 
-function Shelf({ library, onOpen }: { library: StoryLibrary; onOpen: (slug: string) => void }) {
+function Shelf({ library, onOpen, read, level: myLevel, estimate }: { library: StoryLibrary; onOpen: (slug: string) => void; read: Set<string>; level: CefrLevel | null; estimate: string | null }) {
   if (!library.stories.length) return <Notice>{t.empty}</Notice>;
+  // Next to read: the first unread story at the learner's level, then the levels above it.
+  const from = myLevel ? LEVELS.indexOf(myLevel) : 0;
+  const next = LEVELS.slice(from)
+    .flatMap((lvl) => library.stories.filter((x) => x.level === lvl))
+    .find((x) => !read.has(x.slug));
   return (
     <div className="flex flex-col gap-5">
+      {next && (
+        <section aria-labelledby="next-title" className="rounded-2xl border border-brand-500/40 bg-brand-500/5 p-4">
+          <p id="next-title" className="text-xs font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-200">
+            {myLevel ? t.nextFor(myLevel) : t.nextStart}
+          </p>
+          <p lang={library.language} className="mt-1 text-xl font-bold">{next.title}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-300">{next.title_cs}</p>
+          <p className="mt-1 text-xs text-slate-500">{estimate ?? t.noEstimate}</p>
+          <button type="button" onClick={() => onOpen(next.slug)} className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-500 px-4 py-2 font-semibold text-white hover:bg-brand-600">
+            <BookOpenText className="size-5" aria-hidden /> {t.startReading}
+          </button>
+        </section>
+      )}
       {LEVELS.map((level) => {
         const stories = library.stories.filter((s) => s.level === level);
         if (!stories.length) return null;
         return (
           <section key={level} aria-labelledby={`level-${level}`}>
-            <h2 id={`level-${level}`} className="mb-2 text-lg font-bold">{t.level(level, stories.length)}</h2>
+            <h2 id={`level-${level}`} className="mb-2 flex flex-wrap items-baseline justify-between gap-2 text-lg font-bold">
+              {t.level(level, stories.length)}
+              <span className="text-xs font-normal text-slate-500">{t.readCount(stories.filter((x) => read.has(x.slug)).length, stories.length)}</span>
+            </h2>
             <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {stories.map((s) => (
                 <li key={s.slug}>
@@ -297,6 +367,7 @@ function Shelf({ library, onOpen }: { library: StoryLibrary; onOpen: (slug: stri
                     <span lang={library.language} className="font-semibold">{s.title}</span>
                     <span className="text-sm text-slate-600 dark:text-slate-300">{s.title_cs}</span>
                     <span className="mt-auto flex items-center gap-1 pt-1 text-xs text-slate-500">
+                      {read.has(s.slug) && <CheckCircle2 className="size-3.5 text-emerald-600" aria-label={t.readMark} />}
                       {s.kind === "dialogue" ? <MessagesSquare className="size-3.5" aria-hidden /> : <BookOpenText className="size-3.5" aria-hidden />}
                       {t.kinds[s.kind]} · {t.lineCount(s.lines)}
                     </span>
@@ -317,6 +388,8 @@ export default function StoryLibraryPage() {
   const [library, setLibrary] = useState<StoryLibrary | null>(null);
   const [failed, setFailed] = useState(false);
   const [slug, setSlugState] = useState<string | null>(null);
+  const [read, markRead] = useReadMarks(me?.acting.id, language);
+  const [estimate, setEstimate] = useState<{ level: string; source: "test" | "progress" } | null>(null);
 
   // The open story lives in the URL (?story=slug), so a link, reload or Back reopens it.
   useEffect(() => {
@@ -341,6 +414,14 @@ export default function StoryLibraryPage() {
     getStoryLibrary(language)
       .then((l) => live && setLibrary(l))
       .catch(() => live && setFailed(true));
+    // The estimate only picks where to start; without it the shelf simply starts at A1.
+    setEstimate(null);
+    Promise.allSettled([getDiagnosticInfo(language), getProgress(language)]).then(([d, p]) => {
+      if (!live) return;
+      const test = d.status === "fulfilled" ? d.value.latest?.level : null;
+      const prog = p.status === "fulfilled" ? p.value.cefr_level : null;
+      setEstimate(test ? { level: test, source: "test" } : prog ? { level: prog, source: "progress" } : null);
+    });
     return () => {
       live = false;
     };
@@ -362,7 +443,18 @@ export default function StoryLibraryPage() {
         {library?.review_status === "unreviewed" && <p className="text-xs text-amber-700 dark:text-amber-300">{t.unreviewed}</p>}
         {failed && <Notice tone="error">{cs.common.error}</Notice>}
         {!library && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
-        {library && (slug ? <Reader key={`${language}:${slug}`} language={language} slug={slug} onBack={() => setSlug(null)} /> : <Shelf library={library} onOpen={setSlug} />)}
+        {library &&
+          (slug ? (
+            <Reader key={`${language}:${slug}`} language={language} slug={slug} onBack={() => setSlug(null)} read={read.has(slug)} onRead={() => markRead(slug)} />
+          ) : (
+            <Shelf
+              library={library}
+              onOpen={setSlug}
+              read={read}
+              level={estimate ? (READ_AT[estimate.level] ?? null) : null}
+              estimate={estimate ? (estimate.source === "test" ? t.estimateTest(estimate.level) : t.estimateProgress(estimate.level)) : null}
+            />
+          ))}
         {library && library.source && <p className="text-xs text-slate-500">{t.provenance(library.source, library.license)}</p>}
         <Link href="/stories" className="self-start text-sm font-medium text-brand-700 hover:underline dark:text-brand-200">
           {cs.stories.title}

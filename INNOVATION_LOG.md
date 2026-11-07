@@ -2185,3 +2185,13 @@ Vlad approves a push.
 **Implemented Solution:** The reader API returns the questions without answers. A new POST /stories/library/{slug}/questions/{i}/answer checks a choice on the server and records nothing (CSRF-protected like other POSTs; unknown question 404; out-of-range choice 422). Below the text, 'Porozuměl(a) jsi?' presents each question in Lekce style: a wrong pick turns red and can be retried, a right one turns green and locks the question, and after a miss 'Ukázat správnou odpověď' reveals it. A note says this is a check of understanding, not a test.
 
 **Verification:** New test test_comprehension_answers_are_checked_on_the_server_and_not_stored covers: no answer_index in the payload, right and wrong verdicts, 404, 422, 403 without CSRF, and 0 learning events. test_library_api.py: 5 passed. b109.js: two questions shown. On q1, picks 2 and 1 were wrong and 0 right, after which all options are disabled. On q2, a miss then reveal shows 'Im Park'. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 110/120 | Page: [/stories/library] (Page Cycle 5/15)
+
+**Summary:** start at the learner's level and keep track of what was read
+
+**Observed Problem:** The shelf listed 90 stories with no indication of where to begin. An A2 learner had to scroll past 15 A1 texts and remember which ones they had already read: nothing marked a finished story, so the library felt like a flat list rather than a reading path.
+
+**Implemented Solution:** A 'Další k přečtení' card picks the first unread story at the learner's level, then the levels above. The level comes from the placement test, otherwise the vocabulary progress estimate. The source is stated, and with no estimate the card starts at A1 and says so. A story counts as read once all its questions are answered, or via 'Dočteno, zpět do knihovny'. Read marks live in localStorage keyed by profile and language, so family members sharing a device do not mix them. They are a per-device convenience, explicitly not learning evidence, and storage failures fall back silently. Each level heading shows 'přečteno X z Y', and finished cards carry a check.
+
+**Verification:** b110.js (de, no estimate): the card reads 'Začni tady · Der Regenschirm' with the no-estimate note. After answering both questions and pressing Back, next is 'Der Wachhund' and A1 shows 'přečteno 1 z 15'. Both survive a reload, with 1 mark. b110b.js with a routed placement result A2: 'Další k přečtení na úrovni A2 · Das Hotel mit den Kühen · Podle rozřazovacího testu: A2.' No console errors. Typecheck, build, ruff passed.
