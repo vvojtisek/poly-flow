@@ -4283,6 +4283,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-11-dance-broom",
+   "level": "A2",
+   "title": "Der Tanzpartner",
+   "title_cs": "Taneční partner",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wollte zu Hause einen neuen Tanz üben.",
+     "cs": "Eva chtěla doma nacvičit nový tanec."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom hat heute keine Zeit. Ich tanze mit dem Besen.",
+     "cs": "Tom dnes nemá čas. Budu tančit s koštětem."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wenigstens tritt er dir nicht auf die Füße.",
+     "cs": "Aspoň ti nebude šlapat na nohy."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Genau. Und er verbessert mich auch nicht dauernd.",
+     "cs": "Přesně. A také mě pořád neopravuje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Aber warum trägt der Besen eine Krawatte?",
+     "cs": "Jen proč má to koště na sobě kravatu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva verbeugte sich mit dem Besen: Zur ersten Stunde muss er doch ordentlich angezogen kommen.",
+     "cs": "Eva uklonila koště: Na první hodinu přece musí přijít slušně oblečené."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Besen",
+     "cs": "koště"
+    },
+    {
+     "word": "verbeugte",
+     "cs": "uklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "S čím Eva tančí?",
+     "options": [
+      "S koštětem.",
+      "S kabátem.",
+      "Se židlí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co má partner na sobě?",
+     "options": [
+      "Kravatu.",
+      "Brusle.",
+      "Klobouk."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

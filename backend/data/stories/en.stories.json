@@ -4283,6 +4283,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-11-dance-broom",
+   "level": "A2",
+   "title": "The Dance Partner",
+   "title_cs": "Taneční partner",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wanted to practise a new dance at home.",
+     "cs": "Eva chtěla doma nacvičit nový tanec."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tom is busy today. I'll dance with the broom.",
+     "cs": "Tom dnes nemá čas. Budu tančit s koštětem."
+    },
+    {
+     "speaker": "Tom",
+     "text": "At least it won't step on your feet.",
+     "cs": "Aspoň ti nebude šlapat na nohy."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Exactly. And it doesn't keep correcting me.",
+     "cs": "Přesně. A také mě pořád neopravuje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But why is the broom wearing a tie?",
+     "cs": "Jen proč má to koště na sobě kravatu?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva bowed with the broom: It must come properly dressed to its first lesson.",
+     "cs": "Eva uklonila koště: Na první hodinu přece musí přijít slušně oblečené."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "broom",
+     "cs": "koště"
+    },
+    {
+     "word": "bowed",
+     "cs": "uklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "S čím Eva tančí?",
+     "options": [
+      "S koštětem.",
+      "S kabátem.",
+      "Se židlí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co má partner na sobě?",
+     "options": [
+      "Kravatu.",
+      "Brusle.",
+      "Klobouk."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
