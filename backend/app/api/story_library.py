@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.api.deps import DB, Auth
 from app.domain.enums import CefrLevel, Language
@@ -59,7 +59,14 @@ class StoryDetail(BaseModel):
 class AnswerIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     question: int = Field(ge=0, le=3)
-    choice: int = Field(ge=0, le=3)
+    choice: int | None = Field(default=None, ge=0, le=3)
+    text: str | None = Field(default=None, max_length=200)
+
+    @model_validator(mode="after")
+    def one_answer(self):
+        if (self.choice is None) == (self.text is None):
+            raise ValueError("provide exactly one answer")
+        return self
 
 
 class AnswerOut(BaseModel):
@@ -164,6 +171,14 @@ async def answer_library_question(
     if body.question >= len(story.questions):
         raise HTTPException(422, "question_out_of_range")
     answer = story.questions[body.question].answer_index
-    if body.choice >= len(story.questions[body.question].options):
-        raise HTTPException(422, "choice_out_of_range")
-    return AnswerOut(correct=body.choice == answer, answer=answer)
+    if (body.choice is None) == (body.text is None):
+        raise HTTPException(422, "one_answer_required")
+    if body.choice is not None:
+        if body.choice >= len(story.questions[body.question].options):
+            raise HTTPException(422, "choice_out_of_range")
+        correct = body.choice == answer
+    else:
+        correct = " ".join((body.text or "").casefold().split()) == " ".join(
+            story.questions[body.question].options[answer].casefold().split()
+        )
+    return AnswerOut(correct=correct, answer=answer)

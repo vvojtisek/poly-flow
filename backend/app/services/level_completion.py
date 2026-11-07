@@ -121,5 +121,6 @@ async def complete_through(
                 GrammarUnit.level <= level,
                 GrammarUnit.active.is_(True),
             ),
-        ).on_conflict_do_nothing()
+        )
+        .on_conflict_do_nothing()
     )

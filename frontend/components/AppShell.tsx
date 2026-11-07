@@ -11,6 +11,7 @@ import { BuildInfo } from "@/components/BuildInfo";
 import { CommandPalette, openPalette } from "@/components/CommandPalette";
 import { Kbd } from "@/components/Kbd";
 import { RankEmblem } from "@/components/RankEmblem";
+import { PracticeDifficultyControl } from "@/components/PracticeDifficultyControl";
 import { Button, Field, Notice } from "@/components/ui";
 import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
@@ -175,6 +176,8 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   const [focusPref, toggleFocus] = useFocusMode();
   const focus = focusable && focusPref;
   const path = usePathname();
+  const grammarLessonPath = !!path && path.startsWith("/grammar/") && !["/grammar/check", "/grammar/cases", "/grammar/verbs"].includes(path);
+  const practicePath = !!path && (/^\/(lesson\/vocabulary|check|grammar\/check|word-order|stories\/library)(\/|$)/.test(path) || grammarLessonPath);
 
   useEffect(() => {
     if (path) recordVisit(path);
@@ -218,6 +221,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
           </div>
         </header>
         {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
+        {practicePath && <PracticeDifficultyControl me={me} />}
         {children}
         <BuildInfo className="mt-auto justify-center pt-6 text-center opacity-70" />
         <CommandPalette me={me} />
@@ -310,6 +314,7 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
           <BuildInfo className="justify-end px-3 text-right" />
         </div>
       </header>
+      {practicePath && <div className="flex justify-end"><PracticeDifficultyControl me={me} /></div>}
       {me.acting.id !== me.principal.id && <ReturnToParent me={me} />}
       {children}
       <CommandPalette me={me} />

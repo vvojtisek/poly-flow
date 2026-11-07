@@ -14,11 +14,12 @@ import { cs } from "@/lib/i18n/cs";
 const t = cs.wordOrder;
 type Result = { correct: boolean; marks: boolean[]; sentence: string; cs: string | null };
 
-function Trainer({ language }: { language: Language }) {
+function Trainer({ language, difficulty }: { language: Language; difficulty: "auto" | "easy" | "medium" | "hard" }) {
   const [puzzle, setPuzzle] = useState<WordOrderPuzzle | null>(null);
   const [empty, setEmpty] = useState(false);
   const [failed, setFailed] = useState(false);
   const [placed, setPlaced] = useState<number[]>([]); // indices into puzzle.tiles
+  const [typed, setTyped] = useState("");
   const [result, setResult] = useState<Result | null>(null);
   const [busy, setBusy] = useState(false);
   const done = useRef<string[]>([]);
@@ -26,6 +27,7 @@ function Trainer({ language }: { language: Language }) {
   const load = useCallback(async () => {
     setResult(null);
     setPlaced([]);
+    setTyped("");
     try {
       const p = await nextWordOrder(language, done.current.slice(-30));
       if (p.ref === null) setEmpty(true);
@@ -41,20 +43,21 @@ function Trainer({ language }: { language: Language }) {
   }, [load]);
 
   const free = puzzle ? puzzle.tiles.map((_, i) => i).filter((i) => !placed.includes(i)) : [];
-  const complete = !!puzzle && placed.length === puzzle.tiles.length;
+  const hard = difficulty === "hard";
+  const complete = !!puzzle && (hard ? typed.trim().split(/\s+/).length === puzzle.tiles.length : placed.length === puzzle.tiles.length);
 
   const check = useCallback(async () => {
     if (!puzzle || busy) return;
     setBusy(true);
     try {
-      setResult(await checkWordOrder(language, puzzle.ref, placed.map((i) => puzzle.tiles[i]!)));
+      setResult(await checkWordOrder(language, puzzle.ref, hard ? typed.trim().split(/\s+/) : placed.map((i) => puzzle.tiles[i]!)));
       done.current.push(puzzle.ref);
     } catch {
       setFailed(true);
     } finally {
       setBusy(false);
     }
-  }, [puzzle, busy, language, placed]);
+  }, [puzzle, busy, language, placed, hard, typed]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -101,6 +104,12 @@ function Trainer({ language }: { language: Language }) {
         )
       )}
 
+      {hard ? (
+        <label className="flex flex-col gap-2 text-sm font-medium">
+          {t.hardPrompt}
+          <input value={typed} onChange={(event) => setTyped(event.target.value)} disabled={busy || !!result} lang={language} className="rounded-xl border border-slate-300 bg-white px-3 py-3 text-lg dark:border-slate-700 dark:bg-slate-950" />
+        </label>
+      ) : <>
       <div
         className={`flex min-h-16 flex-wrap items-center gap-2 rounded-xl border-2 border-dashed p-3 ${
           result ? (result.correct ? "border-emerald-400" : "border-rose-300") : "border-slate-300 dark:border-slate-700"
@@ -147,6 +156,7 @@ function Trainer({ language }: { language: Language }) {
           ))}
         </div>
       )}
+      </>}
 
       {result && (
         <div aria-live="polite" className="flex flex-col gap-1">
@@ -162,7 +172,7 @@ function Trainer({ language }: { language: Language }) {
       {failed && <Notice tone="error">{cs.common.error}</Notice>}
 
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <Button variant="ghost" disabled={!!result || placed.length === 0} onClick={() => setPlaced((p) => p.slice(0, -1))}>
+        <Button variant="ghost" disabled={!!result || hard || placed.length === 0} onClick={() => setPlaced((p) => p.slice(0, -1))}>
           <Undo2 className="size-4" aria-hidden /> {t.undo}
         </Button>
         {result ? (
@@ -173,7 +183,7 @@ function Trainer({ language }: { language: Language }) {
           </Button>
         )}
       </div>
-      <p className="hidden text-xs text-slate-400 lg:block">{t.keys}</p>
+      {!hard && <p className="hidden text-xs text-slate-400 lg:block">{t.keys}</p>}
     </section>
   );
 }
@@ -193,7 +203,7 @@ export default function WordOrderPage() {
         <p className="max-w-3xl text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
       </div>
-      <Trainer key={language} language={language} />
+      <Trainer key={language} language={language} difficulty={me.acting.settings.practice_difficulty} />
     </AppShell>
   );
 }

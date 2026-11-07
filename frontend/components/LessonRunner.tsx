@@ -575,6 +575,8 @@ export function LessonRunner({
 
   const { session, task, result } = phase;
   const finished = result?.task_done ?? false;
+  const hardMeaning = task.adaptive_tier === "hard" && task.type === "recognition" && (mode === "learn" || mode === "check");
+  const showChoices = !!task.options && !hardMeaning;
 
   async function send(body: { choice?: number; text?: string } | "reveal") {
     if (busy) return;
@@ -632,7 +634,7 @@ export function LessonRunner({
   const tutor = mode === "learn" || mode === "check";
   const legend: [string, string][] = finished
     ? [["Enter", cs.lesson.next], ...(tutor ? ([["W", cs.keys.why]] as [string, string][]) : [])]
-    : task.type === "recognition"
+    : showChoices
       ? [
           [`1–${task.options?.length ?? 4}`, cs.keys.choose],
           ...(mode === "learn" ? ([["H", cs.keys.hint]] as [string, string][]) : []),
@@ -684,7 +686,7 @@ export function LessonRunner({
 
       <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          {task.type === "recognition" ? cs.lesson.recognitionPrompt : cs.lesson.recallPrompt}
+          {hardMeaning ? cs.lesson.typeAnswerMeaning : showChoices && task.type === "recall" ? cs.lesson.chooseTargetWord : task.type === "recognition" ? cs.lesson.recognitionPrompt : cs.lesson.recallPrompt}
         </p>
         <div className="flex items-center justify-center gap-1">
           <p className="text-3xl font-bold break-words" lang={task.type === "recognition" ? language : "cs"}>
@@ -715,9 +717,9 @@ export function LessonRunner({
         )}
       </section>
 
-      {task.type === "recognition" && task.options ? (
+      {showChoices ? (
         <div className="grid gap-2" ref={optionsRef}>
-          {task.options.map((o, i) => {
+          {task.options!.map((o, i) => {
             const state = optionState(o, chosen, result, busy, finished);
             return (
               <button
@@ -746,18 +748,18 @@ export function LessonRunner({
         <form onSubmit={onSubmit} className="flex flex-col gap-2">
           <AnswerInput
             ref={inputRef}
-            language={language}
+            language={hardMeaning ? "cs" : language}
             value={text}
             onChange={setText}
             disabled={busy || finished}
           />
           {task.hint && <p className="text-center text-sm text-slate-500">{task.hint}</p>}
-          {!finished && (
+          {!finished && (task.type === "recall" || hardMeaning) && (
             <Button type="submit" disabled={busy || !text.trim()}>
               {cs.lesson.check}
             </Button>
           )}
-          {!finished && (
+          {!finished && task.type === "recall" && (
             <SpeakAnswer
               key={task.id}
               taskId={task.id}

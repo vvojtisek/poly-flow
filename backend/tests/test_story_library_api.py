@@ -40,6 +40,16 @@ async def test_story_library_is_indexed_filtered_and_server_graded(db, client):
         results.append(graded.json())
     assert sum(result["correct"] for result in results) == 1
     assert all(result["answer"] == results[0]["answer"] for result in results)
+    typed_results = []
+    for option in story["questions"][0]["options"]:
+        typed = await client.post(
+            f"/api/v1/story-library/{selected['slug']}/answer?language=de",
+            headers=csrf(me),
+            json={"question": 0, "text": option},
+        )
+        assert typed.status_code == 200
+        typed_results.append(typed.json())
+    assert sum(result["correct"] for result in typed_results) == 1
 
     filtered = await client.get("/api/v1/story-library?language=de&level=A2", headers=csrf(me))
     assert filtered.status_code == 200 and len(filtered.json()) == 20

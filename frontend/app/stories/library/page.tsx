@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Button, Notice } from "@/components/ui";
-import { answerLibraryStory, getLibraryStory, getProgress, listLibraryStories, type CefrLevel, type LibraryStory, type LibraryStorySummary } from "@/lib/api";
+import { answerLibraryStory, answerLibraryStoryText, getLibraryStory, getProgress, listLibraryStories, type CefrLevel, type LibraryStory, type LibraryStorySummary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
@@ -18,6 +18,7 @@ export default function StoryLibraryPage() {
   const [stories, setStories] = useState<LibraryStorySummary[]>([]);
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [answers, setAnswers] = useState<Record<number, { correct: boolean; answer: number; choice: number }>>({});
+  const [drafts, setDrafts] = useState<Record<number, string>>({});
   const [showTranslation, setShowTranslation] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -41,15 +42,18 @@ export default function StoryLibraryPage() {
     try {
       setStory(await getLibraryStory(language, slug));
       setAnswers({});
+      setDrafts({});
       setShowTranslation(false);
     } catch { setFailed(true); }
   }
 
-  async function answer(question: number, choice: number) {
+  async function answer(question: number, choice?: number, text?: string) {
     if (!language || !story || answers[question]) return;
     try {
-      const result = await answerLibraryStory(language, story.slug, question, choice);
-      setAnswers((current) => ({ ...current, [question]: { ...result, choice } }));
+      const result = text !== undefined
+        ? await answerLibraryStoryText(language, story.slug, question, text)
+        : await answerLibraryStory(language, story.slug, question, choice!);
+      setAnswers((current) => ({ ...current, [question]: { ...result, choice: choice ?? -1 } }));
     } catch { setFailed(true); }
   }
 
@@ -83,7 +87,10 @@ export default function StoryLibraryPage() {
         <h3 className="font-bold">{cs.storyLibrary.questions}</h3>
         {story.questions.map((question, qi) => <fieldset key={qi} className="flex flex-col gap-2 border-b border-slate-200 pb-3 last:border-0 dark:border-slate-800">
           <legend className="mb-2 text-sm font-medium">{question.question}</legend>
-          {question.options.map((option, oi) => {
+          {me.acting.settings.practice_difficulty === "hard" ? <form onSubmit={(event) => { event.preventDefault(); void answer(qi, undefined, drafts[qi] ?? ""); }} className="flex gap-2">
+            <input value={drafts[qi] ?? ""} onChange={(event) => setDrafts((current) => ({ ...current, [qi]: event.target.value }))} disabled={!!answers[qi]} className="min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950" aria-label={question.question} />
+            <Button type="submit" disabled={!!answers[qi] || !drafts[qi]?.trim()}>{cs.lesson.check}</Button>
+          </form> : question.options.map((option, oi) => {
             const result = answers[qi];
             const isCorrect = !!result && oi === result.answer;
             const isWrong = !!result && oi === result.choice && !result.correct;
@@ -91,6 +98,7 @@ export default function StoryLibraryPage() {
               <span className="flex items-center gap-2">{isCorrect ? <CheckCircle2 className="size-4" aria-hidden /> : isWrong ? <XCircle className="size-4" aria-hidden /> : null}{option}</span>
             </button>;
           })}
+          {answers[qi] && me.acting.settings.practice_difficulty === "hard" && <p role="status" className={`text-sm ${answers[qi]!.correct ? "text-emerald-700" : "text-rose-700"}`}>{answers[qi]!.correct ? cs.stories.right : cs.stories.wrong(question.options[answers[qi]!.answer] ?? "")}</p>}
         </fieldset>)}
         <details><summary className="cursor-pointer text-sm font-semibold">{cs.storyLibrary.stretch}</summary><ul className="mt-2 flex flex-wrap gap-2">{story.stretch.map((word) => <li key={word.word} className="rounded-lg bg-slate-100 px-2 py-1 text-sm dark:bg-slate-800"><b lang={language}>{word.word}</b> · {word.cs}</li>)}</ul></details>
       </aside>
