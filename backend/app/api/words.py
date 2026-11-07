@@ -42,6 +42,43 @@ class WordListOut(BaseModel):
     items: list[WordRowOut]
 
 
+class WordLevelOut(BaseModel):
+    key: str  # CEFR value (indicative, by frequency rank) or "extension" past the C1 band
+    first_rank: int
+    last_rank: int | None
+    total: int  # words of this level the profile gets (content filter applied)
+    mine: int  # of those, words the profile has met
+
+
+class WordTopicOut(BaseModel):
+    id: uuid.UUID
+    title: str
+    total: int
+    mine: int
+
+
+class WordGroupsOut(BaseModel):
+    levels: list[WordLevelOut]
+    topics: list[WordTopicOut]
+
+
+class DeckCardOut(BaseModel):
+    id: uuid.UUID
+    lemma: str
+    gender: str | None
+    pos: str
+    rank: int
+    translation: str
+    example: str | None
+    status: Status
+    due: bool
+
+
+class DeckOut(BaseModel):
+    total: int  # own words in the scope; `items` holds at most 50, due and unfinished first
+    items: list[DeckCardOut]
+
+
 class HistoryOut(BaseModel):
     at: datetime
     correct: bool
@@ -144,19 +181,57 @@ async def list_words(
     due: bool = False,
     offset: Annotated[int, Query(ge=0)] = 0,
     limit: Annotated[int, Query(ge=1, le=200)] = 60,
+    level: Annotated[str | None, Query(max_length=16)] = None,
+    topic: uuid.UUID | None = None,
 ) -> WordListOut:
-    out = await svc.list_words(
-        db,
-        auth.acting,
-        language or auth.acting.active_language,
-        now,
-        q=q,
-        status=status,
-        due=due,
-        offset=offset,
-        limit=limit,
-    )
+    try:
+        out = await svc.list_words(
+            db,
+            auth.acting,
+            language or auth.acting.active_language,
+            now,
+            q=q,
+            status=status,
+            due=due,
+            offset=offset,
+            limit=limit,
+            level=level,
+            topic=topic,
+        )
+    except LearningError as exc:
+        raise _http(exc) from exc
     return WordListOut(**out)
+
+
+@router.get("/groups", response_model=WordGroupsOut)
+async def word_groups(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> WordGroupsOut:
+    """Vocabulary by level and by lesson topic, with how many of the words the profile has met."""
+    out = await svc.word_groups(db, auth.acting, language or auth.acting.active_language)
+    return WordGroupsOut(**out)
+
+
+@router.get("/deck", response_model=DeckOut)
+async def word_deck(
+    auth: Auth,
+    db: DB,
+    now: Now,
+    language: Annotated[Language | None, Query()] = None,
+    level: Annotated[str | None, Query(max_length=16)] = None,
+    topic: uuid.UUID | None = None,
+) -> DeckOut:
+    """Flashcards from the profile's own words in one level or one topic (exactly one scope).
+
+    Practice only: flipping and marking cards is not recorded and does not change progress.
+    """
+    try:
+        out = await svc.word_deck(
+            db, auth.acting, language or auth.acting.active_language, now, level=level, topic=topic
+        )
+    except LearningError as exc:
+        raise _http(exc) from exc
+    return DeckOut(**out)
 
 
 @router.get("/export", response_class=Response)

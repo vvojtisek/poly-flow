@@ -87,3 +87,20 @@ html[data-motion="reduce"] *, html[data-motion="reduce"] *::before, html[data-mo
   transition-duration: 0.001ms !important;
   scroll-behavior: auto !important;
 }
+
+/* Disclosure (components/Disclosure.tsx): native <details> that eases open where the browser can
+   animate to an intrinsic size; elsewhere it simply opens. Reduced motion is honoured above. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  details.disclosure::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 220ms ease, content-visibility 220ms allow-discrete;
+  }
+  details.disclosure[open]::details-content { block-size: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  details.disclosure::details-content { transition: none; }
+}
+details.disclosure > summary { list-style: none; }
+details.disclosure > summary::-webkit-details-marker { display: none; }

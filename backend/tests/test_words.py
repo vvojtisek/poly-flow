@@ -11,7 +11,7 @@ from app.cli import LexiconRow, upsert_lexicon
 from app.db.session import get_session
 from app.domain.enums import ProgressState
 from app.main import app
-from app.models import LexiconItem, UserWordProgress
+from app.models import LexiconItem, Scene, SceneWord, UserWordProgress
 from app.services.rate_limit import MemoryAttemptLimiter
 from tests.helpers import Clock, login, make_child, setup_parent
 
@@ -111,3 +111,82 @@ async def test_child_never_sees_flagged_words_and_cannot_read_parents(db, client
     out = (await client.get("/api/v1/words?language=de")).json()
     assert "Mord" not in [w["lemma"] for w in out["items"]]
     assert (await client.get(f"/api/v1/words/{ids['Mord']}")).status_code == 404
+
+
+async def seed_scenes() -> dict[str, uuid.UUID]:
+    async for db in get_session():
+        ids = {i.lemma: i.id for i in (await db.execute(select(LexiconItem))).scalars()}
+        home = Scene(language="de", slug="home", position=1, title_cs="Doma")
+        crime = Scene(language="de", slug="crime", position=2, title_cs="Detektivka")
+        db.add_all([home, crime])
+        await db.flush()
+        db.add_all(
+            [
+                SceneWord(scene_id=home.id, lexicon_item_id=ids["Haus"], position=1),
+                SceneWord(scene_id=home.id, lexicon_item_id=ids["neu"], position=2),
+                SceneWord(scene_id=crime.id, lexicon_item_id=ids["Mord"], position=1),
+            ]
+        )
+        await db.commit()
+        return {"home": home.id, "crime": crime.id}
+    raise AssertionError
+
+
+async def test_groups_count_levels_and_topics_from_own_words(db, client, clock):
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+    scenes = await seed_scenes()
+    out = (await client.get("/api/v1/words/groups?language=de")).json()
+    assert out["levels"] == [
+        {"key": "A1", "first_rank": 1, "last_rank": 500, "total": 5, "mine": 4}
+    ]
+    assert out["topics"] == [
+        {"id": str(scenes["home"]), "title": "Doma", "total": 2, "mine": 1},
+        {"id": str(scenes["crime"]), "title": "Detektivka", "total": 1, "mine": 1},
+    ]
+
+
+async def test_deck_is_scoped_own_words_due_first(db, client, clock):
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+    scenes = await seed_scenes()
+    level = (await client.get("/api/v1/words/deck?language=de&level=A1")).json()
+    # Haus is due (first); "neu" was never met, so it is never a card.
+    assert [c["lemma"] for c in level["items"]] == ["Haus", "gehen", "schön", "Mord"]
+    assert level["total"] == 4 and level["items"][0]["due"] is True
+    topic = (await client.get(f"/api/v1/words/deck?language=de&topic={scenes['home']}")).json()
+    assert [c["lemma"] for c in topic["items"]] == ["Haus"]
+    assert (await client.get("/api/v1/words/deck?language=de&level=B1")).json()["items"] == []
+    assert (await client.get("/api/v1/words/deck?language=de")).status_code == 422
+    both = f"/api/v1/words/deck?language=de&level=A1&topic={scenes['home']}"
+    assert (await client.get(both)).status_code == 422
+    assert (await client.get("/api/v1/words/deck?language=de&level=Z9")).status_code == 422
+    other = f"/api/v1/words/deck?language=fr&topic={scenes['home']}"
+    assert (await client.get(other)).status_code == 404
+
+
+async def test_child_groups_and_decks_hide_flagged_words_and_scenes(db, client, clock):
+    parent = await setup_parent(client)
+    child_profile = await make_child(client, parent)
+    await seed(uuid.UUID(child_profile["id"]), clock)
+    scenes = await seed_scenes()
+    await login(client, "eva", "4321")
+    out = (await client.get("/api/v1/words/groups?language=de")).json()
+    assert out["levels"][0]["total"] == 4 and out["levels"][0]["mine"] == 3
+    assert [t["title"] for t in out["topics"]] == ["Doma"]
+    deck = (await client.get("/api/v1/words/deck?language=de&level=A1")).json()
+    assert "Mord" not in [c["lemma"] for c in deck["items"]]
+    crime = f"/api/v1/words/deck?language=de&topic={scenes['crime']}"
+    assert (await client.get(crime)).status_code == 404
+
+
+async def test_word_list_filters_by_level_and_topic(db, client, clock):
+    me = await setup_parent(client)
+    await seed(uuid.UUID(me["acting"]["id"]), clock)
+    scenes = await seed_scenes()
+    home = (await client.get(f"/api/v1/words?language=de&topic={scenes['home']}")).json()
+    assert [w["lemma"] for w in home["items"]] == ["Haus"]
+    assert home["counts"]["mastered"] == 1 and home["counts"]["learning"] == 0
+    assert (await client.get("/api/v1/words?language=de&level=A1")).json()["total"] == 4
+    assert (await client.get("/api/v1/words?language=de&level=B2")).json()["total"] == 0
+    assert (await client.get("/api/v1/words?language=de&level=nope")).status_code == 422

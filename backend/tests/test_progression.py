@@ -2,7 +2,14 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 
 from app.domain.enums import CefrLevel
-from app.domain.progression import CURRICULUM_END, MILESTONES, frequency_band, is_extension
+from app.domain.progression import (
+    CURRICULUM_END,
+    MILESTONES,
+    frequency_band,
+    is_extension,
+    vocabulary_level,
+    vocabulary_levels,
+)
 from app.main import app
 
 
@@ -69,3 +76,31 @@ async def test_milestones_endpoint():
         "voluntary": True,
         "passive_focus": True,
     }
+
+
+@pytest.mark.parametrize(
+    ("rank", "level"),
+    [
+        (1, "A1"),
+        (100, "A1"),
+        (500, "A1"),
+        (501, "A2"),
+        (1001, "B1"),
+        (2501, "B2"),
+        (5000, "B2"),
+        (5001, "C1"),
+        (8000, "C1"),
+        (8001, "extension"),
+    ],
+)
+def test_vocabulary_level(rank, level):
+    assert vocabulary_level(rank) == level
+
+
+def test_vocabulary_levels_partition_the_ranks():
+    levels = vocabulary_levels()
+    assert [key for key, _, _ in levels] == ["A1", "A2", "B1", "B2", "C1", "extension"]
+    for (key, lo, hi), nxt in zip(levels, [*levels[1:], None], strict=True):
+        assert vocabulary_level(lo) == key
+        if hi is not None:
+            assert vocabulary_level(hi) == key and nxt and nxt[1] == hi + 1
