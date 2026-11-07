@@ -6387,6 +6387,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-40-robot-socks",
+   "level": "B2",
+   "title": "The Sock Robot",
+   "title_cs": "Robot na ponožky",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva programmed a robot to finally solve the household problem of matching socks.",
+     "cs": "Eva naprogramovala robota, který měl konečně vyřešit domácí problém s párováním ponožek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "The algorithm compares colour, size and fabric texture while eliminating human bias.",
+     "cs": "Algoritmus porovnává barvu, velikost i strukturu látky a vylučuje lidskou zaujatost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Excellent. Why has it put every sock into a single pile labelled miscellaneous, then?",
+     "cs": "Výborně. Proč tedy odložil všechny ponožky do jediné hromady označené ostatní?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Because no two are entirely identical. Even slight wear alters the input data.",
+     "cs": "Protože žádné dvě nejsou zcela totožné. I drobné opotřebení mění vstupní data."
+    },
+    {
+     "speaker": "Tom",
+     "text": "So we spent the whole weekend automating something we'll ultimately have to do manually?",
+     "cs": "Takže jsme strávili celý víkend automatizací něčeho, co musíme nakonec udělat ručně?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva launched another program: Not quite. Now the robot can at least calculate precisely how many pairs it can't find.",
+     "cs": "Eva spustila další program: Ne tak úplně. Robot nám teď aspoň dokonale spočítá, kolik párů neumí najít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "bias",
+     "cs": "zaujatost"
+    },
+    {
+     "word": "miscellaneous",
+     "cs": "různé"
+    },
+    {
+     "word": "automating",
+     "cs": "automatizace"
+    },
+    {
+     "word": "manually",
+     "cs": "ručně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč robot nevytvořil páry?",
+     "options": [
+      "Považuje i malé rozdíly za zásadní.",
+      "Nemá proud.",
+      "Ponožky nevidí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co zvládne další program?",
+     "options": [
+      "Spočítat nenalezené páry.",
+      "Vyprat ponožky.",
+      "Opravit díry."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

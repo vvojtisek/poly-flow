@@ -6387,6 +6387,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-40-robot-socks",
+   "level": "B2",
+   "title": "Der Sockenroboter",
+   "title_cs": "Robot na ponožky",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva programmierte einen Roboter, der endlich das häusliche Problem der Sockenzuordnung lösen sollte.",
+     "cs": "Eva naprogramovala robota, který měl konečně vyřešit domácí problém s párováním ponožek."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Der Algorithmus vergleicht Farbe, Größe und Stoffstruktur und schließt menschliche Voreingenommenheit aus.",
+     "cs": "Algoritmus porovnává barvu, velikost i strukturu látky a vylučuje lidskou zaujatost."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ausgezeichnet. Warum hat er dann alle Socken auf einen Haufen mit der Aufschrift Sonstiges gelegt?",
+     "cs": "Výborně. Proč tedy odložil všechny ponožky do jediné hromady označené ostatní?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Weil keine zwei vollständig identisch sind. Schon geringe Abnutzung verändert die Eingabedaten.",
+     "cs": "Protože žádné dvě nejsou zcela totožné. I drobné opotřebení mění vstupní data."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wir haben also das ganze Wochenende etwas automatisiert, das wir letztlich manuell erledigen müssen?",
+     "cs": "Takže jsme strávili celý víkend automatizací něčeho, co musíme nakonec udělat ručně?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva startete ein weiteres Programm: Nicht ganz. Jetzt berechnet der Roboter wenigstens exakt, wie viele Paare er nicht findet.",
+     "cs": "Eva spustila další program: Ne tak úplně. Robot nám teď aspoň dokonale spočítá, kolik párů neumí najít."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Voreingenommenheit",
+     "cs": "zaujatost"
+    },
+    {
+     "word": "Abnutzung",
+     "cs": "opotřebení"
+    },
+    {
+     "word": "Eingabedaten",
+     "cs": "vstupní data"
+    },
+    {
+     "word": "manuell",
+     "cs": "ručně"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč robot nevytvořil páry?",
+     "options": [
+      "Považuje i malé rozdíly za zásadní.",
+      "Nemá proud.",
+      "Ponožky nevidí."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co zvládne další program?",
+     "options": [
+      "Spočítat nenalezené páry.",
+      "Vyprat ponožky.",
+      "Opravit díry."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
