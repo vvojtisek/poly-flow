@@ -4079,6 +4079,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-skate-lesson",
+   "level": "A2",
+   "title": "Le premier cours de patinage",
+   "title_cs": "Lekce na ledě",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a acheté des patins neufs et est allé à son premier cours.",
+     "cs": "Tom koupil nové brusle a šel na první hodinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je sais déjà tout faire. Je l'ai vu à la télévision.",
+     "cs": "Já už umím všechno. Viděl jsem to v televizi."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bien. D'abord, nous allons apprendre à nous arrêter sans danger.",
+     "cs": "Dobře. Nejdřív se naučíme bezpečně zastavit."
+    },
+    {
+     "speaker": "Eva",
+     "text": "M'arrêter ? Je veux apprendre un triple saut.",
+     "cs": "Zastavit? Já se chci naučit trojitý skok."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Alors commencez lentement. Et lâchez la rambarde, s'il vous plaît.",
+     "cs": "Začněte tedy pomalu. A pusťte prosím to zábradlí."
+    },
+    {
+     "speaker": null,
+     "text": "Tom est resté accroché : Aujourd'hui, je travaille surtout les bras.",
+     "cs": "Tom držel zábradlí dál: Dnes trénuji hlavně silné ruce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "triple",
+     "cs": "trojitý"
+    },
+    {
+     "word": "rambarde",
+     "cs": "zábradlí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Tom umět?",
+     "options": [
+      "Trojitý skok.",
+      "Plavat.",
+      "Tancovat valčík."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čeho se Tom drží?",
+     "options": [
+      "Zábradlí.",
+      "Trenéra.",
+      "Stromu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -4079,6 +4079,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-skate-lesson",
+   "level": "A2",
+   "title": "The First Skating Lesson",
+   "title_cs": "Lekce na ledě",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom bought new skates and went to his first lesson.",
+     "cs": "Tom koupil nové brusle a šel na první hodinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I can do everything already. I've seen it on television.",
+     "cs": "Já už umím všechno. Viděl jsem to v televizi."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Good. First we'll learn how to stop safely.",
+     "cs": "Dobře. Nejdřív se naučíme bezpečně zastavit."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Stop? I want to learn a triple jump.",
+     "cs": "Zastavit? Já se chci naučit trojitý skok."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Then start slowly. And please let go of the railing.",
+     "cs": "Začněte tedy pomalu. A pusťte prosím to zábradlí."
+    },
+    {
+     "speaker": null,
+     "text": "Tom kept holding on: Today I'm mainly training my arms.",
+     "cs": "Tom držel zábradlí dál: Dnes trénuji hlavně silné ruce."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "triple",
+     "cs": "trojitý"
+    },
+    {
+     "word": "railing",
+     "cs": "zábradlí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Tom umět?",
+     "options": [
+      "Trojitý skok.",
+      "Plavat.",
+      "Tancovat valčík."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Čeho se Tom drží?",
+     "options": [
+      "Zábradlí.",
+      "Trenéra.",
+      "Stromu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
