@@ -6995,6 +6995,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-48-parking-pie-chart",
+   "level": "B2",
+   "title": "Il bilancio a torta",
+   "title_cs": "Koláčový rozpočet",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva presentava ai vicini il bilancio di una nuova rastrelliera per biciclette con un impressionante grafico colorato.",
+     "cs": "Eva představovala sousedům rozpočet nového stojanu na kola pomocí působivého barevného grafu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "La proporzione maggiore copre i materiali; gli altri segmenti rappresentano trasporto e riserva per imprevisti.",
+     "cs": "Největší podíl připadá na materiál, zbývající segmenty ukazují dopravu a rezervu na nepředvídané výdaje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È chiaro. Ma perché il grafico ha sei fette se elenchi soltanto tre voci?",
+     "cs": "To je přehledné. Ale proč má graf šest dílů, když tady uvádíš jen tři položky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ho suddiviso ogni voce affinché il bilancio apparisse più equilibrato e visivamente rappresentativo.",
+     "cs": "Každou položku jsem rozdělila, aby rozpočet působil vyváženěji a vizuálně reprezentativně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E quanto costa la rastrelliera vera e propria?",
+     "cs": "A kolik tedy stojí samotný stojan?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha chiuso la presentazione: Non lo sappiamo ancora. Per ora abbiamo approvato solo il rinfresco, perché il grafico ha fatto venire a tutti voglia di torta.",
+     "cs": "Eva zavřela prezentaci: To ještě nevíme. Zatím jsme schválili jen občerstvení, protože po tom grafu dostali všichni chuť na koláč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "proporzione",
+     "cs": "podíl"
+    },
+    {
+     "word": "imprevisti",
+     "cs": "nepředvídané výdaje"
+    },
+    {
+     "word": "suddiviso",
+     "cs": "dále rozdělila"
+    },
+    {
+     "word": "rappresentativo",
+     "cs": "reprezentativní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "O čem měl být rozpočet?",
+     "options": [
+      "O stojanu na kola.",
+      "O novém divadle.",
+      "O vydání knihy."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co sousedé zatím schválili?",
+     "options": [
+      "Občerstvení.",
+      "Nákup stojanu.",
+      "Zrušení rezervy."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

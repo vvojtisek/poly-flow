@@ -6995,6 +6995,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-48-parking-pie-chart",
+   "level": "B2",
+   "title": "Das Tortendiagramm",
+   "title_cs": "Koláčový rozpočet",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva präsentierte den Nachbarn den Haushaltsplan für einen neuen Fahrradständer anhand eines eindrucksvollen farbigen Diagramms.",
+     "cs": "Eva představovala sousedům rozpočet nového stojanu na kola pomocí působivého barevného grafu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Der größte Anteil entfällt auf Material; die übrigen Segmente zeigen Transport und eine Reserve für unvorhergesehene Ausgaben.",
+     "cs": "Největší podíl připadá na materiál, zbývající segmenty ukazují dopravu a rezervu na nepředvídané výdaje."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das ist übersichtlich. Aber warum hat das Diagramm sechs Stücke, wenn du nur drei Posten aufführst?",
+     "cs": "To je přehledné. Ale proč má graf šest dílů, když tady uvádíš jen tři položky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe jeden Posten unterteilt, damit das Budget ausgewogener und visuell repräsentativer wirkt.",
+     "cs": "Každou položku jsem rozdělila, aby rozpočet působil vyváženěji a vizuálně reprezentativně."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und wie viel kostet der eigentliche Fahrradständer?",
+     "cs": "A kolik tedy stojí samotný stojan?"
+    },
+    {
+     "speaker": null,
+     "text": "Eva schloss die Präsentation: Das wissen wir noch nicht. Bisher haben wir nur Verpflegung genehmigt, weil alle vom Diagramm Lust auf Torte bekamen.",
+     "cs": "Eva zavřela prezentaci: To ještě nevíme. Zatím jsme schválili jen občerstvení, protože po tom grafu dostali všichni chuť na koláč."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Segmente",
+     "cs": "díly"
+    },
+    {
+     "word": "unvorhergesehene",
+     "cs": "nepředvídaný"
+    },
+    {
+     "word": "visuell",
+     "cs": "vizuálně"
+    },
+    {
+     "word": "repräsentativer",
+     "cs": "reprezentativnější"
+    }
+   ],
+   "questions": [
+    {
+     "question": "O čem měl být rozpočet?",
+     "options": [
+      "O stojanu na kola.",
+      "O novém divadle.",
+      "O vydání knihy."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co sousedé zatím schválili?",
+     "options": [
+      "Občerstvení.",
+      "Nákup stojanu.",
+      "Zrušení rezervy."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
