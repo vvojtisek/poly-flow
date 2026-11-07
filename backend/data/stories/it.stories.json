@@ -1380,6 +1380,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-quiet-coach",
+   "level": "A2",
+   "title": "La carrozza del silenzio",
+   "title_cs": "Tichý vagon",
+   "lines": [
+    {
+     "text": "Julia sedeva sul treno, nella carrozza del silenzio. Voleva leggere un libro.",
+     "cs": "Julia seděla ve vlaku v tichém vagonu. Chtěla číst knihu."
+    },
+    {
+     "text": "Accanto a lei un uomo telefonava a voce molto alta.",
+     "cs": "Vedle ní velmi hlasitě telefonoval nějaký muž."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Scusi, questa è la carrozza del silenzio.",
+     "cs": "Promiňte, tohle je tichý vagon."
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Un momento, per favore. Sto parlando con mia madre.",
+     "cs": "Moment, prosím. Telefonuju s maminkou."
+    },
+    {
+     "text": "Ha continuato per dieci minuti. Julia sembrava sempre più arrabbiata.",
+     "cs": "Mluvil dál deset minut. Julia se tvářila čím dál rozzlobeněji."
+    },
+    {
+     "text": "Poi è arrivato il controllore. Voleva vedere i biglietti.",
+     "cs": "Pak přišel průvodčí. Chtěl vidět jízdenky."
+    },
+    {
+     "speaker": "Controllore",
+     "text": "Il suo biglietto è valido per domani, signora. Oggi non può stare qui.",
+     "cs": "Vaše jízdenka platí až na zítra, paní. Dnes tu sedět nemůžete."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Ma sono seduta qui da due ore!",
+     "cs": "Ale já tu sedím už dvě hodiny!"
+    },
+    {
+     "speaker": "Uomo",
+     "text": "Non si preoccupi. Domani qui sarà sicuramente più tranquillo. Io non ci sarò.",
+     "cs": "Nelekejte se. Zítra tu bude určitě klid. Já tu nebudu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silenzio",
+     "cs": "ticho"
+    },
+    {
+     "word": "arrabbiata",
+     "cs": "rozzlobená"
+    },
+    {
+     "word": "controllore",
+     "cs": "průvodčí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa l'uomo nella carrozza del silenzio?",
+     "options": [
+      "Telefona a voce alta.",
+      "Dorme.",
+      "Legge un libro."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qual è il problema del biglietto di Julia?",
+     "options": [
+      "È valido per domani.",
+      "È troppo vecchio.",
+      "È rotto."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

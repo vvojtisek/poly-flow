@@ -1380,6 +1380,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-quiet-coach",
+   "level": "A2",
+   "title": "La voiture silence",
+   "title_cs": "Tichý vagon",
+   "lines": [
+    {
+     "text": "Julia était assise dans la voiture silence du train. Elle voulait lire un livre.",
+     "cs": "Julia seděla ve vlaku v tichém vagonu. Chtěla číst knihu."
+    },
+    {
+     "text": "À côté d'elle, un homme téléphonait très fort.",
+     "cs": "Vedle ní velmi hlasitě telefonoval nějaký muž."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Excusez-moi, c'est la voiture silence.",
+     "cs": "Promiňte, tohle je tichý vagon."
+    },
+    {
+     "speaker": "Homme",
+     "text": "Un instant, s'il vous plaît. Je parle avec ma mère.",
+     "cs": "Moment, prosím. Telefonuju s maminkou."
+    },
+    {
+     "text": "Il a continué pendant dix minutes. Julia avait l'air de plus en plus fâchée.",
+     "cs": "Mluvil dál deset minut. Julia se tvářila čím dál rozzlobeněji."
+    },
+    {
+     "text": "Puis le contrôleur est arrivé. Il voulait voir les billets.",
+     "cs": "Pak přišel průvodčí. Chtěl vidět jízdenky."
+    },
+    {
+     "speaker": "Contrôleur",
+     "text": "Votre billet est valable pour demain, madame. Aujourd'hui, vous ne pouvez pas rester ici.",
+     "cs": "Vaše jízdenka platí až na zítra, paní. Dnes tu sedět nemůžete."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Mais je suis assise ici depuis deux heures !",
+     "cs": "Ale já tu sedím už dvě hodiny!"
+    },
+    {
+     "speaker": "Homme",
+     "text": "Ne vous inquiétez pas. Demain, ce sera sûrement plus calme. Je ne serai pas là.",
+     "cs": "Nelekejte se. Zítra tu bude určitě klid. Já tu nebudu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "silence",
+     "cs": "ticho"
+    },
+    {
+     "word": "fâchée",
+     "cs": "rozzlobená"
+    },
+    {
+     "word": "contrôleur",
+     "cs": "průvodčí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que fait l'homme dans la voiture silence ?",
+     "options": [
+      "Il téléphone fort.",
+      "Il dort.",
+      "Il lit un livre."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Quel est le problème du billet de Julia ?",
+     "options": [
+      "Il est valable pour demain.",
+      "Il est trop vieux.",
+      "Il est cassé."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

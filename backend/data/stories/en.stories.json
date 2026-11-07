@@ -1380,6 +1380,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-quiet-coach",
+   "level": "A2",
+   "title": "The Quiet Coach",
+   "title_cs": "Tichý vagon",
+   "lines": [
+    {
+     "text": "Julia was sitting in the quiet coach of the train. She wanted to read a book.",
+     "cs": "Julia seděla ve vlaku v tichém vagonu. Chtěla číst knihu."
+    },
+    {
+     "text": "A man next to her was talking very loudly on the phone.",
+     "cs": "Vedle ní velmi hlasitě telefonoval nějaký muž."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Excuse me, this is the quiet coach.",
+     "cs": "Promiňte, tohle je tichý vagon."
+    },
+    {
+     "speaker": "Man",
+     "text": "One moment, please. I'm talking to my mother.",
+     "cs": "Moment, prosím. Telefonuju s maminkou."
+    },
+    {
+     "text": "He carried on for ten minutes. Julia looked angrier and angrier.",
+     "cs": "Mluvil dál deset minut. Julia se tvářila čím dál rozzlobeněji."
+    },
+    {
+     "text": "Then the ticket inspector came. He wanted to see the tickets.",
+     "cs": "Pak přišel průvodčí. Chtěl vidět jízdenky."
+    },
+    {
+     "speaker": "Inspector",
+     "text": "Your ticket is only valid for tomorrow, madam. Today you can't sit here.",
+     "cs": "Vaše jízdenka platí až na zítra, paní. Dnes tu sedět nemůžete."
+    },
+    {
+     "speaker": "Julia",
+     "text": "But I've been sitting here for two hours!",
+     "cs": "Ale já tu sedím už dvě hodiny!"
+    },
+    {
+     "speaker": "Man",
+     "text": "Don't worry. It will surely be quieter here tomorrow. I won't be here.",
+     "cs": "Nelekejte se. Zítra tu bude určitě klid. Já tu nebudu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "coach",
+     "cs": "vagon"
+    },
+    {
+     "word": "angrier",
+     "cs": "rozzlobenější"
+    },
+    {
+     "word": "inspector",
+     "cs": "revizor"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What is the man doing in the quiet coach?",
+     "options": [
+      "Talking loudly on the phone",
+      "Sleeping",
+      "Reading a book"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What is wrong with Julia's ticket?",
+     "options": [
+      "It is only valid for tomorrow.",
+      "It is too old.",
+      "It is broken."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

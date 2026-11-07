@@ -1380,6 +1380,89 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-07-quiet-coach",
+   "level": "A2",
+   "title": "Der Ruhewagen",
+   "title_cs": "Tichý vagon",
+   "lines": [
+    {
+     "text": "Julia saß im Ruhewagen des Zuges. Sie wollte ein Buch lesen.",
+     "cs": "Julia seděla ve vlaku v tichém vagonu. Chtěla číst knihu."
+    },
+    {
+     "text": "Neben ihr hat ein Mann sehr laut telefoniert.",
+     "cs": "Vedle ní velmi hlasitě telefonoval nějaký muž."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Entschuldigung, das hier ist der Ruhewagen.",
+     "cs": "Promiňte, tohle je tichý vagon."
+    },
+    {
+     "speaker": "Mann",
+     "text": "Einen Moment bitte. Ich telefoniere mit meiner Mutter.",
+     "cs": "Moment, prosím. Telefonuju s maminkou."
+    },
+    {
+     "text": "Er hat noch zehn Minuten weitergesprochen. Julia hat immer wütender geschaut.",
+     "cs": "Mluvil dál deset minut. Julia se tvářila čím dál rozzlobeněji."
+    },
+    {
+     "text": "Dann ist der Schaffner gekommen. Er wollte die Fahrkarten sehen.",
+     "cs": "Pak přišel průvodčí. Chtěl vidět jízdenky."
+    },
+    {
+     "speaker": "Schaffner",
+     "text": "Ihre Fahrkarte gilt erst für morgen, gnädige Frau. Heute dürfen Sie hier nicht sitzen.",
+     "cs": "Vaše jízdenka platí až na zítra, paní. Dnes tu sedět nemůžete."
+    },
+    {
+     "speaker": "Julia",
+     "text": "Aber ich sitze schon seit zwei Stunden hier!",
+     "cs": "Ale já tu sedím už dvě hodiny!"
+    },
+    {
+     "speaker": "Mann",
+     "text": "Keine Sorge. Morgen ist es hier sicher ruhiger. Ich bin nicht dabei.",
+     "cs": "Nelekejte se. Zítra tu bude určitě klid. Já tu nebudu."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Ruhewagen",
+     "cs": "tichý vagon"
+    },
+    {
+     "word": "wütender",
+     "cs": "rozzlobeněji"
+    },
+    {
+     "word": "Schaffner",
+     "cs": "průvodčí"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was macht der Mann im Ruhewagen?",
+     "options": [
+      "Er telefoniert laut.",
+      "Er schläft.",
+      "Er liest ein Buch."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was stimmt mit Julias Fahrkarte nicht?",
+     "options": [
+      "Sie gilt erst für morgen.",
+      "Sie ist zu alt.",
+      "Sie ist kaputt."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
