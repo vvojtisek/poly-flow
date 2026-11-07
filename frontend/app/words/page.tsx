@@ -13,7 +13,7 @@ import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Button, Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { addWordsToCollection, type DeckScope, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
-import { useHotkeys } from "@/lib/keyboard";
+import { isTypingTarget, useHotkeys } from "@/lib/keyboard";
 import { genderClass } from "@/lib/gender";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 
@@ -117,7 +117,8 @@ function EvidenceBlock({ w }: { w: WordDetail }) {
 }
 
 function Highlight({ text, part }: { text: string; part: string | null }) {
-  const at = part ? text.indexOf(part) : -1;
+  // The tagged word on word boundaries: "in" must not light up inside "Berlin".
+  const at = part ? text.search(new RegExp(`(?<![\\p{L}\\p{N}])${part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![\\p{L}\\p{N}])`, "u")) : -1;
   if (!part || at < 0) return <>{text}</>;
   return (
     <>
@@ -152,13 +153,33 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
       cancelled = true;
     };
   }, [id, attempt]);
+  // On phones the card is a bottom sheet over the list: lock the page behind it, close on the backdrop
+  // or Escape, and sit above the bottom navigation so its last rows are not hidden.
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 1023px)").matches) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, []);
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape" && !e.defaultPrevented && !isTypingTarget(e.target)) onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
   return (
+    <>
+    <div aria-hidden onClick={onClose} className="fixed inset-0 z-40 bg-slate-950/40 lg:hidden" />
     <aside
       aria-label={t.detail}
-      className="fixed inset-x-0 bottom-0 z-20 max-h-[80vh] overflow-y-auto rounded-t-3xl border border-slate-200 bg-white p-5 shadow-2xl motion-safe:animate-pop-in dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-4 lg:inset-auto lg:max-h-none lg:rounded-3xl lg:shadow-sm"
+      className="fixed inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto overscroll-contain rounded-t-3xl border border-slate-200 bg-white px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl motion-safe:animate-pop-in dark:border-slate-800 dark:bg-slate-900 lg:sticky lg:top-4 lg:inset-auto lg:z-auto lg:max-h-[calc(100dvh-2rem)] lg:rounded-3xl lg:pb-5 lg:shadow-sm"
     >
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-xs uppercase tracking-wide text-slate-500">{t.detail}</p>
+      <div className="sticky top-0 z-10 -mx-5 flex items-start justify-between gap-2 bg-white px-5 pb-2 pt-3 dark:bg-slate-900 lg:pt-5">
+        <span aria-hidden className="absolute left-1/2 top-1.5 h-1 w-10 -translate-x-1/2 rounded-full bg-slate-300 dark:bg-slate-700 lg:hidden" />
+        <p className="pt-1 text-xs uppercase tracking-wide text-slate-500">{t.detail}</p>
         <button type="button" onClick={onClose} aria-label={cs.common.close} className="rounded-full p-1 hover:bg-slate-100 dark:hover:bg-slate-800">
           <X className="size-5" aria-hidden />
         </button>
@@ -269,6 +290,7 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
         </div>
       )}
     </aside>
+    </>
   );
 }
 

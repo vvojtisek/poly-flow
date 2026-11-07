@@ -1655,3 +1655,13 @@ Vlad approves a push.
 **Implemented Solution:** The list, the level/topic groups and the word card each show a RetryNotice with their own message and refetch on retry, through an attempt counter in the effect deps. Loading shows shape-matching skeletons: list rows, three group cards and card lines. 'Načíst další' catches failures, shows a retry notice and shows 'Načítám…' while busy. The inspector clears its failure on every new word. A language or profile switch clears the old list before the new one arrives.
 
 **Verification:** Playwright with request interception: a failed groups request shows the alert, and retry gives 4 group cards; a failed list shows the alert, and retry gives 41 rows; a failed card shows the alert, and retry shows 'der'. Load-more failure was not exercised: local data has 41 words, under the 60-row page, so the button never appears. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 57/120 | Page: [/words] (Page Cycle 12/15)
+
+**Summary:** make the word card a proper bottom sheet on phones
+
+**Observed Problem:** On a 390px phone the word card was a fixed panel at z-20, under the z-30 bottom navigation. Its last rows (answer history and legend) were hidden behind the nav. There was no backdrop, the page behind kept scrolling, and the close button scrolled out of view in a long card. The new context line also highlighted the substring 'in' inside 'Berlin' instead of the tagged word 'in'.
+
+**Implemented Solution:** On phones the card is a sheet above the navigation (z-50) with a dimmed backdrop that closes it. Page scroll is locked while the sheet is open and restored on close, and the sheet uses overscroll-contain, a max of 85dvh and safe-area bottom padding. A sticky header with a grab handle keeps the close button reachable, and Escape closes the card on every screen size (unless typing). On desktop the card stays a sticky side panel with no backdrop or scroll lock and is capped at the viewport height. Highlighting now matches the tagged word on Unicode word boundaries.
+
+**Verification:** Playwright at 390px: the card opens with body overflow hidden; scrolled to the end, the last text ends at y=823 and is visible above the bottom edge; a backdrop tap closes it and restores overflow; Escape closes it. At 1280px the backdrop is hidden and there is no scroll lock. The highlight for 'in' marks the word in 'Berlin ist eine Stadt in Deutschland', not Berl-in. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
