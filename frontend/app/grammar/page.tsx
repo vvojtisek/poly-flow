@@ -10,7 +10,7 @@ import { Kbd } from "@/components/Kbd";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
 import { PlayButton } from "@/components/PlayButton";
-import { Button, Notice } from "@/components/ui";
+import { Button, Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { getGrammarSearchIndex, getGrammarTree, grammarExampleAudioUrl, getGrammarUnit, getProgress, type GrammarTree, type GrammarUnit, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
@@ -231,6 +231,7 @@ export default function GrammarPage() {
   const language = me?.acting.active_language;
   const [tree, setTree] = useState<GrammarTree | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [measured, setMeasured] = useState<{ level: Level; source: "test" | "badge" } | null>(null);
   // The learner's own choice of focus level, remembered per profile and language on this device.
   const [chosen, setChosen] = useState<Level | null>(null);
@@ -279,7 +280,7 @@ export default function GrammarPage() {
     return () => {
       cancelled = true;
     };
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, attempt]);
 
   // Filters live in the URL (?q=…&status=studied&due=1): links can open a filtered view, and the
   // browser's back button returns to the same list.
@@ -456,8 +457,17 @@ export default function GrammarPage() {
           </h1>
           <LanguagePicker me={me} />
         </div>
-        {failed && <Notice tone="error">{cs.common.error}</Notice>}
-        {!tree && !failed && <p className="text-slate-500">{cs.common.loading}</p>}
+        {failed && <RetryNotice text={cs.grammar.loadFailed} onRetry={() => setAttempt((n) => n + 1)} />}
+        {!tree && !failed && (
+          <div className="flex flex-col gap-3 rounded-3xl border-2 border-brand-500/30 p-4 sm:p-5">
+            <Skeleton lines={2} />
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {[0, 1, 2].map((i) => (
+                <div key={i} aria-hidden className="h-36 rounded-2xl bg-slate-100 motion-safe:animate-pulse dark:bg-slate-800" />
+              ))}
+            </div>
+          </div>
+        )}
         {tree && !tree.open && <Notice>{cs.grammar.locked}</Notice>}
         {tree && tree.open && units.length === 0 && <Notice>{cs.grammar.empty}</Notice>}
         {tree && tree.open && units.length > 0 && (

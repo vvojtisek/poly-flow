@@ -1355,3 +1355,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: the card's meta is one line ("8 cvičení · v ověřeních 3 správně, 1 chyba · ověření zítra") next to the open/resume link, and the summary is clamped to two lines. Strings in `lib/i18n/cs.ts` lower-cased to read as one sentence fragment.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single meta line per card and the mobile page at 2 521 px.
+
+## Global Cycle 27/120 | Page: [/grammar] (Page Cycle 12/15)
+
+**Summary:** skeleton while loading, retry when the topic list fails
+
+**Observed Problem:** `/grammar` showed a single "Načítám…" line while the tree loaded and then reflowed the whole page; if the request failed, the learner got "Něco se nepovedlo." with no way to try again except reloading.
+
+**Implemented Solution:** `app/grammar/page.tsx`: a placeholder in the shape of the focus panel (two text lines and three card blocks, pulse only with motion allowed) holds the layout while loading; a failure shows `RetryNotice` ("Gramatiku se nepodařilo načíst." + Zkusit znovu) that re-runs the tree and level requests through an attempt counter.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the tree request failing showed the retry alert, and after recovery the retry loaded all 37 topics.
