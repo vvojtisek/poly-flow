@@ -1835,3 +1835,13 @@ Vlad approves a push.
 **Implemented Solution:** The forecast keeps exact per-day counts but sends at most 30 words per day, ordered by next check and then frequency, so the first items are stable. The day view shows 'a N dalších…' linking to the dictionary ordered by review, and the 'Ověřit slova (N)' count uses the exact total. The day request waits 150ms and is cancelled when the selection moves on, so only the settled day is fetched.
 
 **Verification:** New pytest test_forecast_lists_at_most_30_words_per_day_but_counts_all: 35 due words give words=35, 30 items, Wort1 first; tests/test_insights.py 3 passed. Real data: 8 Nov is words=41 with 30 items, and the UI shows 30 chips plus 'a 11 dalších…'. Playwright: six ↑ presses make 1 day request (2026-11-01). Endpoint timings measured locally: insights 15-19ms, recap 11-13ms, day 6-7ms. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 75/120 | Page: [/insights] (Page Cycle 15/15)
+
+**Summary:** order the statistics panels by what the learner can act on
+
+**Observed Problem:** Fourteen cycles made the forecast (with check buttons) and the mistake drill-down the actionable parts of the page, but they sat below a full-width half-year calendar. On a phone, reaching 'Co tě čeká' meant scrolling past the recap, the calendar and a 41-word day list. The calendar answers 'how regular was I', which is the least urgent question.
+
+**Implemented Solution:** The panels now go forecast, mistake types, accuracy, funnel, then the activity calendar full width last. The loading skeletons follow the same order, so nothing jumps when data arrives. URL state, arrow-key navigation and the day view are unchanged.
+
+**Verification:** Playwright 390px: panel order is Týden v kostce, Co tě čeká, Druhy chyb, Přesnost, Od lekce k jistotě, Aktivita; the forecast heading is now at y=780 (it was below the calendar). Regression scripts for keyboard navigation (cycle 66), URL day restore after Back (cycle 65) and retry states (cycle 71) pass after updating their selectors to the calendar's label. No console errors. typecheck, next build, ruff pass.

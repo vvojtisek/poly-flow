@@ -491,10 +491,10 @@ export default function InsightsPage() {
         {!data ? (
           !failed && (
             <div className="grid gap-4 lg:grid-cols-2">
-              {[t.activity, t.forecast, t.accuracy, t.funnelTitle].map((title, i) => (
-                <div key={title} className={`rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900 ${i === 0 ? "lg:col-span-2" : ""}`}>
+              {[t.forecast, t.mistakes, t.accuracy, t.funnelTitle].map((title) => (
+                <div key={title} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
                   <p className="mb-3 text-sm font-semibold text-slate-400">{title}</p>
-                  <Skeleton lines={i === 0 ? 5 : 4} />
+                  <Skeleton lines={4} />
                 </div>
               ))}
             </div>
@@ -511,27 +511,7 @@ export default function InsightsPage() {
           </section>
         ) : (
           <div className="grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
-            <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
-              <div role="radiogroup" aria-label={t.heatModeLabel} className="mb-2 inline-flex rounded-lg bg-slate-100 p-0.5 text-xs dark:bg-slate-800">
-                {(["all", "graded", "practice"] as const).map((m) => (
-                  <button
-                    key={m}
-                    type="button"
-                    role="radio"
-                    aria-checked={heatMode === m}
-                    onClick={() => setHeatMode(m)}
-                    className={`rounded-md px-2.5 py-1 font-medium ${heatMode === m ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 dark:text-slate-300"}`}
-                  >
-                    {t.heatModes[m]}
-                  </button>
-                ))}
-              </div>
-              <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} mode={heatMode} />
-              <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} onRetry={() => setDayAttempt((n) => n + 1)} />
-              <p className="mt-2 text-xs text-slate-500">
-                {heatMode === "all" ? t.activeDays(data.active_days) : t.modeDays(heatMode, data.heatmap.filter((d) => d[heatMode] > 0).length)}
-              </p>
-            </Panel>
+            {/* Most actionable first: what is due, then what goes wrong, then trends; the half-year calendar last. */}
             <Panel title={t.forecast} icon={Target}>
               <Forecast data={data.forecast} selected={forecastDate} onSelect={setForecastDate} />
               {forecastDate && data.forecast.find((day) => day.date === forecastDate) && (
@@ -545,57 +525,6 @@ export default function InsightsPage() {
                   <span className="size-2.5 rounded-sm bg-amber-400" /> {t.grammar}
                 </span>
               </p>
-            </Panel>
-            <Panel title={t.accuracy} icon={TrendingUp}>
-              {data.accuracy.some((w) => w.answered) ? <AccuracyChart data={data.accuracy} /> : <p className="text-sm text-slate-500">{t.noAnswers}</p>}
-              <p className="mt-1 text-xs text-slate-500">{t.accuracyHelp}</p>
-            </Panel>
-            <Panel title={t.funnelTitle} icon={Filter}>
-              {funnel && funnel.introduced === 0 ? (
-                <p className="text-sm text-slate-500">{t.funnelEmpty}</p>
-              ) : (
-                <ul className="flex flex-col gap-2">
-                  {steps.map(([label, n, href]) => {
-                    const row = (
-                      <>
-                        <div className="flex justify-between text-xs">
-                          <span>{label}</span>
-                          <span className="tabular-nums text-slate-500">{t.funnelShare(n, href === STEP_ROOT ? 0 : steps[0]![1])}</span>
-                        </div>
-                        <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                          <div className="h-full rounded-full bg-emerald-500" style={{ width: `${steps[0]![1] ? (n / steps[0]![1]) * 100 : 0}%` }} />
-                        </div>
-                      </>
-                    );
-                    return (
-                      <li key={label}>
-                        {href ? (
-                          <Link href={href} className="flex flex-col gap-1 rounded-lg p-1 -m-1 hover:bg-slate-100 dark:hover:bg-slate-800">
-                            {row}
-                          </Link>
-                        ) : (
-                          <div className="flex flex-col gap-1">{row}</div>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-              {funnel && funnel.introduced > funnel.passive && (
-                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300">
-                  <Link href="/words?tab=all&status=learning" className="hover:underline">
-                    {t.funnelWaiting(funnel.introduced - funnel.passive)}
-                  </Link>
-                </p>
-              )}
-              {funnel && funnel.fading > 0 && (
-                <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">
-                  <Link href="/words?tab=all&due=1" className="hover:underline">
-                    {t.funnelFading(funnel.fading)}
-                  </Link>
-                </p>
-              )}
-              <p className="mt-2 text-xs text-slate-500">{t.funnelHelp}</p>
             </Panel>
             <Panel title={t.mistakes} icon={TriangleAlert}>
               {data.mistakes.length === 0 ? (
@@ -652,6 +581,78 @@ export default function InsightsPage() {
                 </ul>
               )}
               <p className="mt-2 text-xs text-slate-500">{t.mistakesHelp}</p>
+            </Panel>
+            <Panel title={t.accuracy} icon={TrendingUp}>
+              {data.accuracy.some((w) => w.answered) ? <AccuracyChart data={data.accuracy} /> : <p className="text-sm text-slate-500">{t.noAnswers}</p>}
+              <p className="mt-1 text-xs text-slate-500">{t.accuracyHelp}</p>
+            </Panel>
+            <Panel title={t.funnelTitle} icon={Filter}>
+              {funnel && funnel.introduced === 0 ? (
+                <p className="text-sm text-slate-500">{t.funnelEmpty}</p>
+              ) : (
+                <ul className="flex flex-col gap-2">
+                  {steps.map(([label, n, href]) => {
+                    const row = (
+                      <>
+                        <div className="flex justify-between text-xs">
+                          <span>{label}</span>
+                          <span className="tabular-nums text-slate-500">{t.funnelShare(n, href === STEP_ROOT ? 0 : steps[0]![1])}</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                          <div className="h-full rounded-full bg-emerald-500" style={{ width: `${steps[0]![1] ? (n / steps[0]![1]) * 100 : 0}%` }} />
+                        </div>
+                      </>
+                    );
+                    return (
+                      <li key={label}>
+                        {href ? (
+                          <Link href={href} className="flex flex-col gap-1 rounded-lg p-1 -m-1 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            {row}
+                          </Link>
+                        ) : (
+                          <div className="flex flex-col gap-1">{row}</div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {funnel && funnel.introduced > funnel.passive && (
+                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300">
+                  <Link href="/words?tab=all&status=learning" className="hover:underline">
+                    {t.funnelWaiting(funnel.introduced - funnel.passive)}
+                  </Link>
+                </p>
+              )}
+              {funnel && funnel.fading > 0 && (
+                <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">
+                  <Link href="/words?tab=all&due=1" className="hover:underline">
+                    {t.funnelFading(funnel.fading)}
+                  </Link>
+                </p>
+              )}
+              <p className="mt-2 text-xs text-slate-500">{t.funnelHelp}</p>
+            </Panel>
+            <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
+              <div role="radiogroup" aria-label={t.heatModeLabel} className="mb-2 inline-flex rounded-lg bg-slate-100 p-0.5 text-xs dark:bg-slate-800">
+                {(["all", "graded", "practice"] as const).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    role="radio"
+                    aria-checked={heatMode === m}
+                    onClick={() => setHeatMode(m)}
+                    className={`rounded-md px-2.5 py-1 font-medium ${heatMode === m ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 dark:text-slate-300"}`}
+                  >
+                    {t.heatModes[m]}
+                  </button>
+                ))}
+              </div>
+              <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} mode={heatMode} />
+              <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} onRetry={() => setDayAttempt((n) => n + 1)} />
+              <p className="mt-2 text-xs text-slate-500">
+                {heatMode === "all" ? t.activeDays(data.active_days) : t.modeDays(heatMode, data.heatmap.filter((d) => d[heatMode] > 0).length)}
+              </p>
             </Panel>
           </div>
         )}
