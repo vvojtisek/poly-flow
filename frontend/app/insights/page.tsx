@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Panel } from "@/components/Panel";
 import { WeeklyRecap } from "@/components/WeeklyRecap";
-import { Notice } from "@/components/ui";
+import { RetryNotice, Skeleton } from "@/components/ui";
 import { PlayButton } from "@/components/PlayButton";
 import { getActivityDay, getInsights, myWordAudioUrl, type ActivityDay, type Insights } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
@@ -118,12 +118,12 @@ function Heatmap({ data, selected, onSelect, mode }: { data: Insights["heatmap"]
   );
 }
 
-function ActivityDetails({ data, date, loading, failed, language }: { data: ActivityDay | null; date: string | null; loading: boolean; failed: boolean; language: string }) {
+function ActivityDetails({ data, date, loading, failed, language, onRetry }: { data: ActivityDay | null; date: string | null; loading: boolean; failed: boolean; language: string; onRetry: () => void }) {
   if (!date) return null;
   return (
     <section className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-800" aria-live="polite">
       <h3 className="mb-2 font-semibold">{t.activityDay(dayFmt(date))}</h3>
-      {loading ? <p className="text-sm text-slate-500">{cs.common.loading}</p> : failed ? <Notice tone="error">{cs.common.error}</Notice> : !data || (!data.words.length && !data.grammar.length) ? <p className="text-sm text-slate-500">{t.activityEmpty}</p> : (
+      {loading ? <Skeleton lines={3} /> : failed ? <RetryNotice text={t.dayFailed} onRetry={onRetry} /> : !data || (!data.words.length && !data.grammar.length) ? <p className="text-sm text-slate-500">{t.activityEmpty}</p> : (
         <div className="grid gap-4 sm:grid-cols-2">
           {data.words.length > 0 && <section>
             <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">{t.activityWords}</h4>
@@ -374,6 +374,8 @@ export default function InsightsPage() {
   const language = me?.acting.active_language;
   const [data, setData] = useState<Insights | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const [dayAttempt, setDayAttempt] = useState(0);
   const [forecastDate, setForecastDate] = useState<string | null>(null);
   const [activityDate, setActivityDate] = useState<string | null>(null);
   const [activity, setActivity] = useState<ActivityDay | null>(null);
@@ -386,6 +388,7 @@ export default function InsightsPage() {
     if (!language) return;
     let cancelled = false;
     setData(null);
+    setFailed(false);
     getInsights(language)
       .then((d) => {
         if (cancelled) return;
@@ -405,7 +408,7 @@ export default function InsightsPage() {
     return () => {
       cancelled = true;
     };
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, attempt]);
 
   useEffect(() => {
     if (!data) return;
@@ -429,7 +432,7 @@ export default function InsightsPage() {
       .catch(() => !cancelled && setActivityFailed(true))
       .finally(() => !cancelled && setActivityLoading(false));
     return () => { cancelled = true; };
-  }, [language, activityDate, me?.acting.id]);
+  }, [language, activityDate, me?.acting.id, dayAttempt]);
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const funnel = data?.funnel;
@@ -459,9 +462,18 @@ export default function InsightsPage() {
           <LanguagePicker me={me} />
         </div>
         {language && <WeeklyRecap language={language} />}
-        {failed && <Notice tone="error">{cs.common.error}</Notice>}
+        {failed && <RetryNotice text={t.loadFailed} onRetry={() => setAttempt((n) => n + 1)} />}
         {!data ? (
-          !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>
+          !failed && (
+            <div className="grid gap-4 lg:grid-cols-2">
+              {[t.activity, t.forecast, t.accuracy, t.funnelTitle].map((title, i) => (
+                <div key={title} className={`rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900 ${i === 0 ? "lg:col-span-2" : ""}`}>
+                  <p className="mb-3 text-sm font-semibold text-slate-400">{title}</p>
+                  <Skeleton lines={i === 0 ? 5 : 4} />
+                </div>
+              ))}
+            </div>
+          )
         ) : (
           <div className="grid gap-4 lg:grid-cols-2 [&>*]:min-w-0">
             <Panel title={t.activity} icon={CalendarDays} className="lg:col-span-2">
@@ -480,7 +492,7 @@ export default function InsightsPage() {
                 ))}
               </div>
               <Heatmap data={data.heatmap} selected={activityDate} onSelect={setActivityDate} mode={heatMode} />
-              <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} />
+              <ActivityDetails data={activity} date={activityDate} loading={activityLoading} failed={activityFailed} language={data.language} onRetry={() => setDayAttempt((n) => n + 1)} />
               <p className="mt-2 text-xs text-slate-500">
                 {heatMode === "all" ? t.activeDays(data.active_days) : t.modeDays(heatMode, data.heatmap.filter((d) => d[heatMode] > 0).length)}
               </p>

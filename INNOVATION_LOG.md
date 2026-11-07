@@ -1795,3 +1795,13 @@ Vlad approves a push.
 **Implemented Solution:** Points for weeks with fewer than five answers get a dashed ring, and the help text explains this (together with the dot size growing with answer count). A 'Zobrazit čísla po týdnech' disclosure under the chart opens a real table: rows are weeks with answers, columns are the skills, cells show 'správně/odpovědí' or '–'. It scrolls inside its panel on narrow screens.
 
 **Verification:** Playwright 390px with stubbed tallies: 2 of 4 points are dashed (recall 1/2 and grammar 3/3); the table lists '19. 10. – 1/2 –', '26. 10. – 6/12 3/3' and '2. 11. 23/23 – –'; no page overflow. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 71/120 | Page: [/insights] (Page Cycle 11/15)
+
+**Summary:** add panel skeletons and retry for statistics and the day view
+
+**Observed Problem:** While the statistics loaded, the page showed the bare text 'Načítám…' and then jumped into five panels. A failed load showed a generic error with no retry, and the failure flag was never reset, so a later language switch could show the error above fresh data. A failed day view also had no way to try again except picking another day.
+
+**Implemented Solution:** Loading shows four outlined skeleton panels titled like the real ones (calendar full width), so the layout does not jump. Failures show RetryNotice with their own messages: 'Statistiky se nepodařilo načíst.' refetches the whole page through an attempt counter, and 'Přehled dne se nepodařilo načíst.' refetches only the selected day. The failure flag resets on every load. The day view uses a skeleton instead of loading text.
+
+**Verification:** Playwright with interception: during a 1.2s delayed request, 4 skeletons (role=status) show; a failing insights request shows the statistics alert; retry renders all panels; a failing day request shows the day alert, and retry shows 'Učení · 7. 11.'. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
