@@ -72,6 +72,9 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(page.getByRole("button", { name: "Ověřit, co umím" })).toBeDisabled();
   await page.getByRole("button", { name: "Začít lekci" }).click();
   await page.waitForURL("**/lesson");
+  // The lesson page lists grammar by level; the vocabulary course with its scenes is one step in.
+  await page.getByRole("link", { name: "Otevřít lekce slovní zásoby" }).click();
+  await page.waitForURL("**/lesson/vocabulary");
 
   // Context first: the scene, with Czech on demand, then the new words, then practice.
   await expect(page.getByRole("heading", { name: "Ahoj, jak se jmenuješ?" })).toBeVisible();

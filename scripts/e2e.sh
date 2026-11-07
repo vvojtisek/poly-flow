@@ -23,7 +23,7 @@ for _ in $(seq 1 100); do
 done
 "${compose[@]}" exec -T backend sh -c 'python -m app.cli seed-lexicon data/lexicon/*.csv && python -m app.cli seed-scenes data/scenes/*.json && python -m app.cli seed-grammar data/grammar/*.json'
 # The dev server compiles pages on first hit; warm them so test timeouts measure the app.
-for page in / /setup /login /profiles /lesson /check; do
+for page in / /setup /login /profiles /lesson /lesson/vocabulary /check; do
   curl -s -o /dev/null --max-time 180 "$FRONTEND$page"
 done
 (cd frontend && npx playwright test)

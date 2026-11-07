@@ -15,7 +15,7 @@ async function signIn(page: Page) {
 
 test("a lesson runs on the keyboard: Enter, digit keys, Alt+S for ß", async ({ page }) => {
   await signIn(page);
-  await page.goto("/lesson");
+  await page.goto("/lesson/vocabulary");
   await expect(page.getByRole("heading", { name: "Ahoj, jak se jmenuješ?" })).toBeVisible();
   // Enter: scene -> word cards -> practice
   await page.keyboard.press("Enter");
