@@ -6919,6 +6919,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-47-automatic-thanks",
+   "level": "B2",
+   "title": "Vollkommen höfliche Post",
+   "title_cs": "Dokonale zdvořilá pošta",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom richtete für jede E-Mail eine automatische Danksagung ein, um nie wieder unhöflich zu wirken.",
+     "cs": "Tom si nastavil automatické poděkování za každý e-mail, aby už nikdy nepůsobil nezdvořile."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das System reagiert sofort und wahrt unabhängig von meiner momentanen Stimmung einen konsistenten Ton.",
+     "cs": "Systém reaguje okamžitě a zachovává konzistentní tón bez ohledu na mou momentální náladu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das klingt nützlich. Warum sind dann binnen einer Minute sechzig Nachrichten von meiner Adresse eingegangen?",
+     "cs": "To zní užitečně. Proč ti ale z mé adresy přišlo během minuty šedesát zpráv?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Weil deine automatische Antwort sich für meine Bestätigung bedankt und mein System diese Höflichkeit erwidert.",
+     "cs": "Protože tvoje automatická odpověď děkuje za moje poděkování a můj systém jí děkuje znovu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Dann sollten wir beide Programme deaktivieren, bevor sie unsere Postfächer füllen.",
+     "cs": "Tak bychom měli oba programy vypnout, než nám zaplní schránky."
+    },
+    {
+     "speaker": null,
+     "text": "Tom zögerte: Zuerst müssen wir bestimmen, wer sich als Erster nicht mehr bedankt. Ich möchte diese höflich initiierte Konversation nicht verderben.",
+     "cs": "Tom zaváhal: Nejdřív musíme určit, kdo přestane děkovat první. Nechci pokazit tolik slušně zahájenou konverzaci."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "konsistenten",
+     "cs": "stálý"
+    },
+    {
+     "word": "erwidert",
+     "cs": "opětuje"
+    },
+    {
+     "word": "deaktivieren",
+     "cs": "vypnout"
+    },
+    {
+     "word": "initiierte",
+     "cs": "zahájený"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč přibývají zprávy?",
+     "options": [
+      "Dvě automatické odpovědi si stále děkují.",
+      "Tom píše každou ručně.",
+      "Někdo posílá fotografie."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Toma zdržuje od vypnutí?",
+     "options": [
+      "Nechce být první, kdo přestane děkovat.",
+      "Neví, kde je počítač.",
+      "Čeká na opravu proudu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
