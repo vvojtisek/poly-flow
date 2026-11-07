@@ -1,5 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
 
+// A fresh profile gets the first-run welcome wizard over the dashboard once its progress loads,
+// which can happen mid-step. Skip it whenever it blocks the flow under test.
+test.beforeEach(async ({ page }) => {
+  const welcome = page.locator('[role="dialog"][aria-labelledby="welcome-title"]');
+  await page.addLocatorHandler(welcome, async () => {
+    await welcome.getByRole("button", { name: "Přeskočit" }).click();
+    await expect(welcome).toHaveCount(0);
+  });
+});
+
 // Desktop ergonomics: a whole lesson with the keyboard only. Runs after first-usable.spec.ts
 // (same stack), whose admin account it signs in with.
 const DE: Record<string, string> = { ich: "já", heißen: "jmenovat se", wie: "jak", du: "ty" };

@@ -1,5 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
 
+// A fresh profile gets the first-run welcome wizard over the dashboard once its progress loads,
+// which can happen mid-step. Skip it whenever it blocks the flow under test.
+test.beforeEach(async ({ page }) => {
+  const welcome = page.locator('[role="dialog"][aria-labelledby="welcome-title"]');
+  await page.addLocatorHandler(welcome, async () => {
+    await welcome.getByRole("button", { name: "Přeskočit" }).click();
+    await expect(welcome).toHaveCount(0);
+  });
+});
+
 // Plan §6 "první použitelná verze": profile creation -> lesson -> progress survives reload.
 // The first German lesson takes the first four words of the "hallo" scene (data/scenes).
 const DE: Record<string, string> = { ich: "já", heißen: "jmenovat se", wie: "jak", du: "ty" };
