@@ -1145,3 +1145,13 @@ Vlad approves a push.
 **Implemented Solution:** New `GET /api/v1/learning/languages` (`api/learning.py`, `services/learning.language_summaries`, `LanguageSummaryOut`) returns introduced, known and due words for all four languages from one grouped query over the acting profile's own progress. On the dashboard, `LanguagePicker` (`components/AppShell.tsx`) shows "41 slov · 3 k ověření" or "zatím nezačato" under each language (amber when checks are waiting) and now implements the radio-group keyboard pattern (arrow keys move and select, roving tabindex). Other pages keep the compact switcher. Test `test_language_summaries_count_only_own_words`.
 
 **Verification:** `tests/test_learning.py` summaries/progress tests passed; ruff (import order fixed), typecheck, production build, `git diff --check` passed; screenshot shows per-language summaries.
+
+## Global Cycle 6/120 | Page: [/] (Page Cycle 6/15)
+
+**Summary:** open the four daily actions with keys 1-4
+
+**Observed Problem:** On desktop the dashboard had one shortcut (Enter continues today's plan); reaching review, grammar, flashcards or practice needed the mouse or several Tab presses.
+
+**Implemented Solution:** `app/page.tsx`: the quick actions carry `data-hotkey` 1-4 (`aria-keyshortcuts` for assistive tech) and show a key badge on wide screens via `KeyHint`. The dashboard's existing hotkey listener (installed by `TodayPlan`, layout-independent digit codes from `lib/keyboard.ts`) clicks them; a disabled Daily review card (nothing due) is not a link and ignores its key.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; a Playwright run on the dev server pressed 2, 3 and 4 on `/` and landed on `/grammar`, `/words?tab=levels` and `/practice`.

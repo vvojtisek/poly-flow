@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
+import { KeyHint } from "@/components/Kbd";
 import { Panel } from "@/components/Panel";
 import { ProgressCard } from "@/components/ProgressCard";
 import { ProgressionPath } from "@/components/ProgressionPath";
@@ -32,6 +33,7 @@ function QuickAction({
   help,
   highlight = false,
   disabled = false,
+  hotkey,
 }: {
   href: string;
   icon: LucideIcon;
@@ -39,6 +41,7 @@ function QuickAction({
   help: string;
   highlight?: boolean;
   disabled?: boolean;
+  hotkey?: number; // digit key that opens this action on desktop (TodayPlan installs the listener)
 }) {
   if (disabled) {
     // Nothing to do here today: shown for orientation, but not a dead-end link.
@@ -60,7 +63,9 @@ function QuickAction({
     <li>
       <Link
         href={href}
-        className={`flex h-full items-center gap-3 rounded-2xl border p-4 outline-none transition hover:border-brand-500 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-brand-500 ${
+        data-hotkey={hotkey ? String(hotkey) : undefined}
+        aria-keyshortcuts={hotkey ? String(hotkey) : undefined}
+        className={`relative flex h-full items-center gap-3 rounded-2xl border p-4 outline-none transition hover:border-brand-500 hover:shadow-sm focus-visible:ring-2 focus-visible:ring-brand-500 ${
           highlight ? "border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/40" : "border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900"
         }`}
       >
@@ -71,6 +76,11 @@ function QuickAction({
           <span className="font-semibold">{title}</span>
           <span className="text-sm text-slate-600 dark:text-slate-300">{help}</span>
         </span>
+        {hotkey && (
+          <span className="absolute right-2 top-2">
+            <KeyHint k={String(hotkey)} />
+          </span>
+        )}
       </Link>
     </li>
   );
@@ -204,6 +214,7 @@ export default function HomePage() {
             <QuickAction
               href="/check"
               icon={ClipboardCheck}
+              hotkey={1}
               title={t.daily}
               highlight={checkDue}
               disabled={!checkDue}
@@ -222,12 +233,13 @@ export default function HomePage() {
             <QuickAction
               href={grammar?.active_lesson_unit ? `/grammar/${encodeURIComponent(grammar.active_lesson_unit)}` : "/grammar"}
               icon={GraduationCap}
+              hotkey={2}
               title={t.grammar}
               highlight={!!grammar && grammar.due > 0}
               help={grammarHelp(grammar, progress?.cefr_level ?? null)}
             />
-            <QuickAction href="/words?tab=levels" icon={Layers} title={t.flashcards} help={t.flashcardsHelp} />
-            <QuickAction href="/practice" icon={Dumbbell} title={t.practice} help={t.practiceHelp} />
+            <QuickAction href="/words?tab=levels" icon={Layers} hotkey={3} title={t.flashcards} help={t.flashcardsHelp} />
+            <QuickAction href="/practice" icon={Dumbbell} hotkey={4} title={t.practice} help={t.practiceHelp} />
           </ul>
           {language && (pinned.length > 0 || recent.length > 0) && (
             <div className="flex flex-wrap gap-1" aria-label={cs.practice.pinned}>
