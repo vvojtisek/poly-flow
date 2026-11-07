@@ -15,8 +15,8 @@ const day = (iso: string) => new Date(iso + "T12:00:00").toLocaleDateString("cs-
 const TARGET: Record<Recap["suggestion"], string> = {
   check_due: "/check",
   fix_mistakes: "/words?tab=all",
-  new_lesson: "/lesson",
-  start_small: "/lesson",
+  new_lesson: "/lesson/vocabulary",
+  start_small: "/lesson/vocabulary",
   keep_going: "/practice",
 };
 

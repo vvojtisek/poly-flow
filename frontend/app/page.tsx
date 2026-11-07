@@ -197,7 +197,7 @@ export default function HomePage() {
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
             <button
               type="button"
-              onClick={() => router.push("/lesson")}
+              onClick={() => router.push("/lesson/vocabulary")}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-lg font-bold text-brand-600 shadow-sm transition hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
             >
               <Play className="size-5" aria-hidden />

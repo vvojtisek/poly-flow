@@ -135,7 +135,7 @@ export function CommandPalette({ me }: { me: Me }) {
     const nav = cs.palette.groups.go;
     const list: Command[] = [
       { id: "home", label: cs.palette.home, group: nav, icon: Home, keywords: ["prehled", "dashboard", "domu"], run: go("/") },
-      { id: "lesson", label: cs.lesson.start, group: nav, icon: BookOpen, keywords: ["lekce", "ucit"], run: go("/lesson") },
+      { id: "lesson", label: cs.lesson.start, group: nav, icon: BookOpen, keywords: ["lekce", "ucit"], run: go("/lesson/vocabulary") },
       { id: "check", label: cs.check.start, group: nav, icon: ClipboardCheck, keywords: ["overeni", "opakovani", "test"], run: go("/check") },
       { id: "grammar", label: cs.grammar.title, group: nav, icon: GraduationCap, keywords: ["gramatika", "pravidla"], run: go("/grammar") },
       { id: "stories", label: cs.stories.link, group: nav, icon: BookOpenText, keywords: ["cteni", "pribeh"], run: go("/stories") },

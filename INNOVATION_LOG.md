@@ -1165,3 +1165,13 @@ Vlad approves a push.
 **Implemented Solution:** `components/TodayPlan.tsx`: a "Změnit cíl" toggle under the ring reveals 5/10/15/20/30-minute choices (radio group); picking one saves `daily_goal_minutes` through the existing partial profile PATCH, updates the signed-in profile in auth state and re-reads today's plan. Failures show an inline alert. The `grammar_check` step now goes to `/grammar/check`; lesson step pluralization fixed in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright on a 390 px viewport changed the goal to 20 and back to 10 minutes and the plan text updated each time.
+
+## Global Cycle 8/120 | Page: [/] (Page Cycle 8/15)
+
+**Summary:** send "Start/continue lesson" straight into the vocabulary lesson
+
+**Observed Problem:** The dashboard's main button ("Začít lekci" / "Pokračovat v lekci" for an open session), today's plan lesson step, the welcome wizard's first lesson, the command palette's "Začít lekci" and the weekly coach's lesson suggestion all went to `/lesson`, which is the lesson overview with a grammar recommendation. Resuming a half-finished vocabulary lesson took an extra, misleading click.
+
+**Implemented Solution:** These five entry points now open `/lesson/vocabulary` (the scene-first LessonRunner, which resumes an active session): `app/page.tsx`, `components/TodayPlan.tsx`, `components/Welcome.tsx`, `components/CommandPalette.tsx`, `components/WeeklyRecap.tsx`. The bottom tab "Lekce" still opens the `/lesson` overview.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.

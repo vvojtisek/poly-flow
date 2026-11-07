@@ -16,7 +16,7 @@ const t = cs.today;
 const STEP: Record<Plan["steps"][number]["kind"], { icon: LucideIcon; href: string }> = {
   check: { icon: ClipboardCheck, href: "/check" },
   grammar_check: { icon: GraduationCap, href: "/grammar/check" },
-  lesson: { icon: BookOpen, href: "/lesson" },
+  lesson: { icon: BookOpen, href: "/lesson/vocabulary" },
   reading: { icon: BookOpenText, href: "/stories" },
 };
 
