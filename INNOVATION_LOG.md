@@ -1725,3 +1725,13 @@ Vlad approves a push.
 **Implemented Solution:** Today's detail now offers 'Ověřit slova (N)' (/check) and 'Ověřit gramatiku (N)' (/grammar/check), and its heading reads 'Co tě čeká dnes'. For a later day, the link opens the dictionary ordered by next check (/words?tab=all&sort=review, cycle 49), and a note says those items can wait. Every word chip links to its word card, and topics use client-side Links.
 
 **Verification:** Playwright, real data (no words due before local midnight): 8 Nov shows 'Otevřít slovník -> /words?tab=all&sort=review', chips link to /words?word=…, and the later note is shown. With a stub that makes today due: 'Ověřit slova (41) -> /check', 'Ověřit gramatiku (1) -> /grammar/check', and no later note. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 64/120 | Page: [/insights] (Page Cycle 4/15)
+
+**Summary:** show what the knowledge funnel means and which words are fading
+
+**Observed Problem:** The funnel showed five bare numbers with bars. It did not say how many studied words still wait for their first check-based recognition, or how many recognised words have gone past the 30-day decay window and are due for review, the product's core spaced-repetition rule. It also counted child-filtered words that the forecast already hid.
+
+**Implemented Solution:** The funnel query applies the child content filter and adds 'fading': recognised words whose last error-free check is older than POLICY.decay_after. Rows show count and share of studied words. Rows that match a dictionary filter (all studied, mastered) link to it; passive and active overlap the status ladder and stay plain. Two action lines follow: 'N probraných slov ještě čeká…' links to status=learning, and 'N slov přes 30 dní bez ověření' links to due words. A help line says the counts come from checks only, with recognition and recall measured separately. An empty state covers a profile with no studied words.
+
+**Verification:** tests/test_insights.py: a passive word with last_error_free_at 31 days ago counts as fading=1, and the child profile's funnel no longer counts the violence-flagged word (introduced 0); 2 passed. Playwright on real data: '41 probraných slov ještě čeká…', shares '0 · 0 %', links /words?tab=all, …status=mastered and …status=learning. No console errors. typecheck, next build, ruff pass.

@@ -781,7 +781,7 @@ export interface Insights {
     word_items: { id: string; lemma: string; gender: string | null; translation: string }[];
     grammar_items: { id: string; title: string; level: string }[];
   }[];
-  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
+  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number; fading: number };
 }
 
 export interface ActivityDay {

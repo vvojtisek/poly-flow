@@ -67,6 +67,7 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
                     introduced_at=now - timedelta(days=4),
                     next_review_at=now + timedelta(days=2),
                     passive_known=True,
+                    last_error_free_at=now - timedelta(days=31),  # past the decay window
                     policy_version="v4",
                 ),
                 UserWordProgress(
@@ -110,6 +111,7 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
     assert out["forecast"][0]["word_items"][0]["lemma"] == "und"
     assert out["forecast"][2]["word_items"][0]["lemma"] == "der"
     assert out["funnel"]["introduced"] == 2 and out["funnel"]["passive"] == 1
+    assert out["funnel"]["fading"] == 1
     # Another language sees none of it.
     other = (await client.get("/api/v1/insights?language=fr")).json()
     assert other["active_days"] == 0 and other["funnel"]["introduced"] == 0
@@ -156,6 +158,7 @@ async def test_review_forecast_does_not_reveal_child_filtered_words(db, client, 
     )
     assert sum(day["words"] for day in result["forecast"]) == 0
     assert result["mistakes"] == []  # the child's miss on a filtered word is not shown
+    assert result["funnel"]["introduced"] == 0
     activity = await client.get(f"/api/v1/insights/day?language=de&date={clock.now.date()}")
     assert activity.status_code == 200
     assert all(word["id"] != str(item_id) for word in activity.json()["words"])

@@ -12,6 +12,7 @@ from sqlalchemy import Date, cast, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.enums import Language, ProgressState
+from app.domain.learning_policy import POLICY
 from app.models import (
     GrammarAttempt,
     GrammarUnit,
@@ -187,8 +188,11 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
         if d in forecast:
             forecast[d]["grammar"].append({"id": unit_id, "title": title, "level": level})
 
-    # Knowledge funnel.
-    introduced, passive, active, known, mastered = (
+    # Knowledge funnel, with the same child filter as the forecast. "Fading" are words once
+    # recognised whose last error-free check is past the decay window: they are due for review
+    # (the evidence stays; nothing is taken away).
+    fade_before = now - POLICY.decay_after
+    introduced, passive, active, known, mastered, fading = (
         await db.execute(
             select(
                 func.count().filter(p.introduced_at.is_not(None)),
@@ -196,10 +200,15 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
                 func.count().filter(p.active_known.is_(True)),
                 func.count().filter(p.passive_known.is_(True), p.active_known.is_(True)),
                 func.count().filter(p.state == ProgressState.MASTERED),
+                func.count().filter(
+                    p.passive_known.is_(True),
+                    p.last_error_free_at.is_not(None),
+                    p.last_error_free_at < fade_before,
+                ),
             )
             .select_from(p)
             .join(li, li.id == p.lexicon_item_id)
-            .where(p.user_id == user.id, li.language == language)
+            .where(p.user_id == user.id, li.language == language, _suitable(user))
         )
     ).one()
 
@@ -251,6 +260,7 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             "active": active,
             "known": known,
             "mastered": mastered,
+            "fading": fading,
         },
     }
 

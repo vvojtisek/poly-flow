@@ -13,6 +13,7 @@ import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 
 const t = cs.insights;
+const STEP_ROOT = "/words?tab=all";
 const dayFmt = (iso: string) => new Date(iso + "T12:00:00").toLocaleDateString("cs-CZ", { day: "numeric", month: "numeric" });
 
 function level(n: number, max: number): string {
@@ -296,13 +297,15 @@ export default function InsightsPage() {
 
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const funnel = data?.funnel;
-  const steps: [string, number][] = funnel
+  // Rows that match a dictionary filter link to it; "passive" and "active" overlap the status
+  // ladder (a known word is both), so they stay plain numbers.
+  const steps: [string, number, string | null][] = funnel
     ? [
-        [t.funnel.introduced, funnel.introduced],
-        [t.funnel.passive, funnel.passive],
-        [t.funnel.active, funnel.active],
-        [t.funnel.known, funnel.known],
-        [t.funnel.mastered, funnel.mastered],
+        [t.funnel.introduced, funnel.introduced, STEP_ROOT],
+        [t.funnel.passive, funnel.passive, null],
+        [t.funnel.active, funnel.active, null],
+        [t.funnel.known, funnel.known, null],
+        [t.funnel.mastered, funnel.mastered, "/words?tab=all&status=mastered"],
       ]
     : [];
   const mistakeMax = Math.max(1, ...(data?.mistakes.map((m) => m.count) ?? [1]));
@@ -349,19 +352,51 @@ export default function InsightsPage() {
               <p className="mt-1 text-xs text-slate-500">{t.accuracyHelp}</p>
             </Panel>
             <Panel title={t.funnelTitle} icon={Filter}>
-              <ul className="flex flex-col gap-2">
-                {steps.map(([label, n]) => (
-                  <li key={label} className="flex flex-col gap-1">
-                    <div className="flex justify-between text-xs">
-                      <span>{label}</span>
-                      <span className="tabular-nums text-slate-500">{n.toLocaleString("cs-CZ")}</span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                      <div className="h-full rounded-full bg-emerald-500" style={{ width: `${steps[0]![1] ? (n / steps[0]![1]) * 100 : 0}%` }} />
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {funnel && funnel.introduced === 0 ? (
+                <p className="text-sm text-slate-500">{t.funnelEmpty}</p>
+              ) : (
+                <ul className="flex flex-col gap-2">
+                  {steps.map(([label, n, href]) => {
+                    const row = (
+                      <>
+                        <div className="flex justify-between text-xs">
+                          <span>{label}</span>
+                          <span className="tabular-nums text-slate-500">{t.funnelShare(n, href === STEP_ROOT ? 0 : steps[0]![1])}</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                          <div className="h-full rounded-full bg-emerald-500" style={{ width: `${steps[0]![1] ? (n / steps[0]![1]) * 100 : 0}%` }} />
+                        </div>
+                      </>
+                    );
+                    return (
+                      <li key={label}>
+                        {href ? (
+                          <Link href={href} className="flex flex-col gap-1 rounded-lg p-1 -m-1 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            {row}
+                          </Link>
+                        ) : (
+                          <div className="flex flex-col gap-1">{row}</div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {funnel && funnel.introduced > funnel.passive && (
+                <p className="mt-3 text-xs text-slate-600 dark:text-slate-300">
+                  <Link href="/words?tab=all&status=learning" className="hover:underline">
+                    {t.funnelWaiting(funnel.introduced - funnel.passive)}
+                  </Link>
+                </p>
+              )}
+              {funnel && funnel.fading > 0 && (
+                <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">
+                  <Link href="/words?tab=all&due=1" className="hover:underline">
+                    {t.funnelFading(funnel.fading)}
+                  </Link>
+                </p>
+              )}
+              <p className="mt-2 text-xs text-slate-500">{t.funnelHelp}</p>
             </Panel>
             <Panel title={t.mistakes} icon={TriangleAlert}>
               {data.mistakes.length === 0 ? (

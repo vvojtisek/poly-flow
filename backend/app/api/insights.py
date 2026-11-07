@@ -76,6 +76,7 @@ class FunnelOut(BaseModel):
     active: int
     known: int
     mastered: int
+    fading: int = 0  # recognised once, but no error-free check for longer than the decay window
 
 
 class InsightsOut(BaseModel):
