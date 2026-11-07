@@ -20,8 +20,9 @@ const ERROR_ROUTE: Record<string, (language: Language) => string> = {
   capitalisation: () => "/dictation",
   diacritics: () => "/dictation",
   spelling: () => "/dictation",
-  meaning: () => "/lesson",
-  word_choice: () => "/lesson",
+  // Missed meanings come back first in the next vocabulary lesson (remediation), so go there.
+  meaning: () => "/lesson/vocabulary",
+  word_choice: () => "/lesson/vocabulary",
 };
 const TINT = [
   "from-sky-500/15 to-sky-500/0",
@@ -96,7 +97,16 @@ export default function PracticePage() {
   const recommendations = (weakSpots?.tags ?? [])
     .filter(([tag]) => !!ERROR_ROUTE[tag])
     .slice(0, 3)
-    .map(([tag, count]) => ({ tag, count, href: ERROR_ROUTE[tag]!(me.acting.active_language) }));
+    .map(([tag, count]) => ({
+      tag,
+      count,
+      href: ERROR_ROUTE[tag]!(me.acting.active_language),
+      // The words and topics behind this kind of mistake, so the advice is concrete.
+      examples: [
+        ...(weakSpots?.words ?? []).filter((w) => w.tags.includes(tag)).map((w) => (me.acting.active_language === "de" && w.gender ? `${w.gender} ${w.lemma}` : w.lemma)),
+        ...(weakSpots?.units ?? []).filter((u) => u.tags.includes(tag)).map((u) => u.title),
+      ].slice(0, 3),
+    }));
 
   return (
     <AppShell me={me}>
@@ -120,14 +130,23 @@ export default function PracticePage() {
               <>
                 <p className="text-sm text-slate-600 dark:text-slate-300">{t.recommendHelp}</p>
                 <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {recommendations.map(({ tag, count, href }) => (
+                  {recommendations.map(({ tag, count, href, examples }) => (
                     <li key={tag}>
-                      <Link href={href} className="flex h-full items-center justify-between gap-3 rounded-2xl border border-amber-300/60 bg-white p-3 hover:border-amber-500 dark:border-amber-900 dark:bg-slate-900">
-                        <span className="flex items-start gap-2">
-                          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600" aria-hidden />
-                          <span className="font-semibold">{cs.feedback.errors[tag] ?? tag}</span>
+                      <Link href={href} className="flex h-full flex-col gap-1 rounded-2xl border border-amber-300/60 bg-white p-3 hover:border-amber-500 dark:border-amber-900 dark:bg-slate-900">
+                        <span className="flex items-start justify-between gap-3">
+                          <span className="flex items-start gap-2">
+                            <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600" aria-hidden />
+                            <span className="font-semibold">{cs.feedback.errors[tag] ?? tag}</span>
+                          </span>
+                          <span className="shrink-0 text-xs text-slate-500">{t.recommendCount(count)}</span>
                         </span>
-                        <span className="shrink-0 text-xs text-slate-500">{t.recommendCount(count)}</span>
+                        {examples.length > 0 && (
+                          <span className="pl-6 text-xs text-slate-600 dark:text-slate-300">
+                            {t.recommendExamples}{" "}
+                            <span lang={me.acting.active_language}>{examples.join(", ")}</span>
+                          </span>
+                        )}
+                        <span className="pl-6 text-xs font-semibold text-amber-700 dark:text-amber-300">{t.recommendGo[tag] ?? t.recommendGoDefault}</span>
                       </Link>
                     </li>
                   ))}

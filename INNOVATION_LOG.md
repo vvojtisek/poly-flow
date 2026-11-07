@@ -1395,3 +1395,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx` remembers the `studied` unit for the page visit (separately from the 4-second highlight) and opens whichever disclosure contains it (upcoming, completed or another level's panel) via `defaultOpen`; the group then stays open after the highlight fades. Measured API timings showed no backend bottleneck on this page (tree, progress and levels each answer in about 20 ms locally), so this consolidation cycle went to the edge case instead.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a2-dative` (an A2 topic while the focus level is A1): the A2 panel opened, the card got focus and the highlight.
+
+## Global Cycle 31/120 | Page: [/practice] (Page Cycle 1/15)
+
+**Summary:** concrete mistake recommendations: example words and the right next step
+
+**Observed Problem:** The "Zaměř se na to, co teď dělá potíže" panel showed only an error type and a count ("Význam slova 13×"), and meaning or word-choice mistakes linked to the `/lesson` overview, where nothing practises those words.
+
+**Implemented Solution:** `app/practice/page.tsx`: each recommendation lists up to three of the learner's own words or grammar topics with that mistake type (from the weak-spots API, German nouns with their article) and names the action ("Procvičit rody", "Procvičit v diktátu", "Zopakovat v příští lekci"…). Meaning and word-choice mistakes now go to `/lesson/vocabulary`, whose next lesson re-practises recently missed words. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot shows "Význam slova · Například: der Hund, lesen, nein · Zopakovat v příští lekci".
