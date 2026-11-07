@@ -133,7 +133,23 @@ CC-BY-SA-4.0); review list: `reviews/fr-0101-5000-review.md` in the project file
 `tests/test_lexicon_romance.py` checks ranks 1-5000, unique keys and glosses, provenance, noun
 gender, complete A1-B2 bands, flags and clean examples.
 
-### Producing the full lists (not done yet)
+### `it.0101-5000.csv` (Italian ranks 101-5000, revision `it5000-draft-v1`)
+
+4,900 words that take Italian from the core 100 to full B2 (5,000), built the same way as the
+French list: wordfreq's Italian frequencies (CC-BY-SA-4.0), grouped into lemmas with simplemma
+(MIT), summed per lemma and walked from the top, skipping core-100 lemmas, with every lemma
+checked by hand, so the order is approximate (within a few hundred ranks). Skipped: personal and
+place names, abbreviations, brand names, English words not established in Italian, spelling
+variants (`oramai`, `famigliare`), lemmatiser artefacts and drug names. Nouns carry `m`/`f`.
+Profanity (`cazzo`, `merda`, `stronzo`, `vaffanculo`...) and sexual words are adult opt-in only;
+violent words (`guerra`, `uccidere`, `bomba`, `assassino`...) are flagged `violence`. As in the
+English list, plain insults such as `cretino` and `imbecille` and neutral military words such as
+`esercito` are not flagged. Unflagged examples use no flagged word. About 76% of examples contain
+the lemma verbatim. **Not reviewed by a native speaker** (`source` = `claude-drafted`, licence
+CC-BY-SA-4.0); review list: `reviews/it-0101-5000-review.md` in the project files. Checked by the
+same `tests/test_lexicon_romance.py`.
+
+### Producing the full lists (pipeline notes)
 
 Target per language: 5,000 lemmas for the curriculum (full B2), plus an optional extension (6,000+)
 used only for voluntary, recognition-focused practice.

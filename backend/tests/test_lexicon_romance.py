@@ -10,9 +10,10 @@ from app.domain.enums import CefrLevel
 from app.domain.level_exam import BY_LEVEL, band_complete
 
 DATA = Path(__file__).resolve().parents[1] / "data" / "lexicon"
-LANGS = ["fr"]
+LANGS = ["fr", "it"]
 PROFANITY = {
     "fr": ("merde", "putain", "con", "connard", "salope", "foutre", "chier", "guerre", "tuer"),
+    "it": ("merda", "cazzo", "culo", "stronzo", "vaffanculo", "puttana", "guerra", "uccidere"),
 }
 
 
