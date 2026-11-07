@@ -1070,3 +1070,38 @@ their main entry point.
 - Verification: all 4 recap API tests passed; frontend typecheck and production build passed;
   Compose config passed; rebuilt Compose stack reports `/readyz` ready and serves the frontend
   with HTTP 200 on port 3001.
+
+---
+
+# Innovation log: 120-cycle page-by-page loop
+
+Started 2026-11-07 at Vlad's request, on branch `claude/project-thread-can89h` from `main` at
+`0b8e6e6` (1.0.0-alpha.13). Fifteen cycles per page, in this order: `/`, `/grammar`, `/practice`,
+`/words`, `/insights`, `/lesson`, `/shadowing`, `/stories/library`. Page cycles 1-5 fix flows and
+wire data, 6-10 add learning ergonomics, 11-15 consolidate and harden. Commits stay local until
+Vlad approves a push.
+
+## Baseline
+
+- Working tree clean at `0b8e6e6`. Node 22, Next.js 16.3, Python 3.13 via `uv`, Postgres 16 and
+  Redis 7 running locally.
+- Backend (`backend/`): `uv run pytest` 872 passed, 1 skipped (with `POLYFLOW_TEST_DATABASE_URL`);
+  `ruff check` and `ruff format --check` clean.
+- Frontend (`frontend/`): `npm run typecheck` and `npm run build` clean, 36 routes.
+- Local run: `uvicorn app.main:app --port 8000`, `python -m app.workers`, `next dev --port 3001`
+  (the dev server proxies `/api` to port 8000).
+- Route audit: `/`, `/grammar`, `/practice`, `/words`, `/insights`, `/lesson` and `/shadowing`
+  exist. `/stories/library` does not exist (only `/stories`); its 15 cycles build it inside the
+  existing stories design.
+- Pre-existing defect found while rendering `/`: React warns about duplicate `extension_passive`
+  keys in the progression path (two milestones share that key).
+
+## Global Cycle 1/120 | Page: [/] (Page Cycle 1/15)
+
+**Summary:** show voluntary vocabulary bands once, as rank ranges
+
+**Observed Problem:** The dashboard progression path listed "Pasivní slovní zásoba – dobrovolné" twice (6 000+ and 7 000+) because two backend milestones share the key `extension_passive`, and React logged duplicate-key errors on every render of `/`.
+
+**Implemented Solution:** `components/ProgressionPath.tsx` now merges consecutive voluntary milestones with the same key into one row that shows the rank range it covers (5 001–7 000, 7 001–8 000) and, once the learner has proven words in that range, how many. Required milestone rows are keyed by rank. New `cs.progression.inBand` string in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff and `git diff --check` passed; rendering `/` in Chromium shows no console errors (previously 2 duplicate-key errors).

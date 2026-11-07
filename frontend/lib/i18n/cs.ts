@@ -1,4 +1,6 @@
 // cs-CZ UI strings. All user-facing copy goes through this table.
+const fmt = (n: number) => new Intl.NumberFormat("cs-CZ").format(n);
+
 export const cs = {
   appName: "PolyFlow",
   appInstall: {
@@ -71,6 +73,7 @@ export const cs = {
       c1_vocabulary: "C1 – slovní zásoba do 8 000 slov",
     } as Record<string, string>,
     voluntaryBadge: "dobrovolné",
+    inBand: (known: number, size: number) => `${fmt(known)} / ${fmt(size)}`,
     beyondB2:
       "Po B2 (5 000 slov) navazuje dobrovolná slovní zásoba C1 do 8 000 slov. Jde o pásmo slovní zásoby v této aplikaci, nikoli o certifikaci CEFR. Další rozvoj zahrnuje rozhovory s lidmi, knihy, filmy a kulturu.",
     cefrDisclaimer:

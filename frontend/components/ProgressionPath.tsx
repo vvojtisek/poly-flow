@@ -24,7 +24,16 @@ export function ProgressionPath({ progress }: { progress: ProgressOverview | nul
   if (!data) return null;
 
   const required = data.milestones.filter((m) => !m.voluntary);
-  const voluntary = data.milestones.filter((m) => m.voluntary);
+  // Consecutive voluntary milestones can share a key (6000 and 7000 are both passive extension):
+  // show each key once, as the rank range it spans, so nothing repeats and React keys stay unique.
+  const voluntary: { key: string; from: number; to: number }[] = [];
+  let lastRank = required.at(-1)?.rank ?? 0;
+  for (const m of data.milestones.filter((x) => x.voluntary)) {
+    const prev = voluntary.at(-1);
+    if (prev && prev.key === m.key) prev.to = m.rank;
+    else voluntary.push({ key: m.key, from: lastRank + 1, to: m.rank });
+    lastRank = m.rank;
+  }
   const nextIndex = progress ? required.findIndex((m) => progress.known < m.rank) : -1;
   const nextMilestone = nextIndex >= 0 ? required[nextIndex]! : null;
   const previousRank = nextIndex > 0 ? required[nextIndex - 1]!.rank : 0;
@@ -39,7 +48,7 @@ export function ProgressionPath({ progress }: { progress: ProgressOverview | nul
           const complete = !!progress && progress.known >= m.rank;
           const current = i === nextIndex;
           return (
-          <li key={m.key} className={`flex items-center justify-between gap-2 rounded-xl px-2 py-1.5 text-sm ${current ? "bg-brand-500/10 font-semibold" : ""}`}>
+          <li key={m.rank} className={`flex items-center justify-between gap-2 rounded-xl px-2 py-1.5 text-sm ${current ? "bg-brand-500/10 font-semibold" : ""}`}>
             <span className="flex items-center gap-2">{complete ? <CheckCircle2 className="size-4 text-emerald-600" aria-hidden /> : current ? <Target className="size-4 text-brand-600" aria-hidden /> : <Circle className="size-4 text-slate-300" aria-hidden />}{cs.progression.milestones[m.key] ?? m.key}</span>
             <span className="flex items-baseline gap-2 text-right tabular-nums text-slate-500">
               {complete && <span className="text-xs text-emerald-700 dark:text-emerald-300">{cs.progression.completed}</span>}
@@ -67,12 +76,20 @@ export function ProgressionPath({ progress }: { progress: ProgressOverview | nul
 
       {voluntary.length > 0 && (
         <div className="rounded-xl border border-dashed border-slate-300 p-3 dark:border-slate-700">
-          {voluntary.map((m) => (
-            <p key={m.key} className="flex items-baseline justify-between gap-2 text-sm text-slate-600 dark:text-slate-300">
-              <span>{cs.progression.milestones[m.key] ?? m.key}</span>
-              <span className="tabular-nums text-slate-500">{fmt.format(m.rank)}+</span>
-            </p>
-          ))}
+          {voluntary.map((m) => {
+            const inBand = progress ? Math.min(m.to, Math.max(0, progress.known)) - (m.from - 1) : 0;
+            return (
+              <p key={m.from} className="flex items-baseline justify-between gap-2 text-sm text-slate-600 dark:text-slate-300">
+                <span>{cs.progression.milestones[m.key] ?? m.key}</span>
+                <span className="text-right tabular-nums text-slate-500">
+                  {fmt.format(m.from)}–{fmt.format(m.to)}
+                  {progress && inBand > 0 && (
+                    <span className="ml-2 text-xs">{cs.progression.inBand(inBand, m.to - m.from + 1)}</span>
+                  )}
+                </span>
+              </p>
+            );
+          })}
           <p className="mt-2 flex gap-2 text-xs text-slate-600 dark:text-slate-400">
             <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
             <span>{cs.progression.beyondB2}</span>
