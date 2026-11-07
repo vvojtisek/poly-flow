@@ -1463,6 +1463,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-shelf",
+   "level": "A2",
+   "title": "The Shelf and the Screws",
+   "title_cs": "Police a zbylé šroubky",
+   "lines": [
+    {
+     "text": "Tom bought a new bookshelf. The box said: Easy assembly, 20 minutes.",
+     "cs": "Tomáš koupil novou polici. Na krabici stálo: Snadná montáž, 20 minut."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I can do this on my own. I don't need the instructions.",
+     "cs": "Tohle zvládnu sám. Návod nepotřebuju."
+    },
+    {
+     "text": "After three hours, the shelf was finally standing. There were four screws on the floor.",
+     "cs": "Po třech hodinách police konečně stála. Na podlaze ležely čtyři šroubky."
+    },
+    {
+     "speaker": "Lea",
+     "text": "Tom, those screws belong in the shelf!",
+     "cs": "Tomáši, ty šroubky patří do police!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "No. The manufacturer sent a few extra. That's normal.",
+     "cs": "Ne. Výrobce poslal pár navíc, to je normální."
+    },
+    {
+     "text": "Tom put all his books on the shelf. It held.",
+     "cs": "Tomáš dal na polici všechny své knihy. Police to vydržela."
+    },
+    {
+     "text": "In the evening he sat on the sofa and looked at the shelf happily.",
+     "cs": "Večer sedl na pohovku a spokojeně se na ni díval."
+    },
+    {
+     "text": "Then there was a quiet crack.",
+     "cs": "Pak se ozvalo tiché zapraskání."
+    },
+    {
+     "text": "The shelf slowly leaned over, and the books fell onto the carpet.",
+     "cs": "Police se pomalu naklonila a knihy spadly na koberec."
+    },
+    {
+     "speaker": "Tom",
+     "text": "At least now I know where the four screws are missing.",
+     "cs": "Aspoň už vím, kde ty čtyři šroubky chybí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "instructions",
+     "cs": "návod"
+    },
+    {
+     "word": "manufacturer",
+     "cs": "výrobce"
+    },
+    {
+     "word": "leaned",
+     "cs": "naklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Tom do with the instructions?",
+     "options": [
+      "He doesn't use them.",
+      "He reads them carefully.",
+      "He gives them to Lea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What happens in the evening?",
+     "options": [
+      "The shelf falls over.",
+      "Tom goes to sleep.",
+      "Lea takes the shelf apart."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

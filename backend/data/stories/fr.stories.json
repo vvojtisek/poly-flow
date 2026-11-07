@@ -1463,6 +1463,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-shelf",
+   "level": "A2",
+   "title": "L'étagère et les vis",
+   "title_cs": "Police a zbylé šroubky",
+   "lines": [
+    {
+     "text": "Thomas a acheté une nouvelle étagère. Sur la boîte, il y avait : Montage facile, 20 minutes.",
+     "cs": "Tomáš koupil novou polici. Na krabici stálo: Snadná montáž, 20 minut."
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Je peux le faire tout seul. Je n'ai pas besoin de notice.",
+     "cs": "Tohle zvládnu sám. Návod nepotřebuju."
+    },
+    {
+     "text": "Après trois heures, l'étagère était enfin debout. Il y avait quatre vis par terre.",
+     "cs": "Po třech hodinách police konečně stála. Na podlaze ležely čtyři šroubky."
+    },
+    {
+     "speaker": "Léa",
+     "text": "Thomas, ces vis sont pour l'étagère !",
+     "cs": "Tomáši, ty šroubky patří do police!"
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Non. Le fabricant en a envoyé quelques-unes en plus. C'est normal.",
+     "cs": "Ne. Výrobce poslal pár navíc, to je normální."
+    },
+    {
+     "text": "Thomas a mis tous ses livres sur l'étagère. Elle a tenu.",
+     "cs": "Tomáš dal na polici všechny své knihy. Police to vydržela."
+    },
+    {
+     "text": "Le soir, il s'est assis sur le canapé et il a regardé l'étagère avec satisfaction.",
+     "cs": "Večer sedl na pohovku a spokojeně se na ni díval."
+    },
+    {
+     "text": "Puis il y a eu un petit craquement.",
+     "cs": "Pak se ozvalo tiché zapraskání."
+    },
+    {
+     "text": "L'étagère s'est lentement penchée et les livres sont tombés sur le tapis.",
+     "cs": "Police se pomalu naklonila a knihy spadly na koberec."
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Au moins, je sais maintenant où manquent les quatre vis.",
+     "cs": "Aspoň už vím, kde ty čtyři šroubky chybí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "notice",
+     "cs": "návod"
+    },
+    {
+     "word": "fabricant",
+     "cs": "výrobce"
+    },
+    {
+     "word": "penchée",
+     "cs": "nakloněná"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Que fait Thomas de la notice ?",
+     "options": [
+      "Il ne l'utilise pas.",
+      "Il la lit avec attention.",
+      "Il la donne à Léa."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que se passe-t-il le soir ?",
+     "options": [
+      "L'étagère tombe.",
+      "Thomas va dormir.",
+      "Léa démonte l'étagère."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

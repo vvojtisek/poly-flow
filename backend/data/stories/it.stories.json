@@ -1463,6 +1463,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-shelf",
+   "level": "A2",
+   "title": "La libreria e le viti",
+   "title_cs": "Police a zbylé šroubky",
+   "lines": [
+    {
+     "text": "Tommaso ha comprato una nuova libreria. Sulla scatola c'era scritto: Montaggio facile, 20 minuti.",
+     "cs": "Tomáš koupil novou polici. Na krabici stálo: Snadná montáž, 20 minut."
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "Ce la faccio da solo. Non ho bisogno delle istruzioni.",
+     "cs": "Tohle zvládnu sám. Návod nepotřebuju."
+    },
+    {
+     "text": "Dopo tre ore la libreria era finalmente in piedi. Sul pavimento c'erano quattro viti.",
+     "cs": "Po třech hodinách police konečně stála. Na podlaze ležely čtyři šroubky."
+    },
+    {
+     "speaker": "Lea",
+     "text": "Tommaso, queste viti sono per la libreria!",
+     "cs": "Tomáši, ty šroubky patří do police!"
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "No. Il produttore ne ha mandate alcune in più. È normale.",
+     "cs": "Ne. Výrobce poslal pár navíc, to je normální."
+    },
+    {
+     "text": "Tommaso ha messo tutti i suoi libri sulla libreria. Ha retto.",
+     "cs": "Tomáš dal na polici všechny své knihy. Police to vydržela."
+    },
+    {
+     "text": "La sera si è seduto sul divano e ha guardato la libreria soddisfatto.",
+     "cs": "Večer sedl na pohovku a spokojeně se na ni díval."
+    },
+    {
+     "text": "Poi si è sentito un leggero scricchiolio.",
+     "cs": "Pak se ozvalo tiché zapraskání."
+    },
+    {
+     "text": "La libreria si è inclinata lentamente e i libri sono caduti sul tappeto.",
+     "cs": "Police se pomalu naklonila a knihy spadly na koberec."
+    },
+    {
+     "speaker": "Tommaso",
+     "text": "Almeno adesso so dove mancano le quattro viti.",
+     "cs": "Aspoň už vím, kde ty čtyři šroubky chybí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "istruzioni",
+     "cs": "návod"
+    },
+    {
+     "word": "produttore",
+     "cs": "výrobce"
+    },
+    {
+     "word": "inclinata",
+     "cs": "naklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa fa Tommaso con le istruzioni?",
+     "options": [
+      "Non le usa.",
+      "Le legge con attenzione.",
+      "Le dà a Lea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa succede la sera?",
+     "options": [
+      "La libreria cade.",
+      "Tommaso va a dormire.",
+      "Lea smonta la libreria."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1463,6 +1463,92 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-08-shelf",
+   "level": "A2",
+   "title": "Das Regal und die Schrauben",
+   "title_cs": "Police a zbylé šroubky",
+   "lines": [
+    {
+     "text": "Thomas hat ein neues Regal gekauft. Auf dem Karton stand: Einfacher Aufbau, 20 Minuten.",
+     "cs": "Tomáš koupil novou polici. Na krabici stálo: Snadná montáž, 20 minut."
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Das schaffe ich allein. Ich brauche keine Anleitung.",
+     "cs": "Tohle zvládnu sám. Návod nepotřebuju."
+    },
+    {
+     "text": "Nach drei Stunden stand das Regal endlich. Auf dem Boden lagen vier Schrauben.",
+     "cs": "Po třech hodinách police konečně stála. Na podlaze ležely čtyři šroubky."
+    },
+    {
+     "speaker": "Lea",
+     "text": "Thomas, diese Schrauben gehören ins Regal!",
+     "cs": "Tomáši, ty šroubky patří do police!"
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Nein. Der Hersteller hat ein paar extra geschickt. Das ist normal.",
+     "cs": "Ne. Výrobce poslal pár navíc, to je normální."
+    },
+    {
+     "text": "Thomas hat alle seine Bücher ins Regal gestellt. Das Regal hat gehalten.",
+     "cs": "Tomáš dal na polici všechny své knihy. Police to vydržela."
+    },
+    {
+     "text": "Am Abend hat er auf dem Sofa gesessen und zufrieden auf das Regal geschaut.",
+     "cs": "Večer sedl na pohovku a spokojeně se na ni díval."
+    },
+    {
+     "text": "Dann hat es leise geknackt.",
+     "cs": "Pak se ozvalo tiché zapraskání."
+    },
+    {
+     "text": "Das Regal hat sich langsam geneigt, und die Bücher sind auf den Teppich gefallen.",
+     "cs": "Police se pomalu naklonila a knihy spadly na koberec."
+    },
+    {
+     "speaker": "Thomas",
+     "text": "Wenigstens weiß ich jetzt, wo die vier Schrauben fehlen.",
+     "cs": "Aspoň už vím, kde ty čtyři šroubky chybí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Anleitung",
+     "cs": "návod"
+    },
+    {
+     "word": "Hersteller",
+     "cs": "výrobce"
+    },
+    {
+     "word": "geneigt",
+     "cs": "naklonila se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was macht Thomas mit der Anleitung?",
+     "options": [
+      "Er benutzt sie nicht.",
+      "Er liest sie genau.",
+      "Er gibt sie Lea."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was passiert am Abend?",
+     "options": [
+      "Das Regal fällt um.",
+      "Thomas geht schlafen.",
+      "Lea baut das Regal ab."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
