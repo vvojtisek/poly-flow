@@ -1286,6 +1286,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-06-fish-story",
+   "level": "A2",
+   "title": "Le poisson énorme",
+   "title_cs": "Obrovská ryba",
+   "lines": [
+    {
+     "text": "L'oncle Fritz est allé pêcher ce week-end. Au dîner, il en a parlé.",
+     "cs": "Strýc Fritz byl o víkendu na rybách. U večeře o tom vyprávěl."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "J'ai attrapé un poisson énorme !",
+     "cs": "Chytil jsem obrovskou rybu!"
+    },
+    {
+     "speaker": "Enfant",
+     "text": "Il était grand comment ?",
+     "cs": "Jak byla velká?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Deux mètres ! Il a presque renversé mon bateau.",
+     "cs": "Dva metry! Skoro mi převrhla loď."
+    },
+    {
+     "speaker": "Enfant",
+     "text": "Tu as pris une photo ?",
+     "cs": "Vyfotil jsi ji?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Bien sûr. Tiens, sur mon téléphone.",
+     "cs": "Samozřejmě. Tady, v mobilu."
+    },
+    {
+     "text": "Tout le monde a regardé la photo. On voyait un très petit poisson dans la main de Fritz.",
+     "cs": "Všichni se podívali na fotku. Byla na ní velmi malá rybka na Fritzově ruce."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "C'est l'appareil photo. Il rend tout plus petit.",
+     "cs": "To dělá ten fotoaparát. Všechno zmenší."
+    },
+    {
+     "speaker": "Enfant",
+     "text": "Alors ton bateau est devenu plus petit aussi. Je ne vois qu'une baignoire.",
+     "cs": "Tak se zmenšila i tvoje loď. Vidím jen vanu."
+    },
+    {
+     "text": "Personne n'a rien dit.",
+     "cs": "Nikdo nic neřekl."
+    },
+    {
+     "speaker": "Mamie",
+     "text": "Mange ta soupe, Fritz.",
+     "cs": "Jez polévku, Fritzi."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "énorme",
+     "cs": "obrovský"
+    },
+    {
+     "word": "renversé",
+     "cs": "převrhl"
+    },
+    {
+     "word": "baignoire",
+     "cs": "vana"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Comment est le poisson sur la photo ?",
+     "options": [
+      "Très petit",
+      "Deux mètres",
+      "Moyen"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que voit l'enfant à la place d'un bateau ?",
+     "options": [
+      "Une baignoire",
+      "Un lac",
+      "Une voiture"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

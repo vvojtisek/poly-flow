@@ -1286,6 +1286,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-06-fish-story",
+   "level": "A2",
+   "title": "Der riesige Fisch",
+   "title_cs": "Obrovská ryba",
+   "lines": [
+    {
+     "text": "Onkel Fritz war am Wochenende angeln. Beim Abendessen hat er davon erzählt.",
+     "cs": "Strýc Fritz byl o víkendu na rybách. U večeře o tom vyprávěl."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Ich habe einen riesigen Fisch gefangen!",
+     "cs": "Chytil jsem obrovskou rybu!"
+    },
+    {
+     "speaker": "Kind",
+     "text": "Wie groß war er?",
+     "cs": "Jak byla velká?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Zwei Meter! Er hat fast mein Boot umgeworfen.",
+     "cs": "Dva metry! Skoro mi převrhla loď."
+    },
+    {
+     "speaker": "Kind",
+     "text": "Hast du ein Foto gemacht?",
+     "cs": "Vyfotil jsi ji?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Natürlich. Hier, auf meinem Handy.",
+     "cs": "Samozřejmě. Tady, v mobilu."
+    },
+    {
+     "text": "Alle haben das Foto angeschaut. Man hat einen sehr kleinen Fisch in Fritz' Hand gesehen.",
+     "cs": "Všichni se podívali na fotku. Byla na ní velmi malá rybka na Fritzově ruce."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Das macht die Kamera. Sie macht alles kleiner.",
+     "cs": "To dělá ten fotoaparát. Všechno zmenší."
+    },
+    {
+     "speaker": "Kind",
+     "text": "Dann ist dein Boot auch kleiner geworden. Ich sehe nur eine Badewanne.",
+     "cs": "Tak se zmenšila i tvoje loď. Vidím jen vanu."
+    },
+    {
+     "text": "Niemand hat etwas gesagt.",
+     "cs": "Nikdo nic neřekl."
+    },
+    {
+     "speaker": "Oma",
+     "text": "Iss deine Suppe, Fritz.",
+     "cs": "Jez polévku, Fritzi."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "riesigen",
+     "cs": "obrovský"
+    },
+    {
+     "word": "umgeworfen",
+     "cs": "převrhl"
+    },
+    {
+     "word": "Badewanne",
+     "cs": "vana"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Wie groß war der Fisch auf dem Foto?",
+     "options": [
+      "Sehr klein",
+      "Zwei Meter",
+      "Mittelgroß"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was sieht das Kind auf dem Foto statt eines Bootes?",
+     "options": [
+      "Eine Badewanne",
+      "Einen See",
+      "Ein Auto"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

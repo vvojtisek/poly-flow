@@ -1286,6 +1286,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-06-fish-story",
+   "level": "A2",
+   "title": "The Huge Fish",
+   "title_cs": "Obrovská ryba",
+   "lines": [
+    {
+     "text": "Uncle Fritz went fishing at the weekend. At dinner he talked about it.",
+     "cs": "Strýc Fritz byl o víkendu na rybách. U večeře o tom vyprávěl."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "I caught a huge fish!",
+     "cs": "Chytil jsem obrovskou rybu!"
+    },
+    {
+     "speaker": "Child",
+     "text": "How big was it?",
+     "cs": "Jak byla velká?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Two metres! It nearly tipped over my boat.",
+     "cs": "Dva metry! Skoro mi převrhla loď."
+    },
+    {
+     "speaker": "Child",
+     "text": "Did you take a photo?",
+     "cs": "Vyfotil jsi ji?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Of course. Here, on my phone.",
+     "cs": "Samozřejmě. Tady, v mobilu."
+    },
+    {
+     "text": "Everybody looked at the photo. It showed a very small fish in Fritz's hand.",
+     "cs": "Všichni se podívali na fotku. Byla na ní velmi malá rybka na Fritzově ruce."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "That's the camera. It makes everything smaller.",
+     "cs": "To dělá ten fotoaparát. Všechno zmenší."
+    },
+    {
+     "speaker": "Child",
+     "text": "Then your boat got smaller too. I can only see a bathtub.",
+     "cs": "Tak se zmenšila i tvoje loď. Vidím jen vanu."
+    },
+    {
+     "text": "Nobody said anything.",
+     "cs": "Nikdo nic neřekl."
+    },
+    {
+     "speaker": "Granny",
+     "text": "Eat your soup, Fritz.",
+     "cs": "Jez polévku, Fritzi."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "huge",
+     "cs": "obrovský"
+    },
+    {
+     "word": "tipped",
+     "cs": "převrhl"
+    },
+    {
+     "word": "bathtub",
+     "cs": "vana"
+    }
+   ],
+   "questions": [
+    {
+     "question": "How big is the fish in the photo?",
+     "options": [
+      "Very small",
+      "Two metres",
+      "Medium"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What does the child see instead of a boat?",
+     "options": [
+      "A bathtub",
+      "A lake",
+      "A car"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

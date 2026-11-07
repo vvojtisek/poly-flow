@@ -1286,6 +1286,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-06-fish-story",
+   "level": "A2",
+   "title": "Il pesce enorme",
+   "title_cs": "Obrovská ryba",
+   "lines": [
+    {
+     "text": "Lo zio Fritz è andato a pescare nel fine settimana. A cena ne ha parlato.",
+     "cs": "Strýc Fritz byl o víkendu na rybách. U večeře o tom vyprávěl."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Ho preso un pesce enorme!",
+     "cs": "Chytil jsem obrovskou rybu!"
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Quanto era grande?",
+     "cs": "Jak byla velká?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Due metri! Ha quasi rovesciato la mia barca.",
+     "cs": "Dva metry! Skoro mi převrhla loď."
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Hai fatto una foto?",
+     "cs": "Vyfotil jsi ji?"
+    },
+    {
+     "speaker": "Fritz",
+     "text": "Certo. Ecco, sul mio telefono.",
+     "cs": "Samozřejmě. Tady, v mobilu."
+    },
+    {
+     "text": "Tutti hanno guardato la foto. Si vedeva un pesce molto piccolo nella mano di Fritz.",
+     "cs": "Všichni se podívali na fotku. Byla na ní velmi malá rybka na Fritzově ruce."
+    },
+    {
+     "speaker": "Fritz",
+     "text": "È la fotocamera. Rimpicciolisce tutto.",
+     "cs": "To dělá ten fotoaparát. Všechno zmenší."
+    },
+    {
+     "speaker": "Bambino",
+     "text": "Allora anche la tua barca è diventata piccola. Io vedo solo una vasca da bagno.",
+     "cs": "Tak se zmenšila i tvoje loď. Vidím jen vanu."
+    },
+    {
+     "text": "Nessuno ha detto niente.",
+     "cs": "Nikdo nic neřekl."
+    },
+    {
+     "speaker": "Nonna",
+     "text": "Mangia la zuppa, Fritz.",
+     "cs": "Jez polévku, Fritzi."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "enorme",
+     "cs": "obrovský"
+    },
+    {
+     "word": "rovesciato",
+     "cs": "převrhl"
+    },
+    {
+     "word": "vasca",
+     "cs": "vana"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Com'è il pesce nella foto?",
+     "options": [
+      "Molto piccolo",
+      "Due metri",
+      "Medio"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa vede il bambino al posto di una barca?",
+     "options": [
+      "Una vasca da bagno",
+      "Un lago",
+      "Una macchina"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
