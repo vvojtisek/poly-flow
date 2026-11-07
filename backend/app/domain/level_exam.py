@@ -63,6 +63,11 @@ LEVELS: tuple[ExamLevel, ...] = _levels()
 BY_LEVEL: dict[CefrLevel, ExamLevel] = {e.level: e for e in LEVELS}
 
 
+def prerequisite_rank_ceiling(level: CefrLevel) -> int:
+    """Highest vocabulary rank covered when a level exam is passed."""
+    return BY_LEVEL[level].high
+
+
 def previous(level: CefrLevel) -> CefrLevel | None:
     i = [e.level for e in LEVELS].index(level)
     return LEVELS[i - 1].level if i else None
