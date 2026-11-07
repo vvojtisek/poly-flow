@@ -10,7 +10,7 @@ import { Kbd, KeyHint } from "@/components/Kbd";
 import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
-import { Button, Notice } from "@/components/ui";
+import { Button, Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { addWordsToCollection, type DeckScope, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { useHotkeys } from "@/lib/keyboard";
@@ -140,16 +140,18 @@ function Article({ gender, lemma }: { gender: string | null; lemma: string }) {
 function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; onTopic: (scope: WordScope) => void }) {
   const [w, setW] = useState<WordDetail | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let cancelled = false;
     setW(null);
+    setFailed(false); // a failure belongs to one word; browsing on must not keep showing it
     getWord(id)
       .then((d) => !cancelled && setW(d))
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
-  }, [id]);
+  }, [id, attempt]);
   return (
     <aside
       aria-label={t.detail}
@@ -161,9 +163,9 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
           <X className="size-5" aria-hidden />
         </button>
       </div>
-      {failed && <Notice tone="error">{cs.common.error}</Notice>}
+      {failed && <RetryNotice text={t.detailFailed} onRetry={() => setAttempt((n) => n + 1)} />}
       {!w ? (
-        !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>
+        !failed && <Skeleton lines={5} className="mt-2" />
       ) : (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
@@ -282,6 +284,9 @@ export default function WordsPage() {
   const [data, setData] = useState<WordList | null>(null);
   const [more, setMore] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [listAttempt, setListAttempt] = useState(0);
+  const [groupsAttempt, setGroupsAttempt] = useState(0);
+  const [moreFailed, setMoreFailed] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [cursor, setCursor] = useState(0);
   const [collections, setCollections] = useState<WordCollection[]>([]);
@@ -360,7 +365,13 @@ export default function WordsPage() {
       clearTimeout(timer);
       ctrl.abort();
     };
-  }, [language, q, status, due, scope, sort, kind, me?.acting.id]);
+  }, [language, q, status, due, scope, sort, kind, me?.acting.id, listAttempt]);
+
+  // Another language or profile: never show the previous one's words while the new list loads.
+  useEffect(() => {
+    setData(null);
+    setFailed(false);
+  }, [language, me?.acting.id]);
 
   useEffect(() => {
     if (!language) return;
@@ -388,7 +399,7 @@ export default function WordsPage() {
       })
       .catch((e) => e?.name !== "AbortError" && setGroupsFailed(true));
     return () => ctrl.abort();
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, groupsAttempt]);
 
   useEffect(() => {
     if (!language) return;
@@ -401,9 +412,12 @@ export default function WordsPage() {
   const loadMore = useCallback(async () => {
     if (!language || !data) return;
     setMore(true);
+    setMoreFailed(false);
     try {
       const next = await listWords(language, { q, status, due, offset: data.items.length, limit: PAGE, scope, sort, kind });
       setData({ ...data, items: [...data.items, ...next.items] });
+    } catch {
+      setMoreFailed(true);
     } finally {
       setMore(false);
     }
@@ -523,8 +537,14 @@ export default function WordsPage() {
 
             {tab !== "all" && (
               <div id={`words-panel-${tab}`} role="tabpanel" aria-labelledby={`words-tab-${tab}`} className="flex flex-col gap-3">
-                {groupsFailed && <Notice tone="error">{t.groupsFailed}</Notice>}
-                {!groups && !groupsFailed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
+                {groupsFailed && <RetryNotice text={t.groupsFailed} onRetry={() => setGroupsAttempt((n) => n + 1)} />}
+                {!groups && !groupsFailed && (
+                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    {[0, 1, 2].map((i) => (
+                      <Skeleton key={i} lines={3} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900" />
+                    ))}
+                  </div>
+                )}
                 {groups && tab === "levels" && (
                   <>
                     <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -725,7 +745,8 @@ export default function WordsPage() {
                     </button>
                   ))}
                 </div>
-                {failed && <Notice tone="error">{cs.common.error}</Notice>}
+                {failed && <RetryNotice text={t.listFailed} onRetry={() => setListAttempt((n) => n + 1)} />}
+                {!data && !failed && <Skeleton lines={6} className="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900" />}
                 {selected.length > 0 && (
                   <section aria-label={t.addSelected} className="flex flex-wrap items-center gap-2 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-3">
                     <span className="mr-auto text-sm font-semibold">{t.selected(selected.length)}</span>
@@ -803,9 +824,10 @@ export default function WordsPage() {
                     </li>
                   ))}
                 </ul>
-                {data && data.items.length < data.total && (
+                {moreFailed && <RetryNotice text={t.moreFailed} onRetry={() => void loadMore()} />}
+                {data && data.items.length < data.total && !moreFailed && (
                   <Button variant="secondary" disabled={more} onClick={() => void loadMore()}>
-                    {t.more(data.total - data.items.length)}
+                    {more ? cs.common.loading : t.more(data.total - data.items.length)}
                   </Button>
                 )}
               </div>

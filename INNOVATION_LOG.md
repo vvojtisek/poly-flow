@@ -1645,3 +1645,13 @@ Vlad approves a push.
 **Implemented Solution:** A collapsed 'Co znamenají stavy a barvy' disclosure under the status chips explains each state in ladder order with its pill colour. Each explanation matches the backend rules: seen is exposure without a lesson; learning is a lesson or placement word waiting for a check; passive is repeated correct recognition in checks on different days; known adds recall; mastered is confirmed again later. It also explains the due clock, including the 30-day review rule, and, for German, French and Italian, the article colours (der/die/das or m/f).
 
 **Verification:** Copy checked against services/words._status, learning.mark_seen, placement re-queueing and LearningPolicy (decay_after 30 days). Playwright at 390px: the legend opens, has no horizontal overflow, and the screenshot was inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 56/120 | Page: [/words] (Page Cycle 11/15)
+
+**Summary:** add skeletons and retry for the list, groups, word card and load more
+
+**Observed Problem:** The page's failure and loading states were dead ends. A failed list, group or card load showed a plain error with no way to retry except reloading the page, and loading was the bare text 'Načítám…'. A failed 'Načíst další' threw an unhandled promise rejection and left the button looking idle. Once one card failed, the error stuck to every word opened next, because the inspector never reset its failure flag. Switching language briefly showed the previous language's words.
+
+**Implemented Solution:** The list, the level/topic groups and the word card each show a RetryNotice with their own message and refetch on retry, through an attempt counter in the effect deps. Loading shows shape-matching skeletons: list rows, three group cards and card lines. 'Načíst další' catches failures, shows a retry notice and shows 'Načítám…' while busy. The inspector clears its failure on every new word. A language or profile switch clears the old list before the new one arrives.
+
+**Verification:** Playwright with request interception: a failed groups request shows the alert, and retry gives 4 group cards; a failed list shows the alert, and retry gives 41 rows; a failed card shows the alert, and retry shows 'der'. Load-more failure was not exercised: local data has 41 words, under the 60-row page, so the button never appears. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
