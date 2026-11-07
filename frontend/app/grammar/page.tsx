@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Disclosure } from "@/components/Disclosure";
 import { Button, Notice } from "@/components/ui";
-import { getGrammarTree, getProgress, type GrammarTree, type GrammarUnitSummary, type UnitState } from "@/lib/api";
+import { getGrammarSearchIndex, getGrammarTree, getProgress, type GrammarTree, type GrammarUnitSummary, type UnitState } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs, relativeFuture } from "@/lib/i18n/cs";
 
@@ -154,6 +154,20 @@ export default function GrammarPage() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
   const [dueOnly, setDueOnly] = useState(false);
+  // Explanation text per unit, fetched the first time the learner searches (about 30 kB).
+  const [index, setIndex] = useState<Map<string, string> | null>(null);
+  const wantIndex = !!query.trim();
+  useEffect(() => {
+    if (!language || !wantIndex || index) return;
+    let live = true;
+    getGrammarSearchIndex(language)
+      .then((rows) => live && setIndex(new Map(rows.map((r) => [r.id, fold(r.text)]))))
+      .catch(() => undefined); // search falls back to titles and summaries
+    return () => {
+      live = false;
+    };
+  }, [language, wantIndex, index]);
+  useEffect(() => setIndex(null), [language]);
 
   useEffect(() => {
     if (!language) return;
@@ -230,7 +244,7 @@ export default function GrammarPage() {
   const filtering = !!query.trim() || !!statusFilter || dueOnly;
   const foldedQuery = fold(query.trim());
   const matches = (u: Unit) =>
-    (!foldedQuery || fold(`${u.title} ${u.summary}`).includes(foldedQuery)) && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due);
+    (!foldedQuery || fold(`${u.title} ${u.summary} ${u.objective}`).includes(foldedQuery) || !!index?.get(u.id)?.includes(foldedQuery)) && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due);
   const filteredLevels = CEFR_LEVELS.map((level) => ({ level, units: unitsOf(level).filter(matches) })).filter(
     (level) => level.units.length > 0 || !filtering,
   );

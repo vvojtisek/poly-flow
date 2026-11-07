@@ -135,3 +135,8 @@ class GrammarAnswerOut(BaseModel):
     explanation: str | None
     unit_id: str
     unit_title: str
+
+
+class SearchEntryOut(BaseModel):
+    id: str
+    text: str  # plain explanation text (notes, tables, examples) for client-side search

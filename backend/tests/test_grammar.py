@@ -219,6 +219,17 @@ async def test_tree_lists_units_in_order_with_a_recommendation(db, client):
     assert me
 
 
+async def test_search_index_has_plain_explanation_text(db, client):
+    await seed()
+    await adult(client)
+    r = await client.get("/api/v1/grammar/search-index?language=de")
+    assert r.status_code == 200, r.text
+    rows = r.json()
+    assert [x["id"] for x in rows] == ["t-a", "t-b"]
+    assert all("H" in x["text"] and "T" in x["text"] and "x" in x["text"] for x in rows)
+    assert all("**" not in x["text"] for x in rows)
+
+
 async def test_exercise_never_leaks_answers(db, client):
     await seed()
     me = await adult(client)

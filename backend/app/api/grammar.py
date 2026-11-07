@@ -2,6 +2,7 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import DB, Auth
@@ -26,6 +27,7 @@ from app.schemas.grammar import (
     GrammarSessionOut,
     GrammarStartOut,
     LevelOut,
+    SearchEntryOut,
     TreeOut,
     UnitOut,
     UnitSummaryOut,
@@ -147,6 +149,34 @@ async def get_tree(
         active_lesson_unit=lesson.unit_id if lesson else None,
         active_check_session_id=check.id if check else None,
     )
+
+
+def _search_text(unit: GrammarUnit) -> str:
+    """Plain text of a unit's explanation: headings, notes, table cells and examples."""
+    parts: list[str] = [unit.objective]
+    for note in unit.notes or []:
+        parts += [note.get("heading") or "", note.get("text") or ""]
+        for row in note.get("table") or []:
+            parts += [str(cell) for cell in row]
+    for ex in unit.examples or []:
+        parts += [ex.get("text") or "", ex.get("cs") or ""]
+    return " ".join(p for p in parts if p).replace("**", "")
+
+
+@router.get("/search-index", response_model=list[SearchEntryOut])
+async def search_index(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> list[SearchEntryOut]:
+    """Explanation text per active unit, loaded on demand for full-text topic search."""
+    lang = language or auth.acting.active_language
+    units = (
+        await db.execute(
+            select(GrammarUnit)
+            .where(GrammarUnit.language == lang, GrammarUnit.active.is_(True))
+            .order_by(GrammarUnit.position)
+        )
+    ).scalars()
+    return [SearchEntryOut(id=u.id, text=_search_text(u)) for u in units]
 
 
 @router.get("/units/{unit_id}", response_model=UnitOut)

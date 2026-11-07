@@ -517,6 +517,8 @@ export interface GrammarResult {
 
 export const getGrammarTree = (language: Language) =>
   api<GrammarTree>(`/api/v1/grammar?language=${language}`, { cache: "no-store" });
+export const getGrammarSearchIndex = (language: Language) =>
+  api<{ id: string; text: string }[]>(`/api/v1/grammar/search-index?language=${language}`);
 export const getGrammarUnit = (unitId: string) =>
   api<GrammarUnit>(`/api/v1/grammar/units/${encodeURIComponent(unitId)}`, { cache: "no-store" });
 export const startGrammarLesson = (unitId: string) =>

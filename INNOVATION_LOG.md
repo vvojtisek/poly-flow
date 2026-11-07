@@ -1275,3 +1275,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx` reads `q`, `status` and `due` from the query string on load and keeps them in sync with `history.replaceState` (no extra history entries while typing). The dashboard's Grammar action (`app/page.tsx`) links to `/grammar?due=1` when topics are due and no lesson is open.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?status=studied` ("Zobrazeno 2 z 37 témat") and typing a search updated the URL to `?status=studied&q=sein`.
+
+## Global Cycle 19/120 | Page: [/grammar] (Page Cycle 4/15)
+
+**Summary:** search inside explanations, tables and examples
+
+**Observed Problem:** The topic search promised "Hledat téma nebo vysvětlení" but matched only titles and summaries: searching "vykání" or a form like "bist" found nothing, although the explanation of sein covers both.
+
+**Implemented Solution:** New `GET /api/v1/grammar/search-index` (`api/grammar.py`, `SearchEntryOut`) returns each active unit's objective, note headings and text, table cells and examples as plain text (markdown markers stripped). `app/grammar/page.tsx` fetches it lazily the first time the learner types a query (about 30 kB for German), folds diacritics like the existing search, and also matches the objective; titles and summaries keep working if the index fails. Test `test_search_index_has_plain_explanation_text`.
+
+**Verification:** `tests/test_grammar.py` search/tree tests passed; ruff, typecheck, production build, `git diff --check` passed; Playwright search "vykání" now shows 1 of 37 topics (was 0).
