@@ -4911,6 +4911,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-20-bird-photographer",
+   "level": "B1",
+   "title": "Le photographe patient",
+   "title_cs": "Trpělivý fotograf",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a attendu dans la forêt toute la matinée pour photographier un oiseau rare.",
+     "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je dois rester parfaitement immobile. Le moindre mouvement lui fera peur.",
+     "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Pourquoi as-tu tant de miettes sur ton chapeau ?",
+     "cs": "A proč máš na klobouku tolik drobků?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "C'est ma stratégie. L'oiseau s'approchera et la photo sera parfaite.",
+     "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Certainement. Regarde seulement où tu as posé ton appareil.",
+     "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
+    },
+    {
+     "speaker": null,
+     "text": "Sur la photo d'Eva, l'oiseau était perché sur l'appareil pendant que Tom observait patiemment une branche vide.",
+     "cs": "Na fotografii od Evy seděl pták na fotoaparátu a Tom dál trpělivě sledoval prázdnou větev."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "miettes",
+     "cs": "drobky"
+    },
+    {
+     "word": "stratégie",
+     "cs": "strategie"
+    },
+    {
+     "word": "patiemment",
+     "cs": "trpělivě"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec seděl pták?",
+     "options": [
+      "Na fotoaparátu.",
+      "Na větvi.",
+      "Na Evě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo pořídil fotografii?",
+     "options": [
+      "Eva.",
+      "Tom.",
+      "Nikdo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -4911,6 +4911,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-20-bird-photographer",
+   "level": "B1",
+   "title": "Il fotografo paziente",
+   "title_cs": "Trpělivý fotograf",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha aspettato nel bosco tutta la mattina per fotografare un uccello raro.",
+     "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Devo restare completamente immobile. Ogni movimento lo farà scappare.",
+     "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perché hai tante briciole sul cappello?",
+     "cs": "A proč máš na klobouku tolik drobků?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "È la mia strategia. L'uccello si avvicinerà e la foto sarà perfetta.",
+     "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Certamente. Guarda soltanto dove hai posato la macchina fotografica.",
+     "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
+    },
+    {
+     "speaker": null,
+     "text": "Nella foto di Eva, l'uccello era sulla macchina mentre Tom osservava pazientemente un ramo vuoto.",
+     "cs": "Na fotografii od Evy seděl pták na fotoaparátu a Tom dál trpělivě sledoval prázdnou větev."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "briciole",
+     "cs": "drobky"
+    },
+    {
+     "word": "strategia",
+     "cs": "strategie"
+    },
+    {
+     "word": "pazientemente",
+     "cs": "trpělivě"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec seděl pták?",
+     "options": [
+      "Na fotoaparátu.",
+      "Na větvi.",
+      "Na Evě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo pořídil fotografii?",
+     "options": [
+      "Eva.",
+      "Tom.",
+      "Nikdo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

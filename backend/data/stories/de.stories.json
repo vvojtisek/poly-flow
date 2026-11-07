@@ -4911,6 +4911,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-20-bird-photographer",
+   "level": "B1",
+   "title": "Der geduldige Fotograf",
+   "title_cs": "Trpělivý fotograf",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom wartete den ganzen Morgen im Wald, um einen seltenen Vogel zu fotografieren.",
+     "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich muss ganz still bleiben. Jede Bewegung wird ihn verscheuchen.",
+     "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Warum hast du so viele Krümel auf deinem Hut?",
+     "cs": "A proč máš na klobouku tolik drobků?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das ist meine Strategie. Der Vogel kommt näher, und das Bild wird perfekt.",
+     "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Bestimmt. Schau nur, wo du deine Kamera hingelegt hast.",
+     "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
+    },
+    {
+     "speaker": null,
+     "text": "Auf Evas Foto saß der Vogel auf der Kamera, während Tom geduldig einen leeren Ast beobachtete.",
+     "cs": "Na fotografii od Evy seděl pták na fotoaparátu a Tom dál trpělivě sledoval prázdnou větev."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "verscheuchen",
+     "cs": "vyplašit"
+    },
+    {
+     "word": "Krümel",
+     "cs": "drobky"
+    },
+    {
+     "word": "Strategie",
+     "cs": "strategie"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec seděl pták?",
+     "options": [
+      "Na fotoaparátu.",
+      "Na větvi.",
+      "Na Evě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo pořídil fotografii?",
+     "options": [
+      "Eva.",
+      "Tom.",
+      "Nikdo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

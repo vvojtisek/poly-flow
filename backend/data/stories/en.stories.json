@@ -4911,6 +4911,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-20-bird-photographer",
+   "level": "B1",
+   "title": "The Patient Photographer",
+   "title_cs": "Trpělivý fotograf",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom waited in the woods all morning to photograph a rare bird.",
+     "cs": "Tom čekal celé ráno v lese, aby vyfotil vzácného ptáka."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I must stay completely still. Any movement will frighten it away.",
+     "cs": "Musím zůstat úplně klidný. Každý pohyb ho vyplaší."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Why have you got so many crumbs on your hat?",
+     "cs": "A proč máš na klobouku tolik drobků?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's my strategy. The bird will come closer and the picture will be perfect.",
+     "cs": "To je moje strategie. Pták přiletí blíž a snímek bude dokonalý."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Certainly. Just look where you put your camera.",
+     "cs": "To jistě. Jen se podívej, kam sis položil fotoaparát."
+    },
+    {
+     "speaker": null,
+     "text": "In Eva's photograph, the bird sat on the camera while Tom patiently watched an empty branch.",
+     "cs": "Na fotografii od Evy seděl pták na fotoaparátu a Tom dál trpělivě sledoval prázdnou větev."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "crumbs",
+     "cs": "drobky"
+    },
+    {
+     "word": "strategy",
+     "cs": "strategie"
+    },
+    {
+     "word": "patiently",
+     "cs": "trpělivě"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kde nakonec seděl pták?",
+     "options": [
+      "Na fotoaparátu.",
+      "Na větvi.",
+      "Na Evě."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Kdo pořídil fotografii?",
+     "options": [
+      "Eva.",
+      "Tom.",
+      "Nikdo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
