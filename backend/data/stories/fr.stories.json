@@ -2109,6 +2109,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-05-marathon",
+   "level": "B1",
+   "title": "Le marathon et la balayeuse",
+   "title_cs": "Maraton s úklidem",
+   "lines": [
+    {
+     "text": "Dominik avait promis à ses amis de courir un marathon pour une bonne cause. Pour chaque kilomètre, ils voulaient donner dix euros.",
+     "cs": "Dominik slíbil přátelům, že poběží maraton pro dobrou věc. Za každý kilometr mu chtěli darovat deset eur."
+    },
+    {
+     "text": "Pendant trois mois, il a acheté des chaussures de course, des montres de sport et des barres énergétiques. Il a seulement oublié de courir.",
+     "cs": "Tři měsíce kupoval běžecké boty, sportovní hodinky a energetické tyčinky. Jen běhat zapomněl."
+    },
+    {
+     "text": "Le jour du marathon, il se tenait fièrement sur la ligne de départ.",
+     "cs": "V den maratonu stál hrdě na startovní čáře."
+    },
+    {
+     "text": "Après dix kilomètres, il ne faisait plus que marcher. Après trente, il était assis sur un banc et mangeait une barre.",
+     "cs": "Po deseti kilometrech už jen šel. Po třiceti seděl na lavičce a jedl tyčinku."
+    },
+    {
+     "text": "Vers le soir, il a entendu un grondement derrière lui. C'était la balayeuse, qui nettoyait déjà la rue.",
+     "cs": "K večeru uslyšel za sebou hučení. Byl to zametací vůz, který už čistil ulici."
+    },
+    {
+     "speaker": "Conducteur",
+     "text": "Vous voulez monter ? La course est finie depuis trois heures.",
+     "cs": "Chcete svézt? Závod skončil před třemi hodinami."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "Non merci. Je vais finir ce marathon.",
+     "cs": "Ne, děkuji. Ten maraton doběhnu do konce."
+    },
+    {
+     "text": "Il a couru les deux derniers kilomètres entre des barrières qu'on démontait juste derrière lui.",
+     "cs": "Poslední dva kilometry běžel mezi zábranami, které za ním hned odklízeli."
+    },
+    {
+     "text": "À l'arrivée, il ne restait que le speaker. Il a pris le micro : Et voici notre dernier coureur, avec son propre service de nettoyage !",
+     "cs": "V cíli čekal už jen hlasatel. Vzal mikrofon: A tady je náš poslední běžec, s vlastní úklidovou službou!"
+    },
+    {
+     "text": "Les gens ont applaudi comme pour une victoire.",
+     "cs": "Lidé tleskali jako při vítězství."
+    },
+    {
+     "speaker": "Un ami",
+     "text": "Dominik, tu as fait quarante-deux kilomètres. Nous donnons quatre cent vingt euros.",
+     "cs": "Dominiku, uběhl jsi dvaačtyřicet kilometrů. Darujeme čtyři sta dvacet eur."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "Vous savez ce qui était le mieux ? La rue derrière moi était toujours propre.",
+     "cs": "Víte, co bylo nejlepší? Silnice za mnou byla pořád čistá."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fièrement",
+     "cs": "hrdě"
+    },
+    {
+     "word": "balayeuse",
+     "cs": "zametací vůz"
+    },
+    {
+     "word": "barrières",
+     "cs": "zábrany"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Comment Dominik se prépare-t-il au marathon ?",
+     "options": [
+      "Il achète beaucoup d'équipement mais ne s'entraîne pas.",
+      "Il court dix kilomètres par jour.",
+      "Il ne s'inscrit pas."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qui accompagne Dominik jusqu'à l'arrivée ?",
+     "options": [
+      "La balayeuse",
+      "Ses amis",
+      "Un cycliste"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

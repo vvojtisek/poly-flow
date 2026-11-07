@@ -2109,6 +2109,100 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-05-marathon",
+   "level": "B1",
+   "title": "The Marathon and the Street Sweeper",
+   "title_cs": "Maraton s úklidem",
+   "lines": [
+    {
+     "text": "Dominik had promised his friends to run a marathon for charity. For every kilometre, they wanted to donate ten euros.",
+     "cs": "Dominik slíbil přátelům, že poběží maraton pro dobrou věc. Za každý kilometr mu chtěli darovat deset eur."
+    },
+    {
+     "text": "For three months, he bought running shoes, sports watches and energy bars. He only forgot to run.",
+     "cs": "Tři měsíce kupoval běžecké boty, sportovní hodinky a energetické tyčinky. Jen běhat zapomněl."
+    },
+    {
+     "text": "On the day of the marathon, he stood proudly on the starting line.",
+     "cs": "V den maratonu stál hrdě na startovní čáře."
+    },
+    {
+     "text": "After ten kilometres, he was only walking. After thirty, he was sitting on a bench eating an energy bar.",
+     "cs": "Po deseti kilometrech už jen šel. Po třiceti seděl na lavičce a jedl tyčinku."
+    },
+    {
+     "text": "Towards evening, he heard a rumbling behind him. It was the street sweeper, already cleaning the road.",
+     "cs": "K večeru uslyšel za sebou hučení. Byl to zametací vůz, který už čistil ulici."
+    },
+    {
+     "speaker": "Driver",
+     "text": "Do you want a lift? The race ended three hours ago.",
+     "cs": "Chcete svézt? Závod skončil před třemi hodinami."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "No, thank you. I'm going to finish this marathon.",
+     "cs": "Ne, děkuji. Ten maraton doběhnu do konce."
+    },
+    {
+     "text": "He ran the last two kilometres between barriers that were being taken down right behind him.",
+     "cs": "Poslední dva kilometry běžel mezi zábranami, které za ním hned odklízeli."
+    },
+    {
+     "text": "At the finish line, only the announcer was left. He picked up the microphone: And here comes our last runner, with his own cleaning service!",
+     "cs": "V cíli čekal už jen hlasatel. Vzal mikrofon: A tady je náš poslední běžec, s vlastní úklidovou službou!"
+    },
+    {
+     "text": "The crowd applauded as if it were a victory.",
+     "cs": "Lidé tleskali jako při vítězství."
+    },
+    {
+     "speaker": "Friend",
+     "text": "Dominik, you ran forty-two kilometres. We're donating four hundred and twenty euros.",
+     "cs": "Dominiku, uběhl jsi dvaačtyřicet kilometrů. Darujeme čtyři sta dvacet eur."
+    },
+    {
+     "speaker": "Dominik",
+     "text": "Do you know what the best part was? The road behind me was always clean.",
+     "cs": "Víte, co bylo nejlepší? Silnice za mnou byla pořád čistá."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "donate",
+     "cs": "darovat"
+    },
+    {
+     "word": "sweeper",
+     "cs": "zametací vůz"
+    },
+    {
+     "word": "barriers",
+     "cs": "zábrany"
+    }
+   ],
+   "questions": [
+    {
+     "question": "How does Dominik prepare for the marathon?",
+     "options": [
+      "He buys lots of gear but doesn't train.",
+      "He runs ten kilometres every day.",
+      "He doesn't sign up."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Who accompanies Dominik to the finish?",
+     "options": [
+      "The street sweeper",
+      "His friends",
+      "A cyclist"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
