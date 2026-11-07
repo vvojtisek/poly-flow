@@ -2085,3 +2085,13 @@ Vlad approves a push.
 **Implemented Solution:** The toggle (H or the button) now cycles through three levels. Celý text shows the line. Počáteční písmena shows each word's first letter plus underscores for its length, keeping punctuation and handling Unicode letters (ß, accents). Bez textu removes the line from the DOM and says to repeat by ear. The Czech meaning stays visible at every level, so the meaning cue remains while the form fades. The completion notes now suggest a pass with less support.
 
 **Verification:** s99.js on Hallo! Ich heiße Anna. Wie heißt du?: level 0 shows the full text. Level 1 gives 'H____! I__ h____ A___. W__ h____ d_?' (ß counted as one letter). Level 2 gives the ear-only note and no target text. Level 3 is back to the full text. The button label follows each level, and the Czech line stays visible throughout. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 100/120 | Page: [/shadowing] (Page Cycle 10/15)
+
+**Summary:** run echo rounds continuously through a dialogue
+
+**Observed Problem:** Even with the echo round, a learner had to press A again on every line, and N between lines. Working through a dialogue meant pressing a key every 5-10 seconds, which breaks the flow of speaking. It also cannot be done hands-free with the phone set down.
+
+**Implemented Solution:** A checkbox 'Po kole rovnou další věta (až do konce)' chains rounds. When a round's compare step ends, the page moves to the next line (respecting the chosen role) and starts that line's round 500 ms after it becomes current. The pending start is keyed to the target line index and re-armed if the line's model envelope arrives meanwhile, so a round never plays the previous line's audio. The run stops at the last target line. Esc, or moving manually during a round, ends it through the run token.
+
+**Verification:** s100.js (fake mic, stubbed audio, role Tom, chain on), one click: rounds on line 2 (0.1-10.1 s), line 4 (10.7-20.7 s) and line 6 (21.4-31.3 s), then stop. The count goes to 'nahráno 3 z 3', the completion note appears, and there is no fourth round. An earlier version stalled after the first advance (a timer cleared by runEcho changing); this was fixed by keying the start to the index and arming it in the timer. No console errors. Typecheck, build, ruff passed.

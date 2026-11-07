@@ -172,6 +172,10 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const echoPending = useRef(false);
   const echoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const echoRun = useRef(0);
+  // Continuous run: after each round, move to the next line and start its round, to the end.
+  const [chain, setChain] = useState(false);
+  const [advance, setAdvance] = useState(false);
+  const chainNext = useRef<number | null>(null); // the line whose round starts on arrival
 
   const onRecording = useCallback((blob: Blob) => {
     const url = URL.createObjectURL(blob);
@@ -282,8 +286,13 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     echoPending.current = false;
     if (echoTimer.current) clearTimeout(echoTimer.current);
     setEcho("compare");
-    void compare().finally(() => setEcho(null));
-  }, [mineUrl, compare]);
+    const run = echoRun.current;
+    void compare().finally(() => {
+      setEcho(null);
+      // Esc or a manual move during the compare step ends a continuous run too.
+      if (chain && run === echoRun.current) setAdvance(true);
+    });
+  }, [mineUrl, compare, chain]);
   // A recorder failure (denied, unsupported) ends the round instead of leaving it hanging.
   useEffect(() => {
     if (rec.state.kind === "error" && echo) {
@@ -329,6 +338,26 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     },
     [recording, isTarget],
   );
+
+  useEffect(() => {
+    if (!advance) return;
+    setAdvance(false);
+    const last = targets[targets.length - 1];
+    if (index === last) return; // the end of the list (or of the chosen role) ends the run
+    const next = targets.find((i) => i > index) ?? targets[0];
+    chainNext.current = next ?? null;
+    go(1);
+  }, [advance, index, targets, go]);
+  useEffect(() => {
+    // Only once the next line is actually current, so its round uses that line's audio.
+    if (chainNext.current !== index || !modelUrl || echo || recording) return;
+    // Cleared and re-armed if the line's model envelope arrives meanwhile (runEcho changes).
+    const timer = setTimeout(() => {
+      chainNext.current = null;
+      void runEcho();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [modelUrl, echo, recording, runEcho, index]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -516,6 +545,10 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           </button>
         ))}
       </div>
+      <label className="-mt-1 flex items-center justify-center gap-2 text-xs text-slate-600 dark:text-slate-300">
+        <input type="checkbox" checked={chain} onChange={(e) => setChain(e.target.checked)} className="size-4 accent-brand-500" />
+        {t.chain}
+      </label>
       {echoMode === "together" && <p className="-mt-2 text-center text-xs text-slate-500">{t.headphones}</p>}
       <p className="sr-only" aria-live="polite">{echo ? t.echoSteps[echo] : ""}</p>
       <div className="flex justify-between gap-2">

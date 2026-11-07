@@ -666,6 +666,7 @@ export const cs = {
     allRoles: "Všechny repliky",
     cue: (speaker: string) => `${speaker} říká:`,
     cuePlay: "Přehrát repliku partnera",
+    chain: "Po kole rovnou další věta (až do konce)",
     echoModeLabel: "Jak opakovat v kole",
     echoModes: { after: "Po vzoru", together: "Současně se vzorem" } as Record<string, string>,
     headphones: "Současně jen se sluchátky, jinak mikrofon nahraje i vzor a porovnání nic neukáže.",
