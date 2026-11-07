@@ -1009,8 +1009,8 @@ export interface PracticeSentence {
   lemma: string;
   translation: string;
 }
-export const getPracticeSentences = (language: Language) =>
-  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}`);
+export const getPracticeSentences = (language: Language, order: "random" | "recent" = "random") =>
+  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}&order=${order}`);
 
 // ---------------------------------------------------------------- gender sorter (ungraded)
 

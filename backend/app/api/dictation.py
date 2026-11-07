@@ -4,7 +4,7 @@ Ungraded: nothing here is knowledge evidence. The sentence text is only sent aft
 """
 
 import uuid
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
@@ -108,14 +108,22 @@ async def sentences(
     db: DB,
     language: Annotated[Language | None, Query()] = None,
     limit: Annotated[int, Query(ge=1, le=40)] = 20,
+    order: Annotated[Literal["random", "recent"], Query()] = "random",
 ) -> list[SentenceOut]:
-    """Sentences shown with their text, for shadowing (listen, repeat, compare). Ungraded."""
+    """Sentences shown with their text, for shadowing (listen, repeat, compare). Ungraded.
+
+    ``recent`` lists the most recently introduced words first (the latest lesson's words, while
+    they are fresh); ``random`` samples the whole taught pool.
+    """
     lang = language or auth.acting.active_language
-    items = (
-        (await db.execute(_pool(auth.acting, lang).order_by(func.random()).limit(limit)))
-        .scalars()
-        .all()
-    )
+    q = _pool(auth.acting, lang)
+    if order == "recent":
+        q = q.order_by(
+            UserWordProgress.introduced_at.desc(), LexiconItem.frequency_rank, LexiconItem.id
+        )
+    else:
+        q = q.order_by(func.random())
+    items = (await db.execute(q.limit(limit))).scalars().all()
     return [
         SentenceOut(
             item_id=i.id,

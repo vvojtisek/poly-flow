@@ -19,11 +19,12 @@ const MAX_RECORDING_MS = 15000;
 
 /** One line to shadow, from either source: a lesson word's example or a scene's dialogue line. */
 type Line = { key: string; text: string; audio: string; cs?: string; speaker?: string; word?: { lemma: string; translation: string } };
-type Source = { kind: "words" } | { kind: "scene"; id: string };
+type Order = "recent" | "random";
+type Source = { kind: "words"; order: Order } | { kind: "scene"; id: string };
 
 async function loadLines(language: Language, source: Source): Promise<Line[]> {
   if (source.kind === "words") {
-    const list = await getPracticeSentences(language);
+    const list = await getPracticeSentences(language, source.order);
     return list.map((x) => ({ key: x.item_id, text: x.sentence, audio: myWordAudioUrl(x.item_id, "example"), word: { lemma: x.lemma, translation: x.translation } }));
   }
   // The role only decides which lines roleplay quizzes; shadowing repeats every line in order.
@@ -312,6 +313,9 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
     };
   }, [language]);
   const sceneId = source.kind === "scene" ? source.id : "";
+  // Coming back from a scene keeps the word order the learner chose before.
+  const lastOrder = useRef<Order>("recent");
+  if (source.kind === "words") lastOrder.current = source.order;
   return (
     <div className="flex flex-col gap-2">
       <div role="radiogroup" aria-label={t.sourceLabel} className="flex flex-wrap gap-1">
@@ -322,13 +326,30 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
             role="radio"
             aria-checked={source.kind === kind}
             disabled={kind === "scene" && !scenes?.length}
-            onClick={() => kind === "words" ? onChange({ kind }) : scenes?.[0] && onChange({ kind, id: sceneId || scenes[0].id })}
+            onClick={() => kind === "words" ? onChange({ kind, order: lastOrder.current }) : scenes?.[0] && onChange({ kind, id: sceneId || scenes[0].id })}
             className={`rounded-full px-3 py-1 text-sm font-medium disabled:opacity-40 ${source.kind === kind ? "bg-brand-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
           >
             {t.sources[kind]}
           </button>
         ))}
       </div>
+      {source.kind === "words" && (
+        <div role="radiogroup" aria-label={t.orderLabel} className="flex flex-wrap items-center gap-1 text-xs">
+          <span className="mr-1 text-slate-500">{t.orderLabel}:</span>
+          {(["recent", "random"] as const).map((order) => (
+            <button
+              key={order}
+              type="button"
+              role="radio"
+              aria-checked={source.order === order}
+              onClick={() => onChange({ kind: "words", order })}
+              className={`rounded-full px-2.5 py-1 font-medium ${source.order === order ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900" : "bg-slate-100 dark:bg-slate-800"}`}
+            >
+              {t.orders[order]}
+            </button>
+          ))}
+        </div>
+      )}
       {source.kind === "scene" && scenes && scenes.length > 0 && (
         <label className="flex flex-col gap-1 text-sm">
           <span className="text-slate-500">{t.scenePick}</span>
@@ -353,7 +374,7 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
 export default function ShadowingPage() {
   const me = useRequireMe();
   const { state } = useAuth();
-  const [source, setSource] = useState<Source>({ kind: "words" });
+  const [source, setSource] = useState<Source>({ kind: "words", order: "recent" });
   if (state.kind === "error") return <FullPageStatus text={cs.common.offline} />;
   if (!me) return <FullPageStatus text={cs.common.loading} />;
   const language = me.acting.active_language;
@@ -367,7 +388,7 @@ export default function ShadowingPage() {
         <p className="text-slate-600 dark:text-slate-300">{t.intro}</p>
         <LanguagePicker me={me} />
         <SourcePicker key={`${me.acting.id}:${language}`} language={language} source={source} onChange={setSource} />
-        <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : "words"}`} language={language} source={source} />
+        <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : source.order}`} language={language} source={source} />
       </section>
     </AppShell>
   );

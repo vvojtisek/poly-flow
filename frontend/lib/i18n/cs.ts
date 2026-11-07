@@ -661,6 +661,8 @@ export const cs = {
     word: "Slovo z lekce",
     sourceLabel: "Co stínovat",
     sources: { words: "Věty ze slov", scene: "Rozhovor ze scény" } as Record<string, string>,
+    orderLabel: "Pořadí",
+    orders: { recent: "Nejnovější slova z lekcí", random: "Náhodně ze všech" } as Record<string, string>,
     scenePick: "Scéna",
     sceneOption: (title: string, lines: number) => `${title} (${lines} ${lines < 5 ? "repliky" : "replik"})`,
     noScenes: "Rozhovory se tu objeví, až projdeš lekci se scénou.",

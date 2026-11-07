@@ -2005,3 +2005,13 @@ Vlad approves a push.
 **Implemented Solution:** Shadowing now works on a generic line (text, audio, optional speaker, Czech meaning, lesson word). A source radio switches between 'Věty ze slov' and 'Rozhovor ze scény'. Scene mode lists the scenes the profile has met, with the child filter applied server-side by the roleplay API. It loads the selected dialogue in order, with speaker, line, Czech meaning and line audio. The scene option is disabled when no scene has been met yet, with a note explaining why. Recording state resets per source.
 
 **Verification:** s91.js at 390px (de): word mode unchanged (1/20). Scene mode lists 5 met scenes with line counts. Ahoj, jak se jmenuješ? shows ANNA / 'Hallo! Ich heiße Anna. Wie heißt du?' / Czech line. Switching to Odkud jsi? shows BEN, 1/8. N advances to 2/8. Audio requests go to /roleplay/{id}/audio?line=0, then 1. No console errors other than TTS 503. Typecheck, build, ruff passed.
+
+## Global Cycle 92/120 | Page: [/shadowing] (Page Cycle 2/15)
+
+**Summary:** start word shadowing with the latest lesson's words
+
+**Observed Problem:** Word sentences were a random sample of up to 20 from every word the profile was ever taught. A learner who just finished a lesson saw that lesson's words only by chance (in de, 20 of 41 taught words). Shadowing fresh words right after the lesson is when repetition helps most.
+
+**Implemented Solution:** GET /dictation/sentences takes order=random|recent (default random, so existing callers are unchanged). recent orders by introduced_at descending, then frequency rank and id, using the same taught, child-filtered pool. The page defaults to 'Nejnovější slova z lekcí' with a 'Náhodně ze všech' alternative. The chosen order survives switching to a scene and back.
+
+**Verification:** New test test_shadowing_recent_order_lists_latest_lesson_words_first: newest lesson first, rank within a lesson, untaught words excluded, random still returns the taught pool, and order=rank returns 422. test_dictation.py: 6 passed. s92.js: recent starts at Schule (the latest lesson), random starts elsewhere, requests carry order=recent and then random, and the order is kept after a scene round trip. No console errors. Typecheck, build, ruff passed.
