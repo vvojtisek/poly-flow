@@ -3671,6 +3671,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-02-plant-water",
+   "level": "A1",
+   "title": "Una pianta assetata",
+   "title_cs": "Žíznivá rostlina",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom ha una pianta verde in ufficio.",
+     "cs": "Tom má v kanceláři zelenou rostlinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Le do acqua ogni giorno. È sempre uguale.",
+     "cs": "Každý den jí dávám vodu. Je pořád stejná."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Che strano. Ma cresce almeno?",
+     "cs": "To je zvláštní. Roste vůbec?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "No. Però sotto il tavolo c'è una pozzanghera ogni giorno.",
+     "cs": "Ne. Ale pod stolem je každý den louže."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Tom, questa pianta non è viva. È di plastica.",
+     "cs": "Tome, to není živá rostlina. Je plastová."
+    },
+    {
+     "speaker": null,
+     "text": "Tom compra un fiore vero e un asciugamano nuovo per il collega.",
+     "cs": "Tom si kupuje živou květinu a kolegovi nový ručník."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "pozzanghera",
+     "cs": "louže"
+    },
+    {
+     "word": "plastica",
+     "cs": "plast"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč rostlina neroste?",
+     "options": [
+      "Je plastová.",
+      "Nemá vodu.",
+      "Je noc."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co dostane kolega?",
+     "options": [
+      "Ručník.",
+      "Stůl.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

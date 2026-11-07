@@ -3671,6 +3671,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-02-plant-water",
+   "level": "A1",
+   "title": "Une plante qui a soif",
+   "title_cs": "Žíznivá rostlina",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom a une plante verte au bureau.",
+     "cs": "Tom má v kanceláři zelenou rostlinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Je lui donne de l'eau chaque jour. Elle reste toujours pareille.",
+     "cs": "Každý den jí dávám vodu. Je pořád stejná."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Comme c'est étrange. Elle grandit au moins ?",
+     "cs": "To je zvláštní. Roste vůbec?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Non. Mais il y a une flaque sous le bureau chaque jour.",
+     "cs": "Ne. Ale pod stolem je každý den louže."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Tom, cette plante n'est pas vivante. Elle est en plastique.",
+     "cs": "Tome, to není živá rostlina. Je plastová."
+    },
+    {
+     "speaker": null,
+     "text": "Tom achète une vraie fleur et une serviette neuve pour son collègue.",
+     "cs": "Tom si kupuje živou květinu a kolegovi nový ručník."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "flaque",
+     "cs": "louže"
+    },
+    {
+     "word": "plastique",
+     "cs": "plast"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč rostlina neroste?",
+     "options": [
+      "Je plastová.",
+      "Nemá vodu.",
+      "Je noc."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co dostane kolega?",
+     "options": [
+      "Ručník.",
+      "Stůl.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

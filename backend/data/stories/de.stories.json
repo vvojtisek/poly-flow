@@ -3671,6 +3671,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-02-plant-water",
+   "level": "A1",
+   "title": "Eine durstige Pflanze",
+   "title_cs": "Žíznivá rostlina",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom hat eine grüne Pflanze im Büro.",
+     "cs": "Tom má v kanceláři zelenou rostlinu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich gebe ihr jeden Tag Wasser. Sie sieht immer gleich aus.",
+     "cs": "Každý den jí dávám vodu. Je pořád stejná."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Wie seltsam. Wächst sie überhaupt?",
+     "cs": "To je zvláštní. Roste vůbec?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Nein. Aber unter dem Tisch ist jeden Tag eine Pfütze.",
+     "cs": "Ne. Ale pod stolem je každý den louže."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Tom, diese Pflanze lebt nicht. Sie ist aus Plastik.",
+     "cs": "Tome, to není živá rostlina. Je plastová."
+    },
+    {
+     "speaker": null,
+     "text": "Tom kauft eine lebende Blume und ein neues Handtuch für seinen Kollegen.",
+     "cs": "Tom si kupuje živou květinu a kolegovi nový ručník."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Pfütze",
+     "cs": "louže"
+    },
+    {
+     "word": "Plastik",
+     "cs": "plast"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Proč rostlina neroste?",
+     "options": [
+      "Je plastová.",
+      "Nemá vodu.",
+      "Je noc."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co dostane kolega?",
+     "options": [
+      "Ručník.",
+      "Stůl.",
+      "Kolo."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
