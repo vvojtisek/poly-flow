@@ -1549,6 +1549,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-09-same-as-him",
+   "level": "A2",
+   "title": "La même chose que lui",
+   "title_cs": "Totéž co on",
+   "lines": [
+    {
+     "text": "Ben était pour la première fois dans un restaurant à Vienne. La carte était seulement en allemand.",
+     "cs": "Ben byl poprvé v restauraci ve Vídni. Jídelní lístek byl jen v němčině."
+    },
+    {
+     "speaker": "Ben",
+     "text": "Je ne comprends rien. Je prends la même chose que ce monsieur, là-bas.",
+     "cs": "Nerozumím ničemu. Dám si totéž co támhle ten pán."
+    },
+    {
+     "text": "Le monsieur, là-bas, était aussi touriste. Lui non plus n'avait pas compris la carte.",
+     "cs": "Ten pán byl také turista. Také nerozuměl jídelnímu lístku."
+    },
+    {
+     "speaker": "Serveur",
+     "text": "Que désirez-vous, monsieur ?",
+     "cs": "Co si budete přát, pane?"
+    },
+    {
+     "speaker": "Monsieur",
+     "text": "La même chose que ce jeune homme, là-bas.",
+     "cs": "Totéž co támhleten mladý muž."
+    },
+    {
+     "text": "Le serveur a regardé les deux tables. Puis il a froncé les sourcils.",
+     "cs": "Číšník se podíval na oba stoly. Pak se zamračil."
+    },
+    {
+     "speaker": "Serveur",
+     "text": "Et vous, qu'avez-vous commandé ?",
+     "cs": "A co jste si objednal vy?"
+    },
+    {
+     "speaker": "Ben",
+     "text": "La même chose que lui.",
+     "cs": "Totéž co on."
+    },
+    {
+     "text": "Dix minutes plus tard, le serveur a apporté deux verres d'eau du robinet.",
+     "cs": "Po deseti minutách přinesl číšník dvě sklenice vody z kohoutku."
+    },
+    {
+     "speaker": "Serveur",
+     "text": "La même chose. Deux fois.",
+     "cs": "Totéž. Dvakrát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "carte",
+     "cs": "jídelní lístek"
+    },
+    {
+     "word": "commandé",
+     "cs": "objednal"
+    },
+    {
+     "word": "robinet",
+     "cs": "kohoutek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi Ben prend-il la même chose que le monsieur ?",
+     "options": [
+      "Il ne comprend pas la carte.",
+      "Il n'a pas faim.",
+      "Il connaît le monsieur."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'apporte le serveur ?",
+     "options": [
+      "Deux verres d'eau",
+      "Deux soupes",
+      "Deux steaks"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

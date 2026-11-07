@@ -1549,6 +1549,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-09-same-as-him",
+   "level": "A2",
+   "title": "Das Gleiche wie er",
+   "title_cs": "Totéž co on",
+   "lines": [
+    {
+     "text": "Ben war zum ersten Mal in einem Restaurant in Wien. Die Speisekarte war nur auf Deutsch.",
+     "cs": "Ben byl poprvé v restauraci ve Vídni. Jídelní lístek byl jen v němčině."
+    },
+    {
+     "speaker": "Ben",
+     "text": "Ich verstehe nichts. Ich nehme das Gleiche wie der Herr dort.",
+     "cs": "Nerozumím ničemu. Dám si totéž co támhle ten pán."
+    },
+    {
+     "text": "Der Herr dort war auch Tourist. Er hatte die Speisekarte auch nicht verstanden.",
+     "cs": "Ten pán byl také turista. Také nerozuměl jídelnímu lístku."
+    },
+    {
+     "speaker": "Kellner",
+     "text": "Was möchten Sie, mein Herr?",
+     "cs": "Co si budete přát, pane?"
+    },
+    {
+     "speaker": "Herr",
+     "text": "Das Gleiche wie der junge Mann dort.",
+     "cs": "Totéž co támhleten mladý muž."
+    },
+    {
+     "text": "Der Kellner hat beide Tische angeschaut. Dann hat er die Stirn gerunzelt.",
+     "cs": "Číšník se podíval na oba stoly. Pak se zamračil."
+    },
+    {
+     "speaker": "Kellner",
+     "text": "Und was haben Sie bestellt?",
+     "cs": "A co jste si objednal vy?"
+    },
+    {
+     "speaker": "Ben",
+     "text": "Das Gleiche wie er.",
+     "cs": "Totéž co on."
+    },
+    {
+     "text": "Nach zehn Minuten hat der Kellner zwei Gläser Leitungswasser gebracht.",
+     "cs": "Po deseti minutách přinesl číšník dvě sklenice vody z kohoutku."
+    },
+    {
+     "speaker": "Kellner",
+     "text": "Das Gleiche. Zweimal.",
+     "cs": "Totéž. Dvakrát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Speisekarte",
+     "cs": "jídelní lístek"
+    },
+    {
+     "word": "bestellt",
+     "cs": "objednal"
+    },
+    {
+     "word": "Leitungswasser",
+     "cs": "voda z kohoutku"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum nimmt Ben das Gleiche wie der Herr?",
+     "options": [
+      "Er versteht die Speisekarte nicht.",
+      "Er hat keinen Hunger.",
+      "Er kennt den Herrn."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was bringt der Kellner?",
+     "options": [
+      "Zwei Gläser Wasser",
+      "Zwei Suppen",
+      "Zwei Schnitzel"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

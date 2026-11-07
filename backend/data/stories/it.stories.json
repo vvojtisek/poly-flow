@@ -1549,6 +1549,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-09-same-as-him",
+   "level": "A2",
+   "title": "La stessa cosa di lui",
+   "title_cs": "Totéž co on",
+   "lines": [
+    {
+     "text": "Ben era per la prima volta in un ristorante a Vienna. Il menù era solo in tedesco.",
+     "cs": "Ben byl poprvé v restauraci ve Vídni. Jídelní lístek byl jen v němčině."
+    },
+    {
+     "speaker": "Ben",
+     "text": "Non capisco niente. Prendo la stessa cosa di quel signore là.",
+     "cs": "Nerozumím ničemu. Dám si totéž co támhle ten pán."
+    },
+    {
+     "text": "Anche quel signore era un turista. Neanche lui aveva capito il menù.",
+     "cs": "Ten pán byl také turista. Také nerozuměl jídelnímu lístku."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "Che cosa desidera, signore?",
+     "cs": "Co si budete přát, pane?"
+    },
+    {
+     "speaker": "Signore",
+     "text": "La stessa cosa di quel giovane là.",
+     "cs": "Totéž co támhleten mladý muž."
+    },
+    {
+     "text": "Il cameriere ha guardato i due tavoli. Poi ha aggrottato la fronte.",
+     "cs": "Číšník se podíval na oba stoly. Pak se zamračil."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "E lei che cosa ha ordinato?",
+     "cs": "A co jste si objednal vy?"
+    },
+    {
+     "speaker": "Ben",
+     "text": "La stessa cosa di lui.",
+     "cs": "Totéž co on."
+    },
+    {
+     "text": "Dopo dieci minuti il cameriere ha portato due bicchieri d'acqua del rubinetto.",
+     "cs": "Po deseti minutách přinesl číšník dvě sklenice vody z kohoutku."
+    },
+    {
+     "speaker": "Cameriere",
+     "text": "La stessa cosa. Due volte.",
+     "cs": "Totéž. Dvakrát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "menù",
+     "cs": "jídelní lístek"
+    },
+    {
+     "word": "ordinato",
+     "cs": "objednal"
+    },
+    {
+     "word": "rubinetto",
+     "cs": "kohoutek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Perché Ben prende la stessa cosa del signore?",
+     "options": [
+      "Non capisce il menù.",
+      "Non ha fame.",
+      "Conosce il signore."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Che cosa porta il cameriere?",
+     "options": [
+      "Due bicchieri d'acqua",
+      "Due zuppe",
+      "Due bistecche"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

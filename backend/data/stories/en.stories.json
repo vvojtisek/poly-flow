@@ -1549,6 +1549,94 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-09-same-as-him",
+   "level": "A2",
+   "title": "The Same as Him",
+   "title_cs": "Totéž co on",
+   "lines": [
+    {
+     "text": "Ben was in a restaurant in Vienna for the first time. The menu was only in German.",
+     "cs": "Ben byl poprvé v restauraci ve Vídni. Jídelní lístek byl jen v němčině."
+    },
+    {
+     "speaker": "Ben",
+     "text": "I don't understand anything. I'll have the same as that gentleman over there.",
+     "cs": "Nerozumím ničemu. Dám si totéž co támhle ten pán."
+    },
+    {
+     "text": "The gentleman over there was also a tourist. He hadn't understood the menu either.",
+     "cs": "Ten pán byl také turista. Také nerozuměl jídelnímu lístku."
+    },
+    {
+     "speaker": "Waiter",
+     "text": "What would you like, sir?",
+     "cs": "Co si budete přát, pane?"
+    },
+    {
+     "speaker": "Gentleman",
+     "text": "The same as that young man over there.",
+     "cs": "Totéž co támhleten mladý muž."
+    },
+    {
+     "text": "The waiter looked at both tables. Then he frowned.",
+     "cs": "Číšník se podíval na oba stoly. Pak se zamračil."
+    },
+    {
+     "speaker": "Waiter",
+     "text": "And what did you order, sir?",
+     "cs": "A co jste si objednal vy?"
+    },
+    {
+     "speaker": "Ben",
+     "text": "The same as him.",
+     "cs": "Totéž co on."
+    },
+    {
+     "text": "Ten minutes later, the waiter brought two glasses of tap water.",
+     "cs": "Po deseti minutách přinesl číšník dvě sklenice vody z kohoutku."
+    },
+    {
+     "speaker": "Waiter",
+     "text": "The same. Twice.",
+     "cs": "Totéž. Dvakrát."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "menu",
+     "cs": "jídelní lístek"
+    },
+    {
+     "word": "frowned",
+     "cs": "zamračil se"
+    },
+    {
+     "word": "tap",
+     "cs": "kohoutek"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why does Ben order the same as the gentleman?",
+     "options": [
+      "He doesn't understand the menu.",
+      "He isn't hungry.",
+      "He knows the gentleman."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What does the waiter bring?",
+     "options": [
+      "Two glasses of water",
+      "Two soups",
+      "Two steaks"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
