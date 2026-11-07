@@ -1315,3 +1315,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: every topic card has a "Náhled výkladu" toggle below it (a separate button, not nested in the card link) that expands the unit's objective, first explanation note (markdown markers removed) and up to three examples with Czech translations, read through the existing read-only `GET /grammar/units/{id}`. Unit details are cached per page session and a failed load can be retried by reopening. Copy in `lib/i18n/cs.ts`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened the preview on a 390 px screen without leaving `/grammar`.
+
+## Global Cycle 23/120 | Page: [/grammar] (Page Cycle 8/15)
+
+**Summary:** order in-progress topics by urgency; add a "S chybami" filter
+
+**Observed Problem:** "Právě se učíš" listed topics in curriculum order, so a topic due for a check or with fresh check mistakes could sit behind the recommendation and studied topics; there was also no way to list only the topics with recent mistakes.
+
+**Implemented Solution:** `app/grammar/page.tsx`: in-progress topics are sorted by urgency (open lesson, due for check, recent mistakes, recommended, other studied; stable within groups). A new "S chybami N" chip filters to topics with unresolved recent check mistakes, is kept in the URL as `errors=1` and is cleared by Escape with the other filters. Copy `cs.grammar.withErrors`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.

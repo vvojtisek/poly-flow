@@ -230,6 +230,7 @@ export default function GrammarPage() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
   const [dueOnly, setDueOnly] = useState(false);
+  const [errorsOnly, setErrorsOnly] = useState(false);
 
   // Explanation text per unit, fetched the first time the learner searches (about 30 kB).
   const [index, setIndex] = useState<Map<string, string> | null>(null);
@@ -279,6 +280,7 @@ export default function GrammarPage() {
     const status = params.get("status");
     setStatusFilter(STATUS_FILTERS.includes(status as UnitState) ? (status as UnitState) : null);
     setDueOnly(params.get("due") === "1");
+    setErrorsOnly(params.get("errors") === "1");
     setUrlRead(true);
   }, []);
   useEffect(() => {
@@ -288,10 +290,11 @@ export default function GrammarPage() {
     set("q", query.trim() || null);
     set("status", statusFilter);
     set("due", dueOnly ? "1" : null);
+    set("errors", errorsOnly ? "1" : null);
     const qs = params.toString();
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
     if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
-  }, [urlRead, query, statusFilter, dueOnly]);
+  }, [urlRead, query, statusFilter, dueOnly, errorsOnly]);
 
   useEffect(() => {
     if (!focusKey) return;
@@ -318,17 +321,21 @@ export default function GrammarPage() {
   const unitsOf = (level: string) => tree?.levels.find((section) => section.level === level)?.units ?? [];
   const autoLevel: Level = measured?.level ?? "A1";
   const activeLevel: Level = chosen ?? autoLevel;
-  const filtering = !!query.trim() || !!statusFilter || dueOnly;
+  const filtering = !!query.trim() || !!statusFilter || dueOnly || errorsOnly;
   const foldedQuery = fold(query.trim());
   const matches = (u: Unit) =>
-    (!foldedQuery || fold(`${u.title} ${u.summary} ${u.objective}`).includes(foldedQuery) || !!index?.get(u.id)?.includes(foldedQuery)) && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due);
+    (!foldedQuery || fold(`${u.title} ${u.summary} ${u.objective}`).includes(foldedQuery) || !!index?.get(u.id)?.includes(foldedQuery)) && (!statusFilter || u.status === statusFilter) && (!dueOnly || u.due) && (!errorsOnly || u.recent_errors > 0);
   const filteredLevels = CEFR_LEVELS.map((level) => ({ level, units: unitsOf(level).filter(matches) })).filter(
     (level) => level.units.length > 0 || !filtering,
   );
   const visibleCount = filteredLevels.reduce((sum, level) => sum + level.units.length, 0);
 
   const activeUnits = unitsOf(activeLevel);
-  const current = activeUnits.filter((u) => tree && inProgress(u, tree));
+  // Most urgent first: an open lesson, then topics due for a check, recent mistakes, the
+  // recommendation, then other studied topics (stable within each group).
+  const urgency = (u: Unit) =>
+    !tree ? 9 : u.id === tree.active_lesson_unit ? 0 : u.due ? 1 : u.recent_errors > 0 ? 2 : u.id === tree.recommended ? 3 : 4;
+  const current = activeUnits.filter((u) => tree && inProgress(u, tree)).sort((a, b) => urgency(a) - urgency(b));
   const done = activeUnits.filter((u) => !current.includes(u) && (u.status === "known" || u.status === "mastered"));
   const upcoming = activeUnits.filter((u) => !current.includes(u) && !done.includes(u));
 
@@ -350,11 +357,12 @@ export default function GrammarPage() {
                   event.preventDefault();
                   router.push(`/grammar/${first.id}`);
                 }
-              } else if (event.key === "Escape" && (query || statusFilter || dueOnly)) {
+              } else if (event.key === "Escape" && filtering) {
                 event.preventDefault();
                 setQuery("");
                 setStatusFilter(null);
                 setDueOnly(false);
+                setErrorsOnly(false);
               }
             }}
             placeholder={cs.grammar.searchTopics}
@@ -405,6 +413,14 @@ export default function GrammarPage() {
           className={`rounded-full px-3 py-1.5 text-sm font-medium ${dueOnly ? "bg-amber-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
         >
           {cs.grammar.due} {tree.due}
+        </button>
+        <button
+          type="button"
+          aria-pressed={errorsOnly}
+          onClick={() => setErrorsOnly((value) => !value)}
+          className={`rounded-full px-3 py-1.5 text-sm font-medium ${errorsOnly ? "bg-red-600 text-white" : "bg-slate-100 dark:bg-slate-800"}`}
+        >
+          {cs.grammar.withErrors} {units.filter((u) => u.recent_errors > 0).length}
         </button>
       </div>
     </section>

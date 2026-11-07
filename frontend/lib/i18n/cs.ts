@@ -1170,6 +1170,7 @@ export const cs = {
     nextCheck: (when: string) => `Ověření ${when}`,
     enterOpens: "Enter otevře první, Esc vše zruší",
     preview: "Náhled výkladu",
+    withErrors: "S chybami",
     previewHide: "Skrýt náhled",
     previewGoal: "Cíl:",
     checkedTally: (ok: number, wrong: number) =>
