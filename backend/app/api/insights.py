@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import date
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
@@ -35,9 +35,18 @@ class WeekOut(BaseModel):
     grammar: TallyOut
 
 
+class MistakeItemOut(BaseModel):
+    kind: Literal["word", "grammar"]
+    id: uuid.UUID
+    label: str  # the word with its article, or the topic title
+    detail: str  # the Czech meaning, or the topic level
+    count: int
+
+
 class MistakeOut(BaseModel):
     tag: str
     count: int
+    items: list[MistakeItemOut] = []  # up to six words/topics behind the tag, most frequent first
 
 
 class ForecastWordOut(BaseModel):

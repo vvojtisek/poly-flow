@@ -768,7 +768,12 @@ export interface Insights {
     recall: { answered: number; correct: number };
     grammar: { answered: number; correct: number };
   }[];
-  mistakes: { tag: string; count: number }[];
+  /** Error types in graded answers (last 60 days), each with up to six words or topics behind it. */
+  mistakes: {
+    tag: string;
+    count: number;
+    items: { kind: "word" | "grammar"; id: string; label: string; detail: string; count: number }[];
+  }[];
   forecast: {
     date: string;
     words: number;

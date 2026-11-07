@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, CalendarDays, Filter, Target, TrendingUp, TriangleAlert } from "lucide-react";
+import { BarChart3, CalendarDays, ChevronRight, Filter, Target, TrendingUp, TriangleAlert } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -238,6 +238,7 @@ export default function InsightsPage() {
   const [activity, setActivity] = useState<ActivityDay | null>(null);
   const [activityLoading, setActivityLoading] = useState(false);
   const [activityFailed, setActivityFailed] = useState(false);
+  const [openMistake, setOpenMistake] = useState<string | null>(null);
 
   useEffect(() => {
     if (!language) return;
@@ -342,16 +343,53 @@ export default function InsightsPage() {
               {data.mistakes.length === 0 ? (
                 <p className="text-sm text-slate-500">{t.noMistakes}</p>
               ) : (
-                <ul className="flex flex-col gap-2">
-                  {data.mistakes.map((m) => (
-                    <li key={m.tag} className="flex items-center gap-2 text-sm">
-                      <span className="w-40 shrink-0 truncate">{cs.feedback.errors[m.tag] ?? m.tag}</span>
-                      <span className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                        <span className="block h-full rounded-full bg-rose-400" style={{ width: `${(m.count / mistakeMax) * 100}%` }} />
-                      </span>
-                      <span className="w-8 text-right tabular-nums text-slate-500">{m.count}</span>
-                    </li>
-                  ))}
+                <ul className="flex flex-col gap-1">
+                  {data.mistakes.map((m) => {
+                    const label = cs.feedback.errors[m.tag] ?? m.tag;
+                    const isOpen = openMistake === m.tag;
+                    return (
+                      <li key={m.tag}>
+                        <button
+                          type="button"
+                          aria-expanded={isOpen}
+                          aria-controls={`mistake-${m.tag}`}
+                          onClick={() => setOpenMistake(isOpen ? null : m.tag)}
+                          className="flex w-full items-center gap-2 rounded-lg px-1 py-1 text-left text-sm hover:bg-slate-100 dark:hover:bg-slate-800"
+                        >
+                          <ChevronRight className={`size-4 shrink-0 text-slate-400 transition-transform ${isOpen ? "rotate-90" : ""}`} aria-hidden />
+                          <span className="w-36 shrink-0 truncate">{label}</span>
+                          <span className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                            <span className="block h-full rounded-full bg-rose-400" style={{ width: `${(m.count / mistakeMax) * 100}%` }} />
+                          </span>
+                          <span className="w-8 text-right tabular-nums text-slate-500">{m.count}</span>
+                        </button>
+                        {isOpen && (
+                          <ul id={`mistake-${m.tag}`} aria-label={t.mistakeBehind(label)} className="mb-1 ml-7 mt-1 flex flex-col gap-0.5 border-l border-slate-200 pl-2 dark:border-slate-800">
+                            {m.items.map((item) => (
+                              <li key={`${item.kind}-${item.id}`}>
+                                <a
+                                  href={item.kind === "word" ? `/words?word=${item.id}` : `/grammar/${item.id}`}
+                                  className="flex items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"
+                                >
+                                  <span className="min-w-0 truncate">
+                                    {item.kind === "word" ? (
+                                      <span className="font-medium" lang={data.language}>
+                                        {item.label}
+                                      </span>
+                                    ) : (
+                                      <span className="font-medium">{item.label}</span>
+                                    )}
+                                    <span className="ml-1 text-slate-500">· {item.detail}</span>
+                                  </span>
+                                  <span className="shrink-0 text-xs tabular-nums text-rose-600 dark:text-rose-400">{t.mistakeTimes(item.count)}</span>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
               <p className="mt-2 text-xs text-slate-500">{t.mistakesHelp}</p>

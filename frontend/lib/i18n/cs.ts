@@ -1049,7 +1049,9 @@ export const cs = {
     },
     mistakes: "Druhy chyb (60 dní)",
     noMistakes: "Žádné chyby s rozpoznaným druhem.",
-    mistakesHelp: "Z chyb v ověření. Opakované druhy chyb mají vlastní procvičování v lekcích.",
+    mistakesHelp: "Z chyb v ověření za posledních 60 dní. Klepni na druh chyby a uvidíš slova a témata, kterých se týká.",
+    mistakeBehind: (tag: string) => `Kde se dělá chyba: ${tag}`,
+    mistakeTimes: (n: number) => `${n}×`,
     link: "Statistiky",
   },
   palette: {

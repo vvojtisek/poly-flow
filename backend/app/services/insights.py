@@ -97,28 +97,54 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             weeks[w]["grammar"][0] += n
             weeks[w]["grammar"][1] += ok
 
-    # Mistake types in graded answers.
+    # Mistake types in graded answers, each with the words and topics behind it (most frequent
+    # first), so a learner can go from "gender: 7" to the nouns that cause it.
     tags: dict[str, int] = defaultdict(int)
+    behind: dict[str, list[dict]] = defaultdict(list)
     mistake_since = today - timedelta(days=MISTAKE_DAYS)
-    for model, target, join_on, lang_col in (
-        (ev, li, li.id == ev.lexicon_item_id, li.language),
-        (ga, gu, gu.id == ga.unit_id, gu.language),
-    ):
-        rows = await db.execute(
-            select(model.error_tag, func.count())
-            .join(target, join_on)
-            .where(
-                model.user_id == user.id,
-                lang_col == language,
-                model.counts_as_evidence.is_(True),
-                model.is_correct.is_(False),
-                model.error_tag.is_not(None),
-                model.local_date >= mistake_since,
-            )
-            .group_by(model.error_tag)
+    missed = (
+        ev.user_id == user.id,
+        li.language == language,
+        ev.counts_as_evidence.is_(True),
+        ev.is_correct.is_(False),
+        ev.error_tag.is_not(None),
+        ev.local_date >= mistake_since,
+    )
+    rows = await db.execute(
+        select(ev.error_tag, li.id, li.lemma, li.gender, li.translation_cs, func.count())
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(*missed, _suitable(user))
+        .group_by(ev.error_tag, li.id)
+    )
+    for tag, item_id, lemma, gender, translation, n in rows.all():
+        tags[tag] += n
+        behind[tag].append(
+            {
+                "kind": "word",
+                "id": item_id,
+                "label": f"{gender} {lemma}" if gender and len(gender) > 1 else lemma,
+                "detail": translation,
+                "count": n,
+            }
         )
-        for tag, n in rows.all():
-            tags[tag] += n
+    rows = await db.execute(
+        select(ga.error_tag, gu.id, gu.title, gu.level, func.count())
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            ga.counts_as_evidence.is_(True),
+            ga.is_correct.is_(False),
+            ga.error_tag.is_not(None),
+            ga.local_date >= mistake_since,
+        )
+        .group_by(ga.error_tag, gu.id)
+    )
+    for tag, unit_id, title, level, n in rows.all():
+        tags[tag] += n
+        behind[tag].append(
+            {"kind": "grammar", "id": unit_id, "label": title, "detail": level, "count": n}
+        )
 
     # Review forecast: words and grammar topics due per local day (overdue counts as today).
     p, gp = UserWordProgress, UserGrammarProgress
@@ -199,7 +225,15 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             for w, by in weeks.items()
         ],
         "mistakes": sorted(
-            ({"tag": t, "count": n} for t, n in tags.items()), key=lambda x: -x["count"]
+            (
+                {
+                    "tag": t,
+                    "count": n,
+                    "items": sorted(behind[t], key=lambda x: (-x["count"], x["label"]))[:6],
+                }
+                for t, n in tags.items()
+            ),
+            key=lambda x: -x["count"],
         ),
         "forecast": [
             {

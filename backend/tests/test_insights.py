@@ -101,7 +101,11 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
     assert sum(w["recall"]["answered"] for w in out["accuracy"]) == 1
     assert sum(w["recall"]["correct"] for w in out["accuracy"]) == 1
     assert all(w["grammar"] == {"answered": 0, "correct": 0} for w in out["accuracy"])
-    assert out["mistakes"] == [{"tag": "gender", "count": 1}]
+    assert [(m["tag"], m["count"]) for m in out["mistakes"]] == [("gender", 1)]
+    behind = out["mistakes"][0]["items"]
+    assert [(i["kind"], i["id"], i["label"], i["count"]) for i in behind] == [
+        ("word", str(items[1]), "und", 1)
+    ]
     assert out["forecast"][0]["words"] == 1 and out["forecast"][2]["words"] == 1
     assert out["forecast"][0]["word_items"][0]["lemma"] == "und"
     assert out["forecast"][2]["word_items"][0]["lemma"] == "der"
@@ -140,13 +144,18 @@ async def test_review_forecast_does_not_reveal_child_filtered_words(db, client, 
                 policy_version="v4",
             )
         )
-        session.add(event(uuid.UUID(child["acting"]["id"]), item_id, clock.now, correct=False))
+        session.add(
+            event(
+                uuid.UUID(child["acting"]["id"]), item_id, clock.now, correct=False, tag="meaning"
+            )
+        )
         await session.commit()
     result = (await client.get("/api/v1/insights?language=de")).json()
     assert all(
         word["id"] != str(item_id) for day in result["forecast"] for word in day["word_items"]
     )
     assert sum(day["words"] for day in result["forecast"]) == 0
+    assert result["mistakes"] == []  # the child's miss on a filtered word is not shown
     activity = await client.get(f"/api/v1/insights/day?language=de&date={clock.now.date()}")
     assert activity.status_code == 200
     assert all(word["id"] != str(item_id) for word in activity.json()["words"])

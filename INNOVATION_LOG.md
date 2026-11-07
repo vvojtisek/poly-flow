@@ -1705,3 +1705,13 @@ Vlad approves a push.
 **Implemented Solution:** The insights API returns, per week, the total and separate tallies for recognition (non-recall word checks), recall (written or spoken production) and grammar. The tallies come from one grouped query by task type plus the grammar query. The chart draws one coloured line per skill that has data. Weeks without answers break the line instead of being bridged, and dot size grows with the number of answers, so a 1/1 week no longer looks as solid as 40/50. A legend gives each skill's overall share and count, and point titles give 'N z M správně'.
 
 **Verification:** tests/test_insights.py extended: recognition 1/2, recall 1/1 and grammar 0 tallied apart, and the totals equal their sum; 2 passed. Real data: week of 2 Nov shows 'Poznat význam, Týden od 2. 11.: 23 z 23 správně' and the legend 'Poznat význam 100 % · 23×'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 62/120 | Page: [/insights] (Page Cycle 2/15)
+
+**Summary:** show which words and topics are behind each mistake type
+
+**Observed Problem:** The mistakes panel listed error types with counts ('Rod: 7') and nothing else, so the learner knew a weakness existed but not where. To find the nouns behind the gender errors they had to search the dictionary word by word. The word query also lacked the child content filter, so a child profile's miss on a since-flagged word still counted in the panel (the forecast already filtered it).
+
+**Implemented Solution:** Each mistake type now carries up to six words or grammar topics behind it, with per-item counts, most frequent first. Words show their article and Czech meaning, topics their level. Rows in the panel are buttons (aria-expanded) that open the list, and each entry links to the word card (/words?word=…) or the grammar topic. The word side uses _suitable(user), like the forecast and day views.
+
+**Verification:** tests/test_insights.py: gender mistake lists ('word', und, 1); the child profile's tagged miss on a violence-flagged word no longer appears. Run against the old service, both tests fail ('Left contains one more item: meaning'), confirming the leak; with the change, 2 passed. Playwright with stubbed data at 390px: 'Rod (der/die/das)' expands to 'der Mann · muž 2×' and 'Členy · A1 1×' with correct hrefs. No console errors. typecheck, next build, ruff pass.
