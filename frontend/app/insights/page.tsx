@@ -273,14 +273,33 @@ export default function InsightsPage() {
       .then((d) => {
         if (cancelled) return;
         setData(d);
-        setForecastDate(d.forecast[0]?.date ?? null);
-        setActivityDate([...d.heatmap].reverse().find((day) => day.graded + day.practice > 0)?.date ?? d.today);
+        // The selected days live in the URL, so Back from a word card or topic returns to the same day.
+        const params = new URLSearchParams(window.location.search);
+        const wantedForecast = params.get("forecast");
+        const wantedDay = params.get("day");
+        setForecastDate(d.forecast.find((f) => f.date === wantedForecast)?.date ?? d.forecast[0]?.date ?? null);
+        setActivityDate(
+          d.heatmap.find((h) => h.date === wantedDay)?.date ??
+            [...d.heatmap].reverse().find((day) => day.graded + day.practice > 0)?.date ??
+            d.today,
+        );
       })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
   }, [language, me?.acting.id]);
+
+  useEffect(() => {
+    if (!data) return;
+    const params = new URLSearchParams(window.location.search);
+    const set = (k: string, v: string | null) => (v ? params.set(k, v) : params.delete(k));
+    set("day", activityDate);
+    set("forecast", forecastDate && forecastDate !== data.forecast[0]?.date ? forecastDate : null);
+    const qs = params.toString();
+    const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
+  }, [data, activityDate, forecastDate]);
 
   useEffect(() => {
     if (!language || !activityDate) return;

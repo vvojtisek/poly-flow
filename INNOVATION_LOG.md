@@ -1735,3 +1735,13 @@ Vlad approves a push.
 **Implemented Solution:** The funnel query applies the child content filter and adds 'fading': recognised words whose last error-free check is older than POLICY.decay_after. Rows show count and share of studied words. Rows that match a dictionary filter (all studied, mastered) link to it; passive and active overlap the status ladder and stay plain. Two action lines follow: 'N probraných slov ještě čeká…' links to status=learning, and 'N slov přes 30 dní bez ověření' links to due words. A help line says the counts come from checks only, with recognition and recall measured separately. An empty state covers a profile with no studied words.
 
 **Verification:** tests/test_insights.py: a passive word with last_error_free_at 31 days ago counts as fading=1, and the child profile's funnel no longer counts the violence-flagged word (introduced 0); 2 passed. Playwright on real data: '41 probraných slov ještě čeká…', shares '0 · 0 %', links /words?tab=all, …status=mastered and …status=learning. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 65/120 | Page: [/insights] (Page Cycle 5/15)
+
+**Summary:** keep the selected activity and forecast day across navigation
+
+**Observed Problem:** The activity calendar and forecast details link out to word cards and grammar topics, but the chosen day lived only in component state. After opening a word from 5 Nov and pressing Back, the page reset to the most recent active day (7 Nov), so the learner lost their place every time they followed a link. A specific day could not be linked either.
+
+**Implemented Solution:** The selected activity day (?day=) and a non-default forecast day (?forecast=) are mirrored to the URL with replaceState once data has loaded, and read back on load. Unknown or out-of-range dates fall back to the previous defaults: the last active day and today.
+
+**Verification:** Playwright: default load writes ?day=2026-11-07; picking 5 Nov sets ?day=2026-11-05 and the heading 'Učení · 5. 11.'; opening a word from that day and going Back restores ?day=2026-11-05 with the same heading. No console errors. typecheck, next build, ruff pass.
