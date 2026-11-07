@@ -6159,6 +6159,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-37-museum-dust",
+   "level": "B2",
+   "title": "Original Dust",
+   "title_cs": "Původní prach",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom volunteered at a museum and was asked to clean the display case containing old tools.",
+     "cs": "Tom pracoval jako dobrovolník v muzeu a dostal za úkol očistit vitrínu se starými nástroji."
+    },
+    {
+     "speaker": "Tom",
+     "text": "I've removed all the dust, but preserved a small pile in case it has historical significance.",
+     "cs": "Odstranil jsem všechen prach, ale nechal jsem stranou malou hromádku pro případ, že by byla historická."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That's cautious. Do you have any documentation concerning its provenance?",
+     "cs": "To je opatrné. Máš nějaké doklady o jejím původu?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Not yet, but considering the age of the display case, I wouldn't rule anything out.",
+     "cs": "Zatím ne, ale vzhledem ke stáří vitríny bych nic nevylučoval."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That case was installed last week. They repaired the ceiling here yesterday.",
+     "cs": "Ta vitrína byla instalovaná minulý týden. Včera tu opravovali strop."
+    },
+    {
+     "speaker": null,
+     "text": "Tom added a label to the pile: Then we have an exceptionally well-dated specimen of contemporary construction.",
+     "cs": "Tom přidal k hromádce štítek: Takže máme výjimečně přesně datovanou ukázku současného stavebnictví."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "provenance",
+     "cs": "původ"
+    },
+    {
+     "word": "documentation",
+     "cs": "doklady"
+    },
+    {
+     "word": "specimen",
+     "cs": "ukázka"
+    },
+    {
+     "word": "contemporary",
+     "cs": "současný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Odkud prach pravděpodobně pochází?",
+     "options": [
+      "Z opravy stropu.",
+      "Ze středověku.",
+      "Z vykopávek."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom nakonec udělá?",
+     "options": [
+      "Vytvoří popisek k prachu.",
+      "Přestane v muzeu pracovat.",
+      "Schová vitrínu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
