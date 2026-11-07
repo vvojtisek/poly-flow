@@ -96,6 +96,22 @@ class WordContextOut(BaseModel):
     match: str | None  # the word as it appears in `line` (may be inflected), for highlighting
 
 
+class EvidenceTallyOut(BaseModel):
+    correct: int  # first-try, hint-free correct check answers
+    days: int  # distinct local days with such an answer
+
+
+class WordEvidenceOut(BaseModel):
+    """Check evidence toward the two separate knowledge states and their thresholds."""
+
+    recognition: EvidenceTallyOut  # any correct check answer (production also shows recognition)
+    production: EvidenceTallyOut  # correct written or spoken recall only
+    required_correct: int
+    required_days: int
+    production_required_correct: int
+    production_required_days: int
+
+
 class WordDetailOut(BaseModel):
     id: uuid.UUID
     language: Language
@@ -120,6 +136,7 @@ class WordDetailOut(BaseModel):
     history: list[HistoryOut]
     note: str | None = None  # the learner's own memory hook
     contexts: list[WordContextOut] = []  # lesson scenes that teach the word
+    evidence: WordEvidenceOut
 
 
 class NoteIn(BaseModel):

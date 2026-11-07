@@ -254,3 +254,54 @@ async def test_word_detail_shows_the_lesson_scenes_that_teach_it(db, client, clo
     await login(client, "eva", "4321")
     child = (await client.get(f"/api/v1/words/{ids['Haus']}")).json()
     assert [c["title"] for c in child["contexts"]] == ["Doma"]
+
+
+async def test_word_detail_counts_check_evidence_separately_for_recognition_and_recall(
+    db, client, clock
+):
+    from datetime import date
+
+    from app.models import LearningEvent
+    from app.models.learning import TaskType
+
+    me = await setup_parent(client)
+    uid = uuid.UUID(me["acting"]["id"])
+    ids = await seed(uid, clock)
+
+    def event(task: TaskType, day: int, evidence: bool = True) -> LearningEvent:
+        return LearningEvent(
+            user_id=uid,
+            lexicon_item_id=ids["gehen"],
+            task_type=task,
+            attempt_no=1,
+            answer="x",
+            is_correct=evidence,
+            verdict="exact" if evidence else "wrong",
+            policy_version="v4",
+            idempotency_key=uuid.uuid4().hex,
+            result={},
+            hint_used=False,
+            revealed=False,
+            counts_as_evidence=evidence,
+            answer_mode="typed",
+            local_date=date(2026, 1, day),
+            occurred_at=clock.now,
+        )
+
+    async for db_ in get_session():
+        db_.add_all(
+            [
+                event(TaskType.RECOGNITION, 1),
+                event(TaskType.RECOGNITION, 2),
+                event(TaskType.RECALL, 2),
+                event(TaskType.RECALL, 3, evidence=False),  # practice or a miss: not evidence
+            ]
+        )
+        await db_.commit()
+        break
+    out = (await client.get(f"/api/v1/words/{ids['gehen']}")).json()["evidence"]
+    assert out["recognition"] == {"correct": 3, "days": 2}
+    assert out["production"] == {"correct": 1, "days": 1}
+    assert out["required_correct"] == 3 and out["production_required_days"] == 2
+    none = (await client.get(f"/api/v1/words/{ids['schön']}")).json()["evidence"]
+    assert none["recognition"] == {"correct": 0, "days": 0}

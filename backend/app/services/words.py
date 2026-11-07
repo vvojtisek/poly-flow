@@ -14,6 +14,7 @@ from sqlalchemy.orm import aliased
 
 from app.domain.enums import Language, ProgressState
 from app.domain.export import Row
+from app.domain.learning_policy import POLICY
 from app.domain.progression import vocabulary_level, vocabulary_levels
 from app.models import (
     LearningEvent,
@@ -25,7 +26,7 @@ from app.models import (
     WordCollection,
     WordCollectionItem,
 )
-from app.services.learning import LearningError, _suitable
+from app.services.learning import LearningError, _suitable, evidence_counts
 from app.services.notes import notes_for
 
 DECK_LIMIT = 50
@@ -140,7 +141,16 @@ async def word_detail(db: AsyncSession, user: User, item_id: uuid.UUID, now: dat
             .limit(20)
         )
     ).scalars()
+    correct, days, recalls, recall_days = await evidence_counts(db, user.id, item.id)
     return {
+        "evidence": {
+            "recognition": {"correct": correct, "days": days},
+            "production": {"correct": recalls, "days": recall_days},
+            "required_correct": POLICY.passive_required_correct,
+            "required_days": POLICY.passive_required_days,
+            "production_required_correct": POLICY.active_required_correct,
+            "production_required_days": POLICY.active_required_days,
+        },
         "contexts": await _contexts(db, user, item),
         "id": item.id,
         "language": item.language,

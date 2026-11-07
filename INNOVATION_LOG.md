@@ -1565,3 +1565,13 @@ Vlad approves a push.
 **Implemented Solution:** Word detail now returns up to three lesson scenes that teach the word, in curriculum order, filtered with the same child-scene rule as topics. For each it returns the first line that uses the word, found by the scene's tagged segment id (so inflected forms such as 'bin' for 'sein' are found), with a word-boundary lemma fallback for plain lines. The inspector shows a 'Kde se slovo učí' block with the scene title, the line with the word highlighted and its Czech translation. Tapping it scopes the list to that lesson's words.
 
 **Verification:** New pytest test_word_detail_shows_the_lesson_scenes_that_teach_it covers plain-line match, no-line scene, a word with no scene, tagged inflected segment ('Hauses') and the child profile not seeing the hidden scene; tests/test_words.py 7 passed. Real data: sein -> 'Hallo, Anna! Ich bin Tom.' match 'bin'. Playwright: inspector shows 'Moje rodina / Wer ist der Mann?', click scopes list to 'Jen: Moje rodina' (?topic=…). No console errors. typecheck, next build, ruff check/format pass.
+
+## Global Cycle 48/120 | Page: [/words] (Page Cycle 3/15)
+
+**Summary:** show recognition and recall evidence separately on the word card
+
+**Observed Problem:** The word card collapsed knowledge into one linear ladder (Viděné to Zvládnuté) plus raw correct/error totals that mix lesson practice with checks. A learner could not see that recognising and producing a word are separate states, or how many first-try check answers on how many days each one still needs. A word with no checks looked the same as one that was nearly known.
+
+**Implemented Solution:** The word detail API now returns check-evidence tallies (correct answers and distinct days) for recognition and for recall, plus the policy thresholds. The counting moved into a shared evidence_counts() helper, so the card and the progress update use the same query. The inspector shows a 'Co ukázala ověření' block with two separate rows. Each row says 'splněno', 'zatím neověřeno' (no evidence: unknown, not zero) or 'N z 3 správně · N z 2 dnů', with a bar that follows the weaker of the two requirements.
+
+**Verification:** New pytest test_word_detail_counts_check_evidence_separately_for_recognition_and_recall: recall counts toward both, a non-evidence miss is ignored, and a word without events shows 0/0. tests/test_words.py and tests/test_learning.py pass. Playwright with a stubbed response shows 'splněno' and '2 z 3 správně · 1 z 2 dnů', and real data shows 'zatím neověřeno'. No console errors. typecheck, next build, ruff check/format pass.

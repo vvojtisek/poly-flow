@@ -820,6 +820,15 @@ export interface WordDetail extends Omit<WordRow, "due"> {
   note: string | null;
   /** Lesson scenes that teach the word; `line` is the scene line using it as written, if any. */
   contexts: { topic_id: string; title: string; line: string | null; line_cs: string | null; match: string | null }[];
+  /** First-try, hint-free correct check answers toward the two separate knowledge states. */
+  evidence: {
+    recognition: { correct: number; days: number };
+    production: { correct: number; days: number };
+    required_correct: number;
+    required_days: number;
+    production_required_correct: number;
+    production_required_days: number;
+  };
 }
 
 // Vocabulary groups: levels by frequency rank (indicative CEFR, "extension" past the C1 band) and

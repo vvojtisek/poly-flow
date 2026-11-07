@@ -81,6 +81,38 @@ function when(iso: string | null): string {
   return t.inDays(days);
 }
 
+function EvidenceRow({ label, done, correct, days, needCorrect, needDays }: { label: string; done: boolean; correct: number; days: number; needCorrect: number; needDays: number }) {
+  // Progress is the weaker of the two requirements, so a bar never looks full before both are met.
+  const share = done ? 1 : Math.min(correct / needCorrect, days / needDays, 1);
+  return (
+    <li className="flex flex-col gap-1">
+      <div className="flex items-baseline justify-between gap-2 text-sm">
+        <span className="font-medium">{label}</span>
+        <span className={`shrink-0 text-xs tabular-nums ${done ? "font-semibold text-emerald-600 dark:text-emerald-400" : "text-slate-500"}`}>
+          {done ? t.evidenceDone : correct === 0 ? t.evidenceNone : t.evidenceTally(correct, needCorrect, days, needDays)}
+        </span>
+      </div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" aria-hidden>
+        <div className={`h-full rounded-full ${done ? "bg-emerald-500" : "bg-sky-500"}`} style={{ width: `${Math.round(share * 100)}%` }} />
+      </div>
+    </li>
+  );
+}
+
+function EvidenceBlock({ w }: { w: WordDetail }) {
+  const e = w.evidence;
+  return (
+    <div className="flex flex-col gap-1.5">
+      <p className="text-xs font-semibold text-slate-500">{t.evidenceTitle}</p>
+      <ul className="flex flex-col gap-2">
+        <EvidenceRow label={t.evidenceRecognition} done={w.passive_known} correct={e.recognition.correct} days={e.recognition.days} needCorrect={e.required_correct} needDays={e.required_days} />
+        <EvidenceRow label={t.evidenceProduction} done={w.active_known} correct={e.production.correct} days={e.production.days} needCorrect={e.production_required_correct} needDays={e.production_required_days} />
+      </ul>
+      <p className="text-[0.7rem] text-slate-500">{t.evidenceHelp}</p>
+    </div>
+  );
+}
+
 function Highlight({ text, part }: { text: string; part: string | null }) {
   const at = part ? text.indexOf(part) : -1;
   if (!part || at < 0) return <>{text}</>;
@@ -194,6 +226,7 @@ function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; 
               })}
             </ol>
           </div>
+          <EvidenceBlock w={w} />
           <dl className="grid grid-cols-2 gap-2 text-sm">
             {[
               [t.correct, w.correct],

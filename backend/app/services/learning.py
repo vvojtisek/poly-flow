@@ -815,22 +815,7 @@ async def _apply_progress(
             p.orthography_score = smooth(p.orthography_score, orthography)
 
     if evidence:
-        ev = LearningEvent
-        base = and_(
-            ev.user_id == user.id, ev.lexicon_item_id == item.id, ev.counts_as_evidence.is_(True)
-        )
-        recall = ev.task_type == TaskType.RECALL
-        row = (
-            await db.execute(
-                select(
-                    func.count(),
-                    func.count(func.distinct(ev.local_date)),
-                    func.count().filter(recall),
-                    func.count(func.distinct(case((recall, ev.local_date)))),
-                ).where(base)
-            )
-        ).one()
-        all_n, all_days, recall_n, recall_days = row
+        all_n, all_days, recall_n, recall_days = await evidence_counts(db, user.id, item.id)
         # Producing the word also demonstrates recognising it.
         if all_n >= POLICY.passive_required_correct and all_days >= POLICY.passive_required_days:
             p.passive_known = True
@@ -846,6 +831,33 @@ async def _apply_progress(
             elif now - p.known_since_at >= POLICY.mastery_delay:
                 p.state = ProgressState.MASTERED
     p.policy_version = POLICY.version
+
+
+async def evidence_counts(
+    db: AsyncSession, user_id: uuid.UUID, item_id: uuid.UUID
+) -> tuple[int, int, int, int]:
+    """Check evidence for one word: (correct, distinct days, correct recalls, recall days).
+
+    Only first-try, hint-free correct check answers are evidence; producing the word also counts as
+    recognising it, so recalls are included in the first pair.
+    """
+    ev = LearningEvent
+    recall = ev.task_type == TaskType.RECALL
+    row = (
+        await db.execute(
+            select(
+                func.count(),
+                func.count(func.distinct(ev.local_date)),
+                func.count().filter(recall),
+                func.count(func.distinct(case((recall, ev.local_date)))),
+            ).where(
+                ev.user_id == user_id,
+                ev.lexicon_item_id == item_id,
+                ev.counts_as_evidence.is_(True),
+            )
+        )
+    ).one()
+    return row[0], row[1], row[2], row[3]
 
 
 async def _maybe_unlock_grammar(
