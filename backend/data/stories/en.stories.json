@@ -341,6 +341,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-05-shopping-list",
+   "level": "A1",
+   "title": "The Shopping List",
+   "title_cs": "Nákupní seznam",
+   "lines": [
+    {
+     "text": "Peter writes a shopping list: milk, bread, eggs, apples.",
+     "cs": "Petr píše nákupní seznam: mléko, chleba, vejce, jablka."
+    },
+    {
+     "speaker": "Peter",
+     "text": "Perfect. Now I am going to the supermarket.",
+     "cs": "Perfektní. Teď jdu do obchodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "You forgot the list, Peter! It is on the table.",
+     "cs": "Zapomněl jsi seznam, Petře! Leží na stole."
+    },
+    {
+     "speaker": "Peter",
+     "text": "That's fine. I have a good memory.",
+     "cs": "To nevadí. Mám dobrou paměť."
+    },
+    {
+     "text": "In the supermarket, Peter thinks: what do I buy? Something sweet!",
+     "cs": "V obchodě Petr myslí: co mám koupit? Něco sladkého!"
+    },
+    {
+     "text": "At home, Eva opens the bag. There is only a chocolate cake.",
+     "cs": "Doma Eva otevře tašku. Je tam jen čokoládový dort."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Where is the milk? And the bread? And the eggs?",
+     "cs": "Kde je mléko? A chleba? A vejce?"
+    },
+    {
+     "speaker": "Peter",
+     "text": "Everything is on the list. The list is on the table.",
+     "cs": "Všechno je na seznamu. Seznam leží na stole."
+    },
+    {
+     "speaker": "Eva",
+     "text": "At least we have cake for dinner.",
+     "cs": "Aspoň máme k večeři dort."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "memory",
+     "cs": "paměť"
+    },
+    {
+     "word": "supermarket",
+     "cs": "supermarket"
+    },
+    {
+     "word": "cake",
+     "cs": "dort"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Peter buy?",
+     "options": [
+      "A cake",
+      "Milk",
+      "Bread"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Where is the list?",
+     "options": [
+      "On the table",
+      "In the bag",
+      "In the supermarket"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

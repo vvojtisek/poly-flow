@@ -341,6 +341,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-05-shopping-list",
+   "level": "A1",
+   "title": "Die Einkaufsliste",
+   "title_cs": "Nákupní seznam",
+   "lines": [
+    {
+     "text": "Peter schreibt eine Einkaufsliste: Milch, Brot, Eier, Äpfel.",
+     "cs": "Petr píše nákupní seznam: mléko, chleba, vejce, jablka."
+    },
+    {
+     "speaker": "Peter",
+     "text": "Perfekt. Jetzt gehe ich in den Supermarkt.",
+     "cs": "Perfektní. Teď jdu do obchodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Du hast die Liste vergessen, Peter! Sie liegt auf dem Tisch.",
+     "cs": "Zapomněl jsi seznam, Petře! Leží na stole."
+    },
+    {
+     "speaker": "Peter",
+     "text": "Das macht nichts. Ich habe ein gutes Gedächtnis.",
+     "cs": "To nevadí. Mám dobrou paměť."
+    },
+    {
+     "text": "Im Supermarkt denkt Peter: Was kaufe ich? Etwas Süßes!",
+     "cs": "V obchodě Petr myslí: co mám koupit? Něco sladkého!"
+    },
+    {
+     "text": "Zu Hause öffnet Eva die Tasche. Da ist nur ein Schokoladenkuchen.",
+     "cs": "Doma Eva otevře tašku. Je tam jen čokoládový dort."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Wo ist die Milch? Und das Brot? Und die Eier?",
+     "cs": "Kde je mléko? A chleba? A vejce?"
+    },
+    {
+     "speaker": "Peter",
+     "text": "Alles steht auf der Liste. Die Liste liegt auf dem Tisch.",
+     "cs": "Všechno je na seznamu. Seznam leží na stole."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Wenigstens haben wir heute Kuchen zum Abendessen.",
+     "cs": "Aspoň máme k večeři dort."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Gedächtnis",
+     "cs": "paměť"
+    },
+    {
+     "word": "Supermarkt",
+     "cs": "supermarket"
+    },
+    {
+     "word": "Schokoladenkuchen",
+     "cs": "čokoládový dort"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was kauft Peter?",
+     "options": [
+      "Einen Kuchen",
+      "Milch",
+      "Brot"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wo liegt die Liste?",
+     "options": [
+      "Auf dem Tisch",
+      "In der Tasche",
+      "Im Supermarkt"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -341,6 +341,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-05-shopping-list",
+   "level": "A1",
+   "title": "La lista della spesa",
+   "title_cs": "Nákupní seznam",
+   "lines": [
+    {
+     "text": "Piero scrive la lista della spesa: latte, pane, uova, mele.",
+     "cs": "Petr píše nákupní seznam: mléko, chleba, vejce, jablka."
+    },
+    {
+     "speaker": "Piero",
+     "text": "Perfetto. Adesso vado al supermercato.",
+     "cs": "Perfektní. Teď jdu do obchodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Hai dimenticato la lista, Piero! È sul tavolo.",
+     "cs": "Zapomněl jsi seznam, Petře! Leží na stole."
+    },
+    {
+     "speaker": "Piero",
+     "text": "Non importa. Ho una buona memoria.",
+     "cs": "To nevadí. Mám dobrou paměť."
+    },
+    {
+     "text": "Al supermercato Piero pensa: che cosa compro? Qualcosa di dolce!",
+     "cs": "V obchodě Petr myslí: co mám koupit? Něco sladkého!"
+    },
+    {
+     "text": "A casa Eva apre la borsa. C'è solo una torta al cioccolato.",
+     "cs": "Doma Eva otevře tašku. Je tam jen čokoládový dort."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Dov'è il latte? E il pane? E le uova?",
+     "cs": "Kde je mléko? A chleba? A vejce?"
+    },
+    {
+     "speaker": "Piero",
+     "text": "Tutto è sulla lista. La lista è sul tavolo.",
+     "cs": "Všechno je na seznamu. Seznam leží na stole."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Almeno stasera abbiamo la torta per cena.",
+     "cs": "Aspoň máme k večeři dort."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "memoria",
+     "cs": "paměť"
+    },
+    {
+     "word": "supermercato",
+     "cs": "supermarket"
+    },
+    {
+     "word": "torta",
+     "cs": "dort"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa compra Piero?",
+     "options": [
+      "Una torta",
+      "Il latte",
+      "Il pane"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è la lista?",
+     "options": [
+      "Sul tavolo",
+      "Nella borsa",
+      "Al supermercato"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -341,6 +341,90 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a1-05-shopping-list",
+   "level": "A1",
+   "title": "La liste de courses",
+   "title_cs": "Nákupní seznam",
+   "lines": [
+    {
+     "text": "Pierre écrit une liste de courses : du lait, du pain, des œufs, des pommes.",
+     "cs": "Petr píše nákupní seznam: mléko, chleba, vejce, jablka."
+    },
+    {
+     "speaker": "Pierre",
+     "text": "Parfait. Maintenant, je vais au supermarché.",
+     "cs": "Perfektní. Teď jdu do obchodu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Tu as oublié la liste, Pierre ! Elle est sur la table.",
+     "cs": "Zapomněl jsi seznam, Petře! Leží na stole."
+    },
+    {
+     "speaker": "Pierre",
+     "text": "Ce n'est pas grave. J'ai une bonne mémoire.",
+     "cs": "To nevadí. Mám dobrou paměť."
+    },
+    {
+     "text": "Au supermarché, Pierre pense : qu'est-ce que j'achète ? Quelque chose de sucré !",
+     "cs": "V obchodě Petr myslí: co mám koupit? Něco sladkého!"
+    },
+    {
+     "text": "À la maison, Eva ouvre le sac. Il y a seulement un gâteau au chocolat.",
+     "cs": "Doma Eva otevře tašku. Je tam jen čokoládový dort."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Où est le lait ? Et le pain ? Et les œufs ?",
+     "cs": "Kde je mléko? A chleba? A vejce?"
+    },
+    {
+     "speaker": "Pierre",
+     "text": "Tout est sur la liste. La liste est sur la table.",
+     "cs": "Všechno je na seznamu. Seznam leží na stole."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Au moins, nous avons du gâteau pour le dîner.",
+     "cs": "Aspoň máme k večeři dort."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "mémoire",
+     "cs": "paměť"
+    },
+    {
+     "word": "supermarché",
+     "cs": "supermarket"
+    },
+    {
+     "word": "gâteau",
+     "cs": "dort"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'est-ce que Pierre achète ?",
+     "options": [
+      "Un gâteau",
+      "Du lait",
+      "Du pain"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Où est la liste ?",
+     "options": [
+      "Sur la table",
+      "Dans le sac",
+      "Au supermarché"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
