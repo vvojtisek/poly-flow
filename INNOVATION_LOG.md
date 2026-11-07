@@ -2035,3 +2035,13 @@ Vlad approves a push.
 **Implemented Solution:** Recordings are counted per line for this visit only (nothing is sent or scored), and the header shows 'nahráno X z N'. A numbered line strip under the card fills each line green once recorded, marks the current one, shows the line text on hover, and jumps on tap, which also updates the URL. When every line has been recorded, a note suggests the next step: another pass with the text hidden (H), or roleplay for a scene.
 
 **Verification:** s94.js uses Chromium with a fake microphone on scene Ahoj, jak se jmenuješ?. After the first R R: '1 / 7 · nahráno 1 z 7', and dot 1 reads 'Věta 1, nahraná'. After recording all 7: 'nahráno 7 z 7' and the completion note. Tapping dot 3 goes to 3/7 with line=3. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 95/120 | Page: [/shadowing] (Page Cycle 5/15)
+
+**Summary:** add a hands-free echo round: listen, repeat, compare
+
+**Observed Problem:** One shadowing repetition took four separate actions: play the model (P), start recording (R), stop it (R), then compare (C). With a phone in one hand, or while reading the line aloud, that is the friction that makes learners skip the compare step, which is the point of shadowing.
+
+**Implemented Solution:** An 'Kolo' button (key A) runs the whole loop. It plays the model to the end, records for a window sized to the model's voiced length (1.5× + 1 s, clamped to 2-15 s), then plays the model followed by the recording. The button label and an aria-live region name the current step. Pressing R stops the recording early and still compares. Moving to another line abandons the round through a run token, and a recorder error ends it. The recording counts in the per-line tally like a manual one.
+
+**Verification:** s95.js uses a fake microphone and a stubbed 1.5 s WAV model. The steps were: Poslouchej at 48 ms, then Teď ty at 1624 ms (after the model), then Vzor a pak ty at 4955 ms (a 3.3 s window), then back to idle at 10055 ms. Header: nahráno 1 z 7. Pressing A then N during the listening step went to 2/7 with no stray recording (still 1 z 7) and the button idle. No console errors. Typecheck, build, ruff passed.

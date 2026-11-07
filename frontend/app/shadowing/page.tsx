@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Eye, EyeOff, Mic, Square, Volume2, Waves, type LucideIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, EyeOff, Mic, Repeat, Square, Volume2, Waves, type LucideIcon } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -16,6 +16,11 @@ import { cs } from "@/lib/i18n/cs";
 
 const t = cs.shadow;
 const MAX_RECORDING_MS = 15000;
+/** Echo round: time to repeat after the model, from the model's voiced length (or a default). */
+function echoWindowMs(modelSeconds: number | undefined): number {
+  const ms = Math.round(((modelSeconds ?? 3) * 1.5 + 1) * 1000);
+  return Math.min(MAX_RECORDING_MS, Math.max(2000, ms));
+}
 
 /** One line to shadow, from either source: a lesson word's example or a scene's dialogue line. */
 type Line = { key: string; text: string; audio: string; cs?: string; speaker?: string; word?: { lemma: string; translation: string } };
@@ -132,6 +137,11 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const [mine, setMine] = useState<Envelope | null>(null);
   const [noModel, setNoModel] = useState(false);
   const urls = useRef<string[]>([]);
+  // Echo round: listen, record for a window sized to the model, then hear both. null = off.
+  const [echo, setEcho] = useState<null | "listen" | "speak" | "compare">(null);
+  const echoPending = useRef(false);
+  const echoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const echoRun = useRef(0);
 
   const onRecording = useCallback((blob: Blob) => {
     const url = URL.createObjectURL(blob);
@@ -181,6 +191,11 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     setMine(null);
     setModel(null);
     setNoModel(false);
+    // Moving to another line abandons a running echo round.
+    echoRun.current += 1;
+    echoPending.current = false;
+    if (echoTimer.current) clearTimeout(echoTimer.current);
+    setEcho(null);
     if (!modelUrl) return;
     let cancelled = false;
     clipSrc(modelUrl)
@@ -206,6 +221,37 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     await new Promise((r) => setTimeout(r, 250));
     await playToEnd(mineUrl, { natural: true });
   }, [modelUrl, mineUrl]);
+
+  const runEcho = useCallback(async () => {
+    if (!modelUrl || recording || echo) return;
+    const run = ++echoRun.current;
+    setEcho("listen");
+    await playToEnd(modelUrl);
+    if (run !== echoRun.current) return; // the learner moved to another line meanwhile
+    setEcho("speak");
+    echoPending.current = true;
+    await rec.start();
+    echoTimer.current = setTimeout(() => rec.stop(), echoWindowMs(model?.seconds));
+  }, [modelUrl, recording, echo, rec, model?.seconds]);
+
+  // The echo recording arrived: play the model and then the learner, and end the round.
+  useEffect(() => {
+    if (!mineUrl || !echoPending.current) return;
+    echoPending.current = false;
+    if (echoTimer.current) clearTimeout(echoTimer.current);
+    setEcho("compare");
+    void compare().finally(() => setEcho(null));
+  }, [mineUrl, compare]);
+  // A recorder failure (denied, unsupported) ends the round instead of leaving it hanging.
+  useEffect(() => {
+    if (rec.state.kind === "error" && echo) {
+      echoPending.current = false;
+      setEcho(null);
+    }
+  }, [rec.state.kind, echo]);
+  useEffect(() => () => {
+    if (echoTimer.current) clearTimeout(echoTimer.current);
+  }, []);
 
   const go = useCallback(
     (delta: number) => {
@@ -235,6 +281,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         KeyC: () => void compare(),
         KeyN: () => go(1),
         KeyH: () => setHidden((h) => !h),
+        KeyA: () => void runEcho(),
       };
       const run = actions[e.code];
       if (run) {
@@ -244,7 +291,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [modelUrl, mineUrl, toggleRecord, compare, go]);
+  }, [modelUrl, mineUrl, toggleRecord, compare, go, runEcho]);
 
   if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
   if (!list) return <p className="text-sm text-slate-500">{cs.common.loading}</p>;
@@ -331,6 +378,17 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         <ActionButton icon={Waves} label={t.mine} onClick={() => mineUrl && void play(mineUrl, { natural: true })} disabled={!mineUrl} kbd="M" />
         <ActionButton icon={Waves} label={t.compare} onClick={() => void compare()} disabled={!mineUrl || noModel} kbd="C" />
       </div>
+      <button
+        type="button"
+        onClick={() => void runEcho()}
+        disabled={Boolean(echo) || recording || noModel}
+        className="flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-brand-500/50 px-4 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/5 disabled:opacity-60 dark:text-brand-100"
+      >
+        <Repeat className="size-4" aria-hidden />
+        {echo ? t.echoSteps[echo] : t.echo}
+        <span className="hidden lg:inline"><Kbd>A</Kbd></span>
+      </button>
+      <p className="sr-only" aria-live="polite">{echo ? t.echoSteps[echo] : ""}</p>
       <div className="flex justify-between gap-2">
         <button type="button" onClick={() => go(-1)} className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
           <ChevronLeft className="size-4" aria-hidden /> {t.previous}
