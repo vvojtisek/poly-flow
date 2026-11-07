@@ -70,6 +70,17 @@ export function FlashcardSession({
     setMissed(new Set());
   }
 
+  // Second round with only the cards marked "again" in this round.
+  function restartMissed() {
+    if (!missed.size) return;
+    setOrder([...missed]);
+    setIndex(0);
+    setFlipped(false);
+    setFirstTry(0);
+    setAgain(0);
+    setMissed(new Set());
+  }
+
   function mark(known: boolean) {
     const cardIndex = order[index]!;
     if (known) {
@@ -113,10 +124,17 @@ export function FlashcardSession({
         <h3 className="text-lg font-bold">{t.doneTitle}</h3>
         <p className="text-sm text-slate-600 dark:text-slate-300">{t.doneSummary(firstTry, again)}</p>
         <div className="flex flex-wrap justify-center gap-2">
+          {missed.size > 0 && (
+            <Button onClick={restartMissed} autoFocus>
+              <RotateCcw className="size-4" aria-hidden /> {t.restartMissed(missed.size)}
+            </Button>
+          )}
           <Button variant="secondary" onClick={restart}>
             <RotateCcw className="size-4" aria-hidden /> {t.restart}
           </Button>
-          <Button onClick={onClose}>{closeLabel}</Button>
+          <Button variant={missed.size > 0 ? "secondary" : "primary"} onClick={onClose}>
+            {closeLabel}
+          </Button>
         </div>
       </div>,
     );

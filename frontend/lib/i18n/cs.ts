@@ -422,6 +422,7 @@ export const cs = {
     note: "Procvičování bez známkování: označení se neukládá a nemění tvůj pokrok.",
     doneTitle: "Hotovo!",
     doneSummary: (known: number, again: number) => `Napoprvé jsi věděl(a) ${known} ${known === 1 ? "slovo" : known < 5 && known > 0 ? "slova" : "slov"}, ${again}× sis kartičku nechal(a) zopakovat.`,
+    restartMissed: (n: number) => `Znovu jen ${n} ${n === 1 ? "kartičku, kterou" : n < 5 ? "kartičky, které" : "kartiček, které"} jsem nevěděl(a)`,
     restart: "Projít znovu",
     close: "Zpět na slovník",
   },

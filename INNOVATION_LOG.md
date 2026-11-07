@@ -1475,3 +1475,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/practice.ts`: `suggestModes` replaces `suggestMode` and returns a full ranking: one mode per skill in order of how long ago the skill was trained (each mode used once), then the remaining modes oldest first. `app/practice/page.tsx` shows the first suggestion and a "Jiný tip" button that cycles through the ranking; the tip text is a polite live region so the change is announced. Enter still opens the shown tip.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright cycled six tips on a fresh device: Hraj roli (listening), Stínování (speaking), Diktát (writing), Slovosled (reading), Rody (grammar), Laboratoř pádů.
+
+## Global Cycle 39/120 | Page: [/practice] (Page Cycle 9/15)
+
+**Summary:** after flashcards, repeat only the cards you did not know
+
+**Observed Problem:** At the end of the weak-word flashcards (and any deck) the only options were to run the whole deck again or leave; the few cards the learner had just marked "Ještě zopakovat" could not be rehearsed on their own.
+
+**Implemented Solution:** `components/FlashcardSession.tsx`: the summary offers "Znovu jen 3 kartičky, které jsem nevěděl(a)" (focused, primary) whenever any card was marked again, starting a round with exactly those cards; "Projít znovu" and the close button stay. Still practice only, nothing is stored. Copy with Czech plural forms in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright ran the 10-card weak deck from `/practice` with the keyboard, marked 3 cards again, and the follow-up round had exactly 3 cards.
