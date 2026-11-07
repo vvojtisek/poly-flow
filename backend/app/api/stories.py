@@ -4,14 +4,15 @@ import uuid
 from datetime import date, datetime
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Response, status
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, TtsDep, _chosen_voice, _speech, get_now
-from app.domain.enums import Language
+from app.domain.enums import CefrLevel, Language
 from app.models import DailyStory
+from app.services import library as library_svc
 from app.services import stories as svc
 from app.services.learning import LearningError
 from app.services.llm import Llm, get_llm
@@ -137,6 +138,101 @@ async def story_archive(
 ) -> list[StoryArchiveOut]:
     rows = await svc.archive(db, auth.acting, language or auth.acting.active_language, limit=limit)
     return [_archive_out(story) for story in rows]
+
+
+class LibraryLineOut(BaseModel):
+    speaker: str | None
+    text: str
+    cs: str
+
+
+class LibraryStoryOut(BaseModel):
+    slug: str
+    level: CefrLevel
+    title: str
+    title_cs: str
+    kind: Literal["story", "dialogue"]  # dialogue = every line has a speaker
+    lines: int
+    stretch: int
+
+
+class LibraryOut(BaseModel):
+    language: Language
+    review_status: Literal["unreviewed", "reviewed"]
+    source: str
+    license: str
+    stories: list[LibraryStoryOut]
+
+
+def _kind(s) -> Literal["story", "dialogue"]:
+    return "dialogue" if all(ln.speaker for ln in s.lines) else "story"
+
+
+@router.get("/library", response_model=LibraryOut)
+async def story_library(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> LibraryOut:
+    """The curated graded stories of a language that pass the content gate. Ungraded reading."""
+    lang = language or auth.acting.active_language
+    lib = await library_svc.library(db, auth.acting, lang)
+    if lib is None:
+        return LibraryOut(
+            language=lang, review_status="unreviewed", source="", license="", stories=[]
+        )
+    return LibraryOut(
+        language=lang,
+        review_status=lib.file.review_status,
+        source=lib.file.source,
+        license=lib.file.license,
+        stories=[
+            LibraryStoryOut(
+                slug=s.slug,
+                level=s.level,
+                title=s.title,
+                title_cs=s.title_cs,
+                kind=_kind(s),
+                lines=len(s.lines),
+                stretch=len(s.stretch),
+            )
+            for s in lib.stories
+        ],
+    )
+
+
+class LibraryReadOut(BaseModel):
+    slug: str
+    language: Language
+    level: CefrLevel
+    title: str
+    title_cs: str
+    kind: Literal["story", "dialogue"]
+    lines: list[LibraryLineOut]
+    review_status: Literal["unreviewed", "reviewed"]
+
+
+@router.get("/library/{slug}", response_model=LibraryReadOut)
+async def library_story(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+) -> LibraryReadOut:
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    s = lib.stories[0]
+    return LibraryReadOut(
+        slug=s.slug,
+        language=lang,
+        level=s.level,
+        title=s.title,
+        title_cs=s.title_cs,
+        kind=_kind(s),
+        lines=[LibraryLineOut(speaker=ln.speaker, text=ln.text, cs=ln.cs) for ln in s.lines],
+        review_status=lib.file.review_status,
+    )
 
 
 @router.post(

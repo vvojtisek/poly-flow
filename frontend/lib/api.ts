@@ -636,6 +636,38 @@ export const answerStoryQuestion = (storyId: string, index: number, choice: numb
   });
 export const storyAudioUrl = (storyId: string, line: number) => `/api/v1/stories/${storyId}/audio?line=${line}`;
 
+// ---------------------------------------------------------------- curated story library
+
+export interface LibraryStorySummary {
+  slug: string;
+  level: CefrLevel;
+  title: string;
+  title_cs: string;
+  kind: "story" | "dialogue";
+  lines: number;
+  stretch: number;
+}
+export interface StoryLibrary {
+  language: Language;
+  review_status: "unreviewed" | "reviewed";
+  source: string;
+  license: string;
+  stories: LibraryStorySummary[];
+}
+export interface LibraryStory {
+  slug: string;
+  language: Language;
+  level: CefrLevel;
+  title: string;
+  title_cs: string;
+  kind: "story" | "dialogue";
+  lines: { speaker: string | null; text: string; cs: string }[];
+  review_status: "unreviewed" | "reviewed";
+}
+export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
+export const getLibraryStory = (language: Language, slug: string) =>
+  api<LibraryStory>(`/api/v1/stories/library/${encodeURIComponent(slug)}?language=${language}`);
+
 // ---------------------------------------------------------------- CEFR diagnostic (placement part 2)
 
 export type DiagnosticSkill = "grammar" | "vocabulary" | "reading" | "listening" | "idiom";
