@@ -5343,6 +5343,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-26-parcel-address",
+   "level": "B1",
+   "title": "A Very Precise Address",
+   "title_cs": "Velmi přesná adresa",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom was sending a parcel to a friend and wanted to be sure it arrived.",
+     "cs": "Tom posílal kamarádovi balík a chtěl mít jistotu, že dorazí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I've written the street, the house number and a description of the door.",
+     "cs": "Napsal jsem ulici, číslo domu i popis dveří."
+    },
+    {
+     "speaker": "Tom",
+     "text": "That's thorough. But why is the address two pages long?",
+     "cs": "To je pečlivé. Proč je ale adresa dlouhá dvě stránky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I added directions from the station and a recommendation for a good café.",
+     "cs": "Přidal jsem pokyny od nádraží a doporučení na dobrou kavárnu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "And where is the recipient's name on the envelope?",
+     "cs": "A kde je na obálce jméno příjemce?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom searched for a space: The postman must work that out. I've planned him a lovely outing.",
+     "cs": "Tom chvíli hledal volné místo: Na to už musí přijít pošťák. Já mu naplánoval pěkný výlet."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "thorough",
+     "cs": "důkladný"
+    },
+    {
+     "word": "recommendation",
+     "cs": "doporučení"
+    },
+    {
+     "word": "recipient",
+     "cs": "příjemce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co v adrese chybí?",
+     "options": [
+      "Jméno příjemce.",
+      "Číslo domu.",
+      "Ulice."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom přidal navíc?",
+     "options": [
+      "Pokyny a doporučení kavárny.",
+      "Fotku psa.",
+      "Mapu světa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

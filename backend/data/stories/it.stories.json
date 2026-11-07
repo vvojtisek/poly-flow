@@ -5343,6 +5343,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-26-parcel-address",
+   "level": "B1",
+   "title": "Un indirizzo molto preciso",
+   "title_cs": "Velmi přesná adresa",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom spediva un pacco a un amico e voleva essere sicuro che arrivasse.",
+     "cs": "Tom posílal kamarádovi balík a chtěl mít jistotu, že dorazí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ho scritto la via, il numero e una descrizione della porta.",
+     "cs": "Napsal jsem ulici, číslo domu i popis dveří."
+    },
+    {
+     "speaker": "Tom",
+     "text": "È scrupoloso. Ma perché l'indirizzo occupa due pagine?",
+     "cs": "To je pečlivé. Proč je ale adresa dlouhá dvě stránky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ho aggiunto le indicazioni dalla stazione e una raccomandazione per un buon bar.",
+     "cs": "Přidal jsem pokyny od nádraží a doporučení na dobrou kavárnu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "E dov'è il nome del destinatario sulla busta?",
+     "cs": "A kde je na obálce jméno příjemce?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom ha cercato uno spazio libero: Quello deve trovarlo il postino. Gli ho organizzato una bella gita.",
+     "cs": "Tom chvíli hledal volné místo: Na to už musí přijít pošťák. Já mu naplánoval pěkný výlet."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "scrupoloso",
+     "cs": "důkladný"
+    },
+    {
+     "word": "raccomandazione",
+     "cs": "doporučení"
+    },
+    {
+     "word": "destinatario",
+     "cs": "příjemce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co v adrese chybí?",
+     "options": [
+      "Jméno příjemce.",
+      "Číslo domu.",
+      "Ulice."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom přidal navíc?",
+     "options": [
+      "Pokyny a doporučení kavárny.",
+      "Fotku psa.",
+      "Mapu světa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

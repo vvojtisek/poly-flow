@@ -5343,6 +5343,78 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-26-parcel-address",
+   "level": "B1",
+   "title": "Eine sehr genaue Adresse",
+   "title_cs": "Velmi přesná adresa",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Tom schickte einem Freund ein Paket und wollte sicher sein, dass es ankam.",
+     "cs": "Tom posílal kamarádovi balík a chtěl mít jistotu, že dorazí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe die Straße, die Hausnummer und eine Beschreibung der Tür aufgeschrieben.",
+     "cs": "Napsal jsem ulici, číslo domu i popis dveří."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Das ist gründlich. Aber warum ist die Adresse zwei Seiten lang?",
+     "cs": "To je pečlivé. Proč je ale adresa dlouhá dvě stránky?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich habe eine Wegbeschreibung vom Bahnhof und eine Empfehlung für ein gutes Café hinzugefügt.",
+     "cs": "Přidal jsem pokyny od nádraží a doporučení na dobrou kavárnu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Und wo steht der Name des Empfängers auf dem Umschlag?",
+     "cs": "A kde je na obálce jméno příjemce?"
+    },
+    {
+     "speaker": null,
+     "text": "Tom suchte einen freien Platz: Das muss der Postbote herausfinden. Ich habe ihm einen schönen Ausflug geplant.",
+     "cs": "Tom chvíli hledal volné místo: Na to už musí přijít pošťák. Já mu naplánoval pěkný výlet."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "gründlich",
+     "cs": "důkladný"
+    },
+    {
+     "word": "Empfehlung",
+     "cs": "doporučení"
+    },
+    {
+     "word": "Empfängers",
+     "cs": "příjemce"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co v adrese chybí?",
+     "options": [
+      "Jméno příjemce.",
+      "Číslo domu.",
+      "Ulice."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Co Tom přidal navíc?",
+     "options": [
+      "Pokyny a doporučení kavárny.",
+      "Fotku psa.",
+      "Mapu světa."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
