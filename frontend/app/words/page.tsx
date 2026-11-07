@@ -216,16 +216,47 @@ export default function WordsPage() {
   const [scope, setScope] = useState<WordScope | null>(null);
   const [cards, setCards] = useState<WordScope | null>(null);
 
+  // Filters, tab, scope and the open word live in the URL so a reload, Back or a shared link restores the
+  // same view. Topic labels need the group list, so a topic scope from the URL resolves once groups load.
+  const [urlRead, setUrlRead] = useState(false);
+  const pendingTopic = useRef<string | null>(null);
+  const groupsFor = useRef<string | null>(null);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get("q");
     const initialWord = params.get("word");
     const initialTab = params.get("tab");
-    if (initialQuery || initialWord) setTab("all");
+    const initialStatus = params.get("status");
+    const level = params.get("level");
+    const topic = params.get("topic");
+    const filtered = Boolean(initialQuery || initialWord || initialStatus || params.get("due") || level || topic);
+    if (filtered) setTab("all");
     else if (initialTab === "all" || initialTab === "levels" || initialTab === "topics") setTab(initialTab);
     if (initialQuery) setQ(initialQuery);
     if (initialWord) setOpen(initialWord);
+    if (initialStatus && (STATUSES as string[]).includes(initialStatus)) setStatus(initialStatus as WordStatus);
+    if (params.get("due") === "1") setDue(true);
+    if (level) setScope({ kind: "level", key: level, label: t.level(level) });
+    else if (topic) pendingTopic.current = topic;
+    setUrlRead(true);
   }, []);
+  useEffect(() => {
+    if (!urlRead) return;
+    const params = new URLSearchParams(window.location.search);
+    const set = (k: string, v: string | null) => (v ? params.set(k, v) : params.delete(k));
+    set("tab", tab === "levels" ? null : tab);
+    set("q", tab === "all" ? q.trim() || null : null);
+    set("status", tab === "all" ? status : null);
+    set("due", tab === "all" && due ? "1" : null);
+    set("word", tab === "all" ? open : null);
+    if (!pendingTopic.current) {
+      set("level", tab === "all" && scope?.kind === "level" ? scope.key : null);
+      set("topic", tab === "all" && scope?.kind === "topic" ? scope.id : null);
+    }
+    const qs = params.toString();
+    const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
+  }, [urlRead, tab, q, status, due, open, scope, groups]);
 
   useEffect(() => {
     if (!language) return;
@@ -248,12 +279,27 @@ export default function WordsPage() {
   useEffect(() => {
     if (!language) return;
     const ctrl = new AbortController();
+    const key = `${me?.acting.id}:${language}`;
+    // A scope belongs to one language; only drop it when the language or profile actually changes, not on
+    // the first load where it may have come from the URL.
+    if (groupsFor.current !== null && groupsFor.current !== key) {
+      setScope(null);
+      pendingTopic.current = null;
+    }
+    groupsFor.current = key;
     setGroups(null);
     setGroupsFailed(false);
-    setScope(null);
     setCards(null);
     getWordGroups(language, ctrl.signal)
-      .then(setGroups)
+      .then((g) => {
+        setGroups(g);
+        const wanted = pendingTopic.current;
+        if (wanted) {
+          pendingTopic.current = null;
+          const topic = g.topics.find((item) => item.id === wanted);
+          if (topic) setScope({ kind: "topic", id: topic.id, label: topic.title });
+        }
+      })
       .catch((e) => e?.name !== "AbortError" && setGroupsFailed(true));
     return () => ctrl.abort();
   }, [language, me?.acting.id]);

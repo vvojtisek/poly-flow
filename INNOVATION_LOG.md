@@ -1545,3 +1545,13 @@ Vlad approves a push.
 **Implemented Solution:** `lib/practice.ts` keys `pf_pinned_modes`, `pf_recent_modes` and `pf_mode_visits` by the acting profile id; all readers and writers take the profile (`app/practice/page.tsx`, `app/page.tsx`, `components/AppShell.tsx`) and re-read when the acting profile changes. Older unkeyed entries are ignored rather than attributed to whoever logs in next.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 46/120 | Page: [/words] (Page Cycle 1/15)
+
+**Summary:** keep filters, scope and the open word in the URL
+
+**Observed Problem:** The word list read q, word and tab once on mount and never wrote anything back. Status, due and level/topic scope filters and the open word were lost on reload or Back, and a filtered view could not be shared or bookmarked. The groups effect also cleared the scope on its first run, so even a URL scope could not survive.
+
+**Implemented Solution:** The page now writes tab, q, status, due, level/topic and word back with history.replaceState and restores all of them on load. A topic scope from the URL is resolved to its title once the group list arrives. The scope is dropped only when the language or profile actually changes, not on first load.
+
+**Verification:** Playwright: Show words on A1, filter Učím se, open a word -> URL ?tab=all&level=A1&status=learning&word=…; reload restores chip 'Jen: A1', pressed status and open inspector; ?topic=<id> shows 'Jen: Ahoj, jak se jmenuješ?'. No console errors. typecheck, next build, ruff, git diff --check pass.
