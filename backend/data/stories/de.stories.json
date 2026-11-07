@@ -924,6 +924,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-02-gym",
+   "level": "A2",
+   "title": "Der beste Kunde",
+   "title_cs": "Nejlepší zákazník posilovny",
+   "lines": [
+    {
+     "text": "Im Januar hat Marco ein Jahresabo für das Fitnessstudio gekauft. Er war sehr motiviert.",
+     "cs": "V lednu si Marco koupil roční permanentku do posilovny. Byl velmi motivovaný."
+    },
+    {
+     "speaker": "Marco",
+     "text": "Ab jetzt komme ich dreimal pro Woche!",
+     "cs": "Od teď budu chodit třikrát týdně!"
+    },
+    {
+     "speaker": "Nina",
+     "text": "Das freut mich. Im Januar sagen das viele Leute.",
+     "cs": "To mě těší. V lednu to říká hodně lidí."
+    },
+    {
+     "text": "Am ersten Tag hat Marco zehn Minuten trainiert. Dann hat er im Café eine lange Pause gemacht.",
+     "cs": "První den Marco cvičil deset minut. Pak měl dlouhou pauzu v kavárně."
+    },
+    {
+     "text": "Am zweiten Tag ist er nur ins Café gegangen.",
+     "cs": "Druhý den šel jen do kavárny."
+    },
+    {
+     "text": "Ab März hat er das Fitnessstudio nicht mehr besucht. Aber er hat jeden Monat bezahlt.",
+     "cs": "Od března už do posilovny nechodil. Ale každý měsíc platil."
+    },
+    {
+     "text": "Im Dezember hat er Nina auf der Straße getroffen.",
+     "cs": "V prosinci potkal Ninu na ulici."
+    },
+    {
+     "speaker": "Nina",
+     "text": "Marco! Wir haben dich lange nicht gesehen.",
+     "cs": "Marco! Dlouho jsme tě neviděli."
+    },
+    {
+     "speaker": "Marco",
+     "text": "Ich weiß. Ich komme nächste Woche. Ganz sicher.",
+     "cs": "Já vím. Přijdu příští týden. Určitě."
+    },
+    {
+     "speaker": "Nina",
+     "text": "Du bist unser bester Kunde. Du bezahlst und brauchst nie ein Gerät!",
+     "cs": "Jsi náš nejlepší zákazník. Platíš a nikdy nepotřebuješ žádný stroj!"
+    },
+    {
+     "speaker": "Marco",
+     "text": "Wenigstens macht mein Geldbeutel Sport: Er wird jeden Monat leichter.",
+     "cs": "Aspoň moje peněženka cvičí: každý měsíc je lehčí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "motiviert",
+     "cs": "motivovaný"
+    },
+    {
+     "word": "Gerät",
+     "cs": "stroj, přístroj"
+    },
+    {
+     "word": "Geldbeutel",
+     "cs": "peněženka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was macht Marco am ersten Tag?",
+     "options": [
+      "Er trainiert zehn Minuten.",
+      "Er trainiert zwei Stunden.",
+      "Er bleibt zu Hause."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum ist Marco der beste Kunde?",
+     "options": [
+      "Er bezahlt, aber er kommt nicht.",
+      "Er kommt jeden Tag.",
+      "Er kauft viele Getränke."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

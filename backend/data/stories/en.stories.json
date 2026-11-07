@@ -924,6 +924,98 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-02-gym",
+   "level": "A2",
+   "title": "The Best Customer",
+   "title_cs": "Nejlepší zákazník posilovny",
+   "lines": [
+    {
+     "text": "In January, Marco bought a yearly gym membership. He was very motivated.",
+     "cs": "V lednu si Marco koupil roční permanentku do posilovny. Byl velmi motivovaný."
+    },
+    {
+     "speaker": "Marco",
+     "text": "From now on, I'm coming three times a week!",
+     "cs": "Od teď budu chodit třikrát týdně!"
+    },
+    {
+     "speaker": "Nina",
+     "text": "Good to hear. Lots of people say that in January.",
+     "cs": "To mě těší. V lednu to říká hodně lidí."
+    },
+    {
+     "text": "On the first day, Marco trained for ten minutes. Then he took a long break in the café.",
+     "cs": "První den Marco cvičil deset minut. Pak měl dlouhou pauzu v kavárně."
+    },
+    {
+     "text": "On the second day, he only went to the café.",
+     "cs": "Druhý den šel jen do kavárny."
+    },
+    {
+     "text": "From March, he didn't visit the gym any more. But he paid every month.",
+     "cs": "Od března už do posilovny nechodil. Ale každý měsíc platil."
+    },
+    {
+     "text": "In December, he met Nina in the street.",
+     "cs": "V prosinci potkal Ninu na ulici."
+    },
+    {
+     "speaker": "Nina",
+     "text": "Marco! We haven't seen you for a long time.",
+     "cs": "Marco! Dlouho jsme tě neviděli."
+    },
+    {
+     "speaker": "Marco",
+     "text": "I know. I'm coming next week. Definitely.",
+     "cs": "Já vím. Přijdu příští týden. Určitě."
+    },
+    {
+     "speaker": "Nina",
+     "text": "You are our best customer. You pay and you never need a machine!",
+     "cs": "Jsi náš nejlepší zákazník. Platíš a nikdy nepotřebuješ žádný stroj!"
+    },
+    {
+     "speaker": "Marco",
+     "text": "At least my wallet exercises: it gets lighter every month.",
+     "cs": "Aspoň moje peněženka cvičí: každý měsíc je lehčí."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "membership",
+     "cs": "členství, permanentka"
+    },
+    {
+     "word": "motivated",
+     "cs": "motivovaný"
+    },
+    {
+     "word": "wallet",
+     "cs": "peněženka"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Marco do on the first day?",
+     "options": [
+      "He trains for ten minutes.",
+      "He trains for two hours.",
+      "He stays at home."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why is Marco the best customer?",
+     "options": [
+      "He pays, but he doesn't come.",
+      "He comes every day.",
+      "He buys lots of drinks."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
