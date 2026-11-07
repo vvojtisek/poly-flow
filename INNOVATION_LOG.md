@@ -1555,3 +1555,13 @@ Vlad approves a push.
 **Implemented Solution:** The page now writes tab, q, status, due, level/topic and word back with history.replaceState and restores all of them on load. A topic scope from the URL is resolved to its title once the group list arrives. The scope is dropped only when the language or profile actually changes, not on first load.
 
 **Verification:** Playwright: Show words on A1, filter Učím se, open a word -> URL ?tab=all&level=A1&status=learning&word=…; reload restores chip 'Jen: A1', pressed status and open inspector; ?topic=<id> shows 'Jen: Ahoj, jak se jmenuješ?'. No console errors. typecheck, next build, ruff, git diff --check pass.
+
+## Global Cycle 47/120 | Page: [/words] (Page Cycle 2/15)
+
+**Summary:** show the lesson scene and line where a word is taught
+
+**Observed Problem:** The word card showed rank, an example sentence and statistics, but not where the learner met the word. The product teaches words inside scenes (context first), yet the dictionary cut that link: a learner looking up 'bin' or 'Frau' could not see the dialogue line it came from or go back to that lesson's words.
+
+**Implemented Solution:** Word detail now returns up to three lesson scenes that teach the word, in curriculum order, filtered with the same child-scene rule as topics. For each it returns the first line that uses the word, found by the scene's tagged segment id (so inflected forms such as 'bin' for 'sein' are found), with a word-boundary lemma fallback for plain lines. The inspector shows a 'Kde se slovo učí' block with the scene title, the line with the word highlighted and its Czech translation. Tapping it scopes the list to that lesson's words.
+
+**Verification:** New pytest test_word_detail_shows_the_lesson_scenes_that_teach_it covers plain-line match, no-line scene, a word with no scene, tagged inflected segment ('Hauses') and the child profile not seeing the hidden scene; tests/test_words.py 7 passed. Real data: sein -> 'Hallo, Anna! Ich bin Tom.' match 'bin'. Playwright: inspector shows 'Moje rodina / Wer ist der Mann?', click scopes list to 'Jen: Moje rodina' (?topic=…). No console errors. typecheck, next build, ruff check/format pass.

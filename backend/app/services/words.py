@@ -4,6 +4,7 @@ Only words with a progress row (seen in a lesson, a test or a check) are listed:
 is the learner's own, not a way around the lessons. The content filter applies as everywhere.
 """
 
+import re
 import uuid
 from datetime import datetime
 
@@ -140,6 +141,7 @@ async def word_detail(db: AsyncSession, user: User, item_id: uuid.UUID, now: dat
         )
     ).scalars()
     return {
+        "contexts": await _contexts(db, user, item),
         "id": item.id,
         "language": item.language,
         "lemma": item.lemma,
@@ -265,6 +267,68 @@ def _export_row(item, prog, status: str, language: Language, note: str | None) -
 # lesson scenes, the reviewed thematic grouping the curriculum has. Counts and decks cover only
 # the profile's own words (a progress row), like the rest of the dictionary: flashcards repeat
 # what lessons introduced, they do not replace the lesson's context-first introduction.
+
+
+def _context_line(lines: list, item: LexiconItem) -> dict | None:
+    """The first scene line that uses the word.
+
+    Scene lines tag each taught word's segment with its lexicon id, which also catches inflected
+    forms ("ist" for "sein"); plain lines fall back to the lemma as written, on word boundaries.
+    """
+    item_id = str(item.id)
+    pattern = re.compile(rf"(?<!\w){re.escape(item.lemma.casefold())}(?!\w)")
+    for line in lines:
+        if not isinstance(line, dict):
+            continue
+        segments = line.get("segments")
+        if isinstance(segments, list):
+            parts = [
+                seg for seg in segments if isinstance(seg, dict) and isinstance(seg.get("t"), str)
+            ]
+            hit = next((seg["t"] for seg in parts if seg.get("item") == item_id), None)
+            if hit is not None:
+                return {
+                    "text": "".join(seg["t"] for seg in parts),
+                    "cs": line.get("cs"),
+                    "match": hit,
+                }
+            continue
+        text = line.get("text")
+        if isinstance(text, str):
+            found = pattern.search(text.casefold())
+            if found:
+                return {
+                    "text": text,
+                    "cs": line.get("cs"),
+                    "match": text[found.start() : found.end()],
+                }
+    return None
+
+
+async def _contexts(db: AsyncSession, user: User, item: LexiconItem) -> list[dict]:
+    """Lesson scenes that teach this word, in curriculum order, without scenes the profile lacks."""
+    scenes = (
+        await db.execute(
+            select(Scene)
+            .join(SceneWord, SceneWord.scene_id == Scene.id)
+            .where(SceneWord.lexicon_item_id == item.id, _scene_ok(user))
+            .order_by(Scene.position)
+            .limit(3)
+        )
+    ).scalars()
+    out = []
+    for scene in scenes:
+        line = _context_line(scene.lines or [], item)
+        out.append(
+            {
+                "topic_id": scene.id,
+                "title": scene.title_cs,
+                "line": line["text"] if line else None,
+                "line_cs": line["cs"] if line else None,
+                "match": line["match"] if line else None,
+            }
+        )
+    return out
 
 
 def _scene_ok(user: User):

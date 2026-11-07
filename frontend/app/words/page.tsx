@@ -81,6 +81,18 @@ function when(iso: string | null): string {
   return t.inDays(days);
 }
 
+function Highlight({ text, part }: { text: string; part: string | null }) {
+  const at = part ? text.indexOf(part) : -1;
+  if (!part || at < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, at)}
+      <mark className="rounded bg-amber-100 px-0.5 not-italic text-inherit dark:bg-amber-500/25">{part}</mark>
+      {text.slice(at + part.length)}
+    </>
+  );
+}
+
 function Article({ gender, lemma }: { gender: string | null; lemma: string }) {
   return (
     <>
@@ -90,7 +102,7 @@ function Article({ gender, lemma }: { gender: string | null; lemma: string }) {
   );
 }
 
-function Inspector({ id, onClose }: { id: string; onClose: () => void }) {
+function Inspector({ id, onClose, onTopic }: { id: string; onClose: () => void; onTopic: (scope: WordScope) => void }) {
   const [w, setW] = useState<WordDetail | null>(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -137,6 +149,31 @@ function Inspector({ id, onClose }: { id: string; onClose: () => void }) {
                 {w.example}
               </p>
               <PlayButton url={myWordAudioUrl(w.id, "example")} size="sm" label={cs.audio.playSentence} />
+            </div>
+          )}
+          {w.contexts.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs font-semibold text-slate-500">{t.contexts}</p>
+              <ul className="flex flex-col gap-1.5">
+                {w.contexts.map((c) => (
+                  <li key={c.topic_id}>
+                    <button
+                      type="button"
+                      onClick={() => onTopic({ kind: "topic", id: c.topic_id, label: c.title })}
+                      className="flex w-full flex-col gap-0.5 rounded-xl border border-slate-200 p-2.5 text-left hover:border-brand-500 dark:border-slate-700"
+                    >
+                      <span className="text-sm font-semibold">{c.title}</span>
+                      {c.line && (
+                        <span className="text-sm italic" lang={w.language}>
+                          <Highlight text={c.line} part={c.match} />
+                        </span>
+                      )}
+                      {c.line_cs && <span className="text-xs text-slate-500">{c.line_cs}</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[0.7rem] text-slate-500">{t.contextsHelp}</p>
             </div>
           )}
           <NoteEditor itemId={w.id} initial={w.note} />
@@ -596,7 +633,16 @@ export default function WordsPage() {
               </div>
               <div>
                 {open ? (
-                  <Inspector id={open} onClose={() => setOpen(null)} />
+                  <Inspector
+                    id={open}
+                    onClose={() => setOpen(null)}
+                    onTopic={(pick) => {
+                      setScope(pick);
+                      setStatus(null);
+                      setDue(false);
+                      setQ("");
+                    }}
+                  />
                 ) : (
                   <p className="hidden rounded-3xl border border-dashed border-slate-300 p-6 text-sm text-slate-500 dark:border-slate-700 lg:block">
                     {t.pick}

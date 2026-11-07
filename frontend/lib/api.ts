@@ -818,6 +818,8 @@ export interface WordDetail extends Omit<WordRow, "due"> {
   review_streak: number;
   history: { at: string; correct: boolean; graded: boolean; task: string; mode: string; error_tag: string | null }[];
   note: string | null;
+  /** Lesson scenes that teach the word; `line` is the scene line using it as written, if any. */
+  contexts: { topic_id: string; title: string; line: string | null; line_cs: string | null; match: string | null }[];
 }
 
 // Vocabulary groups: levels by frequency rank (indicative CEFR, "extension" past the C1 band) and

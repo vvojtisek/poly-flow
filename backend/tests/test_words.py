@@ -116,7 +116,16 @@ async def test_child_never_sees_flagged_words_and_cannot_read_parents(db, client
 async def seed_scenes() -> dict[str, uuid.UUID]:
     async for db in get_session():
         ids = {i.lemma: i.id for i in (await db.execute(select(LexiconItem))).scalars()}
-        home = Scene(language="de", slug="home", position=1, title_cs="Doma")
+        home = Scene(
+            language="de",
+            slug="home",
+            position=1,
+            title_cs="Doma",
+            lines=[
+                {"speaker": "A", "text": "Ein Haustier? Wir gehen.", "cs": "Mazlíček? Jdeme."},
+                {"speaker": "B", "text": "Das Haus ist neu.", "cs": "Ten dům je nový."},
+            ],
+        )
         crime = Scene(language="de", slug="crime", position=2, title_cs="Detektivka")
         db.add_all([home, crime])
         await db.flush()
@@ -190,3 +199,58 @@ async def test_word_list_filters_by_level_and_topic(db, client, clock):
     assert (await client.get("/api/v1/words?language=de&level=A1")).json()["total"] == 4
     assert (await client.get("/api/v1/words?language=de&level=B2")).json()["total"] == 0
     assert (await client.get("/api/v1/words?language=de&level=nope")).status_code == 422
+
+
+async def test_word_detail_shows_the_lesson_scenes_that_teach_it(db, client, clock):
+    parent = await setup_parent(client)
+    child_profile = await make_child(client, parent)
+    ids = await seed(uuid.UUID(parent["acting"]["id"]), clock)
+    await seed(uuid.UUID(child_profile["id"]), clock)
+    scenes = await seed_scenes()
+    async for db_ in get_session():
+        # Haus also appears in the crime scene, which a child profile never gets as a whole.
+        db_.add(SceneWord(scene_id=scenes["crime"], lexicon_item_id=ids["Haus"], position=2))
+        await db_.commit()
+        break
+    out = (await client.get(f"/api/v1/words/{ids['Haus']}")).json()
+    assert out["contexts"] == [
+        {
+            "topic_id": str(scenes["home"]),
+            "title": "Doma",
+            "line": "Das Haus ist neu.",
+            "line_cs": "Ten dům je nový.",
+            "match": "Haus",
+        },
+        {
+            "topic_id": str(scenes["crime"]),
+            "title": "Detektivka",
+            "line": None,
+            "line_cs": None,
+            "match": None,
+        },
+    ]
+    assert (await client.get(f"/api/v1/words/{ids['gehen']}")).json()["contexts"] == []
+    async for db_ in get_session():
+        # Current scenes tag the taught word's segment, which also finds inflected forms.
+        crime = await db_.get(Scene, scenes["crime"])
+        crime.lines = [
+            {
+                "cs": "Kvůli domu.",
+                "segments": [
+                    {"t": "Wegen des "},
+                    {"t": "Hauses", "item": str(ids["Haus"])},
+                    {"t": "."},
+                ],
+            }
+        ]
+        await db_.commit()
+        break
+    tagged = (await client.get(f"/api/v1/words/{ids['Haus']}")).json()["contexts"][1]
+    assert (tagged["line"], tagged["line_cs"], tagged["match"]) == (
+        "Wegen des Hauses.",
+        "Kvůli domu.",
+        "Hauses",
+    )
+    await login(client, "eva", "4321")
+    child = (await client.get(f"/api/v1/words/{ids['Haus']}")).json()
+    assert [c["title"] for c in child["contexts"]] == ["Doma"]

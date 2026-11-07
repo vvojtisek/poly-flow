@@ -479,6 +479,8 @@ export const cs = {
     streak: "Úspěšná ověření v řadě",
     history: "Historie odpovědí",
     noHistory: "Zatím žádné odpovědi.",
+    contexts: "Kde se slovo učí",
+    contextsHelp: "Lekce se scénou, ve které slovo poprvé potkáš. Klepnutím ukážeš slova té lekce.",
     historyHelp: "Zelená správně, červená chyba; plné tečky jsou ověření, průsvitné procvičování v lekci.",
     graded: "ověření",
     practice: "procvičování",

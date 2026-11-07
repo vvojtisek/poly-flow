@@ -88,6 +88,14 @@ class HistoryOut(BaseModel):
     error_tag: str | None
 
 
+class WordContextOut(BaseModel):
+    topic_id: uuid.UUID
+    title: str
+    line: str | None  # the scene line that uses the word as written; None when only inflected
+    line_cs: str | None
+    match: str | None  # the word as it appears in `line` (may be inflected), for highlighting
+
+
 class WordDetailOut(BaseModel):
     id: uuid.UUID
     language: Language
@@ -111,6 +119,7 @@ class WordDetailOut(BaseModel):
     review_streak: int
     history: list[HistoryOut]
     note: str | None = None  # the learner's own memory hook
+    contexts: list[WordContextOut] = []  # lesson scenes that teach the word
 
 
 class NoteIn(BaseModel):
