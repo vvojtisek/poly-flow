@@ -123,7 +123,11 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
   const [index, setIndex] = useState(start);
   const [hidden, setHidden] = useState(false);
   const [mineUrl, setMineUrl] = useState<string | null>(null);
-  const [tries, setTries] = useState(0);
+  // Recordings made per line in this visit (local only, never sent or scored).
+  const [practiced, setPracticed] = useState<Record<number, number>>({});
+  const indexRef = useRef(start);
+  indexRef.current = index;
+  const tries = practiced[index] ?? 0;
   const [model, setModel] = useState<Envelope | null>(null);
   const [mine, setMine] = useState<Envelope | null>(null);
   const [noModel, setNoModel] = useState(false);
@@ -133,7 +137,8 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     const url = URL.createObjectURL(blob);
     urls.current.push(url);
     setMineUrl(url);
-    setTries((n) => n + 1);
+    const at = indexRef.current;
+    setPracticed((p) => ({ ...p, [at]: (p[at] ?? 0) + 1 }));
     void envelopeFromUrl(url).then(setMine);
   }, []);
   const rec = useRecorder(onRecording, MAX_RECORDING_MS);
@@ -176,7 +181,6 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     setMine(null);
     setModel(null);
     setNoModel(false);
-    setTries(0);
     if (!modelUrl) return;
     let cancelled = false;
     clipSrc(modelUrl)
@@ -211,6 +215,14 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     },
     [list, recording],
   );
+  const jump = useCallback(
+    (i: number) => {
+      if (recording) return;
+      stop();
+      setIndex(i);
+    },
+    [recording],
+  );
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -244,6 +256,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         <div className="flex items-center justify-between gap-2 text-sm text-slate-500">
           <span>
             {index + 1} / {list.length}
+            <span className="ml-2 text-xs">{t.recordedCount(Object.keys(practiced).length, list.length)}</span>
           </span>
           <span className="flex items-center gap-2">
             <SlowToggle />
@@ -278,6 +291,28 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           {tries > 0 && ` · ${t.tries(tries)}`}
         </p>
       </section>
+
+      {/* Every line at a glance: filled once recorded in this visit; tap to jump. */}
+      <nav aria-label={t.linesNav} className="-mt-1 flex flex-wrap gap-1.5">
+        {list.map((line, i) => (
+          <button
+            key={line.key}
+            type="button"
+            onClick={() => jump(i)}
+            aria-current={i === index ? "true" : undefined}
+            aria-label={t.lineDot(i + 1, Boolean(practiced[i]))}
+            title={line.speaker ? `${line.speaker}: ${line.text}` : line.text}
+            className={`size-7 rounded-full text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+              practiced[i] ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            } ${i === index ? "ring-2 ring-brand-500 ring-offset-1 dark:ring-offset-slate-950" : ""}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </nav>
+      {Object.keys(practiced).length === list.length && (
+        <Notice>{source.kind === "scene" ? t.allRecordedScene : t.allRecorded}</Notice>
+      )}
 
       {noModel && <Notice>{t.noModel}</Notice>}
       {rec.state.kind === "error" && (

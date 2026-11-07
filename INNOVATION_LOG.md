@@ -2025,3 +2025,13 @@ Vlad approves a push.
 **Implemented Solution:** ?scene=<id> or ?order=random plus ?line=N (1-based) are read on mount and written with replaceState on every move. line is kept only for stable lists (recent words, scenes); a random sample changes on each load. An out-of-range or malformed line falls back to the first sentence. Switching language while on a scene returns to that language's words, because a scene belongs to one language.
 
 **Verification:** s93.js: words N N gives 3/20 with line=3, and a reload stays at 3/20. Scene Moje rodina plus N N N gives 4/8 with scene=dd12…&line=4. /words then Back restores 4/8 and the select keeps the same scene. ?line=999 falls back to 1/20. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 94/120 | Page: [/shadowing] (Page Cycle 4/15)
+
+**Summary:** show which lines are recorded and jump between them
+
+**Observed Problem:** The only progress signal was 'N. pokus', which reset on every line, and Další wrapped silently from the last line back to the first. A learner shadowing a 7-line dialogue could not tell which lines they had already recorded, had no way to go straight to a line, and was never told they had finished.
+
+**Implemented Solution:** Recordings are counted per line for this visit only (nothing is sent or scored), and the header shows 'nahráno X z N'. A numbered line strip under the card fills each line green once recorded, marks the current one, shows the line text on hover, and jumps on tap, which also updates the URL. When every line has been recorded, a note suggests the next step: another pass with the text hidden (H), or roleplay for a scene.
+
+**Verification:** s94.js uses Chromium with a fake microphone on scene Ahoj, jak se jmenuješ?. After the first R R: '1 / 7 · nahráno 1 z 7', and dot 1 reads 'Věta 1, nahraná'. After recording all 7: 'nahráno 7 z 7' and the completion note. Tapping dot 3 goes to 3/7 with line=3. No console errors. Typecheck, build, ruff passed.
