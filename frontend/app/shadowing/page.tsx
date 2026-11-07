@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
 import { Kbd } from "@/components/Kbd";
+import { digitOf, isTypingTarget } from "@/lib/keyboard";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice } from "@/components/ui";
 import { useRecorder } from "@/hooks/useRecorder";
@@ -272,14 +273,31 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      const el = e.target as HTMLElement | null;
-      if (e.ctrlKey || e.metaKey || e.altKey || e.repeat || el?.closest("input, select, textarea")) return;
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || e.repeat || isTypingTarget(e.target)) return;
+      const digit = digitOf(e);
+      if (digit !== null && list && digit <= list.length) {
+        e.preventDefault();
+        jump(digit - 1);
+        return;
+      }
       const actions: Record<string, () => void> = {
         KeyP: () => modelUrl && void play(modelUrl),
         KeyR: toggleRecord,
         KeyM: () => mineUrl && void play(mineUrl, { natural: true }),
         KeyC: () => void compare(),
         KeyN: () => go(1),
+        ArrowRight: () => go(1),
+        KeyB: () => go(-1),
+        ArrowLeft: () => go(-1),
+        // Escape ends whatever is running: a recording (kept, as with R), an echo round, playback.
+        Escape: () => {
+          echoRun.current += 1;
+          echoPending.current = false;
+          if (echoTimer.current) clearTimeout(echoTimer.current);
+          setEcho(null);
+          if (recording) rec.stop();
+          stop();
+        },
         KeyH: () => setHidden((h) => !h),
         KeyA: () => void runEcho(),
       };
@@ -291,7 +309,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [modelUrl, mineUrl, toggleRecord, compare, go, runEcho]);
+  }, [modelUrl, mineUrl, toggleRecord, compare, go, runEcho, jump, list, recording, rec]);
 
   if (failed) return <Notice tone="error">{cs.common.error}</Notice>;
   if (!list) return <p className="text-sm text-slate-500">{cs.common.loading}</p>;
@@ -391,10 +409,10 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
       <p className="sr-only" aria-live="polite">{echo ? t.echoSteps[echo] : ""}</p>
       <div className="flex justify-between gap-2">
         <button type="button" onClick={() => go(-1)} className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
-          <ChevronLeft className="size-4" aria-hidden /> {t.previous}
+          <ChevronLeft className="size-4" aria-hidden /> {t.previous} <span className="hidden lg:inline"><Kbd>B</Kbd></span>
         </button>
         <button type="button" onClick={() => go(1)} className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold text-brand-600 hover:bg-brand-500/10">
-          {t.next} <ChevronRight className="size-4" aria-hidden /> <Kbd>N</Kbd>
+          {t.next} <ChevronRight className="size-4" aria-hidden /> <span className="hidden lg:inline"><Kbd>N</Kbd></span>
         </button>
       </div>
       <p className="hidden text-center text-xs text-slate-500 lg:block">{t.keys}</p>

@@ -2045,3 +2045,13 @@ Vlad approves a push.
 **Implemented Solution:** An 'Kolo' button (key A) runs the whole loop. It plays the model to the end, records for a window sized to the model's voiced length (1.5× + 1 s, clamped to 2-15 s), then plays the model followed by the recording. The button label and an aria-live region name the current step. Pressing R stops the recording early and still compares. Moving to another line abandons the round through a run token, and a recorder error ends it. The recording counts in the per-line tally like a manual one.
 
 **Verification:** s95.js uses a fake microphone and a stubbed 1.5 s WAV model. The steps were: Poslouchej at 48 ms, then Teď ty at 1624 ms (after the model), then Vzor a pak ty at 4955 ms (a 3.3 s window), then back to idle at 10055 ms. Header: nahráno 1 z 7. Pressing A then N during the listening step went to 2/7 with no stray recording (still 1 z 7) and the button idle. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 96/120 | Page: [/shadowing] (Page Cycle 6/15)
+
+**Summary:** move, jump and stop from the keyboard
+
+**Observed Problem:** Keyboard shadowing could only go forward (N). There was no key for the previous line, no way to reach line 5 without pressing N four times, and nothing to abort a running echo round or recording. The handler used its own input/select test instead of the shared isTypingTarget, and ignored defaultPrevented. The Předchozí button had no key hint.
+
+**Implemented Solution:** → or N goes to the next line, ← or B to the previous one, and 1-9 jump to a line when it exists. Esc ends whatever is running: a recording (kept, as with R), an echo round (via its run token), and playback. The handler now uses isTypingTarget and respects defaultPrevented, so arrows inside the scene select still change the scene. Both nav buttons show their key on desktop, and the key legend lists the new keys.
+
+**Verification:** s96.js (1280px, fake mic, stubbed audio): →→ gives 3/7, B gives 2/7, ← gives 1/7, 5 gives 5/7, and 9 is ignored on a 7-line scene. A during the speak step followed by Esc leaves the echo button idle and the record button back to Nahrát. ArrowDown in the focused select switches to Moje rodina (1/8). No console errors. Typecheck, build, ruff passed.

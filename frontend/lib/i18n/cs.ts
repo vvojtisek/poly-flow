@@ -657,7 +657,7 @@ export const cs = {
     unsupported: "Tento prohlížeč neumí nahrávat (potřebuje HTTPS). Můžeš aspoň poslouchat a opakovat.",
     denied: "Mikrofon není povolený. Povol ho v nastavení prohlížeče a zkus to znovu.",
     noModel: "Hlas pro tento jazyk teď neběží, takže chybí vzor. Větu si můžeš přečíst nahlas, nahrát a poslechnout.",
-    keys: "P vzor · R nahrát/zastavit · M moje nahrávka · C porovnat · A kolo · H skrýt text · N další",
+    keys: "P vzor · R nahrát/zastavit · M moje nahrávka · C porovnat · A kolo · H skrýt text · N/→ další · B/← předchozí · 1–9 věta · Esc zastavit",
     echo: "Kolo: poslech, opakování, porovnání",
     echoSteps: { listen: "Poslouchej vzor…", speak: "Teď ty: zopakuj nahlas", compare: "Vzor a pak ty…" } as Record<string, string>,
     word: "Slovo z lekce",
