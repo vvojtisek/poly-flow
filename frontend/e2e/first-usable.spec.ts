@@ -79,7 +79,8 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(page.getByRole("link", { name: "Rodina" })).toHaveCount(0);
 
   // Nothing has been learnt yet, so there is nothing to check.
-  await expect(page.getByRole("button", { name: "Ověřit, co umím" })).toBeDisabled();
+  await expect(page.getByText("Dnes nic nečeká")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Denní opakování/ })).toHaveCount(0);
   await page.getByRole("button", { name: "Začít lekci" }).click();
   await page.waitForURL("**/lesson");
   // The lesson page lists grammar by level; the vocabulary course with its scenes is one step in.
@@ -125,7 +126,8 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await page.reload();
   await expect(seen).toHaveText("4"); // progress is persisted server-side
   // Learnt today, checkable from tomorrow.
-  await expect(page.getByRole("button", { name: "Ověřit, co umím" })).toBeDisabled();
+  await expect(page.getByText("Dnes nic nečeká")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Denní opakování/ })).toHaveCount(0);
 
   await page.getByRole("button", { name: "Zpět do účtu správce" }).click();
   // Scoped to the password form: the dashboard's plan has its own "Pokračovat" button.

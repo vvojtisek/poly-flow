@@ -273,7 +273,7 @@ export default function GrammarPage() {
                 ) : (
                   <>
                     <div className="flex flex-col gap-2">
-                      <h3 className="flex items-center gap-1.5 text-sm font-semibold text-brand-700 dark:text-brand-50">
+                      <h3 className="flex items-center gap-1.5 text-sm font-semibold text-brand-600 dark:text-brand-50">
                         <Sparkles className="size-4" aria-hidden /> {cs.grammar.inProgress}
                       </h3>
                       {current.length ? <UnitGrid units={current} tree={tree} /> : <p className="text-sm text-slate-500">{cs.grammar.nothingInProgress}</p>}

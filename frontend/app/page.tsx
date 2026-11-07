@@ -31,13 +31,31 @@ function QuickAction({
   title,
   help,
   highlight = false,
+  disabled = false,
 }: {
   href: string;
   icon: LucideIcon;
   title: string;
   help: string;
   highlight?: boolean;
+  disabled?: boolean;
 }) {
+  if (disabled) {
+    // Nothing to do here today: shown for orientation, but not a dead-end link.
+    return (
+      <li>
+        <div aria-disabled="true" className="flex h-full items-center gap-3 rounded-2xl border border-dashed border-slate-200 p-4 text-slate-500 dark:border-slate-800">
+          <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-slate-100 dark:bg-slate-800">
+            <Icon className="size-5" aria-hidden />
+          </span>
+          <span className="flex min-w-0 flex-col">
+            <span className="font-semibold">{title}</span>
+            <span className="text-sm">{help}</span>
+          </span>
+        </div>
+      </li>
+    );
+  }
   return (
     <li>
       <Link
@@ -114,19 +132,17 @@ export default function HomePage() {
   const assessmentInProgress = !!progress && (!!progress.active_placement_session_id || !!progress.active_exam_session_id);
   return (
     <AppShell me={me}>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="flex min-w-0 justify-end lg:col-span-3 [&>*]:justify-end">
+          <LanguagePicker me={me} />
+        </div>
         <section
           aria-labelledby="continue-title"
           className="flex flex-col gap-4 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-600 p-5 text-white shadow-md sm:p-6 lg:col-span-3"
         >
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="flex flex-col gap-1">
-              <h1 id="continue-title" className="text-2xl font-bold">{t.continueTitle}</h1>
-              <p className="max-w-xl text-sm text-white/85">{progress?.active_session_id ? t.continueResume : t.continueNext}</p>
-            </div>
-            <div className="rounded-xl bg-white p-1 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
-              <LanguagePicker me={me} />
-            </div>
+          <div className="flex flex-col gap-1">
+            <h1 id="continue-title" className="text-2xl font-bold">{t.continueTitle}</h1>
+            <p className="max-w-xl text-sm text-white/85">{progress?.active_session_id ? t.continueResume : t.continueNext}</p>
           </div>
           {offerPlacement && (
             <section className="flex flex-col gap-2 rounded-2xl bg-white p-4 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
@@ -149,7 +165,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => router.push("/lesson")}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-lg font-bold text-brand-700 shadow-sm transition hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-4 text-lg font-bold text-brand-600 shadow-sm transition hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
             >
               <Play className="size-5" aria-hidden />
               {progress?.active_session_id ? cs.lesson.resume : cs.lesson.start}
@@ -167,6 +183,7 @@ export default function HomePage() {
               icon={ClipboardCheck}
               title={t.daily}
               highlight={checkDue}
+              disabled={!checkDue}
               help={
                 !progress
                   ? cs.common.loading
@@ -194,7 +211,7 @@ export default function HomePage() {
                     title={cs.practice.mode[m.id]?.blurb}
                     className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium hover:bg-brand-500/10 ${
                       pinned.includes(m.id)
-                        ? "border-brand-500/60 bg-white text-brand-700 dark:bg-slate-900 dark:text-brand-100"
+                        ? "border-brand-500/60 bg-white text-brand-600 dark:bg-slate-900 dark:text-brand-50"
                         : "border-slate-200 bg-white text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
                     }`}
                   >

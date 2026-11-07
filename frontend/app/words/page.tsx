@@ -345,7 +345,7 @@ export default function WordsPage() {
                   aria-controls={`words-panel-${item.id}`}
                   onClick={() => setTab(item.id)}
                   className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
-                    tab === item.id ? "bg-white text-brand-700 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 hover:bg-white/60 dark:text-slate-300 dark:hover:bg-slate-900/60"
+                    tab === item.id ? "bg-white text-brand-600 shadow-sm dark:bg-slate-900 dark:text-brand-50" : "text-slate-600 hover:bg-white/60 dark:text-slate-300 dark:hover:bg-slate-900/60"
                   }`}
                 >
                   {item.label}
@@ -415,7 +415,7 @@ export default function WordsPage() {
             <div id="words-panel-all" role="tabpanel" aria-labelledby="words-tab-all" hidden={tab !== "all"} className="flex flex-col gap-4">
             {scope && (
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 px-3 py-1.5 text-sm font-semibold text-brand-700 dark:text-brand-50">
+                <span className="inline-flex items-center gap-2 rounded-full bg-brand-500/10 px-3 py-1.5 text-sm font-semibold text-brand-600 dark:text-brand-50">
                   {t.scoped(scope.label)}
                   <button type="button" onClick={() => setScope(null)} aria-label={t.clearScope} className="rounded-full p-0.5 hover:bg-brand-500/20">
                     <X className="size-3.5" aria-hidden />
