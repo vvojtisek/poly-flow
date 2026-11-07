@@ -134,7 +134,7 @@ Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`
 
 ## Versions and releases
 
-The current state is **pre-release 1.0**: version `1.0.0-alpha.2` ([SemVer](https://semver.org) pre-release).
+The current state is **pre-release 1.0**: version `1.0.0-alpha.11` ([SemVer](https://semver.org) pre-release).
 Every PR bumps the pre-release number (`alpha.N`).
 `/VERSION` is canonical; `scripts/set-version.sh <version>` updates every copy (backend package,
 `pyproject.toml`/`uv.lock` in PEP 440 spelling, `frontend/package.json`), and a backend test fails if they drift.
@@ -152,6 +152,13 @@ Commit, branch and build time are baked in when images are built. Run
 `eval "$(scripts/build-info.sh)"` before `docker compose up --build`; without it they read `unknown`.
 The local CD timer (`scripts/deploy-main.sh`) does this itself.
 A local `npm run dev` asks git directly. A `-dirty` suffix means the build had uncommitted changes.
+
+Every push to `main` runs `.github/workflows/release.yml`: it tags `v<VERSION>`, publishes a GitHub
+release with auto-generated change notes (the merged PRs since the previous release), and attaches the
+backend wheel and sdist, a deployment bundle (`*-deploy.tar.gz`), the curated data (`*-data.tar.gz`) and
+`SHA256SUMS`. `1.0.0-alpha.N` versions are marked as pre-releases. A merge that does not bump `/VERSION`
+refreshes the existing release's files instead of creating a new one. Releases and tags are listed under
+the repository's *Releases* page. Releases before `v1.0.0-alpha.11` were not tagged.
 
 Branching (see `AGENTS.md`): until 1.0 ships, work lands on `main` through short-lived branches.
 At release, `main` is tagged `v1.0.0` and from then on tracks released code only; ongoing development
