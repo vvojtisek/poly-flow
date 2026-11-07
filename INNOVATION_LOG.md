@@ -1745,3 +1745,13 @@ Vlad approves a push.
 **Implemented Solution:** The selected activity day (?day=) and a non-default forecast day (?forecast=) are mirrored to the URL with replaceState once data has loaded, and read back on load. Unknown or out-of-range dates fall back to the previous defaults: the last active day and today.
 
 **Verification:** Playwright: default load writes ?day=2026-11-07; picking 5 Nov sets ?day=2026-11-05 and the heading 'Učení · 5. 11.'; opening a word from that day and going Back restores ?day=2026-11-05 with the same heading. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 66/120 | Page: [/insights] (Page Cycle 6/15)
+
+**Summary:** navigate the activity calendar and forecast with arrow keys
+
+**Observed Problem:** The activity calendar rendered 182 day buttons, each its own tab stop, and the forecast added 14 more. A keyboard user had to press Tab about 190 times to get past the calendar, and could not move to the previous week or day directly.
+
+**Implemented Solution:** Both charts use a roving tabindex. The calendar is one tab stop (the selected day): ←/→ move a week, ↑/↓ a day, Home/End jump to the first/last day, and the moved-to day is selected (and its details load) with focus following. The forecast is one tab stop with ←/→/Home/End. A desktop hint 'Šipky: ← → týden, ↑ ↓ den' is linked through aria-describedby.
+
+**Verification:** Playwright: 2 tab stops across 196 chart buttons; from 7 Nov, ← goes to 31 Oct (URL ?day=2026-10-31), ↑ to 30 Oct, End to 7 Nov, Home to 10 May; in the forecast, →→ focuses and selects 9 Nov (?forecast=2026-11-09). No console errors. typecheck, next build, ruff pass.

@@ -1042,6 +1042,7 @@ export const cs = {
     skillPoint: (skill: string, week: string, correct: number, answered: number) => `${skill}, ${week}: ${correct} z ${answered} správně`,
     weekOf: (d: string) => `Týden od ${d}`,
     noAnswers: "Zatím žádné odpovědi v ověření.",
+    heatmapKeys: "Šipky: ← → týden, ↑ ↓ den",
     funnelTitle: "Od lekce k jistotě",
     funnel: {
       introduced: "Probraná slova",

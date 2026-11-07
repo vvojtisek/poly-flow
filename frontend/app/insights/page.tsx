@@ -28,6 +28,22 @@ function level(n: number, max: number): string {
 /** Activity calendar: 26 weeks, Monday on top. A calendar, not a streak counter. */
 function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; selected: string | null; onSelect: (date: string) => void }) {
   const max = Math.max(...data.map((d) => d.graded + d.practice));
+  const focusDate = selected && data.some((d) => d.date === selected) ? selected : data[data.length - 1]!.date;
+  // ←/→ move a week, ↑/↓ a day, Home/End to the first/last day; the moved-to day is selected.
+  function onGridKey(e: React.KeyboardEvent<HTMLDivElement>) {
+    const delta = { ArrowLeft: -7, ArrowRight: 7, ArrowUp: -1, ArrowDown: 1 }[e.key];
+    const index = data.findIndex((d) => d.date === focusDate);
+    let next = index;
+    if (delta !== undefined) next = Math.max(0, Math.min(data.length - 1, index + delta));
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = data.length - 1;
+    else return;
+    e.preventDefault();
+    const date = data[next]!.date;
+    const root = e.currentTarget; // React clears currentTarget after the handler returns
+    onSelect(date);
+    requestAnimationFrame(() => root.querySelector<HTMLElement>(`[data-date="${date}"]`)?.focus());
+  }
   const first = new Date(data[0]!.date + "T12:00:00");
   const pad = (first.getDay() + 6) % 7; // Monday = 0
   const cells: (Insights["heatmap"][number] | null)[] = [...Array(pad).fill(null), ...data];
@@ -35,7 +51,7 @@ function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; sele
   for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-[3px] overflow-x-auto pb-1" role="group" aria-label={t.heatmapLabel}>
+      <div className="flex gap-[3px] overflow-x-auto pb-1" role="group" aria-label={t.heatmapLabel} aria-describedby="heatmap-keys" onKeyDown={onGridKey}>
         {weeks.map((w, i) => (
           <div key={i} className="flex flex-col gap-[3px]">
             {w.map((d, j) =>
@@ -43,6 +59,9 @@ function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; sele
                 <button
                   key={d.date}
                   type="button"
+                  data-date={d.date}
+                  // One tab stop for the whole calendar (the selected day); arrows move inside it.
+                  tabIndex={d.date === focusDate ? 0 : -1}
                   aria-pressed={selected === d.date}
                   aria-label={t.activityDayLabel(dayFmt(d.date), d.graded, d.practice)}
                   onClick={() => onSelect(d.date)}
@@ -57,6 +76,9 @@ function Heatmap({ data, selected, onSelect }: { data: Insights["heatmap"]; sele
         ))}
       </div>
       <div className="flex items-center justify-end gap-1 text-[0.7rem] text-slate-500">
+        <span id="heatmap-keys" className="mr-auto hidden lg:inline">
+          {t.heatmapKeys}
+        </span>
         {t.less}
         {[0, 0.2, 0.4, 0.6, 0.9].map((r) => (
           <span key={r} className={`size-3 rounded-[3px] ${level(r * 100, 100)}`} />
@@ -175,11 +197,25 @@ function Forecast({
 }) {
   const max = Math.max(1, ...data.map((d) => d.words + d.grammar));
   return (
-    <div className="flex h-40 items-end gap-1" role="group" aria-label={t.forecastLabel}>
+    <div
+      className="flex h-40 items-end gap-1"
+      role="group"
+      aria-label={t.forecastLabel}
+      onKeyDown={(e) => {
+        const index = Math.max(0, data.findIndex((d) => d.date === selected));
+        const next = e.key === "ArrowRight" ? index + 1 : e.key === "ArrowLeft" ? index - 1 : e.key === "Home" ? 0 : e.key === "End" ? data.length - 1 : null;
+        if (next === null) return;
+        e.preventDefault();
+        const date = data[Math.max(0, Math.min(data.length - 1, next))]!.date;
+        onSelect(date);
+        const root = e.currentTarget;
+        requestAnimationFrame(() => root.querySelector<HTMLElement>(`[data-date="${date}"]`)?.focus());
+      }}
+    >
       {data.map((d, i) => {
         const total = d.words + d.grammar;
         return (
-          <button key={d.date} type="button" aria-pressed={selected === d.date} aria-label={t.forecastAction(dayFmt(d.date), d.words, d.grammar)} onClick={() => onSelect(d.date)} className={`flex h-full flex-1 flex-col items-center justify-end gap-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${selected === d.date ? "bg-brand-500/10" : "hover:bg-slate-100/70 dark:hover:bg-slate-800/70"}`} title={`${dayFmt(d.date)}: ${t.forecastTitle(d.words, d.grammar)}`}>
+          <button key={d.date} type="button" data-date={d.date} tabIndex={selected === d.date || (!selected && i === 0) ? 0 : -1} aria-pressed={selected === d.date} aria-label={t.forecastAction(dayFmt(d.date), d.words, d.grammar)} onClick={() => onSelect(d.date)} className={`flex h-full flex-1 flex-col items-center justify-end gap-1 rounded-md outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${selected === d.date ? "bg-brand-500/10" : "hover:bg-slate-100/70 dark:hover:bg-slate-800/70"}`} title={`${dayFmt(d.date)}: ${t.forecastTitle(d.words, d.grammar)}`}>
             <span className="text-[0.65rem] tabular-nums text-slate-500">{total || ""}</span>
             <div className="flex w-full flex-col justify-end overflow-hidden rounded-md" style={{ height: `${(total / max) * 75}%` }}>
               <div className="bg-amber-400" style={{ flexGrow: d.grammar }} />
