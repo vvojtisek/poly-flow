@@ -1723,6 +1723,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-01-urgent-meeting",
+   "level": "B1",
+   "title": "The Urgent Meeting",
+   "title_cs": "Naléhavá porada",
+   "lines": [
+    {
+     "text": "At nine o'clock, Ms Wagner called the whole team to an important meeting. In the invitation, the topic was a single word: Urgent.",
+     "cs": "V devět hodin svolala paní Wagnerová celý tým na důležitou poradu. Téma v pozvánce tvořilo jediné slovo: Naléhavé."
+    },
+    {
+     "text": "Everyone arrived on time, although nobody knew what it was about.",
+     "cs": "Všichni přišli včas, i když nikdo nevěděl, o co jde."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Thank you all for coming. I would like to tell you something important.",
+     "cs": "Děkuji, že jste přišli. Chci vám oznámit něco důležitého."
+    },
+    {
+     "text": "She paused for a long time. Jonas held his breath.",
+     "cs": "Udělala dlouhou pauzu. Jonas zadržel dech."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "From next week, the canteen is switching to new plates.",
+     "cs": "Od příštího týdne přechází jídelna na nové talíře."
+    },
+    {
+     "speaker": "Jonas",
+     "text": "Is that all?",
+     "cs": "A to je všechno?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "No. There will also be new forks. I have prepared a presentation.",
+     "cs": "Ne. Budou i nové vidličky. Připravila jsem k tomu prezentaci."
+    },
+    {
+     "text": "She showed forty slides. Sabine secretly counted the windows, Jonas the minutes.",
+     "cs": "Ukázala čtyřicet snímků. Sabine tajně počítala okna, Jonas minuty."
+    },
+    {
+     "text": "After ninety minutes, Ms Wagner asked whether there were any more questions.",
+     "cs": "Po devadesáti minutách se Wagnerová zeptala, jestli jsou ještě nějaké otázky."
+    },
+    {
+     "speaker": "Sabine",
+     "text": "Yes: couldn't you have emailed us this?",
+     "cs": "Ano: Nemohla jste nám to napsat e-mailem?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "That was my first idea. But then I couldn't have shown these lovely slides.",
+     "cs": "To jsem původně chtěla. Ale pak bych nemohla ukázat ty krásné snímky."
+    },
+    {
+     "text": "The next day, the team received an email. Subject: Meeting about the meeting. Urgent.",
+     "cs": "Druhý den dostal tým e-mail. Předmět: Porada o poradě. Naléhavé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Urgent",
+     "cs": "naléhavé"
+    },
+    {
+     "word": "slides",
+     "cs": "snímky"
+    },
+    {
+     "word": "Subject",
+     "cs": "předmět"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What is the meeting about?",
+     "options": [
+      "New plates and forks in the canteen",
+      "A pay rise",
+      "A new boss"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What does Sabine suggest?",
+     "options": [
+      "An email instead of a meeting",
+      "A shorter break",
+      "A second presentation"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

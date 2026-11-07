@@ -1723,6 +1723,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-01-urgent-meeting",
+   "level": "B1",
+   "title": "Réunion urgente",
+   "title_cs": "Naléhavá porada",
+   "lines": [
+    {
+     "text": "À neuf heures, Mme Wagner a convoqué toute l'équipe à une réunion importante. Dans l'invitation, le sujet tenait en un mot : Urgent.",
+     "cs": "V devět hodin svolala paní Wagnerová celý tým na důležitou poradu. Téma v pozvánce tvořilo jediné slovo: Naléhavé."
+    },
+    {
+     "text": "Tout le monde est arrivé à l'heure, bien que personne ne sache de quoi il s'agissait.",
+     "cs": "Všichni přišli včas, i když nikdo nevěděl, o co jde."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Merci d'être venus. Je voudrais vous annoncer quelque chose d'important.",
+     "cs": "Děkuji, že jste přišli. Chci vám oznámit něco důležitého."
+    },
+    {
+     "text": "Elle a fait une longue pause. Jonas a retenu son souffle.",
+     "cs": "Udělala dlouhou pauzu. Jonas zadržel dech."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "À partir de la semaine prochaine, la cantine passe à de nouvelles assiettes.",
+     "cs": "Od příštího týdne přechází jídelna na nové talíře."
+    },
+    {
+     "speaker": "Jonas",
+     "text": "Et c'est tout ?",
+     "cs": "A to je všechno?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Non. Il y aura aussi de nouvelles fourchettes. J'ai préparé une présentation.",
+     "cs": "Ne. Budou i nové vidličky. Připravila jsem k tomu prezentaci."
+    },
+    {
+     "text": "Elle a montré quarante diapositives. Sabine comptait discrètement les fenêtres, Jonas les minutes.",
+     "cs": "Ukázala čtyřicet snímků. Sabine tajně počítala okna, Jonas minuty."
+    },
+    {
+     "text": "Au bout de quatre-vingt-dix minutes, Mme Wagner a demandé s'il y avait encore des questions.",
+     "cs": "Po devadesáti minutách se Wagnerová zeptala, jestli jsou ještě nějaké otázky."
+    },
+    {
+     "speaker": "Sabine",
+     "text": "Oui : vous n'auriez pas pu nous l'écrire par e-mail ?",
+     "cs": "Ano: Nemohla jste nám to napsat e-mailem?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "C'était mon idée au départ. Mais je n'aurais pas pu montrer ces belles diapositives.",
+     "cs": "To jsem původně chtěla. Ale pak bych nemohla ukázat ty krásné snímky."
+    },
+    {
+     "text": "Le lendemain, l'équipe a reçu un e-mail. Objet : Réunion sur la réunion. Urgent.",
+     "cs": "Druhý den dostal tým e-mail. Předmět: Porada o poradě. Naléhavé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Urgent",
+     "cs": "naléhavé"
+    },
+    {
+     "word": "diapositives",
+     "cs": "snímky"
+    },
+    {
+     "word": "Objet",
+     "cs": "předmět"
+    }
+   ],
+   "questions": [
+    {
+     "question": "De quoi parle la réunion ?",
+     "options": [
+      "De nouvelles assiettes et fourchettes à la cantine",
+      "D'une augmentation de salaire",
+      "D'un nouveau chef"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Que propose Sabine ?",
+     "options": [
+      "Un e-mail à la place d'une réunion",
+      "Une pause plus courte",
+      "Une deuxième présentation"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

@@ -1723,6 +1723,102 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-01-urgent-meeting",
+   "level": "B1",
+   "title": "Dringende Besprechung",
+   "title_cs": "Naléhavá porada",
+   "lines": [
+    {
+     "text": "Um neun Uhr rief Frau Wagner das ganze Team zu einer wichtigen Besprechung zusammen. Als Thema stand in der Einladung nur ein Wort: Dringend.",
+     "cs": "V devět hodin svolala paní Wagnerová celý tým na důležitou poradu. Téma v pozvánce tvořilo jediné slovo: Naléhavé."
+    },
+    {
+     "text": "Alle erschienen pünktlich, obwohl niemand wusste, worum es ging.",
+     "cs": "Všichni přišli včas, i když nikdo nevěděl, o co jde."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Danke, dass Sie alle gekommen sind. Ich möchte Ihnen etwas Wichtiges mitteilen.",
+     "cs": "Děkuji, že jste přišli. Chci vám oznámit něco důležitého."
+    },
+    {
+     "text": "Sie machte eine lange Pause. Jonas hielt den Atem an.",
+     "cs": "Udělala dlouhou pauzu. Jonas zadržel dech."
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Ab nächster Woche stellt die Kantine auf neue Teller um.",
+     "cs": "Od příštího týdne přechází jídelna na nové talíře."
+    },
+    {
+     "speaker": "Jonas",
+     "text": "Und das ist alles?",
+     "cs": "A to je všechno?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Nein. Es gibt auch neue Gabeln. Dazu habe ich eine Präsentation vorbereitet.",
+     "cs": "Ne. Budou i nové vidličky. Připravila jsem k tomu prezentaci."
+    },
+    {
+     "text": "Sie zeigte vierzig Folien. Sabine zählte heimlich die Fenster, Jonas die Minuten.",
+     "cs": "Ukázala čtyřicet snímků. Sabine tajně počítala okna, Jonas minuty."
+    },
+    {
+     "text": "Nach neunzig Minuten fragte Frau Wagner, ob es noch Fragen gebe.",
+     "cs": "Po devadesáti minutách se Wagnerová zeptala, jestli jsou ještě nějaké otázky."
+    },
+    {
+     "speaker": "Sabine",
+     "text": "Ja: Hätten Sie uns das nicht per E-Mail schreiben können?",
+     "cs": "Ano: Nemohla jste nám to napsat e-mailem?"
+    },
+    {
+     "speaker": "Wagner",
+     "text": "Das wollte ich zuerst. Aber dann hätte ich diese schönen Folien nicht zeigen können.",
+     "cs": "To jsem původně chtěla. Ale pak bych nemohla ukázat ty krásné snímky."
+    },
+    {
+     "text": "Am nächsten Tag bekam das Team eine E-Mail. Betreff: Besprechung zur Besprechung. Dringend.",
+     "cs": "Druhý den dostal tým e-mail. Předmět: Porada o poradě. Naléhavé."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Dringend",
+     "cs": "naléhavé"
+    },
+    {
+     "word": "Folien",
+     "cs": "fólie, snímky"
+    },
+    {
+     "word": "Betreff",
+     "cs": "předmět"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Worum geht es in der Besprechung?",
+     "options": [
+      "Um neue Teller und Gabeln in der Kantine",
+      "Um eine Gehaltserhöhung",
+      "Um einen neuen Chef"
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was schlägt Sabine vor?",
+     "options": [
+      "Eine E-Mail statt einer Besprechung",
+      "Eine kürzere Pause",
+      "Eine zweite Präsentation"
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
