@@ -474,14 +474,18 @@ async def word_deck(
     level: str | None,
     topic: uuid.UUID | None,
     weak: bool = False,
+    ids: list[uuid.UUID] | None = None,
     limit: int = DECK_LIMIT,
 ) -> dict:
-    """The profile's own words in one scope (a level, a topic, or its unresolved check mistakes),
-    due and unfinished words first."""
-    if sum((level is not None, topic is not None, weak)) != 1:
+    """The profile's own words in one scope (a level, a topic, its unresolved check mistakes, or
+    words it picked by id), due and unfinished words first. Ids of words the profile has not met
+    or may not see are simply left out by the same join and filter."""
+    if sum((level is not None, topic is not None, weak, bool(ids))) != 1:
         raise LearningError("deck_scope_required", 422)
     p, li = UserWordProgress, LexiconItem
-    if weak:
+    if ids:
+        scope = [li.id.in_(ids)]
+    elif weak:
         from app.services import mistakes
 
         missed = [w.item.id for w in (await mistakes.weak_spots(db, user, language, now)).words]

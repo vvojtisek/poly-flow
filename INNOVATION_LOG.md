@@ -1625,3 +1625,13 @@ Vlad approves a push.
 **Implemented Solution:** The words API takes kind=noun|verb|adj|adv|other, which maps Universal Dependencies POS tags to learner-facing groups (PROPN counts with nouns, AUX with verbs, every other tag is 'other'). Kind is one of the facet filters, so the status counts follow it. The page adds a swipeable 'Druh slova' chip row (Podstatná jména, Slovesa, Přídavná jména, Příslovce, Ostatní). Tapping a chip again clears it, and the choice is kept in the URL (?kind=).
 
 **Verification:** New pytest test_word_list_filters_by_word_kind (noun/verb/adj/other, counts add up to total, 422 on unknown); tests/test_words.py 11 passed. Playwright: Slovesa shows 'Vše 8' with sein, haben, können, kommen; nouns show der Mann, die Frau; Ostatní shows der, und, in, ein; a reload keeps the choice; no horizontal overflow at 390px. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 54/120 | Page: [/words] (Page Cycle 9/15)
+
+**Summary:** practise hand-picked words as flashcards and select a whole filtered view
+
+**Observed Problem:** Selecting words in the list only let a learner add them to a collection. To rehearse a few chosen words (say all verbs due this week), the learner had to create a collection first, and selecting a filtered view meant ticking each row. Nothing showed the 100-word limit of the bulk endpoint until a request failed.
+
+**Implemented Solution:** The flashcard deck API takes a hand-picked scope (ids=…, up to 100). The same own-words join and child filter apply, so ids of unmet or hidden words are just left out. The selection bar gets 'Kartičky z vybraných', which opens the practice-only flashcard session on exactly those words. A 'Vybrat zobrazená (N)' checkbox selects or clears all visible rows. Selection is capped at 100 with a note, and further row checkboxes are disabled.
+
+**Verification:** New pytest test_deck_from_picked_words_keeps_only_own_suitable_words: a child profile gets Haus and gehen (Mord hidden, neu unmet), with the due word first; mixing ids with level gives 422, and 101 ids give 422. tests/test_words.py 12 passed. Playwright: ?kind=verb, select shown gives 'Vybráno slov: 8', 'Kartičky z vybraných' opens 'Vybraná slova (8)' with a deck request. No console errors. typecheck, next build, ruff pass.

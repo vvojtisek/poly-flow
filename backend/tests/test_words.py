@@ -368,3 +368,18 @@ async def test_word_list_filters_by_word_kind(db, client, clock):
     assert await lemmas("adj") == ["schön"]
     assert await lemmas("other") == []
     assert (await client.get("/api/v1/words?language=de&kind=x")).status_code == 422
+
+
+async def test_deck_from_picked_words_keeps_only_own_suitable_words(db, client, clock):
+    parent = await setup_parent(client)
+    child_profile = await make_child(client, parent)
+    ids = await seed(uuid.UUID(child_profile["id"]), clock)
+    await login(client, "eva", "4321")
+    picked = "&".join(f"ids={ids[w]}" for w in ("gehen", "Haus", "Mord", "neu"))
+    deck = (await client.get(f"/api/v1/words/deck?language=de&{picked}")).json()
+    # Mord is hidden from a child profile; neu was never met. Haus is due, so it comes first.
+    assert [c["lemma"] for c in deck["items"]] == ["Haus", "gehen"] and deck["total"] == 2
+    both = f"/api/v1/words/deck?language=de&level=A1&ids={ids['Haus']}"
+    assert (await client.get(both)).status_code == 422
+    many = "&".join(f"ids={uuid.uuid4()}" for _ in range(101))
+    assert (await client.get(f"/api/v1/words/deck?language=de&{many}")).status_code == 422

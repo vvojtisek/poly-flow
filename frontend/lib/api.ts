@@ -852,7 +852,7 @@ export interface WordGroups {
 }
 export type WordScope = { kind: "level"; key: string; label: string } | { kind: "topic"; id: string; label: string };
 // Flashcard decks also accept the learner's unresolved check mistakes as a scope.
-export type DeckScope = WordScope | { kind: "weak"; label: string };
+export type DeckScope = WordScope | { kind: "weak"; label: string } | { kind: "picked"; ids: string[]; label: string };
 
 export interface DeckCard {
   id: string;
@@ -881,6 +881,7 @@ function scopeParams(p: URLSearchParams, scope: WordScope | null | undefined) {
 export function getWordDeck(language: Language, scope: DeckScope, signal?: AbortSignal) {
   const p = new URLSearchParams({ language });
   if (scope.kind === "weak") p.set("weak", "true");
+  else if (scope.kind === "picked") scope.ids.slice(0, 100).forEach((id) => p.append("ids", id));
   else scopeParams(p, scope);
   return api<Deck>(`/api/v1/words/deck?${p}`, { signal, cache: "no-store" });
 }

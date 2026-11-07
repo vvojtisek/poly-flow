@@ -11,7 +11,7 @@ import { NoteEditor } from "@/components/NoteEditor";
 import { WordCollectionControl } from "@/components/WordCollectionControl";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Button, Notice } from "@/components/ui";
-import { addWordsToCollection, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
+import { addWordsToCollection, type DeckScope, getWord, getWordGroups, listWordCollections, listWords, myWordAudioUrl, wordExportUrl, type WordCollection, type WordDetail, type WordGroups, type WordList, type WordKind, type WordScope, type WordSort, type WordStatus } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { useHotkeys } from "@/lib/keyboard";
 import { genderClass } from "@/lib/gender";
@@ -28,6 +28,7 @@ const PILL: Record<WordStatus, string> = {
   seen: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300",
 };
 const PAGE = 60;
+const MAX_PICK = 100; // the bulk-add and picked-deck endpoints take at most 100 ids
 const SORTS: WordSort[] = ["rank", "review", "errors", "recent"];
 const KINDS: WordKind[] = ["noun", "verb", "adj", "adv", "other"];
 type Tab = "all" | "levels" | "topics";
@@ -293,7 +294,7 @@ export default function WordsPage() {
   const [groups, setGroups] = useState<WordGroups | null>(null);
   const [groupsFailed, setGroupsFailed] = useState(false);
   const [scope, setScope] = useState<WordScope | null>(null);
-  const [cards, setCards] = useState<WordScope | null>(null);
+  const [cards, setCards] = useState<DeckScope | null>(null);
 
   // Filters, tab, scope and the open word live in the URL so a reload, Back or a shared link restores the
   // same view. Topic labels need the group list, so a topic scope from the URL resolves once groups load.
@@ -697,6 +698,9 @@ export default function WordsPage() {
                 {selected.length > 0 && (
                   <section aria-label={t.addSelected} className="flex flex-wrap items-center gap-2 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-3">
                     <span className="mr-auto text-sm font-semibold">{t.selected(selected.length)}</span>
+                    <Button variant="secondary" onClick={() => setCards({ kind: "picked", ids: selected, label: t.pickedDeck(selected.length) })}>
+                      <Layers className="size-4" aria-hidden /> {t.practiseSelected}
+                    </Button>
                     {collections.length ? (
                       <>
                         <label className="sr-only" htmlFor="bulk-collection">{t.selectCollection}</label>
@@ -713,13 +717,30 @@ export default function WordsPage() {
                   </section>
                 )}
                 {bulkNotice && <Notice tone={bulkNotice.error ? "error" : "ok"}>{bulkNotice.text}</Notice>}
+                {data && data.items.length > 1 && (
+                  <label className="inline-flex items-center gap-2 self-start pl-3 text-sm text-slate-600 dark:text-slate-300">
+                    <input
+                      type="checkbox"
+                      className="size-4 accent-brand-600"
+                      checked={data.items.every((w) => selected.includes(w.id))}
+                      onChange={(e) => {
+                        const shown = data.items.map((w) => w.id);
+                        setSelected((current) =>
+                          e.target.checked ? [...current, ...shown.filter((id) => !current.includes(id))].slice(0, MAX_PICK) : current.filter((id) => !shown.includes(id)),
+                        );
+                      }}
+                    />
+                    {t.selectShown(data.items.length)}
+                  </label>
+                )}
+                {selected.length >= MAX_PICK && <p className="text-xs text-slate-500">{t.selectLimit}</p>}
                 {data && data.items.length === 0 && <Notice>{narrowed ? t.noMatch : t.empty}</Notice>}
                 <ul id="word-list" className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-200 bg-white dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-900">
                   {data?.items.map((w, i) => (
                     <li key={w.id} id={`word-row-${i}`}>
                       <div className="flex items-center">
                       <label className="flex shrink-0 items-center pl-3" title={t.selectWord(w.lemma)}>
-                        <input type="checkbox" checked={selected.includes(w.id)} aria-label={t.selectWord(w.lemma)} onChange={(e) => setSelected((current) => e.target.checked ? [...current, w.id] : current.filter((id) => id !== w.id))} className="size-4 accent-brand-600" />
+                        <input type="checkbox" checked={selected.includes(w.id)} aria-label={t.selectWord(w.lemma)} disabled={!selected.includes(w.id) && selected.length >= MAX_PICK} onChange={(e) => setSelected((current) => e.target.checked ? [...current, w.id] : current.filter((id) => id !== w.id))} className="size-4 accent-brand-600" />
                       </label>
                       <button
                         type="button"

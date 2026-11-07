@@ -251,9 +251,10 @@ async def word_deck(
     level: Annotated[str | None, Query(max_length=16)] = None,
     topic: uuid.UUID | None = None,
     weak: bool = False,
+    ids: Annotated[list[uuid.UUID] | None, Query(max_length=100)] = None,
 ) -> DeckOut:
-    """Flashcards from the profile's own words in one level, one topic, or its unresolved check
-    mistakes (`weak=true`); exactly one scope.
+    """Flashcards from the profile's own words in one level, one topic, its unresolved check
+    mistakes (`weak=true`) or a hand-picked list (`ids`, up to 100); exactly one scope.
 
     Practice only: flipping and marking cards is not recorded and does not change progress.
     """
@@ -266,6 +267,7 @@ async def word_deck(
             level=level,
             topic=topic,
             weak=weak,
+            ids=ids,
         )
     except LearningError as exc:
         raise _http(exc) from exc
