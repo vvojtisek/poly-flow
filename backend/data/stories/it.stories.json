@@ -6235,6 +6235,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-38-compost-diplomacy",
+   "level": "B2",
+   "title": "La diplomazia del compost",
+   "title_cs": "Kompostová diplomacie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva cercava di convincere i vicini a creare un compost comune invece di comprare altri bidoni.",
+     "cs": "Eva se snažila přesvědčit sousedy, aby místo dalších popelnic založili společný kompost."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Servono una cooperazione duratura e una distribuzione equa delle responsabilità per i vari strati.",
+     "cs": "Potřebujeme dlouhodobou spolupráci a spravedlivé rozdělení odpovědnosti za jednotlivé vrstvy."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Porterò le foglie. Chi rappresenterà i lombrichi nelle deliberazioni?",
+     "cs": "Já dodám listí. Kdo bude zastupovat žížaly při rozhodování?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I lombrichi non sono membri del comitato. Fanno parte del processo biologico.",
+     "cs": "Žížaly nejsou členy výboru. Jsou součástí biologického procesu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Eppure lavoreranno la maggior quantità di materiale senza ricevere alcuna remunerazione.",
+     "cs": "Přitom právě ony zpracují největší množství materiálu a nedostanou žádnou odměnu."
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha riscritto l'invito: Bene. La prossima riunione si terrà nel compost, così tutti avranno pari accesso.",
+     "cs": "Eva přepsala pozvánku: Dobře. Příští poradu uspořádáme přímo v kompostu, ať má každý stejný přístup."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "cooperazione",
+     "cs": "spolupráce"
+    },
+    {
+     "word": "equa",
+     "cs": "spravedlivý"
+    },
+    {
+     "word": "deliberazioni",
+     "cs": "jednání"
+    },
+    {
+     "word": "remunerazione",
+     "cs": "odměna"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Eva založit?",
+     "options": [
+      "Společný kompost.",
+      "Další parkoviště.",
+      "Klub zahraničních hostů."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč chce poradu v kompostu?",
+     "options": [
+      "Aby měly přístup i žížaly.",
+      "Aby bylo teplo.",
+      "Aby se sousedi nedostavili."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

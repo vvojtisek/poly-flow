@@ -6235,6 +6235,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-38-compost-diplomacy",
+   "level": "B2",
+   "title": "Kompostdiplomatie",
+   "title_cs": "Kompostová diplomacie",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva wollte die Nachbarn überzeugen, statt weiterer Mülltonnen einen gemeinschaftlichen Komposthaufen anzulegen.",
+     "cs": "Eva se snažila přesvědčit sousedy, aby místo dalších popelnic založili společný kompost."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Wir brauchen dauerhafte Kooperation und eine gerechte Verteilung der Zuständigkeit für die einzelnen Schichten.",
+     "cs": "Potřebujeme dlouhodobou spolupráci a spravedlivé rozdělení odpovědnosti za jednotlivé vrstvy."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich liefere Laub. Wer vertritt die Regenwürmer bei den Beratungen?",
+     "cs": "Já dodám listí. Kdo bude zastupovat žížaly při rozhodování?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Die Würmer sind keine Ausschussmitglieder. Sie gehören zum biologischen Prozess.",
+     "cs": "Žížaly nejsou členy výboru. Jsou součástí biologického procesu."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Dabei verarbeiten gerade sie die größte Materialmenge und bekommen keinerlei Vergütung.",
+     "cs": "Přitom právě ony zpracují největší množství materiálu a nedostanou žádnou odměnu."
+    },
+    {
+     "speaker": null,
+     "text": "Eva schrieb die Einladung um: Gut. Die nächste Sitzung findet im Kompost statt, damit alle gleichberechtigten Zugang haben.",
+     "cs": "Eva přepsala pozvánku: Dobře. Příští poradu uspořádáme přímo v kompostu, ať má každý stejný přístup."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Kooperation",
+     "cs": "spolupráce"
+    },
+    {
+     "word": "Zuständigkeit",
+     "cs": "odpovědnost"
+    },
+    {
+     "word": "Vergütung",
+     "cs": "odměna"
+    },
+    {
+     "word": "gleichberechtigten",
+     "cs": "rovnoprávný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co chce Eva založit?",
+     "options": [
+      "Společný kompost.",
+      "Další parkoviště.",
+      "Klub zahraničních hostů."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč chce poradu v kompostu?",
+     "options": [
+      "Aby měly přístup i žížaly.",
+      "Aby bylo teplo.",
+      "Aby se sousedi nedostavili."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
