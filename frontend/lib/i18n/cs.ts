@@ -1171,6 +1171,7 @@ export const cs = {
     enterOpens: "Enter otevře první, Esc vše zruší",
     preview: "Náhled výkladu",
     withErrors: "S chybami",
+    justStudied: (title: string) => `Právě prostudováno: ${title}`,
     previewHide: "Skrýt náhled",
     previewGoal: "Cíl:",
     checkedTally: (ok: number, wrong: number) =>

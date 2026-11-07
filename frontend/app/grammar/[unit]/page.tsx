@@ -23,7 +23,7 @@ export default function GrammarLessonPage() {
         englishVariant={me.acting.settings.english_variant}
         mode="learn"
         start={start}
-        onExit={() => router.push("/grammar")}
+        onExit={() => router.push(`/grammar?studied=${encodeURIComponent(unit)}`)}
         exitLabel={cs.grammar.toTree}
       />
     </AppShell>

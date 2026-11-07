@@ -1325,3 +1325,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/grammar/page.tsx`: in-progress topics are sorted by urgency (open lesson, due for check, recent mistakes, recommended, other studied; stable within groups). A new "S chybami N" chip filters to topics with unresolved recent check mistakes, is kept in the URL as `errors=1` and is cleared by Escape with the other filters. Copy `cs.grammar.withErrors`.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 24/120 | Page: [/grammar] (Page Cycle 9/15)
+
+**Summary:** return from a lesson to the topic just studied
+
+**Observed Problem:** Finishing a grammar lesson sent the learner to the top of `/grammar`; on a phone the topic they had just studied, now marked "Prostudováno" with its check date, was several screens down, so the result of the lesson was invisible.
+
+**Implemented Solution:** The lesson's exit (`app/grammar/[unit]/page.tsx`) now opens `/grammar?studied=<unit>`. `app/grammar/page.tsx` scrolls that card into view (instant when reduced motion is preferred), moves focus to its link, rings it in green for four seconds and announces "Právě prostudováno: …" to screen readers. The parameter is one-shot: it is removed from the URL so a reload does not scroll again.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a1-articles`: focus landed in that card, it carried the highlight, and the URL was cleaned to `/grammar`.

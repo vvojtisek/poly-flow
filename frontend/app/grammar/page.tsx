@@ -79,10 +79,15 @@ function UnitPreview({ id, language }: { id: string; language: string }) {
   );
 }
 
-function UnitCard({ u, recommended, resumable, language }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean; language: string }) {
+function UnitCard({ u, recommended, resumable, language, highlight }: { u: GrammarUnitSummary; recommended: boolean; resumable: boolean; language: string; highlight: boolean }) {
   const [open, setOpen] = useState(false);
   return (
-    <li className="flex flex-col">
+    <li id={`unit-${u.id}`} className={`flex flex-col rounded-2xl ${highlight ? "ring-4 ring-emerald-400/70 motion-safe:transition-shadow" : ""}`}>
+      {highlight && (
+        <span role="status" className="sr-only">
+          {cs.grammar.justStudied(u.title)}
+        </span>
+      )}
       <Link
         href={`/grammar/${u.id}`}
         className={`flex h-full flex-col gap-2 rounded-2xl border p-4 outline-none transition hover:border-brand-500 focus-visible:ring-2 focus-visible:ring-brand-500 ${
@@ -186,11 +191,11 @@ function LevelHeader({ level, units, active }: { level: string; units: Unit[]; a
   );
 }
 
-function UnitGrid({ units, tree }: { units: Unit[]; tree: GrammarTree }) {
+function UnitGrid({ units, tree, highlight = null }: { units: Unit[]; tree: GrammarTree; highlight?: string | null }) {
   return (
     <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {units.map((u) => (
-        <UnitCard key={u.id} u={u} recommended={u.id === tree.recommended} resumable={u.id === tree.active_lesson_unit} language={tree.language} />
+        <UnitCard key={u.id} u={u} recommended={u.id === tree.recommended} resumable={u.id === tree.active_lesson_unit} language={tree.language} highlight={u.id === highlight} />
       ))}
     </ol>
   );
@@ -231,6 +236,8 @@ export default function GrammarPage() {
   const [statusFilter, setStatusFilter] = useState<UnitState | null>(null);
   const [dueOnly, setDueOnly] = useState(false);
   const [errorsOnly, setErrorsOnly] = useState(false);
+  // Back from a lesson (?studied=<unit>): bring that topic into view and mark it briefly.
+  const [justStudied, setJustStudied] = useState<string | null>(null);
 
   // Explanation text per unit, fetched the first time the learner searches (about 30 kB).
   const [index, setIndex] = useState<Map<string, string> | null>(null);
@@ -281,6 +288,7 @@ export default function GrammarPage() {
     setStatusFilter(STATUS_FILTERS.includes(status as UnitState) ? (status as UnitState) : null);
     setDueOnly(params.get("due") === "1");
     setErrorsOnly(params.get("errors") === "1");
+    setJustStudied(params.get("studied"));
     setUrlRead(true);
   }, []);
   useEffect(() => {
@@ -291,10 +299,20 @@ export default function GrammarPage() {
     set("status", statusFilter);
     set("due", dueOnly ? "1" : null);
     set("errors", errorsOnly ? "1" : null);
+    params.delete("studied"); // one-shot: a reload should not scroll again
     const qs = params.toString();
     const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
     if (next !== `${window.location.pathname}${window.location.search}`) window.history.replaceState(window.history.state, "", next);
   }, [urlRead, query, statusFilter, dueOnly, errorsOnly]);
+
+  useEffect(() => {
+    if (!justStudied || !tree) return;
+    const el = document.getElementById(`unit-${justStudied}`);
+    el?.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    el?.querySelector<HTMLElement>("a")?.focus({ preventScroll: true });
+    const timer = window.setTimeout(() => setJustStudied(null), 4000);
+    return () => window.clearTimeout(timer);
+  }, [justStudied, tree]);
 
   useEffect(() => {
     if (!focusKey) return;
@@ -497,7 +515,7 @@ export default function GrammarPage() {
                       <h3 className="flex items-center gap-1.5 text-sm font-semibold text-brand-600 dark:text-brand-50">
                         <Sparkles className="size-4" aria-hidden /> {cs.grammar.inProgress}
                       </h3>
-                      {current.length ? <UnitGrid units={current} tree={tree} /> : <p className="text-sm text-slate-500">{cs.grammar.nothingInProgress}</p>}
+                      {current.length ? <UnitGrid units={current} tree={tree} highlight={justStudied} /> : <p className="text-sm text-slate-500">{cs.grammar.nothingInProgress}</p>}
                     </div>
                     {upcoming.length > 0 && (
                       <Disclosure
@@ -506,12 +524,12 @@ export default function GrammarPage() {
                         summary={<GroupSummary title={cs.grammar.upNext} count={upcoming.length} />}
                         summaryClassName="px-1"
                       >
-                        <div className="pt-2"><UnitGrid units={upcoming} tree={tree} /></div>
+                        <div className="pt-2"><UnitGrid units={upcoming} tree={tree} highlight={justStudied} /></div>
                       </Disclosure>
                     )}
                     {done.length > 0 && (
                       <Disclosure summary={<GroupSummary title={cs.grammar.completed} count={done.length} />} summaryClassName="px-1">
-                        <div className="pt-2"><UnitGrid units={done} tree={tree} /></div>
+                        <div className="pt-2"><UnitGrid units={done} tree={tree} highlight={justStudied} /></div>
                       </Disclosure>
                     )}
                   </>
