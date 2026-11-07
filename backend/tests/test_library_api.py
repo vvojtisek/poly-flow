@@ -62,6 +62,7 @@ async def test_reading_a_story_returns_lines_with_czech_and_hides_gated_ones(db,
     assert out["title"] == first.title and out["level"] == "A1"
     assert [ln["text"] for ln in out["lines"]] == [ln.text for ln in first.lines]
     assert all(ln["cs"] for ln in out["lines"]) and out["review_status"] == "unreviewed"
+    assert out["stretch"] == [{"word": w.word, "cs": w.cs} for w in first.stretch]
     # Unknown, malformed, or gated slugs are all plain 404s/422s, never another language's text.
     assert (await client.get("/api/v1/stories/library/zz-nothing?language=de")).status_code == 404
     assert (await client.get("/api/v1/stories/library/Bad_Slug?language=de")).status_code == 422

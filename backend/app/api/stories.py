@@ -201,6 +201,7 @@ async def story_library(
 
 class LibraryReadOut(BaseModel):
     slug: str
+    stretch: list[GlossOut]  # words from the level above, with a Czech gloss
     language: Language
     level: CefrLevel
     title: str
@@ -231,6 +232,7 @@ async def library_story(
         title_cs=s.title_cs,
         kind=_kind(s),
         lines=[LibraryLineOut(speaker=ln.speaker, text=ln.text, cs=ln.cs) for ln in s.lines],
+        stretch=[GlossOut(word=w.word, cs=w.cs) for w in s.stretch],
         review_status=lib.file.review_status,
     )
 

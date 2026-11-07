@@ -15,6 +15,58 @@ import { cs } from "@/lib/i18n/cs";
 const t = cs.library;
 const LEVELS: CefrLevel[] = ["A1", "A2", "B1", "B2"];
 
+type Gloss = { word: string; cs: string };
+
+/** Splits a line at the story's stretch words (whole words, any case, longest form first). */
+function glossParts(text: string, stretch: Gloss[]): (string | Gloss)[] {
+  if (!stretch.length) return [text];
+  const forms = [...stretch].sort((a, b) => b.word.length - a.word.length);
+  const escaped = forms.map((g) => g.word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const rx = new RegExp(`(?<![\\p{L}\\p{N}])(${escaped.join("|")})(?![\\p{L}\\p{N}])`, "giu");
+  const out: (string | Gloss)[] = [];
+  let last = 0;
+  for (const m of text.matchAll(rx)) {
+    const at = m.index ?? 0;
+    if (at > last) out.push(text.slice(last, at));
+    const hit = forms.find((g) => g.word.toLocaleLowerCase() === m[0].toLocaleLowerCase());
+    out.push(hit ? { word: m[0], cs: hit.cs } : m[0]);
+    last = at + m[0].length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
+/** A line with its stretch words marked; tapping one shows its Czech gloss in place. */
+function GlossedLine({ text, stretch, language }: { text: string; stretch: Gloss[]; language: Language }) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <span lang={language} className="text-lg leading-relaxed">
+      {glossParts(text, stretch).map((part, i) =>
+        typeof part === "string" ? (
+          <span key={i}>{part}</span>
+        ) : (
+          <span key={i} className="inline">
+            <button
+              type="button"
+              onClick={() => setOpen((v) => (v === i ? null : i))}
+              aria-expanded={open === i}
+              aria-label={t.glossFor(part.word)}
+              className="rounded underline decoration-amber-500 decoration-dotted decoration-2 underline-offset-4 hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:hover:bg-amber-500/20"
+            >
+              {part.word}
+            </button>
+            {open === i && (
+              <span lang="cs" className="ml-1 rounded bg-amber-100 px-1.5 py-0.5 text-sm text-amber-900 dark:bg-amber-500/20 dark:text-amber-100">
+                {part.cs}
+              </span>
+            )}
+          </span>
+        ),
+      )}
+    </span>
+  );
+}
+
 /** One story, read line by line. Ungraded: no questions are scored and nothing is recorded. */
 function Reader({ language, slug, onBack }: { language: Language; slug: string; onBack: () => void }) {
   const [story, setStory] = useState<LibraryStory | null>(null);
@@ -109,6 +161,20 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
             <SlowToggle />
           </div>
           {noAudio && <Notice>{t.noAudio}</Notice>}
+          {/* Context first: the few above-level words, with glosses, before the text itself. */}
+          {story.stretch.length > 0 && (
+            <section aria-labelledby="stretch-title" className="rounded-2xl bg-amber-50 p-3 text-sm dark:bg-amber-950/30">
+              <h3 id="stretch-title" className="font-semibold">{t.stretchTitle}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300">{t.stretchHelp}</p>
+              <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                {story.stretch.map((w) => (
+                  <li key={w.word}>
+                    <strong lang={language}>{w.word}</strong> = {w.cs}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           <ol className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
             {story.lines.map((line, i) => (
               <li
@@ -120,7 +186,7 @@ function Reader({ language, slug, onBack }: { language: Language; slug: string; 
                 <PlayButton url={libraryAudioUrl(language, slug, i)} size="sm" label={t.playLine(i + 1)} />
                 <span className="flex min-w-0 flex-col gap-0.5">
                   {line.speaker && <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">{line.speaker}</span>}
-                  <span lang={language} className="text-lg leading-relaxed">{line.text}</span>
+                  <GlossedLine text={line.text} stretch={story.stretch} language={language} />
                   {showCs && <span className="text-sm text-slate-500">{line.cs}</span>}
                 </span>
               </li>

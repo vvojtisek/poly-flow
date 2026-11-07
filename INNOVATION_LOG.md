@@ -2165,3 +2165,13 @@ Vlad approves a push.
 **Implemented Solution:** GET /stories/library/{slug}/audio?line= speaks one line with the profile's chosen voice. It goes through the same blacklist gate as the text: an unknown or gated story returns 404, an out-of-range line returns 404, and line is limited to 0-40. The reader gets a play button on every line, a 'Přečíst nahlas' run that plays each line to the end, highlights it and scrolls to it, a stop button, and SlowToggle. Each clip is fetched before it plays, so when speech is down the run stops with a notice instead of racing through silent lines. Leaving the story stops its voice.
 
 **Verification:** New test test_library_story_lines_are_spoken_through_the_gate: line 1 is spoken with the exact text, line 39 gives 404, line 41 gives 422, an unknown slug gives 404. test_tts.py + test_library_api.py: 25 passed. b107.js with stubbed 1.5 s clips: the highlight moves 0,1,2,3 in 6 s. Stop clears the highlight and restores the button. With real TTS (503 in this container), the run stops at once with the notice. 6 per-line buttons on a 6-line story. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 108/120 | Page: [/stories/library] (Page Cycle 3/15)
+
+**Summary:** introduce and gloss the above-level words in place
+
+**Observed Problem:** Each curated story has 1-8 stretch words from the level above, each with a Czech gloss. That is the point of the ~95/5 grading: meet a few new words in context. The reader did not return or mark them, so a learner hit them as unexplained words, and the only fallback was the whole-line translation.
+
+**Implemented Solution:** The reader API returns stretch [{word, cs}]. Before the text, a 'Slova z vyšší úrovně' panel lists them with glosses (context first). In the lines, every occurrence is matched as a whole word, case-insensitive and Unicode-aware with longest form first, and rendered as a dotted-underlined button. Tapping it shows the Czech gloss in place; aria-expanded and aria-label are set.
+
+**Verification:** test_library_api.py: 4 passed, including the exact stretch list. b108.js: the panel lists 'Wettervorhersage = předpověď počasí | ruhig = klidný', all three occurrences are marked, and tapping shows 'předpověď počasí'. A sweep over all 360 stories (de, en, fr, it) found 0 stretch words the matcher misses. No console errors. Typecheck, build, ruff passed.

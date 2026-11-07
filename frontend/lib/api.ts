@@ -662,6 +662,7 @@ export interface LibraryStory {
   title_cs: string;
   kind: "story" | "dialogue";
   lines: { speaker: string | null; text: string; cs: string }[];
+  stretch: { word: string; cs: string }[];
   review_status: "unreviewed" | "reviewed";
 }
 export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
