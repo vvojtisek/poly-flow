@@ -7147,6 +7147,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-50-book-club-cover",
+   "level": "B2",
+   "title": "The Book Club Begins",
+   "title_cs": "Čtenářský klub na začátku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva founded a book club and brought the novel everyone was supposed to have read before the first meeting.",
+     "cs": "Eva založila čtenářský klub a na první setkání přinesla román, který si měli všichni předem přečíst."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I suggest beginning with an interpretation of the title, since it undoubtedly shapes the reader's expectations.",
+     "cs": "Navrhuji začít interpretací názvu, protože ten nepochybně určuje očekávání čtenáře."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Agreed. We can add an analysis of the cover, typography and any symbolic associations.",
+     "cs": "Souhlasím. Můžeme přidat analýzu obálky, typografie a případných symbolických souvislostí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "That will easily fill this evening. Who would like to discuss the actual plot next time?",
+     "cs": "To bude na dnešní večer bohatě stačit. Kdo by chtěl příště probrat samotný děj?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perhaps we shouldn't rush our methodology. We haven't evaluated the dedication or the contents page yet.",
+     "cs": "Možná bychom neměli uspěchat metodiku. Ještě jsme nevyhodnotili věnování a obsah."
+    },
+    {
+     "speaker": null,
+     "text": "Eva closed the book: Excellent. We have a programme for the whole year, and haven't had to spoil the ending for anyone.",
+     "cs": "Eva zavřela knihu: Výborně. Máme program na celý rok a zatím jsme nemuseli nikomu prozradit konec."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "typography",
+     "cs": "typografie"
+    },
+    {
+     "word": "associations",
+     "cs": "souvislosti"
+    },
+    {
+     "word": "methodology",
+     "cs": "metodika"
+    },
+    {
+     "word": "dedication",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Čemu se klub zatím vyhýbá?",
+     "options": [
+      "Samotnému ději románu.",
+      "Názvu knihy.",
+      "Obálce."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč Eva říká, že mají program na rok?",
+     "options": [
+      "Rozebírají velmi podrobně už úvodní části knihy.",
+      "Budou číst každý den jinou knihu.",
+      "Román má dvanáct dílů."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

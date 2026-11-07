@@ -7147,6 +7147,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-50-book-club-cover",
+   "level": "B2",
+   "title": "Der Lesekreis beginnt",
+   "title_cs": "Čtenářský klub na začátku",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva gründete einen Lesekreis und brachte zum ersten Treffen den Roman mit, den alle vorher gelesen haben sollten.",
+     "cs": "Eva založila čtenářský klub a na první setkání přinesla román, který si měli všichni předem přečíst."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ich schlage vor, mit einer Interpretation des Titels zu beginnen, da dieser zweifellos die Erwartungen des Lesers prägt.",
+     "cs": "Navrhuji začít interpretací názvu, protože ten nepochybně určuje očekávání čtenáře."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Einverstanden. Dazu können wir das Cover, die Typografie und mögliche symbolische Assoziationen analysieren.",
+     "cs": "Souhlasím. Můžeme přidat analýzu obálky, typografie a případných symbolických souvislostí."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Das reicht für den heutigen Abend völlig. Wer möchte nächstes Mal die eigentliche Handlung besprechen?",
+     "cs": "To bude na dnešní večer bohatě stačit. Kdo by chtěl příště probrat samotný děj?"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Vielleicht sollten wir unsere Methodik nicht überstürzen. Wir haben weder die Widmung noch das Inhaltsverzeichnis ausgewertet.",
+     "cs": "Možná bychom neměli uspěchat metodiku. Ještě jsme nevyhodnotili věnování a obsah."
+    },
+    {
+     "speaker": null,
+     "text": "Eva schloss das Buch: Ausgezeichnet. Wir haben ein Jahresprogramm und mussten bisher niemandem das Ende verraten.",
+     "cs": "Eva zavřela knihu: Výborně. Máme program na celý rok a zatím jsme nemuseli nikomu prozradit konec."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Typografie",
+     "cs": "typografie"
+    },
+    {
+     "word": "Assoziationen",
+     "cs": "souvislosti"
+    },
+    {
+     "word": "Methodik",
+     "cs": "metodika"
+    },
+    {
+     "word": "Widmung",
+     "cs": "věnování"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Čemu se klub zatím vyhýbá?",
+     "options": [
+      "Samotnému ději románu.",
+      "Názvu knihy.",
+      "Obálce."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč Eva říká, že mají program na rok?",
+     "options": [
+      "Rozebírají velmi podrobně už úvodní části knihy.",
+      "Budou číst každý den jinou knihu.",
+      "Román má dvanáct dílů."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
