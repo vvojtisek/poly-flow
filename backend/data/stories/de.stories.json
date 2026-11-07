@@ -3327,6 +3327,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-08-rain-festival",
+   "level": "B2",
+   "title": "Das Fest im Parkhaus",
+   "title_cs": "Slavnosti v garáži",
+   "lines": [
+    {
+     "text": "Bürgermeister Anton Brandt hatte beschlossen, dass das diesjährige Stadtfest das größte der Geschichte werden sollte: ein Open-Air-Konzert auf dem Marktplatz.",
+     "cs": "Starosta Anton Brandt rozhodl, že letošní městské slavnosti budou největší v historii: open-air koncert na náměstí."
+    },
+    {
+     "text": "Am Morgen des Festes meldete der Wetterbericht: Dauerregen, Sturmböen, örtlich Hagel.",
+     "cs": "Ráno v den slavností hlásila předpověď: trvalý déšť, nárazový vítr, místy kroupy."
+    },
+    {
+     "speaker": "Anton",
+     "text": "Wetterberichte irren sich ständig. Wir feiern wie geplant.",
+     "cs": "Předpovědi se pořád mýlí. Slavíme, jak bylo plánováno."
+    },
+    {
+     "text": "Um zwölf Uhr begann es zu gießen. Die Bühne schwamm, die Techniker flohen, und die Blaskapelle spielte unter Regenschirmen.",
+     "cs": "V poledne se spustil liják. Pódium plavalo, technici utekli a dechovka hrála pod deštníky."
+    },
+    {
+     "speaker": "Sekretärin",
+     "text": "Herr Bürgermeister, das Konzert ist ins Wasser gefallen.",
+     "cs": "Pane starosto, koncert se utopil."
+    },
+    {
+     "speaker": "Anton",
+     "text": "In dieser Stadt gibt es nur einen Ort, der trocken und groß genug ist und der mir ohnehin immer zu teuer war.",
+     "cs": "V tomto městě je jediné místo, které je suché, dost velké a které mi bylo stejně vždycky moc drahé."
+    },
+    {
+     "text": "Er meinte das neue Parkhaus, das die Stadt für zwölf Millionen gebaut hatte und das niemand benutzte.",
+     "cs": "Myslel nové parkovací dům, který město postavilo za dvanáct milionů a který nikdo nepoužíval."
+    },
+    {
+     "text": "Am Abend spielte die Blaskapelle im vierten Stock zwischen Betonpfeilern. Die Akustik war überraschend gut.",
+     "cs": "Večer hrála dechovka ve čtvrtém patře mezi betonovými pilíři. Akustika byla překvapivě dobrá."
+    },
+    {
+     "text": "Dreitausend Besucher kamen und stellten zum ersten Mal ihre Autos im Parkhaus ab.",
+     "cs": "Přišly tři tisíce návštěvníků a poprvé zaparkovaly svá auta v garáži."
+    },
+    {
+     "text": "Die Lokalzeitung schrieb: Das beste Fest seit Jahren, und endlich hat das Parkhaus einen Sinn.",
+     "cs": "Místní noviny napsaly: Nejlepší slavnosti za řadu let a konečně má parkovací dům smysl."
+    },
+    {
+     "speaker": "Anton",
+     "text": "Ich habe es von Anfang an so geplant.",
+     "cs": "Já jsem to takhle plánoval od začátku."
+    },
+    {
+     "speaker": "Sekretärin",
+     "text": "Natürlich, Herr Bürgermeister. Deshalb haben wir auch den Regen bestellt.",
+     "cs": "Samozřejmě, pane starosto. Proto jsme si také objednali ten déšť."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Dauerregen",
+     "cs": "trvalý déšť"
+    },
+    {
+     "word": "Blaskapelle",
+     "cs": "dechovka"
+    },
+    {
+     "word": "Akustik",
+     "cs": "akustika"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Warum findet das Fest im Parkhaus statt?",
+     "options": [
+      "Draußen regnet es in Strömen.",
+      "Der Marktplatz ist gesperrt.",
+      "Das Parkhaus ist neu eröffnet."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Was schreibt die Zeitung?",
+     "options": [
+      "Es war das beste Fest seit Jahren.",
+      "Das Fest war ein Reinfall.",
+      "Das Parkhaus ist zu teuer."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

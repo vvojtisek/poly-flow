@@ -3327,6 +3327,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-08-rain-festival",
+   "level": "B2",
+   "title": "The Festival in the Car Park",
+   "title_cs": "Slavnosti v garáži",
+   "lines": [
+    {
+     "text": "Mayor Anthony Brandt had decided that this year's town festival would be the biggest in history: an open-air concert in the market square.",
+     "cs": "Starosta Anton Brandt rozhodl, že letošní městské slavnosti budou největší v historii: open-air koncert na náměstí."
+    },
+    {
+     "text": "On the morning of the festival, the forecast announced: continuous rain, gale-force gusts, hail in places.",
+     "cs": "Ráno v den slavností hlásila předpověď: trvalý déšť, nárazový vítr, místy kroupy."
+    },
+    {
+     "speaker": "Anthony",
+     "text": "Forecasts are wrong all the time. We celebrate as planned.",
+     "cs": "Předpovědi se pořád mýlí. Slavíme, jak bylo plánováno."
+    },
+    {
+     "text": "At noon, it began to pour. The stage was floating, the technicians fled, and the brass band played under umbrellas.",
+     "cs": "V poledne se spustil liják. Pódium plavalo, technici utekli a dechovka hrála pod deštníky."
+    },
+    {
+     "speaker": "Secretary",
+     "text": "Mr Mayor, the concert has been washed out.",
+     "cs": "Pane starosto, koncert se utopil."
+    },
+    {
+     "speaker": "Anthony",
+     "text": "There is only one place in this town that is dry and big enough, and that I always thought was too expensive anyway.",
+     "cs": "V tomto městě je jediné místo, které je suché, dost velké a které mi bylo stejně vždycky moc drahé."
+    },
+    {
+     "text": "He meant the new multi-storey car park that the town had built for twelve million and that nobody used.",
+     "cs": "Myslel nové parkovací dům, který město postavilo za dvanáct milionů a který nikdo nepoužíval."
+    },
+    {
+     "text": "In the evening, the band played on the fourth floor, between concrete pillars. The acoustics were surprisingly good.",
+     "cs": "Večer hrála dechovka ve čtvrtém patře mezi betonovými pilíři. Akustika byla překvapivě dobrá."
+    },
+    {
+     "text": "Three thousand visitors came and, for the first time, parked their cars in the car park.",
+     "cs": "Přišly tři tisíce návštěvníků a poprvé zaparkovaly svá auta v garáži."
+    },
+    {
+     "text": "The local paper wrote: The best festival in years, and at last the car park has a purpose.",
+     "cs": "Místní noviny napsaly: Nejlepší slavnosti za řadu let a konečně má parkovací dům smysl."
+    },
+    {
+     "speaker": "Anthony",
+     "text": "I planned it like this from the beginning.",
+     "cs": "Já jsem to takhle plánoval od začátku."
+    },
+    {
+     "speaker": "Secretary",
+     "text": "Of course, Mr Mayor. That's why we also ordered the rain.",
+     "cs": "Samozřejmě, pane starosto. Proto jsme si také objednali ten déšť."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "hail",
+     "cs": "kroupy"
+    },
+    {
+     "word": "brass",
+     "cs": "mosazný; brass band = dechovka"
+    },
+    {
+     "word": "acoustics",
+     "cs": "akustika"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Why is the festival held in the car park?",
+     "options": [
+      "It is pouring outside.",
+      "The market square is closed.",
+      "The car park has just opened."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "What does the paper write?",
+     "options": [
+      "It was the best festival in years.",
+      "The festival was a flop.",
+      "The car park is too expensive."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

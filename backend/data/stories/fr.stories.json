@@ -3327,6 +3327,101 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-08-rain-festival",
+   "level": "B2",
+   "title": "La fête au parking",
+   "title_cs": "Slavnosti v garáži",
+   "lines": [
+    {
+     "text": "Le maire Antoine Brandt avait décidé que la fête de la ville de cette année serait la plus grande de l'histoire : un concert en plein air sur la place du marché.",
+     "cs": "Starosta Anton Brandt rozhodl, že letošní městské slavnosti budou největší v historii: open-air koncert na náměstí."
+    },
+    {
+     "text": "Le matin de la fête, la météo annonçait : pluie continue, rafales de vent, grêle par endroits.",
+     "cs": "Ráno v den slavností hlásila předpověď: trvalý déšť, nárazový vítr, místy kroupy."
+    },
+    {
+     "speaker": "Antoine",
+     "text": "Les prévisions se trompent tout le temps. Nous fêtons comme prévu.",
+     "cs": "Předpovědi se pořád mýlí. Slavíme, jak bylo plánováno."
+    },
+    {
+     "text": "À midi, il s'est mis à pleuvoir à verse. La scène flottait, les techniciens ont fui et la fanfare jouait sous des parapluies.",
+     "cs": "V poledne se spustil liják. Pódium plavalo, technici utekli a dechovka hrála pod deštníky."
+    },
+    {
+     "speaker": "Secrétaire",
+     "text": "Monsieur le maire, le concert est tombé à l'eau.",
+     "cs": "Pane starosto, koncert se utopil."
+    },
+    {
+     "speaker": "Antoine",
+     "text": "Dans cette ville, il n'y a qu'un seul endroit sec et assez grand, et que j'ai de toute façon toujours trouvé trop cher.",
+     "cs": "V tomto městě je jediné místo, které je suché, dost velké a které mi bylo stejně vždycky moc drahé."
+    },
+    {
+     "text": "Il parlait du nouveau parking que la ville avait construit pour douze millions et que personne n'utilisait.",
+     "cs": "Myslel nové parkovací dům, který město postavilo za dvanáct milionů a který nikdo nepoužíval."
+    },
+    {
+     "text": "Le soir, la fanfare jouait au quatrième étage, entre des piliers de béton. L'acoustique était étonnamment bonne.",
+     "cs": "Večer hrála dechovka ve čtvrtém patře mezi betonovými pilíři. Akustika byla překvapivě dobrá."
+    },
+    {
+     "text": "Trois mille visiteurs sont venus et, pour la première fois, ont garé leur voiture dans le parking.",
+     "cs": "Přišly tři tisíce návštěvníků a poprvé zaparkovaly svá auta v garáži."
+    },
+    {
+     "text": "Le journal local a écrit : La meilleure fête depuis des années, et enfin le parking sert à quelque chose.",
+     "cs": "Místní noviny napsaly: Nejlepší slavnosti za řadu let a konečně má parkovací dům smysl."
+    },
+    {
+     "speaker": "Antoine",
+     "text": "Je l'avais prévu comme ça dès le début.",
+     "cs": "Já jsem to takhle plánoval od začátku."
+    },
+    {
+     "speaker": "Secrétaire",
+     "text": "Bien sûr, monsieur le maire. C'est pour ça que nous avions aussi commandé la pluie.",
+     "cs": "Samozřejmě, pane starosto. Proto jsme si také objednali ten déšť."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "grêle",
+     "cs": "kroupy"
+    },
+    {
+     "word": "fanfare",
+     "cs": "dechovka"
+    },
+    {
+     "word": "acoustique",
+     "cs": "akustika"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Pourquoi la fête a-t-elle lieu dans le parking ?",
+     "options": [
+      "Dehors, il pleut à verse.",
+      "La place du marché est fermée.",
+      "Le parking vient d'ouvrir."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Qu'écrit le journal ?",
+     "options": [
+      "C'était la meilleure fête depuis des années.",
+      "La fête a été un échec.",
+      "Le parking est trop cher."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
