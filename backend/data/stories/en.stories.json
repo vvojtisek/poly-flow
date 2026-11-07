@@ -2296,6 +2296,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-07-fluent-finnish",
+   "level": "B1",
+   "title": "Fluent Finnish",
+   "title_cs": "Plynná finština",
+   "lines": [
+    {
+     "text": "Marek applied for a job as sales manager at an international company. His CV was impressive, especially the languages section.",
+     "cs": "Marek se ucházel o místo vedoucího prodeje v mezinárodní firmě. Jeho životopis byl působivý, zvlášť kolonka jazyky."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "It says here that you speak fluent Finnish.",
+     "cs": "Tady stojí, že mluvíte plynně finsky."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Of course. Finnish is practically my second mother tongue.",
+     "cs": "Samozřejmě. Finština je prakticky můj druhý mateřský jazyk."
+    },
+    {
+     "text": "Ms Virtanen said a long sentence in Finnish. Marek smiled and nodded.",
+     "cs": "Paní Virtanenová pronesla dlouhou větu finsky. Marek se usmíval a přikyvoval."
+    },
+    {
+     "text": "She repeated the sentence more slowly. Marek smiled even more broadly and nodded even harder.",
+     "cs": "Zopakovala ji pomaleji. Marek se usmál ještě šířeji a přikývl ještě rázněji."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "I asked whether you would like coffee or tea. You said yes.",
+     "cs": "Ptala jsem se, jestli chcete kávu, nebo čaj. Řekl jste ano."
+    },
+    {
+     "speaker": "Marek",
+     "text": "That was... deliberate. I'll have both.",
+     "cs": "To byl... úmysl. Dám si obojí."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "By the way, that was the only sentence I know in Finnish. I learned it this morning on the train.",
+     "cs": "Mimochodem, to byla jediná věta, kterou umím finsky. Naučila jsem se ji dnes ráno ve vlaku."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Then I suppose we're even.",
+     "cs": "Pak jsme si asi kvit."
+    },
+    {
+     "text": "Ms Virtanen laughed so loudly that the secretary came to look.",
+     "cs": "Paní Virtanenová se rozesmála tak hlasitě, že nakoukla sekretářka."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "You're hired. In my department I need people who smile when they understand nothing.",
+     "cs": "Jste přijat. Ve svém oddělení potřebuji lidi, kteří se usmívají, když nic nechápou."
+    },
+    {
+     "text": "On Monday, his first client was Finnish. Marek smiled and nodded, and the contract was signed.",
+     "cs": "V pondělí byl jeho první zákazník Fin. Marek se usmíval a přikyvoval a smlouva byla podepsaná."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "fluent",
+     "cs": "plynný"
+    },
+    {
+     "word": "deliberate",
+     "cs": "záměrný"
+    },
+    {
+     "word": "even",
+     "cs": "vyrovnaní; we're even = jsme si kvit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Marek claim in his CV?",
+     "options": [
+      "He speaks fluent Finnish.",
+      "He has been a sales manager before.",
+      "He speaks five languages."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Why does Ms Virtanen hire Marek?",
+     "options": [
+      "She likes his humour and his smile.",
+      "He really speaks Finnish.",
+      "He has the best CV."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

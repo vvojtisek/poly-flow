@@ -2296,6 +2296,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-07-fluent-finnish",
+   "level": "B1",
+   "title": "Un finnois courant",
+   "title_cs": "Plynná finština",
+   "lines": [
+    {
+     "text": "Marek postulait pour un poste de directeur des ventes dans une entreprise internationale. Son CV était impressionnant, surtout la rubrique langues.",
+     "cs": "Marek se ucházel o místo vedoucího prodeje v mezinárodní firmě. Jeho životopis byl působivý, zvlášť kolonka jazyky."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Il est écrit ici que vous parlez couramment finnois.",
+     "cs": "Tady stojí, že mluvíte plynně finsky."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Bien sûr. Le finnois est pratiquement ma deuxième langue maternelle.",
+     "cs": "Samozřejmě. Finština je prakticky můj druhý mateřský jazyk."
+    },
+    {
+     "text": "Mme Virtanen a prononcé une longue phrase en finnois. Marek a souri et hoché la tête.",
+     "cs": "Paní Virtanenová pronesla dlouhou větu finsky. Marek se usmíval a přikyvoval."
+    },
+    {
+     "text": "Elle a répété la phrase plus lentement. Marek a souri encore plus largement et hoché la tête encore plus fort.",
+     "cs": "Zopakovala ji pomaleji. Marek se usmál ještě šířeji a přikývl ještě rázněji."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "J'ai demandé si vous préfériez du café ou du thé. Vous avez répondu oui.",
+     "cs": "Ptala jsem se, jestli chcete kávu, nebo čaj. Řekl jste ano."
+    },
+    {
+     "speaker": "Marek",
+     "text": "C'était... voulu. Je prends les deux.",
+     "cs": "To byl... úmysl. Dám si obojí."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "C'est d'ailleurs la seule phrase que je sache dire en finnois. Je l'ai apprise ce matin dans le train.",
+     "cs": "Mimochodem, to byla jediná věta, kterou umím finsky. Naučila jsem se ji dnes ráno ve vlaku."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Alors nous sommes quittes.",
+     "cs": "Pak jsme si asi kvit."
+    },
+    {
+     "text": "Mme Virtanen a ri si fort que la secrétaire est venue voir.",
+     "cs": "Paní Virtanenová se rozesmála tak hlasitě, že nakoukla sekretářka."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Vous êtes engagé. Dans mon service, j'ai besoin de gens qui sourient quand ils ne comprennent rien.",
+     "cs": "Jste přijat. Ve svém oddělení potřebuji lidi, kteří se usmívají, když nic nechápou."
+    },
+    {
+     "text": "Le lundi, son premier client était finlandais. Marek a souri et hoché la tête, et le contrat a été signé.",
+     "cs": "V pondělí byl jeho první zákazník Fin. Marek se usmíval a přikyvoval a smlouva byla podepsaná."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "couramment",
+     "cs": "plynně"
+    },
+    {
+     "word": "voulu",
+     "cs": "záměrný"
+    },
+    {
+     "word": "quittes",
+     "cs": "vyrovnaní"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Qu'affirme Marek dans son CV ?",
+     "options": [
+      "Il parle couramment finnois.",
+      "Il a déjà été directeur des ventes.",
+      "Il parle cinq langues."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Pourquoi Mme Virtanen engage-t-elle Marek ?",
+     "options": [
+      "Elle aime son humour et son sourire.",
+      "Il parle vraiment finnois.",
+      "Il a le meilleur CV."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

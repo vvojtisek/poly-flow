@@ -2296,6 +2296,103 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b1-07-fluent-finnish",
+   "level": "B1",
+   "title": "Fließend Finnisch",
+   "title_cs": "Plynná finština",
+   "lines": [
+    {
+     "text": "Marek bewarb sich um eine Stelle als Verkaufsleiter in einer internationalen Firma. Sein Lebenslauf war beeindruckend, vor allem der Abschnitt Sprachen.",
+     "cs": "Marek se ucházel o místo vedoucího prodeje v mezinárodní firmě. Jeho životopis byl působivý, zvlášť kolonka jazyky."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Hier steht, Sie sprechen fließend Finnisch.",
+     "cs": "Tady stojí, že mluvíte plynně finsky."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Selbstverständlich. Finnisch ist praktisch meine zweite Muttersprache.",
+     "cs": "Samozřejmě. Finština je prakticky můj druhý mateřský jazyk."
+    },
+    {
+     "text": "Frau Virtanen sagte einen langen Satz auf Finnisch. Marek lächelte und nickte.",
+     "cs": "Paní Virtanenová pronesla dlouhou větu finsky. Marek se usmíval a přikyvoval."
+    },
+    {
+     "text": "Sie wiederholte den Satz langsamer. Marek lächelte noch breiter und nickte noch kräftiger.",
+     "cs": "Zopakovala ji pomaleji. Marek se usmál ještě šířeji a přikývl ještě rázněji."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Ich habe gefragt, ob Sie Kaffee oder Tee möchten. Sie haben Ja gesagt.",
+     "cs": "Ptala jsem se, jestli chcete kávu, nebo čaj. Řekl jste ano."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Das war ... Absicht. Ich nehme beides.",
+     "cs": "To byl... úmysl. Dám si obojí."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Das war übrigens der einzige Satz, den ich auf Finnisch kann. Ich habe ihn heute früh im Zug gelernt.",
+     "cs": "Mimochodem, to byla jediná věta, kterou umím finsky. Naučila jsem se ji dnes ráno ve vlaku."
+    },
+    {
+     "speaker": "Marek",
+     "text": "Dann sind wir wohl quitt.",
+     "cs": "Pak jsme si asi kvit."
+    },
+    {
+     "text": "Frau Virtanen lachte so laut, dass die Sekretärin hereinschaute.",
+     "cs": "Paní Virtanenová se rozesmála tak hlasitě, že nakoukla sekretářka."
+    },
+    {
+     "speaker": "Virtanen",
+     "text": "Sie sind eingestellt. In meiner Abteilung brauche ich Leute, die lächeln, wenn sie nichts verstehen.",
+     "cs": "Jste přijat. Ve svém oddělení potřebuji lidi, kteří se usmívají, když nic nechápou."
+    },
+    {
+     "text": "Am Montag war sein erster Kunde ein Finne. Marek lächelte und nickte, und der Vertrag war unterschrieben.",
+     "cs": "V pondělí byl jeho první zákazník Fin. Marek se usmíval a přikyvoval a smlouva byla podepsaná."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Lebenslauf",
+     "cs": "životopis"
+    },
+    {
+     "word": "Absicht",
+     "cs": "úmysl"
+    },
+    {
+     "word": "quitt",
+     "cs": "kvit"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was behauptet Marek in seinem Lebenslauf?",
+     "options": [
+      "Er spricht fließend Finnisch.",
+      "Er hat schon als Verkaufsleiter gearbeitet.",
+      "Er spricht fünf Sprachen."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Warum stellt Frau Virtanen Marek ein?",
+     "options": [
+      "Sie mag seinen Humor und sein Lächeln.",
+      "Er spricht wirklich Finnisch.",
+      "Er hat den besten Lebenslauf."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
