@@ -371,10 +371,11 @@ export const cs = {
     step: {
       check: (n: number) => `Ověřit ${n} ${n === 1 ? "slovo" : n < 5 ? "slova" : "slov"}`,
       grammar_check: (n: number) => `Ověřit gramatiku (${n})`,
-      lesson: (n: number) => `Nová lekce (${n} slova)`,
+      lesson: (n: number) => `Nová lekce (${n} ${n === 1 ? "slovo" : n < 5 ? "slova" : "slov"})`,
       reading: () => "Krátké čtení",
     } as Record<string, (n: number) => string>,
     go: "Pokračovat",
+    changeGoal: "Změnit cíl",
     recentReadings: "Nedávná čtení",
     tomorrow: (n: number) => `Zítra přijde na řadu ${n} slov.`,
   },

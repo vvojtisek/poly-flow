@@ -1155,3 +1155,13 @@ Vlad approves a push.
 **Implemented Solution:** `app/page.tsx`: the quick actions carry `data-hotkey` 1-4 (`aria-keyshortcuts` for assistive tech) and show a key badge on wide screens via `KeyHint`. The dashboard's existing hotkey listener (installed by `TodayPlan`, layout-independent digit codes from `lib/keyboard.ts`) clicks them; a disabled Daily review card (nothing due) is not a link and ignores its key.
 
 **Verification:** typecheck, production build, ruff, `git diff --check` passed; a Playwright run on the dev server pressed 2, 3 and 4 on `/` and landed on `/grammar`, `/words?tab=levels` and `/practice`.
+
+## Global Cycle 7/120 | Page: [/] (Page Cycle 7/15)
+
+**Summary:** change the daily goal inline and fix the grammar-check step link
+
+**Observed Problem:** Adjusting the daily goal meant leaving the dashboard for Settings, although the goal ring sits right on the plan. The plan's "Ověřit gramatiku" step opened the grammar overview instead of the grammar check, and the lesson step said "Nová lekce (5 slova)".
+
+**Implemented Solution:** `components/TodayPlan.tsx`: a "Změnit cíl" toggle under the ring reveals 5/10/15/20/30-minute choices (radio group); picking one saves `daily_goal_minutes` through the existing partial profile PATCH, updates the signed-in profile in auth state and re-reads today's plan. Failures show an inline alert. The `grammar_check` step now goes to `/grammar/check`; lesson step pluralization fixed in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright on a 390 px viewport changed the goal to 20 and back to 10 minutes and the plan text updated each time.
