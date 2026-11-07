@@ -4555,6 +4555,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-15-scarf-season",
+   "level": "A2",
+   "title": "The Long Scarf",
+   "title_cs": "Dlouhá šála",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva started learning to knit a scarf in January.",
+     "cs": "Eva se v lednu začala učit plést šálu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "I add a little every evening. It'll be ready for winter.",
+     "cs": "Každý večer přidám kousek. Do zimy bude hotová."
+    },
+    {
+     "speaker": "Tom",
+     "text": "But winter is now. How long is it already?",
+     "cs": "Ale zima je teď. Jak dlouhá už je?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "I don't know. One end is in the kitchen and the other is by the television.",
+     "cs": "Nevím. Jeden konec mám v kuchyni a druhý u televize."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Perhaps you could stop now.",
+     "cs": "Tak už bys možná mohla přestat."
+    },
+    {
+     "speaker": null,
+     "text": "Eva thought for a moment: I can't. I've finally learnt to start, but not to finish.",
+     "cs": "Eva se zamyslela: Nemůžu. Konečně jsem se naučila začít, ale ještě ne skončit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "knit",
+     "cs": "plést"
+    },
+    {
+     "word": "scarf",
+     "cs": "šála"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kdy Eva začala?",
+     "options": [
+      "V lednu.",
+      "V červenci.",
+      "Včera."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč stále plete?",
+     "options": [
+      "Neumí práci ukončit.",
+      "Potřebuje dvě šály.",
+      "Je jí pořád zima."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }

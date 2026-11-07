@@ -4555,6 +4555,74 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "a2-15-scarf-season",
+   "level": "A2",
+   "title": "La sciarpa lunga",
+   "title_cs": "Dlouhá šála",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "A gennaio Eva ha cominciato a imparare a lavorare una sciarpa a maglia.",
+     "cs": "Eva se v lednu začala učit plést šálu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Ne aggiungo un po' ogni sera. Sarà pronta per l'inverno.",
+     "cs": "Každý večer přidám kousek. Do zimy bude hotová."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ma l'inverno è adesso. Quanto è lunga ormai?",
+     "cs": "Ale zima je teď. Jak dlouhá už je?"
+    },
+    {
+     "speaker": "Eva",
+     "text": "Non lo so. Un capo è in cucina e l'altro vicino alla televisione.",
+     "cs": "Nevím. Jeden konec mám v kuchyni a druhý u televize."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Forse potresti fermarti adesso.",
+     "cs": "Tak už bys možná mohla přestat."
+    },
+    {
+     "speaker": null,
+     "text": "Eva ha riflettuto: Non posso. Ho finalmente imparato a cominciare, ma non ancora a finire.",
+     "cs": "Eva se zamyslela: Nemůžu. Konečně jsem se naučila začít, ale ještě ne skončit."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "sciarpa",
+     "cs": "šála"
+    },
+    {
+     "word": "riflettuto",
+     "cs": "zamyslela se"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Kdy Eva začala?",
+     "options": [
+      "V lednu.",
+      "V červenci.",
+      "Včera."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Proč stále plete?",
+     "options": [
+      "Neumí práci ukončit.",
+      "Potřebuje dvě šály.",
+      "Je jí pořád zima."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
