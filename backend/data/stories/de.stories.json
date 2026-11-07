@@ -1,0 +1,95 @@
+{
+ "language": "de",
+ "source": "polyflow-curated",
+ "revision": "stories-v1",
+ "license": "CC0-1.0",
+ "review_status": "unreviewed",
+ "stories": [
+  {
+   "slug": "a1-01-umbrella",
+   "level": "A1",
+   "title": "Der Regenschirm",
+   "title_cs": "Deštník na slunci",
+   "lines": [
+    {
+     "speaker": "Tom",
+     "text": "Heute regnet es. Ich nehme meinen Schirm.",
+     "cs": "Dnes bude pršet. Vezmu si deštník."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Aber Tom, die Sonne scheint doch!",
+     "cs": "Ale Tome, vždyť svítí slunce!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Ich weiß es besser. Die Wettervorhersage sagt: Regen.",
+     "cs": "Já to vím líp. Předpověď počasí říká: déšť."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Das ist die Wettervorhersage von gestern, Tom.",
+     "cs": "To je včerejší předpověď, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Egal. Ich gehe mit Schirm in den Park.",
+     "cs": "To je jedno. Jdu s deštníkem do parku."
+    },
+    {
+     "text": "Im Park lachen alle Leute. Tom bleibt ruhig.",
+     "cs": "V parku se všichni smějí. Tom zůstává klidný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Es regnet bald. Ihr seht!",
+     "cs": "Brzy bude pršet. Uvidíte!"
+    },
+    {
+     "text": "Am Abend regnet es wirklich. Tom ist zu Hause, ohne Schirm.",
+     "cs": "Večer opravdu prší. Tom je doma, bez deštníku."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Dein Schirm ist noch im Park, Tom.",
+     "cs": "Tvůj deštník je pořád v parku, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Na gut. Er hatte wenigstens einen schönen Tag.",
+     "cs": "No co. Aspoň si užil hezký den."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "Wettervorhersage",
+     "cs": "předpověď počasí"
+    },
+    {
+     "word": "ruhig",
+     "cs": "klidný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Was sagt Tom über das Wetter?",
+     "options": [
+      "Es regnet bald.",
+      "Es ist kalt.",
+      "Es schneit."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Wo ist der Schirm am Abend?",
+     "options": [
+      "Zu Hause",
+      "Im Park",
+      "Im Bus"
+     ],
+     "answer_index": 1
+    }
+   ]
+  }
+ ]
+}

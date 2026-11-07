@@ -1,0 +1,95 @@
+{
+ "language": "it",
+ "source": "polyflow-curated",
+ "revision": "stories-v1",
+ "license": "CC0-1.0",
+ "review_status": "unreviewed",
+ "stories": [
+  {
+   "slug": "a1-01-umbrella",
+   "level": "A1",
+   "title": "L'ombrello",
+   "title_cs": "Deštník na slunci",
+   "lines": [
+    {
+     "speaker": "Tom",
+     "text": "Oggi piove. Prendo il mio ombrello.",
+     "cs": "Dnes bude pršet. Vezmu si deštník."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Ma Tom, c'è il sole!",
+     "cs": "Ale Tome, vždyť svítí slunce!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "Io lo so meglio. Le previsioni del tempo dicono: pioggia.",
+     "cs": "Já to vím líp. Předpověď počasí říká: déšť."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Sono le previsioni di ieri, Tom.",
+     "cs": "To je včerejší předpověď, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Non importa. Vado al parco con l'ombrello.",
+     "cs": "To je jedno. Jdu s deštníkem do parku."
+    },
+    {
+     "text": "Al parco tutti ridono. Tom resta tranquillo.",
+     "cs": "V parku se všichni smějí. Tom zůstává klidný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Presto piove. Vedrete!",
+     "cs": "Brzy bude pršet. Uvidíte!"
+    },
+    {
+     "text": "La sera piove davvero. Tom è a casa, senza ombrello.",
+     "cs": "Večer opravdu prší. Tom je doma, bez deštníku."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Il tuo ombrello è ancora al parco, Tom.",
+     "cs": "Tvůj deštník je pořád v parku, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Pazienza. Almeno lui ha passato una bella giornata.",
+     "cs": "No co. Aspoň si užil hezký den."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "previsioni",
+     "cs": "předpověď"
+    },
+    {
+     "word": "tranquillo",
+     "cs": "klidný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Che cosa dice Tom del tempo?",
+     "options": [
+      "Presto piove.",
+      "Fa freddo.",
+      "Nevica."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Dov'è l'ombrello la sera?",
+     "options": [
+      "A casa",
+      "Al parco",
+      "Sull'autobus"
+     ],
+     "answer_index": 1
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "language": "en",
+ "source": "polyflow-curated",
+ "revision": "stories-v1",
+ "license": "CC0-1.0",
+ "review_status": "unreviewed",
+ "stories": [
+  {
+   "slug": "a1-01-umbrella",
+   "level": "A1",
+   "title": "The Umbrella",
+   "title_cs": "Deštník na slunci",
+   "lines": [
+    {
+     "speaker": "Tom",
+     "text": "It's raining today. I'm taking my umbrella.",
+     "cs": "Dnes bude pršet. Vezmu si deštník."
+    },
+    {
+     "speaker": "Anna",
+     "text": "But Tom, the sun is shining!",
+     "cs": "Ale Tome, vždyť svítí slunce!"
+    },
+    {
+     "speaker": "Tom",
+     "text": "I know better. The weather forecast says rain.",
+     "cs": "Já to vím líp. Předpověď počasí říká: déšť."
+    },
+    {
+     "speaker": "Anna",
+     "text": "That's yesterday's forecast, Tom.",
+     "cs": "To je včerejší předpověď, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Never mind. I'm going to the park with my umbrella.",
+     "cs": "To je jedno. Jdu s deštníkem do parku."
+    },
+    {
+     "text": "In the park, everybody laughs. Tom stays calm.",
+     "cs": "V parku se všichni smějí. Tom zůstává klidný."
+    },
+    {
+     "speaker": "Tom",
+     "text": "It will rain soon. You'll see!",
+     "cs": "Brzy bude pršet. Uvidíte!"
+    },
+    {
+     "text": "In the evening, it really rains. Tom is at home, without his umbrella.",
+     "cs": "Večer opravdu prší. Tom je doma, bez deštníku."
+    },
+    {
+     "speaker": "Anna",
+     "text": "Your umbrella is still in the park, Tom.",
+     "cs": "Tvůj deštník je pořád v parku, Tome."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Oh well. At least it had a lovely day.",
+     "cs": "No co. Aspoň si užil hezký den."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "forecast",
+     "cs": "předpověď"
+    },
+    {
+     "word": "calm",
+     "cs": "klidný"
+    }
+   ],
+   "questions": [
+    {
+     "question": "What does Tom say about the weather?",
+     "options": [
+      "It will rain soon.",
+      "It is cold.",
+      "It is snowing."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "Where is the umbrella in the evening?",
+     "options": [
+      "At home",
+      "In the park",
+      "On the bus"
+     ],
+     "answer_index": 1
+    }
+   ]
+  }
+ ]
+}
