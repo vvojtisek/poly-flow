@@ -6691,6 +6691,82 @@
      "answer_index": 0
     }
    ]
+  },
+  {
+   "slug": "b2-44-slang-grandmother",
+   "level": "B2",
+   "title": "La mise à jour de mamie",
+   "title_cs": "Babiččina aktualizace",
+   "lines": [
+    {
+     "speaker": null,
+     "text": "Eva a appris de l'argot contemporain à sa grand-mère pour faciliter sa participation au groupe familial.",
+     "cs": "Eva naučila babičku několik současných hovorových výrazů, aby se snáze zapojila do rodinného chatu."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Quand tu dis qu'une chose a une bonne vibe, tu veux dire qu'elle te fait une impression agréable.",
+     "cs": "Když napíšeš, že něco má dobrý vibe, znamená to, že to na tebe příjemně působí."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Je comprends. Une désignation informelle de l'atmosphère générale, pas un terme technique.",
+     "cs": "Rozumím. Jde tedy o neformální označení celkové atmosféry, nikoli o odborný termín."
+    },
+    {
+     "speaker": "Eva",
+     "text": "Exactement. Mais tu n'as pas besoin de définir chaque mot aussi précisément.",
+     "cs": "Přesně. Jen nemusíš každé slovo tak podrobně definovat."
+    },
+    {
+     "speaker": "Tom",
+     "text": "Je n'oserais pas. Le contexte est indispensable à une interprétation correcte.",
+     "cs": "To bych si nedovolila. Kontext je přece zásadní pro správnou interpretaci."
+    },
+    {
+     "speaker": null,
+     "text": "Le soir, mamie a écrit : Le déjeuner était délicieux, mais votre grand-père a aujourd'hui la vibe d'une déclaration fiscale en souffrance.",
+     "cs": "Večer babička napsala: Oběd byl skvělý, ale tvůj děda má dnes vibe nevyřízeného daňového přiznání."
+    }
+   ],
+   "stretch": [
+    {
+     "word": "désignation",
+     "cs": "označení"
+    },
+    {
+     "word": "interprétation",
+     "cs": "výklad"
+    },
+    {
+     "word": "fiscale",
+     "cs": "daňový"
+    },
+    {
+     "word": "vibe",
+     "cs": "celkový dojem či atmosféra"
+    }
+   ],
+   "questions": [
+    {
+     "question": "Co Eva učí babičku?",
+     "options": [
+      "Hovorový výraz vibe.",
+      "Nový sport.",
+      "Daňové zákony."
+     ],
+     "answer_index": 0
+    },
+    {
+     "question": "K čemu babička přirovnala dědovu náladu?",
+     "options": [
+      "K nevyřízenému daňovému přiznání.",
+      "K oslavě.",
+      "K hudebnímu koncertu."
+     ],
+     "answer_index": 0
+    }
+   ]
   }
  ]
 }
