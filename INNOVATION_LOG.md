@@ -1885,3 +1885,13 @@ Vlad approves a push.
 **Implemented Solution:** A one-line strip under the header names the basis: 'Orientační úroveň A2 z testu 3. 11. 2026.', 'Orientační úroveň X podle postupu.', 'Bez testu úrovně; zkouška slovní zásoby X.' or 'Zatím bez odhadu úrovně, doporučení začíná od A1.'. When the test is available it adds 'Zjistit úroveň testem', 'Udělat test znovu' or 'Pokračovat v testu úrovně' linking to /placement/cefr. The wording stays 'orientační' (indicative), as the product requires for CEFR labels.
 
 **Verification:** Playwright 390px, real data: 'Zatím bez odhadu úrovně, doporučení začíná od A1. Zjistit úroveň testem' -> /placement/cefr. With a stubbed A2 estimate dated 3 Nov: 'Orientační úroveň A2 z testu 3. 11. 2026. Udělat test znovu'. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 80/120 | Page: [/lesson] (Page Cycle 5/15)
+
+**Summary:** say each topic's goal once and show its size and check record
+
+**Observed Problem:** On the topic cards the summary and the 'Cíl:' line repeated the same sentence. In the German course that is 37 of 37 topics, so every card said it twice. The cards did not show how long a topic is (number of exercises) or how the learner did in its checks, although the tree returns both.
+
+**Implemented Solution:** The objective line is shown only when it differs from the summary. Each card ends with 'N cvičení' and, once checked, 'v ověření X z Y správně' from checked_correct and checked_errors.
+
+**Verification:** API: 37 German topics, 37 with identical summary and objective. Playwright: the sein card now reads '… Řekneš, kdo jsi a odkud jsi … | 8 cvičení' without the duplicate Cíl line. No console errors. typecheck, next build, ruff pass.

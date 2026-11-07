@@ -236,7 +236,16 @@ export default function LessonPage() {
                               </span>
                             </span>
                             <span className="text-sm text-slate-600 dark:text-slate-300">{unit.summary}</span>
-                            <span className="mt-auto flex items-center gap-1 text-xs text-slate-500"><CheckCircle2 className="size-3" aria-hidden />{cs.lesson.objective(unit.objective)}</span>
+                            {/* Many topics use the same sentence as summary and objective; say it once. */}
+                            {unit.objective.trim() !== unit.summary.trim() && (
+                              <span className="flex items-center gap-1 text-xs text-slate-500"><CheckCircle2 className="size-3" aria-hidden />{cs.lesson.objective(unit.objective)}</span>
+                            )}
+                            <span className="mt-auto flex flex-wrap items-center gap-x-2 text-xs text-slate-500">
+                              <span>{cs.lesson.exercises(unit.exercises)}</span>
+                              {unit.checked_correct + unit.checked_errors > 0 && (
+                                <span>· {cs.lesson.checkedTally(unit.checked_correct, unit.checked_correct + unit.checked_errors)}</span>
+                              )}
+                            </span>
                           </Link>
                         </li>
                       ))}

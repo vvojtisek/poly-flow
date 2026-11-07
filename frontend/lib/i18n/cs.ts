@@ -227,6 +227,8 @@ export const cs = {
     levelCoverage: (studied: number, total: number, known: number) =>
       `prostudováno ${studied} z ${total}${known ? ` · ověřeno ${known}` : ""}`,
     openBadge: "rozdělaná",
+    exercises: (n: number) => `${n} cvičení`,
+    checkedTally: (ok: number, all: number) => `v ověření ${ok} z ${all} správně`,
     dueBadge: "k ověření",
     levelNotImplemented: "Pro tuto úroveň zatím nejsou připravené lekce.",
     noGrammarContent: "Pro vybraný jazyk zatím nejsou gramatické lekce. Slovní zásobu můžeš procvičovat samostatně.",
