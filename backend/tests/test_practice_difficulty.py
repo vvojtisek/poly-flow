@@ -85,3 +85,24 @@ async def test_hard_mode_uses_free_answer_for_recognition(db, client):
     item = await _item_for_prompt(hard["prompt"])
     graded = await answer(client, me, hard, {"text": item.translation_cs})
     assert graded.status_code == 200 and graded.json()["correct"], graded.text
+
+
+async def test_auto_mode_word_bank_accepts_a_choice(db, client):
+    """Under the default "auto" difficulty a new word's recall is a word bank; picking from it
+    must be graded, not refused (the setting is "auto", the resolved tier "medium")."""
+    await seed_words()
+    me = await setup_parent(client)
+    assert me["acting"]["settings"]["practice_difficulty"] == "auto"
+    session = await start(client, me)
+    task = await next_task(client, session["id"])
+    while task["type"] == "recognition":
+        assert (await answer(client, me, task, await correct_answer(task))).json()["correct"]
+        task = await next_task(client, session["id"])
+    assert task["type"] == "recall" and task["options"], task
+    target = await _item_for_prompt(task["prompt"])
+    wrong_id = next(o["id"] for o in task["options"] if o["text"] != target.lemma)
+    wrong = await answer(client, me, task, {"choice": wrong_id})
+    assert wrong.status_code == 200 and wrong.json()["correct"] is False, wrong.text
+    right_id = next(o["id"] for o in task["options"] if o["text"] == target.lemma)
+    right = await answer(client, me, task, {"choice": right_id})
+    assert right.status_code == 200 and right.json()["correct"], right.text

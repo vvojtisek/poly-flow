@@ -723,9 +723,12 @@ async def submit_answer(
         verdict = "exact" if correct else "wrong"
         answer = options[choice]
     elif choice is not None and task.task_type == TaskType.RECALL:
-        if task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK) or (
-            user.settings or {}
-        ).get("practice_difficulty") not in ("easy", "medium"):
+        # A choice is accepted exactly when this task was served with a word bank. Checking the
+        # stored setting instead rejected every pick under "auto", whose tier is resolved per word.
+        if (
+            task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK)
+            or "manual_options" not in task.payload
+        ):
             raise LearningError("choice_answer_not_allowed", 422)
         options = task.payload.get("manual_options", [])
         if not 0 <= choice < len(options):
