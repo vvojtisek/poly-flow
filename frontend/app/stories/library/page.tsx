@@ -8,9 +8,9 @@ import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell"
 import { Kbd } from "@/components/Kbd";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { isTypingTarget } from "@/lib/keyboard";
-import { Notice } from "@/components/ui";
+import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { clipSrc, playToEnd, stop } from "@/lib/audio";
-import { answerLibraryQuestion, getDiagnosticInfo, getLibraryStory, getProgress, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
+import { ApiError, answerLibraryQuestion, getDiagnosticInfo, getLibraryStory, getProgress, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
 import { useRequireMe } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { fold } from "@/lib/palette";
@@ -290,7 +290,9 @@ function Reader({
   onOpen: (slug: string) => void;
 }) {
   const [story, setStory] = useState<LibraryStory | null>(null);
-  const [failed, setFailed] = useState(false);
+  // "missing": this story is not available here (unknown, or hidden by the content gate).
+  const [failed, setFailed] = useState<false | "missing" | "error">(false);
+  const [attempt, setAttempt] = useState(0);
   const [showCs, setShowCs] = useState(false);
   const [size, setSizeState] = useState<Size>("m");
   useEffect(() => {
@@ -386,19 +388,25 @@ function Reader({
     setFailed(false);
     getLibraryStory(language, slug)
       .then((s) => live && setStory(s))
-      .catch(() => live && setFailed(true));
+      .catch((e) => live && setFailed(e instanceof ApiError && e.status === 404 ? "missing" : "error"));
     return () => {
       live = false;
     };
-  }, [language, slug]);
+  }, [language, slug, attempt]);
 
   return (
     <article className="flex flex-col gap-4">
       <button type="button" onClick={onBack} className="inline-flex items-center gap-1 self-start text-sm font-semibold text-brand-700 hover:underline dark:text-brand-200">
         <ArrowLeft className="size-4" aria-hidden /> {t.back}
       </button>
-      {failed && <Notice tone="error">{cs.common.error}</Notice>}
-      {!story && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
+      {failed === "missing" && <Notice>{t.storyMissing}</Notice>}
+      {failed === "error" && <RetryNotice text={t.storyFailed} onRetry={() => setAttempt((n) => n + 1)} />}
+      {!story && !failed && (
+        <div aria-busy className="flex flex-col gap-3">
+          <Skeleton lines={2} className="max-w-sm" />
+          <div className="rounded-2xl border border-slate-200 p-4 dark:border-slate-800"><Skeleton lines={6} /></div>
+        </div>
+      )}
       {story && (
         <>
           <header>
@@ -591,6 +599,7 @@ export default function StoryLibraryPage() {
   const language = me?.acting.active_language;
   const [library, setLibrary] = useState<StoryLibrary | null>(null);
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [slug, setSlugState] = useState<string | null>(null);
   const [read, markRead] = useReadMarks(me?.acting.id, language);
   const [estimate, setEstimate] = useState<{ level: string; source: "test" | "progress" } | null>(null);
@@ -645,7 +654,7 @@ export default function StoryLibraryPage() {
     return () => {
       live = false;
     };
-  }, [language, me?.acting.id]);
+  }, [language, me?.acting.id, attempt]);
 
   if (!me || !language) return <FullPageStatus text={cs.common.loading} />;
   return (
@@ -661,8 +670,14 @@ export default function StoryLibraryPage() {
           <LanguagePicker me={me} />
         </header>
         {library?.review_status === "unreviewed" && <p className="text-xs text-amber-700 dark:text-amber-300">{t.unreviewed}</p>}
-        {failed && <Notice tone="error">{cs.common.error}</Notice>}
-        {!library && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
+        {failed && <RetryNotice text={t.libraryFailed} onRetry={() => setAttempt((n) => n + 1)} />}
+        {!library && !failed && (
+          <div aria-busy className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }, (_, i) => (
+              <div key={i} className="rounded-xl border border-slate-200 p-3 dark:border-slate-800"><Skeleton lines={3} /></div>
+            ))}
+          </div>
+        )}
         {library &&
           (slug ? (
             <Reader

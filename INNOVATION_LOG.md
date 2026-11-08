@@ -2245,3 +2245,13 @@ Vlad approves a push.
 **Implemented Solution:** The reader has a three-step 'Velikost písma' radio (16 / 18 / 24 px) applied to the story lines only. Glossed lines inherit it, so the stretch-word buttons scale with the text. The choice is remembered per device in localStorage, read after mount so SSR is unaffected, with safe fallbacks. The buttons are 44×44 targets.
 
 **Verification:** b115.js at 390px: default line font 18px, Větší 24px (kept after reload), Menší 16px. scrollWidth stays 390 at every size. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 116/120 | Page: [/stories/library] (Page Cycle 11/15)
+
+**Summary:** retry failed loads and explain a story that is not available
+
+**Observed Problem:** Shelf and reader failures showed a generic red 'Něco se pokazilo' with no retry, and loading was one 'Načítám…' line. A story link that no longer opens (unknown slug, or hidden by the content gate in this language) looked like a server fault, even though there was nothing to retry.
+
+**Implemented Solution:** The shelf and reader now fail into RetryNotices that name what failed and refetch it. A 404 from the reader is a distinct, calm state: 'Tento příběh tu není k dispozici. Vyber si jiný v knihovně.' with the back button, and no retry. Loading shows six skeleton cards for the shelf and a title-plus-text skeleton for the reader.
+
+**Verification:** b116.js with routed 500s and a 1.2 s delay: 6 shelf skeletons, then 'Knihovnu se nepodařilo načíst.'. Retry loads the shelf, and the routed story 500 shows 'Příběh se nepodařilo načíst.'. Retry opens Der Regenschirm. ?story=zz-missing shows the not-available note with Back. No console errors other than the forced ones. Typecheck, build, ruff passed.
