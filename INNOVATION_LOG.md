@@ -2225,3 +2225,13 @@ Vlad approves a push.
 **Implemented Solution:** Each line has a small CZ toggle (aria-pressed, 'Překlad věty N') that shows that line's Czech under it. The global 'Ukázat překlad' still shows all lines and hides the per-line toggles while active. A hint under the controls explains the difference. The translation span is tagged lang=cs.
 
 **Verification:** b113.js at 390px on a 10-line story: initially 0 Czech lines and 10 CZ buttons. CZ on line 3 shows exactly 'Já to vím líp. Předpověď počasí říká: déšť.', and pressing it again hides it. The global toggle shows all 10 and hides the CZ buttons. scrollWidth is 390, so there is no overflow. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 114/120 | Page: [/stories/library] (Page Cycle 9/15)
+
+**Summary:** shadow a library story, speaker by speaker
+
+**Observed Problem:** The library had read-aloud, but no way to practise saying the text. /shadowing could only use lesson-word sentences and scene dialogues. The 90 graded stories per language, mostly dialogue with line audio, were exactly the connected speech shadowing needs, and they were not reachable from it.
+
+**Implemented Solution:** The reader has a 'Stínovat tento příběh' link to /shadowing?story=<slug>. Shadowing gains a story source: it loads the gated library story, uses its line audio, and shows speaker and Czech line. It reuses everything built in cycles 91-105: echo/together rounds, continuous run, role choice with partner cue (narration lines cue as 'Vypravěč:'), text-support levels, line strip, and URL state (?story, ?line, ?role). A banner links back to the text. A slug is valid in every language, so a story source survives a language switch.
+
+**Verification:** b114.js: the link leads to ?story=a1-01-umbrella. The banner is shown, the card reads 1/10 TOM 'Heute regnet es…', roles are Tom/Anna, and choosing Anna shows the cue 'Tom říká: …'. N N gives role=Anna&story=…&line=9, and a reload restores 9/10 'nahráno 0 z 3'. Audio requests go to /stories/library/a1-01-umbrella/audio?line=0,1. 'Zpět k textu' returns to the reader. No console errors. Postgres and Redis had stopped after an API interruption and were restarted before testing. Typecheck, build, ruff passed.

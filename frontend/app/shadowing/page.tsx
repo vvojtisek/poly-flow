@@ -10,7 +10,7 @@ import { digitOf, isTypingTarget } from "@/lib/keyboard";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
 import { Notice, RetryNotice, Skeleton } from "@/components/ui";
 import { useRecorder } from "@/hooks/useRecorder";
-import { getPracticeSentences, getRoleplay, listRoleplay, myWordAudioUrl, roleplayAudioUrl, type Language, type RoleplayScene } from "@/lib/api";
+import { getLibraryStory, getPracticeSentences, getRoleplay, libraryAudioUrl, listRoleplay, myWordAudioUrl, roleplayAudioUrl, type Language, type RoleplayScene } from "@/lib/api";
 import { clipSrc, play, playToEnd, prefetchClip, stop } from "@/lib/audio";
 import { useAuth, useRequireMe } from "@/lib/auth";
 import { envelopeFromUrl, type Envelope } from "@/lib/envelope";
@@ -39,9 +39,16 @@ function echoWindowMs(modelSeconds: number | undefined): number {
 /** One line to shadow, from either source: a lesson word's example or a scene's dialogue line. */
 type Line = { key: string; text: string; audio: string; cs?: string; speaker?: string; word?: { lemma: string; translation: string } };
 type Order = "recent" | "random";
-type Source = { kind: "words"; order: Order } | { kind: "scene"; id: string };
+type Source = { kind: "words"; order: Order } | { kind: "scene"; id: string } | { kind: "story"; slug: string };
+const SLUG = /^[a-z0-9][a-z0-9-]{0,63}$/;
+const sourceKey = (s: Source) => (s.kind === "scene" ? s.id : s.kind === "story" ? `story:${s.slug}` : s.order);
 
 async function loadLines(language: Language, source: Source): Promise<Line[]> {
+  if (source.kind === "story") {
+    // A library story: the same plot exists in every language, read line by line with its voice.
+    const story = await getLibraryStory(language, source.slug);
+    return story.lines.map((l, i) => ({ key: `${story.slug}:${i}`, text: l.text, cs: l.cs, speaker: l.speaker ?? undefined, audio: libraryAudioUrl(language, story.slug, i) }));
+  }
   if (source.kind === "words") {
     const list = await getPracticeSentences(language, source.order);
     return list.map((x) => ({ key: x.item_id, text: x.sentence, audio: myWordAudioUrl(x.item_id, "example"), word: { lemma: x.lemma, translation: x.translation } }));
@@ -446,7 +453,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
     return () => document.removeEventListener("keydown", onKey);
   }, [modelUrl, mineUrl, toggleRecord, compare, go, runEcho, jump, list, recording, rec]);
 
-  if (failed) return <RetryNotice text={source.kind === "scene" ? t.sceneFailed : t.wordsFailed} onRetry={() => setAttempt((n) => n + 1)} />;
+  if (failed) return <RetryNotice text={source.kind === "words" ? t.wordsFailed : source.kind === "story" ? t.storyFailed : t.sceneFailed} onRetry={() => setAttempt((n) => n + 1)} />;
   if (!list)
     return (
       <div aria-busy className="flex flex-col gap-4">
@@ -455,7 +462,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
       </div>
     );
   if (!current || !modelUrl)
-    return source.kind === "scene" ? (
+    return source.kind !== "words" ? (
       <Notice>{t.sceneEmpty}</Notice>
     ) : (
       <div className="flex flex-col items-start gap-3 rounded-2xl border border-dashed border-slate-300 p-5 dark:border-slate-700">
@@ -491,7 +498,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
           <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2 text-sm dark:bg-slate-800/60">
             <PlayButton url={cueLine.audio} size="sm" label={t.cuePlay} />
             <span className="min-w-0">
-              <span className="block text-xs text-slate-500">{t.cue(cueLine.speaker ?? "")}</span>
+              <span className="block text-xs text-slate-500">{cueLine.speaker ? t.cue(cueLine.speaker) : t.cueNarrator}</span>
               <span lang={language} className="block">{cueLine.text}</span>
             </span>
           </div>
@@ -563,7 +570,7 @@ function Shadowing({ language, source, start, onIndex }: { language: Language; s
         ))}
       </nav>
       {targets.length > 0 && targets.every((i) => practiced[i]) && (
-        <Notice>{source.kind === "scene" ? t.allRecordedScene : t.allRecorded}</Notice>
+        <Notice>{source.kind === "words" ? t.allRecorded : t.allRecordedScene}</Notice>
       )}
 
       {noModel && <Notice>{t.noModel}</Notice>}
@@ -658,6 +665,14 @@ function SourcePicker({ language, source, onChange }: { language: Language; sour
   if (source.kind === "words") lastOrder.current = source.order;
   return (
     <div className="flex flex-col gap-2">
+      {source.kind === "story" && (
+        <p className="flex flex-wrap items-center gap-2 rounded-xl bg-brand-500/5 px-3 py-2 text-sm">
+          <span>{t.fromStory}</span>
+          <Link href={`/stories/library?story=${encodeURIComponent(source.slug)}`} className="font-semibold text-brand-700 hover:underline dark:text-brand-200">
+            {t.backToStory}
+          </Link>
+        </p>
+      )}
       <div role="radiogroup" aria-label={t.sourceLabel} className="flex flex-wrap gap-1">
         {(["words", "scene"] as const).map((kind) => (
           <button
@@ -730,7 +745,9 @@ export default function ShadowingPage() {
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const scene = q.get("scene");
-    if (scene && /^[0-9a-f-]{36}$/i.test(scene)) setSourceState({ kind: "scene", id: scene });
+    const story = q.get("story");
+    if (story && SLUG.test(story)) setSourceState({ kind: "story", slug: story });
+    else if (scene && /^[0-9a-f-]{36}$/i.test(scene)) setSourceState({ kind: "scene", id: scene });
     else if (q.get("order") === "random") setSourceState({ kind: "words", order: "random" });
     const line = Number(q.get("line"));
     if (Number.isInteger(line) && line > 0 && line < 200) setStart(line - 1);
@@ -739,13 +756,15 @@ export default function ShadowingPage() {
   const writeUrl = useCallback((next: Source, index: number, resetRole = false) => {
     const q = new URLSearchParams(window.location.search);
     q.delete("scene");
+    q.delete("story");
     q.delete("order");
     q.delete("line");
     if (resetRole) q.delete("role");
     if (next.kind === "scene") q.set("scene", next.id);
+    else if (next.kind === "story") q.set("story", next.slug);
     else if (next.order === "random") q.set("order", "random");
     // A random sample differs on every load, so only a stable list remembers its line.
-    if (index > 0 && (next.kind === "scene" || next.order === "recent")) q.set("line", String(index + 1));
+    if (index > 0 && (next.kind !== "words" || next.order === "recent")) q.set("line", String(index + 1));
     const qs = q.toString();
     window.history.replaceState(window.history.state, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
   }, []);
@@ -784,7 +803,7 @@ export default function ShadowingPage() {
         {ready && (
           <>
             <SourcePicker key={`${me.acting.id}:${language}`} language={language} source={source} onChange={setSource} />
-            <Shadowing key={`${me.acting.id}:${language}:${source.kind === "scene" ? source.id : source.order}`} language={language} source={source} start={start} onIndex={onIndex} />
+            <Shadowing key={`${me.acting.id}:${language}:${sourceKey(source)}`} language={language} source={source} start={start} onIndex={onIndex} />
           </>
         )}
       </section>

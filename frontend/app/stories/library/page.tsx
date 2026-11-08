@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, BookOpenText, ChevronLeft, ChevronRight, CheckCircle2, XCircle, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
+import { ArrowLeft, BookOpenText, ChevronLeft, ChevronRight, Waves, CheckCircle2, XCircle, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -405,6 +405,9 @@ function Reader({
               <Languages className="size-4" aria-hidden /> {showCs ? t.hideCs : t.showCs}
             </button>
             <SlowToggle />
+            <Link href={`/shadowing?story=${encodeURIComponent(story.slug)}`} className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/10 dark:text-brand-200">
+              <Waves className="size-4" aria-hidden /> {t.shadowThis}
+            </Link>
           </div>
           {noAudio && <Notice>{t.noAudio}</Notice>}
           {!showCs && <p className="-mt-2 text-xs text-slate-500">{t.lineHelp}</p>}

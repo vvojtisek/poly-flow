@@ -690,6 +690,10 @@ export const cs = {
     emptyAction: "Otevřít lekci slovní zásoby",
     sceneReplaced: "Scéna z odkazu tu není k dispozici, proto se otevřela jiná.",
     sceneReplacedWords: "Scéna z odkazu tu není k dispozici a jiné rozhovory zatím nemáš, proto se otevřely věty ze slov.",
+    storyFailed: "Příběh z knihovny se nepodařilo načíst.",
+    fromStory: "Stínuješ příběh z knihovny.",
+    backToStory: "Zpět k textu",
+    cueNarrator: "Vypravěč:",
     sceneEmpty: "Tuhle scénu teď nejde načíst. Vyber jinou nebo stínuj věty ze slov.",
   },
   genders: {
@@ -1452,6 +1456,7 @@ export const cs = {
     keys: "P číst nahlas / zastavit · T překlad · N/→ další příběh · B/← předchozí · Esc knihovna",
     lineCs: (n: number) => `Překlad věty ${n}`,
     lineHelp: "Překlad jedné věty ukáže CZ vedle ní; celý text přeloží tlačítko nahoře.",
+    shadowThis: "Stínovat tento příběh",
     readAloud: "Přečíst nahlas",
     stopReading: "Zastavit čtení",
     playLine: (n: number) => `Přehrát větu ${n}`,
