@@ -16,14 +16,20 @@ const DE: Record<string, string> = { ich: "já", heißen: "jmenovat se", wie: "j
 const CS_TO_DE = Object.fromEntries(Object.entries(DE).map(([de, cs]) => [cs, de]));
 const PARENT_PASSWORD = "rodic-heslo-1";
 
-// Answers the current task. A correct choice advances by itself; a typed answer waits for "Další".
+// Recognition and recall can both use choices under adaptive difficulty. Recognition advances
+// automatically; a recall word-bank answer waits for "Další" like a typed recall answer.
 async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean; keyboard?: boolean } = {}) {
   const prompt = (await page.locator("section p.text-3xl").innerText()).trim();
-  if (await page.getByText("Co znamená?").count()) {
-    const right = DE[prompt.split(" ").at(-1)!]!;
+  const isRecall = CS_TO_DE[prompt] !== undefined;
+  const expected = isRecall ? CS_TO_DE[prompt] : DE[prompt.split(" ").at(-1)!];
+  expect(expected, `unexpected prompt ${prompt}`).toBeDefined();
+
+  const choices = page.locator("[data-state]");
+  if (await choices.count()) {
+    const right = expected!;
     if (opts.wrongFirst) {
-      // Lekce: one click answers; the pick turns red, the right option green, and the learner retries.
-      const texts = await page.locator("[data-state]").allInnerTexts();
+      // A wrong choice turns red, shows the right answer, and lets the learner retry.
+      const texts = await choices.allInnerTexts();
       const wrong = page.getByRole("button", { name: texts.find((t) => t.trim() !== right)!.trim(), exact: true });
       await wrong.click();
       await expect(wrong).toHaveAttribute("data-state", "wrong");
@@ -41,8 +47,10 @@ async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean; keyboar
       // Focus stays in the exercise: the next question's first option, or the answer box.
       await expect(page.locator("[data-state]").first().or(page.getByLabel("Tvoje odpověď"))).toBeFocused();
     }
+    if (isRecall) await page.getByRole("button", { name: "Další" }).click();
     return;
   }
+
   const box = page.getByLabel("Tvoje odpověď");
   if (opts.wrongFirst) {
     await box.fill("falsch");
@@ -52,8 +60,6 @@ async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean; keyboar
     await page.getByRole("button", { name: "Nápověda" }).click();
     await expect(page.getByText(/^\p{L}…$/u)).toBeVisible();
   }
-  const expected = CS_TO_DE[prompt];
-  expect(expected, `unexpected prompt ${prompt}`).toBeDefined();
   await box.fill(expected!);
   await page.getByRole("button", { name: "Zkontrolovat" }).click();
   await page.getByRole("button", { name: "Další" }).click();
@@ -111,7 +117,8 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   let firstChoice = true;
   for (let n = 2; n <= 8; n++) {
     await expect(page.getByText(`Úkol ${n} z 8`)).toBeVisible();
-    const recall = (await page.getByText("Napiš slovo").count()) > 0;
+    const prompt = (await page.locator("section p.text-3xl").innerText()).trim();
+    const recall = CS_TO_DE[prompt] !== undefined;
     await answerCorrectly(page, { wrongFirst: recall && firstRecall, keyboard: !recall && firstChoice && n < 8 });
     if (recall) firstRecall = false;
     else firstChoice = false;

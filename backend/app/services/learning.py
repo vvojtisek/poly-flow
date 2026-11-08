@@ -17,6 +17,7 @@ import re
 import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime, time, timedelta
+from difflib import SequenceMatcher
 from zoneinfo import ZoneInfo
 
 from sqlalchemy import and_, case, func, select, true, update
@@ -317,6 +318,45 @@ async def _recognition_payload(
     options = [item.translation_cs, *picked]
     rng.shuffle(options)
     return {"options": options, "correct": options.index(item.translation_cs)}
+
+
+async def word_bank_options(
+    db: AsyncSession, user: User, task: LearningTask, *, medium: bool
+) -> list[tuple[int, str]]:
+    """Stable active-recall choices, favouring familiar lookalikes as distractors."""
+    payload = task.payload
+    if "manual_options" not in payload:
+        p = UserWordProgress
+        rows = (
+            await db.execute(
+                select(LexiconItem.lemma, p.passive_known)
+                .outerjoin(p, and_(p.lexicon_item_id == LexiconItem.id, p.user_id == user.id))
+                .where(
+                    LexiconItem.language == task.item.language,
+                    LexiconItem.id != task.item.id,
+                    _suitable(user),
+                )
+                .limit(250)
+            )
+        ).all()
+        candidates = list({lemma: bool(known) for lemma, known in rows}.items())
+        candidates.sort(
+            key=lambda row: (
+                not row[1],
+                -SequenceMatcher(None, task.item.lemma.casefold(), row[0].casefold()).ratio(),
+            )
+        )
+        distractors = [word for word, _known in candidates[: (4 if medium else 3)]]
+        options = [task.item.lemma, *distractors]
+        random.Random(str(task.id)).shuffle(options)
+        payload = {
+            **payload,
+            "manual_options": options,
+            "manual_correct": options.index(task.item.lemma),
+        }
+        task.payload = payload
+        await db.flush()
+    return list(enumerate(payload["manual_options"]))
 
 
 async def start_session(
@@ -652,11 +692,45 @@ async def submit_answer(
             "spoken" if understood else "not_understood",
             heard or "",
         )
+    elif task.task_type == TaskType.RECOGNITION and text is not None:
+        difficulty = (user.settings or {}).get("practice_difficulty", "auto")
+        progress = (
+            (
+                await db.execute(
+                    select(UserWordProgress).where(
+                        UserWordProgress.user_id == user.id,
+                        UserWordProgress.lexicon_item_id == item.id,
+                    )
+                )
+            ).scalar_one_or_none()
+            if difficulty == "auto"
+            else None
+        )
+        if task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK) or not (
+            difficulty == "hard"
+            or (difficulty == "auto" and progress and progress.state == ProgressState.MASTERED)
+        ):
+            raise LearningError("text_answer_not_allowed", 422)
+        answer = " ".join(text.casefold().split())
+        expected = " ".join(item.translation_cs.casefold().split())
+        correct = answer == expected
+        verdict = "exact" if correct else "wrong"
     elif task.task_type == TaskType.RECOGNITION:
         options = task.payload["options"]
         if choice is None or not 0 <= choice < len(options):
             raise LearningError("invalid_choice", 422)
         correct = choice == task.payload["correct"]
+        verdict = "exact" if correct else "wrong"
+        answer = options[choice]
+    elif choice is not None and task.task_type == TaskType.RECALL:
+        if task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK) or (
+            user.settings or {}
+        ).get("practice_difficulty") not in ("easy", "medium"):
+            raise LearningError("choice_answer_not_allowed", 422)
+        options = task.payload.get("manual_options", [])
+        if not 0 <= choice < len(options):
+            raise LearningError("invalid_choice", 422)
+        correct = choice == task.payload.get("manual_correct")
         verdict = "exact" if correct else "wrong"
         answer = options[choice]
     else:

@@ -63,6 +63,22 @@ LEVELS: tuple[ExamLevel, ...] = _levels()
 BY_LEVEL: dict[CefrLevel, ExamLevel] = {e.level: e for e in LEVELS}
 
 
+def prerequisite_rank_ceiling(level: CefrLevel) -> int:
+    """Highest vocabulary rank covered when a level exam is passed."""
+    if level == CefrLevel.C1:
+        return 8000  # app-specific C1 vocabulary band; not a CEFR proficiency certificate
+    return BY_LEVEL[level].high
+
+
+def prerequisite_level_for_target(target: CefrLevel) -> CefrLevel | None:
+    """Last level below a recommended target, including diagnostic B2+ (stored as C1)."""
+    if target == CefrLevel.C1:
+        return CefrLevel.B2
+    if target == CefrLevel.C2:
+        return CefrLevel.C1
+    return previous(target)
+
+
 def previous(level: CefrLevel) -> CefrLevel | None:
     i = [e.level for e in LEVELS].index(level)
     return LEVELS[i - 1].level if i else None

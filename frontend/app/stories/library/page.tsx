@@ -186,19 +186,26 @@ function GlossedLine({ text, stretch, language }: { text: string; stretch: Gloss
  * Comprehension questions after reading: a check of understanding, not a test. Wrong picks can be
  * retried (learning mode), the answer can be shown, and nothing is stored or counted.
  */
-function Questions({ language, slug, questions, onAllDone }: { language: Language; slug: string; questions: { question: string; options: string[] }[]; onAllDone: () => void }) {
-  const [state, setState] = useState<Record<number, { wrong: number[]; right: number | null }>>({});
+type QState = { wrong: number[]; right: number | null; typedMisses: number };
+const NO_ANSWER: QState = { wrong: [], right: null, typedMisses: 0 };
+
+/** Comprehension check. Under the "hard" practice difficulty the learner types the answer instead
+ *  of picking it; either way it is checked on the server and nothing is recorded. */
+function Questions({ language, slug, questions, onAllDone, typed }: { language: Language; slug: string; questions: { question: string; options: string[] }[]; onAllDone: () => void; typed: boolean }) {
+  const [state, setState] = useState<Record<number, QState>>({});
+  const [drafts, setDrafts] = useState<Record<number, string>>({});
   const [busy, setBusy] = useState<number | null>(null);
   const [failed, setFailed] = useState(false);
-  async function pick(q: number, choice: number, reveal = false) {
+  async function pick(q: number, answer: { choice: number } | { text: string }, reveal = false) {
     setBusy(q);
     setFailed(false);
     try {
-      const r = await answerLibraryQuestion(language, slug, q, choice);
+      const r = await answerLibraryQuestion(language, slug, q, answer);
       setState((s) => {
-        const cur = s[q] ?? { wrong: [], right: null };
+        const cur = s[q] ?? NO_ANSWER;
         if (reveal || r.correct) return { ...s, [q]: { ...cur, right: r.answer_index } };
-        return { ...s, [q]: { ...cur, wrong: [...cur.wrong, choice] } };
+        if ("text" in answer) return { ...s, [q]: { ...cur, typedMisses: cur.typedMisses + 1 } };
+        return { ...s, [q]: { ...cur, wrong: [...cur.wrong, answer.choice] } };
       });
     } catch {
       setFailed(true);
@@ -216,10 +223,53 @@ function Questions({ language, slug, questions, onAllDone }: { language: Languag
       <div>
         <h3 id="questions-title" className="text-lg font-bold">{t.questionsTitle}</h3>
         <p className="text-xs text-slate-500">{t.questionsHelp}</p>
+        {typed && <p className="text-xs text-slate-500">{t.typedHelp}</p>}
       </div>
       {questions.map((q, qi) => {
-        const st = state[qi] ?? { wrong: [], right: null };
+        const st = state[qi] ?? NO_ANSWER;
         const done = st.right !== null;
+        if (typed) {
+          const draft = drafts[qi] ?? "";
+          return (
+            <fieldset key={qi} className="flex flex-col gap-2">
+              <legend lang={language} className="mb-1 font-medium">{q.question}</legend>
+              <form
+                className="flex gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (draft.trim()) void pick(qi, { text: draft });
+                }}
+              >
+                <input
+                  lang={language}
+                  value={draft}
+                  disabled={done || busy === qi}
+                  maxLength={200}
+                  onChange={(e) => setDrafts((d) => ({ ...d, [qi]: e.target.value }))}
+                  aria-label={`${t.typeAnswer}: ${q.question}`}
+                  placeholder={t.typeAnswer}
+                  className="min-h-11 min-w-0 flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
+                />
+                <button type="submit" disabled={done || busy === qi || !draft.trim()} className="min-h-11 rounded-xl bg-brand-500 px-3 text-sm font-semibold text-white disabled:opacity-50">
+                  {t.check}
+                </button>
+              </form>
+              {done && (
+                <p className="flex items-center gap-1 text-sm text-emerald-700 dark:text-emerald-300">
+                  <CheckCircle2 className="size-4 shrink-0" aria-label={t.right} /> <span lang={language}>{t.rightWas(q.options[st.right!] ?? "")}</span>
+                </p>
+              )}
+              {!done && st.typedMisses > 0 && (
+                <p className="flex flex-wrap items-center gap-2 text-sm text-rose-700 dark:text-rose-300">
+                  <XCircle className="size-4 shrink-0" aria-label={t.wrong} /> {t.wrong}
+                  <button type="button" onClick={() => void pick(qi, { text: "" }, true)} className="text-xs font-semibold text-brand-700 hover:underline dark:text-brand-200">
+                    {t.reveal}
+                  </button>
+                </p>
+              )}
+            </fieldset>
+          );
+        }
         return (
           <fieldset key={qi} className="flex flex-col gap-2">
             <legend lang={language} className="mb-1 font-medium">{q.question}</legend>
@@ -233,7 +283,7 @@ function Questions({ language, slug, questions, onAllDone }: { language: Languag
                     type="button"
                     lang={language}
                     disabled={done || wrong || busy === qi}
-                    onClick={() => void pick(qi, oi)}
+                    onClick={() => void pick(qi, { choice: oi })}
                     className={`flex min-h-11 items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-sm ${
                       right
                         ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40"
@@ -250,7 +300,7 @@ function Questions({ language, slug, questions, onAllDone }: { language: Languag
               })}
             </div>
             {!done && st.wrong.length > 0 && (
-              <button type="button" onClick={() => void pick(qi, st.wrong[0] ?? 0, true)} className="self-start text-xs font-semibold text-brand-700 hover:underline dark:text-brand-200">
+              <button type="button" onClick={() => void pick(qi, { choice: st.wrong[0] ?? 0 }, true)} className="self-start text-xs font-semibold text-brand-700 hover:underline dark:text-brand-200">
                 {t.reveal}
               </button>
             )}
@@ -294,6 +344,7 @@ function loadStory(key: string, language: Language, slug: string): Promise<Libra
 
 function Reader({
   profile,
+  typed,
   language,
   slug,
   onBack,
@@ -304,6 +355,7 @@ function Reader({
   onOpen,
 }: {
   profile: string;
+  typed: boolean;
   language: Language;
   slug: string;
   onBack: () => void;
@@ -537,7 +589,7 @@ function Reader({
               </li>
             ))}
           </ol>
-          <Questions key={story.slug} language={language} slug={story.slug} questions={story.questions} onAllDone={onRead} />
+          <Questions key={story.slug} language={language} slug={story.slug} questions={story.questions} onAllDone={onRead} typed={typed} />
           <button
             type="button"
             onClick={() => {
@@ -752,6 +804,7 @@ export default function StoryLibraryPage() {
           (slug ? (
             <Reader
               profile={String(me.acting.id)}
+              typed={me.acting.settings.practice_difficulty === "hard"}
               key={`${language}:${slug}`}
               language={language}
               slug={slug}

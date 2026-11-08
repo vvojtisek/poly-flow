@@ -90,9 +90,21 @@ async def _session_out(db: AsyncSession, user: User, s: GrammarSession) -> Gramm
     )
 
 
-def _exercise_out(item: GrammarSessionItem, total: int) -> ExerciseOut:
+async def _exercise_out(
+    db: AsyncSession, user: User, item: GrammarSessionItem, total: int
+) -> ExerciseOut:
     ex = item.exercise
     p = ex.payload
+    difficulty = (user.settings or {}).get("practice_difficulty", "auto")
+    if difficulty == "auto":
+        progress = await db.get(UserGrammarProgress, (user.id, ex.unit_id))
+        difficulty = (
+            "hard"
+            if progress and progress.state.value == "MASTERED"
+            else "medium"
+            if progress and progress.studied_at is not None
+            else "easy"
+        )
     return ExerciseOut(
         item_id=item.id,
         session_id=item.session_id,
@@ -102,7 +114,8 @@ def _exercise_out(item: GrammarSessionItem, total: int) -> ExerciseOut:
         prompt=p["prompt"],
         prompt_cs=p.get("prompt_cs"),
         direction=p.get("direction"),
-        options=p.get("options"),
+        options=None if difficulty == "hard" and ex.kind == "choice" else p.get("options"),
+        adaptive_tier=difficulty,
         tokens=p.get("tokens"),
         unit_id=ex.unit_id,
         unit_title=ex.unit.title,
@@ -251,7 +264,9 @@ async def next_item(session_id: uuid.UUID, auth: Auth, db: DB) -> GrammarNextOut
     except LearningError as exc:
         raise _http(exc) from exc
     item = svc.next_pending(s)
-    return GrammarNextOut(item=_exercise_out(item, len(s.items)) if item else None)
+    return GrammarNextOut(
+        item=await _exercise_out(db, auth.acting, item, len(s.items)) if item else None
+    )
 
 
 @router.post("/sessions/{session_id}/complete", response_model=GrammarSessionOut)

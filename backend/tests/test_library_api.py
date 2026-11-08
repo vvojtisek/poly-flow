@@ -116,6 +116,16 @@ async def test_comprehension_answers_are_checked_on_the_server_and_not_stored(db
     assert r.status_code == 404
     r = await client.post(f"{base}/0/answer?language=de", json={"choice": 9}, headers=csrf(me))
     assert r.status_code == 422
+    # Hard difficulty types the answer: case and spacing do not matter, other text is wrong,
+    # and exactly one of choice/text is accepted.
+    typed = "  " + q0.options[q0.answer_index].upper().replace(" ", "  ") + " "
+    r = await client.post(f"{base}/0/answer?language=de", json={"text": typed}, headers=csrf(me))
+    assert r.json() == {"correct": True, "answer_index": q0.answer_index}
+    r = await client.post(f"{base}/0/answer?language=de", json={"text": "nic"}, headers=csrf(me))
+    assert r.json()["correct"] is False
+    for bad in ({}, {"choice": 0, "text": "x"}, {"text": "x" * 201}):
+        r = await client.post(f"{base}/0/answer?language=de", json=bad, headers=csrf(me))
+        assert r.status_code == 422
     # Without the CSRF header the write-shaped call is refused like every other POST.
     assert (
         await client.post(f"{base}/0/answer?language=de", json={"choice": 0})

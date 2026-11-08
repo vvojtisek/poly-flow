@@ -6,7 +6,7 @@ from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, Response, status
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, TtsDep, _chosen_voice, _speech, get_now
@@ -81,9 +81,28 @@ class AnswerIn(BaseModel):
     choice: int = Field(ge=0, le=9)
 
 
+class LibraryAnswerIn(BaseModel):
+    """Exactly one of: a picked option, or typed text (hard practice difficulty)."""
+
+    model_config = ConfigDict(extra="forbid")
+    choice: int | None = Field(default=None, ge=0, le=9)
+    text: str | None = Field(default=None, max_length=200)
+
+    @model_validator(mode="after")
+    def _one_answer(self) -> "LibraryAnswerIn":
+        if (self.choice is None) == (self.text is None):
+            raise ValueError("provide exactly one of choice or text")
+        return self
+
+
 class AnswerOut(BaseModel):
     correct: bool
     answer_index: int
+
+
+def _same_text(a: str, b: str) -> bool:
+    """Typed answers ignore case and runs of whitespace, nothing else."""
+    return " ".join(a.casefold().split()) == " ".join(b.casefold().split())
 
 
 def _out(s: DailyStory) -> StoryOut:
@@ -351,7 +370,7 @@ async def library_line_audio(
 async def library_answer(
     slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
     index: Annotated[int, Path(ge=0, le=9)],
-    body: AnswerIn,
+    body: LibraryAnswerIn,
     auth: Auth,
     db: DB,
     language: Annotated[Language | None, Query()] = None,
@@ -366,6 +385,9 @@ async def library_answer(
     if index >= len(questions):
         raise HTTPException(404, "unknown_question")
     q = questions[index]
-    if body.choice >= len(q.options):
+    if body.text is not None:
+        correct = _same_text(body.text, q.options[q.answer_index])
+        return AnswerOut(correct=correct, answer_index=q.answer_index)
+    if body.choice is None or body.choice >= len(q.options):
         raise HTTPException(422, "invalid_choice")
     return AnswerOut(correct=body.choice == q.answer_index, answer_index=q.answer_index)

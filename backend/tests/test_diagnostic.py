@@ -8,10 +8,17 @@ from sqlalchemy import select
 
 from app.api.deps import get_limiter
 from app.api.learning import get_now
-from app.cli import read_grammar_pack
+from app.cli import LexiconRow, read_grammar_pack, upsert_lexicon
 from app.db.session import get_session
+from app.domain.enums import ProgressState
 from app.main import app
-from app.models import CefrPlacement, DiagnosticSession, UserGrammarProgress
+from app.models import (
+    CefrPlacement,
+    DiagnosticSession,
+    LexiconItem,
+    UserGrammarProgress,
+    UserWordProgress,
+)
 from app.services import diagnostic as svc
 from app.services import grammar as grammar_svc
 from app.services.rate_limit import MemoryAttemptLimiter
@@ -117,6 +124,18 @@ async def test_without_a_voice_no_listening_question_is_asked(db, client):
 
 async def test_strong_learner_reaches_b2_plus_and_unlocks_grammar_and_exams(db, client):
     await seed_grammar()
+    await upsert_lexicon(
+        [
+            LexiconRow(
+                language="de",
+                rank=rank,
+                lemma=f"wort{rank}",
+                pos="NOUN",
+                translation_cs=f"význam {rank}",
+            )
+            for rank in (1, 500, 501, 1000, 1001, 2500, 2501, 5000, 5001)
+        ]
+    )
     me = await setup_parent(client)
     st = await run(client, me, lambda item: True)
     res = st["result"]
@@ -125,8 +144,27 @@ async def test_strong_learner_reaches_b2_plus_and_unlocks_grammar_and_exams(db, 
     rows = await grammar_rows()
     units = len(read_grammar_pack(GRAMMAR).units)
     assert len(rows) == units and res["grammar_queued"] == units
-    assert all(p.studied_by == "placement" and p.next_review_at is not None for p in rows.values())
-    # The units wait in the grammar check right away.
+    assert all(
+        p.state == ProgressState.MASTERED and p.studied_by == "placement" for p in rows.values()
+    )
+    async for db_ in get_session():
+        word_rows = list((await db_.execute(select(UserWordProgress))).scalars())
+        item_ranks = {
+            item.id: item.frequency_rank
+            for item in (await db_.execute(select(LexiconItem))).scalars()
+        }
+        assert len(word_rows) == 8
+        assert all(
+            p.state == ProgressState.MASTERED and p.active_known and p.passive_known
+            for p in word_rows
+            if item_ranks[p.lexicon_item_id] <= 5000
+        )
+        assert all(
+            item_ranks[p.lexicon_item_id] == 5001
+            for p in word_rows
+            if p.state != ProgressState.MASTERED
+        )
+    # Completed prerequisites are due immediately for confirmation/review.
     r = await client.get("/api/v1/grammar?language=de")
     assert r.json()["due"] == units
     async for db_ in get_session():
@@ -134,7 +172,7 @@ async def test_strong_learner_reaches_b2_plus_and_unlocks_grammar_and_exams(db, 
         assert placed.level.value == "C1"
 
 
-async def test_learner_who_fails_above_a2_is_placed_at_a2_and_retake_returns_units(db, client):
+async def test_lower_retake_does_not_revoke_placement_mastery(db, client):
     await seed_grammar()
     me = await setup_parent(client)
     await run(client, me, lambda item: True)
@@ -142,9 +180,8 @@ async def test_learner_who_fails_above_a2_is_placed_at_a2_and_retake_returns_uni
     res = st["result"]
     assert res["level"] in ("A1", "A2"), res
     rows = await grammar_rows()
-    queued = {u for u, p in rows.items() if p.studied_at is not None}
-    assert res["grammar_returned"] > 0
-    assert queued and all(u.startswith(("de-a1-", "de-a2-")) for u in queued)
+    assert res["grammar_returned"] == 0
+    assert all(p.state == ProgressState.MASTERED for p in rows.values())
 
 
 async def test_answers_are_one_attempt_and_replay(db, client):

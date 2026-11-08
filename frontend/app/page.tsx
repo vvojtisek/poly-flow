@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertTriangle, ArrowRight, Award, BarChart3, ClipboardCheck, Compass, Dumbbell, Flag, Gauge, GraduationCap, Layers, Map as MapIcon, Play, Trophy, type LucideIcon } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, Award, BarChart3, BookOpenText, ClipboardCheck, Compass, Dumbbell, Flag, Gauge, GraduationCap, Headphones, Layers, Map as MapIcon, Mic, Play, Trophy, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -239,6 +239,16 @@ export default function HomePage() {
             </button>
             <p className="text-xs text-white/80">{primary.href === "/lesson/vocabulary" ? cs.lesson.learnHelp : t.checkNote}</p>
           </div>
+        </section>
+
+        <section aria-labelledby="lesson-pillars" className="flex flex-col gap-2 lg:col-span-3">
+          <h2 id="lesson-pillars" className="text-sm font-semibold text-slate-600 dark:text-slate-300">{t.pillars}</h2>
+          <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <QuickAction href="/shadowing" icon={Mic} title={t.speaking} help={t.speakingHelp(progress?.cefr_level ?? null)} />
+            <QuickAction href="/stories/library" icon={BookOpenText} title={t.reading} help={t.readingHelp(progress?.cefr_level ?? null)} />
+            <QuickAction href="/words?tab=levels" icon={Layers} title={t.vocabularyPillar} help={t.vocabularyPillarHelp(progress?.cefr_level ?? null)} />
+            <QuickAction href="/grammar/check" icon={Headphones} title={t.grammarPillar} help={t.grammarPillarHelp(progress?.cefr_level ?? null)} />
+          </ul>
         </section>
 
         <section aria-labelledby="quick-actions" className="flex flex-col gap-2 lg:col-span-3">

@@ -93,6 +93,7 @@ export interface ProfileSettings {
   audio_rate: number;
   autoplay_audio: boolean;
   english_variant: "uk" | "us";
+  practice_difficulty: "auto" | "easy" | "medium" | "hard";
   theme: Theme;
   interests: string[];
   voices: Partial<Record<Language, string>>;
@@ -264,6 +265,7 @@ export interface Task {
   example: string | null;
   cloze: string | null; // recall: example sentence with the target word blanked
   options: { id: number; text: string }[] | null;
+  adaptive_tier: "easy" | "medium" | "hard";
   hint: string | null;
 }
 
@@ -492,6 +494,7 @@ export interface GrammarExercise {
   prompt_cs: string | null;
   direction: "cs-target" | "target-cs" | null;
   options: string[] | null;
+  adaptive_tier: "easy" | "medium" | "hard";
   tokens: string[] | null;
   unit_id: string;
   unit_title: string;
@@ -669,10 +672,11 @@ export interface LibraryStory {
 export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
 export const libraryAudioUrl = (language: Language, slug: string, line: number) =>
   `/api/v1/stories/library/${encodeURIComponent(slug)}/audio?language=${language}&line=${line}`;
-export const answerLibraryQuestion = (language: Language, slug: string, index: number, choice: number) =>
+/** A comprehension answer: a picked option, or (under hard practice difficulty) typed text. */
+export const answerLibraryQuestion = (language: Language, slug: string, index: number, answer: { choice: number } | { text: string }) =>
   api<{ correct: boolean; answer_index: number }>(
     `/api/v1/stories/library/${encodeURIComponent(slug)}/questions/${index}/answer?language=${language}`,
-    { json: { choice } },
+    { json: answer },
   );
 export const getLibraryStory = (language: Language, slug: string) =>
   api<LibraryStory>(`/api/v1/stories/library/${encodeURIComponent(slug)}?language=${language}`);

@@ -92,6 +92,7 @@ class TaskOut(BaseModel):
     # function words ("ten (určitý člen)" alone could be der/die/das).
     cloze: str | None
     options: list[Option] | None
+    adaptive_tier: Literal["easy", "medium", "hard"] = "easy"
     hint: str | None
 
 

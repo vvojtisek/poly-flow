@@ -251,6 +251,23 @@ async def test_exercise_never_leaks_answers(db, client):
     assert item["kind"] == "choice" and item["options"] == ["der", "die", "das"]
 
 
+async def test_hard_difficulty_accepts_free_answer_for_choice(db, client):
+    await seed()
+    me = await adult(client)
+    changed = await client.patch(
+        "/api/v1/me/profile",
+        json={"settings": {"practice_difficulty": "hard"}},
+        headers=csrf(me),
+    )
+    assert changed.status_code == 200
+    session = await lesson(client, me)
+    item = await nxt(client, session["id"])
+    assert item["kind"] == "choice" and item["options"] is None
+    assert item["adaptive_tier"] == "hard"
+    result = await answer(client, me, item, {"text": "der"})
+    assert result["correct"] and result["task_done"]
+
+
 async def test_lesson_wrong_answer_explains_and_retries_without_evidence(db, client):
     await seed()
     me = await adult(client)

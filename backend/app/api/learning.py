@@ -13,7 +13,7 @@ from app.core.config import get_settings
 from app.domain.enums import Language
 from app.domain.level_exam import EXAM
 from app.domain.placement import PLACEMENT
-from app.models import LearningSession, LearningTask, LexiconItem
+from app.models import LearningSession, LearningTask, LexiconItem, UserWordProgress
 from app.models.learning import SessionMode, TaskStatus, TaskType
 from app.schemas.learning import (
     AnswerIn,
@@ -135,10 +135,33 @@ async def _session_out(db: AsyncSession, s: LearningSession) -> SessionOut:
     return out
 
 
-def _task_out(task: LearningTask, total: int) -> TaskOut:
+async def _task_out(db: DB, user, task: LearningTask, total: int) -> TaskOut:
     item = task.item
     recognition = task.task_type == TaskType.RECOGNITION
     options = svc.visible_options(task)
+    difficulty = (user.settings or {}).get("practice_difficulty", "auto")
+    if difficulty == "auto":
+        progress = (
+            await db.execute(
+                select(UserWordProgress).where(
+                    UserWordProgress.user_id == user.id,
+                    UserWordProgress.lexicon_item_id == item.id,
+                )
+            )
+        ).scalar_one_or_none()
+        if progress and progress.state == "MASTERED":
+            difficulty = "hard"
+        elif task.task_type == TaskType.RECALL and (
+            task.is_new_item or (progress is not None and progress.passive_known)
+        ):
+            difficulty = "medium"
+        else:
+            difficulty = "easy"
+    adjustable = task.session.mode in (SessionMode.LEARN, SessionMode.CHECK)
+    if adjustable and task.task_type == TaskType.RECALL and difficulty in ("easy", "medium"):
+        options = await svc.word_bank_options(db, user, task, medium=difficulty == "medium")
+    elif adjustable and task.task_type == TaskType.RECOGNITION and difficulty == "hard":
+        options = None
     return TaskOut(
         id=task.id,
         session_id=task.session_id,
@@ -154,6 +177,7 @@ def _task_out(task: LearningTask, total: int) -> TaskOut:
         gender=item.gender,
         example=item.example_sentence if recognition else None,
         options=[Option(id=i, text=t) for i, t in options] if options is not None else None,
+        adaptive_tier=difficulty,
         hint=svc.hint_text(task),
         cloze=svc.cloze(task),
     )
@@ -205,7 +229,9 @@ async def next_task(session_id: uuid.UUID, auth: Auth, db: DB, now: Now) -> Next
     await db.commit()
     # A placement test's length depends on the answers: show its upper bound.
     total = PLACEMENT.max_items if s.mode == SessionMode.PLACEMENT else len(s.tasks)
-    return NextOut(task=_task_out(task, total))
+    out = await _task_out(db, auth.acting, task, total)
+    await db.commit()  # persist the deterministic word bank for stable grading on submit
+    return NextOut(task=out)
 
 
 @router.post("/tasks/{task_id}/hint", response_model=TaskOut)
@@ -216,7 +242,9 @@ async def hint(task_id: uuid.UUID, auth: Auth, db: DB) -> TaskOut:
         raise _http(exc) from exc
     await db.commit()
     total = len((await svc.get_session(db, auth.acting, task.session_id)).tasks)
-    return _task_out(task, total)
+    out = await _task_out(db, auth.acting, task, total)
+    await db.commit()
+    return out
 
 
 @router.post("/tasks/{task_id}/answer", response_model=AnswerOut)

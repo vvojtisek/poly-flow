@@ -624,20 +624,47 @@ async def submit(
     else:
         picked = None
         if kind == ExerciseKind.CHOICE:
-            options = ex.payload["options"]
-            if choice is None or not 0 <= choice < len(options):
-                raise LearningError("invalid_choice", 422)
-            picked = options[choice]
+            if text is not None:
+                difficulty = (user.settings or {}).get("practice_difficulty", "auto")
+                progress = (
+                    await db.get(UserGrammarProgress, (user.id, ex.unit_id))
+                    if difficulty == "auto"
+                    else None
+                )
+                if item.session.mode not in (LEARN, CHECK) or not (
+                    difficulty == "hard"
+                    or (
+                        difficulty == "auto"
+                        and progress
+                        and progress.state == ProgressState.MASTERED
+                    )
+                ):
+                    raise LearningError("text_answer_not_allowed", 422)
+                g = grade(
+                    language,
+                    ExerciseKind.TRANSLATE,
+                    ex.answers,
+                    text=text,
+                    case_sensitive_target=ex.payload.get("direction") != "target-cs",
+                )
+                picked = text
+            else:
+                options = ex.payload["options"]
+                if choice is None or not 0 <= choice < len(options):
+                    raise LearningError("invalid_choice", 422)
+                picked = options[choice]
+                g = grade(language, kind, ex.answers, choice=picked)
         elif text is None or not text.strip():
             raise LearningError("text_required", 422)
-        g = grade(
-            language,
-            kind,
-            ex.answers,
-            text=text,
-            choice=picked,
-            case_sensitive_target=ex.payload.get("direction") != "target-cs",
-        )
+        else:
+            g = grade(
+                language,
+                kind,
+                ex.answers,
+                text=text,
+                choice=picked,
+                case_sensitive_target=ex.payload.get("direction") != "target-cs",
+            )
         correct, verdict, note = g.correct, g.verdict, g.note
         error = g.error.value if g.error else None
         answer = picked if picked is not None else (text or "")
