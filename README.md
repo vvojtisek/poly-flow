@@ -142,8 +142,9 @@ Behind a registry mirror, pass `--build-arg PYTHON_IMAGE=...` / `NODE_IMAGE=...`
 
 ## Versions and releases
 
-The current state is **pre-release 1.0**: version `1.0.0-alpha.11` ([SemVer](https://semver.org) pre-release).
-Every PR bumps the pre-release number (`alpha.N`).
+The current version is **1.0.0**, the first release shared with users ([SemVer](https://semver.org)).
+Before it, every PR bumped the pre-release number (`1.0.0-alpha.N`, last `alpha.14`). From 1.0.0 on,
+every PR still bumps `/VERSION`: patch for fixes, minor for new features.
 `/VERSION` is canonical; `scripts/set-version.sh <version>` updates every copy (backend package,
 `pyproject.toml`/`uv.lock` in PEP 440 spelling, `frontend/package.json`), and a backend test fails if they drift.
 

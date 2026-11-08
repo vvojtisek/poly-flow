@@ -91,7 +91,7 @@ Treat feed HTML, scraped content, LLM output, model output, and uploaded audio a
 
 ## Versioning and releases
 
-The current state is pre-release 1.0. Until the 1.0 release, work lands on `main` through short-lived branches. After the release, `main` tracks released code and ongoing development happens on a development branch. The GUI must show the app version and, for non-release builds, the branch and commit so a production build is distinguishable from a development one. Every PR bumps the version with `scripts/set-version.sh` (before 1.0: the next `1.0.0-alpha.N`), which keeps the backend and frontend in sync. If `main` moved to the same or a higher version while the PR was open, merge `main` and bump again past it.
+Version 1.0.0 is the first release shared with users (Vlad, 2026-11-08). Before it, work landed on `main` through short-lived branches. From the release on, `main` tracks released code and ongoing development happens on a development branch. The GUI must show the app version and, for non-release builds, the branch and commit so a production build is distinguishable from a development one. Every PR bumps the version with `scripts/set-version.sh` (before 1.0 it was the next `1.0.0-alpha.N`; from 1.0.0, SemVer: patch for fixes, minor for features), which keeps the backend and frontend in sync. If `main` moved to the same or a higher version while the PR was open, merge `main` and bump again past it.
 
 ## Git conventions
 
