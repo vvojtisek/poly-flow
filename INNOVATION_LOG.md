@@ -2265,3 +2265,13 @@ Vlad approves a push.
 **Implemented Solution:** When a story opens, the page freezes the order it came from: the filtered shelf if it contains the story, otherwise the whole library. Next/previous and N/B walk that frozen trail, and the trail is reset on returning to the shelf. Neighbours are looked up from the library by slug.
 
 **Verification:** b117b.js (?kind=story&unread=1): open Die Diät gives nav 'Der Wachhund … Der falsche Koffer'. After answering all questions (marked read) the nav is unchanged, and N opens Der falsche Koffer. Stashed baseline, same steps: after reading, the nav jumped to 'Der vergessene Geburtstag … Das Hotel mit den Kühen', and N left the filter. b117.js (A1 unread) is also stable. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 118/120 | Page: [/stories/library] (Page Cycle 13/15)
+
+**Summary:** fit the open story into the first phone screen
+
+**Observed Problem:** At 390x844 an open story started its first line at y=955, below the fold: the page intro, the four-language picker, the shelf-wide draft note and three rows of reader controls (with full-text labels) all sat above the text. Switching language from inside a story also made no sense, since slugs are per language. The shelf intro was a long paragraph above the filters.
+
+**Implemented Solution:** While a story is open the page header (intro + language picker) is hidden on phones and shrunk on desktop; the unreviewed note moves into the story header so the draft label stays with the text. On phones the translation toggle and the shadowing link become icon buttons (text kept as sr-only and title), and the per-line help line is hidden (the CZ chip carries its aria-label). The shelf intro folds into a 'Co je knihovna?' disclosure below sm.
+
+**Verification:** Playwright b118.js at 390x844: first story line top 955 -> 639 px, reader controls 3 rows -> 2, no horizontal overflow, draft note present in the story header, no console errors; at 1280 the full labels and page title still show. Shelf scrollHeight 10762 -> 10702. typecheck, lint and build passed.

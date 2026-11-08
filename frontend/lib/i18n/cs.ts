@@ -1418,6 +1418,7 @@ export const cs = {
     title: "Knihovna příběhů",
     intro: "Krátké vtipné příběhy a rozhovory po úrovních A1 až B2. Každý je napsaný hlavně slovy své úrovně a pár slovy z té další. Čtení se nehodnotí a nic se nezapisuje.",
     unreviewed: "Texty jsou zatím návrh, který nezkontroloval rodilý mluvčí. Překlady jsou orientační.",
+    aboutLibrary: "Co je knihovna?",
     level: (level: string, n: number) => `${level} · ${n} ${n === 1 ? "text" : n < 5 ? "texty" : "textů"}`,
     kinds: { story: "vyprávění", dialogue: "převážně rozhovor" } as Record<string, string>,
     lineCount: (n: number) => `${n} ${n < 5 ? "věty" : "vět"}`,

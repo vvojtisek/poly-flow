@@ -415,6 +415,7 @@ function Reader({
             </p>
             <h2 lang={language} className="text-2xl font-bold">{story.title}</h2>
             <p className="text-sm text-slate-500">{story.title_cs}</p>
+            {story.review_status === "unreviewed" && <p className="mt-1 text-xs text-amber-700 dark:text-amber-300">{t.unreviewed}</p>}
           </header>
           <div className="flex flex-wrap items-center gap-2">
             {reading === null ? (
@@ -430,9 +431,10 @@ function Reader({
               type="button"
               onClick={() => setShowCs((v) => !v)}
               aria-pressed={showCs}
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-sm font-medium dark:bg-slate-800"
+              title={showCs ? t.hideCs : t.showCs}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl bg-slate-100 px-3 py-2 text-sm font-medium dark:bg-slate-800"
             >
-              <Languages className="size-4" aria-hidden /> {showCs ? t.hideCs : t.showCs}
+              <Languages className="size-4" aria-hidden /> <span className="max-sm:sr-only">{showCs ? t.hideCs : t.showCs}</span>
             </button>
             <SlowToggle />
             <div role="radiogroup" aria-label={t.sizeLabel} className="flex overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
@@ -450,12 +452,12 @@ function Reader({
                 </button>
               ))}
             </div>
-            <Link href={`/shadowing?story=${encodeURIComponent(story.slug)}`} className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/10 dark:text-brand-200">
-              <Waves className="size-4" aria-hidden /> {t.shadowThis}
+            <Link href={`/shadowing?story=${encodeURIComponent(story.slug)}`} title={t.shadowThis} className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/10 dark:text-brand-200">
+              <Waves className="size-4" aria-hidden /> <span className="max-sm:sr-only">{t.shadowThis}</span>
             </Link>
           </div>
           {noAudio && <Notice>{t.noAudio}</Notice>}
-          {!showCs && <p className="-mt-2 text-xs text-slate-500">{t.lineHelp}</p>}
+          {!showCs && <p className="-mt-2 text-xs text-slate-500 max-sm:hidden">{t.lineHelp}</p>}
           {/* Context first: the few above-level words, with glosses, before the text itself. */}
           {story.stretch.length > 0 && (
             <section aria-labelledby="stretch-title" className="rounded-2xl bg-amber-50 p-3 text-sm dark:bg-amber-950/30">
@@ -675,16 +677,26 @@ export default function StoryLibraryPage() {
   return (
     <AppShell me={me}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-4">
-        <header className="flex flex-wrap items-end justify-between gap-3">
+        {/* While a story is open the page header shrinks to its name: the intro and the language
+            switch belong to the shelf, and on a phone they pushed the first line of text off screen. */}
+        <header className={`flex flex-wrap items-end justify-between gap-3 ${slug ? "max-sm:hidden" : ""}`}>
           <div>
-            <h1 className="flex items-center gap-2 text-2xl font-bold">
-              <Library className="size-6 text-brand-500" aria-hidden /> {t.title}
+            <h1 className={`flex items-center gap-2 font-bold ${slug ? "text-lg" : "text-2xl"}`}>
+              <Library className={slug ? "size-5 text-brand-500" : "size-6 text-brand-500"} aria-hidden /> {t.title}
             </h1>
-            <p className="mt-1 max-w-2xl text-sm text-slate-600 dark:text-slate-300">{t.intro}</p>
+            {!slug && (
+              <>
+                <p className="mt-1 hidden max-w-2xl text-sm text-slate-600 sm:block dark:text-slate-300">{t.intro}</p>
+                <details className="mt-1 text-sm text-slate-600 sm:hidden dark:text-slate-300">
+                  <summary className="cursor-pointer font-medium text-slate-500">{t.aboutLibrary}</summary>
+                  <p className="mt-1">{t.intro}</p>
+                </details>
+              </>
+            )}
           </div>
-          <LanguagePicker me={me} />
+          {!slug && <LanguagePicker me={me} />}
         </header>
-        {library?.review_status === "unreviewed" && <p className="text-xs text-amber-700 dark:text-amber-300">{t.unreviewed}</p>}
+        {library?.review_status === "unreviewed" && !slug && <p className="text-xs text-amber-700 dark:text-amber-300">{t.unreviewed}</p>}
         {failed && <RetryNotice text={t.libraryFailed} onRetry={() => setAttempt((n) => n + 1)} />}
         {!library && !failed && (
           <div aria-busy className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
