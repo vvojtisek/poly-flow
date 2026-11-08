@@ -30,6 +30,7 @@ async def test_defaults_for_a_new_profile(db, client):
     s = me["acting"]["settings"]
     assert s["theme"] == "system" and s["interests"] == [] and s["voices"] == {}
     assert s["audio_rate"] == 1.0 and s["english_variant"] == "uk"
+    assert s["practice_difficulty"] == "auto"
 
 
 async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client):
@@ -43,6 +44,7 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
             "voices": {"fr": "fr_FR-siwis-medium"},
             "audio_rate": 0.8,
             "english_variant": "us",
+            "practice_difficulty": "medium",
         },
     )
     assert r.status_code == 200, r.text
@@ -51,6 +53,7 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
     assert s["interests"] == ["travel", "formule 1", "vaření"]
     assert s["voices"] == {"fr": "fr_FR-siwis-medium"} and s["audio_rate"] == 0.8
     assert s["english_variant"] == "us"
+    assert s["practice_difficulty"] == "medium"
 
     r = await patch(client, me, {"theme": "light"})
     s = r.json()["settings"]
@@ -72,6 +75,7 @@ async def test_settings_are_saved_and_a_partial_update_keeps_the_rest(db, client
         {"voices": {"es": "de_DE-thorsten-medium"}},
         {"audio_rate": 3},
         {"english_variant": "au"},
+        {"practice_difficulty": "extreme"},
         {"unknown": True},
     ],
 )

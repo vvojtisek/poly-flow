@@ -76,6 +76,7 @@ class ExerciseOut(BaseModel):
     prompt_cs: str | None
     direction: Literal["cs-target", "target-cs"] | None
     options: list[str] | None
+    adaptive_tier: Literal["easy", "medium", "hard"] = "easy"
     tokens: list[str] | None
     unit_id: str
     unit_title: str

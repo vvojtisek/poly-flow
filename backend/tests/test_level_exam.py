@@ -7,8 +7,24 @@ from sqlalchemy import select, update
 from app.cli import LexiconRow, upsert_lexicon
 from app.db.session import get_session
 from app.domain.enums import CefrLevel
-from app.domain.level_exam import EXAM, LEVELS, band_complete, passed, previous, ready
-from app.models import LanguagePlacement, LearningEvent, LevelBadge, LexiconItem, User
+from app.domain.level_exam import (
+    EXAM,
+    LEVELS,
+    band_complete,
+    passed,
+    prerequisite_rank_ceiling,
+    previous,
+    ready,
+)
+from app.models import (
+    GrammarUnit,
+    LanguagePlacement,
+    LearningEvent,
+    LevelBadge,
+    LexiconItem,
+    User,
+    UserGrammarProgress,
+)
 from app.models import UserWordProgress as P
 from tests.helpers import csrf, login, make_child, setup_parent
 from tests.test_learning import key, next_task, overrides  # noqa: F401  (fixture)
@@ -24,6 +40,10 @@ def test_levels_follow_the_milestone_tags():
         (CefrLevel.B2, 2500, 5000),
     ]
     assert previous(CefrLevel.A1) is None and previous(CefrLevel.B2) is CefrLevel.B1
+    assert [
+        prerequisite_rank_ceiling(level)
+        for level in (CefrLevel.A1, CefrLevel.A2, CefrLevel.B1, CefrLevel.B2)
+    ] == [500, 1000, 2500, 5000]
 
 
 def test_pass_mark_needs_every_question_answered():
@@ -183,6 +203,25 @@ async def test_passing_records_a_badge_and_counts_as_checks(db, client, override
     await seed()
     me = await setup_parent(client)
     await know("mama", 450, overrides.now)
+    async for s in get_session():
+        s.add(
+            GrammarUnit(
+                id="test-a1-prerequisite",
+                language="de",
+                level=CefrLevel.A1,
+                position=0,
+                title="A1",
+                summary="A1 grammar",
+                objective="Use A1 grammar",
+                notes=[],
+                examples=[],
+                source="test",
+                license="CC0-1.0",
+                revision="test",
+                review_status="reviewed",
+            )
+        )
+        await s.commit()
     summary, ranks = await take_exam(client, me, "A1", miss=EXAM.questions - EXAM.pass_correct)
     assert all(1 <= r <= 500 for r in ranks) and len(set(ranks)) == EXAM.questions
     assert summary["passed"] and summary["correct"] == EXAM.pass_correct
@@ -198,6 +237,17 @@ async def test_passing_records_a_badge_and_counts_as_checks(db, client, override
         events = (await s.execute(select(LearningEvent))).scalars().all()
         assert sum(e.counts_as_evidence for e in events) == EXAM.pass_correct
         badge = (await s.execute(select(LevelBadge))).scalar_one()
+        completed = (
+            (await s.execute(select(P).join(LexiconItem).where(LexiconItem.frequency_rank <= 500)))
+            .scalars()
+            .all()
+        )
+        assert len(completed) == 500
+        assert all(p.passive_known and p.active_known for p in completed)
+        grammar_progress = (await s.execute(select(UserGrammarProgress))).scalar_one()
+        assert grammar_progress.state.value == "MASTERED"
+        assert grammar_progress.studied_by == "placement"
+        assert sum(e.counts_as_evidence for e in events) == EXAM.pass_correct
         assert badge.asked == EXAM.questions and badge.policy_version == EXAM.version
 
     r = await start_exam(client, me, "A1")

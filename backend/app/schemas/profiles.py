@@ -32,6 +32,7 @@ class ProfileSettings(BaseModel):
     audio_rate: float = Field(default=1.0, ge=0.5, le=1.5)  # playback speed of spoken audio
     autoplay_audio: bool = True
     english_variant: Literal["uk", "us"] = "uk"
+    practice_difficulty: Literal["auto", "easy", "medium", "hard"] = "auto"
     theme: Literal["light", "dark", "system"] = "system"
     # Predefined topic slugs (voices.TOPICS) and the profile's own keywords, lower case.
     interests: list[str] = Field(default_factory=list, max_length=voices.MAX_INTERESTS)

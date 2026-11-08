@@ -335,6 +335,7 @@ export function GrammarRunner({
 
   const { session, item, result } = phase;
   const finished = result?.task_done ?? false;
+  const hardChoice = item.adaptive_tier === "hard" && item.kind === "choice";
   const targetLang: Language | "cs" = item.kind === "translate" && item.direction === "target-cs" ? "cs" : language;
 
   async function send(body: { choice?: number; text?: string } | "reveal") {
@@ -396,7 +397,7 @@ export function GrammarRunner({
       <SessionProgress current={item.position + 1} total={item.total} label={cs.grammar.exercise(item.position + 1, item.total)} />
 
       <section className="flex flex-col gap-2 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p className="text-sm text-slate-500">{kindLabel(item)}</p>
+        <p className="text-sm text-slate-500">{hardChoice ? cs.grammar.typeAnswer : kindLabel(item)}</p>
         {item.kind === "choice" || item.kind === "gap" ? (
           <GapSentence prompt={item.prompt} fill={result?.expected && finished ? result.expected : null} language={language} />
         ) : (
@@ -412,7 +413,7 @@ export function GrammarRunner({
         {mode === "check" && item.unit_title && <p className="text-xs text-slate-400">{item.unit_title}</p>}
       </section>
 
-      {item.kind === "choice" ? (
+      {item.kind === "choice" && !hardChoice ? (
         <div className="grid gap-2 sm:grid-cols-2">
           {item.options!.map((o, i) => {
             const right = result?.expected === o && (finished || mode === "learn");

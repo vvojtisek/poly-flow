@@ -117,6 +117,14 @@ can be played through Piper. Answers are graded on the server and never count as
 Stories record the provider and model and are labelled as unreviewed. Without `LLM_URL` the page
 says that a model is needed; child profiles get stories only with `LLM_FOR_CHILDREN=true`.
 
+### Curated graded reading library
+
+The *Příběhy podle úrovně* reader at `/stories/library` indexes the checked-in story files in
+`backend/data/stories/`: 90 stories per language (A1 15, A2 20, B1 25, B2 30). Learners can
+filter by level, read the original with an optional Czech translation, and answer comprehension
+questions graded by the API. The story packs are CC0 but marked `unreviewed`; the interface keeps
+that review status visible and does not present them as reviewed curriculum.
+
 Smoke test of the core stack from scratch (also runs in CI): `scripts/compose-smoke.sh`.
 Browser E2E (setup → child → lesson → reload → progress) against a fresh stack: `scripts/e2e.sh`
 (run `npm ci && npx playwright install chromium` in `frontend/` first).
