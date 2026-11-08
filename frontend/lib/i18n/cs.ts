@@ -1457,6 +1457,8 @@ export const cs = {
     lineCs: (n: number) => `Překlad věty ${n}`,
     lineHelp: "Překlad jedné věty ukáže CZ vedle ní; celý text přeloží tlačítko nahoře.",
     shadowThis: "Stínovat tento příběh",
+    sizeLabel: "Velikost písma",
+    sizes: { s: "Menší písmo", m: "Střední písmo", l: "Větší písmo" } as Record<string, string>,
     readAloud: "Přečíst nahlas",
     stopReading: "Zastavit čtení",
     playLine: (n: number) => `Přehrát větu ${n}`,

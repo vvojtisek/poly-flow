@@ -2235,3 +2235,13 @@ Vlad approves a push.
 **Implemented Solution:** The reader has a 'Stínovat tento příběh' link to /shadowing?story=<slug>. Shadowing gains a story source: it loads the gated library story, uses its line audio, and shows speaker and Czech line. It reuses everything built in cycles 91-105: echo/together rounds, continuous run, role choice with partner cue (narration lines cue as 'Vypravěč:'), text-support levels, line strip, and URL state (?story, ?line, ?role). A banner links back to the text. A slug is valid in every language, so a story source survives a language switch.
 
 **Verification:** b114.js: the link leads to ?story=a1-01-umbrella. The banner is shown, the card reads 1/10 TOM 'Heute regnet es…', roles are Tom/Anna, and choosing Anna shows the cue 'Tom říká: …'. N N gives role=Anna&story=…&line=9, and a reload restores 9/10 'nahráno 0 z 3'. Audio requests go to /stories/library/a1-01-umbrella/audio?line=0,1. 'Zpět k textu' returns to the reader. No console errors. Postgres and Redis had stopped after an API interruption and were restarted before testing. Typecheck, build, ruff passed.
+
+## Global Cycle 115/120 | Page: [/stories/library] (Page Cycle 10/15)
+
+**Summary:** let each reader pick a comfortable text size
+
+**Observed Problem:** Story lines were fixed at 18px. A family shares tablets across ages: a child learning to read, or a grandparent, needs larger type, and on a large screen an adult may want more of the text visible at once. The only option was browser zoom, which also scales every control.
+
+**Implemented Solution:** The reader has a three-step 'Velikost písma' radio (16 / 18 / 24 px) applied to the story lines only. Glossed lines inherit it, so the stretch-word buttons scale with the text. The choice is remembered per device in localStorage, read after mount so SSR is unaffected, with safe fallbacks. The buttons are 44×44 targets.
+
+**Verification:** b115.js at 390px: default line font 18px, Větší 24px (kept after reload), Menší 16px. scrollWidth stays 390 at every size. No console errors. Typecheck, build, ruff passed.

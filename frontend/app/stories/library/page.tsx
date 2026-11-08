@@ -155,7 +155,7 @@ function glossParts(text: string, stretch: Gloss[]): (string | Gloss)[] {
 function GlossedLine({ text, stretch, language }: { text: string; stretch: Gloss[]; language: Language }) {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <span lang={language} className="text-lg leading-relaxed">
+    <span lang={language} className="leading-relaxed">
       {glossParts(text, stretch).map((part, i) =>
         typeof part === "string" ? (
           <span key={i}>{part}</span>
@@ -263,6 +263,11 @@ function Questions({ language, slug, questions, onAllDone }: { language: Languag
 }
 
 /** One story, read line by line. Ungraded: no questions are scored and nothing is recorded. */
+/** Reading text size, remembered per device (a family shares tablets: children and grandparents). */
+const SIZES = { s: "text-base", m: "text-lg", l: "text-2xl" } as const;
+type Size = keyof typeof SIZES;
+const SIZE_KEY = "polyflow.library.size";
+
 type Neighbour = { slug: string; title: string } | null;
 
 function Reader({
@@ -287,6 +292,23 @@ function Reader({
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [failed, setFailed] = useState(false);
   const [showCs, setShowCs] = useState(false);
+  const [size, setSizeState] = useState<Size>("m");
+  useEffect(() => {
+    try {
+      const v = window.localStorage.getItem(SIZE_KEY);
+      if (v === "s" || v === "m" || v === "l") setSizeState(v);
+    } catch {
+      /* default size */
+    }
+  }, []);
+  const setSize = (v: Size) => {
+    setSizeState(v);
+    try {
+      window.localStorage.setItem(SIZE_KEY, v);
+    } catch {
+      /* this visit only */
+    }
+  };
   // Scaffolding between "no help" and "everything translated": reveal one line's Czech at a time.
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
   const toggleLine = (i: number) =>
@@ -405,6 +427,21 @@ function Reader({
               <Languages className="size-4" aria-hidden /> {showCs ? t.hideCs : t.showCs}
             </button>
             <SlowToggle />
+            <div role="radiogroup" aria-label={t.sizeLabel} className="flex overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700">
+              {(["s", "m", "l"] as const).map((v) => (
+                <button
+                  key={v}
+                  type="button"
+                  role="radio"
+                  aria-checked={size === v}
+                  aria-label={t.sizes[v]}
+                  onClick={() => setSize(v)}
+                  className={`min-h-11 min-w-11 px-2 font-semibold ${v === "s" ? "text-xs" : v === "m" ? "text-sm" : "text-lg"} ${size === v ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900" : ""}`}
+                >
+                  A
+                </button>
+              ))}
+            </div>
             <Link href={`/shadowing?story=${encodeURIComponent(story.slug)}`} className="inline-flex min-h-11 items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-500/10 dark:text-brand-200">
               <Waves className="size-4" aria-hidden /> {t.shadowThis}
             </Link>
@@ -425,7 +462,7 @@ function Reader({
               </ul>
             </section>
           )}
-          <ol className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
+          <ol className={`${SIZES[size]} flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900`}>
             {story.lines.map((line, i) => (
               <li
                 key={i}
