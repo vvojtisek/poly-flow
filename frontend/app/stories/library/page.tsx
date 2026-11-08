@@ -287,6 +287,15 @@ function Reader({
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [failed, setFailed] = useState(false);
   const [showCs, setShowCs] = useState(false);
+  // Scaffolding between "no help" and "everything translated": reveal one line's Czech at a time.
+  const [revealed, setRevealed] = useState<Set<number>>(new Set());
+  const toggleLine = (i: number) =>
+    setRevealed((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
   // Reading aloud: every line in turn, the current one highlighted. null = not reading.
   const [reading, setReading] = useState<number | null>(null);
   const [noAudio, setNoAudio] = useState(false);
@@ -398,6 +407,7 @@ function Reader({
             <SlowToggle />
           </div>
           {noAudio && <Notice>{t.noAudio}</Notice>}
+          {!showCs && <p className="-mt-2 text-xs text-slate-500">{t.lineHelp}</p>}
           {/* Context first: the few above-level words, with glosses, before the text itself. */}
           {story.stretch.length > 0 && (
             <section aria-labelledby="stretch-title" className="rounded-2xl bg-amber-50 p-3 text-sm dark:bg-amber-950/30">
@@ -421,11 +431,22 @@ function Reader({
                 className={`flex items-start gap-2 rounded-xl px-2 py-1 transition-colors ${reading === i ? "bg-brand-500/10" : ""}`}
               >
                 <PlayButton url={libraryAudioUrl(language, slug, i)} size="sm" label={t.playLine(i + 1)} />
-                <span className="flex min-w-0 flex-col gap-0.5">
+                <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                   {line.speaker && <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">{line.speaker}</span>}
                   <GlossedLine text={line.text} stretch={story.stretch} language={language} />
-                  {showCs && <span className="text-sm text-slate-500">{line.cs}</span>}
+                  {(showCs || revealed.has(i)) && <span lang="cs" className="text-sm text-slate-500">{line.cs}</span>}
                 </span>
+                {!showCs && (
+                  <button
+                    type="button"
+                    onClick={() => toggleLine(i)}
+                    aria-pressed={revealed.has(i)}
+                    aria-label={t.lineCs(i + 1)}
+                    className={`mt-1 shrink-0 rounded-md px-1.5 py-0.5 text-[11px] font-bold ${revealed.has(i) ? "bg-slate-700 text-white dark:bg-slate-200 dark:text-slate-900" : "bg-slate-100 text-slate-500 dark:bg-slate-800"}`}
+                  >
+                    CZ
+                  </button>
+                )}
               </li>
             ))}
           </ol>

@@ -2215,3 +2215,13 @@ Vlad approves a push.
 **Implemented Solution:** The reader ends with previous/next story buttons, showing truncated titles and key hints on desktop. They follow the shelf the learner came from: the filtered list when it contains the story, otherwise the whole library (e.g. when opened from a link). Keys: P starts or stops read-aloud, T toggles the translation, N/→ and B/← go to the next or previous story, Esc returns to the shelf. Typing targets and modifier keys are ignored. The key legend is shown on desktop.
 
 **Verification:** b112.js (1280px, ?level=B1): opening the first B1 story gives b1-01-urgent-meeting. N goes to Das intelligente Haus, → to Entschuldigungen ohne Ende, B back to Das intelligente Haus, with the URL keeping level=B1. T shows Czech. The nav reads 'Dringende Besprechung B … Entschuldigungen ohne Ende N'. Esc returns to ?level=B1 with 25 cards. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 113/120 | Page: [/stories/library] (Page Cycle 8/15)
+
+**Summary:** reveal one line's translation at a time
+
+**Observed Problem:** Translation was all or nothing: either read without any help, or switch every line to Czech. A learner stuck on one sentence had to translate the whole text and lost the effort of decoding the rest. That is the wrong scaffold for graded reading, where most lines should be readable.
+
+**Implemented Solution:** Each line has a small CZ toggle (aria-pressed, 'Překlad věty N') that shows that line's Czech under it. The global 'Ukázat překlad' still shows all lines and hides the per-line toggles while active. A hint under the controls explains the difference. The translation span is tagged lang=cs.
+
+**Verification:** b113.js at 390px on a 10-line story: initially 0 Czech lines and 10 CZ buttons. CZ on line 3 shows exactly 'Já to vím líp. Předpověď počasí říká: déšť.', and pressing it again hides it. The global toggle shows all 10 and hides the CZ buttons. scrollWidth is 390, so there is no overflow. No console errors. Typecheck, build, ruff passed.

@@ -1450,6 +1450,8 @@ export const cs = {
     resetFilters: "Zrušit filtry",
     storyNav: "Předchozí a další příběh",
     keys: "P číst nahlas / zastavit · T překlad · N/→ další příběh · B/← předchozí · Esc knihovna",
+    lineCs: (n: number) => `Překlad věty ${n}`,
+    lineHelp: "Překlad jedné věty ukáže CZ vedle ní; celý text přeloží tlačítko nahoře.",
     readAloud: "Přečíst nahlas",
     stopReading: "Zastavit čtení",
     playLine: (n: number) => `Přehrát větu ${n}`,
