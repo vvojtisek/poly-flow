@@ -358,20 +358,18 @@ export function LessonRunner({
     void begin();
   }, [begin]);
 
+  // Focus follows the control the task shows, not its type: under adaptive difficulty a recall
+  // can be a word bank and a recognition can be typed.
   useEffect(() => {
-    if (phase.kind === "task" && phase.task.type === "recall" && !phase.result?.task_done) {
-      inputRef.current?.focus();
-    }
-    if (
-      phase.kind === "task" &&
-      phase.task.type === "recognition" &&
-      !phase.result?.task_done &&
-      refocusOptions.current
-    ) {
+    if (phase.kind !== "task" || phase.result?.task_done) return;
+    const { task } = phase;
+    const typedMeaning = task.adaptive_tier === "hard" && task.type === "recognition" && (mode === "learn" || mode === "check");
+    if (!task.options || typedMeaning) inputRef.current?.focus();
+    else if (refocusOptions.current) {
       refocusOptions.current = false;
       optionsRef.current?.querySelector("button")?.focus();
     }
-  }, [phase]);
+  }, [phase, mode]);
 
   // One click answers a choice: a correct one shows green briefly, then the next question comes.
   // A wrong one (or a reveal) stays until the learner presses Další.
