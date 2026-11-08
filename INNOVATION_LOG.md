@@ -2285,3 +2285,13 @@ Vlad approves a push.
 **Implemented Solution:** services.library.story now finds the slug in the parsed file and gates only that story (same 404 for unknown and gated). The page keeps per-profile, per-language session caches: read stories (with in-flight dedupe) open instantly, the shelf paints from memory while a fresh copy loads in the background (a failed refresh keeps the shelf), and 400 ms after a story appears the next story's text is prefetched; audio is not prefetched because TTS is generated on demand.
 
 **Verification:** pytest test_library_api + test_tts (26 passed, new assertions: gated story's neighbour still 200, gated story's answer endpoint 404). Playwright b119.js: after the prefetch, N shows 'Der Wachhund' within 50 ms with zero new requests; B back to the first story and Esc issue no request; returning to the shelf via history shows no skeleton. No console errors. typecheck, lint, build passed.
+
+## Global Cycle 120/120 | Page: [/stories/library] (Page Cycle 15/15)
+
+**Summary:** pin the library's reading flow in the browser E2E suite
+
+**Observed Problem:** Cycles 106-119 were verified with 14 throwaway Playwright scripts outside the repository; CI's e2e job (frontend/e2e) had no coverage of /stories/library, so a regression in the shelf, the per-line help, the server-checked comprehension questions, the local read mark or the unknown-story state would ship unnoticed. Re-running the scripts also showed one of them (b106) had gone stale after the done button was renamed.
+
+**Implemented Solution:** New frontend/e2e/story-library.spec.ts (mobile Pixel 7 project, runs after first-usable.spec with the same admin): shelf with draft label and folded intro, accent/umlaut-folding search, open by card, first line in the first viewport, per-line and whole-text translation, each question answered by retrying until right (waits for the server verdict, no fixed sleeps), done marks it read, the unread filter persists across reload, and an unknown ?story= shows the explanation; fails on any page error. scripts/e2e.sh warms /stories/library before the run. E2E_USER/E2E_SECRET let the spec run against a dev stack.
+
+**Verification:** npx playwright test e2e/story-library.spec.ts --project=mobile-chromium against the local stack: 1 passed (3.2 s). All 15 library regression scripts b106-b118 re-run: all pass after fixing b106's selector. The full scripts/e2e.sh Compose run was not executed here. pytest test_library_api, typecheck, lint, build passed.
