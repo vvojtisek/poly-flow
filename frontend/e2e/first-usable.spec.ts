@@ -42,7 +42,10 @@ async function answerCorrectly(page: Page, opts: { wrongFirst?: boolean; keyboar
       await option.focus();
       await page.keyboard.press("Enter");
     } else await option.click();
-    await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${right}`);
+    // Recognition announces the verdict as it auto-advances; a recall pick shows it on the task
+    // and waits for "Další" (below).
+    if (!isRecall) await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${right}`);
+    else await expect(page.getByRole("button", { name: right, exact: true })).toHaveAttribute("data-state", "correct");
     if (opts.keyboard) {
       // Focus stays in the exercise: the next question's first option, or the answer box.
       await expect(page.locator("[data-state]").first().or(page.getByLabel("Tvoje odpověď"))).toBeFocused();
@@ -87,10 +90,8 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   // Nothing has been learnt yet, so there is nothing to check.
   await expect(page.getByText("Dnes nic nečeká")).toBeVisible();
   await expect(page.getByRole("link", { name: /Denní opakování/ })).toHaveCount(0);
+  // "Začít lekci" goes straight into the vocabulary lesson, which starts with its scene.
   await page.getByRole("button", { name: "Začít lekci" }).click();
-  await page.waitForURL("**/lesson");
-  // The lesson page lists grammar by level; the vocabulary course with its scenes is one step in.
-  await page.getByRole("link", { name: "Otevřít lekce slovní zásoby" }).click();
   await page.waitForURL("**/lesson/vocabulary");
 
   // Context first: the scene, with Czech on demand, then the new words, then practice.
@@ -132,8 +133,8 @@ test("admin sets up, hands device to a child, lesson resumes after reload", asyn
   await expect(seen).toHaveText("4");
   await page.reload();
   await expect(seen).toHaveText("4"); // progress is persisted server-side
-  // Learnt today, checkable from tomorrow.
-  await expect(page.getByText("Dnes nic nečeká")).toBeVisible();
+  // Learnt today, checkable from tomorrow: the card says when the next check opens.
+  await expect(page.getByText(/^Teď nic nečeká · další /)).toBeVisible();
   await expect(page.getByRole("link", { name: /Denní opakování/ })).toHaveCount(0);
 
   await page.getByRole("button", { name: "Zpět do účtu správce" }).click();

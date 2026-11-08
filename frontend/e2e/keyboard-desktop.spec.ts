@@ -37,31 +37,51 @@ test("a lesson runs on the keyboard: Enter, digit keys, Alt+S for ß", async ({ 
   await expect(page.getByRole("heading", { name: "Úvodní scéna" })).toBeVisible();
   await expect(page.getByText("Klávesové zkratky").or(page.getByLabel("Klávesové zkratky"))).toBeVisible();
 
+  // The first task is answered by digit key under the default difficulty; then the learner
+  // switches to "Těžká", where every later answer is typed (and German needs Alt+S for ß).
   for (let n = 1; n <= 8; n++) {
     await expect(page.getByText(`Úkol ${n} z 8`)).toBeVisible();
     const prompt = (await page.locator("section p.text-3xl").innerText()).trim();
-    if (await page.getByText("Co znamená?").count()) {
+    const recall = CS_TO_DE[prompt] !== undefined;
+    const expected = recall ? CS_TO_DE[prompt]! : DE[prompt]!;
+    if (await page.locator("[data-state]").count()) {
       const texts = (await page.locator("[data-state]").allInnerTexts()).map((t) => t.replace(/^\d\s*/, "").trim());
-      const index = texts.indexOf(DE[prompt]!);
+      const index = texts.indexOf(expected);
       expect(index).toBeGreaterThanOrEqual(0);
       // Digit row by physical key: on a Czech layout the same key types "ě", "š", ...
       await page.keyboard.press(`Digit${index + 1}`);
-      await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${DE[prompt]}`);
+      if (recall) {
+        await expect(page.getByRole("button", { name: expected, exact: true })).toHaveAttribute("data-state", "correct");
+        await page.keyboard.press("Enter"); // next
+      } else {
+        await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${expected}`);
+      }
+      if (n === 1) {
+        await page.getByRole("button", { name: "Těžká" }).click();
+        await expect(page.getByRole("button", { name: "Těžká" })).toHaveAttribute("aria-pressed", "true");
+      }
       continue;
     }
-    const word = CS_TO_DE[prompt]!;
     const box = page.getByLabel("Tvoje odpověď");
     await expect(box).toBeFocused();
-    for (const ch of word) {
+    for (const ch of expected) {
       if (ch === "ß") await page.keyboard.press("Alt+KeyS");
       else await page.keyboard.type(ch);
     }
-    await expect(box).toHaveValue(word);
+    await expect(box).toHaveValue(expected);
     await page.keyboard.press("Enter"); // submit
-    await expect(page.getByText("Správně!")).toBeVisible();
-    await page.keyboard.press("Enter"); // next
+    if (recall) {
+      await expect(page.getByText("Správně!", { exact: true })).toBeVisible();
+      await page.keyboard.press("Enter"); // next
+    } else {
+      // A correct recognition answer moves on by itself, typed or picked.
+      await expect(page.locator("p[aria-live=polite]")).toHaveText(`Správně! Správná odpověď: ${expected}`);
+    }
   }
   await expect(page.getByText("Lekce dokončena")).toBeVisible();
+  // Back to the default so later specs see the automatic difficulty.
+  await page.getByRole("button", { name: "Auto", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Auto", exact: true })).toHaveAttribute("aria-pressed", "true");
 });
 
 test("grammar lesson: notes beside the exercise, explanation after a mistake", async ({ page }) => {

@@ -442,7 +442,8 @@ export const cs = {
     changeGoal: "Změnit cíl",
     failed: "Dnešní plán se nepodařilo načíst.",
     recentReadings: "Nedávná čtení",
-    tomorrow: (n: number) => `Zítra přijde na řadu ${n} slov.`,
+    tomorrow: (n: number) =>
+      n === 1 ? "Zítra přijde na řadu 1 slovo." : n < 5 ? `Zítra přijdou na řadu ${n} slova.` : `Zítra přijde na řadu ${n} slov.`,
   },
   flashcards: {
     run: "Spustit kartičky",
