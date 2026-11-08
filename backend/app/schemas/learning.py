@@ -224,6 +224,7 @@ class ProgressOut(BaseModel):
     known: int  # both passive and active
     introduced: int  # presented in a finished lesson
     due_now: int  # introduced words a check can ask about now
+    next_review_at: datetime | None = None  # earliest future review, for "nothing due yet"
     orthography_avg: float | None
     phonetic_measured: int  # profiles start at 0: pronunciation scoring is not validated yet
     grammar_unlocked: bool
@@ -240,7 +241,21 @@ class ProgressOut(BaseModel):
     cefr_level: str | None = None  # latest CEFR diagnostic: "pre-A1", "A1".."B2", "B2+"
 
 
+class LessonPreviewOut(BaseModel):
+    scene_title: str | None  # Czech title of the next scene; None = words with example sentences
+    new_words: int
+    review_words: int  # recently missed words practised again (ungraded)
+
+
+class LanguageSummaryOut(BaseModel):
+    language: Language
+    introduced: int
+    known: int  # passive and active both proven
+    due_now: int
+
+
 class WeakWordOut(BaseModel):
+    item_id: uuid.UUID
     lemma: str
     gender: str | None
     translation: str

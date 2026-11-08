@@ -219,6 +219,28 @@ async def test_tree_lists_units_in_order_with_a_recommendation(db, client):
     assert me
 
 
+async def test_search_index_has_plain_explanation_text(db, client):
+    await seed()
+    await adult(client)
+    r = await client.get("/api/v1/grammar/search-index?language=de")
+    assert r.status_code == 200, r.text
+    rows = r.json()
+    assert [x["id"] for x in rows] == ["t-a", "t-b"]
+    assert all("H" in x["text"] and "T" in x["text"] and "x" in x["text"] for x in rows)
+    assert all("**" not in x["text"] for x in rows)
+
+
+async def test_example_audio_only_for_existing_examples(db, client):
+    await seed()
+    await adult(client)
+    # The test container has no voices: an existing example reaches the speech layer (503),
+    # a missing one is rejected before it.
+    r = await client.get("/api/v1/grammar/units/t-a/audio?example=0")
+    assert r.status_code in (200, 503), r.text
+    assert (await client.get("/api/v1/grammar/units/t-a/audio?example=5")).status_code == 404
+    assert (await client.get("/api/v1/grammar/units/nope/audio?example=0")).status_code == 404
+
+
 async def test_exercise_never_leaks_answers(db, client):
     await seed()
     me = await adult(client)
@@ -299,6 +321,9 @@ async def test_check_is_one_attempt_and_moves_the_schedule(db, client, clock):
     p = await progress()
     assert p.error_count == 1 and p.correct_count == 1
     assert p.next_review_at > clock.now
+    tree = (await client.get("/api/v1/grammar?language=de")).json()
+    unit = next(u for lv in tree["levels"] for u in lv["units"] if u["id"] == "t-a")
+    assert unit["checked_correct"] == 1 and unit["checked_errors"] == 1
 
 
 async def test_duplicate_submission_replays(db, client, clock):

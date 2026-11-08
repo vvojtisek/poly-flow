@@ -254,6 +254,17 @@ async def _plan_learn(
     return scene, plan
 
 
+async def preview_lesson(db: AsyncSession, user: User, language: Language, now: datetime) -> dict:
+    """What the next lesson would contain, without starting it (read-only, same planner)."""
+    scene, plan = await _plan_learn(db, user, language, now)
+    new = [p.item for p in plan if p.is_new and p.task_type == TaskType.RECOGNITION]
+    return {
+        "scene_title": scene.title_cs if scene else None,
+        "new_words": len(new),
+        "review_words": sum(1 for p in plan if not p.is_new),
+    }
+
+
 async def _plan_check(
     db: AsyncSession, user: User, language: Language, now: datetime
 ) -> list[_Planned]:
@@ -712,9 +723,12 @@ async def submit_answer(
         verdict = "exact" if correct else "wrong"
         answer = options[choice]
     elif choice is not None and task.task_type == TaskType.RECALL:
-        if task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK) or (
-            user.settings or {}
-        ).get("practice_difficulty") not in ("easy", "medium"):
+        # A choice is accepted exactly when this task was served with a word bank. Checking the
+        # stored setting instead rejected every pick under "auto", whose tier is resolved per word.
+        if (
+            task.session.mode not in (SessionMode.LEARN, SessionMode.CHECK)
+            or "manual_options" not in task.payload
+        ):
             raise LearningError("choice_answer_not_allowed", 422)
         options = task.payload.get("manual_options", [])
         if not 0 <= choice < len(options):
@@ -878,22 +892,7 @@ async def _apply_progress(
             p.orthography_score = smooth(p.orthography_score, orthography)
 
     if evidence:
-        ev = LearningEvent
-        base = and_(
-            ev.user_id == user.id, ev.lexicon_item_id == item.id, ev.counts_as_evidence.is_(True)
-        )
-        recall = ev.task_type == TaskType.RECALL
-        row = (
-            await db.execute(
-                select(
-                    func.count(),
-                    func.count(func.distinct(ev.local_date)),
-                    func.count().filter(recall),
-                    func.count(func.distinct(case((recall, ev.local_date)))),
-                ).where(base)
-            )
-        ).one()
-        all_n, all_days, recall_n, recall_days = row
+        all_n, all_days, recall_n, recall_days = await evidence_counts(db, user.id, item.id)
         # Producing the word also demonstrates recognising it.
         if all_n >= POLICY.passive_required_correct and all_days >= POLICY.passive_required_days:
             p.passive_known = True
@@ -909,6 +908,33 @@ async def _apply_progress(
             elif now - p.known_since_at >= POLICY.mastery_delay:
                 p.state = ProgressState.MASTERED
     p.policy_version = POLICY.version
+
+
+async def evidence_counts(
+    db: AsyncSession, user_id: uuid.UUID, item_id: uuid.UUID
+) -> tuple[int, int, int, int]:
+    """Check evidence for one word: (correct, distinct days, correct recalls, recall days).
+
+    Only first-try, hint-free correct check answers are evidence; producing the word also counts as
+    recognising it, so recalls are included in the first pair.
+    """
+    ev = LearningEvent
+    recall = ev.task_type == TaskType.RECALL
+    row = (
+        await db.execute(
+            select(
+                func.count(),
+                func.count(func.distinct(ev.local_date)),
+                func.count().filter(recall),
+                func.count(func.distinct(case((recall, ev.local_date)))),
+            ).where(
+                ev.user_id == user_id,
+                ev.lexicon_item_id == item_id,
+                ev.counts_as_evidence.is_(True),
+            )
+        )
+    ).one()
+    return row[0], row[1], row[2], row[3]
 
 
 async def _maybe_unlock_grammar(
@@ -1024,6 +1050,35 @@ async def prune_expired_sessions(db: AsyncSession, now: datetime) -> int:
 # ---------------------------------------------------------------- overview
 
 
+async def language_summaries(db: AsyncSession, user: User, now: datetime) -> list[dict]:
+    """Per-language word counts for the language switcher, in one grouped query."""
+    p, li = UserWordProgress, LexiconItem
+    rows = (
+        await db.execute(
+            select(
+                li.language,
+                func.count().filter(p.introduced_at.is_not(None)),
+                func.count().filter(and_(p.passive_known.is_(True), p.active_known.is_(True))),
+                func.count().filter(and_(p.introduced_at.is_not(None), p.next_review_at <= now)),
+            )
+            .select_from(p)
+            .join(li, li.id == p.lexicon_item_id)
+            .where(p.user_id == user.id)
+            .group_by(li.language)
+        )
+    ).all()
+    found = {lang: (introduced, known, due) for lang, introduced, known, due in rows}
+    return [
+        {
+            "language": lang,
+            "introduced": found.get(lang, (0, 0, 0))[0],
+            "known": found.get(lang, (0, 0, 0))[1],
+            "due_now": found.get(lang, (0, 0, 0))[2],
+        }
+        for lang in Language
+    ]
+
+
 async def progress_overview(db: AsyncSession, user: User, language: Language, now: datetime):
     from app.domain.diagnostic import band_label
     from app.domain.progression import MILESTONES
@@ -1043,13 +1098,16 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
                 func.count().filter(and_(p.introduced_at.is_not(None), p.next_review_at <= now)),
                 func.avg(p.orthography_score),
                 func.count(p.phonetic_score),
+                func.min(p.next_review_at).filter(
+                    and_(p.introduced_at.is_not(None), p.next_review_at > now)
+                ),
             )
             .select_from(p)
             .join(li, li.id == p.lexicon_item_id)
             .where(p.user_id == user.id, li.language == language)
         )
     ).one()
-    seen, passive, active, known, introduced, due, ortho_avg, phonetic = row
+    seen, passive, active, known, introduced, due, ortho_avg, phonetic, next_due = row
 
     by_state = dict.fromkeys(ProgressState, 0)
     for state, n in (
@@ -1107,6 +1165,7 @@ async def progress_overview(db: AsyncSession, user: User, language: Language, no
         known=known,
         introduced=introduced,
         due_now=due,
+        next_review_at=next_due,
         orthography_avg=round(float(ortho_avg), 3) if ortho_avg is not None else None,
         phonetic_measured=phonetic,
         grammar_unlocked=unlocked,

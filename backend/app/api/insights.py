@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import date
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
@@ -21,15 +21,32 @@ class DayOut(BaseModel):
     practice: int
 
 
-class WeekOut(BaseModel):
-    week: date
+class TallyOut(BaseModel):
     answered: int
     correct: int
+
+
+class WeekOut(BaseModel):
+    week: date
+    answered: int  # all graded answers of the week
+    correct: int
+    recognition: TallyOut  # word -> meaning (and other non-production word checks)
+    recall: TallyOut  # meaning -> written or spoken word
+    grammar: TallyOut
+
+
+class MistakeItemOut(BaseModel):
+    kind: Literal["word", "grammar"]
+    id: uuid.UUID
+    label: str  # the word with its article, or the topic title
+    detail: str  # the Czech meaning, or the topic level
+    count: int
 
 
 class MistakeOut(BaseModel):
     tag: str
     count: int
+    items: list[MistakeItemOut] = []  # up to six words/topics behind the tag, most frequent first
 
 
 class ForecastWordOut(BaseModel):
@@ -59,6 +76,7 @@ class FunnelOut(BaseModel):
     active: int
     known: int
     mastered: int
+    fading: int = 0  # recognised once, but no error-free check for longer than the decay window
 
 
 class InsightsOut(BaseModel):

@@ -1,6 +1,7 @@
 "use client";
 
-import { BookOpenText, CheckCircle2, Languages, MessagesSquare, Play, Square, Trash2, XCircle } from "lucide-react";
+import { BookOpenText, CheckCircle2, Languages, Library, MessagesSquare, Play, Square, Trash2, XCircle } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
@@ -361,6 +362,9 @@ export default function StoriesPage() {
               <BookOpenText className="size-6 text-brand-500" aria-hidden /> {cs.stories.title}
             </h1>
             <p className="max-w-2xl text-sm text-slate-600 dark:text-slate-300">{cs.stories.intro}</p>
+            <Link href="/stories/library" className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline dark:text-brand-200">
+              <Library className="size-4" aria-hidden /> {cs.library.fromStories}
+            </Link>
           </div>
           <LanguagePicker me={me} />
         </div>

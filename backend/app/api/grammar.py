@@ -2,10 +2,12 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import DB, Auth
-from app.api.learning import Now
+from app.api.learning import AUDIO_RESPONSES, Now, TtsDep, _chosen_voice, _speech
 from app.domain.enums import Language
 from app.domain.grammar import GRAMMAR_OPEN_FROM_START, LEVELS
 from app.models import (
@@ -26,6 +28,7 @@ from app.schemas.grammar import (
     GrammarSessionOut,
     GrammarStartOut,
     LevelOut,
+    SearchEntryOut,
     TreeOut,
     UnitOut,
     UnitSummaryOut,
@@ -146,6 +149,8 @@ async def get_tree(
                 due=bool(p and p.studied_at and p.next_review_at and p.next_review_at <= now),
                 recent_errors=u.recent_errors,
                 next_review_at=p.next_review_at if p and p.studied_at else None,
+                checked_correct=p.correct_count if p else 0,
+                checked_errors=p.error_count if p else 0,
             )
         )
     lesson = await svc.get_active(db, user, lang, svc.LEARN)
@@ -160,6 +165,52 @@ async def get_tree(
         active_lesson_unit=lesson.unit_id if lesson else None,
         active_check_session_id=check.id if check else None,
     )
+
+
+def _search_text(unit: GrammarUnit) -> str:
+    """Plain text of a unit's explanation: headings, notes, table cells and examples."""
+    parts: list[str] = [unit.objective]
+    for note in unit.notes or []:
+        parts += [note.get("heading") or "", note.get("text") or ""]
+        for row in note.get("table") or []:
+            parts += [str(cell) for cell in row]
+    for ex in unit.examples or []:
+        parts += [ex.get("text") or "", ex.get("cs") or ""]
+    return " ".join(p for p in parts if p).replace("**", "")
+
+
+@router.get("/search-index", response_model=list[SearchEntryOut])
+async def search_index(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> list[SearchEntryOut]:
+    """Explanation text per active unit, loaded on demand for full-text topic search."""
+    lang = language or auth.acting.active_language
+    units = (
+        await db.execute(
+            select(GrammarUnit)
+            .where(GrammarUnit.language == lang, GrammarUnit.active.is_(True))
+            .order_by(GrammarUnit.position)
+        )
+    ).scalars()
+    return [SearchEntryOut(id=u.id, text=_search_text(u)) for u in units]
+
+
+@router.get("/units/{unit_id}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def example_audio(
+    unit_id: str,
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    example: Annotated[int, Query(ge=0, le=50)] = 0,
+) -> FileResponse:
+    """Speech for one of a unit's curated examples (never for arbitrary text)."""
+    unit = await db.get(GrammarUnit, unit_id)
+    if unit is None or not unit.active or example >= len(unit.examples or []):
+        raise HTTPException(404, "not_found")
+    text = unit.examples[example].get("text") or ""
+    if not text:
+        raise HTTPException(404, "not_found")
+    return await _speech(tts, unit.language, text, _chosen_voice(auth.acting, unit.language))
 
 
 @router.get("/units/{unit_id}", response_model=UnitOut)

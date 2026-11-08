@@ -40,6 +40,13 @@ function subscribe(l: () => void) {
   return () => listeners.delete(l);
 }
 
+const inflight = new Map<string, Promise<string>>();
+
+/** Fetches the clip ahead of time (e.g. the next sentence), ignoring failures. */
+export function prefetchClip(url: string): void {
+  void clipSrc(url).catch(() => undefined);
+}
+
 function getPlayer(): HTMLAudioElement {
   if (!player) {
     player = new Audio();
@@ -52,14 +59,21 @@ function getPlayer(): HTMLAudioElement {
 /** Object URL of the clip at `url`, fetched once per page. Throws when the clip is unavailable. */
 export async function clipSrc(url: string): Promise<string> {
   if (url.startsWith("blob:")) return url;
-  let src = clips.get(url);
-  if (!src) {
-    const res = await fetch(url, { credentials: "same-origin" });
-    if (!res.ok) throw new Error(`audio ${res.status}`);
-    src = URL.createObjectURL(await res.blob());
-    clips.set(url, src);
+  const src = clips.get(url);
+  if (src) return src;
+  // One request per clip even when a prefetch and a play ask at the same time.
+  let pending = inflight.get(url);
+  if (!pending) {
+    pending = (async () => {
+      const res = await fetch(url, { credentials: "same-origin" });
+      if (!res.ok) throw new Error(`audio ${res.status}`);
+      const made = URL.createObjectURL(await res.blob());
+      clips.set(url, made);
+      return made;
+    })().finally(() => inflight.delete(url));
+    inflight.set(url, pending);
   }
-  return src;
+  return pending;
 }
 
 /**

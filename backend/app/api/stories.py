@@ -4,14 +4,15 @@ import uuid
 from datetime import date, datetime
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Path, Query, Response, status
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from app.api.deps import DB, Auth
 from app.api.learning import AUDIO_RESPONSES, TtsDep, _chosen_voice, _speech, get_now
-from app.domain.enums import Language
+from app.domain.enums import CefrLevel, Language
 from app.models import DailyStory
+from app.services import library as library_svc
 from app.services import stories as svc
 from app.services.learning import LearningError
 from app.services.llm import Llm, get_llm
@@ -80,9 +81,28 @@ class AnswerIn(BaseModel):
     choice: int = Field(ge=0, le=9)
 
 
+class LibraryAnswerIn(BaseModel):
+    """Exactly one of: a picked option, or typed text (hard practice difficulty)."""
+
+    model_config = ConfigDict(extra="forbid")
+    choice: int | None = Field(default=None, ge=0, le=9)
+    text: str | None = Field(default=None, max_length=200)
+
+    @model_validator(mode="after")
+    def _one_answer(self) -> "LibraryAnswerIn":
+        if (self.choice is None) == (self.text is None):
+            raise ValueError("provide exactly one of choice or text")
+        return self
+
+
 class AnswerOut(BaseModel):
     correct: bool
     answer_index: int
+
+
+def _same_text(a: str, b: str) -> bool:
+    """Typed answers ignore case and runs of whitespace, nothing else."""
+    return " ".join(a.casefold().split()) == " ".join(b.casefold().split())
 
 
 def _out(s: DailyStory) -> StoryOut:
@@ -137,6 +157,112 @@ async def story_archive(
 ) -> list[StoryArchiveOut]:
     rows = await svc.archive(db, auth.acting, language or auth.acting.active_language, limit=limit)
     return [_archive_out(story) for story in rows]
+
+
+class LibraryLineOut(BaseModel):
+    speaker: str | None
+    text: str
+    cs: str
+
+
+class LibraryStoryOut(BaseModel):
+    slug: str
+    level: CefrLevel
+    title: str
+    title_cs: str
+    kind: Literal["story", "dialogue"]  # dialogue = at least half the lines are spoken
+    lines: int
+    stretch: int
+
+
+class LibraryOut(BaseModel):
+    language: Language
+    review_status: Literal["unreviewed", "reviewed"]
+    source: str
+    license: str
+    stories: list[LibraryStoryOut]
+
+
+def _kind(s) -> Literal["story", "dialogue"]:
+    """Most curated stories mix narration and speech: "dialogue" when at least half is spoken."""
+    spoken = sum(1 for ln in s.lines if ln.speaker)
+    return "dialogue" if spoken * 2 >= len(s.lines) else "story"
+
+
+@router.get("/library", response_model=LibraryOut)
+async def story_library(
+    auth: Auth, db: DB, language: Annotated[Language | None, Query()] = None
+) -> LibraryOut:
+    """The curated graded stories of a language that pass the content gate. Ungraded reading."""
+    lang = language or auth.acting.active_language
+    lib = await library_svc.library(db, auth.acting, lang)
+    if lib is None:
+        return LibraryOut(
+            language=lang, review_status="unreviewed", source="", license="", stories=[]
+        )
+    return LibraryOut(
+        language=lang,
+        review_status=lib.file.review_status,
+        source=lib.file.source,
+        license=lib.file.license,
+        stories=[
+            LibraryStoryOut(
+                slug=s.slug,
+                level=s.level,
+                title=s.title,
+                title_cs=s.title_cs,
+                kind=_kind(s),
+                lines=len(s.lines),
+                stretch=len(s.stretch),
+            )
+            for s in lib.stories
+        ],
+    )
+
+
+class LibraryQuestionOut(BaseModel):
+    question: str
+    options: list[str]
+
+
+class LibraryReadOut(BaseModel):
+    slug: str
+    questions: list[LibraryQuestionOut]  # answers stay on the server
+    stretch: list[GlossOut]  # words from the level above, with a Czech gloss
+    language: Language
+    level: CefrLevel
+    title: str
+    title_cs: str
+    kind: Literal["story", "dialogue"]
+    lines: list[LibraryLineOut]
+    review_status: Literal["unreviewed", "reviewed"]
+
+
+@router.get("/library/{slug}", response_model=LibraryReadOut)
+async def library_story(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+) -> LibraryReadOut:
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    s = lib.stories[0]
+    return LibraryReadOut(
+        slug=s.slug,
+        language=lang,
+        level=s.level,
+        title=s.title,
+        title_cs=s.title_cs,
+        kind=_kind(s),
+        lines=[LibraryLineOut(speaker=ln.speaker, text=ln.text, cs=ln.cs) for ln in s.lines],
+        stretch=[GlossOut(word=w.word, cs=w.cs) for w in s.stretch],
+        questions=[LibraryQuestionOut(question=q.question, options=q.options) for q in s.questions],
+        review_status=lib.file.review_status,
+    )
 
 
 @router.post(
@@ -217,3 +343,51 @@ async def line_audio(
     except LearningError as exc:
         raise HTTPException(exc.status, exc.code) from exc
     return await _speech(tts, story.language, text, _chosen_voice(auth.acting, story.language))
+
+
+@router.get("/library/{slug}/audio", response_class=FileResponse, responses=AUDIO_RESPONSES)
+async def library_line_audio(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    auth: Auth,
+    db: DB,
+    tts: TtsDep,
+    line: Annotated[int, Query(ge=0, le=40)],
+    language: Annotated[Language | None, Query()] = None,
+) -> FileResponse:
+    """One line of a library story read aloud, through the same gate as the text itself."""
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    lines = lib.stories[0].lines
+    if line >= len(lines):
+        raise HTTPException(404, "unknown_line")
+    return await _speech(tts, lang, lines[line].text, _chosen_voice(auth.acting, lang))
+
+
+@router.post("/library/{slug}/questions/{index}/answer", response_model=AnswerOut)
+async def library_answer(
+    slug: Annotated[str, Path(pattern=r"^[a-z0-9][a-z0-9-]{0,63}$")],
+    index: Annotated[int, Path(ge=0, le=9)],
+    body: LibraryAnswerIn,
+    auth: Auth,
+    db: DB,
+    language: Annotated[Language | None, Query()] = None,
+) -> AnswerOut:
+    """A comprehension check while reading: says whether the choice is right. Nothing is stored."""
+    lang = language or auth.acting.active_language
+    try:
+        lib = await library_svc.story(db, auth.acting, lang, slug)
+    except LearningError as exc:
+        raise HTTPException(exc.status, exc.code) from exc
+    questions = lib.stories[0].questions
+    if index >= len(questions):
+        raise HTTPException(404, "unknown_question")
+    q = questions[index]
+    if body.text is not None:
+        correct = _same_text(body.text, q.options[q.answer_index])
+        return AnswerOut(correct=correct, answer_index=q.answer_index)
+    if body.choice is None or body.choice >= len(q.options):
+        raise HTTPException(422, "invalid_choice")
+    return AnswerOut(correct=body.choice == q.answer_index, answer_index=q.answer_index)

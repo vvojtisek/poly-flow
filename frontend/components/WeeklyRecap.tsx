@@ -15,8 +15,8 @@ const day = (iso: string) => new Date(iso + "T12:00:00").toLocaleDateString("cs-
 const TARGET: Record<Recap["suggestion"], string> = {
   check_due: "/check",
   fix_mistakes: "/words?tab=all",
-  new_lesson: "/lesson",
-  start_small: "/lesson",
+  new_lesson: "/lesson/vocabulary",
+  start_small: "/lesson/vocabulary",
   keep_going: "/practice",
 };
 
@@ -77,7 +77,7 @@ export function WeeklyRecap({ language, className = "" }: { language: Language; 
         {quiet ? (
           <p className="text-slate-600 dark:text-slate-300">{t.quiet}</p>
         ) : (
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
             <div className="rounded-xl bg-slate-50 p-3 dark:bg-slate-800/60">
               <p className="text-2xl font-bold">{w.active_days}/7</p>
               <p className="text-xs text-slate-500">{t.days(w.active_days)}</p>

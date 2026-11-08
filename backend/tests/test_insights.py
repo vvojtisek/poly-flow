@@ -26,11 +26,11 @@ def clock():
     app.dependency_overrides.clear()
 
 
-def event(uid, item, at, *, correct, graded=True, tag=None):
+def event(uid, item, at, *, correct, graded=True, tag=None, task=TaskType.RECOGNITION):
     return LearningEvent(
         user_id=uid,
         lexicon_item_id=item,
-        task_type=TaskType.RECOGNITION,
+        task_type=task,
         attempt_no=1,
         answer="x",
         is_correct=correct,
@@ -60,13 +60,14 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
                 event(uid, items[0], now, correct=True),
                 event(uid, items[1], now, correct=False, tag="gender"),
                 event(uid, items[1], now, correct=False, graded=False),
-                event(uid, items[2], now - timedelta(days=3), correct=True),
+                event(uid, items[2], now - timedelta(days=3), correct=True, task=TaskType.RECALL),
                 UserWordProgress(
                     user_id=uid,
                     lexicon_item_id=items[0],
                     introduced_at=now - timedelta(days=4),
                     next_review_at=now + timedelta(days=2),
                     passive_known=True,
+                    last_error_free_at=now - timedelta(days=31),  # past the decay window
                     policy_version="v4",
                 ),
                 UserWordProgress(
@@ -95,11 +96,22 @@ async def test_insights_aggregate_the_learners_own_events(db, client, clock):
     assert out["active_days"] == 2 and len(out["heatmap"]) == 182
     assert sum(w["answered"] for w in out["accuracy"]) == 3
     assert sum(w["correct"] for w in out["accuracy"]) == 2
-    assert out["mistakes"] == [{"tag": "gender", "count": 1}]
+    # Recognition and recall are tallied apart; the total is their sum (no grammar here).
+    assert sum(w["recognition"]["answered"] for w in out["accuracy"]) == 2
+    assert sum(w["recognition"]["correct"] for w in out["accuracy"]) == 1
+    assert sum(w["recall"]["answered"] for w in out["accuracy"]) == 1
+    assert sum(w["recall"]["correct"] for w in out["accuracy"]) == 1
+    assert all(w["grammar"] == {"answered": 0, "correct": 0} for w in out["accuracy"])
+    assert [(m["tag"], m["count"]) for m in out["mistakes"]] == [("gender", 1)]
+    behind = out["mistakes"][0]["items"]
+    assert [(i["kind"], i["id"], i["label"], i["count"]) for i in behind] == [
+        ("word", str(items[1]), "und", 1)
+    ]
     assert out["forecast"][0]["words"] == 1 and out["forecast"][2]["words"] == 1
     assert out["forecast"][0]["word_items"][0]["lemma"] == "und"
     assert out["forecast"][2]["word_items"][0]["lemma"] == "der"
     assert out["funnel"]["introduced"] == 2 and out["funnel"]["passive"] == 1
+    assert out["funnel"]["fading"] == 1
     # Another language sees none of it.
     other = (await client.get("/api/v1/insights?language=fr")).json()
     assert other["active_days"] == 0 and other["funnel"]["introduced"] == 0
@@ -134,13 +146,48 @@ async def test_review_forecast_does_not_reveal_child_filtered_words(db, client, 
                 policy_version="v4",
             )
         )
-        session.add(event(uuid.UUID(child["acting"]["id"]), item_id, clock.now, correct=False))
+        session.add(
+            event(
+                uuid.UUID(child["acting"]["id"]), item_id, clock.now, correct=False, tag="meaning"
+            )
+        )
         await session.commit()
     result = (await client.get("/api/v1/insights?language=de")).json()
     assert all(
         word["id"] != str(item_id) for day in result["forecast"] for word in day["word_items"]
     )
     assert sum(day["words"] for day in result["forecast"]) == 0
+    assert result["mistakes"] == []  # the child's miss on a filtered word is not shown
+    assert result["funnel"]["introduced"] == 0
     activity = await client.get(f"/api/v1/insights/day?language=de&date={clock.now.date()}")
     assert activity.status_code == 200
     assert all(word["id"] != str(item_id) for word in activity.json()["words"])
+
+
+async def test_forecast_lists_at_most_30_words_per_day_but_counts_all(db, client, clock):
+    from app.services.insights import FORECAST_ITEMS
+
+    me = await setup_parent(client)
+    uid = uuid.UUID(me["acting"]["id"])
+    await upsert_lexicon(
+        [
+            LexiconRow(language="de", rank=i, lemma=f"Wort{i}", pos="NOUN", translation_cs="slovo")
+            for i in range(1, FORECAST_ITEMS + 6)
+        ]
+    )
+    async for s in get_session():
+        for item_id in (await s.execute(select(LexiconItem.id))).scalars():
+            s.add(
+                UserWordProgress(
+                    user_id=uid,
+                    lexicon_item_id=item_id,
+                    introduced_at=clock.now - timedelta(days=2),
+                    next_review_at=clock.now - timedelta(hours=1),
+                    policy_version="v4",
+                )
+            )
+        await s.commit()
+    today = (await client.get("/api/v1/insights?language=de")).json()["forecast"][0]
+    assert today["words"] == FORECAST_ITEMS + 5
+    assert len(today["word_items"]) == FORECAST_ITEMS
+    assert today["word_items"][0]["lemma"] == "Wort1"  # frequency order within the day

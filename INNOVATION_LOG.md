@@ -1070,3 +1070,1228 @@ their main entry point.
 - Verification: all 4 recap API tests passed; frontend typecheck and production build passed;
   Compose config passed; rebuilt Compose stack reports `/readyz` ready and serves the frontend
   with HTTP 200 on port 3001.
+
+---
+
+# Innovation log: 120-cycle page-by-page loop
+
+Started 2026-11-07 at Vlad's request, on branch `claude/project-thread-can89h` from `main` at
+`0b8e6e6` (1.0.0-alpha.13). Fifteen cycles per page, in this order: `/`, `/grammar`, `/practice`,
+`/words`, `/insights`, `/lesson`, `/shadowing`, `/stories/library`. Page cycles 1-5 fix flows and
+wire data, 6-10 add learning ergonomics, 11-15 consolidate and harden. Commits stay local until
+Vlad approves a push.
+
+## Baseline
+
+- Working tree clean at `0b8e6e6`. Node 22, Next.js 16.3, Python 3.13 via `uv`, Postgres 16 and
+  Redis 7 running locally.
+- Backend (`backend/`): `uv run pytest` 872 passed, 1 skipped (with `POLYFLOW_TEST_DATABASE_URL`);
+  `ruff check` and `ruff format --check` clean.
+- Frontend (`frontend/`): `npm run typecheck` and `npm run build` clean, 36 routes.
+- Local run: `uvicorn app.main:app --port 8000`, `python -m app.workers`, `next dev --port 3001`
+  (the dev server proxies `/api` to port 8000).
+- Route audit: `/`, `/grammar`, `/practice`, `/words`, `/insights`, `/lesson` and `/shadowing`
+  exist. `/stories/library` does not exist (only `/stories`); its 15 cycles build it inside the
+  existing stories design.
+- Pre-existing defect found while rendering `/`: React warns about duplicate `extension_passive`
+  keys in the progression path (two milestones share that key).
+
+## Global Cycle 1/120 | Page: [/] (Page Cycle 1/15)
+
+**Summary:** show voluntary vocabulary bands once, as rank ranges
+
+**Observed Problem:** The dashboard progression path listed "Pasivní slovní zásoba – dobrovolné" twice (6 000+ and 7 000+) because two backend milestones share the key `extension_passive`, and React logged duplicate-key errors on every render of `/`.
+
+**Implemented Solution:** `components/ProgressionPath.tsx` now merges consecutive voluntary milestones with the same key into one row that shows the rank range it covers (5 001–7 000, 7 001–8 000) and, once the learner has proven words in that range, how many. Required milestone rows are keyed by rank. New `cs.progression.inBand` string in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff and `git diff --check` passed; rendering `/` in Chromium shows no console errors (previously 2 duplicate-key errors).
+
+## Global Cycle 2/120 | Page: [/] (Page Cycle 2/15)
+
+**Summary:** replace the obsolete grammar lock line with real grammar progress
+
+**Observed Problem:** Grammar has been open from A1 since 2026-11-06, but the dashboard still printed the old word-gate copy ("Gramatické minilekce jsou odemčené" / "odemknou po 1 000 slov"), and the Grammar quick action always said "Témata tvé úrovně" regardless of what was due or in progress.
+
+**Implemented Solution:** `app/page.tsx` now loads the learner's grammar tree for the active language alongside progress. The Grammar quick action shows a resumable lesson (and links straight to it), the number of topics due for review (highlighted), or the recommended next topic. `components/ProgressCard.tsx` replaces the lock line with "Gramatika: X z Y témat prošlo ověřením", counting only units in the known or mastered state. Obsolete `grammarLocked`/`grammarUnlocked` strings removed from `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; dashboard rendered with seeded German progress shows "Gramatika: 0 z 37 témat prošlo ověřením" and no console errors.
+
+## Global Cycle 3/120 | Page: [/] (Page Cycle 3/15)
+
+**Summary:** make weak spots actionable: audio, dictionary links, top five first
+
+**Observed Problem:** The Weak spots panel listed every unresolved word (10+ rows on a phone after one check) as plain text: the learner could not hear the word or open its dictionary card from the place where the mistake was surfaced.
+
+**Implemented Solution:** The weak-spots API now returns each word's `item_id` (`backend/app/schemas/learning.py`, `backend/app/api/learning.py`). `components/WeakSpotsCard.tsx` shows the five worst words first with a "Zobrazit všechna (N)" toggle, each row has a play button (dictionary audio) and links to `/words?word=<id>`, which opens that word's inspector. Types in `lib/api.ts`, copy in `lib/i18n/cs.ts`; `tests/test_mistakes.py` asserts the ids.
+
+**Verification:** `tests/test_mistakes.py` 4 passed; ruff, typecheck, production build, `git diff --check` passed; dashboard renders the capped list with audio buttons and no console errors.
+
+## Global Cycle 4/120 | Page: [/] (Page Cycle 4/15)
+
+**Summary:** say when the next review opens instead of a dead "nothing due" card
+
+**Observed Problem:** After a lesson the Daily review card showed a greyed "Dnes nic nečeká" with no hint of when checking becomes possible (words are checkable from the next day), so learners could not plan their return.
+
+**Implemented Solution:** `services/learning.py` progress overview now also returns `next_review_at`, the earliest future review among introduced words (one extra aggregate in the existing query; schema in `schemas/learning.py`). The dashboard card reads "Teď nic nečeká · další za 3 h / zítra / ve středu / 12. 11." via a new Czech `relativeFuture` helper in `lib/i18n/cs.ts` with correct weekday prepositions. `tests/test_learning.py` covers the new field.
+
+**Verification:** `tests/test_learning.py -k progress` 2 passed; ruff, typecheck, production build and `git diff --check` passed.
+
+## Global Cycle 5/120 | Page: [/] (Page Cycle 5/15)
+
+**Summary:** show each language's words and due checks in the dashboard switcher
+
+**Observed Problem:** Learners studying several languages had to switch blindly: the language buttons gave no sign which language had checks waiting or had not been started, and the radio group ignored arrow keys.
+
+**Implemented Solution:** New `GET /api/v1/learning/languages` (`api/learning.py`, `services/learning.language_summaries`, `LanguageSummaryOut`) returns introduced, known and due words for all four languages from one grouped query over the acting profile's own progress. On the dashboard, `LanguagePicker` (`components/AppShell.tsx`) shows "41 slov · 3 k ověření" or "zatím nezačato" under each language (amber when checks are waiting) and now implements the radio-group keyboard pattern (arrow keys move and select, roving tabindex). Other pages keep the compact switcher. Test `test_language_summaries_count_only_own_words`.
+
+**Verification:** `tests/test_learning.py` summaries/progress tests passed; ruff (import order fixed), typecheck, production build, `git diff --check` passed; screenshot shows per-language summaries.
+
+## Global Cycle 6/120 | Page: [/] (Page Cycle 6/15)
+
+**Summary:** open the four daily actions with keys 1-4
+
+**Observed Problem:** On desktop the dashboard had one shortcut (Enter continues today's plan); reaching review, grammar, flashcards or practice needed the mouse or several Tab presses.
+
+**Implemented Solution:** `app/page.tsx`: the quick actions carry `data-hotkey` 1-4 (`aria-keyshortcuts` for assistive tech) and show a key badge on wide screens via `KeyHint`. The dashboard's existing hotkey listener (installed by `TodayPlan`, layout-independent digit codes from `lib/keyboard.ts`) clicks them; a disabled Daily review card (nothing due) is not a link and ignores its key.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; a Playwright run on the dev server pressed 2, 3 and 4 on `/` and landed on `/grammar`, `/words?tab=levels` and `/practice`.
+
+## Global Cycle 7/120 | Page: [/] (Page Cycle 7/15)
+
+**Summary:** change the daily goal inline and fix the grammar-check step link
+
+**Observed Problem:** Adjusting the daily goal meant leaving the dashboard for Settings, although the goal ring sits right on the plan. The plan's "Ověřit gramatiku" step opened the grammar overview instead of the grammar check, and the lesson step said "Nová lekce (5 slova)".
+
+**Implemented Solution:** `components/TodayPlan.tsx`: a "Změnit cíl" toggle under the ring reveals 5/10/15/20/30-minute choices (radio group); picking one saves `daily_goal_minutes` through the existing partial profile PATCH, updates the signed-in profile in auth state and re-reads today's plan. Failures show an inline alert. The `grammar_check` step now goes to `/grammar/check`; lesson step pluralization fixed in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright on a 390 px viewport changed the goal to 20 and back to 10 minutes and the plan text updated each time.
+
+## Global Cycle 8/120 | Page: [/] (Page Cycle 8/15)
+
+**Summary:** send "Start/continue lesson" straight into the vocabulary lesson
+
+**Observed Problem:** The dashboard's main button ("Začít lekci" / "Pokračovat v lekci" for an open session), today's plan lesson step, the welcome wizard's first lesson, the command palette's "Začít lekci" and the weekly coach's lesson suggestion all went to `/lesson`, which is the lesson overview with a grammar recommendation. Resuming a half-finished vocabulary lesson took an extra, misleading click.
+
+**Implemented Solution:** These five entry points now open `/lesson/vocabulary` (the scene-first LessonRunner, which resumes an active session): `app/page.tsx`, `components/TodayPlan.tsx`, `components/Welcome.tsx`, `components/CommandPalette.tsx`, `components/WeeklyRecap.tsx`. The bottom tab "Lekce" still opens the `/lesson` overview.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 9/120 | Page: [/] (Page Cycle 9/15)
+
+**Summary:** hold the dashboard layout with loading skeletons
+
+**Observed Problem:** While the dashboard loaded, today's plan rendered nothing and then popped in above the other panels, pushing them down; progress and weak spots showed a bare "Načítám…" line and the progression path was blank. On a slow home-server connection the page jumped several times.
+
+**Implemented Solution:** New `Skeleton` component in `components/ui.tsx` (sized placeholder lines, one polite "Načítám" status for screen readers, shimmer only when motion is allowed). Used by `TodayPlan` (ring-shaped placeholder of the final height), the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the dashboard APIs delayed by 4 s shows the placeholders in place of the panels.
+
+## Global Cycle 10/120 | Page: [/] (Page Cycle 10/15)
+
+**Summary:** preview the next lesson's scene and word counts on the start button
+
+**Observed Problem:** The main dashboard button said only "Začít lekci"; the learner could not see which situation came next or that missed words would be practised again, although lessons are built around a scene (context first).
+
+**Implemented Solution:** New read-only `GET /api/v1/learning/next-lesson` (`api/learning.py`, `services/learning.preview_lesson`, `LessonPreviewOut`) runs the same lesson planner used by session start, with the child-content filter, and returns the scene's Czech title, new-word count and remediation count without creating a session. The dashboard hero shows "Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení", or a clear message when every word has been met. New test checks that the preview matches the started lesson and starts nothing.
+
+**Verification:** `tests/test_learning.py` preview/summary tests passed; ruff, typecheck, production build, `git diff --check` passed; mobile screenshot shows the preview.
+
+## Global Cycle 11/120 | Page: [/] (Page Cycle 11/15)
+
+**Summary:** one primary action: the hero button follows today's plan
+
+**Observed Problem:** The dashboard had two competing primary buttons: the hero's "Začít lekci" (always a new lesson) and today's plan "Pokračovat" (first plan step, bound to Enter). When checks were due they pointed to different places, so the page gave contradictory advice.
+
+**Implemented Solution:** `TodayPlan` no longer renders its own button; it exports its step map and hands the loaded plan up via `onPlan`. The hero button in `app/page.tsx` is now the only primary action and the Enter target: resume an open lesson, otherwise the plan's first step (for example "Ověřit 12 slov"), otherwise a new lesson. The note under it switches between the ungraded-lesson note and a new graded-check note (`cs.dashboard.checkNote`), and the lesson preview from cycle 10 only appears when the action is a lesson.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; desktop screenshot shows one primary button with its Enter hint and the plan panel without a duplicate.
+
+## Global Cycle 12/120 | Page: [/] (Page Cycle 12/15)
+
+**Summary:** merge duplicated band bars into the milestone path
+
+**Observed Problem:** Vocabulary progress was shown twice on the dashboard: the Progress panel had six "≤ 100 … ≤ 5 000" bars and the "Tvoje cesta" panel listed the same six milestones again, plus a third "Další milník" line. A second panel called "Moje cesta" (rank path) made the two "cesta" titles indistinguishable.
+
+**Implemented Solution:** `components/ProgressCard.tsx` keeps the six counters and the grammar line; band bars and the next-milestone line are removed. `components/ProgressionPath.tsx` now shows each milestone's band fill (known / words in that band) as a thin labelled progressbar under the row, for the current band and any band with known words. The panel is renamed "Milníky slovní zásoby" in `lib/i18n/cs.ts`; the unused `nextMilestone` string is removed.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile dashboard shrinks from 4 317 px to 4 113 px with no console errors.
+
+## Global Cycle 13/120 | Page: [/] (Page Cycle 13/15)
+
+**Summary:** fit the language switcher and daily actions to phone width
+
+**Observed Problem:** On a 390 px phone the four language buttons (now with summaries) wrapped into a ragged 3 + 1 layout, and the four daily actions stacked as full-width rows, pushing today's plan below the first screen.
+
+**Implemented Solution:** `LanguagePicker` with summaries uses an even 2 × 2 grid on phones and the inline row from `sm` up (`components/AppShell.tsx`). The quick actions in `app/page.tsx` form a 2-column grid on phones with the icon above the text and help clamped to two lines; from `sm` they return to the icon-beside-text layout and four columns on wide screens.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows the 2 × 2 switcher and action grid, no console errors.
+
+## Global Cycle 14/120 | Page: [/] (Page Cycle 14/15)
+
+**Summary:** retry failed dashboard panels instead of dead ends
+
+**Observed Problem:** If today's plan failed to load, the panel stayed a loading skeleton forever (its error was swallowed); progress, weak spots and the milestone path showed a red "Něco se nepovedlo" with no way to recover short of reloading the whole page.
+
+**Implemented Solution:** New `RetryNotice` in `components/ui.tsx` (alert text plus "Zkusit znovu"). `TodayPlan` now records failures and offers a retry; the progress panel in `app/page.tsx`, `WeakSpotsCard` and `ProgressionPath` re-run their own request through an attempt counter. Copy `cs.today.failed` added.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with `/today` and `/learning/progress` returning 500 showed two retry notices, and after the API recovered, pressing them restored both panels.
+
+## Global Cycle 15/120 | Page: [/] (Page Cycle 15/15)
+
+**Summary:** share in-flight rank and milestone requests
+
+**Observed Problem:** A production-build load of `/` sent 14 API requests, with `/api/v1/ranks` twice (the header emblem and the rank card mounted together and both missed the 30 s cache), and the static milestone ladder was refetched on every visit to the dashboard.
+
+**Implemented Solution:** `lib/useRanks.ts` shares one in-flight request per profile and language between concurrent users of the hook (cleared by `invalidateRanks`). `components/ProgressionPath.tsx` keeps the static milestone ladder in a module-level promise for the page session, dropping it after a failure so the retry from cycle 14 asks again.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright against `next start` counts 13 API requests on `/` with `/ranks` once (was 14 with two).
+
+## Global Cycle 16/120 | Page: [/grammar] (Page Cycle 1/15)
+
+**Summary:** pick the focus level; fall back to passed vocabulary exams
+
+**Observed Problem:** The highlighted grammar level came only from the CEFR estimate and otherwise stayed on A1, ignoring passed vocabulary level exams, and a learner who wanted to work on A2 topics had no way to bring them to the top: they stayed collapsed under "Ostatní úrovně".
+
+**Implemented Solution:** `app/grammar/page.tsx`: the default focus level now uses the CEFR estimate, then the highest earned vocabulary badge, then A1, with a matching explanation (`activeFromBadge`). A radio row under the level header lets the learner choose any level that has topics, or go back to "Podle odhadu (A1)"; the choice is a per-device convenience stored per profile and language in localStorage (guarded for private mode). Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright chose A2, saw the A2 panel promoted, and the choice survived a reload.
+
+## Global Cycle 17/120 | Page: [/grammar] (Page Cycle 2/15)
+
+**Summary:** show when each studied topic can be checked
+
+**Observed Problem:** A studied grammar topic looked the same as any other until it became due; the learner could not tell that its check opens tomorrow (topics become checkable from the next day), so a "Prostudováno" card gave no next step.
+
+**Implemented Solution:** `app/grammar/page.tsx` unit cards now show "Ověření za 3 h / zítra / ve středu / 12. 11." under the exercise count for studied, known or mastered topics that are not yet due, using the tree's existing `next_review_at` and the shared `relativeFuture` helper. Due topics keep the amber "K ověření" badge. Copy `cs.grammar.nextCheck`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; after studying two German A1 units through the API, the mobile grammar page shows "Ověření za 1 h" on both cards.
+
+## Global Cycle 18/120 | Page: [/grammar] (Page Cycle 3/15)
+
+**Summary:** keep topic filters in the URL; dashboard opens the due list
+
+**Observed Problem:** Search text and the status/due filters lived only in component state: reloading, going back from a lesson or following a link always reset the list, and the dashboard could not send a learner straight to the topics waiting for a check.
+
+**Implemented Solution:** `app/grammar/page.tsx` reads `q`, `status` and `due` from the query string on load and keeps them in sync with `history.replaceState` (no extra history entries while typing). The dashboard's Grammar action (`app/page.tsx`) links to `/grammar?due=1` when topics are due and no lesson is open.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?status=studied` ("Zobrazeno 2 z 37 témat") and typing a search updated the URL to `?status=studied&q=sein`.
+
+## Global Cycle 19/120 | Page: [/grammar] (Page Cycle 4/15)
+
+**Summary:** search inside explanations, tables and examples
+
+**Observed Problem:** The topic search promised "Hledat téma nebo vysvětlení" but matched only titles and summaries: searching "vykání" or a form like "bist" found nothing, although the explanation of sein covers both.
+
+**Implemented Solution:** New `GET /api/v1/grammar/search-index` (`api/grammar.py`, `SearchEntryOut`) returns each active unit's objective, note headings and text, table cells and examples as plain text (markdown markers stripped). `app/grammar/page.tsx` fetches it lazily the first time the learner types a query (about 30 kB for German), folds diacritics like the existing search, and also matches the objective; titles and summaries keep working if the index fails. Test `test_search_index_has_plain_explanation_text`.
+
+**Verification:** `tests/test_grammar.py` search/tree tests passed; ruff, typecheck, production build, `git diff --check` passed; Playwright search "vykání" now shows 1 of 37 topics (was 0).
+
+## Global Cycle 20/120 | Page: [/grammar] (Page Cycle 5/15)
+
+**Summary:** show graded check results on each topic
+
+**Observed Problem:** Topic cards showed a status label and recent errors, but not how the learner actually did in grammar checks, so "Prostudováno" after three good checks looked the same as after none.
+
+**Implemented Solution:** The grammar tree now returns `checked_correct` and `checked_errors` per unit (first-try graded answers already counted in `UserGrammarProgress`; `schemas/grammar.py`, `api/grammar.py`). Cards in `app/grammar/page.tsx` show "V ověřeních: 3 správně, 1 chyba" once at least one check answer exists; unmeasured topics show nothing instead of a misleading zero. The check test asserts both counts.
+
+**Verification:** `tests/test_grammar.py` 14 passed; ruff, typecheck, production build, `git diff --check` passed.
+
+## Global Cycle 21/120 | Page: [/grammar] (Page Cycle 6/15)
+
+**Summary:** keyboard topic search: /, Enter opens, Esc clears
+
+**Observed Problem:** Finding a grammar topic on desktop needed the mouse: no shortcut reached the search box, Enter did nothing, and resetting search plus filters took several clicks.
+
+**Implemented Solution:** `components/CommandPalette.tsx`: "/" now focuses the current page's own search box when one is marked `data-page-search` and visible, and still opens the global palette elsewhere (Ctrl+K always opens the palette). `app/grammar/page.tsx` marks its topic search, shows a "/" key badge, opens the first matching topic on Enter and clears search and status/due filters on Escape; a desktop hint "Enter otevře první, Esc vše zruší" appears while filtering.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright: "/" then typing "akuzativ" filtered to 1 of 37, Escape restored 37, typing "sein" + Enter opened `/grammar/de-a1-sein`.
+
+## Global Cycle 22/120 | Page: [/grammar] (Page Cycle 7/15)
+
+**Summary:** preview a topic's goal, first rule and examples in place
+
+**Observed Problem:** The only way to see what a grammar topic teaches was to open it, and opening a topic immediately starts a lesson session; browsing several topics created several open sessions and lost the overview.
+
+**Implemented Solution:** `app/grammar/page.tsx`: every topic card has a "Náhled výkladu" toggle below it (a separate button, not nested in the card link) that expands the unit's objective, first explanation note (markdown markers removed) and up to three examples with Czech translations, read through the existing read-only `GET /grammar/units/{id}`. Unit details are cached per page session and a failed load can be retried by reopening. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened the preview on a 390 px screen without leaving `/grammar`.
+
+## Global Cycle 23/120 | Page: [/grammar] (Page Cycle 8/15)
+
+**Summary:** order in-progress topics by urgency; add a "S chybami" filter
+
+**Observed Problem:** "Právě se učíš" listed topics in curriculum order, so a topic due for a check or with fresh check mistakes could sit behind the recommendation and studied topics; there was also no way to list only the topics with recent mistakes.
+
+**Implemented Solution:** `app/grammar/page.tsx`: in-progress topics are sorted by urgency (open lesson, due for check, recent mistakes, recommended, other studied; stable within groups). A new "S chybami N" chip filters to topics with unresolved recent check mistakes, is kept in the URL as `errors=1` and is cleared by Escape with the other filters. Copy `cs.grammar.withErrors`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 24/120 | Page: [/grammar] (Page Cycle 9/15)
+
+**Summary:** return from a lesson to the topic just studied
+
+**Observed Problem:** Finishing a grammar lesson sent the learner to the top of `/grammar`; on a phone the topic they had just studied, now marked "Prostudováno" with its check date, was several screens down, so the result of the lesson was invisible.
+
+**Implemented Solution:** The lesson's exit (`app/grammar/[unit]/page.tsx`) now opens `/grammar?studied=<unit>`. `app/grammar/page.tsx` scrolls that card into view (instant when reduced motion is preferred), moves focus to its link, rings it in green for four seconds and announces "Právě prostudováno: …" to screen readers. The parameter is one-shot: it is removed from the URL so a reload does not scroll again.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a1-articles`: focus landed in that card, it carried the highlight, and the URL was cleaned to `/grammar`.
+
+## Global Cycle 25/120 | Page: [/grammar] (Page Cycle 10/15)
+
+**Summary:** listen to topic examples from the preview
+
+**Observed Problem:** Grammar examples could only be read; the overview offered no way to hear how "Sind Sie Herr Novák?" sounds, while vocabulary, stories and drills all have audio.
+
+**Implemented Solution:** New `GET /api/v1/grammar/units/{id}/audio?example=N` (`api/grammar.py`) speaks one of the unit's curated examples through the existing TTS path and the profile's chosen voice; it never accepts free text and returns 404 for unknown units or example indexes. The topic preview in `app/grammar/page.tsx` gets a play button per example (`PlayButton` shows the unavailable state when no voice is installed). Test `test_example_audio_only_for_existing_examples`.
+
+**Verification:** `tests/test_grammar.py` 15 passed; ruff (one file reformatted), typecheck, production build, `git diff --check` passed. Audio playback itself not verified: this container has no TTS voices (the endpoint returns 503 there, as the test expects).
+
+## Global Cycle 26/120 | Page: [/grammar] (Page Cycle 11/15)
+
+**Summary:** compact topic cards: one meta line, clamped summary
+
+**Observed Problem:** After cycles 17 and 20 a studied card stacked up to four small text lines (exercise count, next check, check tally, open link) under a full-length summary; on a phone two cards filled the screen.
+
+**Implemented Solution:** `app/grammar/page.tsx`: the card's meta is one line ("8 cvičení · v ověřeních 3 správně, 1 chyba · ověření zítra") next to the open/resume link, and the summary is clamped to two lines. Strings in `lib/i18n/cs.ts` lower-cased to read as one sentence fragment.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single meta line per card and the mobile page at 2 521 px.
+
+## Global Cycle 27/120 | Page: [/grammar] (Page Cycle 12/15)
+
+**Summary:** skeleton while loading, retry when the topic list fails
+
+**Observed Problem:** `/grammar` showed a single "Načítám…" line while the tree loaded and then reflowed the whole page; if the request failed, the learner got "Něco se nepovedlo." with no way to try again except reloading.
+
+**Implemented Solution:** `app/grammar/page.tsx`: a placeholder in the shape of the focus panel (two text lines and three card blocks, pulse only with motion allowed) holds the layout while loading; a failure shows `RetryNotice` ("Gramatiku se nepodařilo načíst." + Zkusit znovu) that re-runs the tree and level requests through an attempt counter.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with the tree request failing showed the retry alert, and after recovery the retry loaded all 37 topics.
+
+## Global Cycle 28/120 | Page: [/grammar] (Page Cycle 13/15)
+
+**Summary:** one swipeable filter row on phones
+
+**Observed Problem:** On a 390 px phone the seven status/due/error chips wrapped into three rows and, together with the search box, pushed the topic list half a screen down.
+
+**Implemented Solution:** `app/grammar/page.tsx`: below `sm` the chips form one horizontally scrollable row that bleeds to the screen edge (no scrollbar, chips never shrink or wrap their labels); from `sm` up they wrap as before. The search field takes the full width on phones.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px screenshot shows a single chip row with the next chip cut at the edge as a swipe cue.
+
+## Global Cycle 29/120 | Page: [/grammar] (Page Cycle 14/15)
+
+**Summary:** list empty levels once instead of as empty panels
+
+**Observed Problem:** C1 and C2 have no grammar topics yet, but each still rendered as a full collapsible level panel; opening one revealed only "Pro tuto úroveň zatím není připravené žádné téma", a dead end that also lengthened the page.
+
+**Implemented Solution:** `app/grammar/page.tsx`: "Ostatní úrovně" renders panels only for levels with topics and adds one quiet line for the rest ("C1, C2: zatím bez připravených témat.", `cs.grammar.emptyLevels`). The focus-level picker already offered only levels with topics.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile page shrinks from 2 521 px to 2 277 px with no console errors.
+
+## Global Cycle 30/120 | Page: [/grammar] (Page Cycle 15/15)
+
+**Summary:** open the collapsed group that holds the topic just studied
+
+**Observed Problem:** The return-to-topic jump from cycle 24 failed silently when the studied topic sat in a collapsed group ("Další témata", "Hotovo" or another level such as A2): the card was not rendered, so nothing scrolled or got focus.
+
+**Implemented Solution:** `app/grammar/page.tsx` remembers the `studied` unit for the page visit (separately from the 4-second highlight) and opens whichever disclosure contains it (upcoming, completed or another level's panel) via `defaultOpen`; the group then stays open after the highlight fades. Measured API timings showed no backend bottleneck on this page (tree, progress and levels each answer in about 20 ms locally), so this consolidation cycle went to the edge case instead.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/grammar?studied=de-a2-dative` (an A2 topic while the focus level is A1): the A2 panel opened, the card got focus and the highlight.
+
+## Global Cycle 31/120 | Page: [/practice] (Page Cycle 1/15)
+
+**Summary:** concrete mistake recommendations: example words and the right next step
+
+**Observed Problem:** The "Zaměř se na to, co teď dělá potíže" panel showed only an error type and a count ("Význam slova 13×"), and meaning or word-choice mistakes linked to the `/lesson` overview, where nothing practises those words.
+
+**Implemented Solution:** `app/practice/page.tsx`: each recommendation lists up to three of the learner's own words or grammar topics with that mistake type (from the weak-spots API, German nouns with their article) and names the action ("Procvičit rody", "Procvičit v diktátu", "Zopakovat v příští lekci"…). Meaning and word-choice mistakes now go to `/lesson/vocabulary`, whose next lesson re-practises recently missed words. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot shows "Význam slova · Například: der Hund, lesen, nein · Zopakovat v příští lekci".
+
+## Global Cycle 32/120 | Page: [/practice] (Page Cycle 2/15)
+
+**Summary:** show when each practice mode was last used
+
+**Observed Problem:** The hub listed twelve modes with no sign of which ones the learner had been neglecting; only the last three opened modes appeared in a chip row, without dates.
+
+**Implemented Solution:** `lib/practice.ts` now also stores the last-open time per mode (`pf_mode_visits`, validated on read, local to the device and never sent to the server, like the existing recent list). Each card in `app/practice/page.tsx` shows "Naposledy dnes / včera / před 5 dny" or "Zatím nevyzkoušeno". New `relativePast` helper in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/dictation`, then `/practice` showed "Naposledy dnes" on the Diktát card.
+
+## Global Cycle 33/120 | Page: [/practice] (Page Cycle 3/15)
+
+**Summary:** mark modes that need lesson words before the first lesson
+
+**Observed Problem:** In a language with no lessons yet, role-play, dictation, shadowing and word order looked as available as the rest, but each builds on scenes or example sentences the learner has met and opened to an empty state.
+
+**Implemented Solution:** `lib/practice.ts` flags the four modes with `needsWords`. `app/practice/page.tsx` reads the learner's introduced-word count for the active language from the cheap per-language summary endpoint (cycle 5) and, while it is zero, replaces those cards' last-used line with "Pracuje se slovy z lekcí: nejdřív projdi první lekci." The cards stay links (the modes explain themselves); the other eight modes, which use the whole lexicon, are unchanged.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright in French (no lessons) shows the note on exactly 4 cards, and none in German.
+
+## Global Cycle 34/120 | Page: [/practice] (Page Cycle 4/15)
+
+**Summary:** keep the skill filter in the URL and show counts per skill
+
+**Observed Problem:** Choosing "mluvení" on the hub, opening a mode and pressing Back reset the filter to all twelve modes; the chips also gave no idea how many modes each skill offers in the current language.
+
+**Implemented Solution:** `app/practice/page.tsx` reads `?skill=a,b` on load (unknown values ignored) and mirrors the selection with `history.replaceState`, so Back and shared links restore it. Each skill chip shows how many modes train it for the active language (for example "mluvení 2").
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright opened `/practice?skill=speaking` ("2 způsoby procvičování") and adding listening updated the URL to `?skill=speaking,listening`.
+
+## Global Cycle 35/120 | Page: [/practice] (Page Cycle 5/15)
+
+**Summary:** a daily tip that balances neglected skills
+
+**Observed Problem:** With twelve modes and no guidance beyond recent mistakes, learners tended to reopen the same one or two modes; skills such as listening or speaking could go untrained for weeks without any hint.
+
+**Implemented Solution:** `lib/practice.ts` gains `suggestMode`: from the modes usable now (lesson-dependent ones excluded before the first lesson), it picks the skill opened longest ago on this device (never-trained first, stable tie-break) and its least recently opened mode. `app/practice/page.tsx` shows it as a "Tip na dnes" link card with the reason ("Na poslech ses na tomto zařízení naposledy zaměřil(a) před 5 dny."). The tip is deterministic and local, with no streaks or pressure.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; mobile screenshot on a fresh browser suggests "Hraj roli" for listening, never trained on that device.
+
+## Global Cycle 36/120 | Page: [/practice] (Page Cycle 6/15)
+
+**Summary:** open modes with 1-9 and today's tip with Enter
+
+**Observed Problem:** The practice hub had no keyboard shortcuts; on desktop each mode needed the mouse or many Tab stops past the language switcher, recommendations and chips.
+
+**Implemented Solution:** `app/practice/page.tsx` installs the shared hotkey listener: digits 1-9 open the visible cards in order (so they follow the active skill filter), Enter opens the "Tip na dnes" card. Cards and the tip show key badges on wide screens and carry `aria-keyshortcuts`; digit codes are layout-independent (`lib/keyboard.ts`), so the Czech number row works.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pressed 2 on `/practice?skill=speaking` and landed on `/sounds` (the second speaking mode), and Enter on `/practice` opened the tip's `/roleplay`.
+
+## Global Cycle 37/120 | Page: [/practice] (Page Cycle 7/15)
+
+**Summary:** flashcards from the words you got wrong
+
+**Observed Problem:** The hub's mistake panel pointed to other modes, but there was no quick way to simply rehearse the specific words missed in recent checks; flashcards existed only per level or topic in the dictionary.
+
+**Implemented Solution:** The deck API accepts a third scope, `weak=true`: the profile's unresolved check mistakes from the weak-spots service, still child-filtered and due-first (`services/words.word_deck`, `api/words.py`; exactly one scope is still enforced). `lib/api.ts` adds `DeckScope`; `FlashcardSession` accepts it and an optional close label. `app/practice/page.tsx` offers "Kartičky ze slov s chybami (N)" in the mistake panel and runs the ungraded flashcards in place, returning "Zpět na procvičování". New test `test_weak_deck_holds_exactly_the_unresolved_words`.
+
+**Verification:** `tests/test_mistakes.py` and `tests/test_words.py` 11 passed; ruff, typecheck, production build, `git diff --check` passed; Playwright opened the deck from `/practice` (10 cards, first "können").
+
+## Global Cycle 38/120 | Page: [/practice] (Page Cycle 8/15)
+
+**Summary:** "Jiný tip": step through ranked suggestions
+
+**Observed Problem:** Today's tip offered a single mode; a learner who did not feel like that mode had to fall back to scanning all twelve cards.
+
+**Implemented Solution:** `lib/practice.ts`: `suggestModes` replaces `suggestMode` and returns a full ranking: one mode per skill in order of how long ago the skill was trained (each mode used once), then the remaining modes oldest first. `app/practice/page.tsx` shows the first suggestion and a "Jiný tip" button that cycles through the ranking; the tip text is a polite live region so the change is announced. Enter still opens the shown tip.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright cycled six tips on a fresh device: Hraj roli (listening), Stínování (speaking), Diktát (writing), Slovosled (reading), Rody (grammar), Laboratoř pádů.
+
+## Global Cycle 39/120 | Page: [/practice] (Page Cycle 9/15)
+
+**Summary:** after flashcards, repeat only the cards you did not know
+
+**Observed Problem:** At the end of the weak-word flashcards (and any deck) the only options were to run the whole deck again or leave; the few cards the learner had just marked "Ještě zopakovat" could not be rehearsed on their own.
+
+**Implemented Solution:** `components/FlashcardSession.tsx`: the summary offers "Znovu jen 3 kartičky, které jsem nevěděl(a)" (focused, primary) whenever any card was marked again, starting a round with exactly those cards; "Projít znovu" and the close button stay. Still practice only, nothing is stored. Copy with Czech plural forms in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright ran the 10-card weak deck from `/practice` with the keyboard, marked 3 cards again, and the follow-up round had exactly 3 cards.
+
+## Global Cycle 40/120 | Page: [/practice] (Page Cycle 10/15)
+
+**Summary:** pinned modes lead the grid and keep their shortcuts
+
+**Observed Problem:** Pinning a mode only added a chip above the grid; the card itself stayed in the middle of the list, so pinned favourites got shifting 1-9 shortcuts and the pin button gave no feedback beyond its icon.
+
+**Implemented Solution:** `app/practice/page.tsx`: the grid now lists pinned modes first in pin order (then the usual order, after the skill filter), so a favourite keeps key 1, 2… Toggling a pin announces "Čísla je připnuté a ukazuje se první." / "… už není připnuté." through a polite live region. Copy in `lib/i18n/cs.ts`.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright pinned "Čísla", it became the first card, and pressing 1 opened `/numbers`.
+
+## Global Cycle 41/120 | Page: [/practice] (Page Cycle 11/15)
+
+**Summary:** drop the duplicate pinned and recent chip rows
+
+**Observed Problem:** After cycles 32 and 40 the hub said the same thing three times: a "Moje oblíbené" chip row, a "Naposledy" chip row, and the cards themselves (pinned first, each with its last-used date). On a phone the two rows pushed the grid further down.
+
+**Implemented Solution:** `app/practice/page.tsx` removes both chip rows and their state; pinned modes are visible as the first cards with an active pin button, and recency lives on each card. The dashboard keeps its own shortcut chips.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; no console errors on the 390 px render.
+
+## Global Cycle 42/120 | Page: [/practice] (Page Cycle 12/15)
+
+**Summary:** steady tip while loading; retry when mistakes fail to load
+
+**Observed Problem:** The tip was computed before the word count arrived, so in a fresh language it first suggested a lesson-dependent mode and then jumped to another one; a failed weak-spots request left a dead "Něco se nepovedlo" in the mistake panel.
+
+**Implemented Solution:** `app/practice/page.tsx` waits for the per-language summary (success or failure) before suggesting, showing a tip-sized placeholder meanwhile; if the summary fails, nothing is locked. The mistake panel uses `RetryNotice` ("Nepodařilo se načíst poslední chyby.") that re-runs both requests.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; Playwright with weak-spots returning 500 showed the retry notice, and after recovery the recommendations ("Například: …") appeared.
+
+## Global Cycle 43/120 | Page: [/practice] (Page Cycle 13/15)
+
+**Summary:** shorter mode cards on phones
+
+**Observed Problem:** On a 390 px phone each of the twelve cards was about 190 px tall (large padding, full blurb, a row of skill tags that duplicates the filter chips), so the hub needed 3 600 px of scrolling.
+
+**Implemented Solution:** `app/practice/page.tsx`: below `sm` cards use tighter padding, a smaller icon tile, a two-line clamped blurb and no skill-tag row (skills remain available as filter chips); the grid gap shrinks. From `sm` up the cards are unchanged.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height drops from 3 618 px to 2 842 px with no console errors.
+
+## Global Cycle 44/120 | Page: [/practice] (Page Cycle 14/15)
+
+**Summary:** trim repeated copy and fold skill chips into one row
+
+**Observed Problem:** The top of the hub repeated itself: the intro and the mistake panel both explained that practice is not graded, and the skill label plus six chips wrapped into three rows on a phone, so the first mode card sat below the fold.
+
+**Implemented Solution:** `lib/i18n/cs.ts`: the mistake panel's help is now one line ("Podle posledních chyb v ověřeních."); the ungraded note stays once, in the intro. `app/practice/page.tsx`: the skill label sits above the chips, which form one swipeable row on phones (the group is labelled by it) and wrap from `sm` up.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed; 390 px page height 2 754 px (from 2 842 px), no console errors.
+
+## Global Cycle 45/120 | Page: [/practice] (Page Cycle 15/15)
+
+**Summary:** keep pins, recent modes and last-used dates per profile
+
+**Observed Problem:** Pinned modes, the recent list and the new last-used dates were stored under one browser key, so on a shared family tablet a child's pins and "Naposledy dnes" appeared on a parent's practice hub and dashboard after switching profiles, and today's tip was based on someone else's activity. (A request audit of `/practice` on a production build showed 4 API calls, so no performance work was needed here.)
+
+**Implemented Solution:** `lib/practice.ts` keys `pf_pinned_modes`, `pf_recent_modes` and `pf_mode_visits` by the acting profile id; all readers and writers take the profile (`app/practice/page.tsx`, `app/page.tsx`, `components/AppShell.tsx`) and re-read when the acting profile changes. Older unkeyed entries are ignored rather than attributed to whoever logs in next.
+
+**Verification:** typecheck, production build, ruff, `git diff --check` passed.
+
+## Global Cycle 46/120 | Page: [/words] (Page Cycle 1/15)
+
+**Summary:** keep filters, scope and the open word in the URL
+
+**Observed Problem:** The word list read q, word and tab once on mount and never wrote anything back. Status, due and level/topic scope filters and the open word were lost on reload or Back, and a filtered view could not be shared or bookmarked. The groups effect also cleared the scope on its first run, so even a URL scope could not survive.
+
+**Implemented Solution:** The page now writes tab, q, status, due, level/topic and word back with history.replaceState and restores all of them on load. A topic scope from the URL is resolved to its title once the group list arrives. The scope is dropped only when the language or profile actually changes, not on first load.
+
+**Verification:** Playwright: Show words on A1, filter Učím se, open a word -> URL ?tab=all&level=A1&status=learning&word=…; reload restores chip 'Jen: A1', pressed status and open inspector; ?topic=<id> shows 'Jen: Ahoj, jak se jmenuješ?'. No console errors. typecheck, next build, ruff, git diff --check pass.
+
+## Global Cycle 47/120 | Page: [/words] (Page Cycle 2/15)
+
+**Summary:** show the lesson scene and line where a word is taught
+
+**Observed Problem:** The word card showed rank, an example sentence and statistics, but not where the learner met the word. The product teaches words inside scenes (context first), yet the dictionary cut that link: a learner looking up 'bin' or 'Frau' could not see the dialogue line it came from or go back to that lesson's words.
+
+**Implemented Solution:** Word detail now returns up to three lesson scenes that teach the word, in curriculum order, filtered with the same child-scene rule as topics. For each it returns the first line that uses the word, found by the scene's tagged segment id (so inflected forms such as 'bin' for 'sein' are found), with a word-boundary lemma fallback for plain lines. The inspector shows a 'Kde se slovo učí' block with the scene title, the line with the word highlighted and its Czech translation. Tapping it scopes the list to that lesson's words.
+
+**Verification:** New pytest test_word_detail_shows_the_lesson_scenes_that_teach_it covers plain-line match, no-line scene, a word with no scene, tagged inflected segment ('Hauses') and the child profile not seeing the hidden scene; tests/test_words.py 7 passed. Real data: sein -> 'Hallo, Anna! Ich bin Tom.' match 'bin'. Playwright: inspector shows 'Moje rodina / Wer ist der Mann?', click scopes list to 'Jen: Moje rodina' (?topic=…). No console errors. typecheck, next build, ruff check/format pass.
+
+## Global Cycle 48/120 | Page: [/words] (Page Cycle 3/15)
+
+**Summary:** show recognition and recall evidence separately on the word card
+
+**Observed Problem:** The word card collapsed knowledge into one linear ladder (Viděné to Zvládnuté) plus raw correct/error totals that mix lesson practice with checks. A learner could not see that recognising and producing a word are separate states, or how many first-try check answers on how many days each one still needs. A word with no checks looked the same as one that was nearly known.
+
+**Implemented Solution:** The word detail API now returns check-evidence tallies (correct answers and distinct days) for recognition and for recall, plus the policy thresholds. The counting moved into a shared evidence_counts() helper, so the card and the progress update use the same query. The inspector shows a 'Co ukázala ověření' block with two separate rows. Each row says 'splněno', 'zatím neověřeno' (no evidence: unknown, not zero) or 'N z 3 správně · N z 2 dnů', with a bar that follows the weaker of the two requirements.
+
+**Verification:** New pytest test_word_detail_counts_check_evidence_separately_for_recognition_and_recall: recall counts toward both, a non-evidence miss is ignored, and a word without events shows 0/0. tests/test_words.py and tests/test_learning.py pass. Playwright with a stubbed response shows 'splněno' and '2 z 3 správně · 1 z 2 dnů', and real data shows 'zatím neověřeno'. No console errors. typecheck, next build, ruff check/format pass.
+
+## Global Cycle 49/120 | Page: [/words] (Page Cycle 4/15)
+
+**Summary:** sort the word list by next check, mistakes or lesson date
+
+**Observed Problem:** The list could only be read in frequency order. A learner who wanted to see which words are checked next, which ones cause the most mistakes, or what the last lesson brought had to scan up to the full list page by page. The row also said 'teď k ověření' for a check due in up to 12 hours, because the date was rounded to whole days.
+
+**Implemented Solution:** The words API accepts sort=rank|review|errors|recent. The order is server-side and always ends on rank and id, so offset paging stays stable. Words with no date sort last. The page adds a 'Řadit' select that is kept in the URL (?sort=). Rows show the next check time when sorted by review and an error count when sorted by mistakes. Due wording uses relativeFuture, so only a past date reads as due ('do hodiny', 'zítra' and so on otherwise).
+
+**Verification:** New pytest test_word_list_sorts_by_review_errors_and_recent covers all four orders, the null-last rule and 422 on an unknown sort; tests/test_words.py 9 passed. Playwright: each option reorders rows (errors shows '1 chyba', review shows 'do hodiny', recent starts with Schule), the URL gets ?sort=… and a reload keeps it. Mobile 390px screenshot checked. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 50/120 | Page: [/words] (Page Cycle 5/15)
+
+**Summary:** make status counts follow the search and due filters
+
+**Observed Problem:** The status chips always counted every word in the scope and ignored the search and 'K opakování' filters. With the due filter on, the chips still said 'Učím se 41' over a list of 3 rows. The 'Vše' chip added up the same unfiltered counts, so it disagreed with the list, and the chips were no help for narrowing a search result.
+
+**Implemented Solution:** The list endpoint now applies search, due and scope before counting statuses (the status filter still narrows only the rows, not its own chips). The chips and 'Vše' now always match what the list can show. The empty-state copy now depends on whether any filter is active, not on a zero count, so a search with no match reads 'Nic neodpovídá hledání.' rather than the first-run 'Zatím tu nic není'. The export stays available while filtering.
+
+**Verification:** New pytest test_status_counts_follow_search_and_due_filters (search, due, status-filter facet rule); tests/test_words.py 10 passed. Playwright: unfiltered 'Vše 41 | Učím se 41'; search 'hund' gives 'Vše 1 | Učím se 1' with 1 row; 'zzzz' gives 0 counts with 'Nic neodpovídá hledání.' and export still visible. The command palette only reads items, so it is unaffected. typecheck, next build, ruff pass.
+
+## Global Cycle 51/120 | Page: [/words] (Page Cycle 6/15)
+
+**Summary:** drive the word list from the search box and browse cards with arrows
+
+**Observed Problem:** Keyboard use of the dictionary was fragmented. '/' opened the command palette instead of the page search. ↑/↓/Enter worked only when focus was on the list background, not in the search box where typing happens. Once a row was clicked (a button), the arrows did nothing. With a word card open, moving down the list did not change the card, so reading through words meant clicking each one.
+
+**Implemented Solution:** The search input is now the page search ('/' focuses it) and acts as a combobox: ↑/↓ move the highlighted row (aria-activedescendant), Enter opens it, Escape clears the search and a second Escape closes the card. Arrows also work from a focused row and move focus with the highlight. While a card is open, moving the highlight browses: the card follows the row. The hint shows / ↑ ↓ Enter.
+
+**Verification:** Playwright: '/' focuses data-page-search; typing 's', ↓, Enter opens 'sie'; ↓ switches the card to 'ja'; Escape clears the query, a second Escape closes the card; clicking row 3 ('sein') then ↓ opens 'in' with focus on word-row-3. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 52/120 | Page: [/words] (Page Cycle 7/15)
+
+**Summary:** play words from the list and make P work on the word card
+
+**Observed Problem:** Hearing a word in the dictionary took a click to open its card first, and the card's play button advertised the P hotkey that never fired: the words page did not install the shared hotkey listener. Slower playback, offered on practice screens, was missing here.
+
+**Implemented Solution:** Each list row now has a small play button labelled 'Přehrát <lemma>' next to the row (not nested inside the row button). The page installs useHotkeys, so P plays the open word and Alt+P works from the search box. The card shows the P key hint and the shared 'Pomaleji' toggle.
+
+**Verification:** Playwright: no audio request on load (60 play buttons stay idle); 'Přehrát sein' requests that word's audio without opening the card; P with the card open requests the open word; Alt+P from the focused search plays and types nothing. The container has no TTS, so audio answers 503 and the button shows its unavailable state; the requests are what was checked. No other console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 53/120 | Page: [/words] (Page Cycle 8/15)
+
+**Summary:** filter the word list by part of speech
+
+**Observed Problem:** The list could be narrowed by status, due date and scope but not by kind of word, although learners practise by kind: noun genders, verb forms, adjectives. Finding the 8 verbs among 41 German words meant scrolling or guessing search terms.
+
+**Implemented Solution:** The words API takes kind=noun|verb|adj|adv|other, which maps Universal Dependencies POS tags to learner-facing groups (PROPN counts with nouns, AUX with verbs, every other tag is 'other'). Kind is one of the facet filters, so the status counts follow it. The page adds a swipeable 'Druh slova' chip row (Podstatná jména, Slovesa, Přídavná jména, Příslovce, Ostatní). Tapping a chip again clears it, and the choice is kept in the URL (?kind=).
+
+**Verification:** New pytest test_word_list_filters_by_word_kind (noun/verb/adj/other, counts add up to total, 422 on unknown); tests/test_words.py 11 passed. Playwright: Slovesa shows 'Vše 8' with sein, haben, können, kommen; nouns show der Mann, die Frau; Ostatní shows der, und, in, ein; a reload keeps the choice; no horizontal overflow at 390px. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 54/120 | Page: [/words] (Page Cycle 9/15)
+
+**Summary:** practise hand-picked words as flashcards and select a whole filtered view
+
+**Observed Problem:** Selecting words in the list only let a learner add them to a collection. To rehearse a few chosen words (say all verbs due this week), the learner had to create a collection first, and selecting a filtered view meant ticking each row. Nothing showed the 100-word limit of the bulk endpoint until a request failed.
+
+**Implemented Solution:** The flashcard deck API takes a hand-picked scope (ids=…, up to 100). The same own-words join and child filter apply, so ids of unmet or hidden words are just left out. The selection bar gets 'Kartičky z vybraných', which opens the practice-only flashcard session on exactly those words. A 'Vybrat zobrazená (N)' checkbox selects or clears all visible rows. Selection is capped at 100 with a note, and further row checkboxes are disabled.
+
+**Verification:** New pytest test_deck_from_picked_words_keeps_only_own_suitable_words: a child profile gets Haus and gehen (Mord hidden, neu unmet), with the due word first; mixing ids with level gives 422, and 101 ids give 422. tests/test_words.py 12 passed. Playwright: ?kind=verb, select shown gives 'Vybráno slov: 8', 'Kartičky z vybraných' opens 'Vybraná slova (8)' with a deck request. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 55/120 | Page: [/words] (Page Cycle 10/15)
+
+**Summary:** explain the status chips, due clock and gender colours in a legend
+
+**Observed Problem:** The dictionary used five status labels, a clock icon and coloured articles without saying what any of them meant. 'Učím se' versus 'Poznám' versus 'Umím' encodes the separate recognition and recall evidence rules, and 'Zvládnuté' needs a later confirming check. A learner seeing 41 words stuck at 'Učím se' could not tell that lesson practice does not count and that only checks move a word on.
+
+**Implemented Solution:** A collapsed 'Co znamenají stavy a barvy' disclosure under the status chips explains each state in ladder order with its pill colour. Each explanation matches the backend rules: seen is exposure without a lesson; learning is a lesson or placement word waiting for a check; passive is repeated correct recognition in checks on different days; known adds recall; mastered is confirmed again later. It also explains the due clock, including the 30-day review rule, and, for German, French and Italian, the article colours (der/die/das or m/f).
+
+**Verification:** Copy checked against services/words._status, learning.mark_seen, placement re-queueing and LearningPolicy (decay_after 30 days). Playwright at 390px: the legend opens, has no horizontal overflow, and the screenshot was inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 56/120 | Page: [/words] (Page Cycle 11/15)
+
+**Summary:** add skeletons and retry for the list, groups, word card and load more
+
+**Observed Problem:** The page's failure and loading states were dead ends. A failed list, group or card load showed a plain error with no way to retry except reloading the page, and loading was the bare text 'Načítám…'. A failed 'Načíst další' threw an unhandled promise rejection and left the button looking idle. Once one card failed, the error stuck to every word opened next, because the inspector never reset its failure flag. Switching language briefly showed the previous language's words.
+
+**Implemented Solution:** The list, the level/topic groups and the word card each show a RetryNotice with their own message and refetch on retry, through an attempt counter in the effect deps. Loading shows shape-matching skeletons: list rows, three group cards and card lines. 'Načíst další' catches failures, shows a retry notice and shows 'Načítám…' while busy. The inspector clears its failure on every new word. A language or profile switch clears the old list before the new one arrives.
+
+**Verification:** Playwright with request interception: a failed groups request shows the alert, and retry gives 4 group cards; a failed list shows the alert, and retry gives 41 rows; a failed card shows the alert, and retry shows 'der'. Load-more failure was not exercised: local data has 41 words, under the 60-row page, so the button never appears. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 57/120 | Page: [/words] (Page Cycle 12/15)
+
+**Summary:** make the word card a proper bottom sheet on phones
+
+**Observed Problem:** On a 390px phone the word card was a fixed panel at z-20, under the z-30 bottom navigation. Its last rows (answer history and legend) were hidden behind the nav. There was no backdrop, the page behind kept scrolling, and the close button scrolled out of view in a long card. The new context line also highlighted the substring 'in' inside 'Berlin' instead of the tagged word 'in'.
+
+**Implemented Solution:** On phones the card is a sheet above the navigation (z-50) with a dimmed backdrop that closes it. Page scroll is locked while the sheet is open and restored on close, and the sheet uses overscroll-contain, a max of 85dvh and safe-area bottom padding. A sticky header with a grab handle keeps the close button reachable, and Escape closes the card on every screen size (unless typing). On desktop the card stays a sticky side panel with no backdrop or scroll lock and is capped at the viewport height. Highlighting now matches the tagged word on Unicode word boundaries.
+
+**Verification:** Playwright at 390px: the card opens with body overflow hidden; scrolled to the end, the last text ends at y=823 and is visible above the bottom edge; a backdrop tap closes it and restores overflow; Escape closes it. At 1280px the backdrop is hidden and there is no scroll lock. The highlight for 'in' marks the word in 'Berlin ist eine Stadt in Deutschland', not Berl-in. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 58/120 | Page: [/words] (Page Cycle 13/15)
+
+**Summary:** search without diacritics and explain links to words not in the dictionary
+
+**Observed Problem:** Search matched exact characters only. A Czech learner typing 'skola' did not find 'die Schule — škola', 'dum' did not find 'dům', and a German learner typing 'gross' or 'schon' missed 'groß' and 'schön'. Desktop keyboards without a Czech layout make that the common case. A shared or stale ?word= link to a word the profile has never met showed 'could not load' with a retry button that could never work.
+
+**Implemented Solution:** Search now folds diacritics on both sides without a database extension. In Python, fold() lowercases, maps the Czech, German, French and Italian accented letters and turns ß into ss. In SQL, replace(translate(lower(col))) does the same, so 'dum', 'dům' and 'DŮM' all match the same rows. LIKE wildcards in the input stay literal. A 404 on the word card now shows a calm note ('Toto slovo ve tvém slovníku zatím není…') instead of an error with a useless retry.
+
+**Verification:** New pytest test_word_search_ignores_diacritics_on_both_sides covers dum/dům, schon, HEZKÝ, the '50%' literal and fold('Straße Žluťoučký'); tests/test_words.py 13 passed. Playwright on real data: 'skola' finds die Schule and 'gross' finds groß; ?word=<unknown uuid> shows the missing-word note without a retry button. No console errors apart from the expected 404. typecheck, next build, ruff pass.
+
+## Global Cycle 59/120 | Page: [/words] (Page Cycle 14/15)
+
+**Summary:** load the word list and collections only when they are needed
+
+**Observed Problem:** Every visit to /words (which opens on the level tab) made 5 API calls. Two of them were not needed: the full word list (three SQL queries for counts, total and rows) was rendered into a hidden panel, and the collection list is only used once a word is selected. Every list change also waited a fixed 180 ms debounce, including the first load and chip taps, which need no debounce.
+
+**Implemented Solution:** The word list loads the first time the 'Všechna slova' tab is shown and stays loaded across tab switches. Collections load the first time something is selected, and the bar shows 'Načítám…' until then. The 180 ms debounce now applies only while typing in the search, so the first load, chips, sort and kind run at once.
+
+**Verification:** Production build (next start on :3002): /words went from 5 API requests to 3 (me, ranks, groups). Opening 'Všechna slova' makes 1 list request; going back and forth makes 0 more; typing 'haus' makes 1 list request; the first selection makes 1 collections request. Deep links with ?tab=all still load the list at once (cycle 46 test path). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 60/120 | Page: [/words] (Page Cycle 15/15)
+
+**Summary:** bring the first word into view on a phone
+
+**Observed Problem:** Fourteen cycles of filters, legend and selection piled controls above the list. On a 390x844 phone the first word row started at y=812, under the bottom navigation, so opening the dictionary showed no words at all. The intro paragraph, a full-width collections button, a wrapping tab label, an export disclosure and two rows of wrapping status chips came first.
+
+**Implemented Solution:** On phones the intro is hidden and the collections link sits beside the title. The tabs no longer wrap. The status chips scroll in one row (they still wrap on wider screens). Sort shares a row with the legend toggle. The rarely used CSV/Anki export moved below the list. Desktop keeps the same structure, with the intro and the collections button in the header.
+
+**Verification:** Playwright 390x844: the first row moved from y=812 to y=627 with no horizontal overflow, and mobile and 1280px screenshots were inspected. Regression scripts for sort (cycle 49), kind filter (cycle 53) and URL state (cycle 46) pass. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 61/120 | Page: [/insights] (Page Cycle 1/15)
+
+**Summary:** split weekly check accuracy into recognition, recall and grammar
+
+**Observed Problem:** The accuracy chart averaged every graded answer, word recognition, word recall and grammar, into one line. The product keeps passive recognition and active production as separate knowledge states, but the chart could not show that a learner recognises words at 95% and produces them at 40%. A week without answers was joined across as if the line continued.
+
+**Implemented Solution:** The insights API returns, per week, the total and separate tallies for recognition (non-recall word checks), recall (written or spoken production) and grammar. The tallies come from one grouped query by task type plus the grammar query. The chart draws one coloured line per skill that has data. Weeks without answers break the line instead of being bridged, and dot size grows with the number of answers, so a 1/1 week no longer looks as solid as 40/50. A legend gives each skill's overall share and count, and point titles give 'N z M správně'.
+
+**Verification:** tests/test_insights.py extended: recognition 1/2, recall 1/1 and grammar 0 tallied apart, and the totals equal their sum; 2 passed. Real data: week of 2 Nov shows 'Poznat význam, Týden od 2. 11.: 23 z 23 správně' and the legend 'Poznat význam 100 % · 23×'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 62/120 | Page: [/insights] (Page Cycle 2/15)
+
+**Summary:** show which words and topics are behind each mistake type
+
+**Observed Problem:** The mistakes panel listed error types with counts ('Rod: 7') and nothing else, so the learner knew a weakness existed but not where. To find the nouns behind the gender errors they had to search the dictionary word by word. The word query also lacked the child content filter, so a child profile's miss on a since-flagged word still counted in the panel (the forecast already filtered it).
+
+**Implemented Solution:** Each mistake type now carries up to six words or grammar topics behind it, with per-item counts, most frequent first. Words show their article and Czech meaning, topics their level. Rows in the panel are buttons (aria-expanded) that open the list, and each entry links to the word card (/words?word=…) or the grammar topic. The word side uses _suitable(user), like the forecast and day views.
+
+**Verification:** tests/test_insights.py: gender mistake lists ('word', und, 1); the child profile's tagged miss on a violence-flagged word no longer appears. Run against the old service, both tests fail ('Left contains one more item: meaning'), confirming the leak; with the change, 2 passed. Playwright with stubbed data at 390px: 'Rod (der/die/das)' expands to 'der Mann · muž 2×' and 'Členy · A1 1×' with correct hrefs. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 63/120 | Page: [/insights] (Page Cycle 3/15)
+
+**Summary:** turn the review forecast into actions: check today, open words later
+
+**Observed Problem:** The forecast showed what is due per day, but its links all went to the unfiltered dictionary or grammar index, and the word chips were plain text. Seeing '41 words due today' led nowhere near the check that clears them. Future days gave no hint that those words do not need checking yet.
+
+**Implemented Solution:** Today's detail now offers 'Ověřit slova (N)' (/check) and 'Ověřit gramatiku (N)' (/grammar/check), and its heading reads 'Co tě čeká dnes'. For a later day, the link opens the dictionary ordered by next check (/words?tab=all&sort=review, cycle 49), and a note says those items can wait. Every word chip links to its word card, and topics use client-side Links.
+
+**Verification:** Playwright, real data (no words due before local midnight): 8 Nov shows 'Otevřít slovník -> /words?tab=all&sort=review', chips link to /words?word=…, and the later note is shown. With a stub that makes today due: 'Ověřit slova (41) -> /check', 'Ověřit gramatiku (1) -> /grammar/check', and no later note. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 64/120 | Page: [/insights] (Page Cycle 4/15)
+
+**Summary:** show what the knowledge funnel means and which words are fading
+
+**Observed Problem:** The funnel showed five bare numbers with bars. It did not say how many studied words still wait for their first check-based recognition, or how many recognised words have gone past the 30-day decay window and are due for review, the product's core spaced-repetition rule. It also counted child-filtered words that the forecast already hid.
+
+**Implemented Solution:** The funnel query applies the child content filter and adds 'fading': recognised words whose last error-free check is older than POLICY.decay_after. Rows show count and share of studied words. Rows that match a dictionary filter (all studied, mastered) link to it; passive and active overlap the status ladder and stay plain. Two action lines follow: 'N probraných slov ještě čeká…' links to status=learning, and 'N slov přes 30 dní bez ověření' links to due words. A help line says the counts come from checks only, with recognition and recall measured separately. An empty state covers a profile with no studied words.
+
+**Verification:** tests/test_insights.py: a passive word with last_error_free_at 31 days ago counts as fading=1, and the child profile's funnel no longer counts the violence-flagged word (introduced 0); 2 passed. Playwright on real data: '41 probraných slov ještě čeká…', shares '0 · 0 %', links /words?tab=all, …status=mastered and …status=learning. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 65/120 | Page: [/insights] (Page Cycle 5/15)
+
+**Summary:** keep the selected activity and forecast day across navigation
+
+**Observed Problem:** The activity calendar and forecast details link out to word cards and grammar topics, but the chosen day lived only in component state. After opening a word from 5 Nov and pressing Back, the page reset to the most recent active day (7 Nov), so the learner lost their place every time they followed a link. A specific day could not be linked either.
+
+**Implemented Solution:** The selected activity day (?day=) and a non-default forecast day (?forecast=) are mirrored to the URL with replaceState once data has loaded, and read back on load. Unknown or out-of-range dates fall back to the previous defaults: the last active day and today.
+
+**Verification:** Playwright: default load writes ?day=2026-11-07; picking 5 Nov sets ?day=2026-11-05 and the heading 'Učení · 5. 11.'; opening a word from that day and going Back restores ?day=2026-11-05 with the same heading. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 66/120 | Page: [/insights] (Page Cycle 6/15)
+
+**Summary:** navigate the activity calendar and forecast with arrow keys
+
+**Observed Problem:** The activity calendar rendered 182 day buttons, each its own tab stop, and the forecast added 14 more. A keyboard user had to press Tab about 190 times to get past the calendar, and could not move to the previous week or day directly.
+
+**Implemented Solution:** Both charts use a roving tabindex. The calendar is one tab stop (the selected day): ←/→ move a week, ↑/↓ a day, Home/End jump to the first/last day, and the moved-to day is selected (and its details load) with focus following. The forecast is one tab stop with ←/→/Home/End. A desktop hint 'Šipky: ← → týden, ↑ ↓ den' is linked through aria-describedby.
+
+**Verification:** Playwright: 2 tab stops across 196 chart buttons; from 7 Nov, ← goes to 31 Oct (URL ?day=2026-10-31), ↑ to 30 Oct, End to 7 Nov, Home to 10 May; in the forecast, →→ focuses and selects 9 Nov (?forecast=2026-11-09). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 67/120 | Page: [/insights] (Page Cycle 7/15)
+
+**Summary:** filter the activity calendar by checks or practice
+
+**Observed Problem:** The calendar coloured each day by all answers together. A day with 84 lesson-practice answers looked the same as a day of real checks, although only checks count as evidence. A learner who wanted to see how regularly they actually verify words (the rule that moves words forward and keeps them from fading) could not see it.
+
+**Implemented Solution:** A segmented control above the calendar (Vše / Ověření / Procvičování) recolours the days by the chosen count, scaled to that count's own maximum. The summary line then reads, for example, 'Dny s ověřením: 1 z posledních 182.' The default stays 'Vše' with the existing no-streak sentence.
+
+**Verification:** Playwright on real data: Vše colours 5 Nov and 7 Nov brand-600; Ověření makes 5 Nov empty (0 checks) and keeps 7 Nov; Procvičování colours both. The summary changes to 'Dny s ověřením: 1 z posledních 182.' No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 68/120 | Page: [/insights] (Page Cycle 8/15)
+
+**Summary:** hear the words listed in activity, forecast and mistake details
+
+**Observed Problem:** Insights lists many words (those practised on a day, those due on a forecast day, those behind a mistake type) but each was text only. To hear one, the learner had to leave the page and open the word card, which broke the review-by-ear flow the other pages support.
+
+**Implemented Solution:** Each word in the activity-day list, the forecast chips and the mistake drill-down has a small PlayButton ('Přehrát <lemma>'). It sits next to the link, not inside it, so playing does not navigate. Clips load only on click.
+
+**Verification:** Playwright 390px with ?day=2026-11-05&forecast=2026-11-08: 77 play buttons render with no audio request on load; clicking the first requests that word's audio and stays on /insights. TTS is not available in the container (503), so the request was checked, not playback. The same run found a pre-existing horizontal overflow at 390px from the calendar panel (section 560px wide); it is left for the mobile cycle. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 69/120 | Page: [/insights] (Page Cycle 9/15)
+
+**Summary:** label the activity calendar with weekdays and months and open it on recent weeks
+
+**Observed Problem:** The 26-week calendar was an unlabelled grid of squares: no weekday or month labels, so 'which day was that?' meant hovering each cell. The padding cells in the first column were smaller than the day cells (size-3 vs size-4), so the first week's days sat one pixel step off. On a phone the panel was wider than the screen (560px at 390px, because the grid item could not shrink), so the page scrolled sideways and opened on May.
+
+**Implemented Solution:** A sticky weekday column (Po, St, Pá, Ne) and a month label over the first week of each month (Czech abbreviations, aria-hidden, since every day button already has its full date). Padding cells now match the day size. The panel grid items get min-w-0, so the calendar scrolls inside its own panel, and it opens scrolled to the latest weeks.
+
+**Verification:** Playwright: at 390px there is no page overflow (overflow scan finds no element) and the calendar's scrollLeft equals its maximum (209) on load; at 1280px it fits without scrolling. Desktop and mobile screenshots show 'čvn … lis' labels and Po/St/Pá/Ne aligned with the rows. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 70/120 | Page: [/insights] (Page Cycle 10/15)
+
+**Summary:** mark thin weekly evidence and offer the accuracy numbers as a table
+
+**Observed Problem:** The accuracy chart drew a week with 1 of 1 correct answers as a solid 100% point, visually as strong as a week of 40 answers. The exact numbers were only in SVG <title> tooltips, which touch screens and many screen readers never show. On a phone the chart could not be read precisely at all.
+
+**Implemented Solution:** Points for weeks with fewer than five answers get a dashed ring, and the help text explains this (together with the dot size growing with answer count). A 'Zobrazit čísla po týdnech' disclosure under the chart opens a real table: rows are weeks with answers, columns are the skills, cells show 'správně/odpovědí' or '–'. It scrolls inside its panel on narrow screens.
+
+**Verification:** Playwright 390px with stubbed tallies: 2 of 4 points are dashed (recall 1/2 and grammar 3/3); the table lists '19. 10. – 1/2 –', '26. 10. – 6/12 3/3' and '2. 11. 23/23 – –'; no page overflow. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 71/120 | Page: [/insights] (Page Cycle 11/15)
+
+**Summary:** add panel skeletons and retry for statistics and the day view
+
+**Observed Problem:** While the statistics loaded, the page showed the bare text 'Načítám…' and then jumped into five panels. A failed load showed a generic error with no retry, and the failure flag was never reset, so a later language switch could show the error above fresh data. A failed day view also had no way to try again except picking another day.
+
+**Implemented Solution:** Loading shows four outlined skeleton panels titled like the real ones (calendar full width), so the layout does not jump. Failures show RetryNotice with their own messages: 'Statistiky se nepodařilo načíst.' refetches the whole page through an attempt counter, and 'Přehled dne se nepodařilo načíst.' refetches only the selected day. The failure flag resets on every load. The day view uses a skeleton instead of loading text.
+
+**Verification:** Playwright with interception: during a 1.2s delayed request, 4 skeletons (role=status) show; a failing insights request shows the statistics alert; retry renders all panels; a failing day request shows the day alert, and retry shows 'Učení · 7. 11.'. No console errors apart from the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 72/120 | Page: [/insights] (Page Cycle 12/15)
+
+**Summary:** replace five empty charts with one first-run step
+
+**Observed Problem:** For a language with no lessons yet (French for the test admin), the page showed an empty 26-week calendar, an empty forecast, 'Zatím žádné odpovědi', a funnel of zeros and 'Žádné chyby s rozpoznaným druhem'. The last one implied checks had happened and were clean. The weekly recap above repeated its own 'Začít lekci' prompt.
+
+**Implemented Solution:** When the language has no active days, no studied words and nothing in the forecast, the page shows one dashed card: what the statistics will show, why nothing is there yet, and a 'Začít lekci' button to /lesson/vocabulary. The weekly recap is hidden in that state. With data present but no checks, the mistakes panel says 'Zatím žádné ověření…' instead of claiming there were no mistakes.
+
+**Verification:** Playwright 390px: switching to Francouzština shows the first-run card once with no recap (screenshot inspected); switching back to Němčina shows the 6 panels including the recap. API confirms fr has active_days 0 and an all-zero funnel. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 73/120 | Page: [/insights] (Page Cycle 13/15)
+
+**Summary:** shorten the statistics page on phones
+
+**Observed Problem:** At 390px the statistics page was 4361px tall. The weekly recap stacked its four stat tiles one per row, a busy day's activity listed all 41 practised words, and the 14 forecast labels ('8. 11.') wrapped onto two lines under bars about 20px wide.
+
+**Implemented Solution:** The recap tiles form a 2x2 grid on phones (four across on desktop), which also tightens the dashboard where the recap is reused. A day's word list shows the first 8 words with 'Zobrazit všech N slov' / 'Zobrazit méně'; the toggle resets when another day is picked. Forecast labels show only the day of month ('9.'), with the full date at a month start, and do not wrap.
+
+**Verification:** Playwright 390px: page height went from 4361px to 2918px; the overflow scan finds no element wider than the viewport; the forecast screenshot shows single-line labels 'dnes 8. 9. … 20.'. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 74/120 | Page: [/insights] (Page Cycle 14/15)
+
+**Summary:** bound the forecast payload and fetch only the day the calendar settles on
+
+**Observed Problem:** Insights is fast on test data (about 15ms, 16KB), but the forecast sent every word due in the next 14 days with lemma and translation. At the 2500-5000 words the curriculum aims for, the response grows without limit while the page shows a few chips per day. Walking the calendar with the new arrow keys also fired one day request per key press.
+
+**Implemented Solution:** The forecast keeps exact per-day counts but sends at most 30 words per day, ordered by next check and then frequency, so the first items are stable. The day view shows 'a N dalších…' linking to the dictionary ordered by review, and the 'Ověřit slova (N)' count uses the exact total. The day request waits 150ms and is cancelled when the selection moves on, so only the settled day is fetched.
+
+**Verification:** New pytest test_forecast_lists_at_most_30_words_per_day_but_counts_all: 35 due words give words=35, 30 items, Wort1 first; tests/test_insights.py 3 passed. Real data: 8 Nov is words=41 with 30 items, and the UI shows 30 chips plus 'a 11 dalších…'. Playwright: six ↑ presses make 1 day request (2026-11-01). Endpoint timings measured locally: insights 15-19ms, recap 11-13ms, day 6-7ms. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 75/120 | Page: [/insights] (Page Cycle 15/15)
+
+**Summary:** order the statistics panels by what the learner can act on
+
+**Observed Problem:** Fourteen cycles made the forecast (with check buttons) and the mistake drill-down the actionable parts of the page, but they sat below a full-width half-year calendar. On a phone, reaching 'Co tě čeká' meant scrolling past the recap, the calendar and a 41-word day list. The calendar answers 'how regular was I', which is the least urgent question.
+
+**Implemented Solution:** The panels now go forecast, mistake types, accuracy, funnel, then the activity calendar full width last. The loading skeletons follow the same order, so nothing jumps when data arrives. URL state, arrow-key navigation and the day view are unchanged.
+
+**Verification:** Playwright 390px: panel order is Týden v kostce, Co tě čeká, Druhy chyb, Přesnost, Od lekce k jistotě, Aktivita; the forecast heading is now at y=780 (it was below the calendar). Regression scripts for keyboard navigation (cycle 66), URL day restore after Back (cycle 65) and retry states (cycle 71) pass after updating their selectors to the calendar's label. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 76/120 | Page: [/lesson] (Page Cycle 1/15)
+
+**Summary:** recommend the next unstudied topic, an open lesson or due checks
+
+**Observed Problem:** The lesson overview recommended 'the first non-mastered unit' of the target level. A topic the learner had already studied but not yet mastered (the normal state after one lesson) was recommended again as the next lesson: for the test profile, 'Já jsem, ty jsi: sloveso sein' even though it was studied and a lesson in it was still open. The page also ignored the open lesson and the due grammar checks that the API already returned.
+
+**Implemented Solution:** The overview now decides in this order. A lesson still open in a topic: 'Rozdělaná lekce' with 'Pokračovat v lekci'. Otherwise the first topic with status 'new', looking at the target level after the learner's estimate, then higher levels, then gaps in lower levels, with the existing explanation lines, plus 'Ověřit gramatiku (N)' when checks are due. If every topic is studied: a due-check card, or a calm 'all studied' note.
+
+**Verification:** Real data (de): tree has active_lesson_unit=de-a1-sein, due=2; the page shows 'Rozdělaná lekce · Já jsem, ty jsi: sloveso sein · Pokračovat v lekci'. Stubbed variants: no open lesson recommends 'Přítomný čas pravidelných sloves' (the first new A1 topic, not the studied sein); all studied with due=2 shows 'Ověřit gramatiku (2)'; all studied with due=0 shows the all-studied note. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 77/120 | Page: [/lesson] (Page Cycle 2/15)
+
+**Summary:** preview the next vocabulary lesson and survive partial load failures
+
+**Observed Problem:** The vocabulary card on /lesson only said how many words were introduced and linked to the runner. It did not show what the next lesson holds (scene, new and review words), which the dashboard already had, or that a lesson was open, so the button always read 'Otevřít lekce slovní zásoby'. All four data sources loaded with Promise.all, so if the placement estimate or progress request failed, the whole overview (all grammar lists) went blank.
+
+**Implemented Solution:** The card shows the next lesson preview from /learning/next-lesson, for example 'Další scénka: „Oběd“ · 4 nová slova · 2 slova znovu k procvičení', or 'all words known' when empty. When a session is open, the button reads 'Pokračovat v lekci'. Loading uses Promise.allSettled: only a failed grammar tree is fatal. A failed estimate, progress or preview just leaves that detail out, and the 'Představeno slov' counter no longer sticks on 'Načítám…'.
+
+**Verification:** Playwright real data: the card shows 'Další scénka: „Oběd“ | 4 nová slova · 2 slova znovu k procvičení'. With progress and diagnostic requests forced to 500, the page still renders the preview and all 6 level sections, and the counter is hidden rather than stuck loading. No console errors besides the injected 500s. typecheck, next build, ruff pass.
+
+## Global Cycle 78/120 | Page: [/lesson] (Page Cycle 3/15)
+
+**Summary:** show coverage per level and mark open and due topics
+
+**Observed Problem:** The 'Dostupné gramatické lekce' list gave each level only an availability count ('15 lekcí'). Each topic card showed its status word but not that a lesson in it was still open or that its check was due. A learner could not see how far into A1 they were or which topic cards needed attention without opening /grammar.
+
+**Implemented Solution:** Each level header shows 'prostudováno X z Y' and, when any are verified, '· ověřeno Z', with a two-tone bar (verified emerald, studied sky). Topic cards get a 'rozdělaná' badge for the open lesson and 'k ověření' when due, both from the grammar tree the page already loads.
+
+**Verification:** Playwright on real data: headers read 'A1 prostudováno 2 z 15', 'A2 prostudováno 0 z 11', 'B1 … 0 z 6', 'B2 … 0 z 5'; the sein card shows 'rozdělaná | k ověření | Prostudováno'. Screenshot inspected. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 79/120 | Page: [/lesson] (Page Cycle 4/15)
+
+**Summary:** say where the level estimate comes from and link to the level test
+
+**Observed Problem:** The overview based its recommendation on a placement estimate, vocabulary badge or progress level, but it never showed which one or what level, except inside the explanation under the recommended topic (and not at all while a lesson was open). A learner without an estimate had no route to the CEFR level test from this page, and an open test was not offered for resuming.
+
+**Implemented Solution:** A one-line strip under the header names the basis: 'Orientační úroveň A2 z testu 3. 11. 2026.', 'Orientační úroveň X podle postupu.', 'Bez testu úrovně; zkouška slovní zásoby X.' or 'Zatím bez odhadu úrovně, doporučení začíná od A1.'. When the test is available it adds 'Zjistit úroveň testem', 'Udělat test znovu' or 'Pokračovat v testu úrovně' linking to /placement/cefr. The wording stays 'orientační' (indicative), as the product requires for CEFR labels.
+
+**Verification:** Playwright 390px, real data: 'Zatím bez odhadu úrovně, doporučení začíná od A1. Zjistit úroveň testem' -> /placement/cefr. With a stubbed A2 estimate dated 3 Nov: 'Orientační úroveň A2 z testu 3. 11. 2026. Udělat test znovu'. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 80/120 | Page: [/lesson] (Page Cycle 5/15)
+
+**Summary:** say each topic's goal once and show its size and check record
+
+**Observed Problem:** On the topic cards the summary and the 'Cíl:' line repeated the same sentence. In the German course that is 37 of 37 topics, so every card said it twice. The cards did not show how long a topic is (number of exercises) or how the learner did in its checks, although the tree returns both.
+
+**Implemented Solution:** The objective line is shown only when it differs from the summary. Each card ends with 'N cvičení' and, once checked, 'v ověření X z Y správně' from checked_correct and checked_errors.
+
+**Verification:** API: 37 German topics, 37 with identical summary and objective. Playwright: the sein card now reads '… Řekneš, kdo jsi a odkud jsi … | 8 cvičení' without the duplicate Cíl line. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 81/120 | Page: [/lesson] (Page Cycle 6/15)
+
+**Summary:** open the recommended step with Enter and the vocabulary lesson with V
+
+**Observed Problem:** The lesson overview had no keyboard shortcuts, while the dashboard and practice pages open their main step with Enter. On desktop, reaching the recommended topic meant tabbing through the header, the language picker and the estimate link first.
+
+**Implemented Solution:** The page installs the shared hotkey listener. The single primary action (resume the open lesson, open the recommended topic, or start the due grammar check) carries data-hotkey='enter' with an Enter key hint. V opens the vocabulary lesson, with a hint on its button. V is a page-local letter shortcut: the page has no text input, and it is ignored with modifiers or while typing.
+
+**Verification:** Playwright: Enter on the page body navigates to /grammar/de-a1-sein (the open lesson); V navigates to /lesson/vocabulary. Key hints render on desktop only (KeyHint is lg-only). No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 82/120 | Page: [/lesson] (Page Cycle 7/15)
+
+**Summary:** let the learner hear and read the recommended topic's first example
+
+**Observed Problem:** The recommended or open topic was introduced only by a one-line Czech summary. The product's rule is context before drill, but the overview gave no feel for the target language before the click. The grammar example audio added earlier was not used here.
+
+**Implemented Solution:** The recommended and open-lesson cards load that topic's first example (one extra request, optional: the card works without it) and show it in the target language with its Czech translation and a play button for the sentence audio. P plays it on desktop, with a P key hint.
+
+**Verification:** Playwright on real data: the open-lesson card shows 'Ich bin Anna und ich bin acht. | Jsem Anna a je mi osm.'; pressing P requests grammar/units/de-a1-sein/audio?example=0 (TTS is unavailable in the container, so the request was checked, not playback). No console errors besides the expected 503. typecheck, next build, ruff pass.
+
+## Global Cycle 83/120 | Page: [/lesson] (Page Cycle 8/15)
+
+**Summary:** filter the lesson list to new, studied or due topics
+
+**Observed Problem:** The full topic list showed all 37 German topics across six level boxes. Finding the 2 studied ones or the 2 due for a check meant scanning every card. C1 and C2 also showed empty boxes regardless of what the learner was looking for.
+
+**Implemented Solution:** A chip row above the list (Vše 37 / Nové 35 / Prostudované 2 / K ověření 2) filters the topic cards. Chips with no match are disabled. With a filter on, levels without matches are hidden, while each level header keeps its full coverage numbers. The choice is kept in the URL (?show=), so Back from a topic returns to the same filtered list.
+
+**Verification:** Playwright 390px: the chips read 'Vše 37, Nové 35, Prostudované 2, K ověření 2'; K ověření shows only the A1 box with sein and der/die/das and sets ?show=due; opening a topic and going Back keeps ?show=due and the same two cards; no horizontal overflow. No console errors. typecheck, next build, ruff pass.
+
+## Global Cycle 84/120 | Page: [/lesson] (Page Cycle 9/15)
+
+**Summary:** fold levels away from the learner's focus
+
+**Observed Problem:** With 37 topic cards spread across six level boxes that were all open, the page was about 4000px tall on a phone, and the learner's own level was buried under levels they had not reached.
+
+**Implemented Solution:** Each level is now a details/summary disclosure with its coverage bar in the summary. It is open for the focus level (the level of the recommended next topic, otherwise the one above the placement/badge estimate), for any level holding a due or open lesson, and for every level while a filter is active.
+
+**Verification:** l84.js: default A1 open and A2-C2 closed; clicking A2 opens it; the Nové filter shows A1-B2 open; no console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 85/120 | Page: [/lesson] (Page Cycle 10/15)
+
+**Summary:** point back to the explanation after failed checks
+
+**Observed Problem:** When a grammar check went wrong, /lesson kept recommending only the next new topic. The tree already returned recent_errors per unit (check mistakes within the 21-day remediation window), but nothing on the page used it, so a learner who failed a topic had no route back to its ungraded explanation.
+
+**Implemented Solution:** A 'Vrátit se k výkladu' panel lists up to three topics with recent check mistakes, worst first and lower level first on ties, excluding the topic already on the recommendation card. Each links to the ungraded lesson, which already replays the missed exercises as remediation. Topic cards get a matching 'N chyby' badge. No score is created: the panel only reads check evidence.
+
+**Verification:** Made 4 wrong check answers in de (sein 2, articles 2) through the API. l85.js at 390px: panel lists articles only (sein is the open-lesson card), link /grammar/de-a1-articles, both cards show '2 chyby', no horizontal overflow, no console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 86/120 | Page: [/lesson] (Page Cycle 11/15)
+
+**Summary:** retry a failed overview and never pass off a failed estimate as no estimate
+
+**Observed Problem:** A grammar tree failure left a dead red notice with no way to retry except reloading. Loading was a single 'Načítám…' line, so the page jumped when the content arrived. When only the diagnostic or progress request failed, the estimate line said 'Zatím bez odhadu úrovně', which presents a failed request as a fact about the learner.
+
+**Implemented Solution:** Tree failure now shows a RetryNotice that refetches all four requests and says the vocabulary lesson still works. A failed estimate or progress request is tracked as partial: the estimate line says it could not be loaded, with a 'Načíst odhad úrovně znovu' button. Loading shows skeleton cards in the shape of the recommendation and vocabulary panels.
+
+**Verification:** l86.js with routed 500s: the alert shows the new text, and the vocabulary link is still present. Retry restores 6 level sections. The estimate line reads the failure text. The partial retry restores the real estimate and hides its button. l86b.js with a 3 s delay: 2 skeletons while loading, then 0. No console errors other than the forced 500s. Typecheck, build, ruff passed.
+
+## Global Cycle 87/120 | Page: [/lesson] (Page Cycle 12/15)
+
+**Summary:** show levels without topics as one line, and hide the list when a language has none
+
+**Observed Problem:** C1 and C2 have no grammar topics, but each was rendered as its own box that opened onto 'Pro tuto úroveň zatím nejsou připravené lekce'. A language with no grammar at all showed six such boxes plus a filter row with zero counts above the actual notice.
+
+**Implemented Solution:** Levels without topics are left out of the disclosure list and named on one line, 'C1, C2: zatím bez připravených lekcí.', shown only in the unfiltered view. With no topics at all, only the no-content notice is shown, without a filter or levels. This removes the dead empty branches and two unused copy keys.
+
+**Verification:** l87.js: de shows level boxes A1-B2 and the line 'C1, C2: zatím bez připravených lekcí.'; the line is hidden under the Nové filter. With a routed tree that has no units: 0 level boxes, no filter radios (the 4 radios left are the language picker), and the notice is present. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 88/120 | Page: [/lesson] (Page Cycle 13/15)
+
+**Summary:** keep topic titles readable on phones
+
+**Observed Problem:** At 390px the status badges ('rozdělaná', '2 chyby', 'Prostudováno') sat in a non-shrinking column next to the topic title. 'Já jsem, ty jsi: sloveso sein' was squeezed to 68px and four lines, and other titles to about 145px. Every summary was printed in full, so the open A1 list of 15 cards ran about 2500px. The filter chips overflowed their row by 32px, which hid 'K ověření' behind a scroll.
+
+**Implemented Solution:** The card header now wraps: the title takes a 160px-basis flexible column, and the badges wrap underneath when they do not fit. Summaries are clamped to two lines below the sm breakpoint and shown in full from sm up. Filter chips use px-2 on phones and px-3 from sm.
+
+**Verification:** l88.js at 390px, before vs after: title widths changed from 68/260/147/145px to 298/260/260/298px. Sein title height went from 96 to 24px. Radiogroup scrollWidth went from 398 to 366 (equal to clientWidth). Full-page height went from 4056 to 4008px. ov.js /lesson: no overflowing elements. Typecheck, build, ruff passed.
+
+## Global Cycle 89/120 | Page: [/lesson] (Page Cycle 14/15)
+
+**Summary:** show the last overview at once when returning from a topic
+
+**Observed Problem:** The page's own requests are already minimal (7 API calls in the prod build, all under 20 ms locally). The real cost was navigation: /lesson is the hub learners return to after every topic, and each Back discarded the overview and waited for all four requests before showing anything. With a slow tree, levels took 1353 ms to appear.
+
+**Implemented Solution:** A module-level snapshot per profile and language holds the last complete overview: tree, estimate, progress and preview. Returning to the page renders it immediately and refreshes it in the background. Partial loads are not cached. A failed refresh drops the snapshot and shows the retry state, so stale data is never presented as current. Keys include the acting profile id, so profiles never share an entry.
+
+**Verification:** l89.js with the grammar tree delayed 1200 ms. Opening a topic and pressing Back showed the levels in 141 ms with no skeleton, versus 1353 ms on the stashed baseline. After the refresh, 4 level sections were present. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 90/120 | Page: [/lesson] (Page Cycle 15/15)
+
+**Summary:** say when topics are an unreviewed draft, and re-run the page's regressions
+
+**Observed Problem:** The grammar tree reports review_status ('unreviewed' for every de topic today), and /grammar shows it. /lesson recommended and listed the same drafted topics with no such signal, which presents generated rules as reviewed fact and breaks a product invariant. Folding the levels into disclosures (cycle 84) also broke two of this page's regression scripts, which still selected sections.
+
+**Implemented Solution:** Under 'Dostupné gramatické lekce' the page now says when topics are an unreviewed draft. It uses a separate wording when only some topics are reviewed, and says nothing when all are reviewed or there is no content. The l78 and l83 regression scripts were updated to the details structure, and l83 now uses the Prostudované filter, because the check made in cycle 85 left nothing due.
+
+**Verification:** l90.js: de shows the draft note; with a routed review_status 'reviewed' the note is gone. Regressions re-run at 390px all completed with no console errors: l76 (resume card and Enter), l78 (coverage and first card), l83 (filter, URL and Back), l84 (folding), l85 (revisit), l87 (empty levels), l88 (title widths and chips fit). Typecheck, build, ruff passed.
+
+## Global Cycle 91/120 | Page: [/shadowing] (Page Cycle 1/15)
+
+**Summary:** shadow whole dialogues from met scenes, with speaker and Czech meaning
+
+**Observed Problem:** /shadowing only offered 20 random example sentences of lesson words, shown with the word's gloss but no meaning for the sentence itself, so a learner repeated sentences they might not understand. Shadowing works best on connected speech, and the met lesson scenes already have ordered dialogue lines with Czech translations and per-line TTS (roleplay API), but nothing on this page used them.
+
+**Implemented Solution:** Shadowing now works on a generic line (text, audio, optional speaker, Czech meaning, lesson word). A source radio switches between 'Věty ze slov' and 'Rozhovor ze scény'. Scene mode lists the scenes the profile has met, with the child filter applied server-side by the roleplay API. It loads the selected dialogue in order, with speaker, line, Czech meaning and line audio. The scene option is disabled when no scene has been met yet, with a note explaining why. Recording state resets per source.
+
+**Verification:** s91.js at 390px (de): word mode unchanged (1/20). Scene mode lists 5 met scenes with line counts. Ahoj, jak se jmenuješ? shows ANNA / 'Hallo! Ich heiße Anna. Wie heißt du?' / Czech line. Switching to Odkud jsi? shows BEN, 1/8. N advances to 2/8. Audio requests go to /roleplay/{id}/audio?line=0, then 1. No console errors other than TTS 503. Typecheck, build, ruff passed.
+
+## Global Cycle 92/120 | Page: [/shadowing] (Page Cycle 2/15)
+
+**Summary:** start word shadowing with the latest lesson's words
+
+**Observed Problem:** Word sentences were a random sample of up to 20 from every word the profile was ever taught. A learner who just finished a lesson saw that lesson's words only by chance (in de, 20 of 41 taught words). Shadowing fresh words right after the lesson is when repetition helps most.
+
+**Implemented Solution:** GET /dictation/sentences takes order=random|recent (default random, so existing callers are unchanged). recent orders by introduced_at descending, then frequency rank and id, using the same taught, child-filtered pool. The page defaults to 'Nejnovější slova z lekcí' with a 'Náhodně ze všech' alternative. The chosen order survives switching to a scene and back.
+
+**Verification:** New test test_shadowing_recent_order_lists_latest_lesson_words_first: newest lesson first, rank within a lesson, untaught words excluded, random still returns the taught pool, and order=rank returns 422. test_dictation.py: 6 passed. s92.js: recent starts at Schule (the latest lesson), random starts elsewhere, requests carry order=recent and then random, and the order is kept after a scene round trip. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 93/120 | Page: [/shadowing] (Page Cycle 3/15)
+
+**Summary:** keep the source and sentence in the URL
+
+**Observed Problem:** The page held its position only in memory. A reload, a Back from another page, or a shared link restarted at sentence 1 of the default source, so a learner working through an 8-line dialogue lost their place whenever they left the page.
+
+**Implemented Solution:** ?scene=<id> or ?order=random plus ?line=N (1-based) are read on mount and written with replaceState on every move. line is kept only for stable lists (recent words, scenes); a random sample changes on each load. An out-of-range or malformed line falls back to the first sentence. Switching language while on a scene returns to that language's words, because a scene belongs to one language.
+
+**Verification:** s93.js: words N N gives 3/20 with line=3, and a reload stays at 3/20. Scene Moje rodina plus N N N gives 4/8 with scene=dd12…&line=4. /words then Back restores 4/8 and the select keeps the same scene. ?line=999 falls back to 1/20. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 94/120 | Page: [/shadowing] (Page Cycle 4/15)
+
+**Summary:** show which lines are recorded and jump between them
+
+**Observed Problem:** The only progress signal was 'N. pokus', which reset on every line, and Další wrapped silently from the last line back to the first. A learner shadowing a 7-line dialogue could not tell which lines they had already recorded, had no way to go straight to a line, and was never told they had finished.
+
+**Implemented Solution:** Recordings are counted per line for this visit only (nothing is sent or scored), and the header shows 'nahráno X z N'. A numbered line strip under the card fills each line green once recorded, marks the current one, shows the line text on hover, and jumps on tap, which also updates the URL. When every line has been recorded, a note suggests the next step: another pass with the text hidden (H), or roleplay for a scene.
+
+**Verification:** s94.js uses Chromium with a fake microphone on scene Ahoj, jak se jmenuješ?. After the first R R: '1 / 7 · nahráno 1 z 7', and dot 1 reads 'Věta 1, nahraná'. After recording all 7: 'nahráno 7 z 7' and the completion note. Tapping dot 3 goes to 3/7 with line=3. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 95/120 | Page: [/shadowing] (Page Cycle 5/15)
+
+**Summary:** add a hands-free echo round: listen, repeat, compare
+
+**Observed Problem:** One shadowing repetition took four separate actions: play the model (P), start recording (R), stop it (R), then compare (C). With a phone in one hand, or while reading the line aloud, that is the friction that makes learners skip the compare step, which is the point of shadowing.
+
+**Implemented Solution:** An 'Kolo' button (key A) runs the whole loop. It plays the model to the end, records for a window sized to the model's voiced length (1.5× + 1 s, clamped to 2-15 s), then plays the model followed by the recording. The button label and an aria-live region name the current step. Pressing R stops the recording early and still compares. Moving to another line abandons the round through a run token, and a recorder error ends it. The recording counts in the per-line tally like a manual one.
+
+**Verification:** s95.js uses a fake microphone and a stubbed 1.5 s WAV model. The steps were: Poslouchej at 48 ms, then Teď ty at 1624 ms (after the model), then Vzor a pak ty at 4955 ms (a 3.3 s window), then back to idle at 10055 ms. Header: nahráno 1 z 7. Pressing A then N during the listening step went to 2/7 with no stray recording (still 1 z 7) and the button idle. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 96/120 | Page: [/shadowing] (Page Cycle 6/15)
+
+**Summary:** move, jump and stop from the keyboard
+
+**Observed Problem:** Keyboard shadowing could only go forward (N). There was no key for the previous line, no way to reach line 5 without pressing N four times, and nothing to abort a running echo round or recording. The handler used its own input/select test instead of the shared isTypingTarget, and ignored defaultPrevented. The Předchozí button had no key hint.
+
+**Implemented Solution:** → or N goes to the next line, ← or B to the previous one, and 1-9 jump to a line when it exists. Esc ends whatever is running: a recording (kept, as with R), an echo round (via its run token), and playback. The handler now uses isTypingTarget and respects defaultPrevented, so arrows inside the scene select still change the scene. Both nav buttons show their key on desktop, and the key legend lists the new keys.
+
+**Verification:** s96.js (1280px, fake mic, stubbed audio): →→ gives 3/7, B gives 2/7, ← gives 1/7, 5 gives 5/7, and 9 is ignored on a 7-line scene. A during the speak step followed by Esc leaves the echo button idle and the record button back to Nahrát. ArrowDown in the focused select switches to Moje rodina (1/8). No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 97/120 | Page: [/shadowing] (Page Cycle 7/15)
+
+**Summary:** offer true shadowing: speak along with the model
+
+**Observed Problem:** The page is called Stínování, but every mode was echo practice: listen first, then repeat. Shadowing proper, speaking over the model as it plays, trains rhythm and linking in a way delayed repetition does not, and nothing on the page allowed it.
+
+**Implemented Solution:** The echo round now has two modes. 'Po vzoru' is the existing listen, repeat and compare flow. 'Současně se vzorem' starts recording first, so the first syllable is not cut, plays the model under it, stops 700 ms after the model ends, then plays the model followed by the recording. The mode is remembered per device in localStorage (read after mount, so SSR is unaffected; storage failures fall back to the default). A note says the mode needs headphones, otherwise the microphone records the model too.
+
+**Verification:** s97.js (fake mic, stubbed 1.5 s model): the headphones note is shown. Steps: 'Mluv současně se vzorem…' at 19 ms, compare at 2326 ms (1.5 s model + 0.7 s tail), idle at 6474 ms. The wave caption reads 'Vzor 1.5 s · ty 1.6 s'. After a reload the mode is still selected. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 98/120 | Page: [/shadowing] (Page Cycle 8/15)
+
+**Summary:** take one character's part in a dialogue, with the partner's line as cue
+
+**Observed Problem:** A scene dialogue was shadowed as one undifferentiated list. A learner who wants to practise speaking as Tom, the way the dialogue will be used in roleplay, had to step through Anna's lines too. On Tom's line, nothing showed what he was answering.
+
+**Implemented Solution:** In scene mode with two or more speakers, a 'Moje role' radio (Všechny repliky / each speaker) restricts practice to that speaker's lines. Next, previous and digits skip the other lines, the line strip disables them, and the recorded count and completion note use only the chosen role's lines. The partner's preceding line is shown above as a cue ('Anna říká: …') with its own play button. Word mode has no role control.
+
+**Verification:** s98.js (scene Ahoj, jak se jmenuješ?, 390px): roles are Všechny repliky / Anna / Tom. Choosing Tom moves to 2/7 with the cue 'Anna říká: Hallo! Ich heiße Anna. Wie heißt du?' and the count 'nahráno 0 z 3'. N visits 4, 6, 2, 4 (all TOM). Dots 1, 3, 5 and 7 are disabled. Back to all lines: 0 z 7 and no cue. Word mode has no role group. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 99/120 | Page: [/shadowing] (Page Cycle 9/15)
+
+**Summary:** fade text support in steps: full text, first letters, ear only
+
+**Observed Problem:** Text support was all or nothing. 'Skrýt text' blurred the sentence, so a learner went straight from reading the line to having no support at all. The blur also kept the text in the DOM, where it could be selected or read by assistive tech. Shadowing is easier to scaffold when the text fades gradually.
+
+**Implemented Solution:** The toggle (H or the button) now cycles through three levels. Celý text shows the line. Počáteční písmena shows each word's first letter plus underscores for its length, keeping punctuation and handling Unicode letters (ß, accents). Bez textu removes the line from the DOM and says to repeat by ear. The Czech meaning stays visible at every level, so the meaning cue remains while the form fades. The completion notes now suggest a pass with less support.
+
+**Verification:** s99.js on Hallo! Ich heiße Anna. Wie heißt du?: level 0 shows the full text. Level 1 gives 'H____! I__ h____ A___. W__ h____ d_?' (ß counted as one letter). Level 2 gives the ear-only note and no target text. Level 3 is back to the full text. The button label follows each level, and the Czech line stays visible throughout. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 100/120 | Page: [/shadowing] (Page Cycle 10/15)
+
+**Summary:** run echo rounds continuously through a dialogue
+
+**Observed Problem:** Even with the echo round, a learner had to press A again on every line, and N between lines. Working through a dialogue meant pressing a key every 5-10 seconds, which breaks the flow of speaking. It also cannot be done hands-free with the phone set down.
+
+**Implemented Solution:** A checkbox 'Po kole rovnou další věta (až do konce)' chains rounds. When a round's compare step ends, the page moves to the next line (respecting the chosen role) and starts that line's round 500 ms after it becomes current. The pending start is keyed to the target line index and re-armed if the line's model envelope arrives meanwhile, so a round never plays the previous line's audio. The run stops at the last target line. Esc, or moving manually during a round, ends it through the run token.
+
+**Verification:** s100.js (fake mic, stubbed audio, role Tom, chain on), one click: rounds on line 2 (0.1-10.1 s), line 4 (10.7-20.7 s) and line 6 (21.4-31.3 s), then stop. The count goes to 'nahráno 3 z 3', the completion note appears, and there is no fourth round. An earlier version stalled after the first advance (a timer cleared by runEcho changing); this was fixed by keying the start to the index and arming it in the timer. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 101/120 | Page: [/shadowing] (Page Cycle 11/15)
+
+**Summary:** retry failed loads, and never report a failed scene list as no scenes
+
+**Observed Problem:** A failed sentence request left a generic red notice with no retry. Loading was one 'Načítám…' line. A failed scene-list request was swallowed as an empty list, so the page said 'Rozhovory se tu objeví, až projdeš lekci se scénou': a learner who had done those lessons was told to do them, and the scene option was disabled.
+
+**Implemented Solution:** Sentence and scene loads now fail into a RetryNotice whose text names what failed (word sentences or this scene) and refetches the same source. Loading shows a skeleton card and an action bar placeholder. The scene list keeps a separate failed state that says the list could not be loaded, with its own retry. The 'no scenes yet' note now appears only for a real empty list.
+
+**Verification:** s101.js with routed 500s and a 1.5 s delay. While loading, the skeleton is present. Then the alert reads 'Věty ke stínování se nepodařilo načíst.' The scene-list failure text is shown, and the false 'Rozhovory se tu objeví' claim is absent. Retry loads 1/20. The scene-list retry enables 'Rozhovor ze scény'. No console errors other than the forced 500s. Typecheck, build, ruff passed.
+
+## Global Cycle 102/120 | Page: [/shadowing] (Page Cycle 12/15)
+
+**Summary:** recover from scene links the profile cannot open, and give the empty state a way forward
+
+**Observed Problem:** A ?scene= id this profile cannot open loaded zero lines and showed 'Tuhle scénu teď nejde načíst', with the select silently displaying a different scene. Such ids come from an old URL, another profile or language, a scene not yet met, or one hidden by the child filter. A learner with no taught words got a dead-end notice saying to do lessons, with no link.
+
+**Implemented Solution:** Once the scene list is loaded, a scene source that is not in it is replaced. The page opens the first open scene, or the word sentences when there is none, and a one-line note says which fallback happened. The URL is rewritten to match. The empty word state is now a card with an 'Otevřít lekci slovní zásoby' button. No server data about the unavailable scene is exposed: the list endpoint already applies the met and child filters.
+
+**Verification:** s102.js: ?scene=<unknown>&line=3 shows the 'otevřela jiná' note, select and URL both on the first scene, and card 1/7. With routed empty sentence and scene lists, a known scene id falls back to words with the 'otevřely věty ze slov' note, and the empty card links to /lesson/vocabulary. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 103/120 | Page: [/shadowing] (Page Cycle 13/15)
+
+**Summary:** keep the record controls in reach on phones
+
+**Observed Problem:** At 390px the Vzor/Nahrát/Moje/Porovnat bar sat about 1150px down, below the card, wave, role picker, line strip and notices. Recording a line meant reading the sentence at the top and then scrolling down to press Nahrát, which breaks the listen-and-repeat loop. The four-line privacy intro also pushed the sentence low.
+
+**Implemented Solution:** Below lg, the action bar is sticky just above the tab bar (safe-area aware), with a translucent background. The buttons are compact (min-h-12, smaller icon and text) while still fitting their labels. From lg up the bar is a normal static row. On phones the intro folds into a 'Jak stínovat a co se děje s nahrávkou' disclosure, so the sentence sits clear of the sticky bar.
+
+**Verification:** s103.js / s103b.js at 390×844 on first paint: Nahrát spans 712-780, inside the viewport (it was below the fold before). Sentence bottom 623 < bar top 708, no overlap. All four labels fit without overflow. At 1280px the bar is static. ov.js /shadowing: no overflowing elements. Viewport screenshot checked. Typecheck, build, ruff passed.
+
+## Global Cycle 104/120 | Page: [/shadowing] (Page Cycle 14/15)
+
+**Summary:** have the next line's model ready before the learner gets there
+
+**Observed Problem:** Each new line waited for its model clip, which is local speech synthesis in production, before the outline appeared and a round could start. With an 800 ms synthesis delay, the next line took 823 ms after N, and a continuous run paused that long on every line. Revisiting a line decoded its audio again. Each re-recorded take stayed in memory as a blob URL until the page was left. clipSrc also had no in-flight dedupe, so a prefetch and a play of the same clip would have fetched it twice.
+
+**Implemented Solution:** After the current line's model outline is decoded, the next practised line's clip (role-aware) is prefetched. clipSrc in lib/audio.ts now shares one in-flight request per URL, and prefetchClip ignores failures. Decoded model envelopes are cached per URL in module memory. A new take revokes the take it replaces, and leaving a line revokes its take, since it can no longer be reached.
+
+**Verification:** s104.js with stubbed audio delayed 800 ms: the line 2 outline appeared 34 ms after N, versus 823 ms on the stashed baseline. Each line's audio was requested exactly once ({0:1,1:1,2:1,3:1}). Regressions s94 (7/7 recorded, jump) and s100 (continuous Tom run to 3 z 3) still pass. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 105/120 | Page: [/shadowing] (Page Cycle 15/15)
+
+**Summary:** remember the chosen part in the URL, and re-run the page's regressions
+
+**Observed Problem:** Cycle 98 added a role choice, but it lived only in component state. A reload or Back from another page while practising Tom's lines returned to all lines, while the URL still pointed to Tom's line 4. Fifteen cycles of changes to one page also needed a full regression pass.
+
+**Implemented Solution:** ?role=<speaker> is written when the part changes and restored once the dialogue has loaded. A role that is not in the dialogue is dropped from the URL, falling back to all lines. Changing the source (another scene, or words) clears the role, because a part belongs to one dialogue. Line and scene writes keep the role parameter.
+
+**Verification:** s105.js: choosing Tom then N gives role=Tom&scene=…&line=4. A reload restores 4/7 with Tom checked and 'nahráno 0 z 3'. A scene change gives scene=… with no role. ?role=Nobody is removed and 'Všechny repliky' is checked. Regressions s91-s99 and s101-s103 all finished without console errors and with expected output (s93 URL round trip, s94 recording tally, s95 echo, s96 keys, s97 together mode, s98 roles, s99 support, s101 retry, s102 fallbacks, s103 sticky bar). Typecheck, build, ruff passed.
+
+## Global Cycle 106/120 | Page: [/stories/library] (Page Cycle 1/15)
+
+**Summary:** serve the curated graded stories as a reading library
+
+**Observed Problem:** backend/data/stories has 90 validated, graded stories per language (A1 15, A2 20, B1 25, B2 30; same plots in DE/EN/FR/IT; CC0; drafted, unreviewed). Only the test-time validator read them: no API or page served them. /stories offered only LLM-generated texts, which are off unless a local model is configured, so a family install had nothing to read.
+
+**Implemented Solution:** New services/library.py loads and validates each language file once (lru_cache, and fails loudly on an invalid file). Every story must pass the active content blacklist on all visible text (title, lines, translations, glosses, questions) before it is listed or read, for every profile. safety.blacklist_matcher compiles the patterns once per request, and blacklist_hits now uses it. GET /api/v1/stories/library returns the provenance and the summaries. GET /stories/library/{slug} returns the lines with Czech; the slug is pattern-validated and unknown or gated slugs return 404. The new /stories/library page has a level shelf (A1-B2), a reader with a translation toggle, ?story= in the URL, an unreviewed note, and source/licence. /stories and the command palette link to it.
+
+**Verification:** New tests/test_library_api.py (4): provenance and 90 stories, parity with en, no learning events written. A blacklisted title hides the story for a child profile (89 left) while fr keeps 90. The reader returns lines with Czech, gives 404 for unknown or gated slugs and 422 for a malformed slug, and 401 without a session. 31 passed with test_stories and test_tutor (blacklist users). b106.js at 390px: HTTP 200, levels A1·15 / A2·20 / B1·25 / B2·30, note and 'CC0-1.0' provenance. Opening a story gives ?story=a1-01-umbrella with 10 lines and Czech on toggle; it survives a reload, and Back shows 90 cards. /stories links to the library. No console errors, no overflow.
+
+## Global Cycle 107/120 | Page: [/stories/library] (Page Cycle 2/15)
+
+**Summary:** read stories aloud, line by line or start to finish
+
+**Observed Problem:** Library stories were text only. A1-A2 learners in particular need to hear a text while reading it to connect spelling and sound, and the curated lines had no audio route: TTS existed only for generated stories, scenes and words.
+
+**Implemented Solution:** GET /stories/library/{slug}/audio?line= speaks one line with the profile's chosen voice. It goes through the same blacklist gate as the text: an unknown or gated story returns 404, an out-of-range line returns 404, and line is limited to 0-40. The reader gets a play button on every line, a 'Přečíst nahlas' run that plays each line to the end, highlights it and scrolls to it, a stop button, and SlowToggle. Each clip is fetched before it plays, so when speech is down the run stops with a notice instead of racing through silent lines. Leaving the story stops its voice.
+
+**Verification:** New test test_library_story_lines_are_spoken_through_the_gate: line 1 is spoken with the exact text, line 39 gives 404, line 41 gives 422, an unknown slug gives 404. test_tts.py + test_library_api.py: 25 passed. b107.js with stubbed 1.5 s clips: the highlight moves 0,1,2,3 in 6 s. Stop clears the highlight and restores the button. With real TTS (503 in this container), the run stops at once with the notice. 6 per-line buttons on a 6-line story. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 108/120 | Page: [/stories/library] (Page Cycle 3/15)
+
+**Summary:** introduce and gloss the above-level words in place
+
+**Observed Problem:** Each curated story has 1-8 stretch words from the level above, each with a Czech gloss. That is the point of the ~95/5 grading: meet a few new words in context. The reader did not return or mark them, so a learner hit them as unexplained words, and the only fallback was the whole-line translation.
+
+**Implemented Solution:** The reader API returns stretch [{word, cs}]. Before the text, a 'Slova z vyšší úrovně' panel lists them with glosses (context first). In the lines, every occurrence is matched as a whole word, case-insensitive and Unicode-aware with longest form first, and rendered as a dotted-underlined button. Tapping it shows the Czech gloss in place; aria-expanded and aria-label are set.
+
+**Verification:** test_library_api.py: 4 passed, including the exact stretch list. b108.js: the panel lists 'Wettervorhersage = předpověď počasí | ruhig = klidný', all three occurrences are marked, and tapping shows 'předpověď počasí'. A sweep over all 360 stories (de, en, fr, it) found 0 stretch words the matcher misses. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 109/120 | Page: [/stories/library] (Page Cycle 4/15)
+
+**Summary:** check understanding after reading, without grading it
+
+**Observed Problem:** Every curated story carries 2-4 comprehension questions with an answer key. The library did not expose them, so a learner finished a text with no way to check whether they had understood it. Shipping the answer key to the browser would also have made the 'check' a lookup.
+
+**Implemented Solution:** The reader API returns the questions without answers. A new POST /stories/library/{slug}/questions/{i}/answer checks a choice on the server and records nothing (CSRF-protected like other POSTs; unknown question 404; out-of-range choice 422). Below the text, 'Porozuměl(a) jsi?' presents each question in Lekce style: a wrong pick turns red and can be retried, a right one turns green and locks the question, and after a miss 'Ukázat správnou odpověď' reveals it. A note says this is a check of understanding, not a test.
+
+**Verification:** New test test_comprehension_answers_are_checked_on_the_server_and_not_stored covers: no answer_index in the payload, right and wrong verdicts, 404, 422, 403 without CSRF, and 0 learning events. test_library_api.py: 5 passed. b109.js: two questions shown. On q1, picks 2 and 1 were wrong and 0 right, after which all options are disabled. On q2, a miss then reveal shows 'Im Park'. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 110/120 | Page: [/stories/library] (Page Cycle 5/15)
+
+**Summary:** start at the learner's level and keep track of what was read
+
+**Observed Problem:** The shelf listed 90 stories with no indication of where to begin. An A2 learner had to scroll past 15 A1 texts and remember which ones they had already read: nothing marked a finished story, so the library felt like a flat list rather than a reading path.
+
+**Implemented Solution:** A 'Další k přečtení' card picks the first unread story at the learner's level, then the levels above. The level comes from the placement test, otherwise the vocabulary progress estimate. The source is stated, and with no estimate the card starts at A1 and says so. A story counts as read once all its questions are answered, or via 'Dočteno, zpět do knihovny'. Read marks live in localStorage keyed by profile and language, so family members sharing a device do not mix them. They are a per-device convenience, explicitly not learning evidence, and storage failures fall back silently. Each level heading shows 'přečteno X z Y', and finished cards carry a check.
+
+**Verification:** b110.js (de, no estimate): the card reads 'Začni tady · Der Regenschirm' with the no-estimate note. After answering both questions and pressing Back, next is 'Der Wachhund' and A1 shows 'přečteno 1 z 15'. Both survive a reload, with 1 mark. b110b.js with a routed placement result A2: 'Další k přečtení na úrovni A2 · Das Hotel mit den Kühen · Podle rozřazovacího testu: A2.' No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 111/120 | Page: [/stories/library] (Page Cycle 6/15)
+
+**Summary:** find a story by level, kind, title or unread status
+
+**Observed Problem:** With 90 stories the shelf was a long scroll by level with no search. The 'kind' field was meaningless: every curated story mixes narration and speech, so the 'all lines have a speaker' rule labelled all 90 as story. A learner looking for a dialogue, a B1 text, or the one about cows had to scan everything.
+
+**Implemented Solution:** The server now classifies a story as dialogue when at least half its lines are spoken (de: 73 dialogue, 17 narration), and the test asserts both kinds occur. The shelf has a search over target-language and Czech titles (accent-insensitive, ß matches ss, '/' focuses it), level chips, a kind chip (Vyprávění / Rozhovory), 'Jen nepřečtené', and a live 'N z 90 textů' count. Filters are mirrored in the URL (?q, level, kind, unread) alongside ?story=. A filtered empty result offers 'Zrušit filtry'. The next-to-read card is shown only without filters.
+
+**Verification:** test_library_api.py: 5 passed. b111.js at 390px: B1 gives 25 z 90, B1 + Rozhovory gives 22. '/' then 'desTnik' gives 2 hits (Czech titles with deštník, without accents). 'kühe' and 'kuhe' each give 1. q=kuhe survives a reload. 'zzzz' shows the empty state, and reset gives 90 with the next card back. No console errors, no overflow. Typecheck, build, ruff passed.
+
+## Global Cycle 112/120 | Page: [/stories/library] (Page Cycle 7/15)
+
+**Summary:** move between stories and control the reader from the keyboard
+
+**Observed Problem:** After finishing a story, the only way on was back to the shelf, scrolling to find the next card, and opening it, which breaks a reading session into separate trips. The reader had no keys: read-aloud, translation and leaving all needed the mouse.
+
+**Implemented Solution:** The reader ends with previous/next story buttons, showing truncated titles and key hints on desktop. They follow the shelf the learner came from: the filtered list when it contains the story, otherwise the whole library (e.g. when opened from a link). Keys: P starts or stops read-aloud, T toggles the translation, N/→ and B/← go to the next or previous story, Esc returns to the shelf. Typing targets and modifier keys are ignored. The key legend is shown on desktop.
+
+**Verification:** b112.js (1280px, ?level=B1): opening the first B1 story gives b1-01-urgent-meeting. N goes to Das intelligente Haus, → to Entschuldigungen ohne Ende, B back to Das intelligente Haus, with the URL keeping level=B1. T shows Czech. The nav reads 'Dringende Besprechung B … Entschuldigungen ohne Ende N'. Esc returns to ?level=B1 with 25 cards. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 113/120 | Page: [/stories/library] (Page Cycle 8/15)
+
+**Summary:** reveal one line's translation at a time
+
+**Observed Problem:** Translation was all or nothing: either read without any help, or switch every line to Czech. A learner stuck on one sentence had to translate the whole text and lost the effort of decoding the rest. That is the wrong scaffold for graded reading, where most lines should be readable.
+
+**Implemented Solution:** Each line has a small CZ toggle (aria-pressed, 'Překlad věty N') that shows that line's Czech under it. The global 'Ukázat překlad' still shows all lines and hides the per-line toggles while active. A hint under the controls explains the difference. The translation span is tagged lang=cs.
+
+**Verification:** b113.js at 390px on a 10-line story: initially 0 Czech lines and 10 CZ buttons. CZ on line 3 shows exactly 'Já to vím líp. Předpověď počasí říká: déšť.', and pressing it again hides it. The global toggle shows all 10 and hides the CZ buttons. scrollWidth is 390, so there is no overflow. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 114/120 | Page: [/stories/library] (Page Cycle 9/15)
+
+**Summary:** shadow a library story, speaker by speaker
+
+**Observed Problem:** The library had read-aloud, but no way to practise saying the text. /shadowing could only use lesson-word sentences and scene dialogues. The 90 graded stories per language, mostly dialogue with line audio, were exactly the connected speech shadowing needs, and they were not reachable from it.
+
+**Implemented Solution:** The reader has a 'Stínovat tento příběh' link to /shadowing?story=<slug>. Shadowing gains a story source: it loads the gated library story, uses its line audio, and shows speaker and Czech line. It reuses everything built in cycles 91-105: echo/together rounds, continuous run, role choice with partner cue (narration lines cue as 'Vypravěč:'), text-support levels, line strip, and URL state (?story, ?line, ?role). A banner links back to the text. A slug is valid in every language, so a story source survives a language switch.
+
+**Verification:** b114.js: the link leads to ?story=a1-01-umbrella. The banner is shown, the card reads 1/10 TOM 'Heute regnet es…', roles are Tom/Anna, and choosing Anna shows the cue 'Tom říká: …'. N N gives role=Anna&story=…&line=9, and a reload restores 9/10 'nahráno 0 z 3'. Audio requests go to /stories/library/a1-01-umbrella/audio?line=0,1. 'Zpět k textu' returns to the reader. No console errors. Postgres and Redis had stopped after an API interruption and were restarted before testing. Typecheck, build, ruff passed.
+
+## Global Cycle 115/120 | Page: [/stories/library] (Page Cycle 10/15)
+
+**Summary:** let each reader pick a comfortable text size
+
+**Observed Problem:** Story lines were fixed at 18px. A family shares tablets across ages: a child learning to read, or a grandparent, needs larger type, and on a large screen an adult may want more of the text visible at once. The only option was browser zoom, which also scales every control.
+
+**Implemented Solution:** The reader has a three-step 'Velikost písma' radio (16 / 18 / 24 px) applied to the story lines only. Glossed lines inherit it, so the stretch-word buttons scale with the text. The choice is remembered per device in localStorage, read after mount so SSR is unaffected, with safe fallbacks. The buttons are 44×44 targets.
+
+**Verification:** b115.js at 390px: default line font 18px, Větší 24px (kept after reload), Menší 16px. scrollWidth stays 390 at every size. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 116/120 | Page: [/stories/library] (Page Cycle 11/15)
+
+**Summary:** retry failed loads and explain a story that is not available
+
+**Observed Problem:** Shelf and reader failures showed a generic red 'Něco se pokazilo' with no retry, and loading was one 'Načítám…' line. A story link that no longer opens (unknown slug, or hidden by the content gate in this language) looked like a server fault, even though there was nothing to retry.
+
+**Implemented Solution:** The shelf and reader now fail into RetryNotices that name what failed and refetch it. A 404 from the reader is a distinct, calm state: 'Tento příběh tu není k dispozici. Vyber si jiný v knihovně.' with the back button, and no retry. Loading shows six skeleton cards for the shelf and a title-plus-text skeleton for the reader.
+
+**Verification:** b116.js with routed 500s and a 1.2 s delay: 6 shelf skeletons, then 'Knihovnu se nepodařilo načíst.'. Retry loads the shelf, and the routed story 500 shows 'Příběh se nepodařilo načíst.'. Retry opens Der Regenschirm. ?story=zz-missing shows the not-available note with Back. No console errors other than the forced ones. Typecheck, build, ruff passed.
+
+## Global Cycle 117/120 | Page: [/stories/library] (Page Cycle 12/15)
+
+**Summary:** keep next/previous stable when finishing a story under a filter
+
+**Observed Problem:** Previous/next were recomputed from the live filtered shelf. Under 'Jen nepřečtené', finishing a story removed it from the filtered list, so the reader fell back to whole-library order mid-session. In a narration-only filter, the next story after Die Diät switched from Der falsche Koffer to Das Hotel mit den Kühen, which is outside the learner's filter.
+
+**Implemented Solution:** When a story opens, the page freezes the order it came from: the filtered shelf if it contains the story, otherwise the whole library. Next/previous and N/B walk that frozen trail, and the trail is reset on returning to the shelf. Neighbours are looked up from the library by slug.
+
+**Verification:** b117b.js (?kind=story&unread=1): open Die Diät gives nav 'Der Wachhund … Der falsche Koffer'. After answering all questions (marked read) the nav is unchanged, and N opens Der falsche Koffer. Stashed baseline, same steps: after reading, the nav jumped to 'Der vergessene Geburtstag … Das Hotel mit den Kühen', and N left the filter. b117.js (A1 unread) is also stable. No console errors. Typecheck, build, ruff passed.
+
+## Global Cycle 118/120 | Page: [/stories/library] (Page Cycle 13/15)
+
+**Summary:** fit the open story into the first phone screen
+
+**Observed Problem:** At 390x844 an open story started its first line at y=955, below the fold: the page intro, the four-language picker, the shelf-wide draft note and three rows of reader controls (with full-text labels) all sat above the text. Switching language from inside a story also made no sense, since slugs are per language. The shelf intro was a long paragraph above the filters.
+
+**Implemented Solution:** While a story is open the page header (intro + language picker) is hidden on phones and shrunk on desktop; the unreviewed note moves into the story header so the draft label stays with the text. On phones the translation toggle and the shadowing link become icon buttons (text kept as sr-only and title), and the per-line help line is hidden (the CZ chip carries its aria-label). The shelf intro folds into a 'Co je knihovna?' disclosure below sm.
+
+**Verification:** Playwright b118.js at 390x844: first story line top 955 -> 639 px, reader controls 3 rows -> 2, no horizontal overflow, draft note present in the story header, no console errors; at 1280 the full labels and page title still show. Shelf scrollHeight 10762 -> 10702. typecheck, lint and build passed.
+
+## Global Cycle 119/120 | Page: [/stories/library] (Page Cycle 14/15)
+
+**Summary:** gate one story per request and keep read stories in memory
+
+**Observed Problem:** Every reader, read-aloud line and answer request ran the content blacklist over all 90 stories of the language just to find one, so a 12-line read-aloud did 12 full-shelf scans and the cost grew with stories x active patterns (offline benchmark with 200 patterns: ~500 ms vs ~9 ms per request). In the browser every open, Next/Previous and return to the shelf refetched the same static text and showed a skeleton.
+
+**Implemented Solution:** services.library.story now finds the slug in the parsed file and gates only that story (same 404 for unknown and gated). The page keeps per-profile, per-language session caches: read stories (with in-flight dedupe) open instantly, the shelf paints from memory while a fresh copy loads in the background (a failed refresh keeps the shelf), and 400 ms after a story appears the next story's text is prefetched; audio is not prefetched because TTS is generated on demand.
+
+**Verification:** pytest test_library_api + test_tts (26 passed, new assertions: gated story's neighbour still 200, gated story's answer endpoint 404). Playwright b119.js: after the prefetch, N shows 'Der Wachhund' within 50 ms with zero new requests; B back to the first story and Esc issue no request; returning to the shelf via history shows no skeleton. No console errors. typecheck, lint, build passed.
+
+## Global Cycle 120/120 | Page: [/stories/library] (Page Cycle 15/15)
+
+**Summary:** pin the library's reading flow in the browser E2E suite
+
+**Observed Problem:** Cycles 106-119 were verified with 14 throwaway Playwright scripts outside the repository; CI's e2e job (frontend/e2e) had no coverage of /stories/library, so a regression in the shelf, the per-line help, the server-checked comprehension questions, the local read mark or the unknown-story state would ship unnoticed. Re-running the scripts also showed one of them (b106) had gone stale after the done button was renamed.
+
+**Implemented Solution:** New frontend/e2e/story-library.spec.ts (mobile Pixel 7 project, runs after first-usable.spec with the same admin): shelf with draft label and folded intro, accent/umlaut-folding search, open by card, first line in the first viewport, per-line and whole-text translation, each question answered by retrying until right (waits for the server verdict, no fixed sleeps), done marks it read, the unread filter persists across reload, and an unknown ?story= shows the explanation; fails on any page error. scripts/e2e.sh warms /stories/library before the run. E2E_USER/E2E_SECRET let the spec run against a dev stack.
+
+**Verification:** npx playwright test e2e/story-library.spec.ts --project=mobile-chromium against the local stack: 1 passed (3.2 s). All 15 library regression scripts b106-b118 re-run: all pass after fixing b106's selector. The full scripts/e2e.sh Compose run was not executed here. pytest test_library_api, typecheck, lint, build passed.

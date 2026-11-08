@@ -1398,7 +1398,7 @@ wheels = [
 
 [[package]]
 name = "polyflow-backend"
-version = "1.0.0a14"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "alembic" },

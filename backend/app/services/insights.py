@@ -12,6 +12,7 @@ from sqlalchemy import Date, cast, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.enums import Language, ProgressState
+from app.domain.learning_policy import POLICY
 from app.models import (
     GrammarAttempt,
     GrammarUnit,
@@ -21,12 +22,16 @@ from app.models import (
     UserGrammarProgress,
     UserWordProgress,
 )
+from app.models.learning import TaskType
 from app.services.learning import _suitable
 
 HEATMAP_DAYS = 182
 ACCURACY_WEEKS = 12
 MISTAKE_DAYS = 60
 FORECAST_DAYS = 14
+# Per-day items sent with the forecast. Counts stay exact; at a few thousand words the full lists
+# made the response grow without bound while the page shows a handful per day.
+FORECAST_ITEMS = 30
 
 
 async def insights(db: AsyncSession, user: User, language: Language, now: datetime) -> dict:
@@ -54,55 +59,96 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
     for d, graded, n in rows.all():
         days[d]["graded" if graded else "practice"] += n
 
-    # First-try accuracy per ISO week (graded answers only).
+    # First-try accuracy per ISO week (graded answers only), kept apart per skill: recognising a
+    # word, producing it, and grammar are different abilities, and one average would hide which
+    # of them is moving.
     week_start = today - timedelta(days=today.weekday()) - timedelta(weeks=ACCURACY_WEEKS - 1)
-    weeks: dict[date, list[int]] = {
-        week_start + timedelta(weeks=i): [0, 0] for i in range(ACCURACY_WEEKS)
+    skills = ("recognition", "recall", "grammar")
+    weeks: dict[date, dict[str, list[int]]] = {
+        week_start + timedelta(weeks=i): {k: [0, 0] for k in skills} for i in range(ACCURACY_WEEKS)
     }
-    for model, join_on, lang_col in (
-        (ev, li.id == ev.lexicon_item_id, li.language),
-        (ga, gu.id == ga.unit_id, gu.language),
-    ):
-        target = li if model is ev else gu
-        wk = cast(func.date_trunc("week", model.local_date), Date)
-        rows = await db.execute(
-            select(wk, func.count(), func.count().filter(model.is_correct.is_(True)))
-            .join(target, join_on)
-            .where(
-                model.user_id == user.id,
-                lang_col == language,
-                model.counts_as_evidence.is_(True),
-                model.local_date >= week_start,
-            )
-            .group_by(wk)
+    wk = cast(func.date_trunc("week", ev.local_date), Date)
+    rows = await db.execute(
+        select(wk, ev.task_type, func.count(), func.count().filter(ev.is_correct.is_(True)))
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(
+            ev.user_id == user.id,
+            li.language == language,
+            ev.counts_as_evidence.is_(True),
+            ev.local_date >= week_start,
         )
-        for w, n, ok in rows.all():
-            if w in weeks:
-                weeks[w][0] += n
-                weeks[w][1] += ok
+        .group_by(wk, ev.task_type)
+    )
+    for w, task, n, ok in rows.all():
+        if w in weeks:
+            skill = "recall" if task == TaskType.RECALL else "recognition"
+            weeks[w][skill][0] += n
+            weeks[w][skill][1] += ok
+    gwk = cast(func.date_trunc("week", ga.local_date), Date)
+    rows = await db.execute(
+        select(gwk, func.count(), func.count().filter(ga.is_correct.is_(True)))
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            ga.counts_as_evidence.is_(True),
+            ga.local_date >= week_start,
+        )
+        .group_by(gwk)
+    )
+    for w, n, ok in rows.all():
+        if w in weeks:
+            weeks[w]["grammar"][0] += n
+            weeks[w]["grammar"][1] += ok
 
-    # Mistake types in graded answers.
+    # Mistake types in graded answers, each with the words and topics behind it (most frequent
+    # first), so a learner can go from "gender: 7" to the nouns that cause it.
     tags: dict[str, int] = defaultdict(int)
+    behind: dict[str, list[dict]] = defaultdict(list)
     mistake_since = today - timedelta(days=MISTAKE_DAYS)
-    for model, target, join_on, lang_col in (
-        (ev, li, li.id == ev.lexicon_item_id, li.language),
-        (ga, gu, gu.id == ga.unit_id, gu.language),
-    ):
-        rows = await db.execute(
-            select(model.error_tag, func.count())
-            .join(target, join_on)
-            .where(
-                model.user_id == user.id,
-                lang_col == language,
-                model.counts_as_evidence.is_(True),
-                model.is_correct.is_(False),
-                model.error_tag.is_not(None),
-                model.local_date >= mistake_since,
-            )
-            .group_by(model.error_tag)
+    missed = (
+        ev.user_id == user.id,
+        li.language == language,
+        ev.counts_as_evidence.is_(True),
+        ev.is_correct.is_(False),
+        ev.error_tag.is_not(None),
+        ev.local_date >= mistake_since,
+    )
+    rows = await db.execute(
+        select(ev.error_tag, li.id, li.lemma, li.gender, li.translation_cs, func.count())
+        .join(li, li.id == ev.lexicon_item_id)
+        .where(*missed, _suitable(user))
+        .group_by(ev.error_tag, li.id)
+    )
+    for tag, item_id, lemma, gender, translation, n in rows.all():
+        tags[tag] += n
+        behind[tag].append(
+            {
+                "kind": "word",
+                "id": item_id,
+                "label": f"{gender} {lemma}" if gender and len(gender) > 1 else lemma,
+                "detail": translation,
+                "count": n,
+            }
         )
-        for tag, n in rows.all():
-            tags[tag] += n
+    rows = await db.execute(
+        select(ga.error_tag, gu.id, gu.title, gu.level, func.count())
+        .join(gu, gu.id == ga.unit_id)
+        .where(
+            ga.user_id == user.id,
+            gu.language == language,
+            ga.counts_as_evidence.is_(True),
+            ga.is_correct.is_(False),
+            ga.error_tag.is_not(None),
+            ga.local_date >= mistake_since,
+        )
+        .group_by(ga.error_tag, gu.id)
+    )
+    for tag, unit_id, title, level, n in rows.all():
+        tags[tag] += n
+        behind[tag].append(
+            {"kind": "grammar", "id": unit_id, "label": title, "detail": level, "count": n}
+        )
 
     # Review forecast: words and grammar topics due per local day (overdue counts as today).
     p, gp = UserWordProgress, UserGrammarProgress
@@ -121,13 +167,17 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             p.next_review_at.is_not(None),
             p.next_review_at < horizon,
         )
+        .order_by(p.next_review_at, li.frequency_rank)  # the first items per day are stable
     )
+    word_counts: dict[date, int] = defaultdict(int)
     for item_id, lemma, gender, translation, at in word_due.all():
         d = max(at.astimezone(tz).date(), today)
         if d in forecast:
-            forecast[d]["words"].append(
-                {"id": item_id, "lemma": lemma, "gender": gender, "translation": translation}
-            )
+            word_counts[d] += 1
+            if len(forecast[d]["words"]) < FORECAST_ITEMS:
+                forecast[d]["words"].append(
+                    {"id": item_id, "lemma": lemma, "gender": gender, "translation": translation}
+                )
     grammar_due = await db.execute(
         select(gu.id, gu.title, gu.level, gp.next_review_at)
         .join(gu, gu.id == gp.unit_id)
@@ -145,8 +195,11 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
         if d in forecast:
             forecast[d]["grammar"].append({"id": unit_id, "title": title, "level": level})
 
-    # Knowledge funnel.
-    introduced, passive, active, known, mastered = (
+    # Knowledge funnel, with the same child filter as the forecast. "Fading" are words once
+    # recognised whose last error-free check is past the decay window: they are due for review
+    # (the evidence stays; nothing is taken away).
+    fade_before = now - POLICY.decay_after
+    introduced, passive, active, known, mastered, fading = (
         await db.execute(
             select(
                 func.count().filter(p.introduced_at.is_not(None)),
@@ -154,10 +207,15 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
                 func.count().filter(p.active_known.is_(True)),
                 func.count().filter(p.passive_known.is_(True), p.active_known.is_(True)),
                 func.count().filter(p.state == ProgressState.MASTERED),
+                func.count().filter(
+                    p.passive_known.is_(True),
+                    p.last_error_free_at.is_not(None),
+                    p.last_error_free_at < fade_before,
+                ),
             )
             .select_from(p)
             .join(li, li.id == p.lexicon_item_id)
-            .where(p.user_id == user.id, li.language == language)
+            .where(p.user_id == user.id, li.language == language, _suitable(user))
         )
     ).one()
 
@@ -173,14 +231,30 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             for i in range(HEATMAP_DAYS)
         ],
         "active_days": active_days,
-        "accuracy": [{"week": w, "answered": n, "correct": ok} for w, (n, ok) in weeks.items()],
+        "accuracy": [
+            {
+                "week": w,
+                "answered": sum(v[0] for v in by.values()),
+                "correct": sum(v[1] for v in by.values()),
+                **{k: {"answered": v[0], "correct": v[1]} for k, v in by.items()},
+            }
+            for w, by in weeks.items()
+        ],
         "mistakes": sorted(
-            ({"tag": t, "count": n} for t, n in tags.items()), key=lambda x: -x["count"]
+            (
+                {
+                    "tag": t,
+                    "count": n,
+                    "items": sorted(behind[t], key=lambda x: (-x["count"], x["label"]))[:6],
+                }
+                for t, n in tags.items()
+            ),
+            key=lambda x: -x["count"],
         ),
         "forecast": [
             {
                 "date": d,
-                "words": len(v["words"]),
+                "words": word_counts.get(d, 0),
                 "grammar": len(v["grammar"]),
                 "word_items": v["words"],
                 "grammar_items": v["grammar"],
@@ -193,6 +267,7 @@ async def insights(db: AsyncSession, user: User, language: Language, now: dateti
             "active": active,
             "known": known,
             "mastered": mastered,
+            "fading": fading,
         },
     }
 

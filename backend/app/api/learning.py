@@ -19,6 +19,8 @@ from app.schemas.learning import (
     AnswerIn,
     AnswerOut,
     IdempotencyKey,
+    LanguageSummaryOut,
+    LessonPreviewOut,
     LevelsInfo,
     LevelStatusOut,
     NextOut,
@@ -371,6 +373,22 @@ async def progress(
     )
 
 
+@router.get("/next-lesson", response_model=LessonPreviewOut)
+async def next_lesson(
+    auth: Auth, db: DB, now: Now, language: Annotated[Language | None, Query()] = None
+) -> LessonPreviewOut:
+    """Preview of the next lesson's scene and word counts; starts nothing."""
+    lang = language or auth.acting.active_language
+    return LessonPreviewOut(**await svc.preview_lesson(db, auth.acting, lang, now))
+
+
+@router.get("/languages", response_model=list[LanguageSummaryOut])
+async def languages(auth: Auth, db: DB, now: Now) -> list[LanguageSummaryOut]:
+    """Introduced, known and due words per language, for the dashboard language switcher."""
+    rows = await svc.language_summaries(db, auth.acting, now)
+    return [LanguageSummaryOut(**r) for r in rows]
+
+
 @router.get("/weak-spots", response_model=WeakSpotsOut)
 async def weak_spots(
     auth: Auth, db: DB, now: Now, language: Annotated[Language | None, Query()] = None
@@ -383,6 +401,7 @@ async def weak_spots(
         window_days=w.window_days,
         words=[
             WeakWordOut(
+                item_id=x.item.id,
                 lemma=x.item.lemma,
                 gender=x.item.gender,
                 translation=x.item.translation_cs,

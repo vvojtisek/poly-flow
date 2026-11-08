@@ -1,8 +1,8 @@
 "use client";
 
-import { Lock, LockOpen } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
-import type { ProgressOverview } from "@/lib/api";
+import type { GrammarTree, ProgressOverview } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 
 const fmt = new Intl.NumberFormat("cs-CZ");
@@ -16,8 +16,11 @@ function Stat({ label, value }: { label: string; value: number }) {
   );
 }
 
-export function ProgressCard({ progress }: { progress: ProgressOverview }) {
+export function ProgressCard({ progress, grammar }: { progress: ProgressOverview; grammar?: GrammarTree | null }) {
   const p = progress;
+  // Grammar is open from A1 (decision 2026-11-06); show proven topics instead of the old word gate.
+  const units = grammar?.levels.flatMap((l) => l.units) ?? [];
+  const provenUnits = units.filter((u) => u.status === "known" || u.status === "mastered").length;
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -29,43 +32,13 @@ export function ProgressCard({ progress }: { progress: ProgressOverview }) {
         <Stat label={cs.progress.mastered} value={p.by_state.MASTERED} />
       </div>
 
-      {p.by_band.length > 0 && (
-        <ul className="flex flex-col gap-2">
-          {p.by_band.map((b) => {
-            const pct = b.items ? Math.round((b.known / b.items) * 100) : 0;
-            return (
-              <li key={b.band} className="text-sm">
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>≤ {fmt.format(b.band)}</span>
-                  <span className="tabular-nums">
-                    {fmt.format(b.known)} / {fmt.format(b.items)}
-                  </span>
-                </div>
-                <div
-                  className="mt-1 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"
-                  role="progressbar"
-                  aria-valuenow={pct}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                >
-                  <div className="h-full bg-brand-500" style={{ width: `${pct}%` }} />
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-
       <div className="flex flex-col gap-1 text-sm text-slate-600 dark:text-slate-300">
-        {p.next_milestone && <p>{cs.progress.nextMilestone(p.next_milestone)}</p>}
-        <p className="flex items-center gap-2">
-          {p.grammar_unlocked ? (
-            <LockOpen className="size-4 text-emerald-600" aria-hidden />
-          ) : (
-            <Lock className="size-4" aria-hidden />
-          )}
-          {p.grammar_unlocked ? cs.progress.grammarUnlocked : cs.progress.grammarLocked(p.grammar_gate)}
-        </p>
+        {grammar && (
+          <p className="flex items-center gap-2">
+            <GraduationCap className="size-4 text-brand-600" aria-hidden />
+            {units.length ? cs.progress.grammarTopics(provenUnits, units.length) : cs.progress.grammarNone}
+          </p>
+        )}
         <p className="text-xs text-slate-500">{cs.progress.available(p.lexicon_items)}</p>
         <p className="text-xs text-slate-500">{cs.progress.pronunciation}</p>
       </div>

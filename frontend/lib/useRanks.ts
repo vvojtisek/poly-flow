@@ -7,9 +7,26 @@ import { getRanks, type Language, type RanksOverview } from "@/lib/api";
 // One fetch per language per page view is plenty: ranks only change after checks and exams.
 const cache = new Map<string, { at: number; data: RanksOverview }>();
 const TTL_MS = 30_000;
+// Header and page mount together: share one request per key instead of racing two.
+const inflight = new Map<string, Promise<RanksOverview>>();
 
 export function invalidateRanks() {
   cache.clear();
+  inflight.clear();
+}
+
+function fetchRanks(key: string, language: Language): Promise<RanksOverview> {
+  let p = inflight.get(key);
+  if (!p) {
+    p = getRanks(language)
+      .then((fresh) => {
+        cache.set(key, { at: Date.now(), data: fresh });
+        return fresh;
+      })
+      .finally(() => inflight.delete(key));
+    inflight.set(key, p);
+  }
+  return p;
 }
 
 /** The profile's rank overview for `language`, or null while loading / when it failed. */
@@ -20,9 +37,7 @@ export function useRanks(language: Language | undefined, profileId: string | und
   const reload = useCallback(async () => {
     if (!language) return;
     try {
-      const fresh = await getRanks(language);
-      cache.set(key, { at: Date.now(), data: fresh });
-      setData(fresh);
+      setData(await fetchRanks(key, language));
     } catch {
       /* ranks are a bonus: the page works without them */
     }

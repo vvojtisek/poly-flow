@@ -3,7 +3,7 @@
 import { BarChart3, BookMarked, Download, Dumbbell, GraduationCap, LogOut, Maximize2, Minimize2, Search, Settings, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 
 import { BottomTabs } from "@/components/BottomTabs";
 import { NetworkBanner } from "@/components/NetworkBanner";
@@ -13,7 +13,7 @@ import { Kbd } from "@/components/Kbd";
 import { RankEmblem } from "@/components/RankEmblem";
 import { PracticeDifficultyControl } from "@/components/PracticeDifficultyControl";
 import { Button, Field, Notice } from "@/components/ui";
-import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type Me } from "@/lib/api";
+import { ApiError, LANGUAGES, logout, returnToParent, updateOwnProfile, type Language, type LanguageSummary, type Me } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { useFocusMode } from "@/lib/focus";
 import { cs } from "@/lib/i18n/cs";
@@ -74,9 +74,18 @@ function ReturnToParent({ me }: { me: Me }) {
   );
 }
 
-export function LanguagePicker({ me, onChange }: { me: Me; onChange?: (l: Language) => void }) {
+export function LanguagePicker({
+  me,
+  onChange,
+  summaries,
+}: {
+  me: Me;
+  onChange?: (l: Language) => void;
+  summaries?: LanguageSummary[] | null; // when given, each option shows its words and due checks
+}) {
   const { setMe } = useAuth();
   const [busy, setBusy] = useState(false);
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
 
   async function pick(language: Language) {
     if (language === me.acting.active_language) return;
@@ -90,25 +99,47 @@ export function LanguagePicker({ me, onChange }: { me: Me; onChange?: (l: Langua
     }
   }
 
+  // Radio-group keyboard pattern: arrows move between languages and select.
+  function onKeyDown(e: React.KeyboardEvent, i: number) {
+    const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!step) return;
+    e.preventDefault();
+    const j = (i + step + LANGUAGES.length) % LANGUAGES.length;
+    refs.current[j]?.focus();
+    void pick(LANGUAGES[j]!);
+  }
+
   return (
-    <div role="radiogroup" aria-label={cs.profiles.language} className="flex flex-wrap gap-1">
-      {LANGUAGES.map((l) => (
-        <button
-          key={l}
-          type="button"
-          role="radio"
-          aria-checked={me.acting.active_language === l}
-          disabled={busy}
-          onClick={() => void pick(l)}
-          className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${
-            me.acting.active_language === l
-              ? "bg-brand-500 text-white"
-              : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
-          }`}
-        >
-          {cs.languages[l]}
-        </button>
-      ))}
+    <div role="radiogroup" aria-label={cs.profiles.language} className={summaries ? "grid w-full grid-cols-2 gap-1 sm:flex sm:w-auto sm:flex-wrap" : "flex flex-wrap gap-1"}>
+      {LANGUAGES.map((l, i) => {
+        const active = me.acting.active_language === l;
+        const sum = summaries?.find((x) => x.language === l);
+        return (
+          <button
+            key={l}
+            ref={(el) => {
+              refs.current[i] = el;
+            }}
+            type="button"
+            role="radio"
+            aria-checked={active}
+            tabIndex={active ? 0 : -1}
+            disabled={busy}
+            onClick={() => void pick(l)}
+            onKeyDown={(e) => onKeyDown(e, i)}
+            className={`flex flex-col items-start rounded-lg px-3 py-1.5 text-left text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-1 ${
+              active ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+            }`}
+          >
+            <span>{cs.languages[l]}</span>
+            {sum && (
+              <span className={`text-xs font-normal ${active ? "text-white/85" : sum.due_now ? "text-amber-700 dark:text-amber-300" : "text-slate-500 dark:text-slate-400"}`}>
+                {cs.languageSummary(sum.introduced, sum.due_now)}
+              </span>
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -180,8 +211,8 @@ export function AppShell({ me, children, focusable = false }: { me: Me; children
   const practicePath = !!path && (/^\/(lesson\/vocabulary|check|grammar\/check|word-order|stories\/library)(\/|$)/.test(path) || grammarLessonPath);
 
   useEffect(() => {
-    if (path) recordVisit(path);
-  }, [path]);
+    if (path) recordVisit(me.acting.id, path);
+  }, [path, me.acting.id]);
 
   useEffect(() => {
     if (!focusable) return;

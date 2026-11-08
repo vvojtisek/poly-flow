@@ -24,6 +24,7 @@ import {
   Headphones,
   Home,
   Languages,
+  Library,
   LogOut,
   Monitor,
   Moon,
@@ -79,6 +80,17 @@ export function CommandPalette({ me }: { me: Me }) {
     function onKey(e: KeyboardEvent) {
       const combo = (e.ctrlKey || e.metaKey) && !e.altKey && e.code === "KeyK";
       const slash = e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey && !isTypingTarget(e.target);
+      if (slash) {
+        // "/" searches the current page when it has its own search box (data-page-search);
+        // Ctrl+K always opens the global palette.
+        const local = document.querySelector<HTMLInputElement>("input[data-page-search]");
+        if (local && local.getClientRects().length > 0) {
+          e.preventDefault();
+          local.focus();
+          local.select();
+          return;
+        }
+      }
       if (combo || slash) {
         e.preventDefault();
         setOpen((o) => !o || !combo);
@@ -135,10 +147,11 @@ export function CommandPalette({ me }: { me: Me }) {
     const nav = cs.palette.groups.go;
     const list: Command[] = [
       { id: "home", label: cs.palette.home, group: nav, icon: Home, keywords: ["prehled", "dashboard", "domu"], run: go("/") },
-      { id: "lesson", label: cs.lesson.start, group: nav, icon: BookOpen, keywords: ["lekce", "ucit"], run: go("/lesson") },
+      { id: "lesson", label: cs.lesson.start, group: nav, icon: BookOpen, keywords: ["lekce", "ucit"], run: go("/lesson/vocabulary") },
       { id: "check", label: cs.check.start, group: nav, icon: ClipboardCheck, keywords: ["overeni", "opakovani", "test"], run: go("/check") },
       { id: "grammar", label: cs.grammar.title, group: nav, icon: GraduationCap, keywords: ["gramatika", "pravidla"], run: go("/grammar") },
       { id: "stories", label: cs.stories.link, group: nav, icon: BookOpenText, keywords: ["cteni", "pribeh"], run: go("/stories") },
+      { id: "story-library", label: cs.library.link, group: nav, icon: Library, keywords: ["knihovna", "pribehy", "cteni", "a1", "b2"], run: go("/stories/library") },
       { id: "placement", label: cs.placement.title, group: nav, icon: Compass, keywords: ["slovni zasoba"], run: go("/placement") },
       { id: "cefr", label: cs.cefr.title, group: nav, icon: Gauge, keywords: ["cefr", "uroven", "b2"], run: go("/placement/cefr") },
       { id: "levels", label: cs.tests.levels, group: nav, icon: Award, keywords: ["zkouska", "a1", "a2", "b1", "b2"], run: go("/levels") },

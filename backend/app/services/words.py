@@ -4,6 +4,7 @@ Only words with a progress row (seen in a lesson, a test or a check) are listed:
 is the learner's own, not a way around the lessons. The content filter applies as everywhere.
 """
 
+import re
 import uuid
 from datetime import datetime
 
@@ -13,6 +14,7 @@ from sqlalchemy.orm import aliased
 
 from app.domain.enums import Language, ProgressState
 from app.domain.export import Row
+from app.domain.learning_policy import POLICY
 from app.domain.progression import vocabulary_level, vocabulary_levels
 from app.models import (
     LearningEvent,
@@ -24,7 +26,7 @@ from app.models import (
     WordCollection,
     WordCollectionItem,
 )
-from app.services.learning import LearningError, _suitable
+from app.services.learning import LearningError, _suitable, evidence_counts
 from app.services.notes import notes_for
 
 DECK_LIMIT = 50
@@ -41,6 +43,52 @@ def _status():
         (p.introduced_at.is_not(None), "learning"),
         else_="seen",
     )
+
+
+SORTS = ("rank", "review", "errors", "recent")
+# Word-kind filter over Universal Dependencies POS tags; "other" is every remaining (function) tag.
+KINDS: dict[str, tuple[str, ...]] = {
+    "noun": ("NOUN", "PROPN"),
+    "verb": ("VERB", "AUX"),
+    "adj": ("ADJ",),
+    "adv": ("ADV",),
+}
+
+
+def _kind_filter(kind: str):
+    li = LexiconItem
+    if kind == "other":
+        return li.pos.not_in([tag for tags in KINDS.values() for tag in tags])
+    return li.pos.in_(KINDS[kind])
+
+
+def _order(sort: str) -> list:
+    """List order; every option ends on rank and id so paging with offset stays stable."""
+    p, li = UserWordProgress, LexiconItem
+    tail = [li.frequency_rank, li.id]
+    if sort == "review":  # soonest check first; words not introduced yet have no date and go last
+        return [p.next_review_at.asc().nulls_last(), *tail]
+    if sort == "errors":
+        return [p.error_count.desc(), *tail]
+    if sort == "recent":
+        return [p.introduced_at.desc().nulls_last(), *tail]
+    return tail
+
+
+# Accent-insensitive search without a database extension: the same letters folded on both sides.
+# Czech learners often type without diacritics ("dum" for "dům", "schon" for "schön").
+_ACCENTED = "áàâäãåčçćďéèêëěíìîïľĺňñóòôöõőřŕšśťúùûüůűýÿžźż"
+_PLAIN = "aaaaaacccdeeeeeiiiillnnoooooorrsstuuuuuuyyzzz"
+_FOLD = str.maketrans(_ACCENTED, _PLAIN)
+
+
+def fold(text: str) -> str:
+    """Lower case without diacritics; ß becomes ss (Straße ~ strasse)."""
+    return text.lower().translate(_FOLD).replace("ß", "ss")
+
+
+def _folded(column):
+    return func.replace(func.translate(func.lower(column), _ACCENTED, _PLAIN), "ß", "ss")
 
 
 def _escape(q: str) -> str:
@@ -60,6 +108,8 @@ async def list_words(
     limit: int,
     level: str | None = None,
     topic: uuid.UUID | None = None,
+    sort: str = "rank",
+    kind: str | None = None,
 ) -> dict:
     p, li = UserWordProgress, LexiconItem
     st = _status().label("status")
@@ -69,31 +119,37 @@ async def list_words(
         .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
         .where(li.language == language, _suitable(user), *scope)
     )
+    # Facet counts follow the search, due, kind and scope filters (not the status filter itself),
+    # so the status chips always add up to what the list can show.
+    narrow: list = []
+    if q and q.strip():
+        pat = f"%{_escape(fold(q.strip()))}%"
+        narrow.append(
+            or_(
+                _folded(li.lemma).like(pat, escape="\\"),
+                _folded(li.translation_cs).like(pat, escape="\\"),
+            )
+        )
+    if due:
+        narrow += [p.introduced_at.is_not(None), p.next_review_at <= now]
+    if kind is not None:
+        narrow.append(_kind_filter(kind))
+    base = base.where(*narrow)
     counts = dict(
         (
             await db.execute(
                 select(st, func.count())
                 .select_from(li)
                 .join(p, and_(p.lexicon_item_id == li.id, p.user_id == user.id))
-                .where(li.language == language, _suitable(user), *scope)
+                .where(li.language == language, _suitable(user), *scope, *narrow)
                 .group_by(st)
             )
         ).all()
     )
-    if q and q.strip():
-        pat = f"%{_escape(q.strip().lower())}%"
-        base = base.where(
-            or_(
-                func.lower(li.lemma).like(pat, escape="\\"),
-                func.lower(li.translation_cs).like(pat, escape="\\"),
-            )
-        )
     if status in STATUSES:
         base = base.where(_status() == status)
-    if due:
-        base = base.where(p.introduced_at.is_not(None), p.next_review_at <= now)
     total = await db.scalar(select(func.count()).select_from(base.subquery()))
-    rows = (await db.execute(base.order_by(li.frequency_rank).offset(offset).limit(limit))).all()
+    rows = (await db.execute(base.order_by(*_order(sort)).offset(offset).limit(limit))).all()
     return {
         "total": total or 0,
         "counts": {s: counts.get(s, 0) for s in STATUSES},
@@ -139,7 +195,17 @@ async def word_detail(db: AsyncSession, user: User, item_id: uuid.UUID, now: dat
             .limit(20)
         )
     ).scalars()
+    correct, days, recalls, recall_days = await evidence_counts(db, user.id, item.id)
     return {
+        "evidence": {
+            "recognition": {"correct": correct, "days": days},
+            "production": {"correct": recalls, "days": recall_days},
+            "required_correct": POLICY.passive_required_correct,
+            "required_days": POLICY.passive_required_days,
+            "production_required_correct": POLICY.active_required_correct,
+            "production_required_days": POLICY.active_required_days,
+        },
+        "contexts": await _contexts(db, user, item),
         "id": item.id,
         "language": item.language,
         "lemma": item.lemma,
@@ -267,6 +333,68 @@ def _export_row(item, prog, status: str, language: Language, note: str | None) -
 # what lessons introduced, they do not replace the lesson's context-first introduction.
 
 
+def _context_line(lines: list, item: LexiconItem) -> dict | None:
+    """The first scene line that uses the word.
+
+    Scene lines tag each taught word's segment with its lexicon id, which also catches inflected
+    forms ("ist" for "sein"); plain lines fall back to the lemma as written, on word boundaries.
+    """
+    item_id = str(item.id)
+    pattern = re.compile(rf"(?<!\w){re.escape(item.lemma.casefold())}(?!\w)")
+    for line in lines:
+        if not isinstance(line, dict):
+            continue
+        segments = line.get("segments")
+        if isinstance(segments, list):
+            parts = [
+                seg for seg in segments if isinstance(seg, dict) and isinstance(seg.get("t"), str)
+            ]
+            hit = next((seg["t"] for seg in parts if seg.get("item") == item_id), None)
+            if hit is not None:
+                return {
+                    "text": "".join(seg["t"] for seg in parts),
+                    "cs": line.get("cs"),
+                    "match": hit,
+                }
+            continue
+        text = line.get("text")
+        if isinstance(text, str):
+            found = pattern.search(text.casefold())
+            if found:
+                return {
+                    "text": text,
+                    "cs": line.get("cs"),
+                    "match": text[found.start() : found.end()],
+                }
+    return None
+
+
+async def _contexts(db: AsyncSession, user: User, item: LexiconItem) -> list[dict]:
+    """Lesson scenes that teach this word, in curriculum order, without scenes the profile lacks."""
+    scenes = (
+        await db.execute(
+            select(Scene)
+            .join(SceneWord, SceneWord.scene_id == Scene.id)
+            .where(SceneWord.lexicon_item_id == item.id, _scene_ok(user))
+            .order_by(Scene.position)
+            .limit(3)
+        )
+    ).scalars()
+    out = []
+    for scene in scenes:
+        line = _context_line(scene.lines or [], item)
+        out.append(
+            {
+                "topic_id": scene.id,
+                "title": scene.title_cs,
+                "line": line["text"] if line else None,
+                "line_cs": line["cs"] if line else None,
+                "match": line["match"] if line else None,
+            }
+        )
+    return out
+
+
 def _scene_ok(user: User):
     """A scene with a word this profile does not get is hidden as a whole, as in lessons."""
     hidden = aliased(LexiconItem)
@@ -361,12 +489,25 @@ async def word_deck(
     *,
     level: str | None,
     topic: uuid.UUID | None,
+    weak: bool = False,
+    ids: list[uuid.UUID] | None = None,
     limit: int = DECK_LIMIT,
 ) -> dict:
-    """The profile's own words in one level or topic, due and unfinished words first."""
-    if (level is None) == (topic is None):
+    """The profile's own words in one scope (a level, a topic, its unresolved check mistakes, or
+    words it picked by id), due and unfinished words first. Ids of words the profile has not met
+    or may not see are simply left out by the same join and filter."""
+    if sum((level is not None, topic is not None, weak, bool(ids))) != 1:
         raise LearningError("deck_scope_required", 422)
     p, li = UserWordProgress, LexiconItem
+    if ids:
+        scope = [li.id.in_(ids)]
+    elif weak:
+        from app.services import mistakes
+
+        missed = [w.item.id for w in (await mistakes.weak_spots(db, user, language, now)).words]
+        scope = [li.id.in_(missed)]
+    else:
+        scope = await _scope(db, user, language, level, topic)
     st = _status().label("status")
     due = and_(p.introduced_at.is_not(None), p.next_review_at <= now)
     q = (
@@ -375,7 +516,7 @@ async def word_deck(
         .where(
             li.language == language,
             _suitable(user),
-            *await _scope(db, user, language, level, topic),
+            *scope,
         )
     )
     total = (await db.execute(select(func.count()).select_from(q.subquery()))).scalar_one()

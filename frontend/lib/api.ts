@@ -296,6 +296,7 @@ export interface ProgressOverview {
   due_now: number;
   orthography_avg: number | null;
   phonetic_measured: number;
+  next_review_at: string | null;
   grammar_unlocked: boolean;
   grammar_gate: number;
   next_milestone: number | null;
@@ -437,6 +438,8 @@ export interface GrammarUnitSummary {
   due: boolean;
   recent_errors: number;
   next_review_at: string | null;
+  checked_correct: number;
+  checked_errors: number;
 }
 
 export interface GrammarTree {
@@ -519,6 +522,10 @@ export interface GrammarResult {
 
 export const getGrammarTree = (language: Language) =>
   api<GrammarTree>(`/api/v1/grammar?language=${language}`, { cache: "no-store" });
+export const grammarExampleAudioUrl = (unitId: string, example: number) =>
+  `/api/v1/grammar/units/${encodeURIComponent(unitId)}/audio?example=${example}`;
+export const getGrammarSearchIndex = (language: Language) =>
+  api<{ id: string; text: string }[]>(`/api/v1/grammar/search-index?language=${language}`);
 export const getGrammarUnit = (unitId: string) =>
   api<GrammarUnit>(`/api/v1/grammar/units/${encodeURIComponent(unitId)}`, { cache: "no-store" });
 export const startGrammarLesson = (unitId: string) =>
@@ -541,10 +548,29 @@ export const completeGrammar = (sessionId: string) =>
 export interface WeakSpots {
   language: Language;
   window_days: number;
-  words: { lemma: string; gender: string | null; translation: string; errors: number; last_error_at: string; tags: string[] }[];
+  words: { item_id: string; lemma: string; gender: string | null; translation: string; errors: number; last_error_at: string; tags: string[] }[];
   units: { id: string; title: string; level: string; errors: number; last_error_at: string; tags: string[] }[];
   tags: [string, number][];
 }
+
+export interface LessonPreview {
+  scene_title: string | null;
+  new_words: number;
+  review_words: number;
+}
+
+export const getLessonPreview = (language: Language) =>
+  api<LessonPreview>(`/api/v1/learning/next-lesson?language=${language}`, { cache: "no-store" });
+
+export interface LanguageSummary {
+  language: Language;
+  introduced: number;
+  known: number;
+  due_now: number;
+}
+
+export const getLanguageSummaries = () =>
+  api<LanguageSummary[]>("/api/v1/learning/languages", { cache: "no-store" });
 
 export const getWeakSpots = (language: Language) =>
   api<WeakSpots>(`/api/v1/learning/weak-spots?language=${language}`, { cache: "no-store" });
@@ -594,29 +620,6 @@ export interface StoryArchiveItem {
   targets: string[];
 }
 
-export interface LibraryStorySummary {
-  slug: string;
-  level: CefrLevel;
-  title: string;
-  title_cs: string;
-  line_count: number;
-  question_count: number;
-  review_status: "unreviewed" | "reviewed";
-}
-export interface LibraryStory extends Omit<LibraryStorySummary, "line_count" | "question_count"> {
-  lines: { speaker: string | null; text: string; cs: string }[];
-  stretch: { word: string; cs: string }[];
-  questions: { question: string; options: string[] }[];
-}
-export const listLibraryStories = (language: Language, level?: CefrLevel) =>
-  api<LibraryStorySummary[]>(`/api/v1/story-library?language=${language}${level ? `&level=${level}` : ""}`, { cache: "no-store" });
-export const getLibraryStory = (language: Language, slug: string) =>
-  api<LibraryStory>(`/api/v1/story-library/${encodeURIComponent(slug)}?language=${language}`, { cache: "no-store" });
-export const answerLibraryStory = (language: Language, slug: string, question: number, choice: number) =>
-  api<{ correct: boolean; answer: number }>(`/api/v1/story-library/${encodeURIComponent(slug)}/answer?language=${language}`, { json: { question, choice } });
-export const answerLibraryStoryText = (language: Language, slug: string, question: number, text: string) =>
-  api<{ correct: boolean; answer: number }>(`/api/v1/story-library/${encodeURIComponent(slug)}/answer?language=${language}`, { json: { question, text } });
-
 export const getStoryToday = (language: Language) =>
   api<{ model_available: boolean; story: Story | null }>(`/api/v1/stories/today?language=${language}`, {
     cache: "no-store",
@@ -635,6 +638,48 @@ export const answerStoryQuestion = (storyId: string, index: number, choice: numb
     json: { choice },
   });
 export const storyAudioUrl = (storyId: string, line: number) => `/api/v1/stories/${storyId}/audio?line=${line}`;
+
+// ---------------------------------------------------------------- curated story library
+
+export interface LibraryStorySummary {
+  slug: string;
+  level: CefrLevel;
+  title: string;
+  title_cs: string;
+  kind: "story" | "dialogue";
+  lines: number;
+  stretch: number;
+}
+export interface StoryLibrary {
+  language: Language;
+  review_status: "unreviewed" | "reviewed";
+  source: string;
+  license: string;
+  stories: LibraryStorySummary[];
+}
+export interface LibraryStory {
+  slug: string;
+  language: Language;
+  level: CefrLevel;
+  title: string;
+  title_cs: string;
+  kind: "story" | "dialogue";
+  lines: { speaker: string | null; text: string; cs: string }[];
+  stretch: { word: string; cs: string }[];
+  questions: { question: string; options: string[] }[];
+  review_status: "unreviewed" | "reviewed";
+}
+export const getStoryLibrary = (language: Language) => api<StoryLibrary>(`/api/v1/stories/library?language=${language}`);
+export const libraryAudioUrl = (language: Language, slug: string, line: number) =>
+  `/api/v1/stories/library/${encodeURIComponent(slug)}/audio?language=${language}&line=${line}`;
+/** A comprehension answer: a picked option, or (under hard practice difficulty) typed text. */
+export const answerLibraryQuestion = (language: Language, slug: string, index: number, answer: { choice: number } | { text: string }) =>
+  api<{ correct: boolean; answer_index: number }>(
+    `/api/v1/stories/library/${encodeURIComponent(slug)}/questions/${index}/answer?language=${language}`,
+    { json: answer },
+  );
+export const getLibraryStory = (language: Language, slug: string) =>
+  api<LibraryStory>(`/api/v1/stories/library/${encodeURIComponent(slug)}?language=${language}`);
 
 // ---------------------------------------------------------------- CEFR diagnostic (placement part 2)
 
@@ -759,8 +804,21 @@ export interface Insights {
   today: string;
   heatmap: { date: string; graded: number; practice: number }[];
   active_days: number;
-  accuracy: { week: string; answered: number; correct: number }[];
-  mistakes: { tag: string; count: number }[];
+  /** Graded first-try answers per week, in total and per skill (recognition, recall, grammar). */
+  accuracy: {
+    week: string;
+    answered: number;
+    correct: number;
+    recognition: { answered: number; correct: number };
+    recall: { answered: number; correct: number };
+    grammar: { answered: number; correct: number };
+  }[];
+  /** Error types in graded answers (last 60 days), each with up to six words or topics behind it. */
+  mistakes: {
+    tag: string;
+    count: number;
+    items: { kind: "word" | "grammar"; id: string; label: string; detail: string; count: number }[];
+  }[];
   forecast: {
     date: string;
     words: number;
@@ -768,7 +826,7 @@ export interface Insights {
     word_items: { id: string; lemma: string; gender: string | null; translation: string }[];
     grammar_items: { id: string; title: string; level: string }[];
   }[];
-  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number };
+  funnel: { introduced: number; passive: number; active: number; known: number; mastered: number; fading: number };
 }
 
 export interface ActivityDay {
@@ -818,6 +876,17 @@ export interface WordDetail extends Omit<WordRow, "due"> {
   review_streak: number;
   history: { at: string; correct: boolean; graded: boolean; task: string; mode: string; error_tag: string | null }[];
   note: string | null;
+  /** Lesson scenes that teach the word; `line` is the scene line using it as written, if any. */
+  contexts: { topic_id: string; title: string; line: string | null; line_cs: string | null; match: string | null }[];
+  /** First-try, hint-free correct check answers toward the two separate knowledge states. */
+  evidence: {
+    recognition: { correct: number; days: number };
+    production: { correct: number; days: number };
+    required_correct: number;
+    required_days: number;
+    production_required_correct: number;
+    production_required_days: number;
+  };
 }
 
 // Vocabulary groups: levels by frequency rank (indicative CEFR, "extension" past the C1 band) and
@@ -840,6 +909,8 @@ export interface WordGroups {
   topics: WordTopicGroup[];
 }
 export type WordScope = { kind: "level"; key: string; label: string } | { kind: "topic"; id: string; label: string };
+// Flashcard decks also accept the learner's unresolved check mistakes as a scope.
+export type DeckScope = WordScope | { kind: "weak"; label: string } | { kind: "picked"; ids: string[]; label: string };
 
 export interface DeckCard {
   id: string;
@@ -865,15 +936,20 @@ function scopeParams(p: URLSearchParams, scope: WordScope | null | undefined) {
   if (scope?.kind === "topic") p.set("topic", scope.id);
 }
 
-export function getWordDeck(language: Language, scope: WordScope, signal?: AbortSignal) {
+export function getWordDeck(language: Language, scope: DeckScope, signal?: AbortSignal) {
   const p = new URLSearchParams({ language });
-  scopeParams(p, scope);
+  if (scope.kind === "weak") p.set("weak", "true");
+  else if (scope.kind === "picked") scope.ids.slice(0, 100).forEach((id) => p.append("ids", id));
+  else scopeParams(p, scope);
   return api<Deck>(`/api/v1/words/deck?${p}`, { signal, cache: "no-store" });
 }
 
+export type WordSort = "rank" | "review" | "errors" | "recent";
+export type WordKind = "noun" | "verb" | "adj" | "adv" | "other";
+
 export function listWords(
   language: Language,
-  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number; scope?: WordScope | null },
+  opts: { q?: string; status?: WordStatus | null; due?: boolean; offset?: number; limit?: number; scope?: WordScope | null; sort?: WordSort; kind?: WordKind | null },
   signal?: AbortSignal,
 ) {
   const p = new URLSearchParams({ language });
@@ -883,6 +959,8 @@ export function listWords(
   if (opts.due) p.set("due", "true");
   if (opts.offset) p.set("offset", String(opts.offset));
   if (opts.limit) p.set("limit", String(opts.limit));
+  if (opts.sort && opts.sort !== "rank") p.set("sort", opts.sort);
+  if (opts.kind) p.set("kind", opts.kind);
   return api<WordList>(`/api/v1/words?${p}`, { signal });
 }
 export const getWord = (id: string) => api<WordDetail>(`/api/v1/words/${id}`);
@@ -976,8 +1054,8 @@ export interface PracticeSentence {
   lemma: string;
   translation: string;
 }
-export const getPracticeSentences = (language: Language) =>
-  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}`);
+export const getPracticeSentences = (language: Language, order: "random" | "recent" = "random") =>
+  api<PracticeSentence[]>(`/api/v1/dictation/sentences?language=${language}&order=${order}`);
 
 // ---------------------------------------------------------------- gender sorter (ungraded)
 

@@ -158,7 +158,7 @@ export function Welcome({ me }: { me: Me }) {
               <Button className="!py-4" onClick={() => void finish("/placement")}>
                 {t.placement}
               </Button>
-              <Button variant="secondary" className="!py-4" onClick={() => void finish("/lesson")}>
+              <Button variant="secondary" className="!py-4" onClick={() => void finish("/lesson/vocabulary")}>
                 {t.firstLesson}
               </Button>
             </div>

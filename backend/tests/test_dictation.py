@@ -1,6 +1,7 @@
 """Dictation: word-level comparison and the ungraded API."""
 
 import uuid
+from datetime import timedelta
 
 import pytest
 from sqlalchemy import func, select
@@ -105,3 +106,38 @@ async def test_dictation_uses_only_taught_words_and_records_nothing(db, client, 
         "/api/v1/dictation/check", json={"item_id": str(gehen), "text": "x"}, headers=csrf(me)
     )
     assert r.status_code == 404
+
+
+async def test_shadowing_recent_order_lists_latest_lesson_words_first(db, client, clock):
+    me = await setup_parent(client)
+    await upsert_lexicon(
+        [
+            LexiconRow(language="de", rank=r, lemma=w, translation_cs=c, example=e)
+            for r, w, c, e in [
+                (1, "Haus", "dům", "Das Haus ist groß."),
+                (2, "gehen", "jít", "Wir gehen."),
+                (3, "Hund", "pes", "Der Hund schläft."),
+                (4, "Baum", "strom", "Der Baum ist alt."),
+            ]
+        ]
+    )
+    async for s in get_session():
+        items = {i.lemma: i for i in (await s.execute(select(LexiconItem))).scalars()}
+        # Haus three days ago, Hund and gehen yesterday, Baum never taught.
+        for lemma, days in [("Haus", 3), ("Hund", 1), ("gehen", 1)]:
+            s.add(
+                UserWordProgress(
+                    user_id=uuid.UUID(me["acting"]["id"]),
+                    lexicon_item_id=items[lemma].id,
+                    introduced_at=clock.now - timedelta(days=days),
+                    policy_version="v4",
+                )
+            )
+        await s.commit()
+    recent = (await client.get("/api/v1/dictation/sentences?language=de&order=recent")).json()
+    # Newest lesson first, curriculum rank within the same lesson; untaught words never appear.
+    assert [x["lemma"] for x in recent] == ["gehen", "Hund", "Haus"]
+    shuffled = (await client.get("/api/v1/dictation/sentences?language=de")).json()
+    assert sorted(x["lemma"] for x in shuffled) == ["Haus", "Hund", "gehen"]
+    bad = await client.get("/api/v1/dictation/sentences?language=de&order=rank")
+    assert bad.status_code == 422

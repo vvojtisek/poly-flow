@@ -88,6 +88,30 @@ class HistoryOut(BaseModel):
     error_tag: str | None
 
 
+class WordContextOut(BaseModel):
+    topic_id: uuid.UUID
+    title: str
+    line: str | None  # the scene line that uses the word as written; None when only inflected
+    line_cs: str | None
+    match: str | None  # the word as it appears in `line` (may be inflected), for highlighting
+
+
+class EvidenceTallyOut(BaseModel):
+    correct: int  # first-try, hint-free correct check answers
+    days: int  # distinct local days with such an answer
+
+
+class WordEvidenceOut(BaseModel):
+    """Check evidence toward the two separate knowledge states and their thresholds."""
+
+    recognition: EvidenceTallyOut  # any correct check answer (production also shows recognition)
+    production: EvidenceTallyOut  # correct written or spoken recall only
+    required_correct: int
+    required_days: int
+    production_required_correct: int
+    production_required_days: int
+
+
 class WordDetailOut(BaseModel):
     id: uuid.UUID
     language: Language
@@ -111,6 +135,8 @@ class WordDetailOut(BaseModel):
     review_streak: int
     history: list[HistoryOut]
     note: str | None = None  # the learner's own memory hook
+    contexts: list[WordContextOut] = []  # lesson scenes that teach the word
+    evidence: WordEvidenceOut
 
 
 class NoteIn(BaseModel):
@@ -183,6 +209,8 @@ async def list_words(
     limit: Annotated[int, Query(ge=1, le=200)] = 60,
     level: Annotated[str | None, Query(max_length=16)] = None,
     topic: uuid.UUID | None = None,
+    sort: Literal["rank", "review", "errors", "recent"] = "rank",
+    kind: Literal["noun", "verb", "adj", "adv", "other"] | None = None,
 ) -> WordListOut:
     try:
         out = await svc.list_words(
@@ -197,6 +225,8 @@ async def list_words(
             limit=limit,
             level=level,
             topic=topic,
+            sort=sort,
+            kind=kind,
         )
     except LearningError as exc:
         raise _http(exc) from exc
@@ -220,14 +250,24 @@ async def word_deck(
     language: Annotated[Language | None, Query()] = None,
     level: Annotated[str | None, Query(max_length=16)] = None,
     topic: uuid.UUID | None = None,
+    weak: bool = False,
+    ids: Annotated[list[uuid.UUID] | None, Query(max_length=100)] = None,
 ) -> DeckOut:
-    """Flashcards from the profile's own words in one level or one topic (exactly one scope).
+    """Flashcards from the profile's own words in one level, one topic, its unresolved check
+    mistakes (`weak=true`) or a hand-picked list (`ids`, up to 100); exactly one scope.
 
     Practice only: flipping and marking cards is not recorded and does not change progress.
     """
     try:
         out = await svc.word_deck(
-            db, auth.acting, language or auth.acting.active_language, now, level=level, topic=topic
+            db,
+            auth.acting,
+            language or auth.acting.active_language,
+            now,
+            level=level,
+            topic=topic,
+            weak=weak,
+            ids=ids,
         )
     except LearningError as exc:
         raise _http(exc) from exc

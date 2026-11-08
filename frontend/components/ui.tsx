@@ -1,6 +1,7 @@
 import { useId, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from "react";
 
 import { BuildInfo } from "@/components/BuildInfo";
+import { cs } from "@/lib/i18n/cs";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-semibold transition disabled:cursor-not-allowed disabled:opacity-50";
@@ -68,5 +69,41 @@ export function CenteredCard({ title, children }: { title: string; children: Rea
       </div>
       <BuildInfo className="justify-center text-center" />
     </main>
+  );
+}
+
+/**
+ * Placeholder blocks shown while a panel loads, sized like the content so the page does not jump.
+ * Announced once as "loading" to screen readers; the shimmer respects reduced motion.
+ */
+export function Skeleton({ lines = 3, className = "" }: { lines?: number; className?: string }) {
+  return (
+    <div role="status" aria-live="polite" className={`flex flex-col gap-2 ${className}`}>
+      <span className="sr-only">{cs.common.loading}</span>
+      {Array.from({ length: lines }, (_, i) => (
+        <span
+          key={i}
+          aria-hidden
+          className="h-4 rounded-md bg-slate-200/80 motion-safe:animate-pulse dark:bg-slate-800"
+          style={{ width: `${[92, 76, 84, 60, 70][i % 5]}%` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** A failed panel: says so and offers to load it again, instead of a dead end or endless loading. */
+export function RetryNotice({ onRetry, text = cs.common.error }: { onRetry: () => void; text?: string }) {
+  return (
+    <div role="alert" className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-200">
+      <span>{text}</span>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="rounded-lg border border-red-300 px-2.5 py-1 text-xs font-semibold hover:bg-red-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:border-red-800 dark:hover:bg-red-900"
+      >
+        {cs.common.retry}
+      </button>
+    </div>
   );
 }

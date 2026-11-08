@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useRef, type KeyboardEvent } from "react";
+import { forwardRef, useImperativeHandle, useLayoutEffect, useRef, type KeyboardEvent } from "react";
 
 import { Kbd } from "@/components/Kbd";
 import type { Language } from "@/lib/api";
@@ -27,16 +27,23 @@ export const AnswerInput = forwardRef<
   const chars = language === "cs" ? [] : SPECIAL_CHARS[language];
   const legend = language === "cs" ? [] : altCharLegend(language);
 
+  // Caret to restore once React has committed the inserted character. A layout effect runs
+  // before the next key event is handled; a requestAnimationFrame callback could run after a
+  // fast typist's next letter and move the caret back in front of it ("heißen" -> "heißne").
+  const pendingCaret = useRef<number | null>(null);
+  useLayoutEffect(() => {
+    const el = inputRef.current;
+    const caret = pendingCaret.current;
+    if (el === null || caret === null || el.value !== value) return;
+    pendingCaret.current = null;
+    el.focus();
+    el.setSelectionRange(caret, caret);
+  }, [value]);
+
   function insert(char: string) {
     const { value: next, caret } = insertAtCaret(inputRef.current, value, char);
+    pendingCaret.current = caret;
     onChange(next);
-    // Restore the caret after React re-renders the controlled value.
-    requestAnimationFrame(() => {
-      const el = inputRef.current;
-      if (!el) return;
-      el.focus();
-      el.setSelectionRange(caret, caret);
-    });
   }
 
   function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {

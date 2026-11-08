@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { PlayButton } from "@/components/PlayButton";
 import { SessionProgress } from "@/components/SessionProgress";
 import { Button, Notice } from "@/components/ui";
-import { getWordDeck, myWordAudioUrl, type Deck, type DeckCard, type Language, type WordScope } from "@/lib/api";
+import { getWordDeck, myWordAudioUrl, type Deck, type DeckCard, type DeckScope, type Language } from "@/lib/api";
 import { cs } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
 
@@ -31,10 +31,12 @@ export function FlashcardSession({
   language,
   scope,
   onClose,
+  closeLabel = t.close,
 }: {
   language: Language;
-  scope: WordScope;
+  scope: DeckScope;
   onClose: () => void;
+  closeLabel?: string;
 }) {
   const [deck, setDeck] = useState<Deck | null>(null);
   const [failed, setFailed] = useState(false);
@@ -68,6 +70,17 @@ export function FlashcardSession({
     setMissed(new Set());
   }
 
+  // Second round with only the cards marked "again" in this round.
+  function restartMissed() {
+    if (!missed.size) return;
+    setOrder([...missed]);
+    setIndex(0);
+    setFlipped(false);
+    setFirstTry(0);
+    setAgain(0);
+    setMissed(new Set());
+  }
+
   function mark(known: boolean) {
     const cardIndex = order[index]!;
     if (known) {
@@ -87,7 +100,7 @@ export function FlashcardSession({
         <Layers className="size-5 text-brand-500" aria-hidden /> {t.title(scope.label)}
       </h2>
       <Button variant="ghost" className="!px-2 !py-1 text-sm" onClick={onClose}>
-        <ArrowLeft className="size-4" aria-hidden /> {t.close}
+        <ArrowLeft className="size-4" aria-hidden /> {closeLabel}
       </Button>
     </header>
   );
@@ -111,10 +124,17 @@ export function FlashcardSession({
         <h3 className="text-lg font-bold">{t.doneTitle}</h3>
         <p className="text-sm text-slate-600 dark:text-slate-300">{t.doneSummary(firstTry, again)}</p>
         <div className="flex flex-wrap justify-center gap-2">
+          {missed.size > 0 && (
+            <Button onClick={restartMissed} autoFocus>
+              <RotateCcw className="size-4" aria-hidden /> {t.restartMissed(missed.size)}
+            </Button>
+          )}
           <Button variant="secondary" onClick={restart}>
             <RotateCcw className="size-4" aria-hidden /> {t.restart}
           </Button>
-          <Button onClick={onClose}>{t.close}</Button>
+          <Button variant={missed.size > 0 ? "secondary" : "primary"} onClick={onClose}>
+            {closeLabel}
+          </Button>
         </div>
       </div>,
     );

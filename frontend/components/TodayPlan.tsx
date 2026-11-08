@@ -1,23 +1,25 @@
 "use client";
 
-import { ArrowRight, BookOpen, BookOpenText, ClipboardCheck, GraduationCap, type LucideIcon } from "lucide-react";
+import { BookOpen, BookOpenText, ClipboardCheck, GraduationCap, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { KeyHint } from "@/components/Kbd";
-import { Button } from "@/components/ui";
-import { getToday, listStoryArchive, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
+import { RetryNotice, Skeleton } from "@/components/ui";
+import { getToday, listStoryArchive, updateOwnProfile, type Language, type StoryArchiveItem, type TodayPlan as Plan } from "@/lib/api";
+import { useAuth } from "@/lib/auth";
 import { cs } from "@/lib/i18n/cs";
 import { useHotkeys } from "@/lib/keyboard";
 
 const t = cs.today;
-const STEP: Record<Plan["steps"][number]["kind"], { icon: LucideIcon; href: string }> = {
+export const STEP: Record<Plan["steps"][number]["kind"], { icon: LucideIcon; href: string }> = {
   check: { icon: ClipboardCheck, href: "/check" },
-  grammar_check: { icon: GraduationCap, href: "/grammar" },
-  lesson: { icon: BookOpen, href: "/lesson" },
+  grammar_check: { icon: GraduationCap, href: "/grammar/check" },
+  lesson: { icon: BookOpen, href: "/lesson/vocabulary" },
   reading: { icon: BookOpenText, href: "/stories" },
 };
+
+const GOALS = [5, 10, 15, 20, 30];
 
 /** Ring showing today's (estimated) minutes against the profile's own goal. */
 function GoalRing({ minutes, goal }: { minutes: number; goal: number }) {
@@ -48,20 +50,33 @@ function GoalRing({ minutes, goal }: { minutes: number; goal: number }) {
   );
 }
 
-export function TodayPlan({ language, profileId }: { language: Language; profileId: string }) {
+/**
+ * Today's goal ring and ordered steps. The dashboard's single primary button (in the hero) follows
+ * the first step, so this panel has no button of its own; `onPlan` hands the plan up.
+ */
+export function TodayPlan({ language, profileId, onPlan }: { language: Language; profileId: string; onPlan?: (plan: Plan) => void }) {
   const router = useRouter();
+  const { state, setMe } = useAuth();
   const [plan, setPlan] = useState<Plan | null>(null);
+  const [editGoal, setEditGoal] = useState(false);
+  const [goalFailed, setGoalFailed] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const [recentStories, setRecentStories] = useState<StoryArchiveItem[]>([]);
-  useHotkeys(); // Enter on the dashboard continues with the first step
+  useHotkeys(); // Enter and digit keys on the dashboard
+  useEffect(() => {
+    if (plan) onPlan?.(plan);
+  }, [plan, onPlan]);
   useEffect(() => {
     let cancelled = false;
+    setFailed(false);
     getToday(language)
       .then((p) => !cancelled && setPlan(p))
-      .catch(() => undefined);
+      .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
     };
-  }, [language, profileId]);
+  }, [language, profileId, attempt]);
   useEffect(() => {
     let cancelled = false;
     listStoryArchive(language)
@@ -69,8 +84,32 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
       .catch(() => undefined);
     return () => { cancelled = true; };
   }, [language, profileId]);
-  if (!plan) return null;
-  const first = plan.steps[0];
+  // Changing the goal here saves the profile setting and re-reads the plan (its steps depend on it).
+  async function setGoal(minutes: number) {
+    setGoalFailed(false);
+    try {
+      const acting = await updateOwnProfile({ settings: { daily_goal_minutes: minutes } });
+      if (state.kind === "signed_in") setMe({ ...state.me, acting, principal: state.me.principal.id === acting.id ? acting : state.me.principal });
+      setPlan(await getToday(language));
+      setEditGoal(false);
+    } catch {
+      setGoalFailed(true);
+    }
+  }
+
+  if (!plan && failed)
+    return (
+      <section aria-label={t.title} className="rounded-3xl border border-brand-500/30 p-4 lg:col-span-3">
+        <RetryNotice text={t.failed} onRetry={() => setAttempt((n) => n + 1)} />
+      </section>
+    );
+  if (!plan)
+    return (
+      <section aria-label={t.title} className="flex items-center gap-4 rounded-3xl border border-brand-500/30 p-4 lg:col-span-3">
+        <span aria-hidden className="size-24 shrink-0 rounded-full border-8 border-slate-100 motion-safe:animate-pulse dark:border-slate-800" />
+        <Skeleton lines={3} className="flex-1" />
+      </section>
+    );
   const done = plan.minutes_today >= plan.goal_minutes;
   return (
     <section className="flex flex-col gap-4 rounded-3xl border border-brand-500/30 bg-gradient-to-br from-brand-500/10 via-white to-white p-4 shadow-sm dark:via-slate-900 dark:to-slate-900 sm:flex-row sm:items-center lg:col-span-3">
@@ -80,6 +119,37 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
           <h2 className="text-lg font-bold">{t.title}</h2>
           <p className="text-sm text-slate-600 dark:text-slate-300">{done ? t.goalMet : t.goal(plan.goal_minutes)}</p>
           <p className="text-xs text-slate-500">{t.estimate(plan.answers_today)}</p>
+          <button
+            type="button"
+            aria-expanded={editGoal}
+            onClick={() => setEditGoal((v) => !v)}
+            className="mt-1 self-start rounded-md text-xs font-semibold text-brand-600 underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 dark:text-brand-50"
+          >
+            {t.changeGoal}
+          </button>
+          {editGoal && (
+            <div role="radiogroup" aria-label={t.changeGoal} className="mt-1 flex flex-wrap gap-1">
+              {GOALS.map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  role="radio"
+                  aria-checked={plan.goal_minutes === g}
+                  onClick={() => void setGoal(g)}
+                  className={`rounded-lg px-2.5 py-1 text-xs font-semibold tabular-nums focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 ${
+                    plan.goal_minutes === g ? "bg-brand-500 text-white" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                  }`}
+                >
+                  {g} min
+                </button>
+              ))}
+            </div>
+          )}
+          {goalFailed && (
+            <p role="alert" className="text-xs text-rose-600">
+              {cs.common.error}
+            </p>
+          )}
         </div>
       </div>
       <ol className="flex flex-1 flex-wrap gap-2">
@@ -117,11 +187,6 @@ export function TodayPlan({ language, profileId }: { language: Language; profile
             </Link>
           ))}
         </section>
-      )}
-      {first && (
-        <Button className="shrink-0 !py-4" data-hotkey="enter" onClick={() => router.push(STEP[first.kind].href)}>
-          {t.go} <ArrowRight className="size-5" aria-hidden /> <KeyHint k="Enter" />
-        </Button>
       )}
       {plan.tomorrow_due > 0 && <p className="text-xs text-slate-500 sm:hidden">{t.tomorrow(plan.tomorrow_due)}</p>}
     </section>
