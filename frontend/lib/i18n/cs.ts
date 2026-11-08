@@ -1448,6 +1448,8 @@ export const cs = {
     shown: (n: number, total: number) => (n === total ? `${total} textů` : `${n} z ${total} textů`),
     noMatch: "Tomuto výběru neodpovídá žádný text.",
     resetFilters: "Zrušit filtry",
+    storyNav: "Předchozí a další příběh",
+    keys: "P číst nahlas / zastavit · T překlad · N/→ další příběh · B/← předchozí · Esc knihovna",
     readAloud: "Přečíst nahlas",
     stopReading: "Zastavit čtení",
     playLine: (n: number) => `Přehrát větu ${n}`,

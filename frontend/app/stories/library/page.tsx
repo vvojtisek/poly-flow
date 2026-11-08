@@ -1,11 +1,13 @@
 "use client";
 
-import { ArrowLeft, BookOpenText, CheckCircle2, XCircle, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
+import { ArrowLeft, BookOpenText, ChevronLeft, ChevronRight, CheckCircle2, XCircle, Languages, Library, MessagesSquare, Play, Square } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AppShell, FullPageStatus, LanguagePicker } from "@/components/AppShell";
+import { Kbd } from "@/components/Kbd";
 import { PlayButton, SlowToggle } from "@/components/PlayButton";
+import { isTypingTarget } from "@/lib/keyboard";
 import { Notice } from "@/components/ui";
 import { clipSrc, playToEnd, stop } from "@/lib/audio";
 import { answerLibraryQuestion, getDiagnosticInfo, getLibraryStory, getProgress, getStoryLibrary, libraryAudioUrl, type CefrLevel, type Language, type LibraryStory, type StoryLibrary } from "@/lib/api";
@@ -261,7 +263,27 @@ function Questions({ language, slug, questions, onAllDone }: { language: Languag
 }
 
 /** One story, read line by line. Ungraded: no questions are scored and nothing is recorded. */
-function Reader({ language, slug, onBack, read, onRead }: { language: Language; slug: string; onBack: () => void; read: boolean; onRead: () => void }) {
+type Neighbour = { slug: string; title: string } | null;
+
+function Reader({
+  language,
+  slug,
+  onBack,
+  read,
+  onRead,
+  prev,
+  next,
+  onOpen,
+}: {
+  language: Language;
+  slug: string;
+  onBack: () => void;
+  read: boolean;
+  onRead: () => void;
+  prev: Neighbour;
+  next: Neighbour;
+  onOpen: (slug: string) => void;
+}) {
   const [story, setStory] = useState<LibraryStory | null>(null);
   const [failed, setFailed] = useState(false);
   const [showCs, setShowCs] = useState(false);
@@ -300,6 +322,28 @@ function Reader({ language, slug, onBack, read, onRead }: { language: Language; 
     stop();
     setReading(null);
   }, []);
+  // Reader keys: P read aloud / stop, T translation, N/→ next story, B/← previous, Esc library.
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || e.repeat || isTypingTarget(e.target)) return;
+      const actions: Record<string, () => void> = {
+        KeyP: () => (reading === null ? void readFrom(0) : stopReading()),
+        KeyT: () => setShowCs((v) => !v),
+        KeyN: () => next && onOpen(next.slug),
+        ArrowRight: () => next && onOpen(next.slug),
+        KeyB: () => prev && onOpen(prev.slug),
+        ArrowLeft: () => prev && onOpen(prev.slug),
+        Escape: onBack,
+      };
+      const run = actions[e.code];
+      if (run && story) {
+        e.preventDefault();
+        run();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [reading, readFrom, stopReading, next, prev, onOpen, onBack, story]);
   // Leaving the story stops its voice.
   useEffect(() => () => {
     run.current += 1;
@@ -396,6 +440,21 @@ function Reader({ language, slug, onBack, read, onRead }: { language: Language; 
           >
             <CheckCircle2 className="size-4" aria-hidden /> {read ? t.backRead : t.doneBack}
           </button>
+          <nav aria-label={t.storyNav} className="flex flex-wrap justify-between gap-2 border-t border-slate-200 pt-3 text-sm dark:border-slate-800">
+            {prev ? (
+              <button type="button" onClick={() => onOpen(prev.slug)} className="inline-flex min-h-11 max-w-[48%] items-center gap-1 rounded-lg px-2 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
+                <ChevronLeft className="size-4 shrink-0" aria-hidden /> <span lang={language} className="truncate">{prev.title}</span>
+                <span className="hidden lg:inline"><Kbd>B</Kbd></span>
+              </button>
+            ) : <span />}
+            {next && (
+              <button type="button" onClick={() => onOpen(next.slug)} className="inline-flex min-h-11 max-w-[48%] items-center gap-1 rounded-lg px-2 text-right font-semibold text-brand-700 hover:bg-brand-500/10 dark:text-brand-200">
+                <span lang={language} className="truncate">{next.title}</span> <ChevronRight className="size-4 shrink-0" aria-hidden />
+                <span className="hidden lg:inline"><Kbd>N</Kbd></span>
+              </button>
+            )}
+          </nav>
+          <p className="hidden text-xs text-slate-500 lg:block">{t.keys}</p>
         </>
       )}
     </article>
@@ -482,6 +541,14 @@ export default function StoryLibraryPage() {
   }, []);
   const filtered = filters.q.trim() !== "" || filters.level !== null || filters.kind !== null || filters.unread;
   const shown = library ? applyFilters(library.stories, filters, read) : [];
+  // Previous/next follow the shelf the learner came from: the filtered list when it holds this
+  // story, the whole library otherwise (e.g. opened from a link).
+  const order = shown.some((x) => x.slug === slug) ? shown : (library?.stories ?? []);
+  const at = order.findIndex((x) => x.slug === slug);
+  const neighbour = (d: number): Neighbour => {
+    const x = at >= 0 ? order[at + d] : undefined;
+    return x ? { slug: x.slug, title: x.title } : null;
+  };
 
   // The open story lives in the URL (?story=slug), so a link, reload or Back reopens it.
   useEffect(() => {
@@ -537,7 +604,17 @@ export default function StoryLibraryPage() {
         {!library && !failed && <p className="text-sm text-slate-500">{cs.common.loading}</p>}
         {library &&
           (slug ? (
-            <Reader key={`${language}:${slug}`} language={language} slug={slug} onBack={() => setSlug(null)} read={read.has(slug)} onRead={() => markRead(slug)} />
+            <Reader
+              key={`${language}:${slug}`}
+              language={language}
+              slug={slug}
+              onBack={() => setSlug(null)}
+              read={read.has(slug)}
+              onRead={() => markRead(slug)}
+              prev={neighbour(-1)}
+              next={neighbour(1)}
+              onOpen={setSlug}
+            />
           ) : (
             <>
             {library.stories.length > 0 && <FilterBar filters={filters} onChange={setFilters} shown={shown.length} total={library.stories.length} />}

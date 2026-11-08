@@ -2205,3 +2205,13 @@ Vlad approves a push.
 **Implemented Solution:** The server now classifies a story as dialogue when at least half its lines are spoken (de: 73 dialogue, 17 narration), and the test asserts both kinds occur. The shelf has a search over target-language and Czech titles (accent-insensitive, ß matches ss, '/' focuses it), level chips, a kind chip (Vyprávění / Rozhovory), 'Jen nepřečtené', and a live 'N z 90 textů' count. Filters are mirrored in the URL (?q, level, kind, unread) alongside ?story=. A filtered empty result offers 'Zrušit filtry'. The next-to-read card is shown only without filters.
 
 **Verification:** test_library_api.py: 5 passed. b111.js at 390px: B1 gives 25 z 90, B1 + Rozhovory gives 22. '/' then 'desTnik' gives 2 hits (Czech titles with deštník, without accents). 'kühe' and 'kuhe' each give 1. q=kuhe survives a reload. 'zzzz' shows the empty state, and reset gives 90 with the next card back. No console errors, no overflow. Typecheck, build, ruff passed.
+
+## Global Cycle 112/120 | Page: [/stories/library] (Page Cycle 7/15)
+
+**Summary:** move between stories and control the reader from the keyboard
+
+**Observed Problem:** After finishing a story, the only way on was back to the shelf, scrolling to find the next card, and opening it, which breaks a reading session into separate trips. The reader had no keys: read-aloud, translation and leaving all needed the mouse.
+
+**Implemented Solution:** The reader ends with previous/next story buttons, showing truncated titles and key hints on desktop. They follow the shelf the learner came from: the filtered list when it contains the story, otherwise the whole library (e.g. when opened from a link). Keys: P starts or stops read-aloud, T toggles the translation, N/→ and B/← go to the next or previous story, Esc returns to the shelf. Typing targets and modifier keys are ignored. The key legend is shown on desktop.
+
+**Verification:** b112.js (1280px, ?level=B1): opening the first B1 story gives b1-01-urgent-meeting. N goes to Das intelligente Haus, → to Entschuldigungen ohne Ende, B back to Das intelligente Haus, with the URL keeping level=B1. T shows Czech. The nav reads 'Dringende Besprechung B … Entschuldigungen ohne Ende N'. Esc returns to ?level=B1 with 25 cards. No console errors. Typecheck, build, ruff passed.
