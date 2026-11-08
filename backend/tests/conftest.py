@@ -72,3 +72,10 @@ async def client() -> AsyncIterator:
 
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://testserver") as c:
         yield c
+    # Like the DB engine, the cached Redis client's pooled connections belong to this test's
+    # event loop; a later test reusing one fails with "Event loop is closed" depending on order.
+    from app.api.deps import _redis
+
+    if _redis.cache_info().currsize:
+        await _redis().aclose()
+        _redis.cache_clear()
