@@ -612,11 +612,26 @@ export default function StoryLibraryPage() {
   const filtered = filters.q.trim() !== "" || filters.level !== null || filters.kind !== null || filters.unread;
   const shown = library ? applyFilters(library.stories, filters, read) : [];
   // Previous/next follow the shelf the learner came from: the filtered list when it holds this
-  // story, the whole library otherwise (e.g. opened from a link).
-  const order = shown.some((x) => x.slug === slug) ? shown : (library?.stories ?? []);
-  const at = order.findIndex((x) => x.slug === slug);
+  // story, the whole library otherwise (e.g. opened from a link). The order is frozen when the
+  // reader opens, so finishing a story under "Jen nepřečtené" does not reshuffle next/previous.
+  const [trail, setTrail] = useState<string[] | null>(null);
+  const shownKey = shown.map((x) => x.slug).join(",");
+  useEffect(() => {
+    if (!slug || !library) {
+      setTrail(null);
+      return;
+    }
+    setTrail((cur) => {
+      if (cur?.includes(slug)) return cur;
+      const fromShelf = shownKey ? shownKey.split(",") : [];
+      return fromShelf.includes(slug) ? fromShelf : library.stories.map((x) => x.slug);
+    });
+  }, [slug, library, shownKey]);
+  const bySlug = new Map((library?.stories ?? []).map((x) => [x.slug, x]));
+  const order = trail ?? [];
+  const at = slug ? order.indexOf(slug) : -1;
   const neighbour = (d: number): Neighbour => {
-    const x = at >= 0 ? order[at + d] : undefined;
+    const x = at >= 0 ? bySlug.get(order[at + d] ?? "") : undefined;
     return x ? { slug: x.slug, title: x.title } : null;
   };
 

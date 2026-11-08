@@ -2255,3 +2255,13 @@ Vlad approves a push.
 **Implemented Solution:** The shelf and reader now fail into RetryNotices that name what failed and refetch it. A 404 from the reader is a distinct, calm state: 'Tento příběh tu není k dispozici. Vyber si jiný v knihovně.' with the back button, and no retry. Loading shows six skeleton cards for the shelf and a title-plus-text skeleton for the reader.
 
 **Verification:** b116.js with routed 500s and a 1.2 s delay: 6 shelf skeletons, then 'Knihovnu se nepodařilo načíst.'. Retry loads the shelf, and the routed story 500 shows 'Příběh se nepodařilo načíst.'. Retry opens Der Regenschirm. ?story=zz-missing shows the not-available note with Back. No console errors other than the forced ones. Typecheck, build, ruff passed.
+
+## Global Cycle 117/120 | Page: [/stories/library] (Page Cycle 12/15)
+
+**Summary:** keep next/previous stable when finishing a story under a filter
+
+**Observed Problem:** Previous/next were recomputed from the live filtered shelf. Under 'Jen nepřečtené', finishing a story removed it from the filtered list, so the reader fell back to whole-library order mid-session. In a narration-only filter, the next story after Die Diät switched from Der falsche Koffer to Das Hotel mit den Kühen, which is outside the learner's filter.
+
+**Implemented Solution:** When a story opens, the page freezes the order it came from: the filtered shelf if it contains the story, otherwise the whole library. Next/previous and N/B walk that frozen trail, and the trail is reset on returning to the shelf. Neighbours are looked up from the library by slug.
+
+**Verification:** b117b.js (?kind=story&unread=1): open Die Diät gives nav 'Der Wachhund … Der falsche Koffer'. After answering all questions (marked read) the nav is unchanged, and N opens Der falsche Koffer. Stashed baseline, same steps: after reading, the nav jumped to 'Der vergessene Geburtstag … Das Hotel mit den Kühen', and N left the filter. b117.js (A1 unread) is also stable. No console errors. Typecheck, build, ruff passed.
