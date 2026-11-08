@@ -270,7 +270,30 @@ const SIZE_KEY = "polyflow.library.size";
 
 type Neighbour = { slug: string; title: string } | null;
 
+// Session caches (per acting profile and language). The texts are static per deployment, so a
+// story read once opens instantly when the learner comes back to it or pages back and forth, and
+// the shelf paints from memory while a fresh copy loads in the background.
+const STORIES = new Map<string, LibraryStory>();
+const PENDING = new Map<string, Promise<LibraryStory>>();
+const LIBRARIES = new Map<string, StoryLibrary>();
+function loadStory(key: string, language: Language, slug: string): Promise<LibraryStory> {
+  const hit = STORIES.get(key);
+  if (hit) return Promise.resolve(hit);
+  let p = PENDING.get(key);
+  if (!p) {
+    p = getLibraryStory(language, slug)
+      .then((s) => {
+        STORIES.set(key, s);
+        return s;
+      })
+      .finally(() => PENDING.delete(key));
+    PENDING.set(key, p);
+  }
+  return p;
+}
+
 function Reader({
+  profile,
   language,
   slug,
   onBack,
@@ -280,6 +303,7 @@ function Reader({
   next,
   onOpen,
 }: {
+  profile: string;
   language: Language;
   slug: string;
   onBack: () => void;
@@ -289,7 +313,8 @@ function Reader({
   next: Neighbour;
   onOpen: (slug: string) => void;
 }) {
-  const [story, setStory] = useState<LibraryStory | null>(null);
+  const cacheKey = `${profile}:${language}:${slug}`;
+  const [story, setStory] = useState<LibraryStory | null>(() => STORIES.get(cacheKey) ?? null);
   // "missing": this story is not available here (unknown, or hidden by the content gate).
   const [failed, setFailed] = useState<false | "missing" | "error">(false);
   const [attempt, setAttempt] = useState(0);
@@ -384,15 +409,27 @@ function Reader({
   }, []);
   useEffect(() => {
     let live = true;
-    setStory(null);
+    const cached = STORIES.get(cacheKey);
+    setStory(cached ?? null);
     setFailed(false);
-    getLibraryStory(language, slug)
+    if (cached) return;
+    loadStory(cacheKey, language, slug)
       .then((s) => live && setStory(s))
       .catch((e) => live && setFailed(e instanceof ApiError && e.status === 404 ? "missing" : "error"));
     return () => {
       live = false;
     };
-  }, [language, slug, attempt]);
+  }, [cacheKey, language, slug, attempt]);
+  // Once this story is on screen, fetch the next one quietly: "Další" then opens without a wait.
+  // Only the text is prefetched; read-aloud audio is generated on demand.
+  const nextSlug = next?.slug;
+  useEffect(() => {
+    if (!story || !nextSlug) return;
+    const id = window.setTimeout(() => {
+      loadStory(`${profile}:${language}:${nextSlug}`, language, nextSlug).catch(() => undefined);
+    }, 400);
+    return () => window.clearTimeout(id);
+  }, [story, nextSlug, profile, language]);
 
   return (
     <article className="flex flex-col gap-4">
@@ -655,11 +692,17 @@ export default function StoryLibraryPage() {
   useEffect(() => {
     if (!language) return;
     let live = true;
-    setLibrary(null);
+    const key = `${me?.acting.id}:${language}`;
+    const cached = LIBRARIES.get(key);
+    setLibrary(cached ?? null);
     setFailed(false);
     getStoryLibrary(language)
-      .then((l) => live && setLibrary(l))
-      .catch(() => live && setFailed(true));
+      .then((l) => {
+        LIBRARIES.set(key, l);
+        if (live) setLibrary(l);
+      })
+      // A failed refresh keeps the shelf already on screen; only an empty start shows the error.
+      .catch(() => live && !cached && setFailed(true));
     // The estimate only picks where to start; without it the shelf simply starts at A1.
     setEstimate(null);
     Promise.allSettled([getDiagnosticInfo(language), getProgress(language)]).then(([d, p]) => {
@@ -708,6 +751,7 @@ export default function StoryLibraryPage() {
         {library &&
           (slug ? (
             <Reader
+              profile={String(me.acting.id)}
               key={`${language}:${slug}`}
               language={language}
               slug={slug}

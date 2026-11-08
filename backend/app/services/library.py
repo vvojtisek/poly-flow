@@ -60,8 +60,17 @@ async def library(db: AsyncSession, user: User, language: Language) -> Library |
 
 
 async def story(db: AsyncSession, user: User, language: Language, slug: str) -> Library:
-    lib = await library(db, user, language)
-    found = next((s for s in lib.stories if s.slug == slug), None) if lib else None
-    if lib is None or found is None:
+    """One story through the same gate as the listing.
+
+    Only the requested story is checked: the reader, each read-aloud line and each answer call
+    this, so gating the whole shelf on every request made their cost grow with the number of
+    stories times the number of active blacklist patterns.
+    """
+    f = story_file(language)
+    found = next((s for s in f.stories if s.slug == slug), None) if f else None
+    if f is None or found is None:
         raise LearningError("story_not_found", 404)
-    return Library(lib.file, [found])
+    hits = await blacklist_matcher(db, [language])
+    if hits(full_text(found)):
+        raise LearningError("story_not_found", 404)
+    return Library(f, [found])

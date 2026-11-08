@@ -57,7 +57,7 @@ async def test_library_needs_a_session(db, client):
 
 
 async def test_reading_a_story_returns_lines_with_czech_and_hides_gated_ones(db, client):
-    await setup_parent(client)
+    me = await setup_parent(client)
     f = story_file(Language.DE)
     first = f.stories[0]
     out = (await client.get(f"/api/v1/stories/library/{first.slug}?language=de")).json()
@@ -80,6 +80,18 @@ async def test_reading_a_story_returns_lines_with_czech_and_hides_gated_ones(db,
         await s.commit()
     r = await client.get(f"/api/v1/stories/library/{first.slug}?language=de")
     assert r.status_code == 404
+    # The gate checks only the requested story: the neighbours stay readable, and the gated
+    # one cannot be reached through its answer endpoint either.
+    second = f.stories[1]
+    assert (
+        await client.get(f"/api/v1/stories/library/{second.slug}?language=de")
+    ).status_code == 200
+    answer = await client.post(
+        f"/api/v1/stories/library/{first.slug}/questions/0/answer?language=de",
+        json={"choice": 0},
+        headers=csrf(me),
+    )
+    assert answer.status_code == 404
 
 
 async def test_comprehension_answers_are_checked_on_the_server_and_not_stored(db, client):

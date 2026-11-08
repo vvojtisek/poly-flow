@@ -2275,3 +2275,13 @@ Vlad approves a push.
 **Implemented Solution:** While a story is open the page header (intro + language picker) is hidden on phones and shrunk on desktop; the unreviewed note moves into the story header so the draft label stays with the text. On phones the translation toggle and the shadowing link become icon buttons (text kept as sr-only and title), and the per-line help line is hidden (the CZ chip carries its aria-label). The shelf intro folds into a 'Co je knihovna?' disclosure below sm.
 
 **Verification:** Playwright b118.js at 390x844: first story line top 955 -> 639 px, reader controls 3 rows -> 2, no horizontal overflow, draft note present in the story header, no console errors; at 1280 the full labels and page title still show. Shelf scrollHeight 10762 -> 10702. typecheck, lint and build passed.
+
+## Global Cycle 119/120 | Page: [/stories/library] (Page Cycle 14/15)
+
+**Summary:** gate one story per request and keep read stories in memory
+
+**Observed Problem:** Every reader, read-aloud line and answer request ran the content blacklist over all 90 stories of the language just to find one, so a 12-line read-aloud did 12 full-shelf scans and the cost grew with stories x active patterns (offline benchmark with 200 patterns: ~500 ms vs ~9 ms per request). In the browser every open, Next/Previous and return to the shelf refetched the same static text and showed a skeleton.
+
+**Implemented Solution:** services.library.story now finds the slug in the parsed file and gates only that story (same 404 for unknown and gated). The page keeps per-profile, per-language session caches: read stories (with in-flight dedupe) open instantly, the shelf paints from memory while a fresh copy loads in the background (a failed refresh keeps the shelf), and 400 ms after a story appears the next story's text is prefetched; audio is not prefetched because TTS is generated on demand.
+
+**Verification:** pytest test_library_api + test_tts (26 passed, new assertions: gated story's neighbour still 200, gated story's answer endpoint 404). Playwright b119.js: after the prefetch, N shows 'Der Wachhund' within 50 ms with zero new requests; B back to the first story and Esc issue no request; returning to the shelf via history shows no skeleton. No console errors. typecheck, lint, build passed.
